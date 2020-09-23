@@ -1,0 +1,160 @@
+@import "variables";
+
+body {
+    direction: rtl;
+    margin: 0;
+    padding: 0;
+    background-color: $body-bg;
+}
+
+@import "fonts";
+
+.border-bottom {
+    border-bottom: 1px solid #dedede !important;
+}
+
+@import "components/header/header";
+@import "components/input-group-icon";
+@import "layout-system";
+@import "utilities.scss";
+@import "components/modal";
+
+.clickable {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+
+    /* Konqueror HTML */
+    -moz-user-select: none;
+
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    cursor: pointer;
+
+    /* Internet Explorer/Edge */
+    user-select: none;
+
+    /* Non-prefixed version, currently     supported by Chrome, Opera and Firefox */
+
+    &:hover {
+        cursor: pointer;
+        -webkit-touch-callout: none;
+
+        /* iOS Safari */
+        -webkit-user-select: none;
+
+        /* Safari */
+        -khtml-user-select: none;
+
+        /* Konqueror HTML */
+        -moz-user-select: none;
+
+        /* Old versions of Firefox */
+        -ms-user-select: none;
+
+        /* Internet Explorer/Edge */
+        user-select: none;
+
+        /* Non-prefixed version, currently
+         supported by Chrome, Opera and Firefox */
+    }
+}
+
+i {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+
+    /* Non-prefixed version, currently     supported by Chrome, Opera and Firefox */
+}
+
+img {
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+
+    /* Internet Explorer/Edge */
+    user-select: none;
+
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+}
+
+.rounded-pill {
+    border-radius: 50rem !important;
+}
+
+.text-muted {
+    color: $grey !important;
+}
+
+
+.text-grey {
+    color: $grey;
+}
+
+.text-light {
+    color: $light;
+}
+
+.text-black {
+    color: #000019;
+}
+
+.logo-sm {
+    height: 30px;
+    width: 30px;
+}
+
+
+.logodesktop {
+    margin-bottom: 1px;
+    min-width: 80px;
+    max-width: 80px;
+    display: flex;
+}
+
+.searchfield {
+    min-width: 330px;
+}
+
+@import "components/form-control";
+
+.container {
+    max-width: 1580px !important;
+}
+
+.profileimage {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: contain;
+}

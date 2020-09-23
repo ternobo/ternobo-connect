@@ -1,0 +1,140 @@
+@media print {
+    *,
+    :after,
+    :before {
+        text-shadow: none !important;
+        box-shadow: none !important;
+    }
+}
+
+*,
+:after,
+:before {
+    box-sizing: border-box;
+}
+
+input:not([type=range]) {
+    touch-action: manipulation;
+}
+
+input {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: .9rem;
+    line-height: 1.6;
+    color: $dark;
+    background-color: $white;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid $border-color;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.form-control::-ms-expand {
+    background-color: transparent;
+    border: 0;
+}
+
+.form-control:focus {
+    border-color: #757575 !important;
+}
+
+.form-control::-webkit-input-placeholder {
+    color: $grey;
+    opacity: 1;
+}
+
+.form-control::-moz-placeholder {
+    color: $grey;
+    opacity: 1;
+}
+
+.form-control:-ms-input-placeholder {
+    color: $grey;
+    opacity: 1;
+}
+
+.form-control::-ms-input-placeholder {
+    color: $grey;
+    opacity: 1;
+}
+
+.form-control::placeholder {
+    color: $grey;
+    opacity: 1;
+}
+
+.form-control:disabled {
+    background-color: $grey;
+    opacity: 1;
+}
+
+.input-group {
+    .form-control {
+        position: relative;
+        z-index: 2;
+        flex: 1 1 auto;
+        width: 1%;
+        margin-bottom: 0;
+    }
+
+    .form-control {
+        display: flex;
+        align-items: center;
+    }
+
+    .form-control:not(:last-child) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+
+.input-group .form-control:active,
+.input-group .form-control:focus,
+.input-group .form-control:hover {
+    z-index: 3;
+}
+
+.py-2 {
+    padding-top: .5rem !important;
+}
+
+.py-2 {
+    padding-bottom: .5rem !important;
+}
+
+input[type=text] {
+    color: #191919;
+}
+
+.input-group-icon {
+    .form-control {
+        padding-left: 24px;
+    }
+}
+
+.rounded-pill {
+    border-radius: 50rem !important;
+}
+
+.searchfield {
+    min-width: 330px;
+}
+
+@media screen and (max-width:992px) {
+    .searchfield {
+        min-width: auto;
+    }
+
+    .searchfield {
+        width: 100% !important;
+    }
+}

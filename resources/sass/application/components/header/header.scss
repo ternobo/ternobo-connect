@@ -1,0 +1,28 @@
+@import "../../variables";
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    height: 70px;
+    z-index: 1000;
+    transition: 0.3s all;
+    padding: 0 0.9rem !important;
+}
+
+.header {
+    .container {
+        overflow: hidden;
+        padding: 0px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        max-width: 1580px;
+        background: $body-bg;
+        border-bottom: 1px solid $light;
+        transition: 0.3s all;
+        width: 100%;
+    }
+}

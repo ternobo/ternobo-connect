@@ -1,0 +1,32 @@
+.input-group-icon {
+    position: relative;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+}
+
+.input-group-icon {
+    .form-control {
+        padding-left: 24px;
+    }
+
+    i {
+        z-index: 1000;
+        color: $grey;
+        position: absolute;
+        left: 0.5rem;
+        top: 0;
+        bottom: 0;
+        vertical-align: middle;
+        display: flex;
+        align-items: center;
+        max-width: 24px;
+        justify-content: center;
+        transition: 0.3s all;
+    }
+
+    i:hover {
+        color: $dark;
+    }
+}
