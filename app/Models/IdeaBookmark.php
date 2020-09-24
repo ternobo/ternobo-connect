@@ -11,6 +11,6 @@ use Illuminate\Database\Eloquent\Model;
 class IdeaBookmark extends Model
 {
     public function idea(){
-       return $this->belongsTo("App\Idea","idea_id");
+       return $this->belongsTo("App\Models\Idea","idea_id");
     }
 }

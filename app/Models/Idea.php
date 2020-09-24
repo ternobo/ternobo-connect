@@ -18,17 +18,17 @@ class Idea extends Model
 
     public function replies()
     {
-        return $this->hasMany("App\IdeaReply", "idea_id")->where("pinned", false)->latest();
+        return $this->hasMany("App\Models\IdeaReply", "idea_id")->where("pinned", false)->latest();
     }
 
     public function user()
     {
-        return $this->belongsTo("App\User", "user_id");
+        return $this->belongsTo("App\Models\User", "user_id");
     }
 
     public function votes()
     {
-        return $this->hasMany("App\IdeaVote", "idea_id");
+        return $this->hasMany("App\Models\IdeaVote", "idea_id");
     }
 
     public function isVoted()

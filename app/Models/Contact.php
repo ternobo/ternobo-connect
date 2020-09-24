@@ -27,7 +27,7 @@ class Contact extends Model {
      */
 
     public function option() {
-        return $this->belongsTo("App\ContactOption", "option_id");
+        return $this->belongsTo("App\Models\ContactOption", "option_id");
     }
 
     /**

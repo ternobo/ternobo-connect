@@ -27,6 +27,15 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
     Route::get("/", "IndexController@index");
 
+    Route::get("/test", function (){
+        $articles = App\Models\Post::query()->with("page")->where("type","article")->get();
+        foreach($articles as $article){
+            $article->cover = $article->getMedia();
+            $article->save();
+        }
+        return response()->json($articles);
+    });
+
     Route::get('/feed', 'HomeController@index')->name('home');
 
 /**
@@ -55,4 +64,17 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
     /**
      * End Pages API
      */
+
+    // Pages
+    Route::prefix('/{page:slug}')->group(function () {
+
+        Route::get("/{location?}", "PageController@show")->where("location", "activities|articles|contact");
+
+        Route::prefix('/category/{id}')->group(function () {
+            Route::get("/{location?}", "PageController@getCategory");
+        });
+
+        Route::get("/{post}", "ArticlesController@show");
+    });
+
 });

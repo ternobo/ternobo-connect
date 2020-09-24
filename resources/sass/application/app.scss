@@ -1,4 +1,6 @@
 @import "variables";
+@import '~bootstrap';
+@import '~bootstrap-vue';
 
 body {
     direction: rtl;
@@ -18,6 +20,7 @@ body {
 @import "layout-system";
 @import "utilities.scss";
 @import "components/modal";
+@import "./pages/landing.scss";
 
 .clickable {
     -webkit-touch-callout: none;
@@ -157,4 +160,7 @@ img {
     height: 64px;
     border-radius: 50%;
     object-fit: contain;
+}
+.text-action {
+    color: #0898df !important;
 }

@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Page;
 use App\Models\Post;
-use Artesaos\SEOTools\Facades\SEOTools;
+use Inertia\Inertia;
+use PHPHtmlParser\Dom;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
-use PHPHtmlParser\Dom;
 
 class ArticlesController extends Controller
 {
@@ -143,6 +144,7 @@ class ArticlesController extends Controller
      */
     public function show(Page $page, $article)
     {
+        // return Inertia::render("Feed");
         $article = Post::query()->where("id", $article)->orWhere("slug", $article)->firstOrFail();
         if ($article->type === "article" && $article->user->active) {
             SEOTools::setTitle("$article->title");

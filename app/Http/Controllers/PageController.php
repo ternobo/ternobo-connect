@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class PageController extends Controller
 {
@@ -73,6 +74,36 @@ class PageController extends Controller
         }
 
         return response()->json($posts->paginate(10));
+    }
+
+    public function showPage($page){
+
+        $page = Page::query()
+            ->with("skills")
+            ->with("categories")
+            ->where("slug", $page)->firstOrFail();
+
+        $page->profile_steps = $page->user->getProfileSteps();
+
+        SEOTools::setTitle($page->name);
+        if ($page->about !== null && $page->about !== "") {
+            SEOTools::setDescription($page->about);
+        } else {
+            SEOTools::setDescription("پروفایل کاربر $page->name در ترنوبو");
+        }
+
+        SEOTools::opengraph()->setUrl(url("/" . $page->slug));
+        SEOTools::setCanonical(url("/" . $page->slug));
+        SEOTools::opengraph()->addProperty('type', 'profile');
+        SEOTools::opengraph()->addProperty('profile:first_name', $page->user->first_name);
+        SEOTools::opengraph()->addProperty('profile:last_name', $page->user->last_name);
+        SEOTools::opengraph()->addProperty('profile:username', $page->slug);
+        SEOTools::jsonLd()->addImage($page->profile);
+        SEOMeta::addKeyword(['پروفایل' . $page->name, $page->name, $page->user->first_name, $page->user->last_name]); 
+        return Inertia::render("Profile/UserProfile",[
+            "page"=>$page,
+            "SEOMeta"=>SEOTools::generate()
+        ]);
     }
 
     public function search(Request $request)

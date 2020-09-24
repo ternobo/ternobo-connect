@@ -20,9 +20,9 @@ class Following extends Model {
 
     public function user() {
         if (Auth::user()->id === $this->following) {
-            return $this->belongsTo("App\User", "user_id");
+            return $this->belongsTo("App\Models\User", "user_id");
         }
-        return $this->belongsTo("App\Page", "following");
+        return $this->belongsTo("App\Models\Page", "following");
     }
 
 }

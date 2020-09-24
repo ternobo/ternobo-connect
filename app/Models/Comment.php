@@ -61,15 +61,15 @@ class Comment extends Model {
     }
 
     public function user() {
-        return $this->belongsTo("App\User");
+        return $this->belongsTo("App\Models\User");
     }
 
     public function page() {
-        return $this->belongsTo("App\Page");
+        return $this->belongsTo("App\Models\Page");
     }
 
     public function replyto() {
-        return $this->belongsTo("App\Comment", "reply_to");
+        return $this->belongsTo("App\Models\Comment", "reply_to");
     }
 
     /**

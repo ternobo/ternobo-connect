@@ -13,10 +13,10 @@ class IdeaReply extends Model
 
     public function idea()
     {
-        return $this->belongsTo("App\Idea", "idea_id");
+        return $this->belongsTo("App\Models\Idea", "idea_id");
     }
 
     public function user(){
-        return $this->belongsTo("App\User", "user_id");
+        return $this->belongsTo("App\Models\User", "user_id");
     }
 }

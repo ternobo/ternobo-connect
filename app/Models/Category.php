@@ -39,12 +39,12 @@ class Category extends Model
 
     public function posts()
     {
-        return $this->hasMany("App\Post", "category_id");
+        return $this->hasMany("App\Models\Post", "category_id");
     }
 
     public function page()
     {
-        return $this->belongsTo("App\Page", "page_id");
+        return $this->belongsTo("App\Models\Page", "page_id");
     }
 
 }

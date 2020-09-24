@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Auth;
 class Skill extends Model {
 
     public function user() {
-        return $this->belongsTo("App\User");
+        return $this->belongsTo("App\Models\User");
     }
 
     public function credits() {
-        return $this->hasMany("App\SkillCredit", "skill_id");
+        return $this->hasMany("App\Models\SkillCredit", "skill_id");
     }
 
     public function getCreditText() {

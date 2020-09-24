@@ -106,7 +106,7 @@ class User extends Authenticatable
 
     public function followings()
     {
-        return $this->hasMany("App\Following");
+        return $this->hasMany("App\Models\Following");
     }
 
     public function getProfileSteps()
@@ -223,12 +223,12 @@ class User extends Authenticatable
 
     public function personalPage()
     {
-        return $this->hasOne("App\Page", "user_id")->where("type", "personal");
+        return $this->hasOne("App\Models\Page", "user_id")->where("type", "personal");
     }
 
     public function pages()
     {
-        return $this->hasMany("App\Page", "user_id");
+        return $this->hasMany("App\Models\Page", "user_id");
     }
 
     public function getPage()
@@ -250,12 +250,12 @@ class User extends Authenticatable
 
     public function bookmarks()
     {
-        return $this->hasMany("App\Bookmark");
+        return $this->hasMany("App\Models\Bookmark");
     }
 
     public function skills()
     {
-        return $this->hasMany("App\Skill", "user_id")->orderBy("sort_place");
+        return $this->hasMany("App\Models\Skill", "user_id")->orderBy("sort_place");
     }
 
     public function isCredit($id)

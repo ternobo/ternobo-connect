@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class SkillCredit extends Model {
 
     public function user() {
-        return $this->belongsTo("App\User","user_id");
+        return $this->belongsTo("App\Models\User","user_id");
     }
     
     public function skill(){
-        return $this->belongsTo("App\Skill","skill_id");
+        return $this->belongsTo("App\Models\Skill","skill_id");
     }
 
 }

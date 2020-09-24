@@ -8,11 +8,11 @@ class HelpCategory extends Model
 {
     public function posts()
     {
-        return $this->hasMany("App\HelpPost", "category_id");
+        return $this->hasMany("App\Models\HelpPost", "category_id");
     }
 
     public function children()
     {
-        return $this->hasMany("App\HelpCategory", "parent_id")->with("posts");
+        return $this->hasMany("App\Models\HelpCategory", "parent_id")->with("posts");
     }
 }

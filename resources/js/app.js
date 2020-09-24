@@ -5,7 +5,12 @@ import Vue from 'vue';
 import { InertiaApp } from '@inertiajs/inertia-vue';
 import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
-
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import App from "./Layouts/App";
+// Install BootstrapVue
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
 Vue.use(InertiaApp);
 Vue.use(InertiaForm);
 Vue.use(PortalVue);
@@ -17,7 +22,15 @@ new Vue({
         h(InertiaApp, {
             props: {
                 initialPage: JSON.parse(app.dataset.page),
-                resolveComponent: (name) => require(`./Pages/${name}`).default,
+                resolveComponent: (name) => {
+                    const module = require(`./Pages/${name}`).default;
+                    if (!module.layout) {
+                        // there is no Layout defined, set the default layout
+                        module.layout = App;
+                    }
+
+                    return module;
+                },
             },
         }),
     data() {

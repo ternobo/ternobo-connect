@@ -8,6 +8,6 @@ class FollowSuggestion extends Model
 {
     public function page()
     {
-        return $this->belongsTo("App\Page");
+        return $this->belongsTo("App\Models\Page");
     }
 }

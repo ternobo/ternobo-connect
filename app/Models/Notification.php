@@ -10,27 +10,27 @@ use Ixudra\Curl\Facades\Curl;
 class Notification extends Model {
 
     public function skill() {
-        return $this->belongsTo("App\Skill", "notifications_id");
+        return $this->belongsTo("App\Models\Skill", "notifications_id");
     }
 
     public function mycomment() {
-        return $this->belongsTo("App\Comment", "notifications_id");
+        return $this->belongsTo("App\Models\Comment", "notifications_id");
     }
 
     public function page() {
-        return $this->belongsTo("App\Page", "notifications_id");
+        return $this->belongsTo("App\Models\Page", "notifications_id");
     }
 
     public function user() {
-        return $this->belongsTo("App\User", "user_id");
+        return $this->belongsTo("App\Models\User", "user_id");
     }
 
     public function post() {
-        return $this->belongsTo("App\Post", "notifications_id");
+        return $this->belongsTo("App\Models\Post", "notifications_id");
     }
 
     public function comment() {
-        return $this->belongsTo("App\Comment", "connected_to");
+        return $this->belongsTo("App\Models\Comment", "connected_to");
     }
 
     /**

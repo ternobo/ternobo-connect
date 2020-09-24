@@ -26,25 +26,25 @@ class Page extends Model
 
     public function categories()
     {
-        return $this->hasMany('App\Category');
+        return $this->hasMany('App\Models\Category');
     }
 
     public function user()
     {
-        return $this->belongsTo("App\User", "user_id");
+        return $this->belongsTo("App\Models\User", "user_id");
     }
 
     public function skills()
     {
         if ($this->type === "personal") {
-            return $this->belongsTo("App\Skill", "user_id", "user_id");
+            return $this->belongsTo("App\Models\Skill", "user_id", "user_id");
         } else {
             return new HasManyEmpty(Page::query(), $this, '', '');
         }
     }
 
     public function posts(){
-       return $this->hasMany("App\Post","page_id");
+       return $this->hasMany("App\Models\Post","page_id");
     }
 
     /**

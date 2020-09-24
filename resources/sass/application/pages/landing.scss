@@ -1,0 +1,224 @@
+@import "variables";
+
+.landing {
+    background: $dark;
+    margin: 0 -1rem;
+}
+
+p, span {
+    color: $fixed-elements;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+h1, h2, h3, h4, h5 {
+    font-weight: 700;
+}
+
+.section-1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 991px) {
+    .section-2 {
+        .card {
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .section-2 {
+        .go-top {
+            margin-top: -5rem;
+        }
+    }
+}
+
+.card-img-top {
+    height: 374px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.full-width {
+    margin-left: calc(-100vw / 2 + 500px / 2);
+    margin-right: calc(-100vw / 2 + 500px / 2);
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.btn-grey {
+    background: #0373AB;
+    color: #FFF;
+}
+
+.btn-grey:hover, .btn-grey:active {
+    background: $action;
+    color: #FFF;
+}
+
+.card-icon {
+    margin-top: -7%;
+    color: #FFF;
+    height: 80px;
+    width: 80px;
+    background: #212121;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    align-self: center;
+    font-size: 36px;
+}
+
+.bg-landing-grey {
+    background: #2A2A2A;
+}
+
+.section-1 {
+    div {
+        span:first-child {
+            color: $action;
+        }
+
+        span:nth-child(2) {
+            color: $grey;
+        }
+    }
+}
+
+.section-2 {
+    background: #212121;
+}
+
+.section-2 {
+    span:first-child {
+        color: $action;
+    }
+
+    .sims {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .ex {
+        margin-top: 7rem;
+    }
+
+    .cart {
+        background: #2A2A2A;
+
+        span:first-of-type {
+            color: $action;
+            @extend .font-24;
+
+        }
+
+        span:last-of-type {
+            color: $white;
+
+        }
+    }
+
+    .cercel {
+        margin-top: -3rem;
+    }
+
+    .dot {
+        height: 100px;
+        width: 100px;
+        background-color: #2A2A2A;
+        border-radius: 50%;
+
+        span {
+            margin-top: 2.2rem !important;
+        }
+    }
+}
+
+.section-3 {
+    background: $dark;
+
+}
+
+.section-4 {
+    background: #212121;
+}
+
+.section-4 {
+    .post {
+        background-color: #2A2A2A;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .sims {
+        display: block !important;
+    }
+    .subbtn {
+        margin-top: 3.5rem !important;
+    }
+    .cart2 {
+        margin-top: 2.5rem !important;
+    }
+    .ex {
+        margin-top: 1.5rem !important;
+    }
+    .mobileOfpost {
+        margin-left: 1rem !important;
+        margin-right: 1rem !important;
+    }
+    .svg2 {
+        margin-top: 0 !important;
+    }
+    .tellTOusText {
+        @extend .svg2
+    }
+    .aiImages {
+        width: 150% !important;
+        margin-right: -2rem;
+    }
+    .sptitle {
+        font-size: 1.1rem !important;
+    }
+    .spPr {
+        font-size: 0.6rem !important;
+    }
+    .sptitlePost {
+        font-size: 1rem !important;
+        font-weight: bold !important;
+    }
+    .btn {
+        font-size: 0.7rem !important;
+    }
+}
+
+.slick-next:before {
+    content: 'keyboard_arrow_left' !important;
+    font-family: "Material Icons" !important;
+    font-size: 30px;
+}
+
+.slick-prev:before {
+    content: 'keyboard_arrow_right' !important;
+    font-family: "Material Icons" !important;
+    font-size: 30px;
+}
+
+.slick-prev, .slick-next {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bottom-nav{
+    display: none !important;
+}
