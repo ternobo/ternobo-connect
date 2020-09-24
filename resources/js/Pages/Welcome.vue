@@ -1,7 +1,56 @@
 <template>
 <div class="container-fluid">
-    <div class="search-section"></div>
-    <landing :articles="articles"></landing>
+    <div class="header px-3 d-flex justify-content-between align-items-center">
+        <div class="menu d-flex">
+            <div class="clickale"><i class="material-icons text-white header-btn">menu</i></div>
+            <div class="mr-2 d-flex align-items-center">
+                <h1 class="font-16 text-white mb-0" id="typewritingdescript"></h1>
+            </div>
+        </div>
+        <div>
+            <inertia-link class="text-white" href="/feed">
+                <i class="navheader-icon text-white material-icons-outlined">home</i>
+            </inertia-link>
+        </div>
+    </div>
+    <div class="search-section">
+        <form action="/search" id="searchform" autocomplete="off">
+            <div class="content-body d-flex justify-content-center align-items-center flex-column">
+                <div class="searchbox d-flex justify-content-center align-items-center flex-column">
+                    <img src="/images/logo-type.svg" class="thelogo" />
+                    <img src="/images/logo-type-dark.svg" class="thelogo" style="display: none" />
+                    <div class="input-group-icon mt-5 w-100">
+                        <input class="form-control searchfield w-100 py-2 px-3 rounded-pill" name="q" required="" title="چیزی جستجو کنید" data-autocomplete="" autocomplete="off" type="text" placeholder="هر چیز که در جستن آنی، آنی" id="search-input" />
+                        <span class="clickale">
+                            <i class="material-icons" style="left: 0.7rem">search</i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="footer p-3 d-flex justify-content-between align-items-center">
+        <div class="bg-downloader d-flex" @mouseenter="showDownloader = true" @mouseleave="showDownloader = false">
+            <i class="material-icons-outlined text-white">image</i>
+            <div class="d-flex py-2 copyright-bg px-4 bg-dark align-items-center text-white" v-if="showDownloader">
+                <div class="d-flex flex-column justify-content-center">
+                    <b class="my-1" style="font-size: 0.8rem;">علی اطیابی</b>
+                    <small style="font-size: 0.8rem;">تهران، تهران ایران</small>
+                </div>
+                <a class="d-flex align-items-center" download="" href="/images/search-background-2x.jpg"><i class="material-icons text-white ml-5" style="margin-left: -5px;">get_app</i></a>
+            </div>
+
+        </div>
+        <div class="clickale showlanding" v-on:click="showLanding = true">
+            <i class="material-icons font-38">flight_land</i>
+        </div>
+        <img src="/images/logo-en.svg" class="thelogo" style="width: 110px;">
+        <img src="/images/logo-en-dark.svg" class="thelogo" style="display: none;width: 110px;">
+
+    </div>
+    <transition name="slide">
+        <landing v-if="showLanding" :articles="articles"></landing>
+    </transition>
 </div>
 </template>
 
@@ -10,24 +59,114 @@ import LawsModal from "../Components/Modals/LawsModal";
 import AppHeader from "../Components/App/header/AppHeader";
 import Landing from "../Components/App/Landing";
 export default {
+    data() {
+        return {
+            showLanding: false,
+            showDownloader: false
+        }
+    },
+    mounted() {
+        var i = 0;
+        var txt = 'شبکه اجتماعی متخصصین';
+        var speed = 130;
+
+        function typeWriter() {
+            if (i < txt.length) {
+                document.getElementById("typewritingdescript").innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+        typeWriter();
+    },
     props: {
         articles: {
             type: Array,
-            default: undefined
+            default: undefined,
         },
-
-    },
-    created() {
-        console.log(this);
     },
     name: "Welcome",
     components: {
         LawsModal,
         AppHeader,
-        Landing
+        Landing,
     },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.searchbox {
+    input {
+        height: 42px;
+    }
+}
+
+.searchbox {
+    width: 40%;
+}
+
+#searchform {
+    position: relative;
+    z-index: 999;
+    width: 100%;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    z-index: 99999;
+    transition: all .3s !important;
+    width: 100%;
+    left: 0;
+    padding: .9rem 1rem !important;
+    right: 0;
+}
+
+.search-section {
+    position: relative;
+    background: url("/images/search-background-2x.jpg");
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 -1rem;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.showlanding {
+    background: #f5f5f5;
+    padding: 15px 12px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    width: 62px;
+    margin-left: -31px;
+    margin-right: -31px;
+    margin-bottom: 0;
+}
+
+.search-section::before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    bottom: 0;
+}
 </style>

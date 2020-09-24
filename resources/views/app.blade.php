@@ -20,6 +20,11 @@
 
     {!! SEO::generate() !!}
 
+    @auth
+        <script>
+            var user = @json(Auth::user());
+        </script>
+    @endauth
 </head>
 
 <body class="font-sans antialiased" dir="rtl">
