@@ -1,13 +1,18 @@
 <template>
-  
+
 </template>
 
 <script>
 export default {
-    name: "Feed"
-}
+    name: "Feed",
+    props: {
+        posts: {
+            type: Object,
+            default: undefined
+        },
+    },
+};
 </script>
 
 <style>
-
 </style>

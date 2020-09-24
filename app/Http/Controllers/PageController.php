@@ -32,15 +32,8 @@ class PageController extends Controller
         return abort(404);
     }
 
-    public function getPageInfo(Request $request)
+    public function handlePersonalProfile(Page $page, $location = "home", Request $request)
     {
-        $page = Page::query()
-            ->with("skills")
-            ->with("categories")
-            ->where("slug", $request->page_slug)->firstOrFail();
-
-        $page->profile_steps = $page->user->getProfileSteps();
-
         SEOTools::setTitle($page->name);
         if ($page->about !== null && $page->about !== "") {
             SEOTools::setDescription($page->about);
@@ -57,10 +50,12 @@ class PageController extends Controller
         SEOTools::jsonLd()->addImage($page->profile);
         SEOMeta::addKeyword(['پروفایل' . $page->name, $page->name, $page->user->first_name, $page->user->last_name]);
 
-        return response()->json([
-            "page" => $page,
-            "SEOMeta" => SEOTools::generate(),
-        ]);
+        return Inertia::render(
+            "Profiles/UserProfile",
+            [
+                "user" => $page,
+            ]
+        );
     }
 
     public function getPosts(Request $request)
@@ -69,14 +64,15 @@ class PageController extends Controller
             ->where("slug", $request->page_slug)->firstOrFail()
             ->posts();
 
-        if($request->exists("category")){
-            $posts = $posts->where("category_id",$request->category);
+        if ($request->exists("category")) {
+            $posts = $posts->where("category_id", $request->category);
         }
 
         return response()->json($posts->paginate(10));
     }
 
-    public function showPage($page){
+    public function showPage($page)
+    {
 
         $page = Page::query()
             ->with("skills")
@@ -99,10 +95,10 @@ class PageController extends Controller
         SEOTools::opengraph()->addProperty('profile:last_name', $page->user->last_name);
         SEOTools::opengraph()->addProperty('profile:username', $page->slug);
         SEOTools::jsonLd()->addImage($page->profile);
-        SEOMeta::addKeyword(['پروفایل' . $page->name, $page->name, $page->user->first_name, $page->user->last_name]); 
-        return Inertia::render("Profile/UserProfile",[
-            "page"=>$page,
-            "SEOMeta"=>SEOTools::generate()
+        SEOMeta::addKeyword(['پروفایل' . $page->name, $page->name, $page->user->first_name, $page->user->last_name]);
+        return Inertia::render("Profile/UserProfile", [
+            "page" => $page,
+            "SEOMeta" => SEOTools::generate(),
         ]);
     }
 

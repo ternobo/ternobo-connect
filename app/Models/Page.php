@@ -43,8 +43,9 @@ class Page extends Model
         }
     }
 
-    public function posts(){
-       return $this->hasMany("App\Models\Post","page_id");
+    public function posts()
+    {
+        return $this->hasMany("App\Models\Post", "page_id");
     }
 
     /**
@@ -165,6 +166,29 @@ class Page extends Model
     {
         $contactoptions = ContactOption::all();
         return $contactoptions;
+    }
+
+    // override the toArray function (called by toJson)
+    public function toArray()
+    {
+        // get the original array to be displayed
+        $data = parent::toArray();
+
+        // change the value of the 'skills' key
+        if ($this->skills) {
+            $data['skills'] = $this->skills;
+        } else {
+            $data['skills'] = null;
+        }
+
+         // change the value of the 'categories' key
+         if ($this->categories) {
+            $data['categories'] = $this->categories;
+        } else {
+            $data['categories'] = null;
+        }
+
+        return $data;
     }
 
     public function addAction($action_type, $post_id, $connected_to = null)
