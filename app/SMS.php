@@ -12,8 +12,8 @@ class SMS {
     private $phone = "";
 
     public function __construct($phone) {
-        $this->API_Key = env("TOKEN_SMS", "");
-        $this->API_Secret = env("PASS_SMS", "");
+        $this->API_Key = env("TOKEN_SMS", "JmvEVPITlcakqwPnAvpsGFSwBm");
+        $this->API_Secret = env("PASS_SMS", "1c4753384f0c32b4fdb35c19");
         $this->phone = $phone;
     }
 

@@ -5,9 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
@@ -20,7 +17,9 @@
 
     {!! SEO::generate() !!}
 
-    
+        <script>
+            var APP_URL = "{{  url('/') }}";
+        </script>
         <script>
             var user = @auth @json(Auth::user()); @endauth @guest false @endguest
         </script>

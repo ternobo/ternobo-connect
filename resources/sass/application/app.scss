@@ -19,8 +19,17 @@ body {
 @import "components/input-group-icon";
 @import "layout-system";
 
-@import "./pages/landing.scss";
+@import "./pages/landing";
 @import "./components/buttons";
+@import "./components/tabs";
+@import "vue-select/src/scss/vue-select.scss";
+a:hover {
+    text-decoration: none;
+}
+
+.opacity-0{
+    opacity: 0 !important;
+}
 
 p{
     text-align: right;

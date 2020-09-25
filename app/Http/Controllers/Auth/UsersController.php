@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use App\Models\Mail;
 use App\Models\Page;
-use App\Models\SMS;
+use App\SMS;
 use App\Models\User;
 use App\Models\Verification;
 use Illuminate\Http\Request;

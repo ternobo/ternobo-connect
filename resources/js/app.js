@@ -7,6 +7,11 @@ import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import App from "./Layouts/App";
+import Tabs from "./Components/Tabs/Tabs";
+import Tab from "./Components/Tabs/Tab";
+import vSelect from 'vue-select'
+
+Vue.component('v-select', vSelect);
 // Install BootstrapVue
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
@@ -14,6 +19,12 @@ Vue.use(IconsPlugin)
 Vue.use(InertiaApp);
 Vue.use(InertiaForm);
 Vue.use(PortalVue);
+
+Vue.component("tabs",Tabs);
+Vue.component("tab",Tab);
+
+
+Vue.prototype.$APP_URL = window.APP_URL;
 
 const app = document.getElementById('app');
 

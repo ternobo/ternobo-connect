@@ -2,6 +2,7 @@
 <div class="container-fluid">
     <LoginModal :show.sync="showLogin"></LoginModal>
     <LawsModal :show.sync="showLaws"></LawsModal>
+    <SignupModal :show.sync="showSignup"></SignupModal>
     <b-sidebar id="sidebar" title="" backdrop-variant="dark" bg-variant="white" right backdrop shadow>
         <div class="px-3 py-2">
             <div class="w-100 d-flex justify-content-between align-items-center p-2" style="overflow-x: hidden">
@@ -25,7 +26,7 @@
                 <i class="navheader-icon material-icons-outlined" :class="{'text-dark': !hasBG, 'text-white': hasBG}">home</i>
             </inertia-link>
             <button class="btn btn-transparent border-left" :class="{'text-dark': !hasBG}" @click="showLogin = !showLogin">ورود</button>
-            <button class="btn btn-transparent" :class="{'text-dark': !hasBG}">ثبت‌نام</button>
+            <button class="btn btn-transparent" :class="{'text-dark': !hasBG}" @click="showSignup = !showSignup">ثبت‌نام</button>
         </div>
     </div>
     <div class="search-section" :class="{noBG: !hasBG}">
@@ -75,6 +76,7 @@ import LawsModal from "../Components/Modals/LawsModal";
 import AppHeader from "../Components/App/header/AppHeader";
 import Landing from "../Components/App/Landing";
 import LoginModal from "../Components/Modals/LoginModal";
+import SignupModal from "../Components/Modals/SignupModal";
 
 export default {
     data() {
@@ -83,7 +85,8 @@ export default {
             showDownloader: false,
             hasBG: true,
             showLogin: false,
-            showLaws: false
+            showLaws: false,
+            showSignup: false
         }
     },
     mounted() {
@@ -112,7 +115,8 @@ export default {
         AppHeader,
         Landing,
         Switches,
-        LoginModal
+        LoginModal,
+        SignupModal
     },
 };
 </script>

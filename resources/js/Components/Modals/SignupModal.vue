@@ -1,0 +1,194 @@
+<template>
+<b-modal v-model='showModal' hide-footer hide-header :centered="true">
+    <tabs v-if="emailphone_step">
+        <tab name="ایمیل" :selected="true" icon="email">
+            <div class="input-group d-flex align-items-center">
+                <LoadingButton class="btn btn-dark" :loading="loading" @click.native="sendVcode('email')">ثبت</LoadingButton>
+                <input type="email" class="form-control mx-1 text-left" v-model="email" placeholder="example@ternobo.com">
+            </div>
+        </tab>
+        <tab name="شماره همراه" icon="phone">
+            <div class="input-group d-flex align-items-center">
+                <LoadingButton class="btn btn-dark" :loading="loading" @click.native="sendVcode('phone')">ثبت</LoadingButton>
+                <input type="tel" class="form-control mx-1 text-left" v-model="phone_number" placeholder="09123456789">
+            </div>
+        </tab>
+    </tabs>
+    <transition name="slide">
+        <div v-if="verification_step">
+            <div class="input-group d-flex align-items-center flex-column justify-content-center">
+                <label class="w-100">کد تایید خود‌را وارد کنید</label>
+                <div class="input-group-icon">
+                    <input type="tel" class="form-control mx-1 text-center" v-model="code" placeholder="111111" maxlength="6">
+                    <i class="material-icons-outlined">verified_user</i>
+                </div>
+            </div>
+            <LoadingButton :loading="loading" class="btn btn-dark mx-3 mt-4 w-50" @click.native="verifyCode">بعدی</LoadingButton>
+        </div>
+    </transition>
+    <transition name="slide">
+        <div v-if="personal_info_step">
+            <h5 class="mb-4" style="border-bottom: 1px solid #000019;width: fit-content;align-self: center;margin-top: 20px;padding-bottom: 10px;padding-left: 0;padding-right: 0;">
+                اطلاعات تکمیلی</h5>
+            <div>
+                <input class="form-control mb-3" v-model="first_name" placeholder="نام" />
+                <input class="form-control mb-3" v-model="last_name" placeholder="نام خانوادگی" />
+                <input class="form-control mb-3" v-model="username" placeholder="نام کاربری" />
+                <v-select :placeholder="'جنسیت'" dir="rtl" v-model="gender" :options="[{label: 'زن', code: '1'},{label: 'زن', code: '2'},{label: 'تراجنسیتی', code: '3'}]"></v-select>
+            </div>
+            <LoadingButton :loading="loading" class="btn btn-dark mx-auto mt-4 w-50" @click.native="savePersonal">بعدی</LoadingButton>
+        </div>
+    </transition>
+    <transition name="slide">
+        <div v-if="password_step">
+            <h5 class="mb-4" style="border-bottom: 1px solid #000019;width: fit-content;align-self: center;margin-top: 20px;padding-bottom: 10px;padding-left: 0;padding-right: 0;">
+                رمزعبور</h5>
+            <div>
+
+            </div>
+            <LoadingButton :loading="loading" class="btn btn-dark mx-auto mt-4 w-50" @click.native="savePassword">بعدی</LoadingButton>
+        </div>
+    </transition>
+</b-modal>
+</template>
+
+<script>
+import ModalMixin from '../../Mixins/Modal';
+import LoadingButton from '../../Components/buttons/LoadingButton';
+
+export default {
+    methods: {
+        sendVcode(type) {
+            this.loading = true;
+            const $this = this;
+            var data = new FormData();
+            data.append('phone', this.phone_number);
+
+            var config = {
+                method: 'post',
+                url: this.$APP_URL + '/auth/verification',
+                data: data
+            };
+
+            axios(config)
+                .then(function (response) {
+                    if (response.data.result) {
+                        $this.emailphone_step = false;
+                        $this.verification_step = true;
+                    }
+                    $this.loading = false;
+                })
+                .catch(function (error) {
+                    $this.loading = false;
+                });
+        },
+        verifyCode() {
+            this.loading = true;
+            const $this = this;
+            var data = new FormData();
+            data.append('code', this.code);
+
+            var config = {
+                method: 'post',
+                url: this.$APP_URL + '/auth/verifycode',
+                data: data
+            };
+
+            axios(config)
+                .then(function (response) {
+                    if (response.data.result) {
+                        $this.verification_step = falses;
+                        $this.personal_info_step = true;
+                    }
+                    $this.loading = false;
+                })
+                .catch(function (error) {
+                    $this.loading = false;
+                });
+
+        },
+        savePersonal() {
+            var data = new FormData();
+            if (this.first_name !== undefined && this.first_name !== "") {
+                data.append('firstname', this.first_name);
+            }
+            if (this.last_name !== undefined && this.last_name !== "") {
+                data.append('lastname', this.last_name);
+            }
+            if (this.username !== undefined && this.username !== "") {
+                data.append('username', this.username);
+            }
+            if (this.gender !== undefined) {
+                data.append('gender', this.gender.code);
+            }
+
+            var config = {
+                method: 'post',
+                url: this.$APP_URL + '/auth/signup',
+                data: data
+            };
+
+            axios(config)
+                .then(function (response) {
+                    if (response.data.result) {
+                        $this.personal_info_step = false;
+                        $this.password_step = true;
+                    }
+                })
+                .catch(function (error) {
+                    $this.loading = false;
+                });
+
+        },
+        savePassword() {
+            var data = new FormData();
+            data.append("passwd", "");
+            var config = {
+                method: 'post',
+                url: this.$APP_URL + '/auth/setpassword',
+                data: data
+            };
+
+            axios(config)
+                .then(function (response) {
+                    if (response.data.result) {
+                        $this.password_step = false;
+                        $this.profile_step = true;
+                    }
+                })
+                .catch(function (error) {
+                    $this.loading = false;
+                });
+
+        }
+    },
+    data() {
+        return {
+            emailphone_step: true,
+            verification_step: false,
+            personal_info_step: false,
+            profile_step: false,
+            password_step: false,
+            phone_number: undefined,
+            email: undefined,
+            code: undefined,
+            first_name: undefined,
+            last_name: undefined,
+            username: undefined,
+            gender: undefined,
+            password: undefined,
+            profile: "/images/man-profile.png",
+            loading: false
+        }
+    },
+    mixins: [ModalMixin],
+    name: "SignupModal",
+    components: {
+        LoadingButton
+    }
+}
+</script>
+
+<style>
+
+</style>
