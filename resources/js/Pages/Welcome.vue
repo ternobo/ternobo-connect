@@ -58,7 +58,7 @@
             </div>
 
         </div>
-        <div class="clickable showlanding" :class="{'bg-dark':!hasBG }" v-on:click="showLanding = true">
+        <div class="clickable showlanding" :class="{'bg-dark':!hasBG }" v-on:click="showLanding = true;">
             <i class="material-icons font-38" :class="{'text-white':!hasBG }">flight_land</i>
         </div>
         <img src="/images/logo-en.svg" class="thelogo" v-if="hasBG" style="width: 110px;">
@@ -88,6 +88,11 @@ export default {
             showLogin: false,
             showLaws: false,
             showSignup: false
+        }
+    },
+    watch: {
+        showLanding: function(){
+            setTimeout(function(){ window.scrollTo(0, 800); }, 500);
         }
     },
     mounted() {

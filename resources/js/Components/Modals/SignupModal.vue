@@ -34,19 +34,33 @@
                 <input class="form-control mb-3" v-model="first_name" placeholder="نام" />
                 <input class="form-control mb-3" v-model="last_name" placeholder="نام خانوادگی" />
                 <input class="form-control mb-3" v-model="username" placeholder="نام کاربری" />
-                <v-select :placeholder="'جنسیت'" dir="rtl" v-model="gender" :options="[{label: 'زن', code: '1'},{label: 'زن', code: '2'},{label: 'تراجنسیتی', code: '3'}]"></v-select>
+                <v-select :placeholder="'جنسیت'" dir="rtl" v-model="gender" :options="[{label: 'زن', code: '1'},{label: 'مرد', code: '2'},{label: 'تراجنسیتی', code: '3'}]"></v-select>
             </div>
             <LoadingButton :loading="loading" class="btn btn-dark mx-auto mt-4 w-50" @click.native="savePersonal">بعدی</LoadingButton>
         </div>
     </transition>
     <transition name="slide">
         <div v-if="password_step">
-            <h5 class="mb-4" style="border-bottom: 1px solid #000019;width: fit-content;align-self: center;margin-top: 20px;padding-bottom: 10px;padding-left: 0;padding-right: 0;">
-                رمزعبور</h5>
-            <div>
-
+            <h5 class="mb-4" style="border-bottom: 1px solid #000019;width: fit-content;display:flex;justify-content: center;;margin-top: 20px;padding-bottom: 10px;padding-left: 0;padding-right: 0;">
+                رمزعبور
+            </h5>
+            <div class="d-flex flex-column" style="align-items:center">
+                <input class="form-control w-50 mx-1 text-right" type="password" placeholder="رمزعبور">
+                <input class="form-control w-50 mx-1 text-right mt-2" type="password" placeholder="تکرار رمزعبور">
+            </div>
+            <div class="mt-5">
+                <!-- title -->
+                <p class="font-18" id="ps1">نکات امنیتی</p>
+                <p class="font-14 mt-3" id="ps2">ورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</p>
             </div>
             <LoadingButton :loading="loading" class="btn btn-dark mx-auto mt-4 w-50" @click.native="savePassword">بعدی</LoadingButton>
+        </div>
+    </transition>
+        <transition name="slide">
+        <div v-if="profile_step">
+            <a href="#" class="text-center">تصویر خود را وارد کنید</a>
+
+            <LoadingButton :loading="loading" class="btn btn-dark mx-auto mt-4 w-50" @click.native="saverProfile">رد شدن</LoadingButton>
         </div>
     </transition>
 </b-modal>
@@ -76,7 +90,19 @@ export default {
                         $this.emailphone_step = false;
                         $this.verification_step = true;
                     }
+                    else{
+                        const errors = response.data.errors;
+                            Object.keys(errors).forEach(function (item, index) {
+                                $this.$bvToast.toast(errors[item][0], {
+                                    noCloseButton: true,
+                                    toaster: "b-toaster-bottom-left",
+                                    bodyClass: ["bg-dark", "text-right", "text-white"],
+                                    solid: true
+                                });
+                            });
+                    }
                     $this.loading = false;
+
                 })
                 .catch(function (error) {
                     $this.loading = false;
@@ -97,7 +123,7 @@ export default {
             axios(config)
                 .then(function (response) {
                     if (response.data.result) {
-                        $this.verification_step = falses;
+                        $this.verification_step = false;
                         $this.personal_info_step = true;
                     }
                     $this.loading = false;
@@ -108,6 +134,7 @@ export default {
 
         },
         savePersonal() {
+            var $this = this;
             var data = new FormData();
             if (this.first_name !== undefined && this.first_name !== "") {
                 data.append('firstname', this.first_name);
@@ -129,6 +156,7 @@ export default {
             };
 
             axios(config)
+
                 .then(function (response) {
                     if (response.data.result) {
                         $this.personal_info_step = false;
@@ -141,7 +169,15 @@ export default {
 
         },
         savePassword() {
+            var $this = this;
             var data = new FormData();
+            var ps1 = document.getElementById("ps1").value;
+            var ps2 = document.getElementById("ps2").value;
+            alert("event is work")
+
+            if (ps1 != ps2) {
+                alert("its not =")
+            }
             data.append("passwd", "");
             var config = {
                 method: 'post',
