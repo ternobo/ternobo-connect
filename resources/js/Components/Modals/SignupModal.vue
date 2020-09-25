@@ -45,21 +45,20 @@
                 رمزعبور
             </h5>
             <div class="d-flex flex-column" style="align-items:center">
-                <input class="form-control w-50 mx-1 text-right" type="password" placeholder="رمزعبور">
-                <input class="form-control w-50 mx-1 text-right mt-2" type="password" placeholder="تکرار رمزعبور">
+                <input class="form-control w-50 mx-1 text-right" v-model="password" type="password" placeholder="رمزعبور">
+                <input class="form-control w-50 mx-1 text-right mt-2" v-model="password_repeat" type="password" placeholder="تکرار رمزعبور">
             </div>
             <div class="mt-5">
                 <!-- title -->
-                <p class="font-18" id="ps1">نکات امنیتی</p>
-                <p class="font-14 mt-3" id="ps2">ورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</p>
+                <p class="font-18">نکات امنیتی</p>
+                <p class="font-14 mt-3">ورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</p>
             </div>
             <LoadingButton :loading="loading" class="btn btn-dark mx-auto mt-4 w-50" @click.native="savePassword">بعدی</LoadingButton>
         </div>
     </transition>
-        <transition name="slide">
+    <transition name="slide">
         <div v-if="profile_step">
             <a href="#" class="text-center">تصویر خود را وارد کنید</a>
-
             <LoadingButton :loading="loading" class="btn btn-dark mx-auto mt-4 w-50" @click.native="saverProfile">رد شدن</LoadingButton>
         </div>
     </transition>
@@ -89,17 +88,16 @@ export default {
                     if (response.data.result) {
                         $this.emailphone_step = false;
                         $this.verification_step = true;
-                    }
-                    else{
+                    } else {
                         const errors = response.data.errors;
-                            Object.keys(errors).forEach(function (item, index) {
-                                $this.$bvToast.toast(errors[item][0], {
-                                    noCloseButton: true,
-                                    toaster: "b-toaster-bottom-left",
-                                    bodyClass: ["bg-dark", "text-right", "text-white"],
-                                    solid: true
-                                });
+                        Object.keys(errors).forEach(function (item, index) {
+                            $this.$bvToast.toast(errors[item][0], {
+                                noCloseButton: true,
+                                toaster: "b-toaster-bottom-left",
+                                bodyClass: ["bg-dark", "text-right", "text-white"],
+                                solid: true
                             });
+                        });
                     }
                     $this.loading = false;
 
@@ -171,31 +169,31 @@ export default {
         savePassword() {
             var $this = this;
             var data = new FormData();
-            var ps1 = document.getElementById("ps1").value;
-            var ps2 = document.getElementById("ps2").value;
-            alert("event is work")
+            if (this.password === this.password_repeat) {
+                var config = {
+                    method: 'post',
+                    url: this.$APP_URL + '/auth/setpassword',
+                    data: data
+                };
 
-            if (ps1 != ps2) {
-                alert("its not =")
-            }
-            data.append("passwd", "");
-            var config = {
-                method: 'post',
-                url: this.$APP_URL + '/auth/setpassword',
-                data: data
-            };
-
-            axios(config)
-                .then(function (response) {
-                    if (response.data.result) {
-                        $this.password_step = false;
-                        $this.profile_step = true;
-                    }
-                })
-                .catch(function (error) {
-                    $this.loading = false;
+                axios(config)
+                    .then(function (response) {
+                        if (response.data.result) {
+                            $this.password_step = false;
+                            $this.profile_step = true;
+                        }
+                    })
+                    .catch(function (error) {
+                        $this.loading = false;
+                    });
+            } else {
+                this.$bvToast.toast("رمزعبور و تاییدیه آن برابر نیست", {
+                    noCloseButton: true,
+                    toaster: "b-toaster-bottom-left",
+                    bodyClass: ["bg-dark", "text-right", "text-white"],
+                    solid: true
                 });
-
+            }
         }
     },
     data() {
@@ -213,6 +211,7 @@ export default {
             username: undefined,
             gender: undefined,
             password: undefined,
+            password_repeat: undefined,
             profile: "/images/man-profile.png",
             loading: false
         }
