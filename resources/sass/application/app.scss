@@ -15,9 +15,9 @@ body {
     border-bottom: 1px solid #dedede !important;
 }
 
-@import "components/header/header";
-@import "components/input-group-icon";
-@import "layout-system";
+@import "./components/header/header";
+@import "./components/input-group-icon";
+@import "./layout-system";
 
 @import "./pages/landing";
 @import "./components/buttons";
@@ -162,7 +162,8 @@ img {
     min-width: 330px;
 }
 
-@import "components/form-control";
+@import "./components/form-control";
+@import "./components/TProgress";
 
 .container {
     max-width: 1580px !important;

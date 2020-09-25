@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bookmark;
-use App\Models\Following;
 use App\Models\Page;
 use App\Models\Post;
+use Inertia\Inertia;
+use App\Models\Bookmark;
+use App\Models\Following;
+use Illuminate\Http\Request;
 use App\Models\SearchSuggestion;
+use Illuminate\Support\Facades\Auth;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\SEOTools;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -92,7 +93,7 @@ class HomeController extends Controller
             ->orderByRaw("seen_at IS NULL DESC, seen_at DESC")
             ->paginate(10);
 
-        return view('home', array("posts" => $posts, "pages" => $pages));
+        return Inertia::render("Feed", array("posts" => $posts, "pages" => $pages));
     }
 
     private function generateSearch($search)

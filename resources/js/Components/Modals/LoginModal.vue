@@ -31,6 +31,7 @@ export default {
     },
     methods: {
         login() {
+            const $this = this;
             if (this.username !== undefined &&
                 this.username !== "" &&
                 this.password !== undefined &&
@@ -48,15 +49,18 @@ export default {
                 axios(config)
                     .then(function (response) {
                         if (response.data.result) {
-                            this.$inertia.visit("/feed", {
-                                method: 'get'
-                            });
+
                         } else {
-                            this.$bvToast.toast('رمز عبور یا نام کاربری اشتباه است', {
-                                noCloseButton: true,
-                                variant: variant,
-                                solid: true
-                            });
+                            const errors = response.data.errors;
+                            Object.keys(errors).forEach(function (item, index) {
+                                $this.$bvToast.toast(errors[item][0], {
+                                    noCloseButton: true,
+                                    toaster: "b-toaster-bottom-left",
+                                    bodyClass: ["bg-dark", "text-right", "text-white"],
+                                    solid: true
+                                });
+                            })
+
                         }
                         $this.loading = false;
                     })

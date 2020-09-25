@@ -3,6 +3,7 @@ require('./bootstrap');
 import Vue from 'vue';
 
 import { InertiaApp } from '@inertiajs/inertia-vue';
+import { Inertia } from '@inertiajs/inertia';
 import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
@@ -10,6 +11,7 @@ import App from "./Layouts/App";
 import Tabs from "./Components/Tabs/Tabs";
 import Tab from "./Components/Tabs/Tab";
 import vSelect from 'vue-select'
+import TProgress from "./Libs/TProgress";
 
 Vue.component('v-select', vSelect);
 // Install BootstrapVue
@@ -20,15 +22,24 @@ Vue.use(InertiaApp);
 Vue.use(InertiaForm);
 Vue.use(PortalVue);
 
-Vue.component("tabs",Tabs);
-Vue.component("tab",Tab);
-
+Vue.component("tabs", Tabs);
+Vue.component("tab", Tab);
 
 Vue.prototype.$APP_URL = window.APP_URL;
 
 const app = document.getElementById('app');
 
-new Vue({
+document.addEventListener('inertia:start', event => {
+    TProgress.start();
+});
+document.addEventListener("inertia:success", event => {
+    setTimeout(() => TProgress.done(), 500);
+});
+
+
+window.TProgress = TProgress;
+
+const vue_app = new Vue({
     render: (h) =>
         h(InertiaApp, {
             props: {
