@@ -1,9 +1,11 @@
 <template>
 <div class="container-fluid">
+    <LoginModal :show.sync="showLogin"></LoginModal>
+    <LawsModal :show.sync="showLaws"></LawsModal>
     <b-sidebar id="sidebar" title="" backdrop-variant="dark" bg-variant="white" right backdrop shadow>
         <div class="px-3 py-2">
             <div class="w-100 d-flex justify-content-between align-items-center p-2" style="overflow-x: hidden">
-                <button class="btn btn-transparent text-dark text-right px-0 w-100">قوانین و مقررات</button>
+                <button class="btn btn-transparent text-dark text-right px-0 w-100" @click="showLaws = !showLaws">قوانین و مقررات</button>
             </div>
             <div class="w-100 d-flex justify-content-between align-items-center p-2" style="overflow-x: hidden">
                 <label>نمایش پس زمینه</label>
@@ -22,7 +24,7 @@
             <inertia-link v-if="$root.user" :class="{'text-dark': !hasBG, 'text-white': hasBG}" href="/feed">
                 <i class="navheader-icon material-icons-outlined" :class="{'text-dark': !hasBG, 'text-white': hasBG}">home</i>
             </inertia-link>
-            <button class="btn btn-transparent border-left" :class="{'text-dark': !hasBG}">ورود</button>
+            <button class="btn btn-transparent border-left" :class="{'text-dark': !hasBG}" @click="showLogin = !showLogin">ورود</button>
             <button class="btn btn-transparent" :class="{'text-dark': !hasBG}">ثبت‌نام</button>
         </div>
     </div>
@@ -72,12 +74,16 @@ import Switches from 'vue-switches';
 import LawsModal from "../Components/Modals/LawsModal";
 import AppHeader from "../Components/App/header/AppHeader";
 import Landing from "../Components/App/Landing";
+import LoginModal from "../Components/Modals/LoginModal";
+
 export default {
     data() {
         return {
             showLanding: false,
             showDownloader: false,
-            hasBG: true
+            hasBG: true,
+            showLogin: false,
+            showLaws: false
         }
     },
     mounted() {
@@ -105,7 +111,8 @@ export default {
         LawsModal,
         AppHeader,
         Landing,
-        Switches
+        Switches,
+        LoginModal
     },
 };
 </script>

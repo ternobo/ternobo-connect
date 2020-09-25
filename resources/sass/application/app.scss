@@ -22,6 +22,10 @@ body {
 @import "./pages/landing.scss";
 @import "./components/buttons";
 
+p{
+    text-align: right;
+}
+
 .clickable {
     -webkit-touch-callout: none;
     /* iOS Safari */

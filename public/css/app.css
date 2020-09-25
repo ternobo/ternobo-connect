@@ -19743,8 +19743,8 @@ body {
   margin: 0 -1rem;
 }
 
-p,
-span {
+.landing p,
+.landing span {
   color: #EEEEEE;
 }
 
@@ -19981,6 +19981,10 @@ h5 {
 .btn.focus {
   outline: 0;
   box-shadow: none;
+}
+
+p {
+  text-align: right;
 }
 
 .clickable {

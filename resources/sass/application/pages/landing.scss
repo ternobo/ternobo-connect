@@ -3,17 +3,23 @@
 .landing {
     background: $dark;
     margin: 0 -1rem;
+
+    p,
+    span {
+        color: $fixed-elements;
+    }
 }
 
-p, span {
-    color: $fixed-elements;
-}
 
 .container {
     max-width: 1200px;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
     font-weight: 700;
 }
 
@@ -60,7 +66,8 @@ h1, h2, h3, h4, h5 {
     color: #FFF;
 }
 
-.btn-grey:hover, .btn-grey:active {
+.btn-grey:hover,
+.btn-grey:active {
     background: $action;
     color: #FFF;
 }
@@ -164,39 +171,50 @@ h1, h2, h3, h4, h5 {
     .sims {
         display: block !important;
     }
+
     .subbtn {
         margin-top: 3.5rem !important;
     }
+
     .cart2 {
         margin-top: 2.5rem !important;
     }
+
     .ex {
         margin-top: 1.5rem !important;
     }
+
     .mobileOfpost {
         margin-left: 1rem !important;
         margin-right: 1rem !important;
     }
+
     .svg2 {
         margin-top: 0 !important;
     }
+
     .tellTOusText {
         @extend .svg2
     }
+
     .aiImages {
         width: 150% !important;
         margin-right: -2rem;
     }
+
     .sptitle {
         font-size: 1.1rem !important;
     }
+
     .spPr {
         font-size: 0.6rem !important;
     }
+
     .sptitlePost {
         font-size: 1rem !important;
         font-weight: bold !important;
     }
+
     .btn {
         font-size: 0.7rem !important;
     }
@@ -214,11 +232,13 @@ h1, h2, h3, h4, h5 {
     font-size: 30px;
 }
 
-.slick-prev, .slick-next {
+.slick-prev,
+.slick-next {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.bottom-nav{
+
+.bottom-nav {
     display: none !important;
 }
