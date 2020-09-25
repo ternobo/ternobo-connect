@@ -45,6 +45,7 @@ input {
 
 .form-control:focus {
     border-color: #757575 !important;
+    box-shadow: none;
 }
 
 .form-control::-webkit-input-placeholder {

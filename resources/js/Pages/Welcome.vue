@@ -1,27 +1,40 @@
 <template>
 <div class="container-fluid">
-    <div class="header px-3 d-flex justify-content-between align-items-center">
-        <div class="menu d-flex">
-            <div class="clickale"><i class="material-icons text-white header-btn">menu</i></div>
-            <div class="mr-2 d-flex align-items-center">
-                <h1 class="font-16 text-white mb-0" id="typewritingdescript"></h1>
+    <b-sidebar id="sidebar" title="" backdrop-variant="dark" bg-variant="white" right backdrop shadow>
+        <div class="px-3 py-2">
+            <div class="w-100 d-flex justify-content-between align-items-center p-2" style="overflow-x: hidden">
+                <button class="btn btn-transparent text-dark text-right px-0 w-100">قوانین و مقررات</button>
+            </div>
+            <div class="w-100 d-flex justify-content-between align-items-center p-2" style="overflow-x: hidden">
+                <label>نمایش پس زمینه</label>
+                <switches v-model="hasBG"></switches>
             </div>
         </div>
-        <div>
-            <inertia-link class="text-white" href="/feed">
-                <i class="navheader-icon text-white material-icons-outlined">home</i>
+    </b-sidebar>
+    <div class="header px-3 d-flex justify-content-between align-items-center">
+        <div class="menu d-flex">
+            <div class="clickable" v-b-toggle.sidebar><i class="material-icons header-btn" :class="{'text-dark': !hasBG, 'text-white': hasBG}">menu</i></div>
+            <div class="mr-2 d-flex align-items-center">
+                <h1 class="font-16 mb-0" :class="{'text-dark': !hasBG, 'text-white': hasBG}" id="typewritingdescript"></h1>
+            </div>
+        </div>
+        <div class="d-flex">
+            <inertia-link v-if="$root.user" :class="{'text-dark': !hasBG, 'text-white': hasBG}" href="/feed">
+                <i class="navheader-icon material-icons-outlined" :class="{'text-dark': !hasBG, 'text-white': hasBG}">home</i>
             </inertia-link>
+            <button class="btn btn-transparent border-left" :class="{'text-dark': !hasBG}">ورود</button>
+            <button class="btn btn-transparent" :class="{'text-dark': !hasBG}">ثبت‌نام</button>
         </div>
     </div>
-    <div class="search-section">
+    <div class="search-section" :class="{noBG: !hasBG}">
         <form action="/search" id="searchform" autocomplete="off">
             <div class="content-body d-flex justify-content-center align-items-center flex-column">
                 <div class="searchbox d-flex justify-content-center align-items-center flex-column">
-                    <img src="/images/logo-type.svg" class="thelogo" />
-                    <img src="/images/logo-type-dark.svg" class="thelogo" style="display: none" />
+                    <img src="/images/logo-type.svg" class="thelogo" v-if="hasBG" />
+                    <img src="/images/logo-type-dark.svg" class="thelogo" v-if="!hasBG" />
                     <div class="input-group-icon mt-5 w-100">
                         <input class="form-control searchfield w-100 py-2 px-3 rounded-pill" name="q" required="" title="چیزی جستجو کنید" data-autocomplete="" autocomplete="off" type="text" placeholder="هر چیز که در جستن آنی، آنی" id="search-input" />
-                        <span class="clickale">
+                        <span class="clickable">
                             <i class="material-icons" style="left: 0.7rem">search</i>
                         </span>
                     </div>
@@ -37,15 +50,15 @@
                     <b class="my-1" style="font-size: 0.8rem;">علی اطیابی</b>
                     <small style="font-size: 0.8rem;">تهران، تهران ایران</small>
                 </div>
-                <a class="d-flex align-items-center" download="" href="/images/search-background-2x.jpg"><i class="material-icons text-white ml-5" style="margin-left: -5px;">get_app</i></a>
+                <a class="d-flex align-items-center" download href="/images/search-background-2x.jpg"><i class="material-icons text-white ml-5" style="margin-left: -5px;">get_app</i></a>
             </div>
 
         </div>
-        <div class="clickale showlanding" v-on:click="showLanding = true">
-            <i class="material-icons font-38">flight_land</i>
+        <div class="clickable showlanding" :class="{'bg-dark':!hasBG }" v-on:click="showLanding = true">
+            <i class="material-icons font-38" :class="{'text-white':!hasBG }">flight_land</i>
         </div>
-        <img src="/images/logo-en.svg" class="thelogo" style="width: 110px;">
-        <img src="/images/logo-en-dark.svg" class="thelogo" style="display: none;width: 110px;">
+        <img src="/images/logo-en.svg" class="thelogo" v-if="hasBG" style="width: 110px;">
+        <img src="/images/logo-en-dark.svg" class="thelogo" v-if="!hasBG" style="width: 110px;">
 
     </div>
     <transition name="slide">
@@ -55,6 +68,7 @@
 </template>
 
 <script>
+import Switches from 'vue-switches';
 import LawsModal from "../Components/Modals/LawsModal";
 import AppHeader from "../Components/App/header/AppHeader";
 import Landing from "../Components/App/Landing";
@@ -62,7 +76,8 @@ export default {
     data() {
         return {
             showLanding: false,
-            showDownloader: false
+            showDownloader: false,
+            hasBG: true
         }
     },
     mounted() {
@@ -90,6 +105,7 @@ export default {
         LawsModal,
         AppHeader,
         Landing,
+        Switches
     },
 };
 </script>
@@ -107,19 +123,27 @@ export default {
 
 #searchform {
     position: relative;
-    z-index: 999;
+    z-index: 2;
     width: 100%;
 }
 
 .header {
     position: fixed;
     top: 0;
-    z-index: 99999;
+    z-index: 2;
     transition: all .3s !important;
     width: 100%;
     left: 0;
     padding: .9rem 1rem !important;
     right: 0;
+}
+
+.noBG {
+    background: #FFF !important;
+}
+
+.noBG::before {
+    background: #FFF !important;
 }
 
 .search-section {

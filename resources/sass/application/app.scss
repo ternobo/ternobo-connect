@@ -18,9 +18,9 @@ body {
 @import "components/header/header";
 @import "components/input-group-icon";
 @import "layout-system";
-@import "utilities.scss";
-@import "components/modal";
+
 @import "./pages/landing.scss";
+@import "./components/buttons";
 
 .clickable {
     -webkit-touch-callout: none;
@@ -196,3 +196,13 @@ img {
     overflow: hidden;
     max-height: 0;
  }
+ .modal-header .close {
+    padding: 0;
+    margin: 0;
+}
+.b-sidebar-backdrop{
+    opacity: 0.4;
+}
+.vue-switcher input{
+    display: none;
+}

@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import AppLayout from "../Layouts/AppLayout";
+
 export default {
     name: "Feed",
     props: {
@@ -11,6 +13,7 @@ export default {
             default: undefined
         },
     },
+    layout: AppLayout
 };
 </script>
 

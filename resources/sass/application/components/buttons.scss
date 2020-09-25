@@ -1,0 +1,16 @@
+.btn-transparent{
+    background: transparent;
+    color: #FFF;
+}
+.btn-transparent:hover {
+    background: rgba(255,255,255,0.2);
+    color: #FFF;
+}
+.btn-transparent:active {
+    box-shadow: 0 0 10px 3px rgba(0,0,0,0.2) inset;
+    color: #FFF;
+}
+.btn:focus, .btn.focus {
+    outline: 0;
+    box-shadow: none;
+}

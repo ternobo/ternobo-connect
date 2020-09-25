@@ -36,8 +36,11 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         return response()->json($articles);
     });
 
-    Route::get('/feed', 'HomeController@index')->name('home');
+    Route::group(['middleware'=>"auth"],function (){
+        Route::get('/feed', 'HomeController@index')->name('home');
+    });
 
+ 
 /**
  * Auth Start
  */
