@@ -1,16 +1,56 @@
-.btn-transparent{
+.follow-btn {
+    color: rgb(8, 152, 223);
+    background: rgba(231, 242, 255, 1);
+    border: none;
+    padding: 9px;
+    font-weight: bold;
+    font-size: 0.7rem !important;
+    transition: 0.3s all;
+    white-space: nowrap;
+}
+
+.follow-btn:hover {
+    background: #CDEAF9;
+}
+
+.btn-followed-connected {
+    background: #EEEEEE;
+    color: #757575;
+}
+
+.btn-connection-waiting {
+    @extend .follow-btn;
+    background: #FEFCEA;
+    color: #EFDC36;
+}
+
+.connect-btn {
+    @extend .follow-btn;
+    color: rgb(0, 200, 83);
+    background: #E5FAED;
+}
+
+.connect-btn:hover {
+    background: #CCF4DC;
+}
+
+.btn-transparent {
     background: transparent;
     color: #FFF;
 }
+
 .btn-transparent:hover {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.2);
     color: #FFF;
 }
+
 .btn-transparent:active {
-    box-shadow: 0 0 10px 3px rgba(0,0,0,0.2) inset;
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2) inset;
     color: #FFF;
 }
-.btn:focus, .btn.focus {
+
+.btn:focus,
+.btn.focus {
     outline: 0;
     box-shadow: none;
 }

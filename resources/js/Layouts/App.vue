@@ -1,5 +1,5 @@
 <template>
-<div id="app">
+<div id="defualtapp">
     <slot></slot>
 </div>
 </template>

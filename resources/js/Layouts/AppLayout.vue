@@ -1,17 +1,18 @@
 <template>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-4">
-
-        </div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4"></div>
-    </div>
+<div id="app">
+    <AppHeader></AppHeader>
+    <slot></slot>
 </div>
 </template>
 
 <script>
-export default {};
+import AppHeader from "../Components/App/header/AppHeader";
+export default {
+    name: "AppLayout",
+    components: {
+        AppHeader
+    }
+};
 </script>
 
 <style>

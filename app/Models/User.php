@@ -202,10 +202,6 @@ class User extends Authenticatable
     {
         $page = Page::getPersonalPage($id);
         $connection = Following::where("user_id", $this->id)->where("following", $page->id);
-//        echo $page->id;
-        //        echo "   ";
-        //        echo $this->id;
-        //    dd($connection->toSql());
         return $connection->first();
     }
 

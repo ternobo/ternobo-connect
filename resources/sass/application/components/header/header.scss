@@ -1,4 +1,5 @@
 @import "../../variables";
+
 .header {
     display: flex;
     align-items: center;
@@ -25,4 +26,59 @@
         transition: 0.3s all;
         width: 100%;
     }
+    .toolbar{
+        display: flex;
+        align-items: center;
+    }
+}
+
+
+.usermenu {
+    position: fixed;
+    display: none;
+    top: 60px;
+    min-width: 300px;
+    left: 1rem;
+    z-index: 1000;
+}
+
+.usertoolbar:hover .usermenu {
+    display: block;
+}
+
+
+.usertoolbar {
+    text-decoration: none !important;
+    color: $grey !important;
+
+    &:hover * {
+        text-decoration: none !important;
+    }
+}
+
+.usermenu {
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.usermenu {
+    .card-header {
+        img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+    }
+}
+
+.usertoolbar img {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+}
+
+.list-group {
+    display: flex;
+    flex-direction: column;
+    padding-right: 0;
+    margin-bottom: 0;
 }

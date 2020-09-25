@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
 
     /**
@@ -23,6 +26,23 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Multiple values
+        Inertia::share([
+            // Synchronously
+            'app' => [
+                'name' => Config::get('app.name'),
+            ],
+            "followings" => function () {
+                if(Auth::check()){
+                    $followings = Auth::user()->followings;
+                    $output = [];
+                    foreach($followings as $following){
+                        $output[] = $following->following;
+                    }
+                    return $output;
+                }
+                return null;
+            }
+        ]);
     }
 }

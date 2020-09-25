@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\LocaleMiddleware;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,20 +28,15 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
     Route::get("/", "IndexController@index");
 
-    Route::get("/test", function (){
-        $articles = App\Models\Post::query()->with("page")->where("type","article")->get();
-        foreach($articles as $article){
+    Route::get("/test", function () {
+        $articles = App\Models\Post::query()->with("page")->where("type", "article")->get();
+        foreach ($articles as $article) {
             $article->cover = $article->getMedia();
             $article->save();
         }
         return response()->json($articles);
     });
 
-    Route::group(['middleware'=>"auth"],function (){
-        Route::get('/feed', 'HomeController@index')->name('home');
-    });
-
- 
 /**
  * Auth Start
  */
@@ -55,6 +51,61 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 /**
  * Auth End
  */
+
+    Route::group(['auth'], function () {
+        Route::get('/feed', 'HomeController@index')->name('home');
+        Route::post("/seenPost", "PostController@seenPost");
+        Route::get("/bookmarks", "HomeController@bookmarks");
+
+        Route::post("/verificationRequest", "Auth\UsersController@verificationRequest");
+
+        Route::post("/setprofile", "Auth\UsersController@setProfile")->name("profile-setup");
+        Route::post("/setcover", "Auth\UsersController@setCover")->name("profile-cover");
+
+        Route::post("/like/{post_id}", "PostController@likePost");
+        Route::post("/likecomment/{comment_id}", "CommentController@likeComment");
+
+        //Start Page Edit
+        Route::prefix('/save')->group(function () {
+            Route::post("/contacts", "PageController@saveContacts");
+            Route::post("/socials", "PageController@saveSocials");
+            Route::post("/websites", "PageController@saveWebsits");
+        });
+        Route::prefix("/usersave")->group(function () {
+            Route::post("/profile", "PageController@saveProfile");
+            Route::post("/bio", "PageController@saveBio");
+            Route::post("/shortbio", "PageController@saveShortBio");
+            Route::post("/username", "PageController@saveUsername");
+        });
+        // End Page Edit
+
+        Route::post("/reportpost", "PostController@report");
+
+        // Settings Start
+        Route::post("/change-password", "Auth\UsersController@changePassword");
+        Route::post("/verifynewphone", "Auth\UsersController@verifyNewPhone");
+        Route::post("/verifynewemail", "Auth\UsersController@verifyNewEmail");
+        Route::post("/deactive", "Auth\UsersController@deactiveAccount");
+        //Settings End
+
+        Route::post("/categories/sort/{id}", "CategoryController@sort");
+
+        Route::post("/skills/search", "SkillController@search");
+        Route::resource("/skills", "SkillController");
+        Route::resource("/skills/credit", "SkillCreditController");
+        Route::post("/skills/sort/{id}", "SkillController@sort");
+
+        Route::prefix("/ideas")->group(function () {
+            Route::post("/bookmark", "IdeasController@bookmark");
+            Route::get("/myideas", "IdeasController@myIdeas");
+            Route::post("/reply/{idea:id}", "IdeasController@addReply");
+            Route::delete("/reply/{id}", "IdeasController@deleteComment");
+            Route::post("/vote", "IdeasController@voteIdea");
+        });
+
+        Route::resource("/ideas", "IdeasController");
+
+    });
 
 /**
  * Pages API

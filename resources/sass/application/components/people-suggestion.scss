@@ -1,0 +1,11 @@
+.people-sugestion {
+    padding: 0.6rem 0;
+    flex-wrap: nowrap;
+
+    img {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        object-fit: fill;
+    }
+}

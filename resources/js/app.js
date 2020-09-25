@@ -12,6 +12,7 @@ import Tabs from "./Components/Tabs/Tabs";
 import Tab from "./Components/Tabs/Tab";
 import vSelect from 'vue-select'
 import TProgress from "./Libs/TProgress";
+import VueCircle from 'vue2-circle-progress'
 
 Vue.component('v-select', vSelect);
 // Install BootstrapVue
@@ -24,6 +25,7 @@ Vue.use(PortalVue);
 
 Vue.component("tabs", Tabs);
 Vue.component("tab", Tab);
+Vue.component("vue-circle", VueCircle);
 
 Vue.prototype.$APP_URL = window.APP_URL;
 

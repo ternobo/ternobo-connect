@@ -1,5 +1,5 @@
 @import "variables";
-@import '~bootstrap';
+@import '~bootstrap-v4-rtl';
 @import '~bootstrap-vue';
 
 body {
@@ -7,6 +7,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: $body-bg;
+    text-align: right;
 }
 
 @import "fonts";
@@ -23,15 +24,16 @@ body {
 @import "./components/buttons";
 @import "./components/tabs";
 @import "vue-select/src/scss/vue-select.scss";
+
 a:hover {
     text-decoration: none;
 }
 
-.opacity-0{
+.opacity-0 {
     opacity: 0 !important;
 }
 
-p{
+p {
     text-align: right;
 }
 
@@ -175,6 +177,7 @@ img {
     border-radius: 50%;
     object-fit: contain;
 }
+
 .text-action {
     color: #0898df !important;
 }
@@ -188,9 +191,9 @@ img {
     -webkit-transition-timing-function: ease-in;
     -o-transition-timing-function: ease-in;
     transition-timing-function: ease-in;
- }
- 
- .slide-leave-active {
+}
+
+.slide-leave-active {
     -moz-transition-duration: 0.3s;
     -webkit-transition-duration: 0.3s;
     -o-transition-duration: 0.3s;
@@ -199,24 +202,142 @@ img {
     -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
     -o-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
     transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
- }
- 
- .slide-enter-to, .slide-leave {
+}
+
+.slide-enter-to,
+.slide-leave {
     max-height: 100px;
     overflow: hidden;
- }
- 
- .slide-enter, .slide-leave-to {
+}
+
+.slide-enter,
+.slide-leave-to {
     overflow: hidden;
     max-height: 0;
- }
- .modal-header .close {
+}
+
+.modal-header .close {
     padding: 0;
     margin: 0;
 }
-.b-sidebar-backdrop{
+
+.b-sidebar-backdrop {
     opacity: 0.4;
 }
-.vue-switcher input{
+
+.vue-switcher input {
     display: none;
+}
+
+#app {
+    max-width: 1295px;
+    margin: auto;
+    min-height: calc(100vh - 80px);
+
+    .sidebar-left {
+        padding-right: 30px;
+    }
+
+
+    .sidebar-right {
+        padding-left: 30px;
+    }
+
+    @media screen and (min-width: 991px) {
+        .sidebar-left {
+            max-width: 21.6%;
+            flex: 21.6%;
+        }
+
+
+        .content-container {
+            max-width: 49.1%;
+            flex: 49.1%;
+        }
+
+        .sidebar-right {
+            max-width: 29.3%;
+            flex: 29.3%;
+        }
+    }
+}
+
+.card,
+.idea-card {
+    border: none;
+    border-radius: 0 !important;
+    box-shadow: 0 1rem 40px rgba(0, 0, 0, .02);
+}
+
+@import "components/people-suggestion.scss";
+
+.verificationcheck {
+    @extend .material-icons;
+    color: $action;
+    margin-left: 1px;
+    @extend .font-14;
+}
+
+.userinfo-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.userinfo-card {
+    .profile-image {
+        margin-top: -24%;
+        position: relative;
+    }
+
+    img {
+        border-radius: 50%;
+        width: 79px;
+        height: 79px;
+        margin-bottom: 15px;
+        margin-top: -190px;
+    }
+}
+
+.profile {
+    border-radius: 50%;
+    height: 64px;
+    width: 64px;
+}
+
+.profile-md {
+    border-radius: 50%;
+    height: 46px;
+    width: 46px;
+}
+
+
+.profile-sm {
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+}
+
+.hover-danger:hover {
+    color: #ff0000 !important;
+}
+
+.hover-dark {
+    transition: 0.3s all;
+}
+
+.hover-dark:hover {
+    color: $dark !important;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
 }
