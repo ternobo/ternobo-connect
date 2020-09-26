@@ -19,7 +19,6 @@ class CreateIdeaRepliesTable extends Migration
             $table->bigInteger("idea_id");
             $table->text("text");
             $table->boolean("pinned")->default(false);
-            $table->softDeletes();
             $table->timestamps();
             $table->softDeletes();
         });
