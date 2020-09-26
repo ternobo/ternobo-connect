@@ -18,6 +18,7 @@ class CreateOptions extends Migration {
             $table->string("value");
             $table->string("label");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -18,6 +18,7 @@ class CreateWebsiteOptionsTable extends Migration
             $table->string("name");
             $table->string("starts_with");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

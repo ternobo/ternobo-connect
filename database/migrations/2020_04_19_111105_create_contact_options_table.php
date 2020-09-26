@@ -20,6 +20,7 @@ class CreateContactOptionsTable extends Migration
             $table->string("icon");
             $table->string("starts_with");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

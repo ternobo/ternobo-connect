@@ -23,6 +23,7 @@ class CreateExperiencesTable extends Migration {
             $table->timestamp("end_date")->nullable();
             $table->bigInteger("connected_to")->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

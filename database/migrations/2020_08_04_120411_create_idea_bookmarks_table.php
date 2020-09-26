@@ -18,6 +18,7 @@ class CreateIdeaBookmarksTable extends Migration
             $table->bigInteger("idea_id");
             $table->bigInteger("user_id");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -19,6 +19,7 @@ class CreateContactsTable extends Migration
             $table->string("url");
             $table->bigInteger("page_id");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

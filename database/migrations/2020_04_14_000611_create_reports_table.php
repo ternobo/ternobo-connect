@@ -21,6 +21,7 @@ class CreateReportsTable extends Migration {
             $table->text("description");
             $table->bigInteger("user_id");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

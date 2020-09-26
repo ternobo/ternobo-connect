@@ -20,6 +20,7 @@ class CreateAdminNotificationsTable extends Migration
             $table->text("text");
             $table->boolean("readed")->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

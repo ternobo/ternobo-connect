@@ -18,6 +18,7 @@ class CreateLikes extends Migration {
             $table->bigInteger("post_id")->nullable();
             $table->bigInteger("comment_id")->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

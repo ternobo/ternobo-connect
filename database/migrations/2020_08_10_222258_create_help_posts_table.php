@@ -19,6 +19,7 @@ class CreateHelpPostsTable extends Migration
             $table->longText("text");
             $table->integer("category_id");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

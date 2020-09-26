@@ -21,6 +21,7 @@ class CreateIdeaRepliesTable extends Migration
             $table->boolean("pinned")->default(false);
             $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

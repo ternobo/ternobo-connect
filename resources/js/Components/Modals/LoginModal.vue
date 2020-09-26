@@ -49,7 +49,7 @@ export default {
                 axios(config)
                     .then(function (response) {
                         if (response.data.result) {
-
+                            
                         } else {
                             const errors = response.data.errors;
                             Object.keys(errors).forEach(function (item, index) {

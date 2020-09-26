@@ -18,6 +18,7 @@ class CreateVerifications extends Migration {
             $table->string("email")->nullable();
             $table->string("code");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -19,6 +19,7 @@ class CreateWebsitesTable extends Migration
             $table->bigInteger("page_id");
             $table->string("url");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

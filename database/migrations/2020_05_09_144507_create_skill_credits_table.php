@@ -20,6 +20,7 @@ class CreateSkillCreditsTable extends Migration
             $table->integer("level");
             $table->string("reason");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -22,6 +22,7 @@ class CreateNotifications extends Migration {
             $table->string("text")->nullable();
             $table->boolean("seen")->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

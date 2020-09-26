@@ -15,7 +15,7 @@ class CreateWelcomeBackgroundsTable extends Migration
     {
         Schema::create('welcome_backgrounds', function (Blueprint $table) {
             $table->id();
-            
+        
             $table->timestamps();
         });
     }
