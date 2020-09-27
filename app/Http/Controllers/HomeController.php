@@ -199,7 +199,7 @@ class HomeController extends Controller
     public function bookmarks()
     {
         $bookmarks = Bookmark::where("user_id", Auth::user()->id)->latest()->paginate(10);
-        return view("bookmarks", array("bookmarks" => $bookmarks));
+        return Inertia::render("Bookmarks",array("bookmarks" => $bookmarks));
     }
 
     public function setLocale(Request $request)

@@ -243,7 +243,16 @@ img {
         padding-left: 30px;
     }
 
+    .content-container-full {
+        padding-left: 30px;
+    }
+
     @media screen and (min-width: 991px) {
+        .content-container-full {
+            max-width: 78.4%;
+            flex: 78.4%;
+        }
+
         .sidebar-left {
             max-width: 21.6%;
             flex: 21.6%;

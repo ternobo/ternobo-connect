@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,6 +12,8 @@ class User extends Authenticatable
 {
 
     use Notifiable;
+
+    use HasFactory;
 
     use SoftDeletes;
 
@@ -192,7 +195,7 @@ class User extends Authenticatable
         $result = [
             "done_steps" => $done_steps,
             "undone_steps" => $undone_steps,
-            "precent" => (int) (($done_num / 6) * 100),
+            "percent" => (int) (($done_num / 6) * 100),
         ];
 
         return json_decode(json_encode($result));
@@ -296,6 +299,34 @@ class User extends Authenticatable
         return (count($notification) > 0);
     }
 
+    /**
+     * Convert the model instance to an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $array = parent::toArray();
+        if (Auth::check()) {
+            $array['profile_steps'] = $this->getProfileSteps();
+        }
+
+        return $array;
+    }
+
+    public function makePage()
+    {
+        $page = new Page();
+        $page->name = $this->first_name . " " . $this->last_name;
+        $page->slug = $this->username;
+        $page->profile = $this->profile;
+        $page->cover = $this->cover;
+        $page->short_bio = $this->short_bio;
+        $page->user_id = $this->id;
+        $page->type = "personal";
+        return $page;
+    }
+
     protected static function boot()
     {
         parent::boot();
@@ -315,7 +346,6 @@ class User extends Authenticatable
                 $page->save();
             }
         });
-
     }
 
 }

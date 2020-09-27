@@ -1,19 +1,19 @@
 <template>
 <div class="toolbar">
     <div class="header-menu">
-        <inertia-link class="active" href="/feed">
+        <inertia-link :class="{'active': $root.url === '/feed'}" href="/feed">
             <i class="navheader-icon">home</i>
             <div class="navheader-text">خانه</div>
         </inertia-link>
-        <inertia-link href="/connections">
+        <inertia-link :class="{'active': $root.url === '/connections'}" href="/connections">
             <i class="navheader-icon">group</i>
             <div class="navheader-text">شبکه من</div>
         </inertia-link>
-        <inertia-link href="/notifications">
+        <inertia-link :class="{'active': $root.url === '/notifications'}" href="/notifications">
             <i class="navheader-icon">notifications_none</i>
             <div class="navheader-text">اعلان‌ها</div>
         </inertia-link>
-        <inertia-link href="/bookmarks">
+        <inertia-link :class="{'active': $root.url === '/bookmarks'}" href="/bookmarks">
             <i class="navheader-icon">bookmarks</i>
             <div class="navheader-text">نشان‌ها</div>
         </inertia-link>
@@ -54,11 +54,6 @@ export default {
     },
     components: {
         UserMenu
-
     }
 };
 </script>
-
-<style lang="scss" scoped>
-@import "../../../../sass/application/components/header/toolbar";
-</style>
