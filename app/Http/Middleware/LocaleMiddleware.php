@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 
 class LocaleMiddleware

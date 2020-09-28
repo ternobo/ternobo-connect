@@ -20,7 +20,7 @@
                 <inertia-link href="/ideas" class="m-0"><i class="material-icons-outlined">emoji_objects</i> فیدبک </inertia-link>
             </li>
             <li class="list-group-item headermenu-item d-flex flex-column px-2 pb-2">
-                <inertia-link href="/logout" data-no-instant class="hover-danger m-0"><i class="material-icons">power_settings_new</i> خروج
+                <inertia-link href="/logout" method="post" class="hover-danger m-0"><i class="material-icons">power_settings_new</i> خروج
                 </inertia-link>
             </li>
         </ul>

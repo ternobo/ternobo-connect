@@ -18,7 +18,7 @@
         <div class="menu d-flex">
             <div class="clickable" v-b-toggle.sidebar><i class="material-icons header-btn" :class="{'text-dark': !hasBG, 'text-white': hasBG}">menu</i></div>
             <div class="mr-2 d-flex align-items-center">
-                <h1 class="font-16 mb-0" :class="{'text-dark': !hasBG, 'text-white': hasBG}" id="typewritingdescript"></h1>
+                <h1 class="font-16 mb-0" :class="{'text-dark': !hasBG, 'text-white': hasBG}" ref="typewritingdescript"></h1>
             </div>
         </div>
         <div class="d-flex">
@@ -91,18 +91,21 @@ export default {
         }
     },
     watch: {
-        showLanding: function(){
-            setTimeout(function(){ window.scrollTo(0, 800); }, 500);
+        showLanding: function () {
+            setTimeout(function () {
+                window.scrollTo(0, 800);
+            }, 500);
         }
     },
     mounted() {
+        const $this = this;
         var i = 0;
         var txt = 'شبکه اجتماعی متخصصین';
         var speed = 130;
 
         function typeWriter() {
             if (i < txt.length) {
-                document.getElementById("typewritingdescript").innerHTML += txt.charAt(i);
+                $this.$refs.typewritingdescript.innerHTML += txt.charAt(i);
                 i++;
                 setTimeout(typeWriter, speed);
             }

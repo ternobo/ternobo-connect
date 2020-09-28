@@ -12,9 +12,9 @@
             <input type="password" class="form-control bg-transparent" name="password" v-model="password" placeholder="رمزعبور" value="" />
             <a class="text-primary float-left font-11" style="margin-top: 3px;" data-toggle="modal" href="#resetpasswordmodal">فراموشی رمزعبور</a>
         </div>
-        <button @click="login" class="btn btn-dark mt-2 w-50" type="button">
+        <loading-button @click.native="login" :loading="loading" class="btn btn-dark mt-2 w-50" type="button">
             ورود
-        </button>
+        </loading-button>
     </form>
 </b-modal>
 </template>
@@ -25,7 +25,8 @@ export default {
     data() {
         return {
             password: undefined,
-            username: undefined
+            username: undefined,
+            loading: false
         }
 
     },
@@ -36,6 +37,7 @@ export default {
                 this.username !== "" &&
                 this.password !== undefined &&
                 this.password !== "") {
+                this.loading = true;
                 var data = new FormData();
                 data.append('username', this.username);
                 data.append('password', this.password);
@@ -49,7 +51,7 @@ export default {
                 axios(config)
                     .then(function (response) {
                         if (response.data.result) {
-                            
+                            $this.$inertia.visit('/feed');
                         } else {
                             const errors = response.data.errors;
                             Object.keys(errors).forEach(function (item, index) {
@@ -60,12 +62,17 @@ export default {
                                     solid: true
                                 });
                             })
-
                         }
                         $this.loading = false;
                     })
                     .catch(function (error) {
                         $this.loading = false;
+                        $this.$bvToast.toast("خطا در برقراری ارتباط", {
+                            noCloseButton: true,
+                            toaster: "b-toaster-bottom-left",
+                            bodyClass: ["bg-dark", "text-right", "text-white"],
+                            solid: true
+                        });
                     });
 
             }

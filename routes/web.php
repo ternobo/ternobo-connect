@@ -53,6 +53,12 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
  */
 
     Route::group(['auth'], function () {
+
+        // Follow Start
+        Route::post("/follow/{page_id}", "ConnectionsController@follow")->name("follow");
+        Route::post("/unfollow/{page_id}", "ConnectionsController@unfollow");
+        //Follow End
+
         Route::get('/feed', 'HomeController@index')->name('home');
         Route::post("/seenPost", "PostController@seenPost");
         Route::get("/bookmarks", "HomeController@bookmarks");
@@ -64,6 +70,12 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
         Route::post("/like/{post_id}", "PostController@likePost");
         Route::post("/likecomment/{comment_id}", "CommentController@likeComment");
+
+        // Connections
+        Route::get("/connections", "ConnectionsController@index");
+        Route::get("/followings", "ConnectionsController@followings");
+        Route::get("/followers", "ConnectionsController@followers");
+        //end Connections
 
         //Start Page Edit
         Route::prefix('/save')->group(function () {
