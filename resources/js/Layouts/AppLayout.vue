@@ -1,7 +1,9 @@
 <template>
 <div id="app">
     <AppHeader></AppHeader>
-    <slot></slot>
+    <transition mode="out-in" name="fade">
+        <slot></slot>
+    </transition>
 </div>
 </template>
 

@@ -21060,11 +21060,11 @@ input[type=text] {
 }
 
 #app .sidebar-left {
-  padding-right: 30px;
+  padding-left: 30px;
 }
 
 #app .sidebar-right {
-  padding-left: 30px;
+  padding-right: 30px;
 }
 
 #app .content-container-full {
@@ -21077,7 +21077,7 @@ input[type=text] {
     flex: 78.4%;
   }
 
-  #app .sidebar-left {
+  #app .sidebar-right {
     max-width: 21.6%;
     flex: 21.6%;
   }
@@ -21087,7 +21087,7 @@ input[type=text] {
     flex: 49.1%;
   }
 
-  #app .sidebar-right {
+  #app .sidebar-left {
     max-width: 29.3%;
     flex: 29.3%;
   }

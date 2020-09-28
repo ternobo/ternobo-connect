@@ -12,6 +12,7 @@ import TProgress from "./Libs/TProgress";
 import VueCircle from 'vue2-circle-progress'
 import infiniteScroll from 'vue-infinite-scroll'
 import TernoboApp from "./Libs/TernoboApp";
+import Application from "./Application";
 
 // Install V-Select
 Vue.component('v-select', vSelect);
@@ -42,11 +43,14 @@ window.TProgress = TProgress;
 
 const vue_app = new Vue({
     render: (h) =>
-        h(InertiaApp, {
+        h(Application, {
             props: {
                 initialPage: JSON.parse(app.dataset.page),
+                transformProps: function (props) {
+                    this.$emit('changeProps', props)
+                    return props;
+                },
                 resolveComponent: (name) => {
-
                     const module = require(`./Pages/${name}`).default;
                     if (!module.layout) {
                         // there is no Layout defined, set the default layout
@@ -66,6 +70,10 @@ const vue_app = new Vue({
         }
     }
 }).$mount(app);
+
+window.addEventListener('popstate', () => {
+    vue_app.url = window.location.pathname;
+});
 
 document.addEventListener('inertia:start', event => {
     vue_app.url = event.detail.visit.url;

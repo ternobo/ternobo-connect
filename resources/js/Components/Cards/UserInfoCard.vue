@@ -1,10 +1,10 @@
 <template>
 <div class="card sticky-aside pb-4">
-    <img class="card-img-top page-cover" style="height: auto;" src="https://ternobo.com/profiles/FQGDgu8XRzpw73qGv0EuJnL2A5TCetHZi2PWT8pr.jpeg">
-    <a href="/soroosh" class="userinfo-card">
+    <img class="card-img-top page-cover" style="height: auto;" :src="$page.user.cover">
+    <inertia-link :href="'/'+$page.user.username" class="userinfo-card">
         <div class="d-flex flex-column align-items-center">
             <div class="profile-image">
-                <vue-circle :progress="$page.user.profile_steps.percent" :size="90" empty-fill="#F5F5F5" :show-percent="false" :start-angle="-Math.PI/2" fill="#0898DF">
+                <vue-circle :progress="$page.user.profile_steps.percent" :size="90" empty-fill="#F5F5F5" :show-percent="false" :start-angle="-Math.PI/2" :fill="{color: '#0898DF'}">
                     <img :src="$page.user.profile">
                 </vue-circle>
             </div>
@@ -14,7 +14,7 @@
         <div class="done-precent d-flex">
             <strong class="text-white">{{ $page.user.percent }}%</strong>
         </div>
-    </a>
+    </inertia-link>
 </div>
 </template>
 

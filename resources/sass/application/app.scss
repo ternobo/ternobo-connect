@@ -235,12 +235,12 @@ img {
     min-height: calc(100vh - 80px);
 
     .sidebar-left {
-        padding-right: 30px;
+        padding-left: 30px;
     }
 
 
     .sidebar-right {
-        padding-left: 30px;
+        padding-right: 30px;
     }
 
     .content-container-full {
@@ -253,7 +253,7 @@ img {
             flex: 78.4%;
         }
 
-        .sidebar-left {
+        .sidebar-right {
             max-width: 21.6%;
             flex: 21.6%;
         }
@@ -264,7 +264,7 @@ img {
             flex: 49.1%;
         }
 
-        .sidebar-right {
+        .sidebar-left {
             max-width: 29.3%;
             flex: 29.3%;
         }

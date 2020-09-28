@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import AppLayout from "../../Layouts/AppLayout";
 export default {
     name: "UserProfile",
     props: {
@@ -10,7 +11,8 @@ export default {
             type: Object,
             default: undefined,
         },
-    }
+    },
+    layout: AppLayout
 }
 </script>
 
