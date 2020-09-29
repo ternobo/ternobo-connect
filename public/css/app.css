@@ -21131,12 +21131,14 @@ input[type=text] {
   position: relative;
 }
 
-.userinfo-card img {
-  border-radius: 50%;
-  width: 79px;
-  height: 79px;
-  margin-bottom: 15px;
+.userinfo-card .image__wrapper {
+  width: 80px;
+  height: 80px;
   margin-top: -190px;
+}
+
+.userinfo-card .image__wrapper img {
+  border-radius: 50%;
 }
 
 .profile {
@@ -21177,5 +21179,53 @@ input[type=text] {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.image__wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image__wrapper.loaded .image__spinner {
+  display: none;
+}
+
+.image__wrapper.loaded .image__item {
+  opacity: 1;
+}
+
+.image__wrapper .image__spinner {
+  position: absolute;
+}
+
+.image__wrapper .image__item {
+  transition: 0.3s all;
+  opacity: 0;
+}
+
+.loadingspinner {
+  pointer-events: none;
+  width: 2.5em;
+  height: 2.5em;
+  border: 0.2em solid transparent;
+  border-color: #eee;
+  border-top-color: #191919;
+  border-radius: 50%;
+  -webkit-animation: loadingspin 1s linear infinite;
+          animation: loadingspin 1s linear infinite;
+}
+
+@-webkit-keyframes loadingspin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loadingspin {
+  100% {
+    transform: rotate(360deg);
+  }
 }
 

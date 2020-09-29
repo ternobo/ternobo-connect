@@ -14,6 +14,8 @@ import infiniteScroll from 'vue-infinite-scroll'
 import TernoboApp from "./Libs/TernoboApp";
 import Application from "./Application";
 
+Vue.prototype.window = window.window;
+
 // Install V-Select
 Vue.component('v-select', vSelect);
 
@@ -35,9 +37,8 @@ Vue.component("vue-circle", VueCircle);
 
 Vue.prototype.$APP_URL = window.APP_URL;
 
+
 const app = document.getElementById('app');
-
-
 
 window.TProgress = TProgress;
 
