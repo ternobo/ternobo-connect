@@ -60,6 +60,7 @@ class PostFactory extends Factory
             "category_id" => $category->id,
             "type" => $type,
             "title" => $title,
+            "show" => "public",
             "created_at" => $faker->dateTimeThisYear(),
         ];
     }

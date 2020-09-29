@@ -1,6 +1,6 @@
 import PeopleSuggestion from "../Components/App/PeopleSuggestion";
 import LoadingButton from "../Components/buttons/LoadingButton";
-import PostCard from "../Components/Cards/PostCard";
+import PostCard from "../Components/PostCard/PostCard.vue";
 import UserInfoCard from "../Components/Cards/UserInfoCard";
 import LazyImage from "../Components/LazyImage";
 import Tab from "../Components/Tabs/Tab";
