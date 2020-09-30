@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 /**
  * @property mixed|string slug
@@ -96,11 +96,13 @@ class Post extends Model
         $data['tags'] = $this->getTags();
         $data['medias'] = $this->getMedia();
         $data['is_liked'] = false;
-        if(Auth::check()){
-            $current_page = json_decode(Cookie::get('ternobo_current_page'));
-            $page_ids = array_column($data['likes'], "page_id");
-            if(in_array($current_page->id,$page_ids)){
-                $data['is_liked'] = true;
+        if (Auth::check()) {
+            if (isset($data['likes'])) {
+                $current_page = json_decode(Cookie::get('ternobo_current_page'));
+                $page_ids = array_column($data['likes'], "page_id");
+                if (in_array($current_page->id, $page_ids)) {
+                    $data['is_liked'] = true;
+                }
             }
         }
         return $data;
