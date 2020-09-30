@@ -21123,11 +21123,11 @@ input[type=text] {
 }
 
 #app .sidebar-left {
-  padding-left: 30px;
+  padding-left: 0.9rem;
 }
 
 #app .sidebar-right {
-  padding-right: 30px;
+  padding-right: 0.9rem;
 }
 
 #app .content-container-full {

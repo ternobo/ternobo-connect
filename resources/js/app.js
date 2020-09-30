@@ -36,7 +36,7 @@ Vue.use(infiniteScroll)
 Vue.component("vue-circle", VueCircle);
 
 Vue.prototype.$APP_URL = window.APP_URL;
-
+Vue.prototype.$axios = axios;
 
 const app = document.getElementById('app');
 

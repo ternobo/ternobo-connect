@@ -1,8 +1,8 @@
 <template>
 <div class="post-box" data-id="93" id="post-93">
     <div class="post-header pt-0">
-        <a class="publisher" href="https://ternobo.com/soroosh">
-            <img src="https://ternobo.com/profiles/wiOsB8OZiyONOBiC6xC77ME1fzX3zNDPaELATd8i.jpeg" />
+        <a class="publisher" :href="'/'+post.page.slug">
+            <img :src="post.page.profile" />
             <div>
                 <strong>
                     {{ post.page.name }}
@@ -11,8 +11,13 @@
                     {{ post.page.short_bio }}
                 </text>
                 <span class="text-light font-10">
-                    <small class="text-light font-10"> </small>
-                    <i class="material-icons-outlined font-14 text-light verical-middle">public</i>
+                    {{ post_time }}
+                    <small class="text-light font-10" v-if="post.updated_at !== null">
+                        ویرایش شده در {{ updated_at }}
+                    </small>
+                    <i class="material-icons-outlined font-14 text-light verical-middle">
+                        {{ post.show === 'public'? 'public' : 'group' }}
+                    </i>
                 </span>
             </div>
         </a>
@@ -23,22 +28,31 @@
                     <template v-slot:button-content>
                         <i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
                     </template>
-                    <b-dropdown-item href="#">Action</b-dropdown-item>
-                    <b-dropdown-item href="#">Another action</b-dropdown-item>
+                    <b-dropdown-item href="#">
+                        <i class="material-icons text-muted">link</i> رونوشت پیوند این محتوا
+                    </b-dropdown-item>
+                    <b-dropdown-item href="#">
+                        <div class="d-flex flex-column">
+                            <span>
+                                <i class="material-icons text-muted">link</i> رونوشت پیوند این محتوا
+                            </span>
+                            <small>
+                                یو میو میو
+                            </small>
+                        </div>
+                    </b-dropdown-item>
                     <b-dropdown-item href="#">Something else here...</b-dropdown-item>
                 </b-dropdown>
             </div>
         </div>
     </div>
     <div class="post-body">
-        <pre class="text" id="posteditable-93">
-        {{ post.text }}
-        </pre>
+        <pre class="text" id="posteditable-93">{{ post.text }}</pre>
     </div>
     <div class="post-footer">
         <div class="tagandcate">
             <div class="tags">
-                <a v-for="tag in post.tags" :key="tag" class="tag-item" href="https://ternobo.com/tags/کسب‌وکار">
+                <a v-for="tag in post.tags" :key="tag" class="tag-item" :href="'/tags/' + tag">
                     {{ tag }}
                 </a>
             </div>
@@ -54,9 +68,9 @@
 
             </text>
             <div class="buttons">
-                <i class="material-icons-outlined" onclick="Ternobo.showSharePost('93', this)">sync</i>
-                <i class="material-icons-outlined" onclick="openComments(this)">comment</i>
-                <i class="material-icons like" onclick="likePost(this)" data-post="93">favorite_border</i>
+                <i class="material-icons-outlined">sync</i>
+                <i class="material-icons-outlined">comment</i>
+                <i class="material-icons like" @click="like" :class="{ 'text-danger': liked }">{{ liked ? 'favorite': 'favorite_border' }}</i>
             </div>
         </div>
     </div>
@@ -64,15 +78,57 @@
 </template>
 
 <script>
+import TimeAgo from 'javascript-time-ago'
+
+// Load locale-specific relative date/time formatting rules.
+import fa from 'javascript-time-ago/locale/fa'
+
+TimeAgo.addLocale(fa)
+
 export default {
+    data() {
+        return {
+            liked: false
+        }
+    },
+    created: function () {
+        this.liked = this.post.is_liked;
+    },
+    methods: {
+        like() {
+            if (this.liked) {
+                this.liked = false;
+            } else {
+                this.liked = true;
+            }
+            const $this = this;
+            this.$axios({
+                method: "post",
+                url: this.$APP_URL + "/like/" + this.post.id
+            }).catch((error) => {});
+        }
+    },
     name: "PostCard",
     props: {
         post: {
             type: Object,
             default: undefined,
             required: true,
-        },
+        }
     },
+    computed: {
+        post_time: function () {
+            const timeAgo = new TimeAgo('fa-FA');
+            return timeAgo.format(Date.parse(this.post.created_at), 'twitter') + " ● ";
+        },
+        updated_at: function () {
+            if (this.post.updated_at !== null) {
+                const timeAgo = new TimeAgo('fa-FA');
+                return timeAgo.format(Date.parse(this.post.updated_at), 'twitter') + " ● ";
+            }
+            return "";
+        }
+    }
 };
 </script>
 
