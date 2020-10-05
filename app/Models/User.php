@@ -307,8 +307,9 @@ class User extends Authenticatable
     public function toArray()
     {
         $array = parent::toArray();
-        if (Auth::check()) {
+        if (Auth::check() && Auth::user()->id == $this->id) {
             $array['profile_steps'] = $this->getProfileSteps();
+            $array['page'] = $this->personalPage;
         }
 
         return $array;

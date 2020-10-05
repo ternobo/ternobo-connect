@@ -13,7 +13,8 @@ import VueCircle from 'vue2-circle-progress'
 import infiniteScroll from 'vue-infinite-scroll'
 import TernoboApp from "./Libs/TernoboApp";
 import Application from "./Application";
-
+import TextareaAutosize from 'vue-textarea-autosize'
+ 
 Vue.prototype.window = window.window;
 
 // Install V-Select
@@ -30,6 +31,7 @@ Vue.use(PortalVue);
 
 Vue.use(TernoboApp);
 
+Vue.use(TextareaAutosize);
 // Install Infinite Scroll
 Vue.use(infiniteScroll)
 
@@ -64,8 +66,8 @@ const vue_app = new Vue({
     data() {
         return {
             isMobile: window.matchMedia("(max-width: 600px)").matches,
-            isTablet: window.matchMedia("(max-width: 768px)").matches,
-            isDesktop: window.matchMedia("(min-width: 769px)").matches,
+            isTablet: window.matchMedia("(max-width: 960px)").matches,
+            isDesktop: window.matchMedia("(min-width: 961px)").matches,
             user: window.user,
             url: window.location.pathname
         }
