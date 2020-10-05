@@ -20158,8 +20158,8 @@ h5 {
 }
 
 .follow-btn,
-.connect-btn,
-.btn-connection-waiting {
+.btn-connection-waiting,
+.connect-btn {
   color: #0898df;
   background: #e7f2ff;
   border: none;
@@ -20171,19 +20171,9 @@ h5 {
 }
 
 .follow-btn:hover,
-.connect-btn:hover,
-.btn-connection-waiting:hover {
+.btn-connection-waiting:hover,
+.connect-btn:hover {
   background: #CDEAF9;
-}
-
-.btn-followed-connected {
-  background: #EEEEEE;
-  color: #757575;
-}
-
-.btn-connection-waiting {
-  background: #FEFCEA;
-  color: #EFDC36;
 }
 
 .connect-btn {
@@ -20214,6 +20204,16 @@ h5 {
 .btn.focus {
   outline: 0;
   box-shadow: none;
+}
+
+.btn-followed-connected {
+  background: #EEEEEE !important;
+  color: #757575 !important;
+}
+
+.btn-connection-waiting {
+  background: #FEFCEA;
+  color: #EFDC36;
 }
 
 .tabs {

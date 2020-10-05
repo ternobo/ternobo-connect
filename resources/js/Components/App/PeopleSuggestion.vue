@@ -8,7 +8,7 @@
         </div>
     </inertia-link>
     <div class="d-flex flex-column actions" style="margin-left: 4px;width: 80px;">
-        <connection-button :page="page.id"></connection-button>
+        <connection-button :user="page.user_id"></connection-button>
         <follow-button :page="page.id"></follow-button>
     </div>
 </div>

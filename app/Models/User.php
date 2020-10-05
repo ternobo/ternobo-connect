@@ -267,7 +267,8 @@ class User extends Authenticatable
         return Connection::query()
             ->whereRaw("(connection = '$this->id' or user_id = '$this->id')")
             ->where("accepted", true)
-            ->get();
+            ->get()
+            ->toArray();
     }
 
     public function getConnectionsIds()

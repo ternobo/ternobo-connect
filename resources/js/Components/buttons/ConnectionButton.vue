@@ -1,5 +1,5 @@
 <template>
-<LoadingButton :loading="loading" class="connect-btn" :class="{ 'btn-followed-connected': followed }" @click.native="follow">{{ text }}</LoadingButton>
+<LoadingButton :loading="loading" class="connect-btn" :class="{ 'btn-followed-connected': connected }" @click.native="connect">{{ text }}</LoadingButton>
 </template>
 
 <script>
@@ -21,13 +21,12 @@ export default {
     },
     props: {
         user: {
-            type: Number,
             default: undefined,
             required: true,
         },
     },
     methods: {
-        follow() {
+        connect() {
             const $this = this;
             this.loading = true;
             if (!this.connected) {
@@ -43,7 +42,7 @@ export default {
                             $this.loading = false;
                             $this.$page.followings.push($this.page);
                             $this.text = "متصل شده";
-                            $this.followed = true;
+                            $this.connected = true;
                             $this.emit("connected");
                         } else {
                             const errors = response.data.errors;
@@ -74,7 +73,7 @@ export default {
                             $this.loading = false;
                             $this.$page.followings.push($this.page);
                             $this.text = "متصل شدن";
-                            $this.followed = false;
+                            $this.connected = false;
                             $this.emit("disconnected");
                         } else {
                             const errors = response.data.errors;
