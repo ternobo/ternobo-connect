@@ -107,8 +107,6 @@ class ConnectionsController extends Controller
         $followRow->following = $page_id;
         $followRow->user_id = Auth::user()->id;
         $result = $followRow->save();
-
-        // Notification::sendNotification("follow", Auth::user()->id, $page->id, $followRow->id);
         return response()->json(array("result" => $result, "connection" => $followRow->id));
     }
 
@@ -138,25 +136,32 @@ class ConnectionsController extends Controller
         return response()->json(array("result" => $followRow->save(), "connection" => $followRow->id));
     }
 
-    public function acceptRequest($connection_id)
+    public function acceptRequest(Request $request)
     {
+        $connection_id = $request->connection_id;
         $followRow = Connection::where("user_id", Auth::user()->id)->where("id", $connection_id)->firstOrFail();
         $followRow->accepted = true;
         return response()->json(array("result" => $followRow->save()));
     }
 
-    public function removeConnectionRequest($connection_id)
+    public function removeConnectionRequest(Request $request)
     {
+        $connection_id = $request->connection_id;
         $followRow = Connection::where("user_id", Auth::user()->id)->where("id", $connection_id)->firstOrFail();
         $result = $followRow->delete();
         return response()->json(array("result" => $result));
     }
 
-    public function disconnect($connection_id)
+    public function disconnect($user_id)
     {
-        $followRow = Connection::query()->where(function ($query) {
-            $query->where("user_id", Auth::user()->id)->orWhere("connection", Auth::user()->id);
-        })->where("id", $connection_id)->firstOrFail();
+        $followRow = Connection::query()
+        ->where(function ($query) {
+            $query->where("user_id", Auth::user()->id)->orWhere("connection", $user_id);
+        })
+        ->where(function ($query) {
+            $query->where("user_id", $user_id)->orWhere("connection", Auth::user()->id);
+        })
+        ->firstOrFail();
         $result = $followRow->delete();
         return response()->json(array("result" => $result, "user_id" => $followRow->user_id));
     }

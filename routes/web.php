@@ -63,11 +63,22 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
             Route::post("/like/{post_id}", "PostController@likePost");
             Route::post("/likecomment/{comment_id}", "CommentController@likeComment");
+
             // Connections
             Route::get("/connections", "ConnectionsController@index");
+            Route::post("/connection/accept", "ConnectionsController@acceptRequest");
+            Route::post("/connection/delete", "ConnectionsController@removeConnectionRequest");
+            Route::post("/connect/{user_id}", "ConnectionsController@connectionRequest");
+            Route::post("/disconnect/{user_id}", "ConnectionsController@disconnect");
+
+            // Follows
             Route::get("/followings", "ConnectionsController@followings");
             Route::get("/followers", "ConnectionsController@followers");
+
             //end Connections
+
+
+            
 
             //Start Page Edit
             Route::prefix('/save')->group(function () {
