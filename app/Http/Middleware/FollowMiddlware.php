@@ -18,11 +18,11 @@ class FollowMiddlware
      */
     public function handle(Request $request, Closure $next)
     {
-        // $user = Auth::user();
-        // $followings = Following::query()->where("user_id", $user->id)->get();
-        // if (count($followings) >= 3) {
+        $user = Auth::user();
+        $followings = Following::query()->where("user_id", $user->id)->get();
+        if (count($followings) >= 3) {
             return $next($request);
-        // }
-        // return redirect("/follow-people");
+        }
+        return redirect("/follow-people");
     }
 }
