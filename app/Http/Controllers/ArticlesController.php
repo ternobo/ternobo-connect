@@ -163,7 +163,7 @@ class ArticlesController extends Controller
 
             $comments = $article->getComments();
 
-            return view("content.article", array("post" => $article, "comments" => $comments, "userposts" => count($articles)));
+            return Inertia::render("Articles/Article", array("post" => $article, "comments" => $comments, "userposts" => count($articles)));
         } else {
             return abort(404);
         }
