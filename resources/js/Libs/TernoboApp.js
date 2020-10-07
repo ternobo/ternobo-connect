@@ -10,6 +10,11 @@ import LeftSidbar from "../Layouts/LeftSidbar";
 import RightSidebar from "../Layouts/RightSidebar";
 import LazyloadDirective from "../Directives/LazyloadDirective";
 import LoadingSpinner from "../Components/LoadingSpinner";
+import NewPostCard from "../Components/Cards/NewPostCard";
+import NewPostModal from "../Components/Modals/NewPostModal";
+import {
+    Tselect
+} from "tselect";
 
 const TernoboApp = {};
 
@@ -25,6 +30,9 @@ TernoboApp.install = function (Vue, options) {
     Vue.component("loading-button", LoadingButton);
     Vue.component("lazy-image", LazyImage);
     Vue.component("loading-spinner", LoadingSpinner);
+    Vue.component("new-post-card", NewPostCard);
+    Vue.component("new-post-modal", NewPostModal);
+    Vue.component("tselect", Tselect);
 
 
     // Directives

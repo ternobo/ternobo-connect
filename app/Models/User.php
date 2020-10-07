@@ -267,7 +267,8 @@ class User extends Authenticatable
         return Connection::query()
             ->whereRaw("(connection = '$this->id' or user_id = '$this->id')")
             ->where("accepted", true)
-            ->get();
+            ->get()
+            ->toArray();
     }
 
     public function getConnectionsIds()
@@ -307,8 +308,9 @@ class User extends Authenticatable
     public function toArray()
     {
         $array = parent::toArray();
-        if (Auth::check()) {
+        if (Auth::check() && Auth::user()->id == $this->id) {
             $array['profile_steps'] = $this->getProfileSteps();
+            $array['page'] = $this->personalPage;
         }
 
         return $array;

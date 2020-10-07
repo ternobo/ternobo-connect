@@ -13,17 +13,6 @@
     background: #CDEAF9;
 }
 
-.btn-followed-connected {
-    background: #EEEEEE;
-    color: #757575;
-}
-
-.btn-connection-waiting {
-    @extend .follow-btn;
-    background: #FEFCEA;
-    color: #EFDC36;
-}
-
 .connect-btn {
     @extend .follow-btn;
     color: rgb(0, 200, 83);
@@ -53,4 +42,15 @@
 .btn.focus {
     outline: 0;
     box-shadow: none;
+}
+
+.btn-followed-connected {
+    background: #EEEEEE !important;
+    color: #757575 !important;
+}
+
+.btn-connection-waiting {
+    @extend .follow-btn;
+    background: #FEFCEA;
+    color: #EFDC36;
 }

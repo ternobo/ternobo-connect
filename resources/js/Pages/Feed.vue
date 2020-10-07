@@ -4,6 +4,7 @@
         <user-card></user-card>
     </sidebar-right>
     <div class="content-container">
+        <new-post-card class="mb-3"></new-post-card>
         <div class="posts">
             <PostCard v-for="post in posts.data" :key="post.id" :post="post"></PostCard>
         </div>
