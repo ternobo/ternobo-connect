@@ -170,6 +170,7 @@ export default {
             var $this = this;
             var data = new FormData();
             if (this.password === this.password_repeat) {
+                data.append("password", this.password);
                 var config = {
                     method: 'post',
                     url: this.$APP_URL + '/auth/setpassword',

@@ -235,12 +235,12 @@ img {
     min-height: calc(100vh - 80px);
 
     .sidebar-left {
-        padding-left: 30px;
+        padding-left: 0.9rem;
     }
 
 
     .sidebar-right {
-        padding-right: 30px;
+        padding-right: 0.9rem;
     }
 
     .content-container-full {
@@ -301,12 +301,14 @@ img {
         position: relative;
     }
 
-    img {
-        border-radius: 50%;
-        width: 79px;
-        height: 79px;
-        margin-bottom: 15px;
+    .image__wrapper {
+        width: 80px;
+        height: 80px;
         margin-top: -190px;
+
+        img {
+            border-radius: 50%;
+        }
     }
 }
 
@@ -350,3 +352,51 @@ img {
 .fade-leave-to {
     opacity: 0;
 }
+
+.image__wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.loaded {
+        .image__spinner {
+            display: none;
+        }
+
+        .image__item {
+            opacity: 1;
+        }
+    }
+
+    .image__spinner {
+        position: absolute;
+    }
+
+    .image__item {
+        transition: 0.3s all;
+        opacity: 0;
+    }
+}
+
+@import "./components/loading-spinner";
+
+@import "./components/post-card";
+
+pre {
+    direction: rtl;
+    unicode-bidi: -moz-plaintext;
+    unicode-bidi: plaintext;
+    font-family: dana,PT Sans;
+    letter-spacing: 0 !important;
+    overflow: hidden;
+    line-break: normal;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
+
+@import "./components/dropdown-menu";
+

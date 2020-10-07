@@ -40,7 +40,7 @@ class LoginController extends Controller {
             Auth::login($user, true);
             $user->active = true;
             $user->save();
-            return response()->json(["result"=>true]);
+            return response()->json(["result"=>true])->cookie("ternobo_current_page", $user->personalPage, 9999999);
         }
         $exception = ValidationException::withMessages([
                     "email" => [trans('نام‌کاربری، ایمیل یا شماره همراه اشتباه است.')],

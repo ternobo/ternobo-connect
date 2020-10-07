@@ -31,6 +31,7 @@
         "bootstrap": "^4.5.2",
         "bootstrap-v4-rtl": "^4.5.2-1",
         "bootstrap-vue": "^2.17.3",
+        "javascript-time-ago": "^2.0.13",
         "jquery": "^3.5.1",
         "vue-infinite-scroll": "^2.0.2",
         "vue-select": "^3.10.8",

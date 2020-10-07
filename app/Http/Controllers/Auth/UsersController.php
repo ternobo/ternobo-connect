@@ -188,7 +188,7 @@ class UsersController extends Controller
             $page->save();
 
             Auth::login($user, true);
-            return response()->json(array("result" => true));
+            return response()->json(array("result" => true))->cookie("ternobo_current_page", $user->personalPage, 9999999);
         }
         return abort(400);
     }

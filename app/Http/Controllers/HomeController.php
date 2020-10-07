@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Page;
-use App\Models\Post;
-use Inertia\Inertia;
 use App\Models\Bookmark;
 use App\Models\Following;
-use Illuminate\Http\Request;
+use App\Models\Page;
+use App\Models\Post;
 use App\Models\SearchSuggestion;
-use Illuminate\Support\Facades\Auth;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\SEOTools;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class HomeController extends Controller
 {
@@ -72,16 +72,15 @@ class HomeController extends Controller
         }
         $pages = $this->getSuggestions();
         $posts = Post::query()
-            ->join("users", "posts.user_id", "=", "users.id")
-            ->leftJoin("categories", "categories.id", "=", "posts.category_id")
+            ->with("page")
+            ->with("likes")
+            ->with("mutualLikes")
+            ->with("category")
             ->leftJoin("content_seens", function ($join) {
                 $join->on("posts.id", "=", "content_seens.post_id")->where("content_seens.user_id", Auth::user()->id);
             })
-            ->select(array("posts.*", "categories.name as category_name",
-                "users.name as user_name", "users.short_bio as short_bio",
-                "users.profile as profile",
-                "content_seens.created_at as seen_at"))
-            ->whereRaw("(posts.user_id IN (select following from followings WHERE user_id = '" . Auth::user()->id . "' ) or `posts`.`user_id` = '" . Auth::user()->id . "')")
+            ->select(array("posts.*", "content_seens.created_at as seen_at"))
+            ->whereRaw("(posts.page_id IN (select following from followings WHERE user_id = '" . Auth::user()->id . "' ) or `posts`.`user_id` = '" . Auth::user()->id . "')")
             ->whereRaw("IF(posts.show = 'private' AND (NOT EXISTS(SELECT * FROM connections where "
                 . "(connection = '" . Auth::user()->id . "' and user_id=posts.user_id)"
                 . "OR "
@@ -89,10 +88,12 @@ class HomeController extends Controller
                 . ")"
                 . ")"
                 . ",'TRUE','FALSE') = 'FALSE'")
-            ->where("users.active", true)
+            ->whereHas("page.user", function ($query) {
+                $query->where("active", true);
+            })
             ->orderByRaw("seen_at IS NULL DESC, seen_at DESC")
             ->paginate(10);
-
+            
         return Inertia::render("Feed", array("posts" => $posts, "pages" => $pages));
     }
 
@@ -131,7 +132,6 @@ class HomeController extends Controller
                 ->whereRaw("MATCH (`title`, `text`) AGAINST('$search' IN BOOLEAN MODE) > 0")
                 ->orderBy("score")
                 ->distinct("posts.id");
-
 
             $posts->whereHas("user", function ($query) {
                 $query->where("active", true);
@@ -199,7 +199,7 @@ class HomeController extends Controller
     public function bookmarks()
     {
         $bookmarks = Bookmark::where("user_id", Auth::user()->id)->latest()->paginate(10);
-        return Inertia::render("Bookmarks",array("bookmarks" => $bookmarks));
+        return Inertia::render("Bookmarks", array("bookmarks" => $bookmarks));
     }
 
     public function setLocale(Request $request)

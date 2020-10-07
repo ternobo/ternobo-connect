@@ -164,7 +164,7 @@ class PostController extends Controller
             $like->post_id = $post_id;
             $result = $like->save();
             $page->addAction("like", $post_id);
-            Notification::sendNotification("like", $post_id, $post->page_id, $like->id);
+            // Notification::sendNotification("like", $post_id, $post->page_id, $like->id);
         }
         return response()->json(array("result" => $result, "like" => $is_like));
     }

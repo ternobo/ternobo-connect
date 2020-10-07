@@ -4,7 +4,9 @@
         <user-card></user-card>
     </sidebar-right>
     <div class="content-container">
-
+        <div class="posts">
+            <PostCard v-for="post in posts.data" :key="post.id" :post="post"></PostCard>
+        </div>
     </div>
     <sidebar-left>
         <div class="card">
@@ -18,6 +20,7 @@
 
 <script>
 import AppLayout from "../Layouts/AppLayout";
+import PostCard from "../Components/PostCard/PostCard";
 
 export default {
     name: "Feed",
@@ -30,6 +33,9 @@ export default {
             type: Array,
             defautl: undefined
         }
+    },
+    components: {
+        PostCard
     },
     layout: AppLayout
 };

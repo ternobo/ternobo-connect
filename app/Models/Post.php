@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 /**
  * @property mixed|string slug
@@ -14,7 +15,7 @@ class Post extends Model
 {
 
     use SoftDeletes;
-    
+
     use HasFactory;
     protected $dates = ['deleted_at'];
 
@@ -81,10 +82,30 @@ class Post extends Model
     public function getMedia()
     {
         $medias = json_decode($this->medias);
-        if (count($medias) > 0) {
+        if (count($medias) <= 1) {
             return $medias[0];
         }
-        return null;
+        return $medias;
+    }
+
+    public function toArray()
+    {
+        // get the original array to be displayed
+        $data = parent::toArray();
+
+        $data['tags'] = $this->getTags();
+        $data['medias'] = $this->getMedia();
+        $data['is_liked'] = false;
+        if (Auth::check()) {
+            if (isset($data['likes'])) {
+                $current_page = json_decode(Cookie::get('ternobo_current_page'));
+                $page_ids = array_column($data['likes'], "page_id");
+                if (in_array($current_page->id, $page_ids)) {
+                    $data['is_liked'] = true;
+                }
+            }
+        }
+        return $data;
     }
 
     public function getComments($limit = 10)
@@ -97,53 +118,21 @@ class Post extends Model
         return $comments;
     }
 
-    public function getLikedBy()
+    public function mutualLikes()
     {
-        $myConnection = Like::query()
+        return $this->hasMany("App\Models\Like", "post_id")
             ->with("page")
-            ->where("likes.post_id", $this->id)
-            ->latest()
-            ->limit(2)
-            ->distinct("pages.id");
-        if ($this->page_id . "" !== "" . Auth::user()->getPage()->id) {
-            $myConnection = $myConnection->whereHas("page", function ($query) {
-                $query->whereIn("user_id", Auth::user()->getConnectionsIds());
-            });
-        }
-        $myConnection = $myConnection->get();
-        $users = array();
-        $response = "";
-        if (count($myConnection) > 0) {
-            foreach ($myConnection as $like) {
-                $user = new \stdClass();
-                $user->id = $like->page->user_id;
-                $user->name = $like->page->name;
-                $user->slug = $like->page->slug;
-                $users[] = $user;
-            }
-            $response = "<text class='clickale' onclick='Ternobo.showLikes(\"$this->id\")'>پسندیده شده توسط </text>";
-        }
+            ->whereHas("page", function ($query) {
+                $query->whereRaw("id in (select following from followings where user_id = ?)", Auth::user()->id);
+            })
+            ->latest();
+    }
 
-        $all = count($users);
-        $index = 0;
-        foreach ($users as $user) {
-            if ($user->id . "" === "" . Auth::user()->id) {
-                $user->name = "شما";
-            }
-            $response .= "<a href='$user->slug' class='bold'>$user->name</a>";
-            if ($index + 1 < $all) {
-                if (count($myConnection) > 2) {
-                    $response .= "، ";
-                } else {
-                    $response .= " و ";
-                }
-            }
-            $index++;
-        }
-        if (count($myConnection) > 2) {
-            $response .= "و ...";
-        }
-        return $response;
+    public function likes()
+    {
+        return $this->hasMany("App\Models\Like", "post_id")
+            ->with("page")
+            ->latest();
     }
 
 }

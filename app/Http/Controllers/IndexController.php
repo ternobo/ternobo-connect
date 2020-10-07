@@ -43,7 +43,7 @@ class IndexController extends Controller
         if ($followings >= 3) {
             return redirect("/home");
         }
-        return view("follow-suggestion", ["suggestions" => $suggestion, "followings" => $followings, "more" => $more]);
+        return view("FollowingSuggestion", ["suggestions" => $suggestion, "followings" => $followings, "more" => $more]);
     }
 
     public function getToken()

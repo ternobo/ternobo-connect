@@ -1,0 +1,62 @@
+
+.dropdown-menu {
+    border: 1px solid $border-color;
+    box-shadow: 0 0 .3rem 0 rgba(0,0,0,.1);
+
+    // Slide down transtion
+    display: block !important;
+
+    &:not(.show) {
+        padding: 0px;
+        border-width: 0px;
+        border-color: transparent;
+        box-shadow: none;
+        transition: padding 1.3s ease, border-width 1.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    > li {
+        max-height: 0px;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    &.show {
+        > li {
+            max-height: 100px;
+        }
+    }
+
+    // Add chevron to top
+
+    &[x-placement^="bottom"] {
+        &::before {
+            content:"";
+            position: absolute;
+            left: 20px;
+            top: -5px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 5px 5px 5px;
+            border-color: transparent transparent #fff transparent;
+            z-index: 99999999;
+        }
+    }
+
+    // Add chevron to bottom
+
+    &[x-placement^="top"] {
+        &::after {
+            content:"";
+            position: absolute;
+            left: 20px;
+            bottom: -5px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 5px 5px 0 5px;
+            border-color: #fff transparent transparent transparent;
+            z-index: 99999999;
+        }
+    }
+}
