@@ -44,7 +44,7 @@ class ConnectionsController extends Controller
         $following_count = count(Following::query()->where("user_id", Auth::user()->id)->get());
 
         return Inertia::render("MyConnections", [
-            "connections" => $accpeted_connections->paginate(20), 
+            "connections" => $accpeted_connections->paginate(20),
             "pending_connections" => $pending_connections,
             "connections_count" => $connections_count,
             "following_count" => $following_count,
@@ -138,10 +138,14 @@ class ConnectionsController extends Controller
 
     public function acceptRequest(Request $request)
     {
-        $connection_id = $request->connection_id;
-        $followRow = Connection::where("user_id", Auth::user()->id)->where("id", $connection_id)->firstOrFail();
-        $followRow->accepted = true;
-        return response()->json(array("result" => $followRow->save()));
+        // $connection_id = $request->connection_id;
+        // $followRow = Connection::where("user_id", Auth::user()->id)->where("id", $connection_id)->firstOrFail();
+        // $followRow->accepted = true;
+        // return response()->json(array("result" => $followRow->save()));
+        return response()->json(["result"=>true, "data"=> [
+            "hellp" => 123,
+            "grdfg"=> "mio"
+        ]]);
     }
 
     public function removeConnectionRequest(Request $request)
