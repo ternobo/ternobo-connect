@@ -22012,3 +22012,21 @@ pre {
   gap: 10px;
 }
 
+.page-cover {
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.card-img-top {
+  max-width: 1920px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.pageinfo-card {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
