@@ -74,7 +74,6 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             // Follows
             Route::get("/followings", "ConnectionsController@followings");
             Route::get("/followers", "ConnectionsController@followers");
-
             //end Connections
 
 
@@ -121,6 +120,8 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             Route::resource("/ideas", "IdeasController");
 
         });
+
+        Route::get("/settings", "Auth\UsersController@settingsPage");
 
         /**
          * Pages API
