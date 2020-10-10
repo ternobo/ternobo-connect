@@ -1,5 +1,7 @@
 <template>
- <h1>user profile</h1>
+<div class="car">
+    <lazy-image />
+</div>
 </template>
 
 <script>

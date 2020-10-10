@@ -3,7 +3,7 @@
     <div class="w-100">
         <h6 class="w-25 font-18 text-center pb-1" style="width: 10%!important; border-bottom:3px solid black">دعوت‌ها</h6>
         <div class="row">
-            
+
         </div>
         <div class="d-flex justify-center mt-5">
             <button class="text-center btn btn-light px-5" style="margin:0 auto;">نمایش بیشتر</button>
@@ -13,38 +13,24 @@
             <tab name="شبکه من" :selected="true" class="">
                 <div class="row">
                     <div class="col-md-3 mb-3" v-for="connection in connections.data" :key="connection.id">
-                        <b-card>
-                            <lazy-image class="w-100" style="height:30%" :src="connection.page.cover" />
-                            <div>
-                                <img :src="connection.page.profile" class="rounded-circle text-center profileConenctCard">
+                        <div class="card">
+                            <div class="card-body">
+                                <lazy-image class="w-100" style="height:30%" :src="connection.page.cover" />
+                                <div>
+                                    <img :src="connection.page.profile" class="rounded-circle text-center profileConenctCard">
+                                </div>
+                                <div class="text-center" style="margin-top:-15px">
+                                    <h5>{{ connection.page.name }}</h5>
+                                    <span></span>
+                                </div>
+                                <div class="pt-4 pb-1 d-flex align-items-center justify-content-center">
+                                    <follow-button :page="connection.page.id"></follow-button>
+                                    <connection-button :user='connection.page.user_id' class="mx-2"></connection-button>
+                                </div>
                             </div>
-                            <div class="text-center" style="margin-top:-15px">
-                                <h5>{{ connection.page.name }}</h5>
-                                <span></span>
-                            </div>
-                            <div class="pt-4 pb-1 d-flex align-items-center justify-content-center">
-                                <follow-button :page="connection.page.id"></follow-button>
-                                <connection-button :user='connection.page.user_id' class="mx-2"></connection-button>
-                            </div>
-
-                        </b-card>
+                        </div>
                     </div>
                 </div>
-            </tab>
-
-            <tab name="هم تیمی ها">
-
-            </tab>
-
-            <tab name="دنبال شده ها">
-
-            </tab>
-
-            <tab name="دنبال کننده ها">
-
-            </tab>
-            <tab name="متصل شده ها">
-
             </tab>
         </tabs>
 

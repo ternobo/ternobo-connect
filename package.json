@@ -34,6 +34,7 @@
         "bootstrap-vue": "^2.17.3",
         "javascript-time-ago": "^2.0.13",
         "jquery": "^3.5.1",
+        "tiptap": "^1.30.0",
         "tselect": "^0.1.5",
         "vue-infinite-scroll": "^2.0.2",
         "vue-select": "^3.10.8",
