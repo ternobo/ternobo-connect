@@ -70,7 +70,7 @@ class ConnectionsController extends Controller
         $followers_count = count(Following::query()->where("following", Auth::user()->id)->get());
         $following_count = count(Following::query()->where("user_id", Auth::user()->id)->get());
 
-        return view("myconnections", array("connections" => $followings->paginate(20), "pending_connections" => $pending_connections,
+        return Inertia::render("MyConnections",array("connections" => $followings->paginate(20), "pending_connections" => $pending_connections,
             "connections_count" => $connections_count,
             "following_count" => $following_count, "followers_count" => $followers_count));
     }
@@ -95,7 +95,7 @@ class ConnectionsController extends Controller
         $followers_count = count(Following::query()->where("following", Auth::user()->id)->get());
         $following_count = count(Following::query()->where("user_id", Auth::user()->id)->get());
 
-        return view("myconnections", array("connections" => $followings->paginate(20), "pending_connections" => $pending_connections,
+        return Inertia::render("MyConnections", array("connections" => $followings->paginate(20), "pending_connections" => $pending_connections,
             "connections_count" => $connections_count,
             "following_count" => $following_count, "followers_count" => $followers_count));
     }

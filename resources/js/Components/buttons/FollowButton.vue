@@ -9,7 +9,7 @@ export default {
     created() {
         if (this.$page.followings.includes(this.page)) {
             this.followed = true;
-            this.page = "دنبال شده";
+            this.text = "دنبال شده";
         }
     },
     data() {
@@ -72,7 +72,7 @@ export default {
                         // console.log(response.data);
                         if (response.data.result) {
                             $this.loading = false;
-                            $this.$page.followings.push($this.page);
+                            $this.$page.followings.remove($this.page);
                             $this.text = "دنبال کردن";
                             $this.followed = false;
                             $this.emit("unfollowed");

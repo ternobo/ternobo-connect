@@ -18,11 +18,17 @@ class Following extends Model {
      * @var \App\Following
      */
 
-    public function user() {
+    public function page() {
         if (Auth::user()->id === $this->following) {
             return $this->belongsTo("App\Models\User", "user_id");
         }
         return $this->belongsTo("App\Models\Page", "following");
+    }
+
+    public function toArray(){
+        $array = parent::toArray();
+        $array['page'] = $this->page;
+        return $array;
     }
 
 }

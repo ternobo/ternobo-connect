@@ -27,7 +27,7 @@ Route::get("/nationalcards/{image}", "DownloadsController@nationalCards");
 
 Route::group(['middleware' => LocaleMiddleware::class], function () {
 
-    Route::get("/", "IndexController@index");
+    Route::get("/", "IndexController@index")->name("welcome");
     Route::get("/follow-people", "IndexController@followSuggestions");
 
     /**
