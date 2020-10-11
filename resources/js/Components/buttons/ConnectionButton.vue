@@ -7,9 +7,9 @@ import LoadingButton from "./LoadingButton";
 
 export default {
     created() {
-        if (this.$page.connections.includes(this.user)) {
+        if (this.$page.connectedPeople.includes(this.user)) {
             this.connected = true;
-            this.page = "متصل شده";
+            this.text = "متصل شده";
         }
     },
     data() {
@@ -40,7 +40,7 @@ export default {
                         // console.log(response.data);
                         if (response.data.result) {
                             $this.loading = false;
-                            $this.$page.followings.push($this.page);
+                            $this.$page.connectedPeople.push($this.user);
                             $this.text = "متصل شده";
                             $this.connected = true;
                             $this.emit("connected");
@@ -71,7 +71,7 @@ export default {
                         // console.log(response.data);
                         if (response.data.result) {
                             $this.loading = false;
-                            $this.$page.followings.push($this.page);
+                            $this.$page.connectedPeople.remove($this.user);
                             $this.text = "متصل شدن";
                             $this.connected = false;
                             $this.emit("disconnected");

@@ -1,4 +1,11 @@
 {
+<<<<<<< HEAD
     "/js/app.js": "/js/app.js?id=0a1757c81aca562ce4a9",
     "/css/app.css": "/css/app.css?id=75d3f6f26597cad8c284"
+=======
+    "/js/app.js": "/js/app.js?id=c8a2231a4348747d73d2",
+    "/css/app.css": "/css/app.css?id=001a79ed851b92334ba1",
+    "/js/manifest.js": "/js/manifest.js?id=41f053ba9a94d81b39f8",
+    "/js/vendor.js": "/js/vendor.js?id=d29ea035d1b2b6dccb23"
+>>>>>>> bc9f4635720ff935a55adfdf6827fffe2645ca2b
 }

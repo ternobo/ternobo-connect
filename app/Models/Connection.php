@@ -15,4 +15,10 @@ class Connection extends Model {
         }
     }
 
+    public function toArray(){
+        $array = parent::toArray();
+        $array['page'] = $this->user->personalPage;
+        return $array;
+    }
+
 }

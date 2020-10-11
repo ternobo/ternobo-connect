@@ -1,0 +1,92 @@
+// Body
+$body-bg: #191919;
+
+// Typography
+$font-family-sans-serif: 'dana, PT Sans, serif';
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Shadows
+$card-shadow: 0 1rem 40px rgba(0, 0, 0, 0.02);
+$control-shadow: 0 0 0.25rem 0 rgba(0, 0, 0, 0.25);
+$full-width-container: 1920px;
+
+
+// Colors
+$background: #191919;
+$box-on-bg: #212121;
+$fixed-elements: #424242;
+$icons: #757575;
+$sub-heading: #C8C8C8;
+$icon-hover: #EEE;
+$text-color: #EEE;
+$headings: #F5F5F5;
+
+
+//Colors
+$border-color: #E0E0E0;
+$primary: #191919;
+$action: #0898DF;
+$wating: #FFEB3B;
+$wating-bg: #E1F5FF;
+$red: #F44336;
+$success: #00C853;
+$white: #191919 !default;
+$grey: #757575;
+
+$dark: #191919;
+$light-green: #E1F5FF;
+$light: #757575;
+$light-warning: #FFFCE1;
+$dark-warning: #E4CF23;
+$light-error: #FEECEA;
+$error: #F44336;
+
+$gray-100: #212529 !default;
+$gray-200: #343a40 !default;
+$gray-300: #495057 !default;
+$gray-400: #6c757d !default;
+$gray-500: #adb5bd !default;
+$gray-600: #ced4da !default;
+$gray-700: #dee2e6 !default;
+$gray-800: #e9ecef !default;
+$gray-900: #f8f9fa !default;
+$black: #191919 !default;
+
+// Base colors definitions
+$blue: #0898DF !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: #F44336 !default;
+$orange: #E4CF23 !default;
+$yellow: #ffc107 !default;
+$green: #00C853 !default;
+$teal: #20c997 !default;
+$cyan: #17a2b8 !default;
+
+// Theme color default definitions
+$primary: $dark !default;
+$secondary: $action !default;
+$success: $success !default;
+$info: $cyan !default;
+$warning: $dark-warning !default;
+$danger: $red !default;
+$light: $text-color !default;
+$dark: $white !default;
+
+// This table defines the theme colors (variant names)
+$theme-colors: () !default;
+$theme-colors: map-merge(
+  (
+    'primary': $primary,
+    'secondary': $secondary,
+    'success': $success,
+    'info': $info,
+    'warning': $warning,
+    'danger': $danger,
+    'light': $light,
+    'dark': $dark
+  ),
+  $theme-colors
+);

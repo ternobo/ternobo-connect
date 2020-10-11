@@ -1,31 +1,37 @@
 <template>
-<b-modal v-model='showModal' hide-footer hide-header :centered="true">
-    <div class="d-flex flex-column w-100 aling-items-center">
-        <h5 class="mt-0 font-16 text-center mb-4 w-25" style="border-bottom: 1px solid #000019;width: fit-content;align-self: center;margin-top: 20px;padding-bottom: 10px;padding-left: 0;padding-right: 0;">
-            ورود</h5>
-    </div>
-    <form class="signup-login d-flex flex-column align-items-center justify-content-center clearfix" ref="loginForm" method="POST" action="javascript:;">
-        <div class="w-100">
-            <input type="text" class="form-control bg-transparent mb-2" name="username" v-model="username" placeholder="تلفن، ایمیل یا شناسه" />
+<div>
+    <ResetPasswordModal :show.sync="resetpass"></ResetPasswordModal>
+    <b-modal v-model='showModal' hide-footer hide-header no-stacking :centered="true">
+        <div class="d-flex flex-column w-100 aling-items-center">
+            <h5 class="mt-0 font-16 text-center mb-4 w-25" style="border-bottom: 1px solid #000019;width: fit-content;align-self: center;margin-top: 20px;padding-bottom: 10px;padding-left: 0;padding-right: 0;">
+                ورود</h5>
         </div>
-        <div class="w-100">
-            <input type="password" class="form-control bg-transparent" name="password" v-model="password" placeholder="رمزعبور" value="" />
-            <a class="text-primary float-left font-11" style="margin-top: 3px;" data-toggle="modal" href="#resetpasswordmodal">فراموشی رمزعبور</a>
-        </div>
-        <loading-button @click.native="login" :loading="loading" class="btn btn-dark mt-2 w-50" type="button">
-            ورود
-        </loading-button>
-    </form>
-</b-modal>
+        <form class="signup-login d-flex flex-column align-items-center justify-content-center clearfix" ref="loginForm" method="POST" action="javascript:;">
+            <div class="w-100">
+                <input type="text" class="form-control bg-transparent mb-2" name="username" v-model="username" placeholder="تلفن، ایمیل یا شناسه" />
+            </div>
+            <div class="w-100">
+                <input type="password" class="form-control bg-transparent" name="password" v-model="password" placeholder="رمزعبور" value="" />
+                <a class="text-primary float-left font-11" style="margin-top: 3px;" @click="resetpass = true">فراموشی رمزعبور</a>
+            </div>
+            <loading-button @click.native="login" :loading="loading" class="btn btn-dark mt-2 w-50" type="button">
+                ورود
+            </loading-button>
+        </form>
+    </b-modal>
+</div>
 </template>
 
 <script>
 import ModalMixin from '../../Mixins/Modal';
+import ResetPasswordModal from './ResetPasswordModal';
+
 export default {
     data() {
         return {
             password: undefined,
             username: undefined,
+            resetpass: false,
             loading: false
         }
 
@@ -80,6 +86,9 @@ export default {
     },
 
     mixins: [ModalMixin],
+    components: {
+        ResetPasswordModal
+    },
     name: "LoginModal"
 }
 </script>

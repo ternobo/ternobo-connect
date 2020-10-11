@@ -2,12 +2,27 @@
 @import '~bootstrap-v4-rtl';
 @import '~bootstrap-vue';
 
+input {
+    outline: none;
+}
+
+@import "./components/header/header";
+
 body {
     direction: rtl;
-    margin: 0;
+    margin: 0; 
     padding: 0;
-    background-color: $body-bg;
+    background-color: $background;
     text-align: right;
+    color: $text-color;
+}
+
+.card{
+    background: $box-on-bg;
+}
+
+a{
+    color: $text-color;
 }
 
 @import "fonts";
@@ -162,6 +177,10 @@ img {
 
 .searchfield {
     min-width: 330px;
+}
+
+.modal-backdrop {
+    background-color: #FFF;
 }
 
 @import "./components/form-control";
@@ -401,3 +420,5 @@ pre {
 @import "./components/dropdown-menu";
 
 @import "./components/new-post-modal";
+
+@import "./pages/user-profile.scss";

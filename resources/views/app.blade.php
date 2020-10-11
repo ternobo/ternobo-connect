@@ -13,8 +13,6 @@
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
-    <script src="{{ mix('js/app.js') }}" defer></script>
-
     {!! SEO::generate() !!}
 
         <script>
@@ -28,6 +26,10 @@
 
 <body class="font-sans antialiased" dir="rtl">
     @inertia
+
+    <script src="{{ mix('/js/manifest.js') }}" defer></script>
+    <script src="{{ mix('js/vendor.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 <template>
 <div class="people-sugestion d-flex justify-content-between align-items-center">
     <inertia-link class="d-flex h-100 align-items-center w-100" :href="page.slug">
-        <img class="profileimage" alt="" :to="page.profile">
+        <lazy-image class="profileimage my-0 ml-2" alt="" :src="page.profile" />
         <div class="d-flex ml-2 align-items-start flex-column justify-content-center w-100">
             <span class="person-name">{{ page.name }}</span>
             <small class="text-muted person-short-bio"></small>

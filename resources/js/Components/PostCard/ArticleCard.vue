@@ -48,7 +48,7 @@
     </div>
     <inertia-link class="post-body clickale" :href="postSlug">
         <div class="images articleimg">
-            <img alt="" :src="post.medias">
+            <lazy-image style="min-height: 400px" class="m-0" alt="" :src="post.medias" />
         </div>
         <h4 class="mt-3 mb-0">{{ post.title }}</h4>
     </inertia-link>

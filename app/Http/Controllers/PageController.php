@@ -53,7 +53,7 @@ class PageController extends Controller
         return Inertia::render(
             "Profiles/UserProfile",
             [
-                "user" => $page,
+                "page" => $page,
             ]
         );
     }

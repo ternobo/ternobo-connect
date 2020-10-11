@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             'app' => [
                 'name' => Config::get('app.name'),
             ],
-            "connections"=> function() {
+            "connectedPeople"=> function() {
                 if(Auth::check()){
                     return Auth::user()->getConnectionsIds();
                 }

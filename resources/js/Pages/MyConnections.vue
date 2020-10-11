@@ -1,6 +1,10 @@
 <template>
 <base-layout>
+    <div class="w-100">
+        <h6 class="w-25 font-18 text-center pb-1" style="width: 10%!important; border-bottom:3px solid black">دعوت‌ها</h6>
+        <div class="row">
 
+<<<<<<< HEAD
         <div class="w-100">
             <h6 class="w-25 font-18 text-center pb-1" style="width: 10%!important; border-bottom:3px solid black">دعوت‌ها</h6>
 
@@ -92,66 +96,39 @@
                 <button class="text-center btn btn-light px-5" style="margin:0 auto;">نمایش بیشتر</button>
             </div>
 
+=======
+        </div>
+        <div class="d-flex justify-center mt-5">
+            <button class="text-center btn btn-light px-5" style="margin:0 auto;">نمایش بیشتر</button>
+        </div>
+>>>>>>> bc9f4635720ff935a55adfdf6827fffe2645ca2b
 
-            <tabs>
-                <tab name="شبکه من" :selected="true" class="">
-                    <div class="row">
-                        <div class="col-md-3 col-12">
-                            <b-card>
-                                <img class="w-100" style="height:30%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQBDfVwybzl2KxDc50PK9sISVw8fdD-1JZdZw&usqp=CAU">
+        <tabs>
+            <tab name="شبکه من" :selected="true" class="">
+                <div class="row">
+                    <div class="col-md-3 mb-3" v-for="connection in connections.data" :key="connection.id">
+                        <div class="card">
+                            <div class="card-body">
+                                <lazy-image class="w-100" style="height:30%" :src="connection.page.cover" />
                                 <div>
-                                    <img src="https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png" class="rounded-circle text-center profileConenctCard">
+                                    <img :src="connection.page.profile" class="rounded-circle text-center profileConenctCard">
                                 </div>
                                 <div class="text-center" style="margin-top:-15px">
-                                    <h5>سپهر حدائق‌نیا</h5>
-                                    <span>مدیرعامل و موسس ترنوبو</span>
+                                    <h5>{{ connection.page.name }}</h5>
+                                    <span></span>
                                 </div>
-                                <div class="pt-4 pb-1 text-center">
-                                    <ConnectionButton class="" ></ConnectionButton>
-                                    <ConnectionButton style="margin-right:-4px"></ConnectionButton>
+                                <div class="pt-4 pb-1 d-flex align-items-center justify-content-center">
+                                    <follow-button :page="connection.page.id"></follow-button>
+                                    <connection-button :user='connection.page.user_id' class="mx-2"></connection-button>
                                 </div>
-
-                            </b-card>
+                            </div>
                         </div>
-                        <div class="col-md-3 col-12">
-                            <b-card>
-                                col-2
-                            </b-card>
-                        </div>
-                        <div class="col-md-3 col-12">
-                            <b-card>
-                                col-3
-                            </b-card>
-                        </div>
-                        <div class="col-md-3 col-12">
-                            <b-card>
-                                col-4
-                            </b-card>
-                        </div>
-
                     </div>
-                </tab>
+                </div>
+            </tab>
+        </tabs>
 
-
-
-                <tab name="هم تیمی ها">
-
-                </tab>
-
-                <tab name="دنبال شده ها">
-
-                </tab>
-
-                <tab name="دنبال کننده ها">
-
-                </tab>
-                <tab name="متصل شده ها">
-
-                </tab>
-            </tabs>
-
-
-        </div>
+    </div>
 
 </base-layout>
 </template>
@@ -159,8 +136,14 @@
 <script>
 import AppLayout from "../Layouts/AppLayout";
 import ConnectionButton from "../Components/buttons/ConnectionButton";
+<<<<<<< HEAD
 import Tabs from "../Components/Tabs/Tabs";
 import AcceptConnection from "../Components/buttons/AcceptConnection";
+=======
+import FollowButton from "../Components/buttons/FollowButton";
+
+import Tabs from "../Components/Tabs/Tabs"
+>>>>>>> bc9f4635720ff935a55adfdf6827fffe2645ca2b
 export default {
     name: "MyConnectons",
     data(){
@@ -172,7 +155,11 @@ export default {
     components: {
         ConnectionButton,
         Tabs,
+<<<<<<< HEAD
         AcceptConnection,
+=======
+        FollowButton
+>>>>>>> bc9f4635720ff935a55adfdf6827fffe2645ca2b
     },
     props: {
         followers_count: {
@@ -215,19 +202,27 @@ export default {
 </script>
 
 <style scoped>
-    .profile-img{
-        width: 4rem;
-        height: 4rem;
-    }
-    .cardone{
-        padding: 0.8rem 1.3rem;
-    }
-    .card-body{padding: 0;}
-    .profileConenctCard{
-        display:block;border:6px solid white;
-        margin:0 auto; width: 70px;
-        height: 70px;z-index:1;
-        position: relative;top: -2rem;
-    }
+.profile-img {
+    width: 4rem;
+    height: 4rem;
+}
 
+.cardone {
+    padding: 0.8rem 1.3rem;
+}
+
+.card-body {
+    padding: 0;
+}
+
+.profileConenctCard {
+    display: block;
+    border: 6px solid white;
+    margin: 0 auto;
+    width: 70px;
+    height: 70px;
+    z-index: 1;
+    position: relative;
+    top: -2rem;
+}
 </style>

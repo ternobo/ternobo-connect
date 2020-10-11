@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\SMS;
 use App\Models\Mail;
 use App\Models\Page;
-use App\SMS;
 use App\Models\User;
+use Inertia\Inertia;
+use Illuminate\Support\Str;
 use App\Models\Verification;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
 use PersianValidator\NationalCode\NationalCode;
 
 class UsersController extends Controller
@@ -281,7 +282,7 @@ class UsersController extends Controller
 
     public function settingsPage(Request $request)
     {
-        return view("settings");
+        return Inertia::render("Settings");
     }
 
     public function changePassword(Request $request)

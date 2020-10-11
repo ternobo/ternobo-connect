@@ -1,0 +1,18 @@
+.comment {
+    display: flex;
+    justify-content: flex-start;
+    background: $body-bg;
+    color: #424242;
+    .comment-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+    .comment-body {
+        padding: .4rem;
+        width: 100%;
+    }
+
+}

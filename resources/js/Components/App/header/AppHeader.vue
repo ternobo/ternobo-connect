@@ -29,7 +29,6 @@
 
 <script>
 import HeaderToolbar from "./HeaderToolbar";
-
 export default {
     name: "AppHeader",
     components: {
@@ -37,11 +36,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss" scoped>
-input {
-    outline: none;
-}
-
-@import "../../../../sass/application/components/header/header";
-</style>

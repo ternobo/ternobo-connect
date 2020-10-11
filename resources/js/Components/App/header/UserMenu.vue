@@ -33,7 +33,3 @@ export default {
     name: "UserMenu"
 }
 </script>
-
-<style>
-
-</style>
