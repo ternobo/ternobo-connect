@@ -7,6 +7,7 @@
         <new-post-card class="mb-3"></new-post-card>
         <div class="posts">
             <PostCard v-for="post in posts.data" :key="post.id" :post="post"></PostCard>
+
         </div>
     </div>
     <sidebar-left>
@@ -23,6 +24,7 @@
 import AppLayout from "../Layouts/AppLayout";
 import PostCard from "../Components/PostCard/PostCard";
 
+
 export default {
     name: "Feed",
     props: {
@@ -36,7 +38,8 @@ export default {
         }
     },
     components: {
-        PostCard
+        PostCard,
+        Comment,
     },
     layout: AppLayout
 };
