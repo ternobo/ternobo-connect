@@ -17,6 +17,19 @@ body {
     color: $text-color;
 }
 
+.form-control, .btn, .modal-dialog{
+    border-radius: 0;
+}
+
+.bg-body{
+    background-color: $body-bg !important;
+}
+
+.progress {
+    height: 0.3rem;
+    border-radius: 0;
+}
+
 .card{
     background: $box-on-bg;
 }
@@ -266,10 +279,19 @@ img {
         padding-left: 30px;
     }
 
+    .content-container-right {
+        padding-left: 30px;
+    }
+
     @media screen and (min-width: 991px) {
         .content-container-full {
             max-width: 78.4%;
             flex: 78.4%;
+        }
+
+        .content-container-right {
+            max-width: 70.7%;
+            flex: 70.7%;
         }
 
         .sidebar-right {
@@ -422,3 +444,6 @@ pre {
 @import "./components/new-post-modal";
 
 @import "./pages/user-profile.scss";
+
+@import "./components/feedback/card.scss";
+@import "./components/feedback/label.scss";

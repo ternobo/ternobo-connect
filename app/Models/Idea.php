@@ -36,8 +36,31 @@ class Idea extends Model
         return IdeaVote::query()->where("user_id", Auth::user()->id)->where("idea_id", $this->id)->exists();
     }
 
-    public function isBookmarked(){
+    public function isBookmarked()
+    {
         return IdeaBookmark::query()->where("user_id", Auth::user()->id)->where("idea_id", $this->id)->exists();
+    }
+
+    public function toArray()
+    {
+        $data = parent::toArray();
+        // change the value of the 'skills' key
+        if (!isset($data['user']) && $this->user) {
+            $data['user'] = $this->user;
+        }
+
+        if (!isset($data['replies'])) {
+            $data['replies'] = $this->replies;
+        }
+
+        $data['votes'] = count($this->votes);
+
+        if (Auth::check()) {
+            $data['voted'] = $this->isVoted();
+            $data['isBookmarked'] = $this->isBookmarked();
+        }
+
+        return $data;
     }
 
 }

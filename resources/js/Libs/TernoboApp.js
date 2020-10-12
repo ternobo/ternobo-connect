@@ -34,9 +34,28 @@ TernoboApp.install = function (Vue, options) {
     Vue.component("new-post-modal", NewPostModal);
     Vue.component("tselect", Tselect);
 
-
     // Directives
     Vue.directive("lazyload", LazyloadDirective);
+
+
+
+    const setup = function(vm) {
+        Vue.prototype.toast = function (msessage) {
+            vm.$bvToast.toast(msessage, {
+                noCloseButton: true,
+                toaster: "b-toaster-bottom-left",
+                bodyClass: ["bg-dark", "text-right", "text-white"],
+                solid: true
+            });
+        }
+    };
+
+    Vue.mixin({
+        beforeCreate() {
+            setup(this);
+        }
+    })
+
 }
 
 

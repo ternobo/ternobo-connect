@@ -16,49 +16,6 @@ use Inertia\Inertia;
 class HomeController extends Controller
 {
 
-    private function getSuggestions()
-    {
-        $pages = array();
-        if (Auth::check()) {
-            $user = Auth::user();
-            if (count(Auth::user()->followings) > 0) {
-                $pages = Following::query()
-                    ->distinct("pages.id")
-                    ->join("pages", "pages.id", "=", "followings.following")
-                    ->whereRaw("followings.user_id IN (SELECT following from followings where user_id='$user->id')")
-                    ->whereRaw("followings.following NOT IN (SELECT following from followings where user_id='$user->id')")
-                    ->where("pages.user_id", "!=", Auth::user()->id)
-                    ->select(array("pages.*"))
-                    ->get();
-
-                if (count($pages) > 5) {
-                    $pages = $pages->random(5);
-                } else {
-                    if (count(Page::all()) > 5) {
-                        $pages = Page::query()
-                            ->distinct("pages.id")
-                            ->where("pages.user_id", "!=", Auth::user()->id)
-                            ->get()->random(5);
-                    }
-                }
-            } else {
-                if (count(Page::all()) > 5) {
-                    $pages = Page::query()
-                        ->distinct("pages.id")
-                        ->where("pages.user_id", "!=", Auth::user()->id)
-                        ->get()->random(5);
-                }
-            }
-        }
-        $result = array();
-        foreach ($pages as $page) {
-            if (!(($user->isFollowing($page->user_id) instanceof Following) || ($user->isConnected($page->user_id) instanceof \App\Connection))) {
-                $result[] = $page;
-            }
-        }
-        return $result;
-    }
-
     /**
      * Show the application dashboard.
      *
@@ -70,7 +27,7 @@ class HomeController extends Controller
         if ($request->has("page")) {
             $page = $request->page;
         }
-        $pages = $this->getSuggestions();
+        $pages = Page::getSuggestions();
         $posts = Post::query()
             ->with("page")
             ->with("likes")

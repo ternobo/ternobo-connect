@@ -3,7 +3,6 @@
     <sidebar-left>
     </sidebar-left>
     <div class="content-container-full">
-
         <div class="card">
             <lazy-image :src="page.cover" class="card-img-top page-cover" />
             <div class="card-body pageinfo-card">

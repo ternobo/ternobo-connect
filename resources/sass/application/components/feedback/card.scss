@@ -1,0 +1,59 @@
+.idea-card {
+    @extend .card;
+    @extend .my-2;
+}
+
+.feedback-tabs-white {
+    padding: 1rem;
+    background: $white;
+    box-shadow: $card-shadow;
+}
+
+.feedback-tabs-white {
+    ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+        font-size: 18px;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul {
+        li {
+            color: $sub-heading;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+            border-radius: 15px;
+            gap: 2px;
+            transition: 0.3s all;
+        }
+
+        li.active {
+            background: $fixed-elements;
+
+        }
+    }
+}
+
+.btn-action {
+    background: $action;
+    color: $white;
+}
+
+.idea-votes {
+    background: #EEEEEE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.vote-box {
+    padding: 5px;
+}

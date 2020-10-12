@@ -12,6 +12,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
+use Inertia\Inertia;
+use App\Models\Page;
 
 class IdeasController extends Controller
 {
@@ -46,9 +48,9 @@ class IdeasController extends Controller
                 ->paginate(5);
             $ideas->appends(array("fav" => "1"));
         } else {
-            $ideas = Idea::query()->with("votes")->with("user")->where("status", $status)->latest()->paginate(5);
+            $ideas = Idea::query()->with("votes")->with("user")->where("status", $status)->latest()->paginate(15);
         }
-        return view("ideas", ["ideas" => $ideas, "status" => $status]);
+        return Inertia::render("Feedback", ["ideas" => $ideas, "pages" => Page::getSuggestions()]);
     }
 
     public function myIdeas(Request $request)
@@ -92,7 +94,6 @@ class IdeasController extends Controller
 
         return view("ideas", ["bookmarks" => $bookmarks, "ideas" => $contributed_ideas, "my_ideas" => $ideas, "status" => $status, "myoffers" => true]);
     }
-
 
     public function voteIdea(Request $request)
     {
@@ -151,17 +152,17 @@ class IdeasController extends Controller
      * @param Request $request
      * @return Response
      */
-    public
-    function store(Request $request)
+    public function store(Request $request)
     {
         $messages = [
             "title.required" => "عنوان اجباری است",
             "title.max" => "عنوان حداکثر می‌تواند ۱۰۰ کاراکتر باشد",
-            "description.max" => "توضیحات حداکثر می‌تواند ۳۰۰۰ کاراکتر باشد"
+            "description.max" => "توضیحات حداکثر می‌تواند ۳۰۰۰ کاراکتر باشد",
+
         ];
         $validator = Validator::make($request->all(), [
             "title" => "required|max:100",
-            "description" => "required|max:3000"
+            "description" => "max:3000",
         ], $messages);
         if ($validator->fails()) {
             return response()->json(["result" => false, "errors" => $validator->errors()]);
@@ -172,7 +173,8 @@ class IdeasController extends Controller
         $idea->title = $title;
         $idea->user_id = Auth::user()->id;
         $idea->description = $description;
-        return response()->json(array("result" => $idea->save()));
+        $result = $idea->save();
+        return response()->json(array("result" => $result, "idea"=>$idea));
 
     }
 
@@ -180,10 +182,10 @@ class IdeasController extends Controller
     {
         $messages = [
             "text.required" => "متن دیدگاه اجباری است",
-            "text.max" => "متن دیدگاه حداکثر می‌تواند ۳۰۰۰ کاراکتر باشد"
+            "text.max" => "متن دیدگاه حداکثر می‌تواند ۳۰۰۰ کاراکتر باشد",
         ];
         $validator = Validator::make($request->all(), [
-            "text" => "required|max:3000"
+            "text" => "required|max:3000",
         ], $messages);
         if ($validator->fails()) {
             return response()->json(["result" => false, "errors" => $validator->errors()]);
@@ -203,8 +205,7 @@ class IdeasController extends Controller
      * @param Idea $idea
      * @return View
      */
-    public
-    function show(Idea $idea)
+    public function show(Idea $idea)
     {
         $replies = $idea->replies()->paginate(10);
         return view("content.idea", ["idea" => $idea, "replies" => $replies]);
@@ -216,8 +217,7 @@ class IdeasController extends Controller
      * @param Idea $idea
      * @return Response
      */
-    public
-    function destroy(Idea $idea)
+    public function destroy(Idea $idea)
     {
         if (Auth::user()->id === $idea->user_id) {
             $idea->delete();
