@@ -23,7 +23,7 @@
             <a class="text-light d-flex align-items-center"><i class="material-icons-outlined font-17">poll</i> نظر سنجی
             </a>
             <inertia-link href="/articles/create" data-no-instant class="text-grey font-12 d-flex align-items-center"><i class="material-icons-outlined font-17">article</i> نوشتن مقاله</inertia-link>
-            <inertia-link class="text-grey d-flex align-items-center" data-action="open" data-target="#postmediaselect"><i class="material-icons-outlined font-17">crop_original</i> عکس/فیلم </inertia-link>
+            <a class="text-grey d-flex align-items-center" data-action="open" data-target="#postmediaselect"><i class="material-icons-outlined font-17">crop_original</i> عکس/فیلم </a>
         </div>
     </div>
 </div>

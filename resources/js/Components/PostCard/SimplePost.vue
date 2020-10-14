@@ -1,5 +1,5 @@
 <template>
-<div class="post-box" data-id="93" id="post-93">
+<div class="post-box" ref="post">
     <div class="post-header pt-0">
         <a class="publisher" :href="'/'+post.page.slug">
             <img :src="post.page.profile" />
@@ -93,6 +93,21 @@ export default {
     },
     created: function () {
         this.liked = this.post.is_liked;
+
+    },
+    mounted() {
+        let options = {
+            root: null,
+            threshold: 1.0
+        }
+        const $this = this;
+        let observer = new IntersectionObserver(function () {
+            if (!$this.seen_content.includes($this.post.id)) {
+                $this.seen_content.push($this.post.id);
+                $this.seen_request.push($this.post.id);
+            }
+        }, options);
+        observer.observe(this.$refs.post);
     },
     methods: {
         like() {

@@ -36,14 +36,14 @@
         </div>
         <div class="tabs">
             <ul class="default position-relative">
-                <li class="is-active">
-                    <a class="active">درحال رای‌گیری</a>
+                <li @click="status = 'voting'" :class="{'is-active': status === 'voting'}">
+                    <a>درحال رای‌گیری</a>
                 </li>
-                <li>
-                    <a class="active">برنامه ریزی شده</a>
+                <li @click="status = 'scheduled'" :class="{'is-active': status === 'scheduled'}">
+                    <a>برنامه ریزی شده</a>
                 </li>
-                <li>
-                    <a class="active">انجام شده</a>
+                <li @click="status = 'done'" :class="{'is-active': status === 'done'}">
+                    <a>انجام شده</a>
                 </li>
 
                 <li style="left:0" class="position-absolute">
@@ -55,6 +55,11 @@
             <FeedbackCard v-for="idea in ideasArray" :key="idea.id" :idea="idea"></FeedbackCard>
             <div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
                 <loading-spinner class="image__spinner" />
+            </div>
+            <div v-if="next_page_url === null && !loadingPage">
+                <no-content>
+                    هیچ ایده‌ای وجود ندارد
+                </no-content>
             </div>
         </div>
     </div>
@@ -69,10 +74,45 @@
 </template>
 
 <script>
-import AppLayout from "../Layouts/AppLayout";
-import FeedbackCard from "../Components/Feedback/FeedbackCard";
+import AppLayout from "../../Layouts/AppLayout";
+import FeedbackCard from "../../Components/Feedback/FeedbackCard";
+import NoContent from "../../Components/NoContent";
 
 export default {
+    watch: {
+        status(newValue, oldValue) {
+            const $this = this;
+            this.ideasArray = [];
+            this.loadingPage = true;
+            const options = {
+                method: 'GET',
+                headers: {
+                    "X-Inertia": "true"
+                },
+                url: '/ideas',
+                params: {
+                    status: newValue
+                }
+            };
+            axios(options).then((response) => {
+                const data = (response.data.props.ideas);
+                if (data) {
+                    $this.ideasArray = data.data;
+                    $this.page = data.current_page;
+                    $this.next_page_url = data.next_page_url;
+                }
+            }).catch((error) => {
+                console.log(error);
+                self.$nextTick(() => { //with this we skip the first change
+                    self.status = oldValue;
+                })
+                $this.ideasArray = $this.ideas.data;
+            }).then(() => {
+                $this.loadingPage = false;
+            });
+        },
+
+    },
     created() {
         this.ideasArray = this.ideas.data;
         this.page = this.ideas.current_page;
@@ -80,8 +120,7 @@ export default {
     },
     methods: {
         loadMore() {
-            if (this.next_page_url !== null) {
-                this.loadingPage = true;
+            if (!this.loadingPage && this.next_page_url !== null) {
                 const $this = this;
                 const options = {
                     method: 'GET',
@@ -90,18 +129,18 @@ export default {
                     },
                     url: this.next_page_url,
                 };
-                this.next_page_url = null;
+                this.loadingPage = true;
                 axios(options).then((response) => {
                     const data = (response.data.props.ideas);
                     if (data) {
                         $this.ideasArray = $this.ideasArray.concat(data.data);
                         $this.page = data.current_page;
                         $this.next_page_url = data.next_page_url;
-
                     }
-                    $this.loadingPage = false;
                 }).catch((error) => {
                     this.next_page_url = options.url;
+                }).then(() => {
+                    $this.loadingPage = false;
                 });
             }
         },
@@ -140,7 +179,8 @@ export default {
             ideasArray: [],
             page: 1,
             next_page_url: undefined,
-            loadingPage: false
+            loadingPage: false,
+            status: "voting"
         };
     },
     props: {
@@ -155,7 +195,8 @@ export default {
     },
     layout: AppLayout,
     components: {
-        FeedbackCard
+        FeedbackCard,
+        NoContent
     }
 };
 </script>

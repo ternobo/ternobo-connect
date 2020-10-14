@@ -7,9 +7,9 @@
                     <div class="idea-votes">
                         {{ idea.votes }}
                     </div>
-                    <button v-if="idea.status !== 'scheduled' && idea.status !== 'done'" class="btn btn-dark w-100" :class="{ voted: idea.voted }">
-                        {{ idea.voted ? "ثبت شده" : "ثبت رای" }}
-                    </button>
+                    <loading-button :loading="loading" @click.native="voteIdea" v-if="idea.status !== 'scheduled' && idea.status !== 'done'" class="btn mt-2 btn-dark w-100" :class="{ voted: voted }">
+                        {{ voted ? "ثبت شده" : "ثبت رای" }}
+                    </loading-button>
                 </div>
             </div>
             <div class="col-md-10">
@@ -47,10 +47,37 @@
 import FeedbackLabel from './FeedbackLabel';
 import PersianDate from "persian-date";
 export default {
+    data() {
+        return {
+            voted: false,
+            loading: false
+        }
+    },
+    created() {
+        this.voted = this.idea.voted;
+    },
+    methods: {
+        voteIdea() {
+            this.loading = true;
+            const $this = this;
+            axios.post(this.$APP_URL + "/ideas/vote", {
+                idea: this.idea.id
+            }).then((respone) => {
+                if (respone.data.result) {
+                    $this.voted = respone.data.vote;
+                }
+            }).catch((error) => {
+                $this.$toast("خطا در برقراری ارتباط ");
+            }).then(() => {
+                $this.loading = false;
+            })
+        }
+    },
     computed: {
         ideaStatus() {
             if (this.idea.status === "done") return "انجام شده";
             else if (this.idea.status === "scheduled") return "برنامه‌ریزی شده";
+            else if (this.idea.status === "closed") return "بسته شده";
             else return "";
         },
         createDate() {

@@ -48,7 +48,8 @@ class HomeController extends Controller
             ->whereHas("page.user", function ($query) {
                 $query->where("active", true);
             })
-            ->orderByRaw("seen_at IS NULL DESC, seen_at DESC")
+            ->orderByRaw("posts.user_id = '" . Auth::user()->id . "' DESC ,seen_at IS NULL DESC, seen_at DESC")
+            ->distinct("posts.id")
             ->paginate(10);
             
         return Inertia::render("Feed", array("posts" => $posts, "pages" => $pages));

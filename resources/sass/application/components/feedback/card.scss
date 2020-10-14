@@ -44,6 +44,13 @@
     color: $white;
 }
 
+.idea-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0px;
+}
+
 .idea-votes {
     background: #EEEEEE;
     display: flex;
@@ -56,4 +63,10 @@
 
 .vote-box {
     padding: 5px;
+}
+
+.voted {
+    background: #EEE !important;
+    color: #00C853 !important;
+    border: none !important;
 }

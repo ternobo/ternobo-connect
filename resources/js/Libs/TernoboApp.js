@@ -37,8 +37,6 @@ TernoboApp.install = function (Vue, options) {
     // Directives
     Vue.directive("lazyload", LazyloadDirective);
 
-
-
     const setup = function(vm) {
         Vue.prototype.toast = function (msessage) {
             vm.$bvToast.toast(msessage, {
@@ -53,7 +51,20 @@ TernoboApp.install = function (Vue, options) {
     Vue.mixin({
         beforeCreate() {
             setup(this);
-        }
+        },
+        methods: {
+            handleError(errors){
+                const $this = this;
+                Object.keys(errors).forEach(function (item) {
+                    $this.$bvToast.toast(errors[item][0], {
+                        noCloseButton: true,
+                        toaster: "b-toaster-bottom-left",
+                        bodyClass: ["bg-dark", "text-right", "text-white"],
+                        solid: true
+                    });
+                })
+            }
+        },
     })
 
 }

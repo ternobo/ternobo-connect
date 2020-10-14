@@ -50,7 +50,7 @@ class IdeasController extends Controller
         } else {
             $ideas = Idea::query()->with("votes")->with("user")->where("status", $status)->latest()->paginate(15);
         }
-        return Inertia::render("Feedback", ["ideas" => $ideas, "pages" => Page::getSuggestions()]);
+        return Inertia::render("Feedback/Index", ["ideas" => $ideas, "pages" => Page::getSuggestions()]);
     }
 
     public function myIdeas(Request $request)
@@ -208,7 +208,7 @@ class IdeasController extends Controller
     public function show(Idea $idea)
     {
         $replies = $idea->replies()->paginate(10);
-        return view("content.idea", ["idea" => $idea, "replies" => $replies]);
+        return Inertia::render("Feedback/IdeaPage", ["idea" => $idea, "replies" => $replies]);
     }
 
     /**

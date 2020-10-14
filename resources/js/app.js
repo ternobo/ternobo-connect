@@ -14,7 +14,7 @@ import infiniteScroll from 'vue-infinite-scroll'
 import TernoboApp from "./Libs/TernoboApp";
 import Application from "./Application";
 import TextareaAutosize from 'vue-textarea-autosize'
- 
+
 Vue.prototype.window = window.window;
 
 // Install V-Select
@@ -43,6 +43,20 @@ Vue.prototype.$axios = axios;
 const app = document.getElementById('app');
 
 window.TProgress = TProgress;
+
+Vue.prototype.seen_content = [];
+Vue.prototype.seen_request = [];
+
+setInterval(() => {
+    const seen_request = Vue.prototype.seen_request;
+    if (seen_request.length > 0) {
+        axios.post("/seenPost", {
+            posts: seen_request
+        }).then(() => {
+            Vue.prototype.seen_request = [];
+        })
+    }
+}, 3000);
 
 const vue_app = new Vue({
     render: (h) =>

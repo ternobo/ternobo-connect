@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Middleware\LocaleMiddleware;
 use App\Http\Middleware\FollowMiddlware;
+use App\Http\Middleware\LocaleMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -76,9 +76,6 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             Route::get("/followers", "ConnectionsController@followers");
             //end Connections
 
-
-            
-
             //Start Page Edit
             Route::prefix('/save')->group(function () {
                 Route::post("/contacts", "PageController@saveContacts");
@@ -101,8 +98,6 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             Route::post("/verifynewemail", "Auth\UsersController@verifyNewEmail");
             Route::post("/deactive", "Auth\UsersController@deactiveAccount");
             //Settings End
-
-            Route::post("/categories/sort/{id}", "CategoryController@sort");
 
             Route::post("/skills/search", "SkillController@search");
             Route::resource("/skills", "SkillController");
@@ -134,6 +129,10 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         /**
          * End Pages API
          */
+
+        Route::resource("/posts", "PostController");
+
+        Route::post("/categories/sort/{id}", "CategoryController@sort");
 
     });
 

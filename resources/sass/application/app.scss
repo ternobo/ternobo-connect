@@ -1,4 +1,4 @@
-@import "variables";
+@import "./variables";
 @import '~bootstrap-v4-rtl';
 @import '~bootstrap-vue';
 
@@ -52,6 +52,7 @@ a{
 @import "./components/buttons";
 @import "./components/tabs";
 @import "vue-select/src/scss/vue-select.scss";
+@import "../../../node_modules/tselect/src/tselect/tselect.scss";
 
 a:hover {
     text-decoration: none;
@@ -447,3 +448,5 @@ pre {
 
 @import "./components/feedback/card.scss";
 @import "./components/feedback/label.scss";
+
+@import "./components/cropper/actions.scss";

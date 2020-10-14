@@ -1,0 +1,53 @@
+.cropperactions {
+    border: 1px solid $light;
+    position: absolute;
+    background: #F8F8F8;
+    padding: 0.25rem 0;
+    width: max-content;
+    bottom: -22px;
+}
+
+.cropperactions {
+    button {
+        color: #707070;
+        font-size: 16px;
+        background: #F8F8F8;
+        outline: none;
+        border: none;
+        height: 100%;
+        padding: 0.25rem 2rem;
+        border-left: 1px solid #C8C8C8;
+    }
+
+    button:hover {
+        background: #dedede;
+    }
+}
+
+.closebtn {    
+    background: #F8F8F8;
+    border-radius: 50% !important;
+    padding: 0.3rem;
+    font-size: 16px;
+    box-shadow: 0 0 0.4rem 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    outline: none;
+    border: none;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-content: center;
+    justify-content: center;;
+}
+
+.topleftactions {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 100;
+}

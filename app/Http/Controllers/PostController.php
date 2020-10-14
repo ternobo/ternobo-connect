@@ -21,7 +21,7 @@ use Intervention\Image\Facades\Image;
 class PostController extends Controller
 {
 
-    function startsWith($string, $startString)
+    public function startsWith($string, $startString)
     {
         $len = strlen($startString);
         return (substr($string, 0, $len) === $startString);
@@ -37,7 +37,7 @@ class PostController extends Controller
     {
         $messages = [
             "media.max" => "فایل انتخابی از حد مجاز بزرگتر است(۱۰ مگابایت).",
-            "text.required_without" => "متن یا یک فایل چند رسانه‌ای انتخاب کنید."
+            "text.required_without" => "متن یا یک فایل چند رسانه‌ای انتخاب کنید.",
         ];
         $validator = Validator::make($request->all(), [
             "media" => "mimes:jpg,jpeg,png,bmp,mp4|max:30000",
@@ -72,10 +72,8 @@ class PostController extends Controller
                 }
             }, $text));
 
-
             $text = preg_replace('/\B@(\w+)/', "<a href=" . url("/") . "/" . "$0" . ">$0</a>", $text);
             $text = str_replace("/@", "/", $text);
-
 
             $post = new Post();
             $post->user_id = Auth::user()->id;
@@ -89,7 +87,7 @@ class PostController extends Controller
             }
 
             if ($request->has("tags")) {
-                $tags = $request->tags;
+                $tags = json_decode($request->tags);
                 foreach ($tags as $tag) {
                     if (Tag::where("name", $tag)->first() instanceof Tag) {
                         continue;
@@ -98,18 +96,18 @@ class PostController extends Controller
                     $thetag->name = $tag;
                     $thetag->save();
                 }
-                $post->tags = json_encode($request->tags);
+                $post->tags = json_encode($tags);
             }
             $post->type = "post";
             $post->show = $request->type;
             $medias = array();
             if ($request->has("media")) {
                 $file = $request->file("media")->store("medias");
-                $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
                 if ($request->has("sizes")) {
+                    $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
                     $sizes = (json_decode($request->sizes));
                     //    dd($sizes);
-                    $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->x), intval($sizes->y));
+                    $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->left), intval($sizes->top));
                     $image->save(null, 90, "jpg");
                 }
                 $medias = array(url($file));
@@ -200,7 +198,6 @@ class PostController extends Controller
             }
         }
 
-
         $text = preg_replace('/\B@(\w+)/', "<a href=" . url("/") . "/" . "$0" . ">$0</a>", htmlentities($request->text));
         $text = str_replace("/@", "/", $text);
 
@@ -256,12 +253,12 @@ class PostController extends Controller
         $messages = [
             "post_id.exists" => "این محتوا حدف شده",
             "comment_id.exists" => "این کامنت حذف شده",
-            "report" => "دلیل گزارش اجباری است"
+            "report" => "دلیل گزارش اجباری است",
         ];
         $validator = Validator::make($request->all(), [
             "comment_id" => "required_without:post_id",
             "post_id" => "required_without:comment_id",
-            "report" => "required"
+            "report" => "required",
         ], $messages);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
@@ -375,7 +372,6 @@ class PostController extends Controller
         return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -384,9 +380,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-       return view("layouts.components.edit-post",["post"=>$post]);
+        return view("layouts.components.edit-post", ["post" => $post]);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -400,7 +395,7 @@ class PostController extends Controller
         $messages = [
             "text.max" => "حداکثر متن ۲۵۰۰ کاراکتر است.",
             "text.required" => "متن اجباری است",
-            "text.min" => "متن اجباری است"
+            "text.min" => "متن اجباری است",
         ];
         $validator = Validator::make($request->all(), [
             "text" => "required|max:2500|min:1",
@@ -436,7 +431,7 @@ class PostController extends Controller
                 $thetag->name = $tag;
                 $thetag->save();
             }
-            $post->tags = json_encode($request->tags);
+            $post->tags = json_decode($request->tags);
         }
 
         $text = preg_replace('/\B@(\w+)/', "<a href=" . url("/") . "/" . "$0" . ">$0</a>", $text);
