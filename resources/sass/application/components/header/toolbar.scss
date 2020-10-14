@@ -44,6 +44,12 @@
         }
     }
 
+    a:hover{
+        .navheader-icon {
+            color: $icon-hover;
+        }
+    }
+
     a.active {
         .navheader-icon {
             font-family: "Material Icons";
@@ -56,6 +62,7 @@
             transform: scale(1);
             height: auto;
             width: auto;
+            color: $icon-hover;
         }
     }
 

@@ -14498,6 +14498,10 @@ input {
   color: #C8C8C8;
 }
 
+.header-menu a:hover .navheader-icon {
+  color: #191919;
+}
+
 .header-menu a.active .navheader-icon {
   font-family: "Material Icons";
   font-size: 24px;
@@ -14509,6 +14513,7 @@ input {
   transform: scale(1);
   height: auto;
   width: auto;
+  color: #191919;
 }
 
 .header-menu a::after {
@@ -15083,6 +15088,10 @@ body {
   color: #C8C8C8;
 }
 
+.header-menu a:hover .navheader-icon {
+  color: #191919;
+}
+
 .header-menu a.active .navheader-icon {
   font-family: "Material Icons";
   font-size: 24px;
@@ -15094,6 +15103,7 @@ body {
   transform: scale(1);
   height: auto;
   width: auto;
+  color: #191919;
 }
 
 .header-menu a::after {
