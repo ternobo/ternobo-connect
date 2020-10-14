@@ -4,10 +4,104 @@
         <h6 class="w-25 font-18 text-center pb-1" style="width: 10%!important; border-bottom:3px solid black">دعوت‌ها</h6>
         <div class="row">
 
+<<<<<<< HEAD
+        <div class="w-100">
+            <h6 class="w-25 font-18 text-center pb-1" style="width: 10%!important; border-bottom:3px solid black">دعوت‌ها</h6>
+
+            <div class="row">
+
+                <div class="col-6 col-md-6 col-12" v-for="connectionsArry in connectionsArrys" :key="connectionsArry">
+
+                    <b-card class="cardone">
+                        <div class="row">
+                            <div class="col-md-2 col-3"><img src="https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png" class="rounded-circle profile-img"></div>
+                            <div class="col-6">
+                                <h6>سپهر حدائق‌نیا</h6>
+                                <h6>مدیرعامل و موسس ترنوبو</h6>
+                                <p><span class="material-icons font-18">location_on</span>یران، بوشهر</p>
+                            </div>
+                            <div class="col-md-4 col-3" style="display:flex; align-items: center" v-on:click="indexOfAccerptCart(index)"><AcceptConnection></AcceptConnection></div>
+
+                                <div class=" d-flex">
+                                    <img src="https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png" class="rounded-circle" style="width: 30px;height: 30px;z-index:1;">
+                                    <img src="https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png" class="rounded-circle" style="width: 23px;height: 23px;margin-right:-15px;margin-top:4px">
+                                    <p class="font-12 mt-1 mr-3">شما و سروش هر دو آرمان رضوی زاده، فرناز فهیمی و 32 نفر دیگر را می‌شناسید</p>
+                                </div>
+
+                        </div>
+                    </b-card>
+
+                    <!-- <b-card class="my-3 cardone">
+                        <div class="row">
+                            <div class="col-md-2 col-3"><img src="https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png" class="rounded-circle profile-img"></div>
+                            <div class="col-6">
+                                <h6>سپهر حدائق‌نیا</h6>
+                                <h6>مدیرعامل و موسس ترنوبو</h6>
+                                <p><span class="material-icons font-18">location_on</span>یران، بوشهر</p>
+                            </div>
+                            <div class="col-md-4 col-3" style="display:flex; align-items: center"><ConnectionButton class="float-left w-100" ></ConnectionButton></div>
+
+                        </div>
+                    </b-card> -->
+
+
+                </div>
+
+
+
+                <!-- column 2 in desktop -->
+
+
+
+
+
+                    <!-- <div class="col-md-6 col-12">
+
+                        <b-card class="cardone">
+                            <div class="row">
+                                <div class="col-md-2 col-3"><img src="https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png" class="rounded-circle profile-img"></div>
+                                <div class="col-6">
+                                    <h6>سپهر حدائق‌نیا</h6>
+                                    <h6>مدیرعامل و موسس ترنوبو</h6>
+                                    <p><span class="material-icons font-18">location_on</span>یران، بوشهر</p>
+                                </div>
+                                <div class="col-md-4 col-3" style="display:flex; align-items: center"><ConnectionButton class="float-left w-100" ></ConnectionButton></div>
+                            </div>
+                        </b-card>
+
+                        <b-card class="my-3 cardone">
+                            <div class="row">
+                                <div class="col-md-2 col-3"><img src="https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png" class="rounded-circle profile-img"></div>
+                                <div class="col-6">
+                                    <h6>سپهر حدائق‌نیا</h6>
+                                    <h6>مدیرعامل و موسس ترنوبو</h6>
+                                    <p><span class="material-icons font-18">location_on</span>یران، بوشهر</p>
+                                </div>
+                                <div class="col-md-4 col-3" style="display:flex; align-items: center"><ConnectionButton class="float-left w-100" ></ConnectionButton></div>
+
+                                    <div class=" d-flex">
+                                        <img src="https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png" class="rounded-circle" style="width: 30px;height: 30px;z-index:1;">
+                                        <img src="https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png" class="rounded-circle" style="width: 23px;height: 23px;margin-right:-15px;margin-top:4px">
+                                        <p class="font-12 mt-1 mr-3">شما و سروش هر دو آرمان رضوی زاده، فرناز فهیمی و 32 نفر دیگر را می‌شناسید</p>
+                                    </div>
+
+                            </div>
+                        </b-card>
+
+                    </div> -->
+
+
+            </div>
+            <div class="d-flex justify-center mt-5">
+                <button class="text-center btn btn-light px-5" style="margin:0 auto;">نمایش بیشتر</button>
+            </div>
+
+=======
         </div>
         <div class="d-flex justify-center mt-5">
             <button class="text-center btn btn-light px-5" style="margin:0 auto;">نمایش بیشتر</button>
         </div>
+>>>>>>> bc9f4635720ff935a55adfdf6827fffe2645ca2b
 
         <tabs>
             <tab name="شبکه من" :selected="true" class="">
@@ -42,15 +136,30 @@
 <script>
 import AppLayout from "../Layouts/AppLayout";
 import ConnectionButton from "../Components/buttons/ConnectionButton";
+<<<<<<< HEAD
+import Tabs from "../Components/Tabs/Tabs";
+import AcceptConnection from "../Components/buttons/AcceptConnection";
+=======
 import FollowButton from "../Components/buttons/FollowButton";
 
 import Tabs from "../Components/Tabs/Tabs"
+>>>>>>> bc9f4635720ff935a55adfdf6827fffe2645ca2b
 export default {
     name: "MyConnectons",
+    data(){
+        return{
+            indexnum:Number,
+            connectionsArrys:connections.data,
+        }
+    },
     components: {
         ConnectionButton,
         Tabs,
+<<<<<<< HEAD
+        AcceptConnection,
+=======
         FollowButton
+>>>>>>> bc9f4635720ff935a55adfdf6827fffe2645ca2b
     },
     props: {
         followers_count: {
@@ -76,6 +185,16 @@ export default {
         pending_connections: {
             type: Object,
             default: undefined
+        },
+        postapi:{
+            type: Boolean,
+        }
+    },
+    watch:{
+        postapi:{
+            if (postapi = true) {
+                this.indexnum.splice(this.indexnum);
+            }
         }
     },
     layout: AppLayout
