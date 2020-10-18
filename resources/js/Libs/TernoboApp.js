@@ -1,6 +1,4 @@
-import PeopleSuggestion from "../Components/App/PeopleSuggestion";
 import LoadingButton from "../Components/buttons/LoadingButton";
-import PostCard from "../Components/PostCard/PostCard.vue";
 import UserInfoCard from "../Components/Cards/UserInfoCard";
 import LazyImage from "../Components/LazyImage";
 import Tab from "../Components/Tabs/Tab";
@@ -11,8 +9,6 @@ import RightSidebar from "../Layouts/RightSidebar";
 import LazyloadDirective from "../Directives/LazyloadDirective";
 import LoadingSpinner from "../Components/LoadingSpinner";
 import NewPostCard from "../Components/Cards/NewPostCard";
-import NewPostModal from "../Components/Modals/NewPostModal";
-import TextareaAutosize from "../Components/inputs/TextareaAutosize";
 import CopyToClipboard from "../Directives/CopyToClipboard";
 import {
     Tselect
@@ -21,27 +17,28 @@ import {
 const TernoboApp = {};
 
 TernoboApp.install = function (Vue, options) {
+    Vue.component("AppHeader", ()=>import("../Components/App/header/AppHeader"));
     Vue.component("tabs", Tabs);
     Vue.component("tab", Tab);
     Vue.component("base-layout", BaseLayout);
     Vue.component("sidebar-left", LeftSidbar);
     Vue.component("sidebar-right", RightSidebar);
     Vue.component("user-card", UserInfoCard);
-    Vue.component("post-card", PostCard);
-    Vue.component("people-suggestion", PeopleSuggestion);
+    Vue.component("post-card", () => import("../Components/PostCard/PostCard.vue"));
+    Vue.component("people-suggestion", () => import("../Components/App/PeopleSuggestion"));
     Vue.component("loading-button", LoadingButton);
     Vue.component("lazy-image", LazyImage);
     Vue.component("loading-spinner", LoadingSpinner);
     Vue.component("new-post-card", NewPostCard);
-    Vue.component("new-post-modal", NewPostModal);
+    Vue.component("new-post-modal", ()=>import("../Components/Modals/NewPostModal"));
     Vue.component("tselect", Tselect);
-    Vue.component("textarea-autosize", TextareaAutosize);
+    Vue.component("textarea-autosize", ()=>import("../Components/inputs/TextareaAutosize"));
 
     // Directives
     Vue.directive("lazyload", LazyloadDirective);
     Vue.directive("clipboard", CopyToClipboard);
 
-    const setup = function(vm) {
+    const setup = function (vm) {
         Vue.prototype.toast = function (msessage) {
             vm.$bvToast.toast(msessage, {
                 noCloseButton: true,
@@ -57,7 +54,7 @@ TernoboApp.install = function (Vue, options) {
             setup(this);
         },
         methods: {
-            handleError(errors){
+            handleError(errors) {
                 const $this = this;
                 Object.keys(errors).forEach(function (item) {
                     $this.$bvToast.toast(errors[item][0], {

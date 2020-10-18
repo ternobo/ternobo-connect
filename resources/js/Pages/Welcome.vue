@@ -78,6 +78,7 @@ import AppHeader from "../Components/App/header/AppHeader";
 import Landing from "../Components/App/Landing";
 import LoginModal from "../Components/Modals/LoginModal";
 import SignupModal from "../Components/Modals/SignupModal";
+import App from "../Layouts/App";
 
 export default {
     data() {
@@ -118,6 +119,7 @@ export default {
             default: undefined,
         },
     },
+    layout: App,
     name: "Welcome",
     components: {
         LawsModal,

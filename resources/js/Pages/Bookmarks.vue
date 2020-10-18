@@ -66,7 +66,7 @@ export default {
             this.postsArray = this.posts.data;
         }
     },
-    created() {
+    mounted() {
         this.postsArray = this.posts.data;
         this.page = this.posts.current_page;
         this.next_page_url = this.posts.next_page_url;

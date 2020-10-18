@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[14],{IKs9:function(n,e,t){"use strict";t.r(e);var l={name:"Widget",layout:null},u=t("KHd+"),s=Object(u.a)(l,(function(){var n=this.$createElement;return(this._self._c||n)("div")}),[],!1,null,null,null);e.default=s.exports}}]);
+//# sourceMappingURL=14.js.map

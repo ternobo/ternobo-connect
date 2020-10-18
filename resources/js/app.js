@@ -6,14 +6,12 @@ import { InertiaApp } from '@inertiajs/inertia-vue';
 import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import App from "./Layouts/App";
 import vSelect from 'vue-select'
 import TProgress from "./Libs/TProgress";
 import VueCircle from 'vue2-circle-progress'
 import infiniteScroll from 'vue-infinite-scroll'
 import TernoboApp from "./Libs/TernoboApp";
-import Application from "./Application";
-
+import App from "./Layouts/App";
 Vue.prototype.window = window.window;
 
 // Install V-Select
@@ -56,6 +54,8 @@ setInterval(() => {
     }
 }, 3000);
 
+const Application = () => import("./Application");
+
 const vue_app = new Vue({
     render: (h) =>
         h(Application, {
@@ -65,13 +65,13 @@ const vue_app = new Vue({
                     this.$emit('changeProps', props)
                     return props;
                 },
-                resolveComponent: (name) => {
-                    const module = require(`./Pages/${name}`).default;
-                    if (!module.layout) {
-                        // there is no Layout defined, set the default layout
-                        module.layout = App;
-                    }
-                    return module;
+                async resolveComponent (name){
+                    let page = undefined;
+                    await import(`./Pages/${name}`).then(m=>{
+                        page = m.default;
+                        vue_app.layout = page.layout;
+                    });
+                    return page;
                 },
             },
         }),
@@ -80,6 +80,7 @@ const vue_app = new Vue({
             isMobile: window.matchMedia("(max-width: 600px)").matches,
             isTablet: window.matchMedia("(max-width: 960px)").matches,
             isDesktop: window.matchMedia("(min-width: 961px)").matches,
+            layout: App,
             user: window.user,
             url: window.location.pathname
         }

@@ -12,7 +12,13 @@ const mix = require('laravel-mix');
  */
 
 mix.sass('resources/sass/application/app.scss', 'public/css')
-    .js('resources/js/app.js', 'public/js')
+    .webpackConfig({
+        output: {
+            filename: '[name].js',
+            chunkFilename: 'js/[name].js',
+        }
+    })
+    .js('resources/js/app.js', '')
     .sourceMaps()
-    .extract(['vue'])
+    .extract(['vue', 'laravel-jetstream'])
     .version();
