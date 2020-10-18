@@ -1,11 +1,12 @@
 
 .dropdown-menu {
-    border: 1px solid $border-color;
+    border: none;
     box-shadow: 0 0 .3rem 0 rgba(0,0,0,.1);
-
-    // Slide down transtion
+    background: $fixed-elements;
+    color: $dark;
     display: block !important;
-
+    border-radius: 0;
+    padding: 0;
     &:not(.show) {
         padding: 0px;
         border-width: 0px;
@@ -25,38 +26,17 @@
             max-height: 100px;
         }
     }
-
-    // Add chevron to top
-
-    &[x-placement^="bottom"] {
-        &::before {
-            content:"";
-            position: absolute;
-            left: 20px;
-            top: -5px;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 0 5px 5px 5px;
-            border-color: transparent transparent #fff transparent;
-            z-index: 99999999;
-        }
-    }
-
-    // Add chevron to bottom
-
-    &[x-placement^="top"] {
-        &::after {
-            content:"";
-            position: absolute;
-            left: 20px;
-            bottom: -5px;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 5px 5px 0 5px;
-            border-color: #fff transparent transparent transparent;
-            z-index: 99999999;
-        }
-    }
+}
+.dropdown-item {
+    padding: 0.5rem 0.5rem;
+    color: $text-color;
+    min-width: 230px;
+    text-align: right;
+}
+.dropdown-item:hover, .dropdown-item:focus{
+    background-color: $border-color;
+    color: $text-color;
+}
+.dropdown-toggle-no-caret{
+    padding: 0;
 }

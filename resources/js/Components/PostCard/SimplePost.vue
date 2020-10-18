@@ -2,7 +2,7 @@
 <div class="post-box" ref="post">
     <div class="post-header pt-0">
         <a class="publisher" :href="'/'+post.page.slug">
-            <img :src="post.page.profile" />
+            <lazy-image class="mb-0" :src="post.page.profile" />
             <div>
                 <strong>
                     {{ post.page.name }}
@@ -28,20 +28,65 @@
                     <template v-slot:button-content>
                         <i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
                     </template>
-                    <b-dropdown-item href="#">
-                        <i class="material-icons text-muted">link</i> رونوشت پیوند این محتوا
+                    <b-dropdown-item v-clipboard="$APP_URL+'/posts/'+post.id">
+                        <i class="material-icons text-dark">link</i>
+                        <strong>رونوشت پیوند این محتوا</strong>
                     </b-dropdown-item>
-                    <b-dropdown-item href="#">
-                        <div class="d-flex flex-column">
-                            <span>
-                                <i class="material-icons text-muted">link</i> رونوشت پیوند این محتوا
-                            </span>
-                            <small>
-                                یو میو میو
-                            </small>
+                    <b-dropdown-item>
+                        <div class="d-flex align-items-center">
+                            <i class="material-icons ml-2 text-dark">code</i>
+                            <div>
+                                <div>
+                                    <strong>
+                                        دریافت کد امبد
+                                    </strong>
+                                </div>
+                                <small class="text-muted">
+                                    کد امبد را کپی کرده و در وب‌سایت خودتان قرار دهید.
+                                </small>
+                            </div>
                         </div>
                     </b-dropdown-item>
-                    <b-dropdown-item href="#">Something else here...</b-dropdown-item>
+                    <b-dropdown-item>
+                        <div class="d-flex align-items-center">
+                            <i class="material-icons-outlined ml-2 text-dark">report</i>
+                            <div>
+                                <div>
+                                    <strong>
+                                        گزارش تخلف
+                                    </strong>
+                                </div>
+                                <small class="text-muted">
+                                    این دیدگاه در تضاد با قوانین ترنوبو است
+                                </small>
+                            </div>
+                        </div>
+                    </b-dropdown-item>
+                    <b-dropdown-item>
+                        <div class="d-flex align-items-center">
+                            <i class="material-icons ml-2 text-dark">not_interested</i>
+                            <div>
+                                <div>
+                                    <strong>
+                                        دنبال نکردن {{ post.page.name }}
+                                    </strong>
+                                </div>
+                                <small class="text-muted">
+                                    دیگر محتوای {{ post.page.name }} را تماشا نکنید.
+                                </small>
+                            </div>
+                        </div>
+                    </b-dropdown-item>
+                    <b-dropdown-item class="hover-danger" v-if="post.page.user_id = $page.user.id">
+                        <div class="d-flex align-items-center">
+                            <i class="material-icons-outlined ml-2 text-dark">delete_sweep</i>
+                            <div>
+                                <div>
+                                    حذف کردن
+                                </div>
+                            </div>
+                        </div>
+                    </b-dropdown-item>
                 </b-dropdown>
             </div>
         </div>
@@ -64,22 +109,28 @@
 
         </div>
         <div class="actions">
-            <text class="font-08rem">
+            <div class="font-08rem">
 
-            </text>
+            </div>
             <div class="buttons">
                 <i class="material-icons-outlined">sync</i>
-                <i class="material-icons-outlined">comment</i>
+                <i :class="{'material-icons-outlined':!openComment,'material-icons': openComment}" v-on:click="openComment = !openComment">comment</i>
                 <i class="material-icons like" @click="like" :class="{ 'text-danger': liked }">{{ liked ? 'favorite': 'favorite_border' }}</i>
             </div>
         </div>
     </div>
+
+    <transition name="slide">
+        <div v-if="openComment">
+            <CommentsList :post="post.id"></CommentsList>
+        </div>
+    </transition>
 </div>
 </template>
 
 <script>
 import TimeAgo from 'javascript-time-ago'
-
+import CommentsList from "../Comments/CommetsList";
 // Load locale-specific relative date/time formatting rules.
 import fa from 'javascript-time-ago/locale/fa'
 
@@ -88,7 +139,8 @@ TimeAgo.addLocale(fa)
 export default {
     data() {
         return {
-            liked: false
+            liked: false,
+            openComment: false
         }
     },
     created: function () {
@@ -124,6 +176,9 @@ export default {
         }
     },
     name: "SimplePost",
+    components: {
+        CommentsList
+    },
     props: {
         post: {
             type: Object,

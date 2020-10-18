@@ -21842,7 +21842,7 @@ input[type=text] {
 }
 
 .image__wrapper.loaded .image__spinner {
-  display: none;
+  display: none !important;
 }
 
 .image__wrapper.loaded .image__item {
@@ -21903,6 +21903,7 @@ input[type=text] {
 .post-box .post-header .actions {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .post-box .post-header .publisher div {
@@ -22252,9 +22253,13 @@ pre {
 }
 
 .dropdown-menu {
-  border: 1px solid #E0E0E0;
+  border: none;
   box-shadow: 0 0 0.3rem 0 rgba(0, 0, 0, 0.1);
+  background: #EEE;
+  color: #191919;
   display: block !important;
+  border-radius: 0;
+  padding: 0;
 }
 
 .dropdown-menu:not(.show) {
@@ -22275,30 +22280,21 @@ pre {
   max-height: 100px;
 }
 
-.dropdown-menu[x-placement^="bottom"]::before {
-  content: "";
-  position: absolute;
-  left: 20px;
-  top: -5px;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 5px 5px 5px;
-  border-color: transparent transparent #fff transparent;
-  z-index: 99999999;
+.dropdown-item {
+  padding: 0.5rem 0.5rem;
+  color: #424242;
+  min-width: 230px;
+  text-align: right;
 }
 
-.dropdown-menu[x-placement^="top"]::after {
-  content: "";
-  position: absolute;
-  left: 20px;
-  bottom: -5px;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 5px 5px 0 5px;
-  border-color: #fff transparent transparent transparent;
-  z-index: 99999999;
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: #E0E0E0;
+  color: #424242;
+}
+
+.dropdown-toggle-no-caret {
+  padding: 0;
 }
 
 .new-post .text {
@@ -22567,5 +22563,92 @@ pre {
   align-items: center;
   justify-content: flex-end;
   z-index: 100;
+}
+
+.material-textfield {
+  position: relative;
+}
+
+.material-textfield label {
+  position: absolute;
+  font-size: 1rem;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  color: #C8C8C8;
+  padding: 0 0.3rem;
+  margin: 0 0.5rem;
+  transition: .1s ease-out;
+  transform-origin: right top;
+  pointer-events: none;
+}
+
+.material-textfield .input {
+  font-size: 1rem;
+  outline: none;
+  border: 1px solid #C8C8C8;
+  border-radius: 0;
+  padding: 1rem 0.7rem;
+  color: #424242;
+  transition: 0.1s ease-out;
+}
+
+.material-textfield .input:focus {
+  border-color: #191919;
+}
+
+.material-textfield .input:focus + label {
+  color: #191919;
+  top: 0;
+  transform: translateY(-50%) scale(0.9);
+}
+
+.material-textfield .input:not(:-moz-placeholder-shown) + label {
+  top: 0;
+  transform: translateY(-50%) scale(0.9);
+}
+
+.material-textfield .input:not(:-ms-input-placeholder) + label {
+  top: 0;
+  transform: translateY(-50%) scale(0.9);
+}
+
+.material-textfield .input:not(:placeholder-shown) + label {
+  top: 0;
+  transform: translateY(-50%) scale(0.9);
+}
+
+.comments {
+  max-height: 500px;
+  overflow-y: auto;
+  scrollbar-color: #191919 #757575;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+}
+
+.comment-replies {
+  border-radius: 1px solid #757575;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  justify-content: flex-start;
+  background: #F5F5F5;
+  color: #424242;
+  padding: 8px;
+}
+
+.comment .comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment .comment-body {
+  padding: .4rem;
+  width: 100%;
 }
 

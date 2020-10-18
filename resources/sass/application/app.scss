@@ -403,7 +403,7 @@ img {
 
     &.loaded {
         .image__spinner {
-            display: none;
+            display: none !important;
         }
 
         .image__item {
@@ -450,3 +450,8 @@ pre {
 @import "./components/feedback/label.scss";
 
 @import "./components/cropper/actions.scss";
+
+@import "./components/material/input.scss";
+
+@import "./components/comments/comments.scss";
+@import "./components/comments/comment.scss";

@@ -62,7 +62,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             Route::post("/setcover", "Auth\UsersController@setCover")->name("profile-cover");
 
             Route::post("/like/{post_id}", "PostController@likePost");
-            Route::post("/likecomment/{comment_id}", "CommentController@likeComment");
+            Route::post("/comments/{comment_id}/like", "CommentController@likeComment");
 
             // Connections
             Route::get("/connections", "ConnectionsController@index");
@@ -89,6 +89,12 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
                 Route::post("/username", "PageController@saveUsername");
             });
             // End Page Edit
+
+            // Start Comments
+            Route::any("/comments/{comment:id}/replies", "CommentController@replies");
+            Route::resource('posts.comments', "CommentController");
+
+            // End Comments
 
             Route::post("/reportpost", "PostController@report");
 

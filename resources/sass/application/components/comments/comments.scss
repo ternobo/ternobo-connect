@@ -1,0 +1,10 @@
+.comments {
+    max-height: 500px;
+    overflow-y: auto;
+    scrollbar-color: $dark $light;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+}
+.comment-replies{
+    border-radius: 1px solid $sub-heading;
+}

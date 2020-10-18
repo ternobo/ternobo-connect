@@ -1,0 +1,44 @@
+.material-textfield {
+    position: relative;
+
+
+    label {
+        position: absolute;
+        font-size: 1rem;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: white;
+        color: #C8C8C8;
+        padding: 0 0.3rem;
+        margin: 0 0.5rem;
+        transition: .1s ease-out;
+        transform-origin: right top;
+        pointer-events: none;
+    }
+
+    .input {
+        font-size: 1rem;
+        outline: none;
+        border: 1px solid #C8C8C8;
+        border-radius: 0;
+        padding: 1rem 0.7rem;
+        color: $text-color;
+        transition: 0.1s ease-out;
+    }
+
+    .input:focus {
+        border-color: $black;
+    }
+
+    .input:focus+label {
+        color:$black;
+        top: 0;
+        transform: translateY(-50%) scale(.9);
+    }
+
+    .input:not(:placeholder-shown)+label {
+        top: 0;
+        transform: translateY(-50%) scale(.9);
+    }
+}

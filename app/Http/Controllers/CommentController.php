@@ -2,16 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Like;
+use App\Models\Post;
+use App\Models\Action;
+use App\Models\Comment;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Comment;
-use App\Models\Post;
-use App\Models\Notification;
-use App\Models\Action;
-use App\Models\Like;
 use Illuminate\Support\Facades\Validator;
 
-class CommentController extends Controller {
+class CommentController extends Controller
+{
+
+    public function index($post, Request $request)
+    {
+        $comments = Comment::query()->with("page")->whereNull("reply_to")->where("post_id", $post)->latest();
+        if ($request->has("noload")) {
+            $comments = $comments->where("id", "!=", $request->noload);
+        }
+        $comments = $comments->paginate(5);
+        return response()->json(array("result" => true, "data" => $comments));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -19,76 +30,45 @@ class CommentController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        $post = Post::findOrFail($request->post_id);
+    public function store($post, Request $request)
+    {
+        $post = Post::findOrFail($post);
         $comment = new Comment();
         $comment->page_id = Auth::user()->getPage()->id;
         $recomment = null;
+        $text = $request->text;
         if ($request->has("reply_to") && $request->reply_to !== null) {
             $recomment = Comment::query()->where("id", $request->reply_to)->firstOrFail();
             $comment->reply_to = $request->reply_to;
             if ($recomment->parent_id === null) {
                 $comment->parent_id = $recomment->id;
             } else {
-                $comment->parent_id = $recomment->parent_id;
+                $comment->parent_id = $recomment->parent_id;            
+                $text = "<div><a class='text-action' href='". $recomment->page->slug ."'>@" . $recomment->page->slug . "</a></div> " . $text;
             }
         }
-        $comment->post_id = $request->post_id;
-        $comment->text = $request->text;
+        $comment->post_id = $post->id;
+        $comment->text = $text;
         $comment->save();
-        Auth::user()->getPage()->addAction("comment", $request->post_id, $comment->id);
-        Notification::sendNotification("comment", $request->post_id, $post->page_id, $comment->id);
+        Auth::user()->getPage()->addAction("comment",  $post->id, $comment->id);
+        Notification::sendNotification("comment", $post, $post->page_id, $comment->id);
 
         if ($request->has("reply_to") && $request->reply_to !== null) {
             Notification::sendNotification("reply", $comment->reply_to, $recomment->page->id, $comment->id);
         }
 
-        return response()->json(array("result" => true, "is_reply" => isset($comment->replyto->replyto), "html" => view("layouts.comment", array("comment" => $comment, "post_id" => $request->post_id, "user" => Auth::user()->getPage()))->render()));
+        $comment->page = $comment->page;
+
+        return response()->json(array("result" => true, "comment"=>$comment));
     }
 
-    public function loadMoreReplies($the_comment, Request $request) {
-        $validator = Validator::make($request->all(), [
-                    "page" => "required",
-        ]);
-        if ($validator->fails()) {
-            return response()->json(array("result" => false, "errors" => $validator->errors()));
-        } else {
-            $comments = Comment::query()->where("parent_id", $the_comment)->latest()->paginate(2);
-            $comments_view = array();
-            foreach ($comments as $comment) {
-                $comments_view[] = view("layouts.comment", array("comment" => $comment, "user" => $comment->getUser(), "simple" => true, "post_id" => $request->post_id))->render();
-            }
-            return response()->json(array("result" => true, "nomore" => !$comments->hasMorePages(), "html" => implode("", $comments_view)));
-        }
+    public function replies($comment, Request $request)
+    {
+            $comments = Comment::query()->with("page")->where("parent_id", $comment)->latest()->paginate(5);
+            return response()->json(array("result" => true, "data" => $comments));
     }
-
-    public function loadMore(Request $request) {
-        $validator = Validator::make($request->all(), [
-                    "page" => "required",
-                    "post_id" => "required"
-        ]);
-        if ($validator->fails()) {
-            return response()->json(array("result" => true, "errors"));
-        } else {
-            $comments = Comment::query()->whereNull("reply_to")->where("post_id", $request->post_id)->latest();
-            if ($request->has("noload")) {
-                $comments = $comments->where("id", "!=", $request->noload);
-                //   dd($comments->toSql());
-            }
-            $comments = $comments->paginate(5);
-            $comments_view = array();
-            foreach ($comments as $comment) {
-                if ($request->has("noload")) {
-                    $comments_view[] = view("layouts.comment", array("noload" => $request->noload, "comment" => $comment, "user" => $comment->getUser(), "post_id" => $request->post_id))->render();
-                    continue;
-                }
-                $comments_view[] = view("layouts.comment", array("comment" => $comment, "user" => $comment->getUser(), "post_id" => $request->post_id))->render();
-            }
-            return response()->json(array("result" => true, "total" => $comments->count(), "html" => implode("", $comments_view)));
-        }
-    }
-
-    public function likeComment($comment_id) {
+    public function likeComment($comment_id)
+    {
         $post = Comment::findOrFail($comment_id);
         $page = Auth::user()->getPage();
         $like = Like::query()->where("page_id", $page->id)->where("comment_id", $comment_id)->first();
@@ -113,7 +93,8 @@ class CommentController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($post,$id)
+    {
         $comment = Comment::where("page_id", Auth::user()->getPage()->id)->where("id", $id)->firstOrFail();
         $action = Action::query()->where("connected_to", $comment->id)->first();
         return response()->json(array("result" => $comment->delete() && $action->delete()));

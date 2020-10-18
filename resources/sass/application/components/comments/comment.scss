@@ -1,13 +1,15 @@
 .comment {
     display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
     justify-content: flex-start;
     background: $body-bg;
-    color: #424242;
+    color: $text-color;
+    padding: 8px;
     .comment-header{
         display: flex;
         justify-content: space-between;
         align-items: center;
-
     }
 
     .comment-body {

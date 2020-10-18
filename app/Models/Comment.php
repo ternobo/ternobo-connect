@@ -2,74 +2,85 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Database\Eloquent\Model;
 
 /**
- * 
+ *
  * All models are connected to database so just functions are defined and variables variables are dynamic.
- * Variables : 
+ * Variables :
  *      post_id - bookmarked post id
  *      action - \App\Post bookmarked post
  *      created_at - bookmark date
  */
-class Comment extends Model {
+class Comment extends Model
+{
 
     /**
      *  sender page id
      * @var integer
      */
-    
+
     /**
      *  post id
      * @var integer
      */
-    
+
     /**
      * the comment which is this comment is replying to
      * @var Comment
      */
-    
+
     /**
      * Comment parent parent id
      * @var integer
      */
-    
+
     /**
      *  Comment Text
      * @var string
      */
-    
+
     /**
      * Comment create date and time
      * @var string
      */
-    
+
     /**
      * Comment update date and time
-     * @var string 
+     * @var string
      */
-    
-
 
     /**
      * Sender Page
      * @return Page
      */
-    public function getUser() {
+    public function getUser()
+    {
         return Page::find($this->page_id);
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo("App\Models\User");
     }
 
-    public function page() {
+    public function page()
+    {
         return $this->belongsTo("App\Models\Page");
     }
 
-    public function replyto() {
+    public function replyto()
+    {
         return $this->belongsTo("App\Models\Comment", "reply_to");
+    }
+
+    public function likes()
+    {
+        return $this->hasMany("App\Models\Like", "comment_id")
+            ->with("page")
+            ->latest();
     }
 
     /**
@@ -77,27 +88,48 @@ class Comment extends Model {
      * @param integer $action
      * @return type
      */
-    public function getReplies($action = 2) {
+    public function getReplies($action = 2)
+    {
         if ($action === "all") {
             return Comment::query()->where("parent_id", $this->id)->latest()->get();
         }
         return Comment::query()->where("parent_id", $this->id)->latest()->limit(2)->get();
     }
 
+    public function toArray()
+    {
+        // get the original array to be displayed
+        $data = parent::toArray();
+        $data['is_liked'] = false;
+        if (Auth::check()) {
+            if (!isset($data['likes'])) {
+                $data['likes'] = $this->likes->toArray();
+            }
+            $data['liked_by'] = $this->getLikedBy();
+            $current_page = json_decode(Cookie::get('ternobo_current_page'));
+            $page_ids = array_column($data['likes'], "page_id");
+            if (in_array($current_page->id, $page_ids)) {
+                $data['is_liked'] = true;
+            }
+        }
+        return $data;
+    }
+
     /**
      * Get liked by Text
      * @return string
      */
-    public function getLikedBy() {
+    public function getLikedBy()
+    {
         $myConnection = Like::query()
-                ->join("pages", "likes.page_id", "=", "pages.id")
-                ->where("likes.comment_id", $this->id)
-                ->whereIn("pages.user_id", Auth::user()->getConnections())
-                ->latest()
-                ->limit(2)
-                ->select(array("pages.name", "pages.user_id", "pages.slug", "likes.*"))
-                ->distinct("page_id")
-                ->get();
+            ->join("pages", "likes.page_id", "=", "pages.id")
+            ->where("likes.comment_id", $this->id)
+            ->whereIn("pages.user_id", Auth::user()->getConnections())
+            ->latest()
+            ->limit(2)
+            ->select(array("pages.name", "pages.user_id", "pages.slug", "likes.*"))
+            ->distinct("page_id")
+            ->get();
         $users = array();
         $ids = array();
         $response = "";
@@ -112,15 +144,12 @@ class Comment extends Model {
                     $users[] = $user;
                 }
             }
-            $response = "<text class='clickale' onclick='Ternobo.showCommentLikes(\"$this->id\")'>پسندیده شده توسط </text>";
+            $response = "";
         }
 
         $all = count($users);
         $index = 0;
         foreach ($users as $user) {
-            if ($user->id . "" === "" . Auth::user()->id) {
-                $user->name = "شما";
-            }
             $response .= "<a href='$user->slug' class='text-dark bold'>$user->name</a>";
             if ($index + 1 < $all) {
                 $response .= "، ";

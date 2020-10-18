@@ -12,6 +12,8 @@ import LazyloadDirective from "../Directives/LazyloadDirective";
 import LoadingSpinner from "../Components/LoadingSpinner";
 import NewPostCard from "../Components/Cards/NewPostCard";
 import NewPostModal from "../Components/Modals/NewPostModal";
+import TextareaAutosize from "../Components/inputs/TextareaAutosize";
+import CopyToClipboard from "../Directives/CopyToClipboard";
 import {
     Tselect
 } from "tselect";
@@ -33,9 +35,11 @@ TernoboApp.install = function (Vue, options) {
     Vue.component("new-post-card", NewPostCard);
     Vue.component("new-post-modal", NewPostModal);
     Vue.component("tselect", Tselect);
+    Vue.component("textarea-autosize", TextareaAutosize);
 
     // Directives
     Vue.directive("lazyload", LazyloadDirective);
+    Vue.directive("clipboard", CopyToClipboard);
 
     const setup = function(vm) {
         Vue.prototype.toast = function (msessage) {

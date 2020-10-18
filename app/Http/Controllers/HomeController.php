@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bookmark;
-use App\Models\Following;
 use App\Models\Page;
 use App\Models\Post;
+use Inertia\Inertia;
+use App\Models\Bookmark;
+use App\Models\Following;
+use Illuminate\Http\Request;
 use App\Models\SearchSuggestion;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\SEOTools;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
 
 class HomeController extends Controller
 {
