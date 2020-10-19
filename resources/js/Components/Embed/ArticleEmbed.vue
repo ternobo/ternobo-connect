@@ -1,16 +1,16 @@
 <template>
-<div class="post-box" data-id="93" id="post-93">
-    <div class="post-header pt-0">
+<div class="post-box" id='post-24' style="margin: 0 !important; box-shadow: none !important;width: 100vw">
+    <div class="post-header">
         <a class="publisher" :href="'/'+post.page.slug">
             <img :src="post.page.profile" />
             <div>
                 <strong>
                     {{ post.page.name }}
                 </strong>
-                <text class="text-muted font-12">
+                <span class="text-muted font-12">
                     {{ post.page.short_bio }}
-                </text>
-                <span class="text-light font-10">
+                </span>
+                <small class="text-light font-10">
                     {{ post_time }}
                     <small class="text-light font-10" v-if="post.updated_at !== null">
                         ویرایش شده در {{ updated_at }}
@@ -18,64 +18,27 @@
                     <i class="material-icons-outlined font-14 text-light verical-middle">
                         {{ post.show === 'public'? 'public' : 'group' }}
                     </i>
-                </span>
+                </small>
             </div>
         </a>
-        <div class="actions position-relative">
-            <i class="material-icons clickale text-muted hover-dark" onclick="Ternobo.bookmark('93', this)">bookmark_border</i>
-            <div>
-                <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
-                    <template v-slot:button-content>
-                        <i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
-                    </template>
-                    <b-dropdown-item href="#">
-                        <i class="material-icons text-muted">link</i> رونوشت پیوند این محتوا
-                    </b-dropdown-item>
-                    <b-dropdown-item href="#">
-                        <div class="d-flex flex-column">
-                            <span>
-                                <i class="material-icons text-muted">link</i> رونوشت پیوند این محتوا
-                            </span>
-                            <small>
-                                یو میو میو
-                            </small>
-                        </div>
-                    </b-dropdown-item>
-                    <b-dropdown-item href="#">Something else here...</b-dropdown-item>
-                </b-dropdown>
-            </div>
+        <div class="actions">
         </div>
     </div>
-    <inertia-link class="post-body clickale" :href="postSlug">
+    <a class="post-body clickale" :href="postSlug">
         <div class="images articleimg">
             <lazy-image style="min-height: 400px" class="m-0" alt="" :src="post.medias" />
         </div>
         <h4 class="mt-3 mb-0">{{ post.title }}</h4>
-    </inertia-link>
+    </a>
     <div class="post-footer">
-        <div class="tagandcate">
-            <div class="tags">
-                <inertia-link v-for="tag in post.tags" :key="tag" class="tag-item" :href="'/tags/' + tag">
-                    {{ tag }}
-                </inertia-link>
-            </div>
-            <inertia-link class="category" v-if="post.category !== null" :href="'/' + post.page.slug + '/categories/' + post.category.id">
-                <i class="material-icons text-grey">layers</i><span class="text-grey"> {{ post.category.name }}</span>
-            </inertia-link>
+        <div class="tags">
+            <abbr v-for="tag in post.tags" :key="tag" class="tag-item" :href="'/tags/' + tag">
+                {{ tag }}
+            </abbr>
         </div>
-        <div class="images">
-
-        </div>
-        <div class="actions">
-            <text class="font-08rem">
-
-            </text>
-            <div class="buttons">
-                <i class="material-icons-outlined">sync</i>
-                <i class="material-icons-outlined">comment</i>
-                <i class="material-icons like" @click="like" :class="{ 'text-danger': liked }">{{ liked ? 'favorite': 'favorite_border' }}</i>
-            </div>
-        </div>
+        <a class="category" v-if="post.category !== null" :href="'/' + post.page.slug + '/categories/' + post.category.id">
+            <i class="material-icons text-grey">layers</i><span class="text-grey"> {{ post.category.name }}</span>
+        </a>
     </div>
 </div>
 </template>

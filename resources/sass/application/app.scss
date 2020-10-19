@@ -675,3 +675,29 @@ pre {
 
 @import "./components/comments/comments.scss";
 @import "./components/comments/comment.scss";
+
+.modal-content {
+    border-radius: 0;
+    padding: 0.5rem;
+    border: none;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.1);
+}
+.modal-header{
+    padding: 0.5rem;
+}
+.btn-grey-10{
+    background: $body-bg;
+    color: $light;
+    border: 1px solid $icons;
+    transition: 0.3s all;
+}
+.btn-grey-10:hover{
+    background: $icons;
+    color: $text-color;
+}
+.btn:active{
+    box-shadow: 0 0 10px 3px inset rgba($color: #000000, $alpha: 0.1) !important;
+}
+.btn-dark:active{
+    box-shadow: 0 0 10px 3px inset rgba($color: #FFF, $alpha: 0.15) !important;
+}

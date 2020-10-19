@@ -19,6 +19,7 @@ mix.sass('resources/sass/application/app.scss', 'public/css')
         }
     })
     .js('resources/js/app.js', '')
+    .copy('resources/js/framemanager.js', 'public/js')
     .sourceMaps()
     .extract(['vue', 'laravel-jetstream'])
     .version();

@@ -136,6 +136,14 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
          * End Pages API
          */
 
+        /**
+         * Embed
+         */
+        Route::get("/embed-posts/{id}", "PostController@embedPost");
+
+
+        Route::post("/posts/{post:id}/embed", "PostController@getEmbed");
+
         Route::resource("/posts", "PostController");
 
         Route::post("/categories/sort/{id}", "CategoryController@sort");

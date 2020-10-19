@@ -1,5 +1,6 @@
 <template>
 <div class="post-box" ref="post">
+    <EmbedCodeModal :post="post" :show.sync='showEmbed'></EmbedCodeModal>
     <div class="post-header pt-0">
         <a class="publisher" :href="'/'+post.page.slug">
             <lazy-image class="mb-0" :src="post.page.profile" />
@@ -32,7 +33,7 @@
                         <i class="material-icons text-dark">link</i>
                         <strong>رونوشت پیوند این محتوا</strong>
                     </b-dropdown-item>
-                    <b-dropdown-item>
+                    <b-dropdown-item @click.native="showEmbed = true">
                         <div class="d-flex align-items-center">
                             <i class="material-icons ml-2 text-dark">code</i>
                             <div>
@@ -105,8 +106,8 @@
                 <i class="material-icons text-grey">layers</i><span class="text-grey"> {{ post.category.name }}</span>
             </a>
         </div>
-        <div class="images">
-
+        <div class="images" v-if="post.medias !== null && post.medias !== undefined && post.medias.length > 0">
+            <lazy-image style="min-height: 400px" class="m-0" alt="" :src="post.medias" />
         </div>
         <div class="actions">
             <div class="font-08rem">
@@ -131,6 +132,8 @@
 <script>
 import TimeAgo from 'javascript-time-ago'
 import CommentsList from "../Comments/CommetsList";
+import EmbedCodeModal from "../Modals/EmbedCodeModal";
+
 // Load locale-specific relative date/time formatting rules.
 import fa from 'javascript-time-ago/locale/fa'
 
@@ -140,7 +143,8 @@ export default {
     data() {
         return {
             liked: false,
-            openComment: false
+            openComment: false,
+            showEmbed: false
         }
     },
     created: function () {
@@ -159,7 +163,7 @@ export default {
                 $this.seen_request.push($this.post.id);
             }
         }, options);
-        observer.observe(this.$refs.post);
+        observer.observe(this.$el);
     },
     methods: {
         like() {
@@ -177,7 +181,8 @@ export default {
     },
     name: "SimplePost",
     components: {
-        CommentsList
+        CommentsList,
+        EmbedCodeModal
     },
     props: {
         post: {

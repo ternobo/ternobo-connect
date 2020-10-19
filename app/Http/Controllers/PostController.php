@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
 use Intervention\Image\Facades\Image;
 
 class PostController extends Controller
@@ -338,9 +339,12 @@ class PostController extends Controller
         return abort(404);
     }
 
-    public function embedPost(Request $request, Post $post)
+    public function embedPost($post_id, Request $request)
     {
-        return view("content.embed-post", array("post" => $post));
+        $post = Post::with("page")
+            ->with("category")
+            ->findOrFail($post_id);
+        return Inertia::render("Embed/Widget", array("post" => $post));
     }
 
     public function seenPost(Request $request)
@@ -358,12 +362,16 @@ class PostController extends Controller
         return response()->json(array("result" => true));
     }
 
-    public function getEmbed(Request $request)
+    public function getEmbed($post_id)
     {
-        $post = url("/embed-posts/" . $request->post_id);
+        $post = url("/embed-posts/" . $post_id);
         $randomhash = (PostController::quickRandom(18));
-        $url = url("/posts/" . $request->post_id);
-        return view("layouts.components.embedinside", array("url" => $url, "randomhash" => $randomhash, "post" => $post));
+        $url = url("/posts/" . $post_id);
+        $html_code = view("embedcode", array("url" => $url, "randomhash" => $randomhash, "post" => $post))->render();
+        return response()->json([
+            "result" => true,
+            "code" => $html_code,
+        ]);
     }
 
     public static function quickRandom($length = 16)

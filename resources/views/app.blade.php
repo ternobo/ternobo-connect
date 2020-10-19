@@ -27,6 +27,8 @@
     <script src="/manifest.js" defer></script>
     <script src="/js/vendor.js" defer></script>
     <script src="/js/app.js" defer></script>
+    <script src="{{ url('/js/framemanager.js') }}" defer></script>
+
 </body>
 
 </html>
