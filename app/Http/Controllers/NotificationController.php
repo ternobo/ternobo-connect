@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
-use App\Models\Action;
 use App\Models\Post;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+use Inertia\Inertia;
+use App\Models\Action;
 use App\Models\Notification;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller {
 
@@ -27,7 +28,7 @@ class NotificationController extends Controller {
             $notification->seen = true;
             $notification->save();
         }
-        return view("notifications", array("notifications" => $notifications, "pages" => $pages));
+        return Inertia::render("Notifications", array("notifications" => $notifications, "pages" => $pages));
     }
 
 }

@@ -96,6 +96,7 @@ class Post extends Model
         $data['tags'] = $this->getTags();
         $data['medias'] = $this->getMedia();
         $data['is_liked'] = false;
+        $data['is_bookmarked'] = false;
         if (Auth::check()) {
             if (isset($data['likes'])) {
                 $current_page = json_decode(Cookie::get('ternobo_current_page'));
@@ -104,6 +105,8 @@ class Post extends Model
                     $data['is_liked'] = true;
                 }
             }
+           $bookmark = Bookmark::where("post_id",$data['id'])->where("user_id",Auth::user()->id)->first();
+           $data['is_bookmarked'] = $bookmark instanceof Bookmark;
         }
         return $data;
     }

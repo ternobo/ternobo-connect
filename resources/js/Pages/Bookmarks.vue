@@ -10,12 +10,14 @@
             </no-content>
         </div>
         <div v-if="postsArray.length > 0" class="posts" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="5">
-            <PostCard v-for="(post, index) in postsArray" :key="'post_item_' + index" :post="post"></PostCard>
+            <PostCard v-for="(post, index) in postsArray" :key="'post_item_' + index" :post="post.post"></PostCard>
             <div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
                 <loading-spinner class="image__spinner" />
             </div>
             <div v-if="next_page_url === null && !loadingPage">
-                <no-content></no-content>
+                <no-content>
+                    محتوای نشان شده بیشتری وجود ندارد
+                </no-content>
             </div>
         </div>
     </div>
@@ -29,6 +31,8 @@
 import AppLayout from "../Layouts/AppLayout";
 import AppFooter from "../Components/App/AppFooter";
 import NoContent from "../Components/NoContent";
+import PostCard from "../Components/PostCard/PostCard";
+
 export default {
     methods: {
         loadMore() {
@@ -87,7 +91,8 @@ export default {
     },
     components: {
         AppFooter,
-        NoContent
+        NoContent,
+        PostCard
     },
     layout: AppLayout
 

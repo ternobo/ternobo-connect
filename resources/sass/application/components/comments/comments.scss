@@ -4,7 +4,18 @@
     scrollbar-color: $dark $light;
     scrollbar-width: thin;
     scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+        width: 0.3em;
+        background: #DEDEDE;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $dark;
+    }
 }
-.comment-replies{
+
+
+.comment-replies {
     border-radius: 1px solid $sub-heading;
 }

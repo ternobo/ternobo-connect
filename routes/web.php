@@ -110,6 +110,8 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             Route::resource("/skills/credit", "SkillCreditController");
             Route::post("/skills/sort/{id}", "SkillController@sort");
 
+            Route::post("/bookmark/{post_id}", "PostController@bookmarkPost");
+
             Route::prefix("/ideas")->group(function () {
                 Route::post("/bookmark", "IdeasController@bookmark");
                 Route::get("/myideas", "IdeasController@myIdeas");
@@ -147,6 +149,11 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         Route::resource("/posts", "PostController");
 
         Route::post("/categories/sort/{id}", "CategoryController@sort");
+
+
+        // Notifications
+        Route::get('/notifications', 'NotificationController@index')->name('notifications');
+
 
     });
 

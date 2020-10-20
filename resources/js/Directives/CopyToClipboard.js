@@ -10,6 +10,7 @@ export default {
             element.select();
             document.execCommand('copy');
             document.body.removeChild(element);
+            vnode.context.toast("کپی شد");
         })
             
 

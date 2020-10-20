@@ -23,7 +23,7 @@
             </div>
         </a>
         <div class="actions position-relative">
-            <i class="material-icons clickale text-muted hover-dark" onclick="Ternobo.bookmark('93', this)">bookmark_border</i>
+            <i class="material-icons clickale text-muted hover-dark" @click="bookmark">{{ bookmarked ? 'bookmark' : 'bookmark_border' }}</i>
             <div>
                 <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                     <template v-slot:button-content>
@@ -143,12 +143,14 @@ export default {
     data() {
         return {
             liked: false,
+            bookmarked: false,
             openComment: false,
             showEmbed: false
         }
     },
     created: function () {
         this.liked = this.post.is_liked;
+        this.bookmarked = this.post.is_bookmarked;
 
     },
     mounted() {
@@ -176,6 +178,18 @@ export default {
             this.$axios({
                 method: "post",
                 url: this.$APP_URL + "/like/" + this.post.id
+            }).catch((error) => {});
+        },
+        bookmark() {
+            if (this.bookmarked) {
+                this.bookmarked = false;
+            } else {
+                this.bookmarked = true;
+            }
+            const $this = this;
+            this.$axios({
+                method: "post",
+                url: this.$APP_URL + "/bookmark/" + this.post.id
             }).catch((error) => {});
         }
     },

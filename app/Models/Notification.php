@@ -2,46 +2,84 @@
 
 namespace App\Models;
 
+use App\Events\NotificationEvent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use App\Events\NotificationEvent;
 use Ixudra\Curl\Facades\Curl;
 
-class Notification extends Model {
+class Notification extends Model
+{
 
-    public function skill() {
+    public function skill()
+    {
         return $this->belongsTo("App\Models\Skill", "notifications_id");
     }
 
-    public function mycomment() {
+    public function mycomment()
+    {
         return $this->belongsTo("App\Models\Comment", "notifications_id");
     }
 
-    public function page() {
+    public function page()
+    {
         return $this->belongsTo("App\Models\Page", "notifications_id");
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo("App\Models\User", "user_id");
     }
 
-    public function post() {
+    public function post()
+    {
         return $this->belongsTo("App\Models\Post", "notifications_id");
     }
 
-    public function comment() {
+    public function comment()
+    {
         return $this->belongsTo("App\Models\Comment", "connected_to");
     }
 
+    public function toArray()
+    {
+        // get the original array to be displayed
+        $data = parent::toArray();
+
+        switch ($data['notifications_type']) {
+            case "post":
+                $data['post'] = $this->post;
+                break;
+            case "page":
+                $data['page'] = $this->page;
+                break;
+            case "comment":
+                if ($data['action'] === 'reply') {
+                    $data['mycomment'] = $this->mycomment;
+                } else {
+                    $data['post'] = $this->post;
+                    $data['comment'] = $this->comment;
+                }
+                break;
+            case "skill_credit":
+                $data['skill'] = $this->skill;
+                break;
+        }
+
+        $data['user'] = $this->user;
+
+        return $data;
+    }
+
     /**
-     * 
+     *
      * @param type $action
      * @param type $type
      * @param type $notifiable_id
      * @param type $page_id
      * @param type $connected_to
      */
-    public static function sendNotification($action, $notifiable_id, $page_id, $connected_to) {
+    public static function sendNotification($action, $notifiable_id, $page_id, $connected_to)
+    {
         $type = "";
         $user = Page::find($page_id)->user;
         if ($user instanceof User) {
@@ -93,30 +131,30 @@ class Notification extends Model {
                 event(new NotificationEvent($notification));
 
                 Curl::to("https://api.push-pole.com/v2/messaging/notifications/")
-                        ->withHeader("authorization: Token " . env("PUSHE_TOKEN"))
-                        ->withContentType('application/json')
-                        ->withData(array(
-                            'app_ids' => ['com.ternobo.connect'],
-                            "filters" => array(
-                                "pushe_id" => [$user->pushe_id]
+                    ->withHeader("authorization: Token " . env("PUSHE_TOKEN"))
+                    ->withContentType('application/json')
+                    ->withData(array(
+                        'app_ids' => ['com.ternobo.connect'],
+                        "filters" => array(
+                            "pushe_id" => [$user->pushe_id],
+                        ),
+                        "data" => array(
+                            "icon" => "https://ternobo.com/apple-touch-icon.png",
+                            "notif_icon" => "apps",
+                            "sound_url" => "https://ternobo.com/blank.mp3",
+                            "show_app" => true,
+                            "title" => "ترنوبو",
+                            "content" => $title,
+                            "wake_screen" => true,
+                            "action" => array(
+                                "action_type" => "U",
+                                "action_data" => "https://ternobo.com/notifications",
                             ),
-                            "data" => array(
-                                "icon" => "https://ternobo.com/apple-touch-icon.png",
-                                "notif_icon" => "apps",
-                                "sound_url" => "https://ternobo.com/blank.mp3",
-                                "show_app" => true,
-                                "title" => "ترنوبو",
-                                "content" => $title,
-                                "wake_screen" => true,
-                                "action" => array(
-                                    "action_type" => "U",
-                                    "action_data" => "https://ternobo.com/notifications"
-                                )
-                            ),
-                            "time_to_live" => 604800
-                        ))
-                        ->asJson(true)
-                        ->post();
+                        ),
+                        "time_to_live" => 604800,
+                    ))
+                    ->asJson(true)
+                    ->post();
             }
         }
     }
