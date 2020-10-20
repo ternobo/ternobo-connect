@@ -131,7 +131,7 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
-        $pages = $this->getSuggestions();
+        $pages = Page::getSuggestions();
         if ($request->has("q") && strlen($request->q) < 1) {
             if ($request->isMethod("POST")) {
                 return response()->json(array("result" => true, "pages" => []));
@@ -148,7 +148,7 @@ class HomeController extends Controller
                 foreach ($suggestions as $value) {
                     $result[] = $value->name;
                 }
-                return response()->json(array("result" => true, "pages" => $result));
+                return response()->json(array("result" => true, "suggestions" => $result));
             }
             return view("search", array("pages" => $pages, "results" => $this->handleGetSearch($request), "search" => $request->q, "pages" => $pages, "content" => ($request->has("type") && $request->type === "content")));
         }

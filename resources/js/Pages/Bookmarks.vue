@@ -6,7 +6,7 @@
     <div class="content-container">
         <div v-if="postsArray.length < 1">
             <no-content>
-                هیچ محتوایی نشان نکرده‌اید
+                هیچ محتوایی را نشان نکرده‌اید
             </no-content>
         </div>
         <div v-if="postsArray.length > 0" class="posts" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="5">

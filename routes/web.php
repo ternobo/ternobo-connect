@@ -25,10 +25,12 @@ Route::get("/nationalcards/{image}", "DownloadsController@nationalCards");
  * File Access End
  */
 
+ 
+
 Route::group(['middleware' => LocaleMiddleware::class], function () {
 
     Route::get("/", "IndexController@index")->name("welcome");
-    Route::get("/follow-people", "IndexController@followSuggestions");
+    Route::any("/search", "HomeController@search");
 
     /**
      * Auth Start
@@ -46,6 +48,9 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
      */
 
     Route::group(['auth'], function () {
+
+
+        Route::get("/follow-people", "IndexController@followSuggestions");
 
         // Follow Start
         Route::post("/follow/{page_id}", "ConnectionsController@follow")->name("follow");

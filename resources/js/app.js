@@ -12,6 +12,8 @@ import VueCircle from 'vue2-circle-progress'
 import infiniteScroll from 'vue-infinite-scroll'
 import TernoboApp from "./Libs/TernoboApp";
 import App from "./Layouts/App";
+import '@trevoreyre/autocomplete-vue/dist/style.css'
+
 Vue.prototype.window = window.window;
 
 // Install V-Select

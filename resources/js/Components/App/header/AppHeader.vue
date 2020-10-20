@@ -9,16 +9,13 @@
                 <img src="/images/logo.svg" class="mr-2 w-100" />
             </inertia-link>
 
-            <div class="searchfield d-flex mr-3">
-                <div class="input-group-icon searchfield">
-                    <input class="form-control searchfield rounded-pill py-2" id="searchforminput" autocomplete="off" required type="text" name="q" placeholder="هر چیزی که در جستن آنی، آنی" />
-                    <i class="material-icons clickale">search</i>
-                </div>
+            <form method="get" action="/search" class="searchfield d-flex mr-3">
+                <autocomplete style="min-width: 270px" :search="search" id="searchforminput" autocomplete="off" required type="text" name="q" placeholder="هر چیزی که در جستن آنی، آنی" />
                 <div style="width: max-content" class="text-muted mx-2 align-items-center justify-content-center d-lg-flex d-none nowrap font-12" v-if="$root.isDesktop">
                     <img src="/images/beta.svg" class="mr-2 verical-middle" width="36" />
                     <span class="mx-1">۰.۲ V</span>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="d-flex align-items-center">
             <header-toolbar v-if="$root.isDesktop"></header-toolbar>
@@ -28,11 +25,38 @@
 </template>
 
 <script>
+import Autocomplete from '@trevoreyre/autocomplete-vue'
 import HeaderToolbar from "./HeaderToolbar";
 export default {
+    methods: {
+        search(input) {
+            const element = document.getElementById("searchforminput").parentElement;
+            element.style.position = "unset";
+            if (element.getElementsByClassName("autocomplete-result-list").length > 0) {
+                element.getElementsByClassName("autocomplete-result-list")[0].style.width = element.getBoundingClientRect().width + "px";
+                element.getElementsByClassName("autocomplete-result-list")[0].style.marginTop = "-14px";
+            }
+
+            if (input.length < 2) {
+                return []
+            }
+            return new Promise((resolve, reject) => {
+                axios.post(this.$APP_URL + "/search", {
+                    q: input
+                }).then((response) => {
+                    if (response.data.result) {
+                        resolve(response.data.suggestions);
+                    } else {
+                        resolve([]);
+                    }
+                })
+            });
+        }
+    },
     name: "AppHeader",
     components: {
-        HeaderToolbar
+        HeaderToolbar,
+        Autocomplete
     }
 };
 </script>

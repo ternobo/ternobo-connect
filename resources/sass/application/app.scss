@@ -702,3 +702,23 @@ pre {
 .btn-dark:active{
     box-shadow: 0 0 10px 3px inset rgba($color: #FFF, $alpha: 0.15) !important;
 }
+
+.autocomplete[data-loading=true]:after {
+    display: none !important;
+}
+.autocomplete-input {
+    padding: 8px 12px 8px 48px;
+    transition: 0.3s all;
+    border-radius: 25px;
+    background-color: #FFF !important;
+}
+.autocomplete-input:focus, .autocomplete-input[aria-expanded=true]{
+    border-color: #191919 !important;
+    box-shadow: none !important;
+}
+.autocomplete-input[aria-expanded=true]{
+    border-radius: 25px 25px 0 0 !important;;
+}
+.autocomplete-result-list{
+    box-shadow: 0 1rem 40px rgba(0, 0, 0, 0.02) !important;
+}
