@@ -632,6 +632,17 @@ img {
         }
     }
 
+    &.error{
+        .error_icon{
+            display: block;
+        }
+    }
+
+    .error_icon{
+        position: absolute;
+        display: none;
+    }
+
     .image__spinner {
         position: absolute;
     }

@@ -8,7 +8,11 @@ export default {
                 imageElement.addEventListener("load", () => {
                     setTimeout(() => el.classList.add("loaded"), 100);
                 });
-                imageElement.addEventListener("error", () => console.log("error"));
+                imageElement.addEventListener("error", () => {
+                    setTimeout(() => el.classList.add("error"), 100);
+                    setTimeout(() => el.classList.add("loaded"), 100);
+
+                });
                 imageElement.src = imageElement.dataset.url;
             }
         }

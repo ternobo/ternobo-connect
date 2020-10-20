@@ -1,7 +1,8 @@
 <template>
 <figure v-lazyload class="image__wrapper">
     <loading-spinner class="image__spinner" />
-    <img class="image__item" :class="imgClass" :data-url="src" :alt="alt">
+    <i class="material-icons error_icon">error_outline</i>
+    <img class="image__item" :style="imgStyle" :class="imgClass" :data-url="src" :alt="alt">
 </figure>
 </template>
 
@@ -20,6 +21,10 @@ export default {
             required: false
         },
         imgClass: {
+            type: String,
+            required: false
+        },
+        imgStyle: {
             type: String,
             required: false
         }

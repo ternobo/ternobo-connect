@@ -19,6 +19,9 @@ export default {
         icon: {
             default: undefined
         },
+        id: {
+            default: undefined
+        },
         selected: {
             default: false
         }

@@ -3,6 +3,7 @@
         overflow: hidden;
         padding-top: 56.25%; /* 16:9*/
         position: relative;
+        height: 100%
     }
     #frame-code-ternobo-{{ $randomhash }}-2312357345439 iframe{
         border: 0;
@@ -10,7 +11,7 @@
         left: 0;
         position: absolute;
         top: 0;
-        width: 450px;
+        width: 100%;
     }
 </style>
 <div onclick="window.open('{{ $url }}', '_blank');" id="frame-code-ternobo-{{ $randomhash }}-2312357345439">

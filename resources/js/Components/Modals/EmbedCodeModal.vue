@@ -32,7 +32,7 @@
             </div>
 
         </div>
-        <div class="border-top pt-2" v-html="code"></div>
+        <div class="border-top pt-2" style="height: 700px" v-html="code"></div>
     </div>
 </b-modal>
 </template>
@@ -72,7 +72,7 @@ export default {
     props: {
         post: {
             type: Object,
-            default: undefined,
+            default: {},
             required: true
         },
 
@@ -83,7 +83,7 @@ export default {
         }
     },
     mixins: [ModalMixin],
-    name: "LawsModal",
+    name: "EmbedCodeModal",
 };
 </script>
 

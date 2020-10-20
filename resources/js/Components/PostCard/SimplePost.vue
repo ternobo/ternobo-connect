@@ -1,5 +1,5 @@
 <template>
-<div class="post-box" ref="post">
+<div class="post-box" v-if="post !== undefined">
     <EmbedCodeModal :post="post" :show.sync='showEmbed'></EmbedCodeModal>
     <div class="post-header pt-0">
         <a class="publisher" :href="'/'+post.page.slug">

@@ -10,7 +10,7 @@
             </inertia-link>
 
             <form method="get" action="/search" class="searchfield d-flex mr-3">
-                <autocomplete style="min-width: 270px" :search="search" id="searchforminput" autocomplete="off" required type="text" name="q" placeholder="هر چیزی که در جستن آنی، آنی" />
+                <autocomplete style="min-width: 270px" :default-value="searchVal" :search="search" id="searchforminput" autocomplete="off" required type="text" name="q" placeholder="هر چیزی که در جستن آنی، آنی" />
                 <div style="width: max-content" class="text-muted mx-2 align-items-center justify-content-center d-lg-flex d-none nowrap font-12" v-if="$root.isDesktop">
                     <img src="/images/beta.svg" class="mr-2 verical-middle" width="36" />
                     <span class="mx-1">۰.۲ V</span>
@@ -28,6 +28,11 @@
 import Autocomplete from '@trevoreyre/autocomplete-vue'
 import HeaderToolbar from "./HeaderToolbar";
 export default {
+    data() {
+        return {
+            searchVal: this.$page.search ? this.$page.search : ""
+        }
+    },
     methods: {
         search(input) {
             const element = document.getElementById("searchforminput").parentElement;

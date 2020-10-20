@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bookmark;
 use App\Models\Page;
 use App\Models\Post;
-use Inertia\Inertia;
-use App\Models\Bookmark;
-use App\Models\Following;
-use Illuminate\Http\Request;
 use App\Models\SearchSuggestion;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\SEOTools;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class HomeController extends Controller
 {
@@ -52,7 +50,7 @@ class HomeController extends Controller
             ->orderByRaw("posts.user_id = '" . Auth::user()->id . "' DESC ,seen_at IS NULL DESC, seen_at DESC")
             ->distinct("posts.id")
             ->paginate(10);
-            
+
         return Inertia::render("Feed", array("posts" => $posts, "pages" => $pages));
     }
 
@@ -87,6 +85,10 @@ class HomeController extends Controller
         $results = array();
         if ($request->has("type") && $request->type === "content") {
             $posts = Post::query()
+                ->with("page")
+                ->with("likes")
+                ->with("mutualLikes")
+                ->with("category")
                 ->selectRaw("MATCH (`title`, `text`) AGAINST('$search' IN BOOLEAN MODE) as score, posts.*")
                 ->whereRaw("MATCH (`title`, `text`) AGAINST('$search' IN BOOLEAN MODE) > 0")
                 ->orderBy("score")
@@ -99,7 +101,7 @@ class HomeController extends Controller
             SEOTools::setTitle("جستجو برای " . $request->q);
             SEOTools::setDescription("نتایج جستجو برای $request->q در ترنوبو");
             SEOTools::setCanonical(\Illuminate\Support\Facades\URL::current() . "?q=$request->q&type=content");
-            $results = $posts->paginate(10);
+            $results = $posts->paginate(20);
             $results->appends(['q' => $request->q, "type" => "content"]);
         } else {
             $users = Page::query()
@@ -114,7 +116,7 @@ class HomeController extends Controller
                 ->whereHas("user", function ($query) {
                     return $query->where("active", true);
                 })
-                ->paginate(10);
+                ->paginate(20);
             SEOTools::setTitle("جستجو برای " . $request->q);
             SEOTools::setDescription("نتایج جستجو برای $request->q در ترنوبو");
             SEOTools::setCanonical(\Illuminate\Support\Facades\URL::current() . "?q=$request->q");
@@ -150,7 +152,7 @@ class HomeController extends Controller
                 }
                 return response()->json(array("result" => true, "suggestions" => $result));
             }
-            return view("search", array("pages" => $pages, "results" => $this->handleGetSearch($request), "search" => $request->q, "pages" => $pages, "content" => ($request->has("type") && $request->type === "content")));
+            return Inertia::render("Search", array("pages" => $pages, "results" => $this->handleGetSearch($request), "search" => $request->q, "pages" => $pages, "content" => ($request->has("type") && $request->type === "content")));
         }
         return abort(404);
     }
@@ -158,11 +160,11 @@ class HomeController extends Controller
     public function bookmarks()
     {
         $bookmarks = Bookmark::with("post")
-        ->with("post.page")
-        ->with("post.likes")
-        ->with("post.mutualLikes")
-        ->with("post.category")
-        ->where("user_id", Auth::user()->id)->latest()->paginate(10);
+            ->with("post.page")
+            ->with("post.likes")
+            ->with("post.mutualLikes")
+            ->with("post.category")
+            ->where("user_id", Auth::user()->id)->latest()->paginate(10);
         return Inertia::render("Bookmarks", array("posts" => $bookmarks));
     }
 
