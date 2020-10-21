@@ -59,6 +59,72 @@ eval("exports = module.exports = __webpack_require__(/*! ../../../../node_module
 
 /***/ }),
 
+/***/ "./node_modules/javascript-time-ago/locale/fa/index.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/javascript-time-ago/locale/fa/index.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var locale = __webpack_require__(/*! relative-time-format/locale/fa */ \"./node_modules/relative-time-format/locale/fa/index.js\")\n\nmodule.exports = {\n\tlocale: locale.locale,\n\t// Standard styles.\n\tlong: locale.long,\n\tshort: locale.short,\n\tnarrow: locale.narrow,\n\t// Quantifier.\n\tquantify: locale.quantify\n}//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9ub2RlX21vZHVsZXMvamF2YXNjcmlwdC10aW1lLWFnby9sb2NhbGUvZmEvaW5kZXguanM/ZTg5MCJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxhQUFhLG1CQUFPLENBQUMsOEZBQWdDOztBQUVyRDtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJmaWxlIjoiLi9ub2RlX21vZHVsZXMvamF2YXNjcmlwdC10aW1lLWFnby9sb2NhbGUvZmEvaW5kZXguanMuanMiLCJzb3VyY2VzQ29udGVudCI6WyJ2YXIgbG9jYWxlID0gcmVxdWlyZSgncmVsYXRpdmUtdGltZS1mb3JtYXQvbG9jYWxlL2ZhJylcblxubW9kdWxlLmV4cG9ydHMgPSB7XG5cdGxvY2FsZTogbG9jYWxlLmxvY2FsZSxcblx0Ly8gU3RhbmRhcmQgc3R5bGVzLlxuXHRsb25nOiBsb2NhbGUubG9uZyxcblx0c2hvcnQ6IGxvY2FsZS5zaG9ydCxcblx0bmFycm93OiBsb2NhbGUubmFycm93LFxuXHQvLyBRdWFudGlmaWVyLlxuXHRxdWFudGlmeTogbG9jYWxlLnF1YW50aWZ5XG59Il0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./node_modules/javascript-time-ago/locale/fa/index.js\n");
+
+/***/ }),
+
+/***/ "./node_modules/relative-time-format/locale/fa/index.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/relative-time-format/locale/fa/index.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = {\n\tlocale: 'fa',\n\tlong: __webpack_require__(/*! ./long.json */ \"./node_modules/relative-time-format/locale/fa/long.json\"),\n\tshort: __webpack_require__(/*! ./short.json */ \"./node_modules/relative-time-format/locale/fa/short.json\"),\n\tnarrow: __webpack_require__(/*! ./narrow.json */ \"./node_modules/relative-time-format/locale/fa/narrow.json\"),\n\tquantify: __webpack_require__(/*! ./quantify */ \"./node_modules/relative-time-format/locale/fa/quantify.js\")\n}//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9ub2RlX21vZHVsZXMvcmVsYXRpdmUtdGltZS1mb3JtYXQvbG9jYWxlL2ZhL2luZGV4LmpzPzM3OGMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBLE9BQU8sbUJBQU8sQ0FBQyw0RUFBYTtBQUM1QixRQUFRLG1CQUFPLENBQUMsOEVBQWM7QUFDOUIsU0FBUyxtQkFBTyxDQUFDLGdGQUFlO0FBQ2hDLFdBQVcsbUJBQU8sQ0FBQyw2RUFBWTtBQUMvQiIsImZpbGUiOiIuL25vZGVfbW9kdWxlcy9yZWxhdGl2ZS10aW1lLWZvcm1hdC9sb2NhbGUvZmEvaW5kZXguanMuanMiLCJzb3VyY2VzQ29udGVudCI6WyJtb2R1bGUuZXhwb3J0cyA9IHtcblx0bG9jYWxlOiAnZmEnLFxuXHRsb25nOiByZXF1aXJlKCcuL2xvbmcuanNvbicpLFxuXHRzaG9ydDogcmVxdWlyZSgnLi9zaG9ydC5qc29uJyksXG5cdG5hcnJvdzogcmVxdWlyZSgnLi9uYXJyb3cuanNvbicpLFxuXHRxdWFudGlmeTogcmVxdWlyZSgnLi9xdWFudGlmeScpXG59Il0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./node_modules/relative-time-format/locale/fa/index.js\n");
+
+/***/ }),
+
+/***/ "./node_modules/relative-time-format/locale/fa/long.json":
+/*!***************************************************************!*\
+  !*** ./node_modules/relative-time-format/locale/fa/long.json ***!
+  \***************************************************************/
+/*! exports provided: year, quarter, month, week, day, hour, minute, second, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"year\\\":{\\\"previous\\\":\\\"سال گذشته\\\",\\\"current\\\":\\\"امسال\\\",\\\"next\\\":\\\"سال آینده\\\",\\\"past\\\":\\\"{0} سال پیش\\\",\\\"future\\\":\\\"{0} سال بعد\\\"},\\\"quarter\\\":{\\\"previous\\\":\\\"سه‌ماههٔ گذشته\\\",\\\"current\\\":\\\"سه‌ماههٔ کنونی\\\",\\\"next\\\":\\\"سه‌ماههٔ آینده\\\",\\\"past\\\":\\\"{0} سه‌ماههٔ پیش\\\",\\\"future\\\":\\\"{0} سه‌ماههٔ بعد\\\"},\\\"month\\\":{\\\"previous\\\":\\\"ماه گذشته\\\",\\\"current\\\":\\\"این ماه\\\",\\\"next\\\":\\\"ماه آینده\\\",\\\"past\\\":\\\"{0} ماه پیش\\\",\\\"future\\\":\\\"{0} ماه بعد\\\"},\\\"week\\\":{\\\"previous\\\":\\\"هفتهٔ گذشته\\\",\\\"current\\\":\\\"این هفته\\\",\\\"next\\\":\\\"هفتهٔ آینده\\\",\\\"past\\\":\\\"{0} هفته پیش\\\",\\\"future\\\":\\\"{0} هفته بعد\\\"},\\\"day\\\":{\\\"previous\\\":\\\"دیروز\\\",\\\"previous-2\\\":\\\"پریروز\\\",\\\"current\\\":\\\"امروز\\\",\\\"next\\\":\\\"فردا\\\",\\\"next-2\\\":\\\"پس‌فردا\\\",\\\"past\\\":\\\"{0} روز پیش\\\",\\\"future\\\":\\\"{0} روز بعد\\\"},\\\"hour\\\":{\\\"current\\\":\\\"همین ساعت\\\",\\\"past\\\":\\\"{0} ساعت پیش\\\",\\\"future\\\":\\\"{0} ساعت بعد\\\"},\\\"minute\\\":{\\\"current\\\":\\\"همین دقیقه\\\",\\\"past\\\":\\\"{0} دقیقه پیش\\\",\\\"future\\\":\\\"{0} دقیقه بعد\\\"},\\\"second\\\":{\\\"current\\\":\\\"اکنون\\\",\\\"past\\\":\\\"{0} ثانیه پیش\\\",\\\"future\\\":\\\"{0} ثانیه بعد\\\"}}\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuL25vZGVfbW9kdWxlcy9yZWxhdGl2ZS10aW1lLWZvcm1hdC9sb2NhbGUvZmEvbG9uZy5qc29uLmpzIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./node_modules/relative-time-format/locale/fa/long.json\n");
+
+/***/ }),
+
+/***/ "./node_modules/relative-time-format/locale/fa/narrow.json":
+/*!*****************************************************************!*\
+  !*** ./node_modules/relative-time-format/locale/fa/narrow.json ***!
+  \*****************************************************************/
+/*! exports provided: year, quarter, month, week, day, hour, minute, second, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"year\\\":{\\\"previous\\\":\\\"سال گذشته\\\",\\\"current\\\":\\\"امسال\\\",\\\"next\\\":\\\"سال آینده\\\",\\\"past\\\":\\\"{0} سال پیش\\\",\\\"future\\\":\\\"{0} سال بعد\\\"},\\\"quarter\\\":{\\\"previous\\\":\\\"سه‌ماههٔ گذشته\\\",\\\"current\\\":\\\"سه‌ماههٔ کنونی\\\",\\\"next\\\":\\\"سه‌ماههٔ آینده\\\",\\\"past\\\":\\\"{0} سه‌ماههٔ پیش\\\",\\\"future\\\":\\\"{0} سه‌ماههٔ بعد\\\"},\\\"month\\\":{\\\"previous\\\":\\\"ماه پیش\\\",\\\"current\\\":\\\"این ماه\\\",\\\"next\\\":\\\"ماه آینده\\\",\\\"past\\\":\\\"{0} ماه پیش\\\",\\\"future\\\":\\\"{0} ماه بعد\\\"},\\\"week\\\":{\\\"previous\\\":\\\"هفتهٔ گذشته\\\",\\\"current\\\":\\\"این هفته\\\",\\\"next\\\":\\\"هفتهٔ آینده\\\",\\\"past\\\":\\\"{0} هفته پیش\\\",\\\"future\\\":\\\"{0} هفته بعد\\\"},\\\"day\\\":{\\\"previous\\\":\\\"دیروز\\\",\\\"previous-2\\\":\\\"پریروز\\\",\\\"current\\\":\\\"امروز\\\",\\\"next\\\":\\\"فردا\\\",\\\"next-2\\\":\\\"پس‌فردا\\\",\\\"past\\\":\\\"{0} روز پیش\\\",\\\"future\\\":\\\"{0} روز بعد\\\"},\\\"hour\\\":{\\\"current\\\":\\\"همین ساعت\\\",\\\"past\\\":\\\"{0} ساعت پیش\\\",\\\"future\\\":\\\"{0} ساعت بعد\\\"},\\\"minute\\\":{\\\"current\\\":\\\"همین دقیقه\\\",\\\"past\\\":\\\"{0} دقیقه پیش\\\",\\\"future\\\":\\\"{0} دقیقه بعد\\\"},\\\"second\\\":{\\\"current\\\":\\\"اکنون\\\",\\\"past\\\":\\\"{0} ثانیه پیش\\\",\\\"future\\\":\\\"{0} ثانیه بعد\\\"}}\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuL25vZGVfbW9kdWxlcy9yZWxhdGl2ZS10aW1lLWZvcm1hdC9sb2NhbGUvZmEvbmFycm93Lmpzb24uanMiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./node_modules/relative-time-format/locale/fa/narrow.json\n");
+
+/***/ }),
+
+/***/ "./node_modules/relative-time-format/locale/fa/quantify.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/relative-time-format/locale/fa/quantify.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports=function(n){return 0<=n&&n<=1?\"one\":\"other\"}//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9ub2RlX21vZHVsZXMvcmVsYXRpdmUtdGltZS1mb3JtYXQvbG9jYWxlL2ZhL3F1YW50aWZ5LmpzP2EzMWMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsMkJBQTJCIiwiZmlsZSI6Ii4vbm9kZV9tb2R1bGVzL3JlbGF0aXZlLXRpbWUtZm9ybWF0L2xvY2FsZS9mYS9xdWFudGlmeS5qcy5qcyIsInNvdXJjZXNDb250ZW50IjpbIm1vZHVsZS5leHBvcnRzPWZ1bmN0aW9uKG4pe3JldHVybiAwPD1uJiZuPD0xP1wib25lXCI6XCJvdGhlclwifSJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./node_modules/relative-time-format/locale/fa/quantify.js\n");
+
+/***/ }),
+
+/***/ "./node_modules/relative-time-format/locale/fa/short.json":
+/*!****************************************************************!*\
+  !*** ./node_modules/relative-time-format/locale/fa/short.json ***!
+  \****************************************************************/
+/*! exports provided: year, quarter, month, week, day, hour, minute, second, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"year\\\":{\\\"previous\\\":\\\"سال گذشته\\\",\\\"current\\\":\\\"امسال\\\",\\\"next\\\":\\\"سال آینده\\\",\\\"past\\\":\\\"{0} سال پیش\\\",\\\"future\\\":\\\"{0} سال بعد\\\"},\\\"quarter\\\":{\\\"previous\\\":\\\"سه‌ماههٔ گذشته\\\",\\\"current\\\":\\\"سه‌ماههٔ کنونی\\\",\\\"next\\\":\\\"سه‌ماههٔ آینده\\\",\\\"past\\\":\\\"{0} سه‌ماههٔ پیش\\\",\\\"future\\\":\\\"{0} سه‌ماههٔ بعد\\\"},\\\"month\\\":{\\\"previous\\\":\\\"ماه پیش\\\",\\\"current\\\":\\\"این ماه\\\",\\\"next\\\":\\\"ماه آینده\\\",\\\"past\\\":\\\"{0} ماه پیش\\\",\\\"future\\\":\\\"{0} ماه بعد\\\"},\\\"week\\\":{\\\"previous\\\":\\\"هفتهٔ گذشته\\\",\\\"current\\\":\\\"این هفته\\\",\\\"next\\\":\\\"هفتهٔ آینده\\\",\\\"past\\\":\\\"{0} هفته پیش\\\",\\\"future\\\":\\\"{0} هفته بعد\\\"},\\\"day\\\":{\\\"previous\\\":\\\"دیروز\\\",\\\"previous-2\\\":\\\"پریروز\\\",\\\"current\\\":\\\"امروز\\\",\\\"next\\\":\\\"فردا\\\",\\\"next-2\\\":\\\"پس‌فردا\\\",\\\"past\\\":\\\"{0} روز پیش\\\",\\\"future\\\":\\\"{0} روز بعد\\\"},\\\"hour\\\":{\\\"current\\\":\\\"همین ساعت\\\",\\\"past\\\":\\\"{0} ساعت پیش\\\",\\\"future\\\":\\\"{0} ساعت بعد\\\"},\\\"minute\\\":{\\\"current\\\":\\\"همین دقیقه\\\",\\\"past\\\":\\\"{0} دقیقه پیش\\\",\\\"future\\\":\\\"{0} دقیقه بعد\\\"},\\\"second\\\":{\\\"current\\\":\\\"اکنون\\\",\\\"past\\\":\\\"{0} ثانیه پیش\\\",\\\"future\\\":\\\"{0} ثانیه بعد\\\"}}\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuL25vZGVfbW9kdWxlcy9yZWxhdGl2ZS10aW1lLWZvcm1hdC9sb2NhbGUvZmEvc2hvcnQuanNvbi5qcyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./node_modules/relative-time-format/locale/fa/short.json\n");
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Comments/Comment.vue?vue&type=style&index=0&id=5d0a7522&lang=scss&scoped=true&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Components/Comments/Comment.vue?vue&type=style&index=0&id=5d0a7522&lang=scss&scoped=true& ***!

@@ -78,12 +78,12 @@ class PostController extends Controller
 
             $post = new Post();
             $post->user_id = Auth::user()->id;
-            $post->page_id = Auth::user()->getPage()->id;
+            $post->page_id = Auth::user()->personalPage->id;
             $post->text = $text;
             if ($request->has("category")) {
                 $category = Category::query()->where("name", $request->category)
-                    ->where("page_id", Auth::user()->getPage()->id)
-                    ->firstOrCreate(["name" => $request->category, "page_id" => Auth::user()->getPage()->id]);
+                    ->where("page_id", Auth::user()->personalPage->id)
+                    ->firstOrCreate(["name" => $request->category, "page_id" => Auth::user()->personalPage->id]);
                 $post->category_id = $category->id;
             }
 
@@ -116,7 +116,7 @@ class PostController extends Controller
             $post->medias = json_encode($medias);
             // dd($request);
             $result = $post->save();
-            Auth::user()->getPage()->addAction("post", $post->id);
+            Auth::user()->personalPage->addAction("post", $post->id);
             foreach ($mentions as $mention) {
                 $page = Page::query()->where("slug", $mention)->first();
                 if ($page instanceof Page) {
@@ -149,7 +149,7 @@ class PostController extends Controller
     public function likePost($post_id)
     {
         $post = Post::findOrFail($post_id);
-        $page = Auth::user()->getPage();
+        $page = Auth::user()->personalPage;
         $like = Like::query()->where("page_id", $page->id)->where("post_id", $post_id)->first();
         $result = false;
         $is_like = true;
@@ -163,7 +163,7 @@ class PostController extends Controller
             $like->post_id = $post_id;
             $result = $like->save();
             $page->addAction("like", $post_id);
-            // Notification::sendNotification("like", $post_id, $post->page_id, $like->id);
+            Notification::sendNotification("like", $post_id, $post->page_id, $like->id);
         }
         return response()->json(array("result" => $result, "like" => $is_like));
     }
@@ -204,12 +204,12 @@ class PostController extends Controller
 
         $post = new Post();
         $post->user_id = Auth::user()->id;
-        $post->page_id = Auth::user()->getPage()->id;
+        $post->page_id = Auth::user()->personalPage->id;
         $post->text = $text;
         if ($request->has("category")) {
             $category = Category::query()->where("name", $request->category)
-                ->where("page_id", Auth::user()->getPage()->id)
-                ->firstOrCreate(["name" => $request->category, "page_id" => Auth::user()->getPage()->id]);
+                ->where("page_id", Auth::user()->personalPage->id)
+                ->firstOrCreate(["name" => $request->category, "page_id" => Auth::user()->personalPage->id]);
             $post->category_id = $category->id;
         }
 
@@ -234,7 +234,7 @@ class PostController extends Controller
         $post->medias = json_encode($medias);
         $post->connected_to = $post_id;
         $result = $post->save();
-        Auth::user()->getPage()->addAction("post", $post->id);
+        Auth::user()->personalPage->addAction("post", $post->id);
         foreach ($mentions as $mention) {
             $page = Page::query()->where("slug", $mention)->first();
             if ($page instanceof Page) {
@@ -283,10 +283,10 @@ class PostController extends Controller
     public function getCategories(Request $request)
     {
         $term = trim($request->q);
-        $categories = Category::query()->where("page_id", Auth::user()->getPage()->id)->where("name", "like", "%$term%")->paginate(10);
+        $categories = Category::query()->where("page_id", Auth::user()->personalPage->id)->where("name", "like", "%$term%")->paginate(10);
         $more = false;
         if (empty($term)) {
-            $categories = Category::query()->where("page_id", Auth::user()->getPage()->id)->get();
+            $categories = Category::query()->where("page_id", Auth::user()->personalPage->id)->get();
         } else {
 
             if (($categories->total() > 1) && !$request->has("page")) {
@@ -424,8 +424,8 @@ class PostController extends Controller
 
         if ($request->has("category")) {
             $category = Category::query()->where("name", $request->category)
-                ->where("page_id", Auth::user()->getPage()->id)
-                ->firstOrCreate(["name" => $request->category, "page_id" => Auth::user()->getPage()->id]);
+                ->where("page_id", Auth::user()->personalPage->id)
+                ->firstOrCreate(["name" => $request->category, "page_id" => Auth::user()->personalPage->id]);
             $post->category_id = $category->id;
         }
 
@@ -444,7 +444,7 @@ class PostController extends Controller
 
         $text = preg_replace('/\B@(\w+)/', "<a href=" . url("/") . "/" . "$0" . ">$0</a>", $text);
         $text = str_replace("/@", "/", $text);
-        $post->text = \App\Article::scriptStripper($text);
+        $post->text = Post::scriptStripper($text);
 
         return response()->json(array("result" => $post->save()));
     }

@@ -12,27 +12,27 @@ class Notification extends Model
 
     public function skill()
     {
-        return $this->belongsTo("App\Models\Skill", "notifications_id");
+        return $this->belongsTo("App\Models\Skill", "notificationable_id");
     }
 
     public function mycomment()
     {
-        return $this->belongsTo("App\Models\Comment", "notifications_id");
+        return $this->belongsTo("App\Models\Comment", "notificationable_id");
     }
 
     public function page()
     {
-        return $this->belongsTo("App\Models\Page", "notifications_id");
+        return $this->belongsTo("App\Models\Page", "notificationable_id");
     }
 
-    public function user()
+    public function sender()
     {
-        return $this->belongsTo("App\Models\User", "user_id");
+        return $this->belongsTo("App\Models\Page", "from");
     }
 
     public function post()
     {
-        return $this->belongsTo("App\Models\Post", "notifications_id");
+        return $this->belongsTo("App\Models\Post", "notificationable_id");
     }
 
     public function comment()
@@ -45,7 +45,7 @@ class Notification extends Model
         // get the original array to be displayed
         $data = parent::toArray();
 
-        switch ($data['notifications_type']) {
+        switch ($data['notificationable_type']) {
             case "post":
                 $data['post'] = $this->post;
                 break;
@@ -65,7 +65,7 @@ class Notification extends Model
                 break;
         }
 
-        $data['user'] = $this->user;
+        $data['sender'] = $this->sender;
 
         return $data;
     }
@@ -75,16 +75,19 @@ class Notification extends Model
      * @param type $action
      * @param type $type
      * @param type $notifiable_id
-     * @param type $page_id
+     * @param type $to
      * @param type $connected_to
      */
-    public static function sendNotification($action, $notifiable_id, $page_id, $connected_to)
+    public static function sendNotification($action, $notifiable_id, $to, $connected_to, $from = null)
     {
+        if($from === null){
+            $from = Auth::user()->personalPage;
+        }
         $type = "";
-        $user = Page::find($page_id)->user;
+        $user = Page::find($to)->user;
         if ($user instanceof User) {
-            $thename = Auth::user()->name;
-            $username = Auth::user()->username;
+            $thename = $from->name;
+            $username = $from->username;
             switch ($action) {
                 case "like":
                     $type = "post";
@@ -119,18 +122,23 @@ class Notification extends Model
                     $title = $thename . " " . "در یک محتوا از شما نام برده";
                     break;
             }
-            if ("$page_id" !== Auth::user()->getPage()->id . "") {
+            if ($to != $from->id) {
                 $notification = new Notification();
-                $notification->user_id = Auth::user()->id;
+                $notification->from = $from->id;
+                $notification->to = $to;
+
                 $notification->action = $action;
-                $notification->notifications_id = $notifiable_id;
-                $notification->notifications_type = $type;
-                $notification->page_id = $page_id;
+
+                $notification->notificationable_id = $notifiable_id;
+                $notification->notificationable_type = $type;
                 $notification->connected_to = $connected_to;
+
                 $notification->save();
+
                 event(new NotificationEvent($notification));
 
-                Curl::to("https://api.push-pole.com/v2/messaging/notifications/")
+                if($user->pushe_id !== null){
+                    Curl::to("https://api.push-pole.com/v2/messaging/notifications/")
                     ->withHeader("authorization: Token " . env("PUSHE_TOKEN"))
                     ->withContentType('application/json')
                     ->withData(array(
@@ -155,6 +163,7 @@ class Notification extends Model
                     ))
                     ->asJson(true)
                     ->post();
+                }
             }
         }
     }

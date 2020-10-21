@@ -14,10 +14,17 @@ use Illuminate\Support\Facades\Cookie;
 class Post extends Model
 {
 
+
     use SoftDeletes;
 
     use HasFactory;
+
     protected $dates = ['deleted_at'];
+
+
+    public static function scriptStripper($input) {
+        return preg_replace('#<script(.*?)>(.*?)</script>#is', '', $input);
+    }
 
     /**
      * The User which Post this

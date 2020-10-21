@@ -10,7 +10,7 @@
             <div class="navheader-text">شبکه من</div>
         </inertia-link>
         <inertia-link :class="{'active': $root.url === '/notifications'}" href="/notifications">
-            <i class="navheader-icon">notifications_none</i>
+            <i class="navheader-icon">{{ $root.url === '/notifications' ? 'notifications' : 'notifications_none' }}</i>
             <div class="navheader-text">اعلان‌ها</div>
         </inertia-link>
         <inertia-link :class="{'active': $root.url === '/bookmarks'}" href="/bookmarks">

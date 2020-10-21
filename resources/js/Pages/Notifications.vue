@@ -6,7 +6,7 @@
     <div class="content-container">
         <div class="card">
             <div class="card-body py-1">
-    
+                <Notification v-for="notification in notificationsArray" :notification="notification" :key="notification.id"></Notification>
             </div>
         </div>
     </div>
@@ -20,15 +20,16 @@
 import AppLayout from "../Layouts/AppLayout";
 import PostCard from "../Components/PostCard/PostCard";
 import NoContent from "../Components/NoContent";
+import Notification from "../Components/Notifications/Notification";
 
 export default {
     watch: {
-        posts(newValue) {
-            this.notificationsArray = this.posts.data;
+        notifications(newValue) {
+            this.notificationsArray = this.notifications.data;
         }
     },
     created() {
-        this.postsArray = this.notifications.data;
+        this.notificationsArray = this.notifications.data;
         this.page = this.notifications.current_page;
         this.next_page_url = this.notifications.next_page_url;
     },
@@ -54,9 +55,9 @@ export default {
                 this.loadingPage = true;
                 axios(options)
                     .then((response) => {
-                        const data = response.data.props.posts;
+                        const data = response.data.props.notifications;
                         if (data) {
-                            $this.postsArray = $this.postsArray.concat(data.data);
+                            $this.notificationsArray = $this.notificationsArray.concat(data.data);
                             $this.page = data.current_page;
                             $this.next_page_url = data.next_page_url;
                         }
@@ -70,7 +71,7 @@ export default {
             }
         },
     },
-    name: "Feed",
+    name: "Notifications",
     props: {
         notifications: {
             type: Object,
@@ -83,6 +84,7 @@ export default {
     },
     components: {
         NoContent,
+        Notification
     },
     layout: AppLayout,
 };

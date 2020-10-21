@@ -15,9 +15,9 @@ class CreateNotifications extends Migration {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->enum("action", array("like", "report_respond", "comment", "follow", "reply", "skill_credit", "mention"));
-            $table->bigInteger("user_id");
-            $table->bigInteger("page_id");
-            $table->morphs("notifications");
+            $table->bigInteger("from");
+            $table->bigInteger("to");
+            $table->morphs("notificationable");
             $table->bigInteger("connected_to")->nullable();
             $table->string("text")->nullable();
             $table->boolean("seen")->default(0);

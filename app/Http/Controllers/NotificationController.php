@@ -2,28 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Page;
-use App\Models\Post;
-use Inertia\Inertia;
-use App\Models\Action;
 use App\Models\Notification;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
-class NotificationController extends Controller {
+class NotificationController extends Controller
+{
 
-    public function index() {
+    public function index()
+    {
         $pages = array();
         $notifications_unread = Notification::query()
-                        ->where("seen", false)
-                        ->where("page_id", Auth::user()->getPage()->id)->get();
+            ->where("seen", false)
+            ->where("to", Auth::user()->personalPage->id)->get();
         $notifications = Notification::query()
-                ->where("page_id", Auth::user()->getPage()->id)
-                ->latest()
-                ->whereHas("user", function ($query) {
+            ->where("to", Auth::user()->personalPage->id)
+            ->latest()
+            ->whereHas("page", function ($query) {
+                $query->whereHas("user", function ($query) {
                     $query->where("active", true);
-                })
-                ->paginate(10);
+                });
+            })
+            ->paginate(15);
+        // dd($notifications->toSql());
         foreach ($notifications_unread as $notification) {
             $notification->seen = true;
             $notification->save();

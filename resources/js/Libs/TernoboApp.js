@@ -13,6 +13,7 @@ import CopyToClipboard from "../Directives/CopyToClipboard";
 import {
     Tselect
 } from "tselect";
+import TimeAgo from 'javascript-time-ago'
 
 const TernoboApp = {};
 
@@ -47,6 +48,11 @@ TernoboApp.install = function (Vue, options) {
                 bodyClass: ["bg-dark", "text-right", "text-white"],
                 solid: true
             });
+        };
+        Vue.prototype.time = function(time){
+            const timeAgo = new TimeAgo('fa-FA');
+            return timeAgo.format(Date.parse(time), 'twitter');
+        
         }
     };
 

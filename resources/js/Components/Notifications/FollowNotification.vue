@@ -5,7 +5,7 @@
             <img src="https://ternobo.com/img/man-profile.png" class="profileimage mr-2" />
             <span class="d-flex align-items-center">
                 <span class="d-flex flex-column">
-                    <span class="d-flex aling-items-center"><b> {{ notification.user.name }}</b>
+                    <span class="d-flex aling-items-center"><b> {{ notification.sender.name }}</b>
                         <span class="d-flex ml-2 align-items-center text-muted font-11">۲ ماه
                         </span>
                     </span>
@@ -27,16 +27,9 @@
 </template>
 
 <script>
+import NotificationMixin from "../../Mixins/NotificationMixin";
 export default {
-    props: {
-        notification: {
-            type: Object,
-            default: undefined,
-            required: true
-        },
-
-    },
-    name: "FollowNotification"
+    mixins: [NotificationMixin]
 };
 </script>
 

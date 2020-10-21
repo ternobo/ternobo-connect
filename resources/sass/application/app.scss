@@ -10,7 +10,7 @@ input {
 
 body {
     direction: rtl;
-    margin: 0; 
+    margin: 0;
     padding: 0;
     background-color: $background;
     text-align: right;
@@ -636,6 +636,9 @@ img {
         .error_icon{
             display: block;
         }
+        .image__item {
+            opacity: 0;
+        }
     }
 
     .error_icon{
@@ -733,3 +736,4 @@ pre {
 .autocomplete-result-list{
     box-shadow: 0 1rem 40px rgba(0, 0, 0, 0.02) !important;
 }
+@import "./components/notifications.scss";
