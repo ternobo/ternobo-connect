@@ -1,7 +1,8 @@
 <template>
 <div class="material-textfield">
-    <input type="text" :class="inputClass" @input="$emit('input',value)" v-model="value" :maxlength="maxlength" class="input" />
+    <input type="text" placeholder=" " :class="inputClass" @input="$emit('input',value)" v-model="value" :maxlength="maxlength" class="input" />
     <label v-if="placeholder !== undefined">{{ placeholder }}</label>
+    <slot></slot>
 </div>
 </template>
 
@@ -15,7 +16,7 @@ export default {
     props: {
         maxlength: {
             type: Number,
-            default: "15000",
+            default: 15000,
             required: false,
         },
         inputClass: {
@@ -31,6 +32,3 @@ export default {
     },
 };
 </script>
-
-<style>
-</style>

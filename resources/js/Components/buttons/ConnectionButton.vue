@@ -1,5 +1,5 @@
 <template>
-<LoadingButton :loading="loading" class="connect-btn" :class="{ 'btn-followed-connected': connected }" @click.native="connect">{{ text }}</LoadingButton>
+<LoadingButton :loading="loading" class="btn connect-btn" :class="{ 'btn-followed-connected': connected }" @click.native="connect">{{ text }}</LoadingButton>
 </template>
 
 <script>

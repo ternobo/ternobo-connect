@@ -34,7 +34,21 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', "api_token", "created_at", "updated_at", "token", "phone_verified_at", "followings", "nationalcode", "nationalcard", "pushe_id",
+        'password',
+        'remember_token',
+        "api_token",
+        "created_at",
+        "updated_at",
+        "token",
+        "phone_verified_at",
+        "followings",
+        'connections',
+        "nationalcode",
+        "nationalcard",
+        "pushe_id",
+        "phone",
+        "email",
+        "2AF"
     ];
 
     /**
@@ -274,15 +288,18 @@ class User extends Authenticatable
     public function getConnectionsIds()
     {
         $connections = Connection::query()
+            ->with("connection")
+            ->with("user")
             ->whereRaw("(connection = '$this->id' or user_id = '$this->id')")
             ->where("accepted", true)
             ->get();
         $list = array();
         foreach ($connections as $connection) {
-            if ("" . $this->user_id === "" . Auth::user()->id) {
-                $list[] = $connection->getAttribute("connection");
+            $connection = json_decode(json_encode($connection->toArray()));
+            if ($connection->connection->id === Auth::user()->id) {
+                $list[] = $connection->user_id;
             } else {
-                $list[] = $connection->getAttribute("user_id");
+                $list[] = $connection->connection->id;
             }
         }
         return $list;

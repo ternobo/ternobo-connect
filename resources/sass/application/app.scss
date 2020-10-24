@@ -581,19 +581,6 @@ img {
     width: 64px;
 }
 
-.profile-md {
-    border-radius: 50%;
-    height: 46px;
-    width: 46px;
-}
-
-
-.profile-sm {
-    border-radius: 50%;
-    height: 32px;
-    width: 32px;
-}
-
 .hover-danger:hover {
     color: #ff0000 !important;
 }
@@ -737,3 +724,5 @@ pre {
     box-shadow: 0 1rem 40px rgba(0, 0, 0, 0.02) !important;
 }
 @import "./components/notifications.scss";
+
+@import "components/profile.scss";

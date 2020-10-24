@@ -22,7 +22,7 @@
         <div class="d-flex align-items-center">
             <div class="d-flex align-items-center">
                 <span style="white-space: nowrap;" class="ml-2">{{ $root.user.username }}</span>
-                <img v-bind:src="$root.user.profile" class="profile-sm" />
+                <img v-bind:src="$root.user.profile" class="profile-xsm" />
             </div>
             <i class="material-icons text-light">more_vert</i>
         </div>

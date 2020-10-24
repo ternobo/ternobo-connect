@@ -19,18 +19,30 @@ class ConnectionsController extends Controller
         SEOTools::setTitle("شبکه من");
         $user = Auth::user();
         $accpeted_connections = Connection::query()
-            ->whereRaw("(connection = '$user->id' or user_id = '$user->id')")
-            ->where("accepted", true);
+            ->with("user")
+            ->with("user.personalPage")
+            ->with("user.personalPage.user")
 
-        //dd($accpeted_connections->toSql());
+            ->with("connection")
+            ->with("connection.personalPage")
+            ->with("connection.personalPage.user")
+
+            ->whereHas("user", function ($query) {
+                $query->where("active", true);
+            })
+            ->whereRaw("(connection = '$user->id' or user_id = '$user->id')")
+            ->where("accepted", true)
+            ->latest();
+
         $pending_connections = Connection::query()->where("user_id", Auth::user()->id)
+            ->with("connection")
             ->whereRaw("(user_id = '$user->id')")
             ->where("accepted", false)
-            ->paginate(5);
+            ->paginate(4);
 
         if ($request->has("q")) {
             $accpeted_connections = $accpeted_connections->whereHas("user", function ($query) use ($request) {
-                $query->where("active", true)->where('name', 'like', "%{$request->q}%");
+                $query->where('name', 'like', "%{$request->q}%");
             });
         }
 
@@ -48,21 +60,30 @@ class ConnectionsController extends Controller
             "pending_connections" => $pending_connections,
             "connections_count" => $connections_count,
             "following_count" => $following_count,
-             "followers_count" => $followers_count
-            ]);
+            "followers_count" => $followers_count,
+        ]);
     }
 
     public function followings(Request $request)
     {
         $user = Auth::user();
         SEOTools::setTitle("کسانی که شما دنبال می‌کنید");
-        $followings = Following::query()->where("user_id", Auth::user()->id);
+        $followings = Following::query()
+            ->with("page")
+            ->with("page.user")
+            ->whereHas("page.user", function ($query) {
+                $query->where("active", true);
+            })
+            ->where("user_id", Auth::user()->id)
+            ->latest();
         $pending_connections = Connection::query()->where("user_id", Auth::user()->id)
             ->where("accepted", false)
             ->paginate(5);
 
         if ($request->has("q")) {
-            $followings = $followings->where("active", true)->whereRaw("users.name like '%$request->q%'");
+            $followings = $followings->whereHas("page", function ($query) use ($request) {
+                $query->where('name', 'like', "%{$request->q}%");
+            });
         }
 
         // counts
@@ -70,7 +91,7 @@ class ConnectionsController extends Controller
         $followers_count = count(Following::query()->where("following", Auth::user()->id)->get());
         $following_count = count(Following::query()->where("user_id", Auth::user()->id)->get());
 
-        return Inertia::render("MyConnections",array("connections" => $followings->paginate(20), "pending_connections" => $pending_connections,
+        return Inertia::render("MyConnections", array("connections" => $followings->paginate(20), "pending_connections" => $pending_connections,
             "connections_count" => $connections_count,
             "following_count" => $following_count, "followers_count" => $followers_count));
     }
@@ -79,10 +100,19 @@ class ConnectionsController extends Controller
     {
         $user = Auth::user();
         SEOTools::setTitle("دنبال کنندگان");
-        $followings = Following::query()->where("following", Auth::user()->id);
+        $followings = Following::query()
+            ->with("page")
+            ->with("page.user")
+            ->whereHas("page.user", function ($query) {
+                $query->where("active", true);
+            })
+            ->where("following", Auth::user()->id)
+            ->latest();
 
         if ($request->has("q")) {
-            $followings = $followings->where("active", true)->whereRaw("users.name like '%$request->q%'");
+            $followings = $followings->whereHas("page", function ($query) use ($request) {
+                $query->where('name', 'like', "%{$request->q}%");
+            });
         }
 
         $pending_connections = Connection::query()->where("user_id", Auth::user()->id)
@@ -138,14 +168,10 @@ class ConnectionsController extends Controller
 
     public function acceptRequest(Request $request)
     {
-        // $connection_id = $request->connection_id;
-        // $followRow = Connection::where("user_id", Auth::user()->id)->where("id", $connection_id)->firstOrFail();
-        // $followRow->accepted = true;
-        // return response()->json(array("result" => $followRow->save()));
-        return response()->json(["result"=>true, "data"=> [
-            "hellp" => 123,
-            "grdfg"=> "mio"
-        ]]);
+        $connection_id = $request->connection_id;
+        $followRow = Connection::where("user_id", Auth::user()->id)->where("id", $connection_id)->firstOrFail();
+        $followRow->accepted = true;
+        return response()->json(array("result" => $followRow->save()));
     }
 
     public function removeConnectionRequest(Request $request)
@@ -159,13 +185,13 @@ class ConnectionsController extends Controller
     public function disconnect($user_id)
     {
         $followRow = Connection::query()
-        ->where(function ($query) {
-            $query->where("user_id", Auth::user()->id)->orWhere("connection", $user_id);
-        })
-        ->where(function ($query) {
-            $query->where("user_id", $user_id)->orWhere("connection", Auth::user()->id);
-        })
-        ->firstOrFail();
+            ->where(function ($query) {
+                $query->where("user_id", Auth::user()->id)->orWhere("connection", $user_id);
+            })
+            ->where(function ($query) {
+                $query->where("user_id", $user_id)->orWhere("connection", Auth::user()->id);
+            })
+            ->firstOrFail();
         $result = $followRow->delete();
         return response()->json(array("result" => $result, "user_id" => $followRow->user_id));
     }

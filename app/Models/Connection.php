@@ -7,18 +7,12 @@ use Illuminate\Support\Facades\Auth;
 
 class Connection extends Model {
 
-    public function user() {
-        if ("" . $this->user_id === "" . Auth::user()->id) {
-            return $this->belongsTo("App\Models\User", "connection");
-        } else {
-            return $this->belongsTo("App\Models\User", "user_id");
-        }
+    public function connection(){
+        return $this->belongsTo("App\Models\User", "connection");
     }
 
-    public function toArray(){
-        $array = parent::toArray();
-        $array['page'] = $this->user->personalPage;
-        return $array;
+    public function user() {
+        return $this->belongsTo("App\Models\User", "user_id");
     }
 
 }

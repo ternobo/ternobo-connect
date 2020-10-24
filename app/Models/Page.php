@@ -188,6 +188,10 @@ class Page extends Model
             $data['categories'] = null;
         }
 
+        if(Auth::check()){
+            $data['mutualFriends'] = $this->mutualFriends();
+        }
+
         return $data;
     }
 
@@ -310,7 +314,7 @@ class Page extends Model
         }
     }
 
-    public function getMutuals()
+    public function mutualFriends()
     {
         $userA = Auth::user()->id;
         $usertB = $this->user_id;
@@ -345,6 +349,22 @@ class Page extends Model
         foreach ($connections as $connection) {
             if (!in_array($connection, $mutuals)) {
                 if (Auth::user()->isAcceptedConnection($connection->id)) {
+
+                    unset($connection->token);
+                    unset($connection->accepted);
+                    unset($connection->api_token);
+                    unset($connection->created_at);
+                    unset($connection->deleted_at);
+                    unset($connection->email);
+                    unset($connection->phone);
+                    unset($connection->pushe_id);
+                    unset($connection->remember_token);
+                    unset($connection->phone_verified_at);
+                    unset($connection->nationalcard);
+                    unset($connection->nationalcode);
+                    unset($connection->connection);
+                    unset($connection->password);
+
                     $mutuals[] = $connection;
                 }
             }
