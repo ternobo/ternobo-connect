@@ -21,7 +21,7 @@ class CreateExperiencesTable extends Migration {
             $table->string("location");
             $table->timestamp("start_date");
             $table->timestamp("end_date")->nullable();
-            $table->bigInteger("connected_to")->nullable();
+            $table->morphs("experiencable");
             $table->timestamps();
             $table->softDeletes();
         });

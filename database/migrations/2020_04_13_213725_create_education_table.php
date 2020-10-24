@@ -22,7 +22,7 @@ class CreateEducationTable extends Migration {
             $table->string("description")->nullable();
             $table->timestamp("start_date");
             $table->timestamp("end_date")->nullable();
-            $table->bigInteger("connected_to")->nullable();
+            $table->morphs("educatable");
             $table->timestamps();
             $table->softDeletes();
         });
