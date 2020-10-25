@@ -20,8 +20,17 @@ use Inertia\Inertia;
 class PageController extends Controller
 {
 
-    public function show(Page $page, $location = "home", Request $request)
+    public function show($page, $location = "home", Request $request)
     {
+        $page = Page::query()
+            ->with("categories")
+            ->with("education")
+            ->with("expreciences")
+            ->with("user.skills")
+            ->with("achievements")
+            ->where("slug", $page)
+            ->firstOrFail();
+
         if ($page->user->active) {
             if ($page->type === "company") {
                 return view("company-profile", array("page" => $page));

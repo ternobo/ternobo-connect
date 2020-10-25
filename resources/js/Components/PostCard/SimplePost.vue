@@ -1,5 +1,6 @@
 <template>
 <div class="post-box" v-if="post !== undefined">
+    <ReshareModal :post="post" :show.sync="showReshare"></ReshareModal>
     <EmbedCodeModal :post="post" :show.sync='showEmbed'></EmbedCodeModal>
     <div class="post-header pt-0">
         <a class="publisher" :href="'/'+post.page.slug">
@@ -13,7 +14,7 @@
                 </text>
                 <span class="text-light font-10">
                     {{ post_time }}
-                    <small class="text-light font-10" v-if="post.updated_at !== null">
+                    <small class="text-light font-10" v-if="post.updated_at !== post.created_at">
                         ویرایش شده در {{ updated_at }}
                     </small>
                     <i class="material-icons-outlined font-14 text-light verical-middle">
@@ -22,7 +23,7 @@
                 </span>
             </div>
         </a>
-        <div class="actions position-relative">
+        <div class="actions position-relative" v-if="showMenu">
             <i class="material-icons clickale text-muted hover-dark" @click="bookmark">{{ bookmarked ? 'bookmark' : 'bookmark_border' }}</i>
             <div>
                 <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
@@ -109,12 +110,12 @@
         <div class="images" v-if="post.medias !== null && post.medias !== undefined && post.medias.length > 0">
             <lazy-image style="min-height: 400px" class="m-0" alt="" :src="post.medias" />
         </div>
-        <div class="actions">
+        <div class="actions" v-if="showMenu">
             <div class="font-08rem">
 
             </div>
             <div class="buttons">
-                <i class="material-icons-outlined">sync</i>
+                <i class="material-icons-outlined" @click="showReshare = true">sync</i>
                 <i :class="{'material-icons-outlined':!openComment,'material-icons': openComment}" v-on:click="openComment = !openComment">comment</i>
                 <i class="material-icons like" @click="like" :class="{ 'text-danger': liked }">{{ liked ? 'favorite': 'favorite_border' }}</i>
             </div>
@@ -136,6 +137,7 @@ import EmbedCodeModal from "../Modals/EmbedCodeModal";
 
 // Load locale-specific relative date/time formatting rules.
 import fa from 'javascript-time-ago/locale/fa'
+import ReshareModal from "../Modals/ReshareModal";
 
 TimeAgo.addLocale(fa)
 
@@ -145,7 +147,8 @@ export default {
             liked: false,
             bookmarked: false,
             openComment: false,
-            showEmbed: false
+            showEmbed: false,
+            showReshare: false,
         }
     },
     created: function () {
@@ -195,10 +198,16 @@ export default {
     },
     name: "SimplePost",
     components: {
-        CommentsList,
-        EmbedCodeModal
+        "CommentsList": CommentsList,
+        "EmbedCodeModal": EmbedCodeModal,
+        "ReshareModal": ReshareModal
     },
     props: {
+        showMenu: {
+            type: Boolean,
+            default: true,
+            required: false
+        },
         post: {
             type: Object,
             default: undefined,

@@ -13,32 +13,40 @@ import CopyToClipboard from "../Directives/CopyToClipboard";
 import {
     Tselect
 } from "tselect";
-import TimeAgo from 'javascript-time-ago'
-
+import TimeAgo from 'javascript-time-ago';
 const TernoboApp = {};
 
+var Sortable = require('sortablejs').default
+
 TernoboApp.install = function (Vue, options) {
-    Vue.component("AppHeader", ()=>import("../Components/App/header/AppHeader"));
-    Vue.component("app-footer", ()=>import("../Components/App/AppFooter"));
+    Vue.component("AppHeader", () => import("../Components/App/header/AppHeader"));
+    Vue.component("app-footer", () => import("../Components/App/AppFooter"));
     Vue.component("tabs", Tabs);
     Vue.component("tab", Tab);
     Vue.component("base-layout", BaseLayout);
     Vue.component("sidebar-left", LeftSidbar);
     Vue.component("sidebar-right", RightSidebar);
     Vue.component("user-card", UserInfoCard);
-    Vue.component("post-card", () => import("../Components/PostCard/PostCard.vue"));
+    Vue.component("post-card", () => import("../Components/PostCard/PostCard"));
     Vue.component("people-suggestion", () => import("../Components/App/PeopleSuggestion"));
     Vue.component("loading-button", LoadingButton);
     Vue.component("lazy-image", LazyImage);
     Vue.component("loading-spinner", LoadingSpinner);
     Vue.component("new-post-card", NewPostCard);
-    Vue.component("new-post-modal", ()=>import("../Components/Modals/NewPostModal"));
+    Vue.component("new-post-modal", () => import("../Components/Modals/NewPostModal"));
     Vue.component("tselect", Tselect);
-    Vue.component("textarea-autosize", ()=>import("../Components/inputs/TextareaAutosize"));
-
+    Vue.component("textarea-autosize", () => import("../Components/inputs/TextareaAutosize"));
     // Directives
     Vue.directive("lazyload", LazyloadDirective);
     Vue.directive("clipboard", CopyToClipboard);
+
+    Vue.directive('sortable', function (el, binding) {
+        binding = binding || {}
+        var sortable = new Sortable(el, binding)
+    })
+
+    Vue.component('date-picker', () => import("vue-persian-datetime-picker"));
+
 
     const setup = function (vm) {
         Vue.prototype.toast = function (msessage) {
@@ -49,10 +57,10 @@ TernoboApp.install = function (Vue, options) {
                 solid: true
             });
         };
-        Vue.prototype.time = function(time){
+        Vue.prototype.time = function (time) {
             const timeAgo = new TimeAgo('fa-FA');
             return timeAgo.format(Date.parse(time), 'twitter');
-        
+
         }
     };
 

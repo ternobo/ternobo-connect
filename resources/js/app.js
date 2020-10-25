@@ -14,8 +14,8 @@ import TernoboApp from "./Libs/TernoboApp";
 import App from "./Layouts/App";
 import '@trevoreyre/autocomplete-vue/dist/style.css'
 
+window.formatPersian = false;
 Vue.prototype.window = window.window;
-
 // Install V-Select
 Vue.component('v-select', vSelect);
 

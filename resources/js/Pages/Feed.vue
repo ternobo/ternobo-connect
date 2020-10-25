@@ -16,11 +16,12 @@
         </div>
     </div>
     <sidebar-left>
-        <div class="card">
+        <div class="card mb-3">
             <div class="card-body px-2 py-1">
                 <people-suggestion v-for="page in pages" :page="page" :key="page.id"></people-suggestion>
             </div>
         </div>
+        <AppFooter class="sticky-aside"></AppFooter>
     </sidebar-left>
 </base-layout>
 </template>
@@ -29,6 +30,7 @@
 import AppLayout from "../Layouts/AppLayout";
 import PostCard from "../Components/PostCard/PostCard";
 import NoContent from "../Components/NoContent";
+import AppFooter from "../Components/App/AppFooter";
 
 export default {
     watch: {
@@ -93,6 +95,7 @@ export default {
     components: {
         PostCard,
         NoContent,
+        AppFooter
     },
     layout: AppLayout,
 };

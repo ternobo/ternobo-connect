@@ -8,12 +8,14 @@ import ArticleCard from "./ArticleCard";
 export default {
     created() {
         if (this.post.type === "article") {
-            this.componentType = ArticleCard;
+            this.componentType = require("./ArticleCard").default;
+        } else if (this.post.type === "share") {
+            this.componentType = require("./ResharedPost").default;
         }
     },
     data() {
         return {
-            componentType: SimplePost
+            componentType: require("./SimplePost").default
         }
     },
     name: "PostCard",

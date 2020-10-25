@@ -14,21 +14,34 @@ class Page extends Model
 
     protected $dates = ['deleted_at'];
 
+    public function education()
+    {
+        return $this->hasMany("App\Models\Experience", "user_id", "user_id");
+    }
+
+    public function expreciences()
+    {
+        return $this->hasMany("App\Models\Experience", "user_id", "user_id");
+    }
+
+    public function achievements()
+    {
+        return $this->hasMany("App\Models\Achievement", "page_id");
+    }
+
     /**
      * list page's categories (App\Category)
      * @var array()
      */
-
-    /**
-     * The owner User
-     * @var \App\User
-     */
-
     public function categories()
     {
         return $this->hasMany('App\Models\Category');
     }
 
+    /**
+     * The owner User
+     * @var \App\User
+     */
     public function user()
     {
         return $this->belongsTo("App\Models\User", "user_id");
@@ -175,20 +188,25 @@ class Page extends Model
         $data = parent::toArray();
 
         // change the value of the 'skills' key
-        if ($this->skills) {
-            $data['skills'] = $this->skills;
-        } else {
-            $data['skills'] = null;
+        if (!isset($data['skills'])) {
+            if ($this->skills) {
+                $data['skills'] = $this->skills;
+            } else {
+                $data['skills'] = null;
+            }
+
         }
 
         // change the value of the 'categories' key
-        if ($this->categories) {
-            $data['categories'] = $this->categories;
-        } else {
-            $data['categories'] = null;
+        if (!isset($data['categories'])) {
+            if ($this->categories) {
+                $data['categories'] = $this->categories;
+            } else {
+                $data['categories'] = null;
+            }
         }
 
-        if(Auth::check()){
+        if (Auth::check()) {
             $data['mutualFriends'] = $this->mutualFriends();
         }
 

@@ -27,6 +27,21 @@
                 <small class="font-14">{{ page.short_bio }}</small>
             </div>
         </div>
+        <tabs class="py-3">
+            <tab name="درباره من" :selected="true">
+                <Biography :value="page.about"></Biography>
+                <ExperienceList class="mt-3"></ExperienceList>
+            </tab>
+            <tab name="فعالیت‌ها">
+                <Biography :value="page.about"></Biography>
+            </tab>
+            <tab name="مقالات">
+                <Biography :value="page.about"></Biography>
+            </tab>
+            <tab name="تماس به من">
+                <Biography :value="page.about"></Biography>
+            </tab>
+        </tabs>
     </div>
 </base-layout>
 </template>
@@ -35,6 +50,8 @@
 import AppLayout from "../../Layouts/AppLayout";
 import ConnectionButton from "../../Components/buttons/ConnectionButton";
 import FollowButton from "../../Components/buttons/FollowButton";
+import Biography from "../../Components/Profile/AboutMe/Biography";
+import ExperienceList from "../../Components/Profile/AboutMe/Experiences/ExperienceList";
 
 export default {
     name: "UserProfile",
@@ -47,10 +64,18 @@ export default {
     components: {
         FollowButton,
         ConnectionButton,
+        Biography,
+        ExperienceList
     },
     layout: AppLayout
 }
 </script>
+
+<style>
+.tabs ul li {
+    width: auto;
+}
+</style>
 
 <style lang="scss" scoped>
 .profile {

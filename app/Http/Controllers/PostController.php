@@ -214,7 +214,7 @@ class PostController extends Controller
         }
 
         if ($request->has("tags")) {
-            $tags = $request->tags;
+            $tags = json_decode($request->tags);
             foreach ($tags as $tag) {
                 if (Tag::where("name", $tag)->first() instanceof Tag) {
                     continue;
@@ -223,7 +223,7 @@ class PostController extends Controller
                 $thetag->name = $tag;
                 $thetag->save();
             }
-            $post->tags = json_encode($request->tags);
+            $post->tags = json_encode($tags);
         }
         $post->type = "share";
         $post->show = $request->type;
@@ -232,7 +232,7 @@ class PostController extends Controller
             $medias = array(url($request->file("media")->store("medias")));
         }
         $post->medias = json_encode($medias);
-        $post->connected_to = $post_id;
+        $post->post_id = $post_id;
         $result = $post->save();
         Auth::user()->personalPage->addAction("post", $post->id);
         foreach ($mentions as $mention) {

@@ -14,15 +14,14 @@ use Illuminate\Support\Facades\Cookie;
 class Post extends Model
 {
 
-
     use SoftDeletes;
 
     use HasFactory;
 
     protected $dates = ['deleted_at'];
 
-
-    public static function scriptStripper($input) {
+    public static function scriptStripper($input)
+    {
         return preg_replace('#<script(.*?)>(.*?)</script>#is', '', $input);
     }
 
@@ -53,7 +52,10 @@ class Post extends Model
 
     public function share()
     {
-        return $this->belongsTo("App\Models\Post", "connected_to");
+        return $this->belongsTo("App\Models\Post", "post_id")->with("page")
+            ->with("likes")
+            ->with("mutualLikes")
+            ->with("category");
     }
 
     public function getPublisher()
@@ -102,6 +104,8 @@ class Post extends Model
 
         $data['tags'] = $this->getTags();
         $data['medias'] = $this->getMedia();
+        $data['share'] = $this->share;
+
         $data['is_liked'] = false;
         $data['is_bookmarked'] = false;
         if (Auth::check()) {
@@ -112,8 +116,8 @@ class Post extends Model
                     $data['is_liked'] = true;
                 }
             }
-           $bookmark = Bookmark::where("post_id",$data['id'])->where("user_id",Auth::user()->id)->first();
-           $data['is_bookmarked'] = $bookmark instanceof Bookmark;
+            $bookmark = Bookmark::where("post_id", $data['id'])->where("user_id", Auth::user()->id)->first();
+            $data['is_bookmarked'] = $bookmark instanceof Bookmark;
         }
         return $data;
     }

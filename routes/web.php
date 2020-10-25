@@ -25,7 +25,7 @@ Route::get("/nationalcards/{image}", "DownloadsController@nationalCards");
  * File Access End
  */
 
- 
+
 
 Route::group(['middleware' => LocaleMiddleware::class], function () {
 
@@ -162,8 +162,10 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
     });
 
+    Route::post("/share/{post_id}", "PostController@sharePost");
+
     // Pages
-    Route::prefix('/{page:slug}')->group(function () {
+    Route::prefix('/{page}')->group(function () {
 
         Route::get("/{location?}", "PageController@show")->where("location", "activities|articles|contact");
 

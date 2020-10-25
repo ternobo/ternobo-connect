@@ -6,6 +6,13 @@ input {
     outline: none;
 }
 
+h1, h2, h3, h4, h5,h6{
+    color: $dark;
+}
+p{
+    color: $text-color;
+}
+
 @import "./components/header/header";
 
 body {
@@ -15,6 +22,11 @@ body {
     background-color: $background;
     text-align: right;
     color: $text-color;
+}
+
+.sticky-aside{
+    position: sticky;
+    top: 80px;
 }
 
 .form-control, .btn, .modal-dialog{
@@ -726,3 +738,6 @@ pre {
 @import "./components/notifications.scss";
 
 @import "components/profile.scss";
+.shadow-0{
+    box-shadow: none !important;
+}

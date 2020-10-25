@@ -175,7 +175,7 @@ export default {
             const formData = new FormData();
             formData.append("text", this.text);
             if (this.category) {
-                formData.append("category", this.category.value);
+                formData.append("category", this.category.name);
             }
             formData.append("type", this.showType.value);
             formData.append("tags", JSON.stringify(this.tags));

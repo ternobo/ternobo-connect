@@ -23,7 +23,9 @@ class CreatePosts extends Migration {
             $table->string("medias");
             $table->bigInteger("category_id")->nullable();
             $table->enum("show", array("private", "public"));
-            $table->enum("type", array("article", "post"));
+            $table->enum("type", array("article", "post","share"));
+            $table->string("slug")->nullable();
+            $table->bigInteger("post_id")->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
