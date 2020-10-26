@@ -5,29 +5,86 @@
             بازیابی رمزعبور
         </h5>
     </div>
-    <div class="signup-login d-flex flex-column align-items-center justify-content-center clearfix" ref="loginForm" method="POST" action="javascript:;">
+    <div class="signup-login d-flex flex-column align-items-center justify-content-center clearfix" v-if="!passwordChage" ref="loginForm" action="javascript:;">
         <div class="w-100">
-            <input type="text" class="form-control bg-transparent mb-2" name="username" v-model="username" placeholder="تلفن، ایمیل یا شناسه" />
+            <input type="text" class="form-control bg-transparent mb-2" name="username" v-model="input" placeholder="تلفن، ایمیل یا شناسه" />
         </div>
-        <loading-button @click.native="login" :loading="loading" class="btn btn-dark mt-2 w-50" type="button">
+        <loading-button @click.native="sendResetCode" :loading="loading" class="btn btn-dark mt-2 w-50" type="button">
             ارسال کد بازیابی
+        </loading-button>
+    </div>
+    <div class="signup-login d-flex flex-column align-items-center justify-content-center clearfix" v-else>
+        <MaterialTextField v-model="resetCode" class="material--sm mb-3" placeholder="کد بازیابی"></MaterialTextField>
+        <MaterialTextField v-model="password" type="password" class="material--sm mb-3" placeholder="رمزعبور جدید"></MaterialTextField>
+        <MaterialTextField v-model="password1" type="password" class="material--sm mb-3" placeholder="تکرار رمزعبور جدید"></MaterialTextField>
+
+        <loading-button @click.native="changePassord" :loading="loading" class="btn btn-dark mt-2 w-50" type="button">
+            تغییر رمزعبور
         </loading-button>
     </div>
 </b-modal>
 </template>
 
 <script>
+import {
+    Inertia
+} from '@inertiajs/inertia';
 import ModalMixin from '../../Mixins/Modal';
+import MaterialTextField from '../inputs/MaterialTextField';
 export default {
     data() {
         return {
-            username: undefined,
-            loading: false
+            input: undefined,
+            loading: false,
+            passwordChage: false,
+            resetCode: undefined,
+            password: undefined,
+            password1: undefined,
         }
 
     },
     methods: {
+        changePassord() {
+            this.loading = true;
+            axios.post("updatepassword", {
+                newpassword: this.password,
+                code: this.resetCode
+            }).then((response) => {
+                const data = response.data;
+                if (data !== false) {
+                    if (data.result) {
+                        Inertia.reload();
+                        Inertia.visit("/feed");
+                    } else {
+                        this.handleError(data.errors);
+                    }
+                } else {
+                    this.toast("همه فیلد‌ها اجباری است");
+                }
+            }).then(() => this.loading = false);
 
+        },
+        sendResetCode() {
+            this.loading = true;
+            axios.post("rest-password", {
+                input: this.input
+            }).then((response) => {
+                const data = response.data;
+                if (data !== false) {
+                    if (data.result) {
+                        this.toast(data.msg);
+                        this.passwordChage = true;
+                    } else {
+                        this.handleError(data.errors);
+                    }
+                } else {
+                    this.toast("همه فیلد‌ها اجباری است");
+                }
+            }).then(() => this.loading = false);
+        }
+    },
+    components: {
+        MaterialTextField
     },
     mixins: [ModalMixin],
     name: "ResetPasswordModal"

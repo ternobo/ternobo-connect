@@ -3,7 +3,7 @@
     <ReshareModal :post="post" :show.sync="showReshare"></ReshareModal>
     <EmbedCodeModal :post="post" :show.sync='showEmbed'></EmbedCodeModal>
     <div class="post-header pt-0">
-        <a class="publisher" :href="'/'+post.page.slug">
+        <inertia-link class="publisher" :href="'/'+post.page.slug">
             <lazy-image class="mb-0" :src="post.page.profile" />
             <div>
                 <strong>
@@ -22,7 +22,7 @@
                     </i>
                 </span>
             </div>
-        </a>
+        </inertia-link>
         <div class="actions position-relative" v-if="showMenu">
             <i class="material-icons clickale text-muted hover-dark" @click="bookmark">{{ bookmarked ? 'bookmark' : 'bookmark_border' }}</i>
             <div>

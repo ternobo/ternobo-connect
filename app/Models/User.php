@@ -305,6 +305,28 @@ class User extends Authenticatable
         return $list;
     }
 
+
+    public function getWaitingConnectionsIds()
+    {
+        $connections = Connection::query()
+            ->with("connection")
+            ->with("user")
+            ->whereRaw("(connection = '$this->id' or user_id = '$this->id')")
+            ->where("accepted", false)
+            ->get();
+        $list = array();
+        foreach ($connections as $connection) {
+            $connection = json_decode(json_encode($connection->toArray()));
+            if ($connection->connection->id === Auth::user()->id) {
+                $list[] = $connection->user_id;
+            } else {
+                $list[] = $connection->connection->id;
+            }
+        }
+        return $list;
+    }
+
+
     public function hasUnreadNotification()
     {
         $notification = Notification::query()->where("page_id", $this->getPage()->id)->where("seen", false)->get();

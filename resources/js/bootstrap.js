@@ -16,19 +16,22 @@ window.axios.defaults.headers.common['X-CSRF-TOKEN'] =  document.querySelector('
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
-
 import Echo from 'laravel-echo';
 
-window.io = require('socket.io-client');
+if(user){
 
-window.Echo = new Echo({
-    broadcaster: 'socket.io',
-    host: window.location.hostname + ':6001',
-    forceTLS: true
-});
-const notificationChannel = window.Echo.private("notification."+user.personal_page.id);
-notificationChannel.listen("NotificationEvent", function (data) {
-    console.log("Ddd");
+    window.io = require('socket.io-client');
 
-    console.log(data);
-});
+    window.Echo = new Echo({
+        broadcaster: 'socket.io',
+        host: window.location.hostname + ':6001',
+        forceTLS: true
+    });
+    const notificationChannel = window.Echo.private("notification."+user.personal_page.id);
+    notificationChannel.listen("NotificationEvent", function (data) {
+        console.log("Ddd");
+
+        console.log(data);
+    });
+
+}

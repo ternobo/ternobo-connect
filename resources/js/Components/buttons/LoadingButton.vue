@@ -1,5 +1,5 @@
 <template>
-<button :class="{'loading': loading}" :disabled="loading">
+<button :class="{'loading': loading}" :disabled="loading || disabled">
     <span :class="{'opacity-0': loading}">
         <slot>
         </slot>
@@ -16,7 +16,11 @@ export default {
             default: false,
             required: false
         },
-
+        disabled: {
+            type: Boolean,
+            default: false,
+            required: false
+        },
     }
 }
 </script>

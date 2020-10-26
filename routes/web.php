@@ -35,6 +35,8 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
     /**
      * Auth Start
      */
+    Route::post("/rest-password", "Auth\ForgotPasswordController@resetPassword");
+    Route::post("/updatepassword", "Auth\ForgotPasswordController@updatePassword");
     Route::prefix("/auth")->group(function () {
         Route::post('login', 'Auth\LoginController@login');
         Route::post('logout', 'Auth\LoginController@logout');

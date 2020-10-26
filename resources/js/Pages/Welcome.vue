@@ -79,7 +79,9 @@ import Landing from "../Components/App/Landing";
 import LoginModal from "../Components/Modals/LoginModal";
 import SignupModal from "../Components/Modals/SignupModal";
 import App from "../Layouts/App";
-
+import {
+    Inertia
+} from '@inertiajs/inertia'
 export default {
     data() {
         return {
@@ -99,6 +101,7 @@ export default {
         }
     },
     mounted() {
+        Inertia.reload();
         const $this = this;
         var i = 0;
         var txt = 'شبکه اجتماعی متخصصین';

@@ -741,3 +741,7 @@ pre {
 .shadow-0{
     box-shadow: none !important;
 }
+.form-control:disabled, .form-control[readonly] {
+    background-color: #EEE !important;
+    opacity: 1;
+}

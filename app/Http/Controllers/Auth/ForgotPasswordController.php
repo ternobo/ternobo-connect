@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
-use App\Models\SMS;
+use App\SMS;
 use App\Models\Mail;
 use App\Models\PasswordReset;
 use Illuminate\Support\Facades\Validator;
@@ -30,36 +30,45 @@ use SendsPasswordResetEmails;
 
     public function resetPassword(Request $request) {
         $validator = Validator::make($request->all(), [
-                    "email" => "required",
+                    "input" => "required",
         ]);
         if ($validator->fails()) {
             return false;
         } else {
-            $user = User::query()->where("phone", $request->email)->orWhere("email", $request->email)->first();
+            $user = User::query()
+            ->where("phone", $request->input)
+            ->orWhere("email", $request->input)
+            ->orWhere("username", $request->input)
+            ->first();
             if ($user instanceof User) {
+
                 $passwordrest = new PasswordReset();
-                $passwordrest->email = $request->email;
+
+                if($user->phone !== null){
+                    $passwordrest->email = $user->phone;
+                }else{
+                    $passwordrest->email = $user->email;
+                }
                 $passwordrest->token = random_int(111111, 999999);
 
-                if ($this->checkEmail($request->email)) {
-                    $user = User::query()->orWhere("email", $request->email)->first();
+                if ($user->phone !== null) {
+                    $passwordrest->save();
+                    $sms = new SMS($user->phone);
+                    $sms->sendUltraFastSMS(array(SMS::makeParameter("passreset", $passwordrest->token)), "24525");
+                    session()->put("email", $user->phone);
+                    return response()->json(array("result" => true, "msg" => "کد فعالسازی برای شما پیامک شد"));
+                } else {
                     $html = view('emails.forgotpass', array("code" => $passwordrest->token, "username" => $user->username))->render();
                     $text = "بازیابی رمزعبور در ترنوبو";
                     $title = "بازیابی رمزعبور ترنوبو";
                     $mail = new Mail();
-                    $mail->addAddress($request->email);
+                    $mail->addAddress($user->email);
                     $mail->send($title, $text, $html);
                     $passwordrest->save();
-                    return response()->json(array("result" => true, "phone" => false));
-                } else {
-                    $passwordrest->save();
-                    $sms = new SMS($request->email);
-                    $sms->sendUltraFastSMS(array(SMS::makeParameter("passreset", $passwordrest->token)), "24525");
-                    session()->put("email", $request->email); 
-                    return response()->json(array("result" => true, "phone" => true));
+                    return response()->json(array("result" => true, "msg" => "کد فعالسازی برای شما ایمیل شد"));
                 }
             } else {
-                return response()->json(array("result" => false, "errors" => array("هیچ کاربری با این ایمیل یا شماره موبایل یافت نشد!")));
+                return response()->json(array("result" => false, "errors" => array("هیچ کاربری با این اطلاعات یافت نشد!")));
             }
         }
     }
@@ -79,7 +88,7 @@ use SendsPasswordResetEmails;
                     "code" => "required|exists:password_resets,token"
                         ], $messages);
         if ($validator->fails()) {
-            abort(404);
+            return response()->json(array("result" => false,"errors" => $validator->errors()));
         } else {
             $passreset = PasswordReset::where("token", $request->code)->firstOrFail();
             $user = User::query()->where("phone", $passreset->email)->orWhere("email", $passreset->email)->first();
@@ -90,7 +99,7 @@ use SendsPasswordResetEmails;
                 DB::raw("delete from `password_resets` where `email` is $passreset->email");
                 return response()->json(array("result" => true));
             } else {
-                return response()->json(array("result" => false, "errors" => array("کد بازیابی رمزعبور اشتباه است.")));
+                return response()->json(array("result" => false, "errors" => ["error"=>"کاربر مربوطه مسدود شده است."]));
             }
         }
     }

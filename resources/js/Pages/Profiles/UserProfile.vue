@@ -5,12 +5,9 @@
     </sidebar-left>
     <div class="content-container-full">
         <div class="card">
-            <lazy-image style="min-height: 40px" :src="page.cover" img-class="w-100" class="card-img-top mb-0 page-cover" />
+            <ProfileCover :canChange="page.user_id == this.$root.user.id" :src="page.cover"></ProfileCover>
             <div class="card-body pb-0 d-flex justify-content-between pageinfo-card">
-                <div class="profile profile-xlg clickable">
-                    <lazy-image :src="page.profile" img-class="rounded-circle profile-xlg" />
-                    <i class="material-icons">camera</i>
-                </div>
+                <ProfileImage :canChange="page.user_id == this.$root.user.id" :src="page.profile"></ProfileImage>
                 <div class="d-flex follow-buttons" v-if="page.user_id != this.$root.user.id">
                     <FollowButton :page="page.id"></FollowButton>
                     <ConnectionButton v-if="page.type === 'personal'" :user="page.user_id"></ConnectionButton>
@@ -48,6 +45,9 @@
 
 <script>
 import AppLayout from "../../Layouts/AppLayout";
+import ProfileImage from "../../Components/Profile/ProfileImage";
+import ProfileCover from "../../Components/Profile/ProfileCover";
+
 import ConnectionButton from "../../Components/buttons/ConnectionButton";
 import FollowButton from "../../Components/buttons/FollowButton";
 import Biography from "../../Components/Profile/AboutMe/Biography";
@@ -65,7 +65,9 @@ export default {
         FollowButton,
         ConnectionButton,
         Biography,
-        ExperienceList
+        ExperienceList,
+        ProfileImage,
+        ProfileCover
     },
     layout: AppLayout
 }
@@ -78,45 +80,6 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-.profile {
-    margin-top: -104px;
-    position: relative;
-    border: 3px solid #FFF;
-    background: #FFF;
-
-    >i {
-        position: absolute;
-        top: -3px;
-        left: -3px;
-        right: -3px;
-        bottom: -3px;
-        width: calc(100%+3px);
-        height: calc(100%+3px);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #FFF;
-        border-radius: 50%;
-        background: rgba($color: #191919, $alpha: 0.5);
-        opacity: 0;
-        transition: 0.3s all;
-    }
-
-    >figure {
-        transition: 0.3s all;
-    }
-
-    &:hover {
-        >figure {
-            filter: blur(2px);
-        }
-
-        >i {
-            opacity: 1;
-        }
-    }
-}
-
 .page-cover {
     min-height: 40px;
 }

@@ -21,8 +21,8 @@
     <div id="usermenu-show" class="usertoolbar h-100 d-flex align-items-center mr-2 py-3" @mouseenter="showUserMenu" @mouseleave="menuVisible = false">
         <div class="d-flex align-items-center">
             <div class="d-flex align-items-center">
-                <span style="white-space: nowrap;" class="ml-2">{{ $root.user.username }}</span>
-                <img v-bind:src="$root.user.profile" class="profile-xsm" />
+                <span style="white-space: nowrap;" class="ml-2">{{ $page.user.username }}</span>
+                <img v-bind:src="$page.user.profile" class="profile-xsm" />
             </div>
             <i class="material-icons text-light">more_vert</i>
         </div>

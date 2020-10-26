@@ -90,7 +90,7 @@ class UsersController extends Controller
             } elseif (session()->has("email")) {
                 $phone = session()->get("email");
             }
-                
+
             $verification = Verification::query()->where("code", $request->code)->where("phone", $phone)->first();
             if ($verification instanceof Verification) {
                 return response()->json(array("result" => true));
@@ -203,7 +203,7 @@ class UsersController extends Controller
                 $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
                 if ($request->has("sizes")) {
                     $sizes = (json_decode($request->sizes));
-                    $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->x), intval($sizes->y));
+                    $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->left), intval($sizes->top));
                     $image->save();
                 }
                 $user = $request->user();
@@ -233,7 +233,7 @@ class UsersController extends Controller
                 $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
                 if ($request->has("sizes")) {
                     $sizes = (json_decode($request->sizes));
-                    $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->x), intval($sizes->y));
+                    $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->left), intval($sizes->top));
                 }
                 $image->save(null, 90, "jpg");
                 $user = $request->user();

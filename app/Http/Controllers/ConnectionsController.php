@@ -185,11 +185,11 @@ class ConnectionsController extends Controller
     public function disconnect($user_id)
     {
         $followRow = Connection::query()
-            ->where(function ($query) {
+            ->where(function ($query) use ($user_id) {
                 $query->where("user_id", Auth::user()->id)->orWhere("connection", $user_id);
             })
-            ->where(function ($query) {
-                $query->where("user_id", $user_id)->orWhere("connection", Auth::user()->id);
+            ->orWhere(function ($query) use ($user_id) {
+                $query->where("connection", $user_id)->orWhere("user_id", Auth::user()->id);
             })
             ->firstOrFail();
         $result = $followRow->delete();

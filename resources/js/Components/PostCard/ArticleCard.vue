@@ -3,7 +3,7 @@
     <EmbedCodeModal :post="post" :show.sync="showEmbed"></EmbedCodeModal>
     <ReshareModal :post="post" :show.sync="showReshare"></ReshareModal>
     <div class="post-header pt-0">
-        <a class="publisher" :href="'/' + post.page.slug">
+        <inertia-link class="publisher" :href="'/' + post.page.slug">
             <img :src="post.page.profile" />
             <div>
                 <strong>
@@ -22,7 +22,7 @@
                     </i>
                 </span>
             </div>
-        </a>
+        </inertia-link>
         <div class="actions position-relative" v-if="showMenu">
             <i class="material-icons clickale text-muted hover-dark" onclick="Ternobo.bookmark('93', this)">bookmark_border</i>
             <div>

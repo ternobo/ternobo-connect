@@ -38,6 +38,12 @@ class AppServiceProvider extends ServiceProvider
                 }
                 return [];
             },
+            "waitingConnections"=> function(){
+                if(Auth::check()){
+                    return Auth::user()->getWaitingConnectionsIds();
+                }
+                return [];
+            },
             "followings" => function () {
                 if(Auth::check()){
                     $followings = Auth::user()->followings;

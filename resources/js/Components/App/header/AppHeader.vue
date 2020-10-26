@@ -17,7 +17,7 @@
                 </div>
             </form>
         </div>
-        <div class="d-flex align-items-center" style="min-width: 320px;">
+        <div class="d-flex align-items-center justify-content-end" style="min-width: 400px;">
             <header-toolbar v-if="$root.isDesktop"></header-toolbar>
         </div>
     </div>

@@ -1,23 +1,25 @@
 <template>
 <b-modal v-model='showModal' hide-footer hide-header :centered="true">
-    <tabs v-if="emailphone_step">
+    <tabs v-if="verification_step || emailphone_step" @selected="emailphone_step=true,verification_step=false">
         <tab name="ایمیل" :selected="true" icon="email">
             <div class="input-group d-flex align-items-center">
-                <LoadingButton class="btn btn-dark" :loading="loading" @click.native="sendVcode('email')">ثبت</LoadingButton>
-                <input type="email" class="form-control mx-1 text-left" v-model="email" placeholder="example@ternobo.com">
+                <LoadingButton class="btn btn-dark" :loading="loading" :disabled="verification_step" @click.native="sendVcode('email')">ثبت</LoadingButton>
+                <input type="email" class="form-control mx-1 text-left" :readonly="verification_step" v-model="email" placeholder="example@ternobo.com">
             </div>
         </tab>
         <tab name="شماره همراه" icon="phone">
             <div class="input-group d-flex align-items-center">
-                <LoadingButton class="btn btn-dark" :loading="loading" @click.native="sendVcode('phone')">ثبت</LoadingButton>
-                <input type="tel" class="form-control mx-1 text-left" v-model="phone_number" placeholder="09123456789">
+                <LoadingButton class="btn btn-dark" :loading="loading" :disabled="verification_step" @click.native="sendVcode('phone')">ثبت</LoadingButton>
+                <input type="tel" class="form-control mx-1 text-left" :readonly="verification_step" v-model="phone_number" placeholder="09123456789">
             </div>
         </tab>
     </tabs>
     <transition name="slide">
         <div v-if="verification_step">
-            <div class="input-group d-flex align-items-center flex-column justify-content-center">
-                <label class="w-100">کد تایید خود‌را وارد کنید</label>
+            <label class="ml-1 mt-2 text-left clickable" @click="emailphone_step=true,verification_step=false">ایمیل یا شماره همراه اشتباه است؟</label>
+
+            <div class="input-group d-flex align-items-center flex-column justify-content-center mt-4">
+                <label class="w-100">کد تایید خود ‌را وارد کنید</label>
                 <div class="input-group-icon">
                     <input type="tel" class="form-control mx-1 text-center" v-model="code" placeholder="111111" maxlength="6">
                     <i class="material-icons-outlined">verified_user</i>
@@ -49,17 +51,27 @@
                 <input class="form-control w-50 mx-1 text-right mt-2" v-model="password_repeat" type="password" placeholder="تکرار رمزعبور">
             </div>
             <div class="mt-5">
-                <!-- title -->
                 <p class="font-18">نکات امنیتی</p>
-                <p class="font-14 mt-3">ورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</p>
+                <ul style="list-style: none" class="font-14 mt-3">
+                    <li>
+                        رمزعبور حداقل ۸ کاراکتر باشد
+                    </li>
+                    <li>
+                        بهتر است که از حروف کوچک، بزرگ و سمبل‌ها در رمزعبور خود استفاده کنید.
+                    </li>
+                </ul>
             </div>
             <LoadingButton :loading="loading" class="btn btn-dark mx-auto mt-4 w-50" @click.native="savePassword">بعدی</LoadingButton>
         </div>
     </transition>
     <transition name="slide">
-        <div v-if="profile_step">
-            <a href="#" class="text-center">تصویر خود را وارد کنید</a>
-            <LoadingButton :loading="loading" class="btn btn-dark mx-auto mt-4 w-50" @click.native="saverProfile">رد شدن</LoadingButton>
+        <div v-if="profile_step" class="d-flex flex-column align-items-center">
+            <ProfileImage @updated="Inertia.visit('/feed')" :canChange="true" class="m-0" :src="$APP_URL+'/images/man-profile.png'"></ProfileImage>
+            <div class="d-flex mt-4 flex-column">
+                <span class="text-center">تصویر خود را وارد کنید</span>
+                <inertia-link href="/feed" :loading="loading" class="btn btn-dark mx-auto mt-4 w-50" style="white-space: nowrap">رد شدن</inertia-link>
+            </div>
+
         </div>
     </transition>
 </b-modal>
@@ -68,6 +80,10 @@
 <script>
 import ModalMixin from '../../Mixins/Modal';
 import LoadingButton from '../../Components/buttons/LoadingButton';
+import ProfileImage from '../../Components/Profile/ProfileImage';
+import {
+    Inertia
+} from '@inertiajs/inertia';
 
 export default {
     methods: {
@@ -75,7 +91,12 @@ export default {
             this.loading = true;
             const $this = this;
             var data = new FormData();
-            data.append('phone', this.phone_number);
+            if (type === "email") {
+                data.append('email', this.email);
+            } else {
+                data.append('phone', this.phone_number);
+
+            }
 
             var config = {
                 method: 'post',
@@ -220,7 +241,8 @@ export default {
     mixins: [ModalMixin],
     name: "SignupModal",
     components: {
-        LoadingButton
+        LoadingButton,
+        ProfileImage
     }
 }
 </script>
