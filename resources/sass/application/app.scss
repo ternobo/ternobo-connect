@@ -745,3 +745,11 @@ pre {
     background-color: #EEE !important;
     opacity: 1;
 }
+/* Import the Quill styles you want */
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+
+.ql-picker-label{
+    text-align: center;
+}

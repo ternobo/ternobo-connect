@@ -33,15 +33,10 @@
     <div class="search-section" :class="{noBG: !hasBG}">
         <form action="/search" id="searchform" autocomplete="off">
             <div class="content-body d-flex justify-content-center align-items-center flex-column">
-                <div class="searchbox d-flex justify-content-center align-items-center flex-column">
-                    <img src="/images/logo-type.svg" class="thelogo" v-if="hasBG" />
-                    <img src="/images/logo-type-dark.svg" class="thelogo" v-if="!hasBG" />
-                    <div class="input-group-icon mt-5 w-100">
-                        <input class="form-control searchfield w-100 py-2 px-3 rounded-pill" name="q" required="" title="چیزی جستجو کنید" data-autocomplete="" autocomplete="off" type="text" placeholder="هر چیز که در جستن آنی، آنی" id="search-input" />
-                        <span class="clickable">
-                            <i class="material-icons" style="left: 0.7rem">search</i>
-                        </span>
-                    </div>
+                <div class="col-md-6 d-flex justify-content-center align-items-center flex-column">
+                    <img src="/images/logo-type.svg" class="thelogo" style="max-with: 350px" v-if="hasBG" />
+                    <img src="/images/logo-type-dark.svg" class="thelogo" style="max-with: 350px" v-if="!hasBG" />
+                    <autocomplete style="min-width: 270px" :search="search" id="searchforminput" class="w-100 mt-3" autocomplete="off" required type="text" name="q" placeholder="هر چیزی که در جستن آنی، آنی" />
                 </div>
             </div>
         </form>
@@ -56,7 +51,6 @@
                 </div>
                 <a class="d-flex align-items-center" download href="/images/search-background-2x.jpg"><i class="material-icons text-white ml-5" style="margin-left: -5px;">get_app</i></a>
             </div>
-
         </div>
         <div class="clickable showlanding" :class="{'bg-dark':!hasBG }" v-on:click="showLanding = true;">
             <i class="material-icons font-38" :class="{'text-white':!hasBG }">flight_land</i>
@@ -81,8 +75,35 @@ import SignupModal from "../Components/Modals/SignupModal";
 import App from "../Layouts/App";
 import {
     Inertia
-} from '@inertiajs/inertia'
+} from '@inertiajs/inertia';
+import Autocomplete from '@trevoreyre/autocomplete-vue'
+
 export default {
+    methods: {
+        search(input) {
+            const element = document.getElementById("searchforminput").parentElement;
+            element.style.position = "unset";
+            if (element.getElementsByClassName("autocomplete-result-list").length > 0) {
+                element.getElementsByClassName("autocomplete-result-list")[0].style.width = element.getBoundingClientRect().width + "px";
+                element.getElementsByClassName("autocomplete-result-list")[0].style.marginTop = "-14px";
+            }
+
+            if (input.length < 2) {
+                return []
+            }
+            return new Promise((resolve, reject) => {
+                axios.post(this.$APP_URL + "/search", {
+                    q: input
+                }).then((response) => {
+                    if (response.data.result) {
+                        resolve(response.data.suggestions);
+                    } else {
+                        resolve([]);
+                    }
+                })
+            });
+        }
+    },
     data() {
         return {
             showLanding: false,
@@ -101,7 +122,6 @@ export default {
         }
     },
     mounted() {
-        Inertia.reload();
         const $this = this;
         var i = 0;
         var txt = 'شبکه اجتماعی متخصصین';
@@ -130,7 +150,8 @@ export default {
         Landing,
         Switches,
         LoginModal,
-        SignupModal
+        SignupModal,
+        Autocomplete
     },
 };
 </script>
@@ -140,10 +161,6 @@ export default {
     input {
         height: 42px;
     }
-}
-
-.searchbox {
-    width: 40%;
 }
 
 #searchform {

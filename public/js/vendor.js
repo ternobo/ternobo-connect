@@ -139,7 +139,7 @@ eval("var g;\n\n// This works in non-strict mode\ng = (function() {\n\treturn th
 
 /***/ }),
 
-/***/ 1:
+/***/ 2:
 /*!***********************************!*\
   !*** multi vue laravel-jetstream ***!
   \***********************************/

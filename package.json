@@ -52,6 +52,7 @@
         "vue-sortable": "^0.1.3",
         "vue-switches": "^2.0.1",
         "vue-textarea-autosize": "^1.1.1",
-        "vue2-circle-progress": "^1.2.3"
+        "vue2-circle-progress": "^1.2.3",
+        "vue2-editor": "^2.10.2"
     }
 }

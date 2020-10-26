@@ -32,6 +32,9 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
     Route::get("/", "IndexController@index")->name("welcome");
     Route::any("/search", "HomeController@search");
 
+    Route::resource("/articles", "ArticlesController");
+
+
     /**
      * Auth Start
      */

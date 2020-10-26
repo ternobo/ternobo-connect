@@ -16,17 +16,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ArticlesController extends Controller
 {
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -36,7 +25,7 @@ class ArticlesController extends Controller
     {
         if (Auth::check()) {
             SEOTools::setTitle("نوشتن مقاله جدید");
-            return view("content.new-article");
+            return Inertia::render("Articles/NewArticle");
         } else {
             return redirect("/");
         }
@@ -108,7 +97,7 @@ class ArticlesController extends Controller
                         ->firstOrCreate(["name" => $request->category, "page_id" => Auth::user()->getPage()->id]);
                     $post->category_id = $category->id;
                 }
-                
+
                 if ($request->has("slug")) {
                     $post->slug = $request->slug;
                 }else{

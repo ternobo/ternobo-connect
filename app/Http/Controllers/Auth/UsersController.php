@@ -213,7 +213,7 @@ class UsersController extends Controller
                 $user->save();
                 $page->save();
                 if ($request->has("json")) {
-                    return response()->json(array("result" => true));
+                    return response()->json(array("result" => true,"url"=>url($file)));
                 }
                 return redirect("/home");
             } else {

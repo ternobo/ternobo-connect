@@ -2,7 +2,7 @@
 <div class="profile clickable" :class="size" @click="openFileSelect">
     <CropperModal title="انتخاب تصویر پروفایل" :show.sync="crop" v-if="canChange" :aspect-ratio="1/1" :image="image" @cropped="upload"></CropperModal>
     <input type="file" class="d-none" v-if="canChange" ref="imageFile" @change="imageSelect" />
-    <lazy-image :src="src" img-class="rounded-circle" :class="size" />
+    <lazy-image :src="picture" img-class="rounded-circle" :class="size" />
     <i class="material-icons" v-if="canChange">camera</i>
     <div class="position-absolute d-flex align-items-center justify-content-center profile-xlg" style="top:-3px;left:-3px;right:-3px;bottom:-3px;width:calc(100%+3px);height:calc(100%+3px);background:rgba(0,0,0,0.5);" v-if="loading">
         <loading-spinner></loading-spinner>
@@ -16,6 +16,15 @@ import {
     Inertia
 } from '@inertiajs/inertia'
 export default {
+    watch: {
+        src(newValue) {
+            this.picture = newValue;
+        },
+
+    },
+    created() {
+        this.picture = this.src;
+    },
     props: {
         canChange: {
             type: Boolean,
@@ -65,6 +74,9 @@ export default {
                     const data = response.data;
                     if (data.result) {
                         Inertia.reload();
+                        if (data.url) {
+                            this.picture = data.url;
+                        }
                         this.$emit("updated");
                     } else {
                         const errors = data.errors;
@@ -79,7 +91,8 @@ export default {
             crop: false,
             image: "",
             file: null,
-            loading: false
+            loading: false,
+            picture: "",
         }
     },
     components: {

@@ -20,7 +20,7 @@ export default {
                 coordinates
             } = this.$refs.cropper.getResult();
             canvas.toBlob((blob) => {
-                this.$emit("cropped", coordinates);
+                this.$emit("cropped", coordinates, canvas);
                 this.$emit("update:show", false)
             });
         },

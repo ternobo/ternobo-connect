@@ -45,7 +45,20 @@ TernoboApp.install = function (Vue, options) {
         var sortable = new Sortable(el, binding)
     })
 
+    Vue.directive("no-space", function(el){
+        el.addEventListener("keydown",function(e){
+            if (e.which === 32)
+                return e.preventDefault();
+        },false);
+
+        el.addEventListener("change",function(e){
+            el.value = el.value.replace(/\s/g, "");
+        },false);
+
+    })
+
     Vue.component('date-picker', () => import("vue-persian-datetime-picker"));
+
 
 
     const setup = function (vm) {

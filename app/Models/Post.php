@@ -110,7 +110,7 @@ class Post extends Model
         $data['is_bookmarked'] = false;
         if (Auth::check()) {
             if (isset($data['likes'])) {
-                $current_page = json_decode(Cookie::get('ternobo_current_page'));
+                $current_page = json_decode(Cookie::get('ternobo_current_page')) !== null ?  json_decode(Cookie::get('ternobo_current_page')) : Auth::user()->personalPage;
                 $page_ids = array_column($data['likes'], "page_id");
                 if (in_array($current_page->id, $page_ids)) {
                     $data['is_liked'] = true;
