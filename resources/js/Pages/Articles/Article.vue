@@ -1,5 +1,5 @@
 <template>
-<base-layout class="justify-content-center">
+<base-layout class="justify-content-center bg-white">
     <div class="col-md-8 pb-4 article">
         <div class="row m-0">
             <!-- post img -->
@@ -62,6 +62,7 @@ export default {
         var SizeStyle = Quill.import('attributors/style/size');
         Quill.register(ColorClass, true);
         Quill.register(SizeStyle, true);
+        document.body.style.background = "#FFF";
     },
     name: "Article",
     props: {
@@ -73,6 +74,9 @@ export default {
             default: 0
         },
 
+    },
+    destroyed() {
+        document.body.style.removeProperty("background");
     },
     computed: {
         post_time: function () {
@@ -88,9 +92,3 @@ export default {
     }
 }
 </script>
-
-<style>
-body {
-    background: #FFF;
-}
-</style>

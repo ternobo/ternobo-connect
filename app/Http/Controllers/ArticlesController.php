@@ -110,7 +110,7 @@ class ArticlesController extends Controller
                 $post->type = "article";
                 $post->show = "public";
                 $medias = array();
-                if ($request->filled("media")) {
+                if ($request->file("media") !== null) {
                     $medias = array(url($request->file("media")->store("medias")));
                 }
                 $post->medias = json_encode($medias);
@@ -263,16 +263,11 @@ class ArticlesController extends Controller
                     }
                     $article->tags = json_encode(json_decode($request->tags));
                     $article->show = "public";
-                    $medias = array();
-                    if ($request->filled("media")) {
-                        $medias = $request->file("media");
-                        if($medias!=null){
-                            $medias = array(url($medias->store("medias")));
-                            $article->medias = json_encode($medias);
-
-                        }
+                    $medias = [];
+                    if ($request->file("media") !== null) {
+                        $medias = array(url($request->file("media")->store("medias")));
                     }
-
+                    $article->medias = json_encode($medias);
                     $user = Auth::user();
                     $user->touch();
 

@@ -99,9 +99,9 @@
     <div class="post-footer">
         <div class="tagandcate">
             <div class="tags">
-                <a v-for="tag in post.tags" :key="tag" class="tag-item" :href="'/tags/' + tag">
+                <inertia-link v-for="tag in post.tags" :key="tag" class="tag-item" :href="'/tags/' + tag">
                     {{ tag }}
-                </a>
+                </inertia-link>
             </div>
             <a class="category" v-if="post.category !== null" :href="'/' + post.page.slug + '/categories/' + post.category.id">
                 <i class="material-icons text-grey">layers</i><span class="text-grey"> {{ post.category.name }}</span>

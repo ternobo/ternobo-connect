@@ -187,13 +187,13 @@ class HomeController extends Controller
 
         $posts = Post::query()
             ->distinct("posts.id")
-            ->join("users", "posts.user_id", "=", "users.id")
-            ->leftJoin("categories", "categories.id", "=", "posts.category_id")
-            ->leftJoin("content_seens", "posts.id", "=", "content_seens.post_id")
-            ->select(array("posts.*", "categories.name as category_name", "users.name as user_name", "users.short_bio as short_bio", "users.profile as profile", "content_seens.created_at as seen_at"))
+            ->with("page")
+            ->with("likes")
+            ->with("mutualLikes")
+            ->with("category")
             ->whereJsonContains('tags', $name)
             ->paginate(10);
-        return view('tag', array("posts" => $posts));
+        return Inertia::render('Tags', array("posts" => $posts));
     }
 
     public function redirecthome()
