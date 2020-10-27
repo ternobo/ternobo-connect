@@ -66,7 +66,7 @@
     </transition>
     <transition name="slide">
         <div v-if="profile_step" class="d-flex flex-column align-items-center">
-            <ProfileImage @updated="Inertia.visit('/feed')" :canChange="true" class="m-0" :src="$APP_URL+'/images/man-profile.png'"></ProfileImage>
+            <ProfileImage @updated="updateProfile" :canChange="true" class="m-0" :src="$APP_URL+'/images/man-profile.png'"></ProfileImage>
             <div class="d-flex mt-4 flex-column">
                 <span class="text-center">تصویر خود را وارد کنید</span>
                 <inertia-link href="/feed" :loading="loading" class="btn btn-dark mx-auto mt-4 w-50" style="white-space: nowrap">رد شدن</inertia-link>
@@ -87,6 +87,9 @@ import {
 
 export default {
     methods: {
+        updateProfile() {
+            Inertia.visit('/feed');
+        },
         sendVcode(type) {
             this.loading = true;
             const $this = this;

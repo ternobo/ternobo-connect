@@ -29,8 +29,11 @@ export default {
     watch: {
         text(newValue) {
             this.$emit("input", newValue);
-            this.progress = (((newValue.length / 2500)) * 100) + "%";
-            this.leftCharacter = 2500 - newValue.length;
+            if (newValue != null) {
+                this.progress = (((newValue.length / 2500)) * 100) + "%";
+                this.leftCharacter = 2500 - newValue.length;
+            }
+
         },
         value(newValue) {
             this.text = this.value;

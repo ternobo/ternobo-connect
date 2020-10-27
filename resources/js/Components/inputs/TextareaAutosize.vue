@@ -86,7 +86,9 @@ export default {
             this.$nextTick(() => {
                 let contentHeight = (this.$el.scrollHeight + 1);
 
-                if (this.val.length < 1) {
+                if (this.val == null) {
+                    contentHeight -= (parseInt(window.getComputedStyle(this.$el).paddingTop) + parseInt(window.getComputedStyle(this.$el).paddingBottom));
+                } else if (this.val.length < 1) {
                     contentHeight -= (parseInt(window.getComputedStyle(this.$el).paddingTop) + parseInt(window.getComputedStyle(this.$el).paddingBottom));
                 }
 

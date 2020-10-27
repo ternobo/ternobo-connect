@@ -5,7 +5,8 @@
             <h5>تجربیات</h5>
         </div>
         <div v-sortable="{ handle: '.sort' }">
-            <Experience></Experience>
+            <Experience :edit="edit"></Experience>
+            <Experience :edit="edit"></Experience>
         </div>
     </div>
 </div>
@@ -14,6 +15,13 @@
 <script>
 import Experience from "./Experience";
 export default {
+    props: {
+        edit: {
+            type: Boolean,
+            default: false
+        },
+
+    },
     components: {
         Experience
     }

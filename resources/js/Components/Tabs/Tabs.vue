@@ -3,9 +3,11 @@
     <div class="tabs">
         <ul>
             <li v-for="tab in tabs" :key="tab.name" :class="{ 'is-active': tab.isActive }">
-                <a class="clickable" @click="selectTab(tab)"><i class="material-icons ml-2">{{ tab.icon }}</i>{{ tab.name  }}</a>
+                <inertia-link v-if="stateTab" :href="tab.href" class="clickable" preserve-state @click="selectTab(tab)"><i class="material-icons ml-2">{{ tab.icon }}</i>{{ tab.name }}</inertia-link>
+                <a v-else class="clickable" @click="selectTab(tab)"><i class="material-icons ml-2">{{ tab.icon }}</i>{{ tab.name }}</a>
             </li>
         </ul>
+        <slot name="custom-item"></slot>
     </div>
 
     <div class="tabs-details">
@@ -15,7 +17,17 @@
 </template>
 
 <script>
+import {
+    Inertia
+} from '@inertiajs/inertia';
 export default {
+    props: {
+        stateTab: {
+            type: Boolean,
+            default: false
+        },
+
+    },
     name: "Tabs",
     data() {
         return {
@@ -27,7 +39,7 @@ export default {
     },
     methods: {
         selectTab: function (selectedTab) {
-            this.$emit("selected", selectedTab.id ? selectedTab.id : selectedTab.name)
+            this.$emit("selected", selectedTab.id ? selectedTab.id : selectedTab.name);
             this.tabs.forEach(tab => {
                 tab.isActive = (tab.name == selectedTab.name);
             });

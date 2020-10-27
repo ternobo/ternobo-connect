@@ -19,6 +19,9 @@ export default {
         icon: {
             default: undefined
         },
+        href: {
+            default: undefined
+        },
         id: {
             default: undefined
         },
@@ -31,11 +34,7 @@ export default {
             isActive: false
         }
     },
-    computed: {
-        href() {
-            return '#' + this.name.toLowerCase().replace(/ /g, '-');
-        }
-    },
+    computed: {},
     mounted() {
         this.isActive = this.selected;
     }

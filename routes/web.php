@@ -174,7 +174,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
     // Pages
     Route::prefix('/{page:slug}')->group(function () {
 
-        Route::get("/{location?}", "PageController@show")->where("location", "activities|articles|contact");
+        Route::get("/{location?}", "PageController@show")->where("location", "about|activities|articles|contact");
 
         Route::prefix('/category/{id}')->group(function () {
             Route::get("/{location?}", "PageController@getCategory");

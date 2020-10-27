@@ -63,6 +63,7 @@ class PageController extends Controller
             "Profiles/UserProfile",
             [
                 "page" => $page,
+                "location"=>$location
             ]
         );
     }

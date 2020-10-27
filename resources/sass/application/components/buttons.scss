@@ -54,3 +54,14 @@
     background: #FEFCEA;
     color: #EFDC36;
 }
+
+.btn-edit{
+    border-radius: 32px;
+    border: 1px solid #757575;
+    color: #757575;
+    transition: 0.3s all;
+}
+.btn-edit:hover{
+    border-color: #191919;
+    color: #191919;
+}
