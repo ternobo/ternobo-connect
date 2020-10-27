@@ -6,10 +6,16 @@ input {
     outline: none;
 }
 
-h1, h2, h3, h4, h5,h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: $dark;
 }
-p{
+
+p {
     color: $text-color;
 }
 
@@ -24,16 +30,18 @@ body {
     color: $text-color;
 }
 
-.sticky-aside{
+.sticky-aside {
     position: sticky;
     top: 80px;
 }
 
-.form-control, .btn, .modal-dialog{
+.form-control,
+.btn,
+.modal-dialog {
     border-radius: 0;
 }
 
-.bg-body{
+.bg-body {
     background-color: $body-bg !important;
 }
 
@@ -42,11 +50,11 @@ body {
     border-radius: 0;
 }
 
-.card{
+.card {
     background: $box-on-bg;
 }
 
-a{
+a {
     color: $text-color;
 }
 
@@ -249,7 +257,7 @@ a{
 }
 
 ul {
-    cursor: pointer;
+    list-style: none;
 }
 
 .slide-enter-active {
@@ -513,11 +521,21 @@ img {
         padding-left: 30px;
     }
 
+    .content-container-profile {
+        padding-left: 30px;
+    }
+
     .content-container-right {
         padding-left: 30px;
     }
 
     @media screen and (min-width: 991px) {
+
+        .content-container-profile {
+            max-width: 70.7%;
+            flex: 70.7%;
+        }
+
         .content-container-full {
             max-width: 78.4%;
             flex: 78.4%;
@@ -631,16 +649,17 @@ img {
         }
     }
 
-    &.error{
-        .error_icon{
+    &.error {
+        .error_icon {
             display: block;
         }
+
         .image__item {
             opacity: 0;
         }
     }
 
-    .error_icon{
+    .error_icon {
         position: absolute;
         display: none;
     }
@@ -663,7 +682,7 @@ pre {
     direction: rtl;
     unicode-bidi: -moz-plaintext;
     unicode-bidi: plaintext;
-    font-family: dana,PT Sans;
+    font-family: dana, PT Sans;
     letter-spacing: 0 !important;
     overflow: hidden;
     line-break: normal;
@@ -694,67 +713,83 @@ pre {
     border-radius: 0;
     padding: 0.5rem;
     border: none;
-    box-shadow: 0 0 5px 0 rgba(0,0,0,0.1);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
 }
-.modal-header{
+
+.modal-header {
     padding: 0.5rem;
 }
-.btn-grey-10{
+
+.btn-grey-10 {
     background: $body-bg;
     color: $light;
     border: 1px solid $icons;
     transition: 0.3s all;
 }
-.btn-grey-10:hover{
+
+.btn-grey-10:hover {
     background: $icons;
     color: $text-color;
 }
-.btn:active{
+
+.btn:active {
     box-shadow: 0 0 10px 3px inset rgba($color: #000000, $alpha: 0.1) !important;
 }
-.btn-dark:active{
+
+.btn-dark:active {
     box-shadow: 0 0 10px 3px inset rgba($color: #FFF, $alpha: 0.15) !important;
 }
 
 .autocomplete[data-loading=true]:after {
     display: none !important;
 }
+
 .autocomplete-input {
     padding: 8px 12px 8px 48px;
     transition: 0.3s all;
     border-radius: 25px;
     background-color: #FFF !important;
 }
-.autocomplete-input:focus, .autocomplete-input[aria-expanded=true]{
+
+.autocomplete-input:focus,
+.autocomplete-input[aria-expanded=true] {
     border-color: #191919 !important;
     box-shadow: none !important;
 }
-.autocomplete-input[aria-expanded=true]{
-    border-radius: 25px 25px 0 0 !important;;
+
+.autocomplete-input[aria-expanded=true] {
+    border-radius: 25px 25px 0 0 !important;
+    ;
 }
-.autocomplete-result-list{
+
+.autocomplete-result-list {
     box-shadow: 0 1rem 40px rgba(0, 0, 0, 0.02) !important;
 }
+
 @import "./components/notifications.scss";
 
 @import "components/profile.scss";
-.shadow-0{
+
+.shadow-0 {
     box-shadow: none !important;
 }
-.form-control:disabled, .form-control[readonly] {
+
+.form-control:disabled,
+.form-control[readonly] {
     background-color: #EEE !important;
     opacity: 1;
 }
+
 /* Import the Quill styles you want */
 @import '~quill/dist/quill.core.css';
 @import '~quill/dist/quill.bubble.css';
 @import '~quill/dist/quill.snow.css';
 
-.ql-picker-label{
+.ql-picker-label {
     text-align: center;
 }
 
-.ql-syntax{
+.ql-syntax {
     background: $dark;
     color: #FFF;
     padding: 15px;

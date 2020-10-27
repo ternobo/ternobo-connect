@@ -14,13 +14,14 @@ import {
     Tselect
 } from "tselect";
 import TimeAgo from 'javascript-time-ago';
+
 const TernoboApp = {};
 
 var Sortable = require('sortablejs').default
 
 TernoboApp.install = function (Vue, options) {
     Vue.component("AppHeader", () => import("../Components/App/header/AppHeader"));
-    Vue.component("app-footer", () => import("../Components/App/AppFooter"));
+    Vue.component("AppFooter", () => import("../Components/App/AppFooter"));
     Vue.component("tabs", Tabs);
     Vue.component("tab", Tab);
     Vue.component("base-layout", BaseLayout);

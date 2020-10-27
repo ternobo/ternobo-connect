@@ -274,9 +274,23 @@ class Page extends Model
      *
      * @return array()
      */
-    public function getActions($action = null, $page = null)
+    public function getActions($action = null, $page = null, $category = null)
     {
-        $actions = Action::query()->where("page_id", $this->id)->latest();
+        $actions = Action::query()
+            ->with("post")
+            ->with("post.page")
+            ->with("post.likes")
+            ->with("post.mutualLikes")
+            ->with("post.category")
+            ->where("page_id", $this->id)->latest();
+
+
+        if ($category !== null) {
+            $actions = $actions->whereHas("post", function ($query) use ($category){
+                $query->where("category_id",$category);
+            });
+        }
+
         if ($action !== null) {
             $actions = $actions->where("action", $action);
         }

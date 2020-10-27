@@ -7,6 +7,7 @@ use App\Models\Contact;
 use App\Models\Following;
 use App\Models\Page;
 use App\Models\PageSocial;
+use App\Models\Post;
 use App\Models\Social;
 use App\Models\Website;
 use Artesaos\SEOTools\Facades\SEOMeta;
@@ -41,7 +42,27 @@ class PageController extends Controller
         return abort(404);
     }
 
-    public function handlePersonalProfile(Page $page, $location = "home", Request $request)
+    public function getCategory($page, $category, $location = "activities", Request $request)
+    {
+        $page = Page::query()
+            ->with("categories")
+            ->with("education")
+            ->with("expreciences")
+            ->with("user.skills")
+            ->with("achievements")
+            ->where("slug", $page)
+            ->firstOrFail();
+        if ($page->user->active) {
+            if ($page->type === "company") {
+                return view("company-profile", array("page" => $page));
+            } else {
+                return $this->handlePersonalProfile($page, $location, $request, $category);
+            }
+        }
+        return abort(404);
+    }
+
+    public function handlePersonalProfile(Page $page, $location = "home", Request $request, $category = null)
     {
         SEOTools::setTitle($page->name);
         if ($page->about !== null && $page->about !== "") {
@@ -59,11 +80,59 @@ class PageController extends Controller
         SEOTools::jsonLd()->addImage($page->profile);
         SEOMeta::addKeyword(['پروفایل' . $page->name, $page->name, $page->user->first_name, $page->user->last_name]);
 
+        $pages = array();
+        if (Auth::check()) {
+            $pages = Following::where("followings.user_id", $page->user->id)
+                ->join("pages", "pages.id", "=", "followings.following")
+                ->where("pages.id", "!=", $page->id)
+                ->where("pages.id", "!=", Auth::user()->getPage()->id)
+                ->get();
+            if (count($pages) > 5) {
+                $pages = $pages->random(5);
+            }
+        }
+
+        $actions = ["data" => [], "next_page_url" => null];
+        if (Str::startsWith($request->action, "like")) {
+            $actions = $page->getActions("like", 5);
+        } elseif (Str::startsWith($request->action, "share")) {
+            $actions = $page->getActions("share", 5);
+        } elseif (Str::startsWith($request->action, "comment")) {
+            $actions = $page->getActions("comment", 5);
+        } elseif ($category !== null) {
+            if ($category === "all") {
+                $actions = $page->getActions("post", 5);
+            } else {
+                $actions = $page->getActions("post", 5, $category);
+            }
+        } else {
+            $actions = $page->getActions(null, 5);
+        }
+
+        $articles = ["data" => [], "next_page_url" => null];
+
+        if ($location === 'articles') {
+            $articles = Post::query()
+                ->with("page")
+                ->with("likes")
+                ->with("mutualLikes")
+                ->with("category")
+                ->where("page_id", $page->id)
+                ->where("type", "article");
+            if ($category !== null && $category !== "all") {
+                $articles = $articles->where("category_id", $category);
+            }
+            $articles = $articles->paginate(10);
+        }
+
         return Inertia::render(
             "Profiles/UserProfile",
             [
                 "page" => $page,
-                "location"=>$location
+                "pages" => $pages,
+                "actions" => $actions,
+                "articles" => $articles,
+                "location" => $location,
             ]
         );
     }
@@ -125,64 +194,6 @@ class PageController extends Controller
             $results[] = $result;
         }
         return response()->json(array("result" => true, "pages" => $results));
-    }
-
-    public function getCategory(Page $page, $category, $location = "activities", Request $request)
-    {
-        $actions = array();
-        if ($request->has("action")) {
-            if (Str::startsWith($request->action, "like")) {
-                $actions = $page->getActions($request->action, 5);
-            } elseif (Str::startsWith($request->action, "share")) {
-                $actions = $page->getActions($request->action, 5);
-            } elseif (Str::startsWith($request->action, "like")) {
-                $actions = $page->getActions($request->action, 5);
-            } else {
-                $actions = $page->getPosts()->paginate(10);
-            }
-        } else {
-            $actions = $page->getPosts()->paginate(10);
-        }
-
-        if ($category !== "all") {
-            $category = Category::query()->findOrFail($category);
-            $actions = $page->getPosts($category->id)->paginate(10);
-            $articles = $page->getArticles($category->id)->paginate(10);
-        } else {
-            $category = new \stdClass();
-            $category->id = "-1";
-        }
-
-        if ($page->type === "company") {
-            return view("company-profile", array("page" => $page, "posts" => $posts, "the_category" => $category));
-        } else {
-            $pages = array();
-            if (Auth::check()) {
-                $page_user = $page->user->id;
-                $pages = Following::where("followings.user_id", $page_user)
-                    ->join("pages", "pages.id", "=", "followings.following")
-                    ->where("pages.id", "!=", $page->id)
-                    ->where("pages.id", "!=", Auth::user()->getPage()->id)
-                    ->select(array("pages.*", "followings.following"))
-                    ->get();
-                if (count($pages) > 5) {
-                    $pages = $pages->random(5);
-                }
-            }
-
-            $variables = array("page" => $page, "pages" => $pages, "actions" => $actions, "the_category" => $category, "location" => $location);
-
-            if ($location === "articles") {
-                $articles = $page->getArticles()->paginate(10);
-                $variables["articles"] = $articles;
-            }
-
-            if ($request->has("allskills")) {
-                $variables['allskills'] = true;
-            }
-
-            return view("user-profile", $variables);
-        }
     }
 
     public function getArticleCategory(Page $page, Category $category, Request $request)

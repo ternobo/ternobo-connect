@@ -1,9 +1,6 @@
 <template>
 <base-layout>
-    <sidebar-left>
-
-    </sidebar-left>
-    <div class="content-container-full">
+    <div class="content-container-profile">
         <div class="card">
             <ProfileCover :canChange="page.user_id == this.$root.user.id" :src="page.cover"></ProfileCover>
             <div class="card-body pb-0 d-flex justify-content-between pageinfo-card">
@@ -25,34 +22,83 @@
             </div>
         </div>
 
-        <tabs class="py-3" :state-tab='true'>
+        <tabs class="py-3" @selected="tabChange" :state-tab='true'>
             <template slot="custom-item" v-if="canEdit">
                 <div>
                     <button class="btn button-transparent rounded-circle" v-if="edit" @click="cancelEdit"><i class="material-icons">close</i></button>
                     <button class="btn btn-edit" v-html="edit ? 'ذخیره' : 'ویرایش اطلاعات <i class=\'material-icons-outlined\'>edit</i>'" @click="doEdit"></button>
                 </div>
             </template>
-            <tab name="درباره من" :href="'/'+page.slug" :selected="location==='about'||location==='home'">
+            <tab name="درباره من" :href="'/'+page.slug" :selected="location==='about' || location==='home'">
                 <Biography :value="page.about" v-model="about" :edit="edit"></Biography>
                 <ExperienceList class="mt-3" :edit="edit"></ExperienceList>
             </tab>
-            <tab name="فعالیت‌ها" :href="'/'+page.slug+'/activities'" :selected="location==='activities'">
-                <div class="row">
+            <tab name="فعالیت‌ها" :href="'/'+page.slug+'/activities'" :selected="location === 'activities'">
+                <div class="row" v-if="!loadingTab" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
                     <div class="col-md-4">
-
+                        <Categories :categories="page.categories" :location="location" :slug="page.slug" :article="false"></Categories>
                     </div>
-                    <div class="col-md-8">
-                        <NewPostCard></NewPostCard>
-                        <div class="posts"></div>
+                    <div class="col-md-8 p-0">
+                        <NewPostCard v-if="canEdit"></NewPostCard>
+                        <div class="posts pt-3">
+                            <ActionCard v-for="action in actionsList" :page="page" :action="action" :key="action.id"></ActionCard>
+                        </div>
+                        <div class="w-100 d-flex justify-content-center py-3" v-if="loadingTab">
+                            <loading-spinner class="image__spinner" />
+                        </div>
+                        <div v-if="next_page_url === null && !loadingTab">
+                            <no-content></no-content>
+                        </div>
                     </div>
                 </div>
+                <div class="w-100 d-flex justify-content-center py-3" v-if="loadingTab">
+                    <loading-spinner class="image__spinner" />
+                </div>
+
             </tab>
             <tab name="مقالات" :href="'/'+page.slug+'/articles'" :selected="location==='articles'">
+                <div class="row" v-if="!loadingTab" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
+                    <div class="col-md-4">
+                        <Categories :categories="page.categories" :location="location" :slug="page.slug" :article="true"></Categories>
+                    </div>
+                    <div class="col-md-8 p-0">
+                        <div class="card new-post" v-if="canEdit">
+                            <inertia-link href="/articles/create" class="text p-2">
+                                <lazy-image class="ml-2" loading="lazy" :src="page.profile" />
+                                <div class="textarea d-flex align-items-center">
+                                    <span class="text-light-hover d-flex align-items-center">
+                                        <i class="material-icons-outlined">post_add</i> نوشتن مقاله جدید
+                                    </span>
+                                </div>
+                            </inertia-link>
+                        </div>
+                        <div class="posts pt-3">
+                            <PostCard v-for="article in articlesList" :page="page" :post="article" :key="article.id"></PostCard>
+                        </div>
+                        <div class="w-100 d-flex justify-content-center py-3" v-if="loadingTab">
+                            <loading-spinner class="image__spinner" />
+                        </div>
+                        <div v-if="next_page_url === null && !loadingTab">
+                            <no-content></no-content>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-100 d-flex justify-content-center py-3" v-if="loadingTab">
+                    <loading-spinner class="image__spinner" />
+                </div>
             </tab>
             <tab name="تماس با من" :href="'/'+page.slug+'/contact'" :selected="location==='contact'">
             </tab>
         </tabs>
     </div>
+    <sidebar-left>
+        <div class="card mb-3" v-if="pages.length > 0">
+            <div class="card-body px-2 py-1">
+                <people-suggestion v-for="page in pages" :page="page" :key="page.id"></people-suggestion>
+            </div>
+        </div>
+        <AppFooter class="sticky-aside"></AppFooter>
+    </sidebar-left>
 </base-layout>
 </template>
 
@@ -60,6 +106,7 @@
 import AppLayout from "../../Layouts/AppLayout";
 import ProfileImage from "../../Components/Profile/ProfileImage";
 import ProfileCover from "../../Components/Profile/ProfileCover";
+import NoContent from "../../Components/NoContent";
 
 import ConnectionButton from "../../Components/buttons/ConnectionButton";
 import FollowButton from "../../Components/buttons/FollowButton";
@@ -67,11 +114,92 @@ import Biography from "../../Components/Profile/AboutMe/Biography";
 import ExperienceList from "../../Components/Profile/AboutMe/Experiences/ExperienceList";
 
 import NewPostCard from "../../Components/Cards/NewPostCard";
+import Categories from "../../Components/Profile/Categories";
+import ActionCard from "../../Components/PostCard/ActionCard";
+import PostCard from "../../Components/PostCard/PostCard";
+
+import {
+    Inertia
+} from '@inertiajs/inertia';
+
 export default {
+    created() {
+        this.actionsList = this.actions.data;
+        this.next_page_url = this.actions.next_page_url;
+
+        this.articlesList = this.articles.data;
+        this.next_page_url = this.articles.next_page_url;
+    },
     methods: {
+        loadMore() {
+            if (!this.loadingMore && this.next_page_url !== null) {
+                const options = {
+                    method: "GET",
+                    headers: {
+                        "X-Inertia": "true",
+                    },
+                    url: this.next_page_url,
+                };
+                this.loadingMore = true;
+                axios(options)
+                    .then((response) => {
+                        const data = response.data.props;
+                        if (data) {
+                            if (data.actions) {
+                                this.actionsList = data.actions.data;
+                                this.next_page_url = data.actions.next_page_url;
+                            }
+                            if (data.articles) {
+                                this.articlesList = data.articles.data;
+                                this.next_page_url = data.articles.next_page_url;
+                            }
+
+                        }
+                    })
+                    .catch((error) => {
+                        this.next_page_url = options.url;
+                    })
+                    .then(() => {
+                        this.loadingMore = false;
+                    });
+            }
+        },
+        tabChange(link) {
+            Inertia.visit(link, {
+                preserveState: true
+            });
+            const options = {
+                method: "GET",
+                headers: {
+                    "X-Inertia": "true",
+                },
+                url: link,
+            };
+            this.loadingTab = true;
+            axios(options)
+                .then((response) => {
+                    const data = response.data.props;
+                    if (data) {
+                        if (data.actions) {
+                            this.actionsList = data.actions.data;
+                            this.next_page_url = data.actions.next_page_url;
+                        }
+                        if (data.articles) {
+                            this.articlesList = data.articles.data;
+                            this.next_page_url = data.articles.next_page_url;
+                        }
+
+                    }
+                })
+                .catch((error) => {
+                    this.next_page_url = options.url;
+                })
+                .then(() => {
+                    this.loadingTab = false;
+                });
+        },
         doEdit() {
             this.edit = !this.edit;
-
         },
         cancelEdit() {
 
@@ -84,7 +212,11 @@ export default {
             experiences: [],
             skills: [],
             categories: [],
-
+            actionsList: [],
+            articlesList: [],
+            next_page_url: null,
+            loadingTab: false,
+            loadingMore: false
         }
     },
     computed: {
@@ -94,9 +226,31 @@ export default {
     },
     name: "UserProfile",
     props: {
+        pages: {
+            type: Array,
+            default: [],
+        },
         page: {
             type: Object,
             default: undefined,
+        },
+        actions: {
+            type: Object,
+            default: () => {
+                return {
+                    data: [],
+                    next_page_url: null
+                }
+            },
+        },
+        articles: {
+            type: Object,
+            default: () => {
+                return {
+                    data: [],
+                    next_page_url: null
+                }
+            },
         },
         location: {
             type: String,
@@ -110,7 +264,11 @@ export default {
         ExperienceList,
         ProfileImage,
         ProfileCover,
-        NewPostCard
+        NewPostCard,
+        Categories,
+        ActionCard,
+        NoContent,
+        PostCard
     },
     layout: AppLayout
 }
