@@ -93,6 +93,8 @@ class Post extends Model
         $medias = json_decode($this->medias);
         if (count($medias) === 1) {
             return $medias[0];
+        }elseif(count($medias) < 1){
+            return null;
         }
         return $medias;
     }

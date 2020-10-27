@@ -2,10 +2,11 @@
 
 namespace App\Providers;
 
-use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\ServiceProvider;
+use Inertia\Inertia;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,28 +28,34 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Multiple values
+        if (json_decode(Cookie::get('ternobo_current_page')) == null) {
+            if (Auth::check()) {
+                Cookie::queue("ternobo_current_page", Auth::user()->personalPage);
+            }
+        }
+
         Inertia::share([
             // Synchronously
             'app' => [
                 'name' => Config::get('app.name'),
             ],
-            "connectedPeople"=> function() {
-                if(Auth::check()){
+            "connectedPeople" => function () {
+                if (Auth::check()) {
                     return Auth::user()->getConnectionsIds();
                 }
                 return [];
             },
-            "waitingConnections"=> function(){
-                if(Auth::check()){
+            "waitingConnections" => function () {
+                if (Auth::check()) {
                     return Auth::user()->getWaitingConnectionsIds();
                 }
                 return [];
             },
             "followings" => function () {
-                if(Auth::check()){
+                if (Auth::check()) {
                     $followings = Auth::user()->followings;
                     $output = [];
-                    foreach($followings as $following){
+                    foreach ($followings as $following) {
                         $output[] = $following->following;
                     }
                     return $output;

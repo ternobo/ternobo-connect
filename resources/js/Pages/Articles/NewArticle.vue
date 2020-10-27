@@ -1,8 +1,8 @@
 <template>
 <base-layout>
     <div class="new-article w-100">
-        <CropperModal title="تصویر شاخص مقاله" :image="cover" @cropped="onCropped" :show.sync="cropping"></CropperModal>
-        <ArticleSettings @save="setSettings" :show.sync="showSettings"></ArticleSettings>
+        <CropperModal title="تصویر شاخص مقاله" :image="thumbnail" @cropped="onCropped" :show.sync="cropping"></CropperModal>
+        <ArticleSettings ref="settings" @save="setSettings" :show.sync="showSettings"></ArticleSettings>
         <div class="cover-section clickable" @click="selectFile">
             <img :src="thumbnail" v-if="thumbnail !== undefined" />
             <div class="position-absolute" style="top: 16px;left:16px" @click="thumbnail=undefined" v-if="thumbnail !== undefined">
@@ -11,11 +11,11 @@
         </div>
 
         <div class="editor-section border-bottom">
-            <input type="text" class="font-24 border-0 form-control" placeholder="عنوان مقاله" />
+            <input type="text" v-model="title" class="font-24 border-0 form-control" placeholder="عنوان مقاله" />
             <vue-editor ref="editor" v-model="content" />
         </div>
         <div class="actions-section">
-            <loading-button :loading="loading" class="btn btn-primary w-100">ارسال</loading-button>
+            <loading-button @click.native="submit" :loading="loading" class="btn btn-primary w-100">ارسال</loading-button>
             <button class="btn button-transparent btn-transparent" @click="showSettings = true"><i class="material-icons text-muted">settings</i></button>
         </div>
     </div>
@@ -30,8 +30,19 @@ import {
 } from "vue2-editor";
 import CropperModal from "../../Components/Modals/CropperModal";
 import ArticleSettings from "../../Components/Modals/ArticleSettings";
+import {
+    Inertia
+} from '@inertiajs/inertia';
 
 export default {
+    props: {
+        article: {
+            type: Object,
+            default: undefined,
+            required: false
+        },
+
+    },
     methods: {
         selectFile() {
             if (this.thumbnail === undefined) {
@@ -46,7 +57,8 @@ export default {
                         const file = (el.files[0]);
                         if (file.type.startsWith("image")) {
                             let blobURL = URL.createObjectURL(file);
-                            $this.cover = blobURL;
+                            $this.cover = file;
+                            $this.thumbnail = blobURL;
                             $this.cropping = true;
                         } else {
                             $this.toast("فقط امکان انتخاب تصویر وجود دارد.")
@@ -59,9 +71,71 @@ export default {
         },
         onCropped(cordinates, canvas) {
             canvas.toBlob((url) => this.thumbnail = URL.createObjectURL(url));
+        },
+        setSettings(settings) {
+            this.tags = settings.tags;
+            this.slug = settings.slug;
+            if (settings.category != undefined && settings.category.id) {
+                console.log(settings.category);
+                this.category = settings.category.name;
+            }
+        },
+        submit() {
+            const formData = new FormData();
+            formData.append("media", this.cover);
+            formData.append("title", this.title);
+            formData.append("text", this.content);
+            formData.append("slug", this.slug);
+            if (this.category !== null) {
+                formData.append("category", this.category);
+            }
+            formData.append("tags", JSON.stringify(this.tags));
+            this.loading = true;
+
+            var options = {
+                method: 'post',
+                url: "/articles",
+                data: formData
+            };
+
+            if (this.article !== undefined) {
+                formData.append("_method", "put");
+                axios.post("/articles/" + this.article.id, formData).then((response) => {
+                    if (response.data.result) {
+                        Inertia.visit(response.data.redirect);
+                    } else {
+                        this.handleError(this.data.errors);
+                    }
+                }).then(() => this.loading = false);
+            } else {
+                axios.post("/articles", formData).then((response) => {
+                    if (response.data.result) {
+                        Inertia.visit(response.data.redirect);
+                    } else {
+                        this.handleError(this.data.errors);
+                    }
+                }).then(() => this.loading = false);
+            }
         }
     },
     created() {
+
+        if (this.article !== undefined) {
+            this.title = this.article.title;
+            this.content = this.article.text;
+            if (this.article.medias !== null) {
+                this.thumbnail = this.article.medias;
+
+            }
+            this.tags = this.article.tags;
+            if (this.article.category != null) {
+                this.category = this.article.category.name;
+
+            }
+            this.slug = this.article.slug;
+
+        }
+
         const BlockEmbed = Quill.import('blots/block/embed');
         class VideoBlot extends BlockEmbed {
             static create(url) {
@@ -81,6 +155,11 @@ export default {
     },
 
     mounted() {
+        if (this.article !== undefined) {
+            this.$refs.settings.slug = this.slug;
+            this.$refs.settings.category = this.article.category;
+            this.$refs.settings.tags = this.tags;
+        }
         const $this = this;
         const editor = this.$refs.editor.quill;
         Quill.debug(false);
@@ -111,10 +190,14 @@ export default {
     },
     data() {
         return {
+            title: null,
             content: "",
             cropping: false,
             thumbnail: undefined,
-            cover: "/images/uploadcover.svg",
+            slug: null,
+            category: null,
+            tags: [],
+            cover: null,
             loading: false,
             showSettings: false,
         }

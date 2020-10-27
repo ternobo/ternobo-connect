@@ -106,7 +106,7 @@
             </inertia-link>
         </div>
         <div class="actions" v-if="showMenu">
-            <text class="font-08rem"> </text>
+            <span class="font-08rem"> </span>
             <div class="buttons">
                 <i class="material-icons-outlined" @click="showReshare = true">sync</i>
                 <i class="material-icons like" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
@@ -178,11 +178,11 @@ export default {
             );
         },
         postSlug: function () {
-            const post_slug = this.post.id;
-            if (this.post.slug.length > 0) {
+            let post_slug = this.post.id;
+            if (this.post.slug !== null && this.post.slug.length > 0) {
                 post_slug = this.post.slug;
             }
-            const page_slug = this.post.page.slug;
+            let page_slug = this.post.page.slug;
             return this.$APP_URL + "/" + page_slug + "/" + post_slug;
         },
         updated_at: function () {

@@ -91,7 +91,9 @@ import NewComment from "./NewComment";
 import TimeAgo from 'javascript-time-ago'
 import LoadingSpinner from "../LoadingSpinner";
 // Load locale-specific relative date/time formatting rules.
-import fa from 'javascript-time-ago/locale/fa'
+import fa from 'javascript-time-ago/locale/fa';
+
+TimeAgo.addLocale(fa);
 export default {
     mounted() {
         this.liked = this.comment.is_liked;

@@ -106,7 +106,7 @@ class Comment extends Model
                 $data['likes'] = $this->likes->toArray();
             }
             $data['liked_by'] = $this->getLikedBy();
-            $current_page = json_decode(Cookie::get('ternobo_current_page'));
+            $current_page = json_decode(Cookie::get('ternobo_current_page')) !== null ?  json_decode(Cookie::get('ternobo_current_page')) : Auth::user()->personalPage;
             $page_ids = array_column($data['likes'], "page_id");
             if (in_array($current_page->id, $page_ids)) {
                 $data['is_liked'] = true;

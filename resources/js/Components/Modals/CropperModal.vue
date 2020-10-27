@@ -27,7 +27,6 @@ export default {
     },
     props: {
         image: {
-            type: [String],
             default: undefined,
             required: true
         },

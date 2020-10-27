@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Page;
 use App\Models\Post;
-use Inertia\Inertia;
-use PHPHtmlParser\Dom;
-use App\Models\Category;
-use Illuminate\Support\Str;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
+use PHPHtmlParser\Dom;
+use PHPHtmlParser\Options;
 
 class ArticlesController extends Controller
 {
@@ -45,14 +46,18 @@ class ArticlesController extends Controller
                 "title.required" => "عنوان مقاله اجباری است",
                 "text.required" => "متن مقاله اجباری است",
                 "slug.unique" => "نامک مقاله تکراری است",
-                "slug.regex" => "نامک مقاله نامعتبر است است"
+                "slug.regex" => "نامک مقاله نامعتبر است است",
             ];
             $rules = [
                 "thumbnail" => "mimes:jpg,jpeg,png,bmp",
                 "title" => "required",
                 "text" => "required",
             ];
-            if ($request->has("slug") && $request->slug !== null) {
+            $pages = ['activities', 'articles', 'contact'];
+            if ($request->filled("slug")) {
+                if (in_array($request->slug, $pages)) {
+                    return response()->json(array("result" => false, "errors" => ['slug' => 'نامک انتخابی تامعتبر است']));
+                }
                 $rules['slug'] = "unique:posts,slug|regex:/((?!([ @\/.\\#~!%^&*,?\";']))\\w){1,200}$/";
             }
 
@@ -61,21 +66,19 @@ class ArticlesController extends Controller
             if ($validator->fails()) {
                 return response()->json(array("result" => false, "errors" => $validator->errors()));
             } else {
-
                 $post = new Post();
                 $post->user_id = Auth::user()->id;
-                $post->page_id = Auth::user()->getPage()->id;
+                $post->page_id = Auth::user()->personalPage->id;
                 $post->title = $request->title;
 
-                $text = \App\Article::scriptStripper($request->text);
+                $text = \App\Models\Post::scriptStripper($request->text);
                 $dom = new Dom();
-                $dom->setOptions([
-                    'preserveLineBreaks'=>true,
-                    'whitespaceTextNode' => true,
-                    'removeScripts' => true, // Set a global option to enable strict html parsing.
-                    'removeStyles' => true
-                ]);
-                $dom->load($text);
+                $dom->setOptions((new Options())
+                        ->setPreserveLineBreaks(true)
+                        ->setWhitespaceTextNode(true)
+                        ->setRemoveScripts(true)
+                        ->setRemoveStyles(true));
+                $dom->loadStr($text);
                 $images = $dom->find("img");
                 foreach ($images as $image) {
                     $url = $image->getAttribute("src");
@@ -88,7 +91,6 @@ class ArticlesController extends Controller
                         $image->setAttribute("srcset", "");
                     }
                 }
-                // dd($dom->outerHtml);
                 $post->text = $dom->outerHtml;
 
                 if ($request->category !== null) {
@@ -98,17 +100,17 @@ class ArticlesController extends Controller
                     $post->category_id = $category->id;
                 }
 
-                if ($request->has("slug")) {
+                if ($request->filled("slug")) {
                     $post->slug = $request->slug;
-                }else{
+                } else {
                     $post->slug = Str::slug($request->title);
                 }
 
-                $post->tags = json_encode(explode(",", $request->tags));
+                $post->tags = json_encode(json_decode($request->tags));
                 $post->type = "article";
                 $post->show = "public";
                 $medias = array();
-                if ($request->has("media")) {
+                if ($request->filled("media")) {
                     $medias = array(url($request->file("media")->store("medias")));
                 }
                 $post->medias = json_encode($medias);
@@ -117,7 +119,7 @@ class ArticlesController extends Controller
                 if ($post->slug !== null) {
                     $link = url("/" . Auth::user()->username . "/" . $post->slug);
                 }
-                Auth::user()->getPage()->addAction("post", $post->id);
+                Auth::user()->personalPage->addAction("post", $post->id);
                 return response()->json(array("result" => $result, "redirect" => $link));
             }
         } else {
@@ -128,13 +130,17 @@ class ArticlesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Article $article
+     * @param \App\Models\Page $article
      * @return \Illuminate\Http\Response
      */
     public function show(Page $page, $article)
     {
         // return Inertia::render("Feed");
-        $article = Post::query()->where("id", $article)->orWhere("slug", $article)->firstOrFail();
+        $article = Post::query()
+        ->with("page")
+        ->with("category")
+        ->where("id", $article)->orWhere("slug", $article)->firstOrFail();
+
         if ($article->type === "article" && $article->user->active) {
             SEOTools::setTitle("$article->title");
             SEOTools::setDescription(mb_substr(strip_tags($article->text), 0, 250));
@@ -161,15 +167,19 @@ class ArticlesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Article $article
+     * @param \App\Models\Post $article
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $article)
+    public function edit($article)
     {
         if (Auth::check()) {
+            $article = Post::query()
+            ->with("category")
+            ->findOrFail($article);
             if ($article->type === "article" && $article->user_id === Auth::user()->id) {
                 SEOTools::setTitle("ویرایش مقاله $article->title");
-                return view("content.new-article", array("article" => $article));
+
+                return Inertia::render("Articles/NewArticle", array("article" => $article));
             } else {
                 return abort(404);
             }
@@ -182,10 +192,10 @@ class ArticlesController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Article $article
+     * @param \App\Models\Post $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $article)
+    public function update(Post $article, Request $request)
     {
 
         if (Auth::check()) {
@@ -198,10 +208,9 @@ class ArticlesController extends Controller
                     "title.required" => "عنوان مقاله اجباری است",
                     "text.required" => "متن مقاله اجباری است",
                     "slug.unique" => "نامک مقاله تکراری است",
-                    "slug.regex" => "نامک مقاله نامعتبر است است"
+                    "slug.regex" => "نامک مقاله نامعتبر است است",
 
                 ];
-
                 $rules = [
                     "thumbnail" => "mimes:jpg,jpeg,png,bmp",
                     "title" => "required",
@@ -218,86 +227,87 @@ class ArticlesController extends Controller
                 } else {
                     $article->title = $request->title;
 
-                    $text = \App\Article::scriptStripper($request->text);
+                    $text = \App\Models\Post::scriptStripper($request->text);
                     $dom = new Dom();
-                    $dom->setOptions([
-                        'preserveLineBreaks'=>true,
-                        'whitespaceTextNode' => true,
-                        'removeScripts' => true, // Set a global option to enable strict html parsing.
-                        'removeStyles' => true
-                    ]);
-                    $dom->load($text);
+                    $dom->setOptions((new Options())
+                        ->setPreserveLineBreaks(true)
+                        ->setWhitespaceTextNode(true)
+                        ->setRemoveScripts(true)
+                        ->setRemoveStyles(true));
+                    $dom->loadStr($text);
                     $images = $dom->find("img");
                     foreach ($images as $image) {
                         $url = $image->getAttribute("src");
                         if (Str::startsWith($url, "http") || Str::startsWith($url, "https")) {
-                        $contents = file_get_contents($url);
-                        $name = time() . Auth::user()->id . substr($url, strrpos($url, '/') + 1);
+                            $contents = file_get_contents($url);
+                            $name = time() . Auth::user()->id . substr($url, strrpos($url, '/') + 1);
 
-                        Storage::put("medias/" . $name, $contents);
-                        $image->setAttribute("src", url("/medias/$name"));
-                        $image->setAttribute("srcset", "");
+                            Storage::put("medias/" . $name, $contents);
+                            $image->setAttribute("src", url("/medias/$name"));
+                            $image->setAttribute("srcset", "");
+                        }
                     }
-                }
-                $article->text = $dom->outerHtml;
+                    $article->text = $dom->outerHtml;
 
-                if ($request->has("slug") && $request->slug !== "") {
-                    $article->slug = $request->slug;
-                }else{
-                    $post->slug = Str::slug($request->title);
-                }
+                    if ($request->filled("slug")) {
+                        $article->slug = $request->slug;
+                    } else {
+                        $post->slug = Str::slug($request->title);
+                    }
 
-                if ($request->category !== null) {
-                    $category = Category::query()->where("name", $request->category)
-                        ->where("page_id", Auth::user()->getPage()->id)
-                        ->firstOrCreate(["name" => $request->category, "page_id" => Auth::user()->getPage()->id]);
-                    $article->category_id = $category->id;
-                }
-                $article->tags = json_encode(explode(",", $request->tags));
-                $article->show = "public";
-                $medias = array();
-                if ($request->has("media")) {
-                    $medias = array(url($request->file("media")->store("medias")));
-                    $article->medias = json_encode($medias);
-                }
+                    if ($request->filled("category")) {
+                        $category = Category::query()->where("name", $request->category)
+                            ->where("page_id", Auth::user()->getPage()->id)
+                            ->firstOrCreate(["name" => $request->category, "page_id" => Auth::user()->getPage()->id]);
+                        $article->category_id = $category->id;
+                    }
+                    $article->tags = json_encode(json_decode($request->tags));
+                    $article->show = "public";
+                    $medias = array();
+                    if ($request->filled("media")) {
+                        $medias = $request->file("media");
+                        if($medias!=null){
+                            $medias = array(url($medias->store("medias")));
+                            $article->medias = json_encode($medias);
 
-                $user = Auth::user();
-                $user->touch();
+                        }
+                    }
 
-                $result = $article->save();
-                $link = url("/" . Auth::user()->username . "/" . $article->id);
-                if ($article->slug !== null) {
-                    $link = url("/" . Auth::user()->username . "/" . $article->slug);
+                    $user = Auth::user();
+                    $user->touch();
+
+                    $result = $article->save();
+                    $link = url("/" . Auth::user()->username . "/" . $article->id);
+                    if ($article->slug !== null) {
+                        $link = url("/" . Auth::user()->username . "/" . $article->slug);
+                    }
+                    return response()->json(array("result" => $result, "redirect" => $link));
                 }
-                return response()->json(array("result" => $result, "redirect" => $link));
+            } else {
+                return abort(404);
             }
         } else {
-            return abort(404);
+            return redirect("/");
         }
-    } else
-{
-return redirect("/");
-}
-}
+    }
 
 /**
  * Remove the specified resource from storage.
  *
- * @param \App\Article $article
+ * @param \App\Models\Post $article
  * @return \Illuminate\Http\Response
  */
-public
-function destroy(Post $article)
-{
-    if (Auth::check()) {
-        if ($article->user_id === Auth::user()->id) {
-            $article->delete();
+    public function destroy(Post $article)
+    {
+        if (Auth::check()) {
+            if ($article->user_id === Auth::user()->id) {
+                $article->delete();
+            } else {
+                return abort(404);
+            }
         } else {
-            return abort(404);
+            return redirect("/");
         }
-    } else {
-        return redirect("/");
     }
-}
 
 }

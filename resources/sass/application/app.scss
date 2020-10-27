@@ -753,3 +753,12 @@ pre {
 .ql-picker-label{
     text-align: center;
 }
+
+.ql-syntax{
+    background: $dark;
+    color: #FFF;
+    padding: 15px;
+    direction: ltr;
+    text-align: left;
+    user-select: all;
+}

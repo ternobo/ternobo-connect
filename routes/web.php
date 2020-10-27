@@ -169,8 +169,9 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
     Route::post("/share/{post_id}", "PostController@sharePost");
 
+
     // Pages
-    Route::prefix('/{page}')->group(function () {
+    Route::prefix('/{page:slug}')->group(function () {
 
         Route::get("/{location?}", "PageController@show")->where("location", "activities|articles|contact");
 
