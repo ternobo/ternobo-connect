@@ -1,5 +1,6 @@
 <template>
 <base-layout>
+    <UserInfoModal :user="page.user" :show.sync="showEditModal"></UserInfoModal>
     <div class="content-container-profile">
         <div class="card">
             <ProfileCover :canChange="page.user_id == this.$root.user.id" :src="page.cover"></ProfileCover>
@@ -16,7 +17,7 @@
                         {{ page.name }}
                         <i v-if="page.user.is_verified === 1" class="verificationcheck mr-1 font-20">check_circle</i>
                     </strong>
-                    <i v-if="page.user_id == this.$root.user.id" class="mr-2 material-icons-outlined font-16 text-muted">edit</i>
+                    <i v-if="page.user_id == this.$root.user.id" class="mr-2 material-icons-outlined font-16 text-muted" @click="showEditModal=true">edit</i>
                 </span>
                 <small class="font-14">{{ page.short_bio }}</small>
             </div>
@@ -122,6 +123,8 @@ import {
     Inertia
 } from '@inertiajs/inertia';
 
+import UserInfoModal from "../../Components/Modals/UserInfoModal";
+
 export default {
     created() {
         this.actionsList = this.actions.data;
@@ -215,6 +218,7 @@ export default {
             actionsList: [],
             articlesList: [],
             next_page_url: null,
+            showEditModal: false,
             loadingTab: false,
             loadingMore: false
         }
@@ -266,6 +270,7 @@ export default {
         ProfileCover,
         NewPostCard,
         Categories,
+        UserInfoModal,
         ActionCard,
         NoContent,
         PostCard

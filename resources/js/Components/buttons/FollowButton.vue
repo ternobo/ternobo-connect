@@ -7,7 +7,11 @@ import LoadingButton from "./LoadingButton";
 
 export default {
     created() {
-        if (this.$page.followings.includes(this.page)) {
+        let page = this.page;
+        if (typeof (page) != "number") {
+            page = parseInt(page);
+        }
+        if (this.$page.followings.includes(page)) {
             this.followed = true;
             this.text = "دنبال شده";
         }

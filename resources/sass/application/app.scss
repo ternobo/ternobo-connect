@@ -797,3 +797,10 @@ pre {
     text-align: left;
     user-select: all;
 }
+
+.hand-hover{
+    cursor: grab;
+}
+.hand-hover:active{
+    cursor: grabbing;
+}

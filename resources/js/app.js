@@ -13,9 +13,13 @@ import infiniteScroll from 'vue-infinite-scroll'
 import TernoboApp from "./Libs/TernoboApp";
 import App from "./Layouts/App";
 import '@trevoreyre/autocomplete-vue/dist/style.css'
+import Dialog from 'bootstrap-vue-dialog/dist/bootstrap-vue-dialog'
 
-window.formatPersian = false;
 Vue.prototype.window = window.window;
+
+Vue.use(Dialog);
+
+
 // Install V-Select
 Vue.component('v-select', vSelect);
 

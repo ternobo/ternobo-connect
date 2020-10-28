@@ -1,6 +1,6 @@
 <template>
 <div class="material-textfield">
-    <input :type="type" placeholder=" " :class="inputClass" @input="$emit('input',value)" v-model="value" :maxlength="maxlength" class="input" />
+    <input :type="type" placeholder=" " :class="inputClass" @input="$emit('input',val)" v-model="val" :maxlength="maxlength" class="input" />
     <label v-if="placeholder !== undefined">{{ placeholder }} <span class="text-action" v-if="required">*</span></label>
     <slot></slot>
 </div>
@@ -8,12 +8,25 @@
 
 <script>
 export default {
+    created() {
+        this.val = this.value;
+    },
+    watch: {
+        value() {
+            this.val = this.value;
+        }
+    },
     data() {
         return {
-            value: ''
+            val: ''
         }
     },
     props: {
+        value: {
+            type: String,
+            default: "",
+            required: false
+        },
         required: {
             type: Boolean,
             default: false,

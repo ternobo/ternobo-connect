@@ -10,10 +10,14 @@ import LoadingButton from "./LoadingButton";
 
 export default {
     created() {
-        if (this.$page.connectedPeople.includes(this.user)) {
+        let user = this.user;
+        if (typeof (user) != "number") {
+            user = parseInt(user);
+        }
+        if (this.$page.connectedPeople.includes(user)) {
             this.connected = true;
             this.text = "متصل شده";
-        } else if (this.$page.waitingConnections.includes(this.user)) {
+        } else if (this.$page.waitingConnections.includes(user)) {
             this.waiting = true;
             this.text = "در انتظار تایید";
         }

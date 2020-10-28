@@ -1,12 +1,15 @@
 <template>
-<div class="material-textfield">
-    <textarea-autosize :minHeight="40" placeholder=" " :class="inputClass" @input="$emit('input',val)" v-model="val" :maxlength="maxlength" class="input"></textarea-autosize>
+<div class="material-textfield material-textarea">
+    <textarea-autosize :minHeight="minHeight" placeholder=" " :class="inputClass" @input="$emit('input',val)" v-model="val" :maxlength="maxlength" class="input"></textarea-autosize>
     <label v-if="placeholder !== undefined">{{ placeholder }}</label>
 </div>
 </template>
 
 <script>
 export default {
+    created() {
+        this.val = this.value;
+    },
     watch: {
         value(newValue) {
             this.val = newValue;
@@ -18,6 +21,11 @@ export default {
         }
     },
     props: {
+        minHeight: {
+            type: Number,
+            default: 40,
+            required: false
+        },
         value: {
             default: "15000",
             required: false,

@@ -160,6 +160,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
         Route::post("/categories/sort/{id}", "CategoryController@sort");
 
+        Route::resource("categories", "CategoryController");
 
         // Notifications
         Route::get('/notifications', 'NotificationController@index')->name('notifications');
@@ -170,6 +171,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
     Route::post("/share/{post_id}", "PostController@sharePost");
 
     Route::get("/tags/{name}", "HomeController@tag");
+
 
     // Pages
     Route::prefix('/{page:slug}')->group(function () {

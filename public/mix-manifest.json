@@ -1,7 +1,12 @@
 {
-    "/js//app.js": "/js//app.js?id=eaa9622ed2b1ea8f7532",
+    "/js//app.js": "/js//app.js?id=082047ec58cb315bee26",
     "/css/app.css": "/css/app.css?id=82b7a5fe0f9407ec76cf",
-    "/manifest.js": "/manifest.js?id=a5b9ad59ec9ce08ab787",
+    "/manifest.js": "/manifest.js?id=6bf08a7980b35be35bb0",
     "/js//vendor.js": "/js//vendor.js?id=de2743ad5573bed06749",
-    "/js/framemanager.js": "/js/framemanager.js?id=dba91ec5dec8dcb09181"
+    "/js/framemanager.js": "/js/framemanager.js?id=dba91ec5dec8dcb09181",
+    "/js/vendors~draggable.js": "/js/vendors~draggable.js?id=687d2da7beccbee942b9",
+    "/js/vendors~vue-persian-datetime-picker.js": "/js/vendors~vue-persian-datetime-picker.js?id=9048046eeba5bdec2cde",
+    "/js/vue-persian-datetime-picker.js": "/js/vue-persian-datetime-picker.js?id=89bc184ade0901462b9e",
+    "/js/NewPostModal.js": "/js/NewPostModal.js?id=94fd7fc77ad7a8684ead",
+    "/js/TextareaAutosize.js": "/js/TextareaAutosize.js?id=f42d5bcc56ba937c53ce"
 }

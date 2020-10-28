@@ -21,8 +21,8 @@
                                             </div>
                                         </inertia-link>
                                         <div class="btn-group">
-                                            <FollowButton :page='page'></FollowButton>
-                                            <ConnectionButton v-if="page.type === 'personal'" :user="page.user"></ConnectionButton>
+                                            <FollowButton :page='page.id'></FollowButton>
+                                            <ConnectionButton v-if="page.type === 'personal'" :user="page.user_id"></ConnectionButton>
                                         </div>
                                     </div>
                                 </div>

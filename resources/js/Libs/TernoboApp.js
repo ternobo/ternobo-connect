@@ -34,16 +34,16 @@ TernoboApp.install = function (Vue, options) {
     Vue.component("lazy-image", LazyImage);
     Vue.component("loading-spinner", LoadingSpinner);
     Vue.component("new-post-card", NewPostCard);
-    Vue.component("new-post-modal", () => import("../Components/Modals/NewPostModal"));
+    Vue.component("new-post-modal", () => import(/* webpackChunkName: "NewPostModal" */ "../Components/Modals/NewPostModal"));
     Vue.component("tselect", Tselect);
-    Vue.component("textarea-autosize", () => import("../Components/inputs/TextareaAutosize"));
+    Vue.component("textarea-autosize", () => import(/* webpackChunkName: "TextareaAutosize" */ "../Components/inputs/TextareaAutosize"));
     // Directives
     Vue.directive("lazyload", LazyloadDirective);
     Vue.directive("clipboard", CopyToClipboard);
 
     Vue.directive('sortable', function (el, binding) {
         binding = binding || {}
-        var sortable = new Sortable(el, binding)
+        var sortable = new Sortable(el, binding.value)
     })
 
     Vue.directive("no-space", function(el){
@@ -58,7 +58,9 @@ TernoboApp.install = function (Vue, options) {
 
     })
 
-    Vue.component('date-picker', () => import("vue-persian-datetime-picker"));
+    Vue.component('date-picker', () => import(/* webpackChunkName: "vue-persian-datetime-picker" */ "vue-persian-datetime-picker"));
+
+    Vue.component('draggable', () => import(/* webpackChunkName: "draggable" */  "vuedraggable"));
 
 
 

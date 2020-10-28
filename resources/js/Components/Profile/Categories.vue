@@ -26,12 +26,12 @@
                 <inertia-link :href="'/'+slug+'/category/all/' + location" class="text-light hover-dark">
                     <i class="material-icons">layers</i> همه‌ی مطالب
                 </inertia-link>
-                <i class="clickable text-light hover-dark material-icons-outlined">edit</i>
+                <i class="clickable text-light hover-dark material-icons-outlined" @click="edit=!edit">{{ !edit ? 'edit' : 'save' }}</i>
             </div>
             <ul class="pr-3 text-light border-right">
-                <li v-for="category in categories" :key="category.id">
-                    <inertia-link :href="'/'+slug+'/category/'+category.id + '/' +location">{{ category.name }}</inertia-link>
-                </li>
+                <draggable v-model="list" :disabled="!edit" handle=".hand-hover">
+                    <category-item :edit="edit" v-for="category in list" :key="category.id" :location="location" :slug="slug" :category="category"></category-item>
+                </draggable>
             </ul>
         </div>
 
@@ -40,7 +40,38 @@
 </template>
 
 <script>
+import CategoryItem from "./CategoryItem";
 export default {
+    watch: {
+        edit() {
+            if (!this.edit) {
+                this.list.forEach((item, index) => {
+                    axios.post(this.$APP_URL + "/categories/sort/" + item.id, {
+                        order: item.sort_place
+                    });
+                });
+            }
+        },
+        list() {
+            return this.list.forEach((item, index) => {
+                item.sort_place = index;
+            });
+        }
+    },
+    created() {
+        this.list = this.categories;
+    },
+    data() {
+        return {
+            edit: false,
+            list: [
+
+            ],
+        }
+    },
+    components: {
+        CategoryItem
+    },
     props: {
         categories: {
             type: Array,
