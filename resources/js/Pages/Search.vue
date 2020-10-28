@@ -21,12 +21,8 @@
                                             </div>
                                         </inertia-link>
                                         <div class="btn-group">
-                                            <button class="connect-btn" onclick="Ternobo.connect('45', this)">
-                                                <span class="mdc-button__ripple"></span>متصل شدن
-                                            </button>
-                                            <button class="follow-btn" onclick="Ternobo.follow('45', this)">
-                                                <span class="mdc-button__ripple"></span>دنبال کردن
-                                            </button>
+                                            <FollowButton :page='page'></FollowButton>
+                                            <ConnectionButton v-if="page.type === 'personal'" :user="page.user"></ConnectionButton>
                                         </div>
                                     </div>
                                 </div>
@@ -64,6 +60,8 @@ import AppLayout from "../Layouts/AppLayout";
 import NoContent from "../Components/NoContent";
 import PostCard from "../Components/PostCard/PostCard";
 
+import ConnectionButton from "../Components/buttons/ConnectionButton";
+import FollowButton from "../Components/buttons/FollowButton";
 export default {
     created() {
         this.data = this.results.data;
@@ -154,7 +152,9 @@ export default {
     },
     components: {
         NoContent,
-        PostCard
+        PostCard,
+        FollowButton,
+        ConnectionButton
     },
     name: "Search",
     layout: AppLayout,
