@@ -36,7 +36,7 @@
                 <div class="col-md-6 d-flex justify-content-center align-items-center flex-column">
                     <img src="/images/logo-type.svg" class="thelogo" style="max-with: 350px" v-if="hasBG" />
                     <img src="/images/logo-type-dark.svg" class="thelogo" style="max-with: 350px" v-if="!hasBG" />
-                    <autocomplete style="min-width: 270px" :search="search" id="searchforminput" class="w-100 mt-3" autocomplete="off" required type="text" name="q" placeholder="هر چیزی که در جستن آنی، آنی" />
+                    <autocomplete style="min-width: 270px" :search="search" id="searchforminput" class="w-100 mt-3" autocomplete="off" required type="text" name="q" placeholder="هر چیزی که در جستن آنی، " />
                 </div>
             </div>
         </form>

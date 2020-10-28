@@ -82,11 +82,27 @@ export default {
         },
         submit() {
             const formData = new FormData();
-            formData.append("media", this.cover);
-            formData.append("title", this.title);
-            formData.append("text", this.content);
-            formData.append("slug", this.slug);
-            if (this.category !== null) {
+            if (this.cover !== null && this.cover !== undefined) {
+                formData.append("media", this.cover);
+            }
+
+            if (this.title !== null && this.title !== undefined) {
+                formData.append("title", this.title);
+            } else {
+                this.toast("عنوان مقاله اجباری است.")
+            }
+
+            if (this.content !== null && this.content !== undefined) {
+                formData.append("text", this.content);
+            } else {
+                this.toast("محتوای مقاله اجباری است.")
+            }
+
+            if (this.slug !== null && this.slug !== undefined) {
+                formData.append("slug", this.slug);
+            }
+
+            if (this.category !== null && this.category !== undefined) {
                 formData.append("category", this.category);
             }
             formData.append("tags", JSON.stringify(this.tags));
@@ -119,7 +135,6 @@ export default {
         }
     },
     created() {
-
         if (this.article !== undefined) {
             this.title = this.article.title;
             this.content = this.article.text;
@@ -128,8 +143,10 @@ export default {
 
             }
             this.tags = this.article.tags;
-            if (this.article.category != null) {
+            if (this.article.category !== null) {
                 this.category = this.article.category.name;
+            } else {
+                this.category = undefined;
 
             }
             this.slug = this.article.slug;
@@ -157,7 +174,7 @@ export default {
     mounted() {
         if (this.article !== undefined) {
             this.$refs.settings.slug = this.slug;
-            this.$refs.settings.category = this.article.category;
+            this.$refs.settings.category = this.category;
             this.$refs.settings.tags = this.tags;
         }
         const $this = this;

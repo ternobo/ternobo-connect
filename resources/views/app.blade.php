@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    {{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> --}}
     {!! SEO::generate() !!}
 
         <script>
@@ -18,7 +18,7 @@
         <script>
             var user = @auth @json(Auth::user()); @endauth @guest false @endguest
         </script>
-   
+
 </head>
 
 <body class="font-sans antialiased">
@@ -28,7 +28,6 @@
     <script src="/js/vendor.js" defer></script>
     <script src="/js/app.js" defer></script>
     <script src="{{ url('/js/framemanager.js') }}" defer></script>
-
 </body>
 
 </html>

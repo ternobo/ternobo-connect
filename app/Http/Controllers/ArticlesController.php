@@ -252,7 +252,7 @@ class ArticlesController extends Controller
                     if ($request->filled("slug")) {
                         $article->slug = $request->slug;
                     } else {
-                        $post->slug = Str::slug($request->title);
+                        $article->slug = Str::slug($request->title);
                     }
 
                     if ($request->filled("category")) {
