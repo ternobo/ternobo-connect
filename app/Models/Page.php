@@ -482,4 +482,22 @@ class Page extends Model
         return $result;
     }
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::saved(function ($model) {
+            if($model->type == 'personal'){
+                $user = $model->user;
+                if ($page !== null) {
+                    $user->username = $model->slug;
+                    $user->profile = $model->profile;
+                    $user->cover = $model->cover;
+                    $user->short_bio = $model->short_bio;
+                    $user->save();
+                }
+            }
+        });
+    }
+
 }

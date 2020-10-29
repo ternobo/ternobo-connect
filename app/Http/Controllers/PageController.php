@@ -212,8 +212,6 @@ class PageController extends Controller
             $options = $request->input("option");
             $page = Auth::user()->getPage();
             $result = true;
-
-//            dd($options);
             foreach ($options as $option) {
                 $option = (object) $option;
                 Website::where("page_id", $page->id)->where("option_id", $option->key)->delete();
@@ -234,7 +232,6 @@ class PageController extends Controller
             $options = $request->input("option");
             $page = Auth::user()->getPage();
             $result = true;
-//            dd($options);
             foreach ($options as $option) {
                 $option = (object) $option;
                 PageSocial::where("page_id", $page->id)->where("option_id", $option->key)->delete();
@@ -256,13 +253,43 @@ class PageController extends Controller
             $page = Auth::user()->getPage();
             $result = true;
             Contact::where("page_id", $page->id)->delete();
-//            dd($options);
             foreach ($options as $option) {
                 $option = (object) $option;
                 Contact::where("page_id", $page->id)->where("option_id", $option->key)->delete();
                 $result = Contact::setOption($option->key, $option->value, $page->id);
             }
             return response()->json(array("result" => $result));
+        }
+    }
+
+    public function saveResume(Request $request){
+        $messages = [
+            "about.max" => "بایوگرافی می‌تواند حداکثر 2500 کاراکتر باشد",
+        ];
+        $validator = Validator::make($request->all(), [
+            "about" => "max:2500",
+        ]);
+        if ($validator->fails()) {
+            return response()->json(array("result" => false, "errors" => $validator->errors()));
+        } else {
+            $page = Auth::user()->personalPage;
+            if($request->filled("about")){
+                $page->about = $request->about;
+            }
+
+            if($request->filled("skills")){
+                $skills = $request->skills;
+            }
+
+            if($request->filled("achievements")){
+                $achievements = $request->achievements;
+
+            }
+
+
+
+            $page->save();
+
         }
     }
 

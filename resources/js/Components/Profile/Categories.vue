@@ -1,5 +1,5 @@
 <template>
-<div class="card">
+<div class="card sticky-aside">
     <div class="card-body">
         <div class="title mb-3">
             <strong class="font-18">
@@ -18,8 +18,7 @@
                 <i class="material-icons-outlined">share</i> بازنشر‌ها
             </inertia-link>
         </div>
-
-        <hr>
+        <hr v-if="!article">
 
         <div class="categories">
             <div class="d-flex justify-content-between">

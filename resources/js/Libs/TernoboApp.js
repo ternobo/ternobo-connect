@@ -22,6 +22,10 @@ var Sortable = require('sortablejs').default
 TernoboApp.install = function (Vue, options) {
     Vue.component("AppHeader", () => import("../Components/App/header/AppHeader"));
     Vue.component("AppFooter", () => import("../Components/App/AppFooter"));
+
+    Vue.component("MaterialTextField", () => import("../Components/inputs/MaterialTextField"));
+    Vue.component("MaterialTextArea", () => import("../Components/inputs/MaterialTextArea"));
+
     Vue.component("tabs", Tabs);
     Vue.component("tab", Tab);
     Vue.component("base-layout", BaseLayout);
@@ -46,15 +50,15 @@ TernoboApp.install = function (Vue, options) {
         var sortable = new Sortable(el, binding.value)
     })
 
-    Vue.directive("no-space", function(el){
-        el.addEventListener("keydown",function(e){
+    Vue.directive("no-space", function (el) {
+        el.addEventListener("keydown", function (e) {
             if (e.which === 32)
                 return e.preventDefault();
-        },false);
+        }, false);
 
-        el.addEventListener("change",function(e){
+        el.addEventListener("change", function (e) {
             el.value = el.value.replace(/\s/g, "");
-        },false);
+        }, false);
 
     })
 
@@ -62,7 +66,11 @@ TernoboApp.install = function (Vue, options) {
 
     Vue.component('draggable', () => import(/* webpackChunkName: "draggable" */  "vuedraggable"));
 
-
+    Vue.prototype.removeFromArray = (list, index) =>
+        [
+            ...list.slice(0, index),
+            ...list.slice(index + 1)
+        ];
 
     const setup = function (vm) {
         Vue.prototype.toast = function (msessage) {

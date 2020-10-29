@@ -31,6 +31,13 @@
  * https://github.com/twbs/icons/blob/master/LICENSE.md
  */
 
+/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <http://feross.org>
+ * @license  MIT
+ */
+
 /*! 
   * portal-vue © Thorsten Lünborg, 2019 
   * 
@@ -41,6 +48,10 @@
   * https://github.com/linusborg/portal-vue
   * 
  */
+
+/*! https://mths.be/utf8js v2.1.2 by @mathias */
+
+/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
 /**
 	 * jquery-circle-progress - jQuery Plugin to draw animated circular progress bars:

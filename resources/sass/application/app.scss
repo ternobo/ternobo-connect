@@ -804,3 +804,19 @@ pre {
 .hand-hover:active{
     cursor: grabbing;
 }
+.slugItem{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: all;
+    background-color: $body-bg;
+    border-radius: 20px;
+    color: $light;
+    font-size: 14px;
+    padding: 8px 12px;
+    .icon{
+        border-right: 1px solid;
+        padding-right: 5px;
+        margin-right: 5px;
+    }
+}

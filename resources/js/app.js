@@ -13,7 +13,7 @@ import infiniteScroll from 'vue-infinite-scroll'
 import TernoboApp from "./Libs/TernoboApp";
 import App from "./Layouts/App";
 import '@trevoreyre/autocomplete-vue/dist/style.css'
-import Dialog from 'bootstrap-vue-dialog/dist/bootstrap-vue-dialog'
+import Dialog from 'bootstrap-vue-dialog/dist/bootstrap-vue-dialog';
 
 Vue.prototype.window = window.window;
 

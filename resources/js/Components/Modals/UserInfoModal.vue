@@ -14,7 +14,7 @@
             <MaterialTextArea :min-height="150" class="w-100" input-class="w-100" :value="Biography" v-model="Biography" placeholder="بیوگرافی"></MaterialTextArea>
         </div>
         <div class="col-md-12 mt-3">
-            <v-select :placeholder="'جنسیت'" dir="rtl" v-model="gender" :options="[{label: 'زن', code: '1'},{label: 'مرد', code: '2'},{label: 'تراجنسی', code: '3'}]"></v-select>
+            <v-select class="dropdown-list" :placeholder="'جنسیت'" dir="rtl" v-model="gender" :options="[{label: 'زن', code: '1'},{label: 'مرد', code: '2'},{label: 'تراجنسی', code: '3'}]"></v-select>
         </div>
         <div class="col-md-12 d-flex justify-content-center align-items-center mt-3" style="margin-bottom: -16px">
             <loading-button class="btn btn-dark px-4" :loading="loading" @click.native="save">ثبت</loading-button>

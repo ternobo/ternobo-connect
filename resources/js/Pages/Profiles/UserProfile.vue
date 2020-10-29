@@ -31,15 +31,14 @@
                 </div>
             </template>
             <tab name="درباره من" :href="'/'+page.slug" :selected="location==='about' || location==='home'">
-                <Biography :value="page.about" v-model="about" :edit="edit"></Biography>
-                <ExperienceList class="mt-3" :edit="edit"></ExperienceList>
+                <AboutTab :edit="edit" :page="page"></AboutTab>
             </tab>
             <tab name="فعالیت‌ها" :href="'/'+page.slug+'/activities'" :selected="location === 'activities'">
                 <div class="row" v-if="!loadingTab" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
                     <div class="col-md-4">
                         <Categories :categories="page.categories" :location="location" :slug="page.slug" :article="false"></Categories>
                     </div>
-                    <div class="col-md-8 p-0">
+                    <div class="col-md-8">
                         <NewPostCard v-if="canEdit"></NewPostCard>
                         <div class="posts pt-3">
                             <ActionCard v-for="action in actionsList" :page="page" :action="action" :key="action.id"></ActionCard>
@@ -62,7 +61,7 @@
                     <div class="col-md-4">
                         <Categories :categories="page.categories" :location="location" :slug="page.slug" :article="true"></Categories>
                     </div>
-                    <div class="col-md-8 p-0">
+                    <div class="col-md-8">
                         <div class="card new-post" v-if="canEdit">
                             <inertia-link href="/articles/create" class="text p-2">
                                 <lazy-image class="ml-2" loading="lazy" :src="page.profile" />
@@ -89,6 +88,7 @@
                 </div>
             </tab>
             <tab name="تماس با من" :href="'/'+page.slug+'/contact'" :selected="location==='contact'">
+                <ContactTab :edit="edit" :page="page"></ContactTab>
             </tab>
         </tabs>
     </div>
@@ -111,19 +111,9 @@ import NoContent from "../../Components/NoContent";
 
 import ConnectionButton from "../../Components/buttons/ConnectionButton";
 import FollowButton from "../../Components/buttons/FollowButton";
-import Biography from "../../Components/Profile/AboutMe/Biography";
-import ExperienceList from "../../Components/Profile/AboutMe/Experiences/ExperienceList";
-
-import NewPostCard from "../../Components/Cards/NewPostCard";
-import Categories from "../../Components/Profile/Categories";
-import ActionCard from "../../Components/PostCard/ActionCard";
-import PostCard from "../../Components/PostCard/PostCard";
-
 import {
     Inertia
 } from '@inertiajs/inertia';
-
-import UserInfoModal from "../../Components/Modals/UserInfoModal";
 
 export default {
     created() {
@@ -261,19 +251,22 @@ export default {
             default: "home",
         },
     },
+    /**
+
+     */
     components: {
+        AboutTab: () => import( /* webpackChunkName: "AboutMeTabProfile" */ "../../Components/Profile/AboutMe/AboutMeTab"),
         FollowButton,
         ConnectionButton,
-        Biography,
-        ExperienceList,
         ProfileImage,
         ProfileCover,
-        NewPostCard,
-        Categories,
-        UserInfoModal,
-        ActionCard,
+        NewPostCard: () => import("../../Components/Cards/NewPostCard"),
+        Categories: () => import("../../Components/Profile/Categories"),
+        UserInfoModal: () => import("../../Components/Modals/UserInfoModal"),
+        ActionCard: () => import("../../Components/PostCard/ActionCard"),
         NoContent,
-        PostCard
+        PostCard: () => import("../../Components/PostCard/PostCard"),
+        ContactTab: () => import( /* webpackChunkName: "ContactTabProfile" */ "../../Components/Profile/Contact/ContactTab")
     },
     layout: AppLayout
 }

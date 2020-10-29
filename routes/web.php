@@ -143,6 +143,9 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             Route::post('info', "PageController@getPageInfo");
             Route::post('posts', "PageController@getPosts");
             Route::resource("categories", "CategoryController");
+
+            Route::post('save-resume', "PageController@saveResume");
+
         });
         /**
          * End Pages API
@@ -171,6 +174,10 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
     Route::post("/share/{post_id}", "PostController@sharePost");
 
     Route::get("/tags/{name}", "HomeController@tag");
+
+
+    Route::post("/contact/contact-option", "ContactsController@getContactOptions");
+    Route::post("/contacts/{page}", "ContactsController@getContactData");
 
 
     // Pages
