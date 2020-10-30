@@ -2,6 +2,7 @@
 <div class="profile clickable" :class="size" @click="openFileSelect">
     <CropperModal title="انتخاب تصویر پروفایل" :show.sync="crop" v-if="canChange" :aspect-ratio="1/1" :image="image" @cropped="upload"></CropperModal>
     <input type="file" class="d-none" v-if="canChange" ref="imageFile" @change="imageSelect" />
+
     <lazy-image :src="picture" img-class="rounded-circle" :class="size" />
     <i class="material-icons" v-if="canChange">camera</i>
     <div class="position-absolute d-flex align-items-center justify-content-center profile-xlg" style="top:-3px;left:-3px;right:-3px;bottom:-3px;width:calc(100%+3px);height:calc(100%+3px);background:rgba(0,0,0,0.5);" v-if="loading">
@@ -15,6 +16,9 @@ import CropperModal from "../Modals/CropperModal";
 import {
     Inertia
 } from '@inertiajs/inertia'
+import {
+    PuSkeleton
+} from 'vue-loading-skeleton'
 export default {
     watch: {
         src(newValue) {

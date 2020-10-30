@@ -1,11 +1,14 @@
 export default {
-    inserted: (el) => {
+    inserted: (el,bindings) => {
         function loadImage() {
             const imageElement = Array.from(el.children).find(
                 el => el.nodeName === "IMG"
             );
             if (imageElement) {
                 imageElement.addEventListener("load", () => {
+                    if(bindings.value.onLoad){
+                        bindings.value.onLoad();
+                    }
                     setTimeout(() => el.classList.add("loaded"), 100);
                 });
                 imageElement.addEventListener("error", () => {

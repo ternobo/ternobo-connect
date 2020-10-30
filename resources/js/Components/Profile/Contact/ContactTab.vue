@@ -2,7 +2,7 @@
 <div class="row ml-0">
     <div class="col-md-4">
         <WebsiteCard class="mt-3" :page="page" :edit="edit"></WebsiteCard>
-
+        <SocialsCard class="mt-3" :page="page" :edit="edit"></SocialsCard>
     </div>
     <div class="col-md-8">
         <SlugCard :edit="edit" :page="page" v-model="slug"></SlugCard>
@@ -15,6 +15,7 @@
 import SlugCard from "./SlugCard";
 import ContactCard from "./ContactCard";
 import WebsiteCard from "./WebsitesCard";
+import SocialsCard from "./SocialsCard";
 export default {
     created() {
         this.slug = this.page.slug;
@@ -41,7 +42,8 @@ export default {
     components: {
         SlugCard,
         WebsiteCard,
-        ContactCard
+        ContactCard,
+        SocialsCard
     }
 }
 </script>

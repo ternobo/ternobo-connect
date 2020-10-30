@@ -64,9 +64,9 @@ export default {
         }
     },
     created() {
-        if (this.contact != undefined && this.contact != null) {
-            this.val = this.contact.url;
-            this.option = this.contact.option;
+        if (this.website != undefined && this.website != null) {
+            this.val = this.website.url;
+            this.option = this.website.option;
         }
         this.value = {
             "option": this.option,
@@ -94,7 +94,7 @@ export default {
             type: String,
             default: undefined,
         },
-        contact: {
+        website: {
             type: Object,
             default: undefined,
         },
