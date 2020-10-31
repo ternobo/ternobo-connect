@@ -24,8 +24,8 @@
         </div>
 
         <tabs class="py-3" @selected="tabChange" :state-tab='true'>
-            <template slot="custom-item" v-if="canEdit">
-                <div>
+            <template slot="custom-item">
+                <div v-if="canEdit && showEdit">
                     <button class="btn button-transparent rounded-circle" v-if="edit" @click="cancelEdit"><i class="material-icons">close</i></button>
                     <button class="btn btn-edit" v-html="edit ? 'ذخیره' : 'ویرایش اطلاعات <i class=\'material-icons-outlined\'>edit</i>'" @click="doEdit"></button>
                 </div>
@@ -54,7 +54,6 @@
                 <div class="w-100 d-flex justify-content-center py-3" v-if="loadingTab">
                     <loading-spinner class="image__spinner" />
                 </div>
-
             </tab>
             <tab name="مقالات" :href="'/'+page.slug+'/articles'" :selected="location==='articles'">
                 <div class="row" v-if="!loadingTab" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
@@ -122,6 +121,12 @@ export default {
 
         this.articlesList = this.articles.data;
         this.next_page_url = this.articles.next_page_url;
+
+        if (this.location.endsWith("articles") || this.location.endsWith("activities")) {
+            this.showEdit = false;
+        } else {
+            this.showEdit = true;
+        }
     },
     methods: {
         loadMore() {
@@ -158,6 +163,11 @@ export default {
             }
         },
         tabChange(link) {
+            if (link.endsWith("articles") || link.endsWith("activities")) {
+                this.showEdit = false;
+            } else {
+                this.showEdit = true;
+            }
             Inertia.visit(link, {
                 preserveState: true
             });
@@ -209,6 +219,7 @@ export default {
             articlesList: [],
             next_page_url: null,
             showEditModal: false,
+            showEdit: true,
             loadingTab: false,
             loadingMore: false
         }

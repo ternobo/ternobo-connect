@@ -16,6 +16,7 @@ export default {
         this.$refs.loader.$el.firstElementChild.classList.add(this.imgClass);
         this.$refs.loader.$el.firstElementChild.style.top = "0";
         this.$refs.loader.$el.firstElementChild.style.position = "absolute";
+        this.$refs.loader.$el.firstElementChild.style.borderRadius = getComputedStyle(this.$refs.imageItem).borderRadius;
     },
     components: {
         Skeleton
@@ -32,6 +33,15 @@ export default {
         }
     },
     watch: {
+        loading() {
+            if (this.loading) {
+                this.$refs.imageItem.style.opacity = 0;
+                this.$refs.loader.$el.firstElementChild.classList.add(this.imgClass);
+                this.$refs.loader.$el.firstElementChild.style.top = "0";
+                this.$refs.loader.$el.firstElementChild.style.position = "absolute";
+                this.$refs.loader.$el.firstElementChild.style.borderRadius = getComputedStyle(this.$refs.imageItem).borderRadius;
+            }
+        },
         src(val) {
             this.$el.classList.remove("loaded");
             this.$refs.imageItem.src = val;

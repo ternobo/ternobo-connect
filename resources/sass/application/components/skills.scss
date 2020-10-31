@@ -1,0 +1,78 @@
+.skills-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    li {
+        width: 100%;
+        flex: 100%;
+        padding: 7px 0;
+
+        .skill-name {
+            display: flex;
+            align-items: center;
+
+            .endorsement {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: 600;
+                flex-direction: column;
+                padding-left: 12px;
+                margin-left: 12px;
+                border-left: 2px solid $icons;
+                cursor: pointer;
+
+                i {
+                    font-size: 30px;
+                }
+
+                .action,
+                i {
+                    color: $light;
+                    transition: 0.3s all;
+                }
+
+                &:hover {
+                    .action,
+                    i {
+                        color: $dark;
+                    }
+                }
+            }
+        }
+
+        .editItem {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .actions {
+                border-radius: 32px;
+                display: flex;
+                flex-direction: column;
+                color: $icons;
+                background: $body-bg;
+                height: max-content;
+                padding: 2px;
+                margin-left: 24px;
+            }
+
+        }
+
+    }
+
+    li.edit {
+        width: 100%;
+        flex: 100%;
+        padding: 7px 0;
+
+        &:not(:last-child) {
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #C8C8C8;
+            margin-bottom: 1rem;
+        }
+    }
+
+}

@@ -6,7 +6,10 @@
                 <a class="clickable" @click="selectTab(tab)"><i class="material-icons ml-2">{{ tab.icon }}</i>{{ tab.name }}</a>
             </li>
         </ul>
-        <slot name="custom-item"></slot>
+        <div>
+            <slot name="custom-item"></slot>
+
+        </div>
     </div>
 
     <div class="tabs-details">

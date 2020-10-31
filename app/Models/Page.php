@@ -50,7 +50,8 @@ class Page extends Model
     public function skills()
     {
         if ($this->type === "personal") {
-            return $this->belongsTo("App\Models\Skill", "user_id", "user_id");
+            return $this->hasMany("App\Models\Skill", "user_id", "user_id")
+                ->with("credits");
         } else {
             return new HasManyEmpty(Page::query(), $this, '', '');
         }
@@ -284,10 +285,9 @@ class Page extends Model
             ->with("post.category")
             ->where("page_id", $this->id)->latest();
 
-
         if ($category !== null) {
-            $actions = $actions->whereHas("post", function ($query) use ($category){
-                $query->where("category_id",$category);
+            $actions = $actions->whereHas("post", function ($query) use ($category) {
+                $query->where("category_id", $category);
             });
         }
 
@@ -487,7 +487,7 @@ class Page extends Model
         parent::boot();
 
         self::saved(function ($model) {
-            if($model->type == 'personal'){
+            if ($model->type == 'personal') {
                 $user = $model->user;
                 if ($page !== null) {
                     $user->username = $model->slug;

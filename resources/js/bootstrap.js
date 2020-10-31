@@ -29,8 +29,6 @@ if(user){
     });
     const notificationChannel = window.Echo.private("notification."+user.personal_page.id);
     notificationChannel.listen("NotificationEvent", function (data) {
-        console.log("Ddd");
-
         console.log(data);
     });
 

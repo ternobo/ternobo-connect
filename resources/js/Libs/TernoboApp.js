@@ -14,6 +14,7 @@ import {
     Tselect
 } from "tselect";
 import TimeAgo from 'javascript-time-ago';
+import numeral from "numeral";
 
 const TernoboApp = {};
 
@@ -66,11 +67,13 @@ TernoboApp.install = function (Vue, options) {
 
     Vue.component('draggable', () => import(/* webpackChunkName: "draggable" */  "vuedraggable"));
 
-    Vue.prototype.removeFromArray = (list, index) =>
-        [
-            ...list.slice(0, index),
-            ...list.slice(index + 1)
-        ];
+    Vue.prototype.formatNumber = function (number, format) {
+        return numeral(number).format(format);
+    };
+
+    Vue.prototype.userURL = (user)=>{
+        return '/'+user.username;
+    }
 
     const setup = function (vm) {
         Vue.prototype.toast = function (msessage) {
