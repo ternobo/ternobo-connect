@@ -607,8 +607,11 @@ img {
 
 .profile {
     border-radius: 50%;
-    height: 64px;
-    width: 64px;
+    min-height: 64px;
+    max-height: 64px;
+
+    min-width: 64px;
+    max-width: 64px;
 }
 
 .hover-danger:hover {
@@ -757,6 +760,11 @@ pre {
     box-shadow: none !important;
 }
 
+
+.flip-list-move {
+    transition: transform 0.5s;
+}
+
 .autocomplete-input[aria-expanded=true] {
     border-radius: 25px 25px 0 0 !important;
     ;
@@ -827,3 +835,7 @@ pre {
 @import "./components/skills.scss";
 
 @import "./components/radio-button.scss";
+
+@import "./components/experiences.scss";
+
+@import "./components/material/checkbox.scss";

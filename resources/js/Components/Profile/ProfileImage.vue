@@ -1,5 +1,5 @@
 <template>
-<div class="profile clickable" :class="size" @click="openFileSelect">
+<div class="profile-box clickable" :class="size" @click="openFileSelect">
     <CropperModal title="انتخاب تصویر پروفایل" :show.sync="crop" v-if="canChange" :aspect-ratio="1/1" :image="image" @cropped="upload"></CropperModal>
     <input type="file" class="d-none" v-if="canChange" ref="imageFile" @change="imageSelect" />
 
@@ -99,50 +99,10 @@ export default {
             picture: "",
         }
     },
+
     components: {
         CropperModal
     }
 
 }
 </script>
-
-<style lang="scss" scoped>
-.profile {
-    margin-top: -104px;
-    position: relative;
-    border: 3px solid #FFF;
-    background: #FFF;
-
-    >i {
-        position: absolute;
-        top: -3px;
-        left: -3px;
-        right: -3px;
-        bottom: -3px;
-        width: calc(100%+3px);
-        height: calc(100%+3px);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #FFF;
-        border-radius: 50%;
-        background: rgba($color: #191919, $alpha: 0.5);
-        opacity: 0;
-        transition: 0.3s all;
-    }
-
-    >figure {
-        transition: 0.3s all;
-    }
-
-    &:hover {
-        >figure {
-            filter: blur(2px);
-        }
-
-        >i {
-            opacity: 1;
-        }
-    }
-}
-</style>

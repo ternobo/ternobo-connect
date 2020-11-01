@@ -18,7 +18,8 @@ class Skill extends Model
         return $this->hasMany("App\Models\SkillCredit", "skill_id");
     }
 
-    public function toArray(){
+    public function toArray()
+    {
         $data = parent::toArray();
         $data['credit_text'] = $this->getCreditText();
         return $data;
@@ -26,54 +27,56 @@ class Skill extends Model
 
     public function getCreditText()
     {
-        $self = false;
-        $credits = $this->credits;
-        $nums = count($credits);
-        if ($nums > 2) {
-            $first = $credits[0]->user;
-            $second = $credits[1]->user;
-            if ($first->id === Auth::user()->id) {
-                $first->name = "شما";
-                $self = true;
-            } elseif ($second->id === Auth::user()->id) {
-                $second->name = "شما";
-                $self = true;
-            }
-            if ($self) {
-                $verb = "کرده اید";
-            } else {
-                $verb = "کرده اند";
-            }
-            return ['first' => $first, "second" => $second, 'verb' => $verb, "nums" => $nums];
-        } elseif ($nums === 2) {
-            $first = $credits[0]->user;
-            $second = $credits[1]->user;
-            if ($first->id === Auth::user()->id) {
-                $first->name = "شما";
-                $self = true;
-            } elseif ($second->id === Auth::user()->id) {
-                $second->name = "شما";
-                $self = true;
-            }
-            if ($self) {
-                $verb = "کرده اید";
-            } else {
-                $verb = "کرده اند";
-            }
-            return ['first' => $first, "second" => $second, 'verb' => $verb, "nums" => $nums];
-        } elseif ($nums > 0) {
-            $first = $credits[0]->user;
+        if (Auth::check()) {
+            $self = false;
+            $credits = $this->credits;
+            $nums = count($credits);
+            if ($nums > 2) {
+                $first = $credits[0]->user;
+                $second = $credits[1]->user;
+                if ($first->id === Auth::user()->id) {
+                    $first->name = "شما";
+                    $self = true;
+                } elseif ($second->id === Auth::user()->id) {
+                    $second->name = "شما";
+                    $self = true;
+                }
+                if ($self) {
+                    $verb = "کرده اید";
+                } else {
+                    $verb = "کرده اند";
+                }
+                return ['first' => $first, "second" => $second, 'verb' => $verb, "nums" => $nums];
+            } elseif ($nums === 2) {
+                $first = $credits[0]->user;
+                $second = $credits[1]->user;
+                if ($first->id === Auth::user()->id) {
+                    $first->name = "شما";
+                    $self = true;
+                } elseif ($second->id === Auth::user()->id) {
+                    $second->name = "شما";
+                    $self = true;
+                }
+                if ($self) {
+                    $verb = "کرده اید";
+                } else {
+                    $verb = "کرده اند";
+                }
+                return ['first' => $first, "second" => $second, 'verb' => $verb, "nums" => $nums];
+            } elseif ($nums > 0) {
+                $first = $credits[0]->user;
 
-            if ($first->id === Auth::user()->id) {
-                $first->name = "شما";
-                $self = true;
+                if ($first->id === Auth::user()->id) {
+                    $first->name = "شما";
+                    $self = true;
+                }
+                if ($self) {
+                    $verb = "اید";
+                } else {
+                    $verb = "است";
+                }
+                return ['first' => $first, 'verb' => $verb, "nums" => $nums];
             }
-            if ($self) {
-                $verb = "اید";
-            } else {
-                $verb = "است";
-            }
-            return ['first' => $first, 'verb' => $verb, "nums" => $nums];
         }
         return null;
     }

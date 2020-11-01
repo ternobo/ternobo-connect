@@ -168,9 +168,7 @@ export default {
             } else {
                 this.showEdit = true;
             }
-            Inertia.visit(link, {
-                preserveState: true
-            });
+            window.history.pushState({}, false, link)
             const options = {
                 method: "GET",
                 headers: {

@@ -14,3 +14,46 @@
     align-items: center;
     flex-direction: row;
 }
+
+.profile-box {
+    margin-top: -104px;
+    position: relative;
+    background: #FFF;
+
+    > i {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #FFF;
+        border-radius: 50%;
+        background: rgba($color: #191919, $alpha: 0.5);
+        opacity: 0;
+        transition: 0.3s all;
+    }
+
+    > figure {
+        transition: 0.3s all;
+
+        img{
+            border: 4px solid #FFF;
+        }
+
+    }
+
+    &:hover {
+        >figure {
+            filter: blur(2px);
+        }
+
+        > i {
+            opacity: 1;
+        }
+    }
+}

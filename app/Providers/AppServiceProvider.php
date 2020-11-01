@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Cookie;
@@ -39,6 +40,9 @@ class AppServiceProvider extends ServiceProvider
             'app' => [
                 'name' => Config::get('app.name'),
             ],
+            "SEO" => function (){
+                return SEOTools::generate();
+            },
             "connectedPeople" => function () {
                 if (Auth::check()) {
                     return Auth::user()->getConnectionsIds();

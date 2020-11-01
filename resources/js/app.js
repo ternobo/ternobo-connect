@@ -102,6 +102,11 @@ document.addEventListener('inertia:start', event => {
     TProgress.start();
 });
 document.addEventListener("inertia:finish", event => {
+
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(vue_app.$inertia.page.props.SEO, 'text/html');
+    window.document.title = doc.title;
+
     vue_app.url = window.location.pathname;
     setTimeout(() => TProgress.done(), 500);
 });

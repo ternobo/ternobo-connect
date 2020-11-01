@@ -16,6 +16,10 @@ import {
 import TimeAgo from 'javascript-time-ago';
 import numeral from "numeral";
 
+import PersianDate from 'persian-date';
+
+window.PersianDate = PersianDate;
+
 const TernoboApp = {};
 
 var Sortable = require('sortablejs').default
@@ -67,12 +71,35 @@ TernoboApp.install = function (Vue, options) {
 
     Vue.component('draggable', () => import(/* webpackChunkName: "draggable" */  "vuedraggable"));
 
+    Vue.prototype.yearsFrom = function (startYear,to) {
+        var currentYear = to || new PersianDate().year(), years = [];
+        startYear = startYear || 1980;
+        while (startYear <= currentYear) {
+            years.push(startYear++);
+        }
+        return years;
+    }
+
+    Vue.prototype.months = function (to) {
+        to = to || 12;
+        let months = [];
+        for (let i = 1; i <= to; i++) {
+            months.push(
+                {
+                    label: new PersianDate()._monthName(i),
+                    id: i
+                }
+            );
+        }
+        return months;
+    }
+
     Vue.prototype.formatNumber = function (number, format) {
         return numeral(number).format(format);
     };
 
-    Vue.prototype.userURL = (user)=>{
-        return '/'+user.username;
+    Vue.prototype.userURL = (user) => {
+        return '/' + user.username;
     }
 
     const setup = function (vm) {

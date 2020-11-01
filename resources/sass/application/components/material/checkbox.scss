@@ -1,0 +1,84 @@
+$md-checkbox-checked-color: $dark;
+$md-checkbox-border-color: $border-color;
+$md-checkbox-border-color-disabled: $border-color;
+$md-checkbox-checked-color-disabled: $icons;
+
+$md-checkbox-margin: 1em 0;
+$md-checkbox-size: 1em;
+$md-checkbox-padding: .25em;
+$md-checkbox-border-width: 3px;
+$md-checkbox-border-radius: 0.125em;
+$md-checkmark-width: 0.125em;
+$md-checkbox-label-padding: .75em;
+
+.md-checkbox {
+    position: relative;
+    margin: $md-checkbox-margin;
+    text-align: right;
+
+    &.md-checkbox-inline {
+        display: inline-block;
+    }
+
+    label {
+        cursor: pointer;
+        display: inline;
+        line-height: $md-checkbox-size;
+        vertical-align: top;
+        clear: both;
+        padding-right: 1px;
+
+        &:not(:empty) {
+            padding-right: $md-checkbox-label-padding;
+        }
+
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        &:before {
+            // box
+            width: $md-checkbox-size;
+            height: $md-checkbox-size;
+            background: #fff;
+            border: $md-checkbox-border-width solid $md-checkbox-border-color;
+            border-radius: $md-checkbox-border-radius;
+            cursor: pointer;
+            transition: all .3s;
+        }
+    }
+
+    input[type="checkbox"] {
+        outline: 0;
+        visibility: hidden;
+        width: $md-checkbox-size;
+        margin: 0;
+        display: block;
+        float: right;
+        font-size: inherit;
+
+        &:checked {
+            +label:before {
+                background: $md-checkbox-checked-color;
+                border: 3px solid #E0E0E0;
+            }
+        }
+
+        &:disabled {
+            +label:before {
+                border-color: $md-checkbox-border-color-disabled;
+            }
+
+            &:checked {
+                +label:before {
+                    background: $md-checkbox-checked-color-disabled;
+                }
+            }
+        }
+    }
+
+}

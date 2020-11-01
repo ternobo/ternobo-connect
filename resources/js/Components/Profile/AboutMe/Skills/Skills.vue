@@ -7,12 +7,14 @@
                 <i class="material-icons">add</i>
             </button>
         </div>
-        <ul class="skills-list p-0">
-            <li v-if="loading">
+        <ul class="skills-list p-0" v-if="loading">
+            <li>
                 <Skeleton :count="4" :heigth="25" />
             </li>
-            <Skill @deleted="onDelete(index)" @up="up(index)" @down="down(index)" @input="updateData" :user="page.user" :edit="edit" v-for="(skill, index) in skills" :skill="skill" :key="'skill_' + skill.id" />
         </ul>
+        <draggable ref="draggable" tag="ul" v-bind="dragOptions" v-model="skills" class="skills-list p-0" :disabled="!edit" handle=".hand-hover">
+            <Skill @deleted="onDelete(index)" v-model="skills[index]" :user="page.user" :edit="edit" v-for="(skill, index) in skills" :skill="skill" :key="'skill_' + skill.id" />
+        </draggable>
     </div>
 </div>
 </template>
@@ -23,50 +25,30 @@ import {
 } from "vue-loading-skeleton";
 import Skill from "./Skill";
 export default {
-    methods: {
-        up(index) {
-            // console.log("hh");
-            if (index !== 0) {
-                let skills = this.skills;
-                const temp = skills[index];
-                const temp1 = skills[index - 1];
-
-                this.$set(this.skills, (index - 1), temp);
-                this.$set(this.skills, index, temp1);
-            }
-
-        },
-
-        down(index) {
-            if (index !== this.skills.length - 1) {
-                this.skills = this.skills.map((element, i) => {
-                    // iterate array and change places
-                    if (i === index) {
-                        return this.skills[index + 1];
-                    } else if (i === index + 1) {
-                        return this.skills[index];
-                    } else {
-                        return element;
-                    }
+    watch: {
+        edit(val) {
+            if (!val) {
+                this.skills.forEach((item, index) => {
+                    item.isNew = false;
+                    this.$set(this.skills, index, item);
                 });
             }
-        },
-
+        }
+    },
+    methods: {
         onDelete(index) {
             this.skills.splice(index, 1);
         },
         addSkill() {
             this.skills.push({
                 name: '',
-                id: 'skill_' + Math.round((new Date()).getTime() / 1000)
+                id: 'skill_' + Math.round((new Date()).getTime() / 1000),
+                isNew: true
             });
-        },
-        updateData() {
-            this.skills = this.getData();
         },
         getData() {
             let data = [];
-            this.$children.forEach((item) => {
+            this.$refs.draggable.$children.forEach((item) => {
                 data.push(item.skillVal);
             });
             return data;
@@ -74,9 +56,21 @@ export default {
     },
     data() {
         return {
+            drag: false,
             loading: false,
+            list: [],
             skills: [],
         };
+    },
+    computed: {
+        dragOptions() {
+            return {
+                animation: 200,
+                group: "description",
+                disabled: false,
+                ghostClass: "ghost"
+            };
+        }
     },
     props: {
         edit: {
@@ -90,7 +84,7 @@ export default {
             required: true,
         },
     },
-    mounted() {
+    created() {
         this.skills = this.page.skills;
     },
     components: {

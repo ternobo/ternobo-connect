@@ -1,5 +1,5 @@
 <template>
-<li>
+<li v-if="skill != undefined">
     <SkillCreditModal v-if="user.id != $page.user.id" :show.sync="creditModal" :user="user" :skill="skillVal"></SkillCreditModal>
     <div class="skill-name" v-if="!edit">
         <div class="endorsement" v-if="user.id != $page.user.id">
@@ -28,13 +28,13 @@
     </div>
     <div class="editItem" v-else>
         <div class="actions" v-if="edit">
-            <div class="d-flex flex-column">
-                <i class="material-icons clickable" @click="$emit('up')">keyboard_arrow_up</i>
-                <i class="material-icons clickable" @click="$emit('down')">keyboard_arrow_down</i>
-            </div>
-            <i class="material-icons-outlined clickable">delete</i>
+            <i class="material-icons hand-hover">unfold_more</i>
+            <i class="material-icons-outlined hover-danger clickable">delete</i>
         </div>
-        <MaterialTextField v-model="skillVal.name" class="material--sm w-100" input-class="w-100"></MaterialTextField>
+        <MaterialTextField v-if="skillVal.isNew" v-model="skillVal.name" class="material--sm w-100" input-class="w-100"></MaterialTextField>
+        <span class="font-18 text-dark" v-else>
+            {{ skillVal.name }}
+        </span>
     </div>
 </li>
 </template>
