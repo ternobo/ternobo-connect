@@ -200,7 +200,11 @@ export default {
                 });
         },
         doEdit() {
-            this.edit = !this.edit;
+            if (this.edit) {
+
+            } else {
+                this.edit = true;
+            }
         },
         cancelEdit() {
 

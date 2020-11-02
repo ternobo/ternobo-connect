@@ -4,6 +4,7 @@
     <ExperienceList class="mt-3" :edit="edit"></ExperienceList>
     <EducationsList class="mt-3" :edit="edit"></EducationsList>
     <Skills :edit="edit" :page="page" class="mt-3"></Skills>
+    <AchievementsCard class="mt-3" :edit="edit" :page="page"></AchievementsCard>
 </div>
 </template>
 
@@ -33,7 +34,8 @@ export default {
         Biography: () => import("./Biography"),
         ExperienceList: () => import("./Experiences/ExperienceList"),
         Skills: () => import("./Skills/Skills"),
-        EducationsList: () => import("./Education/EducationsList")
+        EducationsList: () => import("./Education/EducationsList"),
+        AchievementsCard: () => import("./Achievements/AchievementsCard")
 
     }
 

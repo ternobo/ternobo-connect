@@ -2,7 +2,7 @@
 <div class="card">
     <div class="card-body">
         <div class="d-flex mb-3 aling-items-center justify-content-between">
-            <h5>بایوگرافی</h5>
+            <h2 class="font-20">بایوگرافی</h2>
             <div class="character-counter" v-if="edit">
                 <span class="counter tex-dark">{{ leftCharacter }}</span>
                 <div class="progress ml-1 mb-0" style="width: 100px;height: 5px;">
