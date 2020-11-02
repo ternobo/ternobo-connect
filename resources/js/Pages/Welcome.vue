@@ -22,12 +22,12 @@
             </div>
         </div>
         <div class="d-flex">
-            <inertia-link v-if="$root.user" :class="{'text-dark': !hasBG, 'text-white': hasBG}" href="/feed">
+            <inertia-link v-if="$page.user" :class="{'text-dark': !hasBG, 'text-white': hasBG}" href="/feed">
                 <i class="navheader-icon material-icons-outlined" :class="{'text-dark': !hasBG, 'text-white': hasBG}">home</i>
             </inertia-link>
 
-            <button v-if="!$root.user" class="btn btn-transparent border-left" :class="{'text-dark': !hasBG}" @click="showLogin = !showLogin">ورود</button>
-            <button v-if="!$root.user" class="btn btn-transparent" :class="{'text-dark': !hasBG}" @click="showSignup = !showSignup">ثبت‌نام</button>
+            <button v-if="!$page.user" class="btn btn-transparent border-left" :class="{'text-dark': !hasBG}" @click="showLogin = !showLogin">ورود</button>
+            <button v-if="!$page.user" class="btn btn-transparent" :class="{'text-dark': !hasBG}" @click="showSignup = !showSignup">ثبت‌نام</button>
         </div>
     </div>
     <div class="search-section" :class="{noBG: !hasBG}">

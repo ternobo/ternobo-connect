@@ -1,13 +1,13 @@
 <template>
 <div class="usermenu card d-block">
-    <div class="card-header d-flex bg-white border-bottom">
-        <a :href="'/'+this.$root.user.username" class="d-flex aling-items-center">
-            <img class="profile-sm" :src="this.$root.user.profile" />
+    <div class="card-header px-2 d-flex bg-white border-bottom">
+        <a :href="'/'+this.$page.user.username" class="d-flex aling-items-center">
+            <img class="profile-sm" :src="this.$page.user.profile" />
             <span class="mx-2 d-flex flex-column justify-content-center">
-                <strong class="text-black">{{ this.$root.user.name }}
-                    <i v-if="this.$root.user.is_verified === 1" class="verificationcheck">check_circle</i>
+                <strong class="text-black">{{ this.$page.user.name }}
+                    <i v-if="this.$page.user.is_verified === 1" class="verificationcheck">check_circle</i>
                 </strong>
-                <small>{{this.$root.user.short_bio}}</small>
+                <small>{{this.$page.user.short_bio}}</small>
             </span>
         </a>
     </div>

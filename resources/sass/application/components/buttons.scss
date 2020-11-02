@@ -11,6 +11,7 @@
 
 .follow-btn:hover {
     background: #CDEAF9;
+    color: rgb(8, 152, 223);
 }
 
 .connect-btn {
@@ -21,6 +22,7 @@
 
 .connect-btn:hover {
     background: #CCF4DC;
+    color: rgb(0, 200, 83);
 }
 
 .btn-transparent {
@@ -50,9 +52,16 @@
 }
 
 .btn-connection-waiting {
+    font-size: 0.6rem !important;
     @extend .follow-btn;
     background: #FEFCEA;
     color: #EFDC36;
+}
+
+.btn-connection-waiting:hover {
+    background: #fffce4;
+    color: #EFDC36;
+
 }
 
 .btn-edit{

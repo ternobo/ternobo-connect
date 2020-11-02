@@ -2,6 +2,7 @@
 <div>
     <Biography :value="page.about" v-model="about" :edit="edit"></Biography>
     <ExperienceList class="mt-3" :edit="edit"></ExperienceList>
+    <EducationsList class="mt-3" :edit="edit"></EducationsList>
     <Skills :edit="edit" :page="page" class="mt-3"></Skills>
 </div>
 </template>
@@ -31,7 +32,8 @@ export default {
     components: {
         Biography: () => import("./Biography"),
         ExperienceList: () => import("./Experiences/ExperienceList"),
-        Skills: () => import("./Skills/Skills")
+        Skills: () => import("./Skills/Skills"),
+        EducationsList: () => import("./Education/EducationsList")
 
     }
 

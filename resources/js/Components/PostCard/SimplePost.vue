@@ -4,7 +4,7 @@
     <EmbedCodeModal :post="post" :show.sync='showEmbed'></EmbedCodeModal>
     <div class="post-header pt-0">
         <inertia-link class="publisher" :href="'/'+post.page.slug">
-            <lazy-image class="mb-0" :src="post.page.profile" />
+            <lazy-image class="profile-md mb-0" img-class="profile-md" :src="post.page.profile" />
             <div>
                 <strong>
                     {{ post.page.name }}
@@ -97,7 +97,7 @@
         <pre class="text" id="posteditable-93">{{ post.text }}</pre>
     </div>
     <div class="post-footer">
-        <div class="tagandcate">
+        <div class="tagandcate" v-if="post.tags.length > 0 || post.category !== null">
             <div class="tags">
                 <inertia-link v-for="tag in post.tags" :key="tag" class="tag-item" :href="'/tags/' + tag">
                     {{ tag }}

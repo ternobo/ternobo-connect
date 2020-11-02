@@ -1,8 +1,8 @@
 <template>
 <div class="experience">
     <div class="actions" v-if="edit">
-        <i class="material-icons sort">unfold_more</i>
-        <i class="material-icons-outlined">delete</i>
+        <i class="material-icons hand-hover">unfold_more</i>
+        <i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
     </div>
     <div class="detail">
         <div class="d-flex flex-column ml-3">

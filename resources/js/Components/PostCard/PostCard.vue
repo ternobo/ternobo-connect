@@ -1,5 +1,5 @@
 <template>
-<component :post="post" v-bind:is="componentType"></component>
+<component class="mb-3" :post="post" v-bind:is="componentType"></component>
 </template>
 
 <script>

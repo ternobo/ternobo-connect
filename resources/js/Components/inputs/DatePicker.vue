@@ -1,7 +1,7 @@
 <template>
 <div class="d-flex">
-    <v-select class="dropdown-list ml-2 w-50" :placeholder="'سال'" dir="rtl" v-model="year" :options="years"></v-select>
-    <v-select class="dropdown-list w-50" :placeholder="'ماه'" dir="rtl" v-model="month" :options="monthsList"></v-select>
+    <v-select class="dropdown-list ml-2 w-50" v-if="!hideYear" :placeholder="'سال'" dir="rtl" v-model="year" :options="years"></v-select>
+    <v-select class="dropdown-list w-50" v-if="!hideMonth" :placeholder="'ماه'" dir="rtl" v-model="month" :options="monthsList"></v-select>
 </div>
 </template>
 
@@ -14,6 +14,16 @@ export default {
         }
     },
     props: {
+        hideMonth: {
+            type: Boolean,
+            default: false,
+            required: false
+        },
+        hideYear: {
+            type: Boolean,
+            default: false,
+            required: false
+        },
         value: {
             default: null,
         },

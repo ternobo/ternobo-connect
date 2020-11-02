@@ -3,7 +3,7 @@
     <new-post-modal :show.sync="showPostModal"></new-post-modal>
     <div class="card-body px-2 py-2">
         <div class="text d-flex align-items-center">
-            <lazy-image img-class="profile" id="new-post-profile" style="margin: 0 10px;" class="profile" loading="lazy" :src="$page.user.profile" />
+            <lazy-image img-class="profile" class="profile ml-2 mb-0" loading="lazy" :src="$page.user.profile" />
             <div class="w-100 clickable" style="border-radius: 15px;background: #F5F5F5;padding: 8px 12px;" @click="showPostModal = true">
                 <label for="postinput" class="d-none d-lg-block text-light-hover px-1 clickable m-0">
                     <span style="color: #707070;">{{ 'به چی فکر می‌کنی ' + $page.user.first_name + '؟' }}</span>
@@ -12,7 +12,7 @@
                     اگر در خویش میل نوشتن سراغ کردی...
                 </label>
             </div>
-            <div class="d-lg-flex d-none text-muted align-items-center float-left p-2">
+            <div class="d-lg-flex d-none text-muted align-items-center float-left p-2 pl-0">
                 <a href="#" class="text-grey d-flex align-items-center" data-action="open" data-target="#postmediaselect" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="افزودن ویدیو / تصویر" style="
                        "><i class="material-icons-outlined font-17">crop_original</i></a>
                 <span class="splitor-line"></span>

@@ -3,30 +3,56 @@
     border-radius: 50%;
     height: 44px;
     width: 44px;
+
+    min-height: 44px;
+    max-height: 44px;
+    min-width: 44px;
+    max-width: 44px;
+
 }
 
 .profile-sm {
     border-radius: 50%;
     height: 48px;
     width: 48px;
+
+    min-height: 48px;
+    max-height: 48px;
+    min-width: 48px;
+    max-width: 48px;
 }
 
 .profile-md {
     border-radius: 50%;
     height: 72px;
     width: 72px;
+
+    min-height: 72px;
+    max-height: 72px;
+    min-width: 72px;
+    max-width: 72px;
 }
 
 .profile-lg{
     height: 88px;
     width: 88px;
     border-radius: 50%;
+
+    min-height: 88px;
+    max-height: 88px;
+    min-width: 88px;
+    max-width: 88px;
 }
 
 .profile-xlg{
     height: 148px;
     width: 148px;
     border-radius: 50%;
+
+    min-height: 148px;
+    max-height: 148px;
+    min-width: 148px;
+    max-width: 148px;
 }
 
 .pageinfo-card{

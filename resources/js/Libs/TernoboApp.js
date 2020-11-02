@@ -74,8 +74,8 @@ TernoboApp.install = function (Vue, options) {
     Vue.prototype.yearsFrom = function (startYear,to) {
         var currentYear = to || new PersianDate().year(), years = [];
         startYear = startYear || 1980;
-        while (startYear <= currentYear) {
-            years.push(startYear++);
+        while (currentYear >= startYear) {
+            years.push(currentYear--);
         }
         return years;
     }

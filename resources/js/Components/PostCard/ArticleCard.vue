@@ -4,7 +4,7 @@
     <ReshareModal :post="post" :show.sync="showReshare"></ReshareModal>
     <div class="post-header pt-0">
         <inertia-link class="publisher" :href="'/' + post.page.slug">
-            <img :src="post.page.profile" />
+            <lazy-image class="profile-md mb-0" img-class="profile-md" :src="post.page.profile" />
             <div>
                 <strong>
                     {{ post.page.name }}
@@ -95,7 +95,7 @@
         <h4 class="mt-3 mb-0">{{ post.title }}</h4>
     </inertia-link>
     <div class="post-footer">
-        <div class="tagandcate">
+        <div class="tagandcate" v-if="post.tags.length > 0 || post.category !== null">
             <div class="tags">
                 <inertia-link v-for="(tag, index) in post.tags" :key="tag + '_POST_TAG_' + post.id + '_' + index" class="tag-item" :href="'/tags/' + tag">
                     {{ tag }}

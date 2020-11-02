@@ -4,7 +4,7 @@
     <EmbedCodeModal :post="post.share" :show.sync='showEmbed'></EmbedCodeModal>
     <div class="post-header pt-0">
         <inertia-link class="publisher" :href="'/'+post.page.slug">
-            <lazy-image class="mb-0" :src="post.page.profile" />
+            <lazy-image class="profile-md mb-0" img-class="profile-md" :src="post.page.profile" />
             <div>
                 <strong>
                     {{ post.page.name }}
@@ -100,7 +100,7 @@
         <component :is="componentType" class="shadow-0" style="margin-bottom: 0 !important" :post="post.share" :show-menu="false"></component>
     </div>
     <div class="post-footer">
-        <div class="tagandcate">
+        <div class="tagandcate" v-if="post.tags.length > 0 || post.category !== null">
             <div class="tags" v-if="post.tags.length > 0">
                 <a v-for="tag in post.tags" :key="tag" class="tag-item" :href="'/tags/' + tag">
                     {{ tag }}
