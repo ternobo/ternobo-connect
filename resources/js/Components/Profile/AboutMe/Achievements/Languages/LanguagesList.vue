@@ -1,5 +1,5 @@
-<template lang="language">
-<div>
+<template>
+<div v-if="languages.length > 0">
     <div class="py-3">
         <div class="d-flex mb-2 align-items-center clickable justify-content-between" @click="showDetailed">
             <div class="d-flex align-items-center">

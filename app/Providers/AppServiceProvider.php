@@ -57,17 +57,20 @@ class AppServiceProvider extends ServiceProvider
                 return [];
             },
             "currentPage" => function () {
-                $current_page = json_decode(Cookie::get('ternobo_current_page')) !== null ?
-                Page::query()
-                    ->with("categories")
-                    ->with("skills")
-                    ->find(json_decode(Cookie::get('ternobo_current_page'))->id) :
-                Auth::user()->personalPage()
-                    ->with("categories")
-                    ->with("skills")
-                    ->first();
+                if (Auth::check()) {
+                    $current_page = json_decode(Cookie::get('ternobo_current_page')) !== null ?
+                    Page::query()
+                        ->with("categories")
+                        ->with("skills")
+                        ->find(json_decode(Cookie::get('ternobo_current_page'))->id) :
+                    Auth::user()->personalPage()
+                        ->with("categories")
+                        ->with("skills")
+                        ->first();
+                    return $current_page;
+                }
+                return null;
 
-                return $current_page;
             },
             "followings" => function () {
                 if (Auth::check()) {

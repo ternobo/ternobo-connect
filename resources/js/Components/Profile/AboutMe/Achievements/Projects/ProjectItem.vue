@@ -1,26 +1,36 @@
 <template>
-<div class="project">
-    <div class="detail">
-        <div class="d-flex flex-column align-items-center ml-3">
-            <div class="actions" v-if="edit">
+<li class="achievment" :class="{ 'detailed': detailed }" v-if="val != undefined">
+    <div class="mr-3 w-100" v-if="!edit">
+        <div class="d-flex justify-content-center" v-if="detailed">
+            <div class="title">
+                <a :href="val.link" v-if="val.link != null && val.link.length > 0"><strong>{{ val.name }}</strong></a>
+                <span v-else><strong>{{ val.name }}</strong></span>
+                <span class="text-muted">{{ time_text }}</span>
+            </div>
+            <p class="bg-body" v-if="val.description != null && val.description.length > 0">
+                {{ val.description }}
+            </p>
+        </div>
+        <div class="achievement-name" v-else>
+            <a :href="val.link" v-if="val.link != null && val.link.length > 0"><strong>{{ val.name }}</strong></a>
+            <span v-else><strong>{{ val.name }}</strong></span>
+        </div>
+    </div>
+    <div class="editItem" v-else>
+        <div class="d-flex flex-column align-items-center ml-3" v-if="edit">
+            <div class="actions">
                 <i class="material-icons hand-hover">unfold_more</i>
                 <i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
             </div>
-            <button class="btn font-12 follow-btn" @click="showMore = !showMore" v-if="edit">
+            <button class="btn font-12 follow-btn" @click="showMore = !showMore">
                 {{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
             </button>
         </div>
-        <div class="mr-3 w-100" v-if="!edit">
-            <strong class="text-dark">{{ val.name }}</strong>
-            <div class="d-flex aling-items-center">
-                <span class="text-muted"> {{ time_text }} </span>
-            </div>
-            <p class="job-description my-2" :class="{ open: showMore }">
-                {{ val.description }}
-            </p>
-            <span class="clickable text-action" v-if="val.description.length > 468" @click="showMore = !showMore">مشاهده {{ showMore ? "کمتر" : "بیشتر ..." }}</span>
-        </div>
-        <div class="row w-100 m-0" v-else>
+
+        <!--
+            Content Edit
+        !-->
+        <div class="row">
             <div class="col-md-12 py-4">
                 <MaterialTextField v-model="val.name" :required="true" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="نام پروژه"></MaterialTextField>
             </div>
@@ -53,8 +63,11 @@
                 <textarea-autosize class="form-control" v-model="val.description"></textarea-autosize>
             </div>
         </div>
+        <!--
+            Content Edit End
+        !-->
     </div>
-</div>
+</li>
 </template>
 
 <script>
@@ -63,7 +76,9 @@ import DatePicker from "../../../../inputs/DatePicker";
 import MaterialTextField from "../../../../inputs/MaterialTextField";
 import Checkbox from "../../../../inputs/Checkbox";
 
+import AchievementsItem from "../../../../../Mixins/AchievementsItem";
 export default {
+    mixins: [AchievementsItem],
     created() {
         if (this.value.name) {
             this.val = this.value;

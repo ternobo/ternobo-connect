@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="publishs.length > 0">
     <div class="py-3">
         <div class="d-flex mb-2 aling-items-center justify-content-between">
             <h2 class="font-20">انتشارات</h2>
