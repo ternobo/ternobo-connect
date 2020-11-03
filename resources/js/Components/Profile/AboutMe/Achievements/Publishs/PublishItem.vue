@@ -21,26 +21,18 @@
             <span class="clickable text-action" v-if="val.description.length > 468" @click="showMore = !showMore">مشاهده {{ showMore ? "کمتر" : "بیشتر ..." }}</span>
         </div>
         <div class="row w-100 m-0" v-else>
-            <div class="col-md-12 py-4">
-                <MaterialTextField v-model="val.name" :required="true" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="نام پروژه"></MaterialTextField>
+            <div class="col-md-6 py-4">
+                <MaterialTextField v-model="val.name" :required="true" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="عنوان"></MaterialTextField>
+            </div>
+            <div class="col-md-6 py-4">
+                <MaterialTextField v-model="val.publisher" :required="true" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="نام ناشر"></MaterialTextField>
             </div>
             <div class="col-md-6 py-4">
                 <strong>تاریخ شروع <span class="text-action">*</span></strong>
-                <DatePicker v-model="val.startDate" :max="{year: year, month: month}"></DatePicker>
-            </div>
-            <div class="col-md-6 py-4">
-                <strong>تاریخ پایان <span class="text-action">*</span></strong>
-                <DatePicker v-if="typeof(val.endDate) !== 'boolean' || (val.endDate==false)" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{year: year, month: month}"></DatePicker>
-                <input v-else type="text" readonly value="تا کنون" class="form-control bg-white" />
-                <Checkbox v-model="val.endDate">
-                    همچنان در حال کار بر روی این پروژه هستم
-                </Checkbox>
+                <DatePicker v-model="val.date" :max="{year: year, month: month}"></DatePicker>
             </div>
             <div class="col-md-6 py-4" v-if="showMore">
-                <v-select :placeholder="'مرتبط با'" class="w-75" dir="rtl" v-model="val.skills" label="name" :options="page.skills"></v-select>
-            </div>
-            <div class="col-md-6 py-4" v-if="showMore">
-                <MaterialTextField v-model="val.link" class="d-flex align-items-center material--sm" placeholder="لینک پروژه"></MaterialTextField>
+                <MaterialTextField v-model="val.link" class="d-flex align-items-center material--sm" placeholder="لینک ناشر"></MaterialTextField>
             </div>
             <div class="col-md-12 py-4" v-if="showMore">
                 <strong>توضیحات</strong>
@@ -104,21 +96,12 @@ export default {
     computed: {
         time_text() {
             let startText = "";
-            let endText = "تا کنون";
             if (this.val.startDate) {
                 startText = new PersianDate([
                     this.val.startDate.year,
                     this.val.startDate.month.id,
                 ]).format("MMMM YYYY");
             }
-
-            if (this.val.endDate) {
-                endText = new PersianDate([
-                    this.val.endDate.year,
-                    this.val.endDate.month.id,
-                ]).format("MMMM YYYY");
-            }
-            return (startText.length > 0 ? startText + " - " : "") + endText;
         },
         now() {
             return new PersianDate(new Date()).toLocale("en").format("L");
@@ -134,9 +117,8 @@ export default {
         return {
             val: {
                 name: "",
-                skill: undefined,
-                startDate: null,
-                endDate: null,
+                publisher: undefined,
+                date: null,
                 link: "",
                 description: "",
             },

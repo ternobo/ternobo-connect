@@ -102,24 +102,6 @@ export default {
         DatePicker
     },
     computed: {
-        time_text() {
-            let startText = "";
-            let endText = "تا کنون";
-            if (this.val.startDate) {
-                startText = new PersianDate([
-                    this.val.startDate.year,
-                    this.val.startDate.month.id,
-                ]).format("MMMM YYYY");
-            }
-
-            if (this.val.endDate) {
-                endText = new PersianDate([
-                    this.val.endDate.year,
-                    this.val.endDate.month.id,
-                ]).format("MMMM YYYY");
-            }
-            return (startText.length > 0 ? startText + " - " : "") + endText;
-        },
         now() {
             return new PersianDate(new Date()).toLocale("en").format("L");
         },

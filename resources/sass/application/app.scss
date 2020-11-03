@@ -840,6 +840,10 @@ pre {
     flex: 1 1 auto;
 }
 
+.bg-light-blue{
+    background: rgba(231, 242, 255, 1);
+}
+
 @import "./components/website-card";
 @import "./components/contacts-card";
 
@@ -855,3 +859,5 @@ pre {
 
 @import "./components/languages.scss";
 @import "./components/projectItem.scss";
+
+@import "./components/dropdown-btn.scss";
