@@ -3,7 +3,7 @@
     <div class="py-3 card-body">
         <div class="d-flex mb-2 aling-items-center justify-content-between">
             <h2 class="font-24">دستاورد‌ها</h2>
-            <DropdownBtn :items="[
+            <DropdownBtn v-if="edit" :items="[
             { id: 1, name: 'زبان' },
             { id: 2, name: 'پروژه' },
             { id: 3, name: 'انتشارات' },
@@ -17,6 +17,7 @@
         <LanguagesList ref="langs" :edit="edit" :page="page"></LanguagesList>
         <ProjectsList ref="projects" :edit="edit" :page="page"></ProjectsList>
         <PublishList ref="publishs" :edit="edit" :page="page"></PublishList>
+        <AwardsList ref="awards" :edit="edit" :page="page"></AwardsList>
 
     </div>
 </div>
@@ -26,6 +27,7 @@
 import LanguagesList from "./Languages/LanguagesList";
 import ProjectsList from "./Projects/ProjectsList";
 import PublishList from "./Publishs/PublishList";
+import AwardsList from "./Awards/AwardsList";
 
 import DropdownBtn from "../../../buttons/DropdownBtn";
 
@@ -41,6 +43,9 @@ export default {
                     break;
                 case 3:
                     this.$refs.publishs.addPublish();
+                    break;
+                case 4:
+                    this.$refs.awards.addPublish();
                     break;
             }
         }
@@ -61,6 +66,7 @@ export default {
         LanguagesList,
         ProjectsList,
         PublishList,
+        AwardsList,
 
         DropdownBtn,
     },

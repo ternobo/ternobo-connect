@@ -31,6 +31,7 @@ body {
 }
 
 .sticky-aside {
+    position: -webkit-sticky;
     position: sticky;
     top: 80px;
 }
@@ -246,6 +247,22 @@ a {
             left: 10px;
         }
 
+        .tselectـnew_item--input::-webkit-input-placeholder {
+            color: $light;
+        }
+
+        .tselectـnew_item--input::-moz-placeholder {
+            color: $light;
+        }
+
+        .tselectـnew_item--input:-ms-input-placeholder {
+            color: $light;
+        }
+
+        .tselectـnew_item--input::-ms-input-placeholder {
+            color: $light;
+        }
+
         .tselectـnew_item--input::placeholder {
             color: $light;
         }
@@ -261,24 +278,12 @@ ul {
 }
 
 .slide-enter-active {
-    -moz-transition-duration: 0.3s;
-    -webkit-transition-duration: 0.3s;
-    -o-transition-duration: 0.3s;
     transition-duration: 0.3s;
-    -moz-transition-timing-function: ease-in;
-    -webkit-transition-timing-function: ease-in;
-    -o-transition-timing-function: ease-in;
     transition-timing-function: ease-in;
 }
 
 .slide-leave-active {
-    -moz-transition-duration: 0.3s;
-    -webkit-transition-duration: 0.3s;
-    -o-transition-duration: 0.3s;
     transition-duration: 0.3s;
-    -moz-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-    -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-    -o-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
     transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
 
@@ -333,7 +338,6 @@ p {
         -webkit-user-select: none;
 
         /* Safari */
-        -khtml-user-select: none;
 
         /* Konqueror HTML */
         -moz-user-select: none;
@@ -354,7 +358,6 @@ i {
     /* iOS Safari */
     -webkit-user-select: none;
     /* Safari */
-    -khtml-user-select: none;
     /* Konqueror HTML */
     -moz-user-select: none;
     /* Old versions of Firefox */
@@ -369,7 +372,6 @@ img {
     /* iOS Safari */
     -webkit-user-select: none;
     /* Safari */
-    -khtml-user-select: none;
     /* Konqueror HTML */
     -moz-user-select: none;
 
@@ -387,7 +389,6 @@ img {
     /* iOS Safari */
     -webkit-user-select: none;
     /* Safari */
-    -khtml-user-select: none;
     /* Konqueror HTML */
     -moz-user-select: none;
     /* Old versions of Firefox */
@@ -449,7 +450,8 @@ img {
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    object-fit: contain;
+    -o-object-fit: contain;
+       object-fit: contain;
 }
 
 .text-action {
@@ -457,24 +459,12 @@ img {
 }
 
 .slide-enter-active {
-    -moz-transition-duration: 0.3s;
-    -webkit-transition-duration: 0.3s;
-    -o-transition-duration: 0.3s;
     transition-duration: 0.3s;
-    -moz-transition-timing-function: ease-in;
-    -webkit-transition-timing-function: ease-in;
-    -o-transition-timing-function: ease-in;
     transition-timing-function: ease-in;
 }
 
 .slide-leave-active {
-    -moz-transition-duration: 0.3s;
-    -webkit-transition-duration: 0.3s;
-    -o-transition-duration: 0.3s;
     transition-duration: 0.3s;
-    -moz-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-    -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-    -o-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
     transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
 
@@ -803,20 +793,28 @@ pre {
     padding: 15px;
     direction: ltr;
     text-align: left;
-    user-select: all;
+    -webkit-user-select: all;
+       -moz-user-select: all;
+        -ms-user-select: all;
+            user-select: all;
 }
 
 .hand-hover{
+    cursor: -webkit-grab;
     cursor: grab;
 }
 .hand-hover:active{
+    cursor: -webkit-grabbing;
     cursor: grabbing;
 }
 .slugItem{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    user-select: all;
+    -webkit-user-select: all;
+       -moz-user-select: all;
+        -ms-user-select: all;
+            user-select: all;
     background-color: $body-bg;
     border-radius: 20px;
     color: $light;
@@ -861,3 +859,43 @@ pre {
 @import "./components/projectItem.scss";
 
 @import "./components/dropdown-btn.scss";
+
+
+.badge-light{
+    height: 24px;
+    width: 24px;
+    font-size: 11pt;
+    color: $light;
+    background: $fixed-elements;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    align-items: center;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    span {
+        height: 13pt;
+    }
+}
+
+.badge-success{
+   @extend .badge-light;
+   border-radius: 50rem;
+   background-color: $light-success;
+   color: $success;
+   white-space: nowrap;
+   width: auto;
+   padding: 5px 11px;
+    span {
+        height: 13pt;
+    }
+}
+
+.open-achievements{
+    transition: 0.3s all;
+}
+.open-achievements.active{
+    transform: rotate(180deg);
+}

@@ -60,7 +60,7 @@ export default {
             category: undefined,
             editLink: false,
             tags: [],
-            categories: this.$page.user.page.categories,
+            categories: this.$page.currentPage.categories,
         }
     },
 

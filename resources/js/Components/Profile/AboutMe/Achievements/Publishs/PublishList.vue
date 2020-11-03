@@ -9,7 +9,7 @@
                 <Skeleton :count="4" :heigth="25" />
             </li>
         </ul>
-        <draggable ref="draggable" tag="ul" v-bind="dragOptions" v-model="publishs" class="publishs-list p-0" :disabled="!edit" handle=".hand-hover">
+        <draggable group="publishs" ref="draggable" tag="ul" v-bind="dragOptions" v-model="publishs" class="publishs-list p-0" :disabled="!edit" handle=".hand-hover">
             <PublishItem @deleted="onDelete(index)" v-model="publishs[index]" :edit="edit" v-for="(publish, index) in publishs" :page="page" :key="'publish_' + publish.id" />
         </draggable>
     </div>

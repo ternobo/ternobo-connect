@@ -12,7 +12,7 @@
                 <Skeleton :count="4" :heigth="25" />
             </li>
         </ul>
-        <draggable ref="draggable" tag="ul" v-bind="dragOptions" v-model="experiences" class="experiences-list p-0" :disabled="!edit" handle=".hand-hover">
+        <draggable group="experiences" ref="draggable" tag="ul" v-bind="dragOptions" v-model="experiences" class="experiences-list p-0" :disabled="!edit" handle=".hand-hover">
             <Experience @deleted="onDelete(index)" v-model="experiences[index]" :edit="edit" v-for="(experience, index) in experiences" :key="'experience_' + experience.id" />
         </draggable>
     </div>

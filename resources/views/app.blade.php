@@ -19,7 +19,7 @@
             var APP_URL = "{{  url('/') }}";
         </script>
         <script>
-            var user = @auth @json(Auth::user()); @endauth @guest false @endguest
+            var user_id = @auth {{ Auth::user()->id }}; @endauth @guest false @endguest
         </script>
 
 </head>

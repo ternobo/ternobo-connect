@@ -188,28 +188,6 @@ class Page extends Model
         // get the original array to be displayed
         $data = parent::toArray();
 
-        // change the value of the 'skills' key
-        if (!isset($data['skills'])) {
-            if ($this->skills) {
-                $data['skills'] = $this->skills;
-            } else {
-                $data['skills'] = null;
-            }
-
-        }
-
-        // change the value of the 'categories' key
-        if (!isset($data['categories'])) {
-            if ($this->categories) {
-                $data['categories'] = $this->categories;
-            } else {
-                $data['categories'] = null;
-            }
-        }
-
-        if (Auth::check()) {
-            $data['mutualFriends'] = $this->mutualFriends();
-        }
 
         return $data;
     }

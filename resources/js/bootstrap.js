@@ -18,7 +18,7 @@ window.axios.defaults.headers.common['X-CSRF-TOKEN'] =  document.querySelector('
  */
 import Echo from 'laravel-echo';
 
-if(user){
+if(user_id){
 
     window.io = require('socket.io-client');
 
@@ -27,7 +27,7 @@ if(user){
         host: window.location.hostname + ':6001',
         forceTLS: true
     });
-    const notificationChannel = window.Echo.private("notification."+user.personal_page.id);
+    const notificationChannel = window.Echo.private("notification."+window.use_id);
     notificationChannel.listen("NotificationEvent", function (data) {
         console.log(data);
     });

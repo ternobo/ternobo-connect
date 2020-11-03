@@ -241,7 +241,7 @@ export default {
             showType: undefined,
             category: undefined,
             text: undefined,
-            categories: this.$page.user.page.categories,
+            categories: this.$page.currentPage.categories,
             tags: [],
             txtlen: "0%",
             isCropping: false,

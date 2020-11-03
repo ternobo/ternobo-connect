@@ -12,7 +12,7 @@
                 <Skeleton :count="4" :heigth="25" />
             </li>
         </ul>
-        <draggable ref="draggable" tag="ul" v-bind="dragOptions" v-model="skills" class="skills-list p-0" :disabled="!edit" handle=".hand-hover">
+        <draggable group="skills" ref="draggable" tag="ul" v-bind="dragOptions" v-model="skills" class="skills-list p-0" :disabled="!edit" handle=".hand-hover">
             <Skill @deleted="onDelete(index)" v-model="skills[index]" :user="page.user" :edit="edit" v-for="(skill, index) in skills" :skill="skill" :key="'skill_' + skill.id" />
         </draggable>
     </div>

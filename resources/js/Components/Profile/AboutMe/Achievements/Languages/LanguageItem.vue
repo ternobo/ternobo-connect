@@ -1,7 +1,18 @@
 <template>
-<li v-if="language != undefined">
+<li :class="{ 'detailed': detailed }" v-if="language != undefined">
     <div class="language-name" v-if="!edit">
-        {{ languageVal.name }}
+        <div class="d-flex" v-if="detailed">
+            <span>
+                {{ languageVal.name }}
+            </span>
+
+            <div class="mr-4 badge-success">
+                {{ language.level.label }}
+            </div>
+        </div>
+        <span v-else>
+            {{ languageVal.name }}
+        </span>
     </div>
     <div class="editItem" v-else>
         <div class="actions" v-if="edit">
@@ -33,7 +44,10 @@
 
 <script>
 import RadioButton from "../../../../inputs/RadioButton";
+
+import AchievementsItem from "../../../../../Mixins/AchievementsItem";
 export default {
+    mixins: [AchievementsItem],
     components: {
         RadioButton
     },
@@ -58,20 +72,10 @@ export default {
         }
     },
     props: {
-        user: {
-            type: Object,
-            default: undefined,
-            required: true
-        },
         language: {
             type: Object,
             default: undefined,
         },
-        edit: {
-            type: Boolean,
-            default: false,
-        },
-
     },
 
 }

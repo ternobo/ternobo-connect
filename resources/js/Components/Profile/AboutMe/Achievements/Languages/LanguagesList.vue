@@ -1,17 +1,22 @@
 <template lang="language">
 <div>
     <div class="py-3">
-        <div class="d-flex mb-2 aling-items-center justify-content-between">
-            <h2 class="font-18">زبان‌ها</h2>
+        <div class="d-flex mb-2 align-items-center clickable justify-content-between" @click="showDetailed">
+            <div class="d-flex align-items-center">
+                <h2 class="font-18">زبان‌ها</h2>
+                <div class="mr-2 badge-light">{{languages.length }}</div>
+            </div>
+            <i class="material-icons open-achievements" :class="{'active': open}">arrow_drop_down</i>
         </div>
         <ul class="languages-list p-0" v-if="loading">
             <li>
                 <Skeleton :count="4" :heigth="25" />
             </li>
         </ul>
-        <draggable ref="draggable" tag="ul" v-bind="dragOptions" v-model="languages" class="languages-list p-0" :disabled="!edit" handle=".hand-hover">
-            <LanguageItem :class="{'w-100':edit}" @deleted="onDelete(index)" v-model="languages[index]" :user="page.user" :edit="edit" v-for="(language, index) in languages" :language="language" :key="'language_' + language.id" />
+        <draggable group="langs" ref="draggable" tag="ul" v-bind="dragOptions" v-model="languages" class="languages-list p-0" :disabled="!edit" handle=".hand-hover">
+            <LanguageItem :detailed="open" :class="{'edit w-100':edit, 'open':open}" @deleted="onDelete(index)" v-model="languages[index]" :user="page.user" :edit="edit" v-for="(language, index) in languages" :language="language" :key="'language_' + language.id" />
         </draggable>
+
     </div>
 </div>
 </template>
@@ -21,8 +26,10 @@ import {
     Skeleton
 } from "vue-loading-skeleton";
 import LanguageItem from "./LanguageItem";
+
+import AchievementsMxixin from "../../../../../Mixins/AchievementsMixin";
 export default {
-    watch: {},
+    mixins: [AchievementsMxixin],
     methods: {
         onDelete(index) {
             this.languages.splice(index, 1);
@@ -44,9 +51,7 @@ export default {
     },
     data() {
         return {
-            drag: false,
             loading: false,
-            list: [],
             languages: [],
         };
     },

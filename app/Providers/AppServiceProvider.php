@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Page;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -40,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
             'app' => [
                 'name' => Config::get('app.name'),
             ],
-            "SEO" => function (){
+            "SEO" => function () {
                 return SEOTools::generate();
             },
             "connectedPeople" => function () {
@@ -54,6 +55,19 @@ class AppServiceProvider extends ServiceProvider
                     return Auth::user()->getWaitingConnectionsIds();
                 }
                 return [];
+            },
+            "currentPage" => function () {
+                $current_page = json_decode(Cookie::get('ternobo_current_page')) !== null ?
+                Page::query()
+                    ->with("categories")
+                    ->with("skills")
+                    ->find(json_decode(Cookie::get('ternobo_current_page'))->id) :
+                Auth::user()->personalPage()
+                    ->with("categories")
+                    ->with("skills")
+                    ->first();
+
+                return $current_page;
             },
             "followings" => function () {
                 if (Auth::check()) {

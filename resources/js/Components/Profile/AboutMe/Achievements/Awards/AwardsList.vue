@@ -2,15 +2,15 @@
 <div>
     <div class="py-3">
         <div class="d-flex mb-2 aling-items-center justify-content-between">
-            <h2 class="font-20">تجربیات</h2>
+            <h2 class="font-20">جوایز</h2>
         </div>
-        <ul class="projects-list p-0" v-if="loading">
+        <ul class="awards-list p-0" v-if="loading">
             <li>
                 <Skeleton :count="4" :heigth="25" />
             </li>
         </ul>
-        <draggable ref="draggable" tag="ul" v-bind="dragOptions" v-model="projects" class="projects-list p-0" :disabled="!edit" handle=".hand-hover">
-            <ProjectItem @deleted="onDelete(index)" v-model="projects[index]" :edit="edit" v-for="(project, index) in projects" :page="page" :key="'project_' + project.id" />
+        <draggable group="awards" ref="draggable" tag="ul" v-bind="dragOptions" v-model="awards" class="awards-list p-0" :disabled="!edit" handle=".hand-hover">
+            <AwardItem @deleted="onDelete(index)" v-model="awards[index]" :edit="edit" v-for="(award, index) in awards" :page="page" :key="'award_' + award.id" />
         </draggable>
     </div>
 </div>
@@ -20,15 +20,15 @@
 import {
     Skeleton
 } from "vue-loading-skeleton";
-import ProjectItem from "./ProjectItem";
+import AwardItem from "./AwardItem";
 export default {
     methods: {
         onDelete(index) {
-            this.projects.splice(index, 1);
+            this.awards.splice(index, 1);
         },
-        addProject() {
-            this.projects.push({
-                id: 'project_' + Math.round((new Date()).getTime() / 1000),
+        addAward() {
+            this.awards.push({
+                id: 'award_' + Math.round((new Date()).getTime() / 1000),
             });
         },
         getData() {
@@ -43,7 +43,7 @@ export default {
         return {
             drag: false,
             loading: false,
-            projects: [],
+            awards: [],
         };
     },
     computed: {
@@ -70,7 +70,7 @@ export default {
     },
     components: {
         Skeleton,
-        ProjectItem,
+        AwardItem,
     },
 };
 </script>

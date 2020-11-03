@@ -12,7 +12,7 @@
                 <Skeleton :count="4" :heigth="25" />
             </li>
         </ul>
-        <draggable ref="draggable" tag="ul" v-bind="dragOptions" v-model="educations" class="educations-list p-0" :disabled="!edit" handle=".hand-hover">
+        <draggable group="edupublishs" ref="draggable" tag="ul" v-bind="dragOptions" v-model="educations" class="educations-list p-0" :disabled="!edit" handle=".hand-hover">
             <Education @deleted="onDelete(index)" v-model="educations[index]" :edit="edit" v-for="(educaction, index) in educations" :key="'education_' + educaction.id" />
         </draggable>
     </div>

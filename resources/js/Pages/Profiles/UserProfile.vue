@@ -3,10 +3,10 @@
     <UserInfoModal :user="page.user" :show.sync="showEditModal"></UserInfoModal>
     <div class="content-container-profile">
         <div class="card">
-            <ProfileCover :canChange="page.user_id == this.$root.user.id" :src="page.cover"></ProfileCover>
+            <ProfileCover :canChange="canEdit" :src="page.cover"></ProfileCover>
             <div class="card-body pb-0 d-flex justify-content-between pageinfo-card">
-                <ProfileImage :canChange="page.user_id == this.$root.user.id" :src="page.profile"></ProfileImage>
-                <div class="d-flex follow-buttons" v-if="page.user_id != this.$root.user.id">
+                <ProfileImage :canChange="canEdit" :src="page.profile"></ProfileImage>
+                <div class="d-flex follow-buttons" v-if="!canEdit">
                     <FollowButton :page="page.id"></FollowButton>
                     <ConnectionButton v-if="page.type === 'personal'" :user="page.user_id"></ConnectionButton>
                 </div>
@@ -17,7 +17,7 @@
                         {{ page.name }}
                         <i v-if="page.user.is_verified === 1" class="verificationcheck mr-1 font-20">check_circle</i>
                     </strong>
-                    <i v-if="page.user_id == this.$root.user.id" class="mr-2 material-icons-outlined font-16 text-muted" @click="showEditModal=true">edit</i>
+                    <i v-if="canEdit" class="mr-2 material-icons-outlined font-16 text-muted" @click="showEditModal=true">edit</i>
                 </span>
                 <small class="font-14">{{ page.short_bio }}</small>
             </div>
@@ -200,11 +200,7 @@ export default {
                 });
         },
         doEdit() {
-            if (this.edit) {
-
-            } else {
-                this.edit = true;
-            }
+            this.edit = !this.edit;
         },
         cancelEdit() {
 
@@ -228,7 +224,7 @@ export default {
     },
     computed: {
         canEdit() {
-            return this.page.user_id == this.$root.user.id;
+            return this.page.user_id == window.user_id;
         }
     },
     name: "UserProfile",
