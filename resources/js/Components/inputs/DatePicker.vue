@@ -2,6 +2,8 @@
 <div class="d-flex">
     <v-select class="dropdown-list ml-2 w-50" v-if="!hideYear" :placeholder="'سال'" dir="rtl" v-model="year" :options="years"></v-select>
     <v-select class="dropdown-list w-50" v-if="!hideMonth" :placeholder="'ماه'" dir="rtl" v-model="month" :options="monthsList"></v-select>
+    <v-select class="dropdown-list mr-2 w-50" v-if="showDays" :placeholder="'روز'" dir="rtl" v-model="day" :options="daysList"></v-select>
+
 </div>
 </template>
 
@@ -14,6 +16,11 @@ export default {
         }
     },
     props: {
+        showDays: {
+            type: Boolean,
+            default: false,
+            required: false
+        },
         hideMonth: {
             type: Boolean,
             default: false,
@@ -44,6 +51,25 @@ export default {
         },
     },
     computed: {
+        daysList() {
+            if (this.month !== null) {
+                let days = [];
+                if (this.month.id <= 6) {
+                    let day = 1;
+                    while (day <= 31) {
+                        days.push(day);
+                        day++;
+                    }
+                } else {
+                    let day = 1;
+                    while (day <= 30) {
+                        days.push(day);
+                        day++;
+                    }
+                }
+                return days;
+            }
+        },
         years() {
             if (this.max != undefined && this.max.year) {
                 return this.yearsFrom(this.minYear, this.max.year);
@@ -77,7 +103,8 @@ export default {
     data() {
         return {
             year: null,
-            month: null
+            month: null,
+            day: null
         }
     },
 

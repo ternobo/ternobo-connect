@@ -19,6 +19,7 @@
         <PublishList ref="publishs" :edit="edit" :page="page"></PublishList>
         <AwardsList ref="awards" :edit="edit" :page="page"></AwardsList>
         <CoursesList ref="courses" :edit="edit" :page="page"></CoursesList>
+        <InventionsList ref="inventions" :edit="edit" :page="page"></InventionsList>
 
     </div>
 </div>
@@ -30,6 +31,7 @@ import ProjectsList from "./Projects/ProjectsList";
 import PublishList from "./Publishs/PublishList";
 import AwardsList from "./Awards/AwardsList";
 import CoursesList from "./Courses/CoursesList";
+import InventionsList from "./Inventions/InventionsList";
 
 import DropdownBtn from "../../../buttons/DropdownBtn";
 
@@ -47,7 +49,7 @@ export default {
                     this.$refs.publishs.addPublish();
                     break;
                 case 4:
-                    this.$refs.publishs.addPublish();
+                    this.$refs.inventions.addInvention();
                     break;
                 case 5:
                     this.$refs.courses.addCourse();
@@ -56,7 +58,7 @@ export default {
                     this.$refs.awards.addAward();
                     break;
                 case 7:
-                    this.$refs.awards.addAward();
+                    this.$refs.tests.addTest();
                     break;
             }
         }
@@ -79,6 +81,7 @@ export default {
         PublishList,
         AwardsList,
         CoursesList,
+        InventionsList,
 
         DropdownBtn,
     },
