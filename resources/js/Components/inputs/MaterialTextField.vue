@@ -1,7 +1,7 @@
 <template>
 <div class="material-textfield">
     <input :type="type" placeholder=" " :class="inputClass" @input="$emit('input',val)" v-model="val" :maxlength="maxlength" class="input" />
-    <label v-if="placeholder !== undefined">{{ placeholder }} <span class="text-action" v-if="required">*</span></label>
+    <label class="d-flex" v-if="placeholder !== undefined">{{ placeholder }} <span class="text-action" v-if="required">*</span></label>
     <slot></slot>
 </div>
 </template>

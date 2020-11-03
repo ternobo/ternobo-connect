@@ -1,13 +1,13 @@
 <template>
-<li class="achievment" :class="{ 'detailed': detailed }" v-if="val != undefined">
+<li class="project-item achievement" :class="{ 'detailed': detailed }" v-if="val != undefined">
     <div class="mr-3 w-100" v-if="!edit">
-        <div class="d-flex justify-content-center" v-if="detailed">
+        <div class="d-flex justify-content-start" v-if="detailed">
             <div class="title">
                 <a :href="val.link" v-if="val.link != null && val.link.length > 0"><strong>{{ val.name }}</strong></a>
                 <span v-else><strong>{{ val.name }}</strong></span>
-                <span class="text-muted">{{ time_text }}</span>
+                <span class="font-12 text-muted">{{ time_text }}</span>
             </div>
-            <p class="bg-body" v-if="val.description != null && val.description.length > 0">
+            <p class="bg-body py-2 px-3" v-if="val.description != null && val.description.length > 0">
                 {{ val.description }}
             </p>
         </div>
@@ -22,7 +22,7 @@
                 <i class="material-icons hand-hover">unfold_more</i>
                 <i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
             </div>
-            <button class="btn font-12 follow-btn" @click="showMore = !showMore">
+            <button class="mt-3 btn font-12 follow-btn" @click="showMore = !showMore">
                 {{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
             </button>
         </div>
@@ -120,14 +120,14 @@ export default {
         time_text() {
             let startText = "";
             let endText = "تا کنون";
-            if (this.val.startDate) {
+            if (typeof (this.val.startDate) == 'object') {
                 startText = new PersianDate([
                     this.val.startDate.year,
                     this.val.startDate.month.id,
                 ]).format("MMMM YYYY");
             }
 
-            if (this.val.endDate) {
+            if (typeof (this.val.endDate) == 'object') {
                 endText = new PersianDate([
                     this.val.endDate.year,
                     this.val.endDate.month.id,

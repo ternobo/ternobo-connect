@@ -1,8 +1,12 @@
 <template>
 <div v-if="projects.length > 0">
     <div class="py-3">
-        <div class="d-flex mb-2 aling-items-center justify-content-between">
-            <h2 class="font-20">پروژه‌ها</h2>
+        <div class="d-flex mb-2 align-items-center clickable justify-content-between" @click="showDetailed">
+            <div class="d-flex align-items-center">
+                <h2 class="font-20">پروژه‌ها</h2>
+                <div class="mr-2 badge-light">{{projects.length }}</div>
+            </div>
+            <i class="material-icons open-achievements" :class="{'active': open}">arrow_drop_down</i>
         </div>
         <ul class="projects-list p-0" v-if="loading">
             <li>

@@ -1,15 +1,19 @@
 <template>
 <div v-if="awards.length > 0">
     <div class="py-3">
-        <div class="d-flex mb-2 aling-items-center justify-content-between">
-            <h2 class="font-20">جوایز</h2>
+        <div class="d-flex mb-2 align-items-center clickable justify-content-between" @click="showDetailed">
+            <div class="d-flex align-items-center">
+                <h2 class="font-20">جوایز</h2>
+                <div class="mr-2 badge-light">{{ awards.length }}</div>
+            </div>
+            <i class="material-icons open-achievements" :class="{'active': open}">arrow_drop_down</i>
         </div>
         <ul class="awards-list p-0" v-if="loading">
             <li>
                 <Skeleton :count="4" :heigth="25" />
             </li>
         </ul>
-        <draggable group="awards" ref="draggable" tag="ul" v-bind="dragOptions" v-model="awards" class="awards-list p-0" :disabled="!edit" handle=".hand-hover">
+        <draggable group="awards" ref="draggable" tag="ul" v-bind="dragOptions" v-model="awards" class="achievement-list p-0" :disabled="!edit" handle=".hand-hover">
             <AwardItem @deleted="onDelete(index)" v-model="awards[index]" :edit="edit" v-for="(award, index) in awards" :page="page" :key="'award_' + award.id" />
         </draggable>
     </div>
@@ -21,7 +25,9 @@ import {
     Skeleton
 } from "vue-loading-skeleton";
 import AwardItem from "./AwardItem";
+import AchievementsMxixin from "../../../../../Mixins/AchievementsMixin";
 export default {
+    mixins: [AchievementsMxixin],
     methods: {
         onDelete(index) {
             this.awards.splice(index, 1);

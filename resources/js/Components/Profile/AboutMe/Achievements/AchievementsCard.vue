@@ -44,8 +44,8 @@ export default {
                 case 3:
                     this.$refs.publishs.addPublish();
                     break;
-                case 4:
-                    this.$refs.awards.addPublish();
+                case 6:
+                    this.$refs.awards.addAward();
                     break;
             }
         }
