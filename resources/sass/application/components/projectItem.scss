@@ -1,0 +1,32 @@
+.project {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    .job-description {
+        text-align: justify;
+        max-height: 90px;
+        overflow: hidden;
+        word-break: break-word;
+    }
+
+    .job-description.open {
+        max-height: unset;
+    }
+
+    .actions {
+        border-radius: 32px;
+        display: flex;
+        flex-direction: row;
+        color: $icons;
+        background: $body-bg;
+        height: max-content;
+        padding: 2px;
+        margin-bottom: 24px;
+    }
+
+    .detail {
+        display: flex;
+        width: 100%;
+    }
+}

@@ -9,6 +9,7 @@
         </div>
 
         <LanguagesList :edit="edit" :page="page"></LanguagesList>
+        <ProjectsList :edit="edit" :page="page"></ProjectsList>
 
     </div>
 </div>
@@ -16,6 +17,8 @@
 
 <script>
 import LanguagesList from "./Languages/LanguagesList";
+import ProjectsList from "./Projects/ProjectsList";
+
 export default {
     props: {
         page: {
@@ -30,7 +33,8 @@ export default {
         },
     },
     components: {
-        LanguagesList
+        LanguagesList,
+        ProjectsList
     }
 }
 </script>

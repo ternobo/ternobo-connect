@@ -29,7 +29,7 @@
     <div class="editItem" v-else>
         <div class="actions" v-if="edit">
             <i class="material-icons hand-hover">unfold_more</i>
-            <i class="material-icons-outlined hover-danger clickable">delete</i>
+            <i class="material-icons-outlined hover-danger clickable" @click="doDelete">delete</i>
         </div>
         <MaterialTextField v-if="skillVal.isNew" v-model="skillVal.name" class="material--sm w-100" input-class="w-100"></MaterialTextField>
         <span class="font-18 text-dark" v-else>
