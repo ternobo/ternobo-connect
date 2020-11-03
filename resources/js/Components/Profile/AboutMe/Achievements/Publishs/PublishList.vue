@@ -70,7 +70,7 @@ export default {
     },
     components: {
         Skeleton,
-        publishItem,
+        PublishItem,
     },
 };
 </script>

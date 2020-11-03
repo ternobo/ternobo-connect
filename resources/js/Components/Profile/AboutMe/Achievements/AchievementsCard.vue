@@ -40,7 +40,7 @@ export default {
                     this.$refs.projects.addProject();
                     break;
                 case 3:
-                    this.$refs.publishs.addProject();
+                    this.$refs.publishs.addPublish();
                     break;
             }
         }
