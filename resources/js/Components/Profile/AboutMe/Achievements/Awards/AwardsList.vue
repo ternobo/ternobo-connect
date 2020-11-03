@@ -14,7 +14,7 @@
             </li>
         </ul>
         <draggable group="awards" ref="draggable" tag="ul" v-bind="dragOptions" v-model="awards" class="achievement-list p-0" :disabled="!edit" handle=".hand-hover">
-            <AwardItem @deleted="onDelete(index)" v-model="awards[index]" :edit="edit" v-for="(award, index) in awards" :page="page" :key="'award_' + award.id" />
+            <AwardItem :detailed="open" :class="{'edit w-100':edit}" @deleted="onDelete(index)" v-model="awards[index]" :edit="edit" v-for="(award, index) in awards" :page="page" :key="'award_' + award.id" />
         </draggable>
     </div>
 </div>

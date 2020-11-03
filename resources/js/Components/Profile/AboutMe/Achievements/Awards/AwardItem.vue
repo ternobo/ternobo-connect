@@ -147,7 +147,7 @@ export default {
                 skill: null,
                 from: null,
                 date: null,
-                link: "",
+                link: null,
                 description: "",
             },
 

@@ -18,6 +18,7 @@
         <ProjectsList ref="projects" :edit="edit" :page="page"></ProjectsList>
         <PublishList ref="publishs" :edit="edit" :page="page"></PublishList>
         <AwardsList ref="awards" :edit="edit" :page="page"></AwardsList>
+        <CoursesList ref="courses" :edit="edit" :page="page"></CoursesList>
 
     </div>
 </div>
@@ -28,6 +29,7 @@ import LanguagesList from "./Languages/LanguagesList";
 import ProjectsList from "./Projects/ProjectsList";
 import PublishList from "./Publishs/PublishList";
 import AwardsList from "./Awards/AwardsList";
+import CoursesList from "./Courses/CoursesList";
 
 import DropdownBtn from "../../../buttons/DropdownBtn";
 
@@ -44,7 +46,16 @@ export default {
                 case 3:
                     this.$refs.publishs.addPublish();
                     break;
+                case 4:
+                    this.$refs.publishs.addPublish();
+                    break;
+                case 5:
+                    this.$refs.courses.addCourse();
+                    break;
                 case 6:
+                    this.$refs.awards.addAward();
+                    break;
+                case 7:
                     this.$refs.awards.addAward();
                     break;
             }
@@ -67,6 +78,7 @@ export default {
         ProjectsList,
         PublishList,
         AwardsList,
+        CoursesList,
 
         DropdownBtn,
     },

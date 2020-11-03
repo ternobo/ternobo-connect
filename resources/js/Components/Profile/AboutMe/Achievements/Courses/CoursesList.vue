@@ -1,20 +1,20 @@
 <template>
-<div v-if="projects.length > 0">
+<div v-if="courses.length > 0">
     <div class="py-3">
         <div class="d-flex mb-2 align-items-center clickable justify-content-between" @click="showDetailed">
             <div class="d-flex align-items-center">
-                <h2 class="font-20">پروژه‌ها</h2>
-                <div class="mr-2 badge-light">{{projects.length }}</div>
+                <h2 class="font-20">دوره‌ها</h2>
+                <div class="mr-2 badge-light">{{ courses.length }}</div>
             </div>
             <i class="material-icons open-achievements" :class="{'active': open}">arrow_drop_down</i>
         </div>
-        <ul class="projects-list p-0" v-if="loading">
+        <ul class="courses-list p-0" v-if="loading">
             <li>
                 <Skeleton :count="4" :heigth="25" />
             </li>
         </ul>
-        <draggable group="projects" ref="draggable" tag="ul" v-bind="dragOptions" v-model="projects" class="achievement-list p-0" :disabled="!edit" handle=".hand-hover">
-            <ProjectItem :detailed="open" :class="{'edit w-100':edit}" @deleted="onDelete(index)" v-model="projects[index]" :edit="edit" v-for="(project, index) in projects" :page="page" :key="'project_' + project.id" />
+        <draggable group="courses" ref="draggable" tag="ul" v-bind="dragOptions" v-model="courses" class="achievement-list p-0" :disabled="!edit" handle=".hand-hover">
+            <courseItem :detailed="open" :class="{'edit w-100':edit}" @deleted="onDelete(index)" v-model="courses[index]" :edit="edit" v-for="(course, index) in courses" :page="page" :key="'course_' + course.id" />
         </draggable>
     </div>
 </div>
@@ -24,18 +24,20 @@
 import {
     Skeleton
 } from "vue-loading-skeleton";
-import ProjectItem from "./ProjectItem";
-
+import CourseItem from "./CourseItem";
 import AchievementsMxixin from "../../../../../Mixins/AchievementsMixin";
 export default {
     mixins: [AchievementsMxixin],
     methods: {
         onDelete(index) {
-            this.projects.splice(index, 1);
+            this.courses.splice(index, 1);
         },
-        addProject() {
-            this.projects.push({
-                id: 'project_' + Math.round((new Date()).getTime() / 1000),
+        addCourse() {
+            this.courses.push({
+                id: 'course_' + Math.round((new Date()).getTime() / 1000),
+                name: null,
+                code: null,
+                skill: null
             });
         },
         getData() {
@@ -50,7 +52,7 @@ export default {
         return {
             drag: false,
             loading: false,
-            projects: [],
+            courses: [],
         };
     },
     computed: {
@@ -77,7 +79,7 @@ export default {
     },
     components: {
         Skeleton,
-        ProjectItem,
+        CourseItem,
     },
 };
 </script>
