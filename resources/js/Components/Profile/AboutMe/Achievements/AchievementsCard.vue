@@ -20,6 +20,7 @@
         <AwardsList ref="awards" :edit="edit" :page="page"></AwardsList>
         <CoursesList ref="courses" :edit="edit" :page="page"></CoursesList>
         <InventionsList ref="inventions" :edit="edit" :page="page"></InventionsList>
+        <TestsList ref="tests" :edit="edit" :page="page"></TestsList>
 
     </div>
 </div>
@@ -32,6 +33,7 @@ import PublishList from "./Publishs/PublishList";
 import AwardsList from "./Awards/AwardsList";
 import CoursesList from "./Courses/CoursesList";
 import InventionsList from "./Inventions/InventionsList";
+import TestsList from "./Tests/TestsList";
 
 import DropdownBtn from "../../../buttons/DropdownBtn";
 
@@ -82,6 +84,7 @@ export default {
         AwardsList,
         CoursesList,
         InventionsList,
+        TestsList,
 
         DropdownBtn,
     },
