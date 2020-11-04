@@ -17,7 +17,7 @@ class BroadcastServiceProvider extends ServiceProvider
     {
         Broadcast::routes();
         Broadcast::channel('notification.{id}', function (User $user,$id) {
-            return (int) $id === $user->personalPage->id;
+            return (int) $id === $user->id;
         });
         require base_path('routes/channels.php');
     }

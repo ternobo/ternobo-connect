@@ -906,3 +906,13 @@ pre {
     border: 1px solid $danger;
     box-shadow: 0 0 2px 1px rgba(255,0,0,0.5);
 }
+
+
+@media (min-width: 576px){
+    .modal-dialog {
+        max-width: 630px;
+        margin: 1.75rem auto;
+    }
+}
+
+@import "./components/category-item.scss";

@@ -27,7 +27,7 @@ if(user_id){
         host: window.location.hostname + ':6001',
         forceTLS: true
     });
-    const notificationChannel = window.Echo.private("notification."+window.use_id);
+    const notificationChannel = window.Echo.private("notification."+window.user_id);
     notificationChannel.listen("NotificationEvent", function (data) {
         console.log(data);
     });

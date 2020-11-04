@@ -40,12 +40,16 @@ class CategoryController extends Controller {
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
-            $category = new Category();
-            $category->name = $request->name;
-            $category->page_id = Auth::user()->personalPage->id;
-            $result = $category->save();
-            dd(Auth::user()->personalPage);
-            return response()->json(array("result" => $result));
+            $check = Category::query()->where('name',$request->name)->where("page_id",Auth::user()->personalPage->id)->first();
+            if($check==null){
+                $category = new Category();
+                $category->name = $request->name;
+                $category->page_id = Auth::user()->personalPage->id;
+                $result = $category->save();
+                return response()->json(array("result" => $result, "category"=>$category));
+            }
+            return response()->json(array("result" => false));
+
         }
     }
 
@@ -65,7 +69,8 @@ class CategoryController extends Controller {
         } else {
             if ($category->page_id === Auth::user()->getPage()->id) {
                 $category->name = $request->value;
-                return response()->json(array("result" => $category->save()));
+                $result = $category->save();
+                return response()->json(array("result" => $result, "category"=>$category));
             } else {
                 return abort(404);
             }

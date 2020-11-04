@@ -1,10 +1,5 @@
 <template>
 <li class="d-flex">
-    <div class="d-flex align-items-center" v-if="edit">
-        <i class="material-icons-outlined text-light hover-dark p-1 hand-hover">menu</i>
-        <i class="material-icons-outlined text-light hover-danger p-1 clickale" @click="doDelete()">delete_sweep</i>
-        <i class="material-icons-outlined text-light ml-2 clickale" @click="doEdit">{{ !editName ? 'edit' : 'save' }}</i>
-    </div>
     <inertia-link :href="'/'+slug+'/category/'+category.id + '/' +location" class="d-flex align-items-center" :class="{'px-3 border':editName}" :contenteditable="editName" ref="name">{{ category.name }}</inertia-link>
 </li>
 </template>

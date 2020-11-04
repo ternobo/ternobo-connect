@@ -35,7 +35,7 @@ class Page extends Model
      */
     public function categories()
     {
-        return $this->hasMany('App\Models\Category');
+        return $this->hasMany('App\Models\Category')->orderBy("sort_place");
     }
 
     /**

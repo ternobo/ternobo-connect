@@ -1,5 +1,6 @@
 <template>
 <div class="card sticky-aside">
+    <CategoriesModal @categoryAdded="addCategory" :show.sync="edit" :categories.sync="list"></CategoriesModal>
     <div class="card-body">
         <div class="title mb-3">
             <strong class="font-18">
@@ -25,12 +26,10 @@
                 <inertia-link :href="'/'+slug+'/category/all/' + location" class="text-light hover-dark">
                     <i class="material-icons">layers</i> همه‌ی مطالب
                 </inertia-link>
-                <i class="clickable text-light hover-dark material-icons-outlined" @click="edit=!edit">{{ !edit ? 'edit' : 'save' }}</i>
+                <i class="clickable text-light hover-dark material-icons-outlined" @click="edit=!edit">{{ !edit ? 'edit' : 'edit' }}</i>
             </div>
             <ul class="pr-3 text-light border-right">
-                <draggable v-model="list" :disabled="!edit" handle=".hand-hover">
-                    <category-item :edit="edit" v-for="category in list" :key="category.id" :location="location" :slug="slug" :category="category"></category-item>
-                </draggable>
+                <category-item v-for="category in list" :key="category.id" :location="location" :slug="slug" :category="category"></category-item>
             </ul>
         </div>
 
@@ -40,21 +39,12 @@
 
 <script>
 import CategoryItem from "./CategoryItem";
+import CategoriesModal from "../Modals/CategoryModal/CategoriesModal";
+
 export default {
-    watch: {
-        edit() {
-            if (!this.edit) {
-                this.list.forEach((item, index) => {
-                    axios.post(this.$APP_URL + "/categories/sort/" + item.id, {
-                        order: item.sort_place
-                    });
-                });
-            }
-        },
-        list() {
-            return this.list.forEach((item, index) => {
-                item.sort_place = index;
-            });
+    methods: {
+        addCategory(category) {
+            this.list.push(category);
         }
     },
     created() {
@@ -63,13 +53,12 @@ export default {
     data() {
         return {
             edit: false,
-            list: [
-
-            ],
+            list: [],
         }
     },
     components: {
-        CategoryItem
+        CategoryItem,
+        CategoriesModal
     },
     props: {
         categories: {
@@ -92,7 +81,6 @@ export default {
             default: false,
             required: false
         },
-
     },
 
 }
