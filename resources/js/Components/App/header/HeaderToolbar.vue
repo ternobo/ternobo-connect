@@ -18,7 +18,7 @@
             <div class="navheader-text">نشان‌ها</div>
         </inertia-link>
     </div>
-    <div id="usermenu-show" class="usertoolbar h-100 d-flex align-items-center mr-2 py-3" @mouseenter="showUserMenu" @mouseleave="menuVisible = false">
+    <div id="usermenu-show" v-if="$page.user!=null" class="usertoolbar h-100 d-flex align-items-center mr-2 py-3" @mouseenter="showUserMenu" @mouseleave="menuVisible = false">
         <div class="d-flex align-items-center">
             <div class="d-flex align-items-center">
                 <span style="white-space: nowrap;" class="ml-2">{{ $page.user.username }}</span>

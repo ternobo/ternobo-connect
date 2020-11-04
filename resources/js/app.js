@@ -48,17 +48,19 @@ window.TProgress = TProgress;
 
 Vue.prototype.seen_content = [];
 Vue.prototype.seen_request = [];
+if (user_id) {
+    setInterval(() => {
+        const seen_request = Vue.prototype.seen_request;
+        if (seen_request.length > 0) {
+            axios.post("/seenPost", {
+                posts: seen_request
+            }).then(() => {
+                Vue.prototype.seen_request = [];
+            })
+        }
+    }, 3000);
+}
 
-setInterval(() => {
-    const seen_request = Vue.prototype.seen_request;
-    if (seen_request.length > 0) {
-        axios.post("/seenPost", {
-            posts: seen_request
-        }).then(() => {
-            Vue.prototype.seen_request = [];
-        })
-    }
-}, 3000);
 
 const Application = () => import("./Application");
 
@@ -71,9 +73,9 @@ const vue_app = new Vue({
                     this.$emit('changeProps', props)
                     return props;
                 },
-                async resolveComponent (name){
+                async resolveComponent(name) {
                     let page = undefined;
-                    await import(`./Pages/${name}`).then(m=>{
+                    await import(`./Pages/${name}`).then(m => {
                         page = m.default;
                         vue_app.layout = page.layout;
                     });

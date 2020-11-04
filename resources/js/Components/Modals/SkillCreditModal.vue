@@ -1,5 +1,5 @@
 <template>
-<b-modal v-model='showModal' :no-close-on-backdrop="false" hide-footer body-class="pb-0" :title="'تایید مهارت ' + user.name" size="md" :centered="true">
+<b-modal v-if="$page.user != null" v-model='showModal' :no-close-on-backdrop="false" hide-footer body-class="pb-0" :title="'تایید مهارت ' + user.name" size="md" :centered="true">
     <p>
         به مهارت <span class="mx-1">{{user.first_name }}</span> در <span class="mx1">{{ skill.name }}</span> چه امتیازی می‌دهید؟
     </p>

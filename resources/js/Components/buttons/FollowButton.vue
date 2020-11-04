@@ -1,5 +1,5 @@
 <template>
-<LoadingButton :loading="loading" class="btn follow-btn" :class="{ 'btn-followed-connected': followed }" @click.native="follow">{{ text }}</LoadingButton>
+<LoadingButton v-if="$page.user !== null" :loading="loading" class="btn follow-btn" :class="{ 'btn-followed-connected': followed }" @click.native="follow">{{ text }}</LoadingButton>
 </template>
 
 <script>
@@ -7,13 +7,15 @@ import LoadingButton from "./LoadingButton";
 
 export default {
     created() {
-        let page = this.page;
-        if (typeof (page) != "number") {
-            page = parseInt(page);
-        }
-        if (this.$page.followings.includes(page)) {
-            this.followed = true;
-            this.text = "دنبال شده";
+        if (this.$page.user !== null) {
+            let page = this.page;
+            if (typeof (page) != "number") {
+                page = parseInt(page);
+            }
+            if (this.$page.followings.includes(page)) {
+                this.followed = true;
+                this.text = "دنبال شده";
+            }
         }
     },
     data() {

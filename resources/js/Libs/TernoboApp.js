@@ -123,6 +123,12 @@ TernoboApp.install = function (Vue, options) {
             setup(this);
         },
         methods: {
+            checkUser(id){
+                if(this.$page.user !== null){
+                    return this.$page.user.id == id;
+                }
+                return false;
+            },
             handleError(errors) {
                 const $this = this;
                 Object.keys(errors).forEach(function (item) {

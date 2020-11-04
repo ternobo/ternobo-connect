@@ -1,5 +1,5 @@
 <template>
-<div class="position-relative card">
+<div class="position-relative card" v-if="$page.user!=null">
     <new-post-modal :show.sync="showPostModal"></new-post-modal>
     <div class="card-body px-2 py-2">
         <div class="text d-flex align-items-center">

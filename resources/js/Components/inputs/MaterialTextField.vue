@@ -1,6 +1,6 @@
 <template>
-<div class="material-textfield">
-    <input :type="type" placeholder=" " :class="inputClass" @input="$emit('input',val)" v-model="val" :maxlength="maxlength" class="input" />
+<div class="material-textfield" :class="{'invalid': invalid}">
+    <input :type="type" placeholder=" " :class="inputClass" @blur="check" @input="$emit('input',val)" v-model="val" :maxlength="maxlength" class="input" />
     <label class="d-flex" v-if="placeholder !== undefined">{{ placeholder }} <span class="text-action" v-if="required">*</span></label>
     <slot></slot>
 </div>
@@ -8,6 +8,15 @@
 
 <script>
 export default {
+    methods: {
+        check() {
+            if ((this.val == null || this.val.length < 1) && this.required) {
+                this.invalid = true;
+            } else {
+                this.invalid = false;
+            }
+        }
+    },
     created() {
         this.val = this.value;
     },
@@ -18,7 +27,8 @@ export default {
     },
     data() {
         return {
-            val: ''
+            val: '',
+            invalid: false
         }
     },
     props: {

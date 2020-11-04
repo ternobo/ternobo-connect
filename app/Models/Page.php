@@ -259,9 +259,12 @@ class Page extends Model
             ->with("post")
             ->with("post.page")
             ->with("post.likes")
-            ->with("post.mutualLikes")
             ->with("post.category")
             ->where("page_id", $this->id)->latest();
+
+            if(Auth::check()){
+                $actions = $actions->with("post.mutualLikes");
+            }
 
         if ($category !== null) {
             $actions = $actions->whereHas("post", function ($query) use ($category) {
@@ -272,11 +275,14 @@ class Page extends Model
         if ($action !== null) {
             $actions = $actions->where("action", $action);
         }
+
         if ($page !== null) {
             $actions = $actions->paginate($page, "*", "action_page");
         } else {
             $actions = $actions->get();
         }
+
+        // dd(($actions->toArray()));
         return $actions;
     }
 
@@ -467,7 +473,7 @@ class Page extends Model
         self::saved(function ($model) {
             if ($model->type == 'personal') {
                 $user = $model->user;
-                if ($page !== null) {
+                if ($user !== null) {
                     $user->username = $model->slug;
                     $user->profile = $model->profile;
                     $user->cover = $model->cover;

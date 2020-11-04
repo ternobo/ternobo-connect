@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                         </b-dropdown-item>
-                        <b-dropdown-item class="hover-danger" @click="deleteComment" v-if="comment.page.user_id = $page.user.id">
+                        <b-dropdown-item class="hover-danger" @click="deleteComment" v-if="checkUser(comment.page.user_id)">
                             <div class="d-flex hover-danger align-items-center">
                                 <i class="material-icons-outlined ml-2">delete_sweep</i>
                                 <div>

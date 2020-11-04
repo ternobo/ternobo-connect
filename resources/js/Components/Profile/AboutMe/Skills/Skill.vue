@@ -1,8 +1,8 @@
 <template>
 <li v-if="skill != undefined">
-    <SkillCreditModal v-if="user.id != $page.user.id" :show.sync="creditModal" :user="user" :skill="skillVal"></SkillCreditModal>
+    <SkillCreditModal v-if="$page.user != null && !checkUser(user.id)" :show.sync="creditModal" :user="user" :skill="skillVal"></SkillCreditModal>
     <div class="skill-name" v-if="!edit">
-        <div class="endorsement" v-if="user.id != $page.user.id">
+        <div class="endorsement" v-if="$page.user != null && !checkUser(user.id)">
             <i class="material-icons">arrow_circle_up</i>
             <span class="action">
                 {{ formatNumber(skillVal.credits.length,'0a') }}

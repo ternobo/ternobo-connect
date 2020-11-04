@@ -1,5 +1,5 @@
 <template>
-<b-modal v-model='showModal' hide-footer hide-header class="pb-0" size="lg" :centered="true">
+<b-modal v-if="$page.user != null" v-model='showModal' hide-footer hide-header class="pb-0" size="lg" :centered="true">
     <div>
         <div class="w-100 pr-2 mb-3 mt-2 d-flex align-items-center dir-ltr text-right text-action" dir="ltr">
             <i class="material-icons-outlined clickale p-1 text-grey font-18" @click="editLink = !editLink">{{ editLink ? 'check': 'edit' }}</i>

@@ -1,5 +1,5 @@
 <template>
-<LoadingButton :loading="loading" class="btn connect-btn" :class="{ 'btn-followed-connected': connected,'btn-connection-waiting':waiting }" @click.native="connect">{{ text }}</LoadingButton>
+<LoadingButton v-if="$page.user !== null" :loading="loading" class="btn connect-btn" :class="{ 'btn-followed-connected': connected,'btn-connection-waiting':waiting }" @click.native="connect">{{ text }}</LoadingButton>
 </template>
 
 <script>
@@ -10,16 +10,18 @@ import LoadingButton from "./LoadingButton";
 
 export default {
     created() {
-        let user = this.user;
-        if (typeof (user) != "number") {
-            user = parseInt(user);
-        }
-        if (this.$page.connectedPeople.includes(user)) {
-            this.connected = true;
-            this.text = "متصل شده";
-        } else if (this.$page.waitingConnections.includes(user)) {
-            this.waiting = true;
-            this.text = "در انتظار تایید";
+        if (this.$page.user !== null) {
+            let user = this.user;
+            if (typeof (user) != "number") {
+                user = parseInt(user);
+            }
+            if (this.$page.connectedPeople.includes(user)) {
+                this.connected = true;
+                this.text = "متصل شده";
+            } else if (this.$page.waitingConnections.includes(user)) {
+                this.waiting = true;
+                this.text = "در انتظار تایید";
+            }
         }
     },
     data() {

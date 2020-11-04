@@ -79,7 +79,7 @@
                             </div>
                         </div>
                     </b-dropdown-item>
-                    <b-dropdown-item class="hover-danger" v-if="post.page.user_id = $page.user.id">
+                    <b-dropdown-item class="hover-danger" v-if="checkUser(post.page.user_id)">
                         <div class="d-flex align-items-center">
                             <i class="material-icons-outlined ml-2 text-dark">delete_sweep</i>
                             <div>

@@ -1,5 +1,5 @@
 <template>
-<div class="card sticky-aside pb-4">
+<div class="card sticky-aside pb-4" v-if="$page.user!=null">
     <lazy-image class="card-img-top page-cover" style="min-height: 40px;max-height: 40px;height: auto;" :src="$page.user.cover" />
     <inertia-link :href="'/'+$page.user.username" class="userinfo-card">
         <div class="d-flex flex-column align-items-center">

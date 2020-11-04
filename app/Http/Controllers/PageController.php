@@ -115,10 +115,14 @@ class PageController extends Controller
             $articles = Post::query()
                 ->with("page")
                 ->with("likes")
-                ->with("mutualLikes")
+
                 ->with("category")
                 ->where("page_id", $page->id)
                 ->where("type", "article");
+
+            if (Auth::check()) {
+                $articles = $articles->with("mutualLikes");
+            }
             if ($category !== null && $category !== "all") {
                 $articles = $articles->where("category_id", $category);
             }
@@ -262,7 +266,8 @@ class PageController extends Controller
         }
     }
 
-    public function saveResume(Request $request){
+    public function saveResume(Request $request)
+    {
         $messages = [
             "about.max" => "بایوگرافی می‌تواند حداکثر 2500 کاراکتر باشد",
         ];
@@ -273,20 +278,18 @@ class PageController extends Controller
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
             $page = Auth::user()->personalPage;
-            if($request->filled("about")){
+            if ($request->filled("about")) {
                 $page->about = $request->about;
             }
 
-            if($request->filled("skills")){
+            if ($request->filled("skills")) {
                 $skills = $request->skills;
             }
 
-            if($request->filled("achievements")){
+            if ($request->filled("achievements")) {
                 $achievements = $request->achievements;
 
             }
-
-
 
             $page->save();
 

@@ -1,5 +1,5 @@
 <template>
-<div class="usermenu card d-block">
+<div class="usermenu card d-block" v-if="$page.user!=null">
     <div class="card-header px-2 d-flex bg-white border-bottom">
         <a :href="'/'+this.$page.user.username" class="d-flex aling-items-center">
             <img class="profile-sm" :src="this.$page.user.profile" />

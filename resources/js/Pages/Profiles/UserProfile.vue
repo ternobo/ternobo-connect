@@ -1,28 +1,7 @@
 <template>
 <base-layout>
-    <UserInfoModal :user="page.user" :show.sync="showEditModal"></UserInfoModal>
     <div class="content-container-profile">
-        <div class="card">
-            <ProfileCover :canChange="canEdit" :src="page.cover"></ProfileCover>
-            <div class="card-body pb-0 d-flex justify-content-between pageinfo-card">
-                <ProfileImage :canChange="canEdit" :src="page.profile"></ProfileImage>
-                <div class="d-flex follow-buttons" v-if="!canEdit">
-                    <FollowButton :page="page.id"></FollowButton>
-                    <ConnectionButton v-if="page.type === 'personal'" :user="page.user_id"></ConnectionButton>
-                </div>
-            </div>
-            <div class="card-body d-flex flex-column page-name">
-                <span class="d-flex align-items-center">
-                    <strong class="font-20">
-                        {{ page.name }}
-                        <i v-if="page.user.is_verified === 1" class="verificationcheck mr-1 font-20">check_circle</i>
-                    </strong>
-                    <i v-if="canEdit" class="mr-2 material-icons-outlined font-16 text-muted" @click="showEditModal=true">edit</i>
-                </span>
-                <small class="font-14">{{ page.short_bio }}</small>
-            </div>
-        </div>
-
+        <ProfileHeader :page="page" :can-edit="canEdit"></ProfileHeader>
         <tabs class="py-3" @selected="tabChange" :state-tab='true'>
             <template slot="custom-item">
                 <div v-if="canEdit && showEdit">
@@ -104,12 +83,10 @@
 
 <script>
 import AppLayout from "../../Layouts/AppLayout";
-import ProfileImage from "../../Components/Profile/ProfileImage";
-import ProfileCover from "../../Components/Profile/ProfileCover";
 import NoContent from "../../Components/NoContent";
 
-import ConnectionButton from "../../Components/buttons/ConnectionButton";
-import FollowButton from "../../Components/buttons/FollowButton";
+import ProfileHeader from "../../Components/Profile/ProfileHeader";
+
 import {
     Inertia
 } from '@inertiajs/inertia';
@@ -265,17 +242,13 @@ export default {
      */
     components: {
         AboutTab: () => import( /* webpackChunkName: "AboutMeTabProfile" */ "../../Components/Profile/AboutMe/AboutMeTab"),
-        FollowButton,
-        ConnectionButton,
-        ProfileImage,
-        ProfileCover,
         NewPostCard: () => import("../../Components/Cards/NewPostCard"),
         Categories: () => import("../../Components/Profile/Categories"),
-        UserInfoModal: () => import("../../Components/Modals/UserInfoModal"),
         ActionCard: () => import("../../Components/PostCard/ActionCard"),
         NoContent,
         PostCard: () => import("../../Components/PostCard/PostCard"),
-        ContactTab: () => import( /* webpackChunkName: "ContactTabProfile" */ "../../Components/Profile/Contact/ContactTab")
+        ContactTab: () => import( /* webpackChunkName: "ContactTabProfile" */ "../../Components/Profile/Contact/ContactTab"),
+        ProfileHeader
     },
     layout: AppLayout
 }

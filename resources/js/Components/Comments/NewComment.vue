@@ -1,5 +1,5 @@
 <template>
-<div class="sendcomment clearfix">
+<div class="sendcomment clearfix" v-if="$page.user!=null">
     <div class="input-group-btn mb-0">
         <img class="comment-profile" :src='$page.user.profile'>
         <MaterialTextArea :value.sync="text" v-model="text" input-class="form-control autoresize" class="w-100" placeholder="نظر شما چیست؟" name="text" maxlength="2500"></MaterialTextArea>

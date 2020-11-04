@@ -36,7 +36,7 @@
                 <div class="actions">
                     <div class="d-flex flex-lg-row align-items-center">
                         <span class="ml-2">{{ userposts }} مقاله </span>
-                        <inertia-link :href="'/articles/'+post.id+'/edit'" class="btn btn-outline-primary" v-if="post.page.user_id == $page.user.id">ویرایش</inertia-link>
+                        <inertia-link :href="'/articles/'+post.id+'/edit'" class="btn btn-outline-primary" v-if="CheckUser(post.page.user_id)">ویرایش</inertia-link>
                     </div>
                 </div>
             </div>

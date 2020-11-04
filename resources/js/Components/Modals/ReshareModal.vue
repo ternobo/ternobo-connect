@@ -1,5 +1,5 @@
 <template>
-<b-modal v-model='showModal' no-close-on-backdrop hide-footer size="lg" title="تولید محتوای تازه" :centered="true">
+<b-modal v-if="$page.user != null" v-model='showModal' no-close-on-backdrop hide-footer size="lg" title="تولید محتوای تازه" :centered="true">
     <div action="/posts" data-ajax method="POST" data-reload="1" enctype="multipart/form-data" class="w-100">
         <div class="new-post position-relative">
             <div class="selections">
@@ -219,11 +219,13 @@ export default {
         },
 
     },
-    created() {
-        if (this.post.type === "article") {
-            this.componentType = require("../PostCard/ArticleCard").default;
+    mounted() {
+        if (this.$page.user !== null) {
+            if (this.post.type === "article") {
+                this.componentType = require("../PostCard/ArticleCard").default;
+            }
+            this.showType = this.showTypesItems[0];
         }
-        this.showType = this.showTypesItems[0];
     },
     data() {
         return {
@@ -241,7 +243,7 @@ export default {
             showType: undefined,
             category: undefined,
             text: undefined,
-            categories: this.$page.currentPage.categories,
+            categories: this.$page.currentPage != null ? this.$page.currentPage.categories : [],
             tags: [],
             txtlen: "0%",
             isCropping: false,
