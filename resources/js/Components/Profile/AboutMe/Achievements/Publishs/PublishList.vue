@@ -56,7 +56,16 @@ export default {
             };
         }
     },
+    created() {
+        if (this.value != null) {
+            this.publishs = this.value;
+        }
+    },
     props: {
+        value: {
+            default: null,
+            required: true
+        },
         page: {
             type: Object,
             default: undefined,

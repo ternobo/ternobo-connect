@@ -21,7 +21,7 @@
             <section class="slugItem bg-white" v-if="edit">
                 <div class="ml-2 d-flex align-items-center" style="direction: ltr">
                     <span class="mr-1">{{ $APP_URL.replace("https://","").replace("http://","") + "/" }}</span>
-                    <input type="text" class="p-1 font-14 text-left form-control" v-model="slug" />
+                    <input type="text" class="p-1 font-14 text-left form-control" pattern="^(?!.*\\.\\.)(?!.*\\.$)[^\\W][\\w.]{0,29}$" v-model="slug" />
                 </div>
                 <section class="icon" v-clipboard="$APP_URL +'/' + page.slug">
                     <i class="font-18 material-icons-outlined">copy</i>
@@ -60,8 +60,8 @@ export default {
         },
     },
     methods: {
-        doEdit() {
-
+        validate() {
+            return this.slug.match(/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/);
         }
     },
 

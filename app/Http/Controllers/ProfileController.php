@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AboutData;
+use App\Models\Skill;
 use App\Rules\DateObject;
 use App\Rules\LevelObject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
@@ -45,6 +48,21 @@ class ProfileController extends Controller
             }
         }
 
+        if ($request->filled("skills") && is_array($request->skills)) {
+            $skills = $request->skills;
+            $user = Auth::user();
+            foreach ($skills as $skill) {
+                $check = Skill::query()->where("name", $skill['name'])->Where("user_id", $user->id)->first();
+                if ($check == null) {
+                    $theSkill = new Skill();
+                    $theSkill->name = $skill['name'];
+                    $theSkill->user_id = $user->id;
+                    $theSkill->save();
+                }
+            }
+
+        }
+
         /**
          * Handle Educations
          */
@@ -59,8 +77,9 @@ class ProfileController extends Controller
             $educations = $request->educations;
             foreach ($educations as $education) {
                 $validator = Validator::make($education, [
-                    'company' => "required|max:50",
-                    'title' => "required|max:60",
+                    'school' => "required|max:50",
+                    'major' => "required|max:60",
+                    'degree' => "required|max:60",
                     "startDate" => ["required", new DateObject],
                     "endDate" => ["required", new DateObject],
                 ], $msgs);
@@ -127,8 +146,22 @@ class ProfileController extends Controller
                     }
                 }
             }
-
         }
+
+        $data = [
+            'experiences' =>$experiences,
+            'educations'=> $educations,
+            'achievements'=>$achievements
+        ];
+
+        $page = Auth::user()->personalPage;
+        $page->about = $about;
+        $page->save();
+
+        $aboutData = AboutData::query()->where("page_id", $page->id)->firstOrNew();
+        $aboutData->page_id = $page->id;
+        $aboutData->data = json_encode($data);
+        return response()->json(["result"=>$aboutData->save()]);
 
         /**
          *

@@ -1,6 +1,6 @@
 <template>
 <div class="card">
-    <div class="py-3 card-body">
+    <div class="py-3 card-body" v-if="mounted">
         <div class="d-flex mb-2 aling-items-center justify-content-between">
             <h2 class="font-24">دستاورد‌ها</h2>
             <DropdownBtn v-if="edit" :items="[
@@ -14,13 +14,13 @@
           ]" @click="addNew"></DropdownBtn>
         </div>
 
-        <LanguagesList ref="langs" :edit="edit" :page="page"></LanguagesList>
-        <ProjectsList ref="projects" :edit="edit" :page="page"></ProjectsList>
-        <PublishList ref="publishs" :edit="edit" :page="page"></PublishList>
-        <AwardsList ref="awards" :edit="edit" :page="page"></AwardsList>
-        <CoursesList ref="courses" :edit="edit" :page="page"></CoursesList>
-        <InventionsList ref="inventions" :edit="edit" :page="page"></InventionsList>
-        <TestsList ref="tests" :edit="edit" :page="page"></TestsList>
+        <LanguagesList :value="this.achievements.langs" ref="langs" :edit="edit" :page="page"></LanguagesList>
+        <ProjectsList :value="this.achievements.projects" ref="projects" :edit="edit" :page="page"></ProjectsList>
+        <PublishList :value="this.achievements.publishs" ref="publishs" :edit="edit" :page="page"></PublishList>
+        <AwardsList :value="this.achievements.awards" ref="awards" :edit="edit" :page="page"></AwardsList>
+        <CoursesList :value="this.achievements.courses" ref="courses" :edit="edit" :page="page"></CoursesList>
+        <InventionsList :value="this.achievements.inventions" ref="inventions" :edit="edit" :page="page"></InventionsList>
+        <TestsList :value="this.achievements.tests" ref="tests" :edit="edit" :page="page"></TestsList>
 
     </div>
 </div>
@@ -38,6 +38,26 @@ import TestsList from "./Tests/TestsList";
 import DropdownBtn from "../../../buttons/DropdownBtn";
 
 export default {
+    mounted() {
+        if (this.achievements == null) {
+            this.achievements = {
+                langs: null,
+                projects: null,
+                publishs: null,
+                inventions: null,
+                courses: null,
+                awards: null,
+                tests: null
+            };
+            this.mounted = true;
+        }
+    },
+    data() {
+        return {
+            achievements: null,
+            mounted: false
+        }
+    },
     methods: {
         getData() {
             return {

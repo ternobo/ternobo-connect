@@ -24,6 +24,7 @@ class PageController extends Controller
     public function show($page, $location = "home", Request $request)
     {
         $page = Page::query()
+            ->with("aboutData")
             ->with("contactData")
             ->with("categories")
             ->with("education")

@@ -29,6 +29,7 @@ import LanguageItem from "./LanguageItem";
 
 import AchievementsMxixin from "../../../../../Mixins/AchievementsMixin";
 export default {
+
     mixins: [AchievementsMxixin],
     methods: {
         onDelete(index) {
@@ -61,7 +62,16 @@ export default {
             };
         }
     },
+    created() {
+        if (this.value != null) {
+            this.languages = this.value;
+        }
+    },
     props: {
+        value: {
+            default: null,
+            required: true
+        },
         edit: {
             type: Boolean,
             default: false,

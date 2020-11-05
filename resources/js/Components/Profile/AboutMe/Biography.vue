@@ -53,7 +53,7 @@ export default {
     },
     data() {
         return {
-            text: undefined,
+            text: null,
             leftCharacter: 2500,
             progress: 0
         }

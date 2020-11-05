@@ -61,7 +61,17 @@ export default {
             };
         }
     },
+
+    created() {
+        if (this.value != null) {
+            this.courses = this.value;
+        }
+    },
     props: {
+        value: {
+            default: null,
+            required: true
+        },
         page: {
             type: Object,
             default: undefined,

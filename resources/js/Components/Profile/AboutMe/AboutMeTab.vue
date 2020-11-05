@@ -1,6 +1,6 @@
 <template>
 <div>
-    <Biography :value="page.about" v-model="about" :edit="edit"></Biography>
+    <Biography v-model="about" :edit="edit"></Biography>
     <ExperienceList ref="experiences" class="mt-3" :edit="edit"></ExperienceList>
     <EducationsList ref="educations" class="mt-3" :edit="edit"></EducationsList>
     <Skills ref="skills" :edit="edit" :page="page" class="mt-3"></Skills>
@@ -9,7 +9,22 @@
 </template>
 
 <script>
+import Biography from "./Biography";
+import ExperienceList from "./Experiences/ExperienceList";
+import Skills from "./Skills/Skills";
+import EducationsList from "./Education/EducationsList";
+import AchievementsCard from "./Achievements/AchievementsCard";
 export default {
+    created() {
+        this.about = this.page.about;
+    },
+    mounted() {
+        if (this.page.about_data != null) {
+            this.$refs.experiences.experiences = this.page.about_data.experiences;
+            this.$refs.educations.educations = this.page.about_data.educations;
+            this.$refs.achievements.achievements = this.page.about_data.achievements;
+        }
+    },
     methods: {
         getData() {
             return {
@@ -39,11 +54,11 @@ export default {
         }
     },
     components: {
-        Biography: () => import("./Biography"),
-        ExperienceList: () => import("./Experiences/ExperienceList"),
-        Skills: () => import("./Skills/Skills"),
-        EducationsList: () => import("./Education/EducationsList"),
-        AchievementsCard: () => import("./Achievements/AchievementsCard")
+        Biography,
+        ExperienceList,
+        Skills,
+        EducationsList,
+        AchievementsCard,
     }
 
 }

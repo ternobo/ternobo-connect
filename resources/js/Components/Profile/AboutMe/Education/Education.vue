@@ -20,13 +20,13 @@
             <div>
                 <span class="text-muted"> {{ time_text }} </span>
             </div>
-            <p class="edu-description my-2" v-if="val.description.length > 0" :class="{ open: showMore }">
+            <p class="edu-description my-2" v-if="val.description != null && val.description.length > 0" :class="{ open: showMore }">
                 {{ val.description }}
             </p>
-            <p class="edu-description my-2" v-if="val.activities.length > 0 && showMore">
+            <p class="edu-description my-2" v-if="val.activities != null && val.activities.length > 0 && showMore">
                 {{ val.activities }}
             </p>
-            <span class="clickable text-action" v-if="val.description.length > 468" @click="showMore = !showMore">مشاهده {{ showMore ? "کمتر" : "بیشتر ..." }}</span>
+            <span class="clickable text-action" v-if="val.description != null && val.description.length > 468" @click="showMore = !showMore">مشاهده {{ showMore ? "کمتر" : "بیشتر ..." }}</span>
         </div>
         <div class="row w-100 m-0" v-else>
             <div class="col-md-6 py-4">
@@ -86,7 +86,7 @@ import Checkbox from "../../../inputs/Checkbox";
 
 export default {
     created() {
-        if (this.value.company) {
+        if (this.value.school) {
             this.val = this.value;
         }
     },
@@ -95,11 +95,15 @@ export default {
             handler(newValue) {
                 this.$emit("input", newValue);
 
-                this.progress = (((newValue.description.length / 2500)) * 100) + "%";
-                this.leftCharacter = 2500 - newValue.description.length;
+                if (newValue.description != null) {
+                    this.progress = (((newValue.description.length / 2500)) * 100) + "%";
+                    this.leftCharacter = 2500 - newValue.description.length;
+                }
 
-                this.progressActivity = (((newValue.activities.length / 2500)) * 100) + "%";
-                this.leftCharacterActivities = 2500 - newValue.activities.length;
+                if (newValue.activities != null) {
+                    this.progressActivity = (((newValue.activities.length / 2500)) * 100) + "%";
+                    this.leftCharacterActivities = 2500 - newValue.activities.length;
+                }
             },
             deep: true
         }

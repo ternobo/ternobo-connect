@@ -4,7 +4,7 @@
         <i class="material-icons-outlined" :style="{'color': option.color }" v-html="option.icon"></i>
     </a>
     <div class="editItem" v-else>
-        <MaterialTextField :placeholder="placeholder" class="material--sm w-100" input-class="w-100" v-model="val"></MaterialTextField>
+        <MaterialTextField :notValid='!isValid' :placeholder="placeholder" class="material--sm w-100" input-class="w-100" v-model="val"></MaterialTextField>
         <div class="d-flex align-items-center pl-2 mb-3 mb-lg-0 w-100">
             <i class="material-icons-outlined hover-danger pl-2 clickable" @click="doDelete">delete</i>
             <v-select class="dropdown-list w-100" :placeholder="'انتخاب کنید'" label="name" dir="rtl" v-model="option" :options="options">
@@ -47,6 +47,12 @@ export default {
         }
     },
     computed: {
+        isValid() {
+            if (this.option != null) {
+                return RegExp(this.option.pattern).test(this.val);
+            }
+            return null;
+        },
         websiteUrl() {
             let url = this.value.url;
             if (url.startsWith("http://") || url.startsWith("https://")) {
@@ -59,6 +65,12 @@ export default {
     methods: {
         doDelete() {
             this.$emit("deleted");
+        },
+        validate() {
+            if (this.option != null) {
+                return RegExp(this.option.pattern).test(this.val);
+            }
+            return null;
         }
     },
     created() {

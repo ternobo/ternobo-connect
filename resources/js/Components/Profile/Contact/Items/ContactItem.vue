@@ -24,7 +24,7 @@
                 </template>
             </v-select>
         </div>
-        <MaterialTextField :placeholder="placeholder" class="material--sm w-100" input-class="w-100" v-model="value.url"></MaterialTextField>
+        <MaterialTextField :notValid='!isValid' :placeholder="placeholder" class="material--sm w-100" input-class="w-100" v-model="value.url"></MaterialTextField>
     </div>
 </li>
 </template>
@@ -46,11 +46,24 @@ export default {
                 "url": this.val
             };
             this.$emit("input", this.value);
+        },
+    },
+    computed: {
+        isValid() {
+            if (this.value.option != null) {
+                return RegExp(this.value.option.pattern).test(this.value.url);
+            }
+            return null;
         }
     },
     methods: {
         doDelete() {
             this.$emit("deleted");
+        },
+        validate() {
+            if (this.value.option != null) {
+                return RegExp(this.value.option.pattern).test(this.value.url);
+            }
         }
     },
     created() {

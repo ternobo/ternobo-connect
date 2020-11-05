@@ -58,7 +58,16 @@ export default {
             };
         }
     },
+    created() {
+        if (this.value != null) {
+            this.awards = this.value;
+        }
+    },
     props: {
+        value: {
+            default: null,
+            required: true
+        },
         page: {
             type: Object,
             default: undefined,

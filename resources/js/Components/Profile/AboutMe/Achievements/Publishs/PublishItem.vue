@@ -65,8 +65,10 @@ export default {
         val: {
             handler(newValue) {
                 this.$emit("input", newValue);
-                this.progress = (((newValue.description.length / 2500)) * 100) + "%";
-                this.leftCharacter = 2500 - newValue.description.length;
+                if (newValue.description != null) {
+                    this.progress = (((newValue.description.length / 2500)) * 100) + "%";
+                    this.leftCharacter = 2500 - newValue.description.length;
+                }
             },
             deep: true
         }

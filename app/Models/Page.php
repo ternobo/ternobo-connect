@@ -34,6 +34,10 @@ class Page extends Model
         return $this->hasOne("App\Models\ContactData", "page_id");
     }
 
+    public function aboutData(){
+        return $this->hasOne("App\Models\AboutData", "page_id");
+    }
+
     /**
      * list page's categories (App\Category)
      * @var array()
@@ -195,6 +199,11 @@ class Page extends Model
 
         if(isset($data['contact_data'])){
             $data['contact_data'] = json_decode($data['contact_data']['data']);
+        }
+
+
+        if(isset($data['about_data'])){
+            $data['about_data'] = json_decode($data['about_data']['data']);
         }
 
         return $data;

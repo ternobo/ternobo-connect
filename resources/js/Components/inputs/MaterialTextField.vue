@@ -10,7 +10,7 @@
 export default {
     methods: {
         check() {
-            if ((this.val == null || this.val.length < 1) && this.required) {
+            if (((this.val == null || this.val.length < 1) && this.required) || this.notValid) {
                 this.invalid = true;
             } else {
                 this.invalid = false;
@@ -32,6 +32,11 @@ export default {
         }
     },
     props: {
+        notValid: {
+            type: Boolean,
+            default: false,
+            required: false
+        },
         value: {
             type: String,
             default: "",

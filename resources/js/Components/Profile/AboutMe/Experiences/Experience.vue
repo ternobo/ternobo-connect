@@ -20,7 +20,7 @@
             <p class="job-description my-2" :class="{ open: showMore }">
                 {{ val.description }}
             </p>
-            <span class="clickable text-action" v-if="val.description.length > 468" @click="showMore = !showMore">مشاهده {{ showMore ? "کمتر" : "بیشتر ..." }}</span>
+            <span class="clickable text-action" v-if="val.description != null && val.description.length > 468" @click="showMore = !showMore">مشاهده {{ showMore ? "کمتر" : "بیشتر ..." }}</span>
         </div>
         <div class="row w-100 m-0" v-else>
             <div class="col-md-6 py-4">
@@ -85,8 +85,10 @@ export default {
         val: {
             handler(newValue) {
                 this.$emit("input", newValue);
-                this.progress = (((newValue.description.length / 2500)) * 100) + "%";
-                this.leftCharacter = 2500 - newValue.description.length;
+                if (newValue.description != null) {
+                    this.progress = (((newValue.description.length / 2500)) * 100) + "%";
+                    this.leftCharacter = 2500 - newValue.description.length;
+                }
             },
             deep: true
         }
