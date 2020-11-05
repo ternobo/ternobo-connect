@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Rules\DateObject;
+use App\Rules\LevelObject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,7 +15,7 @@ class ProfileController extends Controller
         $experiences = [];
         $educations = [];
         $skills = [];
-        $achievements = [];
+        $achievements = null;
 
         if ($request->filled("about")) {
             $about = $request->about;
@@ -23,16 +24,16 @@ class ProfileController extends Controller
         /**
          * Handle Experiences
          */
-        if ($request->filled("experiences") && (json_decode($request->experiences) != null || is_object($request->experiences))) {
+        if ($request->filled("experiences") && (is_array($request->experiences))) {
             $msgs = [
                 "company.required" => "نام شرکت اجباری است",
                 "title.required" => 'عنوان شرکت اجباری است.',
                 "startDate.required" => "تاریخ شروع اجباری است",
                 "endDate.required" => "تاریخ پایان اجباری است",
             ];
-            $experiences = is_object($request->experiences) ? $request->experiences : json_decode($request->experiences);
+            $experiences = $request->experiences;
             foreach ($experiences as $experience) {
-                $validator = Validator::validate($experience, [
+                $validator = Validator::make($experience, [
                     'company' => "required|max:50",
                     'title' => "required|max:60",
                     "startDate" => ["required", new DateObject],
@@ -47,7 +48,7 @@ class ProfileController extends Controller
         /**
          * Handle Educations
          */
-        if ($request->filled("educations") && (json_decode($request->educations) != null || is_object($request->educations))) {
+        if ($request->filled("educations") && (is_array($request->educations))) {
             $msgs = [
                 "school.required" => "محل تحصیل اجباری است",
                 "major.required" => "رشته تحصیلی اجباری است",
@@ -55,9 +56,9 @@ class ProfileController extends Controller
                 "startDate.required" => "تاریخ شروع اجباری است",
                 "endDate.required" => "تاریخ پایان اجباری است",
             ];
-            $educations = is_object($request->educations) ? $request->educations : json_decode($request->educations);
+            $educations = $request->educations;
             foreach ($educations as $education) {
-                $validator = Validator::validate($education, [
+                $validator = Validator::make($education, [
                     'company' => "required|max:50",
                     'title' => "required|max:60",
                     "startDate" => ["required", new DateObject],
@@ -72,12 +73,93 @@ class ProfileController extends Controller
         /**
          * Handle Skills
          */
-        if ($request->filled("skills") && (json_decode($request->skills) != null || is_array($request->skills))) {
-            $skills = is_object($request->skills) ? $request->skills : json_decode($request->skills);
+        if ($request->filled("achievements") && (is_array($request->achievements))) {
+            $achievements = (array) $request->achievements;
+
+            $messages = [
+                'name.required' => 'عنوان، نام اجباری است',
+                'level' => 'میزان تسلط اجباری است',
+                'startDate' => 'تاریخ شروع اجباری است.',
+                'date' => 'تاریخ اجباری است',
+                'organization' => 'اداره ثبت اختراع اجباری است.',
+                'score' => 'نمره آزمون اجباری است',
+            ];
+
+            // dd($achievements);
+            $validatorRules = [
+                'langs' => [
+                    'name' => "required|max:50",
+                    'level' => ['required', new LevelObject],
+                ],
+                'awards' => [
+                    'name' => "required|max:50",
+                ],
+                'projects' => [
+                    'name' => "required|max:50",
+                    "startDate" => ["required", new DateObject],
+                    "endDate" => ["required", new DateObject],
+                ],
+                'publishs' => [
+                    'name' => "required|max:50",
+                    "date" => ["required", new DateObject],
+                    "publisher" => "required|max:50",
+                ],
+                'inventions' => [
+                    'name' => "required|max:50",
+                    "organization" => "required|max:50",
+                    "registerCode" => "required|numeric",
+                ],
+                'courses' => [
+                    'name' => "required|max:50",
+                ],
+                'tests' => [
+                    'name' => "required|max:50",
+                    "score" => "required|numeric",
+                    "date" => ["required", new DateObject],
+                ],
+            ];
+
+            foreach ($achievements as $type => $list) {
+                foreach ($list as $data) {
+                    $validator = Validator::make($data, $validatorRules[$type], $messages);
+                    if ($validator->fails()) {
+                        return response()->json(['result' => false, "type" => ProfileController::getTypeName($type), "errors" => $validator->errors()]);
+                    }
+                }
+            }
+
         }
 
         /**
          *
          */
     }
+
+    public static function getTypeName($type)
+    {
+        switch ($type) {
+            case 'langs':
+                return 'زبان‌ها';
+                break;
+            case 'awards':
+                return 'جوایز';
+                break;
+            case 'projects':
+                return 'پروژه‌ها';
+                break;
+            case 'publishs':
+                return 'انتشارات';
+                break;
+            case 'inventions':
+                return 'اختراعات';
+                break;
+            case 'courses':
+                return 'دوره‌ها';
+                break;
+            case 'tests':
+                return 'آزمون‌ها';
+                break;
+        }
+    }
+
 }

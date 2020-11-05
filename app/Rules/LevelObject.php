@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class DateObject implements Rule
+class LevelObject implements Rule
 {
     /**
      * Create a new rule instance.
@@ -27,8 +27,10 @@ class DateObject implements Rule
     {
         if(is_object($value) || is_array($value)){
             $value = (object) $value;
-            if(isset($value->month) || isset($value->year)){
-                return true;
+            if (isset($value->label) && isset($value->level)) {
+                if (gettype($value->level) == 'integer') {
+                    return true;
+                }
             }
         }
         return false;
@@ -41,6 +43,6 @@ class DateObject implements Rule
      */
     public function message()
     {
-        return 'تاریخ :attribute نامعتبر است.';
+        return 'The validation error message.';
     }
 }

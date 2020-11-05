@@ -1,10 +1,10 @@
 <template>
 <div>
     <Biography :value="page.about" v-model="about" :edit="edit"></Biography>
-    <ExperienceList class="mt-3" :edit="edit"></ExperienceList>
-    <EducationsList class="mt-3" :edit="edit"></EducationsList>
-    <Skills :edit="edit" :page="page" class="mt-3"></Skills>
-    <AchievementsCard class="mt-3" :edit="edit" :page="page"></AchievementsCard>
+    <ExperienceList ref="experiences" class="mt-3" :edit="edit"></ExperienceList>
+    <EducationsList ref="educations" class="mt-3" :edit="edit"></EducationsList>
+    <Skills ref="skills" :edit="edit" :page="page" class="mt-3"></Skills>
+    <AchievementsCard ref="achievements" class="mt-3" :edit="edit" :page="page"></AchievementsCard>
 </div>
 </template>
 
@@ -12,8 +12,12 @@
 export default {
     methods: {
         getData() {
-            let data = {
-                about: this.about
+            return {
+                about: this.about,
+                experiences: this.$refs.experiences.getData(),
+                educations: this.$refs.educations.getData(),
+                skills: this.$refs.skills.getData(),
+                achievements: this.$refs.achievements.getData()
             }
         }
     },
@@ -32,9 +36,6 @@ export default {
     data() {
         return {
             about: "",
-            experiences: [],
-            skills: [],
-            achievements: [],
         }
     },
     components: {
@@ -43,7 +44,6 @@ export default {
         Skills: () => import("./Skills/Skills"),
         EducationsList: () => import("./Education/EducationsList"),
         AchievementsCard: () => import("./Achievements/AchievementsCard")
-
     }
 
 }

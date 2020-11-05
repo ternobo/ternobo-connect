@@ -2,25 +2,27 @@
 <base-layout>
     <div class="content-container-profile">
         <ProfileHeader :page="page" :can-edit="canEdit"></ProfileHeader>
-        <tabs :disabled="edit" class="py-3" @selected="tabChange" :state-tab='true'>
+        <tabs :disabled="edit" class="py-3" @selected="tabChange" :state-tab="true">
             <template slot="custom-item">
                 <div class="d-flex align-items-center" v-if="canEdit && showEdit">
-                    <button class="btn button-transparent rounded-circle" v-if="edit" @click="cancelEdit"><i class="material-icons">close</i></button>
+                    <button class="btn button-transparent rounded-circle" v-if="edit" @click="cancelEdit">
+                        <i class="material-icons">close</i>
+                    </button>
                     <button class="btn d-flex align-items-center justify-content-center btn-edit" @click="doEdit">
                         <span v-if="!edit">
-                            ویرایش اطلاعات <i class='material-icons-outlined'>edit</i>
+                            ویرایش اطلاعات <i class="material-icons-outlined">edit</i>
                         </span>
-                        <span v-else>
+                        <div class="d-flex align-items-center justify-content-center" v-else>
                             ذخیره
-                            <span style="height: 14px;width: 14px;border-width: 2px;" v-if="loading" class="mr-2 loadingspinner"></span>
-                        </span>
+                            <div style="height: 14px; width: 14px; border-width: 2px" v-if="loadingSave" class="mr-2 loadingspinner"></div>
+                        </div>
                     </button>
                 </div>
             </template>
-            <tab name="درباره من" id="about" :href="'/'+page.slug" :selected="location === 'about' || location === 'home'">
+            <tab name="درباره من" id="home" :href="'/' + page.slug" :selected="location === 'home'">
                 <AboutTab ref="about" :edit="edit" :page="page"></AboutTab>
             </tab>
-            <tab name="فعالیت‌ها" id="activities" :href="'/'+page.slug+'/activities'" :selected="location === 'activities'">
+            <tab name="فعالیت‌ها" id="activities" :href="'/' + page.slug + '/activities'" :selected="location === 'activities'">
                 <div class="row" v-if="!loadingTab" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
                     <div class="col-md-4">
                         <Categories :categories="page.categories" :location="location" :slug="page.slug" :article="false"></Categories>
@@ -42,7 +44,7 @@
                     <loading-spinner class="image__spinner" />
                 </div>
             </tab>
-            <tab name="تماس با من" id="contact" :href="'/'+page.slug+'/contact'" :selected="location==='contact'">
+            <tab name="تماس با من" id="contact" :href="'/' + page.slug + '/contact'" :selected="location === 'contact'">
                 <ContactTab ref="contacts" :edit="edit" :page="page"></ContactTab>
             </tab>
         </tabs>
@@ -66,7 +68,7 @@ import ProfileHeader from "../../Components/Profile/ProfileHeader";
 
 import {
     Inertia
-} from '@inertiajs/inertia';
+} from "@inertiajs/inertia";
 
 export default {
     created() {
@@ -78,7 +80,10 @@ export default {
 
         this.current_tab = this.location;
 
-        if (this.location.endsWith("articles") || this.location.endsWith("activities")) {
+        if (
+            this.location.endsWith("articles") ||
+            this.location.endsWith("activities")
+        ) {
             this.showEdit = false;
         } else {
             this.showEdit = true;
@@ -107,7 +112,6 @@ export default {
                                 this.articlesList = data.articles.data;
                                 this.next_page_url = data.articles.next_page_url;
                             }
-
                         }
                     })
                     .catch((error) => {
@@ -125,7 +129,7 @@ export default {
             } else {
                 this.showEdit = true;
             }
-            window.history.pushState({}, false, link)
+            window.history.pushState({}, false, link);
             const options = {
                 method: "GET",
                 headers: {
@@ -146,7 +150,6 @@ export default {
                             this.articlesList = data.articles.data;
                             this.next_page_url = data.articles.next_page_url;
                         }
-
                     }
                 })
                 .catch((error) => {
@@ -158,13 +161,32 @@ export default {
         },
         doEdit() {
             if (this.edit) {
+                this.loadingSave = true;
                 if (this.current_tab === "contact") {
-                    axios.post("/contacts", {
-                        contacts: this.$refs.contacts.getData()
-                    }).then((response) => {
-                        this.loadingSave = false;
-                        this.edit = false;
-                    });
+                    axios
+                        .post("/contacts", {
+                            contacts: this.$refs.contacts.getData(),
+                        })
+                        .then((response) => {
+                            if (response.data.result) {
+                                this.loadingSave = false;
+                                this.edit = false;
+                            } else {
+                                this.handleError(response.data.errors);
+                            }
+                        });
+                } else if (this.current_tab === "home") {
+                    let data = this.$refs.about.getData();
+                    axios
+                        .post("/save/resume", this.$refs.about.getData())
+                        .then((response) => {
+                            if (response.data.result) {
+                                this.loadingSave = false;
+                                this.edit = false;
+                            } else {
+                                this.handleError(response.data.errors);
+                            }
+                        });
                 }
             } else {
                 this.edit = true;
@@ -172,7 +194,7 @@ export default {
         },
         cancelEdit() {
             this.edit = false;
-        }
+        },
     },
     data() {
         return {
@@ -189,13 +211,13 @@ export default {
             showEditModal: false,
             showEdit: true,
             loadingTab: false,
-            loadingMore: false
-        }
+            loadingMore: false,
+        };
     },
     computed: {
         canEdit() {
             return this.page.user_id == window.user_id;
-        }
+        },
     },
     name: "UserProfile",
     props: {
@@ -212,8 +234,8 @@ export default {
             default: () => {
                 return {
                     data: [],
-                    next_page_url: null
-                }
+                    next_page_url: null,
+                };
             },
         },
         articles: {
@@ -221,8 +243,8 @@ export default {
             default: () => {
                 return {
                     data: [],
-                    next_page_url: null
-                }
+                    next_page_url: null,
+                };
             },
         },
         location: {
@@ -232,19 +254,27 @@ export default {
     },
     /**
 
-     */
+       */
     components: {
-        AboutTab: () => import( /* webpackChunkName: "AboutMeTabProfile" */ "../../Components/Profile/AboutMe/AboutMeTab"),
+        AboutTab: () =>
+            import(
+                /* webpackChunkName: "AboutMeTabProfile" */
+                "../../Components/Profile/AboutMe/AboutMeTab"
+            ),
         NewPostCard: () => import("../../Components/Cards/NewPostCard"),
         Categories: () => import("../../Components/Profile/Categories"),
         ActionCard: () => import("../../Components/PostCard/ActionCard"),
         NoContent,
         PostCard: () => import("../../Components/PostCard/PostCard"),
-        ContactTab: () => import( /* webpackChunkName: "ContactTabProfile" */ "../../Components/Profile/Contact/ContactTab"),
-        ProfileHeader
+        ContactTab: () =>
+            import(
+                /* webpackChunkName: "ContactTabProfile" */
+                "../../Components/Profile/Contact/ContactTab"
+            ),
+        ProfileHeader,
     },
-    layout: AppLayout
-}
+    layout: AppLayout,
+};
 </script>
 
 <style>

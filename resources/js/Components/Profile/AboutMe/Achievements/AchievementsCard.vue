@@ -40,7 +40,15 @@ import DropdownBtn from "../../../buttons/DropdownBtn";
 export default {
     methods: {
         getData() {
-
+            return {
+                langs: this.$refs.langs.getData(),
+                projects: this.$refs.projects.getData(),
+                publishs: this.$refs.publishs.getData(),
+                inventions: this.$refs.inventions.getData(),
+                courses: this.$refs.courses.getData(),
+                awards: this.$refs.awards.getData(),
+                tests: this.$refs.tests.getData()
+            };
         },
         addNew(item) {
             switch (item) {

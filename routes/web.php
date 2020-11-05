@@ -88,9 +88,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
             //Start Page Edit
             Route::prefix('/save')->group(function () {
-                Route::post("/contacts", "PageController@saveContacts");
-                Route::post("/socials", "PageController@saveSocials");
-                Route::post("/websites", "PageController@saveWebsits");
+                Route::post("/resume", "ProfileController@saveAboutMe");
             });
             Route::prefix("/usersave")->group(function () {
                 Route::post("/profile", "PageController@saveProfile");

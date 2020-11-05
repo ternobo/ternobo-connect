@@ -81,7 +81,9 @@ export default {
         },
     },
     created() {
-        this.skills = this.page.skills;
+        if (this.page.skills != null && this.page.skills != undefined) {
+            this.skills = this.page.skills;
+        }
     },
     components: {
         Skeleton,
