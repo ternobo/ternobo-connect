@@ -1,12 +1,12 @@
 <template>
 <div class="row ml-0">
     <div class="col-md-4">
-        <WebsiteCard class="mt-3" :page="page" :edit="edit"></WebsiteCard>
-        <SocialsCard class="mt-3" :page="page" :edit="edit"></SocialsCard>
+        <WebsiteCard ref="websites" class="mt-3" :page="page" :edit="edit"></WebsiteCard>
+        <SocialsCard ref="socials" class="mt-3" :page="page" :edit="edit"></SocialsCard>
     </div>
     <div class="col-md-8">
         <SlugCard :edit="edit" :page="page" v-model="slug"></SlugCard>
-        <ContactCard class="mt-3" :page="page" :edit="edit"></ContactCard>
+        <ContactCard ref="contacts" class="mt-3" :page="page" :edit="edit"></ContactCard>
     </div>
 </div>
 </template>
@@ -17,6 +17,17 @@ import ContactCard from "./ContactCard";
 import WebsiteCard from "./WebsitesCard";
 import SocialsCard from "./SocialsCard";
 export default {
+    methods: {
+        getData() {
+            let data = {
+                websites: this.$refs.websites.getData(),
+                socials: this.$refs.socials.getData(),
+                contacts: this.$refs.contacts.getData(),
+                slug: this.slug
+            };
+            return data;
+        }
+    },
     created() {
         this.slug = this.page.slug;
     },

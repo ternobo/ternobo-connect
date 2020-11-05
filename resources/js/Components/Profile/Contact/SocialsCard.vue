@@ -7,10 +7,13 @@
                 <i class="material-icons">add</i>
             </button>
         </div>
-        <ul class="socials-list p-0">
-            <li v-if="loading">
+
+        <ul class="socials-list p-0" v-if="loading">
+            <li>
                 <Skeleton :count="4" :heigth="25" />
             </li>
+        </ul>
+        <ul class="socials-list p-0" v-else>
             <SocialItem @deleted="onDelete(index)" @input="updateData" :options="usableOptions" :edit="edit" v-for="(social,index) in socials" :social="social" :key="'social_item_num_'+index"></SocialItem>
         </ul>
     </div>
@@ -78,22 +81,17 @@ export default {
         },
 
     },
-    mounted() {
-        this.socials = this.page.social_data;
+    created() {
+        this.loading = true;
         axios.post("/contact/social-option").then((response) => {
             this.options = response.data.options;
-            this.loading = false;
-
-            if (this.socials == null) {
-                this.socials = [];
-                this.usableOptions = this.options;
-            } else {
+            if (this.page.contact_data != null) {
+                this.socials = this.page.contact_data.socials;
                 this.options.forEach((option) => {
                     let canAdd = true;
 
                     this.socials.forEach((social) => {
-                        if (item.option.id == option.id) {
-                            console.log(social);
+                        if (social.option.id == option.id) {
                             canAdd = false;
                         }
                     });
@@ -102,7 +100,7 @@ export default {
                     }
                 });
             }
-
+            this.loading = false;
         });
     },
     components: {

@@ -1,7 +1,7 @@
 <template>
 <li>
-    <a :href="value.option.starts_with + value.url" v-if="!edit">
-        <i class="material-icons-outlined" :style="{'color': value.option.color }" v-html="value.option.icon"></i>
+    <a :href="option.starts_with + val" v-if="!edit">
+        <i class="material-icons-outlined" :style="{'color': option.color }" v-html="option.icon"></i>
     </a>
     <div class="editItem" v-else>
         <MaterialTextField :placeholder="placeholder" class="material--sm w-100" input-class="w-100" v-model="val"></MaterialTextField>
@@ -32,11 +32,10 @@
 export default {
     watch: {
         val() {
-            this.value = {
+            this.$emit("input", {
                 "option": this.option,
                 "url": this.val
-            };
-            this.$emit("input", this.value);
+            });
 
         },
         option() {
@@ -63,15 +62,10 @@ export default {
         }
     },
     created() {
-        if (this.website != undefined && this.website != null) {
-            this.val = this.website.url;
-            this.option = this.website.option;
+        if (this.social != undefined && this.social != null) {
+            this.val = this.social.url;
+            this.option = this.social.option;
         }
-        this.value = {
-            "option": this.option,
-            "url": this.val
-        };
-
     },
     data() {
         return {
@@ -93,9 +87,9 @@ export default {
             type: String,
             default: undefined,
         },
-        website: {
+        social: {
             type: Object,
-            default: undefined,
+            default: null,
         },
         edit: {
             type: Boolean,

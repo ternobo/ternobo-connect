@@ -2,17 +2,25 @@
 <base-layout>
     <div class="content-container-profile">
         <ProfileHeader :page="page" :can-edit="canEdit"></ProfileHeader>
-        <tabs class="py-3" @selected="tabChange" :state-tab='true'>
+        <tabs :disabled="edit" class="py-3" @selected="tabChange" :state-tab='true'>
             <template slot="custom-item">
-                <div v-if="canEdit && showEdit">
+                <div class="d-flex align-items-center" v-if="canEdit && showEdit">
                     <button class="btn button-transparent rounded-circle" v-if="edit" @click="cancelEdit"><i class="material-icons">close</i></button>
-                    <button class="btn btn-edit" v-html="edit ? 'ذخیره' : 'ویرایش اطلاعات <i class=\'material-icons-outlined\'>edit</i>'" @click="doEdit"></button>
+                    <button class="btn d-flex align-items-center justify-content-center btn-edit" @click="doEdit">
+                        <span v-if="!edit">
+                            ویرایش اطلاعات <i class='material-icons-outlined'>edit</i>
+                        </span>
+                        <span v-else>
+                            ذخیره
+                            <span style="height: 14px;width: 14px;border-width: 2px;" v-if="loading" class="mr-2 loadingspinner"></span>
+                        </span>
+                    </button>
                 </div>
             </template>
-            <tab name="درباره من" :href="'/'+page.slug" :selected="location==='about' || location==='home'">
-                <AboutTab :edit="edit" :page="page"></AboutTab>
+            <tab name="درباره من" id="about" :href="'/'+page.slug" :selected="location === 'about' || location === 'home'">
+                <AboutTab ref="about" :edit="edit" :page="page"></AboutTab>
             </tab>
-            <tab name="فعالیت‌ها" :href="'/'+page.slug+'/activities'" :selected="location === 'activities'">
+            <tab name="فعالیت‌ها" id="activities" :href="'/'+page.slug+'/activities'" :selected="location === 'activities'">
                 <div class="row" v-if="!loadingTab" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
                     <div class="col-md-4">
                         <Categories :categories="page.categories" :location="location" :slug="page.slug" :article="false"></Categories>
@@ -34,39 +42,8 @@
                     <loading-spinner class="image__spinner" />
                 </div>
             </tab>
-            <tab name="مقالات" :href="'/'+page.slug+'/articles'" :selected="location==='articles'">
-                <div class="row" v-if="!loadingTab" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
-                    <div class="col-md-4">
-                        <Categories :categories="page.categories" :location="location" :slug="page.slug" :article="true"></Categories>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card new-post" v-if="canEdit">
-                            <inertia-link href="/articles/create" class="text p-2">
-                                <lazy-image class="ml-2" loading="lazy" :src="page.profile" />
-                                <div class="textarea d-flex align-items-center">
-                                    <span class="text-light-hover d-flex align-items-center">
-                                        <i class="material-icons-outlined">post_add</i> نوشتن مقاله جدید
-                                    </span>
-                                </div>
-                            </inertia-link>
-                        </div>
-                        <div class="posts pt-3">
-                            <PostCard v-for="article in articlesList" :page="page" :post="article" :key="article.id"></PostCard>
-                        </div>
-                        <div class="w-100 d-flex justify-content-center py-3" v-if="loadingTab">
-                            <loading-spinner class="image__spinner" />
-                        </div>
-                        <div v-if="next_page_url === null && !loadingTab">
-                            <no-content></no-content>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-100 d-flex justify-content-center py-3" v-if="loadingTab">
-                    <loading-spinner class="image__spinner" />
-                </div>
-            </tab>
-            <tab name="تماس با من" :href="'/'+page.slug+'/contact'" :selected="location==='contact'">
-                <ContactTab :edit="edit" :page="page"></ContactTab>
+            <tab name="تماس با من" id="contact" :href="'/'+page.slug+'/contact'" :selected="location==='contact'">
+                <ContactTab ref="contacts" :edit="edit" :page="page"></ContactTab>
             </tab>
         </tabs>
     </div>
@@ -98,6 +75,8 @@ export default {
 
         this.articlesList = this.articles.data;
         this.next_page_url = this.articles.next_page_url;
+
+        this.current_tab = this.location;
 
         if (this.location.endsWith("articles") || this.location.endsWith("activities")) {
             this.showEdit = false;
@@ -139,7 +118,8 @@ export default {
                     });
             }
         },
-        tabChange(link) {
+        tabChange(link, id) {
+            this.current_tab = id;
             if (link.endsWith("articles") || link.endsWith("activities")) {
                 this.showEdit = false;
             } else {
@@ -177,16 +157,29 @@ export default {
                 });
         },
         doEdit() {
-            this.edit = !this.edit;
+            if (this.edit) {
+                if (this.current_tab === "contact") {
+                    axios.post("/contacts", {
+                        contacts: this.$refs.contacts.getData()
+                    }).then((response) => {
+                        this.loadingSave = false;
+                        this.edit = false;
+                    });
+                }
+            } else {
+                this.edit = true;
+            }
         },
         cancelEdit() {
-
+            this.edit = false;
         }
     },
     data() {
         return {
             edit: false,
             about: null,
+            loadingSave: false,
+            current_tab: "",
             experiences: [],
             skills: [],
             categories: [],

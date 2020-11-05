@@ -3,14 +3,17 @@
     <div class="py-3 card-body">
         <div class="d-flex mb-2 aling-items-center justify-content-between">
             <h5>وب‌سایت‌ها</h5>
-            <button class="btn follow-btn rounded-pill px-3 py-1" v-if="edit && usableOptions.length > 0 && websites.length < options.length" @click="addSocial">
+            <button class="btn follow-btn rounded-pill px-3 py-1" v-if="edit && usableOptions.length > 0 && websites.length < options.length" @click="addWebsite">
                 <i class="material-icons">add</i>
             </button>
         </div>
-        <ul class="websites-list p-0">
-            <li v-if="loading">
-                <Skeleton :count="6" :heigth="25" />
+
+        <ul class="websites-list p-0" v-if="loading">
+            <li>
+                <Skeleton :count="4" :heigth="25" />
             </li>
+        </ul>
+        <ul class="websites-list p-0" v-else>
             <WebsiteItem @deleted="onDelete(index)" @input="updateData" :options="usableOptions" :edit="edit" v-for="(website,index) in websites" :website="website" :key="'contact_item_num_'+index"></WebsiteItem>
         </ul>
     </div>
@@ -27,7 +30,7 @@ export default {
         onDelete(index) {
             this.websites.splice(index, 1);
         },
-        addSocial() {
+        addWebsite() {
             if (this.usableOptions.length > 0) {
                 this.websites.push(null);
             }
@@ -79,21 +82,17 @@ export default {
 
     },
     mounted() {
-        this.websites = this.page.contact_data;
+
+        this.loading = true;
         axios.post("/contact/website-option").then((response) => {
             this.options = response.data.options;
-            this.loading = false;
-
-            if (this.websites == null) {
-                this.websites = [];
-                this.usableOptions = this.options;
-            } else {
+            if (this.page.contact_data != null) {
+                this.websites = this.page.contact_data.websites;
                 this.options.forEach((option) => {
                     let canAdd = true;
 
-                    this.websites.forEach((contact) => {
-                        if (item.option.id == option.id) {
-                            console.log(contact);
+                    this.websites.forEach((social) => {
+                        if (social.option.id == option.id) {
                             canAdd = false;
                         }
                     });
@@ -102,7 +101,7 @@ export default {
                     }
                 });
             }
-
+            this.loading = false;
         });
     },
     components: {

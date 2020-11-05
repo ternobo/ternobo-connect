@@ -48,7 +48,7 @@ class User extends Authenticatable
         "pushe_id",
         "phone",
         "email",
-        "2AF"
+        "2AF",
     ];
 
     /**
@@ -305,7 +305,6 @@ class User extends Authenticatable
         return $list;
     }
 
-
     public function getWaitingConnectionsIds()
     {
         $connections = Connection::query()
@@ -325,7 +324,6 @@ class User extends Authenticatable
         }
         return $list;
     }
-
 
     public function hasUnreadNotification()
     {
@@ -368,25 +366,17 @@ class User extends Authenticatable
         return $page;
     }
 
-    protected static function boot()
+    public function save(array $options = [])
     {
-        parent::boot();
-
-        self::created(function ($model) {
-
-        });
-
-        self::saved(function ($model) {
-            $page = $model->personalPage;
-            if ($page !== null) {
-                $page->name = $model->first_name . " " . $model->last_name;
-                $page->slug = $model->username;
-                $page->profile = $model->profile;
-                $page->cover = $model->cover;
-                $page->short_bio = $model->short_bio;
-                $page->save();
-            }
-        });
+        $page = $this->personalPage;
+        if ($page !== null) {
+            $page->name = $this->first_name . " " . $this->last_name;
+            $page->slug = $this->username;
+            $page->profile = $this->profile;
+            $page->cover = $this->cover;
+            $page->short_bio = $this->short_bio;
+        }
+        return parent::save() && $page->save();
     }
 
 }

@@ -180,7 +180,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
     Route::post("/contact/website-option", "ContactsController@getWebsiteOptions");
     Route::post("/contact/social-option", "ContactsController@getSocialOptions");
 
-
+    Route::post("/contacts/", "ContactsController@saveData");
     Route::post("/contacts/{page}", "ContactsController@getContactData");
 
 

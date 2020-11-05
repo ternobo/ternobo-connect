@@ -29,6 +29,11 @@ class Page extends Model
         return $this->hasMany("App\Models\Achievement", "page_id");
     }
 
+    public function contactData()
+    {
+        return $this->hasOne("App\Models\ContactData", "page_id");
+    }
+
     /**
      * list page's categories (App\Category)
      * @var array()
@@ -188,6 +193,9 @@ class Page extends Model
         // get the original array to be displayed
         $data = parent::toArray();
 
+        if(isset($data['contact_data'])){
+            $data['contact_data'] = json_decode($data['contact_data']['data']);
+        }
 
         return $data;
     }
@@ -262,9 +270,9 @@ class Page extends Model
             ->with("post.category")
             ->where("page_id", $this->id)->latest();
 
-            if(Auth::check()){
-                $actions = $actions->with("post.mutualLikes");
-            }
+        if (Auth::check()) {
+            $actions = $actions->with("post.mutualLikes");
+        }
 
         if ($category !== null) {
             $actions = $actions->whereHas("post", function ($query) use ($category) {
@@ -464,24 +472,6 @@ class Page extends Model
             }
         }
         return $result;
-    }
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        self::saved(function ($model) {
-            if ($model->type == 'personal') {
-                $user = $model->user;
-                if ($user !== null) {
-                    $user->username = $model->slug;
-                    $user->profile = $model->profile;
-                    $user->cover = $model->cover;
-                    $user->short_bio = $model->short_bio;
-                    $user->save();
-                }
-            }
-        });
     }
 
 }

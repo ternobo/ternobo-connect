@@ -52,10 +52,13 @@ class Post extends Model
 
     public function share()
     {
-        return $this->belongsTo("App\Models\Post", "post_id")->with("page")
+        $data = $this->belongsTo("App\Models\Post", "post_id")->with("page")
             ->with("likes")
-            ->with("mutualLikes")
             ->with("category");
+        if (Auth::check()) {
+            $data->with("mutualLikes");
+        }
+        return $data;
     }
 
     public function getPublisher()
@@ -93,7 +96,7 @@ class Post extends Model
         $medias = json_decode($this->medias);
         if (count($medias) === 1) {
             return $medias[0];
-        }elseif(count($medias) < 1){
+        } elseif (count($medias) < 1) {
             return null;
         }
         return $medias;
@@ -112,7 +115,7 @@ class Post extends Model
         $data['is_bookmarked'] = false;
         if (Auth::check()) {
             if (isset($data['likes'])) {
-                $current_page = json_decode(Cookie::get('ternobo_current_page')) !== null ?  json_decode(Cookie::get('ternobo_current_page')) : Auth::user()->personalPage;
+                $current_page = json_decode(Cookie::get('ternobo_current_page')) !== null ? json_decode(Cookie::get('ternobo_current_page')) : Auth::user()->personalPage;
                 $page_ids = array_column($data['likes'], "page_id");
                 if (in_array($current_page->id, $page_ids)) {
                     $data['is_liked'] = true;

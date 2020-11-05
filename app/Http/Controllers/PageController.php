@@ -24,6 +24,7 @@ class PageController extends Controller
     public function show($page, $location = "home", Request $request)
     {
         $page = Page::query()
+            ->with("contactData")
             ->with("categories")
             ->with("education")
             ->with("expreciences")
@@ -328,6 +329,7 @@ class PageController extends Controller
             if ($request->has("about")) {
                 $page->about = $request->about;
             }
+
             return response()->json(array("result" => $user->save() && $page->save()));
         }
     }

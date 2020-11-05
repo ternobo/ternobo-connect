@@ -22,7 +22,12 @@
     vertical-align: top;
     transition: all 0.3s;
     border-bottom: 1px solid transparent;
+
+    &.disabled {
+      color: #C8C8C8 !important;
+    }
   }
+
 
 
 
@@ -42,6 +47,9 @@
       &.is-active a {
         border-bottom-color: $primary;
         color: $primary;
+        &.disabled {
+            border-color: #c8c8c8;
+        }
       }
     }
 
@@ -62,7 +70,7 @@
     }
   }
 
-  ul.default{
+  ul.default {
     li {
       width: auto;
     }

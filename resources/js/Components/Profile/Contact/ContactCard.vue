@@ -7,10 +7,12 @@
                 <i class="material-icons">add</i>
             </button>
         </div>
-        <ul class="contacts-list p-0">
-            <li v-if="loading">
+        <ul class="contacts-list p-0" v-if="loading">
+            <li>
                 <Skeleton :count="4" :heigth="25" />
             </li>
+        </ul>
+        <ul class="contacts-list p-0" v-else>
             <ContactItem @deleted="onDelete(index)" @input="updateData" :options="usableOptions" :edit="edit" v-for="(contact,index) in contacts" :contact="contact" :key="'contact_item_num_'+index"></ContactItem>
         </ul>
     </div>
@@ -79,7 +81,9 @@ export default {
 
     },
     mounted() {
-        this.contacts = this.page.contact_data;
+        if (this.page.contact_data != null) {
+            this.contacts = this.page.contact_data.contacts;
+        }
         axios.post("/contact/contact-option").then((response) => {
             this.options = response.data.options;
             this.loading = false;
@@ -92,8 +96,7 @@ export default {
                     let canAdd = true;
 
                     this.contacts.forEach((contact) => {
-                        if (item.option.id == option.id) {
-                            console.log(contact);
+                        if (contact.option.id == option.id) {
                             canAdd = false;
                         }
                     });
