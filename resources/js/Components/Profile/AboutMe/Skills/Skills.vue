@@ -47,11 +47,7 @@ export default {
             });
         },
         getData() {
-            let data = [];
-            this.$refs.draggable.$children.forEach((item) => {
-                data.push(item.skillVal);
-            });
-            return data;
+            return this.skills;
         },
     },
     data() {

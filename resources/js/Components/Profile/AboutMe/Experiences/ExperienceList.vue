@@ -35,11 +35,7 @@ export default {
             });
         },
         getData() {
-            let data = [];
-            this.$refs.draggable.$children.forEach((item) => {
-                data.push(item.value);
-            });
-            return data;
+            return this.experiences;
         },
     },
     data() {

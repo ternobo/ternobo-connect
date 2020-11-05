@@ -10,6 +10,13 @@
 
 <script>
 export default {
+    methods: {
+        getData() {
+            let data = {
+                about: this.about
+            }
+        }
+    },
     props: {
         page: {
             type: Object,

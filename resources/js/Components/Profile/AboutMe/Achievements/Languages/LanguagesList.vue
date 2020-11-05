@@ -42,11 +42,7 @@ export default {
             });
         },
         getData() {
-            let data = [];
-            this.$refs.draggable.$children.forEach((item) => {
-                data.push(item.languageVal);
-            });
-            return data;
+            return this.languages;
         },
     },
     data() {

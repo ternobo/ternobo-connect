@@ -39,6 +39,9 @@ import DropdownBtn from "../../../buttons/DropdownBtn";
 
 export default {
     methods: {
+        getData() {
+
+        },
         addNew(item) {
             switch (item) {
                 case 1:
