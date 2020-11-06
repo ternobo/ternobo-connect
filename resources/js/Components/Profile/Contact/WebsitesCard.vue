@@ -88,6 +88,8 @@ export default {
             this.options = response.data.options;
             if (this.page.contact_data != null) {
                 this.websites = this.page.contact_data.websites;
+            }
+            this.$nextTick(() => {
                 this.options.forEach((option) => {
                     let canAdd = true;
                     this.websites.forEach((social) => {
@@ -99,7 +101,8 @@ export default {
                         this.usableOptions.push(option);
                     }
                 });
-            }
+            })
+
             this.loading = false;
         });
     },

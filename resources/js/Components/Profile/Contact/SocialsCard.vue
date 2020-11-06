@@ -96,6 +96,8 @@ export default {
             this.options = response.data.options;
             if (this.page.contact_data != null) {
                 this.socials = this.page.contact_data.socials;
+            }
+            this.$nextTick(() => {
                 this.options.forEach((option) => {
                     let canAdd = true;
 
@@ -108,7 +110,8 @@ export default {
                         this.usableOptions.push(option);
                     }
                 });
-            }
+            });
+
             this.loading = false;
         });
     },

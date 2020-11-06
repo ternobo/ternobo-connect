@@ -375,8 +375,9 @@ class User extends Authenticatable
             $page->profile = $this->profile;
             $page->cover = $this->cover;
             $page->short_bio = $this->short_bio;
+            $page->save();
         }
-        return parent::save() && $page->save();
+        return parent::save();
     }
 
 }

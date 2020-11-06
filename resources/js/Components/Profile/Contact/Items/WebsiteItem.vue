@@ -28,7 +28,7 @@
                     </div>
                 </template>
             </v-select>
-            <i class="material-icons-outlined text-muted hover-danger pl-2 clickable" @click="doDelete">delete</i>
+            <i class="material-icons-outlined text-muted hover-danger pr-2 clickable" @click="doDelete">delete</i>
         </div>
     </div>
 </li>

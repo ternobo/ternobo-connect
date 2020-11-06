@@ -5,7 +5,7 @@
             <h5>تماس با من</h5>
         </div>
         <ul class="contacts-list p-0">
-            <li :class="{ 'edit': edit }" v-if="contacts.email != null || edit">
+            <li :class="{ 'edit': edit }" v-if="(contacts.email != null && this.contacts.email.length > 0) || edit">
                 <a target="_blank" :href="'mailto:'+contacts.email" v-if="!edit">
                     <i class="material-icons-outlined ml-1" :style="{'color': '#F14336' }">email</i>
                     ارسال پیام به پست الترونیک
@@ -18,20 +18,20 @@
                     <MaterialTextField class="material--sm" style="width: 300px" input-class="w-100 text-left" v-model="contacts.email"></MaterialTextField>
                 </div>
             </li>
-            <li :class="{ 'edit': edit }" v-if="contacts.telegram != null || edit">
+            <li :class="{ 'edit': edit }" v-if="(contacts.telegram != null && this.contacts.telegram.length > 0) || edit">
                 <a target="_blank" :href="'https://t.me/'+contacts.telegram" v-if="!edit">
-                    <i class="ternobo-telegram ml-1" :style="{'color': '#61A7DD' }"></i>
+                    <i class="icon-t-telegram ml-1" :style="{'color': '#61A7DD' }"></i>
                     ارسال پیام به Telegram
                 </a>
                 <div v-else class="d-flex align-items-center justify-content-between">
                     <span class="text-nowrap ml-2">
-                        <i class="ternobo-telegram ml-1" :style="{'color': '#61A7DD' }"></i>
+                        <i class="icon-t-telegram ml-1" :style="{'color': '#61A7DD' }"></i>
                         ارسال پیام به تلگرام
                     </span>
                     <MaterialTextField class="material--sm" style="width: 300px" input-class="w-100 text-left" v-model="contacts.telegram"></MaterialTextField>
                 </div>
             </li>
-            <li :class="{ 'edit': edit }" v-if="contacts.skype != null || edit">
+            <li :class="{ 'edit': edit }" v-if="(contacts.skype != null && this.contacts.skype.length > 0) || edit">
                 <a target="_blank" :href="'skype:'+contacts.skype" v-if="!edit">
                     <i class="ternobo-skype ml-1" :style="{'color': '#00AFF0' }"></i>
                     ارسال پیام از طریق Skype
@@ -44,7 +44,7 @@
                     <MaterialTextField class="material--sm" style="width: 300px" input-class="w-100 text-left" v-model="contacts.skype"></MaterialTextField>
                 </div>
             </li>
-            <li :class="{ 'edit': edit }" v-if="contacts.whatsapp != null || edit">
+            <li :class="{ 'edit': edit }" v-if="(contacts.whatsapp != null && this.contacts.whatsapp.length > 0) || edit">
                 <a target="_blank" :href="'https://wa.me/'+contacts.whatsapp" v-if="!edit">
                     <i class="ternobo-whatsapp ml-1" :style="{'color': '#191919' }"></i>
                     ارسال پیام به WhatsApp
@@ -98,20 +98,20 @@ export default {
         },
         validate() {
             let cantPass = true;
-            if (!(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$/.test(this.contacts.whatsapp))) {
+            if (this.contacts.whatsapp != null && this.contacts.whatsapp.length > 0 && !(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$/.test(this.contacts.whatsapp))) {
                 this.toast("شماره واتس‌اپ نامعتبر است");
                 cantPass = false;
             }
-            if (!(/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/.test(this.contacts.email))) {
+            if (this.contacts.email != null && this.contacts.email.length > 0 && !(/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/.test(this.contacts.email))) {
                 this.toast("پست الکترونیک نامعتبر است");
                 cantPass = false;
             }
-            if (!(/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/.test(this.contacts.telegram))) {
+            if (this.contacts.telegram != null && this.contacts.telegram.length > 0 && !(/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/.test(this.contacts.telegram))) {
                 this.toast("نام کاربر تلگرام نامعتبر است");
                 cantPass = false;
             }
 
-            if (!(/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/.test(this.contacts.skype))) {
+            if (this.contacts.skype != null && this.contacts.skype.length > 0 && !(/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/.test(this.contacts.skype))) {
                 this.toast("نام کاربری اسکایپ نامعتبر است");
                 cantPass = false;
             }

@@ -19,13 +19,13 @@
                     </button>
                 </div>
             </template>
-            <tab name="درباره من" id="home" :href="'/' + page.slug" :selected="location === 'home'">
+            <tab v-if="showAbout" name="درباره من" id="home" :href="'/' + page.slug" :selected="current_tab === 'home'">
                 <div class="w-100 d-flex justify-content-center py-3" v-if="loadingTab">
                     <loading-spinner class="image__spinner" />
                 </div>
                 <AboutTab v-else ref="about" :edit="edit" :page="page"></AboutTab>
             </tab>
-            <tab name="فعالیت‌ها" id="activities" :href="'/' + page.slug + '/activities'" :selected="location === 'activities'">
+            <tab name="فعالیت‌ها" id="activities" :href="'/' + page.slug + '/activities'" :selected="current_tab === 'activities'">
                 <div class="row" v-if="!loadingTab" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
                     <div class="col-md-4">
                         <Categories :categories="page.categories" :location="location" :slug="page.slug" :article="false"></Categories>
@@ -47,7 +47,7 @@
                     <loading-spinner class="image__spinner" />
                 </div>
             </tab>
-            <tab name="تماس با من" id="contact" :href="'/' + page.slug + '/contact'" :selected="location === 'contact'">
+            <tab name="تماس با من" id="contact" :href="'/' + page.slug + '/contact'" :selected="current_tab === 'contact'">
                 <ContactTab ref="contacts" :edit="edit" :page="page"></ContactTab>
             </tab>
         </tabs>
@@ -91,6 +91,20 @@ export default {
         } else {
             this.showEdit = true;
         }
+        this.current_tab = this.location;
+
+        if (!(this.showSkills ||
+                this.showExperiences ||
+                this.showEducations ||
+                (this.checkUser(this.page.user_id) || (this.about != null && this.about.length > 0)))) {
+            this.showAbout = false;
+            if (this.current_tab == 'home') {
+                this.current_tab = "activities";
+                this.loadTab('/' + this.page.slug + '/activities')
+            }
+
+        }
+
     },
     methods: {
         loadMore() {
@@ -233,11 +247,48 @@ export default {
             showEdit: true,
             loadingTab: false,
             loadingMore: false,
+            showAbout: true
         };
     },
     computed: {
         canEdit() {
             return this.page.user_id == window.user_id;
+        },
+        showSkills() {
+            if (
+                this.checkUser(this.page.user_id) ||
+                (this.page.user.skills != null && this.page.user.skills.length > 0)
+            ) {
+                return true;
+            }
+            return false;
+        },
+        showExperiences() {
+            if (this.checkUser(this.page.user_id) ||
+                (this.page.about_data != null &&
+                    this.page.about_data.experiences != null &&
+                    this.page.about_data.experiences.length > 0)) {
+                return true;
+            }
+            return false;
+        },
+        showEducations() {
+            if (this.checkUser(this.page.user_id) ||
+                (this.page.about_data != null &&
+                    this.page.about_data.educations != null &&
+                    this.page.about_data.educations.length > 0)) {
+                return true;
+            }
+            return false;
+        },
+        showAchievements() {
+            if (this.checkUser(this.page.user_id) ||
+                (this.page.about_data != null &&
+                    this.page.about_data.achievements != null &&
+                    this.page.about_data.achievements.length > 0)) {
+                return true;
+            }
+            return false;
         },
     },
     name: "UserProfile",
@@ -277,11 +328,10 @@ export default {
 
        */
     components: {
-        AboutTab: () =>
-            import(
-                /* webpackChunkName: "AboutMeTabProfile" */
-                "../../Components/Profile/AboutMe/AboutMeTab"
-            ),
+        AboutTab: () => import(
+            /* webpackChunkName: "AboutMeTabProfile" */
+            "../../Components/Profile/AboutMe/AboutMeTab"
+        ),
         NewPostCard: () => import("../../Components/Cards/NewPostCard"),
         Categories: () => import("../../Components/Profile/Categories"),
         ActionCard: () => import("../../Components/PostCard/ActionCard"),

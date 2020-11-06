@@ -5,7 +5,7 @@
             <div class="d-flex align-items-center">
                 <img width="24" src="/images/logo.svg" class="ml-2">
                 <span>
-                    پروفایل <strong>{{ page.name }}</strong>
+                    پروفایل <strong>{{ page.user ? page.user.first_name : page.name }}</strong>
                 </span>
             </div>
 

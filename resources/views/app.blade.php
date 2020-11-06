@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <link rel="stylesheet" href="/ternobo-socials/style.css">
-
+    <link rel="stylesheet" href="/ternobo-telegram/style.css">
 
     <!-- Styles -->
     {{--
