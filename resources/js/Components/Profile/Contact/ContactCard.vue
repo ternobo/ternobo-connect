@@ -3,23 +3,68 @@
     <div class="py-3 card-body">
         <div class="d-flex mb-2 aling-items-center justify-content-between">
             <h5>تماس با من</h5>
-            <button class="btn follow-btn rounded-pill px-3 py-1" v-if="edit && usableOptions.length > 0 && contacts.length < options.length" @click="addContact">
-                <i class="material-icons">add</i>
-            </button>
         </div>
-        <ul class="contacts-list p-0" v-if="loading">
-            <li>
-                <Skeleton :count="4" :heigth="25" />
+        <ul class="contacts-list p-0">
+            <li :class="{ 'edit': edit }" v-if="contacts.email != null || edit">
+                <a target="_blank" :href="'mailto:'+contacts.email" v-if="!edit">
+                    <i class="material-icons-outlined ml-1" :style="{'color': '#F14336' }">email</i>
+                    ارسال پیام به پست الترونیک
+                </a>
+                <div v-else class="d-flex align-items-center justify-content-between">
+                    <span class="text-nowrap ml-2">
+                        <i class="material-icons-outlined ml-1" :style="{'color': '#F14336' }">email</i>
+                        ارسال پیام به پست الکترونیک
+                    </span>
+                    <MaterialTextField class="material--sm" style="width: 300px" input-class="w-100 text-left" v-model="contacts.email"></MaterialTextField>
+                </div>
             </li>
-        </ul>
-        <ul class="contacts-list p-0" v-else>
-            <ContactItem @deleted="onDelete(index)" @input="updateData" :options="usableOptions" :edit="edit" v-for="(contact,index) in contacts" :contact="contact" :key="'contact_item_num_'+index"></ContactItem>
+            <li :class="{ 'edit': edit }" v-if="contacts.telegram != null || edit">
+                <a target="_blank" :href="'https://t.me/'+contacts.telegram" v-if="!edit">
+                    <i class="ternobo-telegram ml-1" :style="{'color': '#61A7DD' }"></i>
+                    ارسال پیام به Telegram
+                </a>
+                <div v-else class="d-flex align-items-center justify-content-between">
+                    <span class="text-nowrap ml-2">
+                        <i class="ternobo-telegram ml-1" :style="{'color': '#61A7DD' }"></i>
+                        ارسال پیام به تلگرام
+                    </span>
+                    <MaterialTextField class="material--sm" style="width: 300px" input-class="w-100 text-left" v-model="contacts.telegram"></MaterialTextField>
+                </div>
+            </li>
+            <li :class="{ 'edit': edit }" v-if="contacts.skype != null || edit">
+                <a target="_blank" :href="'skype:'+contacts.skype" v-if="!edit">
+                    <i class="ternobo-skype ml-1" :style="{'color': '#00AFF0' }"></i>
+                    ارسال پیام از طریق Skype
+                </a>
+                <div v-else class="d-flex align-items-center justify-content-between">
+                    <span class="text-nowrap ml-2">
+                        <i class="ternobo-skype ml-1" :style="{'color': '#00AFF0' }"></i>
+                        ارسال پیام از طریق Skype
+                    </span>
+                    <MaterialTextField class="material--sm" style="width: 300px" input-class="w-100 text-left" v-model="contacts.skype"></MaterialTextField>
+                </div>
+            </li>
+            <li :class="{ 'edit': edit }" v-if="contacts.whatsapp != null || edit">
+                <a target="_blank" :href="'https://wa.me/'+contacts.whatsapp" v-if="!edit">
+                    <i class="ternobo-whatsapp ml-1" :style="{'color': '#191919' }"></i>
+                    ارسال پیام به WhatsApp
+                </a>
+                <div v-else class="d-flex align-items-center justify-content-between">
+                    <span class="text-nowrap ml-2">
+                        <i class="ternobo-whatsapp ml-1" :style="{'color': '#191919' }"></i>
+                        ارسال پیام به WhatsApp
+                    </span>
+                    <MaterialTextField class="material--sm" style="width: 300px" input-class="w-100 text-left" v-model="contacts.whatsapp"></MaterialTextField>
+                </div>
+            </li>
         </ul>
     </div>
 </div>
 </template>
 
 <script>
+import parsePhoneNumber from 'libphonenumber-js'
+
 import {
     Skeleton
 } from 'vue-loading-skeleton'
@@ -52,28 +97,46 @@ export default {
             });
         },
         validate() {
-            return this.$children.every((item) => {
-                if (item.validate()) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
+            let cantPass = true;
+            if (!(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$/.test(this.contacts.whatsapp))) {
+                this.toast("شماره واتس‌اپ نامعتبر است");
+                cantPass = false;
+            }
+            if (!(/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/.test(this.contacts.email))) {
+                this.toast("پست الکترونیک نامعتبر است");
+                cantPass = false;
+            }
+            if (!(/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/.test(this.contacts.telegram))) {
+                this.toast("نام کاربر تلگرام نامعتبر است");
+                cantPass = false;
+            }
+
+            if (!(/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/.test(this.contacts.skype))) {
+                this.toast("نام کاربری اسکایپ نامعتبر است");
+                cantPass = false;
+            }
+            return cantPass;
         },
         getData() {
-            let data = [];
-            this.$children.forEach((item) => {
-                data.push(item.value);
-            });
-            return data;
+            if (this.contacts.whatsapp.startsWith("0")) {
+                this.contacts.whatsapp = this.contacts.whatsapp.replace("0", "98");
+            } else if (this.contacts.whatsapp.startsWith("+")) {
+                this.contacts.whatsapp = this.contacts.whatsapp.replace("+", "");
+            } else if (this.contacts.whatsapp.startsWith("00")) {
+                this.contacts.whatsapp = this.contacts.whatsapp.replace("00", "98");
+            }
+            return this.contacts;
         }
     },
     data() {
         return {
             loading: true,
-            options: [],
-            usableOptions: [],
-            contacts: []
+            contacts: {
+                email: null,
+                telegram: null,
+                skype: null,
+                whatsapp: null
+            },
         }
     },
     props: {
@@ -93,29 +156,6 @@ export default {
         if (this.page.contact_data != null) {
             this.contacts = this.page.contact_data.contacts;
         }
-        axios.post("/contact/contact-option").then((response) => {
-            this.options = response.data.options;
-            this.loading = false;
-
-            if (this.contacts == null) {
-                this.contacts = [];
-                this.usableOptions = this.options;
-            } else {
-                this.options.forEach((option) => {
-                    let canAdd = true;
-
-                    this.contacts.forEach((contact) => {
-                        if (contact.option.id == option.id) {
-                            canAdd = false;
-                        }
-                    });
-                    if (canAdd) {
-                        this.usableOptions.push(option);
-                    }
-                });
-            }
-
-        });
     },
     components: {
         Skeleton,

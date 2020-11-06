@@ -1,5 +1,6 @@
 <template>
 <div class="card">
+    <UserInfoModal :user="page.user" v-if="canEdit" :show.sync="edit"></UserInfoModal>
     <ProfileCover :canChange="canEdit" :src="page.cover"></ProfileCover>
     <div class="card-body pb-0 d-flex justify-content-between pageinfo-card">
         <ProfileImage :canChange="canEdit" :src="page.profile"></ProfileImage>
@@ -18,30 +19,7 @@
 
     </div>
     <div class="card-body d-flex flex-column page-name">
-        <div v-if="edit">
-            <div class="row align-items-start">
-                <div class="col-md-3">
-                    <MaterialTextField class="material--sm w-100" input-class="w-100" :value="firstName" v-model="firstName" :required="true" placeholder="نام"></MaterialTextField>
-                </div>
-                <div class="col-md-3 mt-3 mt-md-0">
-                    <MaterialTextField class="material--sm w-100" input-class="w-100" :value="lastName" v-model="lastName" :required="true" placeholder="نام خانوادگی"></MaterialTextField>
-                </div>
-                <div class="col-md-4 mt-3 mt-md-0">
-                    <MaterialTextField class="material--sm w-100" input-class="w-100" :value="shortBio" v-model="shortBio" placeholder="عنوان"></MaterialTextField>
-                    <span class="text-muted font-12">این عنوان زیر نام شما نمایش داده می‌شود.</span>
-                </div>
-                <div class="col-md-2 mt-3 mt-md-0">
-                    <v-select class="dropdown-list" :placeholder="'جنسیت'" dir="rtl" v-model="gender" :options="[{label: 'زن', code: '1'},{label: 'مرد', code: '2'},{label: 'تراجنسی', code: '3'}]">
-                        <template #open-indicator="{ attributes }">
-                            <span v-bind="attributes">
-                                <i class="material-icons">keyboard_arrow_down</i>
-                            </span>
-                        </template>
-                    </v-select>
-                </div>
-            </div>
-        </div>
-        <div v-else>
+        <div>
             <span class="d-flex align-items-center">
                 <strong class="font-20">
                     {{ page.name }}
@@ -60,6 +38,7 @@ import ConnectionButton from "../buttons/ConnectionButton";
 import FollowButton from "../buttons/FollowButton";
 import ProfileCover from "./ProfileCover";
 import ProfileImage from "./ProfileImage";
+import UserInfoModal from "../Modals/UserInfoModal";
 
 import MaterialTextField from "../inputs/MaterialTextField";
 
@@ -111,6 +90,7 @@ export default {
         ConnectionButton,
         ProfileImage,
         ProfileCover,
+        UserInfoModal,
         MaterialTextField
     },
     props: {

@@ -52,6 +52,15 @@ export default {
                 }
             });
         },
+        validate() {
+            return this.$children.every((item) => {
+                if (item.validate()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        },
         getData() {
             let data = [];
             this.$children.forEach((item) => {

@@ -14,7 +14,6 @@
             display: flex;
             align-items: center;
             flex-direction: column;
-            gap: 10px;
 
             @media screen and(max-width: 622px) {
                 flex-wrap: wrap;
@@ -30,7 +29,6 @@
 
         &:not(:last-child) {
             padding-bottom: 1rem;
-            border-bottom: 1px solid #C8C8C8;
             margin-bottom: 1rem;
         }
     }

@@ -171,18 +171,24 @@ export default {
             if (this.edit) {
                 this.loadingSave = true;
                 if (this.current_tab === "contact") {
-                    axios
-                        .post("/contacts", {
-                            contacts: this.$refs.contacts.getData(),
-                        })
-                        .then((response) => {
-                            if (response.data.result) {
-                                this.loadingSave = false;
-                                this.edit = false;
-                            } else {
-                                this.handleError(response.data.errors);
-                            }
-                        });
+                    let data = this.$refs.contacts.getData();
+                    if (data) {
+                        axios
+                            .post("/contacts", {
+                                contacts: data,
+                            })
+                            .then((response) => {
+                                if (response.data.result) {
+                                    this.loadingSave = false;
+                                    this.edit = false;
+                                } else {
+                                    this.handleError(response.data.errors);
+                                }
+                            });
+                    } else {
+                        this.loadingSave = false;
+                        this.toast("ورودی‌ها نامعتبر است")
+                    }
                 } else if (this.current_tab === "home") {
                     let data = this.$refs.about.getData();
                     axios

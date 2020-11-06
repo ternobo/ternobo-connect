@@ -19,13 +19,16 @@ import SocialsCard from "./SocialsCard";
 export default {
     methods: {
         getData() {
-            let data = {
-                websites: this.$refs.websites.getData(),
-                socials: this.$refs.socials.getData(),
-                contacts: this.$refs.contacts.getData(),
-                slug: this.slug
-            };
-            return data;
+            if (this.$refs.contacts.validate() && this.$refs.socials.validate()) {
+                let data = {
+                    websites: this.$refs.websites.getData(),
+                    socials: this.$refs.socials.getData(),
+                    contacts: this.$refs.contacts.getData(),
+                    slug: this.slug
+                };
+                return data;
+            }
+            return false;
         }
     },
     created() {

@@ -56,7 +56,7 @@ export default {
             if (this.option != null) {
                 return RegExp(this.option.pattern).test(this.val);
             }
-            return null;
+            return true;
         },
         websiteUrl() {
             let url = this.value.url;
@@ -75,7 +75,7 @@ export default {
             if (this.option != null) {
                 return RegExp(this.option.pattern).test(this.val);
             }
-            return null;
+            return false;
         }
     },
     created() {
