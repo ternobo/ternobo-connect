@@ -19,6 +19,20 @@ Vue.prototype.window = window.window;
 
 Vue.use(Dialog);
 
+vSelect.props.components.default = () => ({
+    Deselect: {
+      render: createElement => createElement('i',
+      {
+        attrs: { class: 'material-icons'}
+      }, 'close'),
+    },
+    OpenIndicator: {
+      render: createElement => createElement('i',
+      {
+        attrs: { class: 'material-icons'}
+      }, 'keyboard_arrow_down'),
+    },
+  });
 
 // Install V-Select
 Vue.component('v-select', vSelect);

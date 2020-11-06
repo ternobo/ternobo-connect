@@ -31,7 +31,13 @@
                 label: 'هیچ کدام از موارد بالا',
                 value:'هیچ کدام از موارد بالا'
             }
-        ]"></v-select>
+        ]">
+            <template #open-indicator="{ attributes }">
+                <span v-bind="attributes">
+                    <i class="material-icons">keyboard_arrow_down</i>
+                </span>
+            </template>
+        </v-select>
     </div>
     <div class="w-100 d-flex mt-3 justify-content-center" style="margin-bottom: -8px">
         <button class="btn btn-dark">ثبت</button>

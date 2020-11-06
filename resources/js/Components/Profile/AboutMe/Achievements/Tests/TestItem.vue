@@ -34,7 +34,13 @@
                 <MaterialTextField v-model="val.name" :required="true" class="d-flex align-items-center material--sm p-0" placeholder="عنوان"></MaterialTextField>
             </div>
             <div class="col-md-6 py-4">
-                <v-select :placeholder="'مرتبط با'" class="dropdown-list w-75" dir="rtl" v-model="val.skills" label="name" :options="page.skills"></v-select>
+                <v-select :placeholder="'مرتبط با'" class="dropdown-list w-75" dir="rtl" v-model="val.skills" label="name" :options="page.skills">
+                    <template #open-indicator="{ attributes }">
+                        <span v-bind="attributes">
+                            <i class="material-icons">keyboard_arrow_down</i>
+                        </span>
+                    </template>
+                </v-select>
             </div>
             <div class="col-md-6 py-4">
                 <strong>تاریخ آزمون <span class="text-action">*</span></strong>

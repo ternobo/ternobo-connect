@@ -90,7 +90,6 @@ export default {
                 this.websites = this.page.contact_data.websites;
                 this.options.forEach((option) => {
                     let canAdd = true;
-
                     this.websites.forEach((social) => {
                         if (social.option.id == option.id) {
                             canAdd = false;

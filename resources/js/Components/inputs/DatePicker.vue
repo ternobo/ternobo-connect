@@ -1,9 +1,26 @@
 <template>
 <div class="d-flex">
-    <v-select class="dropdown-list ml-2 w-50" v-if="!hideYear" :placeholder="'سال'" dir="rtl" v-model="year" :options="years"></v-select>
-    <v-select class="dropdown-list w-50" v-if="!hideMonth" :placeholder="'ماه'" dir="rtl" v-model="month" :options="monthsList"></v-select>
-    <v-select class="dropdown-list mr-2 w-50" v-if="showDays" :placeholder="'روز'" dir="rtl" v-model="day" :options="daysList"></v-select>
-
+    <v-select class="dropdown-list ml-2 w-50" v-if="!hideYear" :placeholder="'سال'" dir="rtl" v-model="year" :options="years">
+        <template #open-indicator="{ attributes }">
+            <span v-bind="attributes">
+                <i class="material-icons">keyboard_arrow_down</i>
+            </span>
+        </template>
+    </v-select>
+    <v-select class="dropdown-list w-50" v-if="!hideMonth" :placeholder="'ماه'" dir="rtl" v-model="month" :options="monthsList">
+        <template #open-indicator="{ attributes }">
+            <span v-bind="attributes">
+                <i class="material-icons">keyboard_arrow_down</i>
+            </span>
+        </template>
+    </v-select>
+    <v-select class="dropdown-list mr-2 w-50" v-if="showDays" :placeholder="'روز'" dir="rtl" v-model="day" :options="daysList">
+        <template #open-indicator="{ attributes }">
+            <span v-bind="attributes">
+                <i class="material-icons">keyboard_arrow_down</i>
+            </span>
+        </template>
+    </v-select>
 </div>
 </template>
 
@@ -19,17 +36,17 @@ export default {
         showDays: {
             type: Boolean,
             default: false,
-            required: false
+            required: false,
         },
         hideMonth: {
             type: Boolean,
             default: false,
-            required: false
+            required: false,
         },
         hideYear: {
             type: Boolean,
             default: false,
-            required: false
+            required: false,
         },
         value: {
             default: null,
@@ -37,17 +54,17 @@ export default {
         minYear: {
             type: Number,
             default: 1357,
-            required: false
+            required: false,
         },
         max: {
             type: Object,
             default: () => {
                 return {
                     year: null,
-                    month: null
-                }
+                    month: null,
+                };
             },
-            required: false
+            required: false,
         },
     },
     computed: {
@@ -78,39 +95,41 @@ export default {
         },
         monthsList() {
             if (this.year !== null) {
-                if (this.max != undefined && this.year == this.max.year && this.max.month) {
+                if (
+                    this.max != undefined &&
+                    this.year == this.max.year &&
+                    this.max.month
+                ) {
                     return this.months(this.max.month);
                 }
                 return this.months();
             }
             return [];
-        }
+        },
     },
     watch: {
         year() {
             this.$emit("input", {
                 year: this.year,
-                month: this.month
+                month: this.month,
             });
         },
         month() {
             this.$emit("input", {
                 year: this.year,
-                month: this.month
+                month: this.month,
             });
-        }
+        },
     },
     data() {
         return {
             year: null,
             month: null,
-            day: null
-        }
+            day: null,
+        };
     },
-
-}
+};
 </script>
 
 <style>
-
 </style>

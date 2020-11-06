@@ -98,6 +98,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             });
             // End Page Edit
 
+
             // Start Comments
             Route::any("/comments/{comment:id}/replies", "CommentController@replies");
             Route::resource('posts.comments', "CommentController");

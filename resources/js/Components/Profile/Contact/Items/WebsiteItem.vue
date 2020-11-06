@@ -6,9 +6,13 @@
     </a>
     <div class="editItem" v-else>
         <MaterialTextField :placeholder="placeholder" class="material--sm w-100" input-class="w-100" v-model="val"></MaterialTextField>
-        <div class="d-flex align-items-center pl-2 mb-3 mb-lg-0 w-100">
-            <i class="material-icons-outlined hover-danger pl-2 clickable" @click="doDelete">delete</i>
+        <div class="d-flex align-items-center mb-3 mb-lg-0 w-100">
             <v-select class="dropdown-list w-100" :placeholder="'انتخاب کنید'" label="name" dir="rtl" v-model="option" :options="options">
+                <template #open-indicator="{ attributes }">
+                    <span v-bind="attributes">
+                        <i class="material-icons">keyboard_arrow_down</i>
+                    </span>
+                </template>
                 <template v-slot:selected-option="{ icon, color, name }">
                     <i class="material-icons-outlined ml-1" :style="{'color': color }" v-html="icon"></i>
                     <span class="ml-3" style="white-space: nowrap">
@@ -24,6 +28,7 @@
                     </div>
                 </template>
             </v-select>
+            <i class="material-icons-outlined text-muted hover-danger pl-2 clickable" @click="doDelete">delete</i>
         </div>
     </div>
 </li>

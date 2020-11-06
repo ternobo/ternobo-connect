@@ -31,7 +31,13 @@
                     <span class="text-muted font-12">این عنوان زیر نام شما نمایش داده می‌شود.</span>
                 </div>
                 <div class="col-md-2 mt-3 mt-md-0">
-                    <v-select class="dropdown-list" :placeholder="'جنسیت'" dir="rtl" v-model="gender" :options="[{label: 'زن', code: '1'},{label: 'مرد', code: '2'},{label: 'تراجنسی', code: '3'}]"></v-select>
+                    <v-select class="dropdown-list" :placeholder="'جنسیت'" dir="rtl" v-model="gender" :options="[{label: 'زن', code: '1'},{label: 'مرد', code: '2'},{label: 'تراجنسی', code: '3'}]">
+                        <template #open-indicator="{ attributes }">
+                            <span v-bind="attributes">
+                                <i class="material-icons">keyboard_arrow_down</i>
+                            </span>
+                        </template>
+                    </v-select>
                 </div>
             </div>
         </div>

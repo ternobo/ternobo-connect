@@ -19,6 +19,7 @@ export default {
         this.about = this.page.about;
     },
     mounted() {
+        console.log("22");
         if (this.page.about_data != null) {
             this.$refs.experiences.experiences = this.page.about_data.experiences;
             this.$refs.educations.educations = this.page.about_data.educations;

@@ -1,7 +1,7 @@
 <template>
 <div class="row ml-0">
     <div class="col-md-4">
-        <WebsiteCard ref="websites" class="mt-3" :page="page" :edit="edit"></WebsiteCard>
+        <WebsiteCard ref="websites" :page="page" :edit="edit"></WebsiteCard>
         <SocialsCard ref="socials" class="mt-3" :page="page" :edit="edit"></SocialsCard>
     </div>
     <div class="col-md-8">

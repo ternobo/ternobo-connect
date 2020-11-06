@@ -31,8 +31,9 @@ class ProfileController extends Controller
             $msgs = [
                 "company.required" => "نام شرکت اجباری است",
                 "title.required" => 'عنوان شرکت اجباری است.',
-                "startDate.required" => "تاریخ شروع اجباری است",
-                "endDate.required" => "تاریخ پایان اجباری است",
+                "startDate" => "تاریخ شروع نامعتبر است",
+                "endDate" => "تاریخ پایان نامعتبر است",
+
             ];
             $experiences = $request->experiences;
             foreach ($experiences as $experience) {
@@ -40,7 +41,7 @@ class ProfileController extends Controller
                     'company' => "required|max:50",
                     'title' => "required|max:60",
                     "startDate" => ["required", new DateObject],
-                    "endDate" => ["required", new DateObject],
+                    "endDate" => [new DateObject],
                 ], $msgs);
                 if ($validator->fails()) {
                     return response()->json(['result' => false, "type" => "experience", "errors" => $validator->errors()]);
@@ -72,7 +73,7 @@ class ProfileController extends Controller
                 "major.required" => "رشته تحصیلی اجباری است",
                 "degree.required" => 'مدرک تحصیلی اجباری است',
                 "startDate.required" => "تاریخ شروع اجباری است",
-                "endDate.required" => "تاریخ پایان اجباری است",
+                "endDate" => "تاریخ پایان نامعتبر است",
             ];
             $educations = $request->educations;
             foreach ($educations as $education) {
@@ -81,7 +82,7 @@ class ProfileController extends Controller
                     'major' => "required|max:60",
                     'degree' => "required|max:60",
                     "startDate" => ["required", new DateObject],
-                    "endDate" => ["required", new DateObject],
+                    "endDate" => [new DateObject],
                 ], $msgs);
                 if ($validator->fails()) {
                     return response()->json(['result' => false, "type" => "education", "errors" => $validator->errors()]);
@@ -116,7 +117,7 @@ class ProfileController extends Controller
                 'projects' => [
                     'name' => "required|max:50",
                     "startDate" => ["required", new DateObject],
-                    "endDate" => ["required", new DateObject],
+                    "endDate" => [new DateObject],
                 ],
                 'publishs' => [
                     'name' => "required|max:50",

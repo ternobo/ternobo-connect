@@ -20,7 +20,10 @@
                 </div>
             </template>
             <tab name="درباره من" id="home" :href="'/' + page.slug" :selected="location === 'home'">
-                <AboutTab ref="about" :edit="edit" :page="page"></AboutTab>
+                <div class="w-100 d-flex justify-content-center py-3" v-if="loadingTab">
+                    <loading-spinner class="image__spinner" />
+                </div>
+                <AboutTab v-else ref="about" :edit="edit" :page="page"></AboutTab>
             </tab>
             <tab name="فعالیت‌ها" id="activities" :href="'/' + page.slug + '/activities'" :selected="location === 'activities'">
                 <div class="row" v-if="!loadingTab" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
@@ -122,8 +125,8 @@ export default {
                     });
             }
         },
-        tabChange(link, id) {
-            this.current_tab = id;
+
+        loadTab(link) {
             if (link.endsWith("articles") || link.endsWith("activities")) {
                 this.showEdit = false;
             } else {
@@ -159,6 +162,11 @@ export default {
                     this.loadingTab = false;
                 });
         },
+
+        tabChange(link, id) {
+            this.current_tab = id;
+            this.loadTab(link);
+        },
         doEdit() {
             if (this.edit) {
                 this.loadingSave = true;
@@ -193,6 +201,13 @@ export default {
             }
         },
         cancelEdit() {
+            this.loadingTab = true;
+            Inertia.reload({
+                only: ['page']
+            });
+            setTimeout(() => {
+                this.loadingTab = false;
+            }, 300);
             this.edit = false;
         },
     },

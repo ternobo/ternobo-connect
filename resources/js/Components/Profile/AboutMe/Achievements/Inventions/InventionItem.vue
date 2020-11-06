@@ -56,7 +56,13 @@
                         label: 'حق ثبت اختراع درحال ثبت شدن است',
                         id: 2
                     }
-                ]"></v-select>
+                ]">
+                    <template #open-indicator="{ attributes }">
+                        <span v-bind="attributes">
+                            <i class="material-icons">keyboard_arrow_down</i>
+                        </span>
+                    </template>
+                </v-select>
             </div>
             <div class="col-md-6 py-4" v-if="showMore">
                 <strong>تاریخ صدور ثبت اختراع</strong>

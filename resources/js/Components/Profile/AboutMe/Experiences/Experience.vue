@@ -49,7 +49,13 @@
                     { label: 'فریلنسر', code: 'Freelancer' },
                     { label: 'فصلی', code: 'Seasonal' },
                     { label: 'قراردادی', code: 'Contractual' },
-            ]"></v-select>
+            ]">
+                    <template #open-indicator="{ attributes }">
+                        <span v-bind="attributes">
+                            <i class="material-icons">keyboard_arrow_down</i>
+                        </span>
+                    </template>
+                </v-select>
             </div>
             <div class="col-md-6 py-4" v-if="showMore">
                 <MaterialTextField v-model="val.location" class="d-flex align-items-center material--sm" placeholder="محل فعالیت"></MaterialTextField>
@@ -121,7 +127,7 @@ export default {
                 ]).format("MMMM YYYY");
             }
 
-            if (this.val.endDate) {
+            if (typeof (this.val.endDate) == 'object') {
                 endText = new PersianDate([
                     this.val.endDate.year,
                     this.val.endDate.month.id,

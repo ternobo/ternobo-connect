@@ -43,7 +43,13 @@
                 More Content
              !-->
             <div class="col-md-6 py-4" v-if="showMore">
-                <v-select :placeholder="'مرتبط با'" class="dropdown-list w-75" dir="rtl" v-model="val.skill" label="name" :options="page.skills"></v-select>
+                <v-select :placeholder="'مرتبط با'" class="dropdown-list w-75" dir="rtl" v-model="val.skill" label="name" :options="page.skills">
+                    <template #open-indicator="{ attributes }">
+                        <span v-bind="attributes">
+                            <i class="material-icons">keyboard_arrow_down</i>
+                        </span>
+                    </template>
+                </v-select>
             </div>
             <div class="col-md-6 py-4" v-if="showMore">
                 <MaterialTextField v-model="val.from" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="صادر کننده"></MaterialTextField>

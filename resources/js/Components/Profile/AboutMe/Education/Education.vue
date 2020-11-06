@@ -135,7 +135,7 @@ export default {
                 ]).format("YYYY");
             }
 
-            if (this.val.endDate) {
+            if (typeof (this.val.endDate) == 'object') {
                 endText = new PersianDate([
                     this.val.endDate.year
                 ]).format("YYYY");

@@ -40,7 +40,6 @@ class LoginController extends Controller {
             Auth::login($user, true);
             $user->active = true;
             $user->save();
-            dd($user);
 
             return response()->json(["result"=>true])->cookie("ternobo_current_page", $user->personalPage, 9999999);
         }

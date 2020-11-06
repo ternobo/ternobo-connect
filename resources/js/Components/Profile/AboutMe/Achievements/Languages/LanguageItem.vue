@@ -37,7 +37,13 @@
                 label: 'زبان مادری',
                 level: 4
             },
-        ]"></v-select>
+        ]">
+            <template #open-indicator="{ attributes }">
+                <span v-bind="attributes">
+                    <i class="material-icons">keyboard_arrow_down</i>
+                </span>
+            </template>
+        </v-select>
     </div>
 </li>
 </template>
