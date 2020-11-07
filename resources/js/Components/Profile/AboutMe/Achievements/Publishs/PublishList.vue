@@ -32,7 +32,7 @@ export default {
         },
         addPublish() {
             this.publishs.push({
-                id: 'publish_' + Math.round((new Date()).getTime() / 1000),
+                id: 'publish_' + Math.round((new Date()).getTime()),
             });
         },
         getData() {

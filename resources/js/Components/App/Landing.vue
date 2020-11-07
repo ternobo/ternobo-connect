@@ -8,8 +8,8 @@
                 قالب متن، تصویر و ویدئو با دیگران به اشتراک بگذارید، ارتباط تخصصیتان
                 را گسترش دهید و رزومه آنلاین خودتان را بسازید.</span>
             <div class="w-100">
-                <img class="d-lg-block d-none" src="/images/Svg1.svg" />
-                <img class="d-lg-none d-block" src="/images/svg1mobile.svg" />
+                <lazy-image style="min-height:670px;max-width: 100%" class="d-lg-block d-none" src="/images/Svg1.svg" />
+                <lazy-image style="min-height:600px;max-width: 100%" class="d-lg-none d-block" src="/images/svg1mobile.svg" />
             </div>
         </div>
     </div>
@@ -21,7 +21,7 @@
             <div class="row m-0 pt-5">
                 <div class="col-lg-4">
                     <div class="card bg-landing-grey mb-lg-3">
-                        <img class="card-img-top" src="/images/s1.png" />
+                        <lazy-image class="card-img-top mb-0" img-class="card-img-top" src="/images/s1.png" />
                         <i class="material-icons-outlined card-icon">mms</i>
                         <div class="card-body">
                             <h3 class="text-center text-action font-18">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="card go-top bg-landing-grey mb-lg-3">
-                        <img class="card-img-top" src="/images/cardimage.png" />
+                        <lazy-image class="card-img-top mb-0" img-class="card-img-top" src="/images/cardimage.png" />
                         <i class="material-icons card-icon">work_outline</i>
                         <div class="card-body">
                             <h3 class="text-center text-action font-18">
@@ -53,7 +53,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="card bg-landing-grey mb-lg-3">
-                        <img class="card-img-top" src="/images/cardimage3.png" />
+                        <lazy-image class="card-img-top mb-0" img-class="card-img-top" src="/images/cardimage3.png" />
                         <i class="material-icons-outlined card-icon">description</i>
                         <div class="card-body">
                             <h3 class="text-center text-action font-18">
@@ -114,21 +114,18 @@
                 تازه‌ترین مقالات منتشر شده
             </h2>
             <div class="container">
-                <VueSlickCarousel :arrows="true" :dots="true" :rtl="true" :slidesToShow="3" class="slickslider">
+                <VueSlickCarousel ref="slider" @init="setHeight" :arrows="true" :dots="true" :rtl="true" :slidesToShow="3" class="slickslider">
                     <div class="px-2 h-100" v-for="article in articles" :key="article.id">
-                        <div class="card bg-landing-grey h-100 mb-lg-3 text-right">
-                            <inertia-link :href="article.page.slug + '/' + ''"><img class="card-img-top" :src="article.cover" /></inertia-link>
+                        <div class="card bg-landing-grey h-100 text-right">
+                            <inertia-link :href="article.page.slug + '/' + (article.slug != null ? article.slug : article.id)"><img class="card-img-top" :src="article.medias" /></inertia-link>
                             <div class="card-header bg-landing-grey">
-                                <inertia-link class="card-title" :href="
-                      article.page.slug +
-                      '/' +
-                      (article.slug != null ? article.slug : article.id)">
+                                <inertia-link class="card-title" :href="article.page.slug + '/' + (article.slug != null ? article.slug : article.id)">
                                     <h3 class="text-white py-1 m-0">{{ article.title }}</h3>
                                 </inertia-link>
                             </div>
                             <div class="card-body">
                                 <p class="font-16">
-                                    {{ article.short_text }}
+                                    {{ truncate(extractContent(article.text),25) }}
                                 </p>
                             </div>
                             <div class="card-footer bg-landing-grey d-flex justify-content-between align-items-center">
@@ -139,9 +136,7 @@
                                             <strong class="text-white">
                                                 {{ article.page.name }}
                                             </strong>
-                                            <small class="text-white">{{
-                          article.page.short_bio
-                        }}</small>
+                                            <small class="text-white">{{ article.page.short_bio }}</small>
                                         </div>
                                     </div>
                                 </inertia-link>
@@ -162,6 +157,24 @@ import "vue-slick-carousel/dist/vue-slick-carousel.css";
 // optional style for arrows & dots
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 export default {
+    methods: {
+        setHeight() {
+            setTimeout(() => {
+                this.$refs.slider.$el.getElementsByClassName("card").forEach((item) => {
+                    item.style.minHeight = this.$refs.slider.$el.getBoundingClientRect().height + "px"
+                    item.style.maxHeight = this.$refs.slider.$el.getBoundingClientRect().height + "px"
+                });
+            }, 500);
+        },
+        extractContent(s) {
+            var span = document.createElement('span');
+            span.innerHTML = s;
+            return span.textContent || span.innerText;
+        },
+        truncate(str, no_words) {
+            return str.split(" ").splice(0, no_words).join(" ");
+        }
+    },
     components: {
         VueSlickCarousel,
     },
@@ -175,6 +188,3 @@ export default {
     name: "Landing",
 };
 </script>
-
-<style>
-</style>

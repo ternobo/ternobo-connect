@@ -18,6 +18,10 @@ import numeral from "numeral";
 
 import PersianDate from 'persian-date';
 
+import {
+    Skeleton
+} from 'vue-loading-skeleton'
+
 window.PersianDate = PersianDate;
 
 const TernoboApp = {};
@@ -27,6 +31,8 @@ var Sortable = require('sortablejs').default
 TernoboApp.install = function (Vue, options) {
     Vue.component("AppHeader", () => import("../Components/App/header/AppHeader"));
     Vue.component("AppFooter", () => import("../Components/App/AppFooter"));
+
+    Vue.component("skeleton",Skeleton);
 
     Vue.component("MaterialTextField", () => import("../Components/inputs/MaterialTextField"));
     Vue.component("MaterialTextArea", () => import("../Components/inputs/MaterialTextArea"));

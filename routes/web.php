@@ -115,7 +115,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             //Settings End
 
             Route::post("/skills/search", "SkillController@search");
-            Route::resource("/skills", "SkillController");
+            Route::post("/skills/can-credit", "SkillCreditController@checkCredit");
             Route::resource("/skills/credit", "SkillCreditController");
             Route::post("/skills/sort/{id}", "SkillController@sort");
 

@@ -13,7 +13,7 @@
                 <div v-else class="d-flex align-items-center justify-content-between">
                     <span class="text-nowrap ml-2">
                         <i class="material-icons-outlined ml-1" :style="{'color': '#F14336' }">email</i>
-                        ارسال پیام به پست الکترونیک
+                        پست الکترونیک
                     </span>
                     <MaterialTextField class="material--sm" style="width: 300px" input-class="w-100 text-left" v-model="contacts.email"></MaterialTextField>
                 </div>
@@ -21,12 +21,12 @@
             <li :class="{ 'edit': edit }" v-if="(contacts.telegram != null && this.contacts.telegram.length > 0) || edit">
                 <a target="_blank" :href="'https://t.me/'+contacts.telegram" v-if="!edit">
                     <i class="icon-t-telegram ml-1" :style="{'color': '#61A7DD' }"></i>
-                    ارسال پیام به Telegram
+                    ارسال پیام به تلگرام
                 </a>
                 <div v-else class="d-flex align-items-center justify-content-between">
                     <span class="text-nowrap ml-2">
                         <i class="icon-t-telegram ml-1" :style="{'color': '#61A7DD' }"></i>
-                        ارسال پیام به تلگرام
+                        نام کاربری Telegram
                     </span>
                     <MaterialTextField class="material--sm" style="width: 300px" input-class="w-100 text-left" v-model="contacts.telegram"></MaterialTextField>
                 </div>
@@ -39,7 +39,7 @@
                 <div v-else class="d-flex align-items-center justify-content-between">
                     <span class="text-nowrap ml-2">
                         <i class="ternobo-skype ml-1" :style="{'color': '#00AFF0' }"></i>
-                        ارسال پیام از طریق Skype
+                        نام کاربری Skype
                     </span>
                     <MaterialTextField class="material--sm" style="width: 300px" input-class="w-100 text-left" v-model="contacts.skype"></MaterialTextField>
                 </div>
@@ -52,7 +52,7 @@
                 <div v-else class="d-flex align-items-center justify-content-between">
                     <span class="text-nowrap ml-2">
                         <i class="ternobo-whatsapp ml-1" :style="{'color': '#191919' }"></i>
-                        ارسال پیام به WhatsApp
+                        شماره WhatsApp
                     </span>
                     <MaterialTextField class="material--sm" style="width: 300px" input-class="w-100 text-left" v-model="contacts.whatsapp"></MaterialTextField>
                 </div>
@@ -118,12 +118,14 @@ export default {
             return cantPass;
         },
         getData() {
-            if (this.contacts.whatsapp.startsWith("0")) {
-                this.contacts.whatsapp = this.contacts.whatsapp.replace("0", "98");
-            } else if (this.contacts.whatsapp.startsWith("+")) {
-                this.contacts.whatsapp = this.contacts.whatsapp.replace("+", "");
-            } else if (this.contacts.whatsapp.startsWith("00")) {
-                this.contacts.whatsapp = this.contacts.whatsapp.replace("00", "98");
+            if (this.contacts.whatsapp != null) {
+                if (this.contacts.whatsapp.startsWith("0")) {
+                    this.contacts.whatsapp = this.contacts.whatsapp.replace("0", "98");
+                } else if (this.contacts.whatsapp.startsWith("+")) {
+                    this.contacts.whatsapp = this.contacts.whatsapp.replace("+", "");
+                } else if (this.contacts.whatsapp.startsWith("00")) {
+                    this.contacts.whatsapp = this.contacts.whatsapp.replace("00", "98");
+                }
             }
             return this.contacts;
         }

@@ -15,6 +15,8 @@ export default {
         this.$refs.imageItem.style.opacity = 0;
         this.$refs.loader.$el.firstElementChild.classList.add(this.imgClass);
         this.$refs.loader.$el.firstElementChild.style.top = "0";
+        this.$refs.loader.$el.firstElementChild.style.left = "0";
+        this.$refs.loader.$el.firstElementChild.style.right = "0";
         this.$refs.loader.$el.firstElementChild.style.position = "absolute";
         this.$refs.loader.$el.firstElementChild.style.borderRadius = getComputedStyle(this.$refs.imageItem).borderRadius;
     },

@@ -20,7 +20,12 @@ class SkillCreditController extends Controller {
         $validator = Validator::make($request->all(), [
                     "skill" => "required|exists:skills,id",
                     "level" => "required|digits_between:1,3",
-                    "reason" => "required"
+                    "reason" => "required|string"
+        ],[
+            'level.required' => 'سطح مهارت اجباری است.',
+            'reason.required' => 'یک دلیل برای تاییدیه خود انتخاب کنید.',
+            'reason.string' => 'ورودی نامعتبر'
+
         ]);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
@@ -34,8 +39,14 @@ class SkillCreditController extends Controller {
         $credit->level = $request->level;
         $credit->reason = $request->reason;
         $result = $credit->save();
-        Notification::sendNotification("skill_credit", $credit->skill->id, $credit->skill->user->getPage()->id, $credit->id);
+        Notification::sendNotification("skill_credit", $credit->skill->id, $credit->skill->user->personalPage->id, $credit->id);
         return response()->json(array("result" => $result));
+    }
+
+    public function checkCredit(Request $request){
+        return response()->json([
+            "canCredit" => !Auth::user()->isCredit($request->skill)
+        ]);
     }
 
     /**

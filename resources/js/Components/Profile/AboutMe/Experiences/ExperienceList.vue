@@ -31,7 +31,7 @@ export default {
         },
         addExperience() {
             this.experiences.push({
-                id: 'experience_' + Math.round((new Date()).getTime() / 1000),
+                id: 'experience_' + Math.round((new Date()).getTime()),
             });
         },
         getData() {

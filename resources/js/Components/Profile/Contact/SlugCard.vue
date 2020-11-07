@@ -9,11 +9,11 @@
                 </span>
             </div>
 
-            <div class="slugItem" id="slugItem" v-if="!edit">
-                <span class="ml-2">
+            <div class="slugItem clickable" id="slugItem" v-if="!edit" v-clipboard="$APP_URL +'/' + page.slug">
+                <span class="ml-2 clickable">
                     {{ $APP_URL.replace("https://","").replace("http://","") + "/" + page.slug }}
                 </span>
-                <div class="icon clickable" v-clipboard="$APP_URL +'/' + page.slug">
+                <div class="icon clickable">
                     <i class="font-18 material-icons-outlined">copy</i>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                     <span class="mr-1">{{ $APP_URL.replace("https://","").replace("http://","") + "/" }}</span>
                     <input type="text" class="p-1 font-14 text-left form-control" pattern="^(?!.*\\.\\.)(?!.*\\.$)[^\\W][\\w.]{0,29}$" v-model="slug" />
                 </div>
-                <section class="icon" v-clipboard="$APP_URL +'/' + page.slug">
+                <section class="icon">
                     <i class="font-18 material-icons-outlined">copy</i>
                 </section>
             </section>

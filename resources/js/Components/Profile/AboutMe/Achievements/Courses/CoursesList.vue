@@ -34,7 +34,7 @@ export default {
         },
         addCourse() {
             this.courses.push({
-                id: 'course_' + Math.round((new Date()).getTime() / 1000),
+                id: 'course_' + Math.round((new Date()).getTime()),
                 name: null,
                 code: null,
                 skill: null

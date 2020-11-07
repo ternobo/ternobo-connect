@@ -24,7 +24,7 @@ vSelect.props.components.default = () => ({
       render: createElement => createElement('i',
       {
         attrs: { class: 'material-icons'}
-      }, 'close'),
+      }, ''),
     },
     OpenIndicator: {
       render: createElement => createElement('i',

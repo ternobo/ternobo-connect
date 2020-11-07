@@ -5,16 +5,22 @@
     flex-wrap: wrap;
 
     li {
-        width: 25%;
-        flex: 25%;
         padding: 7px 0;
+        width: 25%;
+
+        a{
+            padding: 10px;
+        }
+
+        a:hover{
+            background: $fixed-elements;
+        }
 
         .editItem {
             width: 100%;
             display: flex;
             align-items: center;
             flex-direction: column;
-            gap: 10px;
 
             @media screen and(max-width: 622px) {
                 flex-wrap: wrap;
@@ -29,9 +35,7 @@
         padding: 7px 0;
 
         &:not(:last-child) {
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #C8C8C8;
-            margin-bottom: 1rem;
+            margin-bottom: 10px;
         }
     }
 

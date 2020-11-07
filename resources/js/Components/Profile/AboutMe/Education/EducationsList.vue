@@ -31,7 +31,7 @@ export default {
         },
         addEducaction() {
             this.educations.push({
-                id: 'education_' + Math.round((new Date()).getTime() / 1000),
+                id: 'education_' + Math.round((new Date()).getTime()),
             });
         },
         getData() {

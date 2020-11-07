@@ -37,7 +37,7 @@
                 <strong>تاریخ پایان <span class="text-action">*</span></strong>
                 <DatePicker v-if="typeof(val.endDate) !== 'boolean' || (val.endDate==false)" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{year: year, month: month}"></DatePicker>
                 <input v-else type="text" readonly value="تا کنون" class="form-control bg-white" />
-                <Checkbox v-model="val.endDate">
+                <Checkbox v-model="val.endDate" :checked="typeof(val.endDate) == 'boolean'">
                     همچنان در این سمت فعالیت می‌کنم
                 </Checkbox>
             </div>

@@ -12,9 +12,10 @@
                 <Skeleton :count="4" :heigth="25" />
             </li>
         </ul>
-        <draggable group="skills" ref="draggable" tag="ul" v-bind="dragOptions" v-model="skills" class="skills-list p-0" :disabled="!edit" handle=".hand-hover">
-            <Skill @deleted="onDelete(index)" v-model="skills[index]" :user="page.user" :edit="edit" v-for="(skill, index) in skills" :skill="skill" :key="'skill_' + skill.id" />
+        <draggable group="skills" ref="draggable" tag="ul" v-bind="dragOptions" v-model="skills" class="skills-list mb-2 p-0" :disabled="!edit" handle=".hand-hover">
+            <Skill @deleted="onDelete(index)" v-model="skills[index]" :user="page.user" :edit="edit" v-for="(skill, index) in skillsToShow" :skill="skill" :key="'skill_' + skill.id" />
         </draggable>
+        <span class="text-action pb-2 clickable" @click="showMore = true" v-if="!showMore">نمایش تمام مهارت‌ها</span>
     </div>
 </div>
 </template>
@@ -42,7 +43,7 @@ export default {
         addSkill() {
             this.skills.push({
                 name: '',
-                id: 'skill_' + Math.round((new Date()).getTime() / 1000),
+                id: 'skill_' + Math.round((new Date()).getTime()),
                 isNew: true
             });
         },
@@ -54,11 +55,18 @@ export default {
         return {
             drag: false,
             loading: false,
+            showMore: false,
             list: [],
             skills: [],
         };
     },
     computed: {
+        skillsToShow() {
+            if (this.showMore) {
+                return this.skills;
+            }
+            return this.skills.slice(0, 3);
+        },
         dragOptions() {
             return {
                 animation: 200,

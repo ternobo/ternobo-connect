@@ -1,5 +1,5 @@
 <template>
-<b-modal v-if="$page.user != null" v-model='showModal' :no-close-on-backdrop="false" hide-footer body-class="pb-0" :title="'تایید مهارت ' + user.name" size="md" :centered="true">
+<b-modal v-if="$page.user != null" v-model='showModal' no-close-on-backdrop hide-footer body-class="pb-0" :title="'تایید مهارت ' + user.name" size="md" :centered="true">
     <p>
         به مهارت <span class="mx-1">{{user.first_name }}</span> در <span class="mx1">{{ skill.name }}</span> چه امتیازی می‌دهید؟
     </p>
@@ -7,7 +7,7 @@
                 {label:'خوب',value:'1'},
                 {label:'عالی',value:'2'},
                 {label:'ماهر',value:'3'},
-            ]"></RadioButton>
+            ]" v-model="level"></RadioButton>
     <div class="w-100">
         <h4>چرا این امتیاز را به {{ user.first_name }} می‌دهید؟</h4>
         <v-select ref="reasonSelect" class="dropdown-list w-100" :placeholder="'انتخاب دلیل'" label="label" dir="rtl" v-model="reason" :options="[
@@ -16,8 +16,8 @@
                 value:'با هم روی یک پروژه کار کرده‌ایم'
             },
             {
-                label: 'مدیریت مستقیم روی کار‌های فرناز دارم/داشته‌ام',
-                value:'مدیریت مستقیم روی کار‌های فرناز دارم/داشته‌ام'
+                label: 'مدیریت مستقیم روی کار‌های '+ user.first_name +' دارم/داشته‌ام',
+                value:'مدیریت مستقیم روی کار‌های '+ user.first_name +' دارم/داشته‌ام'
             },
             {
                 label: 'به طور غیرمستقیم روی یک پروژه کار کرده‌ایم',
@@ -40,7 +40,7 @@
         </v-select>
     </div>
     <div class="w-100 d-flex mt-3 justify-content-center" style="margin-bottom: -8px">
-        <button class="btn btn-dark">ثبت</button>
+        <loading-button :loading="loading" @click.native="onCredit" class="btn btn-dark">ثبت</loading-button>
     </div>
 </b-modal>
 </template>
@@ -49,6 +49,29 @@
 import ModalMixin from '../../Mixins/Modal';
 import RadioButton from "../inputs/RadioButton";
 export default {
+    methods: {
+        onCredit() {
+            if (this.reason != null) {
+                this.loading = true;
+
+                axios.post("/skills/credit", {
+                    skill: this.skill.id,
+                    level: this.level,
+                    reason: this.reason.value,
+                }).then((response) => {
+                    if (response.data.result) {
+                        this.$emit("credited");
+                        this.$emit("update:show", false);
+                    } else {
+                        this.handleError(response.data.errors);
+                    }
+                }).catch((errors) => {}).then(() => this.loading = false);
+            } else {
+                this.toast("دلیل امتیاز اجباری است");
+            }
+
+        }
+    },
     components: {
         RadioButton
     },
@@ -56,7 +79,7 @@ export default {
         return {
             level: undefined,
             reason: null,
-            isOpen: false
+            loading: false,
         }
     },
     props: {

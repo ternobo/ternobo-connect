@@ -1,18 +1,13 @@
 <template>
 <li>
-    <a class="d-flex flex-column text-left font-14" :href="websiteUrl" v-if="!edit">
-        <span>{{ value.url.replace("https://","").replace("http://","") }}</span>
+    <a target="_blank" class="d-flex flex-column text-left font-14" :href="websiteUrl" v-if="!edit">
+        <span>{{ websiteName }}</span>
         <strong class="text-muted">{{ value.option.name }}</strong>
     </a>
     <div class="editItem" v-else>
-        <MaterialTextField :placeholder="placeholder" class="material--sm w-100" input-class="w-100" v-model="val"></MaterialTextField>
+        <MaterialTextField placeholder="آدرس وبسایت" class="material--sm w-100" input-class="w-100" v-model="val"></MaterialTextField>
         <div class="d-flex align-items-center mb-3 mb-lg-0 w-100">
-            <v-select class="dropdown-list w-100" :placeholder="'انتخاب کنید'" label="name" dir="rtl" v-model="option" :options="options">
-                <template #open-indicator="{ attributes }">
-                    <span v-bind="attributes">
-                        <i class="material-icons">keyboard_arrow_down</i>
-                    </span>
-                </template>
+            <v-select :searchable="false" class="dropdown-list w-100" :placeholder="'انتخاب کنید'" label="name" dir="rtl" v-model="option" :options="options">
                 <template v-slot:selected-option="{ icon, color, name }">
                     <i class="material-icons-outlined ml-1" :style="{'color': color }" v-html="icon"></i>
                     <span class="ml-3" style="white-space: nowrap">
@@ -39,6 +34,7 @@ export default {
     watch: {
         val() {
             this.value = {
+                id: this.website.id,
                 "option": this.option,
                 "url": this.val
             };
@@ -47,6 +43,7 @@ export default {
         },
         option() {
             this.value = {
+                id: this.website.id,
                 "option": this.option,
                 "url": this.val
             };
@@ -54,6 +51,16 @@ export default {
         }
     },
     computed: {
+        websiteName() {
+            let url = this.value.url.replace("https://", "").replace("http://", "");
+            if (url.endsWith("/")) {
+                url = url.substring(0, url.length - 1);
+            }
+            if (url.startsWith("www.")) {
+                url = url.replace("www.", "");
+            }
+            return url;
+        },
         websiteUrl() {
             let url = this.value.url;
             if (url.startsWith("http://") || url.startsWith("https://")) {
@@ -64,6 +71,19 @@ export default {
         },
     },
     methods: {
+        validate() {
+            let regex = /(https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
+            if (this.option != null) {
+                if (regex.test(this.val) && this.val != null && this.val.length > 0) {
+                    return true;
+                } else {
+                    this.toast("آدرس وبسایت وارد نشده است");
+                }
+            } else {
+                this.toast("نوع وبسایت انتخاب نشده است");
+            }
+            return false;
+        },
         doDelete() {
             this.$emit("deleted");
         }

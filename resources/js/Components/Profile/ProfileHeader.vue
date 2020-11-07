@@ -9,14 +9,6 @@
             <ConnectionButton v-if="page.type === 'personal'" :user="page.user_id"></ConnectionButton>
         </div>
 
-        <div class="d-flex" v-if="canEdit && edit">
-            <button class="btn button-transparent rounded-circle" v-if="edit" @click="cancel"><i class="material-icons">close</i></button>
-            <button :disabled="loading" class="d-flex btn btn-edit" @click="save">
-                ذخیره
-                <span style="height: 14px;width: 14px;border-width: 2px;" v-if="loading" class="mr-2 loadingspinner"></span>
-            </button>
-        </div>
-
     </div>
     <div class="card-body d-flex flex-column page-name">
         <div>
@@ -25,7 +17,7 @@
                     {{ page.name }}
                     <i v-if="page.user.is_verified === 1" class="verificationcheck mr-1 font-20">check_circle</i>
                 </strong>
-                <i v-if="canEdit" class="mr-2 material-icons-outlined font-16 text-muted" @click="edit = true">edit</i>
+                <i v-if="canEdit" class="mr-2 material-icons-outlined font-16 hover-dark clickable text-muted" @click="edit = true">edit</i>
             </span>
             <small class="font-14">{{ page.short_bio }}</small>
         </div>

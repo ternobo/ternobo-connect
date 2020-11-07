@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="connections" v-infinite-scroll="loadMoreConnection" :infinite-scroll-disabled="loadingMoreConnection" infinite-scroll-distance="5">
-        <tabs @selected="tabSelect">
+        <tabs :compact="true" :centered="true" @selected="tabSelect">
             <tab name="شبکه من" id="connections" :selected="true">
                 <div class="w-100 d-flex justify-content-between">
                     <strong> شبکه من ({{ total }}) </strong>
@@ -279,13 +279,3 @@ export default {
     layout: AppLayout,
 };
 </script>
-
-<style>
-.tabs ul li {
-    width: auto;
-}
-
-.tabs ul {
-    justify-content: center;
-}
-</style>

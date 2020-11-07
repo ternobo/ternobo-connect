@@ -1,7 +1,7 @@
 <template>
 <div class="row">
     <div class="col-md-4" v-if="showWebsites || showSocials">
-        <WebsiteCard v-bind="showWebsites" ref="websites" :page="page" :edit="edit"></WebsiteCard>
+        <WebsiteCard v-if="showWebsites" ref="websites" :page="page" :edit="edit"></WebsiteCard>
         <SocialsCard v-if="showSocials" ref="socials" class="mt-3" :page="page" :edit="edit"></SocialsCard>
     </div>
     <div class="pr-4" :class="{'col-md-12': !showWebsites && !showSocials, 'col-md-8': showWebsites || showSocials}">
@@ -42,7 +42,7 @@ export default {
     },
     methods: {
         getData() {
-            if (this.$refs.contacts.validate() && this.$refs.socials.validate()) {
+            if (this.$refs.contacts.validate() && this.$refs.socials.validate() && this.$refs.websites.validate()) {
                 let data = {
                     websites: this.$refs.websites.getData(),
                     socials: this.$refs.socials.getData(),

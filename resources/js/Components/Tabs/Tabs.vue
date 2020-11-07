@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="tabs">
+    <div class="tabs" :class="{ compact: compact, centered: centered }">
         <ul>
             <li v-for="tab in tabs" :key="tab.name" :class="{ 'is-active': tab.isActive }">
                 <a :class="{ disabled: disabled }" class="clickable" @click="selectTab(tab)"><i class="material-icons ml-2">{{ tab.icon }}</i>{{ tab.name }}</a>
@@ -23,6 +23,16 @@ import {
 } from "@inertiajs/inertia";
 export default {
     props: {
+        centered: {
+            type: Boolean,
+            default: false,
+            required: false,
+        },
+        compact: {
+            type: Boolean,
+            default: false,
+            required: false,
+        },
         disabled: {
             type: Boolean,
             default: false,

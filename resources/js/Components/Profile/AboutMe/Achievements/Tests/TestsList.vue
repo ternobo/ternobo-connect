@@ -35,7 +35,7 @@ export default {
         },
         addTest() {
             this.tests.push({
-                id: 'test_' + Math.round((new Date()).getTime() / 1000),
+                id: 'test_' + Math.round((new Date()).getTime()),
             });
         },
         getData() {

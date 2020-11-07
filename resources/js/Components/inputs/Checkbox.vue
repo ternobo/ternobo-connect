@@ -9,6 +9,9 @@
 
 <script>
 export default {
+    created() {
+        this.status = this.checked;
+    },
     watch: {
         status(val) {
             this.$emit('input', val);

@@ -14,7 +14,7 @@
             </li>
         </ul>
         <ul class="websites-list p-0" v-else>
-            <WebsiteItem @deleted="onDelete(index)" @input="updateData" :options="usableOptions" :edit="edit" v-for="(website,index) in websites" :website="website" :key="'contact_item_num_'+index"></WebsiteItem>
+            <WebsiteItem @deleted="onDelete(index)" @input="updateData" :options="usableOptions" :edit="edit" v-for="(website,index) in websites" :website="website" :key="'contact_item_num_'+website.id"></WebsiteItem>
         </ul>
     </div>
 </div>
@@ -28,11 +28,16 @@ import WebsiteItem from "./Items/WebsiteItem";
 export default {
     methods: {
         onDelete(index) {
+            console.log(index);
             this.websites.splice(index, 1);
         },
         addWebsite() {
             if (this.usableOptions.length > 0) {
-                this.websites.push(null);
+                this.websites.push({
+                    name: '',
+                    id: 'social_' + Math.round((new Date()).getTime()),
+                    isNew: true
+                });
             }
         },
         updateData() {
@@ -49,6 +54,15 @@ export default {
                 });
                 if (canAdd) {
                     this.usableOptions.push(option);
+                }
+            });
+        },
+        validate() {
+            return this.$children.every((item) => {
+                if (item.validate()) {
+                    return true;
+                } else {
+                    return false;
                 }
             });
         },

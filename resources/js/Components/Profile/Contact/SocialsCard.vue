@@ -14,7 +14,7 @@
             </li>
         </ul>
         <ul class="socials-list p-0" v-else>
-            <SocialItem @deleted="onDelete(index)" @input="updateData" :options="usableOptions" :edit="edit" v-for="(social,index) in socials" :social="social" :key="'social_item_num_'+index"></SocialItem>
+            <SocialItem @deleted="onDelete(index)" @input="updateData" :options="usableOptions" :edit="edit" v-for="(social,index) in socials" :social="social" :key="'social_item_num_'+social.id"></SocialItem>
         </ul>
     </div>
 </div>
@@ -28,11 +28,16 @@ import SocialItem from "./Items/SocialItem";
 export default {
     methods: {
         onDelete(index) {
+            console.log(index);
             this.socials.splice(index, 1);
         },
         addSocial() {
             if (this.usableOptions.length > 0) {
-                this.socials.push(null);
+                this.socials.push({
+                    name: '',
+                    id: 'social_' + Math.round((new Date()).getTime()),
+                    isNew: true
+                });
             }
         },
         updateData() {

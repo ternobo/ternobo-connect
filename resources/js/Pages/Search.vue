@@ -5,7 +5,7 @@
             {{ total }} نتیجه جستجو برای <strong>{{ search }}</strong> یافت شد
         </p>
 
-        <tabs class="justify-content-center" @selected="loadTabContent">
+        <tabs :compact="true" :centered="true" class="justify-content-center" @selected="loadTabContent">
             <tab name="کاربران" id="page" :selected="true">
                 <div class="row" v-if="currentTab==='page'">
                     <div class="col-md-6" v-for="(page, index) in data" :key="page.id + '_index_' + index">
@@ -160,13 +160,3 @@ export default {
     layout: AppLayout,
 };
 </script>
-
-<style>
-.tabs ul li {
-    width: auto;
-}
-
-.tabs ul {
-    justify-content: center;
-}
-</style>

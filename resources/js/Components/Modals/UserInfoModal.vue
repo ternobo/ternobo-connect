@@ -11,7 +11,7 @@
             <MaterialTextField class="material--sm w-100" input-class="w-100" :value="shortBio" v-model="shortBio" placeholder="عنوان"></MaterialTextField>
         </div>
         <div class="col-md-6 mt-3">
-            <v-select class="dropdown-list" :placeholder="'جنسیت'" dir="rtl" v-model="gender" :options="[{label: 'زن', code: '1'},{label: 'مرد', code: '2'},{label: 'تراجنسی', code: '3'}]"></v-select>
+            <v-select class="dropdown-list" :searchable="false" :placeholder="'جنسیت'" dir="rtl" v-model="gender" :options="[{label: 'زن', code: '1'},{label: 'مرد', code: '2'}]"></v-select>
         </div>
         <div class="col-md-12 d-flex justify-content-center align-items-center mt-3" style="margin-bottom: -16px">
             <loading-button class="btn btn-dark px-4" :loading="loading" @click.native="save">ثبت</loading-button>
@@ -42,6 +42,24 @@ export default {
         this.lastName = this.user.last_name;
         this.shortBio = this.user.short_bio;
         this.gender = JSON.parse(this.user.gender);
+
+        if (typeof ('gender') != 'object') {
+            switch (this.gender) {
+                case 1:
+                    this.gender = {
+                        label: 'زن',
+                        code: '1'
+                    };
+                    break;
+                case 2:
+                    this.gender = {
+                        label: 'مرد',
+                        code: '2'
+                    };
+                    break;
+
+            }
+        }
 
     },
     data() {

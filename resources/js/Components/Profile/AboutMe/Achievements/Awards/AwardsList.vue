@@ -34,7 +34,7 @@ export default {
         },
         addAward() {
             this.awards.push({
-                id: 'award_' + Math.round((new Date()).getTime() / 1000),
+                id: 'award_' + Math.round((new Date()).getTime()),
             });
         },
         getData() {

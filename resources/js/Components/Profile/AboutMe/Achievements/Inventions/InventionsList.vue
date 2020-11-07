@@ -35,7 +35,7 @@ export default {
         },
         addInvention() {
             this.inventions.push({
-                id: 'invention_' + Math.round((new Date()).getTime() / 1000),
+                id: 'invention_' + Math.round((new Date()).getTime()),
             });
         },
         getData() {

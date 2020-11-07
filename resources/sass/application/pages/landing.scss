@@ -240,6 +240,14 @@ h5 {
     justify-content: center;
 }
 
+.slick-next {
+    left: -25px;
+}
+
+.slick-prev {
+    right: -25px;
+}
+
 .bottom-nav {
     display: none !important;
 }

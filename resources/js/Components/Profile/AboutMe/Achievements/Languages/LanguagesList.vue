@@ -38,7 +38,7 @@ export default {
         addLanguege() {
             this.languages.push({
                 name: '',
-                id: 'lang_' + Math.round((new Date()).getTime() / 1000),
+                id: 'lang_' + Math.round((new Date()).getTime()),
                 level: null
             });
         },

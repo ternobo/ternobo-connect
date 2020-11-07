@@ -2,12 +2,12 @@
 <base-layout>
     <div class="content-container-profile">
         <ProfileHeader :page="page" :can-edit="canEdit"></ProfileHeader>
-        <tabs :disabled="edit" class="py-3" @selected="tabChange" :state-tab="true">
+        <tabs :compact="true" :disabled="edit" class="py-3" @selected="tabChange" :state-tab="true">
             <template slot="custom-item">
                 <div class="d-flex align-items-center" v-if="canEdit && showEdit">
-                    <button class="btn button-transparent rounded-circle" v-if="edit" @click="cancelEdit">
-                        <i class="material-icons">close</i>
-                    </button>
+                    <div class="p-3 rounded-circle clickable" v-if="edit">
+                        <i class="material-icons text-muted hover-dark" v-if="edit" @click="cancelEdit">close</i>
+                    </div>
                     <button class="btn d-flex align-items-center justify-content-center btn-edit" @click="doEdit">
                         <span v-if="!edit">
                             ویرایش اطلاعات <i class="material-icons-outlined">edit</i>
@@ -347,15 +347,3 @@ export default {
     layout: AppLayout,
 };
 </script>
-
-<style>
-.tabs ul li {
-    width: auto;
-}
-</style>
-
-<style lang="scss" scoped>
-.page-cover {
-    min-height: 40px;
-}
-</style>

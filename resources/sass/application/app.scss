@@ -21,6 +21,11 @@ p {
 
 @import "./components/header/header";
 
+button:focus {
+    outline: 1px dotted;
+    outline: none;
+}
+
 body {
     direction: rtl;
     margin: 0;
@@ -920,17 +925,24 @@ pre {
     @extend .material-icons;
 }
 .vs__actions{
-
     display: flex;
     align-items: center;
+    cursor: pointer;
+}
+.vs--single.vs--open .vs__selected{
+        position: relative;
 }
 .vs__clear{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: none;
     color: #757575;
+    z-index: -1;
 }
 .vs__clear > i {
     color: #757575;
     font-size: 20px;
 }
+.card-icon{
+    z-index: 1;
+}
+
+@import "./components/social-card.scss";
