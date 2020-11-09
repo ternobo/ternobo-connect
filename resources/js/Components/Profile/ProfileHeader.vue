@@ -4,11 +4,7 @@
     <ProfileCover :canChange="canEdit" :src="page.cover"></ProfileCover>
     <div class="card-body pb-0 d-flex justify-content-between pageinfo-card">
         <ProfileImage :canChange="canEdit" :src="page.profile"></ProfileImage>
-        <div class="d-flex follow-buttons" v-if="!canEdit">
-            <FollowButton :page="page.id"></FollowButton>
-            <ConnectionButton v-if="page.type === 'personal'" :user="page.user_id"></ConnectionButton>
-        </div>
-
+        <ConnetionButtons class="follow-buttons" v-if="!canEdit" :page-id="page.id" :user-id="page.user_id"></ConnetionButtons>
     </div>
     <div class="card-body d-flex flex-column page-name">
         <div>
@@ -26,8 +22,6 @@
 </template>
 
 <script>
-import ConnectionButton from "../buttons/ConnectionButton";
-import FollowButton from "../buttons/FollowButton";
 import ProfileCover from "./ProfileCover";
 import ProfileImage from "./ProfileImage";
 import UserInfoModal from "../Modals/UserInfoModal";
@@ -78,8 +72,6 @@ export default {
         }
     },
     components: {
-        FollowButton,
-        ConnectionButton,
         ProfileImage,
         ProfileCover,
         UserInfoModal,

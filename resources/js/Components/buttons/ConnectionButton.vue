@@ -15,9 +15,11 @@ export default {
             if (typeof (user) != "number") {
                 user = parseInt(user);
             }
+
             if (this.$page.connectedPeople.includes(user)) {
                 this.connected = true;
                 this.text = "متصل شده";
+                this.$emit("connected");
             } else if (this.$page.waitingConnections.includes(user)) {
                 this.waiting = true;
                 this.text = "در انتظار تایید";
@@ -29,6 +31,7 @@ export default {
             loading: false,
             connected: false,
             waiting: false,
+            followed: true,
             text: "متصل شدن",
         };
     },
@@ -56,7 +59,6 @@ export default {
                             $this.$page.connectedPeople.push($this.user);
                             $this.text = "در انتظار تایید";
                             $this.waiting = true;
-                            $this.emit("connected");
                         } else {
                             const errors = response.data.errors;
                             Object.keys(errors).forEach(function (item, index) {
@@ -84,8 +86,14 @@ export default {
                         // console.log(response.data);
                         if (response.data.result) {
                             $this.loading = false;
-                            Inertia.reload();
                             $this.text = "متصل شدن";
+
+                            if ($this.$page.connectedPeople.indexOf($this.user) != -1) {
+                                $this.$page.connectedPeople.splice($this.$page.connectedPeople.indexOf($this.user), 1)
+                            } else if ($this.$page.waitingConnections.indexOf($this.user) != -1) {
+                                $this.$page.waitingConnections.splice($this.$page.waitingConnections.indexOf($this.user), 1)
+                            }
+
                             $this.connected = false;
                             $this.waiting = false;
                             $this.$emit("disconnected");

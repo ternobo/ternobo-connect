@@ -16,7 +16,7 @@
         </div>
     </div>
     <sidebar-left>
-        <div class="card mb-3">
+        <div class="card mb-3" v-if="pages != undefined && pages != null && pages.length > 0">
             <div class="card-body px-2 py-1">
                 <people-suggestion v-for="page in pages" :page="page" :key="page.id"></people-suggestion>
             </div>
@@ -36,7 +36,7 @@ export default {
     watch: {
         posts(newValue) {
             this.postsArray = this.posts.data;
-        }
+        },
     },
     created() {
         this.postsArray = this.posts.data;
@@ -95,7 +95,7 @@ export default {
     components: {
         PostCard,
         NoContent,
-        AppFooter
+        AppFooter,
     },
     layout: AppLayout,
 };

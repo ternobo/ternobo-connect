@@ -20,10 +20,7 @@
                                                 <small class="text-muted"> {{ page.short_bio }}</small>
                                             </div>
                                         </inertia-link>
-                                        <div class="btn-group">
-                                            <FollowButton :page='page.id'></FollowButton>
-                                            <ConnectionButton v-if="page.type === 'personal'" :user="page.user_id"></ConnectionButton>
-                                        </div>
+                                        <ConnetionButtons :page-id="page.id" :user-id="page.user_id"></ConnetionButtons>
                                     </div>
                                 </div>
                             </div>
@@ -39,8 +36,8 @@
             </tab>
             <tab name="مطالب" id="content">
                 <div class="row" v-if="currentTab==='content' && !loadingPage">
-                    <div class="col-md-6" v-for="(post, index) in data" :key="post.id + '_index_' + index">
-                        <PostCard :post="post"></PostCard>
+                    <div class="col-md-6 mb-3" v-for="(post, index) in data" :key="post.id + '_index_' + index">
+                        <PostCard class="h-100 m-0" :post="post"></PostCard>
                     </div>
                 </div>
                 <div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">

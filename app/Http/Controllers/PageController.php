@@ -89,9 +89,7 @@ class PageController extends Controller
                 ->where("pages.id", "!=", $page->id)
                 ->where("pages.id", "!=", Auth::user()->getPage()->id)
                 ->get();
-            if (count($pages) > 5) {
-                $pages = $pages->random(5);
-            }
+                $pages = count($pages) > 3 ? $pages->random(3) : $pages;
         }
 
         $actions = ["data" => [], "next_page_url" => null];
@@ -139,6 +137,7 @@ class PageController extends Controller
                 "actions" => $actions,
                 "articles" => $articles,
                 "location" => $location,
+                'currentCategory'=> $category
             ]
         );
     }

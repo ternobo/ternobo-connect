@@ -29,7 +29,6 @@ export default {
                 data: data
 
             };
-            console.log(data);
             axios(config)
                 .then((response) => {
                     if (response.data.result) {

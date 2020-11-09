@@ -57,11 +57,123 @@
     background: #FEFCEA;
     color: #EFDC36;
 }
-
 .btn-connection-waiting:hover {
     background: #fffce4;
     color: #EFDC36;
 
+}
+
+
+
+
+.loading-button {
+    position: relative;
+    display: inline-block;
+    font-size: 15px;
+    letter-spacing: 0.05em;
+    outline: 0;
+    border: 1px solid transparent;
+    transition: all 0.4s ease-in-out;
+}
+
+.loading-button.loading {
+    background: #FFF;
+    border-color: #191919;
+}
+
+.loading-button.loading::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -4px;
+    margin-left: -4px;
+    content: '';
+    height: 8px;
+    width: 8px;
+    background: white;
+    border-radius: 100%;
+    transition: all 0.4s linear;
+    animation: loading 2s infinite;
+    opacity: 1;
+    background-color: #223;
+}
+
+@keyframes one-two {
+    0% {
+        left: 20%;
+        top: 50%;
+    }
+
+    12.5% {
+        top: 20%;
+    }
+
+    25% {
+        top: 50%;
+    }
+
+    37.5% {
+        top: 70%;
+    }
+
+    50% {
+        left: 70%;
+        top: 50%;
+    }
+
+    62.5% {
+        top: 20%;
+    }
+
+    75% {
+        top: 50%;
+    }
+
+    87.5% {
+        top: 70%;
+    }
+
+    100% {
+        left: 20%;
+        top: 50%;
+    }
+}
+
+@keyframes loading {
+    0% {
+        left: 20%;
+    }
+
+    50% {
+        left: 80%;
+    }
+
+    100% {
+        left: 20%;
+    }
+}
+
+
+.splitor-b::after{
+    content: " ";
+    bottom: 0px;
+    right: 10px;
+    left: 10px;
+    width: calc(100% - 20px);
+    height: 1px;
+    position: absolute;
+    margin-top: -2px;
+    background: #C8C8C8;
+}
+
+.splitor-l::after{
+    content: " ";
+    left: 0;
+    width: 1px;
+    height: 20px;
+    position: absolute;
+    margin-top: -2px;
+    background: #C8C8C8;
 }
 
 .btn-edit{

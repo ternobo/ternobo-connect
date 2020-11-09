@@ -2,6 +2,17 @@
 @import '~bootstrap-v4-rtl';
 @import '~bootstrap-vue';
 
+
+
+.btn{
+    border-width: 2px;
+}
+
+.form-control{
+    border-width: 2px;
+}
+
+
 input {
     outline: none;
 }
@@ -235,7 +246,7 @@ a {
     .tselect_new-item {
         .tselectـnew_item--input {
             border-radius: 15px;
-            border: 1px solid $light;
+            border: 2px solid $light;
             width: 100%;
             padding: 4px 7px;
             background: transparent;
@@ -721,7 +732,7 @@ pre {
 .btn-grey-10 {
     background: $body-bg;
     color: $light;
-    border: 1px solid $icons;
+    border: 2px solid $icons;
     transition: 0.3s all;
 }
 
@@ -730,11 +741,11 @@ pre {
     color: $text-color;
 }
 
-.btn:active {
+.btn:active:not(:disabled) {
     box-shadow: 0 0 10px 3px inset rgba($color: #000000, $alpha: 0.1) !important;
 }
 
-.btn-dark:active {
+.btn-dark:active:not(:disabled) {
     box-shadow: 0 0 10px 3px inset rgba($color: #FFF, $alpha: 0.15) !important;
 }
 
@@ -835,8 +846,12 @@ pre {
 .splitor-line{
     height: 100%;
     width: 1px;
-    background: #EEE;
+    background: $icons;
     min-height: 20px;
+}
+
+.tooltip-inner {
+    font-family: dana, roboto;
 }
 
 .action{
@@ -885,6 +900,29 @@ pre {
     }
 }
 
+.disabled{
+    cursor: not-allowed !important;
+    color: $icons;
+}
+
+a:focus{
+    outline: none !important;
+}
+
+:focus{
+    outline: none !important;
+}
+
+
+.hover-dropdown:hover{
+    background: #e0e0e0;
+}
+
+.person-name{
+    font-weight: 600;
+    font-size: 14px
+}
+
 .badge-success{
    @extend .badge-light;
    border-radius: 50rem;
@@ -898,6 +936,21 @@ pre {
     }
 }
 
+.card-header{
+    background-color: $white;
+    border: 0;
+}
+
+.autocomplete-result {
+    cursor: pointer;
+    padding: 12px;
+    background-image: none;
+}
+
+[data-position=below] .autocomplete-result-list{
+    border-radius: 0 !important;
+}
+
 .open-achievements{
     transition: 0.3s all;
 }
@@ -908,7 +961,7 @@ pre {
 @import "./components/achievement.scss";
 
 .invalid{
-    border: 1px solid $danger;
+    border: 2px solid $danger;
 }
 
 
@@ -918,6 +971,8 @@ pre {
         margin: 1.75rem auto;
     }
 }
+
+@import "./components/modal.scss";
 
 @import "./components/category-item.scss";
 
@@ -946,3 +1001,7 @@ pre {
 }
 
 @import "./components/social-card.scss";
+
+@import "./components/categories-card.scss";
+
+@import "./components/tag-input.scss";

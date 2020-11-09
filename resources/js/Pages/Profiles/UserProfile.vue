@@ -28,10 +28,10 @@
             <tab name="فعالیت‌ها" id="activities" :href="'/' + page.slug + '/activities'" :selected="current_tab === 'activities'">
                 <div class="row" v-if="!loadingTab" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
                     <div class="col-md-4">
-                        <Categories :categories="page.categories" :location="location" :slug="page.slug" :article="false"></Categories>
+                        <Categories :current-category="currentCategory" :categories="page.categories" :location="location" :slug="page.slug" :article="false"></Categories>
                     </div>
                     <div class="col-md-8">
-                        <NewPostCard v-if="canEdit"></NewPostCard>
+                        <NewPostCard class="mt-4 mt-md-0" v-if="canEdit"></NewPostCard>
                         <div class="posts pt-3">
                             <ActionCard v-for="action in actionsList" :page="page" :action="action" :key="action.id"></ActionCard>
                         </div>
@@ -54,6 +54,14 @@
     </div>
     <sidebar-left>
         <div class="card mb-3" v-if="pages.length > 0">
+            <div class="card-header pb-2 pt-3">
+                <strong>
+                    {{ page.slug }}
+                </strong>
+                <span class="mr-1">
+                    دنبال می‌کند
+                </span>
+            </div>
             <div class="card-body px-2 py-1">
                 <people-suggestion v-for="page in pages" :page="page" :key="page.id"></people-suggestion>
             </div>
@@ -100,7 +108,7 @@ export default {
             this.showAbout = false;
             if (this.current_tab == 'home') {
                 this.current_tab = "activities";
-                this.loadTab('/' + this.page.slug + '/activities')
+                this.loadTab('/' + this.page.slug + '/activities', false)
             }
 
         }
@@ -140,13 +148,17 @@ export default {
             }
         },
 
-        loadTab(link) {
+        loadTab(link, pushState = true) {
             if (link.endsWith("articles") || link.endsWith("activities")) {
                 this.showEdit = false;
             } else {
                 this.showEdit = true;
             }
-            window.history.pushState({}, false, link);
+
+            if (pushState) {
+                window.history.pushState({}, false, link);
+            }
+
             const options = {
                 method: "GET",
                 headers: {
@@ -293,6 +305,10 @@ export default {
     },
     name: "UserProfile",
     props: {
+        currentCategory: {
+            default: null,
+            required: false
+        },
         pages: {
             type: Array,
             default: [],

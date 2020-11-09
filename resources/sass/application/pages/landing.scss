@@ -241,11 +241,12 @@ h5 {
 }
 
 .slick-next {
-    left: -25px;
+    left: -25px !important;
 }
 
 .slick-prev {
-    right: -25px;
+    right: -25px !important;
+    left: unset !important;
 }
 
 .bottom-nav {

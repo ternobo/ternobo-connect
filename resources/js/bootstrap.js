@@ -24,7 +24,7 @@ if(user_id){
 
     window.Echo = new Echo({
         broadcaster: 'socket.io',
-        host: window.location.hostname + ':6001',
+        host: 'https://echo-server.ternobo.info/socket.io',
         forceTLS: true
     });
     const notificationChannel = window.Echo.private("notification."+window.user_id);

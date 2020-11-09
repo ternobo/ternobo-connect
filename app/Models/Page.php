@@ -455,22 +455,22 @@ class Page extends Model
                     ->select(array("pages.*"))
                     ->get();
 
-                if (count($pages) > 5) {
-                    $pages = $pages->random(5);
+                if (count($pages) > 3) {
+                    $pages = $pages->random(3);
                 } else {
-                    if (count(Page::all()) > 5) {
+                    if (count(Page::all()) > 3) {
                         $pages = Page::query()
                             ->distinct("pages.id")
                             ->where("pages.user_id", "!=", Auth::user()->id)
-                            ->get()->random(5);
+                            ->get()->random(3);
                     }
                 }
             } else {
-                if (count(Page::all()) > 5) {
+                if (count(Page::all()) > 3) {
                     $pages = Page::query()
                         ->distinct("pages.id")
                         ->where("pages.user_id", "!=", Auth::user()->id)
-                        ->get()->random(5);
+                        ->get()->random(3);
                 }
             }
         }

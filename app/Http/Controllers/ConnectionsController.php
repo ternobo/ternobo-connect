@@ -189,7 +189,7 @@ class ConnectionsController extends Controller
                 $query->where("user_id", Auth::user()->id)->orWhere("connection", $user_id);
             })
             ->orWhere(function ($query) use ($user_id) {
-                $query->where("connection", $user_id)->orWhere("user_id", Auth::user()->id);
+                $query->where("connection", Auth::user()->id)->orWhere("user_id", $user_id);
             })
             ->firstOrFail();
         $result = $followRow->delete();

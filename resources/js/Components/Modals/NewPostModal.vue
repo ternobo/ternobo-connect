@@ -1,5 +1,5 @@
 <template>
-<b-modal v-if="$page.user != null" v-model='showModal' :no-close-on-backdrop="isCropping" hide-footer size="lg" title="تولید محتوای تازه" :centered="true">
+<b-modal v-if="$page.user != null" v-model='showModal' :no-close-on-backdrop="isCropping" hide-footer body-class="px-2 pb-2" size="lg" title="تولید محتوای تازه" :centered="true">
     <div action="/posts" data-ajax method="POST" data-reload="1" enctype="multipart/form-data" class="w-100">
         <div class="new-post position-relative">
             <div class="selections">
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="mediatag">
-                <div id='mediaPreview' class="position-relative">
+                <div id='mediaPreview' class="position-relative" v-if="image !== undefined || video !== undefined">
                     <div class="topleftactions">
                         <button class="closebtn" @click="rotateImage" v-if="isCropping" style="height: 30px;width: 30px;padding: 3px;"> <i class="material-icons">rotate_left</i></button>
                         <button class="closebtn" v-if="image !== undefined || video !== undefined" @click="removeMedia"> <i class="material-icons font-22">close</i></button>
@@ -47,30 +47,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="tags pt-2 pr-0 pb-3">
-                    <div class="d-flex align-items-center justify-content-between mb-2">
-                        <div class="w-100 d-flex flex-column">
-                            <span class="font-18 bold">برچسب‌ها</span>
-                            <span class="text-muted bold font-11">حداکثر ۳ برچست</span>
-                        </div>
-
+                <div class="tags pr-0 pb-3">
+                    <div class="d-flex justify-content-end align-items-center my-2">
+                        <file-input v-on:change="imageSelect">
+                            <span class="text-grey hover-dark d-flex align-items-center clickable" v-b-tooltip.hover title="افزودن ویدیو / تصویر">
+                                <i class="material-icons-outlined hover-dark">crop_original</i>
+                            </span>
+                        </file-input>
+                        <span class="splitor-line mx-2"></span>
+                        <inertia-link href="/articles/create" class="text-grey hover-dark d-flex align-items-center font-12" data-toggle="tooltip" v-b-tooltip.hover title="نوشتن مقاله"><i class="material-icons-outlined hover-dark">article</i></inertia-link>
                     </div>
-                    <div class="d-flex align-items-center">
-                        <v-select class="w-100" dir="rtl" v-model="tags" taggable multiple push-tags>
-                            <template #open-indicator>
-                                <span></span>
-                            </template>
-                        </v-select>
-                        <div class="d-flex align-items-center">
-                            <file-input v-on:change="imageSelect">
-                                <a class="text-grey d-flex align-items-center clickable" v-b-tooltip.hover title="افزودن ویدیو / تصویر">
-                                    <i class="material-icons-outlined text-grey">crop_original</i>
-                                </a>
-                            </file-input>
-                            <span class="splitor-line mx-2"></span>
-                            <inertia-link href="/articles/create" class="text-grey d-flex align-items-center font-12" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="افزودن مقاله"><i class="material-icons-outlined text-grey">article</i></inertia-link>
-                        </div>
-                    </div>
+                    <TagInput class="w-100" v-model="tags" />
                 </div>
             </div>
             <div class="media pl-2">
@@ -88,6 +75,9 @@
 
 <script>
 import ModalMixin from '../../Mixins/Modal';
+
+import TagInput from "../inputs/TagInput";
+
 import {
     Cropper
 } from 'vue-advanced-cropper'
@@ -244,6 +234,7 @@ export default {
     },
     components: {
         Cropper,
+        TagInput,
         FileInput
     },
     mixins: [ModalMixin],

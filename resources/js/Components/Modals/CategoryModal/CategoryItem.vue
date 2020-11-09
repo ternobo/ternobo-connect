@@ -2,7 +2,7 @@
 <li class="category-item d-flex">
     <div class="actions">
         <i class="material-icons-outlined text-light hover-dark p-1 hand-hover">unfold_more</i>
-        <i class="material-icons-outlined text-light hover-danger p-1 clickale" @click="doDelete()">delete_sweep</i>
+        <i class="material-icons-outlined text-light hover-danger p-1 clickable" @click="doDelete()">delete</i>
     </div>
     <span class="d-flex align-items-center" :class="{'px-3 border':editName}">{{ category.name }}</span>
 </li>

@@ -20,7 +20,7 @@
         height: 100%;
         max-width: 1580px;
         background: $body-bg;
-        border-bottom: 1px solid $icons;
+        border-bottom: 2px solid $icons;
         transition: 0.3s all;
         width: 100%;
     }
@@ -28,6 +28,10 @@
         display: flex;
         align-items: center;
     }
+}
+
+.autocomplete-input{
+    border-width: 2px;
 }
 
 

@@ -23,13 +23,13 @@
 
         <div class="categories">
             <div class="d-flex justify-content-between">
-                <inertia-link :href="'/'+slug+'/category/all/' + location" class="text-light hover-dark">
+                <inertia-link :href="'/'+slug+'/category/all/' + location" :class="{'text-dark':(currentCategory != null ? currentCategory : '').toString() === 'all'}" class="hover-dark">
                     <i class="material-icons">layers</i> همه‌ی مطالب
                 </inertia-link>
-                <i class="clickable text-light hover-dark material-icons-outlined" @click="edit=!edit">{{ !edit ? 'edit' : 'edit' }}</i>
+                <i class="clickable hover-dark material-icons-outlined" @click="edit=!edit">{{ !edit ? 'edit' : 'edit' }}</i>
             </div>
-            <ul class="pr-3 text-light border-right">
-                <category-item v-for="category in list" :key="category.id" :location="location" :slug="slug" :category="category"></category-item>
+            <ul>
+                <category-item v-for="category in list" :class="{'active': (category.id).toString() === (currentCategory != null ? currentCategory : '').toString()}" :key="category.id" :location="location" :slug="slug" :category="category"></category-item>
             </ul>
         </div>
 
@@ -66,6 +66,10 @@ export default {
             default: [],
             required: true
         },
+        currentCategory: {
+            default: null,
+            required: false
+        },
         slug: {
             type: String,
             default: undefined,
@@ -85,30 +89,3 @@ export default {
 
 }
 </script>
-
-<style lang="scss">
-.actions-list {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-
-    .action-item {
-        background: #EEE;
-        padding: 5px 10px;
-        border-radius: 32px;
-        margin-left: 15px;
-    }
-
-    .action-item.active {
-        background: #E0E0E0;
-    }
-
-    .action-item:not(:last-child) {
-        margin-bottom: 15px;
-    }
-
-    ul {
-        list-style: none;
-    }
-}
-</style>

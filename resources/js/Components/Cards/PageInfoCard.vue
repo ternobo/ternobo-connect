@@ -13,10 +13,7 @@
             </small>
         </div>
     </inertia-link>
-    <div class="py-3 d-flex justify-content-center align-items-center pt-5">
-        <FollowButton :page="page.id"></FollowButton>
-        <ConnectionButton v-if="page.type === 'personal'" :user="page.user.id"></ConnectionButton>
-    </div>
+    <ConnetionButtons class="py-3 d-flex justify-content-center align-items-center pt-5" :page-id="page.id" :user-id="page.user_id"></ConnetionButtons>
 </div>
 </template>
 

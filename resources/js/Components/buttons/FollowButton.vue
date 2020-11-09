@@ -15,6 +15,7 @@ export default {
             if (this.$page.followings.includes(page)) {
                 this.followed = true;
                 this.text = "دنبال شده";
+                this.$emit("followed");
             }
         }
     },
@@ -50,7 +51,7 @@ export default {
                             $this.$page.followings.push($this.page);
                             $this.text = "دنبال شده";
                             $this.followed = true;
-                            $this.emit("followed");
+                            $this.$emit("followed");
                         } else {
                             const errors = response.data.errors;
                             Object.keys(errors).forEach(function (item, index) {
@@ -78,10 +79,10 @@ export default {
                         // console.log(response.data);
                         if (response.data.result) {
                             $this.loading = false;
-                            $this.$page.followings.remove($this.page);
                             $this.text = "دنبال کردن";
                             $this.followed = false;
-                            $this.emit("unfollowed");
+                            $this.$emit("unfollowed");
+                            $vm0.$page.followings.splice($vm0.$page.followings.indexOf(51), 1);
                         } else {
                             const errors = response.data.errors;
                             Object.keys(errors).forEach(function (item, index) {
