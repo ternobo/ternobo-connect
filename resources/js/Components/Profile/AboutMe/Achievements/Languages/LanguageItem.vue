@@ -20,7 +20,7 @@
             <i class="material-icons-outlined hover-danger clickable" @click="doDelete">delete</i>
         </div>
         <MaterialTextField v-model="languageVal.name" class="material--sm w-100" input-class="w-100 py-1"></MaterialTextField>
-        <v-select class="dropdown-list w-50" :placeholder="'تسلط'" dir="rtl" v-model="language.level" :options="[
+        <v-select :searchable="false" class="dropdown-list w-50" :placeholder="'تسلط'" dir="rtl" v-model="language.level" :options="[
             {
                 label: 'مبتدی',
                 level: 1

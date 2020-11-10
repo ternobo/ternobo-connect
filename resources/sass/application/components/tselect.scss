@@ -1,0 +1,108 @@
+.tselect {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 100%;
+}
+
+.tselect {
+    .title-text {
+        font-size: 12px;
+    }
+
+    .tselect_title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: $fixed-elements;
+        color: $sub-heading;
+        border-radius: 15px;
+        padding: 5px 5px;
+    }
+
+    .tselect_title.active {
+        border-radius: 15px 15px 0 0;
+    }
+
+    .tselect_title.active {
+        .tselect_arrow {
+            transform: rotate(180deg);
+        }
+    }
+
+    .tselect_title {
+
+        span,
+        i {
+            color: $grey;
+            transition: 0.3s all;
+        }
+    }
+
+    .tselect-items {
+        position: absolute;
+        background: $fixed-elements;
+        color: $sub-heading;
+        border-radius: 0;
+        z-index: 99999;
+
+    }
+
+    .tselectـnew_item--input:focus~i {
+        color: #707070 !important;
+    }
+
+    .tselect-items {
+        .items {
+            display: flex;
+            flex-direction: column;
+            max-height: 210px;
+            padding-top: 20px;
+            overflow: auto;
+            scrollbar-color: $dark $light;
+            scrollbar-width: thin;
+            scroll-behavior: smooth;
+
+            &::-webkit-scrollbar {
+                width: 0.3em;
+                background: #DEDEDE;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: $dark;
+            }
+        }
+    }
+
+    .tselect_item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        width: 100%;
+        padding: 8px 12px !important;
+
+        &:hover,
+        &.active {
+            background: rgb(224,224,224);
+        }
+
+        .tselect_item--text {
+            color: $sub-heading;
+            margin: 0;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+    }
+    .tselect_new-item {
+        position: relative;
+        display: flex;
+        flex-wrap: nowrap;
+        padding: 8px;
+        align-items: center;
+        margin-top: 10px;
+    }
+}

@@ -41,13 +41,13 @@
             <div class="col-md-6 py-4">
                 <strong>تاریخ پایان <span class="text-action">*</span></strong>
                 <DatePicker v-if="typeof(val.endDate) !== 'boolean' || (val.endDate==false)" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{year: year, month: month}"></DatePicker>
-                <input v-else type="text" readonly value="تا کنون" class="form-control bg-white" />
+                <input v-else type="text" readonly value="تا کنون" class="form-control w-75 bg-white" />
                 <Checkbox v-model="val.endDate">
                     همچنان در حال کار بر روی این پروژه هستم
                 </Checkbox>
             </div>
             <div class="col-md-6 py-4" v-if="showMore">
-                <v-select :placeholder="'مرتبط با'" class="w-75" dir="rtl" v-model="val.skills" label="name" :options="page.skills">
+                <v-select :searchable="false" :placeholder="'مرتبط با'" class="dropdown-list  w-75" dir="rtl" v-model="val.skills" label="name" :options="page.skills">
                     <template #open-indicator="{ attributes }">
                         <span v-bind="attributes">
                             <i class="material-icons">keyboard_arrow_down</i>

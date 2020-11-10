@@ -5,11 +5,20 @@
             {{ tag }}
         </div>
     </div>
-    <input :type="type" placeholder=" " @keyup.enter="addTag()" :disabled="tags != null && tags != null && tags.length == 3" @keyup.delete="removeLastTag" :class="[inputClass, { invalid: invalid }]" @blur="check" v-model="input" :maxlength="maxlength" class="input" />
+    <input :type="type" placeholder=" " @keyup.enter="addTag()" :disabled="tags != null && tags != null && tags.length == 3" :class="[inputClass, { invalid: invalid }]" @blur="check" v-model="input" :maxlength="maxlength" class="input" />
     <label class="d-flex align-items-center">
         برچسب‌ها
         <small class="max-text mr-1">حداکثر 3 برچسب</small>
     </label>
+
+    <div class="tags-suggestion" v-if="suggestions.length > 0 && this.input != null && this.input.length > 0">
+        <div class="tags flex-wrap">
+            <div class="tag-item" v-for="(suggestion, index) in suggestions" @click="addTag(suggestion.text)" :key="'suggested_tag_' + suggestion + '_' + index">
+                {{ suggestion.text }}
+            </div>
+        </div>
+    </div>
+
 </div>
 </template>
 
@@ -26,11 +35,20 @@ export default {
             this.tags.splice(index, 1);
             this.$emit("input", this.tags);
         },
-        addTag() {
-            if (this.input != null) {
-                this.tags.push(this.input);
-                this.input = null;
-                this.$emit("input", this.tags);
+        addTag(item = null) {
+            if (item != null) {
+                if (this.tags.indexOf(item) == -1) {
+                    this.tags.push(item);
+                    this.input = null;
+                    this.$emit("input", this.tags);
+                    this.suggestions = [];
+                }
+            } else if (this.input != null) {
+                if (this.tags.indexOf(this.input) == -1) {
+                    this.tags.push(this.input);
+                    this.input = null;
+                    this.$emit("input", this.tags);
+                }
             }
         },
         check() {
@@ -51,10 +69,21 @@ export default {
         value() {
             this.tags = this.value;
         },
+        input(newVal) {
+            if (newVal != null && newVal.length > 0) {
+                axios.get(this.$APP_URL + '/gettags?term=' + newVal + '&q=' + newVal).then((response) => {
+                    let data = response.data;
+                    if (data.results.length > 0) {
+                        this.suggestions = data.results;
+                    }
+                });
+            }
+        }
     },
     data() {
         return {
             tags: [],
+            suggestions: [],
             input: null,
             invalid: false,
         };

@@ -1,6 +1,6 @@
 <template>
 <div class="tselect border position-relative rounded-0" :dir="direction" v-click-outside="close">
-    <div class="tselect_title" ref="titleSection" @click="openDropdown">
+    <div class="tselect_title rounded-0" style="bacground: #F5F5F5" ref="titleSection" @click="openDropdown">
         <div class="title-text w-100">
             <slot name="selected" v-bind:item="selectedItem">
             </slot>

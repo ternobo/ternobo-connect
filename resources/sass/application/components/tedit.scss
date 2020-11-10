@@ -1,0 +1,24 @@
+.teditor{
+    position: relative;
+    background: #FFF;
+    label{
+        position: absolute;
+        z-index: 1;
+    }
+    div.editable {
+        outline: none;
+    }
+    div.editable, div.readonly {
+        width: 100%;
+        white-space: wrap;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    div.readonly {
+        z-index: -99;
+        color: transparent;
+        background: transparent;
+    }
+
+}

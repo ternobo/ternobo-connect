@@ -205,11 +205,14 @@ export default {
                             })
                             .then((response) => {
                                 if (response.data.result) {
-                                    this.loadingSave = false;
                                     this.edit = false;
                                 } else {
                                     this.handleError(response.data.errors);
                                 }
+                                this.loadingSave = false;
+                            })
+                            .then(() => {
+                                this.loadingSave = false;
                             });
                     } else {
                         this.loadingSave = false;
@@ -221,12 +224,15 @@ export default {
                         .post("/save/resume", this.$refs.about.getData())
                         .then((response) => {
                             if (response.data.result) {
-                                this.loadingSave = false;
                                 this.edit = false;
                             } else {
                                 this.handleError(response.data.errors);
                             }
-                        });
+                            this.loadingSave = false;
+                        })
+                        .then(() => {
+                            this.loadingSave = false;
+                        });;
                 }
             } else {
                 this.edit = true;

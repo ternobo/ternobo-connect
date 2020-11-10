@@ -2,14 +2,15 @@
     position: relative;
     border: 2px solid $icons;
     transition: 0.3s all;
-    &:focus-within{
+
+    &:focus-within {
         border-color: #191919;
     }
 
     .tags {
         display: flex;
         align-items: center;
-
+        z-index: 2;
         .tag-item {
             min-width: 32px;
             padding: 5px 12px 0 12px;
@@ -23,6 +24,7 @@
             user-select: none;
             vertical-align: middle;
             transition: 0.3s all;
+            white-space: nowrap;
         }
 
         .tag-item:hover {
@@ -30,6 +32,21 @@
             background-color: $danger;
         }
 
+    }
+
+    .tags-suggestion {
+        position: absolute;
+        top: 105%;
+        z-index: 1;
+        background: #FFF;
+        width: 100%;
+        padding: 6px 0;
+        box-shadow: 0 20px 40px 5px rgba(0, 0, 0, 0.1);
+
+        .tag-item:hover {
+            background-color: #E0E0E0 !important;
+            color: #191919 !important;
+        }
     }
 
     label {

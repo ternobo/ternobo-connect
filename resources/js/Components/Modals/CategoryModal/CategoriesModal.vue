@@ -9,9 +9,9 @@
         <div class="col-md-6">
             <div class="d-flex">
                 <input type="text" class="form-control" v-model="input" placeholder="دسته بندی جدید را وارد کنید" />
-                <button :disabled='!(input!=null&&input.length>0)' style="background: #E0E0E0;color: #757575;" @click="addCategory" class="btn add-btn d-flex justify-content-center align-items-center btn-light rounded-0">
+                <button :disabled='!(input!=null&&input.length>0)' @click="addCategory" class="btn add-btn d-flex justify-content-center align-items-center rounded-0">
                     <i v-if="!loading" class="material-icons">add</i>
-                    <span style="height: 14px;width: 14px;border-width: 2px;" v-if="loading" class="    loadingspinner"></span>
+                    <span style="height: 14px;width: 14px;border-width: 2px;" v-if="loading" class="loadingspinner"></span>
                 </button>
             </div>
         </div>

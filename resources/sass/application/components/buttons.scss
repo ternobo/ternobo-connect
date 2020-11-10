@@ -6,6 +6,7 @@
     font-weight: bold;
     font-size: 0.7rem !important;
     transition: 0.3s all;
+    min-width: 80px;
     white-space: nowrap;
 }
 
@@ -63,8 +64,17 @@
 
 }
 
+.add-btn{
+    border: 2px solid $icons;
+    border-right: none;
+    background: #E0E0E0;
+    color: #757575;
+    max-height: 37px;
+}
 
-
+.add-btn:hover{
+    color: #757575;
+}
 
 .loading-button {
     position: relative;

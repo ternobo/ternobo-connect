@@ -47,7 +47,7 @@
                 <MaterialTextField v-model="val.link" class="d-flex align-items-center material--sm p-0" placeholder="لینک ثبت اختراع"></MaterialTextField>
             </div>
             <div class="col-md-6 py-4">
-                <v-select :placeholder="'وضعیت'" class="w-75" dir="rtl" v-model="val.status" :options="[
+                <v-select :searchable="false" :placeholder="'وضعیت'" class="dropdown-list w-75" dir="rtl" v-model="val.status" :options="[
                     {
                         label: 'حق ثبت اختراع صادر شده',
                         id: 1

@@ -1,5 +1,10 @@
 <template>
 <base-layout>
+    <div>
+        <div class="card">
+            Settings
+        </div>
+    </div>
 </base-layout>
 </template>
 

@@ -10,9 +10,6 @@ import LazyloadDirective from "../Directives/LazyloadDirective";
 import LoadingSpinner from "../Components/LoadingSpinner";
 import NewPostCard from "../Components/Cards/NewPostCard";
 import CopyToClipboard from "../Directives/CopyToClipboard";
-import {
-    Tselect
-} from "tselect";
 import TimeAgo from 'javascript-time-ago';
 import numeral from "numeral";
 
@@ -52,7 +49,7 @@ TernoboApp.install = function (Vue, options) {
     Vue.component("loading-spinner", LoadingSpinner);
     Vue.component("new-post-card", NewPostCard);
     Vue.component("new-post-modal", () => import(/* webpackChunkName: "NewPostModal" */ "../Components/Modals/NewPostModal"));
-    Vue.component("tselect", Tselect);
+    Vue.component("tselect", ()=> import (/* webpackChunkName: "Tselect" */ "../Components/Tselect"));
     Vue.component("textarea-autosize", () => import(/* webpackChunkName: "TextareaAutosize" */ "../Components/inputs/TextareaAutosize"));
     // Directives
     Vue.directive("lazyload", LazyloadDirective);

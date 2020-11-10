@@ -6,7 +6,7 @@
                 <h2 class="font-20">آزمون‌ها</h2>
                 <div class="mr-2 badge-light">{{tests.length }}</div>
             </div>
-            <i class="material-icons open-achievements" :class="{'active': open}">arrow_drop_down</i>
+            <i class="material-icons open-achievements" v-if="!edit" :class="{'active': open}">arrow_drop_down</i>
         </div>
         <ul class="tests-list p-0" v-if="loading">
             <li>
