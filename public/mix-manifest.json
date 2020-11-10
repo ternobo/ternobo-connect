@@ -1,9 +1,9 @@
 {
-    "/js//app.js": "/js//app.js?id=d4266ac8e75850c920f3",
+    "/js//app.js": "/js//app.js?id=ea469435f47c106a8bfb",
     "/css/app.css": "/css/app.css?id=82b7a5fe0f9407ec76cf",
     "/manifest.js": "/manifest.js?id=06ec869283d3e6136175",
     "/js//vendor.js": "/js//vendor.js?id=de2743ad5573bed06749",
-    "/js/AboutMeTabProfile.js": "/js/AboutMeTabProfile.js?id=870a973ca88341b98d0f",
+    "/js/AboutMeTabProfile.js": "/js/AboutMeTabProfile.js?id=cf052348545cfb0ad80c",
     "/js/ContactTabProfile.js": "/js/ContactTabProfile.js?id=e1dbae1b81c96d64ce65",
     "/js/LawsModal.js": "/js/LawsModal.js?id=1c77a7a4d41342490416",
     "/js/NewPostModal.js": "/js/NewPostModal.js?id=4fe6a995864928a008b5",
@@ -12,6 +12,5 @@
     "/js/vendors~ContactTabProfile.js": "/js/vendors~ContactTabProfile.js?id=bc67c5354c542f16fa1f",
     "/js/vendors~draggable.js": "/js/vendors~draggable.js?id=687d2da7beccbee942b9",
     "/js/vendors~vue-persian-datetime-picker.js": "/js/vendors~vue-persian-datetime-picker.js?id=9048046eeba5bdec2cde",
-    "/js/vue-persian-datetime-picker.js": "/js/vue-persian-datetime-picker.js?id=89bc184ade0901462b9e",
-    "/js/framemanager.js": "/js/framemanager.js?id=dba91ec5dec8dcb09181"
+    "/js/vue-persian-datetime-picker.js": "/js/vue-persian-datetime-picker.js?id=89bc184ade0901462b9e"
 }

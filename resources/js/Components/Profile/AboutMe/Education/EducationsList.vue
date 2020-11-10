@@ -9,7 +9,7 @@
         </div>
         <ul class="educations-list p-0" v-if="loading">
             <li>
-                <Skeleton :count="4" :heigth="25" />
+                <Skeleton :count="3" heigth="80px" />
             </li>
         </ul>
         <draggable group="edupublishs" ref="draggable" tag="ul" v-bind="dragOptions" v-model="educations" class="educations-list p-0" :disabled="!edit" handle=".hand-hover">
@@ -38,10 +38,15 @@ export default {
             return this.educations;
         },
     },
+    mounted() {
+        setTimeout(() => {
+            this.loading = false;
+        }, 300);
+    },
     data() {
         return {
             drag: false,
-            loading: false,
+            loading: true,
             educations: [],
         };
     },

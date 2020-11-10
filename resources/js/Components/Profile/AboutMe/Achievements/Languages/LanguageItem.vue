@@ -15,7 +15,7 @@
         </span>
     </div>
     <div class="editItem" v-else>
-        <div class="actions" v-if="edit">
+        <div class="actions mx-0 mb-3" v-if="edit">
             <i class="material-icons hand-hover">unfold_more</i>
             <i class="material-icons-outlined hover-danger clickable" @click="doDelete">delete</i>
         </div>

@@ -1,26 +1,33 @@
 <template>
-<div class="project">
-    <div class="detail">
+<li class="achievement">
+    <div class="mr-3 w-100" v-if="!edit">
+        <div class="d-flex justify-content-start" v-if="detailed">
+            <div class="title">
+                <a :href="val.link" v-if="val.link != null && val.link.length > 0"><strong>{{ val.name }}</strong></a>
+                <span v-else><strong>{{ val.name }}</strong></span>
+                <span class="font-12 text-muted">{{ time_text }}</span>
+            </div>
+            <p class="bg-body py-2 px-3" v-if="val.description != null && val.description.length > 0">
+                {{ val.description }}
+            </p>
+        </div>
+        <div class="achievement-name" v-else>
+            <a :href="val.link" v-if="val.link != null && val.link.length > 0"><strong>{{ val.name }}</strong></a>
+            <span v-else><strong>{{ val.name }}</strong></span>
+        </div>
+    </div>
+
+    <div class="editItem" v-else>
         <div class="d-flex flex-column align-items-center ml-3">
-            <div class="actions" v-if="edit">
+            <div class="actions mx-0 mb-3">
                 <i class="material-icons hand-hover">unfold_more</i>
                 <i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
             </div>
-            <button class="btn font-12 follow-btn" @click="showMore = !showMore" v-if="edit">
+            <button class="btn font-12 ml-1 follow-btn" @click="showMore = !showMore" v-if="edit">
                 {{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
             </button>
         </div>
-        <div class="mr-3 w-100" v-if="!edit">
-            <strong class="text-dark">{{ val.name }}</strong>
-            <div class="d-flex aling-items-center">
-                <span class="text-muted"> {{ time_text }} </span>
-            </div>
-            <p class="job-description my-2" :class="{ open: showMore }">
-                {{ val.description }}
-            </p>
-            <span class="clickable text-action" v-if="val.description.length > 468" @click="showMore = !showMore">مشاهده {{ showMore ? "کمتر" : "بیشتر ..." }}</span>
-        </div>
-        <div class="row w-100 m-0" v-else>
+        <div class="row w-100 m-0">
             <div class="col-md-6 py-4">
                 <MaterialTextField v-model="val.name" :required="true" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="عنوان"></MaterialTextField>
             </div>
@@ -46,7 +53,7 @@
             </div>
         </div>
     </div>
-</div>
+</li>
 </template>
 
 <script>

@@ -13,6 +13,9 @@ import CopyToClipboard from "../Directives/CopyToClipboard";
 import TimeAgo from 'javascript-time-ago';
 import numeral from "numeral";
 
+import MaterialTextField from "../Components/inputs/MaterialTextField";
+import MaterialTextArea from "../Components/inputs/MaterialTextArea";
+
 import PersianDate from 'persian-date';
 
 import {
@@ -33,8 +36,8 @@ TernoboApp.install = function (Vue, options) {
 
     Vue.component("skeleton",Skeleton);
 
-    Vue.component("MaterialTextField", () => import("../Components/inputs/MaterialTextField"));
-    Vue.component("MaterialTextArea", () => import("../Components/inputs/MaterialTextArea"));
+    Vue.component("MaterialTextField", MaterialTextField);
+    Vue.component("MaterialTextArea", MaterialTextArea);
 
     Vue.component("tabs", Tabs);
     Vue.component("tab", Tab);

@@ -9,7 +9,7 @@
         </div>
         <ul class="experiences-list p-0" v-if="loading">
             <li>
-                <Skeleton :count="4" :heigth="25" />
+                <Skeleton :count="3" heigth="80px" />
             </li>
         </ul>
         <draggable group="experiences" ref="draggable" tag="ul" v-bind="dragOptions" v-model="experiences" class="experiences-list p-0" :disabled="!edit" handle=".hand-hover">
@@ -38,10 +38,15 @@ export default {
             return this.experiences;
         },
     },
+    mounted() {
+        setTimeout(() => {
+            this.loading = false;
+        }, 200);
+    },
     data() {
         return {
             drag: false,
-            loading: false,
+            loading: true,
             experiences: [],
         };
     },

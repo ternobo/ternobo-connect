@@ -3,11 +3,16 @@
     .vs__dropdown-toggle,
     .vs__dropdown-menu {
         background: transparent;
-        border: 2px solid $fixed-elements;
         border-radius: 0;
         color: $light;
         min-height: 35px;
         padding-bottom: 0;
+        border-color: $fixed-elements;
+        border-width: 2px;
+    }
+
+    .vs__open-indicator {
+        margin-top: 0 !important;
     }
 
     .vs__dropdown-menu{

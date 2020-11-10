@@ -7,7 +7,7 @@
                 <i class="material-icons">add</i>
             </button>
         </div>
-        <ul class="skills-list p-0" v-if="loading">
+        <ul class="skills-list p-0" v-if="skills == null">
             <li>
                 <Skeleton :count="4" :heigth="25" />
             </li>
@@ -56,8 +56,7 @@ export default {
             drag: false,
             loading: false,
             showMore: false,
-            list: [],
-            skills: [],
+            skills: null,
         };
     },
     computed: {
@@ -91,6 +90,8 @@ export default {
     created() {
         if (this.page.user.skills != null && this.page.user.skills != undefined) {
             this.skills = this.page.user.skills;
+        } else {
+            this.skills = [];
         }
     },
     components: {

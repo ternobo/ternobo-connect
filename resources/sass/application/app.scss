@@ -659,6 +659,7 @@ pre {
     opacity: 1;
 }
 
+
 .about-me .card-body {
     padding-right: 40px;
     padding-left: 40px;
@@ -694,11 +695,24 @@ pre {
 .hand-hover{
     cursor: -webkit-grab;
     cursor: grab;
+    transition: 0.3s all;
+}
+.hand-hover:hover{
+    color: $dark;
 }
 .hand-hover:active{
     cursor: -webkit-grabbing;
     cursor: grabbing;
 }
+
+.vs__open-indicator {
+    max-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6px;
+}
+
 .slugItem{
     display: flex;
     align-items: center;

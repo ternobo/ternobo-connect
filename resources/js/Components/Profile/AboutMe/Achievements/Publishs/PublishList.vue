@@ -8,12 +8,12 @@
             </div>
             <i class="material-icons open-achievements" v-if="!edit" :class="{'active': open}">arrow_drop_down</i>
         </div>
-        <ul class="publishs-list p-0" v-if="loading">
+        <ul class="achievement-list p-0" v-if="loading">
             <li>
                 <Skeleton :count="4" :heigth="25" />
             </li>
         </ul>
-        <draggable group="publishs" ref="draggable" tag="ul" v-bind="dragOptions" v-model="publishs" class="publishs-list p-0" :disabled="!edit" handle=".hand-hover">
+        <draggable group="publishs" ref="draggable" tag="ul" v-bind="dragOptions" v-model="publishs" class="achievement-list p-0" :disabled="!edit" handle=".hand-hover">
             <PublishItem @deleted="onDelete(index)" v-model="publishs[index]" :edit="edit" v-for="(publish, index) in publishs" :page="page" :key="'publish_' + publish.id" />
         </draggable>
     </div>

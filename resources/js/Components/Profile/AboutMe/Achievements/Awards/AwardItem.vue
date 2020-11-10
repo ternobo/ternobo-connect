@@ -22,11 +22,11 @@
     </div>
     <div class="editItem" v-else>
         <div class="d-flex flex-column align-items-center ml-3">
-            <div class="actions" v-if="edit">
+            <div class="actions mx-0 mb-3" v-if="edit">
                 <i class="material-icons hand-hover">unfold_more</i>
                 <i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
             </div>
-            <button class="mt-3 btn font-12 follow-btn" @click="showMore = !showMore" v-if="edit">
+            <button class="mt-3 btn font-12 ml-1 follow-btn" @click="showMore = !showMore" v-if="edit">
                 {{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
             </button>
         </div>

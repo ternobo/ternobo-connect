@@ -6,8 +6,8 @@
     </div>
     <div class="detail">
         <div class="d-flex align-items-center flex-column ml-3">
-            <lazy-image src="/images/school-profile.jpeg" class="profile-md mb-2" img-class="profile-md" />
-            <button class="btn font-12 follow-btn" @click="showMore = !showMore" v-if="edit">
+            <lazy-image src="/images/school-profile.png" class="profile-md mb-2" img-class="profile-md" />
+            <button class="btn font-12 ml-1 follow-btn" @click="showMore = !showMore" v-if="edit">
                 {{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
             </button>
         </div>

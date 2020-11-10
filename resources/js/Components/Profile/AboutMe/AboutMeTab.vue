@@ -64,12 +64,15 @@ export default {
         },
     },
     mounted() {
+        this.$refs.experiences.loading = true;
+        this.$refs.educations.loading = true;
         if (this.page.about_data != null) {
             this.$refs.experiences.experiences = this.page.about_data.experiences;
             this.$refs.educations.educations = this.page.about_data.educations;
             this.$refs.achievements.achievements = this.page.about_data.achievements;
         }
-
+        this.$refs.experiences.loading = false;
+        this.$refs.educations.loading = false;
     },
     methods: {
         canShow() {
