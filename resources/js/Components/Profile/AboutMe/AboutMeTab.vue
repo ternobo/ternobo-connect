@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="about-me">
     <div v-if="canShow()">
         <Biography v-if="checkUser(this.page.user_id) || (about != null && about.length > 0)" v-model="about" :edit="edit"></Biography>
         <ExperienceList v-if="showExperiences" ref="experiences" class="mt-3" :edit="edit"></ExperienceList>

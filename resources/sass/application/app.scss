@@ -632,12 +632,17 @@ pre {
 }
 
 .autocomplete-input[aria-expanded=true] {
-    border-radius: 25px 25px 0 0 !important;
-    ;
+    border-radius: 25px !important;
+    z-index:2;
 }
 
 .autocomplete-result-list {
     box-shadow: 0 1rem 40px rgba(0, 0, 0, 0.02) !important;
+    margin-top: -26px !important;
+}
+
+.autocomplete-result:first-child {
+    padding-top: 20px;
 }
 
 @import "./components/notifications.scss";
@@ -653,6 +658,17 @@ pre {
     background-color: #EEE !important;
     opacity: 1;
 }
+
+.about-me .card-body {
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
+.about-me .card-body .follow-btn {
+    margin-left: -20px;
+}
+
+@import "./components/datepicker.scss";
 
 /* Import the Quill styles you want */
 @import '~quill/dist/quill.core.css';

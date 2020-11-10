@@ -1,6 +1,6 @@
 <template>
 <div class="card">
-    <div class="py-3 card-body" v-if="mounted">
+    <div class="card-body" v-if="mounted">
         <div class="d-flex mb-2 aling-items-center justify-content-between">
             <h2 class="font-24">دستاورد‌ها</h2>
             <DropdownBtn v-if="edit" :items="[

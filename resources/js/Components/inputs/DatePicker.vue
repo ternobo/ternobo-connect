@@ -1,20 +1,20 @@
 <template>
 <div class="d-flex">
-    <v-select class="dropdown-list ml-2 w-50" v-if="!hideYear" :placeholder="'سال'" dir="rtl" v-model="year" :options="years">
+    <v-select class="datepicker-list ml-2 w-50" v-if="!hideYear" :placeholder="'سال'" dir="rtl" v-model="year" :options="years">
         <template #open-indicator="{ attributes }">
             <span v-bind="attributes">
                 <i class="material-icons">keyboard_arrow_down</i>
             </span>
         </template>
     </v-select>
-    <v-select class="dropdown-list w-50" v-if="!hideMonth" :placeholder="'ماه'" dir="rtl" v-model="month" :options="monthsList">
+    <v-select class="datepicker-list w-50" v-if="!hideMonth" :placeholder="'ماه'" dir="rtl" v-model="month" :options="monthsList">
         <template #open-indicator="{ attributes }">
             <span v-bind="attributes">
                 <i class="material-icons">keyboard_arrow_down</i>
             </span>
         </template>
     </v-select>
-    <v-select class="dropdown-list mr-2 w-50" v-if="showDays" :placeholder="'روز'" dir="rtl" v-model="day" :options="daysList">
+    <v-select class="datepicker-list mr-2 w-50" v-if="showDays" :placeholder="'روز'" dir="rtl" v-model="day" :options="daysList">
         <template #open-indicator="{ attributes }">
             <span v-bind="attributes">
                 <i class="material-icons">keyboard_arrow_down</i>

@@ -20,9 +20,14 @@
         flex-direction: column;
         color: $icons;
         background: $body-bg;
-        height: max-content;
         padding: 2px;
         margin-left: 24px;
+        padding: 8px;
+        width: 44px;
+        height: 78px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .detail {

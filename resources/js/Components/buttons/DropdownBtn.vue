@@ -1,6 +1,6 @@
 <template>
 <div class="bg-light-blue dropndown-btn" :class="{'active':open}">
-    <button class="btn follow-btn rounded-pill px-3 py-1" @click="open = !open">
+    <button class="btn follow-btn rounded-pill px-3 py-1" style="min-width: 48px" @click="open = !open">
         <i class="material-icons">add</i>
     </button>
     <transition name="slide">

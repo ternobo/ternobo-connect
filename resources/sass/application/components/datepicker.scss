@@ -1,0 +1,56 @@
+.datepicker-list {
+    .vs__search::placeholder,
+    .vs__dropdown-toggle,
+    .vs__dropdown-menu {
+        background: transparent;
+        border: 2px solid $fixed-elements;
+        border-radius: 0;
+        color: $light;
+        min-height: 35px;
+        padding-bottom: 0;
+    }
+
+    .vs__dropdown-menu{
+        max-height: 200px;
+        min-width: 30px;
+        scrollbar-color: $dark $light;
+        scrollbar-width: thin;
+        scroll-behavior: smooth;
+        padding-top: 0;
+
+        &::-webkit-scrollbar {
+            width: 0.3em;
+            background: #DEDEDE;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $dark;
+        }
+    }
+
+    .vs__actions{
+        min-height: 35px;
+        background: $fixed-elements;
+        max-width: 26px;
+    }
+
+    .vs__search{
+        position: absolute;
+        width: 100%;
+        height: 30px;
+    }
+    .vs__clear,
+    .vs__open-indicator {
+        fill: $light;
+    }
+
+    .vs__dropdown-option {
+        background: $fixed-elements;
+        width: 100%;
+        color: $light;
+        &.vs__dropdown-option--highlight{
+            background: $border-color;
+            color: $dark;
+        }
+    }
+}

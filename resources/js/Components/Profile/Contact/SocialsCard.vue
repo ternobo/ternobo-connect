@@ -9,7 +9,7 @@
         </div>
 
         <ul class="socials-list p-0" v-if="loading">
-            <li>
+            <li class="w-100">
                 <Skeleton :count="4" :heigth="25" />
             </li>
         </ul>
