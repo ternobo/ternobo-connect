@@ -42,7 +42,7 @@
                 </Checkbox>
             </div>
             <div class="col-md-6 py-4" v-if="showMore">
-                <v-select :searchable="false" :placeholder="'نوع اشتغال'" class="dropdown-list w-75" dir="rtl" v-model="val.jobType" :options="[
+                <v-select :searchable="false" :placeholder="'نوع اشتغال'" class="datepicker-list w-75" dir="rtl" v-model="val.jobType" :options="[
                     { label: 'تمام وقت', code: 'Full-Time' },
                     { label: 'پاره وقت', code: 'Part-Time' },
                     { label: 'کار آموزی', code: 'Internship' },
@@ -68,7 +68,7 @@
                         <div class="progress-bar" role="progressbar" :style="{ width : progress }" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
-                <textarea-autosize class="form-control" v-model="val.description"></textarea-autosize>
+                <textarea-autosize maxlength="1000" class="form-control" v-model="val.description"></textarea-autosize>
             </div>
         </div>
     </div>
@@ -92,8 +92,8 @@ export default {
             handler(newValue) {
                 this.$emit("input", newValue);
                 if (newValue.description != null) {
-                    this.progress = (((newValue.description.length / 2500)) * 100) + "%";
-                    this.leftCharacter = 2500 - newValue.description.length;
+                    this.progress = (((newValue.description.length / 1000)) * 100) + "%";
+                    this.leftCharacter = 1000 - newValue.description.length;
                 }
             },
             deep: true
@@ -159,7 +159,7 @@ export default {
             },
 
             showMore: false,
-            leftCharacter: 2500,
+            leftCharacter: 1000,
             progress: 0
         };
     },

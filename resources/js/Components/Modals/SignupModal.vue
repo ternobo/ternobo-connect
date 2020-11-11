@@ -36,7 +36,7 @@
                 <input class="form-control mb-3" v-model="first_name" placeholder="نام" />
                 <input class="form-control mb-3" v-model="last_name" placeholder="نام خانوادگی" />
                 <input class="form-control mb-3" v-model="username" placeholder="نام کاربری" />
-                <v-select class="dropdown-list" :placeholder="'جنسیت'" dir="rtl" v-model="gender" :options="[{label: 'زن', code: '1'},{label: 'مرد', code: '2'}]"></v-select>
+                <v-select class="datepicker-list" :placeholder="'جنسیت'" dir="rtl" v-model="gender" :options="[{label: 'زن', code: '1'},{label: 'مرد', code: '2'}]"></v-select>
             </div>
             <LoadingButton :loading="loading" class="btn btn-dark mx-auto mt-4 w-50" @click.native="savePersonal">بعدی</LoadingButton>
         </div>

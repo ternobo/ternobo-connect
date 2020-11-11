@@ -15,12 +15,12 @@
         </span>
     </div>
     <div class="editItem" v-else>
-        <div class="actions mx-0 mb-3" v-if="edit">
+        <div class="actions mx-0" v-if="edit">
             <i class="material-icons hand-hover">unfold_more</i>
             <i class="material-icons-outlined hover-danger clickable" @click="doDelete">delete</i>
         </div>
         <MaterialTextField v-model="languageVal.name" class="material--sm w-100" input-class="w-100 py-1"></MaterialTextField>
-        <v-select :searchable="false" class="dropdown-list w-50" :placeholder="'تسلط'" dir="rtl" v-model="language.level" :options="[
+        <v-select :searchable="false" class="datepicker-list w-50" :placeholder="'تسلط'" dir="rtl" v-model="language.level" :options="[
             {
                 label: 'مبتدی',
                 level: 1

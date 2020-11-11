@@ -314,7 +314,9 @@ class PageController extends Controller
         } else {
             $page = Auth::user()->getPage();
             $page->name = $request->firstname . " " . $request->lastname;
-
+            if($request->filled("location")){
+                $page->location = $request->location;
+            }
             $user = Auth::user();
             $user->name = $request->firstname . " " . $request->lastname;
             $user->first_name = $request->firstname;

@@ -280,6 +280,9 @@ img {
     color: $grey !important;
 }
 
+.text-superlight{
+ color: $icons;
+}
 
 .text-grey {
     color: $grey;
@@ -482,6 +485,7 @@ img {
 
 .hover-danger:hover {
     color: #ff0000 !important;
+    cursor: pointer;
 }
 
 .hover-dark {
@@ -895,3 +899,5 @@ a:focus{
 @import "./components/categories-card.scss";
 
 @import "./components/tag-input.scss";
+
+@import "./components/settings.scss";

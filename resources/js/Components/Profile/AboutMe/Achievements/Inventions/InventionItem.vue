@@ -21,11 +21,11 @@
     </div>
     <div class="editItem" v-else>
         <div class="d-flex flex-column align-items-center ml-3" v-if="edit">
-            <div class="actions mx-0 mb-3">
+            <div class="actions mx-0">
                 <i class="material-icons hand-hover">unfold_more</i>
                 <i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
             </div>
-            <button class="mt-3 btn font-12 mk-1 follow-btn" @click="showMore = !showMore">
+            <button class="mt-5 btn font-12 mk-1 follow-btn" @click="showMore = !showMore">
                 {{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
             </button>
         </div>
@@ -47,7 +47,7 @@
                 <MaterialTextField v-model="val.link" class="d-flex align-items-center material--sm p-0" placeholder="لینک ثبت اختراع"></MaterialTextField>
             </div>
             <div class="col-md-6 py-4">
-                <v-select :searchable="false" :placeholder="'وضعیت'" class="dropdown-list w-75" dir="rtl" v-model="val.status" :options="[
+                <v-select :searchable="false" :placeholder="'وضعیت'" class="datepicker-list w-75" dir="rtl" v-model="val.status" :options="[
                     {
                         label: 'حق ثبت اختراع صادر شده',
                         id: 1
@@ -76,7 +76,7 @@
                         <div class="progress-bar" role="progressbar" :style="{ width : progress }" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
-                <textarea-autosize class="form-control" v-model="val.description"></textarea-autosize>
+                <textarea-autosize maxlength="1000" class="form-control" v-model="val.description"></textarea-autosize>
             </div>
         </div>
         <!--
@@ -105,8 +105,8 @@ export default {
             handler(newValue) {
                 this.$emit("input", newValue);
                 if (newValue.description != null) {
-                    this.progress = (((newValue.description.length / 2500)) * 100) + "%";
-                    this.leftCharacter = 2500 - newValue.description.length;
+                    this.progress = (((newValue.description.length / 1000)) * 100) + "%";
+                    this.leftCharacter = 1000 - newValue.description.length;
                 }
             },
             deep: true
@@ -169,7 +169,7 @@ export default {
             },
 
             showMore: false,
-            leftCharacter: 2500,
+            leftCharacter: 1000,
             progress: 0
         };
     },

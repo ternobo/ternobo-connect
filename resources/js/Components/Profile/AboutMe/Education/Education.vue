@@ -61,7 +61,7 @@
                         <div class="progress-bar" role="progressbar" :style="{ width : progressActivity }" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
-                <textarea-autosize class="form-control" v-model="val.activities"></textarea-autosize>
+                <textarea-autosize maxlength="1000" class="form-control" v-model="val.activities"></textarea-autosize>
             </div>
             <div class="col-md-12 py-4" v-if="showMore">
                 <strong>توضیحات</strong>
@@ -71,7 +71,7 @@
                         <div class="progress-bar" role="progressbar" :style="{ width : progress }" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
-                <textarea-autosize class="form-control" v-model="val.description"></textarea-autosize>
+                <textarea-autosize maxlength="1000" class="form-control" v-model="val.description"></textarea-autosize>
             </div>
         </div>
     </div>
@@ -96,13 +96,13 @@ export default {
                 this.$emit("input", newValue);
 
                 if (newValue.description != null) {
-                    this.progress = (((newValue.description.length / 2500)) * 100) + "%";
-                    this.leftCharacter = 2500 - newValue.description.length;
+                    this.progress = (((newValue.description.length / 1000)) * 100) + "%";
+                    this.leftCharacter = 1000 - newValue.description.length;
                 }
 
                 if (newValue.activities != null) {
-                    this.progressActivity = (((newValue.activities.length / 2500)) * 100) + "%";
-                    this.leftCharacterActivities = 2500 - newValue.activities.length;
+                    this.progressActivity = (((newValue.activities.length / 500)) * 100) + "%";
+                    this.leftCharacterActivities = 500 - newValue.activities.length;
                 }
             },
             deep: true
@@ -168,8 +168,8 @@ export default {
             },
 
             showMore: false,
-            leftCharacter: 2500,
-            leftCharacterActivities: 2500,
+            leftCharacter: 1000,
+            leftCharacterActivities: 500,
             progressActivity: 0,
             progress: 0
         };

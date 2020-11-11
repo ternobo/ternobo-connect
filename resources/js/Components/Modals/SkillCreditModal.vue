@@ -10,7 +10,7 @@
             ]" v-model="level"></RadioButton>
     <div class="w-100">
         <h4>چرا این امتیاز را به {{ user.first_name }} می‌دهید؟</h4>
-        <v-select ref="reasonSelect" class="dropdown-list w-100" :placeholder="'انتخاب دلیل'" label="label" dir="rtl" v-model="reason" :options="[
+        <v-select ref="reasonSelect" class="datepicker-list w-100" :placeholder="'انتخاب دلیل'" label="label" dir="rtl" v-model="reason" :options="[
             {
                 label: 'با هم روی یک پروژه کار کرده‌ایم',
                 value:'با هم روی یک پروژه کار کرده‌ایم'

@@ -15,7 +15,7 @@
         <draggable group="skills" ref="draggable" tag="ul" v-bind="dragOptions" v-model="skills" class="skills-list mb-2 p-0" :disabled="!edit" handle=".hand-hover">
             <Skill @deleted="onDelete(index)" v-model="skills[index]" :user="page.user" :edit="edit" v-for="(skill, index) in skillsToShow" :skill="skill" :key="'skill_' + skill.id" />
         </draggable>
-        <span class="text-action pb-2 clickable" @click="showMore = true" v-if="!showMore && skills != null && skills.length > 3">نمایش تمام مهارت‌ها</span>
+        <span class="text-action pb-2 clickable" @click="showMore = true" v-if="!showMore && skills != null && skills.length > 3 && !edit">نمایش تمام مهارت‌ها</span>
     </div>
 </div>
 </template>
@@ -61,7 +61,7 @@ export default {
     },
     computed: {
         skillsToShow() {
-            if (this.showMore) {
+            if (this.showMore || this.edit) {
                 return this.skills;
             }
             return this.skills.slice(0, 3);

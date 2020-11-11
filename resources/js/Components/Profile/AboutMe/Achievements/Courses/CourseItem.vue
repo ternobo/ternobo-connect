@@ -14,11 +14,11 @@
     </div>
     <div class="editItem" v-else>
         <div class="d-flex flex-column align-items-center ml-3">
-            <div class="actions mx-0 mb-3" v-if="edit">
+            <div class="actions mx-0" v-if="edit">
                 <i class="material-icons hand-hover">unfold_more</i>
                 <i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
             </div>
-            <button class="mt-3 btn font-12 ml-1 follow-btn" @click="showMore = !showMore" v-if="edit">
+            <button class="mt-5 btn font-12 ml-1 follow-btn" @click="showMore = !showMore" v-if="edit">
                 {{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
             </button>
         </div>
@@ -39,7 +39,7 @@
                 <MaterialTextField v-model="val.code" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="دوره"></MaterialTextField>
             </div>
             <div class="col-md-6 py-4" v-if="showMore">
-                <v-select :placeholder="'مرتبط با'" class="dropdown-list w-75" dir="rtl" v-model="val.skill" label="name" :options="page.skills">
+                <v-select :placeholder="'مرتبط با'" class="datepicker-list w-75" dir="rtl" v-model="val.skill" label="name" :options="page.skills">
                     <template #open-indicator="{ attributes }">
                         <span v-bind="attributes">
                             <i class="material-icons">keyboard_arrow_down</i>
