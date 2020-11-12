@@ -11,6 +11,13 @@
         border-width: 2px;
     }
 
+    .vs__dropdown-menu {
+        background: $fixed-elements;
+    }
+    .vs__no-options {
+        padding-top: 7px;
+    }
+
     .vs__open-indicator {
         margin-top: 0 !important;
     }

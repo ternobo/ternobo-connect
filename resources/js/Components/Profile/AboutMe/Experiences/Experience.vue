@@ -31,11 +31,11 @@
             </div>
             <div class="col-md-6 py-4">
                 <strong>تاریخ شروع <span class="text-action">*</span></strong>
-                <DatePicker v-model="val.startDate" :max="{year: year, month: month}"></DatePicker>
+                <DatePicker v-model="val.startDate" :max="{year: year}"></DatePicker>
             </div>
             <div class="col-md-6 py-4">
                 <strong>تاریخ پایان <span class="text-action">*</span></strong>
-                <DatePicker v-if="typeof(val.endDate) !== 'boolean' || (val.endDate==false)" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{year: year, month: month}"></DatePicker>
+                <DatePicker v-if="typeof(val.endDate) !== 'boolean' || (val.endDate==false)" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{year: year}"></DatePicker>
                 <input v-else type="text" readonly value="تا کنون" class="form-control w-75 bg-white" />
                 <Checkbox v-model="val.endDate" :checked="typeof(val.endDate) == 'boolean'">
                     همچنان در این سمت فعالیت می‌کنم
@@ -48,13 +48,13 @@
                     { label: 'کار آموزی', code: 'Internship' },
                     { label: 'فریلنسر', code: 'Freelancer' },
                     { label: 'فصلی', code: 'Seasonal' },
-                    { label: 'قراردادی', code: 'Contractual' },
-                ]">
+                    { label: 'قراردادی', code: 'Contractual' }]">
                     <template #open-indicator="{ attributes }">
                         <span v-bind="attributes">
                             <i class="material-icons">keyboard_arrow_down</i>
                         </span>
                     </template>
+                    <template #no-options>موردی یافت نشد</template>
                 </v-select>
             </div>
             <div class="col-md-6 py-4" v-if="showMore">
@@ -139,16 +139,14 @@ export default {
         now() {
             return new PersianDate(new Date()).toLocale("en").format("L");
         },
-        month() {
-            return new PersianDate().month();
-        },
         year() {
-            return new PersianDate().year();
+            return new PersianDate().year() + 5;
         }
     },
     data() {
         return {
             val: {
+                id: 'education_' + Math.round((new Date()).getTime()),
                 company: "",
                 title: "",
                 location: "",

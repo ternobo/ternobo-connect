@@ -6,6 +6,7 @@
                 <i class="material-icons">keyboard_arrow_down</i>
             </span>
         </template>
+        <template #no-options>موردی یافت نشد</template>
     </v-select>
     <v-select class="datepicker-list w-50" v-if="!hideMonth" :placeholder="'ماه'" dir="rtl" v-model="month" :options="monthsList">
         <template #open-indicator="{ attributes }">
@@ -13,6 +14,8 @@
                 <i class="material-icons">keyboard_arrow_down</i>
             </span>
         </template>
+        <template #no-options>موردی یافت نشد</template>
+
     </v-select>
     <v-select class="datepicker-list mr-2 w-50" v-if="showDays" :placeholder="'روز'" dir="rtl" v-model="day" :options="daysList">
         <template #open-indicator="{ attributes }">
@@ -20,6 +23,7 @@
                 <i class="material-icons">keyboard_arrow_down</i>
             </span>
         </template>
+        <template #no-options>موردی یافت نشد</template>
     </v-select>
 </div>
 </template>
@@ -94,17 +98,7 @@ export default {
             return this.yearsFrom(this.minYear);
         },
         monthsList() {
-            if (this.year !== null) {
-                if (
-                    this.max != undefined &&
-                    this.year == this.max.year &&
-                    this.max.month
-                ) {
-                    return this.months(this.max.month);
-                }
-                return this.months();
-            }
-            return [];
+            return this.months();
         },
     },
     watch: {

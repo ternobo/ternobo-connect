@@ -6,14 +6,16 @@ use Illuminate\Contracts\Validation\Rule;
 
 class DateObject implements Rule
 {
+
+    private $msg = '';
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($msg = '')
     {
-        //
+        $this->msg = $msg;
     }
 
     /**
@@ -43,6 +45,6 @@ class DateObject implements Rule
      */
     public function message()
     {
-        return 'تاریخ :attribute نامعتبر است.';
+        return $this->msg;
     }
 }

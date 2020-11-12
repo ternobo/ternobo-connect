@@ -31,17 +31,15 @@ class ProfileController extends Controller
             $msgs = [
                 "company.required" => "نام شرکت اجباری است",
                 "title.required" => 'عنوان شرکت اجباری است.',
-                "startDate" => "تاریخ شروع نامعتبر است",
-                "endDate" => "تاریخ پایان نامعتبر است",
-
+                "startDate.required" => "تاریخ شروع اجباری است",
             ];
             $experiences = $request->experiences;
             foreach ($experiences as $experience) {
                 $validator = Validator::make($experience, [
                     'company' => "required|max:50",
                     'title' => "required|max:60",
-                    "startDate" => ["required", new DateObject],
-                    "endDate" => [new DateObject],
+                    "startDate" => ["required", new DateObject('تاریخ شروع تجربه نامعتبر است')],
+                    "endDate" => [new DateObject('تاریخ شروع تجربه نامعتبر است')],
                 ], $msgs);
                 if ($validator->fails()) {
                     return response()->json(['result' => false, "type" => "experience", "errors" => $validator->errors()]);
@@ -73,7 +71,6 @@ class ProfileController extends Controller
                 "major.required" => "رشته تحصیلی اجباری است",
                 "degree.required" => 'مدرک تحصیلی اجباری است',
                 "startDate.required" => "تاریخ شروع اجباری است",
-                "endDate" => "تاریخ پایان نامعتبر است",
             ];
             $educations = $request->educations;
             foreach ($educations as $education) {
@@ -81,8 +78,8 @@ class ProfileController extends Controller
                     'school' => "required|max:50",
                     'major' => "required|max:60",
                     'degree' => "required|max:60",
-                    "startDate" => ["required", new DateObject],
-                    "endDate" => [new DateObject],
+                    "startDate" => ["required", new DateObject('تاریخ پایان تحصیلات نامعتبر است')],
+                    "endDate" => [new DateObject('تاریخ پایان تحصیلات نامعتبر است')],
                 ], $msgs);
                 if ($validator->fails()) {
                     return response()->json(['result' => false, "type" => "education", "errors" => $validator->errors()]);
@@ -97,13 +94,16 @@ class ProfileController extends Controller
             $achievements = (array) $request->achievements;
 
             $messages = [
-                'name.required' => 'عنوان، نام اجباری است',
-                'level' => 'میزان تسلط اجباری است',
-                'startDate' => 'تاریخ شروع اجباری است.',
-                'date' => 'تاریخ اجباری است',
-                'organization' => 'اداره ثبت اختراع اجباری است.',
-                'score' => 'نمره آزمون اجباری است',
+                'name.required' => 'نام، {{ type }} اجباری است',
+                'level.required' => 'میزان تسلط به زبان اجباری است',
+                'startDate.required' => 'تاریخ شروع {{ type }} اجباری است.',
+                'endDate.required' => 'تاریخ پایان {{ type }} اجباری است',
+                'date.required' => 'تاریخ {{ type }} اجباری است',
+                'organization.required' => 'اداره ثبت اختراع اجباری است.',
+                'score.required' => 'نمره آزمون اجباری است',
             ];
+
+            $errors = [];
 
             // dd($achievements);
             $validatorRules = [
@@ -116,12 +116,12 @@ class ProfileController extends Controller
                 ],
                 'projects' => [
                     'name' => "required|max:50",
-                    "startDate" => ["required", new DateObject],
-                    "endDate" => [new DateObject],
+                    "startDate" => ["required", new DateObject('تاریخ پایان {{ type }} نامعتبر است')],
+                    "endDate" => ['required',new DateObject('تاریخ پایان {{ type }} نامعتبر است')],
                 ],
                 'publishs' => [
                     'name' => "required|max:50",
-                    "date" => ["required", new DateObject],
+                    "date" => ["required", new DateObject('تاریخ پایان {{ type }} نامعتبر است')],
                     "publisher" => "required|max:50",
                 ],
                 'inventions' => [
@@ -135,7 +135,7 @@ class ProfileController extends Controller
                 'tests' => [
                     'name' => "required|max:50",
                     "score" => "required|numeric",
-                    "date" => ["required", new DateObject],
+                    "date" => ["required", new DateObject('تاریخ پایان {{ type }} نامعتبر است')],
                 ],
             ];
 
@@ -148,7 +148,6 @@ class ProfileController extends Controller
                 }
             }
         }
-
         $data = [
             'experiences' =>$experiences,
             'educations'=> $educations,
@@ -173,25 +172,25 @@ class ProfileController extends Controller
     {
         switch ($type) {
             case 'langs':
-                return 'زبان‌ها';
+                return 'زبان‌';
                 break;
             case 'awards':
-                return 'جوایز';
+                return 'جایزه';
                 break;
             case 'projects':
-                return 'پروژه‌ها';
+                return 'پروژه';
                 break;
             case 'publishs':
-                return 'انتشارات';
+                return 'انتشار';
                 break;
             case 'inventions':
-                return 'اختراعات';
+                return 'اختراع';
                 break;
             case 'courses':
-                return 'دوره‌ها';
+                return 'دوره';
                 break;
             case 'tests':
-                return 'آزمون‌ها';
+                return 'آزمون';
                 break;
         }
     }

@@ -22,6 +22,7 @@
                         </span>
                     </div>
                 </template>
+                <template #no-options>موردی یافت نشد</template>
             </v-select>
             <i class="material-icons-outlined text-muted hover-danger pr-2 clickable" @click="doDelete">delete</i>
         </div>

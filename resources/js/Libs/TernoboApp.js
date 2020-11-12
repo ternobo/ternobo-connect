@@ -137,10 +137,14 @@ TernoboApp.install = function (Vue, options) {
                 }
                 return false;
             },
-            handleError(errors) {
+            handleError(errors,type) {
                 const $this = this;
                 Object.keys(errors).forEach(function (item) {
-                    $this.$bvToast.toast(errors[item][0], {
+                    let msg = errors[item][0];
+                    if(type != null && type != undefined){
+                        msg = msg.replaceAll('{{ type }}',type);
+                    }
+                    $this.$bvToast.toast(msg, {
                         noCloseButton: true,
                         toaster: "b-toaster-bottom-left",
                         bodyClass: ["bg-dark", "text-right", "text-white"],

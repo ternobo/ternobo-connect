@@ -7,6 +7,13 @@
     border-radius: 0;
     padding: 0;
 
+    .vs__dropdown-menu {
+        background: $fixed-elements;
+    }
+    .vs__no-options {
+        padding-top: 7px;
+    }
+
     &:not(.show) {
         padding: 0px;
         border-width: 0px;

@@ -19,7 +19,7 @@
             <i class="material-icons hand-hover">unfold_more</i>
             <i class="material-icons-outlined hover-danger clickable" @click="doDelete">delete</i>
         </div>
-        <MaterialTextField v-model="languageVal.name" class="material--sm w-100" input-class="w-100 py-1"></MaterialTextField>
+        <MaterialTextField placeholder="زبان" :required="true" v-model="languageVal.name" class="material--sm w-100" input-class="w-100 py-1"></MaterialTextField>
         <v-select :searchable="false" class="datepicker-list w-50" :placeholder="'تسلط'" dir="rtl" v-model="language.level" :options="[
             {
                 label: 'مبتدی',
@@ -43,6 +43,7 @@
                     <i class="material-icons">keyboard_arrow_down</i>
                 </span>
             </template>
+            <template #no-options>موردی یافت نشد</template>
         </v-select>
     </div>
 </li>

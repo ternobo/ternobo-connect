@@ -26,16 +26,16 @@
                         <span>نام کاربری</span>
                     </div>
 
-                    <div class="action">
+                    <div class="d-flex align-items-center">
                         <div class="content">
-                            <section class="slugItem bg-white">
+                            <section class="slugItem">
                                 <div class="ml-2 d-flex align-items-center" style="direction: ltr;">
                                     <span class="mr-1">{{$APP_URL + '/' + $page.user.username}}</span>
                                 </div>
                                 <section class="icon"><i class="font-18 material-icons-outlined">copy</i></section>
                             </section>
                         </div>
-                        <i class="btn material-icons-outlined">edit</i>
+                        <i class="btn setting-btn material-icons-outlined mr-3">edit</i>
                     </div>
                 </div>
                 <div class="setting-action">

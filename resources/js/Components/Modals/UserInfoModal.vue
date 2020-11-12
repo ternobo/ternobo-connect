@@ -14,7 +14,9 @@
             </small>
         </div>
         <div class="col-md-4 mt-3">
-            <v-select class="datepicker-list mt-1" :searchable="false" :placeholder="'جنسیت'" dir="rtl" v-model="gender" :options="[{label: 'زن', code: '1'},{label: 'مرد', code: '2'}]"></v-select>
+            <v-select class="datepicker-list mt-1" :searchable="false" :placeholder="'جنسیت'" dir="rtl" v-model="gender" :options="[{label: 'زن', code: '1'},{label: 'مرد', code: '2'}]">
+                <template #no-options>موردی یافت نشد</template>
+            </v-select>
         </div>
         <div class="col-md-4 mt-3">
             <MaterialTextField class="material--sm w-100" input-class="w-100" :value="location" v-model="location" placeholder="موقعیت"></MaterialTextField>

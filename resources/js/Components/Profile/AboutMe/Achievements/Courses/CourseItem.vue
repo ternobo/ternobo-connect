@@ -6,6 +6,9 @@
                 <span><strong>{{ val.name }}</strong></span>
                 <span v-if="val.code != null && val.code.length > 0" class="text-muted">{{ val.code }}</span>
             </div>
+            <p class="bg-body py-2 px-3" v-if="val.description != null && val.description.length > 0">
+                {{ val.description }}
+            </p>
 
         </div>
         <div class="achievement-name" v-else>
@@ -18,7 +21,7 @@
                 <i class="material-icons hand-hover">unfold_more</i>
                 <i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
             </div>
-            <button class="mt-5 btn font-12 ml-1 follow-btn" @click="showMore = !showMore" v-if="edit">
+            <button class="mt-2 btn font-12 ml-1 follow-btn" @click="showMore = !showMore" v-if="edit">
                 {{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
             </button>
         </div>
@@ -36,16 +39,27 @@
              !-->
 
             <div class="col-md-6 py-4" v-if="showMore">
-                <MaterialTextField v-model="val.code" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="دوره"></MaterialTextField>
+                <MaterialTextField v-model="val.code" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="کد دوره"></MaterialTextField>
             </div>
             <div class="col-md-6 py-4" v-if="showMore">
-                <v-select :placeholder="'مرتبط با'" class="datepicker-list w-75" dir="rtl" v-model="val.skill" label="name" :options="page.skills">
+                <v-select :placeholder="'مرتبط با'" class="datepicker-list w-75" dir="rtl" v-model="val.skill" label="name" :options="page.user.skills">
                     <template #open-indicator="{ attributes }">
                         <span v-bind="attributes">
                             <i class="material-icons">keyboard_arrow_down</i>
                         </span>
                     </template>
+                    <template #no-options>موردی یافت نشد</template>
                 </v-select>
+            </div>
+            <div class="col-md-12 py-4" v-if="showMore">
+                <strong>توضیحات</strong>
+                <div class="character-counter">
+                    <span class="counter tex-dark">{{ leftCharacter }}</span>
+                    <div class="progress ml-1 mb-0" style="width: 100px;height: 5px;">
+                        <div class="progress-bar" role="progressbar" :style="{ width : progress }" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <textarea-autosize maxlength="1000" class="form-control" v-model="val.description"></textarea-autosize>
             </div>
             <!--
                 End More Content
@@ -76,9 +90,13 @@ export default {
         val: {
             handler(newValue) {
                 this.$emit("input", newValue);
+                if (newValue.description != null) {
+                    this.progress = (((newValue.description.length / 1000)) * 100) + "%";
+                    this.leftCharacter = 1000 - newValue.description.length;
+                }
             },
-            deep: true,
-        },
+            deep: true
+        }
     },
     props: {
         page: {
@@ -105,10 +123,11 @@ export default {
                 name: "",
                 skill: null,
                 code: null,
+                description: null
             },
 
             showMore: false,
-            leftCharacter: 2500,
+            leftCharacter: 1000,
             progress: 0,
         };
     },

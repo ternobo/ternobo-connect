@@ -37,6 +37,7 @@
                     <i class="material-icons">keyboard_arrow_down</i>
                 </span>
             </template>
+            <template #no-options>موردی یافت نشد</template>
         </v-select>
     </div>
     <div class="w-100 d-flex mt-3 justify-content-center" style="margin-bottom: -8px">

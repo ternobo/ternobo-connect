@@ -43,11 +43,11 @@
             </div>
             <div class="col-md-6 py-4">
                 <strong>تاریخ شروع <span class="text-action">*</span></strong>
-                <DatePicker :hide-month="true" v-model="val.startDate" :max="{year: year, month: month}"></DatePicker>
+                <DatePicker :hide-month="true" v-model="val.startDate" :max="{year: year}"></DatePicker>
             </div>
             <div class="col-md-6 py-4">
                 <strong>تاریخ پایان <span class="text-action">*</span></strong>
-                <DatePicker :hide-month="true" v-if="typeof(val.endDate) !== 'boolean' || (val.endDate==false)" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{year: year, month: month}"></DatePicker>
+                <DatePicker :hide-month="true" v-if="typeof(val.endDate) !== 'boolean' || (val.endDate==false)" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{year: year}"></DatePicker>
                 <input v-else type="text" readonly value="تا کنون" class="form-control w-75 bg-white" />
                 <Checkbox v-model="val.endDate">
                     درحال تحصیل هستم
@@ -61,7 +61,7 @@
                         <div class="progress-bar" role="progressbar" :style="{ width : progressActivity }" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
-                <textarea-autosize maxlength="1000" class="form-control" v-model="val.activities"></textarea-autosize>
+                <textarea-autosize maxlength="500" class="form-control" v-model="val.activities"></textarea-autosize>
             </div>
             <div class="col-md-12 py-4" v-if="showMore">
                 <strong>توضیحات</strong>
@@ -146,17 +146,14 @@ export default {
         now() {
             return new PersianDate(new Date()).toLocale("en").format("L");
         },
-        month() {
-            return new PersianDate().month();
-        },
         year() {
-            return new PersianDate().year();
+            return new PersianDate().year() + 5;
         }
     },
     data() {
         return {
             val: {
-                id: "",
+                id: 'education_' + Math.round((new Date()).getTime()),
                 school: "",
                 degree: "",
                 major: "",

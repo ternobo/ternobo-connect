@@ -2,8 +2,8 @@
 <div v-if="languages.length > 0">
     <div class="py-3">
         <div class="d-flex mb-2 align-items-center clickable justify-content-between" @click="showDetailed">
-            <div class="d-flex align-items-center">
-                <h2 class="font-18">زبان‌ها</h2>
+            <div class="d-flex align-items-center mb-3">
+                <h2 class="mb-0 font-18">زبان‌ها</h2>
                 <div class="mr-2 badge-light">{{languages.length }}</div>
             </div>
             <i class="material-icons open-achievements" v-if="!edit" :class="{'active': open}">arrow_drop_down</i>

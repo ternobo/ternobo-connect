@@ -226,7 +226,7 @@ export default {
                             if (response.data.result) {
                                 this.edit = false;
                             } else {
-                                this.handleError(response.data.errors);
+                                this.handleError(response.data.errors, response.data.type);
                             }
                             this.loadingSave = false;
                         })

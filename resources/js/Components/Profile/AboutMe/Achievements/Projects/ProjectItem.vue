@@ -22,7 +22,7 @@
                 <i class="material-icons hand-hover">unfold_more</i>
                 <i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
             </div>
-            <button class="mt-5 btn font-12 ml-1 follow-btn" @click="showMore = !showMore">
+            <button class="mt-2 btn font-12 ml-1 follow-btn" @click="showMore = !showMore">
                 {{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
             </button>
         </div>
@@ -32,27 +32,28 @@
         !-->
         <div class="row">
             <div class="col-md-12 py-4">
-                <MaterialTextField v-model="val.name" :required="true" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="نام پروژه"></MaterialTextField>
+                <MaterialTextField v-model="val.name" :required="true" input-class="w-100" class="d-flex align-items-center material--sm p-0 col-md-6" placeholder="نام پروژه"></MaterialTextField>
             </div>
             <div class="col-md-6 py-4">
                 <strong>تاریخ شروع <span class="text-action">*</span></strong>
-                <DatePicker v-model="val.startDate" :max="{year: year, month: month}"></DatePicker>
+                <DatePicker v-model="val.startDate" :max="{year: year}"></DatePicker>
             </div>
             <div class="col-md-6 py-4">
                 <strong>تاریخ پایان <span class="text-action">*</span></strong>
-                <DatePicker v-if="typeof(val.endDate) !== 'boolean' || (val.endDate==false)" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{year: year, month: month}"></DatePicker>
+                <DatePicker v-if="typeof(val.endDate) !== 'boolean' || (val.endDate==false)" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{year: year}"></DatePicker>
                 <input v-else type="text" readonly value="تا کنون" class="form-control w-75 bg-white" />
                 <Checkbox v-model="val.endDate">
                     همچنان در حال کار بر روی این پروژه هستم
                 </Checkbox>
             </div>
             <div class="col-md-6 py-4" v-if="showMore">
-                <v-select :searchable="false" :placeholder="'مرتبط با'" class="datepicker-list  w-75" dir="rtl" v-model="val.skills" label="name" :options="page.skills">
+                <v-select :searchable="false" :placeholder="'مرتبط با'" class="datepicker-list  w-75" dir="rtl" v-model="val.skill" :options="relatedTo">
                     <template #open-indicator="{ attributes }">
                         <span v-bind="attributes">
                             <i class="material-icons">keyboard_arrow_down</i>
                         </span>
                     </template>
+                    <template #no-options>موردی یافت نشد</template>
                 </v-select>
             </div>
             <div class="col-md-6 py-4" v-if="showMore">
@@ -66,7 +67,7 @@
                         <div class="progress-bar" role="progressbar" :style="{ width : progress }" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
-                <textarea-autosize class="form-control" v-model="val.description"></textarea-autosize>
+                <textarea-autosize maxlength="1000" class="form-control" v-model="val.description"></textarea-autosize>
             </div>
         </div>
         <!--
@@ -125,6 +126,15 @@ export default {
         DatePicker
     },
     computed: {
+        relatedTo() {
+            let experience = this.page.about_data.experiences;
+            let computed = [];
+            experience.forEach((item, index) => {
+                computed.push(item.title + " در " + item.company);
+            });
+            computed.push('دیگر');
+            return computed;
+        },
         time_text() {
             let startText = "";
             let endText = "تا کنون";
@@ -146,11 +156,8 @@ export default {
         now() {
             return new PersianDate(new Date()).toLocale("en").format("L");
         },
-        month() {
-            return new PersianDate().month();
-        },
         year() {
-            return new PersianDate().year();
+            return new PersianDate().year() + 5;
         }
     },
     data() {

@@ -26,7 +26,7 @@
                 <i class="material-icons hand-hover">unfold_more</i>
                 <i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
             </div>
-            <button class="mt-5 btn font-12 ml-1 follow-btn" @click="showMore = !showMore" v-if="edit">
+            <button class="mt-2 btn font-12 ml-1 follow-btn" @click="showMore = !showMore" v-if="edit">
                 {{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
             </button>
         </div>
@@ -43,12 +43,13 @@
                 More Content
              !-->
             <div class="col-md-6 py-4" v-if="showMore">
-                <v-select :placeholder="'مرتبط با'" class="datepicker-list w-75" dir="rtl" v-model="val.skill" label="name" :options="page.skills">
+                <v-select :placeholder="'مرتبط با'" class="datepicker-list w-75" dir="rtl" v-model="val.skill" label="name" :options="page.user.skills">
                     <template #open-indicator="{ attributes }">
                         <span v-bind="attributes">
                             <i class="material-icons">keyboard_arrow_down</i>
                         </span>
                     </template>
+                    <template #no-options>موردی یافت نشد</template>
                 </v-select>
             </div>
             <div class="col-md-6 py-4" v-if="showMore">
