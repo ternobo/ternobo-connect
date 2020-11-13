@@ -1,0 +1,66 @@
+.toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 50px;
+}
+
+.ternobo-toast {
+    position: relative;
+    background-color: $text-color;
+    color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 0;
+    min-width: 250px;
+    height: 60px;
+
+    .msg {
+        display: flex;
+        font-family: dana, roboto;
+        align-items: center;
+        color: $white;
+        padding: 20px 16px;
+        z-index: 2;
+        -webkit-user-select: none;
+           -moz-user-select: none;
+            -ms-user-select: none;
+                user-select: none;
+    }
+
+    .btn-toast {
+        height: 60px;
+        padding: 16px 24px;
+        z-index: 2;
+        opacity: 0.8;
+    }
+
+    &::before {
+        content: " ";
+        position: absolute;
+        right: 0;
+        height: 100%;
+        background-color: $dark;
+        width: 100%;
+        transition: 0.3s all;
+        z-index: 1;
+        -webkit-animation-name: toastProgress;
+                animation-name: toastProgress;
+        -webkit-animation-duration: 4s;
+                animation-duration: 4s;
+    }
+    &:not(:last-child){
+        margin-bottom: 14px;
+    }
+}
+
+@-webkit-keyframes toastProgress{
+    from {width: 0;}
+    to {width: 100%}
+}
+
+@keyframes toastProgress{
+    from {width: 0;}
+    to {width: 100%}
+}

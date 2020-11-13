@@ -99,6 +99,7 @@ const vue_app = new Vue({
         }),
     data() {
         return {
+            application: null,
             isMobile: window.matchMedia("(max-width: 600px)").matches,
             isTablet: window.matchMedia("(max-width: 960px)").matches,
             isDesktop: window.matchMedia("(min-width: 961px)").matches,

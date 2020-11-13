@@ -506,6 +506,25 @@ img {
     opacity: 0;
 }
 
+.toast-leave-active,
+.toast-enter-active{
+    transition: 1s all;
+}
+
+.toast-enter{
+     transform: translateY(500px);
+}
+.toast-enter-to{
+    transform: translateY(0);
+}
+
+.toast-leave{
+    transform: translateX(0);
+}
+.toast-leave-to{
+    transform: translateX(500px);
+}
+
 .image__wrapper {
     position: relative;
     display: flex;
@@ -902,3 +921,8 @@ a:focus{
 @import "./components/tag-input.scss";
 
 @import "./components/settings.scss";
+
+@import "./components/toast.scss";
+
+
+

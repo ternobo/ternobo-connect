@@ -10,7 +10,7 @@
     font-display: block;
 }
 
-[class^="ternobo-"], [class*=" ternobo-"] {
+i[class^="ternobo-"], i[class*=" ternobo-"] {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'Ternobo-Socials' !important;
     speak: none;
