@@ -483,4 +483,12 @@ class Page extends Model
         return $result;
     }
 
+
+    public static function checkSlug($slug){
+       if(Auth::check()){
+        return !(Page::query()->where("slug",$slug)->where("id",'!=',Auth::user()->personalPage->id)->first() instanceof Page);
+       }
+       return !(Page::query()->where("slug",$slug)->first() instanceof Page);
+    }
+
 }

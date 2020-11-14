@@ -47,6 +47,25 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         Route::post('verifycode', 'Auth\UsersController@verifyCode');
         Route::post("signup", "Auth\UsersController@signupUser");
         Route::post("setpassword", "Auth\UsersController@savePassword");
+
+
+        /** Username Start */
+        Route::post('/suggest-username', "Auth\SettingsController@suggest");
+        Route::post('/set-username', "Auth\SettingsController@set");
+        Route::post('/check-username', "Auth\SettingsController@check");
+        /** Username End */
+
+        /** Settings */
+        Route::post("/get-info","Auth\SettingsController@getUserInfo");
+        Route::post("/verify-phone","Auth\SettingsController@verifyNewPhone");
+        Route::post("/verify-email","Auth\SettingsController@verifyNewEmail");
+        /** Settings End */
+
+        /**
+         * Password
+         */
+        Route::post("/change-password","Auth\SettingsController@changePassword");
+
     });
     /**
      * Auth End

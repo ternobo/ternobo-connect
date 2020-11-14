@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3",
         "artesaos/seotools": "^0.19.0",
+        "bacon/bacon-qr-code": "^2.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -22,7 +23,10 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.0",
         "paquettg/php-html-parser": "^3.1",
-        "phpmailer/phpmailer": "^6.1"
+        "phpmailer/phpmailer": "^6.1",
+        "pragmarx/google2fa": "^8.0",
+        "pragmarx/recovery": "^0.1.0",
+        "taylornetwork/laravel-username-generator": "^2.4"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

@@ -7,6 +7,7 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
 
