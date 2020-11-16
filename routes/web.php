@@ -66,6 +66,9 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
          */
         Route::post("/change-password","Auth\SettingsController@changePassword");
 
+        // Deactive
+        Route::post("/deactive","Auth\SettingsController@deactiveAccount");
+
     });
     /**
      * Auth End

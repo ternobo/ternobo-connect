@@ -146,11 +146,11 @@ class SettingsController extends Controller
     public function deactiveAccount(Request $request)
     {
         $messages = [
-            "password.password" => "رمز عبور نامعتبر است"
+            "password" => "رمز عبور نامعتبر است"
         ];
         $validator = Validator::make($request->all(), [
             "password" => "password"
-        ]);
+        ],$messages);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         }

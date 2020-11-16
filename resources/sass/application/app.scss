@@ -4,11 +4,11 @@
 
 
 
-.btn{
+.btn {
     border-width: 2px;
 }
 
-.form-control{
+.form-control {
     border-width: 2px;
 }
 
@@ -280,8 +280,8 @@ img {
     color: $grey !important;
 }
 
-.text-superlight{
- color: $icons;
+.text-superlight {
+    color: $icons;
 }
 
 .text-grey {
@@ -330,7 +330,7 @@ img {
     height: 64px;
     border-radius: 50%;
     -o-object-fit: contain;
-       object-fit: contain;
+    object-fit: contain;
 }
 
 .text-action {
@@ -501,27 +501,33 @@ img {
     transition: opacity .5s;
 }
 
+.fade-leave {
+    position: absolute;
+}
+
 .fade-enter,
 .fade-leave-to {
     opacity: 0;
 }
 
 .toast-leave-active,
-.toast-enter-active{
+.toast-enter-active {
     transition: 1s all;
 }
 
-.toast-enter{
-     transform: translateY(500px);
+.toast-enter {
+    transform: translateY(500px);
 }
-.toast-enter-to{
+
+.toast-enter-to {
     transform: translateY(0);
 }
 
-.toast-leave{
+.toast-leave {
     transform: translateX(0);
 }
-.toast-leave-to{
+
+.toast-leave-to {
     transform: translateX(500px);
 }
 
@@ -656,7 +662,7 @@ pre {
 
 .autocomplete-input[aria-expanded=true] {
     border-radius: 25px !important;
-    z-index:2;
+    z-index: 2;
 }
 
 .autocomplete-result-list {
@@ -710,20 +716,22 @@ pre {
     direction: ltr;
     text-align: left;
     -webkit-user-select: all;
-       -moz-user-select: all;
-        -ms-user-select: all;
-            user-select: all;
+    -moz-user-select: all;
+    -ms-user-select: all;
+    user-select: all;
 }
 
-.hand-hover{
+.hand-hover {
     cursor: -webkit-grab;
     cursor: grab;
     transition: 0.3s all;
 }
-.hand-hover:hover{
+
+.hand-hover:hover {
     color: $dark;
 }
-.hand-hover:active{
+
+.hand-hover:active {
     cursor: -webkit-grabbing;
     cursor: grabbing;
 }
@@ -736,27 +744,28 @@ pre {
     margin-top: 6px;
 }
 
-.slugItem{
+.slugItem {
     display: flex;
     align-items: center;
     justify-content: space-between;
     -webkit-user-select: all;
-       -moz-user-select: all;
-        -ms-user-select: all;
-            user-select: all;
+    -moz-user-select: all;
+    -ms-user-select: all;
+    user-select: all;
     background-color: $body-bg;
     border-radius: 20px;
     color: $light;
     font-size: 14px;
     padding: 8px 12px;
-    .icon{
+
+    .icon {
         border-right: 1px solid;
         padding-right: 5px;
         margin-right: 5px;
     }
 }
 
-.splitor-line{
+.splitor-line {
     height: 100%;
     width: 1px;
     background: $icons;
@@ -767,11 +776,11 @@ pre {
     font-family: dana, roboto;
 }
 
-.action{
+.action {
     flex: 1 1 auto;
 }
 
-.bg-light-blue{
+.bg-light-blue {
     background: rgba(231, 242, 255, 1);
 }
 
@@ -794,7 +803,7 @@ pre {
 @import "./components/dropdown-btn.scss";
 
 
-.badge-light{
+.badge-light {
     height: 24px;
     width: 24px;
     font-size: 11pt;
@@ -805,52 +814,54 @@ pre {
     border-radius: 50%;
     align-items: center;
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     padding-top: 5px;
+
     span {
         height: 13pt;
     }
 }
 
-.disabled{
+.disabled {
     cursor: not-allowed !important;
     color: $icons;
 }
 
-a:focus{
+a:focus {
     outline: none !important;
 }
 
-:focus{
+:focus {
     outline: none !important;
 }
 
 
-.hover-dropdown:hover{
+.hover-dropdown:hover {
     background: #e0e0e0;
 }
 
-.person-name{
+.person-name {
     font-weight: 600;
     font-size: 14px
 }
 
-.badge-success{
-   @extend .badge-light;
-   border-radius: 50rem;
-   background-color: $light-success;
-   color: $success;
-   white-space: nowrap;
-   width: auto;
-   padding: 5px 11px;
+.badge-success {
+    @extend .badge-light;
+    border-radius: 50rem;
+    background-color: $light-success;
+    color: $success;
+    white-space: nowrap;
+    width: auto;
+    padding: 5px 11px;
+
     span {
         height: 13pt;
     }
 }
 
-.card-header{
+.card-header {
     background-color: $white;
     border: 0;
 }
@@ -861,27 +872,33 @@ a:focus{
     background-image: none;
 }
 
-[data-position=below] .autocomplete-result-list{
+[data-position=below] .autocomplete-result-list {
     border-radius: 0 !important;
 }
 
-.open-achievements{
+.open-achievements {
     transition: 0.3s all;
 }
-.open-achievements.active{
+
+.open-achievements.active {
     transform: rotate(180deg);
 }
 
 @import "./components/achievement.scss";
 
-.invalid{
+.invalid {
     border: 2px solid $danger !important;
 }
 
 
-@media (min-width: 576px){
-    .modal-dialog {
+@media (min-width: 576px) {
+    .modal-md {
         max-width: 630px;
+        margin: 1.75rem auto;
+    }
+
+    .modal-lang {
+        max-width: 400px;
         margin: 1.75rem auto;
     }
 }
@@ -890,27 +907,32 @@ a:focus{
 
 @import "./components/category-item.scss";
 
-.vs__open-indicator{
+.vs__open-indicator {
     @extend .material-icons;
 }
-.vs__actions{
+
+.vs__actions {
     display: flex;
     align-items: center;
     cursor: pointer;
 }
-.vs--single.vs--open .vs__selected{
-        position: relative;
+
+.vs--single.vs--open .vs__selected {
+    position: relative;
 }
-.vs__clear{
+
+.vs__clear {
     display: none;
     color: #757575;
     z-index: -1;
 }
-.vs__clear > i {
+
+.vs__clear>i {
     color: #757575;
     font-size: 20px;
 }
-.card-icon{
+
+.card-icon {
     z-index: 1;
 }
 
@@ -925,4 +947,52 @@ a:focus{
 @import "./components/toast.scss";
 
 
+.vue-switcher-theme--default.vue-switcher-color--default div {
+    background-color: #191919 !important;
+}
 
+
+.vue-switcher-theme--default.vue-switcher-color--default.vue-switcher--unchecked div {
+    background-color: #C8C8C8 !important;
+
+}
+
+.vue-switcher div {
+    height: 18px !important;
+    width: 36px !important;
+    position: relative !important;
+    border-radius: 30px !important;
+    display: -ms-flex !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    cursor: pointer !important;
+    transition: linear .2s, background-color linear .2s !important;
+}
+
+.vue-switcher-theme--default.vue-switcher-color--default div:after {
+    background-color: #FFF !important;
+}
+
+.vue-switcher--unchecked div:after {
+    left: 22px !important;
+}
+
+.vue-switcher-theme--default.vue-switcher-color--default.vue-switcher--unchecked div:after {
+    background-color: #FFF !important;
+}
+
+.vue-switcher div:after {
+    content: '' !important;
+    height: 14px !important;
+    width: 14px !important;
+    left: 100%;
+    margin-left: -18px !important;
+    cursor: pointer !important;
+    top: 2px !important;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+.vue-switcher--unchecked div:after {
+    left: 22px !important;
+}

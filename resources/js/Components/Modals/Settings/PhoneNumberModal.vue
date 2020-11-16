@@ -1,5 +1,5 @@
 <template>
-<b-modal v-model='showModal' hide-footer title="ثبت / ویرایش تلفن همراه" size="lg" :centered="true">
+<b-modal v-model='showModal' hide-footer title="ثبت / ویرایش تلفن همراه" size="md" :centered="true">
     <div class="d-flex justify-content-between align-items-center">
         <LoadingButton class="btn btn-dark" :loading="loading" @click.native="sendVcode()">ثبت</LoadingButton>
         <input type="tel" class="form-control mx-1 text-left" :readonly="verification_step" v-model="phone" placeholder="09126667152">

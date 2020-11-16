@@ -1,5 +1,5 @@
 <template>
-<b-modal v-if="$page.user != null" v-model='showModal' no-close-on-backdrop hide-footer size="lg" title="تولید محتوای تازه" :centered="true">
+<b-modal v-if="$page.user != null" v-model='showModal' no-close-on-backdrop hide-footer size="md" title="تولید محتوای تازه" :centered="true">
     <div action="/posts" data-ajax method="POST" data-reload="1" enctype="multipart/form-data" class="w-100">
         <div class="new-post position-relative">
             <div class="selections">

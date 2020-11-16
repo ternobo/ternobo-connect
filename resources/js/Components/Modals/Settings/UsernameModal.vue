@@ -1,5 +1,5 @@
 <template>
-<b-modal v-model='showModal' hide-footer title="ویرایش نام کاربری" size="lg" :centered="true">
+<b-modal v-model='showModal' hide-footer title="ویرایش نام کاربری" size="md" :centered="true">
     <div>
         <div class="d-flex justify-content-between align-items-center">
             <loading-button :disabled="loading || !valid" class="btn btn-primary" @click.native="save" :loading="saveLoading">ثبت</loading-button>
