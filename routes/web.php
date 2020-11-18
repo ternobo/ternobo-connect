@@ -25,15 +25,12 @@ Route::get("/nationalcards/{image}", "DownloadsController@nationalCards");
  * File Access End
  */
 
-
-
 Route::group(['middleware' => LocaleMiddleware::class], function () {
 
     Route::get("/", "IndexController@index")->name("welcome");
     Route::any("/search", "HomeController@search");
 
     Route::resource("/articles", "ArticlesController");
-
 
     /**
      * Auth Start
@@ -48,27 +45,25 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         Route::post("signup", "Auth\UsersController@signupUser");
         Route::post("setpassword", "Auth\UsersController@savePassword");
 
-
         /** Username Start */
-        Route::post('/suggest-username', "Auth\SettingsController@suggest");
-        Route::post('/set-username', "Auth\SettingsController@set");
-        Route::post('/check-username', "Auth\SettingsController@check");
+        Route::post('/suggest-username', "Auth\SettingsController@suggest")->middleware("auth");
+        Route::post('/set-username', "Auth\SettingsController@set")->middleware("auth");
+        Route::post('/check-username', "Auth\SettingsController@check")->middleware("auth");
         /** Username End */
 
         /** Settings */
-        Route::post("/get-info","Auth\SettingsController@getUserInfo");
-        Route::post("/verify-phone","Auth\SettingsController@verifyNewPhone");
-        Route::post("/verify-email","Auth\SettingsController@verifyNewEmail");
+        Route::post("/get-info", "Auth\SettingsController@getUserInfo");
+        Route::post("/verify-phone", "Auth\SettingsController@verifyNewPhone")->middleware("auth");
+        Route::post("/verify-email", "Auth\SettingsController@verifyNewEmail")->middleware("auth");
         /** Settings End */
 
         /**
          * Password
          */
-        Route::post("/change-password","Auth\SettingsController@changePassword");
+        Route::post("/change-password", "Auth\SettingsController@changePassword")->middleware("auth");
 
         // Deactive
-        Route::post("/deactive","Auth\SettingsController@deactiveAccount");
-
+        Route::post("/deactive", "Auth\SettingsController@deactiveAccount")->middleware("auth");
     });
     /**
      * Auth End
@@ -76,6 +71,16 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
     Route::group(['auth'], function () {
 
+        Route::prefix("/two-factor-auth")->group(function () {
+            Route::post("info", "Auth\TwoFAController@get2FAInfo");
+
+            Route::post("setup", "Auth\TwoFAController@setup");
+            Route::post("enable", "Auth\TwoFAController@enableTwoFA");
+            Route::post("reset", "Auth\TwoFAController@resetRecovery");
+
+            Route::post("deactive", "Auth\TwoFAController@deactive");
+
+        });
 
         Route::get("/follow-people", "IndexController@followSuggestions");
 
@@ -122,7 +127,6 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             });
             // End Page Edit
 
-
             // Start Comments
             Route::any("/comments/{comment:id}/replies", "CommentController@replies");
             Route::resource('posts.comments', "CommentController");
@@ -155,9 +159,9 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
             Route::resource("/ideas", "IdeasController");
 
-        });
+            Route::get("/settings", "Auth\UsersController@settingsPage");
 
-        Route::get("/settings", "Auth\UsersController@settingsPage");
+        });
 
         /**
          * Pages API
@@ -179,7 +183,6 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
          */
         Route::get("/embed-posts/{id}", "PostController@embedPost");
 
-
         Route::post("/posts/{post:id}/embed", "PostController@getEmbed");
 
         Route::resource("/posts", "PostController");
@@ -191,13 +194,11 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         // Notifications
         Route::get('/notifications', 'NotificationController@index')->name('notifications');
 
-
     });
 
     Route::post("/share/{post_id}", "PostController@sharePost");
 
     Route::get("/tags/{name}", "HomeController@tag");
-
 
     Route::post("/contact/contact-option", "ContactsController@getContactOptions");
     Route::post("/contact/website-option", "ContactsController@getWebsiteOptions");
@@ -205,7 +206,6 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
     Route::post("/contacts/", "ContactsController@saveData");
     Route::post("/contacts/{page}", "ContactsController@getContactData");
-
 
     // Pages
     Route::prefix('/{page:slug}')->group(function () {

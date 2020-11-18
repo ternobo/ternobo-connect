@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Skill;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
-class SkillController extends Controller {
+class SkillController extends Controller
+{
 
     /**
      * Store a newly created resource in storage.
@@ -15,14 +16,15 @@ class SkillController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $messages = [
             "name.required" => "عنوان مهارت اجباری است",
-            "name.max" => "عنوان مهارت حداکثر می‌تواند ۱۰۰ کاراکتر باشد."
+            "name.max" => "عنوان مهارت حداکثر می‌تواند ۱۰۰ کاراکتر باشد.",
         ];
         $validator = Validator::make($request->all(), [
-                    "name" => "required|max:100"
-                        ], $messages);
+            "name" => "required|max:100",
+        ], $messages);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         }
@@ -33,10 +35,11 @@ class SkillController extends Controller {
         return response()->json(array("result" => $skill->save()));
     }
 
-    public function sort(Request $request, $skill) {
+    public function sort(Request $request, $skill)
+    {
         $validator = Validator::make($request->all(), [
-                    "order" => "required",
-                        ], ["orders.required" => "موقعیت اجباری است."]);
+            "order" => "required",
+        ], ["orders.required" => "موقعیت اجباری است."]);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
@@ -46,11 +49,12 @@ class SkillController extends Controller {
         }
     }
 
-    public function search(Request $request) {
+    public function search(Request $request)
+    {
         if ($request->has("q") && $request->q !== "") {
             $search = $request->q;
             $result = array();
-            $suggestions = Skill::query()->whereRaw("name like '%$search%'")->limit(10)->get();
+            $suggestions = Skill::query()->whereRaw("name like '%?%'", [$search])->limit(10)->get();
             //dd($suggestions->toSql());
             foreach ($suggestions as $value) {
                 $result[] = $value->name;
@@ -59,7 +63,8 @@ class SkillController extends Controller {
         }
     }
 
-    public function skillEndorsements(Request $request) {
+    public function skillEndorsements(Request $request)
+    {
         $skill = Skill::find($request->skill);
         return view("layouts.components.skill-endorsement", array("skill" => $skill));
     }
@@ -71,14 +76,15 @@ class SkillController extends Controller {
      * @param  \App\Skill  $skill
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Skill $skill) {
+    public function update(Request $request, Skill $skill)
+    {
         $messages = [
             "name.required" => "عنوان مهارت اجباری است",
-            "name.max" => "عنوان مهارت حداکثر می‌تواند ۱۰۰ کاراکتر باشد."
+            "name.max" => "عنوان مهارت حداکثر می‌تواند ۱۰۰ کاراکتر باشد.",
         ];
         $validator = Validator::make($request->all(), [
-                    "name" => "required|max:100"
-                        ], $messages);
+            "name" => "required|max:100",
+        ], $messages);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         }
@@ -96,7 +102,8 @@ class SkillController extends Controller {
      * @param  \App\Skill  $skill
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Skill $skill) {
+    public function destroy(Skill $skill)
+    {
         $user = Auth::user();
         if ($user->id === $skill->user->id) {
             return response()->json(array("result" => $skill->delete()));

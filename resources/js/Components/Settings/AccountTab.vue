@@ -6,6 +6,7 @@
 		<PasswordModal :show.sync="showPasswordMdal"></PasswordModal>
 		<ChangeLanguageModal :show.sync="showLangModal"></ChangeLanguageModal>
 		<DeactiveModal :show.sync="showDeactiveModal"></DeactiveModal>
+		<TwoFAModal :phone="phone" :email="email" :show.sync="showTwoFAModal"></TwoFAModal>
 		<h2 class="font-20 mb-4">ورود و امنیت</h2>
 		<div class="card">
 			<div class="card-body py-0 px-4">
@@ -66,8 +67,9 @@
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined ml-2">privacy_tip</i>
-						<span>احراز هویت 2 مرحله‌ای</span>
+						<span>تایید 2 مرحله‌ای</span>
 					</div>
+					<i class="btn setting-btn material-icons-outlined mr-3" @click="showTwoFAModal = true">keyboard_arrow_left</i>
 				</div>
 			</div>
 		</div>
@@ -134,6 +136,7 @@ export default {
 			showPasswordMdal: false,
 			showLangModal: false,
 			showDeactiveModal: false,
+			showTwoFAModal: false,
 
 			phone: null,
 			email: null,
@@ -147,6 +150,8 @@ export default {
 
 		ChangeLanguageModal: () => import("../Modals/Settings/ChangeLanguageModal"),
 		DeactiveModal: () => import("../Modals/Settings/DeactiveModal"),
+
+		TwoFAModal: () => import("../Modals/Settings/TwoFAModal"),
 	},
 };
 </script>

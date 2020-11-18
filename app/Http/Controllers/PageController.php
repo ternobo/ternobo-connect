@@ -89,7 +89,7 @@ class PageController extends Controller
                 ->where("pages.id", "!=", $page->id)
                 ->where("pages.id", "!=", Auth::user()->getPage()->id)
                 ->get();
-                $pages = count($pages) > 3 ? $pages->random(3) : $pages;
+            $pages = count($pages) > 3 ? $pages->random(3) : $pages;
         }
 
         $actions = ["data" => [], "next_page_url" => null];
@@ -137,7 +137,7 @@ class PageController extends Controller
                 "actions" => $actions,
                 "articles" => $articles,
                 "location" => $location,
-                'currentCategory'=> $category
+                'currentCategory' => $category,
             ]
         );
     }
@@ -191,7 +191,7 @@ class PageController extends Controller
         $results = array();
         $suggestions = Page::query()->whereHas("user", function ($query) {
             $query->where("active", true);
-        })->whereRaw("slug like '%$request->q%'")->limit(10)->get();
+        })->whereRaw("slug like '%?%'", [$request->q])->limit(10)->get();
         foreach ($suggestions as $value) {
             $result = array();
             $result["key"] = $value->slug;
@@ -314,7 +314,7 @@ class PageController extends Controller
         } else {
             $page = Auth::user()->getPage();
             $page->name = $request->firstname . " " . $request->lastname;
-            if($request->filled("location")){
+            if ($request->filled("location")) {
                 $page->location = $request->location;
             }
             $user = Auth::user();

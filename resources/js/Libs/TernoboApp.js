@@ -34,7 +34,7 @@ TernoboApp.install = function (Vue, options) {
 
     Vue.component("ConnetionButtons", () => import("../Components/buttons/ConnetionButtons.vue"));
 
-    Vue.component("skeleton",Skeleton);
+    Vue.component("skeleton", Skeleton);
 
     Vue.component("MaterialTextField", MaterialTextField);
     Vue.component("MaterialTextArea", MaterialTextArea);
@@ -52,7 +52,7 @@ TernoboApp.install = function (Vue, options) {
     Vue.component("loading-spinner", LoadingSpinner);
     Vue.component("new-post-card", NewPostCard);
     Vue.component("new-post-modal", () => import(/* webpackChunkName: "NewPostModal" */ "../Components/Modals/NewPostModal"));
-    Vue.component("tselect", ()=> import (/* webpackChunkName: "Tselect" */ "../Components/Tselect"));
+    Vue.component("tselect", () => import(/* webpackChunkName: "Tselect" */ "../Components/Tselect"));
     Vue.component("textarea-autosize", () => import(/* webpackChunkName: "TextareaAutosize" */ "../Components/inputs/TextareaAutosize"));
     // Directives
     Vue.directive("lazyload", LazyloadDirective);
@@ -79,7 +79,7 @@ TernoboApp.install = function (Vue, options) {
 
     Vue.component('draggable', () => import(/* webpackChunkName: "draggable" */  "vuedraggable"));
 
-    Vue.prototype.yearsFrom = function (startYear,to) {
+    Vue.prototype.yearsFrom = function (startYear, to) {
         var currentYear = to || new PersianDate().year(), years = [];
         startYear = startYear || 1980;
         while (currentYear >= startYear) {
@@ -111,12 +111,11 @@ TernoboApp.install = function (Vue, options) {
     }
 
     const setup = function (vm) {
-        Vue.prototype.toast = function (msessage) {
-            vm.$bvToast.toast(msessage, {
-                noCloseButton: true,
-                toaster: "b-toaster-bottom-left",
-                bodyClass: ["bg-dark", "text-right", "text-white"],
-                solid: true
+        Vue.prototype.toast = function (msessage, icon = 'error_outline', iconClass = 'text-warning') {
+            this.$root.application.addToast({
+                text: msessage,
+                icon: icon,
+                iconClass: iconClass,
             });
         };
         Vue.prototype.time = function (time) {
@@ -131,17 +130,17 @@ TernoboApp.install = function (Vue, options) {
             setup(this);
         },
         methods: {
-            checkUser(id){
-                if(this.$page.user !== null){
+            checkUser(id) {
+                if (this.$page.user !== null) {
                     return this.$page.user.id == id;
                 }
                 return false;
             },
-            handleError(errors,type) {
+            handleError(errors, type) {
                 Object.keys(errors).forEach((item) => {
                     let msg = errors[item][0];
-                    if(type != null && type != undefined){
-                        msg = msg.replaceAll('{{ type }}',type);
+                    if (type != null && type != undefined) {
+                        msg = msg.replaceAll('{{ type }}', type);
                     }
 
                     this.$root.application.addToast({

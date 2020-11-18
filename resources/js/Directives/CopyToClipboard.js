@@ -1,18 +1,42 @@
 export default {
     bind: function (el, binding, vnode) {
-        el.addEventListener("click",function(e){
-            const element = document.createElement('textarea');
-            element.value = binding.value;
-            element.setAttribute('readonly', '');
-            element.style.position = 'absolute';
-            element.style.left = '-9999px';
-            document.body.appendChild(element);
-            element.select();
-            document.execCommand('copy');
-            document.body.removeChild(element);
-            vnode.context.toast("کپی شد");
+        el.addEventListener("click", function (e) {
+
+            const textarea = document.createElement('textarea')
+            textarea.value = binding.value;
+            textarea.setAttribute('readonly', '')
+            textarea.style.cssText = 'position:fixed;pointer-events:none;z-index:-9999;opacity:0;'
+
+
+            document.body.appendChild(textarea)
+
+            if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+                textarea.contentEditable = true
+                textarea.readOnly = true
+
+                const range = document.createRange()
+
+                range.selectNodeContents(textarea)
+
+                const selection = window.getSelection()
+
+                selection.removeAllRanges()
+                selection.addRange(range)
+                textarea.setSelectionRange(0, 999999)
+            } else {
+                textarea.select()
+            }
+
+            let success = false
+
+            try {
+                success = document.execCommand('copy')
+            } catch (err) {
+                console.warn(err)
+            }
+            vnode.context.toast("کپی شد", 'check', 'text-success');
         })
-            
+
 
     }
 }

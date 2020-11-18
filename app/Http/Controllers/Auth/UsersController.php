@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\SMS;
+use App\Http\Controllers\Controller;
 use App\Models\Mail;
 use App\Models\Page;
 use App\Models\User;
-use Inertia\Inertia;
-use Illuminate\Support\Str;
 use App\Models\Verification;
+use App\SMS;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
+use Intervention\Image\Facades\Image;
 use PersianValidator\NationalCode\NationalCode;
 
 class UsersController extends Controller
@@ -27,7 +27,7 @@ class UsersController extends Controller
         $messages = [
             "phone.unique" => __("شماره همراه تکراری است!"),
             "email.unique" => __("ایمیل تکراری است"),
-            "email" => _("ایمیل نامعتبر است")
+            "email" => _("ایمیل نامعتبر است"),
         ];
         $validator = Validator::make($request->all(), [
             'phone' => 'unique:users,phone',
@@ -55,7 +55,7 @@ class UsersController extends Controller
             $verification->phone = $request->email;
             $verification->save();
             session()->put("email", $request->email);
-            $html = view('emails.verification', array("vcode" => $code))->render();
+            $html = preg_replace("/\r|\n/", "", view('emails.verification', array("vcode" => $code))->render());
             $text = "کد فعالسازی شما در ترنوبو : $code";
             $title = "کد فعالسازی ترنوبو";
             $mail = new Mail();
@@ -106,14 +106,14 @@ class UsersController extends Controller
         $messages = [
             'required' => __('این فیلد اجباری است'),
             "unique" => __("نام کاربری تکراری است"),
-            "username.regex" => _("نام کاربری نامعتبر است. فقط حروف انگلیسی و بدون فاصله وارد کنید")
+            "username.regex" => _("نام کاربری نامعتبر است. فقط حروف انگلیسی و بدون فاصله وارد کنید"),
         ];
 
         $validator = Validator::make($request->all(), [
             "firstname" => "required",
             "lastname" => "required",
             'username' => 'required|min:3|unique:users,username|regex:/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/',
-            "gender" => "required"
+            "gender" => "required",
         ], $messages);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
@@ -130,7 +130,7 @@ class UsersController extends Controller
                         if ($route->uri !== "/") {
                             $pos = strpos($route->uri, "/");
                             if ($pos !== false) {
-                                $invalid[] = Str::substr($route->uri, $pos+1);
+                                $invalid[] = Str::substr($route->uri, $pos + 1);
                             }
                             $invalid[] = $route->uri;
                         }
@@ -161,7 +161,6 @@ class UsersController extends Controller
                 $user->profile = url("/img/woman-profile.png");
             }
             $user->generateToken();
-
 
             $page = new Page();
             $page->name = $user->name;
@@ -213,7 +212,7 @@ class UsersController extends Controller
                 $user->save();
                 $page->save();
                 if ($request->has("json")) {
-                    return response()->json(array("result" => true,"url"=>url($file)));
+                    return response()->json(array("result" => true, "url" => url($file)));
                 }
                 return redirect("/home");
             } else {
@@ -260,11 +259,11 @@ class UsersController extends Controller
             "nationalcode.required" => "کد ملی اجباری است.",
             "file.mimes" => "فایل انتخابی نامعتبر است!",
             "file.max" => "حداکثر حجم فایل 1 مگابایت است.",
-            "file.required" => "عکس سلفی با کارت ملی الزامی است"
+            "file.required" => "عکس سلفی با کارت ملی الزامی است",
         ];
         $validator = Validator::make($request->all(), [
             "file" => "required|mimes:jpg,jpeg,png|max:1024",
-            "nationalcode" => "required"
+            "nationalcode" => "required",
         ], $messages);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));

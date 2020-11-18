@@ -3,50 +3,52 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-use Illuminate\Http\Request;
-use App\SMS;
 use App\Models\Mail;
 use App\Models\PasswordReset;
-use Illuminate\Support\Facades\Validator;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use App\SMS;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
-class ForgotPasswordController extends Controller {
+class ForgotPasswordController extends Controller
+{
     /*
-      |--------------------------------------------------------------------------
-      | Password Reset Controller
-      |--------------------------------------------------------------------------
-      |
-      | This controller is responsible for handling password reset emails and
-      | includes a trait which assists in sending these notifications from
-      | your application to your users. Feel free to explore this trait.
-      |
+    |--------------------------------------------------------------------------
+    | Password Reset Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for handling password reset emails and
+    | includes a trait which assists in sending these notifications from
+    | your application to your users. Feel free to explore this trait.
+    |
      */
 
-use SendsPasswordResetEmails;
+    use SendsPasswordResetEmails;
 
-    public function resetPassword(Request $request) {
+    public function resetPassword(Request $request)
+    {
         $validator = Validator::make($request->all(), [
-                    "input" => "required",
+            "input" => "required",
         ]);
         if ($validator->fails()) {
             return false;
         } else {
             $user = User::query()
-            ->where("phone", $request->input)
-            ->orWhere("email", $request->input)
-            ->orWhere("username", $request->input)
-            ->first();
+                ->where("phone", $request->input)
+                ->orWhere("email", $request->input)
+                ->orWhere("username", $request->input)
+                ->first();
             if ($user instanceof User) {
 
                 $passwordrest = new PasswordReset();
 
-                if($user->phone !== null){
+                if ($user->phone !== null) {
                     $passwordrest->email = $user->phone;
-                }else{
+                } else {
                     $passwordrest->email = $user->email;
                 }
                 $passwordrest->token = random_int(111111, 999999);
@@ -73,22 +75,24 @@ use SendsPasswordResetEmails;
         }
     }
 
-    public static function quickRandom($length = 16) {
+    public static function quickRandom($length = 16)
+    {
         $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
         return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
     }
 
-    public function updatePassword(Request $request) {
+    public function updatePassword(Request $request)
+    {
         $messages = [
-            "exists" => "کد بازیابی رمزعبور اشتباه است."
+            "exists" => "کد بازیابی رمزعبور اشتباه است.",
         ];
         $validator = Validator::make($request->all(), [
-                    "newpassword" => "required",
-                    "code" => "required|exists:password_resets,token"
-                        ], $messages);
+            "newpassword" => "required",
+            "code" => "required|exists:password_resets,token",
+        ], $messages);
         if ($validator->fails()) {
-            return response()->json(array("result" => false,"errors" => $validator->errors()));
+            return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
             $passreset = PasswordReset::where("token", $request->code)->firstOrFail();
             $user = User::query()->where("phone", $passreset->email)->orWhere("email", $passreset->email)->first();
@@ -96,20 +100,22 @@ use SendsPasswordResetEmails;
                 $user->password = Hash::make($request->newpassword);
                 $user->save();
                 Auth::login($user, true);
-                DB::raw("delete from `password_resets` where `email` is $passreset->email");
+                DB::raw("delete from `password_resets` where `email` is ?", $passreset->email);
                 return response()->json(array("result" => true));
             } else {
-                return response()->json(array("result" => false, "errors" => ["error"=>"کاربر مربوطه مسدود شده است."]));
+                return response()->json(array("result" => false, "errors" => ["error" => "کاربر مربوطه مسدود شده است."]));
             }
         }
     }
 
-    public function changePassword($token) {
+    public function changePassword($token)
+    {
         $passreset = PasswordReset::where("token", $token)->firstOrFail();
         return view("auth.passwords.reset", array("token" => $token));
     }
 
-    private function checkEmail($email) {
+    private function checkEmail($email)
+    {
         $find1 = strpos($email, '@');
         $find2 = strpos($email, '.');
         return ($find1 !== false && $find2 !== false && $find2 > $find1);

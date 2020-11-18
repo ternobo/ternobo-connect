@@ -89,8 +89,8 @@ class HomeController extends Controller
                 ->with("likes")
                 ->with("mutualLikes")
                 ->with("category")
-                ->selectRaw("MATCH (`title`, `text`) AGAINST('$search' IN BOOLEAN MODE) as score, posts.*")
-                ->whereRaw("MATCH (`title`, `text`) AGAINST('$search' IN BOOLEAN MODE) > 0")
+                ->selectRaw("MATCH (`title`, `text`) AGAINST('?' IN BOOLEAN MODE) as score, posts.*", [$search])
+                ->whereRaw("MATCH (`title`, `text`) AGAINST('?' IN BOOLEAN MODE) > 0", [$search])
                 ->orderBy("score")
                 ->distinct("posts.id");
 
@@ -106,10 +106,10 @@ class HomeController extends Controller
         } else {
             $users = Page::query()
                 ->leftJoin("skills", "skills.user_id", "pages.user_id")
-                ->selectRaw("MATCH (pages.name,short_bio,about,slug,location) AGAINST('$search' IN BOOLEAN MODE) as score, pages.*")
+                ->selectRaw("MATCH (pages.name,short_bio,about,slug,location) AGAINST('?' IN BOOLEAN MODE) as score, pages.*", [$search])
                 ->where(function ($query) use ($search, $request) {
-                    $query->whereRaw("MATCH (pages.name,short_bio,about,slug,location) AGAINST('$search' IN BOOLEAN MODE) > 0");
-                    $query->orWhereRaw("skills.name like '%$request->q%'");
+                    $query->whereRaw("MATCH (pages.name,short_bio,about,slug,location) AGAINST('?' IN BOOLEAN MODE) > 0", [$search]);
+                    $query->orWhereRaw("skills.name like '%?%'", [$request->q]);
                 })
                 ->orderBy("score")
                 ->distinct("pages.id")
@@ -146,7 +146,7 @@ class HomeController extends Controller
             $search = $this->generateSearch(explode(" ", $request->q));
             if ($request->isMethod("POST")) {
                 $result = array();
-                $suggestions = SearchSuggestion::query()->whereRaw("name like '%$request->q%'")->limit(10)->get();
+                $suggestions = SearchSuggestion::query()->whereRaw("name like '%?%'", [$request->q])->limit(10)->get();
                 foreach ($suggestions as $value) {
                     $result[] = $value->name;
                 }

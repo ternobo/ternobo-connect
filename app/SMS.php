@@ -4,20 +4,23 @@ namespace App;
 
 use Ixudra\Curl\Facades\Curl;
 
-class SMS {
+class SMS
+{
 
     private $API_Key = "";
     private $API_Secret = "";
     private $APIURL = "https://RestfulSms.com/";
     private $phone = "";
 
-    public function __construct($phone) {
+    public function __construct($phone)
+    {
         $this->API_Key = env("TOKEN_SMS", "JmvEVPITlcakqwPnAvpsGFSwBm");
         $this->API_Secret = env("PASS_SMS", "1c4753384f0c32b4fdb35c19");
         $this->phone = $phone;
     }
 
-    public static function makeParameter($key, $value) {
+    public static function makeParameter($key, $value)
+    {
         return array("Parameter" => $key, "ParameterValue" => $value);
     }
 
@@ -26,7 +29,8 @@ class SMS {
      *
      * @return string Indicates the Url
      */
-    protected function getAPIVerificationCodeUrl() {
+    protected function getAPIVerificationCodeUrl()
+    {
         return "api/VerificationCode";
     }
 
@@ -35,7 +39,8 @@ class SMS {
      *
      * @return string Indicates the Url
      */
-    protected function getAPIUltraFastSendUrl() {
+    protected function getAPIUltraFastSendUrl()
+    {
         return "api/UltraFastSend";
     }
 
@@ -44,22 +49,24 @@ class SMS {
      *
      * @return string Indicates the Url
      */
-    protected function getApiTokenUrl() {
+    protected function getApiTokenUrl()
+    {
         return "api/Token";
     }
 
-    public function sendUltraFastSMS($parameters, $template) {
+    public function sendUltraFastSMS($parameters, $template)
+    {
         $token = $this->_getToken();
         if ($token != false) {
             $postData = array(
                 "ParameterArray" => $parameters,
                 "Mobile" => $this->phone,
-                "TemplateId" => $template
+                "TemplateId" => $template,
             );
 
             $url = $this->APIURL . $this->getAPIUltraFastSendUrl();
             $UltraFastSend = $this->_execute($postData, $url, $token);
-            $object = (object)$UltraFastSend;
+            $object = (object) $UltraFastSend;
             $result = true;
             if (is_object($object)) {
                 $result = true;
@@ -81,7 +88,8 @@ class SMS {
 
      * @return string Indicates the sent sms result
      */
-    public function verificationCode($Code) {
+    public function verificationCode($Code)
+    {
         $token = $this->_getToken();
         if ($token != false) {
             $postData = array(
@@ -109,15 +117,16 @@ class SMS {
      *
      * @return string Indicates the token key
      */
-    private function _getToken() {
+    private function _getToken()
+    {
         $postData = array(
             'UserApiKey' => $this->API_Key,
             'SecretKey' => $this->API_Secret,
-            'System' => 'php_rest_v_2_0'
+            'System' => 'php_rest_v_2_0',
         );
 
         $result = Curl::to($this->APIURL . $this->getApiTokenUrl())->
-                        withContentType('application/json')->withData($postData)->asJson(true)->post();
+            withContentType('application/json')->withData($postData)->asJson(true)->post();
         $result = (object) $result;
         $resp = false;
         $IsSuccessful = '';
@@ -142,10 +151,11 @@ class SMS {
      *
      * @return string Indicates the curl execute result
      */
-    private function _execute($postData, $url, $token) {
+    private function _execute($postData, $url, $token)
+    {
         $result = Curl::to($url)
-                        ->withHeader('x-sms-ir-secure-token: ' . $token)->
-                        withContentType('application/json')->withData($postData)->asJson(true)->post();
+            ->withHeader('x-sms-ir-secure-token: ' . $token)->
+            withContentType('application/json')->withData($postData)->asJson(true)->post();
         return $result;
     }
 

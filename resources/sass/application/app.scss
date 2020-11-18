@@ -474,6 +474,31 @@ img {
     }
 }
 
+@-webkit-keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-359deg);
+    }
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-359deg);
+    }
+}
+
+.rotateAnimation {
+    -webkit-animation: rotation 2s infinite linear;
+    animation: rotation 2s infinite linear;
+}
+
 .profile {
     border-radius: 50%;
     min-height: 64px;
@@ -499,10 +524,6 @@ img {
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity .5s;
-}
-
-.fade-leave {
-    position: absolute;
 }
 
 .fade-enter,
