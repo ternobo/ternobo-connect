@@ -35,6 +35,8 @@ export default {
                 console.warn(err)
             }
             vnode.context.toast("کپی شد", 'check', 'text-success');
+
+            document.body.removeChild(textarea);
         })
 
 

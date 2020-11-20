@@ -10,8 +10,9 @@
 			<div v-if="select_step">
 				<div class="d-flex mb-4 justify-content-between flex-wrap align-items-end">
 					<div class="d-flex flex-column">
-						<strong v-if="enabled">یک روش تاییده انتخاب کنید</strong>
+						<strong class="mb-2" v-if="enabled">یک روش تاییده انتخاب کنید</strong>
 						<v-select
+							style="min-width: 280px"
 							class="datepicker-list ml-2"
 							:placeholder="'روش تاییدیه'"
 							dir="rtl"
@@ -89,7 +90,7 @@
 					</div>
 				</div>
 			</div>
-			<strong class="text-muted mt-3"> با فعال کردن این ویژگی تمامی دستگاه‌های متصل به این حساب به صورت خودکار خارج می‌شوند. با اولین ورود هر دستگاه، یک تایید جهت ورود از شما درخواست می‌شود. </strong>
+			<strong class="text-superlight mt-3"> با فعال کردن این ویژگی تمامی دستگاه‌های متصل به این حساب به صورت خودکار خارج می‌شوند. با اولین ورود هر دستگاه، یک تایید جهت ورود از شما درخواست می‌شود. </strong>
 		</div>
 	</b-modal>
 </template>

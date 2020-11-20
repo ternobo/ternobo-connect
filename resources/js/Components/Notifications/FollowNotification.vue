@@ -1,37 +1,30 @@
 <template>
-<div class="post-notification">
+  <div class="post-notification">
     <div class="d-flex flex-responsive flex-row aling-items-center justify-content-between w-100">
-        <a class="d-flex align-items-center justify-content-start w-100" href="https://ternobo.com/soroush_rezae">
-            <img src="https://ternobo.com/img/man-profile.png" class="profileimage mr-2" />
-            <span class="d-flex align-items-center">
-                <span class="d-flex flex-column">
-                    <span class="d-flex aling-items-center"><b> {{ notification.sender.name }}</b>
-                        <span class="d-flex ml-2 align-items-center text-muted font-11">۲ ماه
-                        </span>
-                    </span>
-                    <div class="w-100 text-left">شما را دنبال می&zwnj;کند</div>
-                </span>
+      <inertia-link class="d-flex align-items-center justify-content-start w-100" :href="$APP_URL + '/' + notification.sender.slug">
+        <lazy-image :src="notification.sender.profile" img-class="profile-md" class="mb-0 ml-2" />
+        <span class="d-flex align-items-center">
+          <span class="d-flex flex-column">
+            <span class="d-flex aling-items-center">
+              <b> {{ notification.sender.name }} <i v-if="notification.sender.is_verified" class="verificationcheck">check_circle</i> </b>
+              <span class="d-flex ml-2 align-items-center text-muted font-11">{{ createdAt }}</span>
             </span>
-        </a>
-        <div class="actions d-flex align-items-center mt-2 mt-lg-0">
-            <button class="connect-btn" onclick="Ternobo.connect('45', this)">
-                <span class="mdc-button__ripple"></span>متصل شدن
-            </button>
-
-            <button class="follow-btn" onclick="Ternobo.follow('45', this)">
-                <span class="mdc-button__ripple"></span>دنبال کردن
-            </button>
-        </div>
+            <div class="w-100">شما را دنبال می‌کند</div>
+          </span>
+        </span>
+      </inertia-link>
+      <div class="actions d-flex align-items-center mt-2 mt-lg-0">
+        <connetion-buttons :page-id="notification.sender.id" :userId="notification.sender.u"></connetion-buttons>
+      </div>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
 import NotificationMixin from "../../Mixins/NotificationMixin";
+import ConnetionButtons from "../buttons/ConnetionButtons.vue";
 export default {
-    mixins: [NotificationMixin]
+  components: { ConnetionButtons },
+  mixins: [NotificationMixin],
 };
 </script>
-
-<style>
-</style>

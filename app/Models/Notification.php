@@ -53,16 +53,16 @@ class Notification extends Model
                 $data['page'] = $this->page;
                 break;
             case "comment":
-                if ($data['action'] === 'reply') {
-                    $data['mycomment'] = $this->mycomment;
-                } else {
-                    $data['post'] = $this->post;
-                    $data['comment'] = $this->comment;
-                }
+                $data['comment'] = $this->comment;
+                $data['mycomment'] = $this->mycomment;
                 break;
-            case "skill_credit":
+            case "skill":
                 $data['skill'] = $this->skill;
                 break;
+        }
+
+        if ($data['action'] == 'comment') {
+            $data['comment'] = $this->comment;
         }
 
         $data['sender'] = $this->sender;
@@ -80,7 +80,7 @@ class Notification extends Model
      */
     public static function sendNotification($action, $notifiable_id, $to, $connected_to, $from = null)
     {
-        if($from === null){
+        if ($from === null) {
             $from = Auth::user()->personalPage;
         }
         $type = "";
@@ -100,8 +100,13 @@ class Notification extends Model
                     $url = url("/$username");
                     break;
                 case "comment":
-                    $type = "comment";
+                    $type = "post";
                     $title = $thename . " " . "برای محتوای شما نظر گذاشت";
+                    $url = url("/posts/$notifiable_id");
+                    break;
+                case "like_comment":
+                    $type = "comment";
+                    $title = $thename . " " . "دیدگاه شما پسندید";
                     $url = url("/posts/$notifiable_id");
                     break;
                 case "reply":
@@ -137,32 +142,32 @@ class Notification extends Model
 
                 event(new NotificationEvent($notification));
 
-                if($user->pushe_id !== null){
+                if ($user->pushe_id !== null) {
                     Curl::to("https://api.push-pole.com/v2/messaging/notifications/")
-                    ->withHeader("authorization: Token " . env("PUSHE_TOKEN"))
-                    ->withContentType('application/json')
-                    ->withData(array(
-                        'app_ids' => ['com.ternobo.connect'],
-                        "filters" => array(
-                            "pushe_id" => [$user->pushe_id],
-                        ),
-                        "data" => array(
-                            "icon" => "https://ternobo.com/apple-touch-icon.png",
-                            "notif_icon" => "apps",
-                            "sound_url" => "https://ternobo.com/blank.mp3",
-                            "show_app" => true,
-                            "title" => "ترنوبو",
-                            "content" => $title,
-                            "wake_screen" => true,
-                            "action" => array(
-                                "action_type" => "U",
-                                "action_data" => "https://ternobo.com/notifications",
+                        ->withHeader("authorization: Token " . env("PUSHE_TOKEN"))
+                        ->withContentType('application/json')
+                        ->withData(array(
+                            'app_ids' => ['com.ternobo.connect'],
+                            "filters" => array(
+                                "pushe_id" => [$user->pushe_id],
                             ),
-                        ),
-                        "time_to_live" => 604800,
-                    ))
-                    ->asJson(true)
-                    ->post();
+                            "data" => array(
+                                "icon" => "https://ternobo.com/apple-touch-icon.png",
+                                "notif_icon" => "apps",
+                                "sound_url" => "https://ternobo.com/blank.mp3",
+                                "show_app" => true,
+                                "title" => "ترنوبو",
+                                "content" => $title,
+                                "wake_screen" => true,
+                                "action" => array(
+                                    "action_type" => "U",
+                                    "action_data" => "https://ternobo.com/notifications",
+                                ),
+                            ),
+                            "time_to_live" => 604800,
+                        ))
+                        ->asJson(true)
+                        ->post();
                 }
             }
         }

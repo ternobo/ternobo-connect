@@ -1,0 +1,5 @@
+{
+    "name": "Echo Server",
+    "script": "laravel-echo-server",
+    "args": "start"
+}

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<UsernameModal :show.sync="showUsernameModal" @updated="reload" :value="$page.user.username"></UsernameModal>
+		<UsernameModal :show.sync="showUsernameModal" @updated="reload" :value="$page.props.user.username"></UsernameModal>
 		<email-modal :show.sync="showEmailModal" @updated="updateEmail" :value="email"></email-modal>
 		<phone-number-modal :show.sync="showPhoneModal" @updated="updatePhone" :value="phone"></phone-number-modal>
 		<PasswordModal :show.sync="showPasswordMdal"></PasswordModal>
@@ -20,7 +20,7 @@
 						<div class="content">
 							<section class="slugItem">
 								<div class="ml-2 d-flex align-items-center" style="direction: ltr">
-									<span class="mr-1">{{ $APP_URL + "/" + $page.user.username }}</span>
+									<span class="mr-1">{{ $APP_URL + "/" + $page.props.user.username }}</span>
 								</div>
 								<section class="icon">
 									<i class="font-18 material-icons-outlined">copy</i>

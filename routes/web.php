@@ -193,7 +193,6 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
         // Notifications
         Route::get('/notifications', 'NotificationController@index')->name('notifications');
-
     });
 
     Route::post("/share/{post_id}", "PostController@sharePost");

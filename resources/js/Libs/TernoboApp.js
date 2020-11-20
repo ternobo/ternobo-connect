@@ -131,8 +131,8 @@ TernoboApp.install = function (Vue, options) {
         },
         methods: {
             checkUser(id) {
-                if (this.$page.user !== null) {
-                    return this.$page.user.id == id;
+                if (this.$page.props.user !== null) {
+                    return this.$page.props.user.id == id;
                 }
                 return false;
             },

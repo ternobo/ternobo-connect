@@ -2,7 +2,7 @@ require('./bootstrap');
 
 import Vue from 'vue';
 
-import { InertiaApp } from '@inertiajs/inertia-vue';
+import { plugin } from '@inertiajs/inertia-vue'
 import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
@@ -21,18 +21,18 @@ Vue.use(Dialog);
 
 vSelect.props.components.default = () => ({
     Deselect: {
-      render: createElement => createElement('i',
-      {
-        attrs: { class: 'material-icons'}
-      }, ''),
+        render: createElement => createElement('i',
+            {
+                attrs: { class: 'material-icons' }
+            }, ''),
     },
     OpenIndicator: {
-      render: createElement => createElement('i',
-      {
-        attrs: { class: 'material-icons'}
-      }, 'keyboard_arrow_down'),
+        render: createElement => createElement('i',
+            {
+                attrs: { class: 'material-icons' }
+            }, 'keyboard_arrow_down'),
     },
-  });
+});
 
 // Install V-Select
 Vue.component('v-select', vSelect);
@@ -42,7 +42,7 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 // Install InertiaApp
-Vue.use(InertiaApp);
+Vue.use(plugin);
 Vue.use(InertiaForm);
 Vue.use(PortalVue);
 
@@ -84,7 +84,6 @@ const vue_app = new Vue({
             props: {
                 initialPage: JSON.parse(app.dataset.page),
                 transformProps: function (props) {
-                    this.$emit('changeProps', props)
                     return props;
                 },
                 async resolveComponent(name) {
@@ -109,6 +108,21 @@ const vue_app = new Vue({
         }
     }
 }).$mount(app);
+
+const notificationChannel = window.Echo.private("notification." + window.user_id);
+notificationChannel.listen("NotificationEvent", function (data) {
+    if (vue_app.$page) {
+        let event = new CustomEvent('notification:new', {
+            bubbles: true,
+            detail: {
+                notification: data.message
+            }
+        });
+        document.dispatchEvent(event);
+        vue_app.$page.props.notifications_count += 1;
+    }
+});
+
 
 window.addEventListener('popstate', () => {
     vue_app.url = window.location.pathname;

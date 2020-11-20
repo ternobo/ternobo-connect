@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
     height: 70px;
@@ -9,6 +10,22 @@
     transition: 0.3s all;
     padding: 0 0.9rem !important;
 }
+
+.unread {
+    position: relative;
+}
+
+.unread::after {
+    content: " ";
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #ff0076;
+    bottom: 3px;
+    left: 12px;
+    border-radius: 50%;
+}
+
 
 .header {
     .container {
@@ -24,13 +41,14 @@
         transition: 0.3s all;
         width: 100%;
     }
-    .toolbar{
+
+    .toolbar {
         display: flex;
         align-items: center;
     }
 }
 
-.autocomplete-input{
+.autocomplete-input {
     border-width: 2px;
 }
 
@@ -68,4 +86,5 @@
     padding-right: 0;
     margin-bottom: 0;
 }
+
 @import "./toolbar";

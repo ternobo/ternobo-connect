@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Notification;
 use App\Models\Page;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
 
@@ -50,6 +50,14 @@ class AppServiceProvider extends ServiceProvider
                     return Auth::user()->getConnectionsIds();
                 }
                 return [];
+            },
+            'notifications_count' => function () {
+                if (Auth::check()) {
+                    return count(Notification::query()
+                            ->where("seen", false)
+                            ->where("to", Auth::user()->personalPage->id)->get());
+                }
+                return 0;
             },
             "waitingConnections" => function () {
                 if (Auth::check()) {

@@ -9,7 +9,7 @@ window._ = require('lodash');
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.headers.common['X-CSRF-TOKEN'] =  document.querySelector('meta[name="csrf-token"]').content;
+window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').content;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -18,18 +18,21 @@ window.axios.defaults.headers.common['X-CSRF-TOKEN'] =  document.querySelector('
  */
 import Echo from 'laravel-echo';
 
-if(user_id){
+if (user_id) {
 
     window.io = require('socket.io-client');
 
     window.Echo = new Echo({
         broadcaster: 'socket.io',
-        host: 'https://echo-server.ternobo.info/socket.io',
-        forceTLS: true
+        host: 'https://tsocket.ternobo.com',
+        forceTLS: true,
+        csrfToken: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        auth:
+        {
+            headers:
+            {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            }
+        }
     });
-    const notificationChannel = window.Echo.private("notification."+window.user_id);
-    notificationChannel.listen("NotificationEvent", function (data) {
-        console.log(data);
-    });
-
 }

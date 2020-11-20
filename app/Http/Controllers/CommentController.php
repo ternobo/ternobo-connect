@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Like;
-use App\Models\Post;
 use App\Models\Action;
 use App\Models\Comment;
+use App\Models\Like;
 use App\Models\Notification;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
 {
@@ -43,15 +42,15 @@ class CommentController extends Controller
             if ($recomment->parent_id === null) {
                 $comment->parent_id = $recomment->id;
             } else {
-                $comment->parent_id = $recomment->parent_id;            
-                $text = "<div><a class='text-action' href='". $recomment->page->slug ."'>@" . $recomment->page->slug . "</a></div> " . $text;
+                $comment->parent_id = $recomment->parent_id;
+                $text = "<div><a class='text-action' href='" . $recomment->page->slug . "'>@" . $recomment->page->slug . "</a></div> " . $text;
             }
         }
         $comment->post_id = $post->id;
         $comment->text = $text;
         $comment->save();
-        Auth::user()->getPage()->addAction("comment",  $post->id, $comment->id);
-        Notification::sendNotification("comment", $post, $post->page_id, $comment->id);
+        Auth::user()->getPage()->addAction("comment", $post->id, $comment->id);
+        Notification::sendNotification("comment", $post->id, $post->page_id, $comment->id);
 
         if ($request->has("reply_to") && $request->reply_to !== null) {
             Notification::sendNotification("reply", $comment->reply_to, $recomment->page->id, $comment->id);
@@ -59,13 +58,13 @@ class CommentController extends Controller
 
         $comment->page = $comment->page;
 
-        return response()->json(array("result" => true, "comment"=>$comment));
+        return response()->json(array("result" => true, "comment" => $comment));
     }
 
     public function replies($comment, Request $request)
     {
-            $comments = Comment::query()->with("page")->where("parent_id", $comment)->latest()->paginate(5);
-            return response()->json(array("result" => true, "data" => $comments));
+        $comments = Comment::query()->with("page")->where("parent_id", $comment)->latest()->paginate(5);
+        return response()->json(array("result" => true, "data" => $comments));
     }
     public function likeComment($comment_id)
     {
@@ -82,7 +81,7 @@ class CommentController extends Controller
             $like->page_id = $page->id;
             $like->comment_id = $comment_id;
             $result = $like->save();
-            Notification::sendNotification("like", $comment_id, $post->page_id, $like->id);
+            Notification::sendNotification("like_comment", $comment_id, $post->page_id, $like->id);
         }
         return response()->json(array("result" => $result, "like" => $is_like));
     }
@@ -93,7 +92,7 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($post,$id)
+    public function destroy($post, $id)
     {
         $comment = Comment::where("page_id", Auth::user()->getPage()->id)->where("id", $id)->firstOrFail();
         $action = Action::query()->where("connected_to", $comment->id)->first();
