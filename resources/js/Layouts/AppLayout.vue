@@ -1,21 +1,25 @@
 <template>
-<div id="app">
+  <div id="app">
     <AppHeader></AppHeader>
-    <transition mode="out-in" name="fade">
+    <div :class="{ 'has-bnav': !$root.isDesktop }">
+      <transition mode="out-in" name="fade">
         <slot></slot>
-    </transition>
-</div>
+      </transition>
+    </div>
+    <bottom-navigator v-if="!$root.isDesktop"></bottom-navigator>
+  </div>
 </template>
 
 <script>
+import BottomNavigator from "../Components/App/BottomNavigator.vue";
 import AppHeader from "../Components/App/header/AppHeader";
 export default {
-    name: "AppLayout",
-    components: {
-        AppHeader
-    }
+  name: "AppLayout",
+  components: {
+    AppHeader,
+    BottomNavigator,
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>

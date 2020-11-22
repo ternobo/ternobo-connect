@@ -146,7 +146,7 @@ class HomeController extends Controller
             $search = $this->generateSearch(explode(" ", $request->q));
             if ($request->isMethod("POST")) {
                 $result = array();
-                $suggestions = SearchSuggestion::query()->whereRaw("name like '%?%'", [$request->q])->limit(10)->get();
+                $suggestions = SearchSuggestion::query()->whereRaw("name like ?", ['%' . $request->q . '%'])->limit(10)->get();
                 foreach ($suggestions as $value) {
                     $result[] = $value->name;
                 }

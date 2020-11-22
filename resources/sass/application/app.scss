@@ -6,6 +6,7 @@
 
 .btn {
     border-width: 2px;
+    padding: 6px 8px;
 }
 
 .form-control {
@@ -24,6 +25,7 @@ h4,
 h5,
 h6 {
     color: $dark;
+    font-weight: 600;
 }
 
 p {
@@ -45,6 +47,14 @@ body {
     text-align: right;
     color: $text-color;
 }
+
+@media screen and (max-width:425px) {
+    body {
+        font-size: 14px;
+    }
+}
+
+@import "./components/bottom-nav.scss";
 
 .sticky-aside {
     position: -webkit-sticky;
@@ -74,8 +84,6 @@ body {
 a {
     color: $text-color;
 }
-
-@import "fonts";
 
 .border-bottom {
     border-bottom: 1px solid #dedede !important;
@@ -139,6 +147,21 @@ a {
         width: 6px;
         background: $text-color;
         border-radius: 50%;
+    }
+}
+
+.b-sidebar {
+    background: $body-bg !important;
+    width: 240px;
+
+    .b-sidebar-item {
+        padding: 14px 16px !important;
+        font-size: 0.86rem;
+        color: $sub-heading;
+    }
+
+    .b-sidebar-item:hover {
+        background-color: #EEE;
     }
 }
 
@@ -301,6 +324,7 @@ img {
     width: 30px;
 }
 
+@import "./components/search-page.scss";
 
 .logodesktop {
     margin-bottom: 1px;
@@ -386,19 +410,21 @@ img {
         padding-right: 0.9rem;
     }
 
-    .content-container-full {
-        padding-left: 30px;
-    }
-
-    .content-container-profile {
-        padding-left: 30px;
-    }
-
-    .content-container-right {
-        padding-left: 30px;
-    }
-
     @media screen and (min-width: 991px) {
+
+
+        .content-container-full {
+            padding-left: 30px;
+        }
+
+        .content-container-profile {
+            padding-left: 30px;
+        }
+
+        .content-container-right {
+            padding-left: 30px;
+        }
+
 
         .content-container-profile {
             max-width: 70.7%;
@@ -630,7 +656,7 @@ pre {
 
 .modal-content {
     border-radius: 0;
-    padding: 0.5rem;
+    padding: 0;
     border: none;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
 }
@@ -666,8 +692,17 @@ pre {
 .autocomplete-input {
     padding: 8px 12px 8px 48px;
     transition: 0.3s all;
-    border-radius: 25px;
+    border-radius: 16px;
+    height: 40px;
     background-color: #FFF !important;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iYmxhY2siIHdpZHRoPSIxOHB4IiBoZWlnaHQ9IjE4cHgiPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMFYweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGZpbGw9IiM3NTc1NzUiIGQ9Ik0xNS41IDE0aC0uNzlsLS4yOC0uMjdDMTUuNDEgMTIuNTkgMTYgMTEuMTEgMTYgOS41IDE2IDUuOTEgMTMuMDkgMyA5LjUgM1MzIDUuOTEgMyA5LjUgNS45MSAxNiA5LjUgMTZjMS42MSAwIDMuMDktLjU5IDQuMjMtMS41N2wuMjcuMjh2Ljc5bDUgNC45OUwyMC40OSAxOWwtNC45OS01em0tNiAwQzcuMDEgMTQgNSAxMS45OSA1IDkuNVM3LjAxIDUgOS41IDUgMTQgNy4wMSAxNCA5LjUgMTEuOTkgMTQgOS41IDE0eiIvPjwvc3ZnPg==');
+    background-size: 24px;
+}
+
+@media screen and (max-width: 425px) {
+    .autocomplete-input {
+        font-size: 12px;
+    }
 }
 
 .autocomplete-input:focus,
@@ -788,9 +823,9 @@ pre {
 
 .splitor-line {
     height: 100%;
-    width: 1px;
+    width: 2px;
     background: $icons;
-    min-height: 20px;
+    min-height: 10px;
 }
 
 .tooltip-inner {
@@ -803,6 +838,10 @@ pre {
 
 .bg-light-blue {
     background: rgba(231, 242, 255, 1);
+}
+
+.modal-dialog {
+    padding: 16px;
 }
 
 @import "./components/website-card";
@@ -969,12 +1008,12 @@ a:focus {
 
 
 .vue-switcher-theme--default.vue-switcher-color--default div {
-    background-color: #191919 !important;
+    background-color: #757575 !important;
+    border: 2px solid #757575;
 }
 
-
 .vue-switcher-theme--default.vue-switcher-color--default.vue-switcher--unchecked div {
-    background-color: #C8C8C8 !important;
+    background-color: transparent !important;
 
 }
 
@@ -996,24 +1035,23 @@ a:focus {
 }
 
 .vue-switcher--unchecked div:after {
-    left: 22px !important;
+    left: 18px !important;
 }
 
 .vue-switcher-theme--default.vue-switcher-color--default.vue-switcher--unchecked div:after {
-    background-color: #FFF !important;
+    background-color: $sub-heading !important;
 }
 
 .vue-switcher div:after {
     content: '' !important;
-    height: 14px !important;
-    width: 14px !important;
+    height: 12px !important;
+    width: 12px !important;
     left: 100%;
-    margin-left: -18px !important;
+    margin-left: -14px !important;
     cursor: pointer !important;
-    top: 2px !important;
+    top: 1px !important;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1) !important;
+    background-color: $sub-heading;
 }
 
-.vue-switcher--unchecked div:after {
-    left: 22px !important;
-}
+@import "fonts";

@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "js/" + ({"NewPostModal":"NewPostModal","LawsModal":"LawsModal","TextareaAutosize":"TextareaAutosize","Tselect":"Tselect","vendors~draggable":"vendors~draggable","vendors~vue-persian-datetime-picker":"vendors~vue-persian-datetime-picker","vue-persian-datetime-picker":"vue-persian-datetime-picker","AboutMeTabProfile":"AboutMeTabProfile","vendors~ContactTabProfile":"vendors~ContactTabProfile","ContactTabProfile":"ContactTabProfile"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "js/" + ({"NewPostModal":"NewPostModal","NewPostCard":"NewPostCard","TextareaAutosize":"TextareaAutosize","Tselect":"Tselect","UserInfoCard":"UserInfoCard","vendors~draggable":"vendors~draggable","vendors~vue-persian-datetime-picker":"vendors~vue-persian-datetime-picker","vue-persian-datetime-picker":"vue-persian-datetime-picker","LawsModal":"LawsModal","AboutMeTabProfile":"AboutMeTabProfile","vendors~ContactTabProfile":"vendors~ContactTabProfile","ContactTabProfile":"ContactTabProfile"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function

@@ -1,24 +1,28 @@
 <template>
   <div class="header">
+    <user-option-modal :show.sync="showOptions"></user-option-modal>
     <div class="container">
       <div class="d-flex align-items-center w-100">
         <inertia-link href="/feed" class="logodesktop" v-if="$root.isDesktop">
           <img src="/images/farsi-logo.png" class="w-100" />
         </inertia-link>
         <inertia-link href="/feed" class="logo-sm" v-if="!$root.isDesktop">
-          <img src="/images/logo.svg" class="mr-2 w-100" />
+          <img src="/images/logo.svg" class="mr-2" />
         </inertia-link>
 
         <form method="get" action="/search" class="searchfield d-flex mr-3">
-          <autocomplete style="min-width: 270px" :default-value="searchVal" :search="search" id="searchforminput" autocomplete="off" required type="text" name="q" placeholder="هر چیزی که در جستن آنی، آنی" />
+          <autocomplete class="search-field w-100" :default-value="searchVal" :search="search" id="searchforminput" autocomplete="off" required type="text" name="q" placeholder="هر چیزی که در جستن آنی، آنی" />
           <div style="width: max-content" class="text-muted mx-2 align-items-center justify-content-center d-lg-flex d-none nowrap font-12" v-if="$root.isDesktop">
             <img src="/images/beta.svg" class="mr-2 verical-middle" width="36" />
-            <span class="mx-1">۰.۵ V</span>
+            <span class="mx-1 text-nowrap">۰.۵ V</span>
           </div>
         </form>
+        <div>
+          <i class="material-icons hover-dark clickable" @click="showOptions = true">more_vert</i>
+        </div>
       </div>
-      <div class="d-flex align-items-center justify-content-end" style="min-width: 400px">
-        <header-toolbar v-if="$root.isDesktop"></header-toolbar>
+      <div class="d-flex align-items-center justify-content-end" v-if="$root.isDesktop" style="min-width: 400px">
+        <header-toolbar></header-toolbar>
       </div>
     </div>
   </div>
@@ -27,10 +31,12 @@
 <script>
 import Autocomplete from "@trevoreyre/autocomplete-vue";
 import HeaderToolbar from "./HeaderToolbar";
+import UserOptionModal from "../../Modals/UserOptionModal.vue";
 export default {
   data() {
     return {
       searchVal: this.$page.props.search ? this.$page.props.search : "",
+      showOptions: false,
     };
   },
   methods: {
@@ -64,6 +70,7 @@ export default {
   components: {
     HeaderToolbar,
     Autocomplete,
+    UserOptionModal,
   },
 };
 </script>

@@ -108,22 +108,21 @@ const vue_app = new Vue({
         }
     }
 }).$mount(app);
-
-const notificationChannel = window.Echo.private("notification." + window.user_id);
-notificationChannel.listen("NotificationEvent", function (data) {
-    if (vue_app.$page) {
-        let event = new CustomEvent('notification:new', {
-            bubbles: true,
-            detail: {
-                notification: data.message
-            }
-        });
-        document.dispatchEvent(event);
-        vue_app.$page.props.notifications_count += 1;
-    }
-});
-
-
+if (user_id) {
+    const notificationChannel = window.Echo.private("notification." + window.user_id);
+    notificationChannel.listen("NotificationEvent", function (data) {
+        if (vue_app.$page) {
+            let event = new CustomEvent('notification:new', {
+                bubbles: true,
+                detail: {
+                    notification: data.message
+                }
+            });
+            document.dispatchEvent(event);
+            vue_app.$page.props.notifications_count += 1;
+        }
+    });
+}
 window.addEventListener('popstate', () => {
     vue_app.url = window.location.pathname;
 });

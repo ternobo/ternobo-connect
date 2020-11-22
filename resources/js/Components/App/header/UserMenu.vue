@@ -1,7 +1,7 @@
 <template>
   <div class="usermenu card d-block" v-if="$page.props.user != null">
     <div class="card-header px-2 d-flex bg-white border-bottom">
-      <a :href="'/' + this.$page.props.user.username" class="d-flex aling-items-center">
+      <inertia-link :href="'/' + this.$page.props.user.username" class="d-flex aling-items-center">
         <img class="profile-sm" :src="this.$page.props.user.profile" />
         <span class="mx-2 d-flex flex-column justify-content-center">
           <strong class="text-black"
@@ -10,7 +10,7 @@
           </strong>
           <small>{{ this.$page.props.user.short_bio }}</small>
         </span>
-      </a>
+      </inertia-link>
     </div>
     <div class="card-body p-0">
       <ul class="list-group list-group-flush">

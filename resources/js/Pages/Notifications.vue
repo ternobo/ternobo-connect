@@ -5,8 +5,11 @@
     </sidebar-right>
     <div class="content-container">
       <div class="card">
-        <div class="card-body py-1">
+        <div class="card-body py-1" v-if="notificationsArray.length > 0">
           <Notification v-for="notification in notificationsArray" :notification="notification" :key="notification.id"></Notification>
+        </div>
+        <div class="card-body text-center" v-else>
+          <span class="font-18 text-muted">هیچ اعلان وجود ندارد</span>
         </div>
       </div>
     </div>

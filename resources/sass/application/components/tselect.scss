@@ -17,12 +17,12 @@
         justify-content: space-between;
         background: $fixed-elements;
         color: $sub-heading;
-        border-radius: 15px;
-        padding: 5px 5px;
+        border-radius: 14px;
+        padding: 10px;
     }
 
     .tselect_title.active {
-        border-radius: 15px 15px 0 0;
+        border-radius: 14px 14px 0 0;
     }
 
     .tselect_title.active {
@@ -37,6 +37,10 @@
         i {
             color: $grey;
             transition: 0.3s all;
+        }
+
+        i {
+            color: $grey;
         }
     }
 
@@ -86,7 +90,7 @@
 
         &:hover,
         &.active {
-            background: rgb(224,224,224);
+            background: rgb(224, 224, 224);
         }
 
         .tselect_item--text {
@@ -97,6 +101,7 @@
         }
 
     }
+
     .tselect_new-item {
         position: relative;
         display: flex;
