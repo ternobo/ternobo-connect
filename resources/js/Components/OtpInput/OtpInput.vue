@@ -1,5 +1,5 @@
 <template>
-  <div style="display: flex">
+  <div style="display: flex; flex-direction: row-reverse">
     <input v-if="inputType === 'password'" autocomplete="off" name="hidden" type="text" style="display: none" />
     <single-otp-input
       v-for="(item, i) in numInputs"
@@ -71,7 +71,8 @@ export default {
     // Helper to return OTP from input
     checkFilledAllInputs() {
       if (this.otp.join("").length === this.numInputs) {
-        return this.$emit("on-complete", this.otp.join(""));
+        this.$emit("completed");
+        return this.$emit("input", this.otp.join(""));
       }
       return "Wait until the user enters the required number of characters";
     },

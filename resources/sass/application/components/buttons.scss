@@ -58,13 +58,14 @@
     background: #FEFCEA;
     color: #EFDC36;
 }
+
 .btn-connection-waiting:hover {
     background: #fffce4;
     color: #EFDC36;
 
 }
 
-.add-btn{
+.add-btn {
     border: 2px solid $icons;
     border-right: none;
     background: #E0E0E0;
@@ -72,7 +73,7 @@
     max-height: 37px;
 }
 
-.add-btn:hover{
+.add-btn:hover {
     color: #757575;
 }
 
@@ -103,9 +104,51 @@
     background: white;
     border-radius: 100%;
     transition: all 0.4s linear;
-    animation: loading 2s infinite;
+    -webkit-animation: loading 2s infinite;
+            animation: loading 2s infinite;
     opacity: 1;
     background-color: #223;
+}
+
+@-webkit-keyframes one-two {
+    0% {
+        left: 20%;
+        top: 50%;
+    }
+
+    12.5% {
+        top: 20%;
+    }
+
+    25% {
+        top: 50%;
+    }
+
+    37.5% {
+        top: 70%;
+    }
+
+    50% {
+        left: 70%;
+        top: 50%;
+    }
+
+    62.5% {
+        top: 20%;
+    }
+
+    75% {
+        top: 50%;
+    }
+
+    87.5% {
+        top: 70%;
+    }
+
+    100% {
+        left: 20%;
+        top: 50%;
+    }
 }
 
 @keyframes one-two {
@@ -149,6 +192,20 @@
     }
 }
 
+@-webkit-keyframes loading {
+    0% {
+        left: 20%;
+    }
+
+    50% {
+        left: 80%;
+    }
+
+    100% {
+        left: 20%;
+    }
+}
+
 @keyframes loading {
     0% {
         left: 20%;
@@ -164,7 +221,7 @@
 }
 
 
-.splitor-b::after{
+.splitor-b::after {
     content: " ";
     bottom: 0px;
     right: 10px;
@@ -176,7 +233,7 @@
     background: #C8C8C8;
 }
 
-.splitor-l::after{
+.splitor-l::after {
     content: " ";
     left: 0;
     width: 1px;
@@ -186,13 +243,14 @@
     background: #C8C8C8;
 }
 
-.btn-edit{
-    border-radius: 32px;
+.btn-edit {
+    border-radius: 14px;
     border: 1px solid #757575;
     color: #757575;
     transition: 0.3s all;
 }
-.btn-edit:hover{
+
+.btn-edit:hover {
     border-color: #191919;
     color: #191919;
 }

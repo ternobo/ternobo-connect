@@ -86,11 +86,23 @@
 
 .post-box {
     .post-header {
-        border-bottom: 1px solid #DEDEDE;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0.5rem;
+        padding: 12px;
+        position: relative;
+
+        &::after {
+            content: " ";
+            position: absolute;
+            width: calc(100%-12px);
+            left: 12px;
+            right: 12px;
+            bottom: 0;
+            height: 2px;
+            background: $border-color;
+
+        }
     }
 
     .post-header {

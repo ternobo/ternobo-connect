@@ -1,14 +1,14 @@
 <template>
   <b-modal v-model="showModal" hide-footer hide-header :centered="true">
     <tabs v-if="verification_step || emailphone_step" @selected="(emailphone_step = true), (verification_step = false)">
-      <tab name="ایمیل" :selected="true" :icon="$root.isMobile ? undefined : 'email'">
+      <tab name="ایمیل" :selected="true">
         <div class="input-group d-flex align-items-center">
           <LoadingButton class="btn btn-dark" :loading="loading" v-if="!verification_step" @click.native="sendVcode('email')">ثبت</LoadingButton>
           <i class="material-icons-outlined text-superlight hover-danger" v-else @click="(emailphone_step = true), (verification_step = false)">edit</i>
           <input input-class="w-100" type="email" class="form-control mx-1 text-left" :readonly="verification_step" v-model="email" placeholder="example@ternobo.com" />
         </div>
       </tab>
-      <tab name="شماره همراه" :icon="$root.isMobile ? undefined : 'phone'">
+      <tab name="شماره همراه">
         <div class="input-group d-flex align-items-center">
           <LoadingButton class="btn btn-dark" :loading="loading" v-if="!verification_step" @click.native="sendVcode('phone')">ثبت</LoadingButton>
           <i class="material-icons-outlined text-superlight hover-danger" v-else @click="(emailphone_step = true), (verification_step = false)">edit</i>
@@ -17,15 +17,17 @@
       </tab>
     </tabs>
     <transition name="slide">
-      <div v-if="verification_step">
+      <div class="text-center" v-if="verification_step">
         <div class="input-group d-flex align-items-center flex-column justify-content-center mt-4">
-          <label class="w-100">کد تایید خود ‌را وارد کنید</label>
-          <div class="input-group-icon">
-            <otp-input input-class="w-100" class="material--sm mx-1 text-center" v-model="code" placeholder="111111" maxlength="6" />
-            <i class="material-icons-outlined">verified_user</i>
+          <label class="w-100">کد <span class="text-action">تایید</span> ارسال شده ‌را وارد کنید</label>
+          <div class="d-flex justify-content-center">
+            <div class="d-flex align-items-center">
+              <otp-input input-class="w-100" class="material--sm mx-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" />
+              <i class="material-icons-outlined mr-4" :class="{ 'text-muted': !invalidCode && !completedCode, 'text-danger': invalidCode, 'text-success': !invalidCode }">verified_user</i>
+            </div>
           </div>
         </div>
-        <LoadingButton :loading="loading" class="btn btn-dark mx-3 mt-4 w-50" @click.native="verifyCode">بعدی</LoadingButton>
+        <LoadingButton :loading="loading" class="btn btn-dark mt-4" @click.native="verifyCode">بعدی</LoadingButton>
       </div>
     </transition>
     <transition name="slide">
@@ -143,16 +145,20 @@ export default {
       };
 
       axios(config)
-        .then(function (response) {
+        .then((response) => {
           if (response.data.result) {
-            $this.verification_step = false;
-            $this.personal_info_step = true;
+            this.verification_step = false;
+            this.personal_info_step = true;
+            this.invalidCode = false;
+          } else {
+            this.invalidCode = true;
           }
-          $this.loading = false;
+          this.loading = false;
         })
         .catch(function (error) {
           $this.loading = false;
-        });
+        })
+        .then(() => (this.completedCode = true));
     },
     savePersonal() {
       var $this = this;
@@ -236,6 +242,9 @@ export default {
       password_repeat: undefined,
       profile: "/images/man-profile.png",
       loading: false,
+
+      invalidCode: false,
+      completedCode: false,
     };
   },
   mixins: [ModalMixin],

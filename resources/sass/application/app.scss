@@ -386,6 +386,7 @@ img {
 .modal-header .close {
     padding: 0;
     margin: 0;
+    height: 12px;
 }
 
 .b-sidebar-backdrop {
@@ -659,10 +660,6 @@ pre {
     padding: 0;
     border: none;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
-}
-
-.modal-header {
-    padding: 0.5rem;
 }
 
 .btn-grey-10 {
@@ -996,6 +993,44 @@ a:focus {
     z-index: 1;
 }
 
+.modal-confirm {
+    max-width: 340px;
+}
+
+.confirm-container {
+    padding-top: 8px;
+    margin-bottom: -4px;
+
+    .text {
+        margin-bottom: 32px;
+        font-size: 14px;
+    }
+
+    @media screen and (max-width:768px) {
+        .text {
+            font-size: 12px;
+        }
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        .btn-ok {
+            background: rgba(231, 243, 255, 0.7);
+            border: none;
+            color: $action;
+        }
+
+        .btn-cancel {
+            background: transparent;
+            border: none;
+            color: $icons;
+        }
+    }
+}
+
 @import "./components/social-card.scss";
 
 @import "./components/categories-card.scss";
@@ -1006,6 +1041,28 @@ a:focus {
 
 @import "./components/toast.scss";
 
+
+@media screen and (max-width: 425px) {
+    .content-container-profile {
+        .tabs {
+            li {
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+.otp-input-single {
+    max-width: 16px;
+    margin-right: 12px;
+
+    .input {
+        padding: 8px 0;
+        text-align: center;
+        padding-bottom: 0;
+        max-width: 100%;
+    }
+}
 
 .vue-switcher-theme--default.vue-switcher-color--default div {
     background-color: #757575 !important;

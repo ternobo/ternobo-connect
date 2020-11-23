@@ -1,9 +1,8 @@
 <template>
   <div style="display: flex; align-items: center">
-    <input ref="input" :type="inputType" min="0" max="9" maxlength="1" pattern="[0-9]" v-model="model" :class="inputClasses" @input="handleOnChange" @keydown="handleOnKeyDown" @paste="handleOnPaste" @focus="handleOnFocus" @blur="handleOnBlur" />
-    <span v-if="!isLastChild && separator">
-      <span v-html="separator"></span>
-    </span>
+    <div class="otp-input-single material-textfield material--transparent material--sm" v-on="$listeners">
+      <input class="input" ref="input" :type="inputType" min="0" max="9" maxlength="1" pattern="[0-9]" v-model="model" :class="inputClasses" @input="handleOnChange" @keydown="handleOnKeyDown" @paste="handleOnPaste" @focus="handleOnFocus" @blur="handleOnBlur" />
+    </div>
   </div>
 </template>
 
