@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Skills;
 
+use App\Http\Controllers\Controller;
+use App\Models\Notification;
+use App\Models\Skill;
 use App\Models\SkillCredit;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Notification;
+use Illuminate\Support\Facades\Validator;
 
-class SkillCreditController extends Controller {
+class SkillCreditController extends Controller
+{
 
     /**
      * Store a newly created resource in storage.
@@ -16,15 +19,16 @@ class SkillCreditController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $validator = Validator::make($request->all(), [
-                    "skill" => "required|exists:skills,id",
-                    "level" => "required|digits_between:1,3",
-                    "reason" => "required|string"
-        ],[
+            "skill" => "required|exists:skills,id",
+            "level" => "required|digits_between:1,3",
+            "reason" => "required|string",
+        ], [
             'level.required' => 'سطح مهارت اجباری است.',
             'reason.required' => 'یک دلیل برای تاییدیه خود انتخاب کنید.',
-            'reason.string' => 'ورودی نامعتبر'
+            'reason.string' => 'ورودی نامعتبر',
 
         ]);
         if ($validator->fails()) {
@@ -43,9 +47,21 @@ class SkillCreditController extends Controller {
         return response()->json(array("result" => $result));
     }
 
-    public function checkCredit(Request $request){
+    public function checkCredit(Request $request)
+    {
+        $skill = Skill::find($request->skill);
+        if ($skill != null) {
+            if (Auth::check()) {
+                if ($skill->user_id == Auth::user()->id) {
+                    return response()->json([
+                        "canCredit" => false,
+                    ]);
+                }
+            }
+
+        }
         return response()->json([
-            "canCredit" => !Auth::user()->isCredit($request->skill)
+            "canCredit" => !Auth::user()->isCredit($request->skill),
         ]);
     }
 
@@ -55,7 +71,8 @@ class SkillCreditController extends Controller {
      * @param  \App\SkillCredit  $skillCredit
      * @return \Illuminate\Http\Response
      */
-    public function destroy($skill_id) {
+    public function destroy($skill_id)
+    {
         $user = Auth::user();
         $skillCredit = SkillCredit::where("skill_id", $skill_id)->where("user_id", $user->id)->first();
         if ($skillCredit instanceof SkillCredit) {

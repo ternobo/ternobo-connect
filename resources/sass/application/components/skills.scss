@@ -11,6 +11,13 @@
         .skill-name {
             display: flex;
             align-items: center;
+            font-size: 16px;
+
+            @media screen and (max-width:$sm-size) {
+                font-size: 12px;
+            }
+
+            font-weight: 600;
 
             .endorsement {
                 display: flex;
@@ -23,8 +30,16 @@
                 border-left: 2px solid $icons;
                 cursor: pointer;
 
+                @media screen and (max-width: $sm-size) {
+                    font-size: 12px;
+                }
+
                 i {
                     font-size: 30px;
+
+                    @media screen and (max-width: $sm-size) {
+                        font-size: 24px;
+                    }
                 }
 
                 .action,
@@ -34,6 +49,7 @@
                 }
 
                 &:hover {
+
                     .action,
                     i {
                         color: $dark;
@@ -80,4 +96,14 @@
         }
     }
 
+}
+
+.show-all-skills {
+    font-size: 14px;
+    color: $action;
+    @extend .clickable;
+
+    @media screen and (max-width:$sm-size) {
+        font-size: 12px;
+    }
 }

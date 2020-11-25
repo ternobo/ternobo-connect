@@ -26,6 +26,7 @@
         "phpmailer/phpmailer": "^6.1",
         "pragmarx/google2fa": "^8.0",
         "pragmarx/recovery": "^0.1.0",
+        "silviolleite/laravelpwa": "^2.0",
         "taylornetwork/laravel-username-generator": "^2.4"
     },
     "require-dev": {

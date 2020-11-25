@@ -8,6 +8,10 @@
         max-height: 90px;
         overflow: hidden;
         word-break: break-word;
+
+        @media screen and (max-width: $sm-size) {
+            font-size: 12px;
+        }
     }
 
     .edu-description.open {
@@ -33,5 +37,23 @@
     .detail {
         display: flex;
         width: 100%;
+
+        @media screen and (max-width:$sm-size) {
+            padding-bottom: 16px;
+
+            &:not(:last-child) {
+                border-bottom: 2px solid #e0e0ee;
+                margin-bottom: 16px;
+            }
+        }
+    }
+}
+
+.show--more {
+    @extend .clickable;
+    @extend .text-action;
+
+    @media screen and (max-width: $sm-size) {
+        font-size: 12px;
     }
 }

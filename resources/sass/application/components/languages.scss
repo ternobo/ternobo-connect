@@ -6,11 +6,14 @@
     li {
         padding: 7px 0;
 
-        .languages-name {
+        .language-name {
             display: flex;
             align-items: center;
-        }
 
+            @media screen and (max-width: $sm-size) {
+                font-size: 12px;
+            }
+        }
 
         &:not(:last-child) {
             padding-left: 0.5rem;
@@ -54,13 +57,13 @@
 
     }
 
-    li.edit{
+    li.edit {
         padding-left: 0;
         margin-left: 0;
         border-left: none;
     }
 
-    li.detailed{
+    li.detailed {
         width: 100%;
         border: none;
     }

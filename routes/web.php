@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Skills\SkillCreditController;
 use App\Http\Middleware\FollowMiddlware;
 use App\Http\Middleware\LocaleMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -142,10 +143,10 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             Route::post("/deactive", "Auth\UsersController@deactiveAccount");
             //Settings End
 
-            Route::post("/skills/search", "SkillController@search");
-            Route::post("/skills/can-credit", "SkillCreditController@checkCredit");
-            Route::resource("/skills/credit", "SkillCreditController");
-            Route::post("/skills/sort/{id}", "SkillController@sort");
+            Route::post("/skills/search", "Skills\SkillController@search");
+            Route::post("/skills/can-credit", [SkillCreditController::class, 'checkCredit']);
+            Route::resource("/skills/credit", SkillCreditController::class);
+            Route::post("/skills/sort/{id}", "Skills\SkillController@sort");
 
             Route::post("/bookmark/{post_id}", "PostController@bookmarkPost");
 

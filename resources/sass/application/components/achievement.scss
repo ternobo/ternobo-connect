@@ -9,6 +9,10 @@
         .achievement-name {
             display: flex;
             align-items: center;
+
+            @media screen and (max-width: $sm-size) {
+                font-size: 12px;
+            }
         }
 
 
@@ -51,13 +55,13 @@
 
     }
 
-    li.edit{
+    li.edit {
         padding-left: 0;
         margin-left: 0;
         border-left: none;
     }
 
-    li.detailed{
+    li.detailed {
         width: 100%;
         border: none;
     }

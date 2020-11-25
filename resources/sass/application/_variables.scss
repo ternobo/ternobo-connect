@@ -24,7 +24,7 @@ $headings: #191919;
 
 
 //Colors
-$border-color: rgb(224,224,224);
+$border-color: rgb(224, 224, 224);
 $primary: #191919;
 $action: #0898DF;
 $wating: #FFEB3B;
@@ -80,16 +80,15 @@ $dark: $black !default;
 
 // This table defines the theme colors (variant names)
 $theme-colors: () !default;
-$theme-colors: map-merge(
-  (
-    'primary': $primary,
-    'secondary': $secondary,
-    'success': $success,
-    'info': $info,
-    'warning': $warning,
-    'danger': $danger,
-    'light': $light,
-    'dark': $dark
-  ),
-  $theme-colors
-);
+$theme-colors: map-merge(('primary': $primary,
+        'secondary': $secondary,
+        'success': $success,
+        'info': $info,
+        'warning': $warning,
+        'danger': $danger,
+        'light': $light,
+        'dark': $dark),
+    $theme-colors);
+
+
+$sm-size: 768px;

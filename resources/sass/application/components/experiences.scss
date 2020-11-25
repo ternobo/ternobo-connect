@@ -8,6 +8,10 @@
         max-height: 90px;
         overflow: hidden;
         word-break: break-word;
+
+        @media screen and (max-width: $sm-size) {
+            font-size: 12px;
+        }
     }
 
     .job-description.open {

@@ -1,0 +1,65 @@
+.about-me--picture {
+    border-radius: 50%;
+    height: 72px;
+    width: 72px;
+}
+
+@media screen and (max-width: 768px) {
+    .about-me--picture {
+        height: 48px;
+        width: 48px;
+    }
+}
+
+
+.about-me--card--subtitle {
+    font-size: 18px;
+    font-weight: 600;
+
+    @media screen and (max-width:$sm-size) {
+        font-size: 12px;
+    }
+}
+
+.about-me--card-title {
+    font-size: 20px;
+    font-weight: 600;
+
+    @media screen and (max-width:$sm-size) {
+        font-size: 14px;
+    }
+}
+
+.about-me--company-info {
+    display: flex;
+    align-items: center;
+}
+
+.about-me--picture--mobile {
+    margin-left: 10px;
+}
+
+.about-me--title {
+    font-size: 12px;
+    color: $text-color;
+}
+
+.about-me--subtitle {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 14px;
+    color: $icons;
+
+    .degree {
+        color: $sub-heading;
+
+        &:not(::last-child) {
+            margin-left: 3px;
+        }
+    }
+
+    @media screen and (max-width:$sm-size) {
+        font-size: 10px;
+    }
+}

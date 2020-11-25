@@ -81,6 +81,10 @@ body {
     background: $box-on-bg;
 }
 
+.card-body {
+    padding: 20px;
+}
+
 a {
     color: $text-color;
 }
@@ -741,14 +745,15 @@ pre {
     opacity: 1;
 }
 
+@media screen and (min-width: 769px) {
+    .about-me .card-body {
+        padding-right: 40px;
+        padding-left: 40px;
+    }
 
-.about-me .card-body {
-    padding-right: 40px;
-    padding-left: 40px;
-}
-
-.about-me .card-body .follow-btn {
-    margin-left: -20px;
+    .about-me .card-body .follow-btn {
+        margin-left: -20px;
+    }
 }
 
 @import "./components/datepicker.scss";
@@ -1112,3 +1117,5 @@ a:focus {
 }
 
 @import "fonts";
+
+@import "./components/aboutme.scss";

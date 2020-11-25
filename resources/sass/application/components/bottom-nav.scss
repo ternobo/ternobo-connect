@@ -49,6 +49,10 @@
             font-family: "Material Icons";
             font-size: 24px;
             color: $icon-hover;
+
+            img {
+                border: 2px solid $dark;
+            }
         }
 
         .navheader-icon::after {
@@ -61,6 +65,8 @@
             right: 0;
             bottom: -5px;
         }
+
+
 
 
         .navheader-text {

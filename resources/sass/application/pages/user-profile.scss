@@ -1,5 +1,6 @@
 .page-cover {
     height: auto;
+    -o-object-fit: cover;
     object-fit: cover;
 }
 
@@ -10,9 +11,70 @@
 }
 
 .pageinfo-card {
+    position: relative;
     display: flex;
     align-items: center;
     flex-direction: row;
+    justify-content: space-between;
+    padding: 16px;
+    padding-bottom: 0;
+
+    @media screen and (max-width: $sm-size) {
+        justify-content: center;
+    }
+
+    .btn-edit {
+        position: absolute;
+        right: 16px;
+        top: 14px;
+        height: 24px;
+        width: 24px;
+        font-size: 18px !important;
+    }
+}
+
+.page-name {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+
+    @media screen and (max-width: $sm-size) {
+        padding-top: 8px;
+        align-items: center;
+    }
+
+    .follow-buttons {
+        margin-top: 10px;
+    }
+
+    .user-fullname {
+        font-weight: 600;
+        font-size: 20px;
+
+        @media screen and (max-width: $sm-size) {
+            font-size: 14px;
+        }
+    }
+
+    .user--short-bio {
+        font-size: 14px;
+
+        @media screen and (max-width: $sm-size) {
+            font-size: 12px;
+        }
+    }
+
+    .user-location {
+        font-size: 14px;
+
+        @media screen and (max-width: $sm-size) {
+            font-size: 12px;
+        }
+
+        i {
+            font-size: 16px;
+        }
+    }
 }
 
 .profile-box {
@@ -20,7 +82,11 @@
     position: relative;
     background: #FFF;
 
-    > i {
+    @media screen and (max-width: $sm-size) {
+        margin-top: -64px;
+    }
+
+    >i {
         position: absolute;
         top: 0;
         left: 0;
@@ -36,23 +102,39 @@
         background: rgba($color: #191919, $alpha: 0.5);
         opacity: 0;
         transition: 0.3s all;
+
+        @media screen and (max-width: $sm-size) {
+            opacity: 1;
+            height: 24px;
+            bottom: 6px;
+            width: 24px;
+            top: unset;
+            right: 31px;
+            font-size: 16px;
+            background: #191919;
+            border-radius: 8px;
+        }
+
+
+
     }
 
-    > figure {
+    >figure {
         transition: 0.3s all;
 
-        img{
-            border: 4px solid #FFF;
+        img {
+            border: 5px solid #FFF;
         }
 
     }
 
     &:hover {
         >figure {
+            -webkit-filter: blur(2px);
             filter: blur(2px);
         }
 
-        > i {
+        >i {
             opacity: 1;
         }
     }

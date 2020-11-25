@@ -12,7 +12,7 @@
     <inertia-link :class="{ active: $root.url === '/bookmarks' }" href="/bookmarks">
       <i class="navheader-icon">bookmarks</i>
     </inertia-link>
-    <inertia-link :href="'/' + $page.props.user.username">
+    <inertia-link :class="{ active: $root.url === '/' + $page.props.user.username }" :href="'/' + $page.props.user.username">
       <i class="navheader-icon">
         <img :src="$page.props.user.profile" style="width: 24px; height: 24px" class="rounded-circle" />
       </i>
