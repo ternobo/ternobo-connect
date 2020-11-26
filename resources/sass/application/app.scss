@@ -473,6 +473,57 @@ img {
 
 @import "components/people-suggestion.scss";
 
+
+.new-post--placeholder {
+    font-size: 14px;
+    color: $grey;
+
+    @media screen and(max-width: 768px) {
+        font-size: 12px;
+    }
+}
+
+.new-post--action {
+    font-size: 16px;
+    color: $grey;
+    display: flex;
+    border-radius: 12px;
+    transition: 0.3s all;
+
+    @media screen and(min-width: 769px) {
+        padding: 4px 16px;
+
+        &:not(.disabled):hover {
+            background: #EEE;
+            color: $grey;
+        }
+    }
+
+    i {
+        font-size: 20px;
+        margin-left: 6px;
+
+        &:not(.disabled) {
+            color: $grey;
+        }
+
+        @media screen and(max-width: 768px) {
+            font-size: 16px;
+        }
+    }
+
+    @media screen and(max-width: 768px) {
+        font-size: 10px;
+    }
+
+    &.disabled:hover,
+    &.disabled:hover i,
+    &.disabled i {
+        color: #C8C8C8;
+    }
+
+}
+
 .verificationcheck {
     @extend .material-icons;
     color: $action;
@@ -796,7 +847,7 @@ pre {
 
 .vs__open-indicator {
     max-height: 24px;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     margin-top: 6px;

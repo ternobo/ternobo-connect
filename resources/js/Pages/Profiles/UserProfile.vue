@@ -5,7 +5,7 @@
       <tabs :compact="true" :disabled="edit" class="py-3" @selected="tabChange" :state-tab="true">
         <template slot="custom-item">
           <div class="d-flex align-items-center" v-if="canEdit && showEdit">
-            <div class="p-3 rounded-circle clickable" v-if="edit">
+            <div class="ml-3 rounded-circle clickable" v-if="edit">
               <i class="material-icons text-muted hover-dark" v-if="edit" @click="cancelEdit">close</i>
             </div>
             <button class="btn d-flex align-items-center justify-content-center btn-edit" @click="doEdit">
@@ -18,19 +18,19 @@
             </button>
           </div>
         </template>
-        <tab v-if="showAbout" name="درباره من" id="home" :href="'/' + page.slug" :selected="current_tab === 'home'">
+        <tab v-if="hasAbout" name="درباره من" id="home" :href="'/' + page.slug" :selected="current_tab === 'home'">
           <div class="w-100 d-flex justify-content-center py-3" v-if="loadingTab">
             <loading-spinner class="image__spinner" />
           </div>
           <AboutTab v-else ref="about" :edit="edit" :page="page"></AboutTab>
         </tab>
-        <tab name="فعالیت‌ها" id="activities" :href="'/' + page.slug + '/activities'" :selected="current_tab === 'activities'">
+        <tab v-if="hasActivity" name="فعالیت‌ها" id="activities" :href="'/' + page.slug + '/activities'" :selected="current_tab === 'activities'">
           <div class="row" v-if="!loadingTab" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
-            <div class="col-md-4">
+            <div class="col-md-4" v-if="$root.isDesktop">
               <Categories :current-category="currentCategory" :categories="page.categories" :location="location" :slug="page.slug" :article="false"></Categories>
             </div>
             <div class="col-md-8">
-              <NewPostCard class="mt-4 mt-md-0" v-if="canEdit"></NewPostCard>
+              <NewPostCard v-if="canEdit"></NewPostCard>
               <div class="posts pt-3">
                 <ActionCard v-for="action in actionsList" :page="page" :action="action" :key="action.id"></ActionCard>
               </div>
@@ -93,13 +93,13 @@ export default {
     }
     this.current_tab = this.location;
 
-    if (!(this.showSkills || this.showExperiences || this.showEducations || this.checkUser(this.page.user_id) || (this.about != null && this.about.length > 0))) {
-      this.showAbout = false;
-      if (this.current_tab == "home") {
-        this.current_tab = "activities";
-        this.loadTab("/" + this.page.slug + "/activities", false);
-      }
-    }
+    // if (!(this.showSkills || this.showExperiences || this.showEducations || this.checkUser(this.page.user_id) || (this.about != null && this.about.length > 0))) {
+    //   this.showAbout = false;
+    //   if (this.current_tab == "home") {
+    //     this.current_tab = "activities";
+    //     this.loadTab("/" + this.page.slug + "/activities", false);
+    //   }
+    // }
   },
   methods: {
     loadMore() {
@@ -259,30 +259,30 @@ export default {
     canEdit() {
       return this.page.user_id == window.user_id;
     },
-    showSkills() {
-      if (this.checkUser(this.page.user_id) || (this.page.user.skills != null && this.page.user.skills.length > 0)) {
-        return true;
-      }
-      return false;
-    },
-    showExperiences() {
-      if (this.checkUser(this.page.user_id) || (this.page.about_data != null && this.page.about_data.experiences != null && this.page.about_data.experiences.length > 0)) {
-        return true;
-      }
-      return false;
-    },
-    showEducations() {
-      if (this.checkUser(this.page.user_id) || (this.page.about_data != null && this.page.about_data.educations != null && this.page.about_data.educations.length > 0)) {
-        return true;
-      }
-      return false;
-    },
-    showAchievements() {
-      if (this.checkUser(this.page.user_id) || (this.page.about_data != null && this.page.about_data.achievements != null && this.page.about_data.achievements.length > 0)) {
-        return true;
-      }
-      return false;
-    },
+    // showSkills() {
+    //   if (this.checkUser(this.page.user_id) || (this.page.user.skills != null && this.page.user.skills.length > 0)) {
+    //     return true;
+    //   }
+    //   return false;
+    // },
+    // showExperiences() {
+    //   if (this.checkUser(this.page.user_id) || (this.page.about_data != null && this.page.about_data.experiences != null && this.page.about_data.experiences.length > 0)) {
+    //     return true;
+    //   }
+    //   return false;
+    // },
+    // showEducations() {
+    //   if (this.checkUser(this.page.user_id) || (this.page.about_data != null && this.page.about_data.educations != null && this.page.about_data.educations.length > 0)) {
+    //     return true;
+    //   }
+    //   return false;
+    // },
+    // showAchievements() {
+    //   if (this.checkUser(this.page.user_id) || (this.page.about_data != null && this.page.about_data.achievements != null && this.page.about_data.achievements.length > 0)) {
+    //     return true;
+    //   }
+    //   return false;
+    // },
   },
   name: "UserProfile",
   props: {
@@ -297,6 +297,14 @@ export default {
     page: {
       type: Object,
       default: undefined,
+    },
+    hasActivity: {
+      type: Boolean,
+      default: true,
+    },
+    hasAbout: {
+      type: Boolean,
+      default: true,
     },
     actions: {
       type: Object,

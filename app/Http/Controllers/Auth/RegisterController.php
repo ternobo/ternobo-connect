@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\Http\Controllers\Controller;
-use App\Models\Providers\RouteServiceProvider;
+use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class RegisterController extends Controller {
+class RegisterController extends Controller
+{
     /*
-      |--------------------------------------------------------------------------
-      | Register Controller
-      |--------------------------------------------------------------------------
-      |
-      | This controller handles the registration of new users as well as their
-      | validation and creation. By default this controller uses a trait to
-      | provide this functionality without requiring any additional code.
-      |
+    |--------------------------------------------------------------------------
+    | Register Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles the registration of new users as well as their
+    | validation and creation. By default this controller uses a trait to
+    | provide this functionality without requiring any additional code.
+    |
      */
 
-use RegistersUsers;
+    use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
@@ -35,7 +35,8 @@ use RegistersUsers;
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('guest');
     }
 
@@ -45,7 +46,8 @@ use RegistersUsers;
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data) {
+    protected function validator(array $data)
+    {
         return false;
     }
 
@@ -55,7 +57,8 @@ use RegistersUsers;
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data) {
+    protected function create(array $data)
+    {
         return false;
     }
 

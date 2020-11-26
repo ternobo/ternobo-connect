@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActiveSession;
 use App\Models\Mail;
 use App\Models\Page;
 use App\Models\User;
@@ -10,6 +11,7 @@ use App\Models\Verification;
 use App\SMS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -282,6 +284,15 @@ class UsersController extends Controller
     public function settingsPage(Request $request)
     {
         return Inertia::render("Settings");
+    }
+
+    public function logout()
+    {
+        ActiveSession::removeSession();
+        Auth::logout();
+        Cookie::queue(Cookie::forget("ternobo_remembered_session_id"));
+        Cookie::queue(Cookie::forget("ternobo_current_page"));
+        return redirect("/");
     }
 
 }

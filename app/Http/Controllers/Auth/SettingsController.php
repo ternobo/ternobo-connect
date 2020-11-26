@@ -56,17 +56,23 @@ class SettingsController extends Controller
     {
         $user = Auth::user();
 
-        // dd($user->first_name." ".$user->last_name);
-
-        $sluged = Str::slug($user->first_name." ".$user->last_name);
+        $sluged = Str::slug($user->first_name . " " . $user->last_name);
 
         $generator = UsernameGenerator::generate($sluged);
 
         $suggestions = [];
 
+        if ($user->email != null) {
+            $parts = explode('@', $user->email);
+            if (Page::checkSlug(Str::slug($parts[0]))) {
+                array_push($suggestions, $parts[0]);
+            }
+        }
+
         if (Page::checkSlug(Str::slug($user->first_name))) {
-            array_push($suggestions, Str::slug($user->last_name));
-        } elseif (Page::checkSlug(Str::slug($user->last_name))) {
+            array_push($suggestions, Str::slug($user->first_name));
+        }
+        if (Page::checkSlug(Str::slug($user->last_name))) {
             array_push($suggestions, Str::slug($user->last_name));
         }
 
@@ -75,7 +81,6 @@ class SettingsController extends Controller
         return ['list' => $suggestions];
 
     }
-
 
     public function verifyNewPhone(Request $request)
     {
@@ -111,46 +116,45 @@ class SettingsController extends Controller
         }
     }
 
-
-    public function getUserInfo(){
+    public function getUserInfo()
+    {
         $user = Auth::user();
 
         return response()->json([
             'email' => $user->email,
-            'phone' => $user->phone
+            'phone' => $user->phone,
         ]);
     }
-
 
     public function changePassword(Request $request)
     {
         $messages = [
-            "password" => "رمزعبور فعلی نامعتبر است"
+            "password" => "رمزعبور فعلی نامعتبر است",
         ];
         $validator = Validator::make($request->all(), [
             'currentpassword' => 'password',
-            "password" => "required"
+            "password" => "required",
         ], $messages);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         }
-            $user = Auth::user();
-            if (Hash::check($request->currentpassword, $user->password)) {
-                $user->password = Hash::make($request->password);
-                Auth::logout();
-                return response()->json(array("result" => true));
-            }
-            return response()->json(array("result" => false, "errors" => array("رمزعبور فعلی نامعتبر است")));
+        $user = Auth::user();
+        if (Hash::check($request->currentpassword, $user->password)) {
+            $user->password = Hash::make($request->password);
+            Auth::logout();
+            return response()->json(array("result" => true));
+        }
+        return response()->json(array("result" => false, "errors" => array("رمزعبور فعلی نامعتبر است")));
     }
 
     public function deactiveAccount(Request $request)
     {
         $messages = [
-            "password" => "رمز عبور نامعتبر است"
+            "password" => "رمز عبور نامعتبر است",
         ];
         $validator = Validator::make($request->all(), [
-            "password" => "password"
-        ],$messages);
+            "password" => "password",
+        ], $messages);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         }

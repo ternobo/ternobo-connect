@@ -114,8 +114,7 @@ class PageController extends Controller
         if ($location === 'articles') {
             $articles = Post::query()
                 ->with("page")
-                ->with("likes")
-
+                ->withCount("likes")
                 ->with("category")
                 ->where("page_id", $page->id)
                 ->where("type", "article");
@@ -129,6 +128,18 @@ class PageController extends Controller
             $articles = $articles->paginate(10);
         }
 
+        $hasAbout = !($page->aboutData == null || count((array) $page->aboutData) < 1) || ($page->about == null || $page->about == "");
+
+        if (!$hasAbout) {
+            $location = "activities";
+        }
+
+        $hasActivity = !($actions == null || count($actions) < 1);
+
+        if (!$hasActivity) {
+            $location = "contact";
+        }
+
         return Inertia::render(
             "Profiles/UserProfile",
             [
@@ -138,6 +149,9 @@ class PageController extends Controller
                 "articles" => $articles,
                 "location" => $location,
                 'currentCategory' => $category,
+
+                'hasActivity' => $hasActivity,
+                'hasAbout' => $hasAbout,
             ]
         );
     }

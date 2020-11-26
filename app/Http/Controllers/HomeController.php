@@ -29,7 +29,7 @@ class HomeController extends Controller
         $pages = Page::getSuggestions();
         $posts = Post::query()
             ->with("page")
-            ->with("likes")
+            ->withCount("likes")
             ->with("mutualLikes")
             ->with("category")
             ->leftJoin("content_seens", function ($join) {

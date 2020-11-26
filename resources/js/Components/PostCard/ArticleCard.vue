@@ -30,9 +30,9 @@
     </div>
     <inertia-link class="post-body clickale" :href="postSlug">
       <div class="images articleimg" v-if="post.medias !== null && post.medias !== undefined && post.medias.length > 0">
-        <lazy-image style="min-height: 400px" class="m-0" alt="" :src="post.medias" />
+        <lazy-image class="m-0" alt="" :src="post.medias" />
       </div>
-      <h4 class="mt-3 mb-0">{{ post.title }}</h4>
+      <h4 class="article-title">{{ post.title }}</h4>
     </inertia-link>
     <div class="post-footer">
       <div class="tagandcate" v-if="post.tags.length > 0 || post.category !== null">

@@ -6,7 +6,7 @@
     <CropperModal title="انتخاب تصویر پروفایل" v-if="canChange" :show.sync="crop" :aspect-ratio="25 / 7.8" :image="image" @cropped="upload"></CropperModal>
     <input type="file" class="d-none" ref="imageFile" @change="imageSelect" />
     <lazy-image style="min-height: 87px" :src="src" img-class="w-100" class="mb-0 page-cover" />
-    <i class="material-icons-outlined camera-btn" v-if="canChange" @click="openFileSelect">photo_camera</i>
+    <i class="material-icons-outlined camera-btn clickable" v-if="canChange" @click="openFileSelect">photo_camera</i>
   </div>
 </template>
 

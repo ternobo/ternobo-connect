@@ -38,7 +38,7 @@
       <!--
             Content Edit
         !-->
-      <div class="row">
+      <div class="row w-100">
         <div class="col-md-12 py-4">
           <MaterialTextField v-model="val.name" :required="true" input-class="w-100" class="d-flex align-items-center material--sm p-0 col-md-6" placeholder="نام پروژه"></MaterialTextField>
         </div>

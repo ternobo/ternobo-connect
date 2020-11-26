@@ -1,5 +1,5 @@
 <template>
-  <li class="achievement">
+  <li class="achievement w-100">
     <div class="w-100" v-if="!edit">
       <div class="d-flex justify-content-start" v-if="detailed">
         <div class="title">
@@ -46,7 +46,7 @@
           <strong>تاریخ شروع <span class="text-action">*</span></strong>
           <DatePicker v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
         </div>
-        <div class="col-md-6 py-4" v-if="showMore">
+        <div class="col-md-6 py-4 d-flex align-items-end" v-if="showMore">
           <MaterialTextField v-model="val.link" class="d-flex align-items-center material--sm" placeholder="لینک ناشر"></MaterialTextField>
         </div>
         <div class="col-md-12 py-4" v-if="showMore">

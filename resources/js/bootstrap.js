@@ -10,6 +10,9 @@ window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').content;
+window.axios.defaults.headers.common['Cache-Control'] = 'no-cache';
+window.axios.defaults.headers.common['Pragma'] = 'no-cache';
+window.axios.defaults.headers.common['Expires'] = '0';
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

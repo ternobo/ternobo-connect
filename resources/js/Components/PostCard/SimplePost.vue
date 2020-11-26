@@ -6,18 +6,11 @@
       <inertia-link class="publisher" :href="'/' + post.page.slug">
         <lazy-image class="profile-md mb-0" img-class="profile-md" :src="post.page.profile" />
         <div>
-          <strong>
+          <strong class="publisher--name">
             {{ post.page.name }}
           </strong>
-          <text class="text-muted font-12">
+          <span class="publisher--shortbio">
             {{ post.page.short_bio }}
-          </text>
-          <span class="text-light font-10">
-            {{ post_time }}
-            <small class="text-light font-10" v-if="post.updated_at !== post.created_at"> ویرایش شده در {{ updated_at }} </small>
-            <i class="material-icons-outlined font-14 text-light verical-middle">
-              {{ post.show === "public" ? "public" : "group" }}
-            </i>
           </span>
         </div>
       </inertia-link>
@@ -29,7 +22,7 @@
       </div>
     </div>
     <div class="post-body">
-      <pre class="text" id="posteditable-93">{{ post.text }}</pre>
+      <pre class="text">{{ post.text }}</pre>
     </div>
     <div class="post-footer">
       <div class="tagandcate" v-if="post.tags.length > 0 || post.category !== null">
@@ -43,7 +36,7 @@
         </a>
       </div>
       <div class="images" v-if="post.medias !== null && post.medias !== undefined && post.medias.length > 0">
-        <lazy-image style="min-height: 400px" class="m-0" alt="" :src="post.medias" />
+        <lazy-image class="m-0" alt="" :src="post.medias" />
       </div>
       <div class="actions" v-if="showMenu">
         <div class="font-08rem"></div>

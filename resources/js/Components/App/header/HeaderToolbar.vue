@@ -27,7 +27,7 @@
         <i class="material-icons text-light">more_vert</i>
       </div>
       <transition name="fade" mode="out-in">
-        <user-menu v-bind:style="{ left: menuLeft }" v-if="menuVisible"></user-menu>
+        <user-menu v-bind:style="{ left: menuLeft }" v-show="menuVisible"></user-menu>
       </transition>
     </div>
   </div>

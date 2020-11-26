@@ -30,13 +30,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Multiple values
-        if (json_decode(Cookie::get('ternobo_current_page')) == null) {
-            if (Auth::check()) {
-                Cookie::queue("ternobo_current_page", Auth::user()->personalPage);
-            }
-        }
-
         Inertia::share([
             // Synchronously
             'app' => [

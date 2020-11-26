@@ -33,7 +33,7 @@
       <!--
             Content Edit
         !-->
-      <div class="row">
+      <div class="row w-100">
         <div class="col-md-6 py-4">
           <MaterialTextField v-model="val.name" :required="true" class="d-flex align-items-center material--sm p-0" placeholder="عنوان"></MaterialTextField>
         </div>

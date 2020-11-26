@@ -41,8 +41,8 @@ class UsernameValidator implements Rule
             'fonts',
             'images',
             "android-chrome-192x192.png",
-            "apple-touch-icon-57x57.png"
-        ],scandir(public_path()));
+            "apple-touch-icon-57x57.png",
+        ], scandir(public_path()));
     }
 
     /**
@@ -65,7 +65,7 @@ class UsernameValidator implements Rule
                     if ($route->uri !== "/") {
                         $pos = strpos($route->uri, "/");
                         if ($pos !== false) {
-                            $invalid[] = Str::substr($route->uri, $pos+1);
+                            $invalid[] = Str::substr($route->uri, $pos + 1);
                         }
                         $invalid[] = $route->uri;
                     }
@@ -77,12 +77,11 @@ class UsernameValidator implements Rule
             return false;
         }
 
-        if (!preg_match("/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/", $username)) {
+        if (!preg_match("/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{3,29}$/", $username)) {
             return false;
         }
 
-
-        if (!Page::checkSlug($username)){
+        if (!Page::checkSlug($username)) {
             return false;
         }
 

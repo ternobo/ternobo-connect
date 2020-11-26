@@ -1,40 +1,52 @@
-.settings-item{
+.settings-item {
     padding: 24px 32px;
     color: $grey;
     font-weight: 600;
     cursor: pointer;
-    user-select: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
 
-    &.active{
+    &.active {
         color: $dark;
     }
-    &.active, &:hover{
+
+    &.active,
+    &:hover {
         background: $body-bg;
     }
 }
-.setting-action{
+
+.setting-action {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 32px 0;
-    user-select: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
 
-    .name{
+    .name {
         font-weight: 600;
         color: $grey;
-        i{
+
+        i {
             color: $text-color;
         }
     }
-    &:not(:last-child){
+
+    &:not(:last-child) {
         border-bottom: 1px solid $icons;
     }
 }
-.setting-btn{
+
+.setting-btn {
     padding: 8px;
     width: 40px;
     height: 40px;
-    display: flex;
+    display: flex !important;
     justify-content: center;
     align-items: center;
     color: $light;

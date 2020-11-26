@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
  */
 Route::get("/profiles/{image}", "DownloadsController@profile");
 Route::get("/medias/{image}", "DownloadsController@media");
-Route::get("/nationalcards/{image}", "DownloadsController@nationalCards");
+// Route::get("/nationalcards/{image}", "DownloadsController@nationalCards");
 /**
  * File Access End
  */
@@ -71,6 +71,8 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
      */
 
     Route::group(['auth'], function () {
+
+        Route::post("logout", "Auth\UsersController@logout");
 
         Route::prefix("/two-factor-auth")->group(function () {
             Route::post("info", "Auth\TwoFAController@get2FAInfo");

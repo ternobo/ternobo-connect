@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\Http\Controllers\Controller;
-use App\Models\Providers\RouteServiceProvider;
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
 
 class ConfirmPasswordController extends Controller
@@ -17,7 +17,7 @@ class ConfirmPasswordController extends Controller
     | uses a simple trait to include the behavior. You're free to explore
     | this trait and override any functions that require customization.
     |
-    */
+     */
 
     use ConfirmsPasswords;
 

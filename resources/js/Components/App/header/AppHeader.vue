@@ -17,7 +17,7 @@
             <span class="mx-1 text-nowrap">۰.۵ V</span>
           </div>
         </form>
-        <div>
+        <div v-if="!$root.isDesktop">
           <i class="material-icons hover-dark clickable" @click="showOptions = true">more_vert</i>
         </div>
       </div>

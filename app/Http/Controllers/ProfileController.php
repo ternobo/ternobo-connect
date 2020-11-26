@@ -29,17 +29,17 @@ class ProfileController extends Controller
          */
         if ($request->filled("experiences") && (is_array($request->experiences))) {
             $msgs = [
-                "company.required" => "نام شرکت اجباری است",
+                "company.required" => "نام شرکت اجباری است.",
                 "title.required" => 'عنوان شرکت اجباری است.',
-                "startDate.required" => "تاریخ شروع اجباری است",
+                "startDate.required" => "تاریخ شروع اجباری است.",
             ];
             $experiences = $request->experiences;
             foreach ($experiences as $experience) {
                 $validator = Validator::make($experience, [
                     'company' => "required|max:50",
                     'title' => "required|max:60",
-                    "startDate" => ["required", new DateObject('تاریخ شروع تجربه نامعتبر است')],
-                    "endDate" => [new DateObject('تاریخ شروع تجربه نامعتبر است')],
+                    "startDate" => ["required", new DateObject('تاریخ شروع تجربه نامعتبر است.')],
+                    "endDate" => [new DateObject('تاریخ شروع تجربه نامعتبر است.')],
                 ], $msgs);
                 if ($validator->fails()) {
                     return response()->json(['result' => false, "type" => "experience", "errors" => $validator->errors()]);
@@ -67,10 +67,10 @@ class ProfileController extends Controller
          */
         if ($request->filled("educations") && (is_array($request->educations))) {
             $msgs = [
-                "school.required" => "محل تحصیل اجباری است",
-                "major.required" => "رشته تحصیلی اجباری است",
-                "degree.required" => 'مدرک تحصیلی اجباری است',
-                "startDate.required" => "تاریخ شروع اجباری است",
+                "school.required" => "محل تحصیل اجباری است.",
+                "major.required" => "رشته تحصیلی اجباری است.",
+                "degree.required" => 'مدرک تحصیلی اجباری است.',
+                "startDate.required" => "تاریخ شروع اجباری است.",
             ];
             $educations = $request->educations;
             foreach ($educations as $education) {
@@ -78,8 +78,8 @@ class ProfileController extends Controller
                     'school' => "required|max:50",
                     'major' => "required|max:60",
                     'degree' => "required|max:60",
-                    "startDate" => ["required", new DateObject('تاریخ پایان تحصیلات نامعتبر است')],
-                    "endDate" => [new DateObject('تاریخ پایان تحصیلات نامعتبر است')],
+                    "startDate" => ["required", new DateObject('تاریخ پایان تحصیلات نامعتبر است.')],
+                    "endDate" => [new DateObject('تاریخ پایان تحصیلات نامعتبر است.')],
                 ], $msgs);
                 if ($validator->fails()) {
                     return response()->json(['result' => false, "type" => "education", "errors" => $validator->errors()]);
@@ -94,13 +94,13 @@ class ProfileController extends Controller
             $achievements = (array) $request->achievements;
 
             $messages = [
-                'name.required' => 'نام، {{ type }} اجباری است',
-                'level.required' => 'میزان تسلط به زبان اجباری است',
+                'name.required' => 'نام، {{ type }} اجباری است.',
+                'level.required' => 'میزان تسلط به زبان اجباری است.',
                 'startDate.required' => 'تاریخ شروع {{ type }} اجباری است.',
-                'endDate.required' => 'تاریخ پایان {{ type }} اجباری است',
-                'date.required' => 'تاریخ {{ type }} اجباری است',
+                'endDate.required' => 'تاریخ پایان {{ type }} اجباری است.',
+                'date.required' => 'تاریخ {{ type }} اجباری است.',
                 'organization.required' => 'اداره ثبت اختراع اجباری است.',
-                'score.required' => 'نمره آزمون اجباری است',
+                'score.required' => 'نمره آزمون اجباری است.',
             ];
 
             $errors = [];
@@ -116,12 +116,12 @@ class ProfileController extends Controller
                 ],
                 'projects' => [
                     'name' => "required|max:50",
-                    "startDate" => ["required", new DateObject('تاریخ پایان {{ type }} نامعتبر است')],
-                    "endDate" => ['required',new DateObject('تاریخ پایان {{ type }} نامعتبر است')],
+                    "startDate" => ["required", new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
+                    "endDate" => ['required', new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
                 ],
                 'publishs' => [
                     'name' => "required|max:50",
-                    "date" => ["required", new DateObject('تاریخ پایان {{ type }} نامعتبر است')],
+                    "date" => ["required", new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
                     "publisher" => "required|max:50",
                 ],
                 'inventions' => [
@@ -135,7 +135,7 @@ class ProfileController extends Controller
                 'tests' => [
                     'name' => "required|max:50",
                     "score" => "required|numeric",
-                    "date" => ["required", new DateObject('تاریخ پایان {{ type }} نامعتبر است')],
+                    "date" => ["required", new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
                 ],
             ];
 
@@ -149,9 +149,9 @@ class ProfileController extends Controller
             }
         }
         $data = [
-            'experiences' =>$experiences,
-            'educations'=> $educations,
-            'achievements'=>$achievements
+            'experiences' => $experiences,
+            'educations' => $educations,
+            'achievements' => $achievements,
         ];
 
         $page = Auth::user()->personalPage;
@@ -161,7 +161,7 @@ class ProfileController extends Controller
         $aboutData = AboutData::query()->where("page_id", $page->id)->firstOrNew();
         $aboutData->page_id = $page->id;
         $aboutData->data = json_encode($data);
-        return response()->json(["result"=>$aboutData->save()]);
+        return response()->json(["result" => $aboutData->save()]);
 
         /**
          *
