@@ -11,6 +11,11 @@ import CopyToClipboard from "../Directives/CopyToClipboard";
 import TimeAgo from 'javascript-time-ago';
 import numeral from "numeral";
 
+// Load locale-specific relative date/time formatting rules.
+import fa from "javascript-time-ago/locale/fa";
+TimeAgo.addLocale(fa);
+
+
 import MaterialTextField from "../Components/inputs/MaterialTextField";
 import MaterialTextArea from "../Components/inputs/MaterialTextArea";
 

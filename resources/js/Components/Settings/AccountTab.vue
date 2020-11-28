@@ -7,6 +7,7 @@
     <ChangeLanguageModal :show.sync="showLangModal"></ChangeLanguageModal>
     <DeactiveModal :show.sync="showDeactiveModal"></DeactiveModal>
     <TwoFAModal :phone="phone" :email="email" :show.sync="showTwoFAModal"></TwoFAModal>
+    <SessionsModal :show.sync="showActiveSessions"></SessionsModal>
     <h2 class="font-20 mb-4">ورود و امنیت</h2>
     <div class="card">
       <div class="card-body py-0 px-4">
@@ -63,6 +64,13 @@
           <div class="d-flex align-items-center">
             <i class="btn setting-btn material-icons-outlined mr-3" @click="showPasswordMdal = true">edit</i>
           </div>
+        </div>
+        <div class="setting-action">
+          <div class="name">
+            <i class="material-icons-outlined ml-2">devices</i>
+            <span>دستگاه‌های متصل</span>
+          </div>
+          <i class="btn setting-btn material-icons-outlined mr-3" @click="showActiveSessions = true">keyboard_arrow_left</i>
         </div>
         <div class="setting-action">
           <div class="name">
@@ -139,6 +147,8 @@ export default {
       showDeactiveModal: false,
       showTwoFAModal: false,
 
+      showActiveSessions: false,
+
       phone: null,
       email: null,
     };
@@ -153,6 +163,8 @@ export default {
     DeactiveModal: () => import("../Modals/Settings/DeactiveModal"),
 
     TwoFAModal: () => import("../Modals/Settings/TwoFAModal"),
+
+    SessionsModal: () => import("../Modals/Settings/Sessions/SessionsModal"),
   },
 };
 </script>

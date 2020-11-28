@@ -35,13 +35,26 @@ class ActiveSession extends Model
             "device" => $agent->device(),
             'platform' => $agent->platform(),
             'browser' => $agent->browser(),
+            "isMobile" => $agent->isMobile(),
         ]);
         $session->user_id = $user_id;
 
         $session->ip_address = Request::ip();
         $session->location = Location::get(Request::ip())->countryName;
         $session->save();
-        Cookie::queue('ternobo_remembered_session_id', $session->id);
+        Cookie::queue('ternobo_remembered_session_id', $session->id, 1.577e+9);
+    }
+
+    public function toArray()
+    {
+        $data = parent::toArray();
+        $data['user_agent'] = json_decode($data['user_agent']);
+
+        $cookie = Cookie::get('ternobo_remembered_session_id');
+
+        $data['isActive'] = $cookie == $data['id'];
+
+        return $data;
     }
 
     public static function removeSession()
@@ -60,10 +73,12 @@ class ActiveSession extends Model
     public static function checkSession()
     {
         if (Auth::check()) {
+            // dd(Request::userAgent());
             $cookie = Cookie::get('ternobo_remembered_session_id');
             if ($cookie != null) {
                 $session = ActiveSession::query()->where("id", $cookie)->first();
                 if ($session != null) {
+                    $session->touch();
                     $session->ip_address = Request::ip();
                     $session->location = Location::get(Request::ip())->countryName;
                     $session->save();

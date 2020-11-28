@@ -143,6 +143,9 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             Route::post("/verifynewphone", "Auth\UsersController@verifyNewPhone");
             Route::post("/verifynewemail", "Auth\UsersController@verifyNewEmail");
             Route::post("/deactive", "Auth\UsersController@deactiveAccount");
+
+            Route::post("/sessions", "Auth\SessionsController@getSessions");
+            Route::delete("/sessions/{id}", "Auth\SessionsController@delete");
             //Settings End
 
             Route::post("/skills/search", "Skills\SkillController@search");
