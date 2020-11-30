@@ -6,6 +6,7 @@ use App\Models\Idea;
 use App\Models\IdeaBookmark;
 use App\Models\IdeaReply;
 use App\Models\IdeaVote;
+use App\Models\Page;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -13,7 +14,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Inertia\Inertia;
-use App\Models\Page;
 
 class IdeasController extends Controller
 {
@@ -107,7 +107,6 @@ class IdeasController extends Controller
             } else {
                 IdeaVote::query()->where("user_id", Auth::user()->id)->where("idea_id", $idea->id)->first()->delete();
                 return response()->json(array("result" => true, "vote" => false, "msg" => "رای شما با برداشته ثبت شد"));
-
             }
         }
         return abort(400);
@@ -171,10 +170,11 @@ class IdeasController extends Controller
         $description = $request->description;
         $idea = new Idea();
         $idea->title = $title;
+        $idea->status = "voting";
         $idea->user_id = Auth::user()->id;
         $idea->description = $description;
         $result = $idea->save();
-        return response()->json(array("result" => $result, "idea"=>$idea));
+        return response()->json(array("result" => $result, "idea" => $idea));
 
     }
 
@@ -182,7 +182,7 @@ class IdeasController extends Controller
     {
         $messages = [
             "text.required" => "متن دیدگاه اجباری است",
-            "text.max" => "متن دیدگاه حداکثر می‌تواند ۳۰۰۰ کاراکتر باشد",
+            "text.max" => "متن دیدگاه حداکثر می‌تواند ۲۰۰۰ کاراکتر باشد",
         ];
         $validator = Validator::make($request->all(), [
             "text" => "required|max:3000",
@@ -208,7 +208,7 @@ class IdeasController extends Controller
     public function show(Idea $idea)
     {
         $replies = $idea->replies()->paginate(10);
-        return Inertia::render("Feedback/IdeaPage", ["idea" => $idea, "replies" => $replies]);
+        return Inertia::render("Feedback/IdeaPage", ["idea" => $idea, "replies" => $replies, "pages" => Page::getSuggestions()]);
     }
 
     /**

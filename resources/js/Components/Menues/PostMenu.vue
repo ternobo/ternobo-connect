@@ -1,5 +1,6 @@
 <template>
   <div>
+    <report-modal :show.sync="showReport" :post-id="post.id"></report-modal>
     <div v-if="$root.isDesktop">
       <confirm-modal title="دنبال نکردن" @confirm="unfollow" :show.sync="showConfirm"> آیا دنبال نکردن {{ post.page.name }} تایید می‌کنید. </confirm-modal>
       <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
@@ -21,7 +22,7 @@
             </div>
           </div>
         </b-dropdown-item>
-        <b-dropdown-item>
+        <b-dropdown-item @click="showReport = true">
           <div class="d-flex align-items-center">
             <i class="material-icons-outlined ml-2 text-dark">report</i>
             <div>
@@ -61,6 +62,7 @@
 
 <script>
 import ConfirmModal from "../Modals/ConfirmModal.vue";
+import ReportModal from "../Modals/ReportModal.vue";
 import PostMobileMenu from "./PostMobileMenu.vue";
 export default {
   methods: {
@@ -83,9 +85,10 @@ export default {
   data() {
     return {
       showConfirm: false,
+      showReport: false,
     };
   },
-  components: { ConfirmModal, PostMobileMenu },
+  components: { ConfirmModal, PostMobileMenu, ReportModal },
   computed: {
     following() {
       return this.$page.props.followings.includes(this.post.page_id);

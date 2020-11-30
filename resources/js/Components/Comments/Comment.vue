@@ -1,5 +1,6 @@
 <template>
   <div>
+    <report-modal :show.sync="showReport" type="comment" :comment-id="comment.id"></report-modal>
     <div class="comment" v-if="!deleted">
       <div class="comment-header">
         <inertia-link :href="'/' + comment.page.slug" class="d-flex align-items-center">
@@ -24,7 +25,7 @@
                 <i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
               </template>
               <b-dropdown-item>
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center" @click="showReport = true">
                   <i class="material-icons ml-2 text-dark">link</i>
                   <div>
                     <div>
@@ -100,6 +101,8 @@ export default {
       next_page_url: null,
       loadingMore: false,
       liked: false,
+
+      showReport: false,
     };
   },
   methods: {

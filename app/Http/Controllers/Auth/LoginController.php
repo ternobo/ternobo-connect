@@ -4,12 +4,16 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\ActiveSession;
+use App\Models\Mail;
 use App\Models\User;
+use App\Models\Verification;
+use App\SMS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use PragmaRX\Google2FA\Google2FA;
 
 class LoginController extends Controller
 {
@@ -40,17 +44,88 @@ class LoginController extends Controller
                 ]);
                 return response()->json(["result" => false, "errors" => $exception->errors()]);
             }
-            Auth::login($user, true);
-            ActiveSession::addSession($user->id);
-            $user->active = true;
-            $user->save();
+            if ($user->two_factor) {
+                if ($user->two_factor_type === 'email') {
+                    $code = random_int(111111, 999999);
 
-            return response()->json(["result" => true])->cookie("ternobo_current_page", $user->personalPage, 9999999);
+                    $verification = new Verification();
+                    $verification->code = $code;
+                    $verification->email = $user->email;
+                    $verification->save();
+                    session()->put("email", $user->email);
+                    $html = preg_replace("/\r|\n/", "", view('emails.twoFactor', array("vcode" => $code))->render());
+                    $text = "کد تایید هویت شما در ترنوبو : $code";
+                    $title = "کد تایید ترنوبو";
+                    $mail = new Mail();
+                    $mail->addAddress($user->email);
+                    $mail->send($title, $text, $html);
+                    session()->put("email", $user->email);
+                } elseif ($user->two_factor_type == 'phone') {
+                    $code = random_int(111111, 999999);
+
+                    $verification = new Verification();
+                    $verification->code = $code;
+                    $verification->phone = $user->phone;
+                    $verification->save();
+
+                    $sms = new SMS($user->phone);
+                    $sms->sendUltraFastSMS([SMS::makeParameter("code", $code)], "36529");
+                    $user->save();
+                }
+
+                session()->put("user_to_login", $user);
+
+                return response()->json(["two_factor" => true, 'type' => $user->two_factor_type]);
+            } else {
+                Auth::login($user, true);
+                ActiveSession::addSession($user->id);
+                $user->active = true;
+                $user->save();
+
+                return response()->json(["result" => true])->cookie("ternobo_current_page", $user->personalPage, 9999999);
+            }
+
         }
         $exception = ValidationException::withMessages([
             "email" => [trans('نام‌کاربری، ایمیل یا شماره همراه اشتباه است.')],
         ]);
         return response()->json(["result" => false, "errors" => $exception->errors()]);
+    }
+
+    public function twoFactorVerify(Request $request)
+    {
+        $user = session()->get("user_to_login");
+        // dd($user);
+        if ($user->two_factor_type === 'email' || $user->two_factor_type == "phone") {
+            $verification = $user->two_factor_type == "phone" ?
+            Verification::query()->where("code", $request->code)->where("phone", $user->phone)->first()
+            : Verification::query()->where("code", $request->code)->where("email", $user->email)->first();
+            if ($verification instanceof Verification) {
+                Auth::login($user, true);
+                ActiveSession::addSession($user->id);
+                $user->active = true;
+                $user->save();
+
+                return response()->json(array("result" => true));
+            } else {
+                return response()->json(array("result" => false, "msg" => __("کد تایید نامعتبر است!")));
+            }
+        } elseif ($user->two_factor_type === 'app') {
+            $google2fa = new Google2FA();
+            $valid = $google2fa->verifyKey($user->two_factor_secret, $request->code);
+            if ($valid) {
+                Auth::login($user, true);
+                ActiveSession::addSession($user->id);
+                $user->active = true;
+                $user->save();
+
+                return response()->json([
+                    'result' => true,
+                ]);
+            } else {
+                return response()->json(array("result" => false, "msg" => __("کد تایید نامعتبر است!")));
+            }
+        }
     }
 
     /**

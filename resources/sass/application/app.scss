@@ -710,6 +710,9 @@ pre {
 @import "./components/comments/comments.scss";
 @import "./components/comments/comment.scss";
 
+@import "./components/idea-replies/idea-replies.scss";
+@import "./components/idea-replies/idea-reply.scss";
+
 .modal-content {
     border-radius: 0;
     padding: 0;
@@ -1170,3 +1173,6 @@ a:focus {
 @import "fonts";
 
 @import "./components/aboutme.scss";
+
+
+@import "./components/report-modal.scss";

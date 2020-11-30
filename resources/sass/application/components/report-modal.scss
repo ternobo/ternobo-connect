@@ -1,0 +1,40 @@
+.report-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: 0.3s all;
+
+    &:hover {
+        background-color: $body-bg;
+    }
+}
+
+.report-reason {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 0.5rem;
+}
+
+.report-reason {
+    label {
+        margin: 0;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+.reportreseaons {
+    margin: -16px;
+}

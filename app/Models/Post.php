@@ -115,7 +115,6 @@ class Post extends Model
         $data['is_bookmarked'] = false;
         if (Auth::check()) {
             if ($this->likes != null) {
-                // dd(array_column(, "page_id"));
                 $current_page = json_decode(Cookie::get('ternobo_current_page')) !== null ? json_decode(Cookie::get('ternobo_current_page')) : Auth::user()->personalPage;
                 $page_ids = array_column($this->likes->toArray(), "page_id");
                 if (in_array($current_page->id, $page_ids)) {

@@ -65,6 +65,7 @@ class TwoFAController extends Controller
 
             $google2fa = new Google2FA();
 
+            $user->two_factor_type = "app";
             $user->two_factor_secret = $google2fa->generateSecretKey();
             $user->save();
 
@@ -91,8 +92,8 @@ class TwoFAController extends Controller
     public function setupSMS()
     {
         $user = Auth::user();
-
         $user->two_factor_type = "phone";
+        $user->save();
 
         $code = random_int(111111, 999999);
 
@@ -103,7 +104,6 @@ class TwoFAController extends Controller
 
         $sms = new SMS($user->phone);
         $sms->sendUltraFastSMS([SMS::makeParameter("code", $code)], "36529");
-        $user->save();
         return response()->json(['result' => true]);
     }
 
@@ -112,6 +112,7 @@ class TwoFAController extends Controller
         $user = Auth::user();
 
         $user->two_factor_type = "email";
+        $user->save();
 
         $code = random_int(111111, 999999);
 
@@ -157,9 +158,11 @@ class TwoFAController extends Controller
 
             $valid = $google2fa->verifyKey($user->two_factor_secret, $request->code);
             if ($valid) {
+
                 $recovery = new Recovery();
                 $recovery->setChars(8);
                 $user->two_factor = true;
+                $user->two_factor_type = "app";
                 $user->two_factor_recovery_codes = $recovery->toJson();
                 $user->save();
 

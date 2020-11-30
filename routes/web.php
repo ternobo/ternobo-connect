@@ -40,6 +40,8 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
     Route::post("/updatepassword", "Auth\ForgotPasswordController@updatePassword");
     Route::prefix("/auth")->group(function () {
         Route::post('login', 'Auth\LoginController@login');
+        Route::post('verify-tfa', 'Auth\LoginController@twoFactorVerify');
+
         Route::post('logout', 'Auth\LoginController@logout');
         Route::post('verification', 'Auth\UsersController@sendVcode');
         Route::post('verifycode', 'Auth\UsersController@verifyCode');
@@ -133,7 +135,6 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             // Start Comments
             Route::any("/comments/{comment:id}/replies", "CommentController@replies");
             Route::resource('posts.comments', "CommentController");
-
             // End Comments
 
             Route::post("/reportpost", "PostController@report");
@@ -167,6 +168,8 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
             Route::get("/settings", "Auth\UsersController@settingsPage");
 
+            Route::post("/reportpost", "PostController@report");
+
         });
 
         /**
@@ -199,6 +202,14 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
         // Notifications
         Route::get('/notifications', 'NotificationController@index')->name('notifications');
+
+        // Start Idea Comments
+        Route::any("/idea-replies/{id}/replies", "Ideas\RepliesCotnroller@replies");
+        Route::post("/idea-replies/{id}/like", "Ideas\RepliesCotnroller@likeIdeaReply");
+
+        Route::resource('ideas.replies', "Ideas\RepliesCotnroller");
+        // End Comments
+
     });
 
     Route::post("/share/{post_id}", "PostController@sharePost");
