@@ -12,8 +12,10 @@
         </div>
       </div>
     </div>
-    <loading-spinner style="height: 10px; width: 10px; border-width: 2px" v-if="loading && !session.isActive"></loading-spinner>
-    <i class="material-icons text-muted hover-danger" @click="doDelete" v-else-if="!session.isActive">close</i>
+    <div v-if="canRemove">
+      <loading-spinner style="height: 10px; width: 10px; border-width: 2px" v-if="loading && !session.isActive"></loading-spinner>
+      <i class="material-icons text-muted hover-danger" @click="doDelete" v-else-if="!session.isActive">close</i>
+    </div>
   </div>
 </template>
 
@@ -43,6 +45,11 @@ export default {
     },
   },
   props: {
+    canRemove: {
+      type: Boolean,
+      default: true,
+      required: false,
+    },
     session: {
       type: Object,
       default: undefined,

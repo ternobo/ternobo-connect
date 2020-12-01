@@ -20,7 +20,9 @@
 </template>
 
 <script>
+import NewPostModal from "../Modals/NewPostModal.vue";
 export default {
+  components: { NewPostModal },
   data() {
     return {
       showPostModal: false,

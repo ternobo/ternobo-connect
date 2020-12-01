@@ -11,6 +11,12 @@
           <i class="material-icons text-dark">link</i>
           <strong>رونوشت پیوند این محتوا</strong>
         </b-dropdown-item>
+        <b-dropdown-item @click="$emit('edit')" v-if="checkUser(post.page.user_id)">
+          <div class="d-flex align-items-center">
+            <i class="material-icons-outlined ml-2 text-dark">edit</i>
+            <strong> ویرایش </strong>
+          </div>
+        </b-dropdown-item>
         <b-dropdown-item @click.native="$emit('embed')">
           <div class="d-flex align-items-center">
             <i class="material-icons ml-2 text-dark">code</i>
@@ -33,6 +39,7 @@
             </div>
           </div>
         </b-dropdown-item>
+
         <b-dropdown-item @click="showConfirm = true" v-if="!checkUser(post.page.user_id) && following">
           <div class="d-flex align-items-center">
             <i class="material-icons ml-2 text-dark">not_interested</i>
@@ -55,7 +62,7 @@
       </b-dropdown>
     </div>
     <div v-else>
-      <post-mobile-menu :post="this.post" @embed="$emit('embed')" @deleted="$emit('deleted')"></post-mobile-menu>
+      <post-mobile-menu :post="this.post" @embed="$emit('embed')" @edit="$emit('edit')" @report="showReport = true" @deleted="$emit('deleted')"></post-mobile-menu>
     </div>
   </div>
 </template>

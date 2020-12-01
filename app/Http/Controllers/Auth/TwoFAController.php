@@ -46,6 +46,9 @@ class TwoFAController extends Controller
         $user = Auth::user();
 
         $recovery = new Recovery();
+        $recovery->numeric();
+        $recovery->setBlocks(1);
+
         $recovery->setChars(8);
         $user->two_factor_recovery_codes = $recovery->toJson();
         $user->save();
@@ -144,6 +147,9 @@ class TwoFAController extends Controller
                 $user->two_factor = true;
 
                 $recovery = new Recovery();
+                $recovery->numeric();
+                $recovery->setBlocks(1);
+
                 $recovery->setChars(8);
                 $user->two_factor_recovery_codes = $recovery->toJson();
 
@@ -160,6 +166,9 @@ class TwoFAController extends Controller
             if ($valid) {
 
                 $recovery = new Recovery();
+                $recovery->numeric();
+                $recovery->setBlocks(1);
+
                 $recovery->setChars(8);
                 $user->two_factor = true;
                 $user->two_factor_type = "app";
@@ -187,7 +196,11 @@ class TwoFAController extends Controller
         if ($user->two_factor_secret == null) {
             $user->two_factor_secret = $google2fa->generateSecretKey();
             $recovery = new Recovery();
+            $recovery->numeric();
+            $recovery->setBlocks(1);
+
             $recovery->setChars(8);
+
             $user->two_factor_recovery_codes = $recovery->toJson();
             $user->save();
         }

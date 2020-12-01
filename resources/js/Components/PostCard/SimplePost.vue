@@ -2,6 +2,8 @@
   <div class="post-box" v-if="post !== undefined">
     <ReshareModal :post="post" :show.sync="showReshare"></ReshareModal>
     <EmbedCodeModal :post="post" :show.sync="showEmbed"></EmbedCodeModal>
+    <new-post-modal :post="post" :show.sync="edit"></new-post-modal>
+
     <div class="post-header pt-0">
       <inertia-link class="publisher" :href="'/' + post.page.slug">
         <lazy-image class="profile-md mb-0" img-class="profile-md" :src="post.page.profile" />
@@ -17,11 +19,11 @@
       <div class="actions position-relative" v-if="showMenu">
         <i class="material-icons clickale text-muted hover-dark" @click="bookmark">{{ bookmarked ? "bookmark" : "bookmark_border" }}</i>
         <div>
-          <post-menu :post="post" @embed="showEmbed = true"></post-menu>
+          <post-menu :post="post" @edit="edit = true" @embed="showEmbed = true"></post-menu>
         </div>
       </div>
     </div>
-    <div class="post-body">
+    <div class="post-body" v-if="post.text != null && post.text.length > 0">
       <pre class="text">{{ post.text }}</pre>
     </div>
     <div class="post-footer">
@@ -36,7 +38,8 @@
         </a>
       </div>
       <div class="images" v-if="post.medias !== null && post.medias !== undefined && post.medias.length > 0">
-        <lazy-image class="m-0" alt="" :src="post.medias" />
+        <lazy-image v-if="isImage" class="m-0" alt="" :src="post.medias" />
+        <video v-else :src="post.medias" autoplay controls controlslist="nodownload" style="max-width: 100%"></video>
       </div>
       <div class="actions" v-if="showMenu">
         <div class="font-08rem"></div>
@@ -76,6 +79,7 @@ export default {
       openComment: false,
       showEmbed: false,
       showReshare: false,
+      edit: false,
     };
   },
   created: function () {
@@ -142,6 +146,12 @@ export default {
     },
   },
   computed: {
+    isImage() {
+      if (this.post.media_type.startsWith("video")) {
+        return false;
+      }
+      return true;
+    },
     post_time: function () {
       const timeAgo = new TimeAgo("fa-FA");
       return timeAgo.format(Date.parse(this.post.created_at), "twitter") + " ● ";

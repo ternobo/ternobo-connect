@@ -18,8 +18,8 @@
               <inertia-link :href="'/ideas/' + idea.id"
                 ><strong>{{ idea.title }}</strong>
               </inertia-link>
-              <i class="material-icons text-grey clickale">
-                {{ idea.isBookmarked ? "flag" : "outlined_flag" }}
+              <i class="material-icons text-grey clickable" @click="bookmark">
+                {{ bookmarked ? "flag" : "outlined_flag" }}
               </i>
             </div>
             <feedback-label :type="idea.status"> {{ ideaStatus }} </feedback-label>
@@ -53,13 +53,22 @@ export default {
       voted: false,
       loading: false,
       votes: 0,
+      bookmarked: false,
     };
   },
   created() {
     this.votes = this.idea.votes;
     this.voted = this.idea.voted;
+    this.bookmarked = this.idea.isBookmarked;
   },
   methods: {
+    bookmark() {
+      this.bookmarked = !this.bookmarked;
+
+      axios.post(this.$APP_URL + "/ideas/bookmark", {
+        id: this.idea.id,
+      });
+    },
     voteIdea() {
       this.loading = true;
       axios

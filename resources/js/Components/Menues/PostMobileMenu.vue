@@ -8,6 +8,10 @@
           <i class="material-icons text-dark">link</i>
           <strong>رونوشت پیوند این محتوا</strong>
         </li>
+        <li @click="runAction('edit')" v-if="checkUser(post.page.user_id)">
+          <i class="material-icons-outlined text-dark">edit</i>
+          <strong>ویرایش</strong>
+        </li>
         <li class="d-flex align-items-center" @click="runAction('embed')">
           <i class="material-icons item-icon text-dark">code</i>
           <div>
@@ -17,7 +21,7 @@
             <small class="text-muted"> کد امبد را کپی کرده و در وب‌سایت خودتان قرار دهید. </small>
           </div>
         </li>
-        <li class="d-flex align-items-center">
+        <li class="d-flex align-items-center" @click="runAction('report')">
           <i class="material-icons-outlined item-icon text-dark">report</i>
           <div>
             <div>

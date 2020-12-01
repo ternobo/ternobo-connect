@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <div class="post-body" v-if="post.text.length > 0">
+    <div class="post-body" v-if="post.text != null && post.text.length > 0">
       <pre class="text" id="posteditable-93">{{ post.text }}</pre>
     </div>
     <div class="border my-2 mx-3">
@@ -46,7 +46,8 @@
         </a>
       </div>
       <div class="images" v-if="post.medias !== null && post.medias !== undefined && post.medias.length > 0">
-        <lazy-image style="min-height: 400px" class="m-0" alt="" :src="post.medias" />
+        <lazy-image v-if="isImage" class="m-0" alt="" :src="post.medias" />
+        <video v-else :src="post.medias" autoplay controls controlslist="nodownload" style="max-width: 100%"></video>
       </div>
       <div class="actions" v-if="showMenu">
         <div class="font-08rem"></div>
@@ -156,6 +157,12 @@ export default {
     },
   },
   computed: {
+    isImage() {
+      if (this.post.media_type.startsWith("video")) {
+        return false;
+      }
+      return true;
+    },
     post_time: function () {
       const timeAgo = new TimeAgo("fa-FA");
       return timeAgo.format(Date.parse(this.post.created_at), "twitter") + " ● ";

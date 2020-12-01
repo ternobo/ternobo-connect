@@ -4,7 +4,7 @@
     <input type="file" class="d-none" v-if="canChange" ref="imageFile" @change="imageSelect" />
 
     <lazy-image :src="picture" img-class="rounded-circle" :class="size" />
-    <i class="material-icons" v-if="canChange">camera_alt</i>
+    <i class="material-icons-outlined" v-if="canChange">camera_alt</i>
     <div class="position-absolute d-flex align-items-center justify-content-center profile-xlg" style="top: -3px; left: -3px; right: -3px; bottom: -3px; width: calc(100%+3px); height: calc(100%+3px); background: rgba(0, 0, 0, 0.5)" v-if="loading">
       <loading-spinner></loading-spinner>
     </div>

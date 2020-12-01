@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 /**
  * @property mixed|string slug
@@ -110,6 +112,10 @@ class Post extends Model
         $data['tags'] = $this->getTags();
         $data['medias'] = $this->getMedia();
         $data['share'] = $this->share;
+        $data['media_type'] = "";
+        if ($data['medias'] != null && Str::startsWith($data['medias'], url('/'))) {
+            $data['media_type'] = Storage::mimeType(str_replace(url('/'), '', $data['medias']));
+        }
 
         $data['is_liked'] = false;
         $data['is_bookmarked'] = false;

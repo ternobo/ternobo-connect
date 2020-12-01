@@ -9,8 +9,10 @@
               <i class="material-icons text-muted hover-dark" v-if="edit" @click="cancelEdit">close</i>
             </div>
             <button class="btn d-flex align-items-center justify-content-center btn-edit" @click="doEdit">
-              <span v-if="!edit"> {{ $root.isDesktop ? "ویرایش اطلاعات" : "" }} <i class="material-icons-outlined">edit</i> </span>
-              <div class="d-flex align-items-center justify-content-center" v-else>
+              <span v-if="!edit && $root.isDesktop"> ویرایش اطلاعات <i class="material-icons-outlined">edit</i> </span>
+              <i v-if="!edit && !$root.isDesktop" class="material-icons-outlined">edit</i>
+
+              <div class="d-flex align-items-center justify-content-center" v-if="edit">
                 {{ $root.isDesktop ? "ذخیره" : "" }}
                 <i class="material-icons-outlined" v-if="!$root.isDesktop">save</i>
                 <div style="height: 14px; width: 14px; border-width: 2px" v-if="loadingSave" class="mr-2 loadingspinner"></div>

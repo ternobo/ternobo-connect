@@ -21,7 +21,7 @@
             <div class="content">
               <section class="slugItem clickable" v-clipboard="$APP_URL + '/' + $page.props.user.username">
                 <div class="ml-2 d-flex align-items-center" style="direction: ltr">
-                  <span class="mr-1">{{ $APP_URL + "/" + $page.props.user.username }}</span>
+                  <span class="mr-1">{{ $root.isDesktop ? $APP_URL + "/" : "" }} {{ $page.props.user.username }}</span>
                 </div>
                 <section class="icon clickable">
                   <i class="font-18 material-icons-outlined">copy</i>

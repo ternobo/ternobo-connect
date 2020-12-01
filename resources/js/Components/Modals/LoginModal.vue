@@ -17,7 +17,13 @@
       </div>
       <div v-else-if="VerifyStep" class="signup-login d-flex flex-column align-items-center justify-content-center clearfix" ref="loginForm" method="POST" action="javascript:;">
         <p class="mb-3">{{ verifyText }}</p>
-        <otp-input input-class="w-100" class="material--sm mb-3 text-center" @completed="verifyCode" v-model="code" :numInputs="6" />
+        <div class="text-left mb-3">
+          <otp-input input-class="w-100" class="material--sm mb-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" v-if="!recovery" />
+          <small class="text-muted clickable" @click="recovery = true" v-if="!recovery">استفاده از کد بازیابی</small>
+
+          <input class="form-control" placeholder="کد بازیابی را وارد کنید" v-model="code" maxlength="8" v-if="recovery" />
+          <small class="text-muted clickable" @click="recovery = false" v-if="recovery">استفاده از کد تایید</small>
+        </div>
         <loading-button :loading="loading" class="btn btn-dark" @click.native="verifyCode">تایید</loading-button>
       </div>
     </b-modal>
@@ -39,6 +45,8 @@ export default {
       loginStep: true,
       VerifyStep: false,
 
+      recovery: false,
+
       code: null,
       verifyText: "کد نمایان شده در اپلیکیشن تایید هویت را اینجا وارد کنید",
     };
@@ -47,17 +55,22 @@ export default {
     verifyCode() {
       if (this.code != null) {
         this.loading = true;
+        let data = {
+          code: this.code,
+        };
+        if (this.recovery) {
+          data.type = "recovery";
+        }
+
         axios
-          .post("/auth/verify-tfa", {
-            code: this.code,
-          })
+          .post("/auth/verify-tfa", data)
           .then((response) => {
             if (response.data.result) {
               window.location = "/feed";
             } else {
               this.toast("کد ورودی نامعتبر است");
             }
-            this.loading = true;
+            this.loading = false;
           })
           .catch((err) => (this.loading = true));
       }

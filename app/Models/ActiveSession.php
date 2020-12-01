@@ -70,6 +70,22 @@ class ActiveSession extends Model
 
     }
 
+    public static function getCurrentSession()
+    {
+        if (Auth::check()) {
+            // dd(Request::userAgent());
+            $cookie = Cookie::get('ternobo_remembered_session_id');
+            if ($cookie != null) {
+                $session = ActiveSession::query()->where("id", $cookie)->first();
+                if ($session != null) {
+                    return $session;
+                }
+            }
+            return null;
+        }
+
+    }
+
     public static function checkSession()
     {
         if (Auth::check()) {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="tabs" :class="{ compact: compact, centered: centered }">
+    <div class="tabs" :class="[{ compact: compact, centered: centered }, tabsClass]">
       <ul>
         <li v-for="tab in tabs" :key="tab.name" :class="{ 'is-active': tab.isActive }">
           <a :class="{ disabled: disabled }" class="clickable" @click="selectTab(tab)"
@@ -24,6 +24,16 @@
 import { Inertia } from "@inertiajs/inertia";
 export default {
   props: {
+    ulClass: {
+      type: String,
+      default: null,
+      required: false,
+    },
+    tabsClass: {
+      type: String,
+      default: null,
+      required: false,
+    },
     centered: {
       type: Boolean,
       default: false,

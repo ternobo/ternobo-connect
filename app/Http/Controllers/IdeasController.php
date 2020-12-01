@@ -29,6 +29,10 @@ class IdeasController extends Controller
      */
     public function index(Request $request)
     {
+        if ($request->has("onlyMy")) {
+            return $this->myIdeas($request);
+        }
+
         $mostFav = false;
         $status = "voting";
         if ($request->has("fav")) {
@@ -64,18 +68,20 @@ class IdeasController extends Controller
 
         SEOTools::setTitle("ایده‌ها");
         $ideas = null;
+
+        $ideas = Idea::query()->with("user")
+            ->selectRaw("*,(SELECT COUNT(*) as votes from idea_votes where idea_votes.idea_id = ideas.id) as votes_num")
+            ->where("user_id", Auth::user()->id);
+
+
         if ($mostFav) {
-            $ideas = Idea::query()->with("user")
-                ->selectRaw("*,(SELECT COUNT(*) as votes from idea_votes where idea_votes.idea_id = ideas.id) as votes_num")
-                ->orderByDesc("votes_num")
-                ->where("user_id", Auth::user()->id)
-                ->get();
-            $ideas->appends(array("fav" => "1"));
+            $idea = $idea->orderByDesc("votes_num");
+            // $ideas->appends(array("fav" => "1"));
         } else {
             $ideas = Idea::query()->with("votes")->with("user")
                 ->where("user_id", Auth::user()->id)
                 ->latest()
-                ->get();
+                ->paginate(5);
         }
 
         $contributed_ideas = Idea::query()
@@ -90,9 +96,9 @@ class IdeasController extends Controller
             ->distinct("ideas.id")
             ->paginate(10);
 
-        $bookmarks = IdeaBookmark::query()->where("user_id", Auth::user()->id)->get();
+        $bookmarks = IdeaBookmark::query()->with("idea")->where("user_id", Auth::user()->id)->get()->pluck("idea");
 
-        return view("ideas", ["bookmarks" => $bookmarks, "ideas" => $contributed_ideas, "my_ideas" => $ideas, "status" => $status, "myoffers" => true]);
+        return Inertia::render("Feedback/Index", ["bookmarks" => $bookmarks, "ideas" => $contributed_ideas, "my_ideas" => $ideas->paginate(5);, "myoffers" => true]);
     }
 
     public function voteIdea(Request $request)

@@ -10,7 +10,7 @@
           <span>نمایش پس زمینه</span>
           <switches v-model="hasBG"></switches>
         </div>
-        <inertia-link href="/logout" method="post" as="div" class="b-sidebar-item hover-danger w-100 d-flex justify-content-between align-items-center">
+        <inertia-link v-if="$page.props.user" href="/logout" method="post" as="div" class="b-sidebar-item hover-danger w-100 d-flex justify-content-between align-items-center">
           <span>خروج از حساب کاربری</span>
           <i class="material-icons">power_settings_new</i>
         </inertia-link>

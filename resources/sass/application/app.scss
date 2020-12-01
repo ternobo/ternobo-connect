@@ -406,17 +406,16 @@ img {
     margin: auto;
     min-height: calc(100vh - 80px);
 
-    .sidebar-left {
-        padding-left: 0.9rem;
-    }
-
-
-    .sidebar-right {
-        padding-right: 0.9rem;
-    }
-
     @media screen and (min-width: 991px) {
 
+        .sidebar-left {
+            padding-left: 0.9rem;
+        }
+
+
+        .sidebar-right {
+            padding-right: 0.9rem;
+        }
 
         .content-container-full {
             padding-left: 30px;
@@ -870,6 +869,10 @@ pre {
     font-size: 14px;
     padding: 8px 12px;
 
+    @media screen and (max-width: $sm-size) {
+        font-size: 10px;
+    }
+
     .icon {
         border-right: 1px solid;
         padding-right: 5px;
@@ -1176,3 +1179,32 @@ a:focus {
 
 
 @import "./components/report-modal.scss";
+
+
+.item-filters {
+    background: $white;
+    padding: 20px;
+    box-shadow: $card-shadow;
+    color: $light;
+    display: flex;
+    gap: 10;
+    align-items: center;
+
+    .filter-item {
+        padding: 8px;
+        border-radius: 16px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        i {
+            margin-left: 4px;
+        }
+
+        &.active {
+            background-color: $body-bg;
+        }
+    }
+}

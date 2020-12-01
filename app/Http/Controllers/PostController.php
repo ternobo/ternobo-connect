@@ -45,6 +45,9 @@ class PostController extends Controller
             "text" => "required_without:media|max:2500",
             "type" => "required",
         ], $messages);
+
+        // $mime = $request->file("media")->getMimeType();
+        // // dd($mime);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
@@ -104,6 +107,7 @@ class PostController extends Controller
             $medias = array();
             if ($request->has("media")) {
                 $file = $request->file("media")->store("medias");
+
                 if ($request->has("sizes")) {
                     $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
                     $sizes = (json_decode($request->sizes));
@@ -398,55 +402,106 @@ class PostController extends Controller
      * @param \App\Post $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Post $post, Request $request)
     {
+        if ($post->page->user_id != Auth::user()->id) {
+            return abort(404);
+        }
+
+        // dd($request->all());
         $messages = [
-            "text.max" => "حداکثر متن ۲۵۰۰ کاراکتر است.",
-            "text.required" => "متن اجباری است",
-            "text.min" => "متن اجباری است",
+            "media.max" => "فایل انتخابی از حد مجاز بزرگتر است(۱۰ مگابایت).",
+            "text.required_without" => "متن یا یک فایل چند رسانه‌ای انتخاب کنید.",
         ];
         $validator = Validator::make($request->all(), [
-            "text" => "required|max:2500|min:1",
-        ]);
+            "media" => "mimes:jpg,jpeg,png,bmp,mp4|max:30000",
+            "text" => "required_without:media|max:2500",
+            "type" => "required",
+        ], $messages);
+
+// $mime = $request->file("media")->getMimeType();
+        // // dd($mime);
         if ($validator->fails()) {
-            return response()->json($validator->errors());
-        }
-        $text = ($request->text);
+            return response()->json(array("result" => false, "errors" => $validator->errors()));
+        } else {
 
-        // The Regular Expression filter
-        $reg_exUrl = "/(\s((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/";
-
-        $text = (preg_replace_callback($reg_exUrl, function ($matches) {
-            foreach ($matches as $match) {
-                return "<a target='_blank' href='" . $this->toURL($match) . "'>$match</a>";
-            }
-        }, $text));
-
-        if ($request->has("category")) {
-            $category = Category::query()->where("name", $request->category)
-                ->where("page_id", Auth::user()->personalPage->id)
-                ->firstOrCreate(["name" => $request->category, "page_id" => Auth::user()->personalPage->id]);
-            $post->category_id = $category->id;
-        }
-
-        if ($request->has("tags")) {
-            $tags = $request->tags;
-            foreach ($tags as $tag) {
-                if (Tag::where("name", $tag)->first() instanceof Tag) {
-                    continue;
+            $mentions = array();
+            $matches = array();
+            preg_match_all('/\B@(\w+)/', $request->text, $matches);
+            if (isset($matches[1])) {
+                foreach ($matches as $match) {
+                    foreach ($match as $slug) {
+                        if ((!$this->startsWith($slug, "@") && !in_array($slug, $mentions))) {
+                            $mentions[] = $slug;
+                        }
+                    }
                 }
-                $thetag = new Tag();
-                $thetag->name = $tag;
-                $thetag->save();
             }
-            $post->tags = json_decode($request->tags);
+
+            $text = htmlentities($request->text);
+
+            // The Regular Expression filter
+            $reg_exUrl = "/(\s((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/";
+
+            $text = (preg_replace_callback($reg_exUrl, function ($matches) {
+                foreach ($matches as $match) {
+                    return "<a target='_blank' href='" . $this->toURL($match) . "'>$match</a>";
+                }
+            }, $text));
+
+            $text = preg_replace('/\B@(\w+)/', "<a href=" . url("/") . "/" . "$0" . ">$0</a>", $text);
+            $text = str_replace("/@", "/", $text);
+
+            $post->text = $text;
+            if ($request->filled("category")) {
+                $category = Category::query()->where("name", $request->category)
+                    ->where("page_id", Auth::user()->personalPage->id)
+                    ->firstOrCreate(["name" => $request->category, "page_id" => Auth::user()->personalPage->id]);
+                $post->category_id = $category->id;
+            }
+
+            if ($request->filled("tags")) {
+                $tags = json_decode($request->tags);
+                foreach ($tags as $tag) {
+                    if (Tag::where("name", $tag)->first() instanceof Tag) {
+                        continue;
+                    }
+                    $thetag = new Tag();
+                    $thetag->name = $tag;
+                    $thetag->save();
+                }
+                $post->tags = json_encode($tags);
+            }
+            $post->type = "post";
+            $post->show = $request->type;
+            $medias = array();
+            if ($request->has("media")) {
+                $file = $request->file("media")->store("medias");
+
+                if ($request->has("sizes")) {
+                    $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
+                    $sizes = (json_decode($request->sizes));
+                    //    dd($sizes);
+                    $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->left), intval($sizes->top));
+                    $image->save(null, 90, "jpg");
+                }
+                $medias = array(url($file));
+                $post->medias = json_encode($medias);
+
+            }
+
+            // dd($request);
+            $result = $post->save();
+            // Auth::user()->personalPage->addAction("post", $post->id);
+            // foreach ($mentions as $mention) {
+            //     $page = Page::query()->where("slug", $mention)->first();
+            //     if ($page instanceof Page) {
+            //         Notification::sendNotification("mention", $post->id, $page->id, $post->id);
+            //     }
+            // }
+            //  dd($mentions);
+            return response()->json(array("result" => $result));
         }
-
-        $text = preg_replace('/\B@(\w+)/', "<a href=" . url("/") . "/" . "$0" . ">$0</a>", $text);
-        $text = str_replace("/@", "/", $text);
-        $post->text = Post::scriptStripper($text);
-
-        return response()->json(array("result" => $post->save()));
     }
 
     private function toURL($url)

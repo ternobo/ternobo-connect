@@ -95,6 +95,30 @@ class LoginController extends Controller
     public function twoFactorVerify(Request $request)
     {
         $user = session()->get("user_to_login");
+
+        if ($request->filled("type") && $request->type == "recovery") {
+
+            $code = $request->code;
+            $recoveryCodes = json_decode(User::query()->where("id", $user->id)->first()->two_factor_recovery_codes);
+            if (in_array($code, $recoveryCodes)) {
+                if (($key = array_search($code, $recoveryCodes)) !== false) {
+                    unset($recoveryCodes[$key]);
+
+                    $user->two_factor_recovery_codes = json_encode(array_values($recoveryCodes));
+                    Auth::login($user, true);
+                    ActiveSession::addSession($user->id);
+                    $user->active = true;
+                    $user->save();
+                    return response()->json([
+                        'result' => true,
+                    ]);
+
+                }
+            } else {
+                return response()->json(array("result" => false, "msg" => __("کد بازیابی نامعتبر است!")));
+
+            }
+        }
         // dd($user);
         if ($user->two_factor_type === 'email' || $user->two_factor_type == "phone") {
             $verification = $user->two_factor_type == "phone" ?
@@ -126,6 +150,7 @@ class LoginController extends Controller
                 return response()->json(array("result" => false, "msg" => __("کد تایید نامعتبر است!")));
             }
         }
+
     }
 
     /**

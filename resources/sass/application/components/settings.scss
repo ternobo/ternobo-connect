@@ -1,12 +1,49 @@
+@media screen and (max-width: $sm-size) {
+
+    .settings-card {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 16px;
+    }
+}
+
+.sticky-settings {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 70px;
+    z-index: 99;
+}
+
 .settings-item {
     padding: 24px 32px;
     color: $grey;
     font-weight: 600;
     cursor: pointer;
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 100%;
+
+    @media screen and (max-width: $sm-size) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 16px;
+        font-size: 12px !important;
+    }
+
+    i {
+        @media screen and (max-width: $sm-size) {
+            font-size: 18px !important;
+        }
+    }
+
+    img {
+        @media screen and (max-width: $sm-size) {
+            max-width: 18px !important;
+        }
+    }
 
     &.active {
         color: $dark;
@@ -24,16 +61,30 @@
     justify-content: space-between;
     padding: 32px 0;
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
     .name {
         font-weight: 600;
         color: $grey;
 
+        @media screen and (max-width: $sm-size) {
+            font-size: 12px !important;
+        }
+
         i {
             color: $text-color;
+
+            @media screen and (max-width: $sm-size) {
+                font-size: 18px !important;
+            }
+        }
+    }
+
+    .content {
+        @media screen and (max-width: $sm-size) {
+            font-size: 12px !important;
         }
     }
 
@@ -52,4 +103,8 @@
     color: $light;
     background: $body-bg;
     border-radius: 50%;
+
+    @media screen and (max-width: $sm-size) {
+        font-size: 18px !important;
+    }
 }

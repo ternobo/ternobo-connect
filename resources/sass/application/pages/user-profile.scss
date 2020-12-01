@@ -29,7 +29,6 @@
         top: 14px;
         height: 24px;
         width: 24px;
-        font-size: 18px !important;
     }
 }
 
@@ -136,6 +135,27 @@
 
         >i {
             opacity: 1;
+        }
+    }
+}
+
+.content-container-profile {
+    @media screen and (max-width: $sm-size) {
+        .tabs.compact {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 69px;
+            z-index: 90;
+            background: #F5F5F5;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            padding: 5px 0;
+            padding-top: 8px;
+
+            ul {
+                margin-bottom: 0;
+            }
         }
     }
 }
