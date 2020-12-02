@@ -4,7 +4,7 @@
     <inertia-link :href="'/' + $page.props.user.username" class="userinfo-card">
       <div class="d-flex flex-column align-items-center">
         <div class="profile-image">
-          <vue-circle :progress="$page.props.user.profile_steps.percent" :size="90" empty-fill="#F5F5F5" :show-percent="false" :start-angle="-Math.PI / 2" :fill="{ color: '#0898DF' }">
+          <vue-circle :progress="$page.props.user.profile_steps.percent" :size="82" empty-fill="#F5F5F5" :show-percent="false" :start-angle="-Math.PI / 2" :fill="{ color: '#0898DF' }">
             <lazy-image :src="$page.props.user.profile" />
           </vue-circle>
         </div>

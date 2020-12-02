@@ -14,6 +14,9 @@ import TernoboApp from "./Libs/TernoboApp";
 import App from "./Layouts/App";
 import '@trevoreyre/autocomplete-vue/dist/style.css'
 import Dialog from 'bootstrap-vue-dialog/dist/bootstrap-vue-dialog';
+import InfiniteLoading from 'vue-infinite-loading';
+
+Vue.use(InfiniteLoading, { /* options */ });
 
 Vue.prototype.window = window.window;
 

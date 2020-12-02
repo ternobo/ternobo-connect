@@ -1,0 +1,119 @@
+<template>
+	<b-modal v-model="showModal" hide-footer @show="onShown" title="پسند‌ها" size="md" :centered="true">
+		<div style="min-height: 200px" class="d-flex align-items-center justify-content-center loading" v-if="loading || error">
+			<loading-spinner v-if="loading"></loading-spinner>
+			<div class="d-flex flex-column justify-center align-items-center w-100 err" v-if="error">
+				<i @click="onShown" class="hover-dark text-muted material-icons-outlined">refresh</i>
+				<br />
+				<span class="text-muted">خطا در برقراری ارتباط</span>
+			</div>
+		</div>
+		<div class="likes-list" v-if="!loading && !error" v-infinite-scroll="loadMore" :infinite-scroll-distance="10">
+			<div v-for="like in likes" :key="'like_' + like.id" class="like-item">
+				<div class="userinfo">
+					<lazy-image class="profile-sm" imgClass="profile-sm" :src="like.page.profile"></lazy-image>
+					<div class="page-name d-flex flex-column">
+						<strong>{{ like.page.name }}</strong>
+						<span class="shortbio"> {{ like.page.name }} </span>
+					</div>
+				</div>
+				<follow-button :page="like.page.id"></follow-button>
+			</div>
+			<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>
+		</div>
+	</b-modal>
+</template>
+
+<script>
+import ModalMixin from "../../Mixins/Modal";
+import FollowButton from "../buttons/FollowButton.vue";
+import LazyImage from "../LazyImage.vue";
+import LoadingSpinner from "../LoadingSpinner.vue";
+export default {
+	watch: {
+		likesPaginate(newValue) {
+			this.likes = newValue.data;
+			this.next_page_url = newValue.next_page_url;
+		},
+	},
+	props: {
+		item: {
+			default: 0,
+			required: true,
+		},
+		type: {
+			default: "post",
+			required: false,
+		},
+	},
+	data() {
+		return {
+			error: false,
+			loading: true,
+			likesPaginate: null,
+			likes: [],
+			next_page_url: null,
+			loadingMore: false,
+
+			typeBasedData: {},
+		};
+	},
+	methods: {
+		loadMore() {
+			if (!this.loadingMore && this.next_page_url !== null) {
+				const options = {
+					method: "POST",
+					url: this.next_page_url,
+					data: this.typeBasedData,
+				};
+				this.loadingMore = true;
+				axios(options)
+					.then((response) => {
+						const data = response.data.likes;
+						if (data) {
+							this.likes = this.likes.concat(data.data);
+							this.next_page_url = data.next_page_url;
+						}
+					})
+					.catch((error) => {
+						this.next_page_url = options.url;
+					})
+					.then(() => {
+						this.loadingMore = false;
+					});
+			}
+		},
+		onShown() {
+			this.likes = true;
+			this.loading = true;
+			this.error = false;
+
+			if (this.type == "comment") {
+				this.typeBasedData = {
+					comment_id: this.item,
+				};
+			} else {
+				this.typeBasedData = {
+					post_id: this.item,
+				};
+			}
+
+			axios
+				.post("ikes/get", this.typeBasedData)
+				.then((response) => {
+					this.likesPaginate = response.data.likes;
+				})
+				.catch((error) => {
+					this.error = true;
+				})
+				.then(() => (this.loading = false));
+		},
+	},
+	components: { LazyImage, FollowButton, LoadingSpinner },
+
+	mixins: [ModalMixin],
+	name: "LikesModal",
+};
+</script>
+
+<style></style>

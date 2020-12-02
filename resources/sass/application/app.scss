@@ -387,6 +387,25 @@ img {
     max-height: 0;
 }
 
+.modal-header {
+    border: none;
+    padding: 20px 20px;
+
+    .close {
+        font-size: 24px;
+    }
+
+    &::after {
+        content: " ";
+        position: absolute;
+        left: 16px;
+        right: 16px;
+        bottom: 0;
+        height: 2px;
+        background: #C8C8C8;
+    }
+}
+
 .modal-header .close {
     padding: 0;
     margin: 0;
@@ -545,9 +564,9 @@ img {
     }
 
     .image__wrapper {
-        width: 80px;
-        height: 80px;
-        margin-top: -190px;
+        width: 72px;
+        height: 72px;
+        margin-top: -174px;
 
         img {
             border-radius: 50%;
@@ -751,6 +770,27 @@ pre {
     background-color: #FFF !important;
     background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iYmxhY2siIHdpZHRoPSIxOHB4IiBoZWlnaHQ9IjE4cHgiPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMFYweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGZpbGw9IiM3NTc1NzUiIGQ9Ik0xNS41IDE0aC0uNzlsLS4yOC0uMjdDMTUuNDEgMTIuNTkgMTYgMTEuMTEgMTYgOS41IDE2IDUuOTEgMTMuMDkgMyA5LjUgM1MzIDUuOTEgMyA5LjUgNS45MSAxNiA5LjUgMTZjMS42MSAwIDMuMDktLjU5IDQuMjMtMS41N2wuMjcuMjh2Ljc5bDUgNC45OUwyMC40OSAxOWwtNC45OS01em0tNiAwQzcuMDEgMTQgNSAxMS45OSA1IDkuNVM3LjAxIDUgOS41IDUgMTQgNy4wMSAxNCA5LjUgMTEuOTkgMTQgOS41IDE0eiIvPjwvc3ZnPg==');
     background-size: 24px;
+    font-size: 14px;
+
+    &::-webkit-input-placeholder {
+        color: $icons;
+    }
+
+    &::-moz-placeholder {
+        color: $icons;
+    }
+
+    &:-ms-input-placeholder {
+        color: $icons;
+    }
+
+    &::-ms-input-placeholder {
+        color: $icons;
+    }
+
+    &::placeholder {
+        color: $icons;
+    }
 }
 
 @media screen and (max-width: 425px) {
@@ -790,6 +830,34 @@ pre {
 
 .shadow-0 {
     box-shadow: none !important;
+}
+
+.lang-select {
+    background-color: $body-bg !important;
+}
+
+.shadow {
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.051) !important;
+}
+
+::-webkit-input-placeholder {
+    color: $icons;
+}
+
+::-moz-placeholder {
+    color: $icons;
+}
+
+:-ms-input-placeholder {
+    color: $icons;
+}
+
+::-ms-input-placeholder {
+    color: $icons;
+}
+
+::placeholder {
+    color: $icons;
 }
 
 .form-control:disabled,
@@ -1052,6 +1120,7 @@ a:focus {
 }
 
 .card-icon {
+    display: flex !important;
     z-index: 1;
 }
 
@@ -1190,6 +1259,12 @@ a:focus {
     gap: 10;
     align-items: center;
 
+    @media screen and (max-width: $sm-size) {
+        font-size: 10px;
+        justify-content: space-between;
+        padding: 8px;
+    }
+
     .filter-item {
         padding: 8px;
         border-radius: 16px;
@@ -1199,12 +1274,30 @@ a:focus {
         -ms-user-select: none;
         user-select: none;
 
+        @media screen and (max-width: $sm-size) {
+            font-size: 10px;
+            padding: 4px;
+        }
+
+        font-weight: 600;
+
         i {
+            @media screen and (max-width: $sm-size) {
+                font-size: 16px;
+            }
+
             margin-left: 4px;
         }
 
         &.active {
             background-color: $body-bg;
+            color: $dark;
         }
     }
 }
+
+.new-post-body {
+    padding: 16px 20px;
+}
+
+@import "./components/likes-modal.scss";

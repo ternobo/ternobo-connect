@@ -137,6 +137,8 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             Route::resource('posts.comments', "CommentController");
             // End Comments
 
+            Route::post("/ikes/get", "PostController@getLikes");
+
             Route::post("/reportpost", "PostController@report");
 
             // Settings Start

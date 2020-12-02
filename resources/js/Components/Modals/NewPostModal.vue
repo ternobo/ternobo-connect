@@ -4,7 +4,7 @@
       <div class="new-post position-relative">
         <div class="selections">
           <div class="userinfo col-lg-4 p-0">
-            <lazy-image :src="$page.props.user.profile" class="profile m-0" loading="lazy" />
+            <lazy-image :src="$page.props.user.profile" class="profile-sm" img-class="profile-sm" loading="lazy" />
             <strong>{{ $page.props.user.name }}</strong>
           </div>
           <div class="categoryandtype">

@@ -42,18 +42,15 @@
             display: flex;
             align-items: center;
             padding-right: 15px;
-            background: $body-bg;
-            border-radius: 40px;
+            background: $fixed-elements;
+            border-radius: 24px;
             margin-bottom: 10px;
             text-wrap: none;
         }
 
         .userinfo {
-            img {
-                max-width: 64px;
-                max-height: 64px;
-                margin: 0px 0px 0 10px;
-                border-radius: 50%;
+            .image__wrapper {
+                margin: 8px;
             }
         }
 

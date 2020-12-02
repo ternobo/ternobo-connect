@@ -82,7 +82,7 @@
                 <inertia-link :href="article.page.slug + '/' + (article.slug != null ? article.slug : article.id)">
                   <lazy-image class="card-img-top mb-0" img-class="card-img-top" :src="article.medias" />
                 </inertia-link>
-                <div class="card-header bg-landing-grey">
+                <div class="p-3">
                   <inertia-link class="card-title" :href="article.page.slug + '/' + (article.slug != null ? article.slug : article.id)">
                     <h3 class="text-white py-1 m-0">{{ article.title }}</h3>
                   </inertia-link>

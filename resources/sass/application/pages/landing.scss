@@ -222,13 +222,13 @@ h5 {
 }
 
 .slick-next:before {
-    content: 'keyboard_arrow_left' !important;
+    content: 'keyboard_arrow_right' !important;
     font-family: "Material Icons" !important;
     font-size: 30px;
 }
 
 .slick-prev:before {
-    content: 'keyboard_arrow_right' !important;
+    content: 'keyboard_arrow_left' !important;
     font-family: "Material Icons" !important;
     font-size: 30px;
 }
@@ -241,10 +241,11 @@ h5 {
 }
 
 .slick-next {
-    left: -25px !important;
+    right: -25px !important;
+    left: unset !important;
 }
 
 .slick-prev {
-    right: -25px !important;
-    left: unset !important;
+    left: -25px !important;
+    right: unset !important;
 }

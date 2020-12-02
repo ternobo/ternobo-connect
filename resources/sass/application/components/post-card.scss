@@ -28,8 +28,13 @@
 .post-box {
     @extend .card;
     @extend .px-0;
-    @extend .py-2;
     @extend .col-md-12;
+    padding: 16px 0;
+
+    @media screen and (max-width: $sm-size) {
+        padding: 12px 0;
+    }
+
     display: flex;
     flex-direction: column;
 }
@@ -39,7 +44,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 12px;
+        padding: 16px 20px;
         position: relative;
 
         &::after {
@@ -111,7 +116,8 @@
 
     .post-body {
         flex: 1 1 auto;
-        padding: 0.8rem;
+        padding: 16px 24px;
+        padding-bottom: 40px;
         text-align: justify;
         position: relative;
         line-height: 2;
@@ -132,6 +138,7 @@
 
         .text {
             max-height: 90px;
+            margin: 0;
             font-size: 14px;
             color: $text-color;
 
@@ -153,7 +160,7 @@
 
     .post-body {
         .articleimg {
-            margin: -0.8rem -0.8rem 0;
+            margin: -24px -24px 0;
             max-width: 645px;
             max-height: 480px;
         }
@@ -185,6 +192,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 14px 12px;
+            padding-top: 0;
         }
 
         .tagandcate {
@@ -254,14 +262,28 @@
         }
 
         .actions {
+            position: relative;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            @extend .pt-2;
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
+            padding-top: 16px;
+
+            padding-left: 12px;
+            padding-right: 12px;
+
+            &::before {
+                content: " ";
+                position: absolute;
+                left: 12px;
+                right: 12px;
+                top: 0;
+                height: 2px;
+                background: #e0e0e0;
+            }
 
             @media screen and (max-width: $sm-size) {
+                padding-top: 12px;
+
                 i {
                     font-size: 20px;
                 }
@@ -339,9 +361,24 @@
     font-size: 20px;
     font-weight: 600;
     margin-top: 16px;
+    margin-right: -8px;
 
     @media screen and (max-width: $sm-size) {
         margin-top: 12px;
+        font-size: 16px;
+    }
+}
+
+.post-time {
+    font-size: 14px;
+    padding: 16px 24px;
+    color: #C8C8C8;
+
+    @media screen and (max-width: $sm-size) {
+        font-size: 12px;
+    }
+
+    i {
         font-size: 16px;
     }
 }

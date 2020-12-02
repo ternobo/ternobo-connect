@@ -159,3 +159,23 @@
         }
     }
 }
+
+.profile-filters {
+    display: flex;
+    align-items: center;
+
+    .filter-item {
+        background: #FFF;
+        box-shadow: $card-shadow;
+        padding: 4px 8px;
+        color: $grey;
+        -webkit-user-select: none;
+           -moz-user-select: none;
+            -ms-user-select: none;
+                user-select: none;
+
+    }
+
+    gap: 8px;
+
+}

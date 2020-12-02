@@ -48,6 +48,9 @@ TernoboApp.install = function (Vue, options) {
     Vue.component("sidebar-left", LeftSidbar);
     Vue.component("sidebar-right", RightSidebar);
     Vue.component("user-card", () => import(/* webpackChunkName: "UserInfoCard" */ "../Components/Cards/UserInfoCard"));
+
+    Vue.component("likes-modal", () => import(/* webpackChunkName: "LikesModal" */ "../Components/Modals/LikesModal"));
+
     Vue.component("post-card", () => import("../Components/PostCard/PostCard"));
     Vue.component("people-suggestion", () => import("../Components/App/PeopleSuggestion"));
     Vue.component("loading-button", LoadingButton);

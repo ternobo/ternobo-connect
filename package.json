@@ -54,6 +54,7 @@
         "tselect": "0.1.65",
         "uuid": "^3.4.0",
         "vue-advanced-cropper": "^0.17.3",
+        "vue-infinite-loading": "^2.4.5",
         "vue-infinite-scroll": "^2.0.2",
         "vue-loading-skeleton": "^1.1.9",
         "vue-mention": "^0.1.7",

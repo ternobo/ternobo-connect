@@ -172,19 +172,17 @@ class PostController extends Controller
         return response()->json(array("result" => $result, "like" => $is_like));
     }
 
-    public function showLikes(Request $request)
+    public function getLikes(Request $request)
     {
-        $pages = array();
+        $likes = [];
         if ($request->has("comment_id")) {
             $comment = Post::findOrFail($request->comment_id);
-            $likes = Like::query()->where("comment_id", $comment->id)->select(array("page_id"))->get();
-            $pages = Page::query()->whereIn("id", $likes)->get();
+            $likes = Like::query()->with("page")->where("comment_id", $comment->id)->select(array("page_id", 'id'))->paginate(15);
         } elseif ($request->has("post_id")) {
             $post = Post::findOrFail($request->post_id);
-            $likes = Like::query()->where("post_id", $post->id)->select(array("page_id"))->get();
-            $pages = Page::query()->whereIn("id", $likes)->get();
+            $likes = Like::query()->with("page")->where("post_id", $post->id)->select(array("page_id", 'id'))->paginate(15);
         }
-        return view("layouts.components.likes", array("pages" => $pages));
+        return response()->json(['likes' => $likes]);
     }
 
     public function sharePost($post_id, Request $request)
