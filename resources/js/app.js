@@ -87,6 +87,7 @@ const vue_app = new Vue({
             props: {
                 initialPage: JSON.parse(app.dataset.page),
                 transformProps: function (props) {
+
                     return props;
                 },
                 async resolveComponent(name) {
@@ -136,9 +137,9 @@ document.addEventListener('inertia:start', event => {
 });
 document.addEventListener("inertia:finish", event => {
 
-    var parser = new DOMParser();
-    var doc = parser.parseFromString(vue_app.$inertia.page.props.SEO, 'text/html');
-    window.document.title = doc.title;
+    let header = document.createElement("head");
+    header.innerHTML = vue_app.$page.props.SEO;
+    window.document.title = header.querySelector("title").text;
 
     vue_app.url = window.location.pathname;
     setTimeout(() => TProgress.done(), 500);

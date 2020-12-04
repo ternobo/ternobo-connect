@@ -18,7 +18,7 @@ class NotificationController extends Controller
         $notifications = Notification::query()
             ->where("to", Auth::user()->personalPage->id)
             ->latest()
-            ->whereHas("page", function ($query) {
+            ->whereHas("sender", function ($query) {
                 $query->whereHas("user", function ($query) {
                     $query->where("active", true);
                 });

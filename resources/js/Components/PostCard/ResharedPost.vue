@@ -1,7 +1,7 @@
 <template>
 	<div class="post-box" v-if="post !== undefined">
-		<ReshareModal :post="post" :show.sync="showReshare"></ReshareModal>
-		<EmbedCodeModal :post="post.share" :show.sync="showEmbed"></EmbedCodeModal>
+		<ReshareModal :post="post.share" :show.sync="showReshare"></ReshareModal>
+		<EmbedCodeModal :post="post" :show.sync="showEmbed"></EmbedCodeModal>
 		<likes-modal :item="post.id" :show.sync="showLikes"></likes-modal>
 
 		<div class="post-header pt-0">
@@ -110,7 +110,7 @@ export default {
 		};
 	},
 	created: function () {
-		if (this.post.type === "article") {
+		if (this.post.share.type === "article") {
 			this.componentType = require("../PostCard/ArticleCard").default;
 		}
 		this.liked = this.post.is_liked;

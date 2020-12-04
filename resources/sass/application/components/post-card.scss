@@ -334,6 +334,40 @@
 }
 
 .tagandcate {
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        align-items: center;
+    }
+
+    .tags {
+        .tag-item {
+            background: $fixed-elements;
+            color: $grey;
+            cursor: pointer;
+            margin-left: 8px;
+            padding: 4px 16px;
+            transition: 0.3s all;
+            font-size: 14px;
+
+            @media screen and (max-width: $sm-size) {
+                padding: 2px 12px;
+                font-size: 12px;
+                vertical-align: baseline;
+                height: 20px;
+                margin-left: 4px;
+            }
+
+        }
+
+        .tag-item:hover {
+            background: $border-color;
+            color: $grey;
+        }
+    }
+
     .category {
         display: flex;
         align-items: center;

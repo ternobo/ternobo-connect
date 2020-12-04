@@ -80,6 +80,7 @@ class ArticlesController extends Controller
                         ->setRemoveStyles(true));
                 $dom->loadStr($text);
                 $images = $dom->find("img");
+
                 foreach ($images as $image) {
                     $url = $image->getAttribute("src");
                     if (Str::startsWith($url, "http") || Str::startsWith($url, "https")) {
@@ -89,8 +90,18 @@ class ArticlesController extends Controller
                         Storage::put("medias/" . $name, $contents);
                         $image->setAttribute("src", url("/medias/$name"));
                         $image->setAttribute("srcset", "");
+                    } elseif (Str::startsWith($url, "data:image")) {
+                        list($type, $data) = explode(';', $data);
+                        list(, $data) = explode(',', $data);
+                        dd($type);
+                        // $name = time() . uniqid() . Auth::user()->id;
+
+                        // Storage::put("medias/" . $name, $data);
+                        // $image->setAttribute("src", url("/medias/$name"));
+                        // $image->setAttribute("srcset", "");
                     }
                 }
+
                 $post->text = $dom->outerHtml;
 
                 if ($request->category !== null) {
@@ -137,9 +148,10 @@ class ArticlesController extends Controller
     {
         // return Inertia::render("Feed");
         $article = Post::query()
-        ->with("page")
-        ->with("category")
-        ->where("id", $article)->orWhere("slug", $article)->firstOrFail();
+            ->with("mutualLikes")
+            ->with("page")
+            ->with("category")
+            ->where("id", $article)->orWhere("slug", $article)->firstOrFail();
 
         if ($article->type === "article" && $article->user->active) {
             SEOTools::setTitle("$article->title");
@@ -174,8 +186,8 @@ class ArticlesController extends Controller
     {
         if (Auth::check()) {
             $article = Post::query()
-            ->with("category")
-            ->findOrFail($article);
+                ->with("category")
+                ->findOrFail($article);
             if ($article->type === "article" && $article->user_id === Auth::user()->id) {
                 SEOTools::setTitle("ویرایش مقاله $article->title");
 
@@ -230,19 +242,29 @@ class ArticlesController extends Controller
                     $text = \App\Models\Post::scriptStripper($request->text);
                     $dom = new Dom();
                     $dom->setOptions((new Options())
-                        ->setPreserveLineBreaks(true)
-                        ->setWhitespaceTextNode(true)
-                        ->setRemoveScripts(true)
-                        ->setRemoveStyles(true));
+                            ->setPreserveLineBreaks(true)
+                            ->setWhitespaceTextNode(true)
+                            ->setRemoveScripts(true)
+                            ->setRemoveStyles(true));
                     $dom->loadStr($text);
                     $images = $dom->find("img");
                     foreach ($images as $image) {
                         $url = $image->getAttribute("src");
-                        if (Str::startsWith($url, "http") || Str::startsWith($url, "https")) {
+                        if ((Str::startsWith($url, "http") || Str::startsWith($url, "https")) && !(Str::startsWith($url, url("/")))) {
                             $contents = file_get_contents($url);
                             $name = time() . Auth::user()->id . substr($url, strrpos($url, '/') + 1);
 
                             Storage::put("medias/" . $name, $contents);
+                            $image->setAttribute("src", url("/medias/$name"));
+                            $image->setAttribute("srcset", "");
+                        } elseif (Str::startsWith($url, "data:image")) {
+                            list($type, $data) = explode(';', $url);
+                            list(, $data) = explode(',', $url);
+                            $type = substr($type, strrpos($type, '/') + 1);
+
+                            $name = time() . uniqid() . Auth::user()->id . ".$type";
+
+                            Storage::put("medias/" . $name, base64_decode($data));
                             $image->setAttribute("src", url("/medias/$name"));
                             $image->setAttribute("srcset", "");
                         }
@@ -264,10 +286,11 @@ class ArticlesController extends Controller
                     $article->tags = json_encode(json_decode($request->tags));
                     $article->show = "public";
                     $medias = [];
-                    if ($request->file("media") !== null) {
+
+                    if ($request->file("media") != null) {
                         $medias = array(url($request->file("media")->store("medias")));
+                        $article->medias = json_encode($medias);
                     }
-                    $article->medias = json_encode($medias);
                     $user = Auth::user();
                     $user->touch();
 

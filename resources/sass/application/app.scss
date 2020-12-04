@@ -1301,3 +1301,9 @@ a:focus {
 }
 
 @import "./components/likes-modal.scss";
+
+@import "./components/article.scss";
+
+.ck.ck-sticky-panel .ck-sticky-panel__content_sticky {
+    top: 70px !important;
+}

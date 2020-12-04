@@ -1,5 +1,5 @@
 <template>
-	<b-modal v-if="$page.props.user != null" v-model="showModal" hide-footer hide-header class="pb-0" size="md" :centered="true">
+	<b-modal v-if="$page.props.user != null" v-model="showModal" hide-footer hide-header size="md" :centered="true">
 		<div>
 			<div class="w-100 pr-2 mb-3 mt-2 d-flex align-items-center dir-ltr text-right text-action" dir="ltr">
 				<i class="material-icons-outlined clickale p-1 text-grey font-18" @click="editLink = !editLink">{{ editLink ? "check" : "edit" }}</i>
@@ -9,17 +9,7 @@
 			</div>
 			<tselect class="my-3" v-on:new-item="newCategory" :items="categories" value-option="name" :showNewItem="true" v-model="category" direction="rtl"> <i class="material-icons-outlined">layers</i> دسته‌بندی </tselect>
 			<div>
-				<div class="d-flex align-items-center justify-content-between mb-2">
-					<div class="w-100 d-flex flex-column">
-						<span class="font-18 bold">برچسب‌ها</span>
-						<span class="text-muted bold font-11">حداکثر ۳ برچست</span>
-					</div>
-				</div>
-				<v-select class="w-100" dir="rtl" v-model="tags" taggable multiple push-tags>
-					<template #open-indicator>
-						<span></span>
-					</template>
-				</v-select>
+				<tag-input class="w-100" v-model="tags" />
 			</div>
 		</div>
 		<button style="marg" @click="save" class="btn btn-primary mt-4">ثبت</button>
@@ -29,7 +19,9 @@
 <script>
 import ModalMixin from "../../Mixins/Modal";
 import { Cropper } from "vue-advanced-cropper";
+import TagInput from "../inputs/TagInput.vue";
 export default {
+	components: { TagInput },
 	methods: {
 		save() {
 			const data = {
