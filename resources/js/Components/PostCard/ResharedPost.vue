@@ -53,7 +53,7 @@
 			</div>
 			<div class="actions" v-if="showMenu">
 				<div>
-					<div @click="showLikes = true" class="d-flex text-muted clickable" v-if="post.mutual_likes != null && post.mutual_likes.length > 0">
+					<div @click="showLikes = true" class="d-flex post-likes-text text-muted clickable" v-if="post.mutual_likes != null && post.mutual_likes.length > 0">
 						<span class="ml-1">پسندیده شده توسط</span>
 						<inertia-link v-if="post.mutual_likes[0]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
 							<strong class="text-light">{{ post.mutual_likes[0].page.name }}</strong>

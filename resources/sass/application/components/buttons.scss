@@ -2,12 +2,18 @@
     color: rgb(8, 152, 223);
     background: rgba(231, 242, 255, 1);
     border: none;
-    padding: 9px;
+    padding: 8px;
     font-weight: bold;
-    font-size: 0.7rem !important;
+    font-size: 12px !important;
     transition: 0.3s all;
     min-width: 80px;
     white-space: nowrap;
+
+    @media screen and (max-width: $sm-size) {
+        padding: 4px;
+        font-size: 10px !important;
+
+    }
 }
 
 .follow-btn:hover {
@@ -81,7 +87,7 @@
     position: relative;
     display: inline-block;
     font-size: 15px;
-    letter-spacing: 0.05em;
+    letter-spacing: 0;
     outline: 0;
     border: 1px solid transparent;
     transition: all 0.4s ease-in-out;

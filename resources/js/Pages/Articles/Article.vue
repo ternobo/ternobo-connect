@@ -167,7 +167,9 @@ export default {
 	mounted() {
 		this.liked = this.post.is_liked;
 		document.body.style.background = "#FFF";
-
+		var div = document.createElement("div");
+		div.innerHTML = "<link id='article-style' href='/css/article.css' rel='stylesheet' />";
+		document.head.append(div.firstChild);
 		axios
 			.get(this.$APP_URL + "/posts/" + this.post.id + "/comments")
 			.then((response) => {
@@ -192,6 +194,7 @@ export default {
 	},
 	destroyed() {
 		document.body.style.removeProperty("background");
+		document.querySelector("#article-style").remove();
 	},
 	computed: {
 		post_time: function () {

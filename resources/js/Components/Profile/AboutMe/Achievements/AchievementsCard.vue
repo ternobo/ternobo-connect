@@ -1,32 +1,32 @@
 <template>
-  <div class="card">
-    <div class="card-body" v-if="mounted">
-      <div class="d-flex mb-2 aling-items-center justify-content-between">
-        <h2 class="about-me--card-title">دستاورد‌ها</h2>
-        <DropdownBtn
-          v-if="edit"
-          :items="[
-            { id: 1, name: 'زبان' },
-            { id: 2, name: 'پروژه' },
-            { id: 3, name: 'انتشارات' },
-            { id: 4, name: 'اختراع' },
-            { id: 5, name: 'دوره' },
-            { id: 6, name: 'جایزه' },
-            { id: 7, name: 'آزمون' },
-          ]"
-          @click="addNew"
-        ></DropdownBtn>
-      </div>
+	<div class="card achievments-card">
+		<div class="card-body" v-if="mounted">
+			<div class="d-flex mb-2 aling-items-center justify-content-between">
+				<h2 class="about-me--card-title">دستاورد‌ها</h2>
+				<DropdownBtn
+					v-if="edit"
+					:items="[
+						{ id: 1, name: 'زبان' },
+						{ id: 2, name: 'پروژه' },
+						{ id: 3, name: 'انتشارات' },
+						{ id: 4, name: 'اختراع' },
+						{ id: 5, name: 'دوره' },
+						{ id: 6, name: 'جایزه' },
+						{ id: 7, name: 'آزمون' },
+					]"
+					@click="addNew"
+				></DropdownBtn>
+			</div>
 
-      <LanguagesList :value="this.achievements.langs" ref="langs" :edit="edit" :page="page"></LanguagesList>
-      <ProjectsList :value="this.achievements.projects" ref="projects" :edit="edit" :page="page"></ProjectsList>
-      <PublishList :value="this.achievements.publishs" ref="publishs" :edit="edit" :page="page"></PublishList>
-      <AwardsList :value="this.achievements.awards" ref="awards" :edit="edit" :page="page"></AwardsList>
-      <CoursesList :value="this.achievements.courses" ref="courses" :edit="edit" :page="page"></CoursesList>
-      <InventionsList :value="this.achievements.inventions" ref="inventions" :edit="edit" :page="page"></InventionsList>
-      <TestsList :value="this.achievements.tests" ref="tests" :edit="edit" :page="page"></TestsList>
-    </div>
-  </div>
+			<LanguagesList :value="this.achievements.langs" ref="langs" :edit="edit" :page="page"></LanguagesList>
+			<ProjectsList :value="this.achievements.projects" ref="projects" :edit="edit" :page="page"></ProjectsList>
+			<PublishList :value="this.achievements.publishs" ref="publishs" :edit="edit" :page="page"></PublishList>
+			<AwardsList :value="this.achievements.awards" ref="awards" :edit="edit" :page="page"></AwardsList>
+			<CoursesList :value="this.achievements.courses" ref="courses" :edit="edit" :page="page"></CoursesList>
+			<InventionsList :value="this.achievements.inventions" ref="inventions" :edit="edit" :page="page"></InventionsList>
+			<TestsList :value="this.achievements.tests" ref="tests" :edit="edit" :page="page"></TestsList>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -41,87 +41,87 @@ import TestsList from "./Tests/TestsList";
 import DropdownBtn from "../../../buttons/DropdownBtn";
 
 export default {
-  mounted() {
-    if (this.achievements == null) {
-      this.achievements = {
-        langs: null,
-        projects: null,
-        publishs: null,
-        inventions: null,
-        courses: null,
-        awards: null,
-        tests: null,
-      };
-      this.mounted = true;
-    }
-  },
-  data() {
-    return {
-      achievements: null,
-      mounted: false,
-    };
-  },
-  methods: {
-    getData() {
-      return {
-        langs: this.$refs.langs.getData(),
-        projects: this.$refs.projects.getData(),
-        publishs: this.$refs.publishs.getData(),
-        inventions: this.$refs.inventions.getData(),
-        courses: this.$refs.courses.getData(),
-        awards: this.$refs.awards.getData(),
-        tests: this.$refs.tests.getData(),
-      };
-    },
-    addNew(item) {
-      switch (item) {
-        case 1:
-          this.$refs.langs.addLanguege();
-          break;
-        case 2:
-          this.$refs.projects.addProject();
-          break;
-        case 3:
-          this.$refs.publishs.addPublish();
-          break;
-        case 4:
-          this.$refs.inventions.addInvention();
-          break;
-        case 5:
-          this.$refs.courses.addCourse();
-          break;
-        case 6:
-          this.$refs.awards.addAward();
-          break;
-        case 7:
-          this.$refs.tests.addTest();
-          break;
-      }
-    },
-  },
-  props: {
-    page: {
-      type: Object,
-      default: undefined,
-      required: true,
-    },
-    edit: {
-      type: Boolean,
-      default: false,
-      required: false,
-    },
-  },
-  components: {
-    LanguagesList,
-    ProjectsList,
-    PublishList,
-    AwardsList,
-    CoursesList,
-    InventionsList,
-    TestsList,
+	mounted() {
+		if (this.achievements == null) {
+			this.achievements = {
+				langs: null,
+				projects: null,
+				publishs: null,
+				inventions: null,
+				courses: null,
+				awards: null,
+				tests: null,
+			};
+			this.mounted = true;
+		}
+	},
+	data() {
+		return {
+			achievements: null,
+			mounted: false,
+		};
+	},
+	methods: {
+		getData() {
+			return {
+				langs: this.$refs.langs.getData(),
+				projects: this.$refs.projects.getData(),
+				publishs: this.$refs.publishs.getData(),
+				inventions: this.$refs.inventions.getData(),
+				courses: this.$refs.courses.getData(),
+				awards: this.$refs.awards.getData(),
+				tests: this.$refs.tests.getData(),
+			};
+		},
+		addNew(item) {
+			switch (item) {
+				case 1:
+					this.$refs.langs.addLanguege();
+					break;
+				case 2:
+					this.$refs.projects.addProject();
+					break;
+				case 3:
+					this.$refs.publishs.addPublish();
+					break;
+				case 4:
+					this.$refs.inventions.addInvention();
+					break;
+				case 5:
+					this.$refs.courses.addCourse();
+					break;
+				case 6:
+					this.$refs.awards.addAward();
+					break;
+				case 7:
+					this.$refs.tests.addTest();
+					break;
+			}
+		},
+	},
+	props: {
+		page: {
+			type: Object,
+			default: undefined,
+			required: true,
+		},
+		edit: {
+			type: Boolean,
+			default: false,
+			required: false,
+		},
+	},
+	components: {
+		LanguagesList,
+		ProjectsList,
+		PublishList,
+		AwardsList,
+		CoursesList,
+		InventionsList,
+		TestsList,
 
-    DropdownBtn,
-  },
+		DropdownBtn,
+	},
 };
 </script>
 

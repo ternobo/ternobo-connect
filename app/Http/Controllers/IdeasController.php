@@ -73,7 +73,6 @@ class IdeasController extends Controller
             ->selectRaw("*,(SELECT COUNT(*) as votes from idea_votes where idea_votes.idea_id = ideas.id) as votes_num")
             ->where("user_id", Auth::user()->id);
 
-
         if ($mostFav) {
             $idea = $idea->orderByDesc("votes_num");
             // $ideas->appends(array("fav" => "1"));
@@ -98,7 +97,7 @@ class IdeasController extends Controller
 
         $bookmarks = IdeaBookmark::query()->with("idea")->where("user_id", Auth::user()->id)->get()->pluck("idea");
 
-        return Inertia::render("Feedback/Index", ["bookmarks" => $bookmarks, "ideas" => $contributed_ideas, "my_ideas" => $ideas->paginate(5);, "myoffers" => true]);
+        return Inertia::render("Feedback/Index", ["bookmarks" => $bookmarks, "ideas" => $contributed_ideas, "my_ideas" => $ideas->paginate(5), "myoffers" => true]);
     }
 
     public function voteIdea(Request $request)

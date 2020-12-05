@@ -137,7 +137,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             Route::resource('posts.comments', "CommentController");
             // End Comments
 
-            Route::post("/ikes/get", "PostController@getLikes");
+            Route::post("/likes/get", "PostController@getLikes");
 
             Route::post("/reportpost", "PostController@report");
 
@@ -172,6 +172,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
             Route::post("/reportpost", "PostController@report");
 
+            Route::post("tags/delete", "PageController@removeTags");
         });
 
         /**
@@ -230,9 +231,8 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
         Route::get("/{location?}", "PageController@show")->where("location", "about|activities|articles|contact");
 
-        Route::prefix('/category/{id}')->group(function () {
-            Route::get("/{location?}", "PageController@getCategory");
-        });
+        Route::post("/actions", "PageController@getActions");
+        Route::post("/tags", "PageController@getTags");
 
         Route::get("/{post}", "ArticlesController@show");
     });

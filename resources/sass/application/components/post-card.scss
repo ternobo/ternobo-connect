@@ -409,10 +409,19 @@
     color: #C8C8C8;
 
     @media screen and (max-width: $sm-size) {
-        font-size: 12px;
+        font-size: 10px;
     }
 
     i {
         font-size: 16px;
+        color: #C8C8C8 !important;
+    }
+}
+
+.post-likes-text {
+    font-size: 14px;
+
+    @media screen and (max-width: $sm-size) {
+        font-size: 10px;
     }
 }

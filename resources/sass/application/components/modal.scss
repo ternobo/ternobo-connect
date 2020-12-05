@@ -7,6 +7,18 @@
     left: 0;
     right: 0;
     top: 14px;
+
+    @media screen and (max-width: $sm-size) {
+        font-size: 12px;
+        top: 16px;
+
+    }
+}
+
+@media screen and (max-width: $sm-size) {
+    .modal-header .close {
+        font-size: 20px;
+    }
 }
 
 .modal-header {

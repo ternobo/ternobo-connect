@@ -18,13 +18,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * Actions should be parsed base on their page(\App\Page) using \App\Page:parseAction($action)
  */
-class Action extends Model {
+class Action extends Model
+{
 
     /**
      * id of the page which did the action
      * @var integer
      */
-     /**
+    /**
      * the post that action done on it
      * @var integer
      */
@@ -39,13 +40,18 @@ class Action extends Model {
      * @var integer
      */
 
-
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
 
-    public function post(){
-       return $this->belongsTo("App\Models\Post","post_id");
+    public function post()
+    {
+        return $this->belongsTo("App\Models\Post", "post_id");
+    }
+
+    public function comment()
+    {
+        return $this->belongsTo("App\Models\Comment", "connected_to");
     }
 
 }

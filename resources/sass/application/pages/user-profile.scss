@@ -160,9 +160,24 @@
     }
 }
 
+.profile-action-filter {
+    margin-top: 8px;
+}
+
+.profile-posts {
+    margin-top: 16px;
+
+    @media screen and (max-width: $sm-size) {
+        margin-top: 8px;
+
+    }
+}
+
 .profile-filters {
     display: flex;
     align-items: center;
+    margin-bottom: 8px;
+    margin-top: 8px;
 
     .filter-item {
         background: #FFF;
@@ -170,12 +185,24 @@
         padding: 4px 8px;
         color: $grey;
         -webkit-user-select: none;
-           -moz-user-select: none;
-            -ms-user-select: none;
-                user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        border-radius: 8px;
 
+        @media screen and (max-width: $sm-size) {
+            font-size: 10px;
+            font-weight: 600;
+        }
     }
 
     gap: 8px;
 
+}
+
+.mobile-filters-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 111px;
+    z-index: 99;
 }

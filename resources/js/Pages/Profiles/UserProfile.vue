@@ -30,38 +30,18 @@
 				<tab v-if="hasActivity" name="فعالیت‌ها" id="activities" :href="'/' + page.slug + '/activities'" :selected="current_tab === 'activities'">
 					<div class="row" v-if="!loadingTab" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
 						<div class="col-md-4" v-if="$root.isDesktop">
-							<Categories :current-category="currentCategory" :page-id="page.id" :categories="page.categories" :location="location" :slug="page.slug" :article="false"></Categories>
+							<Categories v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug"></Categories>
 						</div>
 						<div class="col-md-8">
 							<NewPostCard v-if="canEdit"></NewPostCard>
-
-							<div v-if="!$root.isDesktop">
-								<div class="item-filters justify-content-between mt-2">
-									<div class="filter-item"><i class="material-icons-outlined">layers</i> همه مطالب</div>
-									<div class="filter-item"><i class="material-icons-outlined">favorite_border</i> پسند‌ها</div>
-									<div class="filter-item"><i class="material-icons-outlined">comment</i> نظرات</div>
-									<div class="filter-item"><i class="material-icons-outlined">loop</i> بازنشر‌ها</div>
-								</div>
-
-								<div class="profile-filters mt-2">
-									<div class="filter-item">
-										<i class="material-icons-outlined">layers</i>
-										دسته‌بندی‌ها
-									</div>
-									<div class="filter-item">
-										<i class="material-icons-outlined">label</i>
-										برچسب‌ها
-									</div>
-								</div>
-							</div>
-
-							<div class="posts pt-3">
+							<categories-mobile v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug" v-if="!$root.isDesktop"></categories-mobile>
+							<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
 								<ActionCard v-for="action in actionsList" :page="page" :action="action" :key="action.id"></ActionCard>
 							</div>
-							<div class="w-100 d-flex justify-content-center py-3" v-if="loadingTab">
+							<div class="w-100 d-flex justify-content-center py-3" v-if="loadingActions">
 								<loading-spinner class="image__spinner" />
 							</div>
-							<div v-if="next_page_url === null && !loadingTab">
+							<div v-if="next_page_url === null && !loadingActions">
 								<no-content></no-content>
 							</div>
 						</div>
@@ -100,15 +80,23 @@ import ProfileHeader from "../../Components/Profile/ProfileHeader";
 
 import { Inertia } from "@inertiajs/inertia";
 import MobileCategories from "../../Components/Profile/MobileCategories.vue";
+import CategoriesMobile from "../../Components/Profile/CategoriesMobile.vue";
 
 export default {
+	watch: {
+		filters(newValue) {
+			this.loadingActions = true;
+			axios
+				.post("/" + this.page.slug + "/actions", this.filters)
+				.then((response) => {
+					this.actionsList = response.data.actions.data;
+					this.next_page_url = response.data.actions.next_page_url;
+				})
+				.catch((err) => {})
+				.then(() => (this.loadingActions = false));
+		},
+	},
 	created() {
-		this.actionsList = this.actions.data;
-		this.next_page_url = this.actions.next_page_url;
-
-		this.articlesList = this.articles.data;
-		this.next_page_url = this.articles.next_page_url;
-
 		this.current_tab = this.location;
 
 		if (this.location.endsWith("articles") || this.location.endsWith("activities")) {
@@ -118,23 +106,25 @@ export default {
 		}
 		this.current_tab = this.location;
 
-		// if (!(this.showSkills || this.showExperiences || this.showEducations || this.checkUser(this.page.user_id) || (this.about != null && this.about.length > 0))) {
-		//   this.showAbout = false;
-		//   if (this.current_tab == "home") {
-		//     this.current_tab = "activities";
-		//     this.loadTab("/" + this.page.slug + "/activities", false);
-		//   }
-		// }
+		axios
+			.post("/" + this.page.slug + "/actions", this.filters)
+			.then((response) => {
+				this.actionsList = response.data.actions.data;
+				this.next_page_url = response.data.actions.next_page_url;
+			})
+			.catch((err) => {})
+			.then(() => (this.loadingActions = false));
 	},
 	methods: {
 		loadMore() {
 			if (!this.loadingMore && this.next_page_url !== null) {
 				const options = {
-					method: "GET",
+					method: "POST",
 					headers: {
 						"X-Inertia": "true",
 					},
 					url: this.next_page_url,
+					data: this.filters,
 				};
 				this.loadingMore = true;
 				axios(options)
@@ -280,36 +270,18 @@ export default {
 			showAbout: true,
 
 			showMobileCategory: false,
+
+			loadingActions: true,
+
+			filters: {
+				action: "all",
+			},
 		};
 	},
 	computed: {
 		canEdit() {
 			return this.page.user_id == window.user_id;
 		},
-		// showSkills() {
-		//   if (this.checkUser(this.page.user_id) || (this.page.user.skills != null && this.page.user.skills.length > 0)) {
-		//     return true;
-		//   }
-		//   return false;
-		// },
-		// showExperiences() {
-		//   if (this.checkUser(this.page.user_id) || (this.page.about_data != null && this.page.about_data.experiences != null && this.page.about_data.experiences.length > 0)) {
-		//     return true;
-		//   }
-		//   return false;
-		// },
-		// showEducations() {
-		//   if (this.checkUser(this.page.user_id) || (this.page.about_data != null && this.page.about_data.educations != null && this.page.about_data.educations.length > 0)) {
-		//     return true;
-		//   }
-		//   return false;
-		// },
-		// showAchievements() {
-		//   if (this.checkUser(this.page.user_id) || (this.page.about_data != null && this.page.about_data.achievements != null && this.page.about_data.achievements.length > 0)) {
-		//     return true;
-		//   }
-		//   return false;
-		// },
 	},
 	name: "UserProfile",
 	props: {
@@ -377,6 +349,7 @@ export default {
 			),
 		ProfileHeader,
 		MobileCategories,
+		CategoriesMobile,
 	},
 	layout: AppLayout,
 };

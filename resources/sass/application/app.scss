@@ -39,6 +39,37 @@ button:focus {
     outline: none;
 }
 
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: center;
+
+    .tag-item {
+        background: $fixed-elements;
+        color: $grey;
+        cursor: pointer;
+        margin-left: 8px;
+        padding: 4px 16px;
+        transition: 0.3s all;
+        font-size: 14px;
+
+        @media screen and (max-width: $sm-size) {
+            padding: 2px 12px;
+            font-size: 12px;
+            vertical-align: baseline;
+            height: 20px;
+            margin-left: 4px;
+        }
+
+    }
+
+    .tag-item:hover {
+        background: $border-color;
+        color: $grey;
+    }
+}
+
 body {
     direction: rtl;
     margin: 0;
@@ -391,6 +422,10 @@ img {
     border: none;
     padding: 20px 20px;
 
+    @media screen and (max-width: $sm-size) {
+        padding: 20px 12px;
+    }
+
     .close {
         font-size: 24px;
     }
@@ -403,6 +438,17 @@ img {
         bottom: 0;
         height: 2px;
         background: #C8C8C8;
+
+        @media screen and (max-width: $sm-size) {
+            left: 12px;
+            right: 12px;
+        }
+    }
+}
+
+.modal-body {
+    @media screen and (max-width: $sm-size) {
+        padding: 12px;
     }
 }
 
@@ -878,11 +924,6 @@ pre {
 }
 
 @import "./components/datepicker.scss";
-
-/* Import the Quill styles you want */
-@import '~quill/dist/quill.core.css';
-@import '~quill/dist/quill.bubble.css';
-@import '~quill/dist/quill.snow.css';
 
 .ql-picker-label {
     text-align: center;

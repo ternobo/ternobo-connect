@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Action;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Following;
@@ -92,41 +93,7 @@ class PageController extends Controller
             $pages = count($pages) > 3 ? $pages->random(3) : $pages;
         }
 
-        $actions = ["data" => [], "next_page_url" => null];
-        if (Str::startsWith($request->action, "like")) {
-            $actions = $page->getActions("like", 5);
-        } elseif (Str::startsWith($request->action, "share")) {
-            $actions = $page->getActions("share", 5);
-        } elseif (Str::startsWith($request->action, "comment")) {
-            $actions = $page->getActions("comment", 5);
-        } elseif ($category !== null) {
-            if ($category === "all") {
-                $actions = $page->getActions("post", 5);
-            } else {
-                $actions = $page->getActions("post", 5, $category);
-            }
-        } else {
-            $actions = $page->getActions(null, 5);
-        }
-
-        $articles = ["data" => [], "next_page_url" => null];
-
-        if ($location === 'articles') {
-            $articles = Post::query()
-                ->with("page")
-                ->withCount("likes")
-                ->with("category")
-                ->where("page_id", $page->id)
-                ->where("type", "article");
-
-            if (Auth::check()) {
-                $articles = $articles->with("mutualLikes");
-            }
-            if ($category !== null && $category !== "all") {
-                $articles = $articles->where("category_id", $category);
-            }
-            $articles = $articles->paginate(10);
-        }
+        $actions = $page->getActions(null, 5);
 
         $hasAbout = !($page->aboutData == null || count((array) $page->aboutData) < 1) || ($page->about == null || $page->about == "");
 
@@ -145,8 +112,6 @@ class PageController extends Controller
             [
                 "page" => $page,
                 "pages" => $pages,
-                "actions" => $actions,
-                "articles" => $articles,
                 "location" => $location,
                 'currentCategory' => $category,
 
@@ -156,17 +121,111 @@ class PageController extends Controller
         );
     }
 
-    public function getPosts(Request $request)
+    public function getTags(Page $page, Request $request)
     {
-        $posts = Page::query()
-            ->where("slug", $request->page_slug)->firstOrFail()
-            ->posts();
+        $posts = Post::query()->where("page_id", $page->id);
 
-        if ($request->exists("category")) {
+        if ($request->filled("category")) {
             $posts = $posts->where("category_id", $request->category);
         }
 
-        return response()->json($posts->paginate(10));
+        $posts = $posts->get();
+
+        $tags = [];
+
+        foreach ($posts as $post) {
+            $postTags = json_decode($post->tags);
+            $tags = array_merge($tags, $postTags);
+        }
+
+        $tagsOrdered = [];
+
+        $tags = array_count_values($tags);
+
+        arsort($tags);
+
+        return response()->json([
+            'tags' => array_keys($tags),
+        ]);
+    }
+
+    public function removeTags(Request $request)
+    {
+        $tags = $request->tags;
+        foreach ($tags as $tag) {
+            $posts = Post::query()->where("page_id", Auth::user()->personalPage->id)
+                ->whereJsonContains("tags", $tag)
+                ->get();
+            foreach ($posts as $post) {
+                $postTags = json_decode($post->tags);
+
+                $index = array_search($tag, $postTags);
+                if (!is_bool($index)) {
+                    unset($postTags[$index]);
+                }
+                $post->tags = json_encode(array_values($postTags));
+                $post->save();
+            }
+        }
+        return response()->json([
+            "result" => true,
+        ]);
+    }
+
+    public function getActions(Page $page, Request $request)
+    {
+        $actions = ["data" => [], "next_page_url" => null];
+
+        if ($request->filled("category")) {
+            $actions = Action::query()->where("page_id", $page->id)
+                ->with("post")
+                ->with("post.page")
+
+                ->with("post.category")
+                ->where("action", "post")
+                ->whereHas("post", function ($query) use ($request) {
+                    $category = $request->category;
+                    $query->where("category_id", $category);
+                    if ($request->filled("tag")) {
+                        $query->whereJsonContains("tags", $request->tag);
+                    }
+                });
+
+            if (Auth::check()) {
+                $actions = $actions->with("post.mutualLikes");
+            }
+
+            $actions = $actions->paginate(10);
+        } elseif ($request->filled("tag")) {
+            $actions = Action::query()->where("page_id", $page->id)
+                ->with("post")
+                ->with("post.page")
+                ->with("post.category")
+                ->where("action", "post")
+                ->whereHas("post", function ($query) use ($request) {
+                    $query->whereJsonContains("tags", $request->tag);
+                });
+
+            if (Auth::check()) {
+                $actions = $actions->with("post.mutualLikes");
+            }
+
+            $actions = $actions->paginate(10);
+        } elseif ($request->filled("action")) {
+            if (Str::startsWith($request->action, "like")) {
+                $actions = $page->getActions("like", 10);
+            } elseif (Str::startsWith($request->action, "share")) {
+                $actions = $page->getActions("share", 10);
+            } elseif (Str::startsWith($request->action, "comment")) {
+                $actions = $page->getActions("comment", 10);
+            } elseif (Str::startsWith($request->action, "all")) {
+                $actions = $page->getActions(null, 10);
+            }
+        }
+
+        return response()->json([
+            'actions' => $actions,
+        ]);
     }
 
     public function showPage($page)

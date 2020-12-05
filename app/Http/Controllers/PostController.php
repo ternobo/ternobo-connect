@@ -236,7 +236,7 @@ class PostController extends Controller
         $post->medias = json_encode($medias);
         $post->post_id = $post_id;
         $result = $post->save();
-        Auth::user()->personalPage->addAction("post", $post->id);
+        Auth::user()->personalPage->addAction("share", $post->id);
         foreach ($mentions as $mention) {
             $page = Page::query()->where("slug", $mention)->first();
             if ($page instanceof Page) {

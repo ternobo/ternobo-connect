@@ -28,6 +28,10 @@
             .page-name {
                 padding-right: 0 8px !important;
 
+                @media screen and (max-width: $sm-size) {
+                    font-size: 12px;
+                    padding-right: 0 4px !important;
+                }
             }
         }
 

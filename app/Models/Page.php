@@ -34,7 +34,8 @@ class Page extends Model
         return $this->hasOne("App\Models\ContactData", "page_id");
     }
 
-    public function aboutData(){
+    public function aboutData()
+    {
         return $this->hasOne("App\Models\AboutData", "page_id");
     }
 
@@ -197,12 +198,11 @@ class Page extends Model
         // get the original array to be displayed
         $data = parent::toArray();
 
-        if(isset($data['contact_data'])){
+        if (isset($data['contact_data'])) {
             $data['contact_data'] = json_decode($data['contact_data']['data']);
         }
 
-
-        if(isset($data['about_data'])){
+        if (isset($data['about_data'])) {
             $data['about_data'] = json_decode($data['about_data']['data']);
         }
 
@@ -270,12 +270,11 @@ class Page extends Model
      *
      * @return array()
      */
-    public function getActions($action = null, $page = null, $category = null)
+    public function getActions($action = null, $page = 10)
     {
         $actions = Action::query()
             ->with("post")
             ->with("post.page")
-            ->with("post.likes")
             ->with("post.category")
             ->where("page_id", $this->id)->latest();
 
@@ -283,24 +282,11 @@ class Page extends Model
             $actions = $actions->with("post.mutualLikes");
         }
 
-        if ($category !== null) {
-            $actions = $actions->whereHas("post", function ($query) use ($category) {
-                $query->where("category_id", $category);
-            });
-        }
-
-        if ($action !== null) {
+        if ($action != null && $action != "all") {
             $actions = $actions->where("action", $action);
         }
 
-        if ($page !== null) {
-            $actions = $actions->paginate($page, "*", "action_page");
-        } else {
-            $actions = $actions->get();
-        }
-
-        // dd(($actions->toArray()));
-        return $actions;
+        return $actions->paginate($page);
     }
 
     public function parseAction($action)
@@ -483,12 +469,12 @@ class Page extends Model
         return $result;
     }
 
-
-    public static function checkSlug($slug){
-       if(Auth::check()){
-        return !(Page::query()->where("slug",$slug)->where("id",'!=',Auth::user()->personalPage->id)->first() instanceof Page);
-       }
-       return !(Page::query()->where("slug",$slug)->first() instanceof Page);
+    public static function checkSlug($slug)
+    {
+        if (Auth::check()) {
+            return !(Page::query()->where("slug", $slug)->where("id", '!=', Auth::user()->personalPage->id)->first() instanceof Page);
+        }
+        return !(Page::query()->where("slug", $slug)->first() instanceof Page);
     }
 
 }

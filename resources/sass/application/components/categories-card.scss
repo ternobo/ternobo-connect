@@ -7,46 +7,142 @@
         background: #EEE;
         padding: 5px 10px;
         border-radius: 32px;
-        margin-left: 15px;
+        margin: 6px;
+        color: $grey;
+        border: none;
     }
 
     .action-item.active {
-        background: #E0E0E0;
-    }
-
-    @media screen and (min-width: 767px) {
-        .action-item:not(:last-child) {
-            margin-bottom: 15px;
-        }
+        background: $dark;
+        color: $white;
     }
 
     ul {
         list-style: none;
     }
 }
-.categories{
-            color: $icons;
-    a{
-        color: $icons;
-    }
-    li.active{
-        a{
+
+.categories {
+    color: $icons;
+
+    .category-item {
+        &:not(:last-child) {
+            margin-bottom: 5px;
+        }
+
+        &.active {
             color: $dark;
         }
     }
-    ul{
-        border-right: 1px solid $icons;
-        padding-right: 12px;
-        margin-top: 10px;
-        margin-right: 8px;
-        li:hover{
-            a{
+
+    a {
+        color: $icons;
+    }
+
+    li.active {
+        a {
+            color: $dark;
+        }
+    }
+
+    ul {
+        padding: 0;
+
+        li:hover {
+            a {
                 color: $dark;
             }
 
         }
     }
 }
-.add-category-field{
+
+.add-category-field {
     border: 2px solid $icons;
+}
+
+
+.category--title {
+    font-size: 18px;
+    color: $grey;
+}
+
+.profile-tags {
+    .tag-item.active {
+        color: $white;
+        background: $dark;
+    }
+}
+
+
+.tag-edit {
+    .tag-item:hover {
+        background: $danger !important;
+        color: $white !important;
+    }
+}
+
+.slideup-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+
+    i {
+        font-size: 16px;
+    }
+}
+
+.categories-list-mobile {
+    max-height: 380px;
+    border-right: 2px solid #C8C8C8;
+    padding-right: 28px;
+
+    overflow-y: auto;
+    scrollbar-color: $dark $light;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+        width: 0.3em;
+        background: #DEDEDE;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $dark;
+    }
+
+
+    li {
+        color: $grey;
+        font-size: 10px;
+        padding: 4px;
+        min-width: 50px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        width: -webkit-max-content;
+        width: -moz-max-content;
+        width: max-content;
+
+        .close-icon {
+            color: $grey;
+            position: absolute;
+            right: -20px;
+        }
+
+        i {
+            font-size: 16px;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 8px;
+        }
+
+        &.active {
+            color: $white;
+            background-color: $dark;
+        }
+    }
 }
