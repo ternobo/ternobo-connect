@@ -206,3 +206,40 @@
     top: 111px;
     z-index: 99;
 }
+
+.slug-name {
+    font-size: 14px;
+
+    @media screen and (max-width: $sm-size) {
+        max-width: 16px;
+    }
+
+    .slug-logo {
+        max-width: 24px;
+        margin-left: 8px;
+
+        @media screen and (max-width: $sm-size) {
+            max-width: 16px;
+        }
+    }
+}
+
+.slug-item {
+    &.profile-slug-contact {
+        background: $white;
+        border-radius: 14px;
+    }
+
+    .slug-url {
+        @media screen and (max-width: $sm-size) {
+            font-size: 10px;
+            line-height: 1.5;
+        }
+    }
+}
+
+@media screen and (max-width: $sm-size) {
+    .contact--title {
+        font-size: 14px;
+    }
+}

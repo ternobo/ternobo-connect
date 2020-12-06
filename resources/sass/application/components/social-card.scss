@@ -1,18 +1,30 @@
-
 .socials-list {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
 
     li {
-        padding: 7px 0;
+        padding: 8px 0;
         width: 25%;
 
-        a{
+        @media screen and (max-width: $sm-size) {
+            padding: 4px 0;
+            width: 20%;
+
+            .social-icon {
+                font-size: 16px;
+
+                i {
+                    font-size: 16px;
+                }
+            }
+        }
+
+        a {
             padding: 10px;
         }
 
-        a:hover{
+        a:hover {
             background: $fixed-elements;
         }
 

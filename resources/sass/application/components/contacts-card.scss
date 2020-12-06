@@ -1,4 +1,3 @@
-
 .contacts-list {
     display: flex;
     align-items: center;
@@ -9,14 +8,28 @@
         flex: 50%;
         padding: 7px 0;
 
-        .editItem {
+        @media screen and(max-width: $sm-size) {
+            width: 100%;
+            flex: 100%;
+            flex-wrap: wrap;
+            font-size: 12px;
+
+            i {
+                font-size: 18px;
+            }
+        }
+
+        .edit-contact {
             width: 100%;
             display: flex;
             align-items: center;
-            flex-direction: column;
+            justify-content: space-between;
 
-            @media screen and(max-width: 622px) {
-                flex-wrap: wrap;
+            @media screen and(max-width: $sm-size) {
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-direction: column;
+                gap: 8px;
             }
         }
 

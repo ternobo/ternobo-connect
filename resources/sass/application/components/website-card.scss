@@ -7,6 +7,12 @@
         width: 100%;
         flex: 100%;
         padding: 7px 0;
+        color: $action;
+        font-size: 14px;
+
+        @media screen and (max-width: $sm-size) {
+            font-size: 12px;
+        }
     }
 
     li.edit {

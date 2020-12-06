@@ -1213,17 +1213,6 @@ a:focus {
 
 @import "./components/toast.scss";
 
-
-@media screen and (max-width: 425px) {
-    .content-container-profile {
-        .tabs {
-            li {
-                font-size: 12px;
-            }
-        }
-    }
-}
-
 .otp-input-single {
     max-width: 16px;
     margin-right: 12px;
