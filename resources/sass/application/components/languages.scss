@@ -27,6 +27,29 @@
             align-items: center;
             gap: 10px;
 
+            @media screen and (max-width: $sm-size) {
+                align-items: flex-start;
+            }
+
+            .language-edit-input {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                .v-select {
+                    width: 50%;
+                }
+
+                @media screen and (max-width: $sm-size) {
+                    .v-select {
+                        width: 100%;
+                    }
+
+                    flex-direction: column;
+                }
+            }
+
             .actions {
                 border-radius: 32px;
                 display: flex;
@@ -39,11 +62,20 @@
                 padding: 2px;
                 margin-left: 24px;
                 padding: 8px;
-                min-width: 78px;
-                min-height: 44px;
+                width: 78px;
+                height: 44px;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+
+                @media screen and (max-width: $sm-size) {
+                    max-width: 56px;
+                    max-height: 28px;
+
+                    i {
+                        font-size: 20px;
+                    }
+                }
             }
 
 

@@ -70,7 +70,6 @@
                 flex-direction: row;
                 color: $icons;
                 background: $body-bg;
-                padding: 2px;
                 margin-left: 24px;
                 padding: 8px;
                 width: 78px;
@@ -78,6 +77,16 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+
+                @media screen and (max-width: $sm-size) {
+                    max-width: 56px;
+                    max-height: 28px;
+
+                    i {
+                        font-size: 20px;
+                    }
+                }
+
             }
 
         }

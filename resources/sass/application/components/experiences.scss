@@ -32,10 +32,24 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        @media screen and (max-width: $sm-size) {
+            max-width: 28px;
+            max-height: 56px;
+
+            i {
+                font-size: 20px;
+            }
+        }
+
     }
 
     .detail {
         display: flex;
         width: 100%;
+
+        @media screen and (max-width: $sm-size) {
+            font-size: 12px;
+        }
     }
 }

@@ -114,6 +114,10 @@ body {
 
 .card-body {
     padding: 20px;
+
+    @media screen and (max-width: $sm-size) {
+        padding: 16px;
+    }
 }
 
 a {
@@ -918,7 +922,7 @@ pre {
         padding-left: 40px;
     }
 
-    .about-me .card-body .follow-btn {
+    .about-me .card-body .add-to-resume-btn {
         margin-left: -20px;
     }
 }
@@ -1050,6 +1054,12 @@ pre {
     span {
         height: 13pt;
     }
+
+    @media screen and (max-width: $sm-size) {
+        height: 16px;
+        width: 16px;
+        font-size: 10px;
+    }
 }
 
 .disabled {
@@ -1086,6 +1096,10 @@ a:focus {
 
     span {
         height: 13pt;
+    }
+
+    @media screen and (max-width: $sm-size) {
+        font-size: 10px;
     }
 }
 
@@ -1336,4 +1350,31 @@ a:focus {
 
 .ck.ck-sticky-panel .ck-sticky-panel__content_sticky {
     top: 70px !important;
+}
+
+@media screen and (max-width: $sm-size) {
+    .v-select[dir=rtl] .vs__actions {
+        padding: 0;
+    }
+
+    .vs__open-indicator i {
+        font-size: 16px;
+    }
+
+    .datepicker-list .vs__actions {
+        min-height: 24px;
+    }
+
+    .editItem {
+        font-size: 12px;
+
+        .input {
+            width: 100% !important;
+        }
+
+        .v-select {
+            width: 100% !important;
+        }
+    }
+
 }
