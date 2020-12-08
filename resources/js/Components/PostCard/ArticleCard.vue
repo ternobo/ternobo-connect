@@ -1,5 +1,5 @@
 <template>
-	<div class="post-box" v-if="post !== undefined">
+	<div class="post-box" :class="{ 'reshared-post': !showMenu }" v-if="post !== undefined">
 		<EmbedCodeModal :post="post" :show.sync="showEmbed"></EmbedCodeModal>
 		<ReshareModal :post="post" :show.sync="showReshare"></ReshareModal>
 		<likes-modal :item="post.id" :show.sync="showLikes"></likes-modal>
@@ -17,17 +17,17 @@
 				</div>
 			</inertia-link>
 			<div class="actions position-relative" v-if="showMenu">
-				<i class="material-icons clickale text-muted hover-dark" onclick="Ternobo.bookmark('93', this)">bookmark_border</i>
+				<i class="material-icons bookmark-icon clickable text-muted hover-dark">bookmark_border</i>
 				<div>
 					<post-menu :post="post" @embed="showEmbed = true"></post-menu>
 				</div>
 			</div>
 		</div>
-		<inertia-link class="post-body pb-2 clickale" :href="postSlug">
+		<inertia-link class="post-body pb-2" :href="postSlug">
 			<div class="images articleimg" v-if="post.medias !== null && post.medias !== undefined && post.medias.length > 0">
-				<lazy-image class="m-0" style="min-height: 288px" alt="" :src="post.medias" />
+				<lazy-image class="m-0" style="min-height: 218px" alt="" :src="post.medias" />
 			</div>
-			<h4 class="article-title">{{ post.title }}</h4>
+			<h4 style="margin-right: -12px !important" class="article-title">{{ post.title }}</h4>
 		</inertia-link>
 		<div class="post-time" v-if="showMenu">
 			{{ post_time }}
@@ -38,7 +38,7 @@
 				{{ post.show === "public" ? "public" : "group" }}
 			</i>
 		</div>
-		<div class="post-footer">
+		<div class="post-footer" v-if="showMenu">
 			<div class="tagandcate" v-if="post.tags.length > 0 || post.category !== null">
 				<div class="tags">
 					<inertia-link v-for="(tag, index) in post.tags" :key="tag + '_POST_TAG_' + post.id + '_' + index" class="tag-item" :href="'/tags/' + tag">

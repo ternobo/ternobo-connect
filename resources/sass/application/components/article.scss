@@ -1,6 +1,7 @@
 .article-title {
     font-size: 24px;
     font-weight: 600;
+    margin-right: 0 !important;
 }
 
 .article-title-section {
@@ -22,6 +23,24 @@
     color: $dark;
     margin-top: 28px;
     padding-bottom: 40px;
+
+    a {
+        color: $action;
+    }
+
+    a:hover {
+        color: #0784C1;
+    }
+
+    ::-moz-selection {
+        color: $dark;
+        background: #EFDC36;
+    }
+
+    ::selection {
+        color: $dark;
+        background: #EFDC36;
+    }
 }
 
 .article-actions {

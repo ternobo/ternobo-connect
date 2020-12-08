@@ -2,7 +2,9 @@
 	<b-modal v-model="showModal" hide-footer modal-class="slide-up" size="md" :centered="true">
 		<template #modal-header>
 			<div class="w-100 d-flex justify-content-between">
-				<i class="material-icons-outlined btn d-flex align-items-center justify-content-center btn-edit" @click="$emit('edit')">edit</i>
+				<div>
+					<i class="material-icons-outlined btn d-flex align-items-center justify-content-center btn-edit" v-if="checkUser(pageId)" @click="$emit('edit')">edit</i>
+				</div>
 				<div class="slideup-title">
 					<i class="material-icons">layers</i>
 					دسته‌بندی‌ها
@@ -31,7 +33,11 @@ export default {
 			default: [],
 			required: true,
 		},
-
+		pageId: {
+			type: Number,
+			default: 0,
+			required: true,
+		},
 		activeCategory: {
 			default: null,
 		},

@@ -1,5 +1,5 @@
 <template>
-	<div class="post-box" v-if="post !== undefined">
+	<div class="post-box" :class="{ 'reshared-post': !showMenu }" v-if="post !== undefined">
 		<ReshareModal :post="post" :show.sync="showReshare"></ReshareModal>
 		<EmbedCodeModal :post="post" :show.sync="showEmbed"></EmbedCodeModal>
 		<new-post-modal :post="post" :show.sync="edit"></new-post-modal>
@@ -18,14 +18,14 @@
 				</div>
 			</inertia-link>
 			<div class="actions position-relative" v-if="showMenu">
-				<i class="material-icons clickale text-muted hover-dark" @click="bookmark">{{ bookmarked ? "bookmark" : "bookmark_border" }}</i>
+				<i class="material-icons bookmark-icon clickale text-muted clickable hover-dark" @click="bookmark">{{ bookmarked ? "bookmark" : "bookmark_border" }}</i>
 				<div>
 					<post-menu :post="post" @edit="edit = true" @embed="showEmbed = true"></post-menu>
 				</div>
 			</div>
 		</div>
 		<div class="post-body" v-if="post.text != null && post.text.length > 0">
-			<pre class="text">{{ post.text }}</pre>
+			<pre class="text" ref="textelem">{{ post.text }}</pre>
 		</div>
 		<div class="post-time" :class="{ 'pt-0': post.text != null && post.text.length > 0 }" v-if="showMenu">
 			{{ post_time }}
@@ -37,7 +37,7 @@
 			</i>
 		</div>
 		<div class="post-footer">
-			<div class="tagandcate" v-if="post.tags.length > 0 || post.category !== null">
+			<div class="tagandcate" v-if="(post.tags.length > 0 || post.category !== null) && showMenu">
 				<div class="tags">
 					<inertia-link v-for="tag in post.tags" :key="tag" class="tag-item" :href="'/tags/' + tag">
 						{{ tag }}
@@ -49,7 +49,7 @@
 				</a>
 			</div>
 			<div class="images" v-if="post.medias !== null && post.medias !== undefined && post.medias.length > 0">
-				<lazy-image style="min-height: 288px" v-if="isImage" class="m-0" alt="" :src="post.medias" />
+				<lazy-image style="min-height: 218px" v-if="isImage" class="m-0" alt="" :src="post.medias" />
 				<video v-else :src="post.medias" autoplay controls controlslist="nodownload" style="max-width: 100%"></video>
 			</div>
 			<div class="actions" v-if="showMenu">
@@ -70,7 +70,7 @@
 				</div>
 				<div class="buttons">
 					<i class="material-icons-outlined" @click="showReshare = true">sync</i>
-					<i :class="{ 'material-icons-outlined': !openComment, 'material-icons': openComment }" v-on:click="openComment = !openComment">comment</i>
+					<i :class="{ 'material-icons-outlined': !openComment, 'material-icons': openComment }" v-if="hasComment" v-on:click="openComment = !openComment">comment</i>
 					<i class="material-icons like" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
 				</div>
 			</div>
@@ -114,6 +114,12 @@ export default {
 		this.bookmarked = this.post.is_bookmarked;
 	},
 	mounted() {
+		if (this.$refs.textelem) {
+			this.$refs.textelem.oncopy = (event) => {
+				event.preventDefault();
+			};
+		}
+
 		let options = {
 			root: null,
 			threshold: 1.0,
@@ -161,6 +167,11 @@ export default {
 		PostMenu,
 	},
 	props: {
+		hasComment: {
+			type: Boolean,
+			default: true,
+			required: false,
+		},
 		showMenu: {
 			type: Boolean,
 			default: true,

@@ -24,14 +24,14 @@
 				</div>
 			</inertia-link>
 			<div class="actions position-relative" v-if="showMenu">
-				<i class="material-icons clickale text-muted hover-dark" @click="bookmark">{{ bookmarked ? "bookmark" : "bookmark_border" }}</i>
+				<i class="material-icons bookmark-icon clickable text-muted hover-dark" @click="bookmark">{{ bookmarked ? "bookmark" : "bookmark_border" }}</i>
 				<div>
 					<post-menu :post="post" @embed="showEmbed = true"></post-menu>
 				</div>
 			</div>
 		</div>
 		<div class="post-body" v-if="post.text != null && post.text.length > 0">
-			<pre class="text" id="posteditable-93">{{ post.text }}</pre>
+			<pre class="text" ref="textelem">{{ post.text }}</pre>
 		</div>
 		<div class="border my-2 mx-3">
 			<component :is="componentType" class="shadow-0" style="margin-bottom: 0 !important" :post="post.share" :show-menu="false"></component>
@@ -69,14 +69,14 @@
 				</div>
 				<div class="buttons">
 					<i class="material-icons-outlined" @click="showReshare = true">sync</i>
-					<i :class="{ 'material-icons-outlined': !openComment, 'material-icons': openComment }" v-on:click="openComment = !openComment">comment</i>
+					<i :class="{ 'material-icons-outlined': !openComment, 'material-icons': openComment }" v-if="hasComment" v-on:click="openComment = !openComment">comment</i>
 					<i class="material-icons like" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
 				</div>
 			</div>
 		</div>
 
 		<transition name="slide">
-			<div v-if="openComment">
+			<div v-if="openComment && hasComment">
 				<CommentsList :post="post.id"></CommentsList>
 			</div>
 		</transition>
@@ -117,6 +117,12 @@ export default {
 		this.bookmarked = this.post.is_bookmarked;
 	},
 	mounted() {
+		if (this.$refs.textelem) {
+			this.$refs.textelem.oncopy = (event) => {
+				event.preventDefault();
+			};
+		}
+
 		let options = {
 			root: null,
 			threshold: 1.0,
@@ -164,6 +170,11 @@ export default {
 		PostMenu,
 	},
 	props: {
+		hasComment: {
+			type: Boolean,
+			default: true,
+			required: false,
+		},
 		showMenu: {
 			type: Boolean,
 			default: true,

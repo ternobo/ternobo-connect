@@ -121,11 +121,6 @@
         text-align: justify;
         position: relative;
         line-height: 2;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
@@ -135,6 +130,19 @@
         direction: rtl;
         unicode-bidi: -moz-plaintext;
         unicode-bidi: plaintext;
+
+
+        ::-moz-selection {
+            color: $dark;
+            background: #EFDC36;
+        }
+
+        ::selection {
+            color: $dark;
+            background: #EFDC36;
+        }
+
+
 
         .text {
             max-height: 90px;
@@ -401,6 +409,10 @@
         margin-top: 12px;
         font-size: 16px;
     }
+}
+
+.reshared-post {
+    background: #EEEEEE;
 }
 
 .post-time {

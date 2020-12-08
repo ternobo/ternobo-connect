@@ -1,4 +1,4 @@
-.post-notification{
+.post-notification {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -6,8 +6,10 @@
     border-bottom: 1px solid #DEDEDE;
     width: 100%;
 }
-.bg-dede{
-    background: $border-color}
+
+.bg-dede {
+    background: $border-color
+}
 
 .post-notification {
     .userinfo {
@@ -46,14 +48,14 @@
     }
 }
 
-.post-notification{
-    .profileimage{
+.post-notification {
+    .profileimage {
         width: 52px;
         height: 52px;
     }
 }
 
-@media screen and(max-width: 767px) {
+@media screen and(max-width: $sm-size) {
     .post-notification {
         display: flex;
         justify-content: center;
@@ -62,7 +64,9 @@
         width: 100%;
         border-bottom: 1px solid #DEDEDE;
         padding-bottom: 2rem;
+        font-size: 12px;
     }
+
     .post-notification {
         .userinfo {
             display: flex;

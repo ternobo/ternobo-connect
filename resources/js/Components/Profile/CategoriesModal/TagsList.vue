@@ -2,9 +2,11 @@
 	<b-modal v-model="showModal" hide-footer modal-class="slide-up" size="md" :centered="true">
 		<template #modal-header>
 			<div class="w-100 d-flex justify-content-between">
-				<div class="d-flex align-items-center">
-					<i class="material-icons-outlined text-muted" v-if="edit" @click="cancelEdit">close</i>
-					<i class="material-icons-outlined btn d-flex align-items-center justify-content-center btn-edit" @click="saveEdit">{{ edit ? "check" : "edit" }}</i>
+				<div>
+					<div class="d-flex align-items-center" v-if="checkUser(pageId)">
+						<i class="material-icons-outlined text-muted" v-if="edit" @click="cancelEdit">close</i>
+						<i class="material-icons-outlined btn d-flex align-items-center justify-content-center btn-edit" @click="saveEdit">{{ edit ? "check" : "edit" }}</i>
+					</div>
 				</div>
 				<div class="slideup-title">
 					<i class="material-icons ml-1">layers</i>
@@ -58,7 +60,11 @@ export default {
 			default: [],
 			required: true,
 		},
-
+		pageId: {
+			type: Number,
+			default: 0,
+			required: true,
+		},
 		activeTag: {
 			default: null,
 		},

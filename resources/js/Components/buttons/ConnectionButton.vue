@@ -20,7 +20,7 @@ export default {
 				this.$emit("connected");
 			} else if (this.$page.props.waitingConnections.includes(user)) {
 				this.waiting = true;
-				this.text = "در انتظار تایید";
+				this.text = "انتظار تایید";
 			}
 		}
 	},
@@ -55,7 +55,7 @@ export default {
 						if (response.data.result) {
 							$this.loading = false;
 							$this.$page.props.connectedPeople.push($this.user);
-							$this.text = "در انتظار تایید";
+							$this.text = "انتظار تایید";
 							$this.waiting = true;
 						} else {
 							const errors = response.data.errors;

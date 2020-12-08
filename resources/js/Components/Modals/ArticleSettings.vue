@@ -55,12 +55,3 @@ export default {
 	mixins: [ModalMixin],
 };
 </script>
-
-<style scoped>
-.btn {
-	margin-bottom: -24px;
-	margin-left: -24px;
-	margin-right: -24px;
-	width: calc(100% + 48px);
-}
-</style>

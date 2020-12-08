@@ -4,6 +4,17 @@
 
 
 
+::-moz-selection {
+    color: $dark;
+    background: #E0E0E0;
+}
+
+::selection {
+    color: $dark;
+    background: #E0E0E0;
+}
+
+
 .btn {
     border-width: 2px;
     padding: 6px 8px;
@@ -87,10 +98,15 @@ body {
 
 @import "./components/bottom-nav.scss";
 
+
+.bookmark-icon {
+    transform: translateY(-1px);
+}
+
 .sticky-aside {
     position: -webkit-sticky;
     position: sticky;
-    top: 80px;
+    top: 90px;
 }
 
 .form-control,
@@ -490,8 +506,13 @@ img {
             padding-left: 30px;
         }
 
+        .content-container-settings {
+            padding-right: 30px;
+        }
+
         .content-container-profile {
             padding-left: 30px;
+            padding-right: 15px;
         }
 
         .content-container-right {
@@ -552,11 +573,15 @@ img {
 }
 
 .new-post--action {
+    display: flex;
+    align-items: center;
+    line-height: 1;
     font-size: 16px;
     color: $grey;
     display: flex;
     border-radius: 12px;
     transition: 0.3s all;
+    font-size: 14px;
 
     @media screen and(min-width: 769px) {
         padding: 4px 16px;
@@ -569,7 +594,7 @@ img {
 
     i {
         font-size: 20px;
-        margin-left: 6px;
+        margin-left: 4px;
 
         &:not(.disabled) {
             color: $grey;
@@ -867,7 +892,7 @@ pre {
 
 .autocomplete-result-list {
     box-shadow: 0 1rem 40px rgba(0, 0, 0, 0.02) !important;
-    margin-top: -26px !important;
+    margin-top: -18px !important;
 }
 
 .autocomplete-result:first-child {
@@ -1341,7 +1366,11 @@ a:focus {
 }
 
 .new-post-body {
-    padding: 16px 20px;
+    padding: 12px 20px;
+}
+
+.new-post-actions {
+    margin-top: 12px;
 }
 
 @import "./components/likes-modal.scss";
@@ -1377,4 +1406,65 @@ a:focus {
         }
     }
 
+}
+
+.signup-save-btn {
+    padding: 8px 16px;
+}
+
+@media screen and (min-width: $sm-size) {
+    .modal-signup {
+        padding: 24px;
+    }
+
+    .ephone-input-group {
+        padding-top: 24px;
+        padding-bottom: 16px;
+
+        .btn,
+        input {
+            height: 40px;
+        }
+
+        input {
+            margin-right: 36px !important;
+        }
+    }
+}
+
+
+.form-control::-webkit-input-placeholder {
+    color: $icons;
+}
+
+.form-control::-moz-placeholder {
+    color: $icons;
+}
+
+.form-control::-ms-input-placeholder {
+    color: $icons;
+}
+
+.form-control::-ms-input-placeholder {
+    color: $icons;
+}
+
+.form-control:-ms-input-placeholder {
+    color: $icons;
+}
+
+.form-control::placeholder {
+    color: $icons;
+}
+
+.base-layout {
+    margin-top: 24px;
+}
+
+#usermenu-show {
+    padding-right: 4px;
+}
+
+#usermenu-show:hover {
+    background: #EEE;
 }

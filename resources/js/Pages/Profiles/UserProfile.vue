@@ -56,7 +56,7 @@
 			</tabs>
 		</div>
 		<sidebar-left v-if="$root.isDesktop">
-			<div class="card mb-3" v-if="pages.length > 0">
+			<div class="card" style="margin-bottom: 24px" v-if="pages.length > 0">
 				<div class="card-header pb-2 pt-3">
 					<strong>
 						{{ page.slug }}

@@ -14,7 +14,7 @@
 				<h1 class="article-title">{{ post.title }}</h1>
 				<span class="article-time">{{ post_time }}</span>
 			</div>
-			<div class="article-text noselect ck ck-content" dir="rtl" style="word-break: break-word; height: auto" v-html="post.text"></div>
+			<div class="article-text ck ck-content" dir="rtl" style="word-break: break-word; height: auto" ref="articleText" v-html="post.text"></div>
 			<div class="tagandcate">
 				<div class="tags">
 					<inertia-link v-for="(tag, index) in post.tags" :key="tag + '_POST_TAG_' + post.id + '_' + index" class="tag-item" :href="'/tags/' + tag">
@@ -42,8 +42,8 @@
 					</div>
 				</div>
 				<div class="d-flex align-items-center">
-					<i class="material-icons-outlined" @click="showReshare = true">sync</i>
-					<i class="material-icons like" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
+					<i class="material-icons-outlined hover-dark clickable" @click="showReshare = true">sync</i>
+					<i class="material-icons hover-dark clickable" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
 				</div>
 			</div>
 			<div class="my-3 py-2 border-top border-bottom">
@@ -165,8 +165,14 @@ export default {
 		};
 	},
 	mounted() {
+		this.$refs.articleText.oncopy = (event) => {
+			event.preventDefault();
+		};
+
 		this.liked = this.post.is_liked;
 		document.body.style.background = "#FFF";
+		document.querySelector("#app > .header > .container").style.background = "#FFF";
+
 		var div = document.createElement("div");
 		div.innerHTML = "<link id='article-style' href='/css/article.css' rel='stylesheet' />";
 		document.head.append(div.firstChild);
@@ -195,6 +201,8 @@ export default {
 	destroyed() {
 		document.body.style.removeProperty("background");
 		document.querySelector("#article-style").remove();
+
+		document.querySelector("#app > .header > .container").style.removeProperty("background");
 	},
 	computed: {
 		post_time: function () {

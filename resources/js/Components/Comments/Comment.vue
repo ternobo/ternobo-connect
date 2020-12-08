@@ -56,7 +56,7 @@
 				<span v-html="comment.liked_by"></span>
 				<div class="actions">
 					<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies, 'material-icons': showReplies }" class="hover-dark clickable"> insert_comment </i>
-					<i @click="likeComment" class="hover-danger clickable material-icons" :class="{ 'text-danger': liked }">
+					<i @click="likeComment" class="hover-dark clickable material-icons" :class="{ 'text-danger': liked }">
 						{{ liked ? "favorite" : "favorite_border" }}
 					</i>
 				</div>

@@ -54,7 +54,7 @@ class UsersController extends Controller
             $code = random_int(111111, 999999);
             $verification = new Verification();
             $verification->code = $code;
-            $verification->phone = $request->email;
+            $verification->email = $request->email;
             $verification->save();
             session()->put("email", $request->email);
             $html = preg_replace("/\r|\n/", "", view('emails.verification', array("vcode" => $code))->render());
@@ -87,14 +87,22 @@ class UsersController extends Controller
     {
         if ($request->has("code")) {
             $phone = "";
+            $verification = null;
             if (session()->has("phone")) {
                 $phone = session()->get("phone");
+                $verification = Verification::query()->where("code", $request->code)->where("phone", $phone)->first();
             } elseif (session()->has("email")) {
-                $phone = session()->get("email");
+                $email = session()->get("email");
+                $verification = Verification::query()->where("code", $request->code)->where("email", $email)->first();
             }
-
-            $verification = Verification::query()->where("code", $request->code)->where("phone", $phone)->first();
             if ($verification instanceof Verification) {
+                if (session()->has("phone")) {
+                    $phone = session()->forget("phone");
+                } elseif (session()->has("email")) {
+                    $email = session()->forget("email");
+                }
+
+                $verification->delete();
                 return response()->json(array("result" => true));
             } else {
                 return response()->json(array("result" => false, "msg" => __("کد فعال سازی نامعتبر است!")));

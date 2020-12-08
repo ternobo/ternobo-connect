@@ -4,7 +4,7 @@
 			<div class="card-body px-4">
 				<div class="d-flex justify-content-between align-items-center">
 					<div class="d-flex align-items-center">
-						<img class="slug-logo" src="/images/logo.svg" />
+						<img class="slug-logo ml-2" src="/images/logo.svg" />
 						<span>
 							پروفایل <strong>{{ page.user ? page.user.first_name : page.name }}</strong>
 						</span>

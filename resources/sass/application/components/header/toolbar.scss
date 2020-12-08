@@ -44,7 +44,7 @@
         }
     }
 
-    a:hover{
+    a:hover {
         .navheader-icon {
             color: $icon-hover;
         }
@@ -76,13 +76,16 @@
         left: 0;
         right: 0;
         bottom: -5px;
-        transform: scaleX(0);
+        transform: scaleX(0) translateY(8px);
     }
 
-    a.active::after,
-    a:hover::after {
+    a.active::after {
         color: $icon-hover;
         width: 100%;
-        transform: scaleX(1);
+        transform: scaleX(1) translateY(-6px);
+    }
+
+    a:hover:not(.active)::after {
+        transform: scaleX(1) translateY(8px);
     }
 }

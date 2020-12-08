@@ -21,7 +21,7 @@
 						<i class="clickable hover-dark material-icons-outlined" v-if="checkUser(pageId)" @click="edit = !edit">{{ !edit ? "edit" : "save" }}</i>
 					</div>
 					<ul>
-						<category-item v-for="category in list" :class="{ active: category.id == activeCategory }" @click.native="activeCategory = category.id" :key="category.id" :category="category"></category-item>
+						<category-item v-for="category in list" :class="{ active: category.id == activeCategory }" @click.native="categorySelect(category.id)" :key="category.id" :category="category"></category-item>
 					</ul>
 
 					<hr v-if="tags.length > 0" />
@@ -74,7 +74,7 @@ export default {
 				});
 			}
 		},
-		activeCategory(newVal) {
+		activeCategory(newVal, oldValue) {
 			if (newVal != null) {
 				this.action = null;
 				this.$emit("input", {
@@ -98,6 +98,13 @@ export default {
 		removeTag(tag) {
 			this.removedTags.push(tag);
 			this.tags.splice(this.tags.indexOf(tag), 1);
+		},
+		categorySelect(category) {
+			if (category == this.activeCategory) {
+				this.activeCategory = null;
+				this.action = "all";
+			}
+			this.activeCategory = category;
 		},
 		saveTagRemove() {
 			axios

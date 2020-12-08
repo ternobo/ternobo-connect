@@ -1,11 +1,11 @@
 <template>
-<div class="row mx-1 mt-3">
-    <slot></slot>
-</div>
+	<div class="row mx-0 base-layout">
+		<slot></slot>
+	</div>
 </template>
 
 <script>
 export default {
-    name: "BaseLayout"
-}
+	name: "BaseLayout",
+};
 </script>
