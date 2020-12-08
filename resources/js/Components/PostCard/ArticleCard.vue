@@ -32,7 +32,7 @@
 		<div class="post-time" v-if="showMenu">
 			{{ post_time }}
 			<span class="mx-1 font-10">●</span>
-			<span v-if="post.updated_at !== post.created_at"> بروز شده ({{ updated_at }}) </span>
+			<span v-if="post.updated_at !== post.created_at"> بروز شده</span>
 			<span v-if="post.updated_at !== post.created_at" class="mx-1 font-10">●</span>
 			<i class="material-icons-outlined text-light verical-middle">
 				{{ post.show === "public" ? "public" : "group" }}
@@ -148,7 +148,7 @@ export default {
 	computed: {
 		post_time: function () {
 			const timeAgo = new TimeAgo("fa-FA");
-			return timeAgo.format(Date.parse(this.post.created_at), "twitter") + " ● ";
+			return timeAgo.format(Date.parse(this.post.created_at), "fa_FA");
 		},
 		postSlug: function () {
 			let post_slug = this.post.id;
@@ -161,7 +161,7 @@ export default {
 		updated_at: function () {
 			if (this.post.updated_at !== null) {
 				const timeAgo = new TimeAgo("fa-FA");
-				return timeAgo.format(Date.parse(this.post.updated_at), "twitter") + " ● ";
+				return timeAgo.format(Date.parse(this.post.updated_at), "fa_FA");
 			}
 			return "";
 		},

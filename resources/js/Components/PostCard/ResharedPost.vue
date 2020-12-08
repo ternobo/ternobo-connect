@@ -195,12 +195,12 @@ export default {
 		},
 		post_time: function () {
 			const timeAgo = new TimeAgo("fa-FA");
-			return timeAgo.format(Date.parse(this.post.created_at), "twitter") + " ● ";
+			return timeAgo.format(Date.parse(this.post.created_at), "fa_FA");
 		},
 		updated_at: function () {
 			if (this.post.updated_at !== null) {
 				const timeAgo = new TimeAgo("fa-FA");
-				return timeAgo.format(Date.parse(this.post.updated_at), "twitter") + " ● ";
+				return timeAgo.format(Date.parse(this.post.updated_at), "fa_FA");
 			}
 			return "";
 		},

@@ -50,12 +50,18 @@
         &::after {
             content: " ";
             position: absolute;
-            width: calc(100%-12px);
-            left: 12px;
-            right: 12px;
+            width: calc(100% - 48px);
+            left: 24px;
+            right: 24px;
             bottom: 0;
             height: 2px;
             background: $border-color;
+
+            @media screen and (max-width: $sm-size) {
+                width: calc(100% - 48px);
+                left: 12px;
+                right: 24px;
+            }
 
         }
     }

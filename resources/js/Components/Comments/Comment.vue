@@ -24,7 +24,7 @@
 							<template v-slot:button-content class="p-0">
 								<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
 							</template>
-							<b-dropdown-item>
+							<b-dropdown-item v-if="!checkUser(comment.page.user_id)">
 								<div class="d-flex align-items-center" @click="showReport = true">
 									<i class="material-icons ml-2 text-dark">link</i>
 									<div>

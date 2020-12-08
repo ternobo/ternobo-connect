@@ -81,7 +81,6 @@ import ProfileHeader from "../../Components/Profile/ProfileHeader";
 import { Inertia } from "@inertiajs/inertia";
 import MobileCategories from "../../Components/Profile/MobileCategories.vue";
 import CategoriesMobile from "../../Components/Profile/CategoriesMobile.vue";
-
 export default {
 	watch: {
 		filters(newValue) {

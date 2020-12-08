@@ -4,14 +4,18 @@
 			<user-card></user-card>
 		</sidebar-right>
 		<div class="content-container">
-            <post-card :post="post" :has-comment="false"></post-card>
-        </div>
-		<sidebar-left v-if="!$root.isMobile">
-			<div class="card" style="margin-bottom: 24px" v-if="pages != undefined && pages != null && pages.length > 0">
-				<div class="card-body px-2 py-1">
-					<people-suggestion v-for="page in pages" :page="page" :key="page.id"></people-suggestion>
+			<div class="card p-0">
+				<post-card class="pb-0 shadow-0" style="margin-bottom: 0 !important" :post="post" :has-comment="false"></post-card>
+				<div class="comments px-3 pb-3" style="max-height: max-content">
+					<new-comment :post="post.id" @submit="submitComment"></new-comment>
+					<comment v-for="comment in comments" v-on:deleted="commentDelete" :comment="comment" :key="'comment_' + comment.id"></comment>
+					<div class="d-flex w-100 justify-content-center align-items-center py-3" v-if="commentsLoading">
+						<LoadingSpinner></LoadingSpinner>
+					</div>
 				</div>
 			</div>
+		</div>
+		<sidebar-left v-if="!$root.isMobile">
 			<AppFooter class="sticky-aside"></AppFooter>
 		</sidebar-left>
 	</base-layout>
@@ -31,7 +35,7 @@ import { Inertia } from "@inertiajs/inertia";
 import LoadingSpinner from "../Components/LoadingSpinner";
 import Comment from "../Components/Comments/Comment";
 import NewComment from "../Components/Comments/NewComment";
-import PostCard from '../Components/PostCard/PostCard.vue';
+import PostCard from "../Components/PostCard/PostCard.vue";
 
 export default {
 	methods: {
@@ -105,17 +109,7 @@ export default {
 		};
 	},
 	mounted() {
-		this.$refs.articleText.oncopy = (event) => {
-			event.preventDefault();
-		};
-
 		this.liked = this.post.is_liked;
-		document.body.style.background = "#FFF";
-		document.querySelector("#app > .header > .container").style.background = "#FFF";
-
-		var div = document.createElement("div");
-		div.innerHTML = "<link id='article-style' href='/css/article.css' rel='stylesheet' />";
-		document.head.append(div.firstChild);
 		axios
 			.get(this.$APP_URL + "/posts/" + this.post.id + "/comments")
 			.then((response) => {
@@ -138,12 +132,6 @@ export default {
 			default: 0,
 		},
 	},
-	destroyed() {
-		document.body.style.removeProperty("background");
-		document.querySelector("#article-style").remove();
-
-		document.querySelector("#app > .header > .container").style.removeProperty("background");
-	},
 	computed: {
 		post_time: function () {
 			return new PersianDate(Date.parse(this.post.created_at)).format("D MMMM YYYY");
@@ -159,8 +147,8 @@ export default {
 
 		LoadingSpinner,
 		Comment,
+		PostCard,
 		NewComment,
 	},
 };
-</scri,
-PostCardpt>
+</script>

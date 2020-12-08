@@ -29,13 +29,13 @@
 		</div>
 
 		<div id="usermenu-show" v-if="$page.props.user != null" class="usertoolbar h-100 d-flex align-items-center mr-2 py-3" @mouseenter="showUserMenu" @mouseleave="menuVisible = false">
-			<inertia-link as="div" class="d-flex clickable align-items-center" :href="'/' + this.$page.props.user.username">
+			<div class="d-flex align-items-center">
 				<div class="d-flex align-items-center">
-					<span style="white-space: nowrap; user-select: none" class="ml-2">{{ $page.props.user.username }} <i v-if="this.$page.props.user.is_verified === 1" class="verificationcheck">check_circle</i></span>
-					<img v-bind:src="$page.props.user.profile" style="max-width: 36px; max-height: 36px; min-height: 36px; min-width: 36px" class="profile-xsm" />
+					<span style="white-space: nowrap; user-select: none" class="ml-2">{{ $page.props.user.username }}</span>
+					<img v-bind:src="$page.props.user.profile" class="profile-xsm" />
 				</div>
 				<i class="material-icons text-light">more_vert</i>
-			</inertia-link>
+			</div>
 			<transition name="fade" mode="out-in">
 				<user-menu v-bind:style="{ left: menuLeft }" v-show="menuVisible"></user-menu>
 			</transition>

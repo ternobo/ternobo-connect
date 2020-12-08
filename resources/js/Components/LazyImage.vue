@@ -29,7 +29,9 @@ export default {
 	methods: {
 		loaded() {
 			this.loading = false;
-			this.$refs.imageItem.style.opacity = 1;
+			if (this.$refs.imageItem) {
+				this.$refs.imageItem.style.opacity = 1;
+			}
 		},
 	},
 	watch: {

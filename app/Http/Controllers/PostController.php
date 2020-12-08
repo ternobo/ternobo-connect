@@ -332,11 +332,20 @@ class PostController extends Controller
      * @param \App\Post $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Post $post)
+    public function show(Request $request, $post_id)
     {
+        $post = Post::query()
+            ->with("category")
+            ->with("page");
+
+        if (Auth::check()) {
+            $post = $post->with("mutualLikes");
+        }
+
+        $post = $post->findOrFail($post_id);
+
         if (($post->type === "post" || $post->type === "share") && $post->user->active) {
-            $comments = $post->getComments();
-            return view("content.post", array("post" => $post, "comments" => $comments));
+            return Inertia::render("PostPage", array("post" => $post));
         }
         return abort(404);
     }

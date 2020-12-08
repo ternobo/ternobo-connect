@@ -440,7 +440,7 @@ img {
 
 .modal-header {
     border: none;
-    padding: 20px 20px;
+    padding: 20px 24px;
 
     @media screen and (max-width: $sm-size) {
         padding: 20px 12px;
@@ -453,8 +453,8 @@ img {
     &::after {
         content: " ";
         position: absolute;
-        left: 16px;
-        right: 16px;
+        left: 24px;
+        right: 24px;
         bottom: 0;
         height: 2px;
         background: #C8C8C8;
@@ -467,6 +467,8 @@ img {
 }
 
 .modal-body {
+    padding: 24px;
+
     @media screen and (max-width: $sm-size) {
         padding: 12px;
     }
@@ -508,6 +510,12 @@ img {
 
         .content-container-settings {
             padding-right: 30px;
+            padding-left: 15px;
+        }
+
+        .content-container-settings {
+            max-width: 78.4%;
+            flex: 78.4%;
         }
 
         .content-container-profile {
@@ -1467,4 +1475,8 @@ a:focus {
 
 #usermenu-show:hover {
     background: #EEE;
+}
+
+.border {
+    border: 2px solid #e0e0e0 !important;
 }

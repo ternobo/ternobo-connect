@@ -1,24 +1,24 @@
 <template>
-  <b-modal v-model="showModal" hide-footer title="ثبت / ویرایش تلفن همراه" size="md" :centered="true">
-    <div class="d-flex justify-content-between align-items-center">
-      <LoadingButton class="btn btn-dark" :loading="loading" :disabled="verification_step" @click.native="sendVcode()">ثبت</LoadingButton>
-      <input type="tel" class="form-control mx-1 text-left" :readonly="verification_step" v-model="phone" placeholder="09126667152" />
-    </div>
-    <transition name="slide">
-      <div v-if="verification_step" class="text">
-        <label class="ml-1 mt-2 text-left clickable" @click="verification_step = false">شماره همراه اشتباه است؟</label>
+	<b-modal v-model="showModal" hide-footer title="ثبت / ویرایش تلفن همراه" body-class="modal-signup" size="md" :centered="true">
+		<div class="d-flex ephone-input-group py-0 justify-content-between align-items-center">
+			<LoadingButton class="btn btn-dark signup-save-btn" :loading="loading" :disabled="verification_step" @click.native="sendVcode()">ثبت</LoadingButton>
+			<input type="tel" class="form-control mx-1 text-left" :readonly="verification_step" v-model="phone" placeholder="09126667152" />
+		</div>
+		<transition name="slide">
+			<div v-if="verification_step" class="text">
+				<label class="ml-1 mt-2 text-left clickable" @click="verification_step = false">شماره همراه اشتباه است؟</label>
 
-        <div class="input-group d-flex align-items-center flex-column justify-content-center mt-4">
-          <label class="w-100">کد تایید خود ‌را وارد کنید</label>
-          <div class="d-flex align-items-center">
-            <otp-input input-class="w-100" class="material--sm mx-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" />
-            <i class="material-icons-outlined mr-3" :class="{ 'text-muted': !invalidCode && !completedCode, 'text-danger': invalidCode, 'text-success': !invalidCode }">verified_user</i>
-          </div>
-          <LoadingButton :loading="nextLoading" class="btn btn-dark mt-4" @click.native="verifyCode">تایید</LoadingButton>
-        </div>
-      </div>
-    </transition>
-  </b-modal>
+				<div class="input-group d-flex align-items-center flex-column justify-content-center mt-4">
+					<label class="w-100">کد تایید خود ‌را وارد کنید</label>
+					<div class="d-flex align-items-center">
+						<otp-input input-class="w-100" class="material--sm mx-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" />
+						<i class="material-icons-outlined mr-3" :class="{ 'text-muted': !invalidCode && !completedCode, 'text-danger': invalidCode, 'text-success': !invalidCode }">verified_user</i>
+					</div>
+					<LoadingButton :loading="nextLoading" class="btn btn-dark mt-4" @click.native="verifyCode">تایید</LoadingButton>
+				</div>
+			</div>
+		</transition>
+	</b-modal>
 </template>
 
 <script>
@@ -27,89 +27,89 @@ import LoadingButton from "../../buttons/LoadingButton.vue";
 import LoadingSpinner from "../../LoadingSpinner.vue";
 import OtpInput from "../../OtpInput/OtpInput.vue";
 export default {
-  methods: {
-    sendVcode(type) {
-      this.loading = true;
-      const $this = this;
-      var data = new FormData();
-      data.append("phone", this.phone);
+	methods: {
+		sendVcode(type) {
+			this.loading = true;
+			const $this = this;
+			var data = new FormData();
+			data.append("phone", this.phone);
 
-      var config = {
-        method: "post",
-        url: this.$APP_URL + "/auth/verification",
-        data: data,
-      };
+			var config = {
+				method: "post",
+				url: this.$APP_URL + "/auth/verification",
+				data: data,
+			};
 
-      axios(config)
-        .then((response) => {
-          if (response.data.result) {
-            this.verification_step = true;
-          } else {
-            const errors = response.data.errors;
-            this.handleError(errors);
-          }
-          this.loading = false;
-        })
-        .catch((error) => {
-          this.loading = false;
-        });
-    },
-    verifyCode() {
-      this.nextLoading = true;
-      var data = new FormData();
-      data.append("code", this.code);
+			axios(config)
+				.then((response) => {
+					if (response.data.result) {
+						this.verification_step = true;
+					} else {
+						const errors = response.data.errors;
+						this.handleError(errors);
+					}
+					this.loading = false;
+				})
+				.catch((error) => {
+					this.loading = false;
+				});
+		},
+		verifyCode() {
+			this.nextLoading = true;
+			var data = new FormData();
+			data.append("code", this.code);
 
-      var config = {
-        method: "post",
-        url: this.$APP_URL + "/auth/verify-phone",
-        data: data,
-      };
+			var config = {
+				method: "post",
+				url: this.$APP_URL + "/auth/verify-phone",
+				data: data,
+			};
 
-      axios(config)
-        .then((response) => {
-          if (response.data.result) {
-            this.$emit("update:show", false);
-            this.$emit("updated", this.phone);
-            this.invalidCode = false;
-          } else {
-            this.invalidCode = true;
-          }
-          this.nextLoading = false;
-        })
-        .catch((error) => {
-          this.nextLoading = false;
-        })
-        .then(() => (this.completedCode = true));
-    },
-  },
-  props: {
-    value: {
-      default: null,
-    },
-  },
-  mounted() {
-    this.phone = this.value;
-  },
+			axios(config)
+				.then((response) => {
+					if (response.data.result) {
+						this.$emit("update:show", false);
+						this.$emit("updated", this.phone);
+						this.invalidCode = false;
+					} else {
+						this.invalidCode = true;
+					}
+					this.nextLoading = false;
+				})
+				.catch((error) => {
+					this.nextLoading = false;
+				})
+				.then(() => (this.completedCode = true));
+		},
+	},
+	props: {
+		value: {
+			default: null,
+		},
+	},
+	mounted() {
+		this.phone = this.value;
+	},
 
-  data() {
-    return {
-      loading: false,
-      code: null,
-      verification_step: false,
-      phone: null,
-      nextLoading: false,
+	data() {
+		return {
+			loading: false,
+			code: null,
+			verification_step: false,
+			phone: null,
+			nextLoading: false,
 
-      invalidCode: false,
-      completedCode: false,
-    };
-  },
-  components: {
-    LoadingButton,
-    LoadingSpinner,
-    OtpInput,
-  },
-  mixins: [ModalMixin],
-  name: "PhoneNumberModal",
+			invalidCode: false,
+			completedCode: false,
+		};
+	},
+	components: {
+		LoadingButton,
+		LoadingSpinner,
+		OtpInput,
+	},
+	mixins: [ModalMixin],
+	name: "PhoneNumberModal",
 };
 </script>
 

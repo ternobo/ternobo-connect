@@ -1,12 +1,12 @@
 .modal-title {
     position: absolute;
     margin-bottom: 0;
-    line-height: 1.6;
+    line-height: 1;
     width: 100%;
     text-align: center;
     left: 0;
     right: 0;
-    top: 14px;
+    top: 18px;
 
     @media screen and (max-width: $sm-size) {
         font-size: 12px;
