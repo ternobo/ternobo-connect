@@ -99,6 +99,8 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             Route::get("/bookmarks", "HomeController@bookmarks");
             Route::post("/verificationRequest", "Auth\UsersController@verificationRequest");
 
+            Route::post("/slugsearch", "PageController@search");
+
             Route::get("/gettags", "PostController@getTags");
 
             Route::post("/setprofile", "Auth\UsersController@setProfile")->name("profile-setup");

@@ -48,7 +48,11 @@ class User extends Authenticatable
         "pushe_id",
         "phone",
         "email",
-        "2AF",
+        "two_factor_type",
+        "two_factor_recovery_codes",
+        "two_factor_secret",
+        "two_factor_enabled",
+        "two_factor",
     ];
 
     /**
@@ -134,12 +138,12 @@ class User extends Authenticatable
         $undone_steps = [];
 
         $steps = [
-            "profile_image" => ["name" => "بارگزاری نمایه", "text" => "با انتخاب و بارگزاری یک عکس پروفایل خوب، حرفه‌ای تر دیده شوید.", "icon" => "person_pin", "action" => 'upload_profile'],
-            "short_bio" => ["name" => "ثبت عنوان", "text" => "با ثبت کردن عنوانتان به دیگران کمک کنید تا بهتر شما را بشناسند.", "icon" => "short_text", 'action' => 'set_shortbio'],
-            "biography" => ["name" => "نوشتن بایوگرافی", "text" => "نوشتن یک بایوگرافی جامع به شناخت بهتر شما به دیگران کمک می‌کند.", "icon" => "playlist_add_check", "action" => "set_biography"],
-            "skills" => ["name" => "ثبت مهارت", "text" => "به دیگران بگویید که در چه زمینه‌هایی مهارت و تخصص دارید.", "icon" => "person_pin", 'action' => 'set_skills'],
-            "first_post" => ["name" => "انتشار اولین مطلب", "text" => "اولین پست یا مقاله خود را در ترنوبو به اشتراک بگذارید", "icon" => "person_pin", "action" => 'add_post'],
-            "verification" => ["name" => "تایید هویت", "text" => "هویت حساب خود را در ترنوبو تایید کنید تا بیشتر و بهتر دیده شوید", "icon" => "person_pin", "action" => ' verfication'],
+            "profile_image" => ["name" => "بارگزاری نمایه", "button" => "بارگزاری نمایه", "text" => "با انتخاب و بارگزاری یک عکس پروفایل خوب، حرفه‌ای تر دیده شوید.", "icon" => "person_pin", "action" => 'upload_profile'],
+            "short_bio" => ["name" => "ثبت عنوان", "button" => "ثبت عنوان", "text" => "با ثبت کردن عنوانتان به دیگران کمک کنید تا بهتر شما را بشناسند.", "icon" => "short_text", 'action' => 'set_shortbio'],
+            "biography" => ["name" => "نوشتن بایوگرافی", "button" => "نوشتن بایوگرافی", "text" => "نوشتن یک بایوگرافی جامع به شناخت بهتر شما به دیگران کمک می‌کند.", "icon" => "playlist_add_check", "action" => "set_biography"],
+            "skills" => ["name" => "ثبت مهارت", "button" => "ثبت مهارت", "text" => "به دیگران بگویید که در چه زمینه‌هایی مهارت و تخصص دارید.", "icon" => "person_pin", 'action' => 'set_skills'],
+            "first_post" => ["name" => "انتشار اولین مطلب", "button" => "نوشتن مطلب", "text" => "اولین پست یا مقاله خود را در ترنوبو به اشتراک بگذارید", "icon" => "person_pin", "action" => 'add_post'],
+            "verification" => ["name" => "تایید هویت", "button" => "تایید هویت", "text" => "هویت حساب خود را در ترنوبو تایید کنید تا بیشتر و بهتر دیده شوید", "icon" => "person_pin", "action" => ' verfication'],
         ];
 
         foreach ($steps as $step => $data) {

@@ -2,7 +2,7 @@
   <div class="post-notification">
     <div class="d-flex flex-row aling-items-center justify-content-between w-100">
       <inertia-link class="userinfo text-dark" :href="'/' + notification.sender.slug">
-        <lazy-image class="ml-2" img-class="profile-md" :src="notification.sender.profile" />
+        <lazy-image img-class="profile-sm" class="profile-sm mb-0 ml-2" :src="notification.sender.profile" />
         <span class="userinfo flex-column flex-start align-items-start">
           <div>
             {{ notification.sender.name }}

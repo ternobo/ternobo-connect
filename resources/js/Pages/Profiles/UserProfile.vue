@@ -2,6 +2,7 @@
 	<base-layout>
 		<mobile-categories v-if="!$root.isDesktop" :categories="page.categories" :show.sync="showMobileCategory"></mobile-categories>
 		<div class="content-container-profile">
+			<profile-steps class="mb-3" :steps="$page.props.user.profile_steps" v-if="$page.props.user.profile_steps.percent < 100 && checkUser(page.user_id)"></profile-steps>
 			<ProfileHeader :page="page" :can-edit="canEdit"></ProfileHeader>
 			<tabs :compact="true" :disabled="edit" class="py-3" @selected="tabChange" :state-tab="true">
 				<template slot="custom-item">
@@ -81,6 +82,7 @@ import ProfileHeader from "../../Components/Profile/ProfileHeader";
 import { Inertia } from "@inertiajs/inertia";
 import MobileCategories from "../../Components/Profile/MobileCategories.vue";
 import CategoriesMobile from "../../Components/Profile/CategoriesMobile.vue";
+import ProfileSteps from "../../Components/Profile/ProfileSteps.vue";
 export default {
 	watch: {
 		filters(newValue) {
@@ -349,6 +351,7 @@ export default {
 		ProfileHeader,
 		MobileCategories,
 		CategoriesMobile,
+		ProfileSteps,
 	},
 	layout: AppLayout,
 };

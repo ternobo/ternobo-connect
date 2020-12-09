@@ -2,7 +2,7 @@
 	<div class="post-notification">
 		<div class="d-flex flex-responsive flex-row aling-items-center justify-content-between w-100">
 			<inertia-link class="d-flex align-items-center justify-content-start w-100" :href="$APP_URL + '/' + notification.sender.slug">
-				<lazy-image :src="notification.sender.profile" img-class="profile-md" class="mb-0 ml-2" />
+				<lazy-image img-class="profile-sm" class="profile-sm mb-0 ml-2" :src="notification.sender.profile" />
 				<span class="d-flex align-items-center">
 					<span class="d-flex flex-column">
 						<span class="d-flex aling-items-center">

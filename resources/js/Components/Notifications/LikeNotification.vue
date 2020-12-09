@@ -1,7 +1,7 @@
 <template>
   <div class="post-notification" v-if="notification.post !== null">
     <inertia-link class="userinfo text-dark" :href="'/' + notification.sender.slug">
-      <lazy-image imgClass="profile-md" class="mb-0 ml-2" :src="notification.sender.profile" />
+      <lazy-image img-class="profile-sm" class="profile-sm mb-0 ml-2" :src="notification.sender.profile" />
       <div class="d-flex flex-column justify-content-center">
         <span class="d-flex align-items-center">
           <b>

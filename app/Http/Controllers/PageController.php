@@ -264,11 +264,11 @@ class PageController extends Controller
         $results = array();
         $suggestions = Page::query()->whereHas("user", function ($query) {
             $query->where("active", true);
-        })->whereRaw("slug like '%?%'", [$request->q])->limit(10)->get();
+        })->whereRaw("slug like ?", ['%' . $request->q . '%'])->limit(10)->get();
         foreach ($suggestions as $value) {
             $result = array();
-            $result["key"] = $value->slug;
             $result["value"] = $value->slug;
+            $result["label"] = $value->name;
             $results[] = $result;
         }
         return response()->json(array("result" => true, "pages" => $results));
