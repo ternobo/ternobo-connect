@@ -42,20 +42,20 @@ class Handler extends ExceptionHandler
      * @param  \Throwable  $e
      * @return \Throwable
      */
-    // public function render($request, Throwable $e)
-    // {
-    //     $response = parent::render($request, $e);
+    public function render($request, Throwable $e)
+    {
+        $response = parent::render($request, $e);
 
-    //     if (!app()->environment('local') && in_array($response->status(), [500, 503, 404, 403])) {
-    //         return Inertia::render('Error', ['status' => $response->status()])
-    //             ->toResponse($request)
-    //             ->setStatusCode($response->status());
-    //     } else if ($response->status() === 419) {
-    //         return back()->with([
-    //             'message' => 'نشست شما منقضی شده لطفا مجدد تلاش کنید.',
-    //         ]);
-    //     }
+        // if (!app()->environment('local') && in_array($response->status(), [500, 503, 404, 403])) {
+        //     return Inertia::render('Error', ['status' => $response->status()])
+        //         ->toResponse($request)
+        //         ->setStatusCode($response->status());
+        // } else if ($response->status() === 419) {
+        //     return back()->with([
+        //         'message' => 'نشست شما منقضی شده لطفا مجدد تلاش کنید.',
+        //     ]);
+        // }
 
-    //     return $response;
-    // }
+        return $response;
+    }
 }

@@ -40,6 +40,7 @@
         border-width: 2px;
     }
 
+
     .vs__search::placeholder,
     .vs__dropdown-toggle,
     .vs__dropdown-menu {
@@ -113,6 +114,15 @@
         &.vs__dropdown-option--highlight {
             background: $border-color;
             color: $dark;
+        }
+    }
+
+    &.vs--disabled {
+        .vs__actions {
+            min-height: 36px;
+            background: #f8f8f8;
+            max-width: 26px;
+            margin-left: 1px;
         }
     }
 }

@@ -58,9 +58,9 @@ export default {
 			}
 		},
 		countDownTimer() {
-			if (this.countDown > 0) {
+			if (this.countdown > 0) {
 				setTimeout(() => {
-					this.countDown -= 1;
+					this.countdown -= 1;
 					this.countDownTimer();
 				}, 1000);
 			}

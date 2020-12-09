@@ -15,7 +15,13 @@ class CommentController extends Controller
 
     public function index($post, Request $request)
     {
-        $comments = Comment::query()->with("page")->whereNull("reply_to")->where("post_id", $post)->latest();
+        $comments = Comment::query()
+            ->with("mutualLikes")
+            ->with("page")
+            ->withCount("replies")
+            ->whereNull("reply_to")
+            ->where("post_id", $post)
+            ->latest();
         if ($request->has("noload")) {
             $comments = $comments->where("id", "!=", $request->noload);
         }
@@ -43,7 +49,6 @@ class CommentController extends Controller
                 $comment->parent_id = $recomment->id;
             } else {
                 $comment->parent_id = $recomment->parent_id;
-                $text = "<div><a class='text-action' href='" . $recomment->page->slug . "'>@" . $recomment->page->slug . "</a></div> " . $text;
             }
         }
         $comment->post_id = $post->id;
@@ -56,14 +61,21 @@ class CommentController extends Controller
             Notification::sendNotification("reply", $comment->reply_to, $recomment->page->id, $comment->id);
         }
 
-        $comment->page = $comment->page;
+        $comment->load("page");
+        $comment->load("replyto.page");
 
         return response()->json(array("result" => true, "comment" => $comment));
     }
 
     public function replies($comment, Request $request)
     {
-        $comments = Comment::query()->with("page")->where("parent_id", $comment)->latest()->paginate(5);
+        $comments = Comment::query()
+            ->with("mutualLikes")
+            ->with("page")
+            ->where("parent_id", $comment)
+            ->with("replyto.page")
+            ->latest()
+            ->paginate(5);
         return response()->json(array("result" => true, "data" => $comments));
     }
     public function likeComment($comment_id)

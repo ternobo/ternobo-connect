@@ -67,7 +67,7 @@
 				</div>
 				<div class="buttons">
 					<i class="material-icons-outlined" @click="showReshare = true">sync</i>
-					<i class="material-icons like" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
+					<i class="material-icons like" @click="like" v-if="!checkUser(post.page.user_id)" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
 				</div>
 			</div>
 		</div>

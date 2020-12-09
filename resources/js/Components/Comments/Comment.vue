@@ -1,12 +1,16 @@
 <template>
-	<div>
+	<div class="comment-item">
 		<report-modal :show.sync="showReport" type="comment" :comment-id="comment.id"></report-modal>
+		<likes-modal :item="comment.id" type="comment" :show.sync="showLikes"></likes-modal>
+
+		<div v-if="replyTo != undefined && comment.replyto.page">
+			<span class="text-superlight"> <i class="material-icons">reply</i> پاسخ به {{ comment.replyto.page.name }} </span>
+		</div>
 		<div class="comment" v-if="!deleted">
 			<div class="comment-header">
 				<inertia-link :href="'/' + comment.page.slug" class="d-flex align-items-center">
-					<img :src="comment.page.profile" class="profile-md" v-if="$root.isDesktop" />
-					<img :src="comment.page.profile" class="profile-lg" v-else />
-					<div class="pr-3 pagedetail">
+					<img :src="comment.page.profile" class="profile-sm"/>
+					<div class="pr-2 pagedetail">
 						<span class="name">
 							<strong>
 								{{ comment.page.name }}
@@ -35,7 +39,7 @@
 									</div>
 								</div>
 							</b-dropdown-item>
-							<b-dropdown-item class="hover-danger" @click="deleteComment" v-if="checkUser(comment.page.user_id)">
+							<b-dropdown-item @click="deleteComment" v-if="checkUser(comment.page.user_id)">
 								<div class="d-flex hover-danger align-items-center">
 									<i class="material-icons-outlined ml-2">delete_sweep</i>
 									<div>
@@ -52,19 +56,38 @@
 			<div class="comment-body">
 				<div v-html="comment.text" style="unicode-bidi: plaintext; width: 100% !important; display: block; text-align: justify"></div>
 			</div>
-			<div class="w-100 d-flex align-content-center justify-content-between pt-2">
-				<span v-html="comment.liked_by"></span>
+			</div>
+
+            <div class="w-100 d-flex align-content-center justify-content-between pt-2">
+				<div>
+					<div @click="showLikes = true" class="d-flex post-likes-text text-muted clickable" v-if="comment.mutual_likes != null && comment.mutual_likes.length > 0">
+						<span class="ml-1">پسندیده شده توسط</span>
+						<inertia-link v-if="comment.mutual_likes[0]" :href="'/' + comment.mutual_likes[0].page.slug" class="text-dark">
+							<strong class="text-light">{{ comment.mutual_likes[0].page.name }}</strong>
+						</inertia-link>
+						<div v-if="comment.mutual_likes.length > 1">
+							<span class="mr-1">و</span>
+							<inertia-link v-if="comment.mutual_likes[1]" :href="'/' + comment.mutual_likes[0].page.slug" class="text-dark">
+								<strong class="text-light">{{ comment.mutual_likes[1].page.name }}</strong>
+							</inertia-link>
+						</div>
+						<span class="mx-1" v-if="comment.mutual_likes.length > 2"> و ... </span>
+					</div>
+				</div>
 				<div class="actions">
-					<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies, 'material-icons': showReplies }" class="hover-dark clickable"> insert_comment </i>
-					<i @click="likeComment" class="hover-dark clickable material-icons" :class="{ 'text-danger': liked }">
+					<small class="clickable ml-2" @click="loadReplies(false)" v-if="comment.replies_count > 0 && replyTo == undefined">
+						<strong :class="{'text-muted': !showReplies, 'text-dark': showReplies}"> {{ comment.replies_count }} پاسخ </strong>
+					</small>
+					<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies || !showNewComment, 'material-icons': showReplies && showNewComment }" class="hover-dark clickable"> insert_comment </i>
+					<i @click="likeComment" v-if="!checkUser(comment.page.user_id)" class="hover-dark clickable material-icons" :class="{ 'text-danger': liked }">
 						{{ liked ? "favorite" : "favorite_border" }}
 					</i>
 				</div>
 			</div>
-		</div>
-		<transition name="slide">
+
+        <transition name="slide">
 			<div class="comment-replies" v-if="showReplies">
-				<new-comment @submit="submit" :post="this.comment.post_id" :reply-to="this.comment.id"></new-comment>
+				<new-comment @submit="submit" v-if="showNewComment" :post="comment.post_id" :reply-to="comment.id"></new-comment>
 				<div class="border-right pr-3" style="border-color: #212121 !important" v-if="replyTo === undefined">
 					<comment v-on:replied="submit" :reply-to="comment.id" v-for="reply in replies" v-on:deleted="commentDelete" :comment="reply" :key="reply.id"></comment>
 					<div class="w-100 d-flex p-2 justify-content-center align-items-center" v-if="repliesLoading">
@@ -86,6 +109,7 @@ import LoadingSpinner from "../LoadingSpinner";
 // Load locale-specific relative date/time formatting rules.
 import fa from "javascript-time-ago/locale/fa";
 import ReportModal from "../Modals/ReportModal.vue";
+import LikesModal from "../Modals/LikesModal.vue";
 
 TimeAgo.addLocale(fa);
 export default {
@@ -104,6 +128,9 @@ export default {
 			liked: false,
 
 			showReport: false,
+
+			showNewComment: false,
+			showLikes: false,
 		};
 	},
 	methods: {
@@ -122,8 +149,14 @@ export default {
 			}
 			axios.post(this.$APP_URL + "/comments/" + this.comment.id + "/like");
 		},
-		loadReplies() {
-			this.showReplies = !this.showReplies;
+		loadReplies(newComment = true) {
+			if (this.showReplies && !this.showNewComment && newComment) {
+				this.showNewComment = newComment;
+			} else {
+				this.showNewComment = newComment;
+				this.showReplies = !this.showReplies;
+			}
+
 			if (this.showReplies) {
 				this.repliesLoading = true;
 				axios
@@ -188,6 +221,7 @@ export default {
 		NewComment,
 		LoadingSpinner,
 		ReportModal,
+		LikesModal,
 	},
 	props: {
 		replyTo: {

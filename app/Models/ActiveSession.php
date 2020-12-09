@@ -96,7 +96,10 @@ class ActiveSession extends Model
                 if ($session != null) {
                     $session->touch();
                     $session->ip_address = Request::ip();
-                    // $session->location = Location::get(Request::ip())->countryName;
+                    $location = Location::get(Request::ip());
+                    if (is_object($location)) {
+                        $session->location = $location->countryName;
+                    }
                     $session->save();
                     return true;
                 }

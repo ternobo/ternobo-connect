@@ -28,7 +28,7 @@
 						</div>
 					</div>
 				</b-dropdown-item>
-				<b-dropdown-item @click="showReport = true">
+				<b-dropdown-item v-if="!checkUser(post.page.user_id)" @click="showReport = true">
 					<div class="d-flex align-items-center">
 						<i class="material-icons-outlined ml-2 text-dark">report</i>
 						<div>

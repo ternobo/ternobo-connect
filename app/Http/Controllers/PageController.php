@@ -455,4 +455,29 @@ class PageController extends Controller
         }
     }
 
+    public function report(Request $request)
+    {
+        $messages = [
+            "page_id.exists" => "این صفحه حدف شده",
+            "report" => "دلیل گزارش اجباری است",
+        ];
+        $validator = Validator::make($request->all(), [
+            "page_id" => "required",
+            "report" => "required",
+        ], $messages);
+        if ($validator->fails()) {
+            return response()->json(array("result" => false, "errors" => $validator->errors()));
+        } else {
+            $report = new Report();
+            $report->page_id = $request->page_id;
+            $report->reason = $request->report;
+            if ($request->filled("moreinfo")) {
+                $report->description = $request->moreinfo;
+            }
+            $report->user_id = Auth::user()->id;
+            $report->save();
+            return response()->json(array("result" => true, "msg" => "گزارش تخلف شما با موفقیت ثبت شد"));
+        }
+    }
+
 }

@@ -43,7 +43,7 @@
 				</div>
 				<div class="d-flex align-items-center">
 					<i class="material-icons-outlined hover-dark clickable" @click="showReshare = true">sync</i>
-					<i class="material-icons hover-dark clickable" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
+					<i class="material-icons hover-dark clickable" v-if="!checkUser(post.page.user_id)" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
 				</div>
 			</div>
 			<div class="my-3 py-2 border-top border-bottom">

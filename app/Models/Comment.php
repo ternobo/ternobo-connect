@@ -61,6 +61,16 @@ class Comment extends Model
         return Page::find($this->page_id);
     }
 
+    public function mutualLikes()
+    {
+        return $this->hasMany("App\Models\Like", "comment_id")
+            ->with("page")
+            ->whereHas("page", function ($query) {
+                $query->whereRaw("id in (select following from followings where user_id = ?)", Auth::user()->id);
+            })
+            ->latest();
+    }
+
     public function user()
     {
         return $this->belongsTo("App\Models\User");
@@ -74,6 +84,11 @@ class Comment extends Model
     public function replyto()
     {
         return $this->belongsTo("App\Models\Comment", "reply_to");
+    }
+
+    public function replies()
+    {
+        return $this->hasMany("App\Models\Comment", "parent_id");
     }
 
     public function likes()

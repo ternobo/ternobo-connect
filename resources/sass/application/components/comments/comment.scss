@@ -1,20 +1,39 @@
 .comment {
     display: flex;
     flex-direction: column;
-    margin-bottom: 16px;
+    margin-bottom: 0;
     justify-content: flex-start;
     background: $body-bg;
     color: $text-color;
-    padding: 8px;
-    .comment-header{
+
+    .comment-header {
+        position: relative;
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
+        padding: 12px 20px;
+        padding-left: 16px;
+
+        &::after {
+            content: " ";
+            position: absolute;
+            width: calc(100% - 40px);
+            left: 20px;
+            right: 20px;
+            bottom: 0;
+            height: 2px;
+            background: #e0e0e0;
+        }
     }
 
     .comment-body {
-        padding: .4rem;
+        padding: 12px 20px;
+        padding-bottom: 24px;
         width: 100%;
     }
 
+}
+
+.comment-item {
+    margin-bottom: 16px;
 }

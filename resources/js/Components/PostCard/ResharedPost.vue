@@ -31,11 +31,12 @@
 			</div>
 		</div>
 		<div class="post-body" v-if="post.text != null && post.text.length > 0">
-			<pre class="text" ref="textelem">{{ post.text }}</pre>
+			<pre class="text" :class="{ open: showMore }" ref="textelem">{{ post.text }}</pre>
+			<span class="text-action clickable" v-if="post.text != null && post.text.length > 283" @click="showMore = !showMore">{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}</span>
 		</div>
-		<div class="border my-2 mx-3">
+		<inertia-link as="div" :href="'/posts/' + post.share.id" class="border clickable my-2 mx-3">
 			<component :is="componentType" class="shadow-0" style="margin-bottom: 0 !important" :post="post.share" :show-menu="false"></component>
-		</div>
+		</inertia-link>
 		<div class="post-footer">
 			<div class="tagandcate" v-if="post.tags.length > 0 || post.category !== null">
 				<div class="tags" v-if="post.tags.length > 0">
@@ -70,7 +71,7 @@
 				<div class="buttons">
 					<i class="material-icons-outlined" @click="showReshare = true">sync</i>
 					<i :class="{ 'material-icons-outlined': !openComment, 'material-icons': openComment }" v-if="hasComment" v-on:click="openComment = !openComment">comment</i>
-					<i class="material-icons like" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
+					<i class="material-icons like" @click="like" v-if="!checkUser(post.page.user_id)" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
 				</div>
 			</div>
 		</div>
@@ -107,6 +108,8 @@ export default {
 			showLikes: false,
 
 			componentType: require("../PostCard/SimplePost").default,
+
+			showMore: false,
 		};
 	},
 	created: function () {

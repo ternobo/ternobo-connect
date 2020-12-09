@@ -1,7 +1,7 @@
 <template>
   <b-modal v-model="showModal" hide-footer size="md" title="چرا می‌‌خواهید این محتوا را گزارش دهید؟" :centered="true">
     <div class="reportreseaons" v-if="reportFor == null">
-      <div class="report-item" @click="reportFor = 'notrelated'">
+      <div class="report-item" @click="reportFor = 'notrelated',reason='نامرتبط با ترنوبو'">
         <span class="text">فکر می‌کنم <span class="reportTitle">این محتوا</span> مناسب ترنوبو نیست</span>
         <i class="material-icons">keyboard_arrow_left</i>
       </div>
@@ -138,9 +138,9 @@
       <div class="moreinfo px-2">
         <textarea class="form-control h-100" v-model="description" placeholder="توضیحات خود را اینجا بنویسید" name="moreinfo"></textarea>
       </div>
-      <div class="moreinfo-footer py-2">
-        <button class="mdc-button" type="button" @click="(moreInfo = false), (description = null)">لغو</button>
-        <button class="mdc-button bg-dark mdc-button--unelevated" id="moreinfo-close" @click="moreInfo = false">افزودن</button>
+      <div class="moreinfo-footer text-left py-2">
+        <button class="btn button-transparent" type="button" @click="(moreInfo = false), (description = null)">لغو</button>
+        <button class="btn btn-dark" id="moreinfo-close" @click="moreInfo = false">افزودن</button>
       </div>
     </div>
     <div class="d-flex pt-3 justify-content-between" v-else-if="reportFor != null">

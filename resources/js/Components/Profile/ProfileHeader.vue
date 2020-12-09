@@ -2,10 +2,33 @@
 	<div class="card">
 		<UserInfoModal :user="page.user" :page-location="page.location" v-if="canEdit" :show.sync="edit"></UserInfoModal>
 		<ProfileCover :canChange="canEdit" :src="page.cover"></ProfileCover>
+		<report-page-modal :show.sync="showReport" :page-id="page.id"></report-page-modal>
+
 		<div class="pageinfo-card">
 			<i v-if="canEdit && !$root.isDesktop" class="material-icons-outlined btn d-flex align-items-center justify-content-center btn-edit" @click="edit = true">edit</i>
 			<ProfileImage :canChange="canEdit" :src="page.profile"></ProfileImage>
-			<ConnetionButtons class="follow-buttons" v-if="!canEdit && $root.isDesktop" :page-id="page.id" :user-id="page.user_id"></ConnetionButtons>
+			<div class="d-flex align-items-center" v-if="$root.isDesktop">
+				<ConnetionButtons class="follow-buttons" v-if="!canEdit" :page-id="page.id" :user-id="page.user_id"></ConnetionButtons>
+
+				<div>
+					<b-dropdown v-if="!canEdit" size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
+						<template v-slot:button-content class="p-0">
+							<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
+						</template>
+						<b-dropdown-item>
+							<div class="d-flex align-items-center" @click="showReport = true">
+								<i class="material-icons ml-2 text-dark">link</i>
+								<div>
+									<div>
+										<strong> گزارش تخلف </strong>
+									</div>
+									<small class="text-muted"> این صفحه در تضاد با قوانین ترنوبو است </small>
+								</div>
+							</div>
+						</b-dropdown-item>
+					</b-dropdown>
+				</div>
+			</div>
 		</div>
 		<div class="page-name">
 			<span class="d-flex align-items-center">
@@ -20,8 +43,27 @@
 				<i class="material-icons-outlined">location_on</i>
 				{{ page.location }}
 			</small>
-
-			<ConnetionButtons class="follow-buttons" v-if="!canEdit && !$root.isDesktop" :page-id="page.id" :user-id="page.user_id"></ConnetionButtons>
+			<div class="d-flex align-items-center" v-if="!$root.isDesktop">
+				<ConnetionButtons class="follow-buttons" v-if="!canEdit" :page-id="page.id" :user-id="page.user_id"></ConnetionButtons>
+				<div>
+					<b-dropdown v-if="!canEdit" size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
+						<template v-slot:button-content class="p-0">
+							<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
+						</template>
+						<b-dropdown-item>
+							<div class="d-flex align-items-center" @click="showReport = true">
+								<i class="material-icons ml-2 text-dark">link</i>
+								<div>
+									<div>
+										<strong> گزارش تخلف </strong>
+									</div>
+									<small class="text-muted"> این صفحه در تضاد با قوانین ترنوبو است </small>
+								</div>
+							</div>
+						</b-dropdown-item>
+					</b-dropdown>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -32,6 +74,7 @@ import ProfileImage from "./ProfileImage";
 import UserInfoModal from "../Modals/UserInfoModal";
 
 import MaterialTextField from "../inputs/MaterialTextField";
+import ReportPageModal from "../Modals/ReportPageModal.vue";
 
 export default {
 	methods: {
@@ -78,6 +121,8 @@ export default {
 			lastName: null,
 			shortBio: null,
 			gender: null,
+
+			showReport: false,
 		};
 	},
 	components: {
@@ -85,6 +130,7 @@ export default {
 		ProfileCover,
 		UserInfoModal,
 		MaterialTextField,
+		ReportPageModal,
 	},
 	props: {
 		canEdit: {

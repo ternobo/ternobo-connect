@@ -25,7 +25,8 @@
 			</div>
 		</div>
 		<div class="post-body" v-if="post.text != null && post.text.length > 0">
-			<pre class="text" ref="textelem">{{ post.text }}</pre>
+			<pre class="text" :class="{ open: showMore }" ref="textelem">{{ post.text }}</pre>
+			<span class="text-action clickable" v-if="post.text != null && post.text.length > 283" @click="showMore = !showMore">{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}</span>
 		</div>
 		<div class="post-time" :class="{ 'pt-0': post.text != null && post.text.length > 0 }" v-if="showMenu">
 			{{ post_time }}
@@ -71,7 +72,7 @@
 				<div class="buttons">
 					<i class="material-icons-outlined" @click="showReshare = true">sync</i>
 					<i :class="{ 'material-icons-outlined': !openComment, 'material-icons': openComment }" v-if="hasComment" v-on:click="openComment = !openComment">comment</i>
-					<i class="material-icons like" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
+					<i class="material-icons like" v-if="!checkUser(post.page.user_id)" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
 				</div>
 			</div>
 		</div>
@@ -107,6 +108,8 @@ export default {
 			showLikes: false,
 
 			edit: false,
+
+			showMore: false,
 		};
 	},
 	created: function () {

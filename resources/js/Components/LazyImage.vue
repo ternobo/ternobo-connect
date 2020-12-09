@@ -11,7 +11,9 @@ import { Skeleton } from "vue-loading-skeleton";
 export default {
 	mounted() {
 		this.$refs.imageItem.style.opacity = 0;
-		this.$refs.loader.$el.firstElementChild.classList.add(this.imgClass);
+		if (typeof this.imgClass != "object") {
+			this.$refs.loader.$el.firstElementChild.classList.add(this.imgClass);
+		}
 		this.$refs.loader.$el.firstElementChild.style.top = "0";
 		this.$refs.loader.$el.firstElementChild.style.left = "0";
 		this.$refs.loader.$el.firstElementChild.style.right = "0";

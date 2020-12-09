@@ -4,7 +4,7 @@
 		<i class="material-icons openmenu clickable text-muted hover-dark" @click="showMenu = true">more_vert</i>
 		<b-modal v-model="showMenu" hide-footer hide-header modal-class="slide-up" body-class="p-0" size="md" :centered="true">
 			<ul class="post-menu">
-				<li v-clipboard="$APP_URL + '/posts/' + post.id" @click="this.showMenu = false">
+				<li v-clipboard="$APP_URL + '/posts/' + post.id" @click="showMenu = false">
 					<i class="material-icons text-dark">link</i>
 					<strong>رونوشت پیوند این محتوا</strong>
 				</li>
@@ -21,7 +21,7 @@
 						<small class="text-muted"> کد امبد را کپی کرده و در وب‌سایت خودتان قرار دهید. </small>
 					</div>
 				</li>
-				<li class="d-flex align-items-center" @click="runAction('report')">
+				<li class="d-flex align-items-center" v-if="!checkUser(post.page.user_id)" @click="runAction('report')">
 					<i class="material-icons-outlined item-icon text-dark">report</i>
 					<div>
 						<div>

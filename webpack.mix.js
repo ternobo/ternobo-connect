@@ -14,7 +14,7 @@ const mix = require('laravel-mix');
 require('laravel-mix-workbox');
 
 
-mix.sass('resources/sass/application/app.scss', 'public/css')
+mix
     .webpackConfig({
         output: {
             filename: '[name].js',
@@ -22,7 +22,7 @@ mix.sass('resources/sass/application/app.scss', 'public/css')
         }
     })
     .js('resources/js/app.js', '')
-    .extract(['vue', 'laravel-jetstream'])
+    .extract(['vue'])
     .sourceMaps()
     .generateSW()
     .version();
