@@ -143,7 +143,7 @@ class User extends Authenticatable
             "biography" => ["name" => "نوشتن بایوگرافی", "button" => "نوشتن بایوگرافی", "text" => "نوشتن یک بایوگرافی جامع به شناخت بهتر شما به دیگران کمک می‌کند.", "icon" => "playlist_add_check", "action" => "set_biography"],
             "skills" => ["name" => "ثبت مهارت", "button" => "ثبت مهارت", "text" => "به دیگران بگویید که در چه زمینه‌هایی مهارت و تخصص دارید.", "icon" => "person_pin", 'action' => 'set_skills'],
             "first_post" => ["name" => "انتشار اولین مطلب", "button" => "نوشتن مطلب", "text" => "اولین پست یا مقاله خود را در ترنوبو به اشتراک بگذارید", "icon" => "person_pin", "action" => 'add_post'],
-            "verification" => ["name" => "تایید هویت", "button" => "تایید هویت", "text" => "هویت حساب خود را در ترنوبو تایید کنید تا بیشتر و بهتر دیده شوید", "icon" => "person_pin", "action" => ' verfication'],
+            "verification" => ["name" => "تایید هویت", "button" => "تایید هویت", "text" => "هویت حساب خود را در ترنوبو تایید کنید تا بیشتر و بهتر دیده شوید", "icon" => "person_pin", "action" => 'verfication'],
         ];
 
         foreach ($steps as $step => $data) {

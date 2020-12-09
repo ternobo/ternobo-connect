@@ -31,7 +31,7 @@
 			</div>
 		</div>
 		<div class="post-body" v-if="post.text != null && post.text.length > 0">
-			<pre class="text" :class="{ open: showMore }" ref="textelem">{{ post.text }}</pre>
+			<pre class="text" :class="{ open: showMore }" ref="textelem" v-html="post.text"></pre>
 			<span class="text-action clickable" v-if="post.text != null && post.text.length > 283" @click="showMore = !showMore">{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}</span>
 		</div>
 		<inertia-link as="div" :href="'/posts/' + post.share.id" class="border clickable my-2 mx-3">

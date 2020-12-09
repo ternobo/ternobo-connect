@@ -1,9 +1,10 @@
 <template>
 	<base-layout>
 		<mobile-categories v-if="!$root.isDesktop" :categories="page.categories" :show.sync="showMobileCategory"></mobile-categories>
+		<verify-modal @verified="reloadUser" :show.sync="showVerification"></verify-modal>
 		<div class="content-container-profile">
-			<profile-steps class="mb-3" :steps="$page.props.user.profile_steps" v-if="$page.props.user.profile_steps.percent < 100 && checkUser(page.user_id)"></profile-steps>
-			<ProfileHeader :page="page" :can-edit="canEdit"></ProfileHeader>
+			<profile-steps @action="stepsAction" class="mb-3" :steps="$page.props.user.profile_steps" v-if="$page.props.user.profile_steps.percent < 100 && checkUser(page.user_id)"></profile-steps>
+			<ProfileHeader ref="profileHeader" :page="page" :can-edit="canEdit"></ProfileHeader>
 			<tabs :compact="true" :disabled="edit" class="py-3" @selected="tabChange" :state-tab="true">
 				<template slot="custom-item">
 					<div class="d-flex align-items-center" v-if="canEdit && showEdit">
@@ -34,7 +35,7 @@
 							<Categories v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug"></Categories>
 						</div>
 						<div class="col-md-8">
-							<NewPostCard v-if="canEdit"></NewPostCard>
+							<NewPostCard @done="onPostAdded" ref="newPostCard" v-if="canEdit"></NewPostCard>
 							<categories-mobile v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug" v-if="!$root.isDesktop"></categories-mobile>
 							<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
 								<ActionCard v-for="action in actionsList" :page="page" :action="action" :key="action.id"></ActionCard>
@@ -83,6 +84,7 @@ import { Inertia } from "@inertiajs/inertia";
 import MobileCategories from "../../Components/Profile/MobileCategories.vue";
 import CategoriesMobile from "../../Components/Profile/CategoriesMobile.vue";
 import ProfileSteps from "../../Components/Profile/ProfileSteps.vue";
+import VerifyModal from "../../Components/Modals/VerifyModal.vue";
 export default {
 	watch: {
 		filters(newValue) {
@@ -117,6 +119,48 @@ export default {
 			.then(() => (this.loadingActions = false));
 	},
 	methods: {
+		reloadUser() {
+			Inertia.reload({
+				only: ["user"],
+			});
+		},
+		onPostAdded() {
+			this.reloadUser();
+			this.loadingActions = true;
+			axios
+				.post("/" + this.page.slug + "/actions", this.filters)
+				.then((response) => {
+					this.actionsList = response.data.actions.data;
+					this.next_page_url = response.data.actions.next_page_url;
+				})
+				.catch((err) => {})
+				.then(() => (this.loadingActions = false));
+		},
+		stepsAction(action) {
+			console.log(action);
+			switch (action) {
+				case "upload_profile":
+					this.$refs.ProfileHeader.setProfileImage();
+					break;
+				case "set_shortbio":
+					this.$refs.ProfileHeader.edit = true;
+					break;
+				case "set_biography":
+					this.edit = true;
+					break;
+				case "set_skills":
+					this.edit = true;
+					break;
+				case "add_post":
+					this.$refs.newPostCard.showPostModal = true;
+					break;
+				case "verfication":
+					this.showVerification = true;
+					break;
+				default:
+					console.log("hell");
+			}
+		},
 		loadMore() {
 			if (!this.loadingMore && this.next_page_url !== null) {
 				const options = {
@@ -228,6 +272,7 @@ export default {
 						.then((response) => {
 							if (response.data.result) {
 								this.edit = false;
+								this.reloadUser();
 							} else {
 								this.handleError(response.data.errors, response.data.type);
 							}
@@ -277,6 +322,7 @@ export default {
 			filters: {
 				action: "all",
 			},
+			showVerification: false,
 		};
 	},
 	computed: {
@@ -352,6 +398,7 @@ export default {
 		MobileCategories,
 		CategoriesMobile,
 		ProfileSteps,
+		VerifyModal,
 	},
 	layout: AppLayout,
 };

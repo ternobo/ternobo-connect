@@ -18,20 +18,13 @@
 				</div>
 				<div class="text px-0">
 					<div class="textarea">
-                         <Mentionable
-    :keys="['@']"
-    :items="mentionItems"
-    filtering-disabled
-    @open="loadMentions()"
-    @search="loadMentions($event)"
-  >
-						<textarea-autosize :min-height="201" v-model="text" rows="8" placeholder="اگر در خویش میل نوشتن سراغ کردی باید سه چیز در تو باشد. شناختی، هنری و سحری (جبران خلیل جبران)" class="w-100 autoresize autodirection" maxlength="2500"></textarea-autosize>
-                          <template #no-result>
-      {{ loading ? 'درحال بارگذاری..' : 'نتیجه‌ای یافت نشد' }}
-    </template>
-
-                         </Mentionable>
-                        <div class="character-counter">
+						<Mentionable :keys="['@']" :items="mentionItems" filtering-disabled @open="loadMentions()" @search="loadMentions($event)">
+							<textarea-autosize :min-height="201" v-model="text" rows="8" placeholder="اگر در خویش میل نوشتن سراغ کردی باید سه چیز در تو باشد. شناختی، هنری و سحری (جبران خلیل جبران)" class="w-100 autoresize autodirection" maxlength="2500"></textarea-autosize>
+							<template #no-result>
+								{{ loading ? "درحال بارگذاری.." : "نتیجه‌ای یافت نشد" }}
+							</template>
+						</Mentionable>
+						<div class="character-counter">
 							<span class="counter tex-dark">{{ leftCharacter }}</span>
 							<div class="progress ml-1 mb-0" style="width: 100px; height: 5px">
 								<div class="progress-bar" role="progressbar" :style="{ width: txtlen }" aria-valuemin="0" aria-valuemax="100"></div>
@@ -83,7 +76,7 @@
 
 <script>
 import ModalMixin from "../../Mixins/Modal";
-import { Mentionable } from 'vue-mention'
+import { Mentionable } from "vue-mention";
 
 import TagInput from "../inputs/TagInput";
 
@@ -100,19 +93,19 @@ export default {
 		},
 	},
 	methods: {
-        async loadMentions(searchText = null){
-            this.loadingMentions = true;
-            this.mentionItems = await (new Promise((resolve)=>{
-                let data = {};
-                if(searchText != null){
-                    data.q = searchText;
-                }
-                axios.post("/slugsearch",data).then((response)=>{
-                    resolve(response.data.pages);
-                })
-            }));
-            this.loadingMention = false;
-        },
+		async loadMentions(searchText = null) {
+			this.loadingMentions = true;
+			this.mentionItems = await new Promise((resolve) => {
+				let data = {};
+				if (searchText != null) {
+					data.q = searchText;
+				}
+				axios.post("/slugsearch", data).then((response) => {
+					resolve(response.data.pages);
+				});
+			});
+			this.loadingMention = false;
+		},
 		onShown() {
 			if (this.post) {
 				if (this.post.category != null) {
@@ -236,6 +229,7 @@ export default {
 							Inertia.reload({
 								only: ["posts"],
 							});
+							this.$emit("done");
 							this.$emit("update:show", false);
 
 							this.text = undefined;
@@ -264,6 +258,7 @@ export default {
 							Inertia.reload({
 								only: ["posts"],
 							});
+							this.$emit("done");
 							this.$emit("update:show", false);
 
 							this.text = undefined;
@@ -313,10 +308,10 @@ export default {
 				file: undefined,
 				cropCordinates: undefined,
 				loading: false,
-                leftCharacter: 2500,
+				leftCharacter: 2500,
 
-                loadingMention: false,
-                mentionItems: []
+				loadingMention: false,
+				mentionItems: [],
 			};
 		},
 	},
@@ -334,8 +329,8 @@ export default {
 	},
 	components: {
 		Cropper,
-        TagInput,
-        Mentionable,
+		TagInput,
+		Mentionable,
 
 		FileInput,
 	},

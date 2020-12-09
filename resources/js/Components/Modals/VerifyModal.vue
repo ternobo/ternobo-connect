@@ -1,22 +1,22 @@
 <template>
-	<b-modal v-model="showModal" title="تایید هویت" size="lg" :centered="true">
+	<b-modal v-model="showModal" title="تایید هویت" size="md" :centered="true">
 		<h5>حساب خود را در ترنوبو تایید کنید تا بیشتر دیده شوید.</h5>
-		<p class="text-left">برای دریافت نشان کاربر تایید شده <i class="material-icons">verified</i> می بایست هویت خود را با ارسال عکس سلفی خودتان به همراه کارت ملی تایید کنید</p>
+		<p class="text-right">برای دریافت نشان کاربر تایید شده <i class="material-icons text-action">verified</i> می بایست هویت خود را با ارسال عکس سلفی خودتان به همراه کارت ملی تایید کنید</p>
 		<input type="digit" class="form-control mb-2" v-model="code" name="nationalcode" placeholder="کدملی" value="" minlength="10" maxlength="12" />
-		<div class="bg-default p-3 verifybox">
-			<file-input accept="image/jpeg, image/png, image/jpg"></file-input>
+		<div class="bg-default p-3 verifybox" v-if="file == null">
+			<file-input @change="fileSelect" accept="image/jpeg, image/png, image/jpg"></file-input>
 			<span style="padding-right: 1rem; text-align: justify">
 				تصویر را ضمیمه کنید
 				<br />
 				فقط فایل های png، jpg و حداکثر حجم ۱ مگابایت
 			</span>
 		</div>
-		<div class="imageview" v-if="file != null">
-			<i class="material-icons closebtn" @click="file = null">close</i>
+		<div class="position-relative imageview" v-if="file != null">
+			<i class="material-icons closebtn font-16 d-flex align-items-center justify-content-center" style="position: absolute; right: 12px; top: 12px" @click="file = null">close</i>
 			<img :src="image" id="nationalimage" style="width: 100%; max-height: 300px; object-fit: cover" />
 		</div>
 		<template #modal-footer>
-			<loading-button :loading="loading" :disabled="file == null" class="btn btn-dark">ثبت</loading-button>
+			<loading-button :loading="loading" @click.native="upload" :disabled="file == null || code == null || code.length < 1" class="btn btn-dark">ثبت</loading-button>
 		</template>
 	</b-modal>
 </template>
@@ -34,7 +34,13 @@ export default {
 			axios
 				.post("/verificationRequest", formData)
 				.then((response) => {
-					this.loading = false;
+					if (response.data.result) {
+						this.$emit("update:show", false);
+						this.$emit("verified", true);
+						this.loading = false;
+					} else {
+						this.toast("کد ملی نامعتبر است");
+					}
 				})
 				.catch((err) => {
 					this.loading = false;

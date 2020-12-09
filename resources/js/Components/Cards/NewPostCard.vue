@@ -1,6 +1,6 @@
 <template>
 	<div class="position-relative card" v-if="$page.props.user != null">
-		<new-post-modal :show.sync="showPostModal"></new-post-modal>
+		<new-post-modal @done="$emit('done')" :show.sync="showPostModal"></new-post-modal>
 		<div class="new-post-body">
 			<div class="text d-flex align-items-center">
 				<lazy-image img-class="profile-sm" class="profile-sm ml-2 mb-0" loading="lazy" :src="$page.props.user.profile" />

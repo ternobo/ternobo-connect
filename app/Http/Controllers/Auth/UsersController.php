@@ -280,7 +280,7 @@ class UsersController extends Controller
         } else {
             $nationalcode = NationalCode::make($request->nationalcode);
             if ($nationalcode->notValid()) {
-                return response()->json(array("result" => false, "errors" => array("کدملی نامعتبر است")));
+                return response()->json(array("result" => false, "errors" => array('code.invalid' => "کدملی نامعتبر است")));
             }
             $user = Auth::user();
             $user->nationalcard = url($request->file("file")->store("nationalcards"));

@@ -6,7 +6,7 @@
 
 		<div class="pageinfo-card">
 			<i v-if="canEdit && !$root.isDesktop" class="material-icons-outlined btn d-flex align-items-center justify-content-center btn-edit" @click="edit = true">edit</i>
-			<ProfileImage :canChange="canEdit" :src="page.profile"></ProfileImage>
+			<ProfileImage ref="profileImage" :canChange="canEdit" :src="page.profile"></ProfileImage>
 			<div class="d-flex align-items-center" v-if="$root.isDesktop">
 				<ConnetionButtons class="follow-buttons" v-if="!canEdit" :page-id="page.id" :user-id="page.user_id"></ConnetionButtons>
 
@@ -78,6 +78,9 @@ import ReportPageModal from "../Modals/ReportPageModal.vue";
 
 export default {
 	methods: {
+		setProfileImage() {
+			this.$refs.profileImage.openFileSelect();
+		},
 		save() {
 			this.loading = true;
 			axios
