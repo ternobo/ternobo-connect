@@ -48,23 +48,23 @@
         padding-left: 16px;
         position: relative;
 
-        &::after {
-            content: " ";
-            position: absolute;
-            width: calc(100% - 48px);
-            left: 24px;
-            right: 24px;
-            bottom: 0;
-            height: 2px;
-            background: $border-color;
+        // &::after {
+        //     content: " ";
+        //     position: absolute;
+        //     width: calc(100% - 48px);
+        //     left: 24px;
+        //     right: 24px;
+        //     bottom: 0;
+        //     height: 2px;
+        //     background: $border-color;
 
-            @media screen and (max-width: $sm-size) {
-                width: calc(100% - 24px);
-                left: 12px;
-                right: 12px;
-            }
+        //     @media screen and (max-width: $sm-size) {
+        //         width: calc(100% - 24px);
+        //         left: 12px;
+        //         right: 12px;
+        //     }
 
-        }
+        // }
     }
 
     .post-header {
@@ -302,7 +302,7 @@
                 right: 24px;
                 top: 0;
                 height: 2px;
-                background: $border-color;
+                background: $fixed-elements;
 
                 @media screen and (max-width: $sm-size) {
                     width: calc(100% - 24px);
@@ -442,16 +442,15 @@
 }
 
 .post-time {
-    font-size: 14px;
-    padding: 16px 24px;
+    display: flex;
+    font-size: 10px;
     color: #C8C8C8;
-
-    @media screen and (max-width: $sm-size) {
-        font-size: 10px;
-    }
+    flex-direction: row !important;
+    margin: 0 !important;
+    justify-content: flex-start !important;
 
     i {
-        font-size: 16px;
+        font-size: 14px;
         color: #C8C8C8 !important;
     }
 }

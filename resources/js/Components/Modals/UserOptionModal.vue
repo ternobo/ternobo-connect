@@ -2,14 +2,14 @@
 	<b-modal v-model="showModal" hide-footer hide-header @show="onShow" body-class="pb-0" ref="modal" size="lg">
 		<div class="useroptions" v-if="$page.props.user">
 			<div class="useroptions-header">
-				<inertia-link @click="$emit('update:show', false)" :href="'/' + this.$page.props.user.username" class="d-flex aling-items-center">
-					<img class="profile-sm" :src="this.$page.props.user.profile" />
+				<inertia-link @click="$emit('update:show', false)" :href="'/' + $page.props.user.username" class="d-flex aling-items-center">
+					<img class="profile-sm" :src="$page.props.user.profile" />
 					<span class="mx-2 d-flex flex-column justify-content-center">
 						<strong class="text-black"
-							>{{ this.$page.props.user.name }}
-							<i v-if="this.$page.props.user.is_verified === 1" class="verificationcheck">check_circle</i>
+							>{{ $page.props.user.name }}
+							<i v-if="$page.props.user.is_verified === 1" class="position-relative verificationcheck">check_circle</i>
 						</strong>
-						<small>{{ this.$page.props.user.short_bio }}</small>
+						<small>{{ $page.props.user.short_bio }}</small>
 					</span>
 				</inertia-link>
 				<i class="close material-icons text-muted hover-dark" @click="$emit('update:show', false)">close</i>
@@ -36,8 +36,8 @@
 				</li>
 			</ul>
 		</div>
-        <div v-else class="useroptions">
-            <ul class="p-0 menu">
+		<div v-else class="useroptions">
+			<ul class="p-0 menu">
 				<li class="list-item d-flex flex-column">
 					<inertia-link @click="$emit('update:show', false)" href="/settings" class="m-0"><i class="material-icons-outlined">login</i> ورود </inertia-link>
 				</li>
@@ -45,7 +45,7 @@
 					<inertia-link @click="$emit('update:show', false)" href="/ideas" class="m-0"><i class="material-icons-outlined">account_circle</i> ثبت‌نام </inertia-link>
 				</li>
 			</ul>
-        </div>
+		</div>
 	</b-modal>
 </template>
 

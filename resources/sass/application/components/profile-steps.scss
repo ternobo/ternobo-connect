@@ -1,10 +1,13 @@
 .steps-progress {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     height: 100%;
     flex-direction: row-reverse;
     flex-wrap: wrap;
+
+    @media screen and (max-width: 1266px) {
+        display: none;
+    }
 
     .progress-highlight {
         position: relative;
@@ -46,4 +49,26 @@
     display: flex;
     align-items: center;
     flex-direction: row;
+}
+
+.last-step-action {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 16px;
+    flex-wrap: wrap;
+
+    @media screen and (max-width: 1266px) {
+        margin-top: 0;
+    }
+
+    @media screen and (max-width: 470px) {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        button {
+            margin-top: 12px;
+        }
+    }
 }

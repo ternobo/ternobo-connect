@@ -82,6 +82,7 @@ button:focus {
 }
 
 body {
+    font-family: dana, 'Open Sans';
     direction: rtl;
     margin: 0;
     padding: 0;
@@ -784,7 +785,7 @@ pre {
     direction: rtl;
     unicode-bidi: -moz-plaintext;
     unicode-bidi: plaintext;
-    font-family: dana, PT Sans;
+    font-family: dana, 'Open Sans';
     letter-spacing: 0 !important;
     overflow: hidden;
     line-break: normal;
@@ -894,17 +895,17 @@ pre {
 }
 
 .autocomplete-input[aria-expanded=true] {
-    border-radius: 25px !important;
+    border-radius: 12px 12px 0 0 !important;
+    border-bottom: none !important;
     z-index: 2;
 }
 
 .autocomplete-result-list {
     box-shadow: 0 1rem 40px rgba(0, 0, 0, 0.02) !important;
     margin-top: -18px !important;
-}
 
-.autocomplete-result:first-child {
-    padding-top: 20px;
+    border: 2px solid #191919;
+    border-radius: 0 0 12px 12px !important;
 }
 
 @import "./components/notifications.scss";
@@ -1145,10 +1146,6 @@ a:focus {
     cursor: pointer;
     padding: 12px;
     background-image: none;
-}
-
-[data-position=below] .autocomplete-result-list {
-    border-radius: 0 !important;
 }
 
 .open-achievements {
@@ -1507,3 +1504,13 @@ a:focus {
 }
 
 @import "./components/profile-steps.scss";
+
+.done-precent {
+    background: #0898df;
+    position: absolute;
+    right: 0;
+    top: 5px;
+    padding: 0 10px;
+    font-size: 12px;
+    border-radius: 15px 0 0 15px;
+}

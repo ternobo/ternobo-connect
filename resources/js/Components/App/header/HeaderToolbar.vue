@@ -31,7 +31,7 @@
 		<div id="usermenu-show" v-if="$page.props.user != null" class="usertoolbar h-100 d-flex align-items-center mr-2 py-3" @mouseenter="showUserMenu" @mouseleave="menuVisible = false">
 			<div class="d-flex align-items-center">
 				<div class="d-flex align-items-center">
-					<span style="white-space: nowrap; user-select: none" class="ml-2">{{ $page.props.user.username }}</span>
+					<span style="white-space: nowrap; user-select: none" dir="ltr" class="ml-2">{{ $page.props.user.username }} <i v-if="$page.props.user.is_verified === 1" class="verificationcheck">check_circle</i> </span>
 					<img v-bind:src="$page.props.user.profile" class="profile-xsm" />
 				</div>
 				<i class="material-icons text-light">more_vert</i>

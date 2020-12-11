@@ -3,7 +3,7 @@
 		<UserInfoModal :user="page.user" :page-location="page.location" v-if="canEdit" :show.sync="edit"></UserInfoModal>
 		<ProfileCover :canChange="canEdit" :src="page.cover"></ProfileCover>
 		<report-page-modal :show.sync="showReport" :page-id="page.id"></report-page-modal>
-
+		<mutual-friends-modal :show.sync="showFriends" :page-id="page.id"></mutual-friends-modal>
 		<div class="pageinfo-card">
 			<i v-if="canEdit && !$root.isDesktop" class="material-icons-outlined btn d-flex align-items-center justify-content-center btn-edit" @click="edit = true">edit</i>
 			<ProfileImage ref="profileImage" :canChange="canEdit" :src="page.profile"></ProfileImage>
@@ -65,6 +65,18 @@
 				</div>
 			</div>
 		</div>
+		<a class="p-3 d-flex align-items-center pr-4 clickable" @click="showFriends = true" v-if="mutuals != null && mutuals.list.length > 0">
+			<div class="d-flex mr-2">
+				<div class="profile-photos">
+					<img :src="mutuals.list[0].profile" />
+					<img v-if="mutuals.list.length > 1" :src="mutuals.list[1].profile" />
+				</div>
+			</div>
+			<div class="d-flex flex-column px-3">
+				<strong class="text-dark" :class="{ 'font-12': !$root.isDesktop }">{{ mutuals.count }} دوست مشترک</strong>
+				<span class="text-superlight font-10">{{ mutuals.text }}</span>
+			</div>
+		</a>
 	</div>
 </template>
 
@@ -75,6 +87,7 @@ import UserInfoModal from "../Modals/UserInfoModal";
 
 import MaterialTextField from "../inputs/MaterialTextField";
 import ReportPageModal from "../Modals/ReportPageModal.vue";
+import MutualFriendsModal from "../Modals/MutualFriendsModal.vue";
 
 export default {
 	methods: {
@@ -115,6 +128,15 @@ export default {
 		this.lastName = this.page.user.last_name;
 		this.shortBio = this.page.user.short_bio;
 		this.gender = JSON.parse(this.page.user.gender);
+		if (!this.checkUser(this.page.user_id)) {
+			axios
+				.post("/mutual-friends", {
+					page_id: this.page.id,
+				})
+				.then((response) => {
+					this.mutuals = response.data.mutuals;
+				});
+		}
 	},
 	data() {
 		return {
@@ -126,6 +148,8 @@ export default {
 			gender: null,
 
 			showReport: false,
+			mutuals: null,
+			showFriends: false,
 		};
 	},
 	components: {
@@ -134,6 +158,7 @@ export default {
 		UserInfoModal,
 		MaterialTextField,
 		ReportPageModal,
+		MutualFriendsModal,
 	},
 	props: {
 		canEdit: {

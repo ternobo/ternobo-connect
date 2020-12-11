@@ -198,6 +198,11 @@ class Page extends Model
         // get the original array to be displayed
         $data = parent::toArray();
 
+        $user = User::query()->where("id", $data['user_id'])->first();
+        if ($user instanceof User) {
+            $data['is_verified'] = $user->is_verified;
+        }
+
         if (isset($data['contact_data'])) {
             $data['contact_data'] = json_decode($data['contact_data']['data']);
         }
@@ -384,6 +389,19 @@ class Page extends Model
                     unset($connection->connection);
                     unset($connection->password);
 
+                    unset($connection->two_factor);
+                    unset($connection->active);
+                    unset($connection->is_verified);
+                    unset($connection->id);
+                    unset($connection->two_factor_type);
+                    unset($connection->email_verified_at);
+                    unset($connection->two_factor_secret);
+                    unset($connection->two_factor_recovery_codes);
+                    unset($connection->updated_at);
+
+                    // $connection->user = User::query()->find($connection->user_id);
+                    unset($connection->user_id);
+
                     $mutuals[] = $connection;
                 }
             }
@@ -400,7 +418,7 @@ class Page extends Model
     public function getMutualsText($connections = null)
     {
         if ($connections === null) {
-            $connections = $this->getMutuals();
+            $connections = $this->mutualFriends();
         }
         $nums = count($connections);
         if ($nums > 2) {

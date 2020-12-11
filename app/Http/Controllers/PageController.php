@@ -480,4 +480,22 @@ class PageController extends Controller
         }
     }
 
+    public function getMutualFriends(Request $request)
+    {
+        $page = Page::query()->find($request->page_id);
+        $list = $page->mutualFriends();
+        $data = [
+            "list" => array_slice($list, 0, 2),
+            "text" => $page->getMutualsText($list),
+            "count" => count($list),
+        ];
+        if ($request->filled('all') && $request->all) {
+            $data['list'] = $list;
+        }
+        return response()->json([
+            'result' => true,
+            'mutuals' => $data,
+        ]);
+    }
+
 }

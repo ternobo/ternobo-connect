@@ -52,7 +52,7 @@
 					<inertia-link class="d-flex align-items-center text-dark" :href="'/' + post.page.slug">
 						<lazy-image :src="post.page.profile" img-class="profile-md" class="ml-2 mb-0" alt="profile-image" />
 						<div class="d-flex flex-column">
-							<strong>{{ post.page.name }}</strong>
+							<strong>{{ post.page.name }} <i v-if="post.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 							<small class="text-muted" v-if="post.page.short_bio !== null && post.page.short_bio.length > 0">{{ post.page.short_bio }}</small>
 							<small class="text-light font-10" v-if="post.created_at !== post.created_at">{{ update_time }}</small>
 						</div>

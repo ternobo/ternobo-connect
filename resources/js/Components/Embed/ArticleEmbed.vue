@@ -4,9 +4,7 @@
 			<a class="publisher" :href="'/' + post.page.slug">
 				<img :src="post.page.profile" />
 				<div>
-					<strong>
-						{{ post.page.name }}
-					</strong>
+					<strong> {{ post.page.name }} <i v-if="post.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 					<span class="text-muted font-12">
 						{{ post.page.short_bio }}
 					</span>

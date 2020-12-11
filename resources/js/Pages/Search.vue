@@ -16,7 +16,7 @@
 											<inertia-link class="d-flex h-100 align-items-center w-100" :href="$APP_URL + '/' + page.slug">
 												<lazy-image class="mb-0 ml-2" imgStyle="height: 80px; width: 80px" imgClass="rounded-circle" :src="page.profile" />
 												<div class="d-flex ml-2 align-items-start flex-column justify-content-center">
-													<span class="person-name"> {{ page.name }} </span>
+													<span class="person-name"> {{ page.name }} <i v-if="page.is_verified === 1" class="verificationcheck">check_circle</i> </span>
 													<small class="text-muted"> {{ page.short_bio }}</small>
 												</div>
 											</inertia-link>

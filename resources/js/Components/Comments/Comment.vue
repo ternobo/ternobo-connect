@@ -9,12 +9,10 @@
 		<div class="comment" v-if="!deleted">
 			<div class="comment-header">
 				<inertia-link :href="'/' + comment.page.slug" class="d-flex align-items-center">
-					<img :src="comment.page.profile" class="profile-sm"/>
+					<img :src="comment.page.profile" class="profile-sm" />
 					<div class="pr-2 pagedetail">
 						<span class="name">
-							<strong>
-								{{ comment.page.name }}
-							</strong>
+							<strong> {{ comment.page.name }} <i v-if="comment.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 						</span>
 						<small class="text-muted" v-if="comment.page.short_bio">
 							{{ comment.page.short_bio }}
@@ -56,36 +54,36 @@
 			<div class="comment-body">
 				<div v-html="comment.text" style="unicode-bidi: plaintext; width: 100% !important; display: block; text-align: justify"></div>
 			</div>
-			</div>
+		</div>
 
-            <div class="w-100 d-flex align-content-center justify-content-between pt-2">
-				<div>
-					<div @click="showLikes = true" class="d-flex post-likes-text text-muted clickable" v-if="comment.mutual_likes != null && comment.mutual_likes.length > 0">
-						<span class="ml-1">پسندیده شده توسط</span>
-						<inertia-link v-if="comment.mutual_likes[0]" :href="'/' + comment.mutual_likes[0].page.slug" class="text-dark">
-							<strong class="text-light">{{ comment.mutual_likes[0].page.name }}</strong>
+		<div class="w-100 d-flex align-content-center justify-content-between pt-2">
+			<div>
+				<div @click="showLikes = true" class="d-flex post-likes-text text-muted clickable" v-if="comment.mutual_likes != null && comment.mutual_likes.length > 0">
+					<span class="ml-1">پسندیده شده توسط</span>
+					<inertia-link v-if="comment.mutual_likes[0]" :href="'/' + comment.mutual_likes[0].page.slug" class="text-dark">
+						<strong class="text-light">{{ comment.mutual_likes[0].page.name }}</strong>
+					</inertia-link>
+					<div v-if="comment.mutual_likes.length > 1">
+						<span class="mr-1">و</span>
+						<inertia-link v-if="comment.mutual_likes[1]" :href="'/' + comment.mutual_likes[0].page.slug" class="text-dark">
+							<strong class="text-light">{{ comment.mutual_likes[1].page.name }}</strong>
 						</inertia-link>
-						<div v-if="comment.mutual_likes.length > 1">
-							<span class="mr-1">و</span>
-							<inertia-link v-if="comment.mutual_likes[1]" :href="'/' + comment.mutual_likes[0].page.slug" class="text-dark">
-								<strong class="text-light">{{ comment.mutual_likes[1].page.name }}</strong>
-							</inertia-link>
-						</div>
-						<span class="mx-1" v-if="comment.mutual_likes.length > 2"> و ... </span>
 					</div>
-				</div>
-				<div class="actions">
-					<small class="clickable ml-2" @click="loadReplies(false)" v-if="comment.replies_count > 0 && replyTo == undefined">
-						<strong :class="{'text-muted': !showReplies, 'text-dark': showReplies}"> {{ comment.replies_count }} پاسخ </strong>
-					</small>
-					<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies || !showNewComment, 'material-icons': showReplies && showNewComment }" class="hover-dark clickable"> insert_comment </i>
-					<i @click="likeComment" v-if="!checkUser(comment.page.user_id)" class="hover-dark clickable material-icons" :class="{ 'text-danger': liked }">
-						{{ liked ? "favorite" : "favorite_border" }}
-					</i>
+					<span class="mx-1" v-if="comment.mutual_likes.length > 2"> و ... </span>
 				</div>
 			</div>
+			<div class="actions">
+				<small class="clickable ml-2" @click="loadReplies(false)" v-if="comment.replies_count > 0 && replyTo == undefined">
+					<strong :class="{ 'text-muted': !showReplies, 'text-dark': showReplies }"> {{ comment.replies_count }} پاسخ </strong>
+				</small>
+				<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies || !showNewComment, 'material-icons': showReplies && showNewComment }" class="hover-dark clickable"> insert_comment </i>
+				<i @click="likeComment" v-if="!checkUser(comment.page.user_id)" class="hover-dark clickable material-icons" :class="{ 'text-danger': liked }">
+					{{ liked ? "favorite" : "favorite_border" }}
+				</i>
+			</div>
+		</div>
 
-        <transition name="slide">
+		<transition name="slide">
 			<div class="comment-replies" v-if="showReplies">
 				<new-comment @submit="submit" v-if="showNewComment" :post="comment.post_id" :reply-to="comment.id"></new-comment>
 				<div class="border-right pr-3" style="border-color: #212121 !important" v-if="replyTo === undefined">

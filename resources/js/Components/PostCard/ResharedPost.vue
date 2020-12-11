@@ -8,19 +8,19 @@
 			<inertia-link class="publisher" :href="'/' + post.page.slug">
 				<lazy-image class="profile-sm mb-0" img-class="profile-sm" :src="post.page.profile" />
 				<div>
-					<strong>
-						{{ post.page.name }}
-					</strong>
-					<text class="text-muted font-12">
+					<strong> {{ post.page.name }} <i v-if="post.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+					<span class="text-muted font-12">
 						{{ post.page.short_bio }}
-					</text>
-					<span class="text-light font-10">
+					</span>
+					<div class="post-time" :class="{ 'pt-0': post.text != null && post.text.length > 0 }" v-if="showMenu">
 						{{ post_time }}
-						<small class="text-light font-10" v-if="post.updated_at !== post.created_at"> ویرایش شده در {{ updated_at }} </small>
-						<i class="material-icons-outlined font-14 text-light verical-middle">
+						<span class="mx-1 font-10">●</span>
+						<span v-if="post.updated_at !== post.created_at">بروز شده</span>
+						<span v-if="post.updated_at !== post.created_at" class="mx-1 font-10">●</span>
+						<i class="material-icons-outlined text-light verical-middle">
 							{{ post.show === "public" ? "public" : "group" }}
 						</i>
-					</span>
+					</div>
 				</div>
 			</inertia-link>
 			<div class="actions position-relative" v-if="showMenu">

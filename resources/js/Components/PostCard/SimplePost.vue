@@ -9,12 +9,19 @@
 			<inertia-link class="publisher" :href="'/' + post.page.slug">
 				<lazy-image class="profile-sm mb-0" img-class="profile-sm" :src="post.page.profile" />
 				<div>
-					<strong class="publisher--name">
-						{{ post.page.name }}
-					</strong>
+					<strong class="publisher--name"> {{ post.page.name }} <i v-if="post.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 					<span class="publisher--shortbio">
 						{{ post.page.short_bio }}
 					</span>
+					<div class="post-time" :class="{ 'pt-0': post.text != null && post.text.length > 0 }" v-if="showMenu">
+						{{ post_time }}
+						<span class="mx-1 font-10">●</span>
+						<span v-if="post.updated_at !== post.created_at">بروز شده</span>
+						<span v-if="post.updated_at !== post.created_at" class="mx-1 font-10">●</span>
+						<i class="material-icons-outlined text-light verical-middle">
+							{{ post.show === "public" ? "public" : "group" }}
+						</i>
+					</div>
 				</div>
 			</inertia-link>
 			<div class="actions position-relative" v-if="showMenu">
@@ -28,15 +35,7 @@
 			<pre class="text" :class="{ open: showMore }" ref="textelem" v-html="post.text"></pre>
 			<span class="text-action clickable" v-if="post.text != null && post.text.length > 283" @click="showMore = !showMore">{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}</span>
 		</div>
-		<div class="post-time" :class="{ 'pt-0': post.text != null && post.text.length > 0 }" v-if="showMenu">
-			{{ post_time }}
-			<span class="mx-1 font-10">●</span>
-			<span v-if="post.updated_at !== post.created_at">بروز شده</span>
-			<span v-if="post.updated_at !== post.created_at" class="mx-1 font-10">●</span>
-			<i class="material-icons-outlined text-light verical-middle">
-				{{ post.show === "public" ? "public" : "group" }}
-			</i>
-		</div>
+
 		<div class="post-footer">
 			<div class="tagandcate" v-if="(post.tags.length > 0 || post.category !== null) && showMenu">
 				<div class="tags">
