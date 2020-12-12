@@ -9,24 +9,33 @@ use Illuminate\Support\Facades\Storage;
  *
  * @author soroosh
  */
-class DownloadsController extends Controller {
+class DownloadsController extends Controller
+{
 
-    function profile($image) {
+    public function profile($image)
+    {
         $response = (Storage::download("profiles/$image"));
         ob_end_clean();
         return $response;
     }
 
-    function media($image) {
+    public function media($image)
+    {
         $response = (Storage::download("medias/$image"));
         ob_end_clean();
         return $response;
     }
 
-    function nationalCards($image) {
+    public function nationalCards($image)
+    {
         $response = (Storage::download("nationalcards/$image"));
         ob_end_clean();
         return $response;
+    }
+
+    public function js($js)
+    {
+        dd(public_path("/js/$js"));
     }
 
 }

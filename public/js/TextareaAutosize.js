@@ -8,7 +8,129 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  name: 'TextareaAutosize',\n  props: {\n    value: {\n      type: [String, Number],\n      \"default\": ''\n    },\n    autosize: {\n      type: Boolean,\n      \"default\": true\n    },\n    minHeight: {\n      type: [Number],\n      'default': null\n    },\n    maxHeight: {\n      type: [Number],\n      'default': null\n    },\n\n    /*\n     * Force !important for style properties\n     */\n    important: {\n      type: [Boolean, Array],\n      \"default\": false\n    }\n  },\n  data: function data() {\n    return {\n      // data property for v-model binding with real textarea tag\n      val: null,\n      // works when content height becomes more then value of the maxHeight property\n      maxHeightScroll: false,\n      height: 'auto'\n    };\n  },\n  computed: {\n    computedStyles: function computedStyles() {\n      if (!this.autosize) return {};\n      return {\n        resize: !this.isResizeImportant ? 'none' : 'none !important',\n        height: this.height,\n        overflow: this.maxHeightScroll ? 'auto' : !this.isOverflowImportant ? 'hidden' : 'hidden !important'\n      };\n    },\n    isResizeImportant: function isResizeImportant() {\n      var imp = this.important;\n      return imp === true || Array.isArray(imp) && imp.includes('resize');\n    },\n    isOverflowImportant: function isOverflowImportant() {\n      var imp = this.important;\n      return imp === true || Array.isArray(imp) && imp.includes('overflow');\n    },\n    isHeightImportant: function isHeightImportant() {\n      var imp = this.important;\n      return imp === true || Array.isArray(imp) && imp.includes('height');\n    }\n  },\n  watch: {\n    value: function value(val) {\n      this.val = val;\n    },\n    val: function val(_val) {\n      this.$nextTick(this.resize);\n      this.$emit('input', _val);\n    },\n    minHeight: function minHeight() {\n      this.$nextTick(this.resize);\n    },\n    maxHeight: function maxHeight() {\n      this.$nextTick(this.resize);\n    },\n    autosize: function autosize(val) {\n      if (val) this.resize();\n    }\n  },\n  methods: {\n    resize: function resize() {\n      var _this = this;\n\n      var important = this.isHeightImportant ? 'important' : '';\n      this.height = \"auto\".concat(important ? ' !important' : '');\n      this.$nextTick(function () {\n        var contentHeight = _this.$el.scrollHeight + 1;\n\n        if (_this.val == null) {\n          contentHeight -= parseInt(window.getComputedStyle(_this.$el).paddingTop) + parseInt(window.getComputedStyle(_this.$el).paddingBottom);\n        } else if (_this.val.length < 1) {\n          contentHeight -= parseInt(window.getComputedStyle(_this.$el).paddingTop) + parseInt(window.getComputedStyle(_this.$el).paddingBottom);\n        }\n\n        if (_this.minHeight) {\n          contentHeight = contentHeight < _this.minHeight ? _this.minHeight : contentHeight;\n        }\n\n        if (_this.maxHeight) {\n          if (contentHeight > _this.maxHeight) {\n            contentHeight = _this.maxHeight;\n            _this.maxHeightScroll = true;\n          } else {\n            _this.maxHeightScroll = false;\n          }\n        }\n\n        var heightVal = contentHeight + 'px';\n        _this.height = \"\".concat(heightVal).concat(important ? ' !important' : '');\n      });\n      return this;\n    }\n  },\n  created: function created() {\n    this.val = this.value;\n  },\n  mounted: function mounted() {\n    this.resize();\n  }\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vcmVzb3VyY2VzL2pzL0NvbXBvbmVudHMvaW5wdXRzL1RleHRhcmVhQXV0b3NpemUudnVlPzdiMDciXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFLQTtBQUNBLDBCQURBO0FBRUE7QUFDQTtBQUNBLDRCQURBO0FBRUE7QUFGQSxLQURBO0FBS0E7QUFDQSxtQkFEQTtBQUVBO0FBRkEsS0FMQTtBQVNBO0FBQ0Esb0JBREE7QUFFQTtBQUZBLEtBVEE7QUFhQTtBQUNBLG9CQURBO0FBRUE7QUFGQSxLQWJBOztBQWlCQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLDRCQURBO0FBRUE7QUFGQTtBQXBCQSxHQUZBO0FBMkJBLE1BM0JBLGtCQTJCQTtBQUNBO0FBQ0E7QUFDQSxlQUZBO0FBR0E7QUFDQSw0QkFKQTtBQUtBO0FBTEE7QUFPQSxHQW5DQTtBQW9DQTtBQUNBLGtCQURBLDRCQUNBO0FBQ0E7QUFDQTtBQUNBLG9FQURBO0FBRUEsMkJBRkE7QUFHQTtBQUhBO0FBS0EsS0FSQTtBQVNBLHFCQVRBLCtCQVNBO0FBQ0E7QUFDQTtBQUNBLEtBWkE7QUFhQSx1QkFiQSxpQ0FhQTtBQUNBO0FBQ0E7QUFDQSxLQWhCQTtBQWlCQSxxQkFqQkEsK0JBaUJBO0FBQ0E7QUFDQTtBQUNBO0FBcEJBLEdBcENBO0FBMERBO0FBQ0EsU0FEQSxpQkFDQSxHQURBLEVBQ0E7QUFDQTtBQUNBLEtBSEE7QUFJQSxPQUpBLGVBSUEsSUFKQSxFQUlBO0FBQ0E7QUFDQTtBQUNBLEtBUEE7QUFRQSxhQVJBLHVCQVFBO0FBQ0E7QUFDQSxLQVZBO0FBV0EsYUFYQSx1QkFXQTtBQUNBO0FBQ0EsS0FiQTtBQWNBLFlBZEEsb0JBY0EsR0FkQSxFQWNBO0FBQ0E7QUFDQTtBQWhCQSxHQTFEQTtBQTRFQTtBQUNBLFVBREEsb0JBQ0E7QUFBQTs7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0EsU0FGQSxNQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQSxXQUhBLE1BR0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBLE9BeEJBO0FBMEJBO0FBQ0E7QUEvQkEsR0E1RUE7QUE2R0EsU0E3R0EscUJBNkdBO0FBQ0E7QUFDQSxHQS9HQTtBQWdIQSxTQWhIQSxxQkFnSEE7QUFDQTtBQUNBO0FBbEhBIiwiZmlsZSI6Ii4vbm9kZV9tb2R1bGVzL2JhYmVsLWxvYWRlci9saWIvaW5kZXguanM/IS4vbm9kZV9tb2R1bGVzL3Z1ZS1sb2FkZXIvbGliL2luZGV4LmpzPyEuL3Jlc291cmNlcy9qcy9Db21wb25lbnRzL2lucHV0cy9UZXh0YXJlYUF1dG9zaXplLnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qcyYuanMiLCJzb3VyY2VzQ29udGVudCI6WyI8dGVtcGxhdGU+XG48dGV4dGFyZWEgOnN0eWxlPVwiY29tcHV0ZWRTdHlsZXNcIiB2LW1vZGVsPVwidmFsXCIgQGZvY3VzPVwicmVzaXplXCI+PC90ZXh0YXJlYT5cbjwvdGVtcGxhdGU+XG5cbjxzY3JpcHQ+XG5leHBvcnQgZGVmYXVsdCB7XG4gICAgbmFtZTogJ1RleHRhcmVhQXV0b3NpemUnLFxuICAgIHByb3BzOiB7XG4gICAgICAgIHZhbHVlOiB7XG4gICAgICAgICAgICB0eXBlOiBbU3RyaW5nLCBOdW1iZXJdLFxuICAgICAgICAgICAgZGVmYXVsdDogJydcbiAgICAgICAgfSxcbiAgICAgICAgYXV0b3NpemU6IHtcbiAgICAgICAgICAgIHR5cGU6IEJvb2xlYW4sXG4gICAgICAgICAgICBkZWZhdWx0OiB0cnVlXG4gICAgICAgIH0sXG4gICAgICAgIG1pbkhlaWdodDoge1xuICAgICAgICAgICAgdHlwZTogW051bWJlcl0sXG4gICAgICAgICAgICAnZGVmYXVsdCc6IG51bGxcbiAgICAgICAgfSxcbiAgICAgICAgbWF4SGVpZ2h0OiB7XG4gICAgICAgICAgICB0eXBlOiBbTnVtYmVyXSxcbiAgICAgICAgICAgICdkZWZhdWx0JzogbnVsbFxuICAgICAgICB9LFxuICAgICAgICAvKlxuICAgICAgICAgKiBGb3JjZSAhaW1wb3J0YW50IGZvciBzdHlsZSBwcm9wZXJ0aWVzXG4gICAgICAgICAqL1xuICAgICAgICBpbXBvcnRhbnQ6IHtcbiAgICAgICAgICAgIHR5cGU6IFtCb29sZWFuLCBBcnJheV0sXG4gICAgICAgICAgICBkZWZhdWx0OiBmYWxzZVxuICAgICAgICB9XG4gICAgfSxcbiAgICBkYXRhKCkge1xuICAgICAgICByZXR1cm4ge1xuICAgICAgICAgICAgLy8gZGF0YSBwcm9wZXJ0eSBmb3Igdi1tb2RlbCBiaW5kaW5nIHdpdGggcmVhbCB0ZXh0YXJlYSB0YWdcbiAgICAgICAgICAgIHZhbDogbnVsbCxcbiAgICAgICAgICAgIC8vIHdvcmtzIHdoZW4gY29udGVudCBoZWlnaHQgYmVjb21lcyBtb3JlIHRoZW4gdmFsdWUgb2YgdGhlIG1heEhlaWdodCBwcm9wZXJ0eVxuICAgICAgICAgICAgbWF4SGVpZ2h0U2Nyb2xsOiBmYWxzZSxcbiAgICAgICAgICAgIGhlaWdodDogJ2F1dG8nXG4gICAgICAgIH1cbiAgICB9LFxuICAgIGNvbXB1dGVkOiB7XG4gICAgICAgIGNvbXB1dGVkU3R5bGVzKCkge1xuICAgICAgICAgICAgaWYgKCF0aGlzLmF1dG9zaXplKSByZXR1cm4ge31cbiAgICAgICAgICAgIHJldHVybiB7XG4gICAgICAgICAgICAgICAgcmVzaXplOiAhdGhpcy5pc1Jlc2l6ZUltcG9ydGFudCA/ICdub25lJyA6ICdub25lICFpbXBvcnRhbnQnLFxuICAgICAgICAgICAgICAgIGhlaWdodDogdGhpcy5oZWlnaHQsXG4gICAgICAgICAgICAgICAgb3ZlcmZsb3c6IHRoaXMubWF4SGVpZ2h0U2Nyb2xsID8gJ2F1dG8nIDogKCF0aGlzLmlzT3ZlcmZsb3dJbXBvcnRhbnQgPyAnaGlkZGVuJyA6ICdoaWRkZW4gIWltcG9ydGFudCcpXG4gICAgICAgICAgICB9XG4gICAgICAgIH0sXG4gICAgICAgIGlzUmVzaXplSW1wb3J0YW50KCkge1xuICAgICAgICAgICAgY29uc3QgaW1wID0gdGhpcy5pbXBvcnRhbnRcbiAgICAgICAgICAgIHJldHVybiBpbXAgPT09IHRydWUgfHwgKEFycmF5LmlzQXJyYXkoaW1wKSAmJiBpbXAuaW5jbHVkZXMoJ3Jlc2l6ZScpKVxuICAgICAgICB9LFxuICAgICAgICBpc092ZXJmbG93SW1wb3J0YW50KCkge1xuICAgICAgICAgICAgY29uc3QgaW1wID0gdGhpcy5pbXBvcnRhbnRcbiAgICAgICAgICAgIHJldHVybiBpbXAgPT09IHRydWUgfHwgKEFycmF5LmlzQXJyYXkoaW1wKSAmJiBpbXAuaW5jbHVkZXMoJ292ZXJmbG93JykpXG4gICAgICAgIH0sXG4gICAgICAgIGlzSGVpZ2h0SW1wb3J0YW50KCkge1xuICAgICAgICAgICAgY29uc3QgaW1wID0gdGhpcy5pbXBvcnRhbnRcbiAgICAgICAgICAgIHJldHVybiBpbXAgPT09IHRydWUgfHwgKEFycmF5LmlzQXJyYXkoaW1wKSAmJiBpbXAuaW5jbHVkZXMoJ2hlaWdodCcpKVxuICAgICAgICB9XG4gICAgfSxcbiAgICB3YXRjaDoge1xuICAgICAgICB2YWx1ZSh2YWwpIHtcbiAgICAgICAgICAgIHRoaXMudmFsID0gdmFsXG4gICAgICAgIH0sXG4gICAgICAgIHZhbCh2YWwpIHtcbiAgICAgICAgICAgIHRoaXMuJG5leHRUaWNrKHRoaXMucmVzaXplKVxuICAgICAgICAgICAgdGhpcy4kZW1pdCgnaW5wdXQnLCB2YWwpXG4gICAgICAgIH0sXG4gICAgICAgIG1pbkhlaWdodCgpIHtcbiAgICAgICAgICAgIHRoaXMuJG5leHRUaWNrKHRoaXMucmVzaXplKVxuICAgICAgICB9LFxuICAgICAgICBtYXhIZWlnaHQoKSB7XG4gICAgICAgICAgICB0aGlzLiRuZXh0VGljayh0aGlzLnJlc2l6ZSlcbiAgICAgICAgfSxcbiAgICAgICAgYXV0b3NpemUodmFsKSB7XG4gICAgICAgICAgICBpZiAodmFsKSB0aGlzLnJlc2l6ZSgpXG4gICAgICAgIH1cbiAgICB9LFxuICAgIG1ldGhvZHM6IHtcbiAgICAgICAgcmVzaXplKCkge1xuICAgICAgICAgICAgY29uc3QgaW1wb3J0YW50ID0gdGhpcy5pc0hlaWdodEltcG9ydGFudCA/ICdpbXBvcnRhbnQnIDogJydcbiAgICAgICAgICAgIHRoaXMuaGVpZ2h0ID0gYGF1dG8ke2ltcG9ydGFudCA/ICcgIWltcG9ydGFudCcgOiAnJ31gXG4gICAgICAgICAgICB0aGlzLiRuZXh0VGljaygoKSA9PiB7XG4gICAgICAgICAgICAgICAgbGV0IGNvbnRlbnRIZWlnaHQgPSAodGhpcy4kZWwuc2Nyb2xsSGVpZ2h0ICsgMSk7XG5cbiAgICAgICAgICAgICAgICBpZiAodGhpcy52YWwgPT0gbnVsbCkge1xuICAgICAgICAgICAgICAgICAgICBjb250ZW50SGVpZ2h0IC09IChwYXJzZUludCh3aW5kb3cuZ2V0Q29tcHV0ZWRTdHlsZSh0aGlzLiRlbCkucGFkZGluZ1RvcCkgKyBwYXJzZUludCh3aW5kb3cuZ2V0Q29tcHV0ZWRTdHlsZSh0aGlzLiRlbCkucGFkZGluZ0JvdHRvbSkpO1xuICAgICAgICAgICAgICAgIH0gZWxzZSBpZiAodGhpcy52YWwubGVuZ3RoIDwgMSkge1xuICAgICAgICAgICAgICAgICAgICBjb250ZW50SGVpZ2h0IC09IChwYXJzZUludCh3aW5kb3cuZ2V0Q29tcHV0ZWRTdHlsZSh0aGlzLiRlbCkucGFkZGluZ1RvcCkgKyBwYXJzZUludCh3aW5kb3cuZ2V0Q29tcHV0ZWRTdHlsZSh0aGlzLiRlbCkucGFkZGluZ0JvdHRvbSkpO1xuICAgICAgICAgICAgICAgIH1cblxuICAgICAgICAgICAgICAgIGlmICh0aGlzLm1pbkhlaWdodCkge1xuICAgICAgICAgICAgICAgICAgICBjb250ZW50SGVpZ2h0ID0gY29udGVudEhlaWdodCA8IHRoaXMubWluSGVpZ2h0ID8gdGhpcy5taW5IZWlnaHQgOiBjb250ZW50SGVpZ2h0XG4gICAgICAgICAgICAgICAgfVxuXG4gICAgICAgICAgICAgICAgaWYgKHRoaXMubWF4SGVpZ2h0KSB7XG4gICAgICAgICAgICAgICAgICAgIGlmIChjb250ZW50SGVpZ2h0ID4gdGhpcy5tYXhIZWlnaHQpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRlbnRIZWlnaHQgPSB0aGlzLm1heEhlaWdodFxuICAgICAgICAgICAgICAgICAgICAgICAgdGhpcy5tYXhIZWlnaHRTY3JvbGwgPSB0cnVlXG4gICAgICAgICAgICAgICAgICAgIH0gZWxzZSB7XG4gICAgICAgICAgICAgICAgICAgICAgICB0aGlzLm1heEhlaWdodFNjcm9sbCA9IGZhbHNlXG4gICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICB9XG5cbiAgICAgICAgICAgICAgICBjb25zdCBoZWlnaHRWYWwgPSBjb250ZW50SGVpZ2h0ICsgJ3B4J1xuICAgICAgICAgICAgICAgIHRoaXMuaGVpZ2h0ID0gYCR7aGVpZ2h0VmFsfSR7aW1wb3J0YW50ID8gJyAhaW1wb3J0YW50JyA6ICcnfWBcbiAgICAgICAgICAgIH0pXG5cbiAgICAgICAgICAgIHJldHVybiB0aGlzXG4gICAgICAgIH1cbiAgICB9LFxuICAgIGNyZWF0ZWQoKSB7XG4gICAgICAgIHRoaXMudmFsID0gdGhpcy52YWx1ZVxuICAgIH0sXG4gICAgbW91bnRlZCgpIHtcbiAgICAgICAgdGhpcy5yZXNpemUoKVxuICAgIH1cbn1cbjwvc2NyaXB0PlxuIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/inputs/TextareaAutosize.vue?vue&type=script&lang=js&\n");
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'TextareaAutosize',
+  props: {
+    value: {
+      type: [String, Number],
+      "default": ''
+    },
+    autosize: {
+      type: Boolean,
+      "default": true
+    },
+    minHeight: {
+      type: [Number],
+      'default': null
+    },
+    maxHeight: {
+      type: [Number],
+      'default': null
+    },
+
+    /*
+     * Force !important for style properties
+     */
+    important: {
+      type: [Boolean, Array],
+      "default": false
+    }
+  },
+  data: function data() {
+    return {
+      // data property for v-model binding with real textarea tag
+      val: null,
+      // works when content height becomes more then value of the maxHeight property
+      maxHeightScroll: false,
+      height: 'auto'
+    };
+  },
+  computed: {
+    computedStyles: function computedStyles() {
+      if (!this.autosize) return {};
+      return {
+        resize: !this.isResizeImportant ? 'none' : 'none !important',
+        height: this.height,
+        overflow: this.maxHeightScroll ? 'auto' : !this.isOverflowImportant ? 'hidden' : 'hidden !important'
+      };
+    },
+    isResizeImportant: function isResizeImportant() {
+      var imp = this.important;
+      return imp === true || Array.isArray(imp) && imp.includes('resize');
+    },
+    isOverflowImportant: function isOverflowImportant() {
+      var imp = this.important;
+      return imp === true || Array.isArray(imp) && imp.includes('overflow');
+    },
+    isHeightImportant: function isHeightImportant() {
+      var imp = this.important;
+      return imp === true || Array.isArray(imp) && imp.includes('height');
+    }
+  },
+  watch: {
+    value: function value(val) {
+      this.val = val;
+    },
+    val: function val(_val) {
+      this.$nextTick(this.resize);
+      this.$emit('input', _val);
+    },
+    minHeight: function minHeight() {
+      this.$nextTick(this.resize);
+    },
+    maxHeight: function maxHeight() {
+      this.$nextTick(this.resize);
+    },
+    autosize: function autosize(val) {
+      if (val) this.resize();
+    }
+  },
+  methods: {
+    resize: function resize() {
+      var _this = this;
+
+      var important = this.isHeightImportant ? 'important' : '';
+      this.height = "auto".concat(important ? ' !important' : '');
+      this.$nextTick(function () {
+        var contentHeight = _this.$el.scrollHeight + 1;
+
+        if (_this.val == null) {
+          contentHeight -= parseInt(window.getComputedStyle(_this.$el).paddingTop) + parseInt(window.getComputedStyle(_this.$el).paddingBottom);
+        } else if (_this.val.length < 1) {
+          contentHeight -= parseInt(window.getComputedStyle(_this.$el).paddingTop) + parseInt(window.getComputedStyle(_this.$el).paddingBottom);
+        }
+
+        if (_this.minHeight) {
+          contentHeight = contentHeight < _this.minHeight ? _this.minHeight : contentHeight;
+        }
+
+        if (_this.maxHeight) {
+          if (contentHeight > _this.maxHeight) {
+            contentHeight = _this.maxHeight;
+            _this.maxHeightScroll = true;
+          } else {
+            _this.maxHeightScroll = false;
+          }
+        }
+
+        var heightVal = contentHeight + 'px';
+        _this.height = "".concat(heightVal).concat(important ? ' !important' : '');
+      });
+      return this;
+    }
+  },
+  created: function created() {
+    this.val = this.value;
+  },
+  mounted: function mounted() {
+    this.resize();
+  }
+});
 
 /***/ }),
 
@@ -20,7 +142,34 @@ eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n/* harmony de
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"textarea\", {\n    directives: [\n      { name: \"model\", rawName: \"v-model\", value: _vm.val, expression: \"val\" }\n    ],\n    style: _vm.computedStyles,\n    domProps: { value: _vm.val },\n    on: {\n      focus: _vm.resize,\n      input: function($event) {\n        if ($event.target.composing) {\n          return\n        }\n        _vm.val = $event.target.value\n      }\n    }\n  })\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvQ29tcG9uZW50cy9pbnB1dHMvVGV4dGFyZWFBdXRvc2l6ZS52dWU/ZWUxMiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxPQUFPO0FBQ1A7QUFDQTtBQUNBLGVBQWUsaUJBQWlCO0FBQ2hDO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLEdBQUc7QUFDSDtBQUNBO0FBQ0EiLCJmaWxlIjoiLi9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9saWIvbG9hZGVycy90ZW1wbGF0ZUxvYWRlci5qcz8hLi9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9saWIvaW5kZXguanM/IS4vcmVzb3VyY2VzL2pzL0NvbXBvbmVudHMvaW5wdXRzL1RleHRhcmVhQXV0b3NpemUudnVlP3Z1ZSZ0eXBlPXRlbXBsYXRlJmlkPWVlYzE2Mjk2Ji5qcyIsInNvdXJjZXNDb250ZW50IjpbInZhciByZW5kZXIgPSBmdW5jdGlvbigpIHtcbiAgdmFyIF92bSA9IHRoaXNcbiAgdmFyIF9oID0gX3ZtLiRjcmVhdGVFbGVtZW50XG4gIHZhciBfYyA9IF92bS5fc2VsZi5fYyB8fCBfaFxuICByZXR1cm4gX2MoXCJ0ZXh0YXJlYVwiLCB7XG4gICAgZGlyZWN0aXZlczogW1xuICAgICAgeyBuYW1lOiBcIm1vZGVsXCIsIHJhd05hbWU6IFwidi1tb2RlbFwiLCB2YWx1ZTogX3ZtLnZhbCwgZXhwcmVzc2lvbjogXCJ2YWxcIiB9XG4gICAgXSxcbiAgICBzdHlsZTogX3ZtLmNvbXB1dGVkU3R5bGVzLFxuICAgIGRvbVByb3BzOiB7IHZhbHVlOiBfdm0udmFsIH0sXG4gICAgb246IHtcbiAgICAgIGZvY3VzOiBfdm0ucmVzaXplLFxuICAgICAgaW5wdXQ6IGZ1bmN0aW9uKCRldmVudCkge1xuICAgICAgICBpZiAoJGV2ZW50LnRhcmdldC5jb21wb3NpbmcpIHtcbiAgICAgICAgICByZXR1cm5cbiAgICAgICAgfVxuICAgICAgICBfdm0udmFsID0gJGV2ZW50LnRhcmdldC52YWx1ZVxuICAgICAgfVxuICAgIH1cbiAgfSlcbn1cbnZhciBzdGF0aWNSZW5kZXJGbnMgPSBbXVxucmVuZGVyLl93aXRoU3RyaXBwZWQgPSB0cnVlXG5cbmV4cG9ydCB7IHJlbmRlciwgc3RhdGljUmVuZGVyRm5zIH0iXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/inputs/TextareaAutosize.vue?vue&type=template&id=eec16296&\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("textarea", {
+    directives: [
+      { name: "model", rawName: "v-model", value: _vm.val, expression: "val" }
+    ],
+    style: _vm.computedStyles,
+    domProps: { value: _vm.val },
+    on: {
+      focus: _vm.resize,
+      input: function($event) {
+        if ($event.target.composing) {
+          return
+        }
+        _vm.val = $event.target.value
+      }
+    }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
 
 /***/ }),
 
@@ -32,7 +181,32 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _TextareaAutosize_vue_vue_type_template_id_eec16296___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TextareaAutosize.vue?vue&type=template&id=eec16296& */ \"./resources/js/Components/inputs/TextareaAutosize.vue?vue&type=template&id=eec16296&\");\n/* harmony import */ var _TextareaAutosize_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TextareaAutosize.vue?vue&type=script&lang=js& */ \"./resources/js/Components/inputs/TextareaAutosize.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _TextareaAutosize_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _TextareaAutosize_vue_vue_type_template_id_eec16296___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _TextareaAutosize_vue_vue_type_template_id_eec16296___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"resources/js/Components/inputs/TextareaAutosize.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvQ29tcG9uZW50cy9pbnB1dHMvVGV4dGFyZWFBdXRvc2l6ZS52dWU/Y2VjOSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUErRjtBQUMzQjtBQUNMOzs7QUFHL0Q7QUFDZ0c7QUFDaEcsZ0JBQWdCLDJHQUFVO0FBQzFCLEVBQUUsc0ZBQU07QUFDUixFQUFFLDJGQUFNO0FBQ1IsRUFBRSxvR0FBZTtBQUNqQjtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTtBQUNBLElBQUksS0FBVSxFQUFFLFlBaUJmO0FBQ0Q7QUFDZSxnRiIsImZpbGUiOiIuL3Jlc291cmNlcy9qcy9Db21wb25lbnRzL2lucHV0cy9UZXh0YXJlYUF1dG9zaXplLnZ1ZS5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHJlbmRlciwgc3RhdGljUmVuZGVyRm5zIH0gZnJvbSBcIi4vVGV4dGFyZWFBdXRvc2l6ZS52dWU/dnVlJnR5cGU9dGVtcGxhdGUmaWQ9ZWVjMTYyOTYmXCJcbmltcG9ydCBzY3JpcHQgZnJvbSBcIi4vVGV4dGFyZWFBdXRvc2l6ZS52dWU/dnVlJnR5cGU9c2NyaXB0Jmxhbmc9anMmXCJcbmV4cG9ydCAqIGZyb20gXCIuL1RleHRhcmVhQXV0b3NpemUudnVlP3Z1ZSZ0eXBlPXNjcmlwdCZsYW5nPWpzJlwiXG5cblxuLyogbm9ybWFsaXplIGNvbXBvbmVudCAqL1xuaW1wb3J0IG5vcm1hbGl6ZXIgZnJvbSBcIiEuLi8uLi8uLi8uLi9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9saWIvcnVudGltZS9jb21wb25lbnROb3JtYWxpemVyLmpzXCJcbnZhciBjb21wb25lbnQgPSBub3JtYWxpemVyKFxuICBzY3JpcHQsXG4gIHJlbmRlcixcbiAgc3RhdGljUmVuZGVyRm5zLFxuICBmYWxzZSxcbiAgbnVsbCxcbiAgbnVsbCxcbiAgbnVsbFxuICBcbilcblxuLyogaG90IHJlbG9hZCAqL1xuaWYgKG1vZHVsZS5ob3QpIHtcbiAgdmFyIGFwaSA9IHJlcXVpcmUoXCIvaG9tZS9zb3Jvb3NoL1Byb2plY3RzL3Rlcm5vYm8vbm9kZV9tb2R1bGVzL3Z1ZS1ob3QtcmVsb2FkLWFwaS9kaXN0L2luZGV4LmpzXCIpXG4gIGFwaS5pbnN0YWxsKHJlcXVpcmUoJ3Z1ZScpKVxuICBpZiAoYXBpLmNvbXBhdGlibGUpIHtcbiAgICBtb2R1bGUuaG90LmFjY2VwdCgpXG4gICAgaWYgKCFhcGkuaXNSZWNvcmRlZCgnZWVjMTYyOTYnKSkge1xuICAgICAgYXBpLmNyZWF0ZVJlY29yZCgnZWVjMTYyOTYnLCBjb21wb25lbnQub3B0aW9ucylcbiAgICB9IGVsc2Uge1xuICAgICAgYXBpLnJlbG9hZCgnZWVjMTYyOTYnLCBjb21wb25lbnQub3B0aW9ucylcbiAgICB9XG4gICAgbW9kdWxlLmhvdC5hY2NlcHQoXCIuL1RleHRhcmVhQXV0b3NpemUudnVlP3Z1ZSZ0eXBlPXRlbXBsYXRlJmlkPWVlYzE2Mjk2JlwiLCBmdW5jdGlvbiAoKSB7XG4gICAgICBhcGkucmVyZW5kZXIoJ2VlYzE2Mjk2Jywge1xuICAgICAgICByZW5kZXI6IHJlbmRlcixcbiAgICAgICAgc3RhdGljUmVuZGVyRm5zOiBzdGF0aWNSZW5kZXJGbnNcbiAgICAgIH0pXG4gICAgfSlcbiAgfVxufVxuY29tcG9uZW50Lm9wdGlvbnMuX19maWxlID0gXCJyZXNvdXJjZXMvanMvQ29tcG9uZW50cy9pbnB1dHMvVGV4dGFyZWFBdXRvc2l6ZS52dWVcIlxuZXhwb3J0IGRlZmF1bHQgY29tcG9uZW50LmV4cG9ydHMiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./resources/js/Components/inputs/TextareaAutosize.vue\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TextareaAutosize_vue_vue_type_template_id_eec16296___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TextareaAutosize.vue?vue&type=template&id=eec16296& */ "./resources/js/Components/inputs/TextareaAutosize.vue?vue&type=template&id=eec16296&");
+/* harmony import */ var _TextareaAutosize_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TextareaAutosize.vue?vue&type=script&lang=js& */ "./resources/js/Components/inputs/TextareaAutosize.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TextareaAutosize_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TextareaAutosize_vue_vue_type_template_id_eec16296___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TextareaAutosize_vue_vue_type_template_id_eec16296___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Components/inputs/TextareaAutosize.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
@@ -44,7 +218,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Tex
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TextareaAutosize_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TextareaAutosize.vue?vue&type=script&lang=js& */ \"./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/inputs/TextareaAutosize.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TextareaAutosize_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); //# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvQ29tcG9uZW50cy9pbnB1dHMvVGV4dGFyZWFBdXRvc2l6ZS52dWU/MjdjZiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUEsd0NBQXNNLENBQWdCLDRQQUFHLEVBQUMiLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvQ29tcG9uZW50cy9pbnB1dHMvVGV4dGFyZWFBdXRvc2l6ZS52dWU/dnVlJnR5cGU9c2NyaXB0Jmxhbmc9anMmLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IG1vZCBmcm9tIFwiLSEuLi8uLi8uLi8uLi9ub2RlX21vZHVsZXMvYmFiZWwtbG9hZGVyL2xpYi9pbmRleC5qcz8/cmVmLS00LTAhLi4vLi4vLi4vLi4vbm9kZV9tb2R1bGVzL3Z1ZS1sb2FkZXIvbGliL2luZGV4LmpzPz92dWUtbG9hZGVyLW9wdGlvbnMhLi9UZXh0YXJlYUF1dG9zaXplLnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qcyZcIjsgZXhwb3J0IGRlZmF1bHQgbW9kOyBleHBvcnQgKiBmcm9tIFwiLSEuLi8uLi8uLi8uLi9ub2RlX21vZHVsZXMvYmFiZWwtbG9hZGVyL2xpYi9pbmRleC5qcz8/cmVmLS00LTAhLi4vLi4vLi4vLi4vbm9kZV9tb2R1bGVzL3Z1ZS1sb2FkZXIvbGliL2luZGV4LmpzPz92dWUtbG9hZGVyLW9wdGlvbnMhLi9UZXh0YXJlYUF1dG9zaXplLnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qcyZcIiJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./resources/js/Components/inputs/TextareaAutosize.vue?vue&type=script&lang=js&\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TextareaAutosize_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TextareaAutosize.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/inputs/TextareaAutosize.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TextareaAutosize_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -56,7 +232,13 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _nod
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextareaAutosize_vue_vue_type_template_id_eec16296___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TextareaAutosize.vue?vue&type=template&id=eec16296& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/inputs/TextareaAutosize.vue?vue&type=template&id=eec16296&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextareaAutosize_vue_vue_type_template_id_eec16296___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextareaAutosize_vue_vue_type_template_id_eec16296___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvQ29tcG9uZW50cy9pbnB1dHMvVGV4dGFyZWFBdXRvc2l6ZS52dWU/MzE3YiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEiLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvQ29tcG9uZW50cy9pbnB1dHMvVGV4dGFyZWFBdXRvc2l6ZS52dWU/dnVlJnR5cGU9dGVtcGxhdGUmaWQ9ZWVjMTYyOTYmLmpzIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0ICogZnJvbSBcIi0hLi4vLi4vLi4vLi4vbm9kZV9tb2R1bGVzL3Z1ZS1sb2FkZXIvbGliL2xvYWRlcnMvdGVtcGxhdGVMb2FkZXIuanM/P3Z1ZS1sb2FkZXItb3B0aW9ucyEuLi8uLi8uLi8uLi9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9saWIvaW5kZXguanM/P3Z1ZS1sb2FkZXItb3B0aW9ucyEuL1RleHRhcmVhQXV0b3NpemUudnVlP3Z1ZSZ0eXBlPXRlbXBsYXRlJmlkPWVlYzE2Mjk2JlwiIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./resources/js/Components/inputs/TextareaAutosize.vue?vue&type=template&id=eec16296&\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextareaAutosize_vue_vue_type_template_id_eec16296___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TextareaAutosize.vue?vue&type=template&id=eec16296& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/inputs/TextareaAutosize.vue?vue&type=template&id=eec16296&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextareaAutosize_vue_vue_type_template_id_eec16296___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextareaAutosize_vue_vue_type_template_id_eec16296___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ })
 

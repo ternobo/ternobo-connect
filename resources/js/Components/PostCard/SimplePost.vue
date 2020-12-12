@@ -37,7 +37,7 @@
 		</div>
 
 		<div class="post-footer">
-			<div class="tagandcate" v-if="(post.tags.length > 0 || post.category !== null) && showMenu">
+			<div class="tagandcate" v-if="((post.tags != null && post.tags.length > 0) || post.category !== null) && showMenu">
 				<div class="tags">
 					<inertia-link v-for="tag in post.tags" :key="tag" class="tag-item" :href="'/tags/' + tag">
 						{{ tag }}
@@ -52,7 +52,7 @@
 				<lazy-image style="min-height: 218px" v-if="isImage" class="m-0" alt="" :src="post.medias" />
 				<video v-else :src="post.medias" autoplay controls controlslist="nodownload" style="max-width: 100%"></video>
 			</div>
-			<div class="actions" v-if="showMenu">
+			<div class="actions" v-if="showMenu && $page.props.user">
 				<div>
 					<div @click="showLikes = true" class="d-flex post-likes-text text-muted clickable" v-if="post.mutual_likes != null && post.mutual_likes.length > 0">
 						<span class="ml-1">پسندیده شده توسط</span>
@@ -114,6 +114,8 @@ export default {
 	created: function () {
 		this.liked = this.post.is_liked;
 		this.bookmarked = this.post.is_bookmarked;
+
+		this.showMore = this.post.text != null && this.post.text.length < 283;
 	},
 	mounted() {
 		if (this.$refs.textelem) {

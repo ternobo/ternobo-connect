@@ -1,5 +1,5 @@
 <template>
-	<div class="post-box" v-if="post !== undefined">
+	<div class="post-box" v-if="post !== undefined && post != null && post.share != null && post.share != undefined">
 		<ReshareModal :post="post.share" :show.sync="showReshare"></ReshareModal>
 		<EmbedCodeModal :post="post" :show.sync="showEmbed"></EmbedCodeModal>
 		<likes-modal :item="post.id" :show.sync="showLikes"></likes-modal>
@@ -38,7 +38,7 @@
 			<component :is="componentType" class="shadow-0" style="margin-bottom: 0 !important" :post="post.share" :show-menu="false"></component>
 		</inertia-link>
 		<div class="post-footer">
-			<div class="tagandcate" v-if="post.tags.length > 0 || post.category !== null">
+			<div class="tagandcate" v-if="((post.tags != null && post.tags.length > 0) || post.category !== null) && showMenu">
 				<div class="tags" v-if="post.tags.length > 0">
 					<a v-for="tag in post.tags" :key="tag" class="tag-item" :href="'/tags/' + tag">
 						{{ tag }}
@@ -52,7 +52,7 @@
 				<lazy-image v-if="isImage" class="m-0" alt="" :src="post.medias" />
 				<video v-else :src="post.medias" autoplay controls controlslist="nodownload" style="max-width: 100%"></video>
 			</div>
-			<div class="actions" v-if="showMenu">
+			<div class="actions" v-if="showMenu && $page.props.user">
 				<div>
 					<div @click="showLikes = true" class="d-flex post-likes-text text-muted clickable" v-if="post.mutual_likes != null && post.mutual_likes.length > 0">
 						<span class="ml-1">پسندیده شده توسط</span>
@@ -113,11 +113,14 @@ export default {
 		};
 	},
 	created: function () {
-		if (this.post.share.type === "article") {
-			this.componentType = require("../PostCard/ArticleCard").default;
+		if (this.post.share) {
+			if (this.post.share.type === "article") {
+				this.componentType = require("../PostCard/ArticleCard").default;
+			}
+			this.liked = this.post.is_liked;
+			this.bookmarked = this.post.is_bookmarked;
+			this.showMore = this.post.text != null && this.post.text.length < 283;
 		}
-		this.liked = this.post.is_liked;
-		this.bookmarked = this.post.is_bookmarked;
 	},
 	mounted() {
 		if (this.$refs.textelem) {

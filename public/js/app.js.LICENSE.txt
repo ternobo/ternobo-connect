@@ -34,6 +34,11 @@
  */
 
 /*!
+ * @license Copyright (c) 2003-2020, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md.
+ */
+
+/*!
  * BootstrapVue Icons, generated from Bootstrap Icons 1.0.0
  *
  * @link https://icons.getbootstrap.com/
@@ -42,10 +47,35 @@
  */
 
 /*!
+ * Sizzle CSS Selector Engine v2.3.5
+ * https://sizzlejs.com/
+ *
+ * Copyright JS Foundation and other contributors
+ * Released under the MIT license
+ * https://js.foundation/
+ *
+ * Date: 2020-03-14
+ */
+
+/*!
  * The buffer module from node.js, for the browser.
  *
  * @author   Feross Aboukhadijeh <http://feross.org>
  * @license  MIT
+ */
+
+/*!
+ * jQuery JavaScript Library v3.5.1
+ * https://jquery.com/
+ *
+ * Includes Sizzle.js
+ * https://sizzlejs.com/
+ *
+ * Copyright JS Foundation and other contributors
+ * Released under the MIT license
+ * https://jquery.org/license
+ *
+ * Date: 2020-05-04T22:49Z
  */
 
 /*!

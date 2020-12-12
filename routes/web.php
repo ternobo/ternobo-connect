@@ -14,13 +14,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
+Route::get('/sitemap.xml', 'SiteMapController@all');
+Route::get('/sitemap-posts.xml', 'SiteMapController@posts');
+Route::get('/sitemap-posts.xml', 'SiteMapController@posts');
+Route::get('/sitemap-profiles.xml', 'SiteMapController@profiles');
 
 /**
  * File Access Start
  */
 Route::get("/profiles/{image}", "DownloadsController@profile");
 Route::get("/medias/{image}", "DownloadsController@media");
-// Route::get("/nationalcards/{image}", "DownloadsController@nationalCards");
+
+Route::any("/js/{js}", "DownloadsController@js");
+
 /**
  * File Access End
  */

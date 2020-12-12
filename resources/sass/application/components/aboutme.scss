@@ -40,8 +40,12 @@
 }
 
 .about-me--title {
-    font-size: 12px;
+    font-size: 14px;
     color: $text-color;
+
+    @media screen and (max-width:$sm-size) {
+        font-size: 12px;
+    }
 }
 
 .about-me--subtitle {
@@ -54,7 +58,7 @@
     .degree {
         color: $sub-heading;
 
-        &:not(::last-child) {
+        &:not(:last-child) {
             margin-left: 3px;
         }
     }

@@ -26,7 +26,7 @@ class LocaleMiddleware
                 Auth::logout();
                 return redirect("/");
             } else {
-                Cookie::queue("ternobo_current_page_id", Auth::user()->personalPage);
+                Cookie::queue("ternobo_current_page_id", Auth::user()->personalPage->id);
             }
         }
 

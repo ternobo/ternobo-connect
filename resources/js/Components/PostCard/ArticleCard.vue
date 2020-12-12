@@ -37,7 +37,7 @@
 			<h4 style="margin-right: -12px !important" class="article-title">{{ post.title }}</h4>
 		</inertia-link>
 		<div class="post-footer" v-if="showMenu">
-			<div class="tagandcate" v-if="post.tags.length > 0 || post.category !== null">
+			<div class="tagandcate" v-if="((post.tags != null && post.tags.length > 0) || post.category !== null) && showMenu">
 				<div class="tags">
 					<inertia-link v-for="(tag, index) in post.tags" :key="tag + '_POST_TAG_' + post.id + '_' + index" class="tag-item" :href="'/tags/' + tag">
 						{{ tag }}
@@ -47,7 +47,7 @@
 					<i class="material-icons text-grey">layers</i><span class="text-grey"> {{ post.category.name }}</span>
 				</inertia-link>
 			</div>
-			<div class="actions" v-if="showMenu">
+			<div class="actions" v-if="showMenu && $page.props.user">
 				<div>
 					<div @click="showLikes = true" class="d-flex post-likes-text text-muted clickable" v-if="post.mutual_likes != null && post.mutual_likes.length > 0">
 						<span class="ml-1">پسندیده شده توسط</span>

@@ -43,7 +43,7 @@ export default {
 			return false;
 		},
 		showAchievements() {
-			if (this.checkUser(this.page.user_id) || (this.page.about_data != null && this.page.about_data.achievements != null && this.page.about_data.achievements.length > 0)) {
+			if (this.checkUser(this.page.user_id) || (this.page.about_data != null && this.page.about_data.achievements != null)) {
 				return true;
 			}
 			return false;

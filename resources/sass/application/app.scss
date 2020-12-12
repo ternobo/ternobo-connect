@@ -494,6 +494,14 @@ img {
     margin: auto;
     min-height: calc(100vh - 80px);
 
+    .content-container-profile,
+    .content-container-full,
+    .content-container-settings {
+        padding: 0 15px;
+
+    }
+
+
     @media screen and (min-width: 991px) {
 
         .sidebar-left {
@@ -1513,4 +1521,10 @@ a:focus {
     padding: 0 10px;
     font-size: 12px;
     border-radius: 15px 0 0 15px;
+}
+
+.page-cover-info-card img {
+    min-height: 90px;
+    -o-object-fit: cover;
+    object-fit: cover;
 }

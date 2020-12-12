@@ -12,6 +12,7 @@ use App\Models\Following;
 use App\Models\FollowSuggestion;
 use App\Models\Page;
 use App\Models\Post;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -26,8 +27,9 @@ class IndexController extends Controller
 
     public function index()
     {
+        SEOTools::setTitle('شبکه اجتماعی متخصصین');
         $articles = Post::query()->where("type", "article")->with("page")->latest()->limit(10)->get();
-        return Inertia::render("Welcome", ["articles"=>$articles]);
+        return Inertia::render("Welcome", ["articles" => $articles]);
     }
 
     public function followSuggestions(Request $request)

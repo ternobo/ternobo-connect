@@ -49,6 +49,7 @@ import SignupModal from "../../Modals/SignupModal.vue";
 import UserMenu from "./UserMenu";
 
 export default {
+	props: {},
 	name: "HeaderToolbar",
 	data() {
 		return {

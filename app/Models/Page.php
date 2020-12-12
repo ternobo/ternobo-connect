@@ -371,7 +371,7 @@ class Page extends Model
             . "where users.id != $this->user_id and users.id != $userA and users.id != $usertB"
         );
         foreach ($connections as $connection) {
-            if (!in_array($connection, $mutuals)) {
+            if (!in_array($connection->username, array_column($mutuals, "username"))) {
                 if (Auth::user()->isAcceptedConnection($connection->id)) {
 
                     unset($connection->token);

@@ -82,7 +82,7 @@ class LoginController extends Controller
                 $user->active = true;
                 $user->save();
 
-                return response()->json(["result" => true])->cookie("ternobo_current_page", $user->personalPage, 9999999);
+                return response()->json(["result" => true])->cookie("ternobo_current_page_id", $user->personalPage->id, 9999999);
             }
 
         }

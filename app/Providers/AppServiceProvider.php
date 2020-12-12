@@ -60,11 +60,11 @@ class AppServiceProvider extends ServiceProvider
             },
             "currentPage" => function () {
                 if (Auth::check()) {
-                    $current_page = json_decode(Cookie::get('ternobo_current_page')) !== null ?
+                    $current_page = Cookie::get('ternobo_current_page_id') !== null ?
                     Page::query()
                         ->with("categories")
                         ->with("skills")
-                        ->find(json_decode(Cookie::get('ternobo_current_page'))->id) :
+                        ->find(json_decode(Cookie::get('ternobo_current_page_id'))) :
                     Auth::user()->personalPage()
                         ->with("categories")
                         ->with("skills")

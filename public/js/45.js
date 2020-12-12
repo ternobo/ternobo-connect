@@ -1,62 +1,790 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[45],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Modals/Settings/PhoneNumberModal.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Components/Modals/Settings/PhoneNumberModal.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Modals/Settings/TwoFAModal.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Components/Modals/Settings/TwoFAModal.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Mixins_Modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Mixins/Modal */ \"./resources/js/Mixins/Modal.js\");\n/* harmony import */ var _buttons_LoadingButton_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../buttons/LoadingButton.vue */ \"./resources/js/Components/buttons/LoadingButton.vue\");\n/* harmony import */ var _LoadingSpinner_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../LoadingSpinner.vue */ \"./resources/js/Components/LoadingSpinner.vue\");\n/* harmony import */ var _OtpInput_OtpInput_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../OtpInput/OtpInput.vue */ \"./resources/js/Components/OtpInput/OtpInput.vue\");\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  methods: {\n    sendVcode: function sendVcode(type) {\n      var _this = this;\n\n      this.loading = true;\n      var $this = this;\n      var data = new FormData();\n      data.append(\"phone\", this.phone);\n      var config = {\n        method: \"post\",\n        url: this.$APP_URL + \"/auth/verification\",\n        data: data\n      };\n      axios(config).then(function (response) {\n        if (response.data.result) {\n          _this.verification_step = true;\n        } else {\n          var errors = response.data.errors;\n\n          _this.handleError(errors);\n        }\n\n        _this.loading = false;\n      })[\"catch\"](function (error) {\n        _this.loading = false;\n      });\n    },\n    verifyCode: function verifyCode() {\n      var _this2 = this;\n\n      this.nextLoading = true;\n      var data = new FormData();\n      data.append(\"code\", this.code);\n      var config = {\n        method: \"post\",\n        url: this.$APP_URL + \"/auth/verify-phone\",\n        data: data\n      };\n      axios(config).then(function (response) {\n        if (response.data.result) {\n          _this2.$emit(\"update:show\", false);\n\n          _this2.$emit(\"updated\", _this2.phone);\n\n          _this2.invalidCode = false;\n        } else {\n          _this2.invalidCode = true;\n        }\n\n        _this2.nextLoading = false;\n      })[\"catch\"](function (error) {\n        _this2.nextLoading = false;\n      }).then(function () {\n        return _this2.completedCode = true;\n      });\n    }\n  },\n  props: {\n    value: {\n      \"default\": null\n    }\n  },\n  mounted: function mounted() {\n    this.phone = this.value;\n  },\n  data: function data() {\n    return {\n      loading: false,\n      code: null,\n      verification_step: false,\n      phone: null,\n      nextLoading: false,\n      invalidCode: false,\n      completedCode: false\n    };\n  },\n  components: {\n    LoadingButton: _buttons_LoadingButton_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n    LoadingSpinner: _LoadingSpinner_vue__WEBPACK_IMPORTED_MODULE_2__[\"default\"],\n    OtpInput: _OtpInput_OtpInput_vue__WEBPACK_IMPORTED_MODULE_3__[\"default\"]\n  },\n  mixins: [_Mixins_Modal__WEBPACK_IMPORTED_MODULE_0__[\"default\"]],\n  name: \"PhoneNumberModal\"\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vcmVzb3VyY2VzL2pzL0NvbXBvbmVudHMvTW9kYWxzL1NldHRpbmdzL1Bob25lTnVtYmVyTW9kYWwudnVlPzY4OGEiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQXdCQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxhQURBLHFCQUNBLElBREEsRUFDQTtBQUFBOztBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBRUE7QUFDQSxzQkFEQTtBQUVBLGlEQUZBO0FBR0E7QUFIQTtBQU1BLG9CQUNBLElBREEsQ0FDQTtBQUNBO0FBQ0E7QUFDQSxTQUZBLE1BRUE7QUFDQTs7QUFDQTtBQUNBOztBQUNBO0FBQ0EsT0FUQSxXQVVBO0FBQ0E7QUFDQSxPQVpBO0FBYUEsS0ExQkE7QUEyQkEsY0EzQkEsd0JBMkJBO0FBQUE7O0FBQ0E7QUFDQTtBQUNBO0FBRUE7QUFDQSxzQkFEQTtBQUVBLGlEQUZBO0FBR0E7QUFIQTtBQU1BLG9CQUNBLElBREEsQ0FDQTtBQUNBO0FBQ0E7O0FBQ0E7O0FBQ0E7QUFDQSxTQUpBLE1BSUE7QUFDQTtBQUNBOztBQUNBO0FBQ0EsT0FWQSxXQVdBO0FBQ0E7QUFDQSxPQWJBLEVBY0EsSUFkQSxDQWNBO0FBQUE7QUFBQSxPQWRBO0FBZUE7QUFyREEsR0FEQTtBQXdEQTtBQUNBO0FBQ0E7QUFEQTtBQURBLEdBeERBO0FBNkRBLFNBN0RBLHFCQTZEQTtBQUNBO0FBQ0EsR0EvREE7QUFpRUEsTUFqRUEsa0JBaUVBO0FBQ0E7QUFDQSxvQkFEQTtBQUVBLGdCQUZBO0FBR0EsOEJBSEE7QUFJQSxpQkFKQTtBQUtBLHdCQUxBO0FBT0Esd0JBUEE7QUFRQTtBQVJBO0FBVUEsR0E1RUE7QUE2RUE7QUFDQSxxRkFEQTtBQUVBLCtFQUZBO0FBR0E7QUFIQSxHQTdFQTtBQWtGQSxpRUFsRkE7QUFtRkE7QUFuRkEiLCJmaWxlIjoiLi9ub2RlX21vZHVsZXMvYmFiZWwtbG9hZGVyL2xpYi9pbmRleC5qcz8hLi9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9saWIvaW5kZXguanM/IS4vcmVzb3VyY2VzL2pzL0NvbXBvbmVudHMvTW9kYWxzL1NldHRpbmdzL1Bob25lTnVtYmVyTW9kYWwudnVlP3Z1ZSZ0eXBlPXNjcmlwdCZsYW5nPWpzJi5qcyIsInNvdXJjZXNDb250ZW50IjpbIjx0ZW1wbGF0ZT5cblx0PGItbW9kYWwgdi1tb2RlbD1cInNob3dNb2RhbFwiIGhpZGUtZm9vdGVyIHRpdGxlPVwi2KvYqNiqIC8g2YjbjNix2KfbjNi0INiq2YTZgdmGINmH2YXYsdin2YdcIiBib2R5LWNsYXNzPVwibW9kYWwtc2lnbnVwXCIgc2l6ZT1cIm1kXCIgOmNlbnRlcmVkPVwidHJ1ZVwiPlxuXHRcdDxkaXYgY2xhc3M9XCJkLWZsZXggZXBob25lLWlucHV0LWdyb3VwIHB5LTAganVzdGlmeS1jb250ZW50LWJldHdlZW4gYWxpZ24taXRlbXMtY2VudGVyXCI+XG5cdFx0XHQ8TG9hZGluZ0J1dHRvbiBjbGFzcz1cImJ0biBidG4tZGFyayBzaWdudXAtc2F2ZS1idG5cIiA6bG9hZGluZz1cImxvYWRpbmdcIiA6ZGlzYWJsZWQ9XCJ2ZXJpZmljYXRpb25fc3RlcFwiIEBjbGljay5uYXRpdmU9XCJzZW5kVmNvZGUoKVwiPtir2KjYqjwvTG9hZGluZ0J1dHRvbj5cblx0XHRcdDxpbnB1dCB0eXBlPVwidGVsXCIgY2xhc3M9XCJmb3JtLWNvbnRyb2wgbXgtMSB0ZXh0LWxlZnRcIiA6cmVhZG9ubHk9XCJ2ZXJpZmljYXRpb25fc3RlcFwiIHYtbW9kZWw9XCJwaG9uZVwiIHBsYWNlaG9sZGVyPVwiMDkxMjY2NjcxNTJcIiAvPlxuXHRcdDwvZGl2PlxuXHRcdDx0cmFuc2l0aW9uIG5hbWU9XCJzbGlkZVwiPlxuXHRcdFx0PGRpdiB2LWlmPVwidmVyaWZpY2F0aW9uX3N0ZXBcIiBjbGFzcz1cInRleHRcIj5cblx0XHRcdFx0PGxhYmVsIGNsYXNzPVwibWwtMSBtdC0yIHRleHQtbGVmdCBjbGlja2FibGVcIiBAY2xpY2s9XCJ2ZXJpZmljYXRpb25fc3RlcCA9IGZhbHNlXCI+2LTZhdin2LHZhyDZh9mF2LHYp9mHINin2LTYqtio2KfZhyDYp9iz2KrYnzwvbGFiZWw+XG5cblx0XHRcdFx0PGRpdiBjbGFzcz1cImlucHV0LWdyb3VwIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIgZmxleC1jb2x1bW4ganVzdGlmeS1jb250ZW50LWNlbnRlciBtdC00XCI+XG5cdFx0XHRcdFx0PGxhYmVsIGNsYXNzPVwidy0xMDBcIj7aqdivINiq2KfbjNuM2K8g2K7ZiNivIOKAjNix2Kcg2YjYp9ix2K8g2qnZhtuM2K88L2xhYmVsPlxuXHRcdFx0XHRcdDxkaXYgY2xhc3M9XCJkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyXCI+XG5cdFx0XHRcdFx0XHQ8b3RwLWlucHV0IGlucHV0LWNsYXNzPVwidy0xMDBcIiBjbGFzcz1cIm1hdGVyaWFsLS1zbSBteC0xIHRleHQtY2VudGVyXCIgQGNvbXBsZXRlZD1cInZlcmlmeUNvZGVcIiB2LW1vZGVsPVwiY29kZVwiIDpudW1JbnB1dHM9XCI2XCIgLz5cblx0XHRcdFx0XHRcdDxpIGNsYXNzPVwibWF0ZXJpYWwtaWNvbnMtb3V0bGluZWQgbXItM1wiIDpjbGFzcz1cInsgJ3RleHQtbXV0ZWQnOiAhaW52YWxpZENvZGUgJiYgIWNvbXBsZXRlZENvZGUsICd0ZXh0LWRhbmdlcic6IGludmFsaWRDb2RlLCAndGV4dC1zdWNjZXNzJzogIWludmFsaWRDb2RlIH1cIj52ZXJpZmllZF91c2VyPC9pPlxuXHRcdFx0XHRcdDwvZGl2PlxuXHRcdFx0XHRcdDxMb2FkaW5nQnV0dG9uIDpsb2FkaW5nPVwibmV4dExvYWRpbmdcIiBjbGFzcz1cImJ0biBidG4tZGFyayBtdC00XCIgQGNsaWNrLm5hdGl2ZT1cInZlcmlmeUNvZGVcIj7Yqtin24zbjNivPC9Mb2FkaW5nQnV0dG9uPlxuXHRcdFx0XHQ8L2Rpdj5cblx0XHRcdDwvZGl2PlxuXHRcdDwvdHJhbnNpdGlvbj5cblx0PC9iLW1vZGFsPlxuPC90ZW1wbGF0ZT5cblxuPHNjcmlwdD5cbmltcG9ydCBNb2RhbE1peGluIGZyb20gXCIuLi8uLi8uLi9NaXhpbnMvTW9kYWxcIjtcbmltcG9ydCBMb2FkaW5nQnV0dG9uIGZyb20gXCIuLi8uLi9idXR0b25zL0xvYWRpbmdCdXR0b24udnVlXCI7XG5pbXBvcnQgTG9hZGluZ1NwaW5uZXIgZnJvbSBcIi4uLy4uL0xvYWRpbmdTcGlubmVyLnZ1ZVwiO1xuaW1wb3J0IE90cElucHV0IGZyb20gXCIuLi8uLi9PdHBJbnB1dC9PdHBJbnB1dC52dWVcIjtcbmV4cG9ydCBkZWZhdWx0IHtcblx0bWV0aG9kczoge1xuXHRcdHNlbmRWY29kZSh0eXBlKSB7XG5cdFx0XHR0aGlzLmxvYWRpbmcgPSB0cnVlO1xuXHRcdFx0Y29uc3QgJHRoaXMgPSB0aGlzO1xuXHRcdFx0dmFyIGRhdGEgPSBuZXcgRm9ybURhdGEoKTtcblx0XHRcdGRhdGEuYXBwZW5kKFwicGhvbmVcIiwgdGhpcy5waG9uZSk7XG5cblx0XHRcdHZhciBjb25maWcgPSB7XG5cdFx0XHRcdG1ldGhvZDogXCJwb3N0XCIsXG5cdFx0XHRcdHVybDogdGhpcy4kQVBQX1VSTCArIFwiL2F1dGgvdmVyaWZpY2F0aW9uXCIsXG5cdFx0XHRcdGRhdGE6IGRhdGEsXG5cdFx0XHR9O1xuXG5cdFx0XHRheGlvcyhjb25maWcpXG5cdFx0XHRcdC50aGVuKChyZXNwb25zZSkgPT4ge1xuXHRcdFx0XHRcdGlmIChyZXNwb25zZS5kYXRhLnJlc3VsdCkge1xuXHRcdFx0XHRcdFx0dGhpcy52ZXJpZmljYXRpb25fc3RlcCA9IHRydWU7XG5cdFx0XHRcdFx0fSBlbHNlIHtcblx0XHRcdFx0XHRcdGNvbnN0IGVycm9ycyA9IHJlc3BvbnNlLmRhdGEuZXJyb3JzO1xuXHRcdFx0XHRcdFx0dGhpcy5oYW5kbGVFcnJvcihlcnJvcnMpO1xuXHRcdFx0XHRcdH1cblx0XHRcdFx0XHR0aGlzLmxvYWRpbmcgPSBmYWxzZTtcblx0XHRcdFx0fSlcblx0XHRcdFx0LmNhdGNoKChlcnJvcikgPT4ge1xuXHRcdFx0XHRcdHRoaXMubG9hZGluZyA9IGZhbHNlO1xuXHRcdFx0XHR9KTtcblx0XHR9LFxuXHRcdHZlcmlmeUNvZGUoKSB7XG5cdFx0XHR0aGlzLm5leHRMb2FkaW5nID0gdHJ1ZTtcblx0XHRcdHZhciBkYXRhID0gbmV3IEZvcm1EYXRhKCk7XG5cdFx0XHRkYXRhLmFwcGVuZChcImNvZGVcIiwgdGhpcy5jb2RlKTtcblxuXHRcdFx0dmFyIGNvbmZpZyA9IHtcblx0XHRcdFx0bWV0aG9kOiBcInBvc3RcIixcblx0XHRcdFx0dXJsOiB0aGlzLiRBUFBfVVJMICsgXCIvYXV0aC92ZXJpZnktcGhvbmVcIixcblx0XHRcdFx0ZGF0YTogZGF0YSxcblx0XHRcdH07XG5cblx0XHRcdGF4aW9zKGNvbmZpZylcblx0XHRcdFx0LnRoZW4oKHJlc3BvbnNlKSA9PiB7XG5cdFx0XHRcdFx0aWYgKHJlc3BvbnNlLmRhdGEucmVzdWx0KSB7XG5cdFx0XHRcdFx0XHR0aGlzLiRlbWl0KFwidXBkYXRlOnNob3dcIiwgZmFsc2UpO1xuXHRcdFx0XHRcdFx0dGhpcy4kZW1pdChcInVwZGF0ZWRcIiwgdGhpcy5waG9uZSk7XG5cdFx0XHRcdFx0XHR0aGlzLmludmFsaWRDb2RlID0gZmFsc2U7XG5cdFx0XHRcdFx0fSBlbHNlIHtcblx0XHRcdFx0XHRcdHRoaXMuaW52YWxpZENvZGUgPSB0cnVlO1xuXHRcdFx0XHRcdH1cblx0XHRcdFx0XHR0aGlzLm5leHRMb2FkaW5nID0gZmFsc2U7XG5cdFx0XHRcdH0pXG5cdFx0XHRcdC5jYXRjaCgoZXJyb3IpID0+IHtcblx0XHRcdFx0XHR0aGlzLm5leHRMb2FkaW5nID0gZmFsc2U7XG5cdFx0XHRcdH0pXG5cdFx0XHRcdC50aGVuKCgpID0+ICh0aGlzLmNvbXBsZXRlZENvZGUgPSB0cnVlKSk7XG5cdFx0fSxcblx0fSxcblx0cHJvcHM6IHtcblx0XHR2YWx1ZToge1xuXHRcdFx0ZGVmYXVsdDogbnVsbCxcblx0XHR9LFxuXHR9LFxuXHRtb3VudGVkKCkge1xuXHRcdHRoaXMucGhvbmUgPSB0aGlzLnZhbHVlO1xuXHR9LFxuXG5cdGRhdGEoKSB7XG5cdFx0cmV0dXJuIHtcblx0XHRcdGxvYWRpbmc6IGZhbHNlLFxuXHRcdFx0Y29kZTogbnVsbCxcblx0XHRcdHZlcmlmaWNhdGlvbl9zdGVwOiBmYWxzZSxcblx0XHRcdHBob25lOiBudWxsLFxuXHRcdFx0bmV4dExvYWRpbmc6IGZhbHNlLFxuXG5cdFx0XHRpbnZhbGlkQ29kZTogZmFsc2UsXG5cdFx0XHRjb21wbGV0ZWRDb2RlOiBmYWxzZSxcblx0XHR9O1xuXHR9LFxuXHRjb21wb25lbnRzOiB7XG5cdFx0TG9hZGluZ0J1dHRvbixcblx0XHRMb2FkaW5nU3Bpbm5lcixcblx0XHRPdHBJbnB1dCxcblx0fSxcblx0bWl4aW5zOiBbTW9kYWxNaXhpbl0sXG5cdG5hbWU6IFwiUGhvbmVOdW1iZXJNb2RhbFwiLFxufTtcbjwvc2NyaXB0PlxuXG48c3R5bGU+PC9zdHlsZT5cbiJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Modals/Settings/PhoneNumberModal.vue?vue&type=script&lang=js&\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Mixins_Modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Mixins/Modal */ "./resources/js/Mixins/Modal.js");
+/* harmony import */ var _buttons_LoadingButton_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../buttons/LoadingButton.vue */ "./resources/js/Components/buttons/LoadingButton.vue");
+/* harmony import */ var _LoadingSpinner_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../LoadingSpinner.vue */ "./resources/js/Components/LoadingSpinner.vue");
+/* harmony import */ var vue_switches__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-switches */ "./node_modules/vue-switches/src/switches.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    email: {
+      "default": null
+    },
+    phone: {
+      "default": null
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.post("/two-factor-auth/info").then(function (response) {
+      var data = response.data;
+      _this.enabled = data.enabled;
+      _this.isSetuped = data.enabled;
+
+      if (data.enabled) {
+        _this.select_step = false;
+        _this.setup_step = false;
+      }
+
+      var name = "";
+
+      if (data.type === "app") {
+        name = "اپلیکیشن تایید هویت";
+      } else if (data.type === "phone") {
+        name = "تلفن همراه";
+      } else if (data.type === "email") {
+        name = "ایمیل";
+      }
+
+      _this.type = {
+        id: data.type,
+        label: name
+      };
+      _this.recoveryCodes = JSON.parse(data.recovery_codes);
+    });
+  },
+  computed: {
+    theComponent: function theComponent() {
+      if (this.type != null) {
+        if (this.type.id == "app") {
+          return function () {
+            return __webpack_require__.e(/*! import() */ 55).then(__webpack_require__.bind(null, /*! ../../Settings/TwoFA/GoogleAuth */ "./resources/js/Components/Settings/TwoFA/GoogleAuth.vue"));
+          };
+        } else if (this.type.id == "email") {
+          return function () {
+            return __webpack_require__.e(/*! import() */ 54).then(__webpack_require__.bind(null, /*! ../../Settings/TwoFA/Email */ "./resources/js/Components/Settings/TwoFA/Email.vue"));
+          };
+        } else if (this.type.id == "phone") {
+          return function () {
+            return __webpack_require__.e(/*! import() */ 56).then(__webpack_require__.bind(null, /*! ../../Settings/TwoFA/PhoneNumber */ "./resources/js/Components/Settings/TwoFA/PhoneNumber.vue"));
+          };
+        }
+      }
+
+      return null;
+    },
+    typeText: function typeText() {
+      if (this.type.id === "app") {
+        return "اپلیکیشن تایید هویت";
+      } else if (this.type.id === "phone") {
+        return "تلفن همراه";
+      } else if (this.type.id === "email") {
+        return "ایمیل";
+      }
+    },
+    noPhone: function noPhone() {
+      return this.phone == null;
+    },
+    noEmail: function noEmail() {
+      return this.email == null;
+    },
+    canNext: function canNext() {
+      if (this.type != null && this.enabled) {
+        if (this.type.id == "phone") {
+          return !this.noPhone;
+        } else if (this.type.id == "email") {
+          return !this.noEmail;
+        }
+
+        return true;
+      }
+
+      return false;
+    },
+    attributes: function attributes() {
+      if (this.type != null) {
+        if (this.type.id == "phone") {
+          return {
+            phone: this.phone
+          };
+        } else if (this.type.id == "email") {
+          return {
+            email: this.email
+          };
+        }
+      }
+    }
+  },
+  data: function data() {
+    return {
+      enabled: false,
+      QrCode: null,
+      recoveryCodes: [],
+      type: null,
+      isSetuped: false,
+      select_step: true,
+      setup_step: false,
+      resetLoading: false
+    };
+  },
+  methods: {
+    action: function action() {
+      this.enabled = !this.enabled;
+
+      if (!this.enabled) {
+        axios.post("/two-factor-auth/deactive");
+        this.cancel();
+      }
+    },
+    downloadCodes: function downloadCodes() {
+      var csvStr = this.recoveryCodes.join("\n");
+      var hiddenElement = document.createElement("a");
+      hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csvStr);
+      hiddenElement.target = "_blank";
+      hiddenElement.download = "Ternobo-Recovery-Codes.csv";
+      hiddenElement.click();
+    },
+    cancel: function cancel() {
+      this.enabled = false;
+      this.isSetuped = false;
+      this.setup_step = false;
+      this.select_step = true;
+    },
+    resetCodes: function resetCodes() {
+      var _this2 = this;
+
+      this.resetLoading = true;
+      axios.post("/two-factor-auth/reset").then(function (response) {
+        _this2.recoveryCodes = JSON.parse(response.data.codes);
+        _this2.resetLoading = false;
+      })["catch"](function (err) {
+        _this2.toast("خطا در برقراری ارتباط");
+
+        _this2.resetLoading = false;
+      });
+    },
+    changeType: function changeType() {
+      this.select_step = true;
+      this.isSetuped = false;
+    },
+    next: function next() {
+      if (this.type != null) {
+        this.isSetuped = false;
+        this.select_step = false;
+        this.setup_step = true;
+      } else {
+        this.toast("یک شیوه تایید هویت را انتخاب کنید");
+      }
+    },
+    onEnabled: function onEnabled(codes) {
+      this.recoveryCodes = codes;
+      this.setup_step = false;
+      this.enabled = true;
+      this.isSetuped = true;
+    }
+  },
+  components: {
+    LoadingButton: _buttons_LoadingButton_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    LoadingSpinner: _LoadingSpinner_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  mixins: [_Mixins_Modal__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  name: "TwoFAModal"
+});
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Modals/Settings/PhoneNumberModal.vue?vue&type=template&id=775b1d64&":
-/*!***********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Components/Modals/Settings/PhoneNumberModal.vue?vue&type=template&id=775b1d64& ***!
-  \***********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Modals/Settings/TwoFAModal.vue?vue&type=template&id=ebd61398&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Components/Modals/Settings/TwoFAModal.vue?vue&type=template&id=ebd61398& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"b-modal\",\n    {\n      attrs: {\n        \"hide-footer\": \"\",\n        title: \"ثبت / ویرایش تلفن همراه\",\n        \"body-class\": \"modal-signup\",\n        size: \"md\",\n        centered: true\n      },\n      model: {\n        value: _vm.showModal,\n        callback: function($$v) {\n          _vm.showModal = $$v\n        },\n        expression: \"showModal\"\n      }\n    },\n    [\n      _c(\n        \"div\",\n        {\n          staticClass:\n            \"d-flex ephone-input-group py-0 justify-content-between align-items-center\"\n        },\n        [\n          _c(\n            \"LoadingButton\",\n            {\n              staticClass: \"btn btn-dark signup-save-btn\",\n              attrs: { loading: _vm.loading, disabled: _vm.verification_step },\n              nativeOn: {\n                click: function($event) {\n                  return _vm.sendVcode()\n                }\n              }\n            },\n            [_vm._v(\"ثبت\")]\n          ),\n          _vm._v(\" \"),\n          _c(\"input\", {\n            directives: [\n              {\n                name: \"model\",\n                rawName: \"v-model\",\n                value: _vm.phone,\n                expression: \"phone\"\n              }\n            ],\n            staticClass: \"form-control mx-1 text-left\",\n            attrs: {\n              type: \"tel\",\n              readonly: _vm.verification_step,\n              placeholder: \"09126667152\"\n            },\n            domProps: { value: _vm.phone },\n            on: {\n              input: function($event) {\n                if ($event.target.composing) {\n                  return\n                }\n                _vm.phone = $event.target.value\n              }\n            }\n          })\n        ],\n        1\n      ),\n      _vm._v(\" \"),\n      _c(\"transition\", { attrs: { name: \"slide\" } }, [\n        _vm.verification_step\n          ? _c(\"div\", { staticClass: \"text\" }, [\n              _c(\n                \"label\",\n                {\n                  staticClass: \"ml-1 mt-2 text-left clickable\",\n                  on: {\n                    click: function($event) {\n                      _vm.verification_step = false\n                    }\n                  }\n                },\n                [_vm._v(\"شماره همراه اشتباه است؟\")]\n              ),\n              _vm._v(\" \"),\n              _c(\n                \"div\",\n                {\n                  staticClass:\n                    \"input-group d-flex align-items-center flex-column justify-content-center mt-4\"\n                },\n                [\n                  _c(\"label\", { staticClass: \"w-100\" }, [\n                    _vm._v(\"کد تایید خود ‌را وارد کنید\")\n                  ]),\n                  _vm._v(\" \"),\n                  _c(\n                    \"div\",\n                    { staticClass: \"d-flex align-items-center\" },\n                    [\n                      _c(\"otp-input\", {\n                        staticClass: \"material--sm mx-1 text-center\",\n                        attrs: { \"input-class\": \"w-100\", numInputs: 6 },\n                        on: { completed: _vm.verifyCode },\n                        model: {\n                          value: _vm.code,\n                          callback: function($$v) {\n                            _vm.code = $$v\n                          },\n                          expression: \"code\"\n                        }\n                      }),\n                      _vm._v(\" \"),\n                      _c(\n                        \"i\",\n                        {\n                          staticClass: \"material-icons-outlined mr-3\",\n                          class: {\n                            \"text-muted\":\n                              !_vm.invalidCode && !_vm.completedCode,\n                            \"text-danger\": _vm.invalidCode,\n                            \"text-success\": !_vm.invalidCode\n                          }\n                        },\n                        [_vm._v(\"verified_user\")]\n                      )\n                    ],\n                    1\n                  ),\n                  _vm._v(\" \"),\n                  _c(\n                    \"LoadingButton\",\n                    {\n                      staticClass: \"btn btn-dark mt-4\",\n                      attrs: { loading: _vm.nextLoading },\n                      nativeOn: {\n                        click: function($event) {\n                          return _vm.verifyCode($event)\n                        }\n                      }\n                    },\n                    [_vm._v(\"تایید\")]\n                  )\n                ],\n                1\n              )\n            ])\n          : _vm._e()\n      ])\n    ],\n    1\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvQ29tcG9uZW50cy9Nb2RhbHMvU2V0dGluZ3MvUGhvbmVOdW1iZXJNb2RhbC52dWU/M2U5NSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLE9BQU87QUFDUDtBQUNBO0FBQ0E7QUFDQTtBQUNBLFNBQVM7QUFDVDtBQUNBO0FBQ0EsS0FBSztBQUNMO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLFNBQVM7QUFDVDtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0Esc0JBQXNCLHdEQUF3RDtBQUM5RTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsYUFBYTtBQUNiO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxhQUFhO0FBQ2IsdUJBQXVCLG1CQUFtQjtBQUMxQztBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsV0FBVztBQUNYO0FBQ0E7QUFDQTtBQUNBO0FBQ0Esd0JBQXdCLFNBQVMsZ0JBQWdCLEVBQUU7QUFDbkQ7QUFDQSx1QkFBdUIsc0JBQXNCO0FBQzdDO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLGlCQUFpQjtBQUNqQjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsaUJBQWlCO0FBQ2pCO0FBQ0EsK0JBQStCLHVCQUF1QjtBQUN0RDtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EscUJBQXFCLDJDQUEyQztBQUNoRTtBQUNBO0FBQ0E7QUFDQSxnQ0FBZ0MsdUNBQXVDO0FBQ3ZFLDZCQUE2Qiw0QkFBNEI7QUFDekQ7QUFDQTtBQUNBO0FBQ0E7QUFDQSwyQkFBMkI7QUFDM0I7QUFDQTtBQUNBLHVCQUF1QjtBQUN2QjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EseUJBQXlCO0FBQ3pCO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsOEJBQThCLDJCQUEyQjtBQUN6RDtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EscUJBQXFCO0FBQ3JCO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJmaWxlIjoiLi9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9saWIvbG9hZGVycy90ZW1wbGF0ZUxvYWRlci5qcz8hLi9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9saWIvaW5kZXguanM/IS4vcmVzb3VyY2VzL2pzL0NvbXBvbmVudHMvTW9kYWxzL1NldHRpbmdzL1Bob25lTnVtYmVyTW9kYWwudnVlP3Z1ZSZ0eXBlPXRlbXBsYXRlJmlkPTc3NWIxZDY0Ji5qcyIsInNvdXJjZXNDb250ZW50IjpbInZhciByZW5kZXIgPSBmdW5jdGlvbigpIHtcbiAgdmFyIF92bSA9IHRoaXNcbiAgdmFyIF9oID0gX3ZtLiRjcmVhdGVFbGVtZW50XG4gIHZhciBfYyA9IF92bS5fc2VsZi5fYyB8fCBfaFxuICByZXR1cm4gX2MoXG4gICAgXCJiLW1vZGFsXCIsXG4gICAge1xuICAgICAgYXR0cnM6IHtcbiAgICAgICAgXCJoaWRlLWZvb3RlclwiOiBcIlwiLFxuICAgICAgICB0aXRsZTogXCLYq9io2KogLyDZiNuM2LHYp9uM2LQg2KrZhNmB2YYg2YfZhdix2KfZh1wiLFxuICAgICAgICBcImJvZHktY2xhc3NcIjogXCJtb2RhbC1zaWdudXBcIixcbiAgICAgICAgc2l6ZTogXCJtZFwiLFxuICAgICAgICBjZW50ZXJlZDogdHJ1ZVxuICAgICAgfSxcbiAgICAgIG1vZGVsOiB7XG4gICAgICAgIHZhbHVlOiBfdm0uc2hvd01vZGFsLFxuICAgICAgICBjYWxsYmFjazogZnVuY3Rpb24oJCR2KSB7XG4gICAgICAgICAgX3ZtLnNob3dNb2RhbCA9ICQkdlxuICAgICAgICB9LFxuICAgICAgICBleHByZXNzaW9uOiBcInNob3dNb2RhbFwiXG4gICAgICB9XG4gICAgfSxcbiAgICBbXG4gICAgICBfYyhcbiAgICAgICAgXCJkaXZcIixcbiAgICAgICAge1xuICAgICAgICAgIHN0YXRpY0NsYXNzOlxuICAgICAgICAgICAgXCJkLWZsZXggZXBob25lLWlucHV0LWdyb3VwIHB5LTAganVzdGlmeS1jb250ZW50LWJldHdlZW4gYWxpZ24taXRlbXMtY2VudGVyXCJcbiAgICAgICAgfSxcbiAgICAgICAgW1xuICAgICAgICAgIF9jKFxuICAgICAgICAgICAgXCJMb2FkaW5nQnV0dG9uXCIsXG4gICAgICAgICAgICB7XG4gICAgICAgICAgICAgIHN0YXRpY0NsYXNzOiBcImJ0biBidG4tZGFyayBzaWdudXAtc2F2ZS1idG5cIixcbiAgICAgICAgICAgICAgYXR0cnM6IHsgbG9hZGluZzogX3ZtLmxvYWRpbmcsIGRpc2FibGVkOiBfdm0udmVyaWZpY2F0aW9uX3N0ZXAgfSxcbiAgICAgICAgICAgICAgbmF0aXZlT246IHtcbiAgICAgICAgICAgICAgICBjbGljazogZnVuY3Rpb24oJGV2ZW50KSB7XG4gICAgICAgICAgICAgICAgICByZXR1cm4gX3ZtLnNlbmRWY29kZSgpXG4gICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICB9XG4gICAgICAgICAgICB9LFxuICAgICAgICAgICAgW192bS5fdihcItir2KjYqlwiKV1cbiAgICAgICAgICApLFxuICAgICAgICAgIF92bS5fdihcIiBcIiksXG4gICAgICAgICAgX2MoXCJpbnB1dFwiLCB7XG4gICAgICAgICAgICBkaXJlY3RpdmVzOiBbXG4gICAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICBuYW1lOiBcIm1vZGVsXCIsXG4gICAgICAgICAgICAgICAgcmF3TmFtZTogXCJ2LW1vZGVsXCIsXG4gICAgICAgICAgICAgICAgdmFsdWU6IF92bS5waG9uZSxcbiAgICAgICAgICAgICAgICBleHByZXNzaW9uOiBcInBob25lXCJcbiAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgXSxcbiAgICAgICAgICAgIHN0YXRpY0NsYXNzOiBcImZvcm0tY29udHJvbCBteC0xIHRleHQtbGVmdFwiLFxuICAgICAgICAgICAgYXR0cnM6IHtcbiAgICAgICAgICAgICAgdHlwZTogXCJ0ZWxcIixcbiAgICAgICAgICAgICAgcmVhZG9ubHk6IF92bS52ZXJpZmljYXRpb25fc3RlcCxcbiAgICAgICAgICAgICAgcGxhY2Vob2xkZXI6IFwiMDkxMjY2NjcxNTJcIlxuICAgICAgICAgICAgfSxcbiAgICAgICAgICAgIGRvbVByb3BzOiB7IHZhbHVlOiBfdm0ucGhvbmUgfSxcbiAgICAgICAgICAgIG9uOiB7XG4gICAgICAgICAgICAgIGlucHV0OiBmdW5jdGlvbigkZXZlbnQpIHtcbiAgICAgICAgICAgICAgICBpZiAoJGV2ZW50LnRhcmdldC5jb21wb3NpbmcpIHtcbiAgICAgICAgICAgICAgICAgIHJldHVyblxuICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICBfdm0ucGhvbmUgPSAkZXZlbnQudGFyZ2V0LnZhbHVlXG4gICAgICAgICAgICAgIH1cbiAgICAgICAgICAgIH1cbiAgICAgICAgICB9KVxuICAgICAgICBdLFxuICAgICAgICAxXG4gICAgICApLFxuICAgICAgX3ZtLl92KFwiIFwiKSxcbiAgICAgIF9jKFwidHJhbnNpdGlvblwiLCB7IGF0dHJzOiB7IG5hbWU6IFwic2xpZGVcIiB9IH0sIFtcbiAgICAgICAgX3ZtLnZlcmlmaWNhdGlvbl9zdGVwXG4gICAgICAgICAgPyBfYyhcImRpdlwiLCB7IHN0YXRpY0NsYXNzOiBcInRleHRcIiB9LCBbXG4gICAgICAgICAgICAgIF9jKFxuICAgICAgICAgICAgICAgIFwibGFiZWxcIixcbiAgICAgICAgICAgICAgICB7XG4gICAgICAgICAgICAgICAgICBzdGF0aWNDbGFzczogXCJtbC0xIG10LTIgdGV4dC1sZWZ0IGNsaWNrYWJsZVwiLFxuICAgICAgICAgICAgICAgICAgb246IHtcbiAgICAgICAgICAgICAgICAgICAgY2xpY2s6IGZ1bmN0aW9uKCRldmVudCkge1xuICAgICAgICAgICAgICAgICAgICAgIF92bS52ZXJpZmljYXRpb25fc3RlcCA9IGZhbHNlXG4gICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICB9LFxuICAgICAgICAgICAgICAgIFtfdm0uX3YoXCLYtNmF2KfYsdmHINmH2YXYsdin2Ycg2KfYtNiq2KjYp9mHINin2LPYqtifXCIpXVxuICAgICAgICAgICAgICApLFxuICAgICAgICAgICAgICBfdm0uX3YoXCIgXCIpLFxuICAgICAgICAgICAgICBfYyhcbiAgICAgICAgICAgICAgICBcImRpdlwiLFxuICAgICAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICAgIHN0YXRpY0NsYXNzOlxuICAgICAgICAgICAgICAgICAgICBcImlucHV0LWdyb3VwIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIgZmxleC1jb2x1bW4ganVzdGlmeS1jb250ZW50LWNlbnRlciBtdC00XCJcbiAgICAgICAgICAgICAgICB9LFxuICAgICAgICAgICAgICAgIFtcbiAgICAgICAgICAgICAgICAgIF9jKFwibGFiZWxcIiwgeyBzdGF0aWNDbGFzczogXCJ3LTEwMFwiIH0sIFtcbiAgICAgICAgICAgICAgICAgICAgX3ZtLl92KFwi2qnYryDYqtin24zbjNivINiu2YjYryDigIzYsdinINmI2KfYsdivINqp2YbbjNivXCIpXG4gICAgICAgICAgICAgICAgICBdKSxcbiAgICAgICAgICAgICAgICAgIF92bS5fdihcIiBcIiksXG4gICAgICAgICAgICAgICAgICBfYyhcbiAgICAgICAgICAgICAgICAgICAgXCJkaXZcIixcbiAgICAgICAgICAgICAgICAgICAgeyBzdGF0aWNDbGFzczogXCJkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyXCIgfSxcbiAgICAgICAgICAgICAgICAgICAgW1xuICAgICAgICAgICAgICAgICAgICAgIF9jKFwib3RwLWlucHV0XCIsIHtcbiAgICAgICAgICAgICAgICAgICAgICAgIHN0YXRpY0NsYXNzOiBcIm1hdGVyaWFsLS1zbSBteC0xIHRleHQtY2VudGVyXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICBhdHRyczogeyBcImlucHV0LWNsYXNzXCI6IFwidy0xMDBcIiwgbnVtSW5wdXRzOiA2IH0sXG4gICAgICAgICAgICAgICAgICAgICAgICBvbjogeyBjb21wbGV0ZWQ6IF92bS52ZXJpZnlDb2RlIH0sXG4gICAgICAgICAgICAgICAgICAgICAgICBtb2RlbDoge1xuICAgICAgICAgICAgICAgICAgICAgICAgICB2YWx1ZTogX3ZtLmNvZGUsXG4gICAgICAgICAgICAgICAgICAgICAgICAgIGNhbGxiYWNrOiBmdW5jdGlvbigkJHYpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBfdm0uY29kZSA9ICQkdlxuICAgICAgICAgICAgICAgICAgICAgICAgICB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgICBleHByZXNzaW9uOiBcImNvZGVcIlxuICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgIH0pLFxuICAgICAgICAgICAgICAgICAgICAgIF92bS5fdihcIiBcIiksXG4gICAgICAgICAgICAgICAgICAgICAgX2MoXG4gICAgICAgICAgICAgICAgICAgICAgICBcImlcIixcbiAgICAgICAgICAgICAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgc3RhdGljQ2xhc3M6IFwibWF0ZXJpYWwtaWNvbnMtb3V0bGluZWQgbXItM1wiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICBjbGFzczoge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwidGV4dC1tdXRlZFwiOlxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIV92bS5pbnZhbGlkQ29kZSAmJiAhX3ZtLmNvbXBsZXRlZENvZGUsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJ0ZXh0LWRhbmdlclwiOiBfdm0uaW52YWxpZENvZGUsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJ0ZXh0LXN1Y2Nlc3NcIjogIV92bS5pbnZhbGlkQ29kZVxuICAgICAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgICAgICB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgW192bS5fdihcInZlcmlmaWVkX3VzZXJcIildXG4gICAgICAgICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICAgICAgICBdLFxuICAgICAgICAgICAgICAgICAgICAxXG4gICAgICAgICAgICAgICAgICApLFxuICAgICAgICAgICAgICAgICAgX3ZtLl92KFwiIFwiKSxcbiAgICAgICAgICAgICAgICAgIF9jKFxuICAgICAgICAgICAgICAgICAgICBcIkxvYWRpbmdCdXR0b25cIixcbiAgICAgICAgICAgICAgICAgICAge1xuICAgICAgICAgICAgICAgICAgICAgIHN0YXRpY0NsYXNzOiBcImJ0biBidG4tZGFyayBtdC00XCIsXG4gICAgICAgICAgICAgICAgICAgICAgYXR0cnM6IHsgbG9hZGluZzogX3ZtLm5leHRMb2FkaW5nIH0sXG4gICAgICAgICAgICAgICAgICAgICAgbmF0aXZlT246IHtcbiAgICAgICAgICAgICAgICAgICAgICAgIGNsaWNrOiBmdW5jdGlvbigkZXZlbnQpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIF92bS52ZXJpZnlDb2RlKCRldmVudClcbiAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgIH0sXG4gICAgICAgICAgICAgICAgICAgIFtfdm0uX3YoXCLYqtin24zbjNivXCIpXVxuICAgICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICAgIF0sXG4gICAgICAgICAgICAgICAgMVxuICAgICAgICAgICAgICApXG4gICAgICAgICAgICBdKVxuICAgICAgICAgIDogX3ZtLl9lKClcbiAgICAgIF0pXG4gICAgXSxcbiAgICAxXG4gIClcbn1cbnZhciBzdGF0aWNSZW5kZXJGbnMgPSBbXVxucmVuZGVyLl93aXRoU3RyaXBwZWQgPSB0cnVlXG5cbmV4cG9ydCB7IHJlbmRlciwgc3RhdGljUmVuZGVyRm5zIH0iXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Modals/Settings/PhoneNumberModal.vue?vue&type=template&id=775b1d64&\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "b-modal",
+    {
+      attrs: {
+        "hide-footer": "",
+        title: "تایید دو مرحله‌ای",
+        size: "md",
+        centered: true
+      },
+      model: {
+        value: _vm.showModal,
+        callback: function($$v) {
+          _vm.showModal = $$v
+        },
+        expression: "showModal"
+      }
+    },
+    [
+      _c("div", { staticClass: "d-flex flex-column py-3" }, [
+        !_vm.enabled || _vm.isSetuped
+          ? _c("div", { staticClass: "d-flex align-items-center" }, [
+              _c("strong", { staticClass: "ml-4" }, [
+                _vm._v(
+                  " این ویژگی برای شما " +
+                    _vm._s(_vm.enabled ? "فعال" : "غیرفعال") +
+                    " است. "
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "span",
+                {
+                  staticClass: "clickable text-action",
+                  on: { click: _vm.action }
+                },
+                [
+                  _vm._v(
+                    "\n\t\t\t\t" +
+                      _vm._s(_vm.enabled ? "غیرفعال کردن" : "فعال کردن") +
+                      "\n\t\t\t"
+                  )
+                ]
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.select_step
+          ? _c("div", [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "d-flex mb-4 justify-content-between flex-wrap align-items-end"
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "d-flex flex-column" },
+                    [
+                      _vm.enabled
+                        ? _c("strong", { staticClass: "mb-2" }, [
+                            _vm._v("یک روش تاییده انتخاب کنید")
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("v-select", {
+                        staticClass: "datepicker-list ml-2",
+                        staticStyle: { "min-width": "280px" },
+                        attrs: {
+                          placeholder: "روش تاییدیه",
+                          dir: "rtl",
+                          disabled: !_vm.enabled,
+                          options: [
+                            {
+                              id: "app",
+                              label: "اپلیکیشن تایید هویت"
+                            },
+                            {
+                              id: "phone",
+                              label: "تلفن همراه"
+                            },
+                            {
+                              id: "email",
+                              label: "ایمیل"
+                            }
+                          ]
+                        },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "no-options",
+                              fn: function() {
+                                return [_vm._v("موردی یافت نشد")]
+                              },
+                              proxy: true
+                            }
+                          ],
+                          null,
+                          false,
+                          1105869603
+                        ),
+                        model: {
+                          value: _vm.type,
+                          callback: function($$v) {
+                            _vm.type = $$v
+                          },
+                          expression: "type"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "d-flex mt-sm-0 mt-3",
+                      staticStyle: { height: "min-content" }
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn text-muted button-transparent",
+                          attrs: { disabled: !_vm.enabled },
+                          on: {
+                            click: function($event) {
+                              _vm.enabled = false
+                            }
+                          }
+                        },
+                        [_vm._v("لغو")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-dark",
+                          attrs: { disabled: !_vm.canNext },
+                          on: { click: _vm.next }
+                        },
+                        [_vm._v("ادامه")]
+                      )
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _vm.noPhone && _vm.type != null && _vm.type.id == "phone"
+                ? _c("div", [
+                    _c("strong", { staticClass: "text-danger" }, [
+                      _vm._v(
+                        " برای استفاده از این ویژگی بایستی تلفن همراه خود را به اطلاعات حساب اضافه کنید "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mt-3" }, [
+                      _vm._v(
+                        "با افزودن شماره همراه خودتان یک لایه امنیتی جهت ورود به حساب کاربری شما اضافه می‌شود که هربار جهت ورود به حساب کاربری یک تایید برای شما ارسال می‌کنیم. البته شما می‌توانید تعیین کنید که از شماره همراه به چه منظور استفاده کنید."
+                      )
+                    ])
+                  ])
+                : _vm.noEmail && _vm.type != null && _vm.type.id == "email"
+                ? _c("div", [
+                    _c("strong", { staticClass: "text-danger" }, [
+                      _vm._v(
+                        " برای استفاده از این ویژگی بایستی ایمیل خود را به اطلاعات حساب اضافه کنید "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mt-3" }, [
+                      _vm._v(
+                        "با افزودن ایمیل خودتان یک لایه امنیتی جهت ورود به حساب کاربری شما اضافه می‌شود که هربار جهت ورود به حساب کاربری یک تایید برای شما ارسال می‌کنیم. البته شما می‌توانید تعیین کنید که از ایمیل به چه منظور استفاده کنید."
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            ])
+          : _c(
+              "div",
+              [
+                _vm.setup_step
+                  ? _c(
+                      _vm.theComponent,
+                      _vm._b(
+                        {
+                          tag: "component",
+                          on: { enabled: _vm.onEnabled, cancel: _vm.cancel }
+                        },
+                        "component",
+                        _vm.attributes,
+                        false
+                      )
+                    )
+                  : _vm.isSetuped
+                  ? _c("div", [
+                      _c("div", { staticClass: "d-flex flex-column" }, [
+                        _c("div", { staticClass: "py-3 border-bottom" }, [
+                          _c("div", { staticClass: "d-flex" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "bg-body px-2 p-1 ml-3 font-14 rounded-pill"
+                              },
+                              [
+                                _vm._v(
+                                  "تایید هویت دو مرحله‌ای با استفاده از " +
+                                    _vm._s(_vm.typeText)
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                staticClass: "clickable text-action",
+                                on: { click: _vm.changeType }
+                              },
+                              [_vm._v("تغییر روش")]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm.type.id === "app"
+                            ? _c(
+                                "span",
+                                { staticClass: "text-muted font-14 mt-3" },
+                                [
+                                  _vm._v(
+                                    "حین ورود، از کد‌ یکبار مصرفی که " +
+                                      _vm._s(_vm.typeText) +
+                                      " به شما نشان می‌دهد استفاده کنید."
+                                  )
+                                ]
+                              )
+                            : _vm.type.id === "phone"
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "text-muted font-14 text-center mt-3"
+                                },
+                                [
+                                  _c("p", { staticClass: "text-right" }, [
+                                    _vm._v(
+                                      "در هنگام ورود، کد یکبار مصرفی به تلفن همراه شما ارسال می‌شود."
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("strong", { staticClass: "text-dark" }, [
+                                    _vm._v(_vm._s(_vm.phone))
+                                  ])
+                                ]
+                              )
+                            : _vm.type.id === "email"
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "text-muted font-14 text-center mt-3"
+                                },
+                                [
+                                  _c("p", { staticClass: "text-right" }, [
+                                    _vm._v(
+                                      "در هنگام ورود، کد یکبار مصرفی به ایمیل شما ارسال می‌شود."
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("strong", { staticClass: "text-dark" }, [
+                                    _vm._v(_vm._s(_vm.email))
+                                  ])
+                                ]
+                              )
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "pt-3" }, [
+                          _c("h3", { staticClass: "mb-3 font-16" }, [
+                            _vm._v("کد‌های بازیابی")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "اگر به هر دلیل نتوانستید به تلفن‌همراه خود برای دریافت پیامک یا اپلیکیشن تایید هویت دسترسی پیدا کنید می‌توانید برای ورد به حساب از کد‌های زیر استفاده کنید."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "w-100 d-flex justify-content-between align-items-center mb-3"
+                            },
+                            [
+                              _c("span", { staticClass: "font-12" }, [
+                                _vm._v("برای کپی کردن کلیک کنید")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "d-flex align-items-center" },
+                                [
+                                  _c(
+                                    "i",
+                                    {
+                                      staticClass:
+                                        "material-icons-outlined text-muted hover-dark clickable",
+                                      on: { click: _vm.downloadCodes }
+                                    },
+                                    [_vm._v("get_app")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "i",
+                                    {
+                                      staticClass:
+                                        "material-icons-outlined text-muted hover-dark clickable",
+                                      class: {
+                                        rotateAnimation: _vm.resetLoading
+                                      },
+                                      on: { click: _vm.resetCodes }
+                                    },
+                                    [_vm._v("loop")]
+                                  )
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "row" },
+                            _vm._l(_vm.recoveryCodes, function(recoveryCode) {
+                              return _c(
+                                "div",
+                                {
+                                  key: "recovery_" + recoveryCode,
+                                  staticClass: "col-md-4 col-2 mb-3"
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "clipboard",
+                                          rawName: "v-clipboard",
+                                          value: JSON.stringify(recoveryCode),
+                                          expression:
+                                            "JSON.stringify(recoveryCode)"
+                                        }
+                                      ],
+                                      staticClass:
+                                        "bg-body p-1 rounded-pill text-center clickable",
+                                      staticStyle: {
+                                        "padding-top": "7px !important"
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t\t" +
+                                          _vm._s(recoveryCode) +
+                                          "\n\t\t\t\t\t\t\t\t"
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            }),
+                            0
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "w-100 text-center" }, [
+                            _c("strong", [
+                              _vm._v(
+                                "حتما این اطلاعات را در جای امنی نگه دارید"
+                              )
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
+                  : _vm._e()
+              ],
+              1
+            ),
+        _vm._v(" "),
+        _c("strong", { staticClass: "text-superlight mt-3" }, [
+          _vm._v(
+            " با فعال کردن این ویژگی تمامی دستگاه‌های متصل به این حساب به صورت خودکار خارج می‌شوند. با اولین ورود هر دستگاه، یک تایید جهت ورود از شما درخواست می‌شود. "
+          )
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
 
 /***/ }),
 
-/***/ "./resources/js/Components/Modals/Settings/PhoneNumberModal.vue":
-/*!**********************************************************************!*\
-  !*** ./resources/js/Components/Modals/Settings/PhoneNumberModal.vue ***!
-  \**********************************************************************/
+/***/ "./resources/js/Components/Modals/Settings/TwoFAModal.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/Components/Modals/Settings/TwoFAModal.vue ***!
+  \****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _PhoneNumberModal_vue_vue_type_template_id_775b1d64___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PhoneNumberModal.vue?vue&type=template&id=775b1d64& */ \"./resources/js/Components/Modals/Settings/PhoneNumberModal.vue?vue&type=template&id=775b1d64&\");\n/* harmony import */ var _PhoneNumberModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PhoneNumberModal.vue?vue&type=script&lang=js& */ \"./resources/js/Components/Modals/Settings/PhoneNumberModal.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _PhoneNumberModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _PhoneNumberModal_vue_vue_type_template_id_775b1d64___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _PhoneNumberModal_vue_vue_type_template_id_775b1d64___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"resources/js/Components/Modals/Settings/PhoneNumberModal.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvQ29tcG9uZW50cy9Nb2RhbHMvU2V0dGluZ3MvUGhvbmVOdW1iZXJNb2RhbC52dWU/OTNlYiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUErRjtBQUMzQjtBQUNMOzs7QUFHL0Q7QUFDbUc7QUFDbkcsZ0JBQWdCLDJHQUFVO0FBQzFCLEVBQUUsc0ZBQU07QUFDUixFQUFFLDJGQUFNO0FBQ1IsRUFBRSxvR0FBZTtBQUNqQjtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTtBQUNBLElBQUksS0FBVSxFQUFFLFlBaUJmO0FBQ0Q7QUFDZSxnRiIsImZpbGUiOiIuL3Jlc291cmNlcy9qcy9Db21wb25lbnRzL01vZGFscy9TZXR0aW5ncy9QaG9uZU51bWJlck1vZGFsLnZ1ZS5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHJlbmRlciwgc3RhdGljUmVuZGVyRm5zIH0gZnJvbSBcIi4vUGhvbmVOdW1iZXJNb2RhbC52dWU/dnVlJnR5cGU9dGVtcGxhdGUmaWQ9Nzc1YjFkNjQmXCJcbmltcG9ydCBzY3JpcHQgZnJvbSBcIi4vUGhvbmVOdW1iZXJNb2RhbC52dWU/dnVlJnR5cGU9c2NyaXB0Jmxhbmc9anMmXCJcbmV4cG9ydCAqIGZyb20gXCIuL1Bob25lTnVtYmVyTW9kYWwudnVlP3Z1ZSZ0eXBlPXNjcmlwdCZsYW5nPWpzJlwiXG5cblxuLyogbm9ybWFsaXplIGNvbXBvbmVudCAqL1xuaW1wb3J0IG5vcm1hbGl6ZXIgZnJvbSBcIiEuLi8uLi8uLi8uLi8uLi9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9saWIvcnVudGltZS9jb21wb25lbnROb3JtYWxpemVyLmpzXCJcbnZhciBjb21wb25lbnQgPSBub3JtYWxpemVyKFxuICBzY3JpcHQsXG4gIHJlbmRlcixcbiAgc3RhdGljUmVuZGVyRm5zLFxuICBmYWxzZSxcbiAgbnVsbCxcbiAgbnVsbCxcbiAgbnVsbFxuICBcbilcblxuLyogaG90IHJlbG9hZCAqL1xuaWYgKG1vZHVsZS5ob3QpIHtcbiAgdmFyIGFwaSA9IHJlcXVpcmUoXCIvaG9tZS9zb3Jvb3NoL1Byb2plY3RzL3Rlcm5vYm8vbm9kZV9tb2R1bGVzL3Z1ZS1ob3QtcmVsb2FkLWFwaS9kaXN0L2luZGV4LmpzXCIpXG4gIGFwaS5pbnN0YWxsKHJlcXVpcmUoJ3Z1ZScpKVxuICBpZiAoYXBpLmNvbXBhdGlibGUpIHtcbiAgICBtb2R1bGUuaG90LmFjY2VwdCgpXG4gICAgaWYgKCFhcGkuaXNSZWNvcmRlZCgnNzc1YjFkNjQnKSkge1xuICAgICAgYXBpLmNyZWF0ZVJlY29yZCgnNzc1YjFkNjQnLCBjb21wb25lbnQub3B0aW9ucylcbiAgICB9IGVsc2Uge1xuICAgICAgYXBpLnJlbG9hZCgnNzc1YjFkNjQnLCBjb21wb25lbnQub3B0aW9ucylcbiAgICB9XG4gICAgbW9kdWxlLmhvdC5hY2NlcHQoXCIuL1Bob25lTnVtYmVyTW9kYWwudnVlP3Z1ZSZ0eXBlPXRlbXBsYXRlJmlkPTc3NWIxZDY0JlwiLCBmdW5jdGlvbiAoKSB7XG4gICAgICBhcGkucmVyZW5kZXIoJzc3NWIxZDY0Jywge1xuICAgICAgICByZW5kZXI6IHJlbmRlcixcbiAgICAgICAgc3RhdGljUmVuZGVyRm5zOiBzdGF0aWNSZW5kZXJGbnNcbiAgICAgIH0pXG4gICAgfSlcbiAgfVxufVxuY29tcG9uZW50Lm9wdGlvbnMuX19maWxlID0gXCJyZXNvdXJjZXMvanMvQ29tcG9uZW50cy9Nb2RhbHMvU2V0dGluZ3MvUGhvbmVOdW1iZXJNb2RhbC52dWVcIlxuZXhwb3J0IGRlZmF1bHQgY29tcG9uZW50LmV4cG9ydHMiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./resources/js/Components/Modals/Settings/PhoneNumberModal.vue\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TwoFAModal_vue_vue_type_template_id_ebd61398___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TwoFAModal.vue?vue&type=template&id=ebd61398& */ "./resources/js/Components/Modals/Settings/TwoFAModal.vue?vue&type=template&id=ebd61398&");
+/* harmony import */ var _TwoFAModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TwoFAModal.vue?vue&type=script&lang=js& */ "./resources/js/Components/Modals/Settings/TwoFAModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TwoFAModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TwoFAModal_vue_vue_type_template_id_ebd61398___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TwoFAModal_vue_vue_type_template_id_ebd61398___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Components/Modals/Settings/TwoFAModal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/Components/Modals/Settings/PhoneNumberModal.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/Components/Modals/Settings/TwoFAModal.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/Components/Modals/Settings/TwoFAModal.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TwoFAModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TwoFAModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Modals/Settings/TwoFAModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TwoFAModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Components/Modals/Settings/TwoFAModal.vue?vue&type=template&id=ebd61398&":
 /*!***********************************************************************************************!*\
-  !*** ./resources/js/Components/Modals/Settings/PhoneNumberModal.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/Components/Modals/Settings/TwoFAModal.vue?vue&type=template&id=ebd61398& ***!
   \***********************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PhoneNumberModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PhoneNumberModal.vue?vue&type=script&lang=js& */ \"./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Modals/Settings/PhoneNumberModal.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PhoneNumberModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); //# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvQ29tcG9uZW50cy9Nb2RhbHMvU2V0dGluZ3MvUGhvbmVOdW1iZXJNb2RhbC52dWU/OTk1YSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUEsd0NBQTRNLENBQWdCLDRQQUFHLEVBQUMiLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvQ29tcG9uZW50cy9Nb2RhbHMvU2V0dGluZ3MvUGhvbmVOdW1iZXJNb2RhbC52dWU/dnVlJnR5cGU9c2NyaXB0Jmxhbmc9anMmLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IG1vZCBmcm9tIFwiLSEuLi8uLi8uLi8uLi8uLi9ub2RlX21vZHVsZXMvYmFiZWwtbG9hZGVyL2xpYi9pbmRleC5qcz8/cmVmLS00LTAhLi4vLi4vLi4vLi4vLi4vbm9kZV9tb2R1bGVzL3Z1ZS1sb2FkZXIvbGliL2luZGV4LmpzPz92dWUtbG9hZGVyLW9wdGlvbnMhLi9QaG9uZU51bWJlck1vZGFsLnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qcyZcIjsgZXhwb3J0IGRlZmF1bHQgbW9kOyBleHBvcnQgKiBmcm9tIFwiLSEuLi8uLi8uLi8uLi8uLi9ub2RlX21vZHVsZXMvYmFiZWwtbG9hZGVyL2xpYi9pbmRleC5qcz8/cmVmLS00LTAhLi4vLi4vLi4vLi4vLi4vbm9kZV9tb2R1bGVzL3Z1ZS1sb2FkZXIvbGliL2luZGV4LmpzPz92dWUtbG9hZGVyLW9wdGlvbnMhLi9QaG9uZU51bWJlck1vZGFsLnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qcyZcIiJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./resources/js/Components/Modals/Settings/PhoneNumberModal.vue?vue&type=script&lang=js&\n");
-
-/***/ }),
-
-/***/ "./resources/js/Components/Modals/Settings/PhoneNumberModal.vue?vue&type=template&id=775b1d64&":
-/*!*****************************************************************************************************!*\
-  !*** ./resources/js/Components/Modals/Settings/PhoneNumberModal.vue?vue&type=template&id=775b1d64& ***!
-  \*****************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PhoneNumberModal_vue_vue_type_template_id_775b1d64___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PhoneNumberModal.vue?vue&type=template&id=775b1d64& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Modals/Settings/PhoneNumberModal.vue?vue&type=template&id=775b1d64&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PhoneNumberModal_vue_vue_type_template_id_775b1d64___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PhoneNumberModal_vue_vue_type_template_id_775b1d64___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvQ29tcG9uZW50cy9Nb2RhbHMvU2V0dGluZ3MvUGhvbmVOdW1iZXJNb2RhbC52dWU/OTQyOCJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEiLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvQ29tcG9uZW50cy9Nb2RhbHMvU2V0dGluZ3MvUGhvbmVOdW1iZXJNb2RhbC52dWU/dnVlJnR5cGU9dGVtcGxhdGUmaWQ9Nzc1YjFkNjQmLmpzIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0ICogZnJvbSBcIi0hLi4vLi4vLi4vLi4vLi4vbm9kZV9tb2R1bGVzL3Z1ZS1sb2FkZXIvbGliL2xvYWRlcnMvdGVtcGxhdGVMb2FkZXIuanM/P3Z1ZS1sb2FkZXItb3B0aW9ucyEuLi8uLi8uLi8uLi8uLi9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9saWIvaW5kZXguanM/P3Z1ZS1sb2FkZXItb3B0aW9ucyEuL1Bob25lTnVtYmVyTW9kYWwudnVlP3Z1ZSZ0eXBlPXRlbXBsYXRlJmlkPTc3NWIxZDY0JlwiIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./resources/js/Components/Modals/Settings/PhoneNumberModal.vue?vue&type=template&id=775b1d64&\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TwoFAModal_vue_vue_type_template_id_ebd61398___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TwoFAModal.vue?vue&type=template&id=ebd61398& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Modals/Settings/TwoFAModal.vue?vue&type=template&id=ebd61398&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TwoFAModal_vue_vue_type_template_id_ebd61398___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TwoFAModal_vue_vue_type_template_id_ebd61398___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ })
 

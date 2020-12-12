@@ -148,10 +148,14 @@ class ArticlesController extends Controller
     {
         // return Inertia::render("Feed");
         $article = Post::query()
-            ->with("mutualLikes")
             ->with("page")
             ->with("category")
-            ->where("id", $article)->orWhere("slug", $article)->firstOrFail();
+            ->where("id", $article)->orWhere("slug", $article);
+        if (Auth::check()) {
+            $article = $article->with("mutualLikes");
+        }
+
+        $article = $article->firstOrFail();
 
         if ($article->type === "article" && $article->user->active) {
             SEOTools::setTitle("$article->title");

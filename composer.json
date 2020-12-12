@@ -30,7 +30,8 @@
         "pragmarx/recovery": "^0.1.0",
         "silviolleite/laravelpwa": "^2.0",
         "stevebauman/location": "^5.2",
-        "taylornetwork/laravel-username-generator": "^2.4"
+        "taylornetwork/laravel-username-generator": "^2.4",
+        "tedivm/jshrink": "^1.3"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

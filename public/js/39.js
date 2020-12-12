@@ -1,62 +1,252 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[39],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Cards/NewPostCard.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Components/Cards/NewPostCard.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Modals/CookiesModal.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Components/Modals/CookiesModal.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Modals_NewPostModal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Modals/NewPostModal.vue */ \"./resources/js/Components/Modals/NewPostModal.vue\");\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  components: {\n    NewPostModal: _Modals_NewPostModal_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"]\n  },\n  data: function data() {\n    return {\n      showPostModal: false\n    };\n  },\n  name: \"NewPostCard\"\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vcmVzb3VyY2VzL2pzL0NvbXBvbmVudHMvQ2FyZHMvTmV3UG9zdENhcmQudnVlPzc2YTIiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFzQkE7QUFDQTtBQUNBO0FBQUE7QUFBQSxHQURBO0FBRUEsTUFGQSxrQkFFQTtBQUNBO0FBQ0E7QUFEQTtBQUdBLEdBTkE7QUFPQTtBQVBBIiwiZmlsZSI6Ii4vbm9kZV9tb2R1bGVzL2JhYmVsLWxvYWRlci9saWIvaW5kZXguanM/IS4vbm9kZV9tb2R1bGVzL3Z1ZS1sb2FkZXIvbGliL2luZGV4LmpzPyEuL3Jlc291cmNlcy9qcy9Db21wb25lbnRzL0NhcmRzL05ld1Bvc3RDYXJkLnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qcyYuanMiLCJzb3VyY2VzQ29udGVudCI6WyI8dGVtcGxhdGU+XG5cdDxkaXYgY2xhc3M9XCJwb3NpdGlvbi1yZWxhdGl2ZSBjYXJkXCIgdi1pZj1cIiRwYWdlLnByb3BzLnVzZXIgIT0gbnVsbFwiPlxuXHRcdDxuZXctcG9zdC1tb2RhbCBAZG9uZT1cIiRlbWl0KCdkb25lJylcIiA6c2hvdy5zeW5jPVwic2hvd1Bvc3RNb2RhbFwiPjwvbmV3LXBvc3QtbW9kYWw+XG5cdFx0PGRpdiBjbGFzcz1cIm5ldy1wb3N0LWJvZHlcIj5cblx0XHRcdDxkaXYgY2xhc3M9XCJ0ZXh0IGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXJcIj5cblx0XHRcdFx0PGxhenktaW1hZ2UgaW1nLWNsYXNzPVwicHJvZmlsZS1zbVwiIGNsYXNzPVwicHJvZmlsZS1zbSBtbC0yIG1iLTBcIiBsb2FkaW5nPVwibGF6eVwiIDpzcmM9XCIkcGFnZS5wcm9wcy51c2VyLnByb2ZpbGVcIiAvPlxuXHRcdFx0XHQ8ZGl2IGNsYXNzPVwidy0xMDAgY2xpY2thYmxlXCIgc3R5bGU9XCJib3JkZXItcmFkaXVzOiAxNXB4OyBiYWNrZ3JvdW5kOiAjZjVmNWY1OyBwYWRkaW5nOiA4cHggMTJweFwiIEBjbGljaz1cInNob3dQb3N0TW9kYWwgPSB0cnVlXCI+XG5cdFx0XHRcdFx0PHNwYW4gY2xhc3M9XCJuZXctcG9zdC0tcGxhY2Vob2xkZXJcIj5cblx0XHRcdFx0XHRcdHt7IFwi2KjZhyDahtuMINmB2qnYsSDZhduM4oCM2qnZhtuMIFwiICsgJHBhZ2UucHJvcHMudXNlci5maXJzdF9uYW1lICsgXCLYn1wiIH19XG5cdFx0XHRcdFx0PC9zcGFuPlxuXHRcdFx0XHQ8L2Rpdj5cblx0XHRcdDwvZGl2PlxuXHRcdFx0PGRpdiBjbGFzcz1cImQtZmxleCB0ZXh0LW11dGVkIGFsaWduLWl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNvbnRlbnQtYmV0d2VlbiBuZXctcG9zdC1hY3Rpb25zXCI+XG5cdFx0XHRcdDxhIGNsYXNzPVwibmV3LXBvc3QtLWFjdGlvbiBjbGlja2FibGVcIiBAY2xpY2s9XCJzaG93UG9zdE1vZGFsID0gdHJ1ZVwiPjxpIGNsYXNzPVwibWF0ZXJpYWwtaWNvbnMtb3V0bGluZWRcIj5jcm9wX29yaWdpbmFsPC9pPiDYsdiz2KfZhtmHIDwvYT5cblx0XHRcdFx0PGluZXJ0aWEtbGluayBocmVmPVwiL2FydGljbGVzL2NyZWF0ZVwiIGNsYXNzPVwibmV3LXBvc3QtLWFjdGlvblwiPiA8aSBjbGFzcz1cIm1hdGVyaWFsLWljb25zLW91dGxpbmVkXCI+YXJ0aWNsZTwvaT4g2YXZgtin2YTZhyA8L2luZXJ0aWEtbGluaz5cblx0XHRcdFx0PGEgY2xhc3M9XCJuZXctcG9zdC0tYWN0aW9uIGRpc2FibGVkXCI+PGkgY2xhc3M9XCJtYXRlcmlhbC1pY29ucy1vdXRsaW5lZFwiPnBvbGw8L2k+INmG2LjYsSDYs9mG2KzbjCA8L2E+XG5cdFx0XHQ8L2Rpdj5cblx0XHQ8L2Rpdj5cblx0PC9kaXY+XG48L3RlbXBsYXRlPlxuXG48c2NyaXB0PlxuaW1wb3J0IE5ld1Bvc3RNb2RhbCBmcm9tIFwiLi4vTW9kYWxzL05ld1Bvc3RNb2RhbC52dWVcIjtcbmV4cG9ydCBkZWZhdWx0IHtcblx0Y29tcG9uZW50czogeyBOZXdQb3N0TW9kYWwgfSxcblx0ZGF0YSgpIHtcblx0XHRyZXR1cm4ge1xuXHRcdFx0c2hvd1Bvc3RNb2RhbDogZmFsc2UsXG5cdFx0fTtcblx0fSxcblx0bmFtZTogXCJOZXdQb3N0Q2FyZFwiLFxufTtcbjwvc2NyaXB0PlxuXG48c3R5bGU+PC9zdHlsZT5cbiJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Cards/NewPostCard.vue?vue&type=script&lang=js&\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Mixins_Modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Mixins/Modal */ "./resources/js/Mixins/Modal.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_Mixins_Modal__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  name: "CookiesModal"
+});
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Cards/NewPostCard.vue?vue&type=template&id=6f9537ee&":
-/*!********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Components/Cards/NewPostCard.vue?vue&type=template&id=6f9537ee& ***!
-  \********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Modals/CookiesModal.vue?vue&type=template&id=6950280c&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Components/Modals/CookiesModal.vue?vue&type=template&id=6950280c& ***!
+  \**********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _vm.$page.props.user != null\n    ? _c(\n        \"div\",\n        { staticClass: \"position-relative card\" },\n        [\n          _c(\"new-post-modal\", {\n            attrs: { show: _vm.showPostModal },\n            on: {\n              done: function($event) {\n                return _vm.$emit(\"done\")\n              },\n              \"update:show\": function($event) {\n                _vm.showPostModal = $event\n              }\n            }\n          }),\n          _vm._v(\" \"),\n          _c(\"div\", { staticClass: \"new-post-body\" }, [\n            _c(\n              \"div\",\n              { staticClass: \"text d-flex align-items-center\" },\n              [\n                _c(\"lazy-image\", {\n                  staticClass: \"profile-sm ml-2 mb-0\",\n                  attrs: {\n                    \"img-class\": \"profile-sm\",\n                    loading: \"lazy\",\n                    src: _vm.$page.props.user.profile\n                  }\n                }),\n                _vm._v(\" \"),\n                _c(\n                  \"div\",\n                  {\n                    staticClass: \"w-100 clickable\",\n                    staticStyle: {\n                      \"border-radius\": \"15px\",\n                      background: \"#f5f5f5\",\n                      padding: \"8px 12px\"\n                    },\n                    on: {\n                      click: function($event) {\n                        _vm.showPostModal = true\n                      }\n                    }\n                  },\n                  [\n                    _c(\"span\", { staticClass: \"new-post--placeholder\" }, [\n                      _vm._v(\n                        \"\\n\\t\\t\\t\\t\\t\" +\n                          _vm._s(\n                            \"به چی فکر می‌کنی \" +\n                              _vm.$page.props.user.first_name +\n                              \"؟\"\n                          ) +\n                          \"\\n\\t\\t\\t\\t\"\n                      )\n                    ])\n                  ]\n                )\n              ],\n              1\n            ),\n            _vm._v(\" \"),\n            _c(\n              \"div\",\n              {\n                staticClass:\n                  \"d-flex text-muted align-items-center justify-content-between new-post-actions\"\n              },\n              [\n                _c(\n                  \"a\",\n                  {\n                    staticClass: \"new-post--action clickable\",\n                    on: {\n                      click: function($event) {\n                        _vm.showPostModal = true\n                      }\n                    }\n                  },\n                  [\n                    _c(\"i\", { staticClass: \"material-icons-outlined\" }, [\n                      _vm._v(\"crop_original\")\n                    ]),\n                    _vm._v(\" رسانه \")\n                  ]\n                ),\n                _vm._v(\" \"),\n                _c(\n                  \"inertia-link\",\n                  {\n                    staticClass: \"new-post--action\",\n                    attrs: { href: \"/articles/create\" }\n                  },\n                  [\n                    _c(\"i\", { staticClass: \"material-icons-outlined\" }, [\n                      _vm._v(\"article\")\n                    ]),\n                    _vm._v(\" مقاله \")\n                  ]\n                ),\n                _vm._v(\" \"),\n                _vm._m(0)\n              ],\n              1\n            )\n          ])\n        ],\n        1\n      )\n    : _vm._e()\n}\nvar staticRenderFns = [\n  function() {\n    var _vm = this\n    var _h = _vm.$createElement\n    var _c = _vm._self._c || _h\n    return _c(\"a\", { staticClass: \"new-post--action disabled\" }, [\n      _c(\"i\", { staticClass: \"material-icons-outlined\" }, [_vm._v(\"poll\")]),\n      _vm._v(\" نظر سنجی \")\n    ])\n  }\n]\nrender._withStripped = true\n\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvQ29tcG9uZW50cy9DYXJkcy9OZXdQb3N0Q2FyZC52dWU/N2ZkNyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLFNBQVMsd0NBQXdDO0FBQ2pEO0FBQ0E7QUFDQSxvQkFBb0IsMEJBQTBCO0FBQzlDO0FBQ0E7QUFDQTtBQUNBLGVBQWU7QUFDZjtBQUNBO0FBQ0E7QUFDQTtBQUNBLFdBQVc7QUFDWDtBQUNBLHFCQUFxQiwrQkFBK0I7QUFDcEQ7QUFDQTtBQUNBLGVBQWUsZ0RBQWdEO0FBQy9EO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxpQkFBaUI7QUFDakI7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EscUJBQXFCO0FBQ3JCO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxtQkFBbUI7QUFDbkI7QUFDQSxnQ0FBZ0MsdUNBQXVDO0FBQ3ZFO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLGVBQWU7QUFDZjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLG1CQUFtQjtBQUNuQjtBQUNBLDZCQUE2Qix5Q0FBeUM7QUFDdEU7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSw0QkFBNEI7QUFDNUIsbUJBQW1CO0FBQ25CO0FBQ0EsNkJBQTZCLHlDQUF5QztBQUN0RTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxvQkFBb0IsMkNBQTJDO0FBQy9ELGVBQWUseUNBQXlDO0FBQ3hEO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJmaWxlIjoiLi9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9saWIvbG9hZGVycy90ZW1wbGF0ZUxvYWRlci5qcz8hLi9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9saWIvaW5kZXguanM/IS4vcmVzb3VyY2VzL2pzL0NvbXBvbmVudHMvQ2FyZHMvTmV3UG9zdENhcmQudnVlP3Z1ZSZ0eXBlPXRlbXBsYXRlJmlkPTZmOTUzN2VlJi5qcyIsInNvdXJjZXNDb250ZW50IjpbInZhciByZW5kZXIgPSBmdW5jdGlvbigpIHtcbiAgdmFyIF92bSA9IHRoaXNcbiAgdmFyIF9oID0gX3ZtLiRjcmVhdGVFbGVtZW50XG4gIHZhciBfYyA9IF92bS5fc2VsZi5fYyB8fCBfaFxuICByZXR1cm4gX3ZtLiRwYWdlLnByb3BzLnVzZXIgIT0gbnVsbFxuICAgID8gX2MoXG4gICAgICAgIFwiZGl2XCIsXG4gICAgICAgIHsgc3RhdGljQ2xhc3M6IFwicG9zaXRpb24tcmVsYXRpdmUgY2FyZFwiIH0sXG4gICAgICAgIFtcbiAgICAgICAgICBfYyhcIm5ldy1wb3N0LW1vZGFsXCIsIHtcbiAgICAgICAgICAgIGF0dHJzOiB7IHNob3c6IF92bS5zaG93UG9zdE1vZGFsIH0sXG4gICAgICAgICAgICBvbjoge1xuICAgICAgICAgICAgICBkb25lOiBmdW5jdGlvbigkZXZlbnQpIHtcbiAgICAgICAgICAgICAgICByZXR1cm4gX3ZtLiRlbWl0KFwiZG9uZVwiKVxuICAgICAgICAgICAgICB9LFxuICAgICAgICAgICAgICBcInVwZGF0ZTpzaG93XCI6IGZ1bmN0aW9uKCRldmVudCkge1xuICAgICAgICAgICAgICAgIF92bS5zaG93UG9zdE1vZGFsID0gJGV2ZW50XG4gICAgICAgICAgICAgIH1cbiAgICAgICAgICAgIH1cbiAgICAgICAgICB9KSxcbiAgICAgICAgICBfdm0uX3YoXCIgXCIpLFxuICAgICAgICAgIF9jKFwiZGl2XCIsIHsgc3RhdGljQ2xhc3M6IFwibmV3LXBvc3QtYm9keVwiIH0sIFtcbiAgICAgICAgICAgIF9jKFxuICAgICAgICAgICAgICBcImRpdlwiLFxuICAgICAgICAgICAgICB7IHN0YXRpY0NsYXNzOiBcInRleHQgZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlclwiIH0sXG4gICAgICAgICAgICAgIFtcbiAgICAgICAgICAgICAgICBfYyhcImxhenktaW1hZ2VcIiwge1xuICAgICAgICAgICAgICAgICAgc3RhdGljQ2xhc3M6IFwicHJvZmlsZS1zbSBtbC0yIG1iLTBcIixcbiAgICAgICAgICAgICAgICAgIGF0dHJzOiB7XG4gICAgICAgICAgICAgICAgICAgIFwiaW1nLWNsYXNzXCI6IFwicHJvZmlsZS1zbVwiLFxuICAgICAgICAgICAgICAgICAgICBsb2FkaW5nOiBcImxhenlcIixcbiAgICAgICAgICAgICAgICAgICAgc3JjOiBfdm0uJHBhZ2UucHJvcHMudXNlci5wcm9maWxlXG4gICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgfSksXG4gICAgICAgICAgICAgICAgX3ZtLl92KFwiIFwiKSxcbiAgICAgICAgICAgICAgICBfYyhcbiAgICAgICAgICAgICAgICAgIFwiZGl2XCIsXG4gICAgICAgICAgICAgICAgICB7XG4gICAgICAgICAgICAgICAgICAgIHN0YXRpY0NsYXNzOiBcInctMTAwIGNsaWNrYWJsZVwiLFxuICAgICAgICAgICAgICAgICAgICBzdGF0aWNTdHlsZToge1xuICAgICAgICAgICAgICAgICAgICAgIFwiYm9yZGVyLXJhZGl1c1wiOiBcIjE1cHhcIixcbiAgICAgICAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kOiBcIiNmNWY1ZjVcIixcbiAgICAgICAgICAgICAgICAgICAgICBwYWRkaW5nOiBcIjhweCAxMnB4XCJcbiAgICAgICAgICAgICAgICAgICAgfSxcbiAgICAgICAgICAgICAgICAgICAgb246IHtcbiAgICAgICAgICAgICAgICAgICAgICBjbGljazogZnVuY3Rpb24oJGV2ZW50KSB7XG4gICAgICAgICAgICAgICAgICAgICAgICBfdm0uc2hvd1Bvc3RNb2RhbCA9IHRydWVcbiAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgIH0sXG4gICAgICAgICAgICAgICAgICBbXG4gICAgICAgICAgICAgICAgICAgIF9jKFwic3BhblwiLCB7IHN0YXRpY0NsYXNzOiBcIm5ldy1wb3N0LS1wbGFjZWhvbGRlclwiIH0sIFtcbiAgICAgICAgICAgICAgICAgICAgICBfdm0uX3YoXG4gICAgICAgICAgICAgICAgICAgICAgICBcIlxcblxcdFxcdFxcdFxcdFxcdFwiICtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgX3ZtLl9zKFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwi2KjZhyDahtuMINmB2qnYsSDZhduM4oCM2qnZhtuMIFwiICtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF92bS4kcGFnZS5wcm9wcy51c2VyLmZpcnN0X25hbWUgK1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCLYn1wiXG4gICAgICAgICAgICAgICAgICAgICAgICAgICkgK1xuICAgICAgICAgICAgICAgICAgICAgICAgICBcIlxcblxcdFxcdFxcdFxcdFwiXG4gICAgICAgICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICAgICAgICBdKVxuICAgICAgICAgICAgICAgICAgXVxuICAgICAgICAgICAgICAgIClcbiAgICAgICAgICAgICAgXSxcbiAgICAgICAgICAgICAgMVxuICAgICAgICAgICAgKSxcbiAgICAgICAgICAgIF92bS5fdihcIiBcIiksXG4gICAgICAgICAgICBfYyhcbiAgICAgICAgICAgICAgXCJkaXZcIixcbiAgICAgICAgICAgICAge1xuICAgICAgICAgICAgICAgIHN0YXRpY0NsYXNzOlxuICAgICAgICAgICAgICAgICAgXCJkLWZsZXggdGV4dC1tdXRlZCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW4gbmV3LXBvc3QtYWN0aW9uc1wiXG4gICAgICAgICAgICAgIH0sXG4gICAgICAgICAgICAgIFtcbiAgICAgICAgICAgICAgICBfYyhcbiAgICAgICAgICAgICAgICAgIFwiYVwiLFxuICAgICAgICAgICAgICAgICAge1xuICAgICAgICAgICAgICAgICAgICBzdGF0aWNDbGFzczogXCJuZXctcG9zdC0tYWN0aW9uIGNsaWNrYWJsZVwiLFxuICAgICAgICAgICAgICAgICAgICBvbjoge1xuICAgICAgICAgICAgICAgICAgICAgIGNsaWNrOiBmdW5jdGlvbigkZXZlbnQpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgIF92bS5zaG93UG9zdE1vZGFsID0gdHJ1ZVxuICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgfSxcbiAgICAgICAgICAgICAgICAgIFtcbiAgICAgICAgICAgICAgICAgICAgX2MoXCJpXCIsIHsgc3RhdGljQ2xhc3M6IFwibWF0ZXJpYWwtaWNvbnMtb3V0bGluZWRcIiB9LCBbXG4gICAgICAgICAgICAgICAgICAgICAgX3ZtLl92KFwiY3JvcF9vcmlnaW5hbFwiKVxuICAgICAgICAgICAgICAgICAgICBdKSxcbiAgICAgICAgICAgICAgICAgICAgX3ZtLl92KFwiINix2LPYp9mG2YcgXCIpXG4gICAgICAgICAgICAgICAgICBdXG4gICAgICAgICAgICAgICAgKSxcbiAgICAgICAgICAgICAgICBfdm0uX3YoXCIgXCIpLFxuICAgICAgICAgICAgICAgIF9jKFxuICAgICAgICAgICAgICAgICAgXCJpbmVydGlhLWxpbmtcIixcbiAgICAgICAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICAgICAgc3RhdGljQ2xhc3M6IFwibmV3LXBvc3QtLWFjdGlvblwiLFxuICAgICAgICAgICAgICAgICAgICBhdHRyczogeyBocmVmOiBcIi9hcnRpY2xlcy9jcmVhdGVcIiB9XG4gICAgICAgICAgICAgICAgICB9LFxuICAgICAgICAgICAgICAgICAgW1xuICAgICAgICAgICAgICAgICAgICBfYyhcImlcIiwgeyBzdGF0aWNDbGFzczogXCJtYXRlcmlhbC1pY29ucy1vdXRsaW5lZFwiIH0sIFtcbiAgICAgICAgICAgICAgICAgICAgICBfdm0uX3YoXCJhcnRpY2xlXCIpXG4gICAgICAgICAgICAgICAgICAgIF0pLFxuICAgICAgICAgICAgICAgICAgICBfdm0uX3YoXCIg2YXZgtin2YTZhyBcIilcbiAgICAgICAgICAgICAgICAgIF1cbiAgICAgICAgICAgICAgICApLFxuICAgICAgICAgICAgICAgIF92bS5fdihcIiBcIiksXG4gICAgICAgICAgICAgICAgX3ZtLl9tKDApXG4gICAgICAgICAgICAgIF0sXG4gICAgICAgICAgICAgIDFcbiAgICAgICAgICAgIClcbiAgICAgICAgICBdKVxuICAgICAgICBdLFxuICAgICAgICAxXG4gICAgICApXG4gICAgOiBfdm0uX2UoKVxufVxudmFyIHN0YXRpY1JlbmRlckZucyA9IFtcbiAgZnVuY3Rpb24oKSB7XG4gICAgdmFyIF92bSA9IHRoaXNcbiAgICB2YXIgX2ggPSBfdm0uJGNyZWF0ZUVsZW1lbnRcbiAgICB2YXIgX2MgPSBfdm0uX3NlbGYuX2MgfHwgX2hcbiAgICByZXR1cm4gX2MoXCJhXCIsIHsgc3RhdGljQ2xhc3M6IFwibmV3LXBvc3QtLWFjdGlvbiBkaXNhYmxlZFwiIH0sIFtcbiAgICAgIF9jKFwiaVwiLCB7IHN0YXRpY0NsYXNzOiBcIm1hdGVyaWFsLWljb25zLW91dGxpbmVkXCIgfSwgW192bS5fdihcInBvbGxcIildKSxcbiAgICAgIF92bS5fdihcIiDZhti42LEg2LPZhtis24wgXCIpXG4gICAgXSlcbiAgfVxuXVxucmVuZGVyLl93aXRoU3RyaXBwZWQgPSB0cnVlXG5cbmV4cG9ydCB7IHJlbmRlciwgc3RhdGljUmVuZGVyRm5zIH0iXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Cards/NewPostCard.vue?vue&type=template&id=6f9537ee&\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "b-modal",
+    {
+      attrs: {
+        "hide-footer": "",
+        title: "کوکی‌های ترنوبو",
+        size: "lg",
+        centered: true
+      },
+      model: {
+        value: _vm.showModal,
+        callback: function($$v) {
+          _vm.showModal = $$v
+        },
+        expression: "showModal"
+      }
+    },
+    [
+      _c("div", [
+        _c("h2", { staticClass: "font-20" }, [_vm._v("کوکی چیست؟")]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "کوکی‌ها داده‌هایی هستند که برای مدت زمان معینی توسط مرورگر ذخیره می‌شوند، تا کاربر مجبور نباشد هر بار بین صفحات جابه‌جا می‌شود یا به وب‌سایت را مجدد باز می‌کند عملیات‌های تکراری اجام دهد و تجربه استفاده از سیستم لذت‌بخش تر باشد."
+          )
+        ]),
+        _vm._v(" "),
+        _c("h2", { staticClass: "font-20 mb-4" }, [
+          _vm._v("ما از چه کوکی‌هایی استفاده می‌کنیم؟")
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c("div", { staticClass: "clearfix content active" }, [
+            _c("h4", { staticClass: "font-18" }, [
+              _vm._v("کوکی های مرتبط با حساب کاربری (account)")
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "اگر یک حساب کاربری با ما ایجاد کنید، ما از کوکی ها برای مدیریت فرآیند ثبت نام و مدیریت کلی استفاده خواهیم کرد. این کوکی ها معمولا هنگامی که از سیستم خارج می شوید (log out) حذف می‌شوند، اما در بعضی موارد ممکن است پس از آن در جهت حفظ تنظیمات ترنوبو شما حتی پس از خروج از سیستم، باقی بمانند."
+              )
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("h4", { staticClass: "font-18" }, [
+              _vm._v("کوکی های مرتبط با ورود به سیستم (login)")
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "ما از کوکی ها هنگام ورود شما به سیستم استفاده می‌کنیم تا بتوانیم ورود شما را به یاد داشته باشیم. این امر این امکان را به شما می‌دهد که هربار که از یک صفحه جدید بازدید می‌کنید، مجبور نباشید مجددا وارد شوید. این کوکی ها معمولا هنگامی که از سیستم خارج می‌شوید حذف و یا پاک می‌شوند تا اطمینان حاصل شود که تنها پس از ورود به سیستم می‌توان به فضاها و ویژگی های محدود دسترسی پیدا کرد."
+              )
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("h4", { staticClass: "font-18" }, [_vm._v("کوکی های تنظیمات")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "برای اینکه تجربه مناسبی در ترنوبو برای شما فراهم آوریم، قابلیتی جهت اصلاح تنظیمات شما برای نحوه عملکرد ترنوبو به هنگام استفاده شما، فراهم می کنیم. به منظور حفظ تنظیمات شما ما نیاز داریم تا کوکی هایی تنظیم کنیم تا بتوان این اطلاعات را هر زمان که با یک صفحه تحت تنظیمات خود در تعامل هستید اعمال کرد."
+              )
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("h4", { staticClass: "font-18" }, [
+              _vm._v("کوکی‌های تجربه کاربری")
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "\n\t\t\t\t\tما برای بهبود تجربه کاربری، تمامی تجربه از ترنوبو را ردیابی و تحلیل می‌کنیم و اطلاعات مربوطه را در یک کوکی رمزگذاری شده ذخیره می‌کنیم تا پست‌ها و مطالب تکراری، صفحه افرادی که علاقه‌ای به دنبال کردن آنها ندارید به شما کمتر نمایش دهیم.\n\t\t\t\t\t"
+              ),
+              _c("br"),
+              _vm._v(" "),
+              _c("strong", [
+                _vm._v(
+                  "تمامی اطلاعات شما به صورت end2end رمزگذاری شده است و حتی تیم فنی ترنوبو نیز به اطلاعات دسترسی ندارد."
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("h4", { staticClass: "font-18" }, [_vm._v("کوکی های شخص ثالث")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "\n\t\t\t\t\tدر برخی موارد خاص، ما از کوکی هایی که توسط اشخاص ثالث تامین می‌شوند، استفاده می‌کنیم.\n\t\t\t\t\t"
+              ),
+              _c("br"),
+              _vm._v(
+                "\n\t\t\t\t\tترنوبو از گوگل آنالیتیک استفاده می‌کند که یکی از رایج‌ترین و قابل اعتماد ترین ابزارهای تحلیلی در وب برای کمک به درک نحوه درست استفاده از سیستم و ارائه بهتر خدمات، می‌باشد. این کوکی‌ها مواردی مانند مدت زمان صرف شده در ترنوبو و صفحاتی که بازدید می‌کنید را ردیابی می‌کنند و بنابراین ما می‌توانیم به تولید محتوای جذاب ادامه دهیم.\n\t\t\t\t\t"
+              ),
+              _c("br")
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
 
 /***/ }),
 
-/***/ "./resources/js/Components/Cards/NewPostCard.vue":
-/*!*******************************************************!*\
-  !*** ./resources/js/Components/Cards/NewPostCard.vue ***!
-  \*******************************************************/
+/***/ "./resources/js/Components/Modals/CookiesModal.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/Components/Modals/CookiesModal.vue ***!
+  \*********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _NewPostCard_vue_vue_type_template_id_6f9537ee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NewPostCard.vue?vue&type=template&id=6f9537ee& */ \"./resources/js/Components/Cards/NewPostCard.vue?vue&type=template&id=6f9537ee&\");\n/* harmony import */ var _NewPostCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewPostCard.vue?vue&type=script&lang=js& */ \"./resources/js/Components/Cards/NewPostCard.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _NewPostCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _NewPostCard_vue_vue_type_template_id_6f9537ee___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _NewPostCard_vue_vue_type_template_id_6f9537ee___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"resources/js/Components/Cards/NewPostCard.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvQ29tcG9uZW50cy9DYXJkcy9OZXdQb3N0Q2FyZC52dWU/M2ZiYSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUEwRjtBQUMzQjtBQUNMOzs7QUFHMUQ7QUFDZ0c7QUFDaEcsZ0JBQWdCLDJHQUFVO0FBQzFCLEVBQUUsaUZBQU07QUFDUixFQUFFLHNGQUFNO0FBQ1IsRUFBRSwrRkFBZTtBQUNqQjtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTtBQUNBLElBQUksS0FBVSxFQUFFLFlBaUJmO0FBQ0Q7QUFDZSxnRiIsImZpbGUiOiIuL3Jlc291cmNlcy9qcy9Db21wb25lbnRzL0NhcmRzL05ld1Bvc3RDYXJkLnZ1ZS5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHJlbmRlciwgc3RhdGljUmVuZGVyRm5zIH0gZnJvbSBcIi4vTmV3UG9zdENhcmQudnVlP3Z1ZSZ0eXBlPXRlbXBsYXRlJmlkPTZmOTUzN2VlJlwiXG5pbXBvcnQgc2NyaXB0IGZyb20gXCIuL05ld1Bvc3RDYXJkLnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qcyZcIlxuZXhwb3J0ICogZnJvbSBcIi4vTmV3UG9zdENhcmQudnVlP3Z1ZSZ0eXBlPXNjcmlwdCZsYW5nPWpzJlwiXG5cblxuLyogbm9ybWFsaXplIGNvbXBvbmVudCAqL1xuaW1wb3J0IG5vcm1hbGl6ZXIgZnJvbSBcIiEuLi8uLi8uLi8uLi9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9saWIvcnVudGltZS9jb21wb25lbnROb3JtYWxpemVyLmpzXCJcbnZhciBjb21wb25lbnQgPSBub3JtYWxpemVyKFxuICBzY3JpcHQsXG4gIHJlbmRlcixcbiAgc3RhdGljUmVuZGVyRm5zLFxuICBmYWxzZSxcbiAgbnVsbCxcbiAgbnVsbCxcbiAgbnVsbFxuICBcbilcblxuLyogaG90IHJlbG9hZCAqL1xuaWYgKG1vZHVsZS5ob3QpIHtcbiAgdmFyIGFwaSA9IHJlcXVpcmUoXCIvaG9tZS9zb3Jvb3NoL1Byb2plY3RzL3Rlcm5vYm8vbm9kZV9tb2R1bGVzL3Z1ZS1ob3QtcmVsb2FkLWFwaS9kaXN0L2luZGV4LmpzXCIpXG4gIGFwaS5pbnN0YWxsKHJlcXVpcmUoJ3Z1ZScpKVxuICBpZiAoYXBpLmNvbXBhdGlibGUpIHtcbiAgICBtb2R1bGUuaG90LmFjY2VwdCgpXG4gICAgaWYgKCFhcGkuaXNSZWNvcmRlZCgnNmY5NTM3ZWUnKSkge1xuICAgICAgYXBpLmNyZWF0ZVJlY29yZCgnNmY5NTM3ZWUnLCBjb21wb25lbnQub3B0aW9ucylcbiAgICB9IGVsc2Uge1xuICAgICAgYXBpLnJlbG9hZCgnNmY5NTM3ZWUnLCBjb21wb25lbnQub3B0aW9ucylcbiAgICB9XG4gICAgbW9kdWxlLmhvdC5hY2NlcHQoXCIuL05ld1Bvc3RDYXJkLnZ1ZT92dWUmdHlwZT10ZW1wbGF0ZSZpZD02Zjk1MzdlZSZcIiwgZnVuY3Rpb24gKCkge1xuICAgICAgYXBpLnJlcmVuZGVyKCc2Zjk1MzdlZScsIHtcbiAgICAgICAgcmVuZGVyOiByZW5kZXIsXG4gICAgICAgIHN0YXRpY1JlbmRlckZuczogc3RhdGljUmVuZGVyRm5zXG4gICAgICB9KVxuICAgIH0pXG4gIH1cbn1cbmNvbXBvbmVudC5vcHRpb25zLl9fZmlsZSA9IFwicmVzb3VyY2VzL2pzL0NvbXBvbmVudHMvQ2FyZHMvTmV3UG9zdENhcmQudnVlXCJcbmV4cG9ydCBkZWZhdWx0IGNvbXBvbmVudC5leHBvcnRzIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./resources/js/Components/Cards/NewPostCard.vue\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CookiesModal_vue_vue_type_template_id_6950280c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CookiesModal.vue?vue&type=template&id=6950280c& */ "./resources/js/Components/Modals/CookiesModal.vue?vue&type=template&id=6950280c&");
+/* harmony import */ var _CookiesModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CookiesModal.vue?vue&type=script&lang=js& */ "./resources/js/Components/Modals/CookiesModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CookiesModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CookiesModal_vue_vue_type_template_id_6950280c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CookiesModal_vue_vue_type_template_id_6950280c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Components/Modals/CookiesModal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/Components/Cards/NewPostCard.vue?vue&type=script&lang=js&":
-/*!********************************************************************************!*\
-  !*** ./resources/js/Components/Cards/NewPostCard.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************/
+/***/ "./resources/js/Components/Modals/CookiesModal.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/Components/Modals/CookiesModal.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NewPostCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./NewPostCard.vue?vue&type=script&lang=js& */ \"./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Cards/NewPostCard.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NewPostCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); //# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvQ29tcG9uZW50cy9DYXJkcy9OZXdQb3N0Q2FyZC52dWU/MTc3YiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUEsd0NBQWlNLENBQWdCLHVQQUFHLEVBQUMiLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvQ29tcG9uZW50cy9DYXJkcy9OZXdQb3N0Q2FyZC52dWU/dnVlJnR5cGU9c2NyaXB0Jmxhbmc9anMmLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IG1vZCBmcm9tIFwiLSEuLi8uLi8uLi8uLi9ub2RlX21vZHVsZXMvYmFiZWwtbG9hZGVyL2xpYi9pbmRleC5qcz8/cmVmLS00LTAhLi4vLi4vLi4vLi4vbm9kZV9tb2R1bGVzL3Z1ZS1sb2FkZXIvbGliL2luZGV4LmpzPz92dWUtbG9hZGVyLW9wdGlvbnMhLi9OZXdQb3N0Q2FyZC52dWU/dnVlJnR5cGU9c2NyaXB0Jmxhbmc9anMmXCI7IGV4cG9ydCBkZWZhdWx0IG1vZDsgZXhwb3J0ICogZnJvbSBcIi0hLi4vLi4vLi4vLi4vbm9kZV9tb2R1bGVzL2JhYmVsLWxvYWRlci9saWIvaW5kZXguanM/P3JlZi0tNC0wIS4uLy4uLy4uLy4uL25vZGVfbW9kdWxlcy92dWUtbG9hZGVyL2xpYi9pbmRleC5qcz8/dnVlLWxvYWRlci1vcHRpb25zIS4vTmV3UG9zdENhcmQudnVlP3Z1ZSZ0eXBlPXNjcmlwdCZsYW5nPWpzJlwiIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./resources/js/Components/Cards/NewPostCard.vue?vue&type=script&lang=js&\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CookiesModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CookiesModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Modals/CookiesModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CookiesModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/Components/Cards/NewPostCard.vue?vue&type=template&id=6f9537ee&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/Components/Cards/NewPostCard.vue?vue&type=template&id=6f9537ee& ***!
-  \**************************************************************************************/
+/***/ "./resources/js/Components/Modals/CookiesModal.vue?vue&type=template&id=6950280c&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/Components/Modals/CookiesModal.vue?vue&type=template&id=6950280c& ***!
+  \****************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewPostCard_vue_vue_type_template_id_6f9537ee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./NewPostCard.vue?vue&type=template&id=6f9537ee& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Cards/NewPostCard.vue?vue&type=template&id=6f9537ee&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewPostCard_vue_vue_type_template_id_6f9537ee___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewPostCard_vue_vue_type_template_id_6f9537ee___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvQ29tcG9uZW50cy9DYXJkcy9OZXdQb3N0Q2FyZC52dWU/NDM4OCJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEiLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvQ29tcG9uZW50cy9DYXJkcy9OZXdQb3N0Q2FyZC52dWU/dnVlJnR5cGU9dGVtcGxhdGUmaWQ9NmY5NTM3ZWUmLmpzIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0ICogZnJvbSBcIi0hLi4vLi4vLi4vLi4vbm9kZV9tb2R1bGVzL3Z1ZS1sb2FkZXIvbGliL2xvYWRlcnMvdGVtcGxhdGVMb2FkZXIuanM/P3Z1ZS1sb2FkZXItb3B0aW9ucyEuLi8uLi8uLi8uLi9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9saWIvaW5kZXguanM/P3Z1ZS1sb2FkZXItb3B0aW9ucyEuL05ld1Bvc3RDYXJkLnZ1ZT92dWUmdHlwZT10ZW1wbGF0ZSZpZD02Zjk1MzdlZSZcIiJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./resources/js/Components/Cards/NewPostCard.vue?vue&type=template&id=6f9537ee&\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CookiesModal_vue_vue_type_template_id_6950280c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CookiesModal.vue?vue&type=template&id=6950280c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Components/Modals/CookiesModal.vue?vue&type=template&id=6950280c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CookiesModal_vue_vue_type_template_id_6950280c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CookiesModal_vue_vue_type_template_id_6950280c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ })
 

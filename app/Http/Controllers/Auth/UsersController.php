@@ -198,7 +198,7 @@ class UsersController extends Controller
             $page->save();
 
             Auth::login($user, true);
-            return response()->json(array("result" => true))->cookie("ternobo_current_page", $user->personalPage, 9999999);
+            return response()->json(array("result" => true))->cookie("ternobo_current_page_id", $user->personalPage->id, 9999999);
         }
         return abort(400);
     }
@@ -299,7 +299,7 @@ class UsersController extends Controller
         ActiveSession::removeSession();
         Auth::logout();
         Cookie::queue(Cookie::forget("ternobo_remembered_session_id"));
-        Cookie::queue(Cookie::forget("ternobo_current_page"));
+        Cookie::queue(Cookie::forget("ternobo_current_page_id"));
         return redirect("/");
     }
 

@@ -11,8 +11,9 @@ const mix = require('laravel-mix');
  |
  */
 
-require('laravel-mix-workbox');
-
+mix.babelConfig({
+    plugins: ['@babel/plugin-syntax-dynamic-import'],
+});
 
 mix
     .webpackConfig({
@@ -23,6 +24,4 @@ mix
     })
     .js('resources/js/app.js', '')
     .extract(['vue'])
-    .sourceMaps()
-    .generateSW()
     .version();

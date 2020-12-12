@@ -2,8 +2,8 @@
 	<base-layout>
 		<mobile-categories v-if="!$root.isDesktop" :categories="page.categories" :show.sync="showMobileCategory"></mobile-categories>
 		<verify-modal @verified="reloadUser" :show.sync="showVerification"></verify-modal>
-		<div class="content-container-profile">
-			<profile-steps @action="stepsAction" class="mb-3" :steps="$page.props.user.profile_steps" v-if="$page.props.user.profile_steps.percent < 100 && checkUser(page.user_id)"></profile-steps>
+		<div class="content-container-profile" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
+			<profile-steps @action="stepsAction" class="mb-3" :steps="$page.props.user.profile_steps" v-if="$page.props.user && $page.props.user.profile_steps.percent < 100 && checkUser(page.user_id)"></profile-steps>
 			<ProfileHeader ref="profileHeader" :page="page" :can-edit="canEdit"></ProfileHeader>
 			<tabs :compact="true" :disabled="edit" class="py-3" @selected="tabChange" :state-tab="true">
 				<template slot="custom-item">
@@ -23,14 +23,14 @@
 						</button>
 					</div>
 				</template>
-				<tab v-if="hasAbout" name="درباره من" id="home" :href="'/' + page.slug" :selected="current_tab === 'home'">
+				<tab v-if="hasAbout || canEdit" name="درباره من" id="home" :href="'/' + page.slug" :selected="current_tab === 'home'">
 					<div class="w-100 d-flex justify-content-center py-3" v-if="loadingTab">
 						<loading-spinner class="image__spinner" />
 					</div>
 					<AboutTab v-else ref="about" :edit="edit" :page="page"></AboutTab>
 				</tab>
-				<tab v-if="hasActivity" name="فعالیت‌ها" id="activities" :href="'/' + page.slug + '/activities'" :selected="current_tab === 'activities'">
-					<div class="row" v-if="!loadingTab" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
+				<tab v-if="hasActivity || canEdit" name="فعالیت‌ها" id="activities" :href="'/' + page.slug + '/activities'" :selected="current_tab === 'activities'">
+					<div class="row">
 						<div class="col-md-4" v-if="$root.isDesktop">
 							<Categories v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug"></Categories>
 						</div>
@@ -40,7 +40,7 @@
 							<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
 								<ActionCard v-for="action in actionsList" :page="page" :action="action" :key="action.id"></ActionCard>
 							</div>
-							<div class="w-100 d-flex justify-content-center py-3" v-if="loadingActions">
+							<div class="w-100 d-flex justify-content-center py-3" v-if="loadingActions || loadingMore">
 								<loading-spinner class="image__spinner" />
 							</div>
 							<div v-if="next_page_url === null && !loadingActions">
@@ -165,24 +165,17 @@ export default {
 			if (!this.loadingMore && this.next_page_url !== null) {
 				const options = {
 					method: "POST",
-					headers: {
-						"X-Inertia": "true",
-					},
 					url: this.next_page_url,
 					data: this.filters,
 				};
 				this.loadingMore = true;
 				axios(options)
 					.then((response) => {
-						const data = response.data.props;
+						const data = response.data;
 						if (data) {
 							if (data.actions) {
-								this.actionsList = data.actions.data;
+								this.actionsList = this.actionsList.concat(data.actions.data);
 								this.next_page_url = data.actions.next_page_url;
-							}
-							if (data.articles) {
-								this.articlesList = data.articles.data;
-								this.next_page_url = data.articles.next_page_url;
 							}
 						}
 					})

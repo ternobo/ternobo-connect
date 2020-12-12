@@ -98,7 +98,7 @@ export default {
 	components: { ConfirmModal, PostMobileMenu, ReportModal },
 	computed: {
 		following() {
-			return this.$page.props.followings.includes(this.post.page_id);
+			return this.$page.props.user != null ? this.$page.props.followings.includes(this.post.page_id) : false;
 		},
 	},
 	props: {

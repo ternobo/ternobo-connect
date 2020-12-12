@@ -1,57 +1,70 @@
 <template>
-	<b-modal v-model="showModal" hide-footer hide-header @show="onShow" body-class="pb-0" ref="modal" size="lg">
-		<div class="useroptions" v-if="$page.props.user">
-			<div class="useroptions-header">
-				<inertia-link @click="$emit('update:show', false)" :href="'/' + $page.props.user.username" class="d-flex aling-items-center">
-					<img class="profile-sm" :src="$page.props.user.profile" />
-					<span class="mx-2 d-flex flex-column justify-content-center">
-						<strong class="text-black"
-							>{{ $page.props.user.name }}
-							<i v-if="$page.props.user.is_verified === 1" class="position-relative verificationcheck">check_circle</i>
-						</strong>
-						<small>{{ $page.props.user.short_bio }}</small>
-					</span>
-				</inertia-link>
-				<i class="close material-icons text-muted hover-dark" @click="$emit('update:show', false)">close</i>
+	<div>
+		<login-modal :show.sync="showLogin"></login-modal>
+		<signup-modal :show.sync="showSignup"></signup-modal>
+		<b-modal v-model="showModal" hide-footer hide-header @show="onShow" body-class="pb-0" ref="modal" size="lg">
+			<div class="useroptions" v-if="$page.props.user">
+				<div class="useroptions-header">
+					<inertia-link @click="$emit('update:show', false)" :href="'/' + $page.props.user.username" class="d-flex aling-items-center">
+						<img class="profile-sm" :src="$page.props.user.profile" />
+						<span class="mx-2 d-flex flex-column justify-content-center">
+							<strong class="text-black"
+								>{{ $page.props.user.name }}
+								<i v-if="$page.props.user.is_verified === 1" class="position-relative verificationcheck">check_circle</i>
+							</strong>
+							<small>{{ $page.props.user.short_bio }}</small>
+						</span>
+					</inertia-link>
+					<i class="close material-icons text-muted hover-dark" @click="$emit('update:show', false)">close</i>
+				</div>
+				<ul class="p-0 menu">
+					<li class="list-item d-flex flex-column">
+						<inertia-link @click="$emit('update:show', false)" href="/settings" class="m-0"><i class="material-icons-outlined">settings</i> تنظیمات و حریم خصوصی </inertia-link>
+					</li>
+					<li class="list-item d-flex flex-column">
+						<inertia-link @click="$emit('update:show', false)" href="/ideas" class="m-0"><i class="material-icons-outlined">emoji_objects</i> صدای شما </inertia-link>
+					</li>
+					<li class="list-item d-flex flex-column">
+						<inertia-link @click="$emit('update:show', false)" href="/help" class="m-0"><i class="material-icons-outlined">help_outline</i> مرکز راهنمایی </inertia-link>
+					</li>
+				</ul>
+				<div class="langs">
+					<div class="lang-item disabled"><img src="/img/franch.png" width="24" height="24" /> <span>Française</span></div>
+					<div class="lang-item disabled"><img src="/img/en.png" width="24" height="24" /> <span>English</span></div>
+					<div class="lang-item"><img src="/img/iranicon.png" width="24" height="24" /> <span>فارسی</span></div>
+				</div>
+				<ul class="mb-0 p-0">
+					<li class="list-item">
+						<inertia-link @click="$emit('update:show', false)" href="/logout" method="post" as="button" class="text-right bg-transparent hover-danger m-0 border-0 text-grey"><i class="material-icons">power_settings_new</i> خروج </inertia-link>
+					</li>
+				</ul>
 			</div>
-			<ul class="p-0 menu">
-				<li class="list-item d-flex flex-column">
-					<inertia-link @click="$emit('update:show', false)" href="/settings" class="m-0"><i class="material-icons-outlined">settings</i> تنظیمات و حریم خصوصی </inertia-link>
-				</li>
-				<li class="list-item d-flex flex-column">
-					<inertia-link @click="$emit('update:show', false)" href="/ideas" class="m-0"><i class="material-icons-outlined">emoji_objects</i> صدای شما </inertia-link>
-				</li>
-				<li class="list-item d-flex flex-column">
-					<inertia-link @click="$emit('update:show', false)" href="/help" class="m-0"><i class="material-icons-outlined">help_outline</i> مرکز راهنمایی </inertia-link>
-				</li>
-			</ul>
-			<div class="langs">
-				<div class="lang-item disabled"><img src="/img/franch.png" width="24" height="24" /> <span>Française</span></div>
-				<div class="lang-item disabled"><img src="/img/en.png" width="24" height="24" /> <span>English</span></div>
-				<div class="lang-item"><img src="/img/iranicon.png" width="24" height="24" /> <span>فارسی</span></div>
+			<div v-else class="useroptions">
+				<ul class="p-0 menu">
+					<li class="list-item d-flex flex-column">
+						<a @click="$emit('update:show', false), (showLogin = true)" class="clickable m-0"><i class="material-icons-outlined">login</i> ورود </a>
+					</li>
+					<li class="list-item d-flex flex-column">
+						<a @click="$emit('update:show', false), (showSignup = true)" class="clickable m-0"><i class="material-icons-outlined">account_circle</i> ثبت‌نام </a>
+					</li>
+				</ul>
 			</div>
-			<ul class="mb-0 p-0">
-				<li class="list-item">
-					<inertia-link @click="$emit('update:show', false)" href="/logout" method="post" as="button" class="text-right bg-transparent hover-danger m-0 border-0 text-grey"><i class="material-icons">power_settings_new</i> خروج </inertia-link>
-				</li>
-			</ul>
-		</div>
-		<div v-else class="useroptions">
-			<ul class="p-0 menu">
-				<li class="list-item d-flex flex-column">
-					<inertia-link @click="$emit('update:show', false)" href="/settings" class="m-0"><i class="material-icons-outlined">login</i> ورود </inertia-link>
-				</li>
-				<li class="list-item d-flex flex-column">
-					<inertia-link @click="$emit('update:show', false)" href="/ideas" class="m-0"><i class="material-icons-outlined">account_circle</i> ثبت‌نام </inertia-link>
-				</li>
-			</ul>
-		</div>
-	</b-modal>
+		</b-modal>
+	</div>
 </template>
 
 <script>
 import ModalMixin from "../../Mixins/Modal";
+import LoginModal from "./LoginModal.vue";
+import SignupModal from "./SignupModal.vue";
 export default {
+	data() {
+		return {
+			showLogin: false,
+			showSignup: false,
+		};
+	},
+	components: { LoginModal, SignupModal },
 	methods: {
 		onShow() {
 			setTimeout(() => {

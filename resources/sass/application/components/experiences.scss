@@ -3,6 +3,10 @@
     flex-direction: row;
     flex-wrap: nowrap;
 
+    &:not(:last-child) {
+        margin-bottom: 12px;
+    }
+
     .job-description {
         text-align: justify;
         max-height: 90px;

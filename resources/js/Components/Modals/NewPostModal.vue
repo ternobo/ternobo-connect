@@ -298,7 +298,7 @@ export default {
 				showType: undefined,
 				category: undefined,
 				text: undefined,
-				categories: this.$page.props.currentPage.categories,
+				categories: [],
 				tags: [],
 				txtlen: "0%",
 				isCropping: false,
@@ -323,6 +323,12 @@ export default {
 	},
 	created() {
 		this.showType = this.showTypesItems[0];
+
+		if (this.$page.props.user) {
+			if (this.$page.props.currentPage.categories != null) {
+				this.categories = this.$page.props.currentPage.categories;
+			}
+		}
 	},
 	data() {
 		return this.initialData();

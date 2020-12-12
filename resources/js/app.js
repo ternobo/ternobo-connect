@@ -1,5 +1,6 @@
 require('./bootstrap');
 
+console.log("hello");
 import Vue from 'vue';
 
 import { plugin } from '@inertiajs/inertia-vue'
@@ -15,6 +16,7 @@ import App from "./Layouts/App";
 import '@trevoreyre/autocomplete-vue/dist/style.css'
 import Dialog from 'bootstrap-vue-dialog/dist/bootstrap-vue-dialog';
 import InfiniteLoading from 'vue-infinite-loading';
+import Application from "./Application.vue";
 
 Vue.use(InfiniteLoading, { /* options */ });
 
@@ -52,7 +54,10 @@ Vue.use(PortalVue);
 Vue.use(TernoboApp);
 
 // Install Infinite Scroll
-Vue.use(infiniteScroll)
+Vue.use(infiniteScroll);
+
+Vue.config.devtools = false;
+Vue.config.productionTip = false
 
 Vue.component("vue-circle", VueCircle);
 
@@ -78,9 +83,6 @@ if (user_id) {
     }, 3000);
 }
 
-
-const Application = () => import("./Application");
-
 const vue_app = new Vue({
     render: (h) =>
         h(Application, {
@@ -90,14 +92,7 @@ const vue_app = new Vue({
 
                     return props;
                 },
-                async resolveComponent(name) {
-                    let page = undefined;
-                    await import(`./Pages/${name}`).then(m => {
-                        page = m.default;
-                        vue_app.layout = page.layout;
-                    });
-                    return page;
-                },
+                resolveComponent: name => import(`./Pages/${name}`).then(m => m.default),
             },
         }),
     data() {
@@ -107,7 +102,6 @@ const vue_app = new Vue({
             isTablet: window.matchMedia("(max-width: 960px)").matches,
             isDesktop: window.matchMedia("(min-width: 961px)").matches,
             layout: App,
-            user: window.user,
             url: window.location.pathname
         }
     }

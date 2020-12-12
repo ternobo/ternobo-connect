@@ -12,10 +12,12 @@ import SimplePost from "./SimplePost";
 import ArticleCard from "./ArticleCard";
 export default {
 	created() {
-		if (this.action.post.type === "article") {
-			this.componentType = require("./ArticleCard").default;
-		} else if (this.action.post.type === "share") {
-			this.componentType = require("./ResharedPost").default;
+		if (this.action.post) {
+			if (this.action.post.type === "article") {
+				this.componentType = require("./ArticleCard").default;
+			} else if (this.action.post.type === "share") {
+				this.componentType = require("./ResharedPost").default;
+			}
 		}
 	},
 	data() {

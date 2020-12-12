@@ -27,13 +27,13 @@ import SocialsCard from "./SocialsCard";
 export default {
 	computed: {
 		showWebsites() {
-			if (this.checkUser(this.page.user_id) || (this.page.contact_data != null && this.page.contact_data.websites != null && this.page.contact_data.websites.length > 0)) {
+			if (this.checkUser(this.page.user_id) || (this.page.contact_data != null && this.page.contact_data.websites != null)) {
 				return true;
 			}
 			return false;
 		},
 		showContacts() {
-			if (this.checkUser(this.page.user_id) || (this.page.contact_data != null && this.page.contact_data.contacts != null && this.page.contact_data.contacts.length > 0)) {
+			if (this.checkUser(this.page.user_id) || (this.page.contact_data != null && this.page.contact_data.contacts != null)) {
 				return true;
 			}
 			return false;

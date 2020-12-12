@@ -3,7 +3,7 @@
 		<sidebar-right v-if="$root.isDesktop">
 			<user-card></user-card>
 		</sidebar-right>
-		<div class="content-container">
+		<div class="content-container" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="5">
 			<div class="card">
 				<div class="card-body py-1" v-if="notificationsArray.length > 0">
 					<Notification v-for="notification in notificationsArray" :notification="notification" :key="notification.id"></Notification>

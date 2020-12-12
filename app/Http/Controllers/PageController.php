@@ -135,6 +135,7 @@ class PageController extends Controller
 
         foreach ($posts as $post) {
             $postTags = json_decode($post->tags);
+            $postTags = $postTags == null ? [] : $postTags;
             $tags = array_merge($tags, $postTags);
         }
 

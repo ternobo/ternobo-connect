@@ -1,5 +1,5 @@
 <template>
-	<component class="mb-3" :post="post" :has-comment="hasComment" v-bind:is="componentType"></component>
+	<component v-if="post != null && post != undefined" class="mb-3" :post="post" :has-comment="hasComment" v-bind:is="componentType"></component>
 </template>
 
 <script>
@@ -7,10 +7,12 @@ import SimplePost from "./SimplePost";
 import ArticleCard from "./ArticleCard";
 export default {
 	created() {
-		if (this.post.type === "article") {
-			this.componentType = require("./ArticleCard").default;
-		} else if (this.post.type === "share") {
-			this.componentType = require("./ResharedPost").default;
+		if (this.post) {
+			if (this.post.type === "article") {
+				this.componentType = require("./ArticleCard").default;
+			} else if (this.post.type === "share") {
+				this.componentType = require("./ResharedPost").default;
+			}
 		}
 	},
 	data() {
