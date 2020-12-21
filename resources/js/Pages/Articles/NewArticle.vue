@@ -13,7 +13,7 @@
 			<div class="editor-section border-bottom">
 				<input type="text" v-model="title" class="font-24 border-0 form-control" placeholder="عنوان مقاله" />
 
-				<ckeditor ref="editor" :editor="editor" v-model="content" :config="editorConfig"></ckeditor>
+				<ckeditor ref="editor" :editor="editor" v-model="content" :config="editorConfig" @ready="onReady"></ckeditor>
 			</div>
 			<div class="actions-section">
 				<loading-button @click.native="submit" :loading="loading" class="btn btn-primary w-100">ارسال</loading-button>
@@ -41,6 +41,9 @@ export default {
 		},
 	},
 	methods: {
+		onReady(editor) {
+			console.log(editor);
+		},
 		selectFile() {
 			if (this.thumbnail === undefined) {
 				const $this = this;
@@ -195,6 +198,7 @@ export default {
 
 			editor: ClassicEditor,
 			editorConfig: {
+				toolbar: ["heading", "|", "bold", "italic", "link", "bulletedList", "numberedList", "|", "indent", "outdent", "|", "imageUpload", "blockQuote", "insertTable", "mediaEmbed", "undo", "redo"],
 				language: "fa",
 			},
 		};

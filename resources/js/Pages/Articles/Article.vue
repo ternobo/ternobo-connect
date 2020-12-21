@@ -133,7 +133,7 @@ export default {
 						text: "تایید",
 						variant: "primary",
 						handle: async () => {
-							axios.delete(this.$APP_URL + "/articles/" + this.post.id);
+							await axios.delete(this.$APP_URL + "/articles/" + this.post.id);
 							Inertia.visit("/feed");
 						},
 					},

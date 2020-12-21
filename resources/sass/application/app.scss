@@ -1528,3 +1528,11 @@ a:focus {
     -o-object-fit: cover;
     object-fit: cover;
 }
+
+.dialog-layout-modal-body {
+    padding: 0;
+
+    .modal-footer {
+        border: 0;
+    }
+}

@@ -1,6 +1,4 @@
 require('./bootstrap');
-
-console.log("hello");
 import Vue from 'vue';
 
 import { plugin } from '@inertiajs/inertia-vue'
@@ -89,7 +87,6 @@ const vue_app = new Vue({
             props: {
                 initialPage: JSON.parse(app.dataset.page),
                 transformProps: function (props) {
-
                     return props;
                 },
                 resolveComponent: name => import(`./Pages/${name}`).then(m => m.default),

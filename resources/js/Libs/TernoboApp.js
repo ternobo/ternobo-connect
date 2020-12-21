@@ -142,7 +142,7 @@ TernoboApp.install = function (Vue, options) {
                 }
                 return false;
             },
-            handleError(errors, type) {
+            handleError(errors, type = null) {
                 Object.keys(errors).forEach((item) => {
                     let msg = errors[item][0];
                     if (type != null && type != undefined) {

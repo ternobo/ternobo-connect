@@ -20,7 +20,6 @@ window.axios.defaults.headers.common['Expires'] = '0';
  * allows your team to easily build robust real-time web applications.
  */
 import Echo from 'laravel-echo';
-
 if (user_id) {
 
     window.io = require('socket.io-client');

@@ -69,7 +69,7 @@ var render = function() {
         "inertia-link",
         {
           staticClass: "d-flex h-100 align-items-center w-100",
-          attrs: { href: _vm.page.slug }
+          attrs: { href: "/" + _vm.page.slug }
         },
         [
           _c("lazy-image", {

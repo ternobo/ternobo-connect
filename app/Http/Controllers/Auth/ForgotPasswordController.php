@@ -7,7 +7,6 @@ use App\Models\Mail;
 use App\Models\PasswordReset;
 use App\Models\User;
 use App\SMS;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -26,8 +25,6 @@ class ForgotPasswordController extends Controller
     | your application to your users. Feel free to explore this trait.
     |
      */
-
-    use SendsPasswordResetEmails;
 
     public function resetPassword(Request $request)
     {
@@ -53,7 +50,7 @@ class ForgotPasswordController extends Controller
                 }
                 $passwordrest->token = random_int(111111, 999999);
 
-                if ($user->phone !== null) {
+                if (!$this->checkEmail($request->input)) {
                     $passwordrest->save();
                     $sms = new SMS($user->phone);
                     $sms->sendUltraFastSMS(array(SMS::makeParameter("passreset", $passwordrest->token)), "24525");
@@ -70,7 +67,7 @@ class ForgotPasswordController extends Controller
                     return response()->json(array("result" => true, "msg" => "کد فعالسازی برای شما ایمیل شد"));
                 }
             } else {
-                return response()->json(array("result" => false, "errors" => array("هیچ کاربری با این اطلاعات یافت نشد!")));
+                return response()->json(array("result" => false, "errors" => array('msg' => "هیچ کاربری با این اطلاعات یافت نشد!")));
             }
         }
     }

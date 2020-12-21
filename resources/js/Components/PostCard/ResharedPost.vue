@@ -1,9 +1,9 @@
 <template>
-	<div class="post-box" v-if="post !== undefined && post != null && post.share != null && post.share != undefined">
+	<div class="post-box" v-if="post !== undefined && post != null && post.share != null && post.share != undefined && !deleted">
 		<ReshareModal :post="post.share" :show.sync="showReshare"></ReshareModal>
 		<EmbedCodeModal :post="post" :show.sync="showEmbed"></EmbedCodeModal>
 		<likes-modal :item="post.id" :show.sync="showLikes"></likes-modal>
-
+		<new-post-modal :post="post" :show.sync="edit"></new-post-modal>
 		<div class="post-header pt-0">
 			<inertia-link class="publisher" :href="'/' + post.page.slug">
 				<lazy-image class="profile-sm mb-0" img-class="profile-sm" :src="post.page.profile" />
@@ -26,7 +26,7 @@
 			<div class="actions position-relative" v-if="showMenu">
 				<i class="material-icons bookmark-icon clickable text-muted hover-dark" @click="bookmark">{{ bookmarked ? "bookmark" : "bookmark_border" }}</i>
 				<div>
-					<post-menu :post="post" @embed="showEmbed = true"></post-menu>
+					<post-menu :post="post" @deleted="doDelete" @edit="edit = true" @embed="showEmbed = true"></post-menu>
 				</div>
 			</div>
 		</div>
@@ -100,13 +100,14 @@ export default {
 	data() {
 		return {
 			liked: false,
+			deleted: false,
 			bookmarked: false,
 			openComment: false,
 			showEmbed: false,
 			showReshare: false,
 
 			showLikes: false,
-
+			edit: false,
 			componentType: require("../PostCard/SimplePost").default,
 
 			showMore: false,
@@ -143,6 +144,10 @@ export default {
 		observer.observe(this.$el);
 	},
 	methods: {
+		doDelete() {
+			this.deleted = true;
+			axios.delete("/posts/" + this.post.id);
+		},
 		like() {
 			if (this.liked) {
 				this.liked = false;

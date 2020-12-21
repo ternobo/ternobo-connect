@@ -117,14 +117,7 @@ export default {
 						$this.verification_step = true;
 					} else {
 						const errors = response.data.errors;
-						Object.keys(errors).forEach(function (item, index) {
-							$this.$bvToast.toast(errors[item][0], {
-								noCloseButton: true,
-								toaster: "b-toaster-bottom-left",
-								bodyClass: ["bg-dark", "text-right", "text-white"],
-								solid: true,
-							});
-						});
+						$this.handleError(errors);
 					}
 					$this.loading = false;
 				})
@@ -161,6 +154,7 @@ export default {
 				.then(() => (this.completedCode = true));
 		},
 		savePersonal() {
+			this.loading = true;
 			var $this = this;
 			var data = new FormData();
 			if (this.first_name !== undefined && this.first_name !== "") {
@@ -187,7 +181,11 @@ export default {
 					if (response.data.result) {
 						$this.personal_info_step = false;
 						$this.password_step = true;
+					} else {
+						const errors = response.data.errors;
+						$this.handleError(errors);
 					}
+					$this.loading = false;
 				})
 				.catch(function (error) {
 					$this.loading = false;
@@ -197,6 +195,8 @@ export default {
 			var $this = this;
 			var data = new FormData();
 			if (this.password === this.password_repeat) {
+				this.loading = true;
+
 				data.append("password", this.password);
 				var config = {
 					method: "post",
@@ -209,18 +209,17 @@ export default {
 						if (response.data.result) {
 							$this.password_step = false;
 							$this.profile_step = true;
+						} else {
+							const errors = response.data.errors;
+							$this.handleError(errors);
 						}
+						$this.loading = false;
 					})
 					.catch(function (error) {
 						$this.loading = false;
 					});
 			} else {
-				this.$bvToast.toast("رمزعبور و تاییدیه آن برابر نیست", {
-					noCloseButton: true,
-					toaster: "b-toaster-bottom-left",
-					bodyClass: ["bg-dark", "text-right", "text-white"],
-					solid: true,
-				});
+				this.toast("رمزعبور و تاییدیه آن برابر نیست");
 			}
 		},
 	},

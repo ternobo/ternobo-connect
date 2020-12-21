@@ -1,5 +1,5 @@
 <template>
-	<div class="post-box" :class="{ 'reshared-post': !showMenu }" v-if="post !== undefined">
+	<div class="post-box" :class="{ 'reshared-post': !showMenu }" v-if="post !== undefined && !deleted">
 		<EmbedCodeModal :post="post" :show.sync="showEmbed"></EmbedCodeModal>
 		<ReshareModal :post="post" :show.sync="showReshare"></ReshareModal>
 		<likes-modal :item="post.id" :show.sync="showLikes"></likes-modal>
@@ -26,7 +26,7 @@
 			<div class="actions position-relative" v-if="showMenu">
 				<i class="material-icons bookmark-icon clickable text-muted hover-dark">bookmark_border</i>
 				<div>
-					<post-menu :post="post" @embed="showEmbed = true"></post-menu>
+					<post-menu :post="post" @embed="showEmbed = true" @deleted="doDelete"></post-menu>
 				</div>
 			</div>
 		</div>
@@ -91,6 +91,7 @@ export default {
 			showReshare: false,
 
 			showLikes: false,
+			deleted: false,
 		};
 	},
 	created: function () {
@@ -117,6 +118,10 @@ export default {
 		PostMenu,
 	},
 	methods: {
+		doDelete() {
+			this.deleted = true;
+			axios.delete("/posts/" + this.post.id);
+		},
 		like() {
 			if (this.liked) {
 				this.liked = false;

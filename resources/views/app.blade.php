@@ -13,11 +13,15 @@
     <link rel="stylesheet" href="/ternobo-telegram/style.css">
     {!! SEO::generate() !!}
 
-
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="manifest" href="/site.webmanifest.json" crossorigin="use-credentials">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#191919">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="mobile-web-app-capable" content="yes">
+
     <link rel="preload" href="/fonts/google-material/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2"/>
     <link rel="preload" href="/manifest.js" as="script">
     <link rel="preload" href="/js/vendor.js" as="script">
@@ -28,13 +32,7 @@
     <link rel="preload" href="/fonts/roboto/Roboto-Regular.ttf">
     <link rel="preload" href="/fonts/google-material/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2">
 
-    <meta name="apple-mobile-web-app-title" content="Ternobo">
-    <meta name="application-name" content="Ternobo">
-    <meta name="msapplication-TileColor" content="#191919">
-    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
-    <meta name="theme-color" content="#191919">
     <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
 
     <script>
         var APP_URL = "{{ url('/') }}";
@@ -50,16 +48,15 @@
     <script>
         var user_id = @auth {{ Auth::user()->id }} @endauth @guest false @endguest;
     </script>
-
-
-        <script src="/manifest.js" defer></script>
-        <script src="/js/vendor.js" defer></script>
-        <script src="/js/app.js" defer></script>
-        
+  
     </head>
 
     <body class="font-sans antialiased">
         @inertia
+
+        <script src="/manifest.js" defer></script>
+        <script src="/js/vendor.js" defer></script>
+        <script src="/js/app.js" defer></script>
         <link href="/css/app.css" rel="stylesheet"/>
     </body>
 
