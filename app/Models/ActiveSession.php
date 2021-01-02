@@ -40,7 +40,10 @@ class ActiveSession extends Model
         $session->user_id = $user_id;
 
         $session->ip_address = Request::ip();
-        $session->location = Location::get(Request::ip())->countryName;
+        $location = Location::get(Request::ip());
+        if ($location) {
+            $session->location = Location::get(Request::ip())->countryName;
+        }
         $session->save();
         Cookie::queue('ternobo_remembered_session_id', $session->id, 1.577e+9);
     }

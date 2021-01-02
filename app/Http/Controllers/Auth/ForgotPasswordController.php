@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActiveSession;
 use App\Models\Mail;
 use App\Models\PasswordReset;
 use App\Models\User;
@@ -55,7 +56,7 @@ class ForgotPasswordController extends Controller
                     $sms = new SMS($user->phone);
                     $sms->sendUltraFastSMS(array(SMS::makeParameter("passreset", $passwordrest->token)), "24525");
                     session()->put("email", $user->phone);
-                    return response()->json(array("result" => true, "msg" => "کد فعالسازی برای شما پیامک شد"));
+                    return response()->json(array("result" => true, "msg" => ["کد فعالسازی برای شما پیامک شد"]));
                 } else {
                     $html = view('emails.forgotpass', array("code" => $passwordrest->token, "username" => $user->username))->render();
                     $text = "بازیابی رمزعبور در ترنوبو";
@@ -67,7 +68,7 @@ class ForgotPasswordController extends Controller
                     return response()->json(array("result" => true, "msg" => "کد فعالسازی برای شما ایمیل شد"));
                 }
             } else {
-                return response()->json(array("result" => false, "errors" => array('msg' => "هیچ کاربری با این اطلاعات یافت نشد!")));
+                return response()->json(array("result" => false, "errors" => array('msg' => ["هیچ کاربری با این اطلاعات یافت نشد!"])));
             }
         }
     }
@@ -96,6 +97,7 @@ class ForgotPasswordController extends Controller
             if ($user instanceof User) {
                 $user->password = Hash::make($request->newpassword);
                 $user->save();
+                ActiveSession::addSession($user->id);
                 Auth::login($user, true);
                 DB::raw("delete from `password_resets` where `email` is ?", $passreset->email);
                 return response()->json(array("result" => true));

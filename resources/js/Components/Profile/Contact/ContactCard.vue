@@ -8,7 +8,7 @@
 				<li :class="{ edit: edit }" v-if="(contacts.email != null && this.contacts.email.length > 0) || edit">
 					<a target="_blank" :href="'mailto:' + contacts.email" v-if="!edit">
 						<i class="material-icons-outlined ml-1" :style="{ color: '#F14336' }">email</i>
-						ارسال پیام به پست الترونیک
+						ارسال پیام به پست الکترونیک
 					</a>
 					<div v-else class="edit-contact">
 						<span class="text-nowrap ml-2">

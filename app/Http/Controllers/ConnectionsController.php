@@ -101,18 +101,19 @@ class ConnectionsController extends Controller
         $user = Auth::user();
         SEOTools::setTitle("دنبال کنندگان");
         $followings = Following::query()
-            ->with("page")
-            ->with("page.user")
-            ->whereHas("page.user", function ($query) {
+            ->with("follower")
+            ->with("follower.user")
+            ->whereHas("follower.user", function ($query) {
                 $query->where("active", true);
             })
             ->where("following", Auth::user()->id)
             ->latest();
 
         if ($request->has("q")) {
-            $followings = $followings->whereHas("page", function ($query) use ($request) {
+            $followings = $followings->whereHas("follower", function ($query) use ($request) {
                 $query->where('name', 'like', "%{$request->q}%");
             });
+            // dd($followings->toSql());
         }
 
         $pending_connections = Connection::query()->where("user_id", Auth::user()->id)

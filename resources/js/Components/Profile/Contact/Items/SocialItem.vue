@@ -4,7 +4,7 @@
 			<i class="material-icons-outlined social-icon" :style="{ color: option.color }" v-html="option.icon"></i>
 		</a>
 		<div class="editItem" v-else>
-			<MaterialTextField :notValid="!isValid" placeholder="نام کاربری" class="material--sm w-100" input-class="w-100" v-model="val"></MaterialTextField>
+			<MaterialTextField :notValid="!isValid" :placeholder="placeholderText" class="material--sm w-100" input-class="w-100" v-model="val"></MaterialTextField>
 			<div class="d-flex align-items-center mb-3 mb-lg-0 w-100">
 				<v-select class="dropdown-list w-100" :placeholder="'انتخاب کنید'" label="name" dir="rtl" v-model="option" :options="options">
 					<template v-slot:selected-option="{ icon, color, name }">
@@ -41,6 +41,9 @@ export default {
 			this.$emit("input", this.value);
 		},
 		option() {
+			if (this.option == "Youtube") {
+				this.placeholderText = "لینک صفحه";
+			}
 			this.value = {
 				id: this.social.id,
 				option: this.option,
@@ -88,6 +91,7 @@ export default {
 			val: null,
 			option: null,
 			availableOptions: [],
+			placeholderText: "نام کاربری",
 		};
 	},
 	props: {

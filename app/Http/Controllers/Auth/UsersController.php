@@ -96,12 +96,6 @@ class UsersController extends Controller
                 $verification = Verification::query()->where("code", $request->code)->where("email", $email)->first();
             }
             if ($verification instanceof Verification) {
-                if (session()->has("phone")) {
-                    $phone = session()->forget("phone");
-                } elseif (session()->has("email")) {
-                    $email = session()->forget("email");
-                }
-
                 $verification->delete();
                 return response()->json(array("result" => true));
             } else {
@@ -197,8 +191,9 @@ class UsersController extends Controller
             $page->user_id = $user->id;
             $page->save();
 
+            ActiveSession::addSession($user->id);
             Auth::login($user, true);
-            return response()->json(array("result" => true))->cookie("ternobo_current_page_id", $user->personalPage->id, 9999999);
+            return response()->json(array("result" => true));
         }
         return abort(400);
     }
