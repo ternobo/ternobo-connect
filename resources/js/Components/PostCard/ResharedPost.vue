@@ -50,7 +50,7 @@
 			</div>
 			<div class="images" v-if="post.medias !== null && post.medias !== undefined && post.medias.length > 0">
 				<lazy-image v-if="isImage" class="m-0" alt="" :src="post.medias" />
-				<video v-else :src="post.medias" autoplay controls controlslist="nodownload" style="max-width: 100%"></video>
+				<video v-else :src="post.medias" controls controlslist="nodownload" style="max-width: 100%"></video>
 			</div>
 			<div class="actions" v-if="showMenu && $page.props.user">
 				<div>
