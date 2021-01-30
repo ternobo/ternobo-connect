@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<ResetPasswordModal :show.sync="resetpass"></ResetPasswordModal>
+		<ResetPasswordModal :show.sync="resetpass" @back="(resetpass = false), (showModal = true)"></ResetPasswordModal>
 		<b-modal @hide="onHide" v-model="showModal" hide-footer hide-header no-stacking :centered="true">
 			<div class="d-flex flex-column w-100 aling-items-center">
 				<h5 class="mt-0 font-16 text-center mb-4 w-25" style="border-bottom: 1px solid #000019; width: fit-content; align-self: center; margin-top: 20px; padding-bottom: 10px; padding-left: 0; padding-right: 0">ورود</h5>
@@ -11,7 +11,7 @@
 				</div>
 				<div class="w-100" style="margin-top: 12px">
 					<material-text-field type="password" class="material--sm w-100 bg-transparent" input-class="w-100" name="password" v-model="password" placeholder="رمزعبور" />
-					<a class="text-primary float-left font-11" style="margin-top: 3px" @click="resetpass = true">فراموشی رمزعبور</a>
+					<a class="text-primary float-left font-11 clickable" style="margin-top: 3px" @click="resetpass = true">فراموشی رمزعبور</a>
 				</div>
 				<loading-button @click.native="login" :loading="loading" class="btn btn-dark mt-2" type="button"> ورود </loading-button>
 			</div>

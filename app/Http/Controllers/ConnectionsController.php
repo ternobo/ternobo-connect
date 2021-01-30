@@ -187,14 +187,15 @@ class ConnectionsController extends Controller
     {
         $followRow = Connection::query()
             ->where(function ($query) use ($user_id) {
-                $query->where("user_id", Auth::user()->id)->orWhere("connection", $user_id);
+                $query->where("user_id", Auth::user()->id)->where("connection", $user_id);
             })
             ->orWhere(function ($query) use ($user_id) {
-                $query->where("connection", Auth::user()->id)->orWhere("user_id", $user_id);
+                $query->where("connection", Auth::user()->id)->where("user_id", $user_id);
             })
             ->firstOrFail();
+        // dd($followRow);
         $result = $followRow->delete();
-        return response()->json(array("result" => $result, "user_id" => $followRow->user_id));
+        return response()->json(array("result" => $result, "user_id" => $user_id));
     }
 
 }
