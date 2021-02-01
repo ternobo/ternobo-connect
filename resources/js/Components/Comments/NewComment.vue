@@ -1,7 +1,7 @@
 <template>
-	<div class="sendcomment clearfix" v-if="$page.props.user != null">
+	<div class="sendcomment clearfix" v-if="$store.state.user != null">
 		<div class="input-group-btn mb-0">
-			<img class="profile-sm ml-3" :src="$page.props.user.profile" />
+			<img class="profile-sm ml-3" :src="$store.state.user.profile" />
 			<MaterialTextArea v-model="text" input-class="form-control autoresize" class="w-100" placeholder="نظر شما چیست؟" name="text" maxlength="2500"></MaterialTextArea>
 		</div>
 		<transition name="slide">

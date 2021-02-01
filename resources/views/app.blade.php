@@ -22,7 +22,7 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="mobile-web-app-capable" content="yes">
 
-    <link rel="preload" href="/fonts/google-material/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2"/>
+    <link rel="preload" href="/fonts/google-material/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2" />
     <link rel="preload" href="/manifest.js" as="script">
     <link rel="preload" href="/js/vendor.js" as="script">
     <link rel="preload" href="/js/app.js" as="script">
@@ -44,20 +44,22 @@
             });
 
     </script>
-
+    <!-- Scripts -->
+    {!! $ternoboScripts !!}
     <script>
-        var user_id = @auth {{ Auth::user()->id }} @endauth @guest false @endguest;
+        var user_id = false;
+
     </script>
-  
-    </head>
 
-    <body class="font-sans antialiased">
-        @inertia
+</head>
 
-        <script src="/manifest.js?id=735a084d9c7149d314cc" defer></script>
-        <script src="/js/vendor.js?id=01d32c0e23dc6208d392" defer></script>
-        <script src="/js/app.js?id=767e4823158c74c9b025" defer></script>
-        <link href="/css/app.css" rel="stylesheet"/>
-    </body>
+<body class="font-sans antialiased">
+    {!! $ternoboApp !!}
+
+    <script src="/js/manifest.js" defer></script>
+    <script src="/js/vendor.js?" defer></script>
+    <script src="/js/app.js" defer></script>
+    <link href="/css/app.css" rel="stylesheet" />
+</body>
 
 </html>

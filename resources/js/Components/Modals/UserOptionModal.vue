@@ -3,16 +3,16 @@
 		<login-modal :show.sync="showLogin"></login-modal>
 		<signup-modal :show.sync="showSignup"></signup-modal>
 		<b-modal v-model="showModal" hide-footer hide-header @show="onShow" body-class="pb-0" ref="modal" size="lg">
-			<div class="useroptions" v-if="$page.props.user">
+			<div class="useroptions" v-if="$store.state.user">
 				<div class="useroptions-header">
-					<inertia-link @click="$emit('update:show', false)" :href="'/' + $page.props.user.username" class="d-flex aling-items-center">
-						<img class="profile-sm" :src="$page.props.user.profile" />
+					<inertia-link @click="$emit('update:show', false)" :href="'/' + $store.state.user.username" class="d-flex aling-items-center">
+						<img class="profile-sm" :src="$store.state.user.profile" />
 						<span class="mx-2 d-flex flex-column justify-content-center">
 							<strong class="text-black"
-								>{{ $page.props.user.name }}
-								<i v-if="$page.props.user.is_verified === 1" class="position-relative verificationcheck">check_circle</i>
+								>{{ $store.state.user.name }}
+								<i v-if="$store.state.user.is_verified === 1" class="position-relative verificationcheck">check_circle</i>
 							</strong>
-							<small>{{ $page.props.user.short_bio }}</small>
+							<small>{{ $store.state.user.short_bio }}</small>
 						</span>
 					</inertia-link>
 					<i class="close material-icons text-muted hover-dark" @click="$emit('update:show', false)">close</i>

@@ -10,7 +10,7 @@
 					<span>نمایش پس زمینه</span>
 					<switches v-model="hasBG"></switches>
 				</div>
-				<inertia-link v-if="$page.props.user" href="/logout" method="post" as="div" class="b-sidebar-item hover-danger w-100 d-flex justify-content-between align-items-center">
+				<inertia-link v-if="$store.state.user" href="/logout" method="post" as="div" class="b-sidebar-item hover-danger w-100 d-flex justify-content-between align-items-center">
 					<span>خروج از حساب کاربری</span>
 					<i class="material-icons">power_settings_new</i>
 				</inertia-link>
@@ -24,13 +24,13 @@
 				</div>
 			</div>
 			<div class="d-flex align-items-center">
-				<inertia-link v-if="$page.props.user" :class="{ 'text-dark': !hasBG, 'text-white': hasBG }" href="/feed">
+				<inertia-link v-if="$store.state.user" :class="{ 'text-dark': !hasBG, 'text-white': hasBG }" href="/feed">
 					<i class="navheader-icon material-icons-outlined" :class="{ 'text-dark': !hasBG, 'text-white': hasBG }">home</i>
 				</inertia-link>
 
-				<button v-if="!$page.props.user" class="btn btn-transparent font-14 py-1" :class="{ 'text-dark': !hasBG }" @click="showLogin = !showLogin">ورود</button>
-				<span v-if="!$page.props.user" class="splitor-line"></span>
-				<button v-if="!$page.props.user" class="btn btn-transparent font-14 py-1" :class="{ 'text-dark': !hasBG }" @click="showSignup = !showSignup">ثبت‌نام</button>
+				<button v-if="!$store.state.user" class="btn btn-transparent font-14 py-1" :class="{ 'text-dark': !hasBG }" @click="showLogin = !showLogin">ورود</button>
+				<span v-if="!$store.state.user" class="splitor-line"></span>
+				<button v-if="!$store.state.user" class="btn btn-transparent font-14 py-1" :class="{ 'text-dark': !hasBG }" @click="showSignup = !showSignup">ثبت‌نام</button>
 			</div>
 		</div>
 		<div class="search-section" :class="{ noBG: !hasBG }">

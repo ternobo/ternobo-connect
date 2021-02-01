@@ -14,10 +14,10 @@ class UpdateNotifications extends Migration
     public function up()
     {
         Schema::table("notifications", function (Blueprint $table) {
-            $table->rename("notifications_type", "notificationable_type");
-            $table->rename("notifications_id", "notificationable_id");
-            $table->rename("user_id", "from");
-            $table->rename("page_id", "to");
+            // $table->renameColumn("notifications_type", "notificationable_type");
+            // $table->renameColumn("notifications_id", "notificationable_id");
+            // $table->renameColumn("user_id", "from");
+            // $table->renameColumn("page_id", "to");
         });
     }
 

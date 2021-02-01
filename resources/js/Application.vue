@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<transition name="fade">
-			<InertiaApp v-bind="$props"></InertiaApp>
+			<WireApp v-bind="$props"></WireApp>
 		</transition>
 		<transition name="toast" mode="out-in">
 			<div class="toast-container" v-if="toasts.length > 0">
@@ -14,14 +14,10 @@
 </template>
 
 <script>
-import { InertiaApp } from "@inertiajs/inertia-vue";
-import App from "./Layouts/App";
-import { Inertia } from "@inertiajs/inertia";
-
+import WireApp from "wire-js";
 import Toast from "./Components/Toast";
 
 import { v4 as uuidv4 } from "uuid";
-
 export default {
 	methods: {
 		addToast(toast) {
@@ -42,9 +38,9 @@ export default {
 	created() {
 		this.$root.application = this;
 	},
-	props: ["initialPage", "resolveComponent", "transformProps"],
+	props: ["initialData", "resolveComponent", "initialComponent"],
 	components: {
-		InertiaApp,
+		WireApp,
 		Toast,
 	},
 };

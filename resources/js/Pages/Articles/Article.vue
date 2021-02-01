@@ -67,7 +67,7 @@
 				</div>
 			</div>
 
-			<div class="comments px-2" style="margin: -0.5rem; max-height: max-content !important" v-if="$page.props.user">
+			<div class="comments px-2" style="margin: -0.5rem; max-height: max-content !important" v-if="$store.state.user">
 				<new-comment :post="post.id" @submit="submitComment"></new-comment>
 				<comment v-for="comment in comments" v-on:deleted="commentDelete" :comment="comment" :key="'comment_' + comment.id"></comment>
 				<div class="d-flex w-100 justify-content-center align-items-center py-3" v-if="commentsLoading">

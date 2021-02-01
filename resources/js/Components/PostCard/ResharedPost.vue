@@ -52,7 +52,7 @@
 				<lazy-image v-if="isImage" class="m-0" alt="" :src="post.medias" />
 				<video v-else :src="post.medias" controls controlslist="nodownload" style="max-width: 100%"></video>
 			</div>
-			<div class="actions" v-if="showMenu && $page.props.user">
+			<div class="actions" v-if="showMenu && $store.state.user">
 				<div>
 					<div @click="showLikes = true" class="d-flex post-likes-text text-muted clickable" v-if="post.mutual_likes != null && post.mutual_likes.length > 0">
 						<span class="ml-1">پسندیده شده توسط</span>

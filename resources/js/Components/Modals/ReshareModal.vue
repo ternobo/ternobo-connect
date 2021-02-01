@@ -1,11 +1,11 @@
 <template>
-	<b-modal v-if="$page.props.user != null" v-model="showModal" :no-close-on-backdrop="isCropping" hide-footer body-class="px-3 pb-2" size="md" title="بازنشر محتوا" :centered="true">
+	<b-modal v-if="$store.state.user != null" v-model="showModal" :no-close-on-backdrop="isCropping" hide-footer body-class="px-3 pb-2" size="md" title="بازنشر محتوا" :centered="true">
 		<div action="/posts" data-ajax method="POST" data-reload="1" enctype="multipart/form-data" class="w-100">
 			<div class="new-post position-relative">
 				<div class="selections">
 					<div class="userinfo col-lg-4 p-0">
-						<lazy-image :src="$page.props.user.profile" class="profile-sm" img-class="profile-sm" loading="lazy" />
-						<strong>{{ $page.props.user.name }}</strong>
+						<lazy-image :src="$store.state.user.profile" class="profile-sm" img-class="profile-sm" loading="lazy" />
+						<strong>{{ $store.state.user.name }}</strong>
 					</div>
 					<div class="categoryandtype">
 						<div class="mx-1 col-lg-5 p-0">
@@ -171,7 +171,7 @@ export default {
 		},
 	},
 	mounted() {
-		if (this.$page.props.user !== null) {
+		if (this.$store.state.user !== null) {
 			if (this.post.type === "article") {
 				this.componentType = require("../PostCard/ArticleCard").default;
 			}

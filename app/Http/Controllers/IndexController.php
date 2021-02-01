@@ -15,7 +15,7 @@ use App\Models\Post;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
+use Ternobo\TernoboWire\TernoboWire;
 
 /**
  * Description of IndexController
@@ -29,7 +29,7 @@ class IndexController extends Controller
     {
         SEOTools::setTitle('شبکه اجتماعی متخصصین');
         $articles = Post::query()->where("type", "article")->with("page")->latest()->limit(10)->get();
-        return Inertia::render("Welcome", ["articles" => $articles]);
+        return TernoboWire::render("Welcome", ["articles" => $articles]);
     }
 
     public function followSuggestions(Request $request)

@@ -1,11 +1,11 @@
 <template>
-	<b-modal v-if="$page.props.user != null" v-model="showModal" :no-close-on-backdrop="isCropping" @show="onShown" hide-footer body-class="pb-2" size="md" title="تولید محتوای تازه" :centered="true">
+	<b-modal v-if="$store.state.user != null" v-model="showModal" :no-close-on-backdrop="isCropping" @show="onShown" hide-footer body-class="pb-2" size="md" title="تولید محتوای تازه" :centered="true">
 		<div action="/posts" data-ajax method="POST" data-reload="1" enctype="multipart/form-data" class="w-100">
 			<div class="new-post position-relative">
 				<div class="selections">
 					<div class="userinfo col-lg-4 p-0">
-						<lazy-image :src="$page.props.user.profile" class="profile-sm" img-class="profile-sm" loading="lazy" />
-						<strong>{{ $page.props.user.name }}</strong>
+						<lazy-image :src="$store.state.user.profile" class="profile-sm" img-class="profile-sm" loading="lazy" />
+						<strong>{{ $store.state.user.name }}</strong>
 					</div>
 					<div class="categoryandtype">
 						<div class="mx-1 col-lg-5 p-0">
@@ -324,7 +324,7 @@ export default {
 	created() {
 		this.showType = this.showTypesItems[0];
 
-		if (this.$page.props.user) {
+		if (this.$store.state.user) {
 			if (this.$page.props.currentPage.categories != null) {
 				this.categories = this.$page.props.currentPage.categories;
 			}

@@ -15,13 +15,15 @@ mix.babelConfig({
     plugins: ['@babel/plugin-syntax-dynamic-import'],
 });
 
-mix
-    .webpackConfig({
-        output: {
-            filename: '[name].js',
-            chunkFilename: 'js/[name].js',
-        }
-    })
-    .js('resources/js/app.js', '')
-    .extract(['vue'])
-    .version();
+mix.sourceMaps();
+
+mix.options({
+    extractVueStyles: 'public/css/vue-components.css'
+});
+mix.webpackConfig(require('./webpack.config'));
+mix.js('resources/js/app.js', 'public/js').vue({
+    // extractCSS: true
+});
+mix.sass("resources/sass/application/app.scss", "public/css");
+mix.extract(['vue'])
+mix.version();

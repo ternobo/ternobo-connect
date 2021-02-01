@@ -1,14 +1,14 @@
 <template>
-	<div class="usermenu card" v-if="$page.props.user != null">
+	<div class="usermenu card" v-if="$store.state.user != null">
 		<div class="card-header px-2 d-flex bg-white border-bottom">
-			<inertia-link :href="'/' + this.$page.props.user.username" class="d-flex aling-items-center">
-				<img class="profile-sm" :src="this.$page.props.user.profile" />
+			<inertia-link :href="'/' + this.$store.state.user.username" class="d-flex aling-items-center">
+				<img class="profile-sm" :src="this.$store.state.user.profile" />
 				<span class="mx-2 d-flex flex-column justify-content-center">
 					<strong class="text-black"
-						>{{ this.$page.props.user.name }}
-						<i v-if="this.$page.props.user.is_verified === 1" class="verificationcheck">check_circle</i>
+						>{{ this.$store.state.user.name }}
+						<i v-if="this.$store.state.user.is_verified === 1" class="verificationcheck">check_circle</i>
 					</strong>
-					<small>{{ this.$page.props.user.short_bio }}</small>
+					<small>{{ this.$store.state.user.short_bio }}</small>
 				</span>
 			</inertia-link>
 		</div>

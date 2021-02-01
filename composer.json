@@ -7,10 +7,20 @@
         "laravel"
     ],
     "license": "MIT",
+    "repositories": {
+        "ternobo-wire": {
+            "type": "path",
+            "url": "../ternobo-wire",
+            "options": {
+                "symlink": true
+            }
+        }
+    },
     "require": {
         "php": "^7.3",
         "artesaos/seotools": "^0.19.0",
         "bacon/bacon-qr-code": "^2.0",
+        "doctrine/dbal": "^3.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -29,6 +39,7 @@
         "pragmarx/google2fa": "^8.0",
         "pragmarx/recovery": "^0.1.0",
         "silviolleite/laravelpwa": "^2.0",
+        "soroosh/ternobo-wire": "@dev",
         "stevebauman/location": "^5.2",
         "taylornetwork/laravel-username-generator": "^2.4",
         "tedivm/jshrink": "^1.3"

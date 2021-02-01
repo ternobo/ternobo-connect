@@ -3,6 +3,7 @@
 use App\Http\Middleware\FollowMiddlware;
 use App\Http\Middleware\LocaleMiddleware;
 use Illuminate\Support\Facades\Route;
+use Ternobo\TernoboWire\TernoboWire;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
+
+TernoboWire::routes();
+
 Route::get('/sitemap.xml', 'SiteMapController@all');
 Route::get('/sitemap-posts.xml', 'SiteMapController@posts');
 Route::get('/sitemap-posts.xml', 'SiteMapController@posts');
@@ -24,8 +28,6 @@ Route::get('/sitemap-profiles.xml', 'SiteMapController@profiles');
  */
 Route::get("/profiles/{image}", "DownloadsController@profile");
 Route::get("/medias/{image}", "DownloadsController@media");
-
-Route::any("/js/{js}", "DownloadsController@js");
 
 /**
  * File Access End

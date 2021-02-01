@@ -47,7 +47,7 @@
 					<i class="material-icons text-grey">layers</i><span class="text-grey"> {{ post.category.name }}</span>
 				</inertia-link>
 			</div>
-			<div class="actions" v-if="showMenu && $page.props.user">
+			<div class="actions" v-if="showMenu && $store.state.user">
 				<div>
 					<div @click="showLikes = true" class="d-flex post-likes-text text-muted clickable" v-if="post.mutual_likes != null && post.mutual_likes.length > 0">
 						<span class="ml-1">پسندیده شده توسط</span>

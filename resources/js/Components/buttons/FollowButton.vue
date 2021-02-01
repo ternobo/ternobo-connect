@@ -1,5 +1,5 @@
 <template>
-	<LoadingButton v-if="$page.props.user !== null" :loading="loading" class="btn follow-btn" :class="{ 'btn-followed-connected': followed }" @click.native="follow">{{ text }}</LoadingButton>
+	<LoadingButton v-if="$store.state.user !== null" :loading="loading" class="btn follow-btn" :class="{ 'btn-followed-connected': followed }" @click.native="follow">{{ text }}</LoadingButton>
 </template>
 
 <script>
@@ -7,7 +7,7 @@ import LoadingButton from "./LoadingButton";
 
 export default {
 	created() {
-		if (this.$page.props.user !== null) {
+		if (this.$store.state.user !== null) {
 			let page = this.page;
 			if (typeof page != "number") {
 				page = parseInt(page);

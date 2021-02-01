@@ -1,7 +1,10 @@
 require('./bootstrap');
 import Vue from 'vue';
 
-import { plugin } from '@inertiajs/inertia-vue'
+import {
+    store,
+    plugin,
+} from 'wire-js';
 import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
@@ -15,6 +18,7 @@ import '@trevoreyre/autocomplete-vue/dist/style.css'
 import Dialog from 'bootstrap-vue-dialog/dist/bootstrap-vue-dialog';
 import InfiniteLoading from 'vue-infinite-loading';
 import Application from "./Application.vue";
+import Vuex from "vuex";
 
 Vue.use(InfiniteLoading, { /* options */ });
 
@@ -44,18 +48,17 @@ Vue.component('v-select', vSelect);
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
-// Install InertiaApp
+//use Vuex
+Vue.use(Vuex);
+
+/// Install TernoboApp
 Vue.use(plugin);
-Vue.use(InertiaForm);
 Vue.use(PortalVue);
 
 Vue.use(TernoboApp);
 
 // Install Infinite Scroll
 Vue.use(infiniteScroll);
-
-Vue.config.devtools = false;
-Vue.config.productionTip = false
 
 Vue.component("vue-circle", VueCircle);
 
@@ -81,15 +84,17 @@ if (user_id) {
     }, 3000);
 }
 
+let instanceData = window.ternoboApplicationData;
+let component = instanceData.component;
+
 const vue_app = new Vue({
+    store: store(),
     render: (h) =>
         h(Application, {
             props: {
-                initialPage: JSON.parse(app.dataset.page),
-                transformProps: function (props) {
-                    return props;
-                },
-                resolveComponent: name => import(`./Pages/${name}`).then(m => m.default),
+                initialData: instanceData,
+                initialComponent: component,
+                resolveComponent: (component) => import(`./Pages/${component}`),
             },
         }),
     data() {

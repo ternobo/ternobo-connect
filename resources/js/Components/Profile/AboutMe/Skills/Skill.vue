@@ -1,10 +1,10 @@
 <template>
 	<li v-if="skill != undefined">
-		<SkillCreditModal @credited="credited" v-if="$page.props.user != null && !checkUser(user.id)" :show.sync="creditModal" :user="user" :skill="skillVal"></SkillCreditModal>
+		<SkillCreditModal @credited="credited" v-if="$store.state.user != null && !checkUser(user.id)" :show.sync="creditModal" :user="user" :skill="skillVal"></SkillCreditModal>
 		<skeleton :height="'24px'" v-if="loading"></skeleton>
 		<div v-else>
 			<div class="skill-name" v-if="!edit">
-				<div class="endorsement" v-if="$page.props.user != null && !checkUser(user.id)">
+				<div class="endorsement" v-if="$store.state.user != null && !checkUser(user.id)">
 					<i class="material-icons" @click="credit">
 						{{ canCredit ? "arrow_circle_up" : "remove_circle_outline" }}
 					</i>
@@ -90,7 +90,7 @@ export default {
 		},
 	},
 	mounted() {
-		if (this.$page.props.user) {
+		if (this.$store.state.user) {
 			axios
 				.post("/skills/can-credit", {
 					skill: this.skillVal.id,

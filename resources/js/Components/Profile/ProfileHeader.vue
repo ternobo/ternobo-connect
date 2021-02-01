@@ -9,7 +9,7 @@
 			<ProfileImage ref="profileImage" :canChange="canEdit" :src="page.profile"></ProfileImage>
 			<div class="d-flex align-items-center" v-if="$root.isDesktop">
 				<ConnetionButtons class="follow-buttons" v-if="!canEdit" :page-id="page.id" :user-id="page.user_id"></ConnetionButtons>
-				<div v-if="$page.props.user != null">
+				<div v-if="$store.state.user != null">
 					<b-dropdown v-if="!canEdit" size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
 						<template v-slot:button-content class="p-0">
 							<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
@@ -44,7 +44,7 @@
 			</small>
 			<div class="d-flex align-items-center" v-if="!$root.isDesktop">
 				<ConnetionButtons class="follow-buttons" v-if="!canEdit" :page-id="page.id" :user-id="page.user_id"></ConnetionButtons>
-				<div v-if="$page.props.user != null">
+				<div v-if="$store.state.user != null">
 					<b-dropdown v-if="!canEdit" size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
 						<template v-slot:button-content class="p-0">
 							<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
@@ -127,7 +127,7 @@ export default {
 		this.lastName = this.page.user.last_name;
 		this.shortBio = this.page.user.short_bio;
 		this.gender = JSON.parse(this.page.user.gender);
-		if (this.$page.props.user != null && !this.checkUser(this.page.user_id)) {
+		if (this.$store.state.user != null && !this.checkUser(this.page.user_id)) {
 			axios
 				.post("/mutual-friends", {
 					page_id: this.page.id,
