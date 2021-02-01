@@ -9,7 +9,7 @@ use App\Models\Page;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
+use Ternobo\TernoboWire\TernoboWire;
 
 class ConnectionsController extends Controller
 {
@@ -55,7 +55,7 @@ class ConnectionsController extends Controller
         $followers_count = count(Following::query()->where("following", Auth::user()->id)->get());
         $following_count = count(Following::query()->where("user_id", Auth::user()->id)->get());
 
-        return Inertia::render("MyConnections", [
+        return TernoboWire::render("MyConnections", [
             "connections" => $accpeted_connections->paginate(20),
             "pending_connections" => $pending_connections,
             "connections_count" => $connections_count,
@@ -91,7 +91,7 @@ class ConnectionsController extends Controller
         $followers_count = count(Following::query()->where("following", Auth::user()->id)->get());
         $following_count = count(Following::query()->where("user_id", Auth::user()->id)->get());
 
-        return Inertia::render("MyConnections", array("connections" => $followings->paginate(20), "pending_connections" => $pending_connections,
+        return TernoboWire::render("MyConnections", array("connections" => $followings->paginate(20), "pending_connections" => $pending_connections,
             "connections_count" => $connections_count,
             "following_count" => $following_count, "followers_count" => $followers_count));
     }
@@ -126,7 +126,7 @@ class ConnectionsController extends Controller
         $followers_count = count(Following::query()->where("following", Auth::user()->id)->get());
         $following_count = count(Following::query()->where("user_id", Auth::user()->id)->get());
 
-        return Inertia::render("MyConnections", array("connections" => $followings->paginate(20), "pending_connections" => $pending_connections,
+        return TernoboWire::render("MyConnections", array("connections" => $followings->paginate(20), "pending_connections" => $pending_connections,
             "connections_count" => $connections_count,
             "following_count" => $following_count, "followers_count" => $followers_count));
     }

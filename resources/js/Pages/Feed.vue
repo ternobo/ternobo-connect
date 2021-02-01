@@ -89,11 +89,9 @@ export default {
 	props: {
 		posts: {
 			type: Object,
-			default: undefined,
 		},
 		pages: {
 			type: Array,
-			defautl: undefined,
 		},
 	},
 	components: {

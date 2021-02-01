@@ -17,26 +17,26 @@
 			<div class="article-text ck ck-content" dir="rtl" style="word-break: break-word; height: auto" ref="articleText" v-html="post.text"></div>
 			<div class="tagandcate">
 				<div class="tags">
-					<inertia-link v-for="(tag, index) in post.tags" :key="tag + '_POST_TAG_' + post.id + '_' + index" class="tag-item" :href="'/tags/' + tag">
+					<wire-link v-for="(tag, index) in post.tags" :key="tag + '_POST_TAG_' + post.id + '_' + index" class="tag-item" :href="'/tags/' + tag">
 						{{ tag }}
-					</inertia-link>
+					</wire-link>
 				</div>
-				<inertia-link class="category" v-if="post.category !== null" :href="'/' + post.page.slug + '/categories/' + post.category.id">
+				<wire-link class="category" v-if="post.category !== null" :href="'/' + post.page.slug + '/categories/' + post.category.id">
 					<i class="material-icons text-grey">layers</i><span class="text-grey"> {{ post.category.name }}</span>
-				</inertia-link>
+				</wire-link>
 			</div>
 			<div class="article-actions">
 				<div>
 					<div @click="showLikes = true" class="d-flex text-muted clickable" v-if="post.mutual_likes != null && post.mutual_likes.length > 0">
 						<span class="ml-1">پسندیده شده توسط</span>
-						<inertia-link v-if="post.mutual_likes[0]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
+						<wire-link v-if="post.mutual_likes[0]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
 							<strong class="text-light">{{ post.mutual_likes[0].page.name }}</strong>
-						</inertia-link>
+						</wire-link>
 						<div v-if="post.mutual_likes.length > 1">
 							<span class="mr-1">و</span>
-							<inertia-link v-if="post.mutual_likes[1]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
+							<wire-link v-if="post.mutual_likes[1]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
 								<strong class="text-light">{{ post.mutual_likes[1].page.name }}</strong>
-							</inertia-link>
+							</wire-link>
 						</div>
 						<span class="mx-1" v-if="post.mutual_likes.length > 2"> و ... </span>
 					</div>
@@ -49,20 +49,20 @@
 			<div class="my-3 py-2 border-top border-bottom">
 				<div><span class="publisher-title-size text-muted">منتشر شده توسط</span></div>
 				<div class="d-flex justify-content-between flex-lg-row flex-column align-items-center ml-1 mt-2">
-					<inertia-link class="d-flex align-items-center text-dark" :href="'/' + post.page.slug">
+					<wire-link class="d-flex align-items-center text-dark" :href="'/' + post.page.slug">
 						<lazy-image :src="post.page.profile" img-class="profile-md" class="ml-2 mb-0" alt="profile-image" />
 						<div class="d-flex flex-column">
 							<strong>{{ post.page.name }} <i v-if="post.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 							<small class="text-muted" v-if="post.page.short_bio !== null && post.page.short_bio.length > 0">{{ post.page.short_bio }}</small>
 							<small class="text-light font-10" v-if="post.created_at !== post.created_at">{{ update_time }}</small>
 						</div>
-					</inertia-link>
+					</wire-link>
 					<div class="d-flex align-items-center">
 						<div class="d-flex flex-lg-row align-items-center">
 							<span class="ml-2">{{ userposts }} مقاله </span>
-							<inertia-link :href="'/articles/' + post.id + '/edit'" class="btn btn-outline-primary" v-if="checkUser(post.page.user_id)">ویرایش</inertia-link>
+							<wire-link :href="'/articles/' + post.id + '/edit'" class="btn btn-outline-primary" v-if="checkUser(post.page.user_id)">ویرایش</wire-link>
 						</div>
-						<post-menu :post="post" @edit="Inertia.visit('/articles/' + post.id + '/edit')" @deleted="doDelete"></post-menu>
+						<post-menu :post="post" @edit="$store.state.ternoboWireApp.visit('/articles/' + post.id + '/edit')" @deleted="doDelete"></post-menu>
 					</div>
 				</div>
 			</div>
@@ -134,7 +134,7 @@ export default {
 						variant: "primary",
 						handle: async () => {
 							await axios.delete(this.$APP_URL + "/articles/" + this.post.id);
-							Inertia.visit("/feed");
+							this.$store.state.ternoboWireApp.visit("/feed");
 						},
 					},
 				},

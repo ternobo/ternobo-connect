@@ -10,7 +10,7 @@ use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
+use Ternobo\TernoboWire\TernoboWire;
 
 class HomeController extends Controller
 {
@@ -51,7 +51,7 @@ class HomeController extends Controller
             ->distinct("posts.id")
             ->paginate(10);
 
-        return Inertia::render("Feed", array("posts" => $posts, "pages" => $pages));
+        return TernoboWire::render("Feed", array("posts" => $posts, "pages" => $pages));
     }
 
     private function generateSearch($search)
@@ -152,7 +152,7 @@ class HomeController extends Controller
                 }
                 return response()->json(array("result" => true, "suggestions" => $result));
             }
-            return Inertia::render("Search", array("pages" => $pages, "results" => $this->handleGetSearch($request), "search" => $request->q, "pages" => $pages, "content" => ($request->has("type") && $request->type === "content")));
+            return TernoboWire::render("Search", array("pages" => $pages, "results" => $this->handleGetSearch($request), "search" => $request->q, "pages" => $pages, "content" => ($request->has("type") && $request->type === "content")));
         }
         return abort(404);
     }
@@ -165,7 +165,7 @@ class HomeController extends Controller
             ->with("post.mutualLikes")
             ->with("post.category")
             ->where("user_id", Auth::user()->id)->latest()->paginate(10);
-        return Inertia::render("Bookmarks", array("posts" => $bookmarks));
+        return TernoboWire::render("Bookmarks", array("posts" => $bookmarks));
     }
 
     public function setLocale(Request $request)
@@ -193,7 +193,7 @@ class HomeController extends Controller
             ->with("category")
             ->whereJsonContains('tags', $name)
             ->paginate(10);
-        return Inertia::render('Tags', array("posts" => $posts));
+        return TernoboWire::render('Tags', array("posts" => $posts));
     }
 
     public function redirecthome()

@@ -3,12 +3,12 @@
 		<user-option-modal :show.sync="showOptions"></user-option-modal>
 		<div class="container">
 			<div class="d-flex align-items-center w-100">
-				<inertia-link href="/feed" class="logodesktop" v-if="$root.isDesktop">
+				<wire-link href="/feed" class="logodesktop" v-if="$root.isDesktop">
 					<img src="/images/farsi-logo.png" class="w-100" />
-				</inertia-link>
-				<inertia-link href="/feed" class="logo-sm" v-if="!$root.isDesktop">
+				</wire-link>
+				<wire-link href="/feed" class="logo-sm" v-if="!$root.isDesktop">
 					<img src="/images/logo.svg" class="mr-2" />
-				</inertia-link>
+				</wire-link>
 
 				<form method="get" action="/search" class="searchfield d-flex mr-3">
 					<autocomplete class="search-field w-100" :default-value="searchVal" :search="search" id="searchforminput" autocomplete="off" required type="text" name="q" placeholder="هر چیزی که در جستن آنی، آنی" />
@@ -33,9 +33,12 @@ import Autocomplete from "@trevoreyre/autocomplete-vue";
 import HeaderToolbar from "./HeaderToolbar";
 import UserOptionModal from "../../Modals/UserOptionModal.vue";
 export default {
+	created() {
+		this.searchVal = this.$store.state.search;
+	},
 	data() {
 		return {
-			searchVal: this.$page.props.search ? this.$page.props.search : "",
+			searchVal: null,
 			showOptions: false,
 		};
 	},

@@ -10,13 +10,13 @@
 		</div>
 		<div class="likes-list" v-if="!loading && !error">
 			<div v-for="user in users" :key="'friend_' + pageId + '_' + user.username" class="like-item">
-				<inertia-link :href="'/' + user.username" class="userinfo">
+				<wire-link :href="'/' + user.username" class="userinfo">
 					<lazy-image class="mb-0" :class="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" :imgClass="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" :src="user.profile"></lazy-image>
 					<div class="page-name d-flex flex-column">
 						<strong> {{ user.name }} <i v-if="user.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 						<span class="shortbio"> {{ user.short_bio }} </span>
 					</div>
-				</inertia-link>
+				</wire-link>
 			</div>
 		</div>
 	</b-modal>

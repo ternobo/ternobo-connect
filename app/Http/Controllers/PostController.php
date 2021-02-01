@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Inertia\Inertia;
 use Intervention\Image\Facades\Image;
+use Ternobo\TernoboWire\TernoboWire;
 
 class PostController extends Controller
 {
@@ -345,7 +345,7 @@ class PostController extends Controller
         $post = $post->findOrFail($post_id);
 
         if (($post->type === "post" || $post->type === "share") && $post->user->active) {
-            return Inertia::render("PostPage", array("post" => $post));
+            return TernoboWire::render("PostPage", array("post" => $post));
         }
         return abort(404);
     }
@@ -355,7 +355,7 @@ class PostController extends Controller
         $post = Post::with("page")
             ->with("category")
             ->findOrFail($post_id);
-        return Inertia::render("Embed/Widget", array("post" => $post));
+        return TernoboWire::render("Embed/Widget", array("post" => $post));
     }
 
     public function seenPost(Request $request)

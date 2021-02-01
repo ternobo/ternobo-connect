@@ -5,7 +5,7 @@
 		<b-modal v-model="showModal" hide-footer hide-header @show="onShow" body-class="pb-0" ref="modal" size="lg">
 			<div class="useroptions" v-if="$store.state.user">
 				<div class="useroptions-header">
-					<inertia-link @click="$emit('update:show', false)" :href="'/' + $store.state.user.username" class="d-flex aling-items-center">
+					<wire-link @click="$emit('update:show', false)" :href="'/' + $store.state.user.username" class="d-flex aling-items-center">
 						<img class="profile-sm" :src="$store.state.user.profile" />
 						<span class="mx-2 d-flex flex-column justify-content-center">
 							<strong class="text-black"
@@ -14,18 +14,18 @@
 							</strong>
 							<small>{{ $store.state.user.short_bio }}</small>
 						</span>
-					</inertia-link>
+					</wire-link>
 					<i class="close material-icons text-muted hover-dark" @click="$emit('update:show', false)">close</i>
 				</div>
 				<ul class="p-0 menu">
 					<li class="list-item d-flex flex-column">
-						<inertia-link @click="$emit('update:show', false)" href="/settings" class="m-0"><i class="material-icons-outlined">settings</i> تنظیمات و حریم خصوصی </inertia-link>
+						<wire-link @click="$emit('update:show', false)" href="/settings" class="m-0"><i class="material-icons-outlined">settings</i> تنظیمات و حریم خصوصی </wire-link>
 					</li>
 					<li class="list-item d-flex flex-column">
-						<inertia-link @click="$emit('update:show', false)" href="/ideas" class="m-0"><i class="material-icons-outlined">emoji_objects</i> صدای شما </inertia-link>
+						<wire-link @click="$emit('update:show', false)" href="/ideas" class="m-0"><i class="material-icons-outlined">emoji_objects</i> صدای شما </wire-link>
 					</li>
 					<li class="list-item d-flex flex-column">
-						<inertia-link @click="$emit('update:show', false)" href="/help" class="m-0"><i class="material-icons-outlined">help_outline</i> مرکز راهنمایی </inertia-link>
+						<wire-link @click="$emit('update:show', false)" href="/help" class="m-0"><i class="material-icons-outlined">help_outline</i> مرکز راهنمایی </wire-link>
 					</li>
 				</ul>
 				<div class="langs">
@@ -35,7 +35,7 @@
 				</div>
 				<ul class="mb-0 p-0">
 					<li class="list-item">
-						<inertia-link @click="$emit('update:show', false)" href="/logout" method="post" as="button" class="text-right bg-transparent hover-danger m-0 border-0 text-grey"><i class="material-icons">power_settings_new</i> خروج </inertia-link>
+						<wire-link @click="$emit('update:show', false)" href="/logout" method="post" as="button" class="text-right bg-transparent hover-danger m-0 border-0 text-grey"><i class="material-icons">power_settings_new</i> خروج </wire-link>
 					</li>
 				</ul>
 			</div>

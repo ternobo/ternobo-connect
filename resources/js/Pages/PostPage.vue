@@ -22,15 +22,12 @@
 </template>
 
 <script>
-import TimeAgo from "javascript-time-ago";
 // Load locale-specific relative date/time formatting rules.
-import fa from "javascript-time-ago/locale/fa";
 import AppLayout from "../Layouts/AppLayout";
 import PersianDate from "persian-date";
 
 import ReshareModal from "../Components/Modals/ReshareModal.vue";
 import PostMenu from "../Components/Menues/PostMenu.vue";
-import { Inertia } from "@inertiajs/inertia";
 
 import LoadingSpinner from "../Components/LoadingSpinner";
 import Comment from "../Components/Comments/Comment";
@@ -78,7 +75,7 @@ export default {
 						variant: "primary",
 						handle: async () => {
 							axios.delete(this.$APP_URL + "/articles/" + this.post.id);
-							Inertia.visit("/feed");
+							this.$store.state.ternoboWireApp.visit("/feed");
 						},
 					},
 				},

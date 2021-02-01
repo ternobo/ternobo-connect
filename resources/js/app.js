@@ -5,7 +5,6 @@ import {
     store,
     plugin,
 } from 'wire-js';
-import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import vSelect from 'vue-select'
@@ -84,15 +83,27 @@ if (user_id) {
     }, 3000);
 }
 
-let instanceData = window.ternoboApplicationData;
+let instanceData = JSON.parse(document.body.dataset.wire);
+document.body.dataset.wire = "";
 let component = instanceData.component;
 
+let vuexStore = store({
+    state: {
+        search: null
+    },
+    mutations: {
+        setSearch(state, payload) {
+            state.search = payload;
+        }
+    }
+})
+
 const vue_app = new Vue({
-    store: store(),
+    store: vuexStore,
     render: (h) =>
         h(Application, {
             props: {
-                initialData: instanceData,
+                initialData: instanceData.data,
                 initialComponent: component,
                 resolveComponent: (component) => import(`./Pages/${component}`),
             },
@@ -119,7 +130,7 @@ if (user_id) {
                 }
             });
             document.dispatchEvent(event);
-            vue_app.$page.props.notifications_count += 1;
+            vue_app.$store.state.notifications_count += 1;
         }
     });
 }
@@ -127,16 +138,15 @@ window.addEventListener('popstate', () => {
     vue_app.url = window.location.pathname;
 });
 
-document.addEventListener('inertia:start', event => {
-    vue_app.url = event.detail.visit.url;
+document.addEventListener('ternobo:navigate', event => {
+    console.log("hello");
+    vue_app.url = event.detail.location;
     TProgress.start();
 });
-document.addEventListener("inertia:finish", event => {
-
-    let header = document.createElement("head");
-    header.innerHTML = vue_app.$page.props.SEO;
-    window.document.title = header.querySelector("title").text;
-
+document.addEventListener("ternobo:loaded", event => {
     vue_app.url = window.location.pathname;
+});
+
+document.addEventListener("ternobo:finish", event => {
     setTimeout(() => TProgress.done(), 500);
 });

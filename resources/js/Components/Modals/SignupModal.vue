@@ -75,7 +75,7 @@
 				<ProfileImage @updated="updateProfile" :canChange="true" class="m-0" :src="$APP_URL + '/images/man-profile.png'"></ProfileImage>
 				<div class="d-flex mt-4 flex-column">
 					<span class="text-center">تصویر خود را وارد کنید</span>
-					<inertia-link href="/feed" :loading="loading" class="btn btn-dark mx-auto mt-4 signup-save-btn" style="white-space: nowrap">رد شدن</inertia-link>
+					<wire-link href="/feed" :loading="loading" class="btn btn-dark mx-auto mt-4 signup-save-btn" style="white-space: nowrap">رد شدن</wire-link>
 				</div>
 			</div>
 		</transition>
@@ -86,13 +86,12 @@
 import ModalMixin from "../../Mixins/Modal";
 import LoadingButton from "../../Components/buttons/LoadingButton";
 import ProfileImage from "../../Components/Profile/ProfileImage";
-import { Inertia } from "@inertiajs/inertia";
 import OtpInput from "../OtpInput/OtpInput.vue";
 
 export default {
 	methods: {
 		updateProfile() {
-			Inertia.visit("/feed");
+			this.$store.state.ternoboWireApp.visit("/feed");
 		},
 		sendVcode(type) {
 			this.loading = true;

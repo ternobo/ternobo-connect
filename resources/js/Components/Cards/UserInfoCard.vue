@@ -1,7 +1,7 @@
 <template>
 	<div class="card sticky-aside pb-4" v-if="$store.state.user != null">
 		<lazy-image class="card-img-top page-cover" :src="$store.state.user.cover" />
-		<inertia-link :href="'/' + $store.state.user.username" class="userinfo-card">
+		<wire-link :href="'/' + $store.state.user.username" class="userinfo-card">
 			<div class="d-flex flex-column align-items-center">
 				<div class="profile-image">
 					<vue-circle :progress="$store.state.user.profile_steps.percent" :size="82" empty-fill="#F5F5F5" :show-percent="false" :start-angle="-Math.PI / 2" :fill="{ color: '#0898DF' }">
@@ -14,7 +14,7 @@
 			<div class="done-precent d-flex">
 				<strong class="text-white">{{ $store.state.user.profile_steps.percent }}%</strong>
 			</div>
-		</inertia-link>
+		</wire-link>
 	</div>
 </template>
 

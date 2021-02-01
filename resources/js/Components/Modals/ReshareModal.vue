@@ -195,7 +195,7 @@ export default {
 			showType: undefined,
 			category: undefined,
 			text: undefined,
-			categories: this.$page.props.currentPage != null ? this.$page.props.currentPage.categories : [],
+			categories: this.$store.state.currentPage != null ? this.$store.state.currentPage.categories : [],
 			tags: [],
 			txtlen: "0%",
 			isCropping: false,

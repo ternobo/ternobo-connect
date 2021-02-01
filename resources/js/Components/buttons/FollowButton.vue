@@ -12,7 +12,7 @@ export default {
 			if (typeof page != "number") {
 				page = parseInt(page);
 			}
-			if (this.$page.props.followings.includes(page)) {
+			if (this.$store.state.followings.includes(page)) {
 				this.followed = true;
 				this.text = "دنبال شده";
 				this.$emit("followed");
@@ -48,7 +48,7 @@ export default {
 						// console.log(response.data);
 						if (response.data.result) {
 							$this.loading = false;
-							$this.$page.props.followings.push($this.page);
+							$this.$store.state.followings.push($this.page);
 							$this.text = "دنبال شده";
 							$this.followed = true;
 							$this.$emit("followed");
@@ -82,7 +82,7 @@ export default {
 							$this.text = "دنبال کردن";
 							$this.followed = false;
 							$this.$emit("unfollowed");
-							$vm0.$page.props.followings.splice($vm0.$page.props.followings.indexOf(51), 1);
+							$vm0.$store.state.followings.splice($vm0.$store.state.followings.indexOf(51), 1);
 						} else {
 							const errors = response.data.errors;
 							Object.keys(errors).forEach(function (item, index) {

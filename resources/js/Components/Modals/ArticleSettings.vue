@@ -48,7 +48,7 @@ export default {
 			category: undefined,
 			editLink: false,
 			tags: [],
-			categories: this.$page.props.currentPage.categories,
+			categories: this.$store.state.currentPage.categories,
 		};
 	},
 

@@ -13,7 +13,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
-use Inertia\Inertia;
+use Ternobo\TernoboWire\TernoboWire;
 
 class IdeasController extends Controller
 {
@@ -54,7 +54,7 @@ class IdeasController extends Controller
         } else {
             $ideas = Idea::query()->with("votes")->with("user")->where("status", $status)->latest()->paginate(15);
         }
-        return Inertia::render("Feedback/Index", ["ideas" => $ideas, "pages" => Page::getSuggestions()]);
+        return TernoboWire::render("Feedback/Index", ["ideas" => $ideas, "pages" => Page::getSuggestions()]);
     }
 
     public function myIdeas(Request $request)
@@ -97,7 +97,7 @@ class IdeasController extends Controller
 
         $bookmarks = IdeaBookmark::query()->with("idea")->where("user_id", Auth::user()->id)->get()->pluck("idea");
 
-        return Inertia::render("Feedback/Index", ["bookmarks" => $bookmarks, "ideas" => $contributed_ideas, "my_ideas" => $ideas->paginate(5), "myoffers" => true]);
+        return TernoboWire::render("Feedback/Index", ["bookmarks" => $bookmarks, "ideas" => $contributed_ideas, "my_ideas" => $ideas->paginate(5), "myoffers" => true]);
     }
 
     public function voteIdea(Request $request)
@@ -213,7 +213,7 @@ class IdeasController extends Controller
     public function show(Idea $idea)
     {
         $replies = $idea->replies()->paginate(10);
-        return Inertia::render("Feedback/IdeaPage", ["idea" => $idea, "replies" => $replies, "pages" => Page::getSuggestions()]);
+        return TernoboWire::render("Feedback/IdeaPage", ["idea" => $idea, "replies" => $replies, "pages" => Page::getSuggestions()]);
     }
 
     /**

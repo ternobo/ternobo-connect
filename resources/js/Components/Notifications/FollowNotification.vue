@@ -1,7 +1,7 @@
 <template>
 	<div class="post-notification">
 		<div class="d-flex flex-responsive flex-row aling-items-center justify-content-between w-100">
-			<inertia-link class="d-flex align-items-center justify-content-start w-100" :href="$APP_URL + '/' + notification.sender.slug">
+			<wire-link class="d-flex align-items-center justify-content-start w-100" :href="$APP_URL + '/' + notification.sender.slug">
 				<lazy-image img-class="profile-sm" class="profile-sm mb-0 ml-2" :src="notification.sender.profile" />
 				<span class="d-flex align-items-center">
 					<span class="d-flex flex-column">
@@ -12,7 +12,7 @@
 						<div class="w-100">شما را دنبال می‌کند</div>
 					</span>
 				</span>
-			</inertia-link>
+			</wire-link>
 			<div class="actions d-flex align-items-center mt-2 mt-lg-0">
 				<connetion-buttons :page-id="notification.sender.id" :userId="notification.sender.user_id"></connetion-buttons>
 			</div>

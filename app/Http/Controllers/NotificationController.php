@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
+use Ternobo\TernoboWire\TernoboWire;
 
 class NotificationController extends Controller
 {
@@ -29,7 +29,7 @@ class NotificationController extends Controller
             $notification->seen = true;
             $notification->save();
         }
-        return Inertia::render("Notifications", array("notifications" => $notifications, "pages" => $pages));
+        return TernoboWire::render("Notifications", array("notifications" => $notifications, "pages" => $pages));
     }
 
 }

@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Inertia\Inertia;
 use PHPHtmlParser\Dom;
 use PHPHtmlParser\Options;
+use Ternobo\TernoboWire\TernoboWire;
 
 class ArticlesController extends Controller
 {
@@ -26,7 +26,7 @@ class ArticlesController extends Controller
     {
         if (Auth::check()) {
             SEOTools::setTitle("نوشتن مقاله جدید");
-            return Inertia::render("Articles/NewArticle");
+            return TernoboWire::render("Articles/NewArticle");
         } else {
             return redirect("/");
         }
@@ -146,7 +146,6 @@ class ArticlesController extends Controller
      */
     public function show(Page $page, $article)
     {
-        // return Inertia::render("Feed");
         $article = Post::query()
             ->with("page")
             ->with("category")
@@ -174,7 +173,7 @@ class ArticlesController extends Controller
 
             $comments = $article->getComments();
 
-            return Inertia::render("Articles/Article", array("post" => $article, "comments" => $comments, "userposts" => count($articles)));
+            return TernoboWire::render("Articles/Article", array("post" => $article, "comments" => $comments, "userposts" => count($articles)));
         } else {
             return abort(404);
         }
@@ -195,7 +194,7 @@ class ArticlesController extends Controller
             if ($article->type === "article" && $article->user_id === Auth::user()->id) {
                 SEOTools::setTitle("ویرایش مقاله $article->title");
 
-                return Inertia::render("Articles/NewArticle", array("article" => $article));
+                return TernoboWire::render("Articles/NewArticle", array("article" => $article));
             } else {
                 return abort(404);
             }

@@ -123,7 +123,7 @@ export default {
 					.post("/articles/" + this.article.id, formData)
 					.then((response) => {
 						if (response.data.result) {
-							Inertia.visit(response.data.redirect);
+							this.$store.state.ternoboWireApp.visit(response.data.redirect);
 						} else {
 							this.handleError(this.data.errors);
 						}
@@ -134,7 +134,7 @@ export default {
 					.post("/articles", formData)
 					.then((response) => {
 						if (response.data.result) {
-							Inertia.visit(response.data.redirect);
+							this.$store.state.ternoboWireApp.visit(response.data.redirect);
 						} else {
 							this.handleError(this.data.errors);
 						}

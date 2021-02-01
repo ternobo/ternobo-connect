@@ -37,9 +37,7 @@ class AppServiceProvider extends ServiceProvider
                     'app' => [
                         'name' => Config::get('app.name'),
                     ],
-                    "SEO" => function () {
-                        return SEOTools::generate();
-                    },
+                    "SEO" => SEOTools::generate(),
                     "connectedPeople" => function () {
                         if (Auth::check()) {
                             return Auth::user()->getConnectionsIds();

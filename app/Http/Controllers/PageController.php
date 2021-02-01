@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Inertia\Inertia;
+use Ternobo\TernoboWire\TernoboWire;
 
 class PageController extends Controller
 {
@@ -107,7 +107,7 @@ class PageController extends Controller
             $location = "contact";
         }
 
-        return Inertia::render(
+        return TernoboWire::render(
             "Profiles/UserProfile",
             [
                 "page" => $page,
@@ -254,7 +254,7 @@ class PageController extends Controller
         SEOTools::opengraph()->addProperty('profile:username', $page->slug);
         SEOTools::jsonLd()->addImage($page->profile);
         SEOMeta::addKeyword(['پروفایل' . $page->name, $page->name, $page->user->first_name, $page->user->last_name]);
-        return Inertia::render("Profile/UserProfile", [
+        return TernoboWire::render("Profile/UserProfile", [
             "page" => $page,
             "SEOMeta" => SEOTools::generate(),
         ]);
@@ -273,11 +273,6 @@ class PageController extends Controller
             $results[] = $result;
         }
         return response()->json(array("result" => true, "pages" => $results));
-    }
-
-    public function getArticleCategory(Page $page, Category $category, Request $request)
-    {
-        return $this->getCategory($page, $category, $request);
     }
 
     public function saveWebsits(Request $request)

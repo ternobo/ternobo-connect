@@ -14,17 +14,17 @@
 				</div>
 				<div class="d-flex flex-column justify-content-center">
 					<span class="d-flex medium align-items-center clickale">
-						<inertia-link :href="'/search?q=' + skillVal.name">{{ skillVal.name }}</inertia-link>
+						<wire-link :href="'/search?q=' + skillVal.name">{{ skillVal.name }}</wire-link>
 					</span>
 					<span class="font-11 clickable" v-if="skillVal.credit_text != null && skillVal.credit_text.nums > 1">
-						<inertia-link v-if="skillVal.credit_text.first" :href="userURL(skillVal.credit_text.first)" class="text-dark">
+						<wire-link v-if="skillVal.credit_text.first" :href="userURL(skillVal.credit_text.first)" class="text-dark">
 							<strong class="text-light">{{ skillVal.credit_text.first.name }}</strong>
-						</inertia-link>
+						</wire-link>
 						<span v-if="skillVal.credit_text.nums > 2">،</span>
 						<span v-if="skillVal.credit_text.nums == 2">و</span>
-						<inertia-link v-if="skillVal.credit_text.second" :href="userURL(skillVal.credit_text.second)" class="text-dark">
+						<wire-link v-if="skillVal.credit_text.second" :href="userURL(skillVal.credit_text.second)" class="text-dark">
 							<strong class="text-light">{{ skillVal.credit_text.second.name }}</strong>
-						</inertia-link>
+						</wire-link>
 						<span v-if="skillVal.credit_text.nums > 2">و</span>
 						<span>{{ formatNumber(skillVal.credit_text.nums - 2, "0a") }} نفر دیگر این مهارت را تایید کرده‌اند</span>
 					</span>

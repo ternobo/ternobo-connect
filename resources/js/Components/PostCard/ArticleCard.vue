@@ -5,7 +5,7 @@
 		<likes-modal :item="post.id" :show.sync="showLikes"></likes-modal>
 
 		<div class="post-header pt-0">
-			<inertia-link class="publisher" :href="'/' + post.page.slug">
+			<wire-link class="publisher" :href="'/' + post.page.slug">
 				<lazy-image class="profile-sm mb-0" img-class="profile-sm" :src="post.page.profile" />
 				<div>
 					<strong> {{ post.page.name }} <i v-if="post.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
@@ -22,7 +22,7 @@
 						</i>
 					</div>
 				</div>
-			</inertia-link>
+			</wire-link>
 			<div class="actions position-relative" v-if="showMenu">
 				<i class="material-icons bookmark-icon clickable text-muted hover-dark">bookmark_border</i>
 				<div>
@@ -30,35 +30,35 @@
 				</div>
 			</div>
 		</div>
-		<inertia-link class="post-body pb-2" :href="postSlug">
+		<wire-link class="post-body pb-2" :href="postSlug">
 			<div class="images articleimg" v-if="post.medias !== null && post.medias !== undefined && post.medias.length > 0">
 				<lazy-image class="m-0" style="min-height: 218px" alt="" :src="post.medias" />
 			</div>
 			<h4 style="margin-right: -12px !important" class="article-title">{{ post.title }}</h4>
-		</inertia-link>
+		</wire-link>
 		<div class="post-footer" v-if="showMenu">
 			<div class="tagandcate" v-if="((post.tags != null && post.tags.length > 0) || post.category !== null) && showMenu">
 				<div class="tags">
-					<inertia-link v-for="(tag, index) in post.tags" :key="tag + '_POST_TAG_' + post.id + '_' + index" class="tag-item" :href="'/tags/' + tag">
+					<wire-link v-for="(tag, index) in post.tags" :key="tag + '_POST_TAG_' + post.id + '_' + index" class="tag-item" :href="'/tags/' + tag">
 						{{ tag }}
-					</inertia-link>
+					</wire-link>
 				</div>
-				<inertia-link class="category" v-if="post.category !== null" :href="'/' + post.page.slug + '/categories/' + post.category.id">
+				<wire-link class="category" v-if="post.category !== null" :href="'/' + post.page.slug + '/categories/' + post.category.id">
 					<i class="material-icons text-grey">layers</i><span class="text-grey"> {{ post.category.name }}</span>
-				</inertia-link>
+				</wire-link>
 			</div>
 			<div class="actions" v-if="showMenu && $store.state.user">
 				<div>
 					<div @click="showLikes = true" class="d-flex post-likes-text text-muted clickable" v-if="post.mutual_likes != null && post.mutual_likes.length > 0">
 						<span class="ml-1">پسندیده شده توسط</span>
-						<inertia-link v-if="post.mutual_likes[0]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
+						<wire-link v-if="post.mutual_likes[0]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
 							<strong class="text-light">{{ post.mutual_likes[0].page.name }}</strong>
-						</inertia-link>
+						</wire-link>
 						<div v-if="post.mutual_likes.length > 1">
 							<span class="mr-1">و</span>
-							<inertia-link v-if="post.mutual_likes[1]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
+							<wire-link v-if="post.mutual_likes[1]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
 								<strong class="text-light">{{ post.mutual_likes[1].page.name }}</strong>
-							</inertia-link>
+							</wire-link>
 						</div>
 						<span class="mx-1" v-if="post.mutual_likes.length > 2"> و ... </span>
 					</div>

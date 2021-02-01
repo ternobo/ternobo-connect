@@ -14,11 +14,11 @@ export default {
 				user = parseInt(user);
 			}
 
-			if (this.$page.props.connectedPeople.includes(user)) {
+			if (this.$store.state.connectedPeople.includes(user)) {
 				this.connected = true;
 				this.text = "متصل شده";
 				this.$emit("connected");
-			} else if (this.$page.props.waitingConnections.includes(user)) {
+			} else if (this.$store.state.waitingConnections.includes(user)) {
 				this.waiting = true;
 				this.text = "انتظار تایید";
 			}
@@ -54,7 +54,7 @@ export default {
 						// console.log(response.data);
 						if (response.data.result) {
 							$this.loading = false;
-							$this.$page.props.connectedPeople.push($this.user);
+							$this.$store.state.connectedPeople.push($this.user);
 							$this.text = "انتظار تایید";
 							$this.waiting = true;
 						} else {
@@ -86,10 +86,10 @@ export default {
 							$this.loading = false;
 							$this.text = "متصل شدن";
 
-							if ($this.$page.props.connectedPeople.indexOf($this.user) != -1) {
-								$this.$page.props.connectedPeople.splice($this.$page.props.connectedPeople.indexOf($this.user), 1);
-							} else if ($this.$page.props.waitingConnections.indexOf($this.user) != -1) {
-								$this.$page.props.waitingConnections.splice($this.$page.props.waitingConnections.indexOf($this.user), 1);
+							if ($this.$store.state.connectedPeople.indexOf($this.user) != -1) {
+								$this.$store.state.connectedPeople.splice($this.$store.state.connectedPeople.indexOf($this.user), 1);
+							} else if ($this.$store.state.waitingConnections.indexOf($this.user) != -1) {
+								$this.$store.state.waitingConnections.splice($this.$store.state.waitingConnections.indexOf($this.user), 1);
 							}
 
 							$this.connected = false;

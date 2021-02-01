@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import { Inertia } from "@inertiajs/inertia";
 import ModalMixin from "../../Mixins/Modal";
 import MaterialTextField from "../inputs/MaterialTextField";
 export default {
@@ -50,8 +49,7 @@ export default {
 					const data = response.data;
 					if (data !== false) {
 						if (data.result) {
-							Inertia.reload();
-							Inertia.visit("/feed");
+							this.$store.state.ternoboWireApp.visit("/feed");
 						} else {
 							this.handleError(data.errors);
 						}

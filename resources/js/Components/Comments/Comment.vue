@@ -8,7 +8,7 @@
 		</div>
 		<div class="comment" v-if="!deleted">
 			<div class="comment-header">
-				<inertia-link :href="'/' + comment.page.slug" class="d-flex align-items-center">
+				<wire-link :href="'/' + comment.page.slug" class="d-flex align-items-center">
 					<img :src="comment.page.profile" class="profile-sm" />
 					<div class="pr-2 pagedetail">
 						<span class="name">
@@ -18,7 +18,7 @@
 							{{ comment.page.short_bio }}
 						</small>
 					</div>
-				</inertia-link>
+				</wire-link>
 				<div class="d-flex align-items-center">
 					<span class="font-10 text-muted">{{ comment_time }}</span>
 					<div>
@@ -60,14 +60,14 @@
 			<div>
 				<div @click="showLikes = true" class="d-flex post-likes-text text-muted clickable" v-if="comment.mutual_likes != null && comment.mutual_likes.length > 0">
 					<span class="ml-1">پسندیده شده توسط</span>
-					<inertia-link v-if="comment.mutual_likes[0]" :href="'/' + comment.mutual_likes[0].page.slug" class="text-dark">
+					<wire-link v-if="comment.mutual_likes[0]" :href="'/' + comment.mutual_likes[0].page.slug" class="text-dark">
 						<strong class="text-light">{{ comment.mutual_likes[0].page.name }}</strong>
-					</inertia-link>
+					</wire-link>
 					<div v-if="comment.mutual_likes.length > 1">
 						<span class="mr-1">و</span>
-						<inertia-link v-if="comment.mutual_likes[1]" :href="'/' + comment.mutual_likes[0].page.slug" class="text-dark">
+						<wire-link v-if="comment.mutual_likes[1]" :href="'/' + comment.mutual_likes[0].page.slug" class="text-dark">
 							<strong class="text-light">{{ comment.mutual_likes[1].page.name }}</strong>
-						</inertia-link>
+						</wire-link>
 					</div>
 					<span class="mx-1" v-if="comment.mutual_likes.length > 2"> و ... </span>
 				</div>

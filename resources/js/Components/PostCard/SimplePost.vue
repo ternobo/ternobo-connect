@@ -6,7 +6,7 @@
 		<likes-modal :item="post.id" :show.sync="showLikes"></likes-modal>
 
 		<div class="post-header pt-0">
-			<inertia-link class="publisher" :href="'/' + post.page.slug">
+			<wire-link class="publisher" :href="'/' + post.page.slug">
 				<lazy-image class="profile-sm mb-0" img-class="profile-sm" :src="post.page.profile" />
 				<div>
 					<strong class="publisher--name"> {{ post.page.name }} <i v-if="post.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
@@ -23,7 +23,7 @@
 						</i>
 					</div>
 				</div>
-			</inertia-link>
+			</wire-link>
 			<div class="actions position-relative" v-if="showMenu">
 				<i class="material-icons bookmark-icon clickale text-muted clickable hover-dark" @click="bookmark">{{ bookmarked ? "bookmark" : "bookmark_border" }}</i>
 				<div>
@@ -39,9 +39,9 @@
 		<div class="post-footer">
 			<div class="tagandcate" v-if="((post.tags != null && post.tags.length > 0) || post.category !== null) && showMenu">
 				<div class="tags">
-					<inertia-link v-for="tag in post.tags" :key="tag" class="tag-item" :href="'/tags/' + tag">
+					<wire-link v-for="tag in post.tags" :key="tag" class="tag-item" :href="'/tags/' + tag">
 						{{ tag }}
-					</inertia-link>
+					</wire-link>
 				</div>
 				<a class="category" v-if="post.category !== null" :href="'/' + post.page.slug + '/categories/' + post.category.id">
 					<i class="material-icons text-grey">layers</i>
@@ -56,14 +56,14 @@
 				<div>
 					<div @click="showLikes = true" class="d-flex post-likes-text text-muted clickable" v-if="post.mutual_likes != null && post.mutual_likes.length > 0">
 						<span class="ml-1">پسندیده شده توسط</span>
-						<inertia-link v-if="post.mutual_likes[0]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
+						<wire-link v-if="post.mutual_likes[0]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
 							<strong class="text-light">{{ post.mutual_likes[0].page.name }}</strong>
-						</inertia-link>
+						</wire-link>
 						<div v-if="post.mutual_likes.length > 1">
 							<span class="mr-1">و</span>
-							<inertia-link v-if="post.mutual_likes[1]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
+							<wire-link v-if="post.mutual_likes[1]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
 								<strong class="text-light">{{ post.mutual_likes[1].page.name }}</strong>
-							</inertia-link>
+							</wire-link>
 						</div>
 						<span class="mx-1" v-if="post.mutual_likes.length > 2"> و ... </span>
 					</div>

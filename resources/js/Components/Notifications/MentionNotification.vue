@@ -1,6 +1,6 @@
 <template>
 	<div class="post-notification">
-		<inertia-link class="userinfo text-dark" :href="'/' + notification.sender.slug">
+		<wire-link class="userinfo text-dark" :href="'/' + notification.sender.slug">
 			<lazy-image img-class="profile-sm" class="profile-sm mb-3 ml-2" :src="notification.sender.profile" />
 			<div class="d-flex flex-column justify-content-center">
 				<span class="d-flex align-items-center">
@@ -12,7 +12,7 @@
 				>
 				<div class="w-100 text-left">در این محتوا از شما نام برده</div>
 			</div>
-		</inertia-link>
+		</wire-link>
 		<div class="row m-0">
 			<post-viewer :post="notification.post"></post-viewer>
 		</div>

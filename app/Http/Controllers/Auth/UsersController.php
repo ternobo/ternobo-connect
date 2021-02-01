@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Inertia\Inertia;
 use Intervention\Image\Facades\Image;
 use PersianValidator\NationalCode\NationalCode;
+use Ternobo\TernoboWire\TernoboWire;
 
 class UsersController extends Controller
 {
@@ -286,7 +286,7 @@ class UsersController extends Controller
 
     public function settingsPage(Request $request)
     {
-        return Inertia::render("Settings");
+        return TernoboWire::render("Settings");
     }
 
     public function logout()
