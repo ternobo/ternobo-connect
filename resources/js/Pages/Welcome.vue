@@ -83,7 +83,7 @@ import Landing from "../Components/App/Landing";
 import LoginModal from "../Components/Modals/LoginModal";
 import SignupModal from "../Components/Modals/SignupModal";
 import App from "../Layouts/App";
-import { Inertia } from "@inertiajs/inertia";
+
 import Autocomplete from "@trevoreyre/autocomplete-vue";
 
 export default {

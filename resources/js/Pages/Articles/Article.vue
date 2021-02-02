@@ -87,7 +87,6 @@ import PersianDate from "persian-date";
 
 import ReshareModal from "../../Components/Modals/ReshareModal.vue";
 import PostMenu from "../../Components/Menues/PostMenu.vue";
-import { Inertia } from "@inertiajs/inertia";
 
 import LoadingSpinner from "../../Components/LoadingSpinner";
 import Comment from "../../Components/Comments/Comment";

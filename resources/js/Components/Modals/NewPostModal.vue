@@ -81,7 +81,7 @@ import { Mentionable } from "vue-mention";
 import TagInput from "../inputs/TagInput";
 
 import { Cropper } from "vue-advanced-cropper";
-import { Inertia } from "@inertiajs/inertia";
+
 import FileInput from "../../Components/inputs/FileInput";
 
 export default {
@@ -138,9 +138,13 @@ export default {
 				name: value,
 				id: value,
 			});
-			axios.post("/categories", {
-				name: value,
-			});
+			axios
+				.post("/categories", {
+					name: value,
+				})
+				.then(() => {
+					this.$store.commit("addCategory", { name: value, id: value });
+				});
 		},
 		cropImage() {
 			this.isCroppingDone = true;
@@ -226,7 +230,7 @@ export default {
 					.then((response) => {
 						const data = response.data;
 						if (data.result) {
-							Inertia.reload({
+							this.$store.state.ternoboWireApp.reload({
 								only: ["posts"],
 							});
 							this.$emit("done");
@@ -255,7 +259,7 @@ export default {
 					.then((response) => {
 						const data = response.data;
 						if (data.result) {
-							Inertia.reload({
+							this.$store.state.ternoboWireApp.reload({
 								only: ["posts"],
 							});
 							this.$emit("done");
@@ -321,12 +325,12 @@ export default {
 			this.leftCharacter = 2500 - newValue.length;
 		},
 	},
-	created() {
+	mounted() {
 		this.showType = this.showTypesItems[0];
 
 		if (this.$store.state.user) {
-			if (this.$store.state.currentPage.categories != null) {
-				this.categories = this.$store.state.currentPage.categories;
+			if (this.$store.state.shared.currentPage.categories != null) {
+				this.categories = this.$store.state.shared.currentPage.categories;
 			}
 		}
 	},

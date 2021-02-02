@@ -260,7 +260,7 @@ TProgress.remove = function () {
         ? Settings.parent
         : document.querySelector(Settings.parent)
     removeClass(parent, 'TProgress-custom-parent')
-    var progress = document.getElementById('TProgress');
+    var progress = document.getElementById('tprogress');
     progress && removeElement(progress);
 };
 
@@ -339,11 +339,11 @@ function barPositionCSS(n, speed, ease) {
     var barCSS;
 
     if (Settings.positionUsing === 'translate3d') {
-        barCSS = {transform: 'translate3d(' + toBarPerc(n) + '%,0,0)'};
+        barCSS = { transform: 'translate3d(' + toBarPerc(n) + '%,0,0)' };
     } else if (Settings.positionUsing === 'translate') {
-        barCSS = {transform: 'translate(' + toBarPerc(n) + '%,0)'};
+        barCSS = { transform: 'translate(' + toBarPerc(n) + '%,0)' };
     } else {
-        barCSS = {'margin-left': toBarPerc(n) + '%'};
+        barCSS = { 'margin-left': toBarPerc(n) + '%' };
     }
 
     barCSS.transition = 'all ' + speed + 'ms ' + ease;

@@ -104,7 +104,7 @@ export default {
 				})
 				.then((response) => {
 					if (response.data.result) {
-						Inertia.reload();
+						this.$store.state.ternoboWireApp.reload();
 						this.$emit("saved");
 					} else {
 						this.handleError(response.data.errors);

@@ -27,7 +27,6 @@
 import AppLayout from "../../Layouts/AppLayout";
 import CropperModal from "../../Components/Modals/CropperModal";
 import ArticleSettings from "../../Components/Modals/ArticleSettings";
-import { Inertia } from "@inertiajs/inertia";
 
 import CKEditor from "@ckeditor/ckeditor5-vue2";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";

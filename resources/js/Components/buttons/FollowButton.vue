@@ -6,13 +6,14 @@
 import LoadingButton from "./LoadingButton";
 
 export default {
-	created() {
+	mounted() {
 		if (this.$store.state.user !== null) {
 			let page = this.page;
 			if (typeof page != "number") {
 				page = parseInt(page);
 			}
-			if (this.$store.state.followings.includes(page)) {
+			this.page_id = page;
+			if (this.$store.state.shared.followings.includes(page)) {
 				this.followed = true;
 				this.text = "دنبال شده";
 				this.$emit("followed");
@@ -24,6 +25,8 @@ export default {
 			loading: false,
 			followed: false,
 			text: "دنبال کردن",
+
+			page_id: -1,
 		};
 	},
 	props: {
@@ -44,18 +47,18 @@ export default {
 				};
 
 				axios(config)
-					.then(function (response) {
+					.then((response) => {
 						// console.log(response.data);
 						if (response.data.result) {
-							$this.loading = false;
-							$this.$store.state.followings.push($this.page);
-							$this.text = "دنبال شده";
-							$this.followed = true;
-							$this.$emit("followed");
+							this.loading = false;
+							this.$store.commit("addFollower", this.page_id);
+							this.text = "دنبال شده";
+							this.followed = true;
+							this.$emit("followed");
 						} else {
 							const errors = response.data.errors;
-							Object.keys(errors).forEach(function (item, index) {
-								$this.$bvToast.toast(errors[item][0], {
+							Object.keys(errors).forEach((item, index) => {
+								this.$bvToast.toast(errors[item][0], {
 									noCloseButton: true,
 									toaster: "b-toaster-bottom-left",
 									bodyClass: ["bg-dark", "text-right", "text-white"],
@@ -63,10 +66,10 @@ export default {
 								});
 							});
 						}
-						$this.loading = false;
+						this.loading = false;
 					})
-					.catch(function (error) {
-						$this.loading = false;
+					.catch((error) => {
+						this.loading = false;
 					});
 			} else {
 				var config = {
@@ -75,18 +78,18 @@ export default {
 				};
 
 				axios(config)
-					.then(function (response) {
+					.then((response) => {
 						// console.log(response.data);
 						if (response.data.result) {
-							$this.loading = false;
-							$this.text = "دنبال کردن";
-							$this.followed = false;
-							$this.$emit("unfollowed");
-							$vm0.$store.state.followings.splice($vm0.$store.state.followings.indexOf(51), 1);
+							this.loading = false;
+							this.text = "دنبال کردن";
+							this.followed = false;
+							this.$emit("unfollowed");
+							this.$store.commit("unfollow", this.$store.state.followings.indexOf(this.page_id));
 						} else {
 							const errors = response.data.errors;
-							Object.keys(errors).forEach(function (item, index) {
-								$this.$bvToast.toast(errors[item][0], {
+							Object.keys(errors).forEach((item, index) => {
+								this.$bvToast.toast(errors[item][0], {
 									noCloseButton: true,
 									toaster: "b-toaster-bottom-left",
 									bodyClass: ["bg-dark", "text-right", "text-white"],
@@ -94,10 +97,10 @@ export default {
 								});
 							});
 						}
-						$this.loading = false;
+						this.loading = false;
 					})
 					.catch(function (error) {
-						$this.loading = false;
+						this.loading = false;
 					});
 			}
 		},

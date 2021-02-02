@@ -116,7 +116,6 @@
 </template>
 
 <script>
-import { Inertia } from "@inertiajs/inertia";
 export default {
 	created() {
 		axios.post("/auth/get-info").then((response) => {
@@ -126,9 +125,7 @@ export default {
 	},
 	methods: {
 		reload() {
-			Inertia.reload({
-				only: ["user"],
-			});
+			this.$store.commit("userUpdate");
 		},
 		updateEmail(email) {
 			this.email = email;

@@ -202,6 +202,8 @@ class UsersController extends Controller
     {
         if ($request->has("profile")) {
             if (Auth::check()) {
+                $current_profile = substr(str_replace(url('/'), "", Auth::user()->profile), 1);
+                Storage::delete($current_profile);
                 $file = ($request->file("profile")->store("profiles"));
                 //   dd(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
                 $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);

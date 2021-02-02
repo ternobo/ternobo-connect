@@ -80,7 +80,6 @@ import NoContent from "../../Components/NoContent";
 
 import ProfileHeader from "../../Components/Profile/ProfileHeader";
 
-import { Inertia } from "@inertiajs/inertia";
 import MobileCategories from "../../Components/Profile/MobileCategories.vue";
 import CategoriesMobile from "../../Components/Profile/CategoriesMobile.vue";
 import ProfileSteps from "../../Components/Profile/ProfileSteps.vue";
@@ -120,9 +119,7 @@ export default {
 	},
 	methods: {
 		reloadUser() {
-			Inertia.reload({
-				only: ["user"],
-			});
+			this.$store.commit("userUpdate");
 		},
 		onPostAdded() {
 			this.reloadUser();
@@ -281,7 +278,7 @@ export default {
 		},
 		cancelEdit() {
 			this.loadingTab = true;
-			Inertia.reload({
+			this.$store.state.ternoboWireApp.reload({
 				only: ["page"],
 			});
 			setTimeout(() => {
@@ -320,7 +317,7 @@ export default {
 	},
 	computed: {
 		canEdit() {
-			return this.page.user_id == window.user_id;
+			return this.page.user_id == this.$store.state.user.id;
 		},
 	},
 	name: "UserProfile",

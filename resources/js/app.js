@@ -2,7 +2,6 @@ require('./bootstrap');
 import Vue from 'vue';
 
 import {
-    store,
     plugin,
 } from 'wire-js';
 import PortalVue from 'portal-vue';
@@ -86,24 +85,15 @@ if (user_id) {
 let instanceData = JSON.parse(document.body.dataset.wire);
 document.body.dataset.wire = "";
 let component = instanceData.component;
-
-let vuexStore = store({
-    state: {
-        search: null
-    },
-    mutations: {
-        setSearch(state, payload) {
-            state.search = payload;
-        }
-    }
-})
-
 const vue_app = new Vue({
-    store: vuexStore,
+    store: require("./store").default,
     render: (h) =>
         h(Application, {
             props: {
-                initialData: instanceData.data,
+                initialData: {
+                    data: instanceData.data,
+                    shared: instanceData.shared
+                },
                 initialComponent: component,
                 resolveComponent: (component) => import(`./Pages/${component}`),
             },

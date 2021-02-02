@@ -49,7 +49,6 @@
 <script>
 import ModalMixin from "../../Mixins/Modal";
 import { Cropper } from "vue-advanced-cropper";
-import { Inertia } from "@inertiajs/inertia";
 import FileInput from "../../Components/inputs/FileInput";
 import TagInput from "../inputs/TagInput.vue";
 
@@ -151,7 +150,7 @@ export default {
 				.then((response) => {
 					const data = response.data;
 					if (data.result) {
-						Inertia.reload({
+						this.$store.state.ternoboWireApp.reload({
 							only: ["posts"],
 						});
 						this.$emit("update:show", false);
@@ -195,7 +194,7 @@ export default {
 			showType: undefined,
 			category: undefined,
 			text: undefined,
-			categories: this.$store.state.currentPage != null ? this.$store.state.currentPage.categories : [],
+			categories: this.$store.state.shared.currentPage != null ? this.$store.state.shared.currentPage.categories : [],
 			tags: [],
 			txtlen: "0%",
 			isCropping: false,
