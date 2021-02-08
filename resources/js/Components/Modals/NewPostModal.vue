@@ -321,8 +321,10 @@ export default {
 	},
 	watch: {
 		text(newValue) {
-			this.txtlen = (newValue.length / 2500) * 100 + "%";
-			this.leftCharacter = 2500 - newValue.length;
+			if (newValue) {
+				this.txtlen = (newValue.length / 2500) * 100 + "%";
+				this.leftCharacter = 2500 - newValue.length;
+			}
 		},
 	},
 	mounted() {

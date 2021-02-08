@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Connection;
 use Illuminate\Console\Command;
 
 class AcceptConnections extends Command
@@ -11,7 +12,7 @@ class AcceptConnections extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'connections:accept {user_id}';
 
     /**
      * The console command description.
@@ -37,6 +38,16 @@ class AcceptConnections extends Command
      */
     public function handle()
     {
+        $user_id = $this->argument("user_id");
+        $connections = Connection::query()
+            ->whereHas("user", function ($query) {
+                $query->where("active", true);
+            })
+            ->whereRaw("(connection = '$user_id' or user_id = '$user_id')")
+            ->where("accepted", false)
+            ->update([
+                'accepted' => true,
+            ]);
         return 0;
     }
 }

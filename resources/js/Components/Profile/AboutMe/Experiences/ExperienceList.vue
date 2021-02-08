@@ -12,6 +12,9 @@
 					<Skeleton :count="3" heigth="80px" />
 				</li>
 			</ul>
+			<div class="w-100 text-center" v-else-if="experiences.length < 1">
+				<span class="font-16 text-superlight">هیچ تجربیاتی ثبت نشده</span>
+			</div>
 			<draggable group="experiences" ref="draggable" tag="ul" v-bind="dragOptions" v-model="experiences" class="experiences-list p-0" :disabled="!edit" handle=".hand-hover">
 				<Experience @deleted="onDelete(index)" v-model="experiences[index]" :edit="edit" v-for="(experience, index) in experiences" :key="'experience_' + experience.id" />
 			</draggable>

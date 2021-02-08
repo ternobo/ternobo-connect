@@ -10,9 +10,12 @@
 
 			<ul class="socials-list p-0" v-if="loading">
 				<li class="w-100">
-					<Skeleton :count="4" :heigth="25" />
+					<Skeleton :count="2" :heigth="25" />
 				</li>
 			</ul>
+			<div class="w-100 text-center" v-else-if="socials.length < 1">
+				<span class="font-16 text-superlight">هیچ مهارتی ثبت نشده</span>
+			</div>
 			<ul class="socials-list p-0" v-else>
 				<SocialItem @deleted="onDelete(index)" @input="updateData" :options="usableOptions" :edit="edit" v-for="(social, index) in socials" :social="social" :key="'social_item_num_' + social.id"></SocialItem>
 			</ul>
@@ -26,7 +29,6 @@ import SocialItem from "./Items/SocialItem";
 export default {
 	methods: {
 		onDelete(index) {
-			console.log(index);
 			this.socials.splice(index, 1);
 		},
 		addSocial() {

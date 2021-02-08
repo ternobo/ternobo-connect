@@ -33,29 +33,24 @@ export default {
 	methods: {
 		loadMore() {
 			if (!this.loadingPage && this.next_page_url !== null) {
-				const $this = this;
-				const options = {
-					method: "GET",
-					headers: {
-						"X-Inertia": "true",
-					},
-					url: this.next_page_url,
-				};
+				let url = this.next_page_url;
 				this.loadingPage = true;
-				axios(options)
+				this.$store.state.ternoboWireApp
+					.getData(this.next_page_url, false)
 					.then((response) => {
-						const data = response.data.props.posts;
+						const data = response.data.posts;
 						if (data) {
-							$this.postsArray = $this.postsArray.concat(data.data);
-							$this.page = data.current_page;
-							$this.next_page_url = data.next_page_url;
+							this.postsArray = this.postsArray.concat(data.data);
+							this.page = data.current_page;
+							this.next_page_url = data.next_page_url;
 						}
 					})
 					.catch((error) => {
-						this.next_page_url = options.url;
+						this.next_page_url = url;
+						console.error(error);
 					})
 					.then(() => {
-						$this.loadingPage = false;
+						this.loadingPage = false;
 					});
 			}
 		},

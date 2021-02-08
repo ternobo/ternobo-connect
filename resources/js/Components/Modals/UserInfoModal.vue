@@ -49,8 +49,7 @@ export default {
 			required: true,
 		},
 		pageLocation: {
-			type: String,
-			default: "",
+			default: null,
 			required: true,
 		},
 	},

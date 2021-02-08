@@ -11,8 +11,8 @@
 				</div>
 			</div>
 			<div>
-				<div class="content" :class="{ 'font-12': !$root.isDesktop }" v-if="!edit">
-					{{ text }}
+				<div class="content" :class="{ 'font-12': !$root.isDesktop, 'text-superlight text-center': text == null || text.length < 1 }" v-if="!edit">
+					{{ text != null && text.length > 0 ? text : "هیچ اطلاعاتی ثبت نشده" }}
 				</div>
 				<textarea-autosize class="form-control" v-else v-model="text"></textarea-autosize>
 			</div>
@@ -33,7 +33,7 @@ export default {
 				this.leftCharacter = 2500 - newValue.length;
 			}
 		},
-		value(newValue) {
+		value() {
 			this.text = this.value;
 		},
 	},

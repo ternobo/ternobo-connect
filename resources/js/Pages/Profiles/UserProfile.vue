@@ -4,7 +4,7 @@
 		<verify-modal @verified="reloadUser" :show.sync="showVerification"></verify-modal>
 		<div class="content-container-profile" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
 			<profile-steps @action="stepsAction" class="mb-3" :steps="$store.state.user.profile_steps" v-if="$store.state.user && $store.state.user.profile_steps.percent < 100 && checkUser(page.user_id)"></profile-steps>
-			<ProfileHeader ref="profileHeader" :page="page" :can-edit="canEdit"></ProfileHeader>
+			<ProfileHeader ref="ProfileHeader" :page="page" :can-edit="canEdit"></ProfileHeader>
 			<tabs :compact="true" :disabled="edit" class="py-3" @selected="tabChange" :state-tab="true">
 				<template slot="custom-item">
 					<div class="d-flex align-items-center" v-if="canEdit && showEdit">
@@ -80,13 +80,15 @@ import NoContent from "../../Components/NoContent";
 
 import ProfileHeader from "../../Components/Profile/ProfileHeader";
 
+import { TernoboWire } from "wire-js";
+
 import MobileCategories from "../../Components/Profile/MobileCategories.vue";
 import CategoriesMobile from "../../Components/Profile/CategoriesMobile.vue";
 import ProfileSteps from "../../Components/Profile/ProfileSteps.vue";
 import VerifyModal from "../../Components/Modals/VerifyModal.vue";
 export default {
 	watch: {
-		filters(newValue) {
+		filters() {
 			this.loadingActions = true;
 			axios
 				.post("/" + this.page.slug + "/actions", this.filters)
@@ -143,19 +145,22 @@ export default {
 					this.$refs.ProfileHeader.edit = true;
 					break;
 				case "set_biography":
+					this.current_tab = "home";
+					this.loadTab("/" + this.page.slug);
 					this.edit = true;
 					break;
 				case "set_skills":
+					this.current_tab = "home";
+					this.loadTab("/" + this.page.slug);
 					this.edit = true;
 					break;
 				case "add_post":
+					this.current_tab = "activities";
 					this.$refs.newPostCard.showPostModal = true;
 					break;
 				case "verfication":
 					this.showVerification = true;
 					break;
-				default:
-					console.log("hell");
 			}
 		},
 		loadMore() {
@@ -188,42 +193,34 @@ export default {
 		loadTab(link, pushState = true) {
 			if (link.endsWith("articles") || link.endsWith("activities")) {
 				this.showEdit = false;
+				this.loadingTab = true;
+				TernoboWire.getInstance(this)
+					.getData(link, false)
+					.then((data) => {
+						if (data) {
+							if (data.actions) {
+								this.actionsList = data.actions.data;
+								this.next_page_url = data.actions.next_page_url;
+							}
+							if (data.articles) {
+								this.articlesList = data.articles.data;
+								this.next_page_url = data.articles.next_page_url;
+							}
+						}
+					})
+					.catch(() => {
+						this.next_page_url = options.url;
+					})
+					.then(() => {
+						this.loadingTab = false;
+					});
 			} else {
 				this.showEdit = true;
 			}
 
 			if (pushState) {
-				window.history.pushState({}, false, link);
+				window.history.replaceState({}, false, link);
 			}
-
-			const options = {
-				method: "GET",
-				headers: {
-					"X-Inertia": "true",
-				},
-				url: link,
-			};
-			this.loadingTab = true;
-			axios(options)
-				.then((response) => {
-					const data = response.data.props;
-					if (data) {
-						if (data.actions) {
-							this.actionsList = data.actions.data;
-							this.next_page_url = data.actions.next_page_url;
-						}
-						if (data.articles) {
-							this.articlesList = data.articles.data;
-							this.next_page_url = data.articles.next_page_url;
-						}
-					}
-				})
-				.catch((error) => {
-					this.next_page_url = options.url;
-				})
-				.then(() => {
-					this.loadingTab = false;
-				});
 		},
 
 		tabChange(link, id) {

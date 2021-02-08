@@ -87,18 +87,12 @@ export default {
 			if (tab !== this.currentTab) {
 				this.data = [];
 				this.currentTab = tab;
-
-				const options = {
-					method: "GET",
-					headers: {
-						"X-Inertia": "true",
-					},
-					url: this.$APP_URL + "/search?type=" + tab + "&q=" + this.search,
-				};
 				this.loadingPage = true;
-				axios(options)
+
+				this.$store.state.ternoboWireApp
+					.getData(this.$APP_URL + "/search?type=" + tab + "&q=" + this.search, false)
 					.then((response) => {
-						const data = response.data.props.results;
+						const data = response.results;
 						if (data) {
 							this.data = data.data;
 							this.total = data.total;
@@ -116,30 +110,24 @@ export default {
 		},
 		loadMore() {
 			if (!this.loadingPage && this.next_page_url !== null) {
-				const $this = this;
-				const options = {
-					method: "GET",
-					headers: {
-						"X-Inertia": "true",
-					},
-					url: this.next_page_url,
-				};
 				this.loadingPage = true;
-				axios(options)
+				this.$store.state.ternoboWireApp
+					.getData(this.next_page_url, false)
 					.then((response) => {
-						const data = response.data.props.results;
+						const data = response.results;
 						if (data) {
-							$this.data = $this.data.concat(data.data);
-							$this.page = data.current_page;
-							$this.next_page_url = data.next_page_url;
+							this.data = this.data.concat(data.data);
+							this.page = data.current_page;
+							this.next_page_url = data.next_page_url;
 						}
 					})
 					.catch((error) => {
 						this.next_page_url = options.url;
 					})
 					.then(() => {
-						$this.loadingPage = false;
+						this.loadingPage = false;
 					});
+				axios(options);
 			}
 		},
 	},

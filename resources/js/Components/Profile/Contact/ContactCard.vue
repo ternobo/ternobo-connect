@@ -4,7 +4,10 @@
 			<div class="d-flex mb-2 aling-items-center justify-content-between">
 				<h5 class="contact--title">تماس با من</h5>
 			</div>
-			<ul class="contacts-list p-0">
+			<div class="w-100 text-center" v-if="showNoData">
+				<span class="font-16 text-superlight">هیچ مهارتی ثبت نشده</span>
+			</div>
+			<ul class="contacts-list p-0" v-else>
 				<li :class="{ edit: edit }" v-if="(contacts.email != null && this.contacts.email.length > 0) || edit">
 					<a target="_blank" :href="'mailto:' + contacts.email" v-if="!edit">
 						<i class="material-icons-outlined ml-1" :style="{ color: '#F14336' }">email</i>
@@ -149,6 +152,11 @@ export default {
 			type: Object,
 			default: undefined,
 			required: true,
+		},
+	},
+	computed: {
+		showNoData() {
+			return (this.contacts.email == null || this.contacts.email.length < 1) && (this.contacts.telegram == null || this.contacts.telegram.length < 1) && (this.contacts.skype == null || this.contacts.skype.length < 1) && (this.contacts.whatsapp == null || this.contacts.whatsapp < 1);
 		},
 	},
 	mounted() {

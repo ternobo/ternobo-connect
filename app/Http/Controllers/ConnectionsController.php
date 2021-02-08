@@ -40,10 +40,15 @@ class ConnectionsController extends Controller
             ->where("accepted", false)
             ->paginate(4);
 
-        if ($request->has("q")) {
-            $accpeted_connections = $accpeted_connections->whereHas("user", function ($query) use ($request) {
-                $query->where('name', 'like', "%{$request->q}%");
-            });
+        if ($request->filled("q")) {
+            $accpeted_connections = $accpeted_connections
+                ->whereHas("user", function ($query) use ($request) {
+                    $query->where('name', 'like', "%{$request->q}%");
+                })
+                ->paginate(20)
+                ->appends("q", $request->q);
+        } else {
+            $accpeted_connections = $accpeted_connections->paginate(20);
         }
 
         Connection::query()->where("user_id", Auth::user()->id)
@@ -56,7 +61,7 @@ class ConnectionsController extends Controller
         $following_count = count(Following::query()->where("user_id", Auth::user()->id)->get());
 
         return TernoboWire::render("MyConnections", [
-            "connections" => $accpeted_connections->paginate(20),
+            "connections" => $accpeted_connections,
             "pending_connections" => $pending_connections,
             "connections_count" => $connections_count,
             "following_count" => $following_count,
@@ -80,10 +85,12 @@ class ConnectionsController extends Controller
             ->where("accepted", false)
             ->paginate(5);
 
-        if ($request->has("q")) {
+        if ($request->filled("q")) {
             $followings = $followings->whereHas("page", function ($query) use ($request) {
                 $query->where('name', 'like', "%{$request->q}%");
-            });
+            })->paginate(20)->appends("q", $request->q);
+        } else {
+            $followings = $followings->paginate(20);
         }
 
         // counts
@@ -91,7 +98,7 @@ class ConnectionsController extends Controller
         $followers_count = count(Following::query()->where("following", Auth::user()->id)->get());
         $following_count = count(Following::query()->where("user_id", Auth::user()->id)->get());
 
-        return TernoboWire::render("MyConnections", array("connections" => $followings->paginate(20), "pending_connections" => $pending_connections,
+        return TernoboWire::render("MyConnections", array("connections" => $followings, "pending_connections" => $pending_connections,
             "connections_count" => $connections_count,
             "following_count" => $following_count, "followers_count" => $followers_count));
     }
@@ -109,11 +116,16 @@ class ConnectionsController extends Controller
             ->where("following", Auth::user()->id)
             ->latest();
 
-        if ($request->has("q")) {
-            $followings = $followings->whereHas("follower", function ($query) use ($request) {
-                $query->where('name', 'like', "%{$request->q}%");
-            });
+        if ($request->filled("q")) {
+            $followings = $followings
+                ->whereHas("follower", function ($query) use ($request) {
+                    $query->where('name', 'like', "%{$request->q}%");
+                })
+                ->paginate(20)
+                ->appends("q", $request->q);
             // dd($followings->toSql());
+        } else {
+            $followings = $followings->paginate(20);
         }
 
         $pending_connections = Connection::query()->where("user_id", Auth::user()->id)

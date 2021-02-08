@@ -129,7 +129,6 @@ window.addEventListener('popstate', () => {
 });
 
 document.addEventListener('ternobo:navigate', event => {
-    console.log("hello");
     vue_app.url = event.detail.location;
     TProgress.start();
 });

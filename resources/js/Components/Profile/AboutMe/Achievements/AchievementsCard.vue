@@ -25,6 +25,10 @@
 			<CoursesList :value="this.achievements.courses" ref="courses" :edit="edit" :page="page"></CoursesList>
 			<InventionsList :value="this.achievements.inventions" ref="inventions" :edit="edit" :page="page"></InventionsList>
 			<TestsList :value="this.achievements.tests" ref="tests" :edit="edit" :page="page"></TestsList>
+
+			<div class="w-100 text-center" v-if="this.achievements.langs < 1 && this.achievements.projects < 1 && this.achievements.publishs < 1 && this.achievements.awards < 1 && this.achievements.courses < 1 && this.achievements.inventions < 1 && this.achievements.tests < 1">
+				<span class="font-16 text-superlight">هیچ دستاوردی ثبت نشده</span>
+			</div>
 		</div>
 	</div>
 </template>

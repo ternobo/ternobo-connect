@@ -103,7 +103,6 @@ import MaterialTextField from "../Components/inputs/MaterialTextField";
 import AppLayout from "../Layouts/AppLayout";
 import ConnectionButton from "../Components/buttons/ConnectionButton";
 import FollowButton from "../Components/buttons/FollowButton";
-import Tabs from "../Components/Tabs/Tabs";
 import AcceptConnection from "../Components/buttons/AcceptConnection";
 import PageInfoCard from "../Components/Cards/PageInfoCard";
 import ConnectInvitation from "../Components/Cards/ConnectInvitation";
@@ -112,71 +111,43 @@ export default {
 	watch: {
 		search(value) {
 			this.searchLoading = true;
-			const options = {
-				cancelToken: this.cancelSource.token,
-				method: "GET",
-				headers: {
-					"X-Inertia": "true",
-				},
-				url: this.current_tab,
-				params: {
-					q: value,
-				},
-			};
-			axios(options)
+			this.$store.state.ternoboWireApp
+				.getData(this.current_tab + "?q=" + value, false)
 				.then((response) => {
-					const data = response.data.props.connections;
-					if (data) {
-						this.list = data.data;
-						this.total = data.total;
-						this.connections_next_page = data.next_page_url;
-					}
+					let data = response.connections;
+					this.list = data.data;
+					this.total = data.total;
+					this.connections_next_page = data.next_page_url;
 				})
-				.then(() => (this.searchLoading = false));
+				.catch((error) => {
+					console.log(error);
+				})
+				.then(() => {
+					this.searchLoading = false;
+				});
 		},
 	},
 	methods: {
 		onAcceptConnection() {
-			const options = {
-				method: "GET",
-				headers: {
-					"X-Inertia": "true",
-				},
-				url: this.current_tab,
-			};
-			this.loading = true;
-			axios(options)
-				.then((response) => {
-					const data = response.data.props.connections;
-					if (data) {
-						this.list = data.data;
-						this.total = data.total;
-						this.connections_next_page = data.next_page_url;
-					}
-				})
-				.then(() => {
-					this.loading = false;
-				});
+			this.search = null;
 		},
 		tabSelect(tab) {
 			if (tab !== this.current_tab) {
 				this.current_tab = tab;
-				const options = {
-					method: "GET",
-					headers: {
-						"X-Inertia": "true",
-					},
-					url: tab,
-				};
+
 				this.loading = true;
-				axios(options)
+				this.$store.state.ternoboWireApp
+					.getData(tab, false)
 					.then((response) => {
-						const data = response.data.props.connections;
+						const data = response.connections;
 						if (data) {
 							this.list = data.data;
 							this.total = data.total;
 							this.connections_next_page = data.next_page_url;
 						}
+					})
+					.catch((error) => {
+						console.error(error);
 					})
 					.then(() => {
 						this.loading = false;
@@ -185,21 +156,18 @@ export default {
 		},
 		loadMoreConnection() {
 			if (this.connections_next_page !== null && !this.loadingMoreConnection) {
-				const options = {
-					method: "GET",
-					headers: {
-						"X-Inertia": "true",
-					},
-					url: this.connections_next_page,
-				};
 				this.loadingMoreConnection = true;
-				axios(options)
+				this.$store.state.ternoboWireApp
+					.getData(this.connections_next_page, false)
 					.then((response) => {
-						const data = response.data.props.connections;
+						const data = response.connections;
 						if (data) {
 							this.list = this.list.concat(data.data);
 							this.connections_next_page = data.next_page_url;
 						}
+					})
+					.catch((error) => {
+						console.error(error);
 					})
 					.then(() => {
 						this.loadingMoreConnection = false;
@@ -208,21 +176,18 @@ export default {
 		},
 		loadMoreInvtite() {
 			if (this.invites_next_page !== null && !this.loadingMoreInvite) {
-				const options = {
-					method: "GET",
-					headers: {
-						"X-Inertia": "true",
-					},
-					url: this.invites_next_page,
-				};
 				this.loadingMoreInvite = true;
-				axios(options)
+				this.$store.state.ternoboWireApp
+					.getData(this.invites_next_page, false)
 					.then((response) => {
-						const data = response.data.props.pending_connections;
+						const data = response.pending_connections;
 						if (data) {
 							this.invites = this.invites.concat(data.data);
 							this.invites_next_page = data.next_page_url;
 						}
+					})
+					.catch((err) => {
+						console.error(err);
 					})
 					.then(() => {
 						this.loadingMoreInvite = false;

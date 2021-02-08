@@ -2,9 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Page;
-use App\Models\User;
 use App\Models\Following;
+use App\Models\Page;
 use Illuminate\Console\Command;
 
 class FollowAll extends Command
@@ -14,14 +13,14 @@ class FollowAll extends Command
      *
      * @var string
      */
-    protected $signature = 'fake:follow';
+    protected $signature = 'fake:follow {page}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Follow All Pages';
 
     /**
      * Create a new command instance.
@@ -40,8 +39,9 @@ class FollowAll extends Command
      */
     public function handle()
     {
-        $users = Page::query()->where("id", "!=", 1)->get();
-        foreach($users as $user){
+        $auth = $this->argument("page");
+        $users = Page::query()->where("id", "!=", $auth)->get();
+        foreach ($users as $user) {
             $following = new Following();
             $following->user_id = 301;
             $following->following = $user->id;

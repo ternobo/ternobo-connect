@@ -10,9 +10,12 @@
 
 			<ul class="websites-list p-0" v-if="loading">
 				<li>
-					<Skeleton :count="4" :heigth="25" />
+					<Skeleton :count="2" :heigth="25" />
 				</li>
 			</ul>
+			<div class="w-100 text-center" v-else-if="websites.length < 1">
+				<span class="font-16 text-superlight">هیچ مهارتی ثبت نشده</span>
+			</div>
 			<ul class="websites-list p-0" v-else>
 				<WebsiteItem @deleted="onDelete(index)" @input="updateData" :options="usableOptions" :edit="edit" v-for="(website, index) in websites" :website="website" :key="'contact_item_num_' + website.id"></WebsiteItem>
 			</ul>
@@ -26,7 +29,6 @@ import WebsiteItem from "./Items/WebsiteItem";
 export default {
 	methods: {
 		onDelete(index) {
-			console.log(index);
 			this.websites.splice(index, 1);
 		},
 		addWebsite() {
