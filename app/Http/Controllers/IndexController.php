@@ -79,4 +79,11 @@ class IndexController extends Controller
         return $request->user();
     }
 
+    public function checkOnline()
+    {
+        if (Auth::check()) {
+            return response()->json(['result' => true]);
+        }
+    }
+
 }

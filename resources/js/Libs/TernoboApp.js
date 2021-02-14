@@ -128,12 +128,16 @@ TernoboApp.install = function (Vue, options) {
             const timeAgo = new TimeAgo('fa-FA');
             return timeAgo.format(Date.parse(time), 'twitter');
         }
-        Vue.prototype.encodeQueryData = function (data) {
-            const ret = [];
-            for (let d in data)
-                ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
-            return ret.join('&');
-        }
+        Vue.prototype.timeAgo = function (time) {
+            const timeAgo = new TimeAgo("fa-FA");
+            return timeAgo.format(Date.parse(time), "fa_FA");
+        },
+            Vue.prototype.encodeQueryData = function (data) {
+                const ret = [];
+                for (let d in data)
+                    ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
+                return ret.join('&');
+            }
     };
 
     Vue.mixin({

@@ -51,7 +51,7 @@
 
 </head>
 
-<body class="font-sans antialiased" data-wire='{!!  $data !!}'>
+<body class="font-sans antialiased" data-wire='{{ $data }}'>
     {!! $ternoboApp !!}
 
     <script src="/js/manifest.js" defer></script>

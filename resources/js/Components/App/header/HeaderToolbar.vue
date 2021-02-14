@@ -5,6 +5,10 @@
 				<i class="navheader-icon">home</i>
 				<div class="navheader-text">خانه</div>
 			</wire-link>
+			<wire-link :class="{ active: $root.url === '/chats' }" href="/chats">
+				<i class="navheader-icon">textsms</i>
+				<div class="navheader-text">گفتگو‌ها</div>
+			</wire-link>
 			<wire-link :class="{ active: $root.url === '/connections' }" href="/connections">
 				<i class="navheader-icon">group</i>
 				<div class="navheader-text">شبکه من</div>

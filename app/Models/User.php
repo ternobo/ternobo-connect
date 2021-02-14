@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use Ternobo\TernoboChat\Interfaces\Messageable;
+use Ternobo\TernoboChat\Traits\CanChat;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Messageable
 {
+
+    use CanChat;
 
     use Notifiable;
 

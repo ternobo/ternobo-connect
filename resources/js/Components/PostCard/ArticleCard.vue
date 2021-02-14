@@ -24,7 +24,7 @@
 				</div>
 			</wire-link>
 			<div class="actions position-relative" v-if="showMenu">
-				<i class="material-icons bookmark-icon clickable text-muted hover-dark">bookmark_border</i>
+				<i class="material-icons bookmark-icon clickale text-muted clickable hover-dark" @click="bookmark">{{ bookmarked ? "bookmark" : "bookmark_border" }}</i>
 				<div>
 					<post-menu :post="post" @embed="showEmbed = true" @deleted="doDelete"></post-menu>
 				</div>
@@ -94,7 +94,7 @@ export default {
 			deleted: false,
 		};
 	},
-	created: function () {
+	created() {
 		this.liked = this.post.is_liked;
 		this.bookmarked = this.post.is_bookmarked;
 	},
@@ -132,6 +132,18 @@ export default {
 			this.$axios({
 				method: "post",
 				url: this.$APP_URL + "/like/" + this.post.id,
+			}).catch((error) => {});
+		},
+		bookmark() {
+			if (this.bookmarked) {
+				this.bookmarked = false;
+			} else {
+				this.bookmarked = true;
+			}
+			const $this = this;
+			this.$axios({
+				method: "post",
+				url: this.$APP_URL + "/bookmark/" + this.post.id,
 			}).catch((error) => {});
 		},
 	},

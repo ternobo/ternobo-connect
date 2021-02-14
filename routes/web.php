@@ -81,6 +81,8 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
     Route::group(['auth'], function () {
 
+        Route::post("/ternobo-wire/check-online", "IndexController@checkOnline");
+
         Route::post("logout", "Auth\UsersController@logout");
 
         Route::prefix("/two-factor-auth")->group(function () {
@@ -238,6 +240,13 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
     Route::post("/contacts/", "ContactsController@saveData");
     Route::post("/contacts/{page}", "ContactsController@getContactData");
+
+    //Chats
+    Route::prefix("chats")->group(function () {
+        Route::get("/", "Chats\ChatController@index");
+        Route::post("/conversations/{id}", "Chats\ChatController@chat");
+
+    });
 
     // Pages
     Route::prefix('/{page:slug}')->group(function () {

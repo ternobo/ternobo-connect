@@ -1,5 +1,5 @@
 window._ = require('lodash');
-
+import NoiseGate from "noise-gate";
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -13,6 +13,8 @@ window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('m
 window.axios.defaults.headers.common['Cache-Control'] = 'no-cache';
 window.axios.defaults.headers.common['Pragma'] = 'no-cache';
 window.axios.defaults.headers.common['Expires'] = '0';
+
+window.NoiseGate = NoiseGate;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

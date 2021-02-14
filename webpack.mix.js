@@ -20,10 +20,10 @@ mix.sourceMaps();
 mix.options({
     extractVueStyles: 'public/css/vue-components.css'
 });
+mix.browserSync('localhost:8000');
+
 mix.webpackConfig(require('./webpack.config'));
-mix.js('resources/js/app.js', 'public/js').vue({
-    // extractCSS: true
-});
+mix.js('resources/js/app.js', 'public/js').vue();
 mix.sass("resources/sass/application/app.scss", "public/css");
 mix.extract(['vue'])
 mix.version();

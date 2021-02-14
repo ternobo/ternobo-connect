@@ -494,32 +494,9 @@ img {
     margin: auto;
     min-height: calc(100vh - 80px);
 
-    .content-container-profile,
-    .content-container-full,
-    .content-container-settings {
-        padding: 0 15px;
-
-    }
-
-
     @media screen and (min-width: 991px) {
-
-        .sidebar-left {
-            padding-left: 0.9rem;
-        }
-
-
-        .sidebar-right {
-            padding-right: 0.9rem;
-        }
-
-        .content-container-full {
-            padding-left: 30px;
-        }
-
         .content-container-settings {
             padding-right: 30px;
-            padding-left: 15px;
         }
 
         .content-container-settings {
@@ -529,7 +506,6 @@ img {
 
         .content-container-profile {
             padding-left: 30px;
-            padding-right: 15px;
         }
 
         .content-container-right {
@@ -890,6 +866,8 @@ pre {
         font-size: 12px;
     }
 }
+
+@import "./components/nice-scroll.scss";
 
 .autocomplete-input:focus,
 .autocomplete-input[aria-expanded=true] {
@@ -1536,3 +1514,5 @@ a:focus {
         border: 0;
     }
 }
+
+@import "./pages/chats.scss";

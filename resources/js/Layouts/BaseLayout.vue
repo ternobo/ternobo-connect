@@ -1,5 +1,5 @@
 <template>
-	<div class="row mx-0 base-layout">
+	<div class="row base-layout">
 		<slot></slot>
 	</div>
 </template>

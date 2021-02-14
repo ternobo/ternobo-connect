@@ -18,7 +18,7 @@
 			</div>
 		</div>
 		<sidebar-left v-if="$root.isDesktop">
-			<app-footer></app-footer>
+			<app-footer class="sticky-aside"></app-footer>
 		</sidebar-left>
 	</base-layout>
 </template>
