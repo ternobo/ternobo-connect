@@ -23966,6 +23966,7 @@ body {
   color: #757575;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   box-shadow: 0px -5px 40px rgba(0, 0, 0, 0.05);
   width: 100%;
   padding: 12px 20px;
@@ -23973,5 +23974,89 @@ body {
 
 .chat-container .conversation-container > .conversation-footer input {
   color: #424242;
+}
+
+.recoording-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  background: #C7FEDC;
+  border-radius: 8px;
+}
+
+.recording-timer {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  direction: ltr;
+}
+
+.recording-timer label {
+  margin: 0;
+}
+
+.voice-preview {
+  align-items: center;
+  display: flex;
+  line-height: 1;
+  gap: 5px;
+}
+
+.voice-preview > span {
+  font-size: 12px;
+  color: #0898DF;
+}
+
+.voice-preview .progress {
+  width: 100%;
+  position: relative;
+  direction: ltr;
+  height: 8px;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  flex-direction: row;
+}
+
+.voice-preview .progress .progress-bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: #CDEAF9;
+  width: 100%;
+  height: 5px;
+}
+
+.voice-preview .progress .progress-fill {
+  background: #0898DF;
+  position: relative;
+  transition: 0.3s all;
+  display: flex;
+  align-items: center;
+  height: 5px;
+}
+
+.voice-preview .progress .progress-fill::after {
+  content: " ";
+  position: absolute;
+  background: #0898DF;
+  right: 0;
+  border-radius: 3px;
+  width: 4px;
+  height: 8px;
+}
+
+.save-recording {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #C7FEDC;
+  box-sizing: border-box;
+  border-radius: 8px;
+  color: #00C853;
 }
 

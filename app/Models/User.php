@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -67,6 +68,15 @@ class User extends Authenticatable implements Messageable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Conversations Query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function conversations(): Builder
+    {
+        return Conversation::query()->whereJsonContains("members", $this->id);
+    }
 
     public function generateToken()
     {

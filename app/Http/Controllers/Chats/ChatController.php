@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Chats;
 
 use App\Http\Controllers\Controller;
+use App\Models\Conversation;
 use Illuminate\Support\Facades\Auth;
-use Ternobo\TernoboChat\Models\Conversation;
 use Ternobo\TernoboWire\TernoboWire;
 
 class ChatController extends Controller
