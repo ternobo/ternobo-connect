@@ -27,20 +27,37 @@
 			</div>
 		</div>
 		<div class="conversation-footer">
-			<div class="d-flex">
-				<i class="material-icons clickable" @click="selectFile">attach_file</i>
-				<i class="material-icons clickable" @click="recordVoice" :class="{ 'text-action': recording }">{{ recording ? "mic" : "mic_none" }}</i>
+			<voice-preview v-if="voiceData != null && !recording" style="width: 60%" :src="voiceUrl"></voice-preview>
+
+			<div v-else>
+				<div class="d-flex align-items-center recording" style="gap: 20px" v-if="recording">
+					<i class="material-icons text-success recoording-icon">mic_none</i>
+					<countup-timer class="recording-timer"></countup-timer>
+					<i class="material-icons clickable text-superlight" @click="stopRecording(true)">close</i>
+					<i class="material-icons clickable save-recording" @click="stopRecording(false)">check</i>
+				</div>
+				<div class="d-flex" v-if="!recording">
+					<i class="material-icons clickable" @click="selectFile">attach_file</i>
+					<i class="material-icons clickable" @click="recordVoice">mic_none</i>
+				</div>
 			</div>
-			<input type="text" class="border-0 form-control bg-white" @keypress.enter="sendMessage" v-model="message" placeholder="پیام خود را بنویسید" />
-			<i class="material-icons-outlined clickable" @click="sendMessage" style="transform: rotate(180deg)">send</i>
+			<input type="text" class="border-0 form-control bg-white" v-show="!recording && voiceData == null" @keypress.enter="sendMessage" v-model="message" placeholder="پیام خود را بنویسید" />
+			<i class="material-icons-outlined clickable" :class="{ disabled: recording }" @click="sendMessage" style="transform: rotate(180deg)">send</i>
 		</div>
 	</div>
 </template>
 
 <script>
+import CountupTimer from "../CountupTimer.vue";
 import LoadingSpinner from "../LoadingSpinner.vue";
+import VoicePreview from "./VoicePreview.vue";
 export default {
-	components: { LoadingSpinner },
+	components: { LoadingSpinner, CountupTimer, VoicePreview },
+	computed: {
+		voiceUrl() {
+			return URL.createObjectURL(this.voiceData);
+		},
+	},
 	methods: {
 		recordVoice() {
 			let audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -63,15 +80,20 @@ export default {
 				});
 
 				this.mediaRecorder.addEventListener("stop", () => {
-					const audioBlob = new Blob(audioChunks);
-					this.audioData = audioBlob;
-					this.mediaRecorder.stream.getAudioTracks()[0].stop();
+					if (!this.recordCanceled) {
+						const audioBlob = new Blob(audioChunks);
+						this.voiceData = audioBlob;
+					}
+					this.mediaRecorder.stream
+						.getTracks() // get all tracks from the MediaStream
+						.forEach((track) => track.stop());
 				});
 			});
 		},
 		selectFile() {},
 		sendMessage() {},
-		stopRecording() {
+		stopRecording(recordCanceled = false) {
+			this.recordCanceled = recordCanceled;
 			if (this.mediaRecorder != null) {
 				this.mediaRecorder.stop();
 				this.recording = false;
@@ -99,9 +121,10 @@ export default {
 		return {
 			message: null,
 			recording: false,
+			recordCanceled: false,
 
 			mediaRecorder: null,
-			audioData: null,
+			voiceData: null,
 
 			loading: false,
 			error: false,
