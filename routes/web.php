@@ -246,6 +246,8 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         Route::get("/", "Chats\ChatController@index");
         Route::post("/conversations/{id}", "Chats\ChatController@chat");
 
+        Route::post("/send-message", "Chats\ChatController@sendMessage");
+
     });
 
     // Pages

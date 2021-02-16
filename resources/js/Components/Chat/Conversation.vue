@@ -81,7 +81,9 @@ export default {
 
 				this.mediaRecorder.addEventListener("stop", () => {
 					if (!this.recordCanceled) {
-						const audioBlob = new Blob(audioChunks);
+						const audioBlob = new Blob(audioChunks, {
+							type: "audio/webm",
+						});
 						this.voiceData = audioBlob;
 					}
 					this.mediaRecorder.stream
@@ -91,7 +93,19 @@ export default {
 			});
 		},
 		selectFile() {},
-		sendMessage() {},
+		sendMessage() {
+			if (this.sendDisabled) {
+				return;
+			}
+			if (this.voiceData != null) {
+				let formData = new FormData();
+				formData.append("voice", this.voiceData);
+				formData.append("type", "voice");
+				axios.post("/chats/send-message", formData).then((response) => {
+					console.log(response.data);
+				});
+			}
+		},
 		stopRecording(recordCanceled = false) {
 			this.recordCanceled = recordCanceled;
 			if (this.mediaRecorder != null) {
@@ -122,6 +136,7 @@ export default {
 			message: null,
 			recording: false,
 			recordCanceled: false,
+			sendDisabled: false,
 
 			mediaRecorder: null,
 			voiceData: null,
