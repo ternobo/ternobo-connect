@@ -355,6 +355,20 @@ class User extends Authenticatable implements Messageable
         return (count($notification) > 0);
     }
 
+    public function getClass()
+    {
+        return User::class;
+    }
+
+    /**
+     *
+     */
+    public function addMedia($data)
+    {
+        $data['user_id'] = $this->id;
+        return Media::query()->where("filename", $data['filename'])->where("user_id", $this->id)->firstOrCreate($data);
+    }
+
     /**
      * Convert the model instance to an array.
      *
@@ -363,11 +377,6 @@ class User extends Authenticatable implements Messageable
     public function toArray()
     {
         $array = parent::toArray();
-        if (Auth::check() && Auth::user()->id == $this->id) {
-            $array['profile_steps'] = $this->getProfileSteps();
-            $array['page'] = $this->personalPage;
-        }
-
         return $array;
     }
 

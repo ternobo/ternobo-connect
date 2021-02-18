@@ -2,16 +2,21 @@
 	<div class="voice-preview">
 		<span class="text-action">{{ timerText }}</span>
 		<div class="progress" ref="progressBar" @click="seekTime">
-			<span class="progress-bg"></span>
+			<span class="progress-bg clickable"></span>
 			<span class="progress-fill" :style="{ width: progress + '%' }"></span>
 		</div>
-		<i class="material-icons text-action" @click="isPlaying = !isPlaying">{{ isPlaying ? "pause_circle_outline" : "play_circle_outline" }}</i>
+		<i class="material-icons text-action" :class="{ disabled: loading, clickable: !loading }" @click="playPause">{{ isPlaying ? "pause_circle_outline" : "play_circle_outline" }}</i>
 	</div>
 </template>
 
 <script>
 export default {
 	methods: {
+		playPause() {
+			if (!this.loading) {
+				this.isPlaying = !this.isPlaying;
+			}
+		},
 		seekTime(e) {
 			const timelineWidth = window.getComputedStyle(this.$refs.progressBar).width;
 			const timeToSeek = (e.offsetX / parseInt(timelineWidth)) * this.audio.duration;
@@ -38,25 +43,36 @@ export default {
 		},
 	},
 	watch: {
-		isPlaying(newVal) {
-			if (newVal) {
-				this.audio.play();
+		isPlaying(newVal, oldVal) {
+			if (!this.loading) {
+				if (newVal) {
+					this.audio.play();
+				} else {
+					this.audio.pause();
+				}
 			} else {
-				this.audio.pause();
+				return oldVal;
 			}
 		},
 	},
 	created() {
 		this.audio = new Audio(this.src);
-		setTimeout(() => {
+		this.audio.onloadeddata = () => {
 			if (this.audio.duration == Infinity || this.audio.duration == NaN) {
-				this.audio.currentTime = 60 * 99;
+				this.loading = true;
 				setTimeout(() => {
-					this.audio.currentTime = 0;
-					setInterval(this.updateProgress, 500);
+					this.audio.currentTime = 60 * 99;
+					setTimeout(() => {
+						this.audio.currentTime = 0;
+						setInterval(this.updateProgress, 500);
+						this.loading = false;
+					}, 1000);
 				}, 1000);
+			} else {
+				this.loading = false;
+				setInterval(this.updateProgress, 500);
 			}
-		}, 1000);
+		};
 	},
 	mounted() {},
 	destroyed() {
@@ -69,6 +85,7 @@ export default {
 			isPlaying: false,
 			progress: 0,
 			timerText: "00:00",
+			loading: true,
 		};
 	},
 	props: ["src"],

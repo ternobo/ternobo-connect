@@ -18,17 +18,21 @@
 			</div>
 		</div>
 		<div class="conversation-messages" :class="{ 'd-flex justify-content-center aling-items-center': error || loading }">
-			<div class="d-flex w-100 flex-column align-items-center justify-content-center">
+			<div class="d-flex w-100 flex-column align-items-center justify-content-center" v-if="error || loading">
 				<loading-spinner v-if="loading"></loading-spinner>
 				<div v-if="error" class="text-center">
 					<p class="text-muted">خطا در بارگذاری اطلاعات</p>
 					<span class="text-action clickable" @click="loadMessagess"> <i class="material-icons">refresh</i> تلاش مجدد </span>
 				</div>
 			</div>
+			<div v-else class="messages-list">
+				<div class="message-column" v-for="(message, index) in messages.data" :key="'msg_id_' + message.id">
+					<message :message="message" :hide-profile="checkPreviosMessages(index)"></message>
+				</div>
+			</div>
 		</div>
 		<div class="conversation-footer">
 			<voice-preview v-if="voiceData != null && !recording" style="width: 60%" :src="voiceUrl"></voice-preview>
-
 			<div v-else>
 				<div class="d-flex align-items-center recording" style="gap: 20px" v-if="recording">
 					<i class="material-icons text-success recoording-icon">mic_none</i>
@@ -50,15 +54,23 @@
 <script>
 import CountupTimer from "../CountupTimer.vue";
 import LoadingSpinner from "../LoadingSpinner.vue";
+import Message from "./Message/Message.vue";
 import VoicePreview from "./VoicePreview.vue";
 export default {
-	components: { LoadingSpinner, CountupTimer, VoicePreview },
+	components: { LoadingSpinner, CountupTimer, VoicePreview, Message },
 	computed: {
 		voiceUrl() {
 			return URL.createObjectURL(this.voiceData);
 		},
 	},
 	methods: {
+		checkPreviosMessages(index) {
+			let list = this.messages.data;
+			if (list[index + 1] && list[index + 1].sender.id == list[index].sender.id && list[index + 1].type == list[index].type) {
+				return true;
+			}
+			return false;
+		},
 		recordVoice() {
 			let audioContext = new (window.AudioContext || window.webkitAudioContext)();
 			if (this.recording) {
@@ -101,6 +113,7 @@ export default {
 				let formData = new FormData();
 				formData.append("voice", this.voiceData);
 				formData.append("type", "voice");
+				formData.append("conversation_id", this.chatId);
 				axios.post("/chats/send-message", formData).then((response) => {
 					console.log(response.data);
 				});

@@ -58,6 +58,12 @@ class AppServiceProvider extends ServiceProvider
                         }
                         return [];
                     },
+                    'profile_steps' => function () {
+                        if (Auth::check()) {
+                            return Auth::user()->getProfileSteps();
+                        }
+                        return [];
+                    },
                     "currentPage" => function () {
                         if (Auth::check()) {
                             $current_page = Cookie::get('ternobo_current_page_id') !== null ?

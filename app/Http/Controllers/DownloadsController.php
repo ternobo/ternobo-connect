@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Media;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 /**
  * Description of Downloads
@@ -33,9 +36,18 @@ class DownloadsController extends Controller
         return $response;
     }
 
-    public function js($js)
+    public function voices($file)
     {
-        dd(public_path("/js/$js"));
+        if (Auth::check()) {
+            $mediaAcess = Media::query()->where("filename", "voices/$file")->whereJsonContains("meta->access", Auth::user()->id)->firstOrFail();
+            ob_end_clean();
+            if (Storage::exists("voices/$file")) {
+                $response = new BinaryFileResponse(Storage::path("voices/$file"));
+                BinaryFileResponse::trustXSendfileTypeHeader();
+                return $response;
+            }
+        }
+        return abort(404);
     }
 
 }

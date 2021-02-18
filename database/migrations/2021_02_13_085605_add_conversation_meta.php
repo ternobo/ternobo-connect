@@ -14,7 +14,7 @@ class AddConversationMeta extends Migration
     public function up()
     {
         Schema::table("conversations", function (Blueprint $table) {
-            $table->json("meta")->nullable();
+            $table->json("meta")->nullable()->after("description");
         });
     }
 

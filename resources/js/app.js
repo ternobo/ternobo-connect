@@ -134,6 +134,10 @@ document.addEventListener('ternobo:navigate', event => {
 });
 document.addEventListener("ternobo:loaded", event => {
     vue_app.url = window.location.pathname;
+    var el = document.createElement('html');
+    el.innerHTML = "<head>" + vue_app.$store.state.shared.SEO + "</head>";
+    let title = el.getElementsByTagName("title")[0].text
+    document.title = title;
 });
 
 document.addEventListener("ternobo:finish", event => {

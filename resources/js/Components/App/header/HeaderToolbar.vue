@@ -7,7 +7,7 @@
 			</wire-link>
 			<wire-link :class="{ active: $root.url === '/chats' }" href="/chats">
 				<i class="navheader-icon">textsms</i>
-				<div class="navheader-text">گفتگو‌ها</div>
+				<div class="navheader-text">گفت‌وگو</div>
 			</wire-link>
 			<wire-link :class="{ active: $root.url === '/connections' }" href="/connections">
 				<i class="navheader-icon">group</i>

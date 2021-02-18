@@ -81,6 +81,8 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
     Route::group(['auth'], function () {
 
+        Route::get("/voices/{file}", "DownloadsController@voices");
+
         Route::post("/ternobo-wire/check-online", "IndexController@checkOnline");
 
         Route::post("logout", "Auth\UsersController@logout");

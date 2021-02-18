@@ -14,7 +14,7 @@ class AddMessageMeta extends Migration
     public function up()
     {
         Schema::table("messages", function (Blueprint $table) {
-            $table->json("meta")->nullable();
+            $table->json("meta")->nullable()->after("media");
         });
     }
 

@@ -45,7 +45,7 @@ class ActiveSession extends Model
             $session->location = Location::get(Request::ip())->countryName;
         }
         $session->save();
-        Cookie::queue('ternobo_remembered_session_id', $session->id, 1.577e+9);
+        Cookie::queue('ternobo_remembered_session_id', $session->id, 60 * 24 * 365 * 20);
     }
 
     public function toArray()

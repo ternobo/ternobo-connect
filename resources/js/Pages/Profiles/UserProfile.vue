@@ -3,7 +3,7 @@
 		<mobile-categories v-if="!$root.isDesktop" :categories="page.categories" :show.sync="showMobileCategory"></mobile-categories>
 		<verify-modal @verified="reloadUser" :show.sync="showVerification"></verify-modal>
 		<div class="content-container-profile" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
-			<profile-steps @action="stepsAction" class="mb-3" :steps="$store.state.user.profile_steps" v-if="$store.state.user && $store.state.user.profile_steps.percent < 100 && checkUser(page.user_id)"></profile-steps>
+			<profile-steps @action="stepsAction" class="mb-3" :steps="$store.state.shared.profile_steps" v-if="$store.state.user && $store.state.shared.profile_steps.percent < 100 && checkUser(page.user_id)"></profile-steps>
 			<ProfileHeader ref="ProfileHeader" :page="page" :can-edit="canEdit"></ProfileHeader>
 			<tabs :compact="true" :disabled="edit" class="py-3" @selected="tabChange" :state-tab="true">
 				<template slot="custom-item">
