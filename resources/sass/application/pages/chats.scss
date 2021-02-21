@@ -77,6 +77,25 @@
                 }
             }
 
+            .unread-badge {
+                background: $action;
+                padding: 4px;
+                padding-top: 7px;
+                border-radius: 4px;
+                color: $white;
+                height: 20px;
+                width: 20px;
+                font-size: 10px;
+                line-height: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &.muted {
+                    background: $light;
+                }
+            }
+
         }
     }
 
@@ -230,8 +249,42 @@
 
 
 .message-column {
-    width: 100%;
+    max-width: 50%;
     margin-bottom: 12px;
+}
+
+
+.file-send-preview {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+
+    .file-detail {
+        display: flex;
+        align-items: center;
+
+        .file-icon {
+            background: #E7F3FF;
+            color: $action;
+            border-radius: 14px;
+            height: 40px;
+            width: 40px;
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 12px;
+        }
+    }
+
+    .caption {
+        margin: 16px 0;
+    }
+
+    .actions {
+        justify-content: flex-end;
+    }
+
 }
 
 .messages-list {
@@ -246,6 +299,7 @@
 
 .message-container {
     display: flex;
+
 
     strong {
         -webkit-user-select: none;
@@ -277,4 +331,22 @@
             }
         }
     }
+
+    &.send-error {
+        color: $danger;
+
+        .reload-btn {
+            color: $action;
+            margin-right: -12px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+
+        .voice-message {
+            background-color: #f8d0cd;
+        }
+    }
+
 }

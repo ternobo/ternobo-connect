@@ -23929,6 +23929,25 @@ body {
   background: #F5F5F5;
 }
 
+.chat-container .chats-list .chats .unread-badge {
+  background: #0898DF;
+  padding: 4px;
+  padding-top: 7px;
+  border-radius: 4px;
+  color: #FFFF;
+  height: 20px;
+  width: 20px;
+  font-size: 10px;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-container .chats-list .chats .unread-badge.muted {
+  background: #757575;
+}
+
 .chat-container .conversation-container {
   flex: 75%;
   width: 75%;
@@ -24075,8 +24094,40 @@ body {
 }
 
 .message-column {
-  width: 100%;
+  max-width: 50%;
   margin-bottom: 12px;
+}
+
+.file-send-preview {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+}
+
+.file-send-preview .file-detail {
+  display: flex;
+  align-items: center;
+}
+
+.file-send-preview .file-detail .file-icon {
+  background: #E7F3FF;
+  color: #0898DF;
+  border-radius: 14px;
+  height: 40px;
+  width: 40px;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12px;
+}
+
+.file-send-preview .caption {
+  margin: 16px 0;
+}
+
+.file-send-preview .actions {
+  justify-content: flex-end;
 }
 
 .messages-list {
@@ -24121,5 +24172,21 @@ body {
 
 .message-container .voice-message .voice-preview > span {
   margin-top: 3px;
+}
+
+.message-container.send-error {
+  color: #F44336;
+}
+
+.message-container.send-error .reload-btn {
+  color: #0898DF;
+  margin-right: -12px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.message-container.send-error .voice-message {
+  background-color: #f8d0cd;
 }
 

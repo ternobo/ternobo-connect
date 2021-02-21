@@ -1,5 +1,6 @@
 <template>
 	<div class="conversation-container">
+		<send-file-modal v-if="selectedFile != null" :file="selectedFile" :show.sync="showFileModal"></send-file-modal>
 		<div class="conversation-header">
 			<div class="pageinfo clickable">
 				<lazy-image src="/images/man-profile.png" class="profile-sm mb-0 ml-2" img-class="profile-sm" />
@@ -45,8 +46,8 @@
 					<i class="material-icons clickable" @click="recordVoice">mic_none</i>
 				</div>
 			</div>
-			<input type="text" class="border-0 form-control bg-white" v-show="!recording && voiceData == null" @keypress.enter="sendMessage" v-model="message" placeholder="پیام خود را بنویسید" />
-			<i class="material-icons-outlined clickable" :class="{ disabled: recording }" @click="sendMessage" style="transform: rotate(180deg)">send</i>
+			<textarea-autosize row="1" :minHeight="40" @keydown.enter.native="keydownHandle" type="text" class="border-0 form-control bg-white" v-show="!recording && voiceData == null" @keypress.enter="sendMessage" v-model="messageText" placeholder="پیام خود را بنویسید" />
+			<i class="material-icons-outlined clickable" :class="{ disabled: !canSend }" @click="sendMessage" style="transform: rotate(180deg)">send</i>
 		</div>
 	</div>
 </template>
@@ -56,14 +57,28 @@ import CountupTimer from "../CountupTimer.vue";
 import LoadingSpinner from "../LoadingSpinner.vue";
 import Message from "./Message/Message.vue";
 import VoicePreview from "./VoicePreview.vue";
+import { v4 as uuidv4 } from "uuid";
+import SendFileModal from "./SendFileModal.vue";
+import TextareaAutosize from "../inputs/TextareaAutosize.vue";
+
 export default {
-	components: { LoadingSpinner, CountupTimer, VoicePreview, Message },
+	components: { LoadingSpinner, CountupTimer, VoicePreview, Message, SendFileModal, TextareaAutosize },
 	computed: {
 		voiceUrl() {
 			return URL.createObjectURL(this.voiceData);
 		},
+		canSend() {
+			return (!this.recording && this.messageText != null && this.messageText.trim().length > 0) || (!this.recording && this.voiceData != null) || this.selectedFile != null;
+		},
 	},
 	methods: {
+		keydownHandle(e) {
+			if (e.key == "Enter" && !e.shiftKey) {
+				// prevent default behavior
+				e.preventDefault();
+				this.sendMessage();
+			}
+		},
 		checkPreviosMessages(index) {
 			let list = this.messages.data;
 			if (list[index + 1] && list[index + 1].sender.id == list[index].sender.id && list[index + 1].type == list[index].type) {
@@ -104,19 +119,54 @@ export default {
 				});
 			});
 		},
-		selectFile() {},
+		selectFile() {
+			let fileChooser = document.createElement("input");
+			fileChooser.type = "file";
+
+			fileChooser.onchange = (e) => {
+				let file = e.target.files[0];
+				let fileType = file.type;
+				fileType = fileType.substr(0, fileType.lastIndexOf("/"));
+				this.selectedFile = file;
+				if (fileType == "application") {
+					this.showFileModal = true;
+				}
+			};
+			fileChooser.click();
+		},
 		sendMessage() {
-			if (this.sendDisabled) {
-				return;
-			}
-			if (this.voiceData != null) {
-				let formData = new FormData();
-				formData.append("voice", this.voiceData);
-				formData.append("type", "voice");
-				formData.append("conversation_id", this.chatId);
-				axios.post("/chats/send-message", formData).then((response) => {
-					console.log(response.data);
-				});
+			if (this.canSend) {
+				let message = {
+					id: uuidv4(),
+					sender: this.$store.state.user,
+					shouldSend: true,
+				};
+				if (this.chatId) {
+					message.conversation_id = this.chatId;
+				} else {
+					message.sendTo = this.userId;
+				}
+				if (this.sendDisabled) {
+					return;
+				}
+				if (this.voiceData != null) {
+					message.type = "voice";
+					message.media = [this.voiceData];
+					this.voiceData = null;
+				} else if (this.selectedFile != null) {
+					let file = this.selectedFile;
+					let fileType = file.type;
+					fileType = fileType.substr(0, fileType.lastIndexOf("/"));
+
+					message.type = fileType;
+					message.media = [file];
+					message.text = this.messageText;
+				} else {
+					message.type = "text";
+					message.text = this.messageText;
+					this.messageText = null;
+				}
+				this.messages.data.unshift(message);
 			}
 		},
 		stopRecording(recordCanceled = false) {
@@ -146,13 +196,15 @@ export default {
 	},
 	data() {
 		return {
-			message: null,
 			recording: false,
 			recordCanceled: false,
 			sendDisabled: false,
-
+			showFileModal: false,
 			mediaRecorder: null,
+
 			voiceData: null,
+			selectedFile: null,
+			messageText: null,
 
 			loading: false,
 			error: false,
@@ -160,7 +212,7 @@ export default {
 			messages: {},
 		};
 	},
-	props: ["chatId", "title", "subtitle", "profile"],
+	props: ["chatId", "userId", "title", "subtitle", "profile"],
 };
 </script>
 

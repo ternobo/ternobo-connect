@@ -16,7 +16,7 @@
 					<span class="d-flex medium align-items-center clickale">
 						<wire-link :href="'/search?q=' + skillVal.name">{{ skillVal.name }}</wire-link>
 					</span>
-					<span class="font-11 clickable" v-if="skillVal.credit_text != null && skillVal.credit_text.nums > 1">
+					<span class="font-11 clickable" v-if="skillVal.credit_text != null && skillVal.credit_text.nums >= 1">
 						<wire-link v-if="skillVal.credit_text.first" :href="userURL(skillVal.credit_text.first)" class="text-dark">
 							<strong class="text-light">{{ skillVal.credit_text.first.name }}</strong>
 						</wire-link>
@@ -26,7 +26,9 @@
 							<strong class="text-light">{{ skillVal.credit_text.second.name }}</strong>
 						</wire-link>
 						<span v-if="skillVal.credit_text.nums > 2">و</span>
-						<span>{{ formatNumber(skillVal.credit_text.nums - 2, "0a") }} نفر دیگر این مهارت را تایید کرده‌اند</span>
+						<span v-if="skillVal.credit_text.nums - 2 > 0">{{ formatNumber(skillVal.credit_text.nums - 2, "0a") }} نفر دیگر این مهارت را تایید کرده‌اند</span>
+						<span v-else-if="(skillVal.credit_text.nums = 1)">این مهارت را تایید کرده است</span>
+						<span v-else-if="skillVal.credit_text.nums == 2">این مهارت را تایید کرده‌اند</span>
 					</span>
 				</div>
 			</div>

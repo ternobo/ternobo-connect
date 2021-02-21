@@ -9,6 +9,7 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Ternobo\TernoboChat\Models\Message;
 use Ternobo\TernoboWire\TernoboWire;
 
 class ChatController extends Controller
@@ -16,7 +17,9 @@ class ChatController extends Controller
 
     public function index()
     {
-        $conversations = Auth::user()->conversations()->with("lastMessage")->latest()->paginate(30);
+        $conversations = Auth::user()->conversations()->with(["lastMessage"])->withCount(['messages as unread_messages_count' => function ($query) {
+            $query->where("seen", false)->where("sender_id", Auth::user()->id);
+        }])->latest()->paginate(30);
         SEOTools::setTitle("گفت‌وگو");
         return TernoboWire::render("Chats", [
             'chatsData' => $conversations,
@@ -27,11 +30,36 @@ class ChatController extends Controller
     {
         $conversation = Conversation::query()->findOrFail($id);
         $messages = $conversation->messages()->with("sender")->paginate(40);
+
+        Message::query()->where("seen", false)->where("conversation_id", $conversation->id)->update(['seen' => true]);
+
         return response()->json([
             'result' => true,
             'messages' => $messages,
             'conversation' => $conversation,
         ]);
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->q;
+
+        $conversations = Auth::user()->conversations()->with(["lastMessage"])->withCount(['messages as unread_messages_count' => function ($query) {
+            $query->where("seen", false)->where("sender_id", Auth::user()->id);
+        }])->whereHas("message", function ($query) use ($search) {
+            $query->whereRaw("text like ?", ["%$search%"]);
+        })->latest()->paginate(30);
+
+        $user = Auth::user();
+        $connections = Connection::query()
+            ->whereRaw("(connection = '$user->id' or user_id = '$user->id')")
+            ->where("accepted", true)
+            ->latest()
+            ->paginate(30);
+
+        $data = $connections->data;
+
+        dd($data);
     }
 
     public function sendMessage(Request $request)
@@ -71,11 +99,11 @@ class ChatController extends Controller
                 $message = $user->sendMessage($conversation_id, "voice", null, $filename);
                 break;
             case "text":
-                $message = $user->sendMessage($conversation_id, "text", $request->message);
+                $message = $user->sendMessage($conversation_id, "text", $request->text);
                 break;
             case "video":
                 $mediaFile = $request->file("media");
-                $filename = $mediaFile->store("media");
+                $filename = $mediaFile->store("private-media");
                 $user->addMedia([
                     "name" => $mediaFile->originalName,
                     'filename' => $filename,

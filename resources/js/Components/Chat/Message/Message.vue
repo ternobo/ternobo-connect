@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<div class="message-container">
+		<div class="message-container" :class="{ 'send-error': error }">
+			<i class="material-icons reload-btn" v-if="error" @click="sendMessage" :class="{ rotateAnimation: loading }">refresh</i>
 			<lazy-image class="profile-xsm" img-class="profile-xsm" :class="{ 'opacity-0': hideProfile }" :src="message.sender.profile"></lazy-image>
 			<component v-bind="$props" :is="type"></component>
 		</div>
@@ -9,12 +10,58 @@
 
 <script>
 export default {
+	methods: {
+		sendMessage() {
+			let formData = new FormData();
+			if (this.message.conversation_id) {
+				formData.append("conversation_id", this.message.conversation_id);
+			} else {
+				formData.append("user_id", this.message.sendTo);
+			}
+			if (this.message.text) {
+				formData.append("text", this.message.text);
+			}
+			switch (this.message.type) {
+				case "text":
+					formData.append("type", "text");
+					break;
+				case "video":
+					formData.append("media", this.message.media[0]);
+					formData.append("type", "video");
+					break;
+				case "image":
+					formData.append("media", this.message.media[0]);
+					formData.append("type", "image");
+					break;
+				case "audio":
+					formData.append("media", this.message.media[0]);
+					formData.append("type", "audio");
+					break;
+				case "voice":
+					formData.append("voice", this.message.media[0]);
+					formData.append("type", "voice");
+					break;
+				case "document":
+					formData.append("media", this.message.media[0]);
+					formData.append("type", "document");
+					break;
+			}
+			axios.post("/chats/send-message", formData).catch((error) => {
+				this.error = true;
+			});
+		},
+	},
 	data() {
 		return {
 			type: () => import("./TextMessage"),
+			error: false,
+			loading: false,
 		};
 	},
 	created() {
+		if (this.message.shouldSend) {
+			this.sendMessage();
+		}
 		switch (this.message.type) {
 			case "text":
 				this.type = () => import("./TextMessage");
