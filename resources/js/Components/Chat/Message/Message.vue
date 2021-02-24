@@ -46,9 +46,14 @@ export default {
 					formData.append("type", "document");
 					break;
 			}
-			axios.post("/chats/send-message", formData).catch((error) => {
-				this.error = true;
-			});
+			axios
+				.post("/chats/send-message", formData)
+				.then((response) => {
+					this.$emit("update:message", response.data.message);
+				})
+				.catch((error) => {
+					this.error = true;
+				});
 		},
 	},
 	data() {

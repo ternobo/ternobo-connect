@@ -53,6 +53,7 @@
         "browser-sync": "^2.26.14",
         "browser-sync-webpack-plugin": "^2.3.0",
         "ffmpeg": "0.0.4",
+        "jalali-moment": "^3.3.10",
         "javascript-time-ago": "^2.3.4",
         "jquery": "^3.5.1",
         "laravel-echo": "^1.10.0",

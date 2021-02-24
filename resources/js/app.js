@@ -109,10 +109,19 @@ const vue_app = new Vue({
         }
     }
 }).$mount(app);
-if (user_id) {
-    const notificationChannel = window.Echo.private("notification." + window.user_id);
-    notificationChannel.listen("NotificationEvent", function (data) {
-        if (vue_app.$page) {
+window.addEventListener('popstate', () => {
+    vue_app.url = window.location.pathname;
+});
+
+let isSocketConnected = false;
+
+document.addEventListener('ternobo:userloaded', event => {
+    let notification = new Audio("/sounds/notification1.mp3")
+
+    let user = event.detail.user;
+    if (user && !isSocketConnected) {
+        const notificationChannel = window.Echo.private("notification." + user.id);
+        notificationChannel.listen("NotificationEvent", function (data) {
             let event = new CustomEvent('notification:new', {
                 bubbles: true,
                 detail: {
@@ -121,11 +130,24 @@ if (user_id) {
             });
             document.dispatchEvent(event);
             vue_app.$store.state.notifications_count += 1;
-        }
-    });
-}
-window.addEventListener('popstate', () => {
-    vue_app.url = window.location.pathname;
+        });
+
+
+        const chatChannel = window.Echo.private("ternobo-chat.user." + user.id);
+        chatChannel.listen("\\Ternobo\\TernoboChat\\Events\\MessageEvent", function (data) {
+
+            if (!data.muted) {
+                notification.play();
+            }
+            let event = new CustomEvent('message:new', {
+                bubbles: true,
+                detail: {
+                    message: data.message
+                }
+            });
+            document.dispatchEvent(event);
+        });
+    }
 });
 
 document.addEventListener('ternobo:navigate', event => {

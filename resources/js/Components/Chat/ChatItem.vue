@@ -52,7 +52,7 @@ export default {
 			return preview;
 		},
 		updated_at() {
-			return this.timeAgo(this.chat.updated_at);
+			return this.time(this.chat.updated_at);
 		},
 		chatTitle() {
 			return this.chat.type == "private" ? this.chat.user.first_name + " " + this.chat.user.last_name : this.chat.title;

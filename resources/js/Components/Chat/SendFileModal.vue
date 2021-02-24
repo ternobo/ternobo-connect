@@ -6,11 +6,11 @@
 				<span class="file-name">{{ file.name }}</span>
 			</div>
 			<div class="caption">
-				<material-text-field inputClass="w-100" class="material--sm" placeholder="توضیحات" v-model="caption"></material-text-field>
+				<material-text-field inputClass="w-100" class="material--sm" placeholder="توضیحات" v-model="captionVal"></material-text-field>
 			</div>
 			<div class="d-flex actions">
-				<button class="btn btn-transparent text-light">لغو</button>
-				<button class="btn btn-primary">تایید</button>
+				<button class="btn btn-transparent text-light" @click="cancel">لغو</button>
+				<button class="btn btn-primary" @click="send">تایید</button>
 			</div>
 		</div>
 	</b-modal>
@@ -20,23 +20,31 @@
 import ModalMixin from "../../Mixins/Modal";
 import MaterialTextField from "../inputs/MaterialTextField.vue";
 export default {
+	watch: {
+		captionVal(newValue) {
+			this.$emit("caption:update", newValue);
+		},
+	},
 	data() {
 		return {
-			caption: null,
+			captionVal: null,
 		};
+	},
+	mounted() {
+		this.captionVal = this.caption;
 	},
 	methods: {
 		cancel() {
 			this.$emit("canceled");
-			this.$emit("show:update", false);
+			this.$emit("update:show", false);
 		},
 		send() {
-			this.$emit("ok", this.caption);
-			this.$emit("show:update", false);
+			this.$emit("send", this.caption);
+			this.$emit("update:show", false);
 		},
 	},
 	components: { MaterialTextField },
-	props: ["file"],
+	props: ["file", "caption"],
 	mixins: [ModalMixin],
 	name: "SendFileModal",
 };

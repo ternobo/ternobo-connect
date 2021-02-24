@@ -76,6 +76,7 @@ export default {
 	},
 	mounted() {},
 	destroyed() {
+		this.audio.pause();
 		clearInterval(this.updateProgress);
 	},
 	data() {

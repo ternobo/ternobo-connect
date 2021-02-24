@@ -1,5 +1,7 @@
 window._ = require('lodash');
 import NoiseGate from "noise-gate";
+window.moment = require('jalali-moment');
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -22,21 +24,18 @@ window.NoiseGate = NoiseGate;
  * allows your team to easily build robust real-time web applications.
  */
 import Echo from 'laravel-echo';
-if (user_id) {
+window.io = require('socket.io-client');
 
-    window.io = require('socket.io-client');
-
-    window.Echo = new Echo({
-        broadcaster: 'socket.io',
-        host: 'https://tsocket.ternobo.com',
-        forceTLS: true,
-        csrfToken: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        auth:
+window.Echo = new Echo({
+    broadcaster: 'socket.io',
+    host: 'http://localhost:6001',
+    forceTLS: true,
+    csrfToken: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+    auth:
+    {
+        headers:
         {
-            headers:
-            {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            }
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         }
-    });
-}
+    }
+});

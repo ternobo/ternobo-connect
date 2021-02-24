@@ -58,6 +58,9 @@ class User extends Authenticatable implements Messageable
         "two_factor_secret",
         "two_factor_enabled",
         "two_factor",
+        "email_verified_at",
+        "deleted_at",
+        "is_admin",
     ];
 
     /**

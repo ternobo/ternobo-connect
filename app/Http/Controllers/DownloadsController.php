@@ -50,4 +50,29 @@ class DownloadsController extends Controller
         return abort(404);
     }
 
+    public function privateDocuments($file)
+    {
+        if (Auth::check()) {
+            $mediaAcess = Media::query()->where("filename", "private-documents/$file")->whereJsonContains("meta->access", Auth::user()->id)->firstOrFail();
+            ob_end_clean();
+            if (Storage::exists("private-documents/$file")) {
+                return Storage::download("private-documents/$file", $mediaAcess->name);
+            }
+        }
+        return abort(404);
+    }
+
+    public function privateMedia($file)
+    {
+        if (Auth::check()) {
+            $mediaAcess = Media::query()->where("filename", "private-media/$file")->whereJsonContains("meta->access", Auth::user()->id)->firstOrFail();
+            ob_end_clean();
+            if (Storage::exists("private-media/$file")) {
+                $response = new BinaryFileResponse(Storage::path("private-media/$file"));
+                BinaryFileResponse::trustXSendfileTypeHeader();
+                return $response;
+            }
+        }
+        return abort(404);
+    }
 }

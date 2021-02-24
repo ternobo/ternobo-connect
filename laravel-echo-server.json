@@ -1,5 +1,5 @@
 {
-    "authHost": "https://dev.ternobo.com",
+    "authHost": "http://localhost:3000",
     "authEndpoint": "/broadcasting/auth",
     "clients": [
         {
@@ -31,11 +31,5 @@
     "subscribers": {
         "http": true,
         "redis": true
-    },
-    "apiOriginAllow": {
-        "allowCors": true,
-        "allowOrigin": "https://dev.ternobo.com",
-        "allowMethods": "GET, POST",
-        "allowHeaders": "Origin, Content-Type, X-Auth-Token, X-Requested-With, Accept, Authorization, X-CSRF-TOKEN, X-Socket-Id"
     }
 }

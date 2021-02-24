@@ -153,6 +153,37 @@
     }
 }
 
+.file-message {
+    display: flex;
+    align-items: center;
+
+    .file-type {
+        min-width: 48px;
+        min-height: 48px;
+        width: 48px;
+        height: 48px;
+        background: $fixed-elements;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 12px;
+    }
+
+    .file-detail {
+        display: flex;
+        flex-direction: column;
+
+        .file-name {
+            display: flex;
+            align-items: center;
+
+            strong {
+                margin-left: 12px;
+            }
+        }
+    }
+}
+
 .recoording-icon {
     display: flex;
     justify-content: center;

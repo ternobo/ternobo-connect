@@ -9,11 +9,14 @@
 					</div>
 				</MaterialTextField>
 			</div>
-			<div class="chats">
+			<div class="chats" v-if="loading">
+				<chat-skeleton v-for="x in 8" :key="x"></chat-skeleton>
+			</div>
+			<div class="chats" v-else>
 				<chat-item v-for="(chat, index) in chats" :key="'chat_id_' + chat.id" @click.native="selectChat(chat)" :selected="selectedChat != null && chat.id == selectedChat.id" :chat.sync="chats[index]"></chat-item>
 			</div>
 		</div>
-		<conversation v-if="selectedChat != null" :chat-id="selectedChat.id" :profile="selectedChat.user ? selectedChat.user.username : null" :title="chatTitle(selectedChat)" :subtitle="chatSubtitle(selectedChat)"></conversation>
+		<conversation v-if="selectedChat != null" ref="conversationElem" :chat-id="selectedChat.id" :profile="selectedChat.user ? selectedChat.user.username : null" :title="chatTitle(selectedChat)" :subtitle="chatSubtitle(selectedChat)"></conversation>
 		<div v-else class="conversation-container">
 			<no-chat-selected></no-chat-selected>
 		</div>
@@ -21,14 +24,43 @@
 </template>
 
 <script>
-import Input from "../../../vendor/laravel/jetstream/stubs/inertia/resources/js/Jetstream/Input.vue";
 import ChatItem from "../Components/Chat/ChatItem.vue";
 import Conversation from "../Components/Chat/Conversation.vue";
 import NoChatSelected from "../Components/Chat/NoChatSelected.vue";
 import LazyImage from "../Components/LazyImage.vue";
+import ChatSkeleton from "../Components/Skeletons/ChatSkeleton.vue";
 import AppLayout from "../Layouts/AppLayout";
 export default {
 	methods: {
+		onNewMessage(event) {
+			let message = event.detail.message;
+			if (this.selectedChat != null && message.conversation_id == this.selectedChat.id) {
+				this.$refs.conversationElem.addMessage(message);
+			} else {
+				this.loadChats(true);
+			}
+		},
+		loadChats(repeat = false) {
+			axios
+				.post("/chats")
+				.then((response) => {
+					let chats = response.data.chats;
+					this.chats = chats.data;
+					this.next_page_url = chats.next_page_url;
+				})
+				.catch((err) => {
+					if (repeat) {
+						this.loadChats(true);
+					} else {
+						this.error = true;
+					}
+				})
+				.then(() => {
+					if (!repeat) {
+						this.loading = false;
+					}
+				});
+		},
 		selectChat(chat) {
 			this.selectedChat = chat;
 		},
@@ -44,11 +76,13 @@ export default {
 	},
 	data() {
 		return {
+			loading: false,
 			searchInput: null,
 			searchLoading: false,
 
 			selectedChat: null,
-			chats: {},
+			chats: [],
+			next_page_url: null,
 
 			onEsc: (e) => {
 				if (e.key === "Escape") {
@@ -58,17 +92,30 @@ export default {
 		};
 	},
 	mounted() {
-		this.chats = this.chatsData.data;
+		this.loading = true;
+		axios
+			.post("/chats")
+			.then((response) => {
+				let chats = response.data.chats;
+				this.chats = chats.data;
+				this.next_page_url = chats.next_page_url;
+			})
+			.catch((err) => {
+				this.error = true;
+			})
+			.then(() => {
+				this.loading = false;
+			});
+
+		document.addEventListener("message:new", this.onNewMessage);
 		window.addEventListener("keydown", this.onEsc);
 	},
 	destroyed() {
 		window.removeEventListener("keydown", this.onEsc);
+		window.removeEventListener("message:new", this.onNewMessage);
 	},
-	components: { LazyImage, ChatItem, Input, Conversation, NoChatSelected },
+	components: { LazyImage, ChatItem, Conversation, NoChatSelected, ChatSkeleton },
 	layout: AppLayout,
-	props: ["chatsData"],
 };
 </script>
 
-<style>
-</style>

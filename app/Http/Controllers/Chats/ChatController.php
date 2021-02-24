@@ -17,12 +17,19 @@ class ChatController extends Controller
 
     public function index()
     {
-        $conversations = Auth::user()->conversations()->with(["lastMessage"])->withCount(['messages as unread_messages_count' => function ($query) {
-            $query->where("seen", false)->where("sender_id", Auth::user()->id);
-        }])->latest()->paginate(30);
         SEOTools::setTitle("گفت‌وگو");
-        return TernoboWire::render("Chats", [
-            'chatsData' => $conversations,
+        return TernoboWire::render("Chats");
+    }
+
+    public function getChats()
+    {
+        $conversations = Auth::user()->conversations()->with(["lastMessage"])->withCount(['messages as unread_messages_count' => function ($query) {
+            $query->where("seen", false)->where("sender_id", "!=", Auth::user()->id);
+        }])->orderBy('updated_at', 'desc')->paginate(30);
+        // dd($conversations);
+        return response()->json([
+            'result' => true,
+            'chats' => $conversations,
         ]);
     }
 
@@ -93,7 +100,10 @@ class ChatController extends Controller
                     'access' => 'private',
                     'type' => 'chat',
                     'meta' => json_encode([
+                        "type" => "voice",
                         'access' => json_decode($conversation->members),
+                        'chat_id' => $conversation_id,
+                        'filesize' => $mediaFile->getSize(),
                     ]),
                 ]);
                 $message = $user->sendMessage($conversation_id, "voice", null, $filename);
@@ -105,63 +115,87 @@ class ChatController extends Controller
                 $mediaFile = $request->file("media");
                 $filename = $mediaFile->store("private-media");
                 $user->addMedia([
-                    "name" => $mediaFile->originalName,
+                    "name" => $mediaFile->getClientOriginalName(),
                     'filename' => $filename,
                     'access' => 'private',
                     'type' => 'chat',
                     'meta' => json_encode([
+                        "type" => "media",
                         'access' => json_decode($conversation->members),
+                        'chat_id' => $conversation_id,
+                        'filesize' => $mediaFile->getSize(),
                     ]),
                 ]);
-                $message = $user->sendMessage($conversation_id, "video", null, $filename);
+                $message = $user->sendMessage($conversation_id, "video", null, $filename, json_encode([
+                    'filename' => $mediaFile->getClientOriginalName(),
+                    'filesize' => $mediaFile->getSize(),
+                ]));
                 break;
             case "image":
                 $mediaFile = $request->file("media");
                 $filename = $mediaFile->store("private-media");
                 $user->addMedia([
-                    "name" => $mediaFile->originalName,
+                    "name" => $mediaFile->getClientOriginalName(),
                     'filename' => $filename,
                     'access' => 'private',
                     'type' => 'chat',
                     'meta' => json_encode([
+                        "type" => "media",
                         'access' => json_decode($conversation->members),
+                        'chat_id' => $conversation_id,
+                        'filesize' => $mediaFile->getSize(),
                     ]),
                 ]);
-                $message = $user->sendMessage($conversation_id, "image", null, $filename);
+                $message = $user->sendMessage($conversation_id, "image", null, $filename, json_encode([
+                    'filename' => $mediaFile->getClientOriginalName(),
+                    'filesize' => $mediaFile->getSize(),
+                ]));
                 break;
             case "audio":
-                $mediaFile = $request->file("media")->store("private-media");
+                $mediaFile = $request->file("media");
                 $filename = $mediaFile->store("private-media");
                 $user->addMedia([
-                    "name" => $mediaFile->originalName,
+                    "name" => $mediaFile->getClientOriginalName(),
                     'filename' => $filename,
                     'access' => 'private',
                     'type' => 'chat',
                     'meta' => json_encode([
+                        "type" => "media",
                         'access' => json_decode($conversation->members),
+                        'chat_id' => $conversation_id,
+                        'filesize' => $mediaFile->getSize(),
                     ]),
                 ]);
-                $message = $user->sendMessage($conversation_id, "audio", null, $filename);
+                $message = $user->sendMessage($conversation_id, "audio", null, $filename, json_encode([
+                    'filename' => $mediaFile->getClientOriginalName(),
+                    'filesize' => $mediaFile->getSize(),
+                ]));
                 break;
             case "document":
-                $mediaFile = $request->file("media")->store("private-documents");
+                $mediaFile = $request->file("media");
                 $filename = $mediaFile->store("private-documents");
                 $user->addMedia([
-                    "name" => $mediaFile->originalName,
+                    "name" => $mediaFile->getClientOriginalName(),
                     'filename' => $filename,
                     'access' => 'private',
                     'type' => 'chat',
                     'meta' => json_encode([
+                        "type" => "document",
                         'access' => json_decode($conversation->members),
+                        'chat_id' => $conversation_id,
+                        'filesize' => $mediaFile->getSize(),
                     ]),
                 ]);
-                $message = $user->sendMessage($conversation_id, "document", null, $filename);
+                $message = $user->sendMessage($conversation_id, "document", null, $filename, json_encode([
+                    'filename' => $mediaFile->getClientOriginalName(),
+                    'filesize' => $mediaFile->getSize(),
+                ]));
                 break;
         }
 
         return response()->json([
             'result' => $message != null,
-            'message_id' => $message->id,
+            'message' => $message,
         ]);
 
     }

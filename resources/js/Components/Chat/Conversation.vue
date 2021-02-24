@@ -1,6 +1,6 @@
 <template>
 	<div class="conversation-container">
-		<send-file-modal v-if="selectedFile != null" :file="selectedFile" :show.sync="showFileModal"></send-file-modal>
+		<send-file-modal v-if="selectedFile != null" :file="selectedFile" @send="sendMessage" @canceled="selectedFile = null" :caption.sync="messageText" :show.sync="showFileModal"></send-file-modal>
 		<div class="conversation-header">
 			<div class="pageinfo clickable">
 				<lazy-image src="/images/man-profile.png" class="profile-sm mb-0 ml-2" img-class="profile-sm" />
@@ -28,7 +28,7 @@
 			</div>
 			<div v-else class="messages-list">
 				<div class="message-column" v-for="(message, index) in messages.data" :key="'msg_id_' + message.id">
-					<message :message="message" :hide-profile="checkPreviosMessages(index)"></message>
+					<message :message.sync="messages.data[index]" :hide-profile="checkPreviosMessages(index)"></message>
 				</div>
 			</div>
 		</div>
@@ -62,6 +62,11 @@ import SendFileModal from "./SendFileModal.vue";
 import TextareaAutosize from "../inputs/TextareaAutosize.vue";
 
 export default {
+	watch: {
+		chatId() {
+			this.loadMessagess();
+		},
+	},
 	components: { LoadingSpinner, CountupTimer, VoicePreview, Message, SendFileModal, TextareaAutosize },
 	computed: {
 		voiceUrl() {
@@ -158,6 +163,13 @@ export default {
 					let fileType = file.type;
 					fileType = fileType.substr(0, fileType.lastIndexOf("/"));
 
+					fileType = fileType == "application" ? "document" : fileType;
+
+					message.meta = {
+						filename: file.name,
+						filesize: file.size,
+					};
+
 					message.type = fileType;
 					message.media = [file];
 					message.text = this.messageText;
@@ -168,6 +180,9 @@ export default {
 				}
 				this.messages.data.unshift(message);
 			}
+		},
+		addMessage(message) {
+			this.messages.data.unshift(message);
 		},
 		stopRecording(recordCanceled = false) {
 			this.recordCanceled = recordCanceled;

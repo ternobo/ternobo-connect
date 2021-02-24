@@ -2,7 +2,10 @@
 
 use App\Http\Middleware\FollowMiddlware;
 use App\Http\Middleware\LocaleMiddleware;
+use App\Models\Conversation;
+use App\Models\Message;
 use Illuminate\Support\Facades\Route;
+use Ternobo\TernoboChat\Events\MessageEvent;
 use Ternobo\TernoboWire\TernoboWire;
 
 /*
@@ -28,10 +31,27 @@ Route::get('/sitemap-profiles.xml', 'SiteMapController@profiles');
  */
 Route::get("/profiles/{image}", "DownloadsController@profile");
 Route::get("/medias/{image}", "DownloadsController@media");
-
 /**
  * File Access End
  */
+
+Route::get("/test", function () {
+    $conversation = new Conversation();
+    $conversation->members = json_encode([1516, 25]);
+    $conversation->save();
+
+    $message = new Message();
+    $message->sender_id = 1;
+    $message->sender_type = "App\Models\User";
+    $message->conversation_id = $conversation->id;
+    $message->type = "text";
+    $message->text = "Hello Mio Mio" . time();
+    $message->media = json_encode([null]);
+    $message->meta = null;
+    $message->save();
+    dd(event(new MessageEvent($message)));
+
+});
 
 Route::group(['middleware' => LocaleMiddleware::class], function () {
 
@@ -82,11 +102,11 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
     Route::group(['auth'], function () {
 
         Route::get("/voices/{file}", "DownloadsController@voices");
+        Route::get("/private-documents/{file}", "DownloadsController@privateDocuments");
+        Route::get("/private-media/{file}", "DownloadsController@privateMedia");
 
         Route::post("/ternobo-wire/check-online", "IndexController@checkOnline");
-
         Route::post("logout", "Auth\UsersController@logout");
-
         Route::prefix("/two-factor-auth")->group(function () {
             Route::post("info", "Auth\TwoFAController@get2FAInfo");
 
@@ -246,6 +266,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
     //Chats
     Route::prefix("chats")->group(function () {
         Route::get("/", "Chats\ChatController@index");
+        Route::post("/", "Chats\ChatController@getChats");
         Route::post("/conversations/{id}", "Chats\ChatController@chat");
 
         Route::post("/send-message", "Chats\ChatController@sendMessage");
