@@ -2,8 +2,13 @@
 	<b-modal v-model="showModal" hide-footer hide-header body-class="p-0" size="md" :centered="true">
 		<div class="file-send-preview">
 			<div class="file-detail">
-				<i class="material-icons file-icon">insert_drive_file</i>
-				<span class="file-name">{{ file.name }}</span>
+				<img v-if="type == 'image'" :src="url" class="w-100" />
+				<video controls v-else-if="type == 'video'" :src="url" class="w-100" />
+				<audio controls v-else-if="type == 'audio'" :src="url" class="w-100" />
+				<div class="d-flex" v-else>
+					<i class="material-icons file-icon">insert_drive_file</i>
+					<span class="file-name">{{ file.name }}</span>
+				</div>
 			</div>
 			<div class="caption">
 				<material-text-field inputClass="w-100" class="material--sm" placeholder="توضیحات" v-model="captionVal"></material-text-field>
@@ -22,7 +27,7 @@ import MaterialTextField from "../inputs/MaterialTextField.vue";
 export default {
 	watch: {
 		captionVal(newValue) {
-			this.$emit("caption:update", newValue);
+			this.$emit("update:caption", newValue);
 		},
 	},
 	data() {
@@ -32,6 +37,21 @@ export default {
 	},
 	mounted() {
 		this.captionVal = this.caption;
+	},
+	computed: {
+		url() {
+			return URL.createObjectURL(this.file);
+		},
+		type() {
+			if (this.file.type.startsWith("image")) {
+				return "image";
+			} else if (this.file.type.startsWith("video")) {
+				return "video";
+			} else if (this.file.type.startsWith("audio")) {
+				return "audio";
+			}
+			return "file";
+		},
 	},
 	methods: {
 		cancel() {

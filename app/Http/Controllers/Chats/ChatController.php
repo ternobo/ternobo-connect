@@ -89,6 +89,10 @@ class ChatController extends Controller
         $message_type = $request->type;
 
         $message = null;
+        $text = null;
+        if ($request->filled("text")) {
+            $text = $request->text;
+        }
 
         switch ($message_type) {
             case "voice":
@@ -106,10 +110,10 @@ class ChatController extends Controller
                         'filesize' => $mediaFile->getSize(),
                     ]),
                 ]);
-                $message = $user->sendMessage($conversation_id, "voice", null, $filename);
+                $message = $user->sendMessage($conversation_id, "voice", $text, $filename);
                 break;
             case "text":
-                $message = $user->sendMessage($conversation_id, "text", $request->text);
+                $message = $user->sendMessage($conversation_id, "text", $text);
                 break;
             case "video":
                 $mediaFile = $request->file("media");
@@ -126,7 +130,7 @@ class ChatController extends Controller
                         'filesize' => $mediaFile->getSize(),
                     ]),
                 ]);
-                $message = $user->sendMessage($conversation_id, "video", null, $filename, json_encode([
+                $message = $user->sendMessage($conversation_id, "video", $text, $filename, json_encode([
                     'filename' => $mediaFile->getClientOriginalName(),
                     'filesize' => $mediaFile->getSize(),
                 ]));
@@ -146,7 +150,7 @@ class ChatController extends Controller
                         'filesize' => $mediaFile->getSize(),
                     ]),
                 ]);
-                $message = $user->sendMessage($conversation_id, "image", null, $filename, json_encode([
+                $message = $user->sendMessage($conversation_id, "image", $text, $filename, json_encode([
                     'filename' => $mediaFile->getClientOriginalName(),
                     'filesize' => $mediaFile->getSize(),
                 ]));
@@ -166,7 +170,7 @@ class ChatController extends Controller
                         'filesize' => $mediaFile->getSize(),
                     ]),
                 ]);
-                $message = $user->sendMessage($conversation_id, "audio", null, $filename, json_encode([
+                $message = $user->sendMessage($conversation_id, "audio", $text, $filename, json_encode([
                     'filename' => $mediaFile->getClientOriginalName(),
                     'filesize' => $mediaFile->getSize(),
                 ]));
@@ -186,7 +190,7 @@ class ChatController extends Controller
                         'filesize' => $mediaFile->getSize(),
                     ]),
                 ]);
-                $message = $user->sendMessage($conversation_id, "document", null, $filename, json_encode([
+                $message = $user->sendMessage($conversation_id, "document", $text, $filename, json_encode([
                     'filename' => $mediaFile->getClientOriginalName(),
                     'filesize' => $mediaFile->getSize(),
                 ]));

@@ -1,17 +1,41 @@
 <template>
-	<div>
+	<div class="message-column" :class="{ received: message.sender.id != $store.state.user.id }">
 		<div class="message-container" :class="{ 'send-error': error }">
 			<i class="material-icons reload-btn" v-if="error" @click="sendMessage" :class="{ rotateAnimation: loading }">refresh</i>
 			<lazy-image class="profile-xsm" img-class="profile-xsm" :class="{ 'opacity-0': hideProfile }" :src="message.sender.profile"></lazy-image>
-			<component v-bind="$props" :is="type"></component>
+			<div>
+				<div v-if="message.type == 'text'" class="text-message-head">
+					<strong>{{ message.sender.name }}</strong>
+					<loading-spinner class="message-loading" v-if="loading"></loading-spinner>
+					<i class="material-icons text-danger" v-else-if="error">error_outline</i>
+					<small v-else class="message-time">{{ sendTime }}</small>
+				</div>
+				<component v-bind="$props" :is="type"></component>
+			</div>
+			<div v-if="message.type != 'text'">
+				<loading-spinner class="message-loading" v-if="loading"></loading-spinner>
+				<i class="material-icons text-danger" v-else-if="error">error_outline</i>
+				<small v-else class="message-time">{{ sendTime }}</small>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import LoadingSpinner from "../../LoadingSpinner.vue";
 export default {
+	components: { LoadingSpinner },
+	computed: {
+		sendTime() {
+			return moment.from(this.message.created_at).format("HH:mm");
+		},
+	},
 	methods: {
 		sendMessage() {
+			this.loading = true;
+			this.$store.commit("setChatLastMessage", { id: this.message.conversation_id, message: this.message });
+			this.$store.dispatch("sortChats");
+
 			let formData = new FormData();
 			if (this.message.conversation_id) {
 				formData.append("conversation_id", this.message.conversation_id);
@@ -50,9 +74,13 @@ export default {
 				.post("/chats/send-message", formData)
 				.then((response) => {
 					this.$emit("update:message", response.data.message);
+					this.$store.dispatch("loadChats");
 				})
 				.catch((error) => {
 					this.error = true;
+				})
+				.then(() => {
+					this.loading = false;
 				});
 		},
 	},

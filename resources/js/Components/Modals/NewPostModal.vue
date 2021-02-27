@@ -112,7 +112,7 @@ export default {
 					this.category = this.post.category;
 				}
 
-				this.text = this.post.text;
+				this.text = this.post.text.replace("&zwnj;", "‌");
 				if (this.post.show == "private") {
 					this.showType = this.showTypesItems[1];
 				}

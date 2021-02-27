@@ -27,9 +27,7 @@
 				</div>
 			</div>
 			<div v-else class="messages-list">
-				<div class="message-column" v-for="(message, index) in messages.data" :key="'msg_id_' + message.id">
-					<message :message.sync="messages.data[index]" :hide-profile="checkPreviosMessages(index)"></message>
-				</div>
+				<message v-for="(message, index) in messages.data" :key="'msg_id_' + message.id" :message.sync="messages.data[index]" :hide-profile="checkPreviosMessages(index)"></message>
 			</div>
 		</div>
 		<div class="conversation-footer">
@@ -133,9 +131,7 @@ export default {
 				let fileType = file.type;
 				fileType = fileType.substr(0, fileType.lastIndexOf("/"));
 				this.selectedFile = file;
-				if (fileType == "application") {
-					this.showFileModal = true;
-				}
+				this.showFileModal = true;
 			};
 			fileChooser.click();
 		},
@@ -143,6 +139,7 @@ export default {
 			if (this.canSend) {
 				let message = {
 					id: uuidv4(),
+					created_at: new Date().toISOString(),
 					sender: this.$store.state.user,
 					shouldSend: true,
 				};
@@ -173,11 +170,12 @@ export default {
 					message.type = fileType;
 					message.media = [file];
 					message.text = this.messageText;
+					console.log(message);
 				} else {
 					message.type = "text";
 					message.text = this.messageText;
-					this.messageText = null;
 				}
+				this.messageText = null;
 				this.messages.data.unshift(message);
 			}
 		},

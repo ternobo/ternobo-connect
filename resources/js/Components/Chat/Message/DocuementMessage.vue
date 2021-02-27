@@ -6,7 +6,6 @@
 		<div class="file-detail">
 			<div class="file-name">
 				<strong>{{ fileName }}</strong>
-				<small class="text-muted">{{ sendTime }}</small>
 			</div>
 			<div class="d-flex align-items-center">
 				<small class="send-date text-muted ml-3">{{ sendDate }}</small>
@@ -27,7 +26,7 @@ export default {
 			return typeof this.message.media[0] == "object" ? this.file : "/" + this.message.media[0];
 		},
 		fileSize() {
-			return typeof this.message.media[0] == "object" ? Math.round(this.message.media[0].size / 1024) : "/" + Math.round(this.message.meta.filesize / 1024);
+			return typeof this.message.media[0] == "object" ? Math.round(this.message.media[0].size / 1024) + "KB" : Math.round(this.message.meta.filesize / 1024) + "KB";
 		},
 		fileType() {
 			let file = this.file;
@@ -38,9 +37,6 @@ export default {
 		},
 		fileName() {
 			return this.message.meta.filename;
-		},
-		sendTime() {
-			return moment.from(this.message.created_at).format("HH:mm");
 		},
 		sendDate() {
 			return moment.from(this.message.created_at).format("jYYYY/jMM/jDD");

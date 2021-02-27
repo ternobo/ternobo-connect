@@ -17,6 +17,20 @@
 <script>
 import LazyImage from "../LazyImage.vue";
 export default {
+	methods: {
+		updateTime() {
+			this.updated_at = this.time(this.chat.last_message.created_at);
+			if ((new Date() - new Date(this.chat.last_message.created_at)) / 1000 > 60) {
+				clearInterval(this.updateTime);
+				setInterval(this.updateTime, 60000);
+			}
+		},
+	},
+	data() {
+		return {
+			updated_at: null,
+		};
+	},
 	watch: {
 		selected(newVal) {
 			if (newVal) {
@@ -25,6 +39,20 @@ export default {
 				this.$emit("chat:update", chat);
 			}
 		},
+		chat: {
+			deep: true,
+
+			handler() {
+				this.updated_at = this.time(this.chat.last_message.created_at);
+			},
+		},
+	},
+	mounted() {
+		this.updated_at = this.time(this.chat.last_message.created_at);
+		setInterval(this.updateTime, 1000);
+	},
+	destroyed() {
+		clearInterval(this.updateTime);
 	},
 	computed: {
 		lastPreview() {
@@ -50,9 +78,6 @@ export default {
 					break;
 			}
 			return preview;
-		},
-		updated_at() {
-			return this.time(this.chat.updated_at);
 		},
 		chatTitle() {
 			return this.chat.type == "private" ? this.chat.user.first_name + " " + this.chat.user.last_name : this.chat.title;

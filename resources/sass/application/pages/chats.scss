@@ -280,8 +280,120 @@
 
 
 .message-column {
-    max-width: 50%;
+    display: flex;
     margin-bottom: 12px;
+
+
+    .message-container {
+        display: flex;
+        max-width: 50%;
+
+        .message-time {
+            color: $light;
+            height: 16px;
+        }
+
+        .message-loading {
+            width: 16px;
+            height: 16px;
+        }
+
+        .message-time,
+        .message-loading {
+            margin-right: 12px;
+        }
+
+        strong {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        figure.profile-xsm {
+            margin-bottom: 0;
+            margin-left: 12px;
+        }
+
+        .voice-message {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 12px;
+            background: #E7F3FF;
+            border-radius: 22px;
+            width: 260px;
+
+            .voice-preview {
+                width: 100%;
+
+                >span {
+                    margin-top: 3px;
+                }
+            }
+        }
+
+        &.send-error {
+            .reload-btn {
+                color: $action;
+                margin-right: -32px;
+                max-height: 44px;
+                display: flex;
+                align-items: center;
+                margin-left: 8px;
+                cursor: pointer;
+            }
+
+
+            .voice-message {
+                background-color: #f8d0cd;
+            }
+        }
+
+
+        .text-message-head {
+            display: flex;
+            align-items: center;
+        }
+
+    }
+
+    &.received {
+        justify-content: flex-end;
+
+        .message-container {
+            flex-direction: row-reverse;
+
+            figure.profile-xsm {
+                margin-bottom: 0;
+                margin-right: 12px;
+                margin-left: 0;
+
+                .reload-btn {
+                    margin-left: -32px;
+                    max-height: 44px;
+                    display: flex;
+                    align-items: center;
+                    margin-right: 8px;
+                    cursor: pointer;
+                }
+            }
+
+            .text-message-head {
+                flex-direction: row-reverse;
+            }
+
+            .message-time,
+            .message-loading {
+                margin-left: 12px;
+                margin-right: 0;
+            }
+
+        }
+    }
+
+
+
 }
 
 
@@ -324,60 +436,57 @@
     overflow: auto;
     max-height: 100%;
     height: 100%;
-    padding: 20px;
+    padding: 48px;
     @extend .nice-scroll;
 }
 
-.message-container {
+
+.media-message {
+    background: $fixed-elements;
+    padding: 4px;
+    border-radius: 4px;
+
+    img {
+        height: 300px;
+        width: 300px;
+        min-width: 300px;
+        -o-object-fit: cover;
+        object-fit: cover;
+        -o-object-position: center;
+        object-position: center;
+        cursor: pointer;
+    }
+
+    video {
+        height: 300px;
+        max-width: 300px;
+    }
+
+    .caption {
+        background: none;
+        margin: 0;
+        unicode-bidi: -moz-plaintext;
+        unicode-bidi: plaintext;
+        padding: 12px;
+        text-align: start;
+    }
+
+}
+
+.ternobo-vide-player {
+    position: relative;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 
-
-    strong {
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+    &::after {
+        position: absolute;
+        content: "play_circle_outline";
+        font-family: 'Material Icons';
+        width: 36px;
+        height: 36px;
+        font-size: 36px;
+        color: $white;
     }
-
-    figure.profile-xsm {
-        margin-bottom: 0;
-        margin-left: 12px;
-    }
-
-    .voice-message {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 16px 12px;
-        background: #E7F3FF;
-        border-radius: 22px;
-        width: 260px;
-        max-width: 50%;
-
-        .voice-preview {
-            width: 100%;
-
-            >span {
-                margin-top: 3px;
-            }
-        }
-    }
-
-    &.send-error {
-        color: $danger;
-
-        .reload-btn {
-            color: $action;
-            margin-right: -12px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-
-        .voice-message {
-            background-color: #f8d0cd;
-        }
-    }
-
 }

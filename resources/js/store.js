@@ -1,11 +1,49 @@
+import axios from "axios";
 import {
     store
 } from "wire-js";
 export default store({
     state: {
-        search: null
+        search: null,
+        chats: [],
+        chats_next_page_url: null
+    },
+    actions: {
+        loadChats({ commit }) {
+            return axios
+                .post("/chats")
+                .then((response) => {
+                    let chats = response.data.chats;
+                    commit("setChats", chats.data);
+                    commit("setChatsNextPage", chats.next_page_url)
+                });
+        },
+        sortChats(context) {
+            let chats = context.state.chats;
+            chats.sort((a, b) => {
+                return new Date(b.last_message.created_at) - new Date(a.last_message.created_at)
+            });
+            context.commit("setChats", chats);
+        }
     },
     mutations: {
+        // Chats Mutations - Start
+        setChats(state, payload) {
+            state.chats = payload;
+        },
+        setChatsNextPage(state, payload) {
+            state.chats_next_page_url = payload;
+        },
+        setChatLastMessage(state, { id, message }) {
+            state.chats.forEach((item) => {
+                if (item.id == id) {
+                    item.updated_at = message.created_at;
+                    item.last_message = message;
+                }
+            });
+        },
+        // Chats Mutations - End
+
         setSearch(state, payload) {
             state.search = payload;
         },

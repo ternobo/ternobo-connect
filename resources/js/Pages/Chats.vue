@@ -30,7 +30,10 @@ import NoChatSelected from "../Components/Chat/NoChatSelected.vue";
 import LazyImage from "../Components/LazyImage.vue";
 import ChatSkeleton from "../Components/Skeletons/ChatSkeleton.vue";
 import AppLayout from "../Layouts/AppLayout";
+import { mapState, mapActions } from "vuex";
+
 export default {
+	computed: mapState(["chats"]),
 	methods: {
 		onNewMessage(event) {
 			let message = event.detail.message;
@@ -41,13 +44,8 @@ export default {
 			}
 		},
 		loadChats(repeat = false) {
-			axios
-				.post("/chats")
-				.then((response) => {
-					let chats = response.data.chats;
-					this.chats = chats.data;
-					this.next_page_url = chats.next_page_url;
-				})
+			this.$store
+				.dispatch("loadChats")
 				.catch((err) => {
 					if (repeat) {
 						this.loadChats(true);
@@ -56,9 +54,7 @@ export default {
 					}
 				})
 				.then(() => {
-					if (!repeat) {
-						this.loading = false;
-					}
+					this.loading = false;
 				});
 		},
 		selectChat(chat) {
@@ -81,8 +77,6 @@ export default {
 			searchLoading: false,
 
 			selectedChat: null,
-			chats: [],
-			next_page_url: null,
 
 			onEsc: (e) => {
 				if (e.key === "Escape") {
@@ -93,20 +87,7 @@ export default {
 	},
 	mounted() {
 		this.loading = true;
-		axios
-			.post("/chats")
-			.then((response) => {
-				let chats = response.data.chats;
-				this.chats = chats.data;
-				this.next_page_url = chats.next_page_url;
-			})
-			.catch((err) => {
-				this.error = true;
-			})
-			.then(() => {
-				this.loading = false;
-			});
-
+		this.loadChats(true);
 		document.addEventListener("message:new", this.onNewMessage);
 		window.addEventListener("keydown", this.onEsc);
 	},
