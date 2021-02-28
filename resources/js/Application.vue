@@ -66,7 +66,7 @@ export default {
 	created() {
 		this.$root.application = this;
 	},
-	props: ["initialData", "resolveComponent", "initialComponent"],
+	props: ["dataToken", "resolveComponent"],
 	components: {
 		WireApp,
 		Toast,

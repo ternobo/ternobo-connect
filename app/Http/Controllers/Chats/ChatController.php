@@ -23,7 +23,7 @@ class ChatController extends Controller
 
     public function getChats()
     {
-        $conversations = Auth::user()->conversations()->with(["lastMessage"])->withCount(['messages as unread_messages_count' => function ($query) {
+        $conversations = Auth::user()->conversations()->whereHas("messages")->with(["lastMessage"])->withCount(['messages as unread_messages_count' => function ($query) {
             $query->where("seen", false)->where("sender_id", "!=", Auth::user()->id);
         }])->orderBy('updated_at', 'desc')->paginate(30);
         // dd($conversations);
@@ -69,6 +69,16 @@ class ChatController extends Controller
         dd($data);
     }
 
+    public function createConversation($user_id)
+    {
+        $user = Auth::user();
+        $conversation = $user->startConversationWith($user_id);
+        return response()->json([
+            'result' => true,
+            'conversation' => $conversation,
+        ]);
+    }
+
     public function sendMessage(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -84,7 +94,7 @@ class ChatController extends Controller
         }
 
         $user = Auth::user();
-        $conversation = $request->filled("conversation_id") ? Conversation::findOrFail($request->conversation_id) : $user->startConversationWith($request->user_id);
+        $conversation = Conversation::findOrFail($request->conversation_id);
         $conversation_id = $conversation->id;
         $message_type = $request->type;
 

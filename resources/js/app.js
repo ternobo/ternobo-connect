@@ -82,19 +82,14 @@ if (user_id) {
     }, 3000);
 }
 
-let instanceData = JSON.parse(document.body.dataset.wire);
+let dataToken = (document.body.dataset.wire);
 document.body.dataset.wire = "";
-let component = instanceData.component;
 const vue_app = new Vue({
     store: require("./store").default,
     render: (h) =>
         h(Application, {
             props: {
-                initialData: {
-                    data: instanceData.data,
-                    shared: instanceData.shared
-                },
-                initialComponent: component,
+                dataToken: dataToken,
                 resolveComponent: (component) => import(`./Pages/${component}`),
             },
         }),

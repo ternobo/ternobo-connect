@@ -23,7 +23,7 @@
 				<loading-spinner v-if="loading"></loading-spinner>
 				<div v-if="error" class="text-center">
 					<p class="text-muted">خطا در بارگذاری اطلاعات</p>
-					<span class="text-action clickable" @click="loadMessagess"> <i class="material-icons">refresh</i> تلاش مجدد </span>
+					<span class="text-action clickable" @click="loadMessages"> <i class="material-icons">refresh</i> تلاش مجدد </span>
 				</div>
 			</div>
 			<div v-else class="messages-list">
@@ -61,8 +61,11 @@ import TextareaAutosize from "../inputs/TextareaAutosize.vue";
 
 export default {
 	watch: {
-		chatId() {
-			this.loadMessagess();
+		chatId(newVal) {
+			this.conversation_id = newVal;
+		},
+		conversation_id() {
+			this.loadMessages();
 		},
 	},
 	components: { LoadingSpinner, CountupTimer, VoicePreview, Message, SendFileModal, TextareaAutosize },
@@ -142,12 +145,9 @@ export default {
 					created_at: new Date().toISOString(),
 					sender: this.$store.state.user,
 					shouldSend: true,
+					conversation_id: this.conversation_id,
 				};
-				if (this.chatId) {
-					message.conversation_id = this.chatId;
-				} else {
-					message.sendTo = this.userId;
-				}
+
 				if (this.sendDisabled) {
 					return;
 				}
@@ -189,26 +189,43 @@ export default {
 				this.recording = false;
 			}
 		},
-		loadMessagess() {
-			this.loading = true;
-			axios
-				.post("/chats/conversations/" + this.chatId)
-				.then((response) => {
-					this.messages = response.data.messages;
-				})
-				.catch((err) => {
-					this.error = true;
-				})
-				.then(() => {
-					this.loading = false;
-				});
+		loadMessages() {
+			if (this.conversation_id) {
+				this.loading = true;
+				axios
+					.post("/chats/conversations/" + this.conversation_id)
+					.then((response) => {
+						this.messages = response.data.messages;
+					})
+					.catch((err) => {
+						this.error = true;
+					})
+					.then(() => {
+						this.loading = false;
+					});
+			} else {
+				axios
+					.post("/chats/conversation/create/" + this.userId)
+					.then((response) => {
+						this.conversation_id = response.data.conversation_id;
+					})
+					.catch((err) => {
+						this.error = true;
+					})
+					.then(() => {
+						this.loading = false;
+					});
+			}
 		},
 	},
 	mounted() {
-		this.loadMessagess();
+		this.conversation_id = this.chatId;
+		this.loadMessages();
 	},
 	data() {
 		return {
+			conversation_id: null,
+
 			recording: false,
 			recordCanceled: false,
 			sendDisabled: false,
