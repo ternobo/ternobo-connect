@@ -70,7 +70,7 @@
     position: relative;
 }
 
-.unread::after {
+:not(.active) .unread::after {
     content: " ";
     position: absolute;
     width: 5px;

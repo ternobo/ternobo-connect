@@ -36,33 +36,33 @@ export default {
 			onlineCheckInterval: null,
 		};
 	},
-	mounted() {
-		setTimeout(() => {
-			if (this.$store.state.user) {
-				this.onlineCheckInterval = setInterval(function () {
-					axios.post("/ternobo-wire/check-online");
-				}, 60000);
-			}
-			this.$store.watch(
-				(state) => {
-					return this.$store.state.user; // could also put a Getter here
-				},
-				(newValue) => {
-					if (newValue) {
-						this.onlineCheckInterval = setInterval(function () {
-							axios.post("/ternobo-wire/check-online");
-						}, 60000);
-					} else {
-						clearInterval(this.onlineCheckInterval);
-					}
-				},
-				//Optional Deep if you need it
-				{
-					deep: true,
-				}
-			);
-		}, 10000);
-	},
+	// mounted() {
+	// 	setTimeout(() => {
+	// 		if (this.$store.state.user) {
+	// 			this.onlineCheckInterval = setInterval(function () {
+	// 				axios.post("/ternobo-wire/check-online");
+	// 			}, 60000);
+	// 		}
+	// 		this.$store.watch(
+	// 			(state) => {
+	// 				return this.$store.state.user; // could also put a Getter here
+	// 			},
+	// 			(newValue) => {
+	// 				if (newValue) {
+	// 					this.onlineCheckInterval = setInterval(function () {
+	// 						axios.post("/ternobo-wire/check-online");
+	// 					}, 60000);
+	// 				} else {
+	// 					clearInterval(this.onlineCheckInterval);
+	// 				}
+	// 			},
+	// 			//Optional Deep if you need it
+	// 			{
+	// 				deep: true,
+	// 			}
+	// 		);
+	// 	}, 10000);
+	// },
 	created() {
 		this.$root.application = this;
 	},

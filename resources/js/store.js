@@ -18,6 +18,18 @@ export default store({
                     commit("setChatsNextPage", chats.next_page_url)
                 });
         },
+        loadChatsNextPage({ commit, state }) {
+            if (state.chats_next_page_url != null) {
+                let chats = state.chats;
+                return axios
+                    .post(state.chats_next_page_url)
+                    .then((response) => {
+                        chats = chats.concat(response.data.chats.data);
+                        commit("setChatsNextPage", response.data.chats.next_page_url)
+                        commit("setChats", chats);
+                    });
+            }
+        },
         sortChats(context) {
             let chats = context.state.chats;
             chats.sort((a, b) => {
@@ -71,7 +83,15 @@ export default store({
         // Categories Mutations
         addCategory(state, payload) {
             state.shared.currentPage.categories.push(payload);
-        }
+        },
+
+
+        addUnreadMessage(state) {
+            state.shared.unread_messages_count++;
+        },
+        addUnreadNotification(state) {
+            state.shared.notifications_count++;
+        },
 
     }
 });

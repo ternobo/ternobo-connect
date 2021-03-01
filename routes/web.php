@@ -267,6 +267,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
     Route::prefix("chats")->group(function () {
         Route::get("/", "Chats\ChatController@index");
         Route::post("/", "Chats\ChatController@getChats");
+        Route::post("/search", "Chats\ChatController@search");
         Route::post("/conversations/{id}", "Chats\ChatController@chat");
         Route::post("/conversations/create/{id}", "Chats\ChatController@createConversation");
 

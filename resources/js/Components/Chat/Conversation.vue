@@ -27,7 +27,10 @@
 				</div>
 			</div>
 			<div v-else class="messages-list">
-				<message v-for="(message, index) in messages.data" :key="'msg_id_' + message.id" :message.sync="messages.data[index]" :hide-profile="checkPreviosMessages(index)"></message>
+				<message v-for="(message, index) in messages" :key="'msg_id_' + message.id" :message.sync="messages[index]" :hide-profile="checkPreviosMessages(index)"></message>
+				<div class="d-flex justify-content-center w-100" v-if="next_page_url != null" v-reached="loadMore">
+					<loading-spinner></loading-spinner>
+				</div>
 			</div>
 		</div>
 		<div class="conversation-footer">
@@ -86,12 +89,13 @@ export default {
 			}
 		},
 		checkPreviosMessages(index) {
-			let list = this.messages.data;
+			let list = this.messages;
 			if (list[index + 1] && list[index + 1].sender.id == list[index].sender.id && list[index + 1].type == list[index].type) {
 				return true;
 			}
 			return false;
 		},
+
 		recordVoice() {
 			let audioContext = new (window.AudioContext || window.webkitAudioContext)();
 			if (this.recording) {
@@ -176,11 +180,11 @@ export default {
 					message.text = this.messageText;
 				}
 				this.messageText = null;
-				this.messages.data.unshift(message);
+				this.messages.unshift(message);
 			}
 		},
 		addMessage(message) {
-			this.messages.data.unshift(message);
+			this.messages.unshift(message);
 		},
 		stopRecording(recordCanceled = false) {
 			this.recordCanceled = recordCanceled;
@@ -195,7 +199,8 @@ export default {
 				axios
 					.post("/chats/conversations/" + this.conversation_id)
 					.then((response) => {
-						this.messages = response.data.messages;
+						this.messages = response.data.messages.data;
+						this.next_page_url = response.data.messages.next_page_url;
 					})
 					.catch((err) => {
 						this.error = true;
@@ -208,6 +213,22 @@ export default {
 					.post("/chats/conversation/create/" + this.userId)
 					.then((response) => {
 						this.conversation_id = response.data.conversation_id;
+					})
+					.catch((err) => {
+						this.error = true;
+					})
+					.then(() => {
+						this.loading = false;
+					});
+			}
+		},
+		loadMore() {
+			if (this.next_page_url != null) {
+				axios
+					.post(this.next_page_url)
+					.then((response) => {
+						this.messages = this.messages.concat(response.data.messages.data);
+						this.next_page_url = response.data.messages.next_page_url;
 					})
 					.catch((err) => {
 						this.error = true;
@@ -239,7 +260,8 @@ export default {
 			loading: false,
 			error: false,
 
-			messages: {},
+			messages: [],
+			next_page_url: null,
 		};
 	},
 	props: ["chatId", "userId", "title", "subtitle", "profile"],

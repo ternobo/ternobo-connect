@@ -69,6 +69,19 @@ TernoboApp.install = function (Vue, options) {
         var sortable = new Sortable(el, binding.value)
     })
 
+    Vue.directive('reached', {
+        inserted: function (el, binding) {
+            let action = binding.value;
+            let options = {
+                rootMargin: '0px',
+                threshold: 0.3
+            }
+
+            let observer = new IntersectionObserver(action, options);
+            observer.observe(el);
+        }
+    });
+
     Vue.directive("no-space", function (el) {
         el.addEventListener("keydown", function (e) {
             if (e.which === 32)

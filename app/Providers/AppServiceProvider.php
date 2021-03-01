@@ -44,6 +44,14 @@ class AppServiceProvider extends ServiceProvider
                         }
                         return [];
                     },
+                    'unread_messages_count' => function () {
+                        if (Auth::check()) {
+                            return Auth::user()->conversations()->whereHas('messages', function ($query) {
+                                $query->where("seen", false)->where("sender_id", "!=", Auth::user()->id);
+                            })->count();
+                        }
+                        return 0;
+                    },
                     'notifications_count' => function () {
                         if (Auth::check()) {
                             return count(Notification::query()

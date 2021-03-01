@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Chats;
 
 use App\FileManager\MediaConverter;
 use App\Http\Controllers\Controller;
+use App\Models\Connection;
 use App\Models\Conversation;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
@@ -26,7 +27,6 @@ class ChatController extends Controller
         $conversations = Auth::user()->conversations()->whereHas("messages")->with(["lastMessage"])->withCount(['messages as unread_messages_count' => function ($query) {
             $query->where("seen", false)->where("sender_id", "!=", Auth::user()->id);
         }])->orderBy('updated_at', 'desc')->paginate(30);
-        // dd($conversations);
         return response()->json([
             'result' => true,
             'chats' => $conversations,
@@ -36,7 +36,7 @@ class ChatController extends Controller
     public function chat($id)
     {
         $conversation = Conversation::query()->findOrFail($id);
-        $messages = $conversation->messages()->with("sender")->paginate(40);
+        $messages = $conversation->messages()->with("sender")->paginate(50);
 
         Message::query()->where("seen", false)->where("conversation_id", $conversation->id)->update(['seen' => true]);
 
@@ -50,12 +50,11 @@ class ChatController extends Controller
     public function search(Request $request)
     {
         $search = $request->q;
-
         $conversations = Auth::user()->conversations()->with(["lastMessage"])->withCount(['messages as unread_messages_count' => function ($query) {
             $query->where("seen", false)->where("sender_id", Auth::user()->id);
-        }])->whereHas("message", function ($query) use ($search) {
+        }])->whereHas("messages", function ($query) use ($search) {
             $query->whereRaw("text like ?", ["%$search%"]);
-        })->latest()->paginate(30);
+        })->orderBy('updated_at', 'desc')->paginate(30);
 
         $user = Auth::user();
         $connections = Connection::query()
@@ -63,10 +62,13 @@ class ChatController extends Controller
             ->where("accepted", true)
             ->latest()
             ->paginate(30);
+        $connections->appends(['connection' => '1']);
 
-        $data = $connections->data;
-
-        dd($data);
+        return response()->json([
+            'result' => true,
+            'connections' => $connections,
+            'conversations' => $conversations,
+        ]);
     }
 
     public function createConversation($user_id)
