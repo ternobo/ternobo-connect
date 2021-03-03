@@ -60,6 +60,9 @@ class ChatController extends Controller
         $connections = Connection::query()
             ->whereRaw("(connection = '$user->id' or user_id = '$user->id')")
             ->where("accepted", true)
+            ->whereHas("user", function ($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%");
+            })
             ->latest()
             ->paginate(30);
         $connections->appends(['connection' => '1']);

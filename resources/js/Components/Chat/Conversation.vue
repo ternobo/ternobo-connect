@@ -3,7 +3,7 @@
 		<send-file-modal v-if="selectedFile != null" :file="selectedFile" @send="sendMessage" @canceled="selectedFile = null" :caption.sync="messageText" :show.sync="showFileModal"></send-file-modal>
 		<div class="conversation-header">
 			<div class="pageinfo clickable">
-				<lazy-image src="/images/man-profile.png" class="profile-sm mb-0 ml-2" img-class="profile-sm" />
+				<lazy-image :src="profile" class="profile-sm mb-0 ml-2" img-class="profile-sm" />
 				<div class="d-flex flex-column">
 					<strong class="">{{ title }}</strong>
 					<small>{{ subtitle }}</small>
@@ -174,7 +174,6 @@ export default {
 					message.type = fileType;
 					message.media = [file];
 					message.text = this.messageText;
-					console.log(message);
 				} else {
 					message.type = "text";
 					message.text = this.messageText;
@@ -194,23 +193,35 @@ export default {
 			}
 		},
 		loadMessages() {
+			// Cancel Previous Request
+			if (this.request) {
+				this.request.cancel();
+			}
+			this.messages = [];
+
+			const axiosSource = axios.CancelToken.source();
+			this.request = { cancel: axiosSource.cancel };
+			this.loading = true;
 			if (this.conversation_id) {
-				this.loading = true;
 				axios
-					.post("/chats/conversations/" + this.conversation_id)
+					.post("/chats/conversations/" + this.conversation_id, {}, { cancelToken: axiosSource.token })
 					.then((response) => {
 						this.messages = response.data.messages.data;
 						this.next_page_url = response.data.messages.next_page_url;
 					})
 					.catch((err) => {
-						this.error = true;
+						if (axios.isCancel(err)) {
+							this.loading = true;
+						} else {
+							this.error = true;
+						}
 					})
 					.then(() => {
 						this.loading = false;
 					});
 			} else {
 				axios
-					.post("/chats/conversation/create/" + this.userId)
+					.post("/chats/conversation/create/" + this.userId, {}, { cancelToken: axiosSource.token })
 					.then((response) => {
 						this.conversation_id = response.data.conversation_id;
 					})
@@ -241,10 +252,14 @@ export default {
 	},
 	mounted() {
 		this.conversation_id = this.chatId;
-		this.loadMessages();
+	},
+	beforeDestroy() {
+		this.request.cancel();
 	},
 	data() {
 		return {
+			request: null,
+
 			conversation_id: null,
 
 			recording: false,

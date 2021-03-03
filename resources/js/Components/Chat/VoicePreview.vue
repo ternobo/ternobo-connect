@@ -24,7 +24,7 @@ export default {
 			this.progress = (this.audio.currentTime / this.audio.duration) * 100;
 		},
 		updateProgress() {
-			this.progress = (this.audio.currentTime / this.audio.duration) * 100;
+			this.progress = Number.parseInt((this.audio.currentTime / this.audio.duration) * 100);
 			this.timerText = this.getTimeCodeFromNum(this.audio.duration - this.audio.currentTime);
 			if (this.progress == 100) {
 				this.isPlaying = false;
@@ -57,6 +57,7 @@ export default {
 	},
 	created() {
 		this.audio = new Audio(this.src);
+		this.audio.ontimeupdate = this.updateProgress;
 		this.audio.onloadeddata = () => {
 			if (this.audio.duration == Infinity || this.audio.duration == NaN) {
 				this.loading = true;
@@ -64,13 +65,11 @@ export default {
 					this.audio.currentTime = 60 * 99;
 					setTimeout(() => {
 						this.audio.currentTime = 0;
-						setInterval(this.updateProgress, 500);
 						this.loading = false;
 					}, 1000);
 				}, 1000);
 			} else {
 				this.loading = false;
-				setInterval(this.updateProgress, 500);
 			}
 		};
 	},
@@ -78,7 +77,6 @@ export default {
 	destroyed() {
 		this.audio.pause();
 		this.audio.remove();
-		clearInterval(this.updateProgress);
 	},
 	data() {
 		return {

@@ -21004,18 +21004,26 @@ pre {
 }
 
 .nice-scroll, .chat-container .chats-list .chats, .messages-list {
-  scrollbar-color: #191919 #757575;
+  scrollbar-color: #191919 #DEDEDE;
   scrollbar-width: thin;
   scroll-behavior: smooth;
 }
 
 .nice-scroll::-webkit-scrollbar, .chat-container .chats-list .chats::-webkit-scrollbar, .messages-list::-webkit-scrollbar {
+  cursor: pointer;
   width: 0.3em;
   background: #DEDEDE;
 }
 
 .nice-scroll::-webkit-scrollbar-thumb, .chat-container .chats-list .chats::-webkit-scrollbar-thumb, .messages-list::-webkit-scrollbar-thumb {
+  cursor: -webkit-grab;
+  cursor: grab;
   background-color: #191919;
+}
+
+.nice-scroll::-webkit-scrollbar-thumb:active, .chat-container .chats-list .chats::-webkit-scrollbar-thumb:active, .messages-list::-webkit-scrollbar-thumb:active {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
 }
 
 .autocomplete-input:focus,
@@ -24319,5 +24327,21 @@ body {
   height: 36px;
   font-size: 36px;
   color: #FFFF;
+}
+
+.chat-widget-container {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  padding: 0 40px;
+  right: 0;
+}
+
+.chat-widget-container .chat-widget {
+  min-width: 320px;
+  padding: 16px;
+  background: #FFFF;
+  box-shadow: 0px -5px 40px rgba(0, 0, 0, 0.05);
 }
 

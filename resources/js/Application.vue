@@ -10,6 +10,7 @@
 				</transition-group>
 			</div>
 		</transition>
+		<widget-container></widget-container>
 	</div>
 </template>
 
@@ -18,6 +19,7 @@ import WireApp from "wire-js";
 import Toast from "./Components/Toast";
 
 import { v4 as uuidv4 } from "uuid";
+import WidgetContainer from "./Components/ChatWidget/WidgetContainer.vue";
 export default {
 	methods: {
 		addToast(toast) {
@@ -70,6 +72,7 @@ export default {
 	components: {
 		WireApp,
 		Toast,
+		WidgetContainer,
 	},
 };
 </script>

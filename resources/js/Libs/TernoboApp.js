@@ -139,18 +139,15 @@ TernoboApp.install = function (Vue, options) {
         };
         Vue.prototype.time = function (time) {
             const timeAgo = new TimeAgo('fa-FA');
-            return timeAgo.format(Date.parse(time), 'twitter');
-        }
-        Vue.prototype.timeAgo = function (time) {
-            const timeAgo = new TimeAgo("fa-FA");
-            return timeAgo.format(Date.parse(time), "fa_FA");
-        },
-            Vue.prototype.encodeQueryData = function (data) {
-                const ret = [];
-                for (let d in data)
-                    ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
-                return ret.join('&');
-            }
+            let timeAgoStr = timeAgo.format(Date.parse(time), 'fa_FA')
+            return timeAgoStr == '۰ ثانیه پیش' ? 'هم‌اکنون' : timeAgoStr;
+        };
+        Vue.prototype.encodeQueryData = function (data) {
+            const ret = [];
+            for (let d in data)
+                ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
+            return ret.join('&');
+        };
     };
 
     Vue.mixin({
