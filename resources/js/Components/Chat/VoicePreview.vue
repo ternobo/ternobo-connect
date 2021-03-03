@@ -1,11 +1,11 @@
 <template>
 	<div class="voice-preview">
-		<span class="text-action">{{ timerText }}</span>
+		<span class="audio-duration">{{ timerText }}</span>
 		<div class="progress" ref="progressBar" @click="seekTime">
 			<span class="progress-bg clickable"></span>
 			<span class="progress-fill" :style="{ width: progress + '%' }"></span>
 		</div>
-		<i class="material-icons text-action" :class="{ disabled: loading, clickable: !loading }" @click="playPause">{{ isPlaying ? "pause_circle_outline" : "play_circle_outline" }}</i>
+		<i class="material-icons audio-playpause" :class="{ disabled: loading, clickable: !loading }" @click="playPause">{{ isPlaying ? "pause_circle_outline" : "play_circle_outline" }}</i>
 	</div>
 </template>
 
@@ -65,6 +65,7 @@ export default {
 					this.audio.currentTime = 60 * 99;
 					setTimeout(() => {
 						this.audio.currentTime = 0;
+						this.timerText = this.getTimeCodeFromNum(this.audio.duration - this.audio.currentTime);
 						this.loading = false;
 					}, 1000);
 				}, 1000);

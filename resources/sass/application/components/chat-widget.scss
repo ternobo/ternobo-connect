@@ -5,11 +5,126 @@
     bottom: 0;
     padding: 0 40px;
     right: 0;
+    height: 68px;
 
     .chat-widget {
         min-width: 320px;
-        padding: 16px;
         background: $white;
         box-shadow: 0px -5px 40px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        transform: translateY(210px);
+        transition: 0.5s all;
+        margin-left: 16px;
+
+        &.open {
+            transform: translateY(-210px);
+        }
+
+        >.widget-header {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0px -5px 40px rgba(0, 0, 0, 0.05);
+
+
+            >.widget-info {
+                display: flex;
+                align-items: center;
+
+                >strong {
+
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 22px;
+                    margin-right: 12px;
+                }
+
+                .profile-xsm {
+                    margin: 0;
+                    min-width: 36px;
+                    min-height: 36px;
+                    width: 36px;
+                    height: 36px;
+                }
+            }
+        }
+
+
+        >.widget-body {
+            transition: 0.3s all;
+            min-height: 420px;
+            height: 420px;
+
+            .search-container {
+                padding: 0 20px;
+                padding-bottom: 20px;
+            }
+
+            .chats-list {
+                .chats {
+                    max-height: 360px;
+                }
+            }
+        }
+
+    }
+}
+
+
+.conversation-container.widget {
+    max-width: 320px;
+
+    .message-container {
+        max-width: 100%;
+    }
+
+    .media-message {
+
+        img,
+        video {
+            min-width: 150px;
+            width: 100%;
+            height: 150px;
+        }
+    }
+
+    .voice-message {
+        width: 195px;
+    }
+
+    .message-column.received {
+        flex-direction: row;
+        justify-content: flex-start;
+
+        .message-container {
+            flex-direction: row;
+
+            .text-message-head {
+                flex-direction: row;
+            }
+
+            figure.profile-xsm {
+                margin-left: 12px;
+                margin-right: 0;
+            }
+
+            .message-loading,
+            .message-time {
+                margin-right: 12px;
+                margin-left: 0;
+            }
+        }
+    }
+
+    .conversation-messages {
+        max-height: 360px;
+
+        .messages-list {
+            min-height: 360px;
+            max-height: 360px;
+            padding: 12px;
+        }
     }
 }

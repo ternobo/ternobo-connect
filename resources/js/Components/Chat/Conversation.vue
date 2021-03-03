@@ -1,7 +1,7 @@
 <template>
 	<div class="conversation-container">
 		<send-file-modal v-if="selectedFile != null" :file="selectedFile" @send="sendMessage" @canceled="selectedFile = null" :caption.sync="messageText" :show.sync="showFileModal"></send-file-modal>
-		<div class="conversation-header">
+		<div class="conversation-header" v-if="!hideHeader">
 			<div class="pageinfo clickable">
 				<lazy-image :src="profile" class="profile-sm mb-0 ml-2" img-class="profile-sm" />
 				<div class="d-flex flex-column">
@@ -279,7 +279,7 @@ export default {
 			next_page_url: null,
 		};
 	},
-	props: ["chatId", "userId", "title", "subtitle", "profile"],
+	props: ["chatId", "userId", "title", "subtitle", "profile", "hideHeader"],
 };
 </script>
 

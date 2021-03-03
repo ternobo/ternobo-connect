@@ -1,6 +1,6 @@
 <template>
 	<div class="voice-message">
-		<voice-preview :src="voice"></voice-preview>
+		<voice-preview :class="{ received: message.sender.id != $store.state.user.id }" :src="voice"></voice-preview>
 	</div>
 </template>
 
