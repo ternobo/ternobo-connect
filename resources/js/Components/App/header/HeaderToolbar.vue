@@ -1,23 +1,23 @@
 <template>
 	<div class="toolbar">
 		<div class="header-menu" v-if="$store.state.user != null">
-			<wire-link :class="{ active: $root.url === '/feed' }" href="/feed">
+			<wire-link :class="{ active: $store.state.url === '/feed' }" href="/feed">
 				<i class="navheader-icon">home</i>
 				<div class="navheader-text">خانه</div>
 			</wire-link>
-			<wire-link :class="{ active: $root.url === '/chats' }" href="/chats">
+			<wire-link :class="{ active: $store.state.url === '/chats' }" href="/chats">
 				<i class="navheader-icon" :class="{ unread: $store.state.shared.unread_messages_count > 0 }">textsms</i>
 				<div class="navheader-text">گفت‌وگو</div>
 			</wire-link>
-			<wire-link :class="{ active: $root.url === '/connections' }" href="/connections">
+			<wire-link :class="{ active: $store.state.url === '/connections' }" href="/connections">
 				<i class="navheader-icon">group</i>
 				<div class="navheader-text">شبکه من</div>
 			</wire-link>
-			<wire-link :class="{ active: $root.url === '/notifications' }" href="/notifications">
-				<i class="navheader-icon" :class="{ unread: $store.state.shared.notifications_count > 0 }">{{ $root.url === "/notifications" ? "notifications" : "notifications_none" }}</i>
+			<wire-link :class="{ active: $store.state.url === '/notifications' }" href="/notifications">
+				<i class="navheader-icon" :class="{ unread: $store.state.shared.notifications_count > 0 }">{{ $store.state.url === "/notifications" ? "notifications" : "notifications_none" }}</i>
 				<div class="navheader-text">اعلان‌ها</div>
 			</wire-link>
-			<wire-link :class="{ active: $root.url === '/bookmarks' }" href="/bookmarks">
+			<wire-link :class="{ active: $store.state.url === '/bookmarks' }" href="/bookmarks">
 				<i class="navheader-icon">bookmarks</i>
 				<div class="navheader-text">نشان‌ها</div>
 			</wire-link>

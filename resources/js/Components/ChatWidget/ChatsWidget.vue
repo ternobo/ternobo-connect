@@ -1,7 +1,7 @@
  <template>
 	<div class="chat-widget" :class="{ open: showList }">
 		<div class="widget-header" @click="showList = !showList">
-			<div class="widget-info">
+			<div class="widget-info" v-if="$store.state.user.profile">
 				<lazy-image class="profile-xsm" img-class="profile-xsm" :src="$store.state.user.profile"></lazy-image>
 				<strong>گفتگو</strong>
 			</div>

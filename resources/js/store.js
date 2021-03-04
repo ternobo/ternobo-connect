@@ -6,7 +6,9 @@ export default store({
     state: {
         search: null,
         chats: [],
-        chats_next_page_url: null
+        chats_next_page_url: null,
+
+        url: window.location.pathname,
     },
     actions: {
         loadChats({ commit }) {
@@ -39,6 +41,10 @@ export default store({
         }
     },
     mutations: {
+        updateUrl(state) {
+            state.url = window.location.pathname;
+        },
+
         // Chats Mutations - Start
         setChats(state, payload) {
             state.chats = payload;

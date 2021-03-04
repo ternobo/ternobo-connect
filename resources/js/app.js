@@ -100,12 +100,14 @@ const vue_app = new Vue({
             isTablet: window.matchMedia("(max-width: 960px)").matches,
             isDesktop: window.matchMedia("(min-width: 961px)").matches,
             layout: App,
-            url: window.location.pathname
         }
-    }
+    },
+    mounted() {
+        this.$store.commit("updateUrl");
+    },
 }).$mount(app);
 window.addEventListener('popstate', () => {
-    vue_app.url = window.location.pathname;
+    vue_app.$store.commit("updateUrl");
 });
 
 let isSocketConnected = false;
@@ -154,11 +156,10 @@ document.addEventListener('ternobo:userloaded', event => {
 });
 
 document.addEventListener('ternobo:navigate', event => {
-    vue_app.url = event.detail.location;
     TProgress.start();
 });
 document.addEventListener("ternobo:loaded", event => {
-    vue_app.url = window.location.pathname;
+    vue_app.$store.commit("updateUrl");
     var el = document.createElement('html');
     el.innerHTML = "<head>" + vue_app.$store.state.shared.SEO + "</head>";
     let title = el.getElementsByTagName("title")[0].text
