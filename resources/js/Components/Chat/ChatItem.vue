@@ -1,10 +1,11 @@
 <template>
-	<div class="chat-item" :class="{ active: selected }">
+	<div class="chat-item" :class="{ active: selected }" @click="createChat">
 		<div class="chat-info">
 			<lazy-image :src="chat ? chat.user.profile : user.profile" class="profile-image"></lazy-image>
 			<div class="d-flex flex-column">
 				<span class="profile-name"> {{ chatTitle }} </span>
-				<span class="last-message" v-html="lastPreview"></span>
+				<loading-spinner v-if="loading" style="height: 16px; width: 16px"></loading-spinner>
+				<span class="last-message" v-if="chat" v-html="lastPreview"></span>
 			</div>
 		</div>
 		<div class="d-flex flex-column align-items-end" v-if="chat">
@@ -16,10 +17,31 @@
 
 <script>
 import LazyImage from "../LazyImage.vue";
+import LoadingSpinner from "../LoadingSpinner.vue";
 export default {
+	methods: {
+		createChat() {
+			if (this.user) {
+				this.loading = true;
+				axios
+					.post("/chats/conversations/create/" + this.user.id)
+					.then((response) => {
+						this.$emit("newConversation", response.data.conversation);
+					})
+					.catch((err) => {
+						console.log(err);
+					})
+					.then(() => {
+						this.loading = false;
+					});
+			}
+		},
+	},
 	data() {
 		return {
 			updated_at: null,
+			loading: false,
+			user: null,
 		};
 	},
 	watch: {
@@ -39,8 +61,15 @@ export default {
 			},
 		},
 	},
+	created() {
+		if (this.connection) {
+			this.user = this.checkUser(this.connection.user.id) ? this.connection.connection : this.connection.user;
+		}
+	},
 	mounted() {
-		this.updated_at = this.time(this.chat.last_message.created_at);
+		if (this.chat) {
+			this.updated_at = this.time(this.chat.last_message.created_at);
+		}
 	},
 	computed: {
 		lastPreview() {
@@ -77,9 +106,10 @@ export default {
 			}
 		},
 	},
-	props: ["chat", "user", "selected"],
+	props: ["chat", "connection", "selected"],
 	components: {
 		LazyImage,
+		LoadingSpinner,
 	},
 };
 </script>

@@ -8,6 +8,9 @@ export default store({
         chats: [],
         chats_next_page_url: null,
 
+        connections: [],
+        connections_next_page_url: null,
+
         url: window.location.pathname,
     },
     actions: {
@@ -15,10 +18,26 @@ export default store({
             return axios
                 .post("/chats")
                 .then((response) => {
-                    let chats = response.data.chats;
-                    commit("setChats", chats.data);
-                    commit("setChatsNextPage", chats.next_page_url)
+                    let data = response.data;
+                    commit("setChats", data.chats.data);
+                    commit("setChatsNextPage", data.chats.next_page_url)
+
+                    commit("setConnections", data.connections.data);
+                    commit("setConnectionsNextPage", data.connections.next_page_url)
+
                 });
+        },
+        loadConnectionsNextPage({ commit, state }) {
+            if (state.connections_next_page_url != null) {
+                let connections = state.connections;
+                return axios
+                    .post(state.connections_next_page_url)
+                    .then((response) => {
+                        connections = connections.concat(response.data.connections.data);
+                        commit("setConnections", data.connections.data);
+                        commit("setConnectionsNextPage", data.connections.next_page_url)
+                    });
+            }
         },
         loadChatsNextPage({ commit, state }) {
             if (state.chats_next_page_url != null) {
@@ -41,6 +60,14 @@ export default store({
         }
     },
     mutations: {
+        setConnections(state, payload) {
+            state.connections = payload;
+        },
+        setConnectionsNextPage(state, payload) {
+            state.connections_next_page_url = payload;
+        },
+
+
         updateUrl(state) {
             state.url = window.location.pathname;
         },

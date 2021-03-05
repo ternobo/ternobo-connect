@@ -326,6 +326,20 @@ class User extends Authenticatable implements Messageable
         return $list;
     }
 
+    public function startConversationWith($user_id)
+    {
+        $members = [
+            (int) parent::getAttribute('id'),
+            (int) $user_id,
+        ];
+        $conversation = Conversation::query()->whereRaw("members = CAST('" . json_encode($members) . "' AS JSON)")->firstOrNew();
+        $conversation->type = count($members) > 2 ? 'group' : 'private';
+        $conversation->created_by = count($members) > 2 ? parent::getAttribute('id') : null;
+        $conversation->members = json_encode($members);
+        $conversation->save();
+        return $conversation;
+    }
+
     public function getWaitingConnectionsIds()
     {
         $connections = Connection::query()

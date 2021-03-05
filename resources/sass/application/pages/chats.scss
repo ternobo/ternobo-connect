@@ -43,7 +43,6 @@
 
     .chats {
         overflow: auto;
-        flex: 1 1 auto;
         @extend .nice-scroll;
 
         .chat-item {
@@ -537,4 +536,14 @@
         font-size: 36px;
         color: $white;
     }
+}
+
+.search-part {
+    padding: 12px;
+    background: $body-bg;
+    color: $grey;
+    width: 100%;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 19px;
 }

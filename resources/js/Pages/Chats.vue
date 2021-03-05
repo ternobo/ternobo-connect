@@ -18,11 +18,13 @@
 				<div class="d-flex justify-content-center w-100" v-if="chats_next_page_url != null" v-reached="loadMoreChats">
 					<loading-spinner></loading-spinner>
 				</div>
-			</div>
-			<div class="chats" v-if="connections.length > 0">
-				<chat-item v-for="(connection, index) in connections" :key="'connections_id_' + connection.id" @click.native="createChat(connection.user.id)" :user.sync="connection.user[index]"></chat-item>
-				<div class="d-flex justify-content-center w-100" v-if="connections_next_page_url != null" v-reached="loadMoreConnections">
-					<loading-spinner></loading-spinner>
+
+				<div class="connections d-flex flex-column" v-if="connections.length > 0">
+					<div class="search-part">شبکه من</div>
+					<chat-item v-for="(connection, index) in connections" :key="'connections_id_' + connection.id" @newConversation="selectChat" :connection.sync="connections[index]"></chat-item>
+					<div class="d-flex justify-content-center w-100" v-if="connections_next_page != null" v-reached="loadMoreConnections">
+						<loading-spinner></loading-spinner>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -24,11 +24,29 @@ class ChatController extends Controller
 
     public function getChats()
     {
-        $conversations = Auth::user()->conversations()->whereHas("messages")->with(["lastMessage"])->withCount(['messages as unread_messages_count' => function ($query) {
-            $query->where("seen", false)->where("sender_id", "!=", Auth::user()->id);
+        $user = Auth::user();
+        $conversations = $user->conversations()->whereHas("messages")->with(["lastMessage"])->withCount(['messages as unread_messages_count' => function ($query) use ($user) {
+            $query->where("seen", false)->where("sender_id", "!=", $user->id);
         }])->orderBy('updated_at', 'desc')->paginate(30);
+
+        $connections = Connection::query()
+            ->with("user")
+            ->with("user.personalPage")
+            ->with("user.personalPage.user")
+
+            ->with("connection")
+            ->with("connection.personalPage")
+            ->with("connection.personalPage.user")
+
+            ->whereRaw("(connection = '$user->id' or user_id = '$user->id')")
+            ->where("accepted", true)
+            ->latest()
+            ->paginate(30);
+        $connections->appends(['connection' => '1']);
+
         return response()->json([
             'result' => true,
+            'connections' => $connections,
             'chats' => $conversations,
         ]);
     }
@@ -58,6 +76,14 @@ class ChatController extends Controller
 
         $user = Auth::user();
         $connections = Connection::query()
+            ->with("user")
+            ->with("user.personalPage")
+            ->with("user.personalPage.user")
+
+            ->with("connection")
+            ->with("connection.personalPage")
+            ->with("connection.personalPage.user")
+
             ->whereRaw("(connection = '$user->id' or user_id = '$user->id')")
             ->where("accepted", true)
             ->whereHas("user", function ($query) use ($search) {

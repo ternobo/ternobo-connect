@@ -23903,7 +23903,6 @@ body {
 
 .chats-list .chats {
   overflow: auto;
-  flex: 1 1 auto;
 }
 
 .chats-list .chats .chat-item {
@@ -24369,6 +24368,16 @@ body {
   height: 36px;
   font-size: 36px;
   color: #FFFF;
+}
+
+.search-part {
+  padding: 12px;
+  background: #F5F5F5;
+  color: #757575;
+  width: 100%;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 19px;
 }
 
 .chat-widget-container {

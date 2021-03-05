@@ -15,6 +15,22 @@ export default {
                 this.loadingNextChats = false;
             });
         },
+        loadMoreConnections() {
+            this.connections_loading = true;
+            axios
+                .post(this.connections_next_page, { q: this.searchInput })
+                .then((response) => {
+                    let data = response.data;
+                    this.connections = data.connections.data;
+                    this.connections_next_page = data.connections.next_page_url;
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .then(() => {
+                    this.connections_loading = false;
+                });
+        },
         onNewMessage(event) {
             let message = event.detail.message;
             if (this.selectedChat != null && message.conversation_id == this.selectedChat.id) {
@@ -49,16 +65,17 @@ export default {
     },
     watch: {
         searchInput() {
+            this.searchLoading = true;
             clearTimeout(this.searchTimeout);
-            this.searchTimeout = setTimeout(() => {
-                if (this.searchInput != null && this.searchInput.length > 0) {
-                    this.searchLoading = true;
+            if (this.searchInput != null && this.searchInput.length > 0) {
+                this.searchTimeout = setTimeout(() => {
                     axios
                         .post("/chats/search", { q: this.searchInput })
                         .then((response) => {
                             let data = response.data;
                             this.$store.commit("setChats", data.conversations.data);
-                            this.connections = data.connections;
+                            this.connections = data.connections.data;
+                            this.connections_next_page = data.connections.next_page_url;
                         })
                         .catch((err) => {
                             console.log(err);
@@ -66,15 +83,20 @@ export default {
                         .then(() => {
                             this.searchLoading = false;
                         });
-                } else {
-                    this.loadChats();
-                }
-            }, 1000);
+
+                }, 1000);
+            } else {
+                this.connections = [];
+                this.connections_next_page = null;
+                this.loadChats();
+            }
         },
     },
     data() {
         return {
             connections: [],
+            connections_next_page: null,
+            connections_loading: null,
 
             loadingNextChats: false,
 

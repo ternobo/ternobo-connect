@@ -14,9 +14,12 @@ class Conversation extends TenoboChatConversation
                 $data['user'] = $data['members'][0] == Auth::user()->id ?
                 User::query()->where("active", true)->where("id", $data['members'][1])->first()
                 : User::query()->where("active", true)->where("id", $data['members'][0])->first();
-                if ($data['title'] == null) {
-                    $data['showItem'] = false;
+                if (isset($data['title'])) {
+                    if ($data['title'] == null) {
+                        $data['showItem'] = false;
+                    }
                 }
+
             }
         }
         return $data;
