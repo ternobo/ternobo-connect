@@ -43,7 +43,7 @@ class AcceptConnections extends Command
             ->whereHas("user", function ($query) {
                 $query->where("active", true);
             })
-            ->whereRaw("(connection = '$user_id' or user_id = '$user_id')")
+            ->whereRaw("(connection_id = '$user_id' or user_id = '$user_id')")
             ->where("accepted", false)
             ->update([
                 'accepted' => true,

@@ -6,6 +6,7 @@ use App\FileManager\MediaConverter;
 use App\Http\Controllers\Controller;
 use App\Models\Connection;
 use App\Models\Conversation;
+use App\Models\User;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +39,7 @@ class ChatController extends Controller
             ->with("connection.personalPage")
             ->with("connection.personalPage.user")
 
-            ->whereRaw("(connection = '$user->id' or user_id = '$user->id')")
+            ->whereRaw("(connection_id = '$user->id' or user_id = '$user->id')")
             ->where("accepted", true)
             ->latest()
             ->paginate(30);
@@ -54,6 +55,7 @@ class ChatController extends Controller
     public function chat($id)
     {
         $conversation = Conversation::query()->findOrFail($id);
+        // dd(json_encode($conversation->toArray()));
         $messages = $conversation->messages()->with("sender")->paginate(50);
 
         Message::query()->where("seen", false)->where("conversation_id", $conversation->id)->update(['seen' => true]);
@@ -61,7 +63,7 @@ class ChatController extends Controller
         return response()->json([
             'result' => true,
             'messages' => $messages,
-            'conversation' => $conversation,
+            'conversation' => $conversation->toArray(),
         ]);
     }
 
@@ -84,7 +86,7 @@ class ChatController extends Controller
             ->with("connection.personalPage")
             ->with("connection.personalPage.user")
 
-            ->whereRaw("(connection = '$user->id' or user_id = '$user->id')")
+            ->whereRaw("(connection_id = '$user->id' or user_id = '$user->id')")
             ->where("accepted", true)
             ->whereHas("user", function ($query) use ($search) {
                 $query->where('name', 'like', "%{$search}%");
@@ -236,13 +238,27 @@ class ChatController extends Controller
                     'filesize' => $mediaFile->getSize(),
                 ]));
                 break;
+            case "contact":
+                $contact_id = $request->contact_id;
+                $contact = User::query()->findOrFail($contact_id);
+
+                $message = $user->sendMessage($conversation_id, "meta", null, null, json_encode([
+                    "type" => "contact",
+                    "user" => [
+                        "id" => $contact->id,
+                        "name" => $contact->first_name . " " . $contact->last_name,
+                        "profile" => $contact->profile,
+                        "username" => $contact->username,
+                        "short_bio" => $contact->short_bio,
+                    ],
+                ]));
+                break;
         }
 
         return response()->json([
             'result' => $message != null,
             'message' => $message,
         ]);
-
     }
 
 }

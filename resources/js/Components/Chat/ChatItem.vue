@@ -4,8 +4,10 @@
 			<lazy-image :src="chat ? chat.user.profile : user.profile" class="profile-image"></lazy-image>
 			<div class="d-flex flex-column">
 				<span class="profile-name"> {{ chatTitle }} </span>
+
 				<loading-spinner v-if="loading" style="height: 16px; width: 16px"></loading-spinner>
 				<span class="last-message" v-if="chat" v-html="lastPreview"></span>
+				<span class="last-message" v-else>{{ user.short_bio }}</span>
 			</div>
 		</div>
 		<div class="d-flex flex-column align-items-end" v-if="chat">
@@ -21,7 +23,7 @@ import LoadingSpinner from "../LoadingSpinner.vue";
 export default {
 	methods: {
 		createChat() {
-			if (this.user) {
+			if (this.user && this.newConversation) {
 				this.loading = true;
 				axios
 					.post("/chats/conversations/create/" + this.user.id)
@@ -106,7 +108,17 @@ export default {
 			}
 		},
 	},
-	props: ["chat", "connection", "selected"],
+	props: {
+		chat: {},
+		connection: {},
+		selected: {},
+		newConversation: {
+			type: Boolean,
+			default: true,
+			required: false,
+		},
+	},
+
 	components: {
 		LazyImage,
 		LoadingSpinner,

@@ -11,7 +11,8 @@
         padding-left: 24px;
     }
 
-    i {
+    i,
+    .actions {
         z-index: 1000;
         color: $grey;
         position: absolute;
@@ -28,5 +29,15 @@
 
     i:hover {
         color: $dark;
+    }
+}
+
+.search-input-rounded {
+    @extend .input-group-icon;
+
+    .form-control {
+        background: $fixed-elements;
+        border-radius: 16px;
+        border: none;
     }
 }

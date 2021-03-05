@@ -45,56 +45,6 @@
         overflow: auto;
         @extend .nice-scroll;
 
-        .chat-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 20px;
-            cursor: pointer;
-
-            .chat-info {
-                display: flex;
-
-                .profile-image {
-                    width: 44px;
-                    height: 44px;
-                    margin-left: 16px;
-                    margin-bottom: 0;
-
-                    img {
-                        width: 44px;
-                        height: 44px;
-                        border-radius: 50%;
-                    }
-                }
-
-                .profile-name {
-                    color: $dark;
-                    font-weight: 600;
-                    font-size: 14px;
-                    line-height: 22px;
-                    margin-bottom: 4px;
-                }
-
-                .last-message {
-                    font-size: 14px;
-                    line-height: 21px;
-                    color: $grey;
-                }
-
-            }
-
-            .update-time {
-                font-size: 12px;
-                line-height: 18px;
-                color: $grey;
-            }
-
-            &:hover,
-            &.active {
-                background: $body-bg;
-            }
-        }
-
         .unread-badge {
             background: $action;
             padding: 4px;
@@ -114,6 +64,56 @@
             }
         }
 
+    }
+}
+
+.chat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 20px;
+    cursor: pointer;
+
+    .chat-info {
+        display: flex;
+
+        .profile-image {
+            width: 44px;
+            height: 44px;
+            margin-left: 16px;
+            margin-bottom: 0;
+
+            img {
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+            }
+        }
+
+        .profile-name {
+            color: $dark;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 22px;
+            margin-bottom: 4px;
+        }
+
+        .last-message {
+            font-size: 14px;
+            line-height: 21px;
+            color: $grey;
+        }
+
+    }
+
+    .update-time {
+        font-size: 12px;
+        line-height: 18px;
+        color: $grey;
+    }
+
+    &:hover,
+    &.active {
+        background: $body-bg;
     }
 }
 
@@ -546,4 +546,57 @@
     font-weight: 600;
     font-size: 12px;
     line-height: 19px;
+}
+
+.contact-message {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: $fixed-elements;
+    padding: 8px 12px;
+
+    .contactinfo {
+        display: flex;
+        margin-left: 40px;
+    }
+
+    figure.profile {
+        margin-bottom: 0;
+        margin-left: 12px;
+    }
+
+    .profile,
+    .profile img {
+        max-width: 36px;
+        max-height: 36px;
+        min-width: 36px;
+        min-height: 36px;
+        border-radius: 12px;
+    }
+
+    strong {
+        color: $text-color;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 19px;
+    }
+
+    .subtitle {
+        font-size: 10px;
+        line-height: 15px;
+        text-align: right;
+        color: $grey;
+    }
+
+    i.showprofile {
+        color: $grey;
+    }
+
+
+}
+
+.connections-list {
+    max-height: 450px;
+    overflow: auto;
+    @extend .nice-scroll;
 }

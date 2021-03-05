@@ -69,6 +69,10 @@ export default {
 					formData.append("media", this.message.media[0]);
 					formData.append("type", "document");
 					break;
+				case "meta":
+					formData.append("contact_id", this.message.contact.user.id);
+					formData.append("type", "contact");
+					break;
 			}
 			axios
 				.post("/chats/send-message", formData)
@@ -113,6 +117,9 @@ export default {
 				break;
 			case "document":
 				this.type = () => import("./DocuementMessage");
+				break;
+			case "meta":
+				this.type = () => import("./ContactShareMessage");
 				break;
 		}
 	},

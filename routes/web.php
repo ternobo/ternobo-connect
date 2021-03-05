@@ -145,6 +145,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
             // Connections
             Route::get("/connections", "ConnectionsController@index");
+            Route::post("/connections", "ConnectionsController@getConnections");
             Route::post("/connection/accept", "ConnectionsController@acceptRequest");
             Route::post("/connection/delete", "ConnectionsController@removeConnectionRequest");
             Route::post("/connect/{user_id}", "ConnectionsController@connectionRequest");

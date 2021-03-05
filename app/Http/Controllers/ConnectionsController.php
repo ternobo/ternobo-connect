@@ -19,6 +19,7 @@ class ConnectionsController extends Controller
         SEOTools::setTitle("شبکه من");
         $user = Auth::user();
         $accpeted_connections = Connection::query()
+            ->distinct()
             ->with("user")
             ->with("user.personalPage")
             ->with("user.personalPage.user")
@@ -30,7 +31,7 @@ class ConnectionsController extends Controller
             ->whereHas("user", function ($query) {
                 $query->where("active", true);
             })
-            ->whereRaw("(connection = '$user->id' or user_id = '$user->id')")
+            ->whereRaw("(connection_id = '$user->id' or user_id = '$user->id')")
             ->where("accepted", true)
             ->latest();
 
@@ -45,6 +46,9 @@ class ConnectionsController extends Controller
                 ->whereHas("user", function ($query) use ($request) {
                     $query->where('name', 'like', "%{$request->q}%");
                 })
+                ->orWhereHas("connection", function ($query) use ($request) {
+                    $query->where('name', 'like', "%{$request->q}%");
+                })
                 ->paginate(20)
                 ->appends("q", $request->q);
         } else {
@@ -56,7 +60,7 @@ class ConnectionsController extends Controller
             ->update(['seen' => true]);
 
         // counts
-        $connections_count = count(Connection::query()->where("accepted", true)->whereRaw("(connection = '$user->id' or user_id = '$user->id')")->get());
+        $connections_count = count(Connection::query()->where("accepted", true)->whereRaw("(connection_id = '$user->id' or user_id = '$user->id')")->get());
         $followers_count = count(Following::query()->where("following", Auth::user()->id)->get());
         $following_count = count(Following::query()->where("user_id", Auth::user()->id)->get());
 
@@ -67,6 +71,42 @@ class ConnectionsController extends Controller
             "following_count" => $following_count,
             "followers_count" => $followers_count,
         ]);
+    }
+
+    public function getConnections(Request $request)
+    {
+        $user = Auth::user();
+        $accpeted_connections = Connection::query()
+            ->distinct()
+            ->with("user")
+            ->with("connection")
+            ->whereHas("user", function ($query) {
+                $query->where("active", true);
+            })
+            ->whereRaw("(connection_id = '$user->id' or user_id = '$user->id')")
+            ->where("accepted", true)
+            ->latest();
+
+        if ($request->filled("q")) {
+            $accpeted_connections = $accpeted_connections
+                ->where(function ($query) use ($request) {
+                    $query->whereHas("user", function ($query) use ($request) {
+                        $query->where('name', 'like', "%{$request->q}%");
+                    })
+                        ->orWhereHas("connection", function ($query) use ($request) {
+                            $query->where('name', 'like', "%{$request->q}%");
+                        });
+                })
+                ->paginate(20)
+                ->appends("q", $request->q);
+        } else {
+            $accpeted_connections = $accpeted_connections->paginate(20);
+        }
+
+        return response()->json([
+            "connections" => $accpeted_connections,
+        ]);
+
     }
 
     public function followings(Request $request)
@@ -94,7 +134,7 @@ class ConnectionsController extends Controller
         }
 
         // counts
-        $connections_count = count(Connection::query()->where("accepted", true)->whereRaw("(connection = '$user->id' or user_id = '$user->id')")->get());
+        $connections_count = count(Connection::query()->where("accepted", true)->whereRaw("(connection_id = '$user->id' or user_id = '$user->id')")->get());
         $followers_count = count(Following::query()->where("following", Auth::user()->id)->get());
         $following_count = count(Following::query()->where("user_id", Auth::user()->id)->get());
 
@@ -134,7 +174,7 @@ class ConnectionsController extends Controller
             ->paginate(5);
 
         // counts
-        $connections_count = count(Connection::query()->where("accepted", true)->whereRaw("(connection = '$user->id' or user_id = '$user->id')")->get());
+        $connections_count = count(Connection::query()->where("accepted", true)->whereRaw("(connection_id = '$user->id' or user_id = '$user->id')")->get());
         $followers_count = count(Following::query()->where("following", Auth::user()->id)->get());
         $following_count = count(Following::query()->where("user_id", Auth::user()->id)->get());
 
@@ -167,14 +207,14 @@ class ConnectionsController extends Controller
 
     public function connectionRequest($user_id)
     {
-        $connection = Connection::query()->where("user_id", Auth::user()->id)->where("connection", Auth::user()->id)->first();
+        $connection_id = Connection::query()->where("user_id", Auth::user()->id)->where("connection", Auth::user()->id)->first();
         $connectionExist = ($connection instanceof Connection);
         if ($connectionExist) {
             return response()->json(array("result" => true, "connection" => $connection->id));
         }
         $followRow = Connection::query()->where("user_id", $user_id)->where("connection", Auth::user()->id)->firstOrNew();
         $followRow->user_id = $user_id;
-        $followRow->connection = Auth::user()->id;
+        $followRow->connection_id = Auth::user()->id;
         $followRow->accepted = false;
         return response()->json(array("result" => $followRow->save(), "connection" => $followRow->id));
     }

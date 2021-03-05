@@ -245,13 +245,13 @@ class User extends Authenticatable implements Messageable
 
     public function isConnected($id)
     {
-        $connection = Connection::query()->whereRaw("(user_id = '$this->id' AND connection = '$id') OR (user_id = '$id' AND connection = '$this->id')")->first();
+        $connection = Connection::query()->whereRaw("(user_id = '$this->id' AND connection_id = '$id') OR (user_id = '$id' AND connection_id = '$this->id')")->first();
         return $connection;
     }
 
     public function isAcceptedConnection($id)
     {
-        $connection = Connection::query()->whereRaw("(user_id = '$this->id' AND connection = '$id') OR (user_id = '$id' AND connection = '$this->id')")->first();
+        $connection = Connection::query()->whereRaw("(user_id = '$this->id' AND connection_id = '$id') OR (user_id = '$id' AND connection_id = '$this->id')")->first();
         return ($connection instanceof Connection) ? $connection->accepted : false;
     }
 
@@ -300,7 +300,7 @@ class User extends Authenticatable implements Messageable
     public function getConnections()
     {
         return Connection::query()
-            ->whereRaw("(connection = '$this->id' or user_id = '$this->id')")
+            ->whereRaw("(connection_id = '$this->id' or user_id = '$this->id')")
             ->where("accepted", true)
             ->get()
             ->toArray();
@@ -311,7 +311,7 @@ class User extends Authenticatable implements Messageable
         $connections = Connection::query()
             ->with("connection")
             ->with("user")
-            ->whereRaw("(connection = '$this->id' or user_id = '$this->id')")
+            ->whereRaw("(connection_id = '$this->id' or user_id = '$this->id')")
             ->where("accepted", true)
             ->get();
         $list = array();
@@ -345,7 +345,7 @@ class User extends Authenticatable implements Messageable
         $connections = Connection::query()
             ->with("connection")
             ->with("user")
-            ->whereRaw("(connection = '$this->id' or user_id = '$this->id')")
+            ->whereRaw("(connection_id = '$this->id' or user_id = '$this->id')")
             ->where("accepted", false)
             ->get();
         $list = array();

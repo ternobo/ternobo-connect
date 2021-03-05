@@ -65,10 +65,10 @@ export default {
     },
     watch: {
         searchInput() {
-            this.searchLoading = true;
             clearTimeout(this.searchTimeout);
             if (this.searchInput != null && this.searchInput.length > 0) {
                 this.searchTimeout = setTimeout(() => {
+                    this.searchLoading = true;
                     axios
                         .post("/chats/search", { q: this.searchInput })
                         .then((response) => {

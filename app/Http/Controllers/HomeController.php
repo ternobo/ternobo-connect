@@ -38,7 +38,7 @@ class HomeController extends Controller
             ->select(array("posts.*", "content_seens.created_at as seen_at"))
             ->whereRaw("(posts.page_id IN (select following from followings WHERE user_id = '" . Auth::user()->id . "' ) or `posts`.`user_id` = '" . Auth::user()->id . "')")
             ->whereRaw("IF(posts.show = 'private' AND (NOT EXISTS(SELECT * FROM connections where "
-                . "(connection = '" . Auth::user()->id . "' and user_id=posts.user_id)"
+                . "(connection_id = '" . Auth::user()->id . "' and user_id=posts.user_id)"
                 . "OR "
                 . "(user_id = '" . Auth::user()->id . "' and connection=posts.user_id)"
                 . ")"

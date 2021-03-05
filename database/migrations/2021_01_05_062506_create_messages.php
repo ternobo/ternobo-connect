@@ -17,7 +17,7 @@ class CreateMessages extends Migration
             $table->id();
             $table->bigInteger("sender");
             $table->bigInteger("conversation_id");
-            $table->enum("type", ["text", "video", "image", "audio", "voice", "document"]);
+            $table->enum("type", ["text", "video", "image", "audio", "voice", "document", "meta"]);
             $table->text("text")->nullable();
             $table->json("media")->nullable();
             $table->boolean("seen")->default(false);

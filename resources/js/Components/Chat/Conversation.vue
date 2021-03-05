@@ -1,5 +1,6 @@
 <template>
 	<div class="conversation-container">
+		<user-share-modal :show.sync="showShareUser" :user="user"></user-share-modal>
 		<send-file-modal v-if="selectedFile != null" :file="selectedFile" @send="sendMessage" @canceled="selectedFile = null" :caption.sync="messageText" :show.sync="showFileModal"></send-file-modal>
 		<div class="conversation-header" v-if="!hideHeader">
 			<div class="pageinfo clickable">
@@ -15,6 +16,9 @@
 						<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
 					</template>
 					<wire-link role="presentation" as="li" :href="'/' + profile"><strong class="dropdown-item clickable" role="menuitem">مشاهده پروفایل</strong></wire-link>
+					<li role="presentation"><strong class="dropdown-item clickable" role="menuitem">غیرفعال کردن اطلاعیه</strong></li>
+					<li role="presentation" @click="showShareUser = true"><strong class="dropdown-item clickable" role="menuitem">اشتراک گذاری کاربر</strong></li>
+					<li role="presentation"><strong class="dropdown-item clickable" role="menuitem">خروجی گرفتن از گفتگو</strong></li>
 				</b-dropdown>
 			</div>
 		</div>
@@ -61,6 +65,7 @@ import VoicePreview from "./VoicePreview.vue";
 import { v4 as uuidv4 } from "uuid";
 import SendFileModal from "./SendFileModal.vue";
 import TextareaAutosize from "../inputs/TextareaAutosize.vue";
+import UserShareModal from "./UserShareModal.vue";
 
 export default {
 	watch: {
@@ -71,7 +76,7 @@ export default {
 			this.loadMessages();
 		},
 	},
-	components: { LoadingSpinner, CountupTimer, VoicePreview, Message, SendFileModal, TextareaAutosize },
+	components: { LoadingSpinner, CountupTimer, VoicePreview, Message, SendFileModal, TextareaAutosize, UserShareModal },
 	computed: {
 		voiceUrl() {
 			return URL.createObjectURL(this.voiceData);
@@ -208,6 +213,7 @@ export default {
 					.then((response) => {
 						this.messages = response.data.messages.data;
 						this.next_page_url = response.data.messages.next_page_url;
+						this.user = response.data.conversation.user;
 					})
 					.catch((err) => {
 						if (axios.isCancel(err)) {
@@ -258,6 +264,8 @@ export default {
 	},
 	data() {
 		return {
+			showShareUser: false,
+
 			request: null,
 
 			conversation_id: null,
@@ -277,6 +285,8 @@ export default {
 
 			messages: [],
 			next_page_url: null,
+
+			user: null,
 		};
 	},
 	props: ["chatId", "userId", "title", "subtitle", "profile", "hideHeader"],

@@ -353,7 +353,7 @@ class Page extends Model
             "       FROM  " .
             "           connections  " .
             "       WHERE  " .
-            "           connections.user_id = $userA OR connections.connection = $userA  " .
+            "           connections.user_id = $userA OR connections.connection_id = $userA  " .
             "   ) AS UserAConnetions " .
             "   INNER JOIN(  " .
             "       SELECT  " .
@@ -361,13 +361,13 @@ class Page extends Model
             "       FROM  " .
             "           connections  " .
             "       WHERE  " .
-            "           connections.user_id = $usertB OR connections.connection = $usertB  " .
+            "           connections.user_id = $usertB OR connections.connection_id = $usertB  " .
             "   ) AS UserBConnetions  " .
             "   ON  " .
             "       (  " .
-            "           UserBConnetions.user_id = UserAConnetions.user_id OR UserAConnetions.connection = UserBConnetions.connection OR UserBConnetions.user_id = UserAConnetions.connection OR UserAConnetions.user_id = UserBConnetions.connection  " .
+            "           UserBConnetions.user_id = UserAConnetions.user_id OR UserAConnetions.connection_id = UserBConnetions.connection OR UserBConnetions.user_id = UserAConnetions.connection OR UserAConnetions.user_id = UserBConnetions.connection  " .
             "      )  "
-            . " INNER JOIN users on (UserBConnetions.user_id = users.id or UserBConnetions.connection = users.id)"
+            . " INNER JOIN users on (UserBConnetions.user_id = users.id or UserBConnetions.connection_id = users.id)"
             . "where users.id != $this->user_id and users.id != $userA and users.id != $usertB"
         );
         foreach ($connections as $connection) {
