@@ -17,9 +17,9 @@
 						<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
 					</template>
 					<wire-link role="presentation" as="li" :href="'/' + profile"><strong class="dropdown-item clickable" role="menuitem">مشاهده پروفایل</strong></wire-link>
-					<li role="presentation"><strong class="dropdown-item clickable" role="menuitem">غیرفعال کردن اطلاعیه</strong></li>
+					<b-dropdown-item @click="disableNotification">غیرفعال کردن اطلاعیه</b-dropdown-item>
 					<li role="presentation" @click="showShareUser = true"><strong class="dropdown-item clickable" role="menuitem">اشتراک گذاری کاربر</strong></li>
-					<li role="presentation"><strong class="dropdown-item clickable" role="menuitem">خروجی گرفتن از گفتگو</strong></li>
+					<!-- <li role="presentation"><strong class="dropdown-item clickable" role="menuitem">خروجی گرفتن از گفتگو</strong></li> -->
 				</b-dropdown>
 			</div>
 		</div>
@@ -91,6 +91,13 @@ export default {
 		},
 	},
 	methods: {
+		disableNotification() {
+			axios.post("/chats/conversations/" + this.chatId + "/mute").then((response) => {
+				if (response.data.result) {
+					this.$store.dispatch("loadChats");
+				}
+			});
+		},
 		keydownHandle(e) {
 			if (e.key == "Enter" && !e.shiftKey) {
 				// prevent default behavior

@@ -8,7 +8,7 @@
     height: 68px;
 
     .chat-widget {
-        min-width: 320px;
+        min-width: 360px;
         background: $white;
         box-shadow: 0px -5px 40px rgba(0, 0, 0, 0.05);
         overflow: hidden;
@@ -74,7 +74,7 @@
 
 
 .conversation-container.widget {
-    max-width: 320px;
+    max-width: 360px;
 
     .message-container {
         max-width: 100%;

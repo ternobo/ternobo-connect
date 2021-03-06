@@ -138,10 +138,14 @@ class ChatController extends Controller
         ]);
     }
 
-    private function messageMediaMeta($file)
+    public function muteChat($id)
     {
-
+        $conversation = Conversation::query()->findOrFail($id);
+        return response()->json([
+            "result" => $conversation->mute(),
+        ]);
     }
+
     private function mediaMeta($file, $type, $conversation)
     {
         return [
