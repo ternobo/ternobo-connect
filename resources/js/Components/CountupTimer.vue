@@ -13,9 +13,9 @@ export default {
 	},
 	methods: {
 		setTime() {
-			++totalSeconds;
-			secondsLabel.innerHTML = pad(totalSeconds % 60);
-			minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+			this.totalSeconds++;
+			this.secondsLabel.innerHTML = this.pad(this.totalSeconds % 60);
+			this.minutesLabel.innerHTML = this.pad(parseInt(this.totalSeconds / 60));
 		},
 
 		pad(val) {

@@ -96,6 +96,9 @@ export default {
 					case "image":
 						preview = "<i class='material-icons font-18'>image</i> تصویر";
 						break;
+					case "meta":
+						preview = "<i class='material-icons font-18'>person</i> کاربر";
+						break;
 				}
 			}
 			return preview;

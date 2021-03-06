@@ -168,6 +168,10 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             });
             // End Page Edit
 
+            Route::prefix("/media")->group(function () {
+                Route::post("/get", "Chats\ChatController@getMedia");
+            });
+
             // Start Comments
             Route::any("/comments/{comment:id}/replies", "CommentController@replies");
             Route::resource('posts.comments', "CommentController");

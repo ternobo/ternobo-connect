@@ -3,7 +3,7 @@
 		<div class="contactinfo">
 			<lazy-image class="profile" img-class="profile" :src="message.meta.user.profile"></lazy-image>
 			<div class="d-flex flex-column">
-				<stong>{{ message.meta.user.name }}</stong>
+				<strong>{{ message.meta.user.name }}</strong>
 				<span class="subtitle">{{ message.meta.user.short_bio }}</span>
 			</div>
 		</div>

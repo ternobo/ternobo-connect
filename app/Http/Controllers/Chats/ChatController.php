@@ -6,6 +6,7 @@ use App\FileManager\MediaConverter;
 use App\Http\Controllers\Controller;
 use App\Models\Connection;
 use App\Models\Conversation;
+use App\Models\Media;
 use App\Models\User;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
@@ -112,6 +113,46 @@ class ChatController extends Controller
         ]);
     }
 
+    public function getMedia(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'chat_id' => 'required',
+            'type' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'result' => false,
+                'errors' => $validator->errors(),
+            ]);
+        }
+        $chat_id = $request->chat_id;
+        $type = $request->type;
+        $media = Media::query()->where("type", "chat")
+            ->where("meta->chat_id", $chat_id)
+            ->whereJsonContains("meta->access", Auth::user()->id)
+            ->where("meta->type", $type)
+            ->paginate(30);
+        return response()->json([
+            'result' => true,
+            'media' => $media,
+        ]);
+    }
+
+    private function messageMediaMeta($file)
+    {
+
+    }
+    private function mediaMeta($file, $type, $conversation)
+    {
+        return [
+            "mime" => $file->getClientMimeType(),
+            "type" => $type,
+            'access' => json_decode($conversation->members),
+            'chat_id' => $conversation->id,
+            'filesize' => $file->getSize(),
+        ];
+    }
+
     public function sendMessage(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -146,12 +187,7 @@ class ChatController extends Controller
                     'filename' => $filename,
                     'access' => 'private',
                     'type' => 'chat',
-                    'meta' => json_encode([
-                        "type" => "voice",
-                        'access' => json_decode($conversation->members),
-                        'chat_id' => $conversation_id,
-                        'filesize' => $mediaFile->getSize(),
-                    ]),
+                    'meta' => $this->mediaMeta($voiceFile, "voice", $conversation),
                 ]);
                 $message = $user->sendMessage($conversation_id, "voice", $text, $filename);
                 break;
@@ -166,12 +202,7 @@ class ChatController extends Controller
                     'filename' => $filename,
                     'access' => 'private',
                     'type' => 'chat',
-                    'meta' => json_encode([
-                        "type" => "media",
-                        'access' => json_decode($conversation->members),
-                        'chat_id' => $conversation_id,
-                        'filesize' => $mediaFile->getSize(),
-                    ]),
+                    'meta' => $this->mediaMeta($mediaFile, "media", $conversation),
                 ]);
                 $message = $user->sendMessage($conversation_id, "video", $text, $filename, json_encode([
                     'filename' => $mediaFile->getClientOriginalName(),
@@ -186,12 +217,7 @@ class ChatController extends Controller
                     'filename' => $filename,
                     'access' => 'private',
                     'type' => 'chat',
-                    'meta' => json_encode([
-                        "type" => "media",
-                        'access' => json_decode($conversation->members),
-                        'chat_id' => $conversation_id,
-                        'filesize' => $mediaFile->getSize(),
-                    ]),
+                    'meta' => $this->mediaMeta($mediaFile, "media", $conversation),
                 ]);
                 $message = $user->sendMessage($conversation_id, "image", $text, $filename, json_encode([
                     'filename' => $mediaFile->getClientOriginalName(),
@@ -206,12 +232,7 @@ class ChatController extends Controller
                     'filename' => $filename,
                     'access' => 'private',
                     'type' => 'chat',
-                    'meta' => json_encode([
-                        "type" => "media",
-                        'access' => json_decode($conversation->members),
-                        'chat_id' => $conversation_id,
-                        'filesize' => $mediaFile->getSize(),
-                    ]),
+                    'meta' => $this->mediaMeta($mediaFile, "media", $conversation),
                 ]);
                 $message = $user->sendMessage($conversation_id, "audio", $text, $filename, json_encode([
                     'filename' => $mediaFile->getClientOriginalName(),
@@ -226,12 +247,7 @@ class ChatController extends Controller
                     'filename' => $filename,
                     'access' => 'private',
                     'type' => 'chat',
-                    'meta' => json_encode([
-                        "type" => "document",
-                        'access' => json_decode($conversation->members),
-                        'chat_id' => $conversation_id,
-                        'filesize' => $mediaFile->getSize(),
-                    ]),
+                    'meta' => $this->mediaMeta($mediaFile, "document", $conversation),
                 ]);
                 $message = $user->sendMessage($conversation_id, "document", $text, $filename, json_encode([
                     'filename' => $mediaFile->getClientOriginalName(),

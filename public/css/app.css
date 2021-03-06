@@ -23894,7 +23894,7 @@ body {
 
 .chat-container .conversation-container .conversation-messages {
   flex: 1 1 auto;
-  max-height: calc(100% - 137px);
+  max-height: calc(100% - 70px);
 }
 
 .chats-list {
@@ -23987,11 +23987,6 @@ body {
   overflow: hidden;
 }
 
-.conversation-container .conversation-messages {
-  flex: 1 1 auto;
-  max-height: calc(100% - 137px);
-}
-
 .conversation-container > .conversation-header {
   display: flex;
   align-items: center;
@@ -24015,7 +24010,19 @@ body {
   color: #757575;
 }
 
-.conversation-container > .conversation-footer {
+.conversation-container .conversation-chat-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  max-height: calc(100% - 70px);
+}
+
+.conversation-container .conversation-chat-container > .conversation-messages {
+  flex: 1 1 auto;
+  max-height: calc(100% - 70px);
+}
+
+.conversation-container .conversation-chat-container > .conversation-footer {
   color: #757575;
   display: flex;
   align-items: center;
@@ -24025,7 +24032,7 @@ body {
   padding: 12px 20px;
 }
 
-.conversation-container > .conversation-footer input {
+.conversation-container .conversation-chat-container > .conversation-footer input {
   color: #424242;
 }
 
@@ -24326,7 +24333,7 @@ body {
   overflow: auto;
   max-height: 100%;
   height: 100%;
-  padding: 48px;
+  padding: 0 48px;
 }
 
 .media-message {
@@ -24436,6 +24443,64 @@ body {
 .connections-list {
   max-height: 450px;
   overflow: auto;
+}
+
+.media-viewer {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.media-viewer .document-list {
+  padding: 12px;
+}
+
+.media-viewer .media-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  padding: 12px;
+  gap: 12px;
+}
+
+.media-viewer .media-list img,
+.media-viewer .media-list video {
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 100%;
+  height: 300px;
+}
+
+.media-viewer .media-list .media {
+  box-shadow: 0 1rem 40px rgba(0, 0, 0, 0.02);
+}
+
+.media-viewer .media-list.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.media-viewer .filters {
+  display: flex;
+  align-items: center;
+  padding: 16px 12px;
+}
+
+.media-viewer .filters .filter {
+  margin-left: 12px;
+  background: #F5F5F5;
+  padding: 4px 8px;
+  border-radius: 10px;
+  color: #757575;
+}
+
+.media-viewer .filters .filter.active {
+  color: #191919;
+}
+
+.media-viewer .filters .filter i {
+  color: #757575;
 }
 
 .chat-widget-container {

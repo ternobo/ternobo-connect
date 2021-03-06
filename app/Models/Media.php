@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Media extends Model
 {
+
+    protected $casts = [
+        'meta' => 'array',
+    ];
+
     protected $fillable = [
         'name',
         'filename',

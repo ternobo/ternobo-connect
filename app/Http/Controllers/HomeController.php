@@ -40,7 +40,7 @@ class HomeController extends Controller
             ->whereRaw("IF(posts.show = 'private' AND (NOT EXISTS(SELECT * FROM connections where "
                 . "(connection_id = '" . Auth::user()->id . "' and user_id=posts.user_id)"
                 . "OR "
-                . "(user_id = '" . Auth::user()->id . "' and connection=posts.user_id)"
+                . "(user_id = '" . Auth::user()->id . "' and connection_id = posts.user_id)"
                 . ")"
                 . ")"
                 . ",'TRUE','FALSE') = 'FALSE'")

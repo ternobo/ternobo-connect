@@ -123,8 +123,10 @@ export default {
 					axios
 						.post("/chats/send-message", formData)
 						.then((response) => {
-							this.$store.dispatch("loadChats");
-							this.$emit("update:show", false);
+							this.$store.dispatch("loadChats").then(() => {
+								this.sendLoading = false;
+								this.$emit("update:show", false);
+							});
 						})
 						.catch((err) => {
 							console.log(err);

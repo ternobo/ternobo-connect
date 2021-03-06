@@ -3,7 +3,7 @@
 		<user-share-modal :show.sync="showShareUser" :user="user"></user-share-modal>
 		<send-file-modal v-if="selectedFile != null" :file="selectedFile" @send="sendMessage" @canceled="selectedFile = null" :caption.sync="messageText" :show.sync="showFileModal"></send-file-modal>
 		<div class="conversation-header" v-if="!hideHeader">
-			<div class="pageinfo clickable">
+			<div class="pageinfo clickable" @click="showMedia = true">
 				<lazy-image :src="profile" class="profile-sm mb-0 ml-2" img-class="profile-sm" />
 				<div class="d-flex flex-column">
 					<strong class="">{{ title }}</strong>
@@ -11,7 +11,8 @@
 				</div>
 			</div>
 			<div>
-				<b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
+				<i v-if="showMedia" class="material-icons clickable" @click="showMedia = false">close</i>
+				<b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret v-else>
 					<template v-slot:button-content>
 						<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
 					</template>
@@ -22,37 +23,40 @@
 				</b-dropdown>
 			</div>
 		</div>
-		<div class="conversation-messages" :class="{ 'd-flex justify-content-center aling-items-center': error || loading }">
-			<div class="d-flex w-100 flex-column align-items-center justify-content-center" v-if="error || loading">
-				<loading-spinner v-if="loading"></loading-spinner>
-				<div v-if="error" class="text-center">
-					<p class="text-muted">خطا در بارگذاری اطلاعات</p>
-					<span class="text-action clickable" @click="loadMessages"> <i class="material-icons">refresh</i> تلاش مجدد </span>
+		<media-viewer :chat-id="chatId" v-if="showMedia"></media-viewer>
+		<div v-else class="conversation-chat-container">
+			<div class="conversation-messages" :class="{ 'd-flex justify-content-center aling-items-center': error || loading }">
+				<div class="d-flex w-100 flex-column align-items-center justify-content-center" v-if="error || loading">
+					<loading-spinner v-if="loading"></loading-spinner>
+					<div v-if="error" class="text-center">
+						<p class="text-muted">خطا در بارگذاری اطلاعات</p>
+						<span class="text-action clickable" @click="loadMessages"> <i class="material-icons">refresh</i> تلاش مجدد </span>
+					</div>
+				</div>
+				<div v-else class="messages-list">
+					<message v-for="(message, index) in messages" :key="'msg_id_' + message.id" :message.sync="messages[index]" :hide-profile="checkPreviosMessages(index)"></message>
+					<div class="d-flex justify-content-center w-100" v-if="next_page_url != null" v-reached="loadMore">
+						<loading-spinner></loading-spinner>
+					</div>
 				</div>
 			</div>
-			<div v-else class="messages-list">
-				<message v-for="(message, index) in messages" :key="'msg_id_' + message.id" :message.sync="messages[index]" :hide-profile="checkPreviosMessages(index)"></message>
-				<div class="d-flex justify-content-center w-100" v-if="next_page_url != null" v-reached="loadMore">
-					<loading-spinner></loading-spinner>
+			<div class="conversation-footer">
+				<voice-preview v-if="voiceData != null && !recording" style="width: 60%" :src="voiceUrl"></voice-preview>
+				<div v-else>
+					<div class="d-flex align-items-center recording" style="gap: 20px" v-if="recording">
+						<i class="material-icons text-success recoording-icon">mic_none</i>
+						<countup-timer class="recording-timer"></countup-timer>
+						<i class="material-icons clickable text-superlight" @click="stopRecording(true)">close</i>
+						<i class="material-icons clickable save-recording" @click="stopRecording(false)">check</i>
+					</div>
+					<div class="d-flex" v-if="!recording">
+						<i class="material-icons clickable" @click="selectFile">attach_file</i>
+						<i class="material-icons clickable" @click="recordVoice">mic_none</i>
+					</div>
 				</div>
+				<textarea-autosize row="1" :minHeight="40" @keydown.enter.native="keydownHandle" type="text" class="border-0 form-control bg-white" v-show="!recording && voiceData == null" @keypress.enter="sendMessage" v-model="messageText" placeholder="پیام خود را بنویسید" />
+				<i class="material-icons-outlined clickable" :class="{ disabled: !canSend }" @click="sendMessage" style="transform: rotate(180deg)">send</i>
 			</div>
-		</div>
-		<div class="conversation-footer">
-			<voice-preview v-if="voiceData != null && !recording" style="width: 60%" :src="voiceUrl"></voice-preview>
-			<div v-else>
-				<div class="d-flex align-items-center recording" style="gap: 20px" v-if="recording">
-					<i class="material-icons text-success recoording-icon">mic_none</i>
-					<countup-timer class="recording-timer"></countup-timer>
-					<i class="material-icons clickable text-superlight" @click="stopRecording(true)">close</i>
-					<i class="material-icons clickable save-recording" @click="stopRecording(false)">check</i>
-				</div>
-				<div class="d-flex" v-if="!recording">
-					<i class="material-icons clickable" @click="selectFile">attach_file</i>
-					<i class="material-icons clickable" @click="recordVoice">mic_none</i>
-				</div>
-			</div>
-			<textarea-autosize row="1" :minHeight="40" @keydown.enter.native="keydownHandle" type="text" class="border-0 form-control bg-white" v-show="!recording && voiceData == null" @keypress.enter="sendMessage" v-model="messageText" placeholder="پیام خود را بنویسید" />
-			<i class="material-icons-outlined clickable" :class="{ disabled: !canSend }" @click="sendMessage" style="transform: rotate(180deg)">send</i>
 		</div>
 	</div>
 </template>
@@ -66,6 +70,7 @@ import { v4 as uuidv4 } from "uuid";
 import SendFileModal from "./SendFileModal.vue";
 import TextareaAutosize from "../inputs/TextareaAutosize.vue";
 import UserShareModal from "./UserShareModal.vue";
+import MediaViewer from "./MediaViewer/MediaViewer";
 
 export default {
 	watch: {
@@ -76,7 +81,7 @@ export default {
 			this.loadMessages();
 		},
 	},
-	components: { LoadingSpinner, CountupTimer, VoicePreview, Message, SendFileModal, TextareaAutosize, UserShareModal },
+	components: { LoadingSpinner, CountupTimer, VoicePreview, Message, SendFileModal, TextareaAutosize, UserShareModal, MediaViewer },
 	computed: {
 		voiceUrl() {
 			return URL.createObjectURL(this.voiceData);
@@ -264,6 +269,8 @@ export default {
 	},
 	data() {
 		return {
+			showMedia: false,
+
 			showShareUser: false,
 
 			request: null,
