@@ -14,7 +14,7 @@
 					<autocomplete class="search-field w-100" :default-value="searchVal" :search="search" id="searchforminput" autocomplete="off" required type="text" name="q" placeholder="هر چیزی که در جستن آنی، آنی" />
 					<div class="text-muted align-items-center justify-content-center d-lg-flex d-none nowrap font-12" style="width: max-content; margin-right: 24px !important">
 						<img src="/images/beta.svg" width="36" class="verical-middle" />
-						<span class="mx-1 text-nowrap" style="margin-top: 3px">۰.۵ V</span>
+						<span class="mx-1 text-nowrap" style="margin-top: 3px">۰.۶ V</span>
 					</div>
 				</form>
 				<div v-if="!$root.isDesktop">

@@ -12,7 +12,7 @@
 			</div>
 			<div class="d-flex text-muted align-items-center justify-content-between new-post-actions">
 				<a class="new-post--action clickable" @click="showPostModal = true"><i class="material-icons-outlined">crop_original</i> رسانه </a>
-				<wire-link href="/articles/create" class="new-post--action"> <i class="material-icons-outlined">article</i> مقاله </wire-link>
+				<a class="new-post--action disabled"> <i class="material-icons-outlined">article</i> مقاله </a>
 				<a class="new-post--action disabled"><i class="material-icons-outlined">poll</i> نظر سنجی </a>
 			</div>
 		</div>
