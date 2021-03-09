@@ -4,6 +4,7 @@ use App\Http\Middleware\FollowMiddlware;
 use App\Http\Middleware\LocaleMiddleware;
 use App\Models\Conversation;
 use App\Models\Message;
+use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 use Ternobo\TernoboChat\Events\MessageEvent;
 use Ternobo\TernoboWire\TernoboWire;
@@ -56,6 +57,7 @@ Route::get("/test", function () {
 Route::group(['middleware' => LocaleMiddleware::class], function () {
 
     Route::get("/", "IndexController@index")->name("welcome");
+    Broadcast::routes();
     Route::any("/search", "HomeController@search");
 
     Route::resource("/articles", "ArticlesController");
@@ -255,9 +257,23 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         Route::resource('ideas.replies', "Ideas\RepliesCotnroller");
         // End Comments
 
-    });
+        //Chats
+        Route::prefix("chats")->group(function () {
+            Route::get("/", "Chats\ChatController@index");
+            Route::post("/", "Chats\ChatController@getChats");
+            Route::post("/search", "Chats\ChatController@search");
+            Route::post("/conversations/{id}", "Chats\ChatController@chat");
+            Route::post("/conversations/{id}/mute", "Chats\ChatController@muteChat");
 
-    Route::post("/share/{post_id}", "PostController@sharePost");
+            Route::post("/conversations/create/{id}", "Chats\ChatController@createConversation");
+
+            Route::post("/send-message", "Chats\ChatController@sendMessage");
+
+        });
+
+        Route::post("/share/{post_id}", "PostController@sharePost");
+    });
+    //End Auth
 
     Route::get("/tags/{name}", "HomeController@tag");
 
@@ -267,20 +283,6 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
     Route::post("/contacts/", "ContactsController@saveData");
     Route::post("/contacts/{page}", "ContactsController@getContactData");
-
-    //Chats
-    Route::prefix("chats")->group(function () {
-        Route::get("/", "Chats\ChatController@index");
-        Route::post("/", "Chats\ChatController@getChats");
-        Route::post("/search", "Chats\ChatController@search");
-        Route::post("/conversations/{id}", "Chats\ChatController@chat");
-        Route::post("/conversations/{id}/mute", "Chats\ChatController@muteChat");
-
-        Route::post("/conversations/create/{id}", "Chats\ChatController@createConversation");
-
-        Route::post("/send-message", "Chats\ChatController@sendMessage");
-
-    });
 
     // Pages
     Route::prefix('/{page:slug}')->group(function () {

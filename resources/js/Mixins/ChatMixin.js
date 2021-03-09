@@ -34,7 +34,10 @@ export default {
         onNewMessage(event) {
             let message = event.detail.message;
             if (this.selectedChat != null && message.conversation_id == this.selectedChat.id) {
-                this.$refs.conversationElem.addMessage(message);
+                if (this.$refs.conversationElem) {
+                    // this.$refs.conversationElem.addMessage(message);
+
+                }
             } else {
                 this.loadChats(true);
             }
@@ -50,6 +53,9 @@ export default {
                     }
                 })
                 .then(() => {
+                    if (this.selectedChat) {
+                        this.selectedChat.unread_messages_count = 0;
+                    }
                     this.loading = false;
                 });
         },
@@ -84,7 +90,7 @@ export default {
                             this.searchLoading = false;
                         });
 
-                }, 1000);
+                }, 500);
             } else {
                 this.connections = [];
                 this.connections_next_page = null;

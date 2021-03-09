@@ -117,7 +117,7 @@ document.addEventListener('ternobo:userloaded', event => {
 
     let user = event.detail.user;
     if (user && !isSocketConnected) {
-        if (Notification in window) {
+        if (window.hasOwnProperty("Notification")) {
             Notification.requestPermission();
         }
         const notificationChannel = window.Echo.private("notification." + user.id);
@@ -135,10 +135,14 @@ document.addEventListener('ternobo:userloaded', event => {
 
         const chatChannel = window.Echo.private("ternobo-chat.user." + user.id);
         chatChannel.listen("\\Ternobo\\TernoboChat\\Events\\MessageEvent", function (data) {
+            console.log(data);
             if (!data.muted) {
+                if (vue_app.$store.state.url != "/chats") {
+                    vue_app.$store.commit("addUnreadMessage");
+                }
                 notification.play();
                 if (window.hasOwnProperty("Notification") && Notification.permission == 'granted') {
-                    new Notification(data.message.conversation.user.name, {
+                    new Notification(data.message.sender.name, {
                         body: data.message.sender.name + ": " + (data.message.text != null ? data.message.text : data.message.type),
                         icon: window.location.origin + '/favicon-32x32.png'
                     });

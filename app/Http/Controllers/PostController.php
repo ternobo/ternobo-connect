@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Action;
 use App\Models\Bookmark;
 use App\Models\Category;
 use App\Models\ContentSeen;
@@ -159,6 +160,7 @@ class PostController extends Controller
         $is_like = true;
         if ($like instanceof Like) {
             Notification::query()->where("connected_to", $like->id)->delete();
+            Action::query()->where("page_id", $page->id)->where("post_id", $post_id)->where("action", "like")->delete();
             $result = $like->delete();
             $is_like = false;
         } else {
@@ -166,7 +168,7 @@ class PostController extends Controller
             $like->page_id = $page->id;
             $like->post_id = $post_id;
             $result = $like->save();
-            $page->addAction("like", $post_id);
+            $page->addAction("like", $post_id, $like->id);
             Notification::sendNotification("like", $post_id, $post->page_id, $like->id);
         }
         return response()->json(array("result" => $result, "like" => $is_like));
@@ -235,7 +237,7 @@ class PostController extends Controller
         }
         $post->medias = json_encode($medias);
         $post->post_id = $post_id;
-        $result = $post->save();
+        // $result = $post->save();
         Auth::user()->personalPage->addAction("share", $post->id);
         foreach ($mentions as $mention) {
             $page = Page::query()->where("slug", $mention)->first();

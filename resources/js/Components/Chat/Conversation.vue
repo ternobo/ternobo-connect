@@ -1,13 +1,14 @@
 <template>
 	<div class="conversation-container">
 		<user-share-modal :show.sync="showShareUser" :user="user"></user-share-modal>
-		<send-file-modal v-if="selectedFile != null" :file="selectedFile" @send="sendMessage" @canceled="selectedFile = null" :caption.sync="messageText" :show.sync="showFileModal"></send-file-modal>
+		<send-file-modal v-if="selectedFile != null" :file="selectedFile" @send="sendMessage" @canceled="selectedFile = null" :caption.sync="textCaption" :show.sync="showFileModal"></send-file-modal>
 		<div class="conversation-header" v-if="!hideHeader">
 			<div class="pageinfo clickable" @click="showMedia = true">
 				<lazy-image :src="profile" class="profile-sm mb-0 ml-2" img-class="profile-sm" />
 				<div class="d-flex flex-column">
 					<strong class="">{{ title }}</strong>
-					<small>{{ subtitle }}</small>
+					<span class="text-action font-12" v-if="typing">درحال تایپ</span>
+					<small v-else>{{ subtitle }}</small>
 				</div>
 			</div>
 			<div>
@@ -17,7 +18,7 @@
 						<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
 					</template>
 					<wire-link role="presentation" as="li" :href="'/' + profile"><strong class="dropdown-item clickable" role="menuitem">مشاهده پروفایل</strong></wire-link>
-					<b-dropdown-item @click="disableNotification">غیرفعال کردن اطلاعیه</b-dropdown-item>
+					<b-dropdown-item @click="toggleNotification">{{ conversation.muted ? "فعال کردن اطلاعیه" : "غیرفعال کردن اطلاعیه" }}</b-dropdown-item>
 					<li role="presentation" @click="showShareUser = true"><strong class="dropdown-item clickable" role="menuitem">اشتراک گذاری کاربر</strong></li>
 					<!-- <li role="presentation"><strong class="dropdown-item clickable" role="menuitem">خروجی گرفتن از گفتگو</strong></li> -->
 				</b-dropdown>
@@ -25,6 +26,9 @@
 		</div>
 		<media-viewer :chat-id="chatId" v-if="showMedia"></media-viewer>
 		<div v-else class="conversation-chat-container">
+			<div class="loadingMessages" v-if="next_page_url != null && loadingNextPage">
+				<loading-spinner></loading-spinner>
+			</div>
 			<div class="conversation-messages" :class="{ 'd-flex justify-content-center aling-items-center': error || loading }">
 				<div class="d-flex w-100 flex-column align-items-center justify-content-center" v-if="error || loading">
 					<loading-spinner v-if="loading"></loading-spinner>
@@ -33,11 +37,8 @@
 						<span class="text-action clickable" @click="loadMessages"> <i class="material-icons">refresh</i> تلاش مجدد </span>
 					</div>
 				</div>
-				<div v-else class="messages-list">
+				<div v-else class="messages-list" ref="messagesList">
 					<message v-for="(message, index) in messages" :key="'msg_id_' + message.id" :message.sync="messages[index]" :hide-profile="checkPreviosMessages(index)"></message>
-					<div class="d-flex justify-content-center w-100" v-if="next_page_url != null" v-reached="loadMore">
-						<loading-spinner></loading-spinner>
-					</div>
 				</div>
 			</div>
 			<div class="conversation-footer">
@@ -54,7 +55,7 @@
 						<i class="material-icons clickable" @click="recordVoice">mic_none</i>
 					</div>
 				</div>
-				<textarea-autosize row="1" :minHeight="40" @keydown.enter.native="keydownHandle" type="text" class="border-0 form-control bg-white" v-show="!recording && voiceData == null" @keypress.enter="sendMessage" v-model="messageText" placeholder="پیام خود را بنویسید" />
+				<textarea-content ref="messageInput" v-model="messageText" editableClass="form-control bg-transparent border-0" class="border-0 form-control bg-white" v-show="!recording && voiceData == null" @keypress.enter="keydownHandle" />
 				<i class="material-icons-outlined clickable" :class="{ disabled: !canSend }" @click="sendMessage" style="transform: rotate(180deg)">send</i>
 			</div>
 		</div>
@@ -71,6 +72,7 @@ import SendFileModal from "./SendFileModal.vue";
 import TextareaAutosize from "../inputs/TextareaAutosize.vue";
 import UserShareModal from "./UserShareModal.vue";
 import MediaViewer from "./MediaViewer/MediaViewer";
+import TextareaContent from "../inputs/TextareaContent.vue";
 
 export default {
 	watch: {
@@ -79,10 +81,31 @@ export default {
 		},
 		conversation_id() {
 			this.loadMessages();
+			if (this.conversation_id != null) {
+				this.chatChannel = Echo.private("ternobo-chat.typing." + this.conversation_id);
+				this.chatChannel.listenForWhisper("typing", (e) => {
+					this.typing = true;
+				});
+				this.chatChannel.listenForWhisper("endTyping", (e) => {
+					this.typing = false;
+				});
+			}
+		},
+
+		messageText() {
+			this.textCaption = this.messageText;
+			this.chatChannel.whisper("typing", {});
+			clearTimeout(this.typingTimeout);
+			this.typingTimeout = setTimeout(() => {
+				this.chatChannel.whisper("endTyping", {});
+			}, 1000);
 		},
 	},
-	components: { LoadingSpinner, CountupTimer, VoicePreview, Message, SendFileModal, TextareaAutosize, UserShareModal, MediaViewer },
+	components: { LoadingSpinner, CountupTimer, VoicePreview, Message, SendFileModal, TextareaAutosize, UserShareModal, MediaViewer, TextareaContent },
 	computed: {
+		inputContent() {
+			return this.messageText == null || this.messageText == "" ? "<span class='text-superlight'>پیام خود را بنویسید</span>" : this.messageText;
+		},
 		voiceUrl() {
 			return URL.createObjectURL(this.voiceData);
 		},
@@ -91,9 +114,13 @@ export default {
 		},
 	},
 	methods: {
-		disableNotification() {
+		onTextInput(e) {
+			this.messageText = e.target.innerText;
+		},
+		toggleNotification() {
 			axios.post("/chats/conversations/" + this.chatId + "/mute").then((response) => {
 				if (response.data.result) {
+					this.conversation.muted = response.data.muted;
 					this.$store.dispatch("loadChats");
 				}
 			});
@@ -181,7 +208,7 @@ export default {
 					let fileType = file.type;
 					fileType = fileType.substr(0, fileType.lastIndexOf("/"));
 
-					fileType = fileType == "application" ? "document" : fileType;
+					fileType = fileType == "video" || fileType == "image" || fileType == "audio" ? fileType : "document";
 
 					message.meta = {
 						filename: file.name,
@@ -190,18 +217,28 @@ export default {
 
 					message.type = fileType;
 					message.media = [file];
-					message.text = this.messageText;
+					message.text = this.textCaption;
 				} else {
 					message.type = "text";
 					message.text = this.messageText;
 				}
 				this.messageText = null;
+				this.$refs.messageInput.clear();
 				this.messages.unshift(message);
 			}
 		},
 		addMessage(message) {
+			this.$refs.messagesList.scrollTop = this.$refs.messagesList.scrollHeight;
 			this.messages.unshift(message);
 		},
+
+		onNewMessage(event) {
+			let message = event.detail.message;
+			if (message.conversation_id == this.chatId) {
+				this.addMessage(message);
+			}
+		},
+
 		stopRecording(recordCanceled = false) {
 			this.recordCanceled = recordCanceled;
 			if (this.mediaRecorder != null) {
@@ -219,40 +256,37 @@ export default {
 			const axiosSource = axios.CancelToken.source();
 			this.request = { cancel: axiosSource.cancel };
 			this.loading = true;
-			if (this.conversation_id) {
-				axios
-					.post("/chats/conversations/" + this.conversation_id, {}, { cancelToken: axiosSource.token })
-					.then((response) => {
-						this.messages = response.data.messages.data;
-						this.next_page_url = response.data.messages.next_page_url;
-						this.user = response.data.conversation.user;
-					})
-					.catch((err) => {
-						if (axios.isCancel(err)) {
-							this.loading = true;
-						} else {
-							this.error = true;
-						}
-					})
-					.then(() => {
-						this.loading = false;
-					});
-			} else {
-				axios
-					.post("/chats/conversation/create/" + this.userId, {}, { cancelToken: axiosSource.token })
-					.then((response) => {
-						this.conversation_id = response.data.conversation_id;
-					})
-					.catch((err) => {
+			axios
+				.post("/chats/conversations/" + this.conversation_id, {}, { cancelToken: axiosSource.token })
+				.then((response) => {
+					this.conversation = response.data.conversation;
+					this.messages = response.data.messages.data;
+					this.next_page_url = response.data.messages.next_page_url;
+					this.user = response.data.conversation.user;
+				})
+				.catch((err) => {
+					if (axios.isCancel(err)) {
+						this.loading = true;
+					} else {
 						this.error = true;
-					})
-					.then(() => {
-						this.loading = false;
+					}
+				})
+				.then(() => {
+					this.loading = false;
+					this.$nextTick(() => {
+						this.$refs.messagesList.onscroll = (e) => {
+							let el = e.target;
+
+							if (el.scrollTop + el.scrollHeight - 700 <= 4) {
+								this.loadMore();
+							}
+						};
 					});
-			}
+				});
 		},
 		loadMore() {
-			if (this.next_page_url != null) {
+			if (this.next_page_url != null && !this.loadingNextPage) {
+				this.loadingNextPage = true;
 				axios
 					.post(this.next_page_url)
 					.then((response) => {
@@ -263,19 +297,30 @@ export default {
 						this.error = true;
 					})
 					.then(() => {
-						this.loading = false;
+						this.loadingNextPage = false;
 					});
 			}
 		},
 	},
 	mounted() {
 		this.conversation_id = this.chatId;
+		document.addEventListener("message:new", this.onNewMessage);
+	},
+	destroyed() {
+		window.removeEventListener("message:new", this.onNewMessage);
 	},
 	beforeDestroy() {
 		this.request.cancel();
 	},
 	data() {
 		return {
+			textCaption: null,
+
+			loadingNextPage: false,
+
+			chatChannel: null,
+			typing: false,
+
 			showMedia: false,
 
 			showShareUser: false,
@@ -283,6 +328,7 @@ export default {
 			request: null,
 
 			conversation_id: null,
+			conversation: {},
 
 			recording: false,
 			recordCanceled: false,
@@ -301,6 +347,8 @@ export default {
 			next_page_url: null,
 
 			user: null,
+
+			typingTimeout: null,
 		};
 	},
 	props: ["chatId", "userId", "title", "subtitle", "profile", "hideHeader"],

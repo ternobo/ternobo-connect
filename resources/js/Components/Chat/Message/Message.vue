@@ -2,7 +2,8 @@
 	<div class="message-column" :class="{ received: message.sender.id != $store.state.user.id }">
 		<div class="message-container" :class="{ 'send-error': error }">
 			<i class="material-icons reload-btn" v-if="error" @click="sendMessage" :class="{ rotateAnimation: loading }">refresh</i>
-			<lazy-image class="profile-xsm" img-class="profile-xsm" :class="{ 'opacity-0': hideProfile }" :src="message.sender.profile"></lazy-image>
+			<div class="profile-xsm" v-if="hideProfile"></div>
+			<lazy-image v-else class="profile-xsm" img-class="profile-xsm" :src="message.sender.profile"></lazy-image>
 			<div>
 				<div v-if="message.type == 'text'" class="text-message-head">
 					<strong>{{ message.sender.name }}</strong>
@@ -23,6 +24,12 @@
 
 <script>
 import LoadingSpinner from "../../LoadingSpinner.vue";
+import MediaMessage from "./MediaMessage";
+import DocuementMessage from "./DocuementMessage";
+import ContactShareMessage from "./ContactShareMessage";
+import TextMessage from "./TextMessage";
+import VoiceMessage from "./VoiceMessage";
+
 export default {
 	components: { LoadingSpinner },
 	computed: {
@@ -90,7 +97,7 @@ export default {
 	},
 	data() {
 		return {
-			type: () => import("./TextMessage"),
+			type: require("./TextMessage"),
 			error: false,
 			loading: false,
 		};
@@ -101,25 +108,25 @@ export default {
 		}
 		switch (this.message.type) {
 			case "text":
-				this.type = () => import("./TextMessage");
+				this.type = TextMessage;
 				break;
 			case "video":
-				this.type = () => import("./MediaMessage");
+				this.type = MediaMessage;
 				break;
 			case "image":
-				this.type = () => import("./MediaMessage");
+				this.type = MediaMessage;
 				break;
 			case "audio":
-				this.type = () => import("./VoiceMessage");
+				this.type = VoiceMessage;
 				break;
 			case "voice":
-				this.type = () => import("./VoiceMessage");
+				this.type = VoiceMessage;
 				break;
 			case "document":
-				this.type = () => import("./DocuementMessage");
+				this.type = DocuementMessage;
 				break;
 			case "meta":
-				this.type = () => import("./ContactShareMessage");
+				this.type = ContactShareMessage;
 				break;
 		}
 	},

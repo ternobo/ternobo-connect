@@ -33,7 +33,7 @@
 
 					<div class="row pt-4" v-if="!loading && current_tab === 'connections'">
 						<div class="col-lg-3" :class="{ 'mb-3': !$root.isDesktop }" v-for="connection in list" :key="connection.id">
-							<PageInfoCard :page="checkUser(connection.user.id) ? connection.connection.personal_page : connection.user.personal_page"></PageInfoCard>
+							<PageInfoCard :page="connection.user.personal_page"></PageInfoCard>
 						</div>
 						<div class="p-4 text-center" v-if="list.length < 1">
 							<span class="font-20 text-muted">هیچ ارتباطی یافت نشد</span>

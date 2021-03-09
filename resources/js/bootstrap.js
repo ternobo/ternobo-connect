@@ -28,7 +28,7 @@ window.io = require('socket.io-client');
 
 window.Echo = new Echo({
     broadcaster: 'socket.io',
-    host: 'http://localhost:6001',
+    host: 'http://localhost:7000',
     forceTLS: true,
     csrfToken: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
     auth:

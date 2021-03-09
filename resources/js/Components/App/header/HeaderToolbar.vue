@@ -6,7 +6,7 @@
 				<div class="navheader-text">خانه</div>
 			</wire-link>
 			<wire-link :class="{ active: $store.state.url === '/chats' }" href="/chats">
-				<i class="navheader-icon" :class="{ unread: $store.state.shared.unread_messages_count > 0 }">textsms</i>
+				<i class="navheader-icon" :class="{ unread: $store.state.shared.unread_messages_count > 0 && $store.state.url != '/chats' }">textsms</i>
 				<div class="navheader-text">گفت‌وگو</div>
 			</wire-link>
 			<wire-link :class="{ active: $store.state.url === '/connections' }" href="/connections">
@@ -14,7 +14,7 @@
 				<div class="navheader-text">شبکه من</div>
 			</wire-link>
 			<wire-link :class="{ active: $store.state.url === '/notifications' }" href="/notifications">
-				<i class="navheader-icon" :class="{ unread: $store.state.shared.notifications_count > 0 }">{{ $store.state.url === "/notifications" ? "notifications" : "notifications_none" }}</i>
+				<i class="navheader-icon" :class="{ unread: $store.state.shared.notifications_count > 0 && $store.state.url != '/notifications' }">{{ $store.state.url === "/notifications" ? "notifications" : "notifications_none" }}</i>
 				<div class="navheader-text">اعلان‌ها</div>
 			</wire-link>
 			<wire-link :class="{ active: $store.state.url === '/bookmarks' }" href="/bookmarks">

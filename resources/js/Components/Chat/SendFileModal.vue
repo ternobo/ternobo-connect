@@ -11,7 +11,7 @@
 				</div>
 			</div>
 			<div class="caption">
-				<material-text-field inputClass="w-100" class="material--sm" placeholder="توضیحات" v-model="captionVal"></material-text-field>
+				<material-text-field v-if="type == 'image' || type == 'video' || type == 'audio'" inputClass="w-100" class="material--sm" placeholder="توضیحات" v-model="captionVal"></material-text-field>
 			</div>
 			<div class="d-flex actions">
 				<button class="btn btn-transparent text-light" @click="cancel">لغو</button>

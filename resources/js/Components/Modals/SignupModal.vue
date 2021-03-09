@@ -2,14 +2,14 @@
 	<b-modal v-model="showModal" hide-footer hide-header body-class="modal-signup" :centered="true">
 		<tabs v-if="verification_step || emailphone_step" @selected="(emailphone_step = true), (verification_step = false)">
 			<tab name="ایمیل" :selected="true">
-				<div class="input-group ephone-input-group d-flex align-items-center">
+				<div class="input-group ephone-input-group d-flex align-items-center" @keydown.enter="sendVcode('email')">
 					<LoadingButton class="signup-save-btn btn btn-dark" :loading="loading" v-if="!verification_step" @click.native="sendVcode('email')">ثبت</LoadingButton>
 					<i class="material-icons-outlined text-superlight hover-danger" v-else @click="(emailphone_step = true), (verification_step = false)">edit</i>
 					<input dir="ltr" input-class="w-100" type="email" class="form-control mx-1 text-left" :readonly="verification_step" v-model="email" placeholder="example@ternobo.com" />
 				</div>
 			</tab>
 			<tab name="شماره همراه">
-				<div class="input-group ephone-input-group d-flex align-items-center">
+				<div class="input-group ephone-input-group d-flex align-items-center" @keydown.enter="sendVcode('phone')">
 					<LoadingButton class="signup-save-btn btn btn-dark" :loading="loading" v-if="!verification_step" @click.native="sendVcode('phone')">ثبت</LoadingButton>
 					<i class="material-icons-outlined text-superlight hover-danger" v-else @click="(emailphone_step = true), (verification_step = false)">edit</i>
 					<input dir="ltr" type="tel" class="form-control mx-1 text-left" :readonly="verification_step" v-model="phone_number" placeholder="09123456789" />

@@ -24011,13 +24011,21 @@ body {
 }
 
 .conversation-container .conversation-chat-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
   max-height: calc(100% - 70px);
 }
 
+.conversation-container .conversation-chat-container .loadingMessages {
+  position: absolute;
+  top: 16px;
+  align-self: center;
+}
+
 .conversation-container .conversation-chat-container > .conversation-messages {
+  width: 100%;
   flex: 1 1 auto;
   max-height: calc(100% - 70px);
 }
@@ -24187,7 +24195,7 @@ body {
 
 .message-column {
   display: flex;
-  margin-bottom: 12px;
+  margin-top: 12px;
 }
 
 .message-column .message-container {
@@ -24263,7 +24271,7 @@ body {
 }
 
 .message-column.received .voice-message {
-  background: #EEEEEE;
+  background: #EEE;
 }
 
 .message-column.received .message-container {
@@ -24334,10 +24342,17 @@ body {
   max-height: 100%;
   height: 100%;
   padding: 0 48px;
+  scroll-behavior: auto;
+  -ms-scroll-chaining: none;
+  overscroll-behavior: none;
+}
+
+.received .media-message {
+  background: #EEE;
 }
 
 .media-message {
-  background: #EEE;
+  background: #E7F3FF;
   padding: 4px;
   border-radius: 4px;
 }
@@ -24365,6 +24380,11 @@ body {
   unicode-bidi: plaintext;
   padding: 12px;
   text-align: start;
+  word-break: break-word;
+}
+
+.no-chat-selected {
+  margin-top: 12px;
 }
 
 .ternobo-vide-player {
@@ -24503,6 +24523,10 @@ body {
   color: #757575;
 }
 
+.message-show-more {
+  max-height: 300px;
+}
+
 .chat-widget-container {
   display: flex;
   align-items: center;
@@ -24518,13 +24542,13 @@ body {
   background: #FFFF;
   box-shadow: 0px -5px 40px rgba(0, 0, 0, 0.05);
   overflow: hidden;
-  transform: translateY(210px);
+  transform: translateY(200px);
   transition: 0.5s all;
   margin-left: 16px;
 }
 
 .chat-widget-container .chat-widget.open {
-  transform: translateY(-210px);
+  transform: translateY(-200px);
 }
 
 .chat-widget-container .chat-widget > .widget-header {
@@ -24558,13 +24582,12 @@ body {
 
 .chat-widget-container .chat-widget > .widget-body {
   transition: 0.3s all;
-  min-height: 420px;
-  height: 420px;
+  min-height: 410px;
+  height: 410px;
 }
 
 .chat-widget-container .chat-widget > .widget-body .search-container {
-  padding: 0 20px;
-  padding-bottom: 20px;
+  padding: 12px;
 }
 
 .chat-widget-container .chat-widget > .widget-body .chats-list .chats {
@@ -24615,12 +24638,32 @@ body {
 }
 
 .conversation-container.widget .conversation-messages {
-  max-height: 360px;
+  max-height: 340px;
+  min-height: 340px;
 }
 
 .conversation-container.widget .conversation-messages .messages-list {
-  min-height: 360px;
-  max-height: 360px;
+  min-height: 340px;
+  max-height: 340px;
   padding: 12px;
+}
+
+.textarea-content {
+  position: relative;
+}
+
+.textarea-content .placeholder {
+  position: absolute;
+}
+
+.textarea-content div[contenteditable] {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  z-index: 2;
 }
 

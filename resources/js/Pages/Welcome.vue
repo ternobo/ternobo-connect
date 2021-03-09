@@ -19,9 +19,6 @@
 		<div class="header-search d-flex justify-content-between align-items-center">
 			<div class="menu d-flex">
 				<div class="clickable" v-b-toggle.sidebar><i class="material-icons header-btn" :class="{ 'text-dark': !hasBG, 'text-white': hasBG }">menu</i></div>
-				<div class="mr-2 d-flex align-items-center">
-					<h1 class="font-16 mb-0" :class="{ 'text-dark': !hasBG, 'text-white': hasBG }" ref="typewritingdescript" v-show="$root.isDesktop"></h1>
-				</div>
 			</div>
 			<div class="d-flex align-items-center">
 				<wire-link v-if="$store.state.user" :class="{ 'text-dark': !hasBG, 'text-white': hasBG }" href="/feed">
@@ -132,19 +129,18 @@ export default {
 		},
 	},
 	mounted() {
-		const $this = this;
-		var i = 0;
-		var txt = "شبکه اجتماعی متخصصین";
-		var speed = 130;
-
-		function typeWriter() {
-			if (i < txt.length) {
-				$this.$refs.typewritingdescript.innerHTML += txt.charAt(i);
-				i++;
-				setTimeout(typeWriter, speed);
-			}
-		}
-		typeWriter();
+		// const $this = this;
+		// var i = 0;
+		// var txt = "شبکه اجتماعی متخصصین";
+		// var speed = 130;
+		// function typeWriter() {
+		// 	if (i < txt.length) {
+		// 		$this.$refs.typewritingdescript.innerHTML += txt.charAt(i);
+		// 		i++;
+		// 		setTimeout(typeWriter, speed);
+		// 	}
+		// }
+		// typeWriter();
 	},
 	props: {
 		articles: {

@@ -108,7 +108,7 @@ export default {
 			this.toast("خطا در ارسال اطلاعات");
 		},
 		shareUser(connection) {
-			let user_id = this.checkUser(connection.user_id) ? connection.connection_id : connection.user_id;
+			let user_id = connection.user.id;
 			let contact_id = this.user.id;
 			this.sendLoading = true;
 			axios

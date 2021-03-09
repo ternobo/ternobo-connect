@@ -29,7 +29,7 @@ export default {
 			return typeof this.message.media[0] == "object" ? Math.round(this.message.media[0].size / 1024) + "KB" : Math.round(this.message.meta.filesize / 1024) + "KB";
 		},
 		fileType() {
-			let file = this.file;
+			let file = this.fileName;
 			if (typeof this.message.media[0] == "object") {
 				file = this.message.media[0].name;
 			}

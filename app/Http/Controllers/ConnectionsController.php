@@ -207,12 +207,12 @@ class ConnectionsController extends Controller
 
     public function connectionRequest($user_id)
     {
-        $connection_id = Connection::query()->where("user_id", Auth::user()->id)->where("connection", Auth::user()->id)->first();
+        $connection = Connection::query()->where("user_id", Auth::user()->id)->where("connection_id", Auth::user()->id)->first();
         $connectionExist = ($connection instanceof Connection);
         if ($connectionExist) {
             return response()->json(array("result" => true, "connection" => $connection->id));
         }
-        $followRow = Connection::query()->where("user_id", $user_id)->where("connection", Auth::user()->id)->firstOrNew();
+        $followRow = Connection::query()->where("user_id", $user_id)->where("connection_id", Auth::user()->id)->firstOrNew();
         $followRow->user_id = $user_id;
         $followRow->connection_id = Auth::user()->id;
         $followRow->accepted = false;
@@ -239,10 +239,10 @@ class ConnectionsController extends Controller
     {
         $followRow = Connection::query()
             ->where(function ($query) use ($user_id) {
-                $query->where("user_id", Auth::user()->id)->where("connection", $user_id);
+                $query->where("user_id", Auth::user()->id)->where("connection_id", $user_id);
             })
             ->orWhere(function ($query) use ($user_id) {
-                $query->where("connection", Auth::user()->id)->where("user_id", $user_id);
+                $query->where("connection_id", Auth::user()->id)->where("user_id", $user_id);
             })
             ->firstOrFail();
         // dd($followRow);

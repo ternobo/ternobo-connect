@@ -309,18 +309,16 @@ class User extends Authenticatable implements Messageable
     public function getConnectionsIds()
     {
         $connections = Connection::query()
-            ->with("connection")
-            ->with("user")
             ->whereRaw("(connection_id = '$this->id' or user_id = '$this->id')")
             ->where("accepted", true)
             ->get();
         $list = array();
         foreach ($connections as $connection) {
-            $connection = json_decode(json_encode($connection->toArray()));
-            if ($connection->connection->id === Auth::user()->id) {
-                $list[] = $connection->user_id;
+            $connection = $connection->toArray();
+            if ($connection["connection_id"] == Auth::user()->id) {
+                $list[] = $connection["user_id"];
             } else {
-                $list[] = $connection->connection->id;
+                $list[] = $connection["connection_id"];
             }
         }
         return $list;
@@ -343,18 +341,16 @@ class User extends Authenticatable implements Messageable
     public function getWaitingConnectionsIds()
     {
         $connections = Connection::query()
-            ->with("connection")
-            ->with("user")
             ->whereRaw("(connection_id = '$this->id' or user_id = '$this->id')")
             ->where("accepted", false)
             ->get();
         $list = array();
         foreach ($connections as $connection) {
-            $connection = json_decode(json_encode($connection->toArray()));
-            if ($connection->connection->id === Auth::user()->id) {
-                $list[] = $connection->user_id;
+            $connection = $connection->toArray();
+            if ($connection["connection_id"] == Auth::user()->id) {
+                $list[] = $connection["user_id"];
             } else {
-                $list[] = $connection->connection->id;
+                $list[] = $connection["connection_id"];
             }
         }
         return $list;

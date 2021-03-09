@@ -9,18 +9,12 @@
     "license": "MIT",
     "repositories": {
         "ternobo-wire": {
-            "type": "path",
-            "url": "../ternobo-wire",
-            "options": {
-                "symlink": true
-            }
+            "type": "git",
+            "url": "https://git.ternobo.info/Ternobo/ternobo-wire.git"
         },
         "ternobo-chat": {
-            "type": "path",
-            "url": "../ternobo-chat",
-            "options": {
-                "symlink": true
-            }
+            "type": "git",
+            "url": "https://git.ternobo.info/Ternobo/ternobo-chat.git"
         }
     },
     "require": {

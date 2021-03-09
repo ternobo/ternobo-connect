@@ -5,7 +5,7 @@
 			<div class="d-flex flex-column w-100 aling-items-center">
 				<h5 class="mt-0 font-16 text-center mb-4 w-25" style="border-bottom: 1px solid #000019; width: fit-content; align-self: center; margin-top: 20px; padding-bottom: 10px; padding-left: 0; padding-right: 0">ورود</h5>
 			</div>
-			<div v-if="loginStep" class="signup-login d-flex flex-column align-items-center justify-content-center clearfix" ref="loginForm" method="POST" action="javascript:;">
+			<div v-if="loginStep" @keydown.enter="login" class="signup-login d-flex flex-column align-items-center justify-content-center clearfix" ref="loginForm" method="POST" action="javascript:;">
 				<div class="w-100">
 					<material-text-field type="text" class="material--sm w-100 bg-transparent mb-2" input-class="w-100" name="username" v-model="username" placeholder="تلفن، ایمیل یا شناسه" />
 				</div>
@@ -15,7 +15,7 @@
 				</div>
 				<loading-button @click.native="login" :loading="loading" class="btn btn-dark mt-2" type="button"> ورود </loading-button>
 			</div>
-			<div v-else-if="VerifyStep" class="signup-login d-flex flex-column align-items-center justify-content-center clearfix" ref="loginForm" method="POST" action="javascript:;">
+			<div v-else-if="VerifyStep" @keydown.enter="verifyCode" class="signup-login d-flex flex-column align-items-center justify-content-center clearfix" ref="loginForm" method="POST" action="javascript:;">
 				<p class="mb-3">{{ verifyText }}</p>
 				<div class="text-left mb-3">
 					<otp-input input-class="w-100" class="material--sm mb-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" v-if="!recovery" />

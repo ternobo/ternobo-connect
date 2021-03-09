@@ -67,7 +67,11 @@ TernoboApp.install = function (Vue, options) {
     Vue.directive('sortable', function (el, binding) {
         binding = binding || {}
         var sortable = new Sortable(el, binding.value)
-    })
+    });
+
+    Vue.prototype.reverse = function (array) {
+        return array.slice().reverse()
+    };
 
     Vue.directive('reached', {
         inserted: function (el, binding) {

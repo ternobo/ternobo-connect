@@ -1,0 +1,2 @@
+(self.webpackChunkternobo=self.webpackChunkternobo||[]).push([[5362],{5362:(e,s,t)=>{"use strict";t.r(s),t.d(s,{default:()=>n});const l={props:["message"]};const n=(0,t(1900).Z)(l,(function(){var e=this,s=e.$createElement,t=e._self._c||s;return t("div",{staticClass:"d-flex flex-column"},[t("pre",[e._v(e._s(e.message.text))])])}),[],!1,null,null,null).exports}}]);
+//# sourceMappingURL=5362.js.map

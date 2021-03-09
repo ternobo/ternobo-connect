@@ -149,12 +149,20 @@
     }
 
     .conversation-chat-container {
+        position: relative;
         display: flex;
         flex-direction: column;
         flex: 1 1 auto;
         max-height: calc(100% - 70px);
 
+        .loadingMessages {
+            position: absolute;
+            top: 16px;
+            align-self: center;
+        }
+
         >.conversation-messages {
+            width: 100%;
             flex: 1 1 auto;
             max-height: calc(100% - 70px);
         }
@@ -333,7 +341,7 @@
 
 .message-column {
     display: flex;
-    margin-bottom: 12px;
+    margin-top: 12px;
 
 
     .message-container {
@@ -413,7 +421,7 @@
         justify-content: flex-end;
 
         .voice-message {
-            background: #EEEEEE;
+            background: $fixed-elements;
         }
 
         .message-container {
@@ -492,12 +500,22 @@
     max-height: 100%;
     height: 100%;
     padding: 0 48px;
+    scroll-behavior: auto;
+    -ms-scroll-chaining: none;
+    overscroll-behavior: none;
     @extend .nice-scroll;
 }
 
 
+.received {
+    .media-message {
+        background: $fixed-elements;
+    }
+}
+
 .media-message {
-    background: $fixed-elements;
+    background: #E7F3FF;
+
     padding: 4px;
     border-radius: 4px;
 
@@ -524,8 +542,13 @@
         unicode-bidi: plaintext;
         padding: 12px;
         text-align: start;
+        word-break: break-word;
     }
 
+}
+
+.no-chat-selected {
+    margin-top: 12px;
 }
 
 .ternobo-vide-player {
@@ -665,4 +688,8 @@
             }
         }
     }
+}
+
+.message-show-more {
+    max-height: 300px;
 }

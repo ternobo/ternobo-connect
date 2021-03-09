@@ -57,7 +57,7 @@ class ChatController extends Controller
     {
         $conversation = Conversation::query()->findOrFail($id);
         // dd(json_encode($conversation->toArray()));
-        $messages = $conversation->messages()->with("sender")->paginate(50);
+        $messages = $conversation->messages()->with("sender")->paginate(20);
 
         Message::query()->where("seen", false)->where("conversation_id", $conversation->id)->update(['seen' => true]);
 
@@ -89,8 +89,12 @@ class ChatController extends Controller
 
             ->whereRaw("(connection_id = '$user->id' or user_id = '$user->id')")
             ->where("accepted", true)
-            ->whereHas("user", function ($query) use ($search) {
-                $query->where('name', 'like', "%{$search}%");
+            ->where(function ($query) use ($search) {
+                $query->whereHas("user", function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%");
+                })->orWhereHas("connection", function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%");
+                });
             })
             ->latest()
             ->paginate(30);
@@ -140,9 +144,18 @@ class ChatController extends Controller
 
     public function muteChat($id)
     {
-        $conversation = Conversation::query()->findOrFail($id);
+        $conversation = Conversation::query()->where("id", $id)->whereJsonContains("members", Auth::user()->id)->firstOrFail();
+        $result = false;
+        $muted = true;
+        if ($conversation->isMuted()) {
+            $result = $conversation->unmute();
+            $muted = false;
+        } else {
+            $result = $conversation->mute();
+        }
         return response()->json([
-            "result" => $conversation->mute(),
+            "muted" => $muted,
+            "result" => $result,
         ]);
     }
 
