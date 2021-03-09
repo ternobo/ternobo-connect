@@ -60,7 +60,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
     Broadcast::routes();
     Route::any("/search", "HomeController@search");
 
-    Route::resource("/articles", "ArticlesController");
+    // Route::resource("/articles", "ArticlesController");
 
     /**
      * Auth Start
@@ -292,7 +292,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         Route::post("/actions", "PageController@getActions");
         Route::post("/tags", "PageController@getTags");
 
-        Route::get("/{post}", "ArticlesController@show");
+        // Route::get("/{post}", "ArticlesController@show");
     });
 
 });

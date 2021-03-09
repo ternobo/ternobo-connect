@@ -220,7 +220,7 @@ class PageController extends Controller
             } elseif (Str::startsWith($request->action, "comment")) {
                 $actions = $page->getActions("comment", 10);
             } elseif (Str::startsWith($request->action, "all")) {
-                $actions = $page->getActions(null, 10);
+                $actions = $page->getActions("post", 10);
             }
         }
 

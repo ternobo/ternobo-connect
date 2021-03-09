@@ -8,7 +8,6 @@
 			<div class="filter-item" @click="action = 'all'" :class="{ active: action == 'all' }"><i class="material-icons-outlined">library_books</i> همه مطالب</div>
 			<div class="filter-item" @click="action = 'likes'" :class="{ active: action == 'likes' }"><i class="material-icons-outlined">favorite_border</i> پسند‌ها</div>
 			<div class="filter-item" @click="action = 'comments'" :class="{ active: action == 'comments' }"><i class="material-icons-outlined">comment</i> نظرات</div>
-			<div class="filter-item" @click="action = 'share'" :class="{ active: action == 'share' }"><i class="material-icons-outlined">loop</i> بازنشر‌ها</div>
 		</div>
 
 		<div class="profile-filters" ref="catfilters" v-show="!isSticky">
