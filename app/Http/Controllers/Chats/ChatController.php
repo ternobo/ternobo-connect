@@ -180,7 +180,7 @@ class ChatController extends Controller
         if ($request->filled("text")) {
             $text = htmlentities($request->text);
             $reg_exUrl = "/(\s((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/";
-            $text = (preg_replace_callback($reg_exUrl, function ($matches) use ($user, $conversation) {
+            $text = preg_replace_callback($reg_exUrl, function ($matches) use ($user, $conversation) {
                 foreach ($matches as $match) {
                     $user->addMedia([
                         "name" => $match,
@@ -189,14 +189,13 @@ class ChatController extends Controller
                         'type' => 'chat',
                         'meta' => [
                             "type" => "link",
-                            'access' => $conversation->members,
+                            'access' => json_decode($conversation->members),
                             'chat_id' => $conversation->id,
                         ],
                     ]);
                     return "<a target='_blank' class='text-action' href='" . URLTools::toURL($match) . "'>$match</a>";
                 }
-            }, $text));
-            // dd($text);
+            }, $text);
         }
 
         switch ($message_type) {
