@@ -8,10 +8,12 @@ use App\Models\Connection;
 use App\Models\Conversation;
 use App\Models\Media;
 use App\Models\User;
+use App\URLTools;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Ternobo\TernoboChat\Models\Message;
 use Ternobo\TernoboWire\TernoboWire;
 
@@ -20,7 +22,7 @@ class ChatController extends Controller
 
     public function index()
     {
-        SEOTools::setTitle("گفت‌وگو");
+        SEOTools::setTitle("گفتگو");
         return TernoboWire::render("Chats");
     }
 
@@ -31,24 +33,8 @@ class ChatController extends Controller
             $query->where("seen", false)->where("sender_id", "!=", $user->id);
         }])->orderBy('updated_at', 'desc')->paginate(30);
 
-        $connections = Connection::query()
-            ->with("user")
-            ->with("user.personalPage")
-            ->with("user.personalPage.user")
-
-            ->with("connection")
-            ->with("connection.personalPage")
-            ->with("connection.personalPage.user")
-
-            ->whereRaw("(connection_id = '$user->id' or user_id = '$user->id')")
-            ->where("accepted", true)
-            ->latest()
-            ->paginate(30);
-        $connections->appends(['connection' => '1']);
-
         return response()->json([
             'result' => true,
-            'connections' => $connections,
             'chats' => $conversations,
         ]);
     }
@@ -192,7 +178,25 @@ class ChatController extends Controller
         $message = null;
         $text = null;
         if ($request->filled("text")) {
-            $text = $request->text;
+            $text = htmlentities($request->text);
+            $reg_exUrl = "/(\s((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/";
+            $text = (preg_replace_callback($reg_exUrl, function ($matches) use ($user, $conversation) {
+                foreach ($matches as $match) {
+                    $user->addMedia([
+                        "name" => $match,
+                        'filename' => (string) Str::uuid(),
+                        'access' => 'private',
+                        'type' => 'chat',
+                        'meta' => [
+                            "type" => "link",
+                            'access' => $conversation->members,
+                            'chat_id' => $conversation->id,
+                        ],
+                    ]);
+                    return "<a target='_blank' class='text-action' href='" . URLTools::toURL($match) . "'>$match</a>";
+                }
+            }, $text));
+            // dd($text);
         }
 
         switch ($message_type) {

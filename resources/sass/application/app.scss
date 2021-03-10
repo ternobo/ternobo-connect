@@ -819,11 +819,11 @@ pre {
 }
 
 .btn:active:not(:disabled) {
-    box-shadow: 0 0 10px 3px inset rgba($color: #000000, $alpha: 0.1) !important;
+    box-shadow: none !important;
 }
 
 .btn-dark:active:not(:disabled) {
-    box-shadow: 0 0 10px 3px inset rgba($color: #FFF, $alpha: 0.15) !important;
+    box-shadow: none !important;
 }
 
 .autocomplete[data-loading=true]:after {

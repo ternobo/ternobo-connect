@@ -4,9 +4,9 @@
 		<send-file-modal v-if="selectedFile != null" :file="selectedFile" @send="sendMessage" @canceled="selectedFile = null" :caption.sync="textCaption" :show.sync="showFileModal"></send-file-modal>
 		<div class="conversation-header" v-if="!hideHeader">
 			<div class="pageinfo clickable" @click="showMedia = true">
-				<lazy-image :src="profile" class="profile-sm mb-0 ml-2" img-class="profile-sm" />
+				<lazy-image :src="image" class="profile-sm mb-0 ml-2" img-class="profile-sm" />
 				<div class="d-flex flex-column">
-					<strong class="">{{ title }}</strong>
+					<strong class="">{{ title }} <i class="verificationcheck" v-if="isVerified">check_circle</i></strong>
 					<span class="text-action font-12" v-if="typing">درحال تایپ</span>
 					<small v-else>{{ subtitle }}</small>
 				</div>
@@ -19,7 +19,7 @@
 					</template>
 					<wire-link role="presentation" as="li" :href="'/' + profile"><strong class="dropdown-item clickable" role="menuitem">مشاهده پروفایل</strong></wire-link>
 					<b-dropdown-item @click="toggleNotification">{{ conversation.muted ? "فعال کردن اطلاعیه" : "غیرفعال کردن اطلاعیه" }}</b-dropdown-item>
-					<li role="presentation" @click="showShareUser = true"><strong class="dropdown-item clickable" role="menuitem">اشتراک گذاری کاربر</strong></li>
+					<li role="presentation" @click="showShareUser = true"><strong class="dropdown-item clickable" role="menuitem">اشتراک گذاری این کاربر</strong></li>
 					<!-- <li role="presentation"><strong class="dropdown-item clickable" role="menuitem">خروجی گرفتن از گفتگو</strong></li> -->
 				</b-dropdown>
 			</div>
@@ -37,18 +37,25 @@
 						<span class="text-action clickable" @click="loadMessages"> <i class="material-icons">refresh</i> تلاش مجدد </span>
 					</div>
 				</div>
+				<div class="d-flex align-items-center justify-content-center flex-column w-100 h-100" style="min-height: 360px" v-else-if="messages.length < 1">
+					<i class="material-icons-outlined text-superlight font-32 ml-2">sentiment_dissatisfied</i>
+					<span class="text-superlight font-16 no-chat-selected">گفتگویی صورت نگرفته</span>
+				</div>
 				<div v-else class="messages-list" ref="messagesList">
 					<message v-for="(message, index) in messages" :key="'msg_id_' + message.id" :message.sync="messages[index]" :hide-profile="checkPreviosMessages(index)"></message>
 				</div>
 			</div>
 			<div class="conversation-footer">
-				<voice-preview v-if="voiceData != null && !recording" style="width: 60%" :src="voiceUrl"></voice-preview>
+				<div v-if="voiceData != null && !recording" style="width: 60%" class="d-flex align-items-center">
+					<i class="material-icons clickable text-superlight font-20 hover-dark" @click="voiceData = null">close</i>
+					<voice-preview class="w-100" :src="voiceUrl"></voice-preview>
+				</div>
 				<div v-else>
 					<div class="d-flex align-items-center recording" style="gap: 20px" v-if="recording">
 						<i class="material-icons text-success recoording-icon">mic_none</i>
 						<countup-timer class="recording-timer"></countup-timer>
-						<i class="material-icons clickable text-superlight" @click="stopRecording(true)">close</i>
-						<i class="material-icons clickable save-recording" @click="stopRecording(false)">check</i>
+						<i class="material-icons clickable text-superlight hover-dark" @click="stopRecording(true)">close</i>
+						<i class="material-icons clickable save-recording hover-dark" @click="stopRecording(false)">check</i>
 					</div>
 					<div class="d-flex" v-if="!recording">
 						<i class="material-icons clickable" @click="selectFile">attach_file</i>
@@ -274,13 +281,15 @@ export default {
 				.then(() => {
 					this.loading = false;
 					this.$nextTick(() => {
-						this.$refs.messagesList.onscroll = (e) => {
-							let el = e.target;
+						if (this.$refs.messagesList) {
+							this.$refs.messagesList.onscroll = (e) => {
+								let el = e.target;
 
-							if (el.scrollTop + el.scrollHeight - 700 <= 4) {
-								this.loadMore();
-							}
-						};
+								if (el.scrollTop + el.scrollHeight - 700 <= 4) {
+									this.loadMore();
+								}
+							};
+						}
 					});
 				});
 		},
@@ -346,12 +355,12 @@ export default {
 			messages: [],
 			next_page_url: null,
 
-			user: null,
+			user: {},
 
 			typingTimeout: null,
 		};
 	},
-	props: ["chatId", "userId", "title", "subtitle", "profile", "hideHeader"],
+	props: ["chatId", "userId", "title", "subtitle", "profile", "image", "isVerified", "hideHeader"],
 };
 </script>
 

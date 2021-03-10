@@ -76,19 +76,16 @@ class ConnectionsController extends Controller
     public function getConnections(Request $request)
     {
         $user = Auth::user();
-        $accpeted_connections = Connection::query()
+        $connections = Connection::query()
             ->distinct()
             ->with("user")
             ->with("connection")
-            ->whereHas("user", function ($query) {
-                $query->where("active", true);
-            })
             ->whereRaw("(connection_id = '$user->id' or user_id = '$user->id')")
             ->where("accepted", true)
             ->latest();
 
         if ($request->filled("q")) {
-            $accpeted_connections = $accpeted_connections
+            $connections = $connections
                 ->where(function ($query) use ($request) {
                     $query->whereHas("user", function ($query) use ($request) {
                         $query->where('name', 'like', "%{$request->q}%");
@@ -100,11 +97,11 @@ class ConnectionsController extends Controller
                 ->paginate(20)
                 ->appends("q", $request->q);
         } else {
-            $accpeted_connections = $accpeted_connections->paginate(20);
+            $connections = $connections->paginate(20);
         }
 
         return response()->json([
-            "connections" => $accpeted_connections,
+            "connections" => $connections,
         ]);
 
     }

@@ -7,7 +7,7 @@
 			</wire-link>
 			<wire-link :class="{ active: $store.state.url === '/chats' }" href="/chats">
 				<i class="navheader-icon" :class="{ unread: $store.state.shared.unread_messages_count > 0 && $store.state.url != '/chats' }">textsms</i>
-				<div class="navheader-text">گفت‌وگو</div>
+				<div class="navheader-text">گفتگو</div>
 			</wire-link>
 			<wire-link :class="{ active: $store.state.url === '/connections' }" href="/connections">
 				<i class="navheader-icon">group</i>

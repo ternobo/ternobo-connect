@@ -22,7 +22,7 @@
 					<chat-skeleton v-for="x in 10" :key="x"></chat-skeleton>
 				</div>
 				<div class="chats" v-else ref="chatsElem">
-					<chat-item v-for="(chat, index) in chats" :key="'chat_id_' + chat.id" @click.native="selectChat(chat)" :chat.sync="chats[index]"></chat-item>
+					<chat-item v-for="(chat, index) in chats" :key="'chat_id_' + chat.id" @click.native="selectChat(index)" :chat.sync="chats[index]"></chat-item>
 					<div class="d-flex justify-content-center w-100" v-if="chats_next_page_url != null" v-reached="loadMoreChats">
 						<loading-spinner></loading-spinner>
 					</div>
@@ -44,7 +44,16 @@
 import ChatMixin from "../../Mixins/ChatMixin";
 export default {
 	methods: {
-		selectChat(chat) {
+		selectChat(index) {
+			let chat = null;
+			if (typeof index == "number") {
+				chat = this.chats[index];
+				chat.unread_messages_count = 0;
+				this.$set(this.chats, index, chat);
+			} else {
+				chat = index;
+			}
+			console.log(chat);
 			this.$emit("selectChat", chat);
 		},
 	},

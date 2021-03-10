@@ -21,10 +21,6 @@ export default store({
                     let data = response.data;
                     commit("setChats", data.chats.data);
                     commit("setChatsNextPage", data.chats.next_page_url)
-
-                    commit("setConnections", data.connections.data);
-                    commit("setConnectionsNextPage", data.connections.next_page_url)
-
                 });
         },
         loadConnectionsNextPage({ commit, state }) {
