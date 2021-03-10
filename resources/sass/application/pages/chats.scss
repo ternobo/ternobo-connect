@@ -24,7 +24,7 @@
 
         .conversation-messages {
             flex: 1 1 auto;
-            max-height: calc(100% - 70px);
+            max-height: calc(100% - 60px);
         }
     }
 }
@@ -343,6 +343,9 @@
     display: flex;
     margin-top: 12px;
 
+    &:first-child {
+        margin-bottom: 12px;
+    }
 
     .message-container {
         display: flex;
@@ -692,4 +695,10 @@
 
 .message-show-more {
     max-height: 300px;
+}
+
+.link-item {
+    direction: ltr;
+    text-align: left;
+    padding-left: 16px;
 }

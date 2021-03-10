@@ -9,15 +9,29 @@
 				<i class="material-icons-outlined">file_copy</i>
 				پرونده
 			</div>
+			<div class="clickable filter" @click="type = 'link'" :class="{ active: type == 'link' }">
+				<i class="material-icons-outlined">link</i>
+				پیوند
+			</div>
 		</div>
 		<div class="media-list loading" v-if="loading">
 			<loading-spinner></loading-spinner>
 		</div>
-		<div class="media-list" v-else-if="type == 'media'">
+		<div class="media-list" v-else-if="type == 'media' && media.length > 0">
 			<media-item v-for="item in media" :key="'media_item_id_' + item.id" :media="item"></media-item>
 		</div>
-		<div class="document-list" v-else-if="type == 'document'">
+		<div class="document-list" v-else-if="type == 'document' && media.length > 0">
 			<document-item class="mb-3" v-for="item in media" :key="'document_item_id_' + item.id" :document="item"></document-item>
+		</div>
+		<div class="document-list" v-else-if="type == 'link' && media.length > 0">
+			<link-item class="mb-3" v-for="item in media" :key="'link_item_id_' + item.id" :link="item"></link-item>
+		</div>
+		<div class="media-list loading" v-else>
+			<div class="d-flex align-items-center justify-content-center flex-column w-100 h-100">
+				<i class="material-icons-outlined text-superlight font-32">sentiment_dissatisfied</i>
+				<span class="text-superlight font-16 no-chat-selected" v-if="type == 'document' || type == 'media'">{{ type == "document" ? "پرونده‌ای یافت نشد" : "رسانه‌ای یافت نشد" }}</span>
+				<span class="text-superlight font-16 no-chat-selected" v-else>پیوندی یافت نشد</span>
+			</div>
 		</div>
 	</div>
 </template>
@@ -25,6 +39,7 @@
 <script>
 import LoadingSpinner from "../../LoadingSpinner.vue";
 import DocumentItem from "./DocumentItem.vue";
+import LinkItem from "./LinkItem.vue";
 import MediaItem from "./MediaItem.vue";
 export default {
 	watch: {
@@ -57,7 +72,7 @@ export default {
 				this.loading = false;
 			});
 	},
-	components: { MediaItem, LoadingSpinner, DocumentItem },
+	components: { MediaItem, LoadingSpinner, DocumentItem, LinkItem },
 	data() {
 		return {
 			type: "media",

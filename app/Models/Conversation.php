@@ -3,6 +3,7 @@ namespace App\Models;
 
 use Illuminate\Support\Facades\Auth;
 use Ternobo\TernoboChat\Models\Conversation as TenoboChatConversation;
+use Ternobo\TernoboChat\Models\MutedConversation;
 
 class Conversation extends TenoboChatConversation
 {
@@ -19,9 +20,14 @@ class Conversation extends TenoboChatConversation
                         $data['showItem'] = false;
                     }
                 }
-
             }
         }
         return $data;
     }
+
+    public function unmute()
+    {
+        return MutedConversation::query()->where("user_id", Auth::user()->id)->where("conversation_id", $this->id)->delete();
+    }
+
 }

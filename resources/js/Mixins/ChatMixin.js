@@ -32,15 +32,7 @@ export default {
                 });
         },
         onNewMessage(event) {
-            let message = event.detail.message;
-            if (this.selectedChat != null && message.conversation_id == this.selectedChat.id) {
-                if (this.$refs.conversationElem) {
-                    // this.$refs.conversationElem.addMessage(message);
-
-                }
-            } else {
-                this.loadChats(true);
-            }
+            this.loadChats(true);
         },
         loadChats(repeat = false) {
             this.$store
@@ -125,6 +117,16 @@ export default {
     mounted() {
         this.loading = true;
         this.loadChats(true);
+        axios
+            .post("/connections")
+            .then((response) => {
+                let data = response.data;
+                this.connections = data.connections.data;
+                this.connections_next_page = data.connections.next_page_url;
+            })
+            .catch((err) => {
+                console.log(err);
+            })
         document.addEventListener("message:new", this.onNewMessage);
         window.addEventListener("keydown", this.onEsc);
     },

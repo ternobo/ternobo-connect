@@ -2,7 +2,7 @@
 	<div class="message-column" :class="{ received: message.sender.id != $store.state.user.id }">
 		<div class="message-container" :class="{ 'send-error': error }">
 			<i class="material-icons reload-btn" v-if="error" @click="sendMessage" :class="{ rotateAnimation: loading }">refresh</i>
-			<div class="profile-xsm" v-if="hideProfile"></div>
+			<figure class="profile-xsm" v-if="hideProfile"></figure>
 			<lazy-image v-else class="profile-xsm" img-class="profile-xsm" :src="message.sender.profile"></lazy-image>
 			<div>
 				<div v-if="message.type == 'text'" class="text-message-head">

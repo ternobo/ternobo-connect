@@ -132,10 +132,8 @@ document.addEventListener('ternobo:userloaded', event => {
             vue_app.$store.state.notifications_count += 1;
         });
 
-
         const chatChannel = window.Echo.private("ternobo-chat.user." + user.id);
         chatChannel.listen("\\Ternobo\\TernoboChat\\Events\\MessageEvent", function (data) {
-            console.log(data);
             if (!data.muted) {
                 if (vue_app.$store.state.url != "/chats") {
                     vue_app.$store.commit("addUnreadMessage");

@@ -2,7 +2,7 @@
 	<div class="chat-container">
 		<div class="chats-list">
 			<div class="chat-list-header">
-				<MaterialTextField v-model="searchInput" class="d-flex align-items-center material--transparent material--sm" input-class="w-100 pl-4" input-placeholder="جستجو">
+				<MaterialTextField v-model="searchInput" class="d-flex align-items-center material--transparent material--sm" input-class="w-100 pl-4" input-placeholder="جستجو در گفتگوها">
 					<div style="position: absolute; left: 0">
 						<loading-spinner style="width: 20px; height: 20px" v-if="searchLoading"></loading-spinner>
 						<i v-else-if="searchInput != null" @click="searchInput = null" class="material-icons text-superlight clickable hover-dark">close</i>
@@ -28,7 +28,7 @@
 				</div>
 			</div>
 		</div>
-		<conversation v-if="selectedChat != null" ref="conversationElem" :chat-id="selectedChat.id" :profile="selectedChat.user ? selectedChat.user.username : null" :title="chatTitle(selectedChat)" :subtitle="chatSubtitle(selectedChat)"></conversation>
+		<conversation v-if="selectedChat != null" ref="conversationElem" :isVerified="selectedChat.user ? selectedChat.user.is_verified : false" :image="selectedChat.user ? selectedChat.user.profile : selectChat.icon" :chat-id="selectedChat.id" :profile="selectedChat.user ? selectedChat.user.username : null" :title="chatTitle(selectedChat)" :subtitle="chatSubtitle(selectedChat)"></conversation>
 		<div v-else class="conversation-container">
 			<no-chat-selected></no-chat-selected>
 		</div>

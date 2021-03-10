@@ -12,12 +12,18 @@
         background: $white;
         box-shadow: 0px -5px 40px rgba(0, 0, 0, 0.05);
         overflow: hidden;
-        transform: translateY(200px);
+        transform: translateY(210px);
         transition: 0.5s all;
         margin-left: 16px;
 
         &.open {
             transform: translateY(-200px);
+        }
+
+        &.open {
+            >.widget-body {
+                box-shadow: 0px -5px 40px rgba(0, 0, 0, 0.05);
+            }
         }
 
         >.widget-header {
@@ -26,8 +32,6 @@
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            box-shadow: 0px -5px 40px rgba(0, 0, 0, 0.05);
-
 
             >.widget-info {
                 display: flex;
@@ -56,6 +60,7 @@
             transition: 0.3s all;
             min-height: 410px;
             height: 410px;
+
 
             .search-container {
                 padding: 12px;
