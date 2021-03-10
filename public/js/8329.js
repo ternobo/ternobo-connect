@@ -1,2 +1,1 @@
 (self.webpackChunkternobo=self.webpackChunkternobo||[]).push([[8329],{8329:(e,n,t)=>{"use strict";t.r(n),t.d(n,{default:()=>l});const s={name:"FollowingSuggestion",props:{users:{type:Object,default:udefined}}};const l=(0,t(1900).Z)(s,(function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("base-layou",[t("div",{staticClass:"col-md-12"},[e._v("\n        Content Goes Here\n    ")])])}),[],!1,null,null,null).exports}}]);
-//# sourceMappingURL=8329.js.map

@@ -15,12 +15,11 @@ mix.babelConfig({
     plugins: ['@babel/plugin-syntax-dynamic-import'],
 });
 
-mix.sourceMaps();
+// mix.sourceMaps();
 
 mix.options({
     extractVueStyles: 'public/css/vue-components.css'
 });
-mix.browserSync('localhost:8000');
 
 mix.webpackConfig(require('./webpack.config'));
 mix.js('resources/js/app.js', 'public/js').vue();
