@@ -109,7 +109,7 @@ class ConnectionsController extends Controller
     public function followings(Request $request)
     {
         $user = Auth::user();
-        SEOTools::setTitle("کسانی که شما دنبال می‌کنید");
+        SEOTools::setTitle("شبکه من");
         $followings = Following::query()
             ->with("page")
             ->with("page.user")
@@ -143,7 +143,7 @@ class ConnectionsController extends Controller
     public function followers(Request $request)
     {
         $user = Auth::user();
-        SEOTools::setTitle("دنبال کنندگان");
+        SEOTools::setTitle("شبکه من");
         $followings = Following::query()
             ->with("follower")
             ->with("follower.user")

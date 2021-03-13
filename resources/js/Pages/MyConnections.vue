@@ -1,6 +1,6 @@
 <template>
 	<base-layout>
-		<div class="invitations" v-if="invites.length > 0">
+		<!-- <div class="invitations" v-if="invites.length > 0">
 			<span class="text-dark font-18" style="border-bottom: 1px solid #191919"> دعوت‌ها </span>
 			<div class="list py-4">
 				<div class="row">
@@ -15,10 +15,10 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="connections" v-infinite-scroll="loadMoreConnection" :infinite-scroll-disabled="loadingMoreConnection" infinite-scroll-distance="5">
 			<tabs :compact="true" :centered="true" @selected="tabSelect">
-				<tab name="شبکه من" id="connections" :selected="true">
+				<!-- <tab name="شبکه من" id="connections">
 					<div class="w-100 d-flex justify-content-between">
 						<strong> شبکه من ({{ total }}) </strong>
 						<div class="search">
@@ -42,8 +42,8 @@
 					<div class="d-flex align-items-center justify-content-center p-4" v-if="loading || loadingMoreConnection">
 						<loading-spinner></loading-spinner>
 					</div>
-				</tab>
-				<tab name="دنبال شده‌ها" id="followings">
+				</tab> -->
+				<tab name="دنبال شده‌ها" id="followings" :selected="true">
 					<div class="w-100 d-flex justify-content-between">
 						<strong> دنبال شده‌ها ({{ total }}) </strong>
 						<div class="search">
@@ -101,8 +101,6 @@
 <script>
 import MaterialTextField from "../Components/inputs/MaterialTextField";
 import AppLayout from "../Layouts/AppLayout";
-import ConnectionButton from "../Components/buttons/ConnectionButton";
-import FollowButton from "../Components/buttons/FollowButton";
 import AcceptConnection from "../Components/buttons/AcceptConnection";
 import PageInfoCard from "../Components/Cards/PageInfoCard";
 import ConnectInvitation from "../Components/Cards/ConnectInvitation";
@@ -216,7 +214,7 @@ export default {
 	name: "MyConnectons",
 	data() {
 		return {
-			current_tab: "connections",
+			current_tab: "followings",
 			total: 0,
 			list: [],
 			search: "",
@@ -232,9 +230,7 @@ export default {
 		};
 	},
 	components: {
-		ConnectionButton,
 		AcceptConnection,
-		FollowButton,
 		MaterialTextField,
 		PageInfoCard,
 		ConnectInvitation,

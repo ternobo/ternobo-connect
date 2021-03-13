@@ -13,7 +13,6 @@
 
 <script>
 import FollowButton from "../buttons/FollowButton";
-import ConnectionButton from "../buttons/ConnectionButton";
 export default {
 	props: {
 		page: {
@@ -24,7 +23,6 @@ export default {
 	},
 	components: {
 		FollowButton,
-		ConnectionButton,
 	},
 	name: "PeopleSuggestion",
 };

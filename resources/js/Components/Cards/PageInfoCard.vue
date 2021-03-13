@@ -18,14 +18,8 @@
 </template>
 
 <script>
-import FollowButton from "../buttons/FollowButton";
-import ConnectionButton from "../buttons/ConnectionButton";
 export default {
 	name: "PageInfoCard",
-	components: {
-		FollowButton,
-		ConnectionButton,
-	},
 	props: {
 		page: {
 			type: Object,

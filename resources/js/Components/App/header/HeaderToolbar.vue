@@ -5,11 +5,11 @@
 				<i class="navheader-icon">home</i>
 				<div class="navheader-text">خانه</div>
 			</wire-link>
-			<wire-link :class="{ active: $store.state.url === '/chats' }" href="/chats">
+			<!-- <wire-link :class="{ active: $store.state.url === '/chats' }" href="/chats">
 				<i class="navheader-icon" :class="{ unread: $store.state.shared.unread_messages_count > 0 && $store.state.url != '/chats' }">textsms</i>
 				<div class="navheader-text">گفتگو</div>
-			</wire-link>
-			<wire-link :class="{ active: $store.state.url === '/connections' }" href="/connections">
+			</wire-link> -->
+			<wire-link :class="{ active: $store.state.url === '/followings' }" href="/followings">
 				<i class="navheader-icon">group</i>
 				<div class="navheader-text">شبکه من</div>
 			</wire-link>
@@ -36,7 +36,7 @@
 			<div class="d-flex align-items-center">
 				<div class="d-flex align-items-center">
 					<span style="white-space: nowrap; user-select: none" dir="ltr" class="ml-2">{{ $store.state.user.username }} <i v-if="$store.state.user.is_verified === 1" class="verificationcheck">check_circle</i> </span>
-					<img v-bind:src="$store.state.user.profile" class="profile-xsm" />
+					<img v-bind:src="$store.state.user.profile" class="profile-xxsm" />
 				</div>
 				<i class="material-icons text-light">more_vert</i>
 			</div>

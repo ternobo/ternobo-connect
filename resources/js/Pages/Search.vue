@@ -56,9 +56,6 @@
 import AppLayout from "../Layouts/AppLayout";
 import NoContent from "../Components/NoContent";
 import PostCard from "../Components/PostCard/PostCard";
-
-import ConnectionButton from "../Components/buttons/ConnectionButton";
-import FollowButton from "../Components/buttons/FollowButton";
 export default {
 	created() {
 		this.data = this.results.data;
@@ -144,8 +141,6 @@ export default {
 	components: {
 		NoContent,
 		PostCard,
-		FollowButton,
-		ConnectionButton,
 	},
 	name: "Search",
 	layout: AppLayout,

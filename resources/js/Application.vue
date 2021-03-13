@@ -10,7 +10,7 @@
 				</transition-group>
 			</div>
 		</transition>
-		<widget-container v-if="this.url != '/' && this.url != '/chats' && this.user != null && $root.isDesktop"></widget-container>
+		<!-- <widget-container v-if="this.url != '/' && this.url != '/chats' && this.user != null && $root.isDesktop"></widget-container> -->
 	</div>
 </template>
 

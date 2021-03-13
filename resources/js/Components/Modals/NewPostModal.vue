@@ -57,7 +57,7 @@
 							</span>
 						</file-input>
 						<span class="splitor-line mx-2"></span>
-						<wire-link href="/articles/create" class="text-grey hover-dark d-flex align-items-center font-12" data-toggle="tooltip" v-b-tooltip.hover title="نوشتن مقاله"><i class="material-icons-outlined hover-dark">article</i></wire-link>
+						<a class="text-grey hover-dark d-flex align-items-center font-12 disabled"><i class="material-icons-outlined disabled">article</i></a>
 					</div>
 					<div class="tags pr-0 pb-3">
 						<TagInput class="w-100" v-model="tags" />
