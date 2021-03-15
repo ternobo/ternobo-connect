@@ -11,6 +11,7 @@
 						<notification :notificationGroup="notification"></notification>
 					</div>
 				</div>
+				<div class="w-100 text-muted font-14 text-center" v-if="groupsKey.length < 1">هیچ اعلانی وجود ندارد</div>
 				<div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
 					<loading-spinner class="image__spinner" />
 				</div>

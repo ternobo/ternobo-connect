@@ -52,6 +52,12 @@
 
             .date-text {
                 margin-right: 12px;
+                font-size: 12px;
+                color: #C8C8C8;
+
+                @media screen and (max-width: $sm-size) {
+                    font-size: 10px;
+                }
             }
 
             .notification-text {
@@ -61,11 +67,19 @@
                     display: flex;
                     color: $dark;
                     font-size: 16px;
+
+                    @media screen and (max-width: $sm-size) {
+                        font-size: 14px;
+                    }
                 }
 
                 .action {
                     color: $grey;
                     font-size: 14px;
+
+                    @media screen and (max-width: $sm-size) {
+                        font-size: 12px;
+                    }
                 }
 
             }

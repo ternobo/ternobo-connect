@@ -453,12 +453,11 @@ class User extends Authenticatable implements Messageable
     public function getNotifications()
     {
         $notificationsPaginator = Notification::query()->where("to", $this->personalPage->id)
-            ->whereMonth("created_at", ">=", Carbon::now()->subMonth()->month)
+            ->where("created_at", ">=", Carbon::now()->subMonth())
             ->whereHasMorph("notifiable", [Post::class, Skill::class, Comment::class, Page::class])
             ->latest("created_at")
             ->with(["sender", "notifiable"])
             ->paginate(30);
-        // ;
         // dd(Carbon::now()->subMonth())    ;
         $notifications = $notificationsPaginator;
 
