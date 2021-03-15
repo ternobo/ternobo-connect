@@ -15,7 +15,7 @@ mix.babelConfig({
     plugins: ['@babel/plugin-syntax-dynamic-import'],
 });
 
-// mix.sourceMaps();
+mix.sourceMaps();
 
 mix.options({
     extractVueStyles: 'public/css/vue-components.css'
@@ -25,4 +25,7 @@ mix.webpackConfig(require('./webpack.config'));
 mix.js('resources/js/app.js', 'public/js').vue();
 mix.sass("resources/sass/application/app.scss", "public/css");
 mix.extract(['vue'])
+mix.browserSync({
+    proxy: "http://localhost:8000"
+});
 mix.version();

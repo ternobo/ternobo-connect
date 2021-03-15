@@ -1,7 +1,16 @@
 window._ = require('lodash');
 import NoiseGate from "noise-gate";
 window.moment = require('jalali-moment');
+window.moment.isSameWeek = function (firstDay, secondDay, offset = -1) {
+    var firstMoment = moment(firstDay);
+    var secondMoment = moment(secondDay);
 
+    var startOfWeek = function (_moment, _offset) {
+        return _moment.add("days", _moment.weekday() * -1 + (_moment.weekday() >= 7 + _offset ? 7 + _offset : _offset));
+    }
+
+    return startOfWeek(firstMoment, offset).isSame(startOfWeek(secondMoment, offset), "day");
+}
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

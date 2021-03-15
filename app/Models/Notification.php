@@ -10,29 +10,19 @@ use Ixudra\Curl\Facades\Curl;
 class Notification extends Model
 {
 
-    public function skill()
-    {
-        return $this->belongsTo("App\Models\Skill", "notificationable_id");
-    }
-
-    public function mycomment()
-    {
-        return $this->belongsTo("App\Models\Comment", "notificationable_id");
-    }
-
-    public function page()
-    {
-        return $this->belongsTo("App\Models\Page", "notificationable_id");
-    }
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
 
     public function sender()
     {
         return $this->belongsTo("App\Models\Page", "from");
     }
 
-    public function post()
+    public function notifiable()
     {
-        return $this->belongsTo("App\Models\Post", "notificationable_id");
+        return $this->morphTo("notifiable");
     }
 
     public function comment()
@@ -42,31 +32,10 @@ class Notification extends Model
 
     public function toArray()
     {
-        // get the original array to be displayed
         $data = parent::toArray();
-
-        switch ($data['notificationable_type']) {
-            case "post":
-                $data['post'] = $this->post;
-                break;
-            case "page":
-                $data['page'] = $this->page;
-                break;
-            case "comment":
-                $data['comment'] = $this->comment;
-                $data['mycomment'] = $this->mycomment;
-                break;
-            case "skill":
-                $data['skill'] = $this->skill;
-                break;
-        }
-
-        if ($data['action'] == 'comment') {
+        if ($data['action'] == 'comment' || $data['action'] == 'reply') {
             $data['comment'] = $this->comment;
         }
-
-        $data['sender'] = $this->sender;
-
         return $data;
     }
 
@@ -91,31 +60,37 @@ class Notification extends Model
             switch ($action) {
                 case "like":
                     $type = "post";
+                    $notifiable_type = Post::class;
                     $title = $thename . " " . "محتوای شما را پسندید";
                     $url = url("/posts/$notifiable_id");
                     break;
                 case "follow":
                     $type = "page";
+                    $notifiable_type = Page::class;
                     $title = $thename . " " . "شما را دنبال می‌کند";
                     $url = url("/$username");
                     break;
                 case "comment":
                     $type = "post";
+                    $notifiable_type = Post::class;
                     $title = $thename . " " . "برای محتوای شما نظر گذاشت";
                     $url = url("/posts/$notifiable_id");
                     break;
                 case "like_comment":
                     $type = "comment";
+                    $notifiable_type = Comment::class;
                     $title = $thename . " " . "دیدگاه شما پسندید";
                     $url = url("/posts/$notifiable_id");
                     break;
                 case "reply":
                     $type = "comment";
+                    $notifiable_type = Comment::class;
                     $title = $thename . " " . "به نظر شما پاسخ داد";
                     $url = url("/posts/$notifiable_id");
                     break;
                 case "skill_credit":
                     $type = "skill";
+                    $notifiable_type = Skill::class;
                     $skill = Skill::query()->find($notifiable_id);
                     if ($skill instanceof Skill) {
                         $title = $thename . " " . "مهارت $skill->name شما را تایید کرد.";
@@ -123,6 +98,7 @@ class Notification extends Model
                     break;
                 case "mention":
                     $type = "post";
+                    $notifiable_type = Post::class;
                     $url = url("/posts/$notifiable_id");
                     $title = $thename . " " . "در یک محتوا از شما نام برده";
                     break;
@@ -134,8 +110,8 @@ class Notification extends Model
 
                 $notification->action = $action;
 
-                $notification->notificationable_id = $notifiable_id;
-                $notification->notificationable_type = $type;
+                $notification->notifiable_id = $notifiable_id;
+                $notification->notifiable_type = $notifiable_type;
                 $notification->connected_to = $connected_to;
 
                 $notification->save();

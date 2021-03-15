@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Comment;
 use App\Models\Notification;
 use App\Models\Page;
+use App\Models\Post;
+use App\Models\Skill;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -40,21 +43,22 @@ class AppServiceProvider extends ServiceProvider
                     "SEO" => SEOTools::generate(),
                     "connectedPeople" => function () {
                         if (Auth::check()) {
-                            return Auth::user()->getConnectionsIds();
+                            // return Auth::user()->getConnectionsIds();
                         }
                         return [];
                     },
                     'unread_messages_count' => function () {
                         if (Auth::check()) {
-                            return Auth::user()->conversations()->whereHas('messages', function ($query) {
-                                $query->where("seen", false)->where("sender_id", "!=", Auth::user()->id);
-                            })->count();
+                            // return Auth::user()->conversations()->whereHas('messages', function ($query) {
+                            //     $query->where("seen", false)->where("sender_id", "!=", Auth::user()->id);
+                            // })->count();
                         }
                         return 0;
                     },
                     'notifications_count' => function () {
                         if (Auth::check()) {
                             return count(Notification::query()
+                                    ->whereHasMorph("notifiable", [Post::class, Skill::class, Comment::class, Page::class])
                                     ->where("seen", false)
                                     ->where("to", Auth::user()->personalPage->id)->get());
                         }
@@ -62,7 +66,7 @@ class AppServiceProvider extends ServiceProvider
                     },
                     "waitingConnections" => function () {
                         if (Auth::check()) {
-                            return Auth::user()->getWaitingConnectionsIds();
+                            // return Auth::user()->getWaitingConnectionsIds();
                         }
                         return [];
                     },
@@ -97,8 +101,8 @@ class AppServiceProvider extends ServiceProvider
                             }
                             return $output;
                         }
-                        return null;
-                    }
+                        return [];
+                    },
                 ];
             }
         );

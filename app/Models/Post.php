@@ -52,6 +52,16 @@ class Post extends Model
         return $this->belongsTo("App\Models\User");
     }
 
+    public function comments()
+    {
+        return $this->hasMany("App\Models\Comment", "post_id");
+    }
+
+    public function notifications()
+    {
+        return $this->morphMany(Notification::class, "notifiable");
+    }
+
     public function share()
     {
         $data = $this->belongsTo("App\Models\Post", "post_id")->with("page")
@@ -63,11 +73,6 @@ class Post extends Model
         return $data;
     }
 
-    public function getPublisher()
-    {
-        return Page::find($this->page_id);
-    }
-
     public function page()
     {
         return $this->belongsTo("App\Models\Page", "page_id");
@@ -76,6 +81,11 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo("App\Models\Category");
+    }
+
+    public function actions()
+    {
+        return $this->hasMany(Action::class, "post_id");
     }
 
     public function bookmarks()
@@ -141,6 +151,15 @@ class Post extends Model
             });
         })->where("post_id", $this->id)->latest()->paginate($limit);
         return $comments;
+    }
+
+    public function delete()
+    {
+        $this->notifications()->delete();
+        $this->bookmarks()->delete();
+        $this->comments()->delete();
+        $this->actions()->delete();
+        parent::delete();
     }
 
     public function mutualLikes()

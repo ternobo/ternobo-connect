@@ -1,21 +1,22 @@
 <template>
 	<div class="post-notification">
-		<div class="d-flex flex-responsive flex-row aling-items-center justify-content-between w-100">
-			<wire-link class="d-flex align-items-center justify-content-start w-100" :href="$APP_URL + '/' + notification.sender.slug">
-				<lazy-image img-class="profile-sm" class="profile-sm mb-0 ml-2" :src="notification.sender.profile" />
-				<span class="d-flex align-items-center">
-					<span class="d-flex flex-column">
-						<span class="d-flex aling-items-center">
-							<b> {{ notification.sender.name }} <i v-if="notification.sender.is_verified" class="verificationcheck">check_circle</i> </b>
-							<span class="d-flex ml-2 align-items-center text-muted font-11">{{ createdAt }}</span>
-						</span>
-						<div class="w-100">شما را دنبال می‌کند</div>
-					</span>
-				</span>
-			</wire-link>
-			<div class="actions d-flex align-items-center mt-2 mt-lg-0">
-				<connetion-buttons :page-id="notification.sender.id" :userId="notification.sender.user_id"></connetion-buttons>
+		<div class="notification-header">
+			<div class="notification-title">
+				<div class="profiles">
+					<lazy-image :src="notifications[0].sender.profile" class="profile-xxsm" img-class="profile-xxsm" />
+					<lazy-image v-if="notifications[1]" :src="notifications[1].sender.profile" class="profile-xxsm" img-class="profile-xxsm" />
+				</div>
+				<div class="notification-text">
+					<div class="title">
+						<span>{{ notifications[0].sender.name }}</span>
+						<span v-if="notifications[1]">، {{ notifications[1].sender.name }}</span>
+						<span v-if="notifications.length > 2">و {{ notifications.length - 2 }} نفر دیگر</span>
+						<span class="font-weight-normal date-text">{{ createdAt }}</span>
+					</div>
+					<div class="action">شما را {{ notifications.length > 1 ? "دنبال می‌کنند" : "دنبال می‌کند" }}</div>
+				</div>
 			</div>
+			<i class="material-icons text-action">group_add</i>
 		</div>
 	</div>
 </template>

@@ -243,20 +243,6 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
         Route::resource("/posts", "PostController");
 
-        Route::post("/categories/sort/{id}", "CategoryController@sort");
-
-        Route::resource("categories", "CategoryController");
-
-        // Notifications
-        Route::get('/notifications', 'NotificationController@index')->name('notifications');
-
-        // Start Idea Comments
-        Route::any("/idea-replies/{id}/replies", "Ideas\RepliesCotnroller@replies");
-        Route::post("/idea-replies/{id}/like", "Ideas\RepliesCotnroller@likeIdeaReply");
-
-        Route::resource('ideas.replies', "Ideas\RepliesCotnroller");
-        // End Comments
-
         //Chats
         Route::prefix("chats")->group(function () {
             Route::get("/", "Chats\ChatController@index");
@@ -272,6 +258,20 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         });
 
         Route::post("/share/{post_id}", "PostController@sharePost");
+
+        Route::post("/categories/sort/{id}", "CategoryController@sort");
+
+        Route::resource("categories", "CategoryController");
+
+        // Notifications
+        Route::get('/notifications', 'NotificationController@index')->name('notifications');
+
+        // Start Idea Comments
+        Route::any("/idea-replies/{id}/replies", "Ideas\RepliesCotnroller@replies");
+        Route::post("/idea-replies/{id}/like", "Ideas\RepliesCotnroller@likeIdeaReply");
+
+        Route::resource('ideas.replies', "Ideas\RepliesCotnroller");
+        // End Comments
     });
     //End Auth
 

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Str;
 use Jenssegers\Agent\Agent;
 use Stevebauman\Location\Facades\Location;
 
@@ -39,13 +40,22 @@ class ActiveSession extends Model
         ]);
         $session->user_id = $user_id;
 
+        $token = null;
+        do {
+            $token = Str::uuid();
+        } while (ActiveSession::query()->where("token", $token)->first() instanceof ActiveSession);
+
+        $session->token = $token;
+
         $session->ip_address = Request::ip();
         $location = Location::get(Request::ip());
         if ($location) {
             $session->location = Location::get(Request::ip())->countryName;
         }
+
         $session->save();
         Cookie::queue('ternobo_remembered_session_id', $session->id, 60 * 24 * 365 * 20);
+        return $session;
     }
 
     public function toArray()

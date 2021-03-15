@@ -1,5 +1,5 @@
 <template>
-	<component :is="component" :notification="notification"></component>
+	<component :is="component" :notificationGroup="notificationGroup"></component>
 </template>
 
 <script>
@@ -17,44 +17,32 @@ export default {
 		};
 	},
 	created() {
-		switch (this.notification.action) {
+		switch (this.notificationGroup.action) {
 			case "like_comment":
-				if (this.notification.mycomment != null) {
-					this.component = CommentLikeNotification;
-				}
+				this.component = CommentLikeNotification;
 				break;
 			case "like":
-				if (this.notification.post != null) {
-					this.component = LikeNotification;
-				}
+				this.component = LikeNotification;
 				break;
 			case "follow":
 				this.component = FollowNotification;
 				break;
 			case "comment":
-				if (this.notification.post != null) {
-					this.component = CommentNotification;
-				}
+				this.component = CommentNotification;
 				break;
 			case "reply":
-				if (this.notification.mycomment != null) {
-					this.component = ReplyNotification;
-				}
+				this.component = ReplyNotification;
 				break;
 			case "skill_credit":
-				if (this.notification.skill != null) {
-					this.component = SkillCreditNotificationVue;
-				}
+				this.component = SkillCreditNotificationVue;
 				break;
 			case "mention":
-				if (this.notification.post != null) {
-					this.component = MentionNotification;
-				}
+				this.component = MentionNotification;
 				break;
 		}
 	},
 	name: "Notification",
-	props: ["notification"],
+	props: ["notificationGroup"],
 };
 </script>
 

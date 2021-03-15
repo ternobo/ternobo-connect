@@ -2,13 +2,14 @@
 
 namespace App\Console\Commands;
 
-use App\Events\NotificationEvent;
 use App\Models\Comment;
 use App\Models\Following;
 use App\Models\Like;
 use App\Models\Notification;
+use App\Models\Page;
 use App\Models\Post;
 use App\Models\User;
+use Carbon\Carbon;
 use Faker\Factory;
 use Illuminate\Console\Command;
 
@@ -60,12 +61,12 @@ class FakeNotification extends Command
             $notification->from = $from->id;
             $notification->to = $user->id;
 
-            $action = $faker->randomElement(['like', 'comment', 'follow', 'reply', 'skill_credit', 'mention']);
+            $action = $faker->randomElement(['like', 'comment', 'follow', 'mention']);
             // print_r($action);
             $notification->action = $action;
 
             $notificationable_id = $post->id;
-            $notificationable_type = "post";
+            $notificationable_type = Post::class;
 
             $connected_to = $post->id;
 
@@ -76,7 +77,6 @@ class FakeNotification extends Command
                     $like->post_id = $post->id;
                     $result = $like->save();
                     $connected_to = $like->id;
-                    $notificationable_type = "post";
                     break;
                 case 'comment':
                     $comment = new Comment();
@@ -85,7 +85,6 @@ class FakeNotification extends Command
                     $comment->text = $faker->text;
                     $comment->save();
                     $connected_to = $comment->id;
-                    $notificationable_type = "post";
                     break;
                 case 'follow':
                     $followRow = Following::query()->where("user_id", $from->id)->where("following", $user->id)->firstOrNew();
@@ -94,23 +93,23 @@ class FakeNotification extends Command
                     $followRow->save();
                     $notificationable_id = $from->id;
                     $connected_to = $followRow->id;
-                    $notificationable_type = "page";
+                    $notificationable_type = Page::class;
                     break;
                 case 'mention':
                     $newPost = Post::all()->random();
                     $connected_to = $newPost->id;
                     $notificationable_id = $newPost->id;
-                    $notificationable_type = "post";
                     break;
             }
 
-            $notification->notificationable_id = $notificationable_id;
-            $notification->notificationable_type = $notificationable_type;
+            $notification->notifiable_id = $notificationable_id;
+            $notification->notifiable_type = $notificationable_type;
             $notification->connected_to = $connected_to;
-
+            $notification->created_at = Carbon::today()->subDays(rand(0, 30));
+            $notification->timestamps = false;
             $notification->save();
 
-            event(new NotificationEvent($notification));
+            // event(new NotificationEvent($notification));
 
         }
         return 0;

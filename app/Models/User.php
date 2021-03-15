@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -147,6 +148,9 @@ class User extends Authenticatable implements Messageable
         return $this->hasMany("App\Models\Following");
     }
 
+    /**
+     * Return profile steps
+     */
     public function getProfileSteps()
     {
 
@@ -236,6 +240,9 @@ class User extends Authenticatable implements Messageable
         return json_decode(json_encode($result));
     }
 
+    /**
+     * Check if following a page
+     */
     public function isFollowing($id)
     {
         $page = Page::getPersonalPage($id);
@@ -243,60 +250,92 @@ class User extends Authenticatable implements Messageable
         return $connection->first();
     }
 
+    /**
+     * check if user is connected to another user.
+     */
     public function isConnected($id)
     {
         $connection = Connection::query()->whereRaw("(user_id = '$this->id' AND connection_id = '$id') OR (user_id = '$id' AND connection_id = '$this->id')")->first();
         return $connection;
     }
-
+    /**
+     * Check if a connection is accepted by user
+     */
     public function isAcceptedConnection($id)
     {
         $connection = Connection::query()->whereRaw("(user_id = '$this->id' AND connection_id = '$id') OR (user_id = '$id' AND connection_id = '$this->id')")->first();
         return ($connection instanceof Connection) ? $connection->accepted : false;
     }
 
+    /**
+     * User personal Page
+     */
     public function personalPage()
     {
         return $this->hasOne("App\Models\Page", "user_id")->where("type", "personal");
     }
 
+    /**
+     * User pages
+     */
     public function pages()
     {
         return $this->hasMany("App\Models\Page", "user_id");
     }
 
+    /**
+     * Get user personal page (deprecated)
+     */
     public function getPage()
     {
         return Page::where("user_id", $this->id)->where("type", "personal")->first();
     }
 
+    /**
+     * Check if a post is liked by user.
+     */
     public function isPostLiked($id)
     {
         $page = $this->getPage();
         return (Like::query()->where("post_id", $id)->where("page_id", $page->id)->first() instanceof Like);
     }
 
+    /**
+     * Check if a commnet is liked by user.
+     */
     public function isCommentLiked($id)
     {
         $page = $this->getPage();
         return (Like::query()->where("comment_id", $id)->where("page_id", $page->id)->first() instanceof Like);
     }
 
+    /**
+     * Return bookmarks
+     */
     public function bookmarks()
     {
         return $this->hasMany("App\Models\Bookmark");
     }
 
+    /**
+     * return skills
+     */
     public function skills()
     {
         return $this->hasMany("App\Models\Skill", "user_id")->orderBy("sort_place");
     }
 
+    /**
+     * Check if user credit a skill before.
+     */
     public function isCredit($id)
     {
         return SkillCredit::query()->where("user_id", $this->id)->where("skill_id", $id)->first() instanceof SkillCredit;
     }
 
+    /**
+     * Return Connections.
+     */
     public function getConnections()
     {
         return Connection::query()
@@ -306,6 +345,9 @@ class User extends Authenticatable implements Messageable
             ->toArray();
     }
 
+    /**
+     * Return Connections list (col id only).
+     */
     public function getConnectionsIds()
     {
         $connections = Connection::query()
@@ -324,6 +366,9 @@ class User extends Authenticatable implements Messageable
         return $list;
     }
 
+    /**
+     * create a new conversation or return precreated convertsation with the user
+     */
     public function startConversationWith($user_id)
     {
         $members = [
@@ -338,6 +383,9 @@ class User extends Authenticatable implements Messageable
         return $conversation;
     }
 
+    /**
+     * Get list of Pending Connections
+     */
     public function getWaitingConnectionsIds()
     {
         $connections = Connection::query()
@@ -356,12 +404,22 @@ class User extends Authenticatable implements Messageable
         return $list;
     }
 
+    /**
+     * Check if there is any unread notification
+     *
+     * return boolval
+     */
     public function hasUnreadNotification()
     {
         $notification = Notification::query()->where("page_id", $this->getPage()->id)->where("seen", false)->get();
         return (count($notification) > 0);
     }
 
+    /**
+     * Check if there is any pending connection, not seened.
+     *
+     * return boolval
+     */
     public function hasUnreadConnection()
     {
         $notification = Connection::query()->where("user_id", Auth::user()->id)->where("seen", false)->get();
@@ -380,6 +438,80 @@ class User extends Authenticatable implements Messageable
     {
         $data['user_id'] = $this->id;
         return Media::query()->where("filename", $data['filename'])->where("user_id", $this->id)->firstOrCreate($data);
+    }
+
+    /**
+     * Add Active Session and return token
+     */
+    public function addAPISession()
+    {
+        $session = ActiveSession::addSession($this->id);
+        return $session->token;
+    }
+
+    /** Get user Notifications */
+    public function getNotifications()
+    {
+        $notificationsPaginator = Notification::query()->where("to", $this->personalPage->id)
+            ->whereMonth("created_at", ">=", Carbon::now()->subMonth()->month)
+            ->whereHasMorph("notifiable", [Post::class, Skill::class, Comment::class, Page::class])
+            ->latest("created_at")
+            ->with(["sender", "notifiable"])
+            ->paginate(30);
+        // ;
+        // dd(Carbon::now()->subMonth())    ;
+        $notifications = $notificationsPaginator;
+
+        $next_page_url = $notificationsPaginator->nextPageUrl();
+
+        $groups = [];
+        $group_index = 0;
+        $prevGroup = "unset";
+        foreach ($notifications as $notification) {
+            $index = "notifiable_" . $notification->action . '_' . $notification->notifiable_id . "_" . $group_index;
+            if (isset($groups[$index])) {
+                $notification = $notification->toArray();
+                $group = $groups[$index];
+                $group["notifiable"] = $notification["notifiable"];
+
+                $group['updated_at'] = new Carbon($notification["created_at"]);
+                $group['action'] = $notification['action'];
+
+                array_push($group["notifications"], $notification);
+                $groups[$index] = $group;
+
+                if ($prevGroup != "unset" && isset($groups[$prevGroup]) && !$groups[$index]["updated_at"]->isSameDay($groups[$prevGroup]["updated_at"])) {
+                    $index++;
+                }
+
+            } else {
+                $notification = $notification->toArray();
+                $group = $this->createNotificationGroup($notification['notifiable_id']);
+                $group["notifiable"] = $notification["notifiable"];
+                $group["notifiable_type"] = $notification["notifiable_type"];
+                $group["notifiable_id"] = $notification["notifiable_id"];
+                unset($notification["notifiable"]);
+                $group['action'] = $notification['action'];
+                $group['updated_at'] = new Carbon($notification["created_at"]);
+                array_push($group["notifications"], $notification);
+                $groups[$index] = $group;
+            }
+            $prevGroup = $index;
+        }
+        uasort($groups, function ($a, $b) {
+            return $b['updated_at']->greaterThan($a['updated_at']);
+        });
+        return ["data" => array_values($groups), 'next_page_url' => $notificationsPaginator->nextPageUrl()];
+    }
+
+    private function createNotificationGroup($notifiable_id)
+    {
+        return [
+            "notifications" => [],
+            "notifiable" => null,
+            "notifiable_id" => $notifiable_id,
+            "updated_at" => null,
+        ];
     }
 
     /**

@@ -1,20 +1,22 @@
 <template>
 	<div class="post-notification">
-		<wire-link class="userinfo text-dark" :href="'/' + notification.sender.slug">
-			<lazy-image img-class="profile-sm" class="profile-sm mb-3 ml-2" :src="notification.sender.profile" />
-			<div class="d-flex flex-column justify-content-center">
-				<span class="d-flex align-items-center">
-					<b>
-						{{ notification.sender.name }}
-						<i v-if="notification.sender.is_verified" class="verificationcheck">check_circle</i>
-					</b>
-					<span class="ml-2 text-muted font-11">{{ time(notification.created_at) }} </span></span
-				>
-				<div class="w-100 text-left">در این محتوا از شما نام برده</div>
+		<div class="notification-header">
+			<div class="notification-title">
+				<div class="profiles">
+					<lazy-image :src="notifications[0].sender.profile" class="profile-xxsm" img-class="profile-xxsm" />
+				</div>
+				<div class="notification-text">
+					<div class="title">
+						<span>{{ notifications[0].sender.name }}</span>
+						<span class="font-weight-normal date-text">{{ createdAt }}</span>
+					</div>
+					<div class="action">در این محتوا از شما نام برده</div>
+				</div>
 			</div>
-		</wire-link>
-		<div class="row m-0">
-			<post-viewer :post="notification.post"></post-viewer>
+			<i class="material-icons-outlined text-action">account_circle</i>
+		</div>
+		<div class="notification-content">
+			<post-viewer :post="notificationGroup.notifiable"></post-viewer>
 		</div>
 	</div>
 </template>

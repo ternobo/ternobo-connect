@@ -1,9 +1,14 @@
+.notification-item:not(:last-child) {
+    .post-notification {
+        border-bottom: 2px solid #E0E0E0;
+    }
+}
+
 .post-notification {
     display: flex;
     justify-content: center;
     flex-direction: column;
     padding: 1.5rem 0;
-    border-bottom: 1px solid #DEDEDE;
     width: 100%;
 }
 
@@ -11,99 +16,81 @@
     background: $border-color
 }
 
+.notifications-group {
+    >h3 {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 28px;
+        color: $dark;
+        margin-bottom: 28px;
+    }
+
+    &:not(:first-child) {
+        >h3 {
+            margin-top: 48px;
+        }
+    }
+}
+
 .post-notification {
-    .userinfo {
+    .notification-header {
         display: flex;
+        justify-content: space-between;
         align-items: center;
-    }
 
-    .post {
-        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
-        align-self: center;
-        width: 88%;
-        padding-top: 0.5rem;
-        max-height: 150px;
-        overflow: hidden;
-    }
-
-    .post {
-        .post-title {
-            padding: 1rem;
-            color: $grey;
-        }
-
-        p {
-            padding: 0.5rem;
-            color: $grey;
-            text-align: justify;
-        }
-
-        .media {
-            width: 100%;
-        }
-
-        .media {
-            img {
-                width: 100%;
-            }
-        }
-    }
-}
-
-.post-notification {
-    .profileimage {
-        width: 52px;
-        height: 52px;
-    }
-}
-
-@media screen and(max-width: $sm-size) {
-    .post-notification {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        padding-top: 1rem;
-        width: 100%;
-        border-bottom: 1px solid #DEDEDE;
-        padding-bottom: 2rem;
-        font-size: 12px;
-    }
-
-    .post-notification {
-        .userinfo {
+        >.notification-title {
             display: flex;
-            align-items: center;
-            margin-bottom: 0;
-            padding-bottom: 0.5rem;
-        }
 
-        .post {
-            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
-            align-self: center;
-            width: 100%;
-            padding-top: 0.5rem;
-        }
+            >.profiles {
+                margin-left: 12px;
+                display: flex;
 
-        .post {
-            .post-title {
-                color: $grey;
-            }
-
-            p {
-                padding: 0.5rem;
-                color: $grey;
-                text-align: justify;
-            }
-
-            .media {
-                width: 100%;
-            }
-
-            .media {
-                img {
-                    width: 100%;
+                figure.profile-xxsm:not(:first-child) {
+                    margin-right: -20px;
                 }
             }
+
+            .date-text {
+                margin-right: 12px;
+            }
+
+            .notification-text {
+                font-weight: 600;
+
+                .title {
+                    display: flex;
+                    color: $dark;
+                    font-size: 16px;
+                }
+
+                .action {
+                    color: $grey;
+                    font-size: 14px;
+                }
+
+            }
+
+        }
+    }
+
+    .notif-icon {
+        @extend .text-muted;
+    }
+
+    .notification-content {
+        background: $white;
+        display: flex;
+        flex-direction: column;
+
+        .comment-text {
+            margin: 24px;
+            margin-bottom: 0;
+            padding: 16px 24px;
+            background-color: $body-bg;
+        }
+
+        .post-content {
+            padding: 24px;
         }
     }
 }

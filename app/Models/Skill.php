@@ -18,6 +18,12 @@ class Skill extends Model
         return $this->hasMany("App\Models\SkillCredit", "skill_id");
     }
 
+    public function delete()
+    {
+        $this->credits()->delete();
+        parent::delete();
+    }
+
     public function toArray()
     {
         $data = parent::toArray();

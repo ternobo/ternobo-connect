@@ -175,4 +175,17 @@ class Comment extends Model
         return $response;
     }
 
+    public function notification()
+    {
+        return $this->hasOne(Notification::class, "connected_to")->where("action", "comment");
+    }
+
+    public function delete()
+    {
+        $this->notification()->delete();
+        $this->likes()->delete();
+        $this->replies()->delete();
+        parent::delete();
+    }
+
 }
