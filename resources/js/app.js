@@ -69,18 +69,6 @@ window.TProgress = TProgress;
 
 Vue.prototype.seen_content = [];
 Vue.prototype.seen_request = [];
-if (user_id) {
-    setInterval(() => {
-        const seen_request = Vue.prototype.seen_request;
-        if (seen_request.length > 0) {
-            axios.post("/seenPost", {
-                posts: seen_request
-            }).then(() => {
-                Vue.prototype.seen_request = [];
-            })
-        }
-    }, 3000);
-}
 
 let dataToken = (document.body.dataset.wire);
 document.body.dataset.wire = "";
@@ -116,6 +104,20 @@ document.addEventListener('ternobo:userloaded', event => {
     let notification = new Audio("/sounds/notification1.mp3")
 
     let user = event.detail.user;
+
+    if (user) {
+        setInterval(() => {
+            const seen_request = Vue.prototype.seen_request;
+            if (seen_request.length > 0) {
+                axios.post("/seenPost", {
+                    posts: seen_request
+                }).then(() => {
+                    Vue.prototype.seen_request = [];
+                })
+            }
+        }, 3000);
+    }
+
     if (user && !isSocketConnected) {
         if (window.hasOwnProperty("Notification")) {
             Notification.requestPermission();

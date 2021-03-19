@@ -12,6 +12,7 @@ use App\Models\Page;
 use App\Models\Post;
 use App\Models\Report;
 use App\Models\Tag;
+use App\SocialMediaTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -52,33 +53,9 @@ class PostController extends Controller
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
-
-            $mentions = array();
-            $matches = array();
-            preg_match_all('/\B@(\w+)/', $request->text, $matches);
-            if (isset($matches[1])) {
-                foreach ($matches as $match) {
-                    foreach ($match as $slug) {
-                        if ((!$this->startsWith($slug, "@") && !in_array($slug, $mentions))) {
-                            $mentions[] = $slug;
-                        }
-                    }
-                }
-            }
-
-            $text = htmlentities($request->text);
-
-            // The Regular Expression filter
-            $reg_exUrl = "/(\s((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/";
-
-            $text = (preg_replace_callback($reg_exUrl, function ($matches) {
-                foreach ($matches as $match) {
-                    return "<a target='_blank' href='" . $this->toURL($match) . "'>$match</a>";
-                }
-            }, $text));
-
-            $text = preg_replace('/\B@(\w+)/', "<a href=" . url("/") . "/" . "$0" . ">$0</a>", $text);
-            $text = str_replace("/@", "/", $text);
+            $rawText = htmlentities($request->text);
+            $mentions = SocialMediaTools::getMentions($rawText);
+            $text = SocialMediaTools::replacHashtags(SocialMediaTools::replaceMentions(SocialMediaTools::replaceUrls($rawText)), 3);
 
             $post = new Post();
             $post->user_id = Auth::user()->id;
@@ -91,18 +68,8 @@ class PostController extends Controller
                 $post->category_id = $category->id;
             }
 
-            if ($request->has("tags")) {
-                $tags = json_decode($request->tags);
-                foreach ($tags as $tag) {
-                    if (Tag::where("name", $tag)->first() instanceof Tag) {
-                        continue;
-                    }
-                    $thetag = new Tag();
-                    $thetag->name = $tag;
-                    $thetag->save();
-                }
-                $post->tags = json_encode($tags);
-            }
+            $post->tags = json_encode(array_slice(SocialMediaTools::getHashtags($rawText), 0, 3));
+
             $post->type = "post";
             $post->show = $request->type;
             $medias = array();
@@ -128,7 +95,6 @@ class PostController extends Controller
                     Notification::sendNotification("mention", $post->id, $page->id, $post->id);
                 }
             }
-            //  dd($mentions);
             return response()->json(array("result" => $result));
         }
     }
@@ -185,72 +151,6 @@ class PostController extends Controller
             $likes = Like::query()->with("page")->where("post_id", $post->id)->select(array("page_id", 'id'))->paginate(15);
         }
         return response()->json(['likes' => $likes]);
-    }
-
-    public function sharePost($post_id, Request $request)
-    {
-        Post::findOrFail($post_id);
-        $mentions = array();
-        $matches = array();
-        preg_match_all('/\B@(\w+)/', $request->text, $matches);
-        if (isset($matches[1])) {
-            foreach ($matches as $match) {
-                foreach ($match as $slug) {
-                    if ((!$this->startsWith($slug, "@") && !in_array($slug, $mentions))) {
-                        $mentions[] = $slug;
-                    }
-                }
-            }
-        }
-
-        $text = preg_replace('/\B@(\w+)/', "<a href=" . url("/") . "/" . "$0" . ">$0</a>", htmlentities($request->text));
-        $text = str_replace("/@", "/", $text);
-
-        $post = new Post();
-        $post->user_id = Auth::user()->id;
-        $post->page_id = Auth::user()->personalPage->id;
-        $post->text = $text;
-        if ($request->has("category")) {
-            $category = Category::query()->where("name", $request->category)
-                ->where("page_id", Auth::user()->personalPage->id)
-                ->firstOrCreate(["name" => $request->category, "page_id" => Auth::user()->personalPage->id]);
-            $post->category_id = $category->id;
-        }
-
-        if ($request->has("tags")) {
-            $tags = json_decode($request->tags);
-            foreach ($tags as $tag) {
-                if (Tag::where("name", $tag)->first() instanceof Tag) {
-                    continue;
-                }
-                $thetag = new Tag();
-                $thetag->name = $tag;
-                $thetag->save();
-            }
-            $post->tags = json_encode($tags);
-        }
-        $post->type = "share";
-        $post->show = $request->type;
-        $medias = array();
-        if ($request->has("media")) {
-            $medias = array(url($request->file("media")->store("medias")));
-        }
-        $post->medias = json_encode($medias);
-        $post->post_id = $post_id;
-        // $result = $post->save();
-        Auth::user()->personalPage->addAction("share", $post->id);
-        foreach ($mentions as $mention) {
-            $page = Page::query()->where("slug", $mention)->first();
-            if ($page instanceof Page) {
-                Notification::sendNotification("mention", $post->id, $page->id, $post->id);
-            }
-        }
-        return response()->json(array("result" => $result));
-    }
-
-    public function shareModalPost(Post $post)
-    {
-        return view("layouts.components.share-post", array("post" => $post));
     }
 
     public function report(Request $request)

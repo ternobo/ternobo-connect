@@ -62,6 +62,16 @@ class Post extends Model
         return $this->morphMany(Notification::class, "notifiable");
     }
 
+    public function slides()
+    {
+        return $this->hasMany(PostSlide::class, "post_id");
+    }
+
+    public function content()
+    {
+        return $this->hasManyThrough(PostContent::class, PostSlide::class, "post_id", "slide_id");
+    }
+
     public function share()
     {
         $data = $this->belongsTo("App\Models\Post", "post_id")->with("page")
