@@ -26,6 +26,16 @@ class ActiveSession extends Model
         return [];
     }
 
+    public static function isAdmin()
+    {
+        $api_key = Request::header("api-key");
+        if ($api_key != null) {
+            $session = ActiveSession::query()->where("token", $api_key)->first();
+            return $session instanceof ActiveSession;
+        }
+        return false;
+    }
+
     public static function addSession($user_id)
     {
         $session = new ActiveSession();

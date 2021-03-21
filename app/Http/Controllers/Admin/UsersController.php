@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -16,11 +16,10 @@ class UsersController extends Controller
     public function index()
     {
         $user = User::withTrashed()
-            ->with("personalPage")
-            ->get();
+            ->withCount(["followings", 'followers'])
+            ->paginate();
         return response()->json(['result' => true, 'data' => $user]);
     }
-
 
     /**
      * Display the specified resource.
@@ -30,6 +29,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
+        $user->loadCount(["followings", 'followers']);
         return response()->json(['result' => true, 'data' => $user]);
     }
 
@@ -50,25 +50,29 @@ class UsersController extends Controller
             "email_verified_at",
             "deleted_at",
             "created_at",
-            "password"
+            "password",
         ];
         $fields = $request->all();
-        if (count($fields) > 0) foreach ($fields as $key => $value) {
-            if (!in_array($key, $notAllowed)) {
-                $user->setAttribute($key, $value);
-                if ($key === "first_name" || $key === "last_name") {
-                    $user->name = $user->first_name . " " . $user->last_name;
+        if (count($fields) > 0) {
+            foreach ($fields as $key => $value) {
+                if (!in_array($key, $notAllowed)) {
+                    $user->setAttribute($key, $value);
+                    if ($key === "first_name" || $key === "last_name") {
+                        $user->name = $user->first_name . " " . $user->last_name;
+                    }
                 }
             }
         }
+
         return response()->json(['result' => $user->save()]);
     }
 
-    public function verifyUser(User $user){
-       if($user->nationalcard !== null){
-           $user->is_verified = true;
-           return response()->json(["result"=>$user->save()]);
-       }
+    public function verifyUser(User $user)
+    {
+        if ($user->nationalcard !== null) {
+            $user->is_verified = true;
+            return response()->json(["result" => $user->save()]);
+        }
     }
 
     /**

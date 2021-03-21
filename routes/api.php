@@ -17,5 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::post("/admin/login", "Admin\AdminController@login");
 
 Route::middleware(AdminAPIMiddleware::class)->prefix("/admin")->group(function () {
+    Route::resource("/users", "Admin\UsersController");
 
 });

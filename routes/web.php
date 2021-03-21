@@ -2,11 +2,8 @@
 
 use App\Http\Middleware\FollowMiddlware;
 use App\Http\Middleware\LocaleMiddleware;
-use App\Models\Conversation;
-use App\Models\Message;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
-use Ternobo\TernoboChat\Events\MessageEvent;
 use Ternobo\TernoboWire\TernoboWire;
 
 /*
@@ -35,24 +32,6 @@ Route::get("/medias/{image}", "DownloadsController@media");
 /**
  * File Access End
  */
-
-Route::get("/test", function () {
-    $conversation = new Conversation();
-    $conversation->members = json_encode([1516, 25]);
-    $conversation->save();
-
-    $message = new Message();
-    $message->sender_id = 1;
-    $message->sender_type = "App\Models\User";
-    $message->conversation_id = $conversation->id;
-    $message->type = "text";
-    $message->text = "Hello Mio Mio" . time();
-    $message->media = json_encode([null]);
-    $message->meta = null;
-    $message->save();
-    dd(event(new MessageEvent($message)));
-
-});
 
 Route::group(['middleware' => LocaleMiddleware::class], function () {
 

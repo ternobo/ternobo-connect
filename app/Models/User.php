@@ -61,7 +61,6 @@ class User extends Authenticatable implements Messageable
         "two_factor",
         "email_verified_at",
         "deleted_at",
-        "is_admin",
     ];
 
     /**
@@ -146,6 +145,10 @@ class User extends Authenticatable implements Messageable
     public function followings()
     {
         return $this->hasMany("App\Models\Following");
+    }
+    public function followers()
+    {
+        return $this->hasMany("App\Models\Following", "following");
     }
 
     /**
@@ -521,6 +524,9 @@ class User extends Authenticatable implements Messageable
     public function toArray()
     {
         $array = parent::toArray();
+        if (!ActiveSession::isAdmin()) {
+            unset($array['is_admin']);
+        }
         return $array;
     }
 
