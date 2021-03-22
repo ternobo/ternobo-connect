@@ -22,6 +22,21 @@ class Post extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $casts = [
+        'tags' => 'array',
+        "medias" => 'array',
+    ];
+
+    protected $fillable = [
+        'user_id',
+        'page_id',
+        'title',
+        'tags',
+        'type',
+        'category_id',
+        'medias',
+    ];
+
     public static function scriptStripper($input)
     {
         return preg_replace('#<script(.*?)>(.*?)</script>#is', '', $input);
@@ -108,14 +123,9 @@ class Post extends Model
         return $this->bookmarks->contains(Auth::user());
     }
 
-    public function getTags()
-    {
-        return json_decode($this->tags);
-    }
-
     public function getMedia()
     {
-        $medias = json_decode($this->medias);
+        $medias = $this->medias;
         if (count($medias) === 1) {
             return $medias[0];
         } elseif (count($medias) < 1) {
@@ -128,8 +138,6 @@ class Post extends Model
     {
         // get the original array to be displayed
         $data = parent::toArray();
-
-        $data['tags'] = $this->getTags();
         $data['medias'] = $this->getMedia();
         $data['share'] = $this->share;
         $data['media_type'] = "";

@@ -4,6 +4,7 @@ use App\Http\Middleware\FollowMiddlware;
 use App\Http\Middleware\LocaleMiddleware;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
+use Laravel\Passport\Passport;
 use Ternobo\TernoboWire\TernoboWire;
 
 /*
@@ -16,7 +17,7 @@ use Ternobo\TernoboWire\TernoboWire;
 | contains the "web" middleware group. Now create something great!
 |
  */
-
+Passport::routes();
 TernoboWire::routes();
 
 Route::get('/sitemap.xml', 'SiteMapController@all');

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Passport\HasApiTokens;
 use Ternobo\TernoboChat\Interfaces\Messageable;
 use Ternobo\TernoboChat\Traits\CanChat;
 
@@ -22,6 +23,8 @@ class User extends Authenticatable implements Messageable
     use HasFactory;
 
     use SoftDeletes;
+
+    use HasApiTokens;
 
     protected $dates = ['deleted_at'];
 
@@ -432,6 +435,11 @@ class User extends Authenticatable implements Messageable
     public function getClass()
     {
         return User::class;
+    }
+
+    public function generate2FA()
+    {
+
     }
 
     /**

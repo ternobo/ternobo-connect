@@ -10,6 +10,8 @@ use App\Models\Like;
 use App\Models\Notification;
 use App\Models\Page;
 use App\Models\Post;
+use App\Models\PostContent;
+use App\Models\PostSlide;
 use App\Models\Report;
 use App\Models\Tag;
 use App\SocialMediaTools;
@@ -43,59 +45,87 @@ class PostController extends Controller
             "text.required_without" => "متن یا یک فایل چند رسانه‌ای انتخاب کنید.",
         ];
         $validator = Validator::make($request->all(), [
-            "media" => "mimes:jpg,jpeg,png,bmp,mp4|max:30000",
-            "text" => "required_without:media|max:2500",
-            "type" => "required",
+            "slides" => "required|array",
         ], $messages);
-
-        // $mime = $request->file("media")->getMimeType();
-        // // dd($mime);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
-            $rawText = htmlentities($request->text);
-            $mentions = SocialMediaTools::getMentions($rawText);
-            $text = SocialMediaTools::replacHashtags(SocialMediaTools::replaceMentions(SocialMediaTools::replaceUrls($rawText)), 3);
 
-            $post = new Post();
-            $post->user_id = Auth::user()->id;
-            $post->page_id = Auth::user()->personalPage->id;
-            $post->text = $text;
-            if ($request->has("category")) {
-                $category = Category::query()->where("name", $request->category)
-                    ->where("page_id", Auth::user()->personalPage->id)
-                    ->firstOrCreate(["name" => $request->category, "page_id" => Auth::user()->personalPage->id]);
-                $post->category_id = $category->id;
-            }
+            $slides = $request->slides;
+            $user = Auth::user();
+            $user->load("personalPage");
 
-            $post->tags = json_encode(array_slice(SocialMediaTools::getHashtags($rawText), 0, 3));
+            $mentions = null;
+            $tags = [];
 
-            $post->type = "post";
-            $post->show = $request->type;
-            $medias = array();
-            if ($request->has("media")) {
-                $file = $request->file("media")->store("medias");
+            $post = Post::query()->create([
+                'type' => 'slide',
+                'user_id' => $user->id,
+                'page_id' => $user->personalPage->id,
+                'medias' => [],
+                'show' => "public",
+            ]);
 
-                if ($request->has("sizes")) {
-                    $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
-                    $sizes = (json_decode($request->sizes));
-                    //    dd($sizes);
-                    $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->left), intval($sizes->top));
-                    $image->save(null, 90, "jpg");
+            foreach ($slides as $slide_input) {
+                if (!(count($slide_input) > 0)) {
+                    continue;
                 }
-                $medias = array(url($file));
-            }
-            $post->medias = json_encode($medias);
-            // dd($request);
-            $result = $post->save();
-            Auth::user()->personalPage->addAction("post", $post->id);
-            foreach ($mentions as $mention) {
-                $page = Page::query()->where("slug", $mention)->first();
-                if ($page instanceof Page) {
-                    Notification::sendNotification("mention", $post->id, $page->id, $post->id);
+                $slide = PostSlide::query()->create([
+                    'page_id' => $user->personalPage->id,
+                    'post_id' => $post->id,
+                ]);
+                $sort = 0;
+                foreach ($slide_input as $type => $content) {
+                    switch ($type) {
+                        case "text":
+                            // Process
+                            $rawText = htmlentities($content);
+                            $mentions = SocialMediaTools::getMentions($rawText);
+                            $text = SocialMediaTools::replacHashtags(SocialMediaTools::replaceMentions(SocialMediaTools::replaceUrls($rawText)), 3);
+
+                            $slideTags = array_slice(SocialMediaTools::getHashtags($rawText), 0, 3);
+
+                            PostContent::query()->create([
+                                'slide_id' => $slide->id,
+                                'page_id' => $user->personalPage->id,
+                                'sort' => $sort,
+                                'text' => $text,
+                                'type' => 'text',
+                            ]);
+
+                            if (count($tags) < 3) {
+                                $tags = array_merge($slideTags, $tags);
+                            }
+
+                            break;
+
+                        case "title":
+                            PostContent::query()->create([
+                                'slide_id' => $slide->id,
+                                'page_id' => $user->personalPage->id,
+                                'sort' => $sort,
+                                'text' => $content,
+                                'type' => 'title',
+                            ]);
+                            break;
+
+                        case "media":
+                            $media = $content->store("medias");
+                            PostContent::query()->create([
+                                'slide_id' => $slide->id,
+                                'page_id' => $user->personalPage->id,
+                                'sort' => $sort,
+                                'media' => $media,
+                                'type' => 'title',
+                            ]);
+                            break;
+                    }
+                    $sort++;
                 }
             }
-            return response()->json(array("result" => $result));
+            $post->tags = $tags;
+            $post->save();
+            return response()->json(array("result" => true));
         }
     }
 

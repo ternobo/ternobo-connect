@@ -1,6 +1,8 @@
 <?php
 namespace App;
 
+use App\Models\Notification;
+
 class SocialMediaTools
 {
     public static function getHashtags($text)
@@ -38,7 +40,19 @@ class SocialMediaTools
 
     public static function replacHashtags($text, $limit)
     {
-        return preg_replace('/\B#(\w+)/u', "<a href=" . url("/tags/$1") . ">$0</a>", $text, $limit);
+        return preg_replace_callback('/\B#(\w+)/u', function ($matches) {
+            return "<a href='" . url("/tags/" . $matches[1]) . "'>" . str_replace('ـ', ' ', str_replace('_', ' ', $matches[1])) . "</a>";
+        }, $text, $limit);
+    }
+
+    public static function callMentions($mentions, $post_id)
+    {
+        foreach ($mentions as $mention) {
+            $page = Page::query()->where("slug", $mention)->first();
+            if ($page instanceof Page) {
+                Notification::sendNotification("mention", $post_id, $page->id, $post_id);
+            }
+        }
     }
 
 }

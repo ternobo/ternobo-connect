@@ -9,8 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PostSlide extends Model
 {
 
-    protected $cats = [
-        "content" => "array",
+    protected $fillable = [
+        'page_id',
+        'post_id',
     ];
 
     use HasFactory;

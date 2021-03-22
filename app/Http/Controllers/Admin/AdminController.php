@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -33,10 +34,14 @@ class AdminController extends Controller
 
         $admin = User::query()->where("username", $username)->where("is_admin", true)->first();
         if ($admin instanceof User && Hash::check($password, $admin->password)) {
-            $api_token = $admin->addAPISession();
-            $admin->save();
-            return response()->json(["result" => true, "api_key" => $api_token]);
+            return response()->json(["result" => true, "api_key" => $admin->createToken('Admin Token')->accessToken]);
         }
         return response()->json(['result' => false]);
     }
+
+    public function getUser()
+    {
+        return response()->json(['result' => true, "user" => Auth::user()]);
+    }
+
 }
