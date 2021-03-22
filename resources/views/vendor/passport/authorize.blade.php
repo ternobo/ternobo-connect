@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,8 +12,25 @@
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 
     <style>
+        body {
+            direction: ltr;
+            text-align: left;
+        }
+
+        p {
+            text-align: left;
+        }
+
+        .passport-authorize {
+            min-height: 100vh;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .passport-authorize .container {
-            margin-top: 30px;
+            margin-top: 0;
         }
 
         .passport-authorize .scopes {
@@ -35,15 +53,22 @@
         .passport-authorize form {
             display: inline;
         }
+
     </style>
 </head>
+
 <body class="passport-authorize">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card card-default">
                     <div class="card-header">
-                        Authorization Request
+                        <div class="d-flex flex-column align-items-center">
+                            <img src="{{ Auth::user()->profile }}" class="profile-md" />
+                            <strong class="mt-2 font-18">
+                                {{ Auth::user()->name }}
+                            </strong>
+                        </div>
                     </div>
                     <div class="card-body">
                         <!-- Introduction -->
@@ -52,13 +77,13 @@
                         <!-- Scope List -->
                         @if (count($scopes) > 0)
                             <div class="scopes">
-                                    <p><strong>This application will be able to:</strong></p>
+                                <p><strong>This application will be able to:</strong></p>
 
-                                    <ul>
-                                        @foreach ($scopes as $scope)
-                                            <li>{{ $scope->description }}</li>
-                                        @endforeach
-                                    </ul>
+                                <ul>
+                                    @foreach ($scopes as $scope)
+                                        <li>{{ $scope->description }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
                         @endif
 
@@ -90,4 +115,5 @@
         </div>
     </div>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AdminAPIMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::post("/admin/login", "Admin\AdminController@login");
 
-Route::middleware("auth:api")->prefix("/admin")->group(function () {
+Route::middleware(["auth:api", AdminAPIMiddleware::class])->prefix("/admin")->group(function () {
     Route::post("/get-user", "Admin\AdminController@getUser");
-    Route::resource("/users", "Admin\UsersController");
+    Route::resources([
+        'users' => "Admin\UsersController",
+        'reports' => 'Admin\ReportsController',
+    ]);
 
 });

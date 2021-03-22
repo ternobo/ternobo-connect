@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\ActiveSession;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminAPIMiddleware
 {
@@ -17,13 +17,9 @@ class AdminAPIMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $api_key = $request->header("api-key");
-        if ($api_key != null) {
-            $session = ActiveSession::query()->where("token", $api_key)->first();
-            if ($session instanceof ActiveSession) {
-                return $next($request);
-            }
+        if (Auth::user()->is_admin) {
+            return $next($request);
         }
-        return abort(401);
+        return response()->json(['message' => 'Unauthorized'], 401);
     }
 }

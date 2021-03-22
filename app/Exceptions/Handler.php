@@ -46,13 +46,16 @@ class Handler extends ExceptionHandler
     // {
     //     $response = parent::render($request, $e);
 
-    //     if (in_array($response->status(), [500, 503, 404, 403])) {
-    //         return TernoboWire::render('Error', ['status' => $response->status()]);
-    //     } else if ($response->status() === 419) {
-    //         return back()->with([
-    //             'message' => 'نشست شما منقضی شده لطفا مجدد تلاش کنید.',
-    //         ]);
+    //     if (!env("APP_DEBUG", false)) {
+    //         if (in_array($response->status(), [500, 503, 404, 403])) {
+    //             return TernoboWire::render('Error', ['status' => $response->status()]);
+    //         } else if ($response->status() === 419) {
+    //             return back()->with([
+    //                 'message' => 'نشست شما منقضی شده لطفا مجدد تلاش کنید.',
+    //             ]);
+    //         }
     //     }
+    //     // dd($response);
 
     //     return $response;
     // }

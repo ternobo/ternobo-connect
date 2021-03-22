@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Report;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ReportsController extends Controller
 {
@@ -15,7 +17,8 @@ class ReportsController extends Controller
      */
     public function index()
     {
-        $reports = Report::withTrashed()
+        $reports = Report::query()
+            ->latest()
             ->paginate();
         return response()->json(['result' => true, 'data' => $reports]);
     }
@@ -40,7 +43,17 @@ class ReportsController extends Controller
      */
     public function update(Request $request, Report $report)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'status' => ['required', Rule::in(['pending', 'closed'])],
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['result' => false, 'errors' => $validator->errors()]);
+        }
+        return response()->json([
+            'result' => $report->update([
+                'status' => $report->status,
+            ]),
+        ]);
     }
 
     /**
@@ -51,6 +64,6 @@ class ReportsController extends Controller
      */
     public function destroy(Report $report)
     {
-        //
+        $report->delete();
     }
 }
