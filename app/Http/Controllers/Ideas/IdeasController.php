@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Ideas;
 
 use App\Models\Idea;
 use App\Models\IdeaBookmark;

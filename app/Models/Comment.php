@@ -185,7 +185,7 @@ class Comment extends Model
         $this->notification()->delete();
         $this->likes()->delete();
         $this->replies()->delete();
-        parent::delete();
+        return parent::delete();
     }
 
 }

@@ -24,7 +24,7 @@ class Like extends Model
     public function delete()
     {
         $this->notification()->delete();
-        parent::delete();
+        return parent::delete();
     }
 
 }

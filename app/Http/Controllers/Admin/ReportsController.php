@@ -18,20 +18,11 @@ class ReportsController extends Controller
     public function index()
     {
         $reports = Report::query()
+            ->with(["user", "post", "comment", "page"])
+            ->with(["post.slides", "post.slides.content"])
             ->latest()
             ->paginate();
         return response()->json(['result' => true, 'data' => $reports]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Report  $report
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Report $report)
-    {
-        //
     }
 
     /**
@@ -44,15 +35,13 @@ class ReportsController extends Controller
     public function update(Request $request, Report $report)
     {
         $validator = Validator::make($request->all(), [
-            'status' => ['required', Rule::in(['pending', 'closed'])],
+            'status' => [Rule::in(['pending', 'closed'])],
         ]);
         if ($validator->fails()) {
             return response()->json(['result' => false, 'errors' => $validator->errors()]);
         }
         return response()->json([
-            'result' => $report->update([
-                'status' => $report->status,
-            ]),
+            'result' => $report->update($request->all()),
         ]);
     }
 
@@ -64,6 +53,6 @@ class ReportsController extends Controller
      */
     public function destroy(Report $report)
     {
-        $report->delete();
+        return response()->json(['result' => $report->delete()]);
     }
 }

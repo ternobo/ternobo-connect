@@ -115,7 +115,7 @@ class Post extends Model
 
     public function bookmarks()
     {
-        return $this->belongsToMany('App\User', 'bookmarks', 'post_id', 'user_id');
+        return $this->belongsToMany('App\Models\User', 'bookmarks', 'post_id', 'user_id');
     }
 
     public function is_bookmarked()
@@ -177,7 +177,9 @@ class Post extends Model
         $this->bookmarks()->delete();
         $this->comments()->delete();
         $this->actions()->delete();
-        parent::delete();
+        $this->slides()->delete();
+        $this->content()->delete();
+        return parent::delete();
     }
 
     public function mutualLikes()

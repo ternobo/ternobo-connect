@@ -21,7 +21,7 @@ class Skill extends Model
     public function delete()
     {
         $this->credits()->delete();
-        parent::delete();
+        return parent::delete();
     }
 
     public function toArray()

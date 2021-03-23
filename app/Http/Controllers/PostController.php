@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
 use App\Models\Action;
 use App\Models\Bookmark;
 use App\Models\Category;
@@ -20,7 +21,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
 use Ternobo\TernoboWire\TernoboWire;
 
 class PostController extends Controller
@@ -38,95 +38,83 @@ class PostController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        $messages = [
-            "media.max" => "فایل انتخابی از حد مجاز بزرگتر است(۱۰ مگابایت).",
-            "text.required_without" => "متن یا یک فایل چند رسانه‌ای انتخاب کنید.",
-        ];
-        $validator = Validator::make($request->all(), [
-            "slides" => "required|array",
-        ], $messages);
-        if ($validator->fails()) {
-            return response()->json(array("result" => false, "errors" => $validator->errors()));
-        } else {
+        $slides = $request->slides;
+        $user = Auth::user();
+        $user->load("personalPage");
 
-            $slides = $request->slides;
-            $user = Auth::user();
-            $user->load("personalPage");
+        $mentions = null;
+        $tags = [];
 
-            $mentions = null;
-            $tags = [];
+        $post = Post::query()->create([
+            'type' => 'slide',
+            'user_id' => $user->id,
+            'page_id' => $user->personalPage->id,
+            'medias' => [],
+            'show' => "public",
+        ]);
 
-            $post = Post::query()->create([
-                'type' => 'slide',
-                'user_id' => $user->id,
-                'page_id' => $user->personalPage->id,
-                'medias' => [],
-                'show' => "public",
-            ]);
-
-            foreach ($slides as $slide_input) {
-                if (!(count($slide_input) > 0)) {
-                    continue;
-                }
-                $slide = PostSlide::query()->create([
-                    'page_id' => $user->personalPage->id,
-                    'post_id' => $post->id,
-                ]);
-                $sort = 0;
-                foreach ($slide_input as $type => $content) {
-                    switch ($type) {
-                        case "text":
-                            // Process
-                            $rawText = htmlentities($content);
-                            $mentions = SocialMediaTools::getMentions($rawText);
-                            $text = SocialMediaTools::replacHashtags(SocialMediaTools::replaceMentions(SocialMediaTools::replaceUrls($rawText)), 3);
-
-                            $slideTags = array_slice(SocialMediaTools::getHashtags($rawText), 0, 3);
-
-                            PostContent::query()->create([
-                                'slide_id' => $slide->id,
-                                'page_id' => $user->personalPage->id,
-                                'sort' => $sort,
-                                'text' => $text,
-                                'type' => 'text',
-                            ]);
-
-                            if (count($tags) < 3) {
-                                $tags = array_merge($slideTags, $tags);
-                            }
-
-                            break;
-
-                        case "title":
-                            PostContent::query()->create([
-                                'slide_id' => $slide->id,
-                                'page_id' => $user->personalPage->id,
-                                'sort' => $sort,
-                                'text' => $content,
-                                'type' => 'title',
-                            ]);
-                            break;
-
-                        case "media":
-                            $media = $content->store("medias");
-                            PostContent::query()->create([
-                                'slide_id' => $slide->id,
-                                'page_id' => $user->personalPage->id,
-                                'sort' => $sort,
-                                'media' => $media,
-                                'type' => 'title',
-                            ]);
-                            break;
-                    }
-                    $sort++;
-                }
+        foreach ($slides as $slide_input) {
+            if (!(count($slide_input) > 0)) {
+                continue;
             }
-            $post->tags = $tags;
-            $post->save();
-            return response()->json(array("result" => true));
+            $slide = PostSlide::query()->create([
+                'page_id' => $user->personalPage->id,
+                'post_id' => $post->id,
+            ]);
+            $sort = 0;
+            foreach ($slide_input as $type => $content) {
+                switch ($type) {
+                    case "text":
+                        // Process
+                        $rawText = htmlentities($content);
+                        $mentions = SocialMediaTools::getMentions($rawText);
+                        $text = SocialMediaTools::replacHashtags(SocialMediaTools::replaceMentions(SocialMediaTools::replaceUrls($rawText)), 3);
+
+                        $slideTags = array_slice(SocialMediaTools::getHashtags($rawText), 0, 3);
+
+                        PostContent::query()->create([
+                            'slide_id' => $slide->id,
+                            'page_id' => $user->personalPage->id,
+                            'sort' => $sort,
+                            'text' => $text,
+                            'type' => 'text',
+                        ]);
+
+                        if (count($tags) < 3) {
+                            $tags = array_merge($slideTags, $tags);
+                        }
+
+                        break;
+
+                    case "title":
+                        PostContent::query()->create([
+                            'slide_id' => $slide->id,
+                            'page_id' => $user->personalPage->id,
+                            'sort' => $sort,
+                            'text' => $content,
+                            'type' => 'title',
+                        ]);
+                        break;
+
+                    case "media":
+                        $media = $content->store("medias");
+                        PostContent::query()->create([
+                            'slide_id' => $slide->id,
+                            'page_id' => $user->personalPage->id,
+                            'sort' => $sort,
+                            'media' => $media,
+                            'type' => 'media',
+                        ]);
+                        break;
+                }
+                $sort++;
+            }
         }
+        $post->tags = $tags;
+        $post->save();
+        return response()->json(array("result" => true));
     }
 
     public function bookmarkPost($post_id)
@@ -282,6 +270,9 @@ class PostController extends Controller
         return abort(404);
     }
 
+    /**
+     * Render embed post
+     */
     public function embedPost($post_id, Request $request)
     {
         $post = Post::with("page")
@@ -293,7 +284,6 @@ class PostController extends Controller
     public function seenPost(Request $request)
     {
         $posts = $request->posts;
-        //  dd($posts);
         foreach ($posts as $post_id) {
             if (!(ContentSeen::where("post_id", $post_id)->where("user_id", Auth::user()->id)->first() instanceof ContentSeen)) {
                 $seen = new ContentSeen();
@@ -308,30 +298,13 @@ class PostController extends Controller
     public function getEmbed($post_id)
     {
         $post = url("/embed-posts/" . $post_id);
-        $randomhash = (PostController::quickRandom(18));
+        $randomhash = (Str::uuid());
         $url = url("/posts/" . $post_id);
         $html_code = view("embedcode", array("url" => $url, "randomhash" => $randomhash, "post" => $post))->render();
         return response()->json([
             "result" => true,
             "code" => $html_code,
         ]);
-    }
-
-    public static function quickRandom($length = 16)
-    {
-        $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Post $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        return view("layouts.components.edit-post", ["post" => $post]);
     }
 
     /**
@@ -341,113 +314,109 @@ class PostController extends Controller
      * @param \App\Post $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Post $post, Request $request)
+    public function update(Post $post, PostRequest $request)
     {
-        if ($post->page->user_id != Auth::user()->id) {
-            return abort(404);
-        }
+        $slides = $request->slides;
+        $user = Auth::user();
+        $user->load("personalPage");
 
-        // dd($request->all());
-        $messages = [
-            "media.max" => "فایل انتخابی از حد مجاز بزرگتر است(۱۰ مگابایت).",
-            "text.required_without" => "متن یا یک فایل چند رسانه‌ای انتخاب کنید.",
-        ];
-        $validator = Validator::make($request->all(), [
-            "media" => "mimes:jpg,jpeg,png,bmp,mp4|max:30000",
-            "text" => "required_without:media|max:2500",
-            "type" => "required",
-        ], $messages);
+        $mentions = null;
+        $tags = [];
 
-// $mime = $request->file("media")->getMimeType();
-        // // dd($mime);
-        if ($validator->fails()) {
-            return response()->json(array("result" => false, "errors" => $validator->errors()));
-        } else {
+        foreach ($slides as $slide_input) {
+            if (!(count($slide_input) > 0)) {
+                continue;
+            }
+            $slide = isset($slide['id']) && PostSlide::findOrFail($slide_input['id']) != null ?
+            PostSlide::findOrFail($slide_input['id']) :
+            PostSlide::query()->create([
+                'page_id' => $user->personalPage->id,
+                'post_id' => $post->id,
+            ]);
 
-            $mentions = array();
-            $matches = array();
-            preg_match_all('/\B@(\w+)/', $request->text, $matches);
-            if (isset($matches[1])) {
-                foreach ($matches as $match) {
-                    foreach ($match as $slug) {
-                        if ((!$this->startsWith($slug, "@") && !in_array($slug, $mentions))) {
-                            $mentions[] = $slug;
+            $sort = 0;
+
+            $added_elements = [];
+
+            foreach ($slide_input as $type => $content) {
+                if (in_array($type, $added_elements)) {
+                    throw new HttpResponseException(response()->json(['result' => false, 'errors' => ["duplicated element - $type"]], 422));
+                }
+                $postContent = PostContent::query()->where("type", $type)->where("slide_id", $slide->id)->first();
+                switch ($type) {
+                    case "text":
+                        // Process
+                        $rawText = htmlentities($content);
+                        $mentions = SocialMediaTools::getMentions($rawText);
+                        $text = SocialMediaTools::replacHashtags(SocialMediaTools::replaceMentions(SocialMediaTools::replaceUrls($rawText)), 3);
+
+                        $slideTags = array_slice(SocialMediaTools::getHashtags($rawText), 0, 3);
+
+                        if ($postContent == null) {
+                            PostContent::query()->create([
+                                'slide_id' => $slide->id,
+                                'page_id' => $user->personalPage->id,
+                                'sort' => $sort,
+                                'text' => $text,
+                                'type' => 'text',
+                            ]);
+                        } else {
+                            $postContent->update([
+                                'sort' => $sort,
+                                'text' => $text,
+                            ]);
                         }
-                    }
+
+                        if (count($tags) < 3) {
+                            $tags = array_merge($slideTags, $tags);
+                        }
+
+                        break;
+
+                    case "title":
+                        if ($postContent == null) {
+                            PostContent::query()->create([
+                                'slide_id' => $slide->id,
+                                'page_id' => $user->personalPage->id,
+                                'sort' => $sort,
+                                'text' => $content,
+                                'type' => 'title',
+                            ]);
+                        } else {
+                            $postContent->update([
+                                'sort' => $sort,
+                                'text' => $text,
+                            ]);
+                        }
+                        break;
+
+                    case "media":
+                        $media = $content->store("medias");
+
+                        if ($postContent == null) {
+                            PostContent::query()->create([
+                                'slide_id' => $slide->id,
+                                'page_id' => $user->personalPage->id,
+                                'sort' => $sort,
+                                'media' => $media,
+                                'type' => 'media',
+                            ]);
+                        } else {
+                            $postContent->update([
+                                'sort' => $sort,
+                                'media' => $media,
+                            ]);
+                        }
+
+                        break;
                 }
+                $sort++;
             }
-
-            $text = htmlentities($request->text);
-
-            // The Regular Expression filter
-            $reg_exUrl = "/(\s((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/";
-
-            $text = (preg_replace_callback($reg_exUrl, function ($matches) {
-                foreach ($matches as $match) {
-                    return "<a target='_blank' href='" . $this->toURL($match) . "'>$match</a>";
-                }
-            }, $text));
-
-            $text = preg_replace('/\B@(\w+)/', "<a href=" . url("/") . "/" . "$0" . ">$0</a>", $text);
-            $text = str_replace("/@", "/", $text);
-
-            $post->text = $text;
-            if ($request->filled("category")) {
-                $category = Category::query()->where("name", $request->category)
-                    ->where("page_id", Auth::user()->personalPage->id)
-                    ->firstOrCreate(["name" => $request->category, "page_id" => Auth::user()->personalPage->id]);
-                $post->category_id = $category->id;
-            }
-
-            if ($request->filled("tags")) {
-                $tags = json_decode($request->tags);
-                foreach ($tags as $tag) {
-                    if (Tag::where("name", $tag)->first() instanceof Tag) {
-                        continue;
-                    }
-                    $thetag = new Tag();
-                    $thetag->name = $tag;
-                    $thetag->save();
-                }
-                $post->tags = json_encode($tags);
-            }
-            $post->type = "post";
-            $post->show = $request->type;
-            $medias = array();
-            if ($request->has("media")) {
-                $file = $request->file("media")->store("medias");
-
-                if ($request->has("sizes")) {
-                    $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
-                    $sizes = (json_decode($request->sizes));
-                    //    dd($sizes);
-                    $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->left), intval($sizes->top));
-                    $image->save(null, 90, "jpg");
-                }
-                $medias = array(url($file));
-                $post->medias = json_encode($medias);
-
-            }
-
-            // dd($request);
-            $result = $post->save();
-            // Auth::user()->personalPage->addAction("post", $post->id);
-            // foreach ($mentions as $mention) {
-            //     $page = Page::query()->where("slug", $mention)->first();
-            //     if ($page instanceof Page) {
-            //         Notification::sendNotification("mention", $post->id, $page->id, $post->id);
-            //     }
-            // }
-            //  dd($mentions);
-            return response()->json(array("result" => $result));
         }
+        $post->tags = $tags;
+        $post->save();
+        return response()->json(array("result" => true));
     }
-
-    private function toURL($url)
-    {
-        return (Str::startsWith($url, "http") || Str::startsWith($url, "https")) ? $url : "http://" . $url;
-    }
-
     /**
      * Remove the specified resource from storage.
      *

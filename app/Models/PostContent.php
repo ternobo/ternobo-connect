@@ -15,5 +15,6 @@ class PostContent extends Model
         "text",
         "media",
         "type",
+        "sort",
     ];
 }

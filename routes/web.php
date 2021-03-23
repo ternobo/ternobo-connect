@@ -25,6 +25,11 @@ Route::get('/sitemap-posts.xml', 'SiteMapController@posts');
 Route::get('/sitemap-posts.xml', 'SiteMapController@posts');
 Route::get('/sitemap-profiles.xml', 'SiteMapController@profiles');
 
+Route::get('/test', function () {
+    $slide = [];
+    dd(isset($slide['id']));
+});
+
 /**
  * File Access Start
  */
@@ -57,38 +62,47 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         Route::post("signup", "Auth\UsersController@signupUser");
         Route::post("setpassword", "Auth\UsersController@savePassword");
 
-        /** Username Start */
-        Route::post('/suggest-username', "Auth\SettingsController@suggest")->middleware("auth");
-        Route::post('/set-username', "Auth\SettingsController@set")->middleware("auth");
-        Route::post('/check-username', "Auth\SettingsController@check")->middleware("auth");
-        /** Username End */
+        Route::group(['auth'], function () {
+            /** Username Start */
+            Route::post('/suggest-username', "Auth\SettingsController@suggest");
+            Route::post('/set-username', "Auth\SettingsController@set");
+            Route::post('/check-username', "Auth\SettingsController@check");
+            /** Username End */
 
-        /** Settings */
-        Route::post("/get-info", "Auth\SettingsController@getUserInfo");
-        Route::post("/verify-phone", "Auth\SettingsController@verifyNewPhone")->middleware("auth");
-        Route::post("/verify-email", "Auth\SettingsController@verifyNewEmail")->middleware("auth");
-        /** Settings End */
+            /** Settings */
+            Route::post("/get-info", "Auth\SettingsController@getUserInfo");
+            Route::post("/verify-phone", "Auth\SettingsController@verifyNewPhone");
+            Route::post("/verify-email", "Auth\SettingsController@verifyNewEmail");
+            /** Settings End */
 
-        /**
-         * Password
-         */
-        Route::post("/change-password", "Auth\SettingsController@changePassword")->middleware("auth");
+            /**
+             * Password
+             */
+            Route::post("/change-password", "Auth\SettingsController@changePassword");
 
-        // Deactive
-        Route::post("/deactive", "Auth\SettingsController@deactiveAccount")->middleware("auth");
+            // Deactive
+            Route::post("/deactive", "Auth\SettingsController@deactiveAccount");
+        });
     });
     /**
      * Auth End
      */
 
     Route::group(['auth'], function () {
-
+        /**
+         * Private Files
+         */
         Route::get("/voices/{file}", "DownloadsController@voices");
         Route::get("/private-documents/{file}", "DownloadsController@privateDocuments");
         Route::get("/private-media/{file}", "DownloadsController@privateMedia");
+        /**
+         * Private Files End
+         */
 
         Route::post("/ternobo-wire/check-online", "IndexController@checkOnline");
         Route::post("logout", "Auth\UsersController@logout");
+
+        // Two Factor Authentication
         Route::prefix("/two-factor-auth")->group(function () {
             Route::post("info", "Auth\TwoFAController@get2FAInfo");
 
@@ -100,17 +114,23 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
         });
 
+        // Follow Suggestion Page
         Route::get("/follow-people", "IndexController@followSuggestions");
 
-        // Follow Start
+        // Follow Actions Start
         Route::post("/follow/{page_id}", "ConnectionsController@follow")->name("follow");
         Route::post("/unfollow/{page_id}", "ConnectionsController@unfollow");
-        //Follow End
+        //Follow Actions End
 
         Route::middleware([FollowMiddlware::class, "auth"])->group(function () {
             Route::get('/feed', 'HomeController@index')->name('home');
+
+            // Seen Post
             Route::post("/seenPost", "PostController@seenPost");
+
             Route::get("/bookmarks", "HomeController@bookmarks");
+
+            // Request Verifiation
             Route::post("/verificationRequest", "Auth\UsersController@verificationRequest");
 
             Route::post("/mutual-friends", "PageController@getMutualFriends");
@@ -183,14 +203,14 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             Route::post("/bookmark/{post_id}", "PostController@bookmarkPost");
 
             Route::prefix("/ideas")->group(function () {
-                Route::post("/bookmark", "IdeasController@bookmark");
-                Route::get("/myideas", "IdeasController@myIdeas");
-                Route::post("/reply/{idea:id}", "IdeasController@addReply");
-                Route::delete("/reply/{id}", "IdeasController@deleteComment");
-                Route::post("/vote", "IdeasController@voteIdea");
+                Route::post("/bookmark", "Ideas\IdeasController@bookmark");
+                Route::get("/myideas", "Ideas\IdeasController@myIdeas");
+                Route::post("/reply/{idea:id}", "Ideas\IdeasController@addReply");
+                Route::delete("/reply/{id}", "Ideas\IdeasController@deleteComment");
+                Route::post("/vote", "Ideas\IdeasController@voteIdea");
             });
 
-            Route::resource("/ideas", "IdeasController");
+            Route::resource("/ideas", "Ideas\IdeasController");
 
             Route::get("/settings", "Auth\UsersController@settingsPage");
 
@@ -221,7 +241,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
         Route::post("/posts/{post:id}/embed", "PostController@getEmbed");
 
-        Route::resource("/posts", "PostController");
+        Route::resource("/posts", "PostController")->only(['store', 'update', 'destroy']);
 
         //Chats
         Route::prefix("chats")->group(function () {

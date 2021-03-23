@@ -22,6 +22,11 @@ class PostSlide extends Model
         return $this->belongsTo(Post::class, "post_id");
     }
 
+    public function content()
+    {
+        return $this->hasMany(PostContent::class, "slide_id")->orderBy("sort", "asc");
+    }
+
     public function page()
     {
         return $this->belongsTo(Page::class, "page_id");
