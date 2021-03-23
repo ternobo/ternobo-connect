@@ -15,11 +15,9 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::query()
-            ->with("user")
-            ->with("share")
-            ->with("page")
-            ->with("category")
-            ->get();
+            ->latest()
+            ->with(['page', 'slides', 'category', 'slides.content'])
+            ->paginate();
         return response()->json(['result' => true, "posts" => $posts]);
     }
 
@@ -31,13 +29,8 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-        $post = $post
-            ->with("user")
-            ->with("share")
-            ->with("page")
-            ->with("category")
-            ->get();
-        return response()->json(['result' => true, "posts" => $post]);
+        $post->load(['page', 'slides', 'category', 'slides.content']);
+        return response()->json(['result' => true, "post" => $post]);
     }
 
     /**

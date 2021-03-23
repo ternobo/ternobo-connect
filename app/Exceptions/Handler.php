@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -36,27 +37,36 @@ class Handler extends ExceptionHandler
         //
     }
 
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ($request->acceptsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+
+        return route('welcome');
+    }
+
     /**
      * Prepare exception for rendering.
      *
      * @param  \Throwable  $e
      * @return \Throwable
      */
-    // public function render($request, Throwable $e)
-    // {
-    //     $response = parent::render($request, $e);
+    public function render($request, Throwable $e)
+    {
+        $response = parent::render($request, $e);
+        if ($request->acceptsJson()) {
+            return response()->json(['error' => $response->status()], $response->status());
+        }
 
-    //     if (!env("APP_DEBUG", false)) {
-    //         if (in_array($response->status(), [500, 503, 404, 403])) {
-    //             return TernoboWire::render('Error', ['status' => $response->status()]);
-    //         } else if ($response->status() === 419) {
-    //             return back()->with([
-    //                 'message' => 'نشست شما منقضی شده لطفا مجدد تلاش کنید.',
-    //             ]);
-    //         }
-    //     }
-    //     // dd($response);
+        if (in_array($response->status(), [500, 503, 404, 403])) {
+            return TernoboWire::render('Error', ['status' => $response->status()]);
+        } else if ($response->status() === 419) {
+            return back()->with([
+                'message' => 'نشست شما منقضی شده لطفا مجدد تلاش کنید.',
+            ]);
+        }
 
-    //     return $response;
-    // }
+        return $response;
+    }
 }

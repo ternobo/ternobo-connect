@@ -21,6 +21,7 @@ Route::middleware(["auth:api", AdminAPIMiddleware::class])->prefix("/admin")->gr
     Route::resources([
         'users' => "Admin\UsersController",
         'reports' => 'Admin\ReportsController',
+        'posts' => "Admin\PostsController",
     ]);
 
 });
