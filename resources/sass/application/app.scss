@@ -1515,6 +1515,11 @@ a:focus {
     }
 }
 
+.flip-list-move {
+    transition: transform 0.5s;
+}
+
 @import "./pages/chats.scss";
 @import "./components/chat-widget.scss";
 @import "./components/textarea-content.scss";
+@import "./components/editor/editor.scss";

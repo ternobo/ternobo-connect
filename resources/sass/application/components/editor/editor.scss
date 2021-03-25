@@ -1,0 +1,114 @@
+.content-editor--container {
+    display: flex;
+    flex-direction: column;
+    min-height: 270px;
+    background-color: $white;
+
+    .editor-item {
+        display: flex;
+
+        >.actions {
+            color: $light;
+            margin-left: 24px;
+            width: 60px;
+        }
+    }
+}
+
+.editor--text-input {
+    min-height: 60px;
+    width: 100%;
+    color: $text-color;
+    unicode-bidi: -moz-plaintext;
+    unicode-bidi: plaintext;
+    text-align: start;
+
+    p {
+        unicode-bidi: -moz-plaintext;
+        unicode-bidi: plaintext;
+        text-align: start;
+    }
+
+    &:not(.highlight) {
+        -webkit-text-fill-color: transparent;
+        text-fill-color: transparent
+    }
+
+    &.highlight {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background: transparent;
+    }
+
+    &::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection, *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::selection,
+    *::selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+}
+
+[placeholder]:empty::before {
+    content: attr(placeholder);
+    color: $grey;
+    cursor: text;
+}
+
+[placeholder]:empty:focus::before {
+    content: "";
+}
+
+.tribute-container {
+    height: auto;
+    max-height: 300px;
+    max-width: 500px;
+    overflow: auto;
+    display: block;
+    z-index: 999999;
+}
+
+.tribute-container ul {
+    margin: 0;
+    margin-top: 2px;
+    padding: 0;
+    list-style: none;
+    background: #efefef;
+}
+
+.tribute-container li {
+    padding: 5px 5px;
+    cursor: pointer;
+}
+
+.tribute-container li.highlight {
+    background: #ddd;
+}
+
+.tribute-container li span {
+    font-weight: bold;
+}
+
+.tribute-container li.no-match {
+    cursor: default;
+}
+
+.tribute-container .menu-highlighted {
+    font-weight: bold;
+}
+
+.mention-item {
+    background: rgba($color: $action, $alpha: 0.3);
+    color: $action;
+    padding: 0;
+}
