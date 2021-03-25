@@ -16,12 +16,28 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $user = User::withTrashed()
+        $users = User::withTrashed()
             ->withCount(["followings", 'followers'])
-            ->paginate()
-            ->makeVisible(["deleted_at", "two_factor", "pushe_id", "token"]);
+            ->paginate();
 
-        return response()->json(['result' => true, 'data' => $user]);
+        foreach ($users as $user) {
+            $user->makeVisible([
+                "deleted_at",
+                "two_factor_type",
+                "two_factor_recovery_codes",
+                "two_factor_secret",
+                "two_factor_enabled",
+                "two_factor",
+                "pushe_id",
+                "token",
+                "phone",
+                "email",
+                "created_at",
+                "updated_at",
+            ]);
+        }
+
+        return response()->json(['result' => true, 'data' => $users]);
     }
 
     /**
@@ -32,6 +48,20 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
+        $user->makeVisible([
+            "deleted_at",
+            "two_factor_type",
+            "two_factor_recovery_codes",
+            "two_factor_secret",
+            "two_factor_enabled",
+            "two_factor",
+            "pushe_id",
+            "token",
+            "phone",
+            "email",
+            "created_at",
+            "updated_at",
+        ]);
         $user->loadCount(["followings", 'followers']);
         return response()->json(['result' => true, 'data' => $user]);
     }
