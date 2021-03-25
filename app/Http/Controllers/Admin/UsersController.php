@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -17,7 +18,9 @@ class UsersController extends Controller
     {
         $user = User::withTrashed()
             ->withCount(["followings", 'followers'])
-            ->paginate();
+            ->paginate()
+            ->makeVisible(["deleted_at", "two_factor", "pushe_id", "token"]);
+
         return response()->json(['result' => true, 'data' => $user]);
     }
 
@@ -42,29 +45,13 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-
-        $notAllowed = [
-            "id",
-            "name",
-            "2AF",
-            "email_verified_at",
-            "deleted_at",
-            "created_at",
-            "password",
-        ];
         $fields = $request->all();
-        if (count($fields) > 0) {
-            foreach ($fields as $key => $value) {
-                if (!in_array($key, $notAllowed)) {
-                    $user->setAttribute($key, $value);
-                    if ($key === "first_name" || $key === "last_name") {
-                        $user->name = $user->first_name . " " . $user->last_name;
-                    }
-                }
-            }
+        $result = $user->update($request->all());
+        if ($request->filled("password")) {
+            $user->password = Hash::make($request->password);
+            $result = $user->save();
         }
-
-        return response()->json(['result' => $user->save()]);
+        return response()->json(['result' => $result]);
     }
 
     public function verifyUser(User $user)

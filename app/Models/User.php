@@ -26,7 +26,7 @@ class User extends Authenticatable implements Messageable
 
     use HasApiTokens;
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'created_at', 'updated_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -34,7 +34,17 @@ class User extends Authenticatable implements Messageable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'email',
+        'first_name',
+        'last_name',
+        'gender',
+        'short_bio',
+        'username',
+        'phone',
+        'cover',
+        'profile',
+        'nationalcode',
+        'is_verified',
     ];
 
     /**
@@ -73,6 +83,8 @@ class User extends Authenticatable implements Messageable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        // "is_verified" => "boolval",
+        // "two_factor" => "boolval",
     ];
 
     /**
@@ -435,11 +447,6 @@ class User extends Authenticatable implements Messageable
     public function getClass()
     {
         return User::class;
-    }
-
-    public function generate2FA()
-    {
-
     }
 
     /**

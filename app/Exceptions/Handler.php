@@ -52,21 +52,21 @@ class Handler extends ExceptionHandler
      * @param  \Throwable  $e
      * @return \Throwable
      */
-    public function render($request, Throwable $e)
-    {
-        $response = parent::render($request, $e);
-        if ($request->acceptsJson()) {
-            return response()->json(['error' => $response->status()], $response->status());
-        }
+    // public function render($request, Throwable $e)
+    // {
+    //     $response = parent::render($request, $e);
+    //     if ($request->acceptsJson()) {
+    //         return response()->json(['error' => $response->status()], $response->status());
+    //     }
 
-        if (in_array($response->status(), [500, 503, 404, 403])) {
-            return TernoboWire::render('Error', ['status' => $response->status()]);
-        } else if ($response->status() === 419) {
-            return back()->with([
-                'message' => 'نشست شما منقضی شده لطفا مجدد تلاش کنید.',
-            ]);
-        }
+    //     if (in_array($response->status(), [500, 503, 404, 403])) {
+    //         return TernoboWire::render('Error', ['status' => $response->status()]);
+    //     } else if ($response->status() === 419) {
+    //         return back()->with([
+    //             'message' => 'نشست شما منقضی شده لطفا مجدد تلاش کنید.',
+    //         ]);
+    //     }
 
-        return $response;
-    }
+    //     return $response;
+    // }
 }
