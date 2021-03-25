@@ -230,20 +230,14 @@ class PostController extends Controller
     {
         $term = trim($request->q);
         if (empty($term)) {
-            return response()->json([]);
+            return response()->json(["results" => []]);
         }
-        $tags = Tag::query()->where("name", "like", "%$term%")->paginate(10);
+        $tags = Tag::query()->where("name", "like", "$term%")->paginate(10);
         $formatted_tags = [];
         foreach ($tags as $tag) {
-            $formatted_tags[] = ['id' => $tag->name, 'text' => $tag->name];
+            $formatted_tags[] = ['key' => $tag->name, 'value' => $tag->name];
         }
-        $more = false;
-        if (($tags->total() > 1) && !$request->has("page")) {
-            $more = true;
-        } elseif (($tags->total() > $request->page)) {
-            $more = true;
-        }
-        return response()->json(array("results" => $formatted_tags, "pagination" => ["more" => $more]));
+        return response()->json(array("results" => $formatted_tags));
     }
 
     /**

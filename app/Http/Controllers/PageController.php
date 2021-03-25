@@ -268,8 +268,10 @@ class PageController extends Controller
         })->whereRaw("slug like ?", ['%' . $request->q . '%'])->limit(10)->get();
         foreach ($suggestions as $value) {
             $result = array();
+            $result["key"] = $value->slug;
             $result["value"] = $value->slug;
-            $result["label"] = $value->name;
+            $result["name"] = $value->name;
+
             $results[] = $result;
         }
         return response()->json(array("result" => true, "pages" => $results));
