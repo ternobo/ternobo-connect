@@ -1,7 +1,6 @@
 <template>
 	<div class="textarea-content">
-		<span class="text-superlight placeholder" v-if="showPlaceholder">پیام خود را بنویسید</span>
-		<div :class="editableClass" @keypress="onEnter" ref="editable" contenteditable @focus="showPlaceholder = false" @blur="onBlur" @input="input"></div>
+		<div :class="editableClass" :placeholder="placeholder" @keypress="onEnter" ref="editable" contenteditable @focus="showPlaceholder = false" @blur="onBlur" @input="input"></div>
 	</div>
 </template>
 <script>
@@ -48,7 +47,17 @@ export default {
 			this.text = e.target.innerText;
 		},
 	},
-	props: ["editableClass", "value"],
+	props: {
+		editableClass: {
+			default: null,
+		},
+		value: {
+			default: "",
+		},
+		placeholder: {
+			default: "",
+		},
+	},
 };
 </script>
 
