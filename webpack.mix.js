@@ -11,22 +11,14 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
-mix.babelConfig({
-    plugins: ['@babel/plugin-syntax-dynamic-import'],
-});
-
 mix.sourceMaps();
 
-mix.options({
-    extractVueStyles: 'public/css/vue-components.css'
-});
-
 mix.webpackConfig(require('./webpack.config'));
+
 mix.js('resources/js/app.js', 'public/js').vue();
 mix.sass("resources/sass/application/app.scss", "public/css");
-mix.extract(['vue'])
-mix.browserSync({
-    proxy: "http://localhost:8000"
-});
+mix.extract(['vue', 'axios'])
+// mix.browserSync({
+//     proxy: "http://localhost:8000"
+// });
 mix.version();
