@@ -1870,6 +1870,16 @@ pre code {
   opacity: 1;
 }
 
+.form-control::-webkit-input-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::-ms-input-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
 .form-control::placeholder {
   color: #6c757d;
   opacity: 1;
@@ -7459,7 +7469,8 @@ button.bg-dark:focus {
 .user-select-all {
   -webkit-user-select: all !important;
      -moz-user-select: all !important;
-          user-select: all !important;
+          -ms-user-select: all !important;
+      user-select: all !important;
 }
 
 .user-select-auto {
@@ -18006,7 +18017,8 @@ h5 {
   border-radius: 12px;
   padding: 4px;
   color: #E0E0E0;
-  filter: drop-shadow(0px 10px 40px rgba(0, 0, 0, 0.2));
+  -webkit-filter: drop-shadow(0px 10px 40px rgba(0, 0, 0, 0.2));
+          filter: drop-shadow(0px 10px 40px rgba(0, 0, 0, 0.2));
 }
 
 @media screen and (max-width: 768px) {
@@ -18524,6 +18536,14 @@ h5 {
 }
 
 .vs__search:-ms-input-placeholder {
+  color: inherit;
+}
+
+.vs__search::-webkit-input-placeholder {
+  color: inherit;
+}
+
+.vs__search::-ms-input-placeholder {
   color: inherit;
 }
 
@@ -19083,6 +19103,16 @@ input {
 }
 
 .form-control:-ms-input-placeholder {
+  color: #757575;
+  opacity: 1;
+}
+
+.form-control::-webkit-input-placeholder {
+  color: #757575;
+  opacity: 1;
+}
+
+.form-control::-ms-input-placeholder {
   color: #757575;
   opacity: 1;
 }
@@ -20108,6 +20138,22 @@ pre {
   min-height: 35px;
 }
 
+.dropdown-list .vs__search::-webkit-input-placeholder {
+  background: #EEE;
+  border: none;
+  border-radius: 0;
+  color: #757575;
+  min-height: 35px;
+}
+
+.dropdown-list .vs__search::-ms-input-placeholder {
+  background: #EEE;
+  border: none;
+  border-radius: 0;
+  color: #757575;
+  min-height: 35px;
+}
+
 .dropdown-list .vs__search::placeholder,
 .dropdown-list .vs__dropdown-toggle,
 .dropdown-list .vs__dropdown-menu {
@@ -21001,6 +21047,14 @@ pre {
   color: #C8C8C8;
 }
 
+.autocomplete-input::-webkit-input-placeholder {
+  color: #C8C8C8;
+}
+
+.autocomplete-input::-ms-input-placeholder {
+  color: #C8C8C8;
+}
+
 .autocomplete-input::placeholder {
   color: #C8C8C8;
 }
@@ -21292,6 +21346,14 @@ pre {
   color: #C8C8C8;
 }
 
+::-webkit-input-placeholder {
+  color: #C8C8C8;
+}
+
+::-ms-input-placeholder {
+  color: #C8C8C8;
+}
+
 ::placeholder {
   color: #C8C8C8;
 }
@@ -21322,6 +21384,26 @@ pre {
 }
 
 .datepicker-list .vs__search:-ms-input-placeholder {
+  background: transparent;
+  border-radius: 0;
+  color: #757575;
+  min-height: 35px;
+  padding-bottom: 0;
+  border-color: #EEE;
+  border-width: 2px;
+}
+
+.datepicker-list .vs__search::-webkit-input-placeholder {
+  background: transparent;
+  border-radius: 0;
+  color: #757575;
+  min-height: 35px;
+  padding-bottom: 0;
+  border-color: #EEE;
+  border-width: 2px;
+}
+
+.datepicker-list .vs__search::-ms-input-placeholder {
   background: transparent;
   border-radius: 0;
   color: #757575;
@@ -23737,6 +23819,14 @@ body {
 }
 
 .form-control:-ms-input-placeholder {
+  color: #C8C8C8;
+}
+
+.form-control::-webkit-input-placeholder {
+  color: #C8C8C8;
+}
+
+.form-control::-ms-input-placeholder {
   color: #C8C8C8;
 }
 

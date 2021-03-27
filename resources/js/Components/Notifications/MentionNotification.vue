@@ -2,14 +2,14 @@
 	<div class="post-notification">
 		<div class="notification-header">
 			<div class="notification-title">
-				<div class="profiles">
+				<wire-link :href="notifications[0].sender.slug" class="profiles clickable">
 					<lazy-image :src="notifications[0].sender.profile" class="profile-xxsm" img-class="profile-xxsm" />
-				</div>
+				</wire-link>
 				<div class="notification-text">
-					<div class="title">
+					<wire-link as="div" class="title clickable" :href="notifications[0].sender.slug">
 						<span>{{ notifications[0].sender.name }}</span>
 						<span class="font-weight-normal date-text">{{ createdAt }}</span>
-					</div>
+					</wire-link>
 					<div class="action">در این محتوا از شما نام برده</div>
 				</div>
 			</div>
