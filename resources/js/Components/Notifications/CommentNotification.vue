@@ -2,9 +2,9 @@
 	<div class="post-notification">
 		<div class="notification-header">
 			<div class="notification-title">
-				<div class="profiles">
+				<wire-link as="div" :href="notifications[0].sender.slug" class="profiles clickable">
 					<lazy-image :src="notifications[0].sender.profile" class="profile-xxsm" img-class="profile-xxsm" />
-				</div>
+				</wire-link>
 				<div class="notification-text">
 					<div class="title">
 						<span>{{ notifications[0].sender.name }}</span>
