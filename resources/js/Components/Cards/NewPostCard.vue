@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import NewPostModal from "../Modals/NewPostModal.vue";
+import NewPostModal from "../NewPost/NewPostModal";
 export default {
 	components: { NewPostModal },
 	data() {

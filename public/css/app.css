@@ -24703,3 +24703,34 @@ body {
   z-index: 2;
 }
 
+.content-editor--container {
+  display: flex;
+  flex-direction: column;
+  min-height: 270px;
+  background-color: #FFFF;
+}
+
+.content-editor--container > .editor-item {
+  display: flex;
+}
+
+.content-editor--container > .editor-item > .actions {
+  margin-left: 24px;
+  width: 60px;
+}
+
+.editor--text-input {
+  min-height: 60px;
+  width: 100%;
+  color: #424242;
+}
+
+[placeholder]:empty::before {
+  content: attr(placeholder);
+  color: #757575;
+}
+
+[placeholder]:empty:focus::before {
+  content: "";
+}
+

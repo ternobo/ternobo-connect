@@ -22,6 +22,8 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="mobile-web-app-capable" content="yes">
 
+    <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+
     <link rel="preload" href="/fonts/google-material/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2" />
     <link rel="preload" href="/manifest.js" as="script">
     <link rel="preload" href="/js/vendor.js" as="script">
@@ -54,10 +56,10 @@
 <body class="font-sans antialiased" data-wire='{{ $tuuid }}'>
     {!! $ternoboApp !!}
 
-    <script src="/js/manifest.js" defer></script>
-    <script src="/js/vendor.js?" defer></script>
-    <script src="/js/app.js" defer></script>
-    <link href="/css/app.css" rel="stylesheet" />
+    <script src="{{ mix('/js/manifest.js') }}" defer></script>
+    <script src="{{ mix('/js/vendor.js') }}" defer></script>
+    <script src="{{ mix('/js/app.js') }}" defer></script>
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
 </body>
 
 </html>

@@ -11,6 +11,8 @@ window.moment.isSameWeek = function (firstDay, secondDay, offset = -1) {
 
     return startOfWeek(firstMoment, offset).isSame(startOfWeek(secondMoment, offset), "day");
 }
+window.CaretPos = require("./Libs/CaretPos");
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

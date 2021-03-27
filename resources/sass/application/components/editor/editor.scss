@@ -7,10 +7,16 @@
     .editor-item {
         display: flex;
 
+        &:not(:first-child) {
+            margin-top: 24px;
+        }
+
         >.actions {
             color: $light;
             margin-left: 24px;
             width: 60px;
+            display: flex;
+            align-items: center;
         }
     }
 }
@@ -22,6 +28,8 @@
     unicode-bidi: -moz-plaintext;
     unicode-bidi: plaintext;
     text-align: start;
+
+    padding: .375rem .75rem;
 
     p {
         unicode-bidi: -moz-plaintext;
@@ -43,6 +51,48 @@
     }
 
     &::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
         -webkit-text-fill-color: $text-color;
         text-fill-color: $text-color;
     }
@@ -69,6 +119,7 @@
     content: "";
 }
 
+/** Tag Selector **/
 .tribute-container {
     height: auto;
     max-height: 300px;
@@ -111,4 +162,21 @@
     background: rgba($color: $action, $alpha: 0.3);
     color: $action;
     padding: 0;
+}
+
+/** Tag Selector **/
+
+.title-input {
+    background: $fixed-elements;
+    width: 100%;
+
+    input {
+        color: $text-color;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 28px;
+        unicode-bidi: -moz-plaintext;
+        unicode-bidi: plaintext;
+        text-align: start;
+    }
 }
