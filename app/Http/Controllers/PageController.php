@@ -467,7 +467,8 @@ class PageController extends Controller
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
             $report = new Report();
-            $report->page_id = $request->page_id;
+            $report->reportable_id = $request->page_id;
+            $report->reportable_type = Page::class;
             $report->reason = $request->report;
             if ($request->filled("moreinfo")) {
                 $report->description = $request->moreinfo;

@@ -18,8 +18,8 @@ class ReportsController extends Controller
     public function index()
     {
         $reports = Report::query()
-            ->with(["user", "post", "comment", "page"])
-            ->with(["post.slides", "post.slides.content"])
+            ->whereHas("reportable")
+            ->with(["reportable"])
             ->latest()
             ->paginate();
         return response()->json(['result' => true, 'data' => $reports]);

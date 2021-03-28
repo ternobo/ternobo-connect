@@ -20,19 +20,10 @@ class Report extends Model
         return $this->belongsTo(User::class, "user_id");
     }
 
-    public function post()
+    public function reportable()
     {
-        return $this->belongsTo(Post::class, "post_id");
-    }
-
-    public function comment()
-    {
-        return $this->belongsTo(Comment::class, "comment_id");
-    }
-
-    public function page()
-    {
-        return $this->belongsTo(Page::class, "page_id");
+        // dd(->toSql());
+        return $this->morphTo("reportable", "reportable_type", "reportable_id");
     }
 
 }

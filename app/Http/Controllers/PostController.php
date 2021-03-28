@@ -6,6 +6,7 @@ use App\Http\Requests\PostRequest;
 use App\Models\Action;
 use App\Models\Bookmark;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\ContentSeen;
 use App\Models\Like;
 use App\Models\Notification;
@@ -188,9 +189,12 @@ class PostController extends Controller
         } else {
             $report = new Report();
             if ($request->has("comment_id")) {
-                $report->comment_id = $request->comment_id;
+                $report->reportable_id = $request->comment_id;
+                $report->reportable_type = Comment::class;
+
             } else {
-                $report->post_id = $request->post_id;
+                $report->reportable_id = $request->post_id;
+                $report->reportable_type = Post::class;
             }
             $report->reason = $request->report;
             if ($request->has("moreinfo")) {

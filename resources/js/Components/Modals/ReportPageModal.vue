@@ -1,7 +1,7 @@
 <template>
 	<b-modal v-model="showModal" hide-footer size="md" title="چرا می‌‌خواهید این صفحه را گزارش دهید؟" :centered="true">
 		<div class="reportreseaons" v-if="reportFor == null">
-            <div class="report-item" @click="reportFor = 'notrelated',reason='نامرتبط با ترنوبو'">
+			<div class="report-item" @click="(reportFor = 'notrelated'), (reason = 'نامرتبط با ترنوبو')">
 				<span class="text">فکر می‌کنم <span class="reportTitle">این صفحه</span> مناسب ترنوبو نیست</span>
 				<i class="material-icons">keyboard_arrow_left</i>
 			</div>
@@ -139,8 +139,8 @@
 				<textarea class="form-control h-100" v-model="description" placeholder="توضیحات خود را اینجا بنویسید" name="moreinfo"></textarea>
 			</div>
 			<div class="moreinfo-footer text-left py-2">
-				 <button class="btn button-transparent" type="button" @click="(moreInfo = false), (description = null)">لغو</button>
-                <button class="btn btn-dark" id="moreinfo-close" @click="moreInfo = false">افزودن</button>
+				<button class="btn button-transparent" type="button" @click="(moreInfo = false), (description = null)">لغو</button>
+				<button class="btn btn-dark" id="moreinfo-close" @click="moreInfo = false">افزودن</button>
 			</div>
 		</div>
 		<div class="d-flex pt-3 justify-content-between" v-else-if="reportFor != null">
@@ -173,13 +173,19 @@ export default {
 		},
 		submit() {
 			this.loading = true;
-			let data = {};
-			data.page_id = this.postId;
+			let data = {
+				page_id: this.pageId,
+				report: this.reason,
+			};
 			axios
 				.post("/reportpage", data)
 				.then((response) => {
-					this.toast("درخواست شما با موفقیت ثبت شد", "check", "text-success");
-					this.$emit("update:show", false);
+					if (response.data.result) {
+						this.toast("درخواست شما با موفقیت ثبت شد", "check", "text-success");
+						this.$emit("update:show", false);
+					} else {
+						this.handleError(response.data.errors);
+					}
 				})
 				.catch((err) => this.toast("خطا در برقراری ارتباط"))
 				.then(() => (this.loading = false));
