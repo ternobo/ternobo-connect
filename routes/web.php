@@ -241,7 +241,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
         Route::post("/posts/{post:id}/embed", "PostController@getEmbed");
 
-        Route::resource("/posts", "PostController")->only(['store', 'update', 'destroy']);
+        Route::resource("/posts", "PostController")->only(['store', 'update', 'destroy', "show"]);
 
         //Chats
         Route::prefix("chats")->group(function () {
