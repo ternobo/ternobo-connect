@@ -16,6 +16,12 @@
     }
 }
 
+.btn-action-light {
+    background: #E7F3FF;
+    border-radius: 12px;
+    color: $action !important;
+}
+
 .follow-btn:hover {
     background: #CDEAF9;
     color: rgb(8, 152, 223);

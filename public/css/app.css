@@ -17764,6 +17764,12 @@ h5 {
   }
 }
 
+.btn-action-light {
+  background: #E7F3FF;
+  border-radius: 12px;
+  color: #0898DF !important;
+}
+
 .follow-btn:hover, .connect-btn:hover, .btn-connection-waiting:hover, .add-to-resume-btn:hover {
   background: #CDEAF9;
   color: #0898df;
@@ -24703,6 +24709,18 @@ body {
   background-color: #FFFF;
 }
 
+.content-editor--container .elements .placeholder-element {
+  margin-right: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.content-editor--container .editor-actions:not(:first-child) {
+  margin-top: 24px;
+}
+
 .content-editor--container .editor-item {
   display: flex;
 }
@@ -24720,7 +24738,7 @@ body {
 }
 
 .editor--text-input {
-  min-height: 60px;
+  min-height: 30px;
   width: 100%;
   color: #424242;
   unicode-bidi: -moz-plaintext;
@@ -24749,6 +24767,60 @@ body {
 }
 
 .editor--text-input::-moz-selection {
+  -webkit-text-fill-color: #424242;
+  text-fill-color: #424242;
+}
+
+.editor--text-input::-moz-selection,
+.editor--text-input *::-moz-selection {
+  -webkit-text-fill-color: #424242;
+  text-fill-color: #424242;
+}
+
+.editor--text-input::-moz-selection,
+.editor--text-input *::-moz-selection {
+  -webkit-text-fill-color: #424242;
+  text-fill-color: #424242;
+}
+
+.editor--text-input::-moz-selection,
+.editor--text-input *::-moz-selection {
+  -webkit-text-fill-color: #424242;
+  text-fill-color: #424242;
+}
+
+.editor--text-input::-moz-selection,
+.editor--text-input *::-moz-selection {
+  -webkit-text-fill-color: #424242;
+  text-fill-color: #424242;
+}
+
+.editor--text-input::-moz-selection,
+.editor--text-input *::-moz-selection {
+  -webkit-text-fill-color: #424242;
+  text-fill-color: #424242;
+}
+
+.editor--text-input::-moz-selection,
+.editor--text-input *::-moz-selection {
+  -webkit-text-fill-color: #424242;
+  text-fill-color: #424242;
+}
+
+.editor--text-input::-moz-selection,
+.editor--text-input *::-moz-selection {
+  -webkit-text-fill-color: #424242;
+  text-fill-color: #424242;
+}
+
+.editor--text-input::-moz-selection,
+.editor--text-input *::-moz-selection {
+  -webkit-text-fill-color: #424242;
+  text-fill-color: #424242;
+}
+
+.editor--text-input::-moz-selection,
+.editor--text-input *::-moz-selection {
   -webkit-text-fill-color: #424242;
   text-fill-color: #424242;
 }

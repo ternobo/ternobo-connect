@@ -4,7 +4,7 @@ import Vue from 'vue';
 import {
     plugin,
 } from 'wire-js';
-import PortalVue from 'portal-vue';
+import PortalVue from 'portal-vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 import TProgress from "./Libs/TProgress";
@@ -52,7 +52,6 @@ Vue.use(Vuex);
 /// Install TernoboApp
 Vue.use(plugin);
 Vue.use(PortalVue);
-
 Vue.use(TernoboApp);
 
 // Install Infinite Scroll
