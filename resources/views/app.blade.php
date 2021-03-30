@@ -55,7 +55,7 @@
 
 <body class="font-sans antialiased" data-wire='{{ $tuuid }}'>
     {!! $ternoboApp !!}
-    <portal-target name="body-outlet"></portal-target>
+
     <script src="{{ mix('/js/manifest.js') }}" defer></script>
     <script src="{{ mix('/js/vendor.js') }}" defer></script>
     <script src="{{ mix('/js/app.js') }}" defer></script>
