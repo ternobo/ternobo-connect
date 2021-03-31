@@ -1,7 +1,21 @@
-<template></template>
+<template>
+	<img :src="imageUrl" />
+</template>
 
 <script>
-export default {};
+export default {
+	computed: {
+		imageUrl() {
+			console.log(this.content);
+			return URL.createObjectURL(this.content);
+		},
+	},
+	props: {
+		content: {
+			default: null,
+		},
+	},
+};
 </script>
 
 <style>

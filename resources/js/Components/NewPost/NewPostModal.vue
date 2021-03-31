@@ -1,16 +1,13 @@
 <template>
-	<b-modal v-if="$store.state.user != null" v-model="showModal" :no-close-on-backdrop="isCropping" @show="onShown" hide-footer body-class="pb-2" size="md" title="تولید محتوای تازه" :centered="true">
+	<b-modal v-if="$store.state.user != null" v-model="showModal" :no-close-on-backdrop="isCropping" @show="onShown" hide-footer modal-class="new-post-modal" body-class="pb-2" size="md" title="تولید محتوای تازه" :centered="true">
 		<div action="/posts" data-ajax method="POST" data-reload="1" enctype="multipart/form-data" class="w-100">
 			<div class="new-post position-relative">
 				<div class="selections">
-					<div class="userinfo col-lg-4 p-0">
-						<lazy-image :src="$store.state.user.profile" class="profile-sm" img-class="profile-sm" loading="lazy" />
+					<div class="d-flex align-items-center">
+						<lazy-image :src="$store.state.user.profile" class="profile-sm mb-0 ml-2" img-class="profile-sm" loading="lazy" />
 						<strong>{{ $store.state.user.name }}</strong>
 					</div>
 					<div class="categoryandtype">
-						<div class="mx-1 col-lg-5 p-0">
-							<tselect :items="showTypesItems" :showNewItem="false" v-model="showType" direction="rtl"></tselect>
-						</div>
 						<div class="ml-1 p-0 col-lg-7">
 							<tselect v-on:new-item="newCategory" :items="categories" value-option="name" :showNewItem="true" v-model="category" direction="rtl"> <i class="material-icons-outlined">layers</i> دسته‌بندی </tselect>
 						</div>
