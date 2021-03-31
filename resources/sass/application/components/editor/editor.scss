@@ -21,6 +21,39 @@
     .editor-item {
         display: flex;
 
+        &.image-item {
+            position: relative;
+            margin-left: -24px;
+            margin-right: -24px;
+
+            .actions {
+                position: absolute;
+                width: 68px;
+                height: 48px;
+                background: $dark;
+                border-radius: 20px;
+                z-index: 999;
+                top: 16px;
+                right: 18px;
+                padding: 12px 6px;
+
+                i {
+                    color: $icons
+                }
+
+                .hand-hover:hover {
+                    cursor: -webkit-grab;
+                    cursor: grab;
+                }
+
+                ;
+            }
+
+            >img {
+                width: 100%;
+            }
+        }
+
         &:not(:first-child) {
             margin-top: 24px;
         }
@@ -28,9 +61,11 @@
         >.actions {
             color: $light;
             margin-left: 24px;
-            width: 60px;
+            width: 68px;
+            height: 48px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
         }
     }
 }
@@ -41,6 +76,22 @@
     background: $dark;
     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.051);
     padding: 16px 24px;
+    padding-bottom: 24px;
+}
+
+.add-action-btn {
+    i {
+        transition: 0.3s transform;
+    }
+}
+
+.add-action-btn.active {
+    background: #EEEEEE;
+
+    i {
+        color: $light;
+        transform: rotate(45deg);
+    }
 }
 
 .text-type-list {
@@ -81,8 +132,6 @@
                 opacity: 0.4;
             }
         }
-
-
     }
 }
 
@@ -116,6 +165,132 @@
     }
 
     &::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
         -webkit-text-fill-color: $text-color;
         text-fill-color: $text-color;
     }

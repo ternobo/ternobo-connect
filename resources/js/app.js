@@ -43,7 +43,7 @@ vSelect.props.components.default = () => ({
 Vue.component('v-select', vSelect);
 
 // Install BootstrapVue
-Vue.use(BootstrapVue)
+Vue.use(BootstrapVue, { "BModal": { "headerCloseContent": 'close' } })
 Vue.use(IconsPlugin)
 
 //use Vuex
