@@ -20,6 +20,7 @@ class ReportsController extends Controller
         $reports = Report::query()
             ->whereHas("reportable")
             ->with(["reportable", "reportable.page", "adminNotes", "adminNotes.user"])
+            ->with("reportedBy")
             ->latest()
             ->paginate();
         return response()->json(['result' => true, 'data' => $reports]);
