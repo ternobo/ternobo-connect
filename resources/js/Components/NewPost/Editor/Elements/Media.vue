@@ -6,7 +6,6 @@
 export default {
 	computed: {
 		imageUrl() {
-			console.log(this.content);
 			return URL.createObjectURL(this.content);
 		},
 	},

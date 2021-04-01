@@ -8,7 +8,7 @@
 							<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 							<i class="material-icons-outlined hand-hover">unfold_more</i>
 						</div>
-						<component :is="components[element.type]" :content="element.content" />
+						<component :is="components[element.type]" :content.sync="editorItems[index].content" />
 					</div>
 				</transition-group>
 			</draggable>
@@ -30,6 +30,9 @@ import Media from "./Elements/Media";
 export default {
 	watch: {},
 	methods: {
+		getData() {
+			return this.editorItems;
+		},
 		deleteElem(index) {
 			this.editorItems.splice(index, 1);
 		},
@@ -42,7 +45,6 @@ export default {
 					this.editorItems.push({ type: "title", content: "" });
 					break;
 				case "media":
-					console.log("hi");
 					let fileChooser = document.createElement("input");
 					fileChooser.type = "file";
 					fileChooser.onchange = (e) => {

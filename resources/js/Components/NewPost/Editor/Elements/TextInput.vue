@@ -12,6 +12,7 @@ export default {
 	methods: {
 		input() {
 			this.$refs.editableHighlight.innerHTML = this.$refs.editable.innerHTML.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
+			this.$emit("update:content", this.$refs.editable.textContent);
 		},
 		searchForTags(text, cb) {
 			axios.get(this.$APP_URL + "/gettags?term=" + text + "&q=" + text).then((response) => {
@@ -27,12 +28,13 @@ export default {
 		},
 	},
 	props: {
-		value: {
+		content: {
 			default: "",
 		},
 	},
 	created() {
-		this.text = this.value;
+		this.this.$refs.editable.innerHTML = this.content;
+		this.$refs.editableHighlight.innerHTML = this.$refs.editable.innerHTML.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
 	},
 	mounted() {
 		document.execCommand("defaultParagraphSeparator", false, "br");
@@ -62,11 +64,6 @@ export default {
 		text(newValue) {
 			this.$emit("input", newValue);
 		},
-	},
-	data() {
-		return {
-			text: "",
-		};
 	},
 	components: { TextareaContent },
 };
