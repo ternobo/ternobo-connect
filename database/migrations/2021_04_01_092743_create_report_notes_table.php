@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAdminNotesToReports extends Migration
+class CreateReportNotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddAdminNotesToReports extends Migration
      */
     public function up()
     {
-        Schema::table('reports', function (Blueprint $table) {
-            $table->json("admin_note")->nullable()->after("description");
+        Schema::create('report_notes', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger("report_id");
+            $table->json("content");
+            $table->unsignedBigInteger("user_id");
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddAdminNotesToReports extends Migration
      */
     public function down()
     {
-        Schema::table('reports', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('report_notes');
     }
 }

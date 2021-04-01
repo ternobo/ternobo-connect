@@ -24,4 +24,6 @@ Route::middleware(["auth:api", AdminAPIMiddleware::class])->prefix("/admin")->gr
         'posts' => "Admin\PostsController",
     ]);
 
+    Route::resource("reports.notes", "Admin\ReportNotesController")->only("store", "destroy", "update");
+
 });

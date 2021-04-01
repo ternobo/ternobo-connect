@@ -12,8 +12,12 @@ class Report extends Model
 
     protected $fillable = [
         'status',
-        'admin_note',
     ];
+
+    public function adminNotes()
+    {
+        return $this->hasMany(ReportNote::class);
+    }
 
     public function user()
     {

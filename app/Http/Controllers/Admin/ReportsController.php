@@ -19,7 +19,7 @@ class ReportsController extends Controller
     {
         $reports = Report::query()
             ->whereHas("reportable")
-            ->with(["reportable", "reportable.page"])
+            ->with(["reportable", "reportable.page", "adminNotes", "adminNotes.user"])
             ->latest()
             ->paginate();
         return response()->json(['result' => true, 'data' => $reports]);
@@ -40,8 +40,9 @@ class ReportsController extends Controller
         if ($validator->fails()) {
             return response()->json(['result' => false, 'errors' => $validator->errors()]);
         }
+        $result = $report->update($request->all());
         return response()->json([
-            'result' => $report->update($request->all()),
+            'result' => $result,
         ]);
     }
 

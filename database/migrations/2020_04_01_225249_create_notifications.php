@@ -19,7 +19,7 @@ class CreateNotifications extends Migration
             $table->enum("action", array("like", "report_respond", "comment", "follow", "reply", "skill_credit", "mention", "like_comment"));
             $table->bigInteger("from");
             $table->bigInteger("to");
-            $table->morphs("notificationable");
+            $table->nullableMorphs("notificationable");
             $table->bigInteger("connected_to")->nullable();
             $table->string("text")->nullable();
             $table->boolean("seen")->default(0);

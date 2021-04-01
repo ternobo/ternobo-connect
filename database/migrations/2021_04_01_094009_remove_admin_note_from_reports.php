@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAdminNotesToReports extends Migration
+class RemoveAdminNoteFromReports extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddAdminNotesToReports extends Migration
     public function up()
     {
         Schema::table('reports', function (Blueprint $table) {
-            $table->json("admin_note")->nullable()->after("description");
+            $table->dropColumn("admin_note");
         });
     }
 
