@@ -3,10 +3,9 @@
 		<div class="tabs" :class="[{ compact: compact, centered: centered }, tabsClass]">
 			<ul>
 				<li v-for="tab in tabs" :key="tab.name" :class="{ 'is-active': tab.isActive }">
-					<a :class="{ disabled: disabled }" class="clickable" @click="selectTab(tab)"
-						><i class="material-icons ml-2" v-if="tab.icon != null && tab.icon != undefined">{{ tab.icon }}</i
-						>{{ tab.name }}</a
-					>
+					<a :class="{ disabled: disabled }" class="clickable" @click="selectTab(tab)">
+						<i class="material-icons ml-2" v-if="tab.icon != null && tab.icon != undefined">{{ tab.icon }}</i> {{ tab.name }}
+					</a>
 				</li>
 			</ul>
 			<div>

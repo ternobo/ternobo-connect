@@ -32,12 +32,11 @@ export default {
 			default: "",
 		},
 	},
-	created() {
-		this.this.$refs.editable.innerHTML = this.content;
-		this.$refs.editableHighlight.innerHTML = this.$refs.editable.innerHTML.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
-	},
 	mounted() {
 		document.execCommand("defaultParagraphSeparator", false, "br");
+		this.$refs.editable.innerHTML = this.content;
+		this.$refs.editableHighlight.innerHTML = this.$refs.editable.innerHTML.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
+
 		let tribute = new Tribute({
 			collection: [
 				{
