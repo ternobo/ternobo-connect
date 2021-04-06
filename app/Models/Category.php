@@ -34,7 +34,7 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'page_id'
+        'name', 'page_id', "type",
     ];
 
     public function posts()

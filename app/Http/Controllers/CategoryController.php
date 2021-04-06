@@ -3,21 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
-class CategoryController extends Controller {
+class CategoryController extends Controller
+{
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
-    public function sort(Request $request, $category) {
+    public function sort(Request $request, $category)
+    {
         $validator = Validator::make($request->all(), [
-                    "order" => "required",
-                        ], ["orders.required" => "موقعیت اجباری است."]);
+            "order" => "required",
+        ], ["orders.required" => "موقعیت اجباری است."]);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
@@ -33,20 +36,21 @@ class CategoryController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $validator = Validator::make($request->all(), [
-                    "name" => "required",
-                        ], ["name.required" => "نام دسته بندی اجباری است."]);
+            "name" => "required",
+        ], ["name.required" => "نام دسته بندی اجباری است."]);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
-            $check = Category::query()->where('name',$request->name)->where("page_id",Auth::user()->personalPage->id)->first();
-            if($check==null){
+            $check = Category::query()->where('name', $request->name)->where("page_id", Auth::user()->personalPage->id)->first();
+            if ($check == null) {
                 $category = new Category();
                 $category->name = $request->name;
                 $category->page_id = Auth::user()->personalPage->id;
                 $result = $category->save();
-                return response()->json(array("result" => $result, "category"=>$category));
+                return response()->json(array("result" => $result, "category" => $category));
             }
             return response()->json(array("result" => false));
 
@@ -60,17 +64,18 @@ class CategoryController extends Controller {
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category) {
+    public function update(Request $request, Category $category)
+    {
         $validator = Validator::make($request->all(), [
-                    "value" => "required",
-                        ], ["name.required" => "نام دسته بندی اجباری است."]);
+            "value" => "required",
+        ], ["name.required" => "نام دسته بندی اجباری است."]);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
             if ($category->page_id === Auth::user()->getPage()->id) {
                 $category->name = $request->value;
                 $result = $category->save();
-                return response()->json(array("result" => $result, "category"=>$category));
+                return response()->json(array("result" => $result, "category" => $category));
             } else {
                 return abort(404);
             }
@@ -83,7 +88,8 @@ class CategoryController extends Controller {
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category) {
+    public function destroy(Category $category)
+    {
         if ($category->page_id === Auth::user()->getPage()->id) {
             $posts = Post::query()->where("category_id", $category->id)->get();
             foreach ($posts as $post) {

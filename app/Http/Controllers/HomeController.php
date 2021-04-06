@@ -28,10 +28,6 @@ class HomeController extends Controller
         }
         $pages = Page::getSuggestions();
         $posts = Post::query()
-            ->with("page")
-            ->withCount("likes")
-            ->with("mutualLikes")
-            ->with("category")
             ->leftJoin("content_seens", function ($join) {
                 $join->on("posts.id", "=", "content_seens.post_id")->where("content_seens.user_id", Auth::user()->id);
             })

@@ -44,7 +44,14 @@ class PostController extends Controller
         $slides = $request->slides;
         $user = Auth::user();
         $user->load("personalPage");
-
+        $category = null;
+        if ($request->filled("category")) {
+            $category = Category::query()->where("name", $request->category)->where("page_id", $user->personalPage->id)->firstOrCreate([
+                "name" => $request->category,
+                "page_id" => $user->personalPage->id,
+                "type" => "post",
+            ])->id;
+        }
         $mentions = null;
         $tags = [];
 
@@ -54,6 +61,7 @@ class PostController extends Controller
             'page_id' => $user->personalPage->id,
             'medias' => [],
             'show' => "public",
+            "category_id" => $category,
         ]);
 
         foreach ($slides as $slide_input) {

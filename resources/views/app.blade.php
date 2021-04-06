@@ -25,14 +25,14 @@
     <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
 
     <link rel="preload" href="/fonts/google-material/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2" />
-    <link rel="preload" href="/manifest.js" as="script">
+    <link rel="preload" href="/js/manifest.js" as="script">
     <link rel="preload" href="/js/vendor.js" as="script">
     <link rel="preload" href="/js/app.js" as="script">
 
-    <link rel="preload" href="/fonts/dana/woff2/dana-noen-bold.woff2">
-    <link rel="preload" href="/fonts/dana/woff2/dana-noen-regular.woff2">
-    <link rel="preload" href="/fonts/roboto/Roboto-Regular.ttf">
-    <link rel="preload" href="/fonts/google-material/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2">
+    <link rel="preload" href="/fonts/dana/woff2/dana-noen-bold.woff2" as="font">
+    <link rel="preload" href="/fonts/dana/woff2/dana-noen-regular.woff2" as="font">
+    <link rel="preload" href="/fonts/roboto/Roboto-Regular.ttf" as="font">
+    <link rel="preload" href="/fonts/google-material/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2" as="font">
 
     <!-- Add to homescreen for Chrome on Android -->
 

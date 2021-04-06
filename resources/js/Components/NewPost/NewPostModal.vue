@@ -1,5 +1,5 @@
 <template>
-	<b-modal v-if="$store.state.user != null" v-model="showModal" no-close-on-esc no-close-on-backdrop @show="onShown" hide-footer no modal-class="new-post-modal" size="md" title="تولید محتوای تازه" :centered="true">
+	<b-modal v-if="$store.state.user != null" v-model="showModal" no-close-on-esc no-close-on-backdrop hide-footer no modal-class="new-post-modal" size="md" title="تولید محتوای تازه" :centered="true">
 		<div action="/posts" data-ajax method="POST" data-reload="1" enctype="multipart/form-data" class="w-100">
 			<div class="new-post position-relative">
 				<div class="selections">
@@ -43,45 +43,58 @@ export default {
 		},
 	},
 	methods: {
+		newCategory(value) {
+			if (!this.categories.filter((item) => item.name == value).length > 0) {
+				this.categories.push({
+					name: value,
+					id: value,
+				});
+				axios
+					.post("/categories", {
+						name: value,
+					})
+					.then(() => {
+						this.$store.commit("addCategory", { name: value, id: value });
+					});
+			} else {
+				this.toast("نام دسته بندی تکراری است");
+			}
+		},
+		onShown() {},
 		submitPost() {
+			this.loading = true;
 			let data = this.$refs.sliderEditor.getData();
 			let formData = new FormData();
-			data.forEach((item) => {
+			data.forEach((item, index) => {
 				item.content.forEach((slide) => {
 					if (slide.content != "" && slide.content != null) {
-						formData.append(`slides[][${slide.type}]`, slide.content);
+						formData.append(`slides[${index}][${slide.type}]`, slide.content);
 					}
 				});
 			});
+			if (this.category) {
+				formData.append("category", this.category.name);
+			}
 			axios
 				.post("/posts", formData)
 				.then((response) => {
 					if (response.data.result) {
 						this.toast("با موفقیت منتشر شد", "check", "text-success");
 						this.$emit("update:show", false);
+						this.$store.state.ternoboWireApp.reload();
 					} else {
 						this.toast("خطا در ثبت اطلاعات");
 					}
 				})
 				.catch((err) => {
 					this.toast("خطا در ثبت اطلاعات");
+				})
+				.then(() => {
+					this.loading = false;
 				});
 		},
 		initialData() {
 			return {
-				showTypesItems: [
-					{
-						name: "همه",
-						value: "public",
-						icon: "public",
-					},
-					{
-						name: "فقط دوستان",
-						value: "private",
-						icon: "group",
-					},
-				],
-				showType: undefined,
 				category: undefined,
 				text: undefined,
 				categories: [],
@@ -110,8 +123,6 @@ export default {
 		},
 	},
 	mounted() {
-		this.showType = this.showTypesItems[0];
-
 		if (this.$store.state.user) {
 			if (this.$store.state.shared.currentPage.categories != null) {
 				this.categories = this.$store.state.shared.currentPage.categories;

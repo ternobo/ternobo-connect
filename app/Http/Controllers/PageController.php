@@ -9,6 +9,7 @@ use App\Models\Following;
 use App\Models\Page;
 use App\Models\PageSocial;
 use App\Models\Post;
+use App\Models\Report;
 use App\Models\Social;
 use App\Models\Website;
 use Artesaos\SEOTools\Facades\SEOMeta;

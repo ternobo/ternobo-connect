@@ -35,7 +35,10 @@ class Post extends Model
         'type',
         'category_id',
         'medias',
+        "show",
     ];
+
+    protected $with = ["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"];
 
     public static function scriptStripper($input)
     {
@@ -184,12 +187,15 @@ class Post extends Model
 
     public function mutualLikes()
     {
-        return $this->hasMany("App\Models\Like", "post_id")
-            ->with("page")
-            ->whereHas("page", function ($query) {
-                $query->whereRaw("id in (select following from followings where user_id = ?)", Auth::user()->id);
-            })
-            ->latest();
+        if (Auth::check()) {
+            return $this->hasMany("App\Models\Like", "post_id")
+                ->with("page")
+                ->whereHas("page", function ($query) {
+                    $query->whereRaw("id in (select following from followings where user_id = ?)", Auth::user()->id);
+                })
+                ->latest();
+        }
+        return $this->hasMany("App\Models\Like", "post_id")->where("id", "-1");
     }
 
     public function likes()

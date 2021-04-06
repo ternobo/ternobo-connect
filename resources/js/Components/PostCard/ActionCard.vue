@@ -3,23 +3,14 @@
 		<div class="actionText border-bottom" v-if="action.action !== 'post'">
 			{{ actionText }}
 		</div>
-		<component class="shadow-0" :post="action.post" v-bind:is="componentType"></component>
+		<post-card :post="action.post" />
 	</div>
 </template>
 
 <script>
-import SimplePost from "./SimplePost";
-import ArticleCard from "./ArticleCard";
+import PostCard from "./PostCard.vue";
 export default {
-	created() {
-		if (this.action.post) {
-			if (this.action.post.type === "article") {
-				this.componentType = require("./ArticleCard").default;
-			} else if (this.action.post.type === "share") {
-				this.componentType = require("./ResharedPost").default;
-			}
-		}
-	},
+	components: { PostCard },
 	data() {
 		return {
 			componentType: require("./SimplePost").default,
