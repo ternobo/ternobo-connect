@@ -161,9 +161,37 @@ class User extends Authenticatable implements Messageable
     {
         return $this->hasMany("App\Models\Following");
     }
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+    public function actions()
+    {
+        return $this->hasMany(Action::class);
+    }
     public function followers()
     {
         return $this->hasMany("App\Models\Following", "following");
+    }
+
+    public function likes()
+    {
+        return $this->hasManyThrough(Like::class, Page::class);
+    }
+
+    public function commets()
+    {
+        return $this->hasManyThrough(Comment::class, Page::class);
+    }
+
+    public function aboutData()
+    {
+        return $this->hasOneThrough(AboutData::class, Page::class);
+    }
+
+    public function activeSessions()
+    {
+        return $this->hasMany(ActiveSession::class);
     }
 
     /**
@@ -543,6 +571,22 @@ class User extends Authenticatable implements Messageable
             unset($array['is_admin']);
         }
         return $array;
+    }
+
+    public function forceDelete()
+    {
+        $this->activeSessions()->forceDelete();
+        $this->aboutData()->forceDelete();
+        $this->likes()->forceDelete();
+        $this->commets()->forceDelete();
+        $this->followers()->forceDelete();
+        $this->followings()->forceDelete();
+        $this->actions()->forceDelete();
+        $this->posts()->forceDelete();
+        $this->skills()->forceDelete();
+        $this->pages()->forceDelete();
+        $this->bookmarks()->forceDelete();
+        return parent::forceDelete();
     }
 
     public function makePage()

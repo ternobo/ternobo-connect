@@ -93,17 +93,50 @@ class UsersController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Deacive Multiple resource from storage.
      *
      * @param \App\User $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function activeMultiple(Request $request)
     {
         try {
-            return response()->json(['result' => $user->delete() && $user->pages()->delete()]);
+            $users = $request->users;
+            $result = User::query()->whereIn("id", $users)->restore();
+
+            return response()->json(['result' => $result != 0 && $result != null]);
         } catch (\Exception $e) {
             return response()->json(['result' => false]);
         }
     }
+
+    /**
+     * Deacive Multiple resource from storage.
+     *
+     * @param \App\User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function deactiveMutiple(Request $request)
+    {
+        try {
+            $users = $request->users;
+            $result = User::query()->whereIn("id", $users)->delete();
+            return response()->json(['result' => $result != 0 && $result != null]);
+        } catch (\Exception $e) {
+            return response()->json(['result' => false]);
+        }
+    }
+
+    public function forceDestory(Request $request)
+    {
+        try {
+            $users = $request->users;
+            $result = User::query()->whereIn("id", $users)->forceDelete();
+
+            return response()->json(['result' => $result != 0 && $result != null]);
+        } catch (\Exception $e) {
+            return response()->json(['result' => false]);
+        }
+    }
+
 }
