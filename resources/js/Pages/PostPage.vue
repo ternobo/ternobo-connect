@@ -26,7 +26,6 @@
 import AppLayout from "../Layouts/AppLayout";
 import PersianDate from "persian-date";
 
-import ReshareModal from "../Components/Modals/ReshareModal.vue";
 import PostMenu from "../Components/Menues/PostMenu.vue";
 
 import LoadingSpinner from "../Components/LoadingSpinner";
@@ -139,7 +138,6 @@ export default {
 	},
 	layout: AppLayout,
 	components: {
-		ReshareModal,
 		PostMenu,
 
 		LoadingSpinner,

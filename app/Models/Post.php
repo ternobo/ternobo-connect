@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 /**
@@ -126,28 +125,10 @@ class Post extends Model
         return $this->bookmarks->contains(Auth::user());
     }
 
-    public function getMedia()
-    {
-        $medias = $this->medias;
-        if (count($medias) === 1) {
-            return $medias[0];
-        } elseif (count($medias) < 1) {
-            return null;
-        }
-        return $medias;
-    }
-
     public function toArray()
     {
         // get the original array to be displayed
         $data = parent::toArray();
-        $data['medias'] = $this->getMedia();
-        $data['share'] = $this->share;
-        $data['media_type'] = "";
-        if ($data['medias'] != null && Str::startsWith($data['medias'], url('/'))) {
-            $data['media_type'] = Storage::mimeType(str_replace(url('/'), '', $data['medias']));
-        }
-
         $data['is_liked'] = false;
         $data['is_bookmarked'] = false;
         if (Auth::check()) {

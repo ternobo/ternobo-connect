@@ -48,6 +48,7 @@ class PostRequest extends FormRequest
     {
         return [
             "slides" => ['required', 'array', 'min:1', "max:12"],
+            "deletedSlides" => ["exists:post_slides,id", "json"],
         ];
     }
 }

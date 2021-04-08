@@ -24,7 +24,7 @@ class PostFactory extends Factory
         $faker = $this->faker;
 
         $page = Page::where("id", "!=", 1)->get()->random();
-        $type = $faker->randomElement(array("article", "post"));
+        $type = "post";
         $medias = [$faker->imageUrl()];
         // dd($page->id);
         $tags = [$faker->word, $faker->word, $faker->word];
@@ -47,16 +47,13 @@ class PostFactory extends Factory
             $category->save();
         }
         $title = null;
-        if ($type === "article") {
-            $title = $faker->company;
-        }
 
         return [
             "page_id" => $page->id,
             "user_id" => $page->user_id,
             "text" => $faker->paragraph,
-            "medias" => json_encode($medias),
-            "tags" => json_encode($tags),
+            "medias" => $medias,
+            "tags" => $tags,
             "category_id" => $category->id,
             "type" => $type,
             "title" => $title,

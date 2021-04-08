@@ -2,10 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class AddSlidesToPosts extends Migration
+class FixOldPostsColumnsPost extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +13,7 @@ class AddSlidesToPosts extends Migration
      */
     public function up()
     {
-        DB::statement("ALTER TABLE `posts` CHANGE `type` `type` ENUM('article','post') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;");
+        //
     }
 
     /**
@@ -24,8 +23,6 @@ class AddSlidesToPosts extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            //
-        });
+        //
     }
 }

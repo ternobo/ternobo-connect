@@ -14,13 +14,22 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $users = User::withTrashed()
-            ->withCount(["followings", 'followers'])
-            ->paginate();
+            ->withCount(["followings", 'followers']);
 
-        foreach ($users as $user) {
+        if ($request->filled("q")) {
+            $query = $request->q;
+            $users = $users->whereRaw("name like ?", ["%$query%"])->orWhereRaw("username like ?", ["%$query"]);
+        }
+
+        $data = $users->paginate();
+        if ($request->filled("q")) {
+            $data->appends('q', $request->q);
+        }
+
+        foreach ($data as $user) {
             $user->makeVisible([
                 "deleted_at",
                 "two_factor_type",
@@ -36,8 +45,7 @@ class UsersController extends Controller
                 "updated_at",
             ]);
         }
-
-        return response()->json(['result' => true, 'data' => $users]);
+        return response()->json(['result' => true, 'data' => $data]);
     }
 
     /**
@@ -63,6 +71,7 @@ class UsersController extends Controller
             "updated_at",
         ]);
         $user->loadCount(["followings", 'followers']);
+        $user->load(["personalPage.aboutData", "personalPage.contactData"]);
         return response()->json(['result' => true, 'data' => $user]);
     }
 
@@ -101,6 +110,7 @@ class UsersController extends Controller
     public function activeMultiple(Request $request)
     {
         try {
+            $request->validate(['users' => ["required", 'array']]);
             $users = $request->users;
             $result = User::query()->whereIn("id", $users)->restore();
 
@@ -119,6 +129,7 @@ class UsersController extends Controller
     public function deactiveMutiple(Request $request)
     {
         try {
+            $request->validate(['users' => ["required", 'array']]);
             $users = $request->users;
             $result = User::query()->whereIn("id", $users)->delete();
             return response()->json(['result' => $result != 0 && $result != null]);
@@ -130,9 +141,9 @@ class UsersController extends Controller
     public function forceDestory(Request $request)
     {
         try {
+            $request->validate(['users' => ["required", 'array']]);
             $users = $request->users;
             $result = User::query()->whereIn("id", $users)->forceDelete();
-
             return response()->json(['result' => $result != 0 && $result != null]);
         } catch (\Exception $e) {
             return response()->json(['result' => false]);

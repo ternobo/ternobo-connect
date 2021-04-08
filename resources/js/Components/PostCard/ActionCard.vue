@@ -11,11 +11,6 @@
 import PostCard from "./PostCard.vue";
 export default {
 	components: { PostCard },
-	data() {
-		return {
-			componentType: require("./SimplePost").default,
-		};
-	},
 	computed: {
 		actionText() {
 			if (this.action.action == "like") {

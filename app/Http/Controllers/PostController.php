@@ -56,7 +56,7 @@ class PostController extends Controller
         $tags = [];
 
         $post = Post::query()->create([
-            'type' => 'slide',
+            'type' => 'post',
             'user_id' => $user->id,
             'page_id' => $user->personalPage->id,
             'medias' => [],
@@ -79,7 +79,8 @@ class PostController extends Controller
                         // Process
                         $rawText = htmlentities($content);
                         $mentions = SocialMediaTools::getMentions($rawText);
-                        $text = SocialMediaTools::replacHashtags(SocialMediaTools::replaceMentions(SocialMediaTools::replaceUrls($rawText)), 3);
+                        // $text = SocialMediaTools::replacHashtags(SocialMediaTools::replaceMentions(SocialMediaTools::replaceUrls($rawText)), 3);
+                        $text = $rawText;
 
                         $slideTags = array_slice(SocialMediaTools::getHashtags($rawText), 0, 3);
 
@@ -325,6 +326,13 @@ class PostController extends Controller
         $slides = $request->slides;
         $user = Auth::user();
         $user->load("personalPage");
+
+        $deletedSlides = [];
+
+        if ($request->filled("deletedSlides")) {
+            $deletedSlides = json_decode($request->deletedSlides);
+            PostSlide::query()->whereIn("id", $deletedSlides)->delete();
+        }
 
         $mentions = null;
         $tags = [];

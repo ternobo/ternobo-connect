@@ -526,3 +526,9 @@
 .slider-media-image {
     margin: 0 -22px;
 }
+
+.post-content--text {
+    >a {
+        color: $action;
+    }
+}

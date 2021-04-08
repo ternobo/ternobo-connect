@@ -12,7 +12,7 @@ export default {
 	methods: {
 		input() {
 			this.$refs.editableHighlight.innerHTML = this.$refs.editable.innerHTML.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
-			this.$emit("update:content", this.$refs.editable.textContent);
+			this.$emit("update:content", this.$refs.editable.innerText);
 		},
 		searchForTags(text, cb) {
 			axios.get(this.$APP_URL + "/gettags?term=" + text + "&q=" + text).then((response) => {

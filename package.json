@@ -39,6 +39,8 @@
         "@ckeditor/ckeditor5-ui": "^23.1.0",
         "@ckeditor/ckeditor5-vue2": "^1.0.5",
         "@trevoreyre/autocomplete-vue": "^2.2.0",
+        "@vue/babel-helper-vue-jsx-merge-props": "^1.2.1",
+        "@vue/babel-preset-jsx": "^1.2.4",
         "bootstrap": "^4.6.0",
         "bootstrap-v4-rtl": "^4.5.2-1",
         "bootstrap-vue": "^2.21.2",

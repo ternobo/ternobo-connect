@@ -64,6 +64,25 @@ TernoboApp.install = function (Vue, options) {
     Vue.directive("lazyload", LazyloadDirective);
     Vue.directive("clipboard", CopyToClipboard);
 
+    Vue.component('dynamic-link', {
+        template: '<component v-bind:is="transformed"></component>',
+        props: ['text'],
+        methods: {
+            convertHashTags: function (str) {
+                const spanned = `<span>${str}</span>`
+                return spanned.replace(/\B#(\S+)/gu, "<wire-link href='/tags/$1' class='text-action'>#$1</wire-link>").replace(/\B@(\w+)/gu, "<wire-link href='/$1'  class='mention-item'>@$1</wire-link>");
+            }
+        },
+        computed: {
+            transformed() {
+                const template = this.convertHashTags(this.text);
+                return {
+                    template: template,
+                    props: this.$options.props
+                }
+            }
+        }
+    })
 
     Vue.directive('click-outside', {
         inserted: function (el, binding, vnode) {

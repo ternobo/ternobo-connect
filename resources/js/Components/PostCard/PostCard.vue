@@ -1,6 +1,5 @@
 <template>
 	<div class="post-box" v-if="post !== undefined && !deleted">
-		<ReshareModal :post="post" :show.sync="showReshare"></ReshareModal>
 		<EmbedCodeModal :post="post" :show.sync="showEmbed"></EmbedCodeModal>
 		<new-post-modal :post="post" :show.sync="edit"></new-post-modal>
 		<likes-modal :item="post.id" :show.sync="showLikes"></likes-modal>
@@ -63,7 +62,6 @@ import EmbedCodeModal from "../Modals/EmbedCodeModal";
 
 // Load locale-specific relative date/time formatting rules.
 import fa from "javascript-time-ago/locale/fa";
-import ReshareModal from "../Modals/ReshareModal";
 import PostMenu from "../Menues/PostMenu.vue";
 
 TimeAgo.addLocale(fa);
@@ -85,7 +83,6 @@ export default {
 	components: {
 		CommentsList: CommentsList,
 		EmbedCodeModal: EmbedCodeModal,
-		ReshareModal: ReshareModal,
 		PostMenu,
 	},
 	methods: {
@@ -123,15 +120,13 @@ export default {
 			if (this.post.type === "article") {
 				this.componentType = require("./ArticleCard").default;
 			} else if (this.post.type == "post") {
-				this.componentType = require("./SimplePost").default;
-			} else if (this.post.type == "slide") {
 				this.componentType = require("./SliderCard").default;
 			}
 		}
 	},
 	data() {
 		return {
-			componentType: require("./SimplePost").default,
+			componentType: null,
 			liked: false,
 			bookmarked: false,
 			openComment: false,

@@ -41,7 +41,7 @@ class SocialMediaTools
     public static function replacHashtags($text, $limit)
     {
         return preg_replace_callback('/\B#(\w+)/u', function ($matches) {
-            return "<a href='" . url("/tags/" . $matches[1]) . "'>" . str_replace('ـ', ' ', str_replace('_', ' ', $matches[1])) . "</a>";
+            return "<a href='" . url("/tags/" . $matches[1]) . "'>#" . str_replace('ـ', ' ', str_replace('_', ' ', $matches[1])) . "</a>";
         }, $text, $limit);
     }
 

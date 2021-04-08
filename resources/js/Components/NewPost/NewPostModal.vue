@@ -38,7 +38,7 @@ export default {
 	props: {
 		post: {
 			type: Object,
-			default: undefined,
+			default: null,
 			required: false,
 		},
 	},
@@ -60,7 +60,9 @@ export default {
 				this.toast("نام دسته بندی تکراری است");
 			}
 		},
-		onShown() {},
+		onShown() {
+			console.log(this.post);
+		},
 		submitPost() {
 			this.loading = true;
 			let data = this.$refs.sliderEditor.getData();

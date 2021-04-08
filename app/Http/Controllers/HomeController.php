@@ -183,10 +183,6 @@ class HomeController extends Controller
 
         $posts = Post::query()
             ->distinct("posts.id")
-            ->with("page")
-            ->with("likes")
-            ->with("mutualLikes")
-            ->with("category")
             ->whereJsonContains('tags', $name)
             ->paginate(10);
         return TernoboWire::render('Tags', array("posts" => $posts));
