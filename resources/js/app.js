@@ -3,7 +3,7 @@ import Vue from 'vue';
 
 import {
     plugin,
-} from 'wire-js';
+} from 'ternobowire-js';
 import PortalVue from 'portal-vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import vSelect from 'vue-select'
@@ -115,6 +115,10 @@ document.addEventListener('ternobo:userloaded', event => {
                 })
             }
         }, 3000);
+        ;
+        window.Echo.connector.socket.on("connection", () => {
+            Echo.connector.socket.emit("clientInfo", { user_id: user.id, name: user.username });
+        })
     }
 
     if (user && !isSocketConnected) {

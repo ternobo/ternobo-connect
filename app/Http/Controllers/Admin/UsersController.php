@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Rules\UsernameValidator;
+use App\Tools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
@@ -54,8 +58,9 @@ class UsersController extends Controller
      * @param \App\User $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($user)
     {
+        $user = User::withTrashed()->where("id", $user)->firstOrFail();
         $user->makeVisible([
             "deleted_at",
             "two_factor_type",
@@ -82,14 +87,29 @@ class UsersController extends Controller
      * @param \App\User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $user)
     {
+        $user = User::withTrashed()->where("id", $user)->firstOrFail();
+        $validator = Validator::make($request->all(), [
+            "email" => [Rule::unique("users", "email")->ignore($user->id), "email"],
+            "username" => [new UsernameValidator($user->personalPage->id)],
+            "phone" => [Rule::unique("users", "phone")->ignore($user->id)],
+        ], [
+            'email.unique' => "ایمیل تکراری است",
+            'phone.unique' => "شماره تماس تکراری است",
+            'email.email' => "ایمیل نامعتبر است",
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['result' => false, "errors" => $validator->errors()]);
+        }
+
         $fields = $request->all();
         $result = $user->update($request->all());
         if ($request->filled("password")) {
             $user->password = Hash::make($request->password);
             $result = $user->save();
         }
+
         return response()->json(['result' => $result]);
     }
 
@@ -148,6 +168,159 @@ class UsersController extends Controller
         } catch (\Exception $e) {
             return response()->json(['result' => false]);
         }
+    }
+
+    /**
+     * Handle User About Data update
+     */
+    private function updateAboutData(User $user, $data)
+    {
+        $about = null;
+        $experiences = [];
+        $educations = [];
+        $skills = [];
+        $achievements = null;
+        $objectData = json_decode(json_encode($data));
+        if (Tools::filled($data, "about")) {
+            $about = $objectData->about;
+        }
+
+        /**
+         * Handle Experiences
+         */
+        if (Tools::filled($data, "experiences") && (is_array($data['experiences']))) {
+            $msgs = [
+                "company.required" => "نام شرکت اجباری است.",
+                "title.required" => 'عنوان شرکت اجباری است.',
+                "startDate.required" => "تاریخ شروع اجباری است.",
+            ];
+            $experiences = $objectData->experiences;
+            foreach ($experiences as $experience) {
+                $validator = Validator::make($experience, [
+                    'company' => "required|max:50",
+                    'title' => "required|max:60",
+                    "startDate" => ["required", new DateObject('تاریخ شروع تجربه نامعتبر است.')],
+                    "endDate" => [new DateObject('تاریخ شروع تجربه نامعتبر است.')],
+                ], $msgs);
+                if ($validator->fails()) {
+                    return response()->json(['result' => false, "type" => "experience", "errors" => $validator->errors()]);
+                }
+            }
+        }
+
+        if (Tools::filled($data, "skills") && is_array($objectData->skills)) {
+            $skills = $objectData->skills;
+            foreach ($skills as $skill) {
+                $check = Skill::query()->where("name", $skill['name'])->Where("user_id", $user->id)->first();
+                if ($check == null) {
+                    $theSkill = new Skill();
+                    $theSkill->name = $skill['name'];
+                    $theSkill->user_id = $user->id;
+                    $theSkill->save();
+                }
+            }
+        }
+
+        /**
+         * Handle Educations
+         */
+        if (Tools::filled($data, "educations") && is_array($objectData->educations)) {
+            $msgs = [
+                "school.required" => "محل تحصیل اجباری است.",
+                "major.required" => "رشته تحصیلی اجباری است.",
+                "degree.required" => 'مدرک تحصیلی اجباری است.',
+                "startDate.required" => "تاریخ شروع اجباری است.",
+            ];
+            $educations = $objectData->educations;
+            foreach ($educations as $education) {
+                $validator = Validator::make($education, [
+                    'school' => "required|max:50",
+                    'major' => "required|max:60",
+                    'degree' => "required|max:60",
+                    "startDate" => ["required", new DateObject('تاریخ پایان تحصیلات نامعتبر است.')],
+                    "endDate" => [new DateObject('تاریخ پایان تحصیلات نامعتبر است.')],
+                ], $msgs);
+                if ($validator->fails()) {
+                    return response()->json(['result' => false, "type" => "education", "errors" => $validator->errors()]);
+                }
+            }
+        }
+
+        /**
+         * Handle Skills
+         */
+        if (Tools::filled($data, "achievements") && is_array($objectData->achievements)) {
+            $achievements = (array) $objectData->achievements;
+
+            $messages = [
+                'name.required' => 'نام، {{ type }} اجباری است.',
+                'level.required' => 'میزان تسلط به زبان اجباری است.',
+                'startDate.required' => 'تاریخ شروع {{ type }} اجباری است.',
+                'endDate.required' => 'تاریخ پایان {{ type }} اجباری است.',
+                'date.required' => 'تاریخ {{ type }} اجباری است.',
+                'organization.required' => 'اداره ثبت اختراع اجباری است.',
+                'score.required' => 'نمره آزمون اجباری است.',
+            ];
+
+            $errors = [];
+
+            // dd($achievements);
+            $validatorRules = [
+                'langs' => [
+                    'name' => "required|max:50",
+                    'level' => ['required', new LevelObject],
+                ],
+                'awards' => [
+                    'name' => "required|max:50",
+                ],
+                'projects' => [
+                    'name' => "required|max:50",
+                    "startDate" => ["required", new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
+                    "endDate" => ['required', new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
+                ],
+                'publishs' => [
+                    'name' => "required|max:50",
+                    "date" => ["required", new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
+                    "publisher" => "required|max:50",
+                ],
+                'inventions' => [
+                    'name' => "required|max:50",
+                    "organization" => "required|max:50",
+                    "registerCode" => "required|numeric",
+                ],
+                'courses' => [
+                    'name' => "required|max:50",
+                ],
+                'tests' => [
+                    'name' => "required|max:50",
+                    "score" => "required|numeric",
+                    "date" => ["required", new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
+                ],
+            ];
+
+            foreach ($achievements as $type => $list) {
+                foreach ($list as $data) {
+                    $validator = Validator::make($data, $validatorRules[$type], $messages);
+                    if ($validator->fails()) {
+                        return response()->json(['result' => false, "type" => ProfileController::getTypeName($type), "errors" => $validator->errors()]);
+                    }
+                }
+            }
+        }
+        $data = [
+            'experiences' => $experiences,
+            'educations' => $educations,
+            'achievements' => $achievements,
+        ];
+
+        $page = $user->personalPage;
+        $page->about = $about;
+        $page->save();
+
+        $aboutData = AboutData::query()->where("page_id", $page->id)->firstOrNew();
+        $aboutData->page_id = $page->id;
+        $aboutData->data = json_encode($data);
+        return response()->json(["result" => $aboutData->save()]);
     }
 
 }

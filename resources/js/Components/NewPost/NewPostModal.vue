@@ -1,5 +1,5 @@
 <template>
-	<b-modal v-if="$store.state.user != null" v-model="showModal" no-close-on-esc no-close-on-backdrop hide-footer no modal-class="new-post-modal" size="md" title="تولید محتوای تازه" :centered="true">
+	<b-modal v-if="$store.state.user != null" v-model="showModal" @show="shown" no-close-on-esc no-close-on-backdrop hide-footer no modal-class="new-post-modal" size="md" title="تولید محتوای تازه" :centered="true">
 		<div action="/posts" data-ajax method="POST" data-reload="1" enctype="multipart/form-data" class="w-100">
 			<div class="new-post position-relative">
 				<div class="selections">
@@ -13,7 +13,7 @@
 						</div>
 					</div>
 				</div>
-				<slider ref="sliderEditor" />
+				<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
 				<div class="d-flex justify-content-center align-items-center">
 					<loading-button class="btn btn-transparent button-transparent text-muted font-14"> پیش نویس </loading-button>
 					<loading-button :loading="loading" class="btn btn-primary font-14" @click.native="submitPost"> انتشار </loading-button>
@@ -25,14 +25,12 @@
 
 <script>
 import ModalMixin from "../../Mixins/Modal";
-import { Mentionable } from "vue-mention";
-
 import TagInput from "../inputs/TagInput";
-
-import { Cropper } from "vue-advanced-cropper";
-
 import FileInput from "../../Components/inputs/FileInput";
 import Slider from "./Slides/Slider.vue";
+
+import uuidv4 from "uuid";
+import isUUID from "is-uuid";
 
 export default {
 	props: {
@@ -43,6 +41,11 @@ export default {
 		},
 	},
 	methods: {
+		onSlideDelete(id) {
+			if (!isUUID.v4(id)) {
+				this.deletedSlides.push(id);
+			}
+		},
 		newCategory(value) {
 			if (!this.categories.filter((item) => item.name == value).length > 0) {
 				this.categories.push({
@@ -60,32 +63,71 @@ export default {
 				this.toast("نام دسته بندی تکراری است");
 			}
 		},
-		onShown() {
-			console.log(this.post);
+		shown() {
+			this.deletedSlides = [];
+			if (this.post) {
+				let content = _.cloneDeep(this.post.slides);
+				for (let i = 0; i < content.length; i++) {
+					let item = content[i];
+					item.icon = "more_horiz";
+					let items = item.content;
+					for (let i = 0; i < items.length; i++) {
+						let elem = items[i];
+						if (elem.type == "media") {
+							item.icon = "image";
+							break;
+						} else {
+							item.icon = "text_fields";
+						}
+					}
+					item.active = false;
+				}
+				content[0].active = true;
+				this.content = content;
+			}
 		},
 		submitPost() {
 			this.loading = true;
-			let data = this.$refs.sliderEditor.getData();
+			let data = this.content;
 			let formData = new FormData();
 			data.forEach((item, index) => {
-				item.content.forEach((slide) => {
+				for (let slide of item.content) {
 					if (slide.content != "" && slide.content != null) {
+						if (slide.type == "media" && typeof slide.content != "object") {
+							continue;
+						}
 						formData.append(`slides[${index}][${slide.type}]`, slide.content);
 					}
-				});
+				}
+				if (this.post && !isUUID.v4(item.id)) {
+					formData.append(`slides[${index}][id]`, item.id);
+				}
 			});
 			if (this.category) {
 				formData.append("category", this.category.name);
 			}
-			axios
-				.post("/posts", formData)
+
+			if (this.post) {
+				formData.append("deletedSlides", JSON.stringify(this.deletedSlides));
+				formData.append("_method", "PUT");
+			}
+
+			let url = this.post != null ? `/posts/${this.post.id}` : "/posts";
+
+			let requestConfig = {
+				method: "post",
+				url: url,
+				data: formData,
+			};
+
+			axios(requestConfig)
 				.then((response) => {
 					if (response.data.result) {
 						this.toast("با موفقیت منتشر شد", "check", "text-success");
 						this.$emit("update:show", false);
 						this.$store.state.ternoboWireApp.reload();
 					} else {
-						this.toast("خطا در ثبت اطلاعات");
+						this.handleError(response.data.errors);
 					}
 				})
 				.catch((err) => {
@@ -94,26 +136,6 @@ export default {
 				.then(() => {
 					this.loading = false;
 				});
-		},
-		initialData() {
-			return {
-				category: undefined,
-				text: undefined,
-				categories: [],
-				tags: [],
-				txtlen: "0%",
-				isCropping: false,
-				isCroppingDone: false,
-				image: undefined,
-				video: undefined,
-				file: undefined,
-				cropCordinates: undefined,
-				loading: false,
-				leftCharacter: 2500,
-
-				loadingMention: false,
-				mentionItems: [],
-			};
 		},
 	},
 	watch: {
@@ -132,12 +154,16 @@ export default {
 		}
 	},
 	data() {
-		return this.initialData();
+		return {
+			categories: [],
+			category: undefined,
+			loading: false,
+			deletedSlides: [],
+			content: [{ id: uuidv4(), content: [], icon: "more_horiz", active: true }],
+		};
 	},
 	components: {
-		Cropper,
 		TagInput,
-		Mentionable,
 		FileInput,
 		Slider,
 	},

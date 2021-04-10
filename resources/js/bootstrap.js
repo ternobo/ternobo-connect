@@ -41,12 +41,5 @@ window.Echo = new Echo({
     broadcaster: 'socket.io',
     host: 'http://localhost:7000',
     forceTLS: true,
-    csrfToken: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-    auth:
-    {
-        headers:
-        {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        }
-    }
+    csrfToken: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 });

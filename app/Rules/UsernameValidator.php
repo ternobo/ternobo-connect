@@ -14,13 +14,16 @@ class UsernameValidator implements Rule
 
     private $reserved_usernames;
 
+    private $ignore = null;
+    private $messageText = "نام کاربری نامعتبر است";
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($ignore = null)
     {
+        $this->ignore = $ignore;
         $this->reserved_usernames = array_merge([
             'admin',
             'moderator',
@@ -76,12 +79,13 @@ class UsernameValidator implements Rule
         if (in_array(strtolower($username), $invalid)) {
             return false;
         }
+        // dd($username);
 
-        if (!preg_match("/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{3,29}$/", $username)) {
+        if (!preg_match("/^[a-zA-Z0-9]+([a-zA-Z0-9](_|-| )[a-zA-Z0-9])*[a-zA-Z0-9]+$/", $username)) {
             return false;
         }
-
-        if (!Page::checkSlug($username)) {
+        if (!Page::checkSlug($username, $this->ignore)) {
+            $this->messageText = "نام کاربری نامعتبر است";
             return false;
         }
 
@@ -96,6 +100,6 @@ class UsernameValidator implements Rule
      */
     public function message()
     {
-        return 'نام کاربری نامعتبر است.';
+        return $this->messageText;
     }
 }

@@ -1,4 +1,3 @@
-import Vue from "vue";
 export default {
     render: function (h) {
         let contentType = this.content.type;
@@ -7,42 +6,24 @@ export default {
         let content = "";
 
         let text = document.createElement("p");
-
         switch (contentType) {
             case "title":
                 tag = "h2";
-                text.innerHTML = this.content.text
+                text.innerHTML = this.content.content
                 content = (text.innerText);
                 break;
             case "text":
-                if (this.content.text != null) {
+                if (this.content.content != null) {
                     tag = "pre";
                     classes += "post-content--text";
-                    let text = this.content.text;
-                    // console.log(text)
-                    // let items = [];
-                    // text.forEach((item) => {
-                    //     if (item != undefined) {
-                    //         if (item.startsWith("#")) {
-                    //             items.push(
-                    //                 <wire-link href={`/tags/${item}`}>{item}</wire-link>
-                    //             );
-                    //         } else if (item.startsWith("@")) {
-                    //             items.push(
-                    //                 <wire-link href={`/${item}`}>{item}</wire-link>
-                    //             );
-                    //         } else {
-                    //             items.push(item)
-                    //         }
-                    //     }
-                    // });
+                    let text = this.content.content;
                     content = (<dynamic-link text={text}></dynamic-link>);
                 }
                 break;
             case "media":
                 tag = "div";
                 classes = "slider-media-image";
-                content = h("img", { attrs: { src: `/${this.content.media}` } });
+                content = h("img", { attrs: { src: `/${this.content.content}` } });
                 break;
         }
         return h(tag, {

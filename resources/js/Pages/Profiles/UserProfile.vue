@@ -80,7 +80,7 @@ import NoContent from "../../Components/NoContent";
 
 import ProfileHeader from "../../Components/Profile/ProfileHeader";
 
-import { TernoboWire } from "wire-js";
+import { TernoboWire } from "ternobowire-js";
 
 import MobileCategories from "../../Components/Profile/MobileCategories.vue";
 import CategoriesMobile from "../../Components/Profile/CategoriesMobile.vue";

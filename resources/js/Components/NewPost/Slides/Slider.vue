@@ -32,6 +32,19 @@ import SlideItem from "./SlideItem.vue";
 import uuidv4 from "uuid";
 
 export default {
+	watch: {
+		slides: {
+			deep: true,
+			handler(newValue) {
+				this.$emit("input", newValue);
+			},
+		},
+	},
+	props: {
+		value: {
+			default: null,
+		},
+	},
 	methods: {
 		getData() {
 			return this.slides.filter((item) => item.content.length > 0);
@@ -48,7 +61,8 @@ export default {
 			}
 
 			this.$nextTick(() => {
-				this.slides.splice(index, 1);
+				let deletedItem = this.slides.splice(index, 1);
+				this.$emit("delete", deletedItem[0].id);
 			});
 		},
 		updateIcon() {
@@ -85,11 +99,17 @@ export default {
 	},
 	computed: {
 		activeIndex() {
-			return this.slides.findIndex((item) => item.active);
+			const index = this.slides.findIndex((item) => item.active);
+			return index != -1 ? index : 0;
 		},
 	},
 	mounted() {
 		this.maxSlides = Math.floor(this.$refs.slidesList.getBoundingClientRect().width / 76) - 1;
+	},
+	created() {
+		if (this.value) {
+			this.slides = this.value;
+		}
 	},
 	data() {
 		return {

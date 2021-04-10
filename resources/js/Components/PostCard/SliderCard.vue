@@ -6,9 +6,9 @@
 			</transition-group>
 		</div>
 		<div dir="ltr" class="slider-arrows" v-if="post.slides.length > 1">
-			<i class="material-icons" :class="{ disabled: active < 1 }" @click="goPrevSlide">keyboard_arrow_left</i>
-			<div class="dot" v-for="(dot, index) in post.slides" :key="'dot_' + dot.id" @click="active = index" :class="{ active: index == active }"></div>
-			<i class="material-icons" @click="goNextSlide">keyboard_arrow_right</i>
+			<i class="material-icons clickable" :class="{ disabled: active < 1 }" @click="goPrevSlide">keyboard_arrow_left</i>
+			<div class="dot" v-for="(dot, index) in post.slides" :key="'dot_' + dot.id" @click="active = index" :class="{ active: index == active, clickable: index != active }"></div>
+			<i class="material-icons clickable" :class="{ disabled: active == post.slides.length - 1 }" @click="goNextSlide">keyboard_arrow_right</i>
 		</div>
 	</div>
 </template>

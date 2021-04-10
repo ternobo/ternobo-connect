@@ -32,7 +32,7 @@ import PostCard from "../Components/PostCard/PostCard";
 import NoContent from "../Components/NoContent";
 import AppFooter from "../Components/App/AppFooter";
 import { v4 as uuidv4 } from "uuid";
-import { TernoboWire } from "wire-js";
+import { TernoboWire } from "ternobowire-js";
 
 export default {
 	watch: {

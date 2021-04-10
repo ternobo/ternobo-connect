@@ -1,7 +1,7 @@
 import axios from "axios";
 import {
     store
-} from "wire-js";
+} from "ternobowire-js";
 export default store({
     state: {
         search: null,

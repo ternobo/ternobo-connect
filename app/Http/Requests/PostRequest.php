@@ -22,7 +22,7 @@ class PostRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json(['result' => false, 'errors' => $validator->errors()], 422));
+        throw new HttpResponseException(response()->json(['result' => false, 'errors' => $validator->errors()]));
     }
 
     /**
@@ -36,6 +36,7 @@ class PostRequest extends FormRequest
             'slides.required' => 'slides are required',
             'slides.array' => 'slides is not array',
             'slides.max' => 'you can\'t have more than 12 slides in one post',
+            'slides.*.media.mimes' => "فقط امکان فایل‌های jpeg, png, jpg, gif مجاز است",
         ];
     }
 
@@ -48,7 +49,8 @@ class PostRequest extends FormRequest
     {
         return [
             "slides" => ['required', 'array', 'min:1', "max:12"],
-            "deletedSlides" => ["exists:post_slides,id", "json"],
+            "slides.*.media" => ["mimes:jpeg,png,jpg,gif"],
+            "deletedSlides" => ["json"],
         ];
     }
 }

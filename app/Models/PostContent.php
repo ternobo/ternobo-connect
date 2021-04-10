@@ -12,8 +12,7 @@ class PostContent extends Model
     protected $fillable = [
         "page_id",
         "slide_id",
-        "text",
-        "media",
+        "content",
         "type",
         "sort",
     ];

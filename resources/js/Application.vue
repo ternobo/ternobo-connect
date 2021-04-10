@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import WireApp from "wire-js";
+import WireApp from "ternobowire-js";
 import Toast from "./Components/Toast";
 
 import { v4 as uuidv4 } from "uuid";

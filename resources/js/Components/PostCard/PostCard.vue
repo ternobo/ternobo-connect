@@ -16,7 +16,7 @@
 			<div class="actions position-relative">
 				<span class="category-item" v-if="this.post.category != null"><i class="material-icons-outlined">layers</i>{{ this.post.category.name }}</span>
 				<div>
-					<post-menu :post="post" @embed="showEmbed = true" @deleted="doDelete"></post-menu>
+					<post-menu :post="post" @embed="showEmbed = true" @edit="edit = true" @deleted="doDelete"></post-menu>
 				</div>
 			</div>
 		</div>
@@ -63,6 +63,7 @@ import EmbedCodeModal from "../Modals/EmbedCodeModal";
 // Load locale-specific relative date/time formatting rules.
 import fa from "javascript-time-ago/locale/fa";
 import PostMenu from "../Menues/PostMenu.vue";
+import NewPostModal from "../NewPost/NewPostModal";
 
 TimeAgo.addLocale(fa);
 export default {
@@ -84,6 +85,7 @@ export default {
 		CommentsList: CommentsList,
 		EmbedCodeModal: EmbedCodeModal,
 		PostMenu,
+		NewPostModal,
 	},
 	methods: {
 		like() {

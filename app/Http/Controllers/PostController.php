@@ -88,7 +88,7 @@ class PostController extends Controller
                             'slide_id' => $slide->id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
-                            'text' => $text,
+                            'content' => $text,
                             'type' => 'text',
                         ]);
 
@@ -103,7 +103,7 @@ class PostController extends Controller
                             'slide_id' => $slide->id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
-                            'text' => $content,
+                            'content' => $content,
                             'type' => 'title',
                         ]);
                         break;
@@ -114,7 +114,7 @@ class PostController extends Controller
                             'slide_id' => $slide->id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
-                            'media' => $media,
+                            'content' => $media,
                             'type' => 'media',
                         ]);
                         break;
@@ -338,21 +338,29 @@ class PostController extends Controller
         $tags = [];
 
         foreach ($slides as $slide_input) {
-            if (!(count($slide_input) > 0)) {
-                continue;
+            try {
+                if (!(count($slide_input) > 0)) {
+                    continue;
+                }
+            } catch (\Throwable $th) {
+                throw $th;
             }
-            $slide = isset($slide['id']) && PostSlide::findOrFail($slide_input['id']) != null ?
+
+            $slide = isset($slide_input['id']) && PostSlide::findOrFail($slide_input['id']) != null ?
             PostSlide::findOrFail($slide_input['id']) :
             PostSlide::query()->create([
                 'page_id' => $user->personalPage->id,
                 'post_id' => $post->id,
             ]);
-
             $sort = 0;
 
             $added_elements = [];
 
             foreach ($slide_input as $type => $content) {
+                if ($type == "id") {
+                    continue;
+                }
+
                 if (in_array($type, $added_elements)) {
                     throw new HttpResponseException(response()->json(['result' => false, 'errors' => ["duplicated element - $type"]], 422));
                 }
@@ -371,13 +379,13 @@ class PostController extends Controller
                                 'slide_id' => $slide->id,
                                 'page_id' => $user->personalPage->id,
                                 'sort' => $sort,
-                                'text' => $text,
+                                'content' => $text,
                                 'type' => 'text',
                             ]);
                         } else {
                             $postContent->update([
                                 'sort' => $sort,
-                                'text' => $text,
+                                'content' => $text,
                             ]);
                         }
 
@@ -393,32 +401,32 @@ class PostController extends Controller
                                 'slide_id' => $slide->id,
                                 'page_id' => $user->personalPage->id,
                                 'sort' => $sort,
-                                'text' => $content,
+                                'content' => $content,
                                 'type' => 'title',
                             ]);
                         } else {
                             $postContent->update([
                                 'sort' => $sort,
-                                'text' => $text,
+                                'content' => $content,
                             ]);
                         }
                         break;
 
                     case "media":
                         $media = $content->store("medias");
-
                         if ($postContent == null) {
                             PostContent::query()->create([
                                 'slide_id' => $slide->id,
                                 'page_id' => $user->personalPage->id,
                                 'sort' => $sort,
-                                'media' => $media,
+                                'content' => $media,
                                 'type' => 'media',
                             ]);
                         } else {
+                            // dd($media);
                             $postContent->update([
                                 'sort' => $sort,
-                                'media' => $media,
+                                'content' => $media,
                             ]);
                         }
 

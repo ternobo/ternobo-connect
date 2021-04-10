@@ -57,11 +57,11 @@ export default {
 					fileChooser.type = "file";
 					fileChooser.onchange = (e) => {
 						let file = e.target.files[0];
-						if (file.type.startsWith("image")) {
+						if (file.type.startsWith("image") && !file.type.includes("svg+xml")) {
 							this.editorItems.push({ type: "media", content: file });
 							this.$emit("itemAdd");
 						} else {
-							this.toast("فقط امکان انتخاب تصویر وجود دارد");
+							this.toast("فقط امکان فایل‌های jpeg, png, jpg, gif مجاز است");
 						}
 					};
 					fileChooser.click();
@@ -96,10 +96,10 @@ export default {
 		};
 	},
 	mounted() {
-		this.editorItems = this.contents;
+		this.editorItems = this.content;
 	},
 	props: {
-		contents: {
+		content: {
 			default: () => [],
 		},
 	},

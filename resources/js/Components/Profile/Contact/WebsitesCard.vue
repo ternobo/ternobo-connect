@@ -14,7 +14,7 @@
 				</li>
 			</ul>
 			<div class="w-100 text-center" v-else-if="websites.length < 1">
-				<span class="font-16 text-superlight">هیچ مهارتی ثبت نشده</span>
+				<span class="font-16 text-superlight">هیچ وب‌سایتی ثبت نشده</span>
 			</div>
 			<ul class="websites-list p-0" v-else>
 				<WebsiteItem @deleted="onDelete(index)" @input="updateData" :options="usableOptions" :edit="edit" v-for="(website, index) in websites" :website="website" :key="'contact_item_num_' + website.id"></WebsiteItem>

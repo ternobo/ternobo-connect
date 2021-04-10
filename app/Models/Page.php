@@ -487,12 +487,21 @@ class Page extends Model
         return $result;
     }
 
-    public static function checkSlug($slug)
+    public static function checkSlug($slug, $ignore = null)
     {
+        $query = Page::query()->where("slug", $slug);
         if (Auth::check()) {
-            return !(Page::query()->where("slug", $slug)->where("id", '!=', Auth::user()->personalPage->id)->first() instanceof Page);
+            if ($ignore == null) {
+                $ignore = Auth::user()->personalPage->id;
+            }
         }
-        return !(Page::query()->where("slug", $slug)->first() instanceof Page);
+        if ($ignore != null) {
+            $query = $query->where("id", '!=', $ignore);
+        }
+
+        // dd($query->toSql());
+
+        return !($query->where("slug", $slug)->first() instanceof Page);
     }
 
 }

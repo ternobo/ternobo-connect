@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\ActiveSession;
 use App\Models\Mail;
-use App\Models\Page;
 use App\Models\User;
 use App\Models\Verification;
 use App\SMS;
@@ -146,7 +145,6 @@ class UsersController extends Controller
                 return response()->json(array("result" => false, "errors" => array("username" => "نام کاربری نامعتبر است")));
             }
             $user = new User();
-            $user->name = $request->firstname . " " . $request->lastname;
             $user->first_name = $request->firstname;
             $user->last_name = $request->lastname;
             if (session()->has("phone")) {
@@ -160,22 +158,14 @@ class UsersController extends Controller
             $user->cover = url("/img/cover.jpg");
             $user->short_bio = "";
             if ("$user->gender" === "1") {
-                $user->profile = url("/img/man-profile.png");
-            } else {
                 $user->profile = url("/img/woman-profile.png");
+            } else {
+                $user->profile = url("/img/man-profile.png");
             }
             $user->generateToken();
 
-            $page = new Page();
-            $page->name = $user->name;
-            $page->profile = $user->profile;
-            $page->cover = $user->cover;
-            $page->slug = $user->username;
-            $page->short_bio = "";
-            $page->type = "personal";
-
             session()->put("passwd", "toSet");
-            session()->put("theUser", array("user" => $user, "page" => $page));
+            session()->put("theUser", array("user" => $user));
             return response()->json(array("result" => true));
         }
     }
@@ -187,9 +177,7 @@ class UsersController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
 
-            $page = session()->get("theUser")['page'];
-            $page->user_id = $user->id;
-            $page->save();
+            $page = $user->makePage()->save();
 
             ActiveSession::addSession($user->id);
             Auth::login($user, true);

@@ -75,7 +75,7 @@
 				<ProfileImage @updated="updateProfile" :canChange="true" class="m-0" :src="$APP_URL + '/images/man-profile.png'"></ProfileImage>
 				<div class="d-flex mt-4 flex-column">
 					<span class="text-center">تصویر خود را وارد کنید</span>
-					<wire-link href="/feed" :loading="loading" class="btn btn-dark mx-auto mt-4 signup-save-btn" style="white-space: nowrap">رد شدن</wire-link>
+					<a href="/feed" class="btn btn-dark mx-auto mt-4 signup-save-btn" style="white-space: nowrap">رد شدن</a>
 				</div>
 			</div>
 		</transition>
@@ -91,7 +91,7 @@ import OtpInput from "../OtpInput/OtpInput.vue";
 export default {
 	methods: {
 		updateProfile() {
-			this.$store.state.ternoboWireApp.visit("/feed");
+			window.location = "/feed";
 		},
 		sendVcode(type) {
 			this.loading = true;
