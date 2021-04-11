@@ -83,8 +83,6 @@ class User extends Authenticatable implements Messageable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        // "is_verified" => "boolval",
-        // "two_factor" => "boolval",
     ];
 
     /**
@@ -604,7 +602,16 @@ class User extends Authenticatable implements Messageable
 
     public function save(array $options = [])
     {
+        $this->username = strtolower($this->username);
+        if ($this->gender == "1" && $this->profile == null) {
+            $this->profile = url("/img/woman-profile.png");
+        } elseif ($this->profile == null) {
+            $this->profile = url("/img/man-profile.png");
+        }
+        $this->cover = url("/img/cover.jpg");
+
         $page = $this->personalPage;
+
         if ($page !== null) {
             $page->name = $this->first_name . " " . $this->last_name;
             $page->slug = $this->username;

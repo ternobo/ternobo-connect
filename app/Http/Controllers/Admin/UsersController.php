@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NewUserRequest;
 use App\Models\User;
 use App\Rules\UsernameValidator;
 use App\Tools;
@@ -78,6 +79,16 @@ class UsersController extends Controller
         $user->loadCount(["followings", 'followers']);
         $user->load(["personalPage.aboutData", "personalPage.contactData"]);
         return response()->json(['result' => true, 'data' => $user]);
+    }
+
+    public function store(NewUserRequest $request)
+    {
+        $user = new User($request->all());
+        $user->password = Hash::make($request->password);
+        $user->generateToken();
+        $user->save();
+        $user->makePage()->save();
+        return response()->json(['result' => true, "user" => $user]);
     }
 
     /**

@@ -90,7 +90,6 @@ class UsernameValidator implements Rule
         }
 
         return true;
-
     }
 
     /**
