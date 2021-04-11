@@ -39,6 +39,8 @@ class NewUserRequest extends FormRequest
             "phone.required" => "شماره موبایل یا ایمیل اجباری است.",
             "email.required" => "شماره موبایل یا ایمیل اجباری است.",
             "email.email" => "ایمیل نامعتبر است",
+            "email.unique" => "ایمیل تکراری است",
+            "phone.unique" => "شماره موبایل تکراری است",
             "password" => "رمزعبور نامعتبر است",
             "cover.file" => "کاور فقط می‌تواند فایل باشد",
             "profile.file" => "تصویر پروفایل فقط می‌تواند فایل باشد",
@@ -60,8 +62,8 @@ class NewUserRequest extends FormRequest
         return [
             "first_name" => ['required', "string", "min:2", "max:12"],
             "last_name" => ['required', "string", "min:2", "max:12"],
-            "phone" => ["required_without:email", "digits:11,13"],
-            "email" => ['email', "required_without:phone"],
+            "phone" => ["required_without:email", Rule::unique("users", "phone"), "digits:11,13"],
+            "email" => ['email', Rule::unique("users", "email"), "required_without:phone"],
             "username" => [new UsernameValidator(), "required"],
             "password" => ['required', "min:8"],
             "gender" => ['required', Rule::in(['1', '2', '3'])],
@@ -69,6 +71,7 @@ class NewUserRequest extends FormRequest
             "profile" => ['file', "mimes:png,jpg,jpeg"],
             "short_bio" => ['string', "max:150"],
             "nationalcode" => ["digits_between:9,14"],
+            "is_admin" => [Rule::in("0", "1")],
         ];
     }
 }

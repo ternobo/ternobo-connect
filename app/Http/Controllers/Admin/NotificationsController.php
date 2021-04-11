@@ -18,7 +18,6 @@ class NotificationsController extends Controller
     public function store(NotificationRequest $request)
     {
         $report = Report::find($request->report_id);
-        // dd($report);
         $text = $request->text;
 
         $notification = Notification::sendReportRespond($report->id, $report->user_id, $text);

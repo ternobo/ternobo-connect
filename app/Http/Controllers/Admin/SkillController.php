@@ -13,9 +13,9 @@ class SkillController extends Controller
      * @param $user
      * @return \Illuminate\Http\Response
      */
-    public function index($user)
+    public function index()
     {
-        $skills = Skill::query()->where("user_id", $user)->get();
+        $skills = Skill::query()->distinct("")->paginate();
         return response()->json(["result" => true, "skills" => $skills]);
     }
 
