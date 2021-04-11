@@ -149,4 +149,28 @@ class Notification extends Model
         }
     }
 
+    /**
+     *
+     * @param integer $notifiable_id
+     * @param integer $to
+     * @param string $text
+     */
+    public static function sendReportRespond($notifiable_id, $to, $text)
+    {
+
+        $notification = new Notification();
+        $notification->from = -1;
+        $notification->to = $to;
+
+        $notification->action = "report_respond";
+
+        $notification->notifiable_id = $notifiable_id;
+        $notification->notifiable_type = Report::class;
+        $notification->connected_to = $notifiable_id;
+        $notification->text = $text;
+        $notification->save();
+        event(new NotificationEvent($notification));
+        return $notification;
+    }
+
 }

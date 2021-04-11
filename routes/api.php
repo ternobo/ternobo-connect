@@ -23,10 +23,12 @@ Route::middleware(["auth:api", AdminAPIMiddleware::class])->prefix("/admin")->gr
         'posts' => "Admin\PostsController",
     ]);
 
-    Route::resource('users', "Admin\UsersController")->only(['update', "show", "index"]);
+    Route::resource('users', "Admin\UsersController")->only(["store", 'update', "show", "index"]);
     Route::delete("/users/delete", "Admin\UsersController@forceDestory");
     Route::post("/users/deactive", "Admin\UsersController@deactiveMutiple");
     Route::post("/users/active", "Admin\UsersController@activeMultiple");
+
+    Route::resource('notifications', "Admin\NotificationsController")->only(["store", "index"]);
 
     Route::resource("reports.notes", "Admin\ReportNotesController")->only("store", "destroy", "update");
 
