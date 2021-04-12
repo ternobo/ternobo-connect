@@ -51,6 +51,7 @@ class PostRequest extends FormRequest
             "slides" => ['required', 'array', 'min:1', "max:12"],
             "slides.*.media" => ["mimes:jpeg,png,jpg,gif"],
             "deletedSlides" => ["json"],
+            "draft" => [Rule::in(['1', '0'])],
         ];
     }
 }

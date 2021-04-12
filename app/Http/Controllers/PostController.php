@@ -55,8 +55,12 @@ class PostController extends Controller
         $mentions = null;
         $tags = [];
 
+        $mentions = [];
+
+        $draft = $request->draft == '1';
+
         $post = Post::query()->create([
-            'type' => 'post',
+            'type' => $draft ? 'draft_post' : 'post',
             'user_id' => $user->id,
             'page_id' => $user->personalPage->id,
             'medias' => [],
@@ -78,8 +82,8 @@ class PostController extends Controller
                     case "text":
                         // Process
                         $rawText = htmlentities($content);
-                        $mentions = SocialMediaTools::getMentions($rawText);
-                        // $text = SocialMediaTools::replacHashtags(SocialMediaTools::replaceMentions(SocialMediaTools::replaceUrls($rawText)), 3);
+                        $text_mentions = SocialMediaTools::getMentions($rawText);
+
                         $text = $rawText;
 
                         $slideTags = array_slice(SocialMediaTools::getHashtags($rawText), 0, 3);
@@ -95,6 +99,7 @@ class PostController extends Controller
                         if (count($tags) < 3) {
                             $tags = array_merge($slideTags, $tags);
                         }
+                        $mentions = array_merge($text_mentions, $mentions);
 
                         break;
 
@@ -122,6 +127,7 @@ class PostController extends Controller
                 $sort++;
             }
         }
+        SocialMediaTools::callMentions($mentions, $post->id);
         $post->tags = $tags;
         $post->save();
         return response()->json(array("result" => true));
@@ -327,7 +333,15 @@ class PostController extends Controller
         $user = Auth::user();
         $user->load("personalPage");
 
+        $draft = $request->draft == '1';
+
         $deletedSlides = [];
+
+        if ($draft) {
+            $post->update([
+                'type' => "draft_post",
+            ]);
+        }
 
         if ($request->filled("deletedSlides")) {
             $deletedSlides = json_decode($request->deletedSlides);

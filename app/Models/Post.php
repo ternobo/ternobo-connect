@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\PostDraftScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -184,6 +185,21 @@ class Post extends Model
         return $this->hasMany("App\Models\Like", "post_id")
             ->with("page")
             ->latest();
+    }
+
+    public static function withDrafts()
+    {
+        return static::withoutGlobalScope(PostDraftScope::class);
+    }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new PostDraftScope);
     }
 
 }
