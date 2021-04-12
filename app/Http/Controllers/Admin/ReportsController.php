@@ -26,6 +26,18 @@ class ReportsController extends Controller
         return response()->json(['result' => true, 'data' => $reports]);
     }
 
+    public function show($report)
+    {
+        $reports = Report::query()
+            ->whereHas("reportable")
+            ->with(["reportable", "reportable.page", "adminNotes", "adminNotes.user"])
+            ->with("reportedBy")
+            ->latest()
+            ->where("id", $report)
+            ->firstOrFail();
+        return response()->json(['result' => true, 'report' => $reports]);
+    }
+
     /**
      * Update the specified resource in storage.
      *
