@@ -17,10 +17,24 @@ class NotificationsController extends Controller
 
     public function store(NotificationRequest $request)
     {
-        $report = Report::find($request->report_id);
-        $text = $request->text;
+        if ($request->filled("report_id") && $request->report_id != 0) {
+            $report = Report::find($request->report_id);
+            $text = $request->text;
+            $title = $request->title;
+            $icon = $request->icon;
 
-        $notification = Notification::sendReportRespond($report->id, $report->user_id, $text);
-        return response()->json(['result' => true, 'notification' => $notification]);
+            $notification = Notification::sendReportRespond($report->id, $report->user_id, $title, $text, $icon);
+            return response()->json(['result' => true, 'notification' => $notification]);
+        } else {
+            $text = $request->text;
+            $title = $request->title;
+            $icon = $request->icon;
+
+            $to = $request->filled("to_all") && $request->to_all == true ? -1 : $request->to;
+
+            $notification = Notification::sendTo($to, $title, $text, $icon);
+            return response()->json(['result' => true, 'notification' => $notification]);
+        }
     }
+
 }

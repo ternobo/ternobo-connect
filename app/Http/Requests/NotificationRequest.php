@@ -33,7 +33,9 @@ class NotificationRequest extends FormRequest
     public function messages()
     {
         return [
-            "text.required" => "متن پاسخ اجباری است",
+            "text.required" => "متن اعلان اجباری است",
+            "icon.required" => "ایکون اعلان اجباری است",
+            "title.required" => "عنوان اعلان اجباری است",
             "report_id.exists" => "آی‌دی گزارش نامعتبر است",
         ];
     }
@@ -45,8 +47,12 @@ class NotificationRequest extends FormRequest
     public function rules()
     {
         return [
+            'title' => ['required'],
+            "icon" => ["required"],
             "text" => ["required"],
-            "report_id" => ['required', Rule::exists("reports", 'id')->whereNull("deleted_at")],
+            "to" => ['required_without_all:report_id,to_all', Rule::exists("users", 'id')->whereNull("deleted_at")],
+            "to_all" => ['boolean'],
+            "report_id" => [Rule::exists("reports", 'id')->whereNull("deleted_at")],
         ];
     }
 }
