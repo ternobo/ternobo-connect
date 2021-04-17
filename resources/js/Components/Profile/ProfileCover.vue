@@ -58,7 +58,7 @@ export default {
 				.then((response) => {
 					const data = response.data;
 					if (data.result) {
-						this.$store.commit("userUpdate");
+						this.$store.dispatch("loadUser");
 						this.$store.state.ternoboWireApp.reload();
 					} else {
 						const errors = data.errors;

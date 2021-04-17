@@ -22,6 +22,12 @@
 							</div>
 						</button>
 					</div>
+					<div v-else-if="current_tab == 'activities'">
+						<button class="btn d-flex align-items-center justify-content-center btn-edit" @click="draft = !draft">
+							<span v-if="!draft"> پیش‌نویس <i class="material-icons-outlined mr-2">save</i> </span>
+							<span v-else> منتشر شده <i class="material-icons-outlined mr-2">article</i> </span>
+						</button>
+					</div>
 				</template>
 				<tab v-if="hasAbout || canEdit" name="درباره من" id="home" :href="'/' + page.slug" :selected="current_tab === 'home'">
 					<div class="w-100 d-flex justify-content-center py-3" v-if="loadingTab">
@@ -35,16 +41,29 @@
 							<Categories v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug"></Categories>
 						</div>
 						<div class="col-md-8">
-							<NewPostCard @done="onPostAdded" ref="newPostCard" v-if="canEdit"></NewPostCard>
-							<categories-mobile v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug" v-if="!$root.isDesktop"></categories-mobile>
-							<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
-								<ActionCard v-for="action in actionsList" :page="page" :action="action" :key="action.id"></ActionCard>
+							<div v-if="draft">
+								<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
+									<draft-card class="mb-3" v-for="action in actionsList" :post="action" :key="action.id"></draft-card>
+								</div>
+								<div class="w-100 d-flex justify-content-center py-3" v-if="loadingActions || loadingMore">
+									<loading-spinner class="image__spinner" />
+								</div>
+								<div v-if="next_page_url === null && !loadingActions">
+									<no-content></no-content>
+								</div>
 							</div>
-							<div class="w-100 d-flex justify-content-center py-3" v-if="loadingActions || loadingMore">
-								<loading-spinner class="image__spinner" />
-							</div>
-							<div v-if="next_page_url === null && !loadingActions">
-								<no-content></no-content>
+							<div v-else>
+								<NewPostCard @done="onPostAdded" ref="newPostCard" v-if="canEdit"></NewPostCard>
+								<categories-mobile v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug" v-if="!$root.isDesktop"></categories-mobile>
+								<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
+									<ActionCard v-for="action in actionsList" :page="page" :action="action" :key="action.id"></ActionCard>
+								</div>
+								<div class="w-100 d-flex justify-content-center py-3" v-if="loadingActions || loadingMore">
+									<loading-spinner class="image__spinner" />
+								</div>
+								<div v-if="next_page_url === null && !loadingActions">
+									<no-content></no-content>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -75,7 +94,6 @@
 </template>
 
 <script>
-import AppLayout from "../../Layouts/AppLayout";
 import NoContent from "../../Components/NoContent";
 
 import ProfileHeader from "../../Components/Profile/ProfileHeader";
@@ -86,9 +104,12 @@ import MobileCategories from "../../Components/Profile/MobileCategories.vue";
 import CategoriesMobile from "../../Components/Profile/CategoriesMobile.vue";
 import ProfileSteps from "../../Components/Profile/ProfileSteps.vue";
 import VerifyModal from "../../Components/Modals/VerifyModal.vue";
+import DraftCard from "../../Components/PostCard/DraftCard.vue";
+import AppLayout from "../../Layouts/AppLayout.vue";
 export default {
 	watch: {
 		filters() {
+			this.draft = false;
 			this.loadingActions = true;
 			axios
 				.post("/" + this.page.slug + "/actions", this.filters)
@@ -96,8 +117,30 @@ export default {
 					this.actionsList = response.data.actions.data;
 					this.next_page_url = response.data.actions.next_page_url;
 				})
-				.catch((err) => {})
+				.catch((err) => console.log(err))
 				.then(() => (this.loadingActions = false));
+		},
+		draft() {
+			this.loadingActions = true;
+			if (this.draft) {
+				axios
+					.post("/" + this.page.slug + "/drafts", this.filters)
+					.then((response) => {
+						this.actionsList = response.data.drafts.data;
+						this.next_page_url = response.data.drafts.next_page_url;
+					})
+					.catch((err) => console.log(err))
+					.then(() => (this.loadingActions = false));
+			} else {
+				axios
+					.post("/" + this.page.slug + "/actions", this.filters)
+					.then((response) => {
+						this.actionsList = response.data.actions.data;
+						this.next_page_url = response.data.actions.next_page_url;
+					})
+					.catch((err) => console.log(err))
+					.then(() => (this.loadingActions = false));
+			}
 		},
 	},
 	created() {
@@ -116,12 +159,12 @@ export default {
 				this.actionsList = response.data.actions.data;
 				this.next_page_url = response.data.actions.next_page_url;
 			})
-			.catch((err) => {})
+			.catch((err) => console.log(err))
 			.then(() => (this.loadingActions = false));
 	},
 	methods: {
 		reloadUser() {
-			this.$store.commit("userUpdate");
+			this.$store.dispatch("loadUser");
 		},
 		onPostAdded() {
 			this.reloadUser();
@@ -310,6 +353,8 @@ export default {
 				action: "all",
 			},
 			showVerification: false,
+
+			draft: false,
 		};
 	},
 	computed: {
@@ -386,6 +431,7 @@ export default {
 		CategoriesMobile,
 		ProfileSteps,
 		VerifyModal,
+		DraftCard,
 	},
 	layout: AppLayout,
 };

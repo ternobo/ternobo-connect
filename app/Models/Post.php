@@ -192,6 +192,13 @@ class Post extends Model
         return static::withoutGlobalScope(PostDraftScope::class);
     }
 
+    public function publish()
+    {
+        return $this->update([
+            "type" => substr($this->type, 6),
+        ]);
+    }
+
     /**
      * The "booted" method of the model.
      *

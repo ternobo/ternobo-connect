@@ -18,4 +18,5 @@ class PostDraftScope implements Scope
     {
         $builder->where('type', '!=', "draft_post")->where('type', "!=", "draft_article");
     }
+
 }

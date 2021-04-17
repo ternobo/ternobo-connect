@@ -15,8 +15,8 @@
 				</div>
 				<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
 				<div class="d-flex justify-content-center align-items-center">
-					<loading-button class="btn btn-transparent button-transparent text-muted font-14"> پیش نویس </loading-button>
-					<loading-button :loading="loading" class="btn btn-primary font-14" @click.native="submitPost"> انتشار </loading-button>
+					<loading-button :loading="loadingDraft" class="btn btn-transparent button-transparent text-muted font-14" @click.native="submitPost(true)"> پیش نویس </loading-button>
+					<loading-button :loading="loading" class="btn btn-primary font-14" @click.native="submitPost(false)"> انتشار </loading-button>
 				</div>
 			</div>
 		</div>
@@ -86,14 +86,19 @@ export default {
 				this.content = content;
 			}
 		},
-		submitPost() {
-			this.loading = true;
+		submitPost(draft = false) {
+			if (draft) {
+				this.loadingDraft = true;
+			} else {
+				this.loading = true;
+			}
 			let data = this.content;
 			let formData = new FormData();
 			data.forEach((item, index) => {
 				for (let slide of item.content) {
 					if (slide.content != "" && slide.content != null) {
 						if (slide.type == "media" && typeof slide.content != "object") {
+							formData.append(`slides[${index}][${slide.type}_notChange]`, slide.content);
 							continue;
 						}
 						formData.append(`slides[${index}][${slide.type}]`, slide.content);
@@ -111,6 +116,8 @@ export default {
 				formData.append("deletedSlides", JSON.stringify(this.deletedSlides));
 				formData.append("_method", "PUT");
 			}
+
+			formData.append("draft", draft ? "1" : "0");
 
 			let url = this.post != null ? `/posts/${this.post.id}` : "/posts";
 
@@ -134,7 +141,11 @@ export default {
 					this.toast("خطا در ثبت اطلاعات");
 				})
 				.then(() => {
-					this.loading = false;
+					if (draft) {
+						this.loadingDraft = false;
+					} else {
+						this.loading = false;
+					}
 				});
 		},
 	},
@@ -158,6 +169,7 @@ export default {
 			categories: [],
 			category: undefined,
 			loading: false,
+			loadingDraft: false,
 			deletedSlides: [],
 			content: [{ id: uuidv4(), content: [], icon: "more_horiz", active: true }],
 		};

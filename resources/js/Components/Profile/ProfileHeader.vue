@@ -104,7 +104,7 @@ export default {
 				})
 				.then((response) => {
 					if (response.data.result) {
-						this.$store.state.ternoboWireApp.reload();
+						this.$store.dispatch("loadUser");
 						this.$emit("saved");
 					} else {
 						this.handleError(response.data.errors);

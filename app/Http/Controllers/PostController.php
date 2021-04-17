@@ -374,11 +374,15 @@ class PostController extends Controller
                 if ($type == "id") {
                     continue;
                 }
+                $typeSql = $type;
+                if ($type == "media_notChange") {
+                    $typeSql = "media";
+                }
 
                 if (in_array($type, $added_elements)) {
                     throw new HttpResponseException(response()->json(['result' => false, 'errors' => ["duplicated element - $type"]], 422));
                 }
-                $postContent = PostContent::query()->where("type", $type)->where("slide_id", $slide->id)->first();
+                $postContent = PostContent::query()->where("type", $typeSql)->where("slide_id", $slide->id)->first();
                 switch ($type) {
                     case "text":
                         // Process
@@ -437,14 +441,22 @@ class PostController extends Controller
                                 'type' => 'media',
                             ]);
                         } else {
-                            // dd($media);
                             $postContent->update([
                                 'sort' => $sort,
                                 'content' => $media,
                             ]);
                         }
-
                         break;
+                    case "media_notChange":
+                        if ($postContent != null) {
+
+                            $postContent->update([
+                                'sort' => $sort,
+                            ]);
+                            // dd($postContent);
+
+                            break;
+                        }
                 }
                 $sort++;
             }
@@ -453,14 +465,21 @@ class PostController extends Controller
         $post->save();
         return response()->json(array("result" => true));
     }
+
+    public function publishPost($post)
+    {
+        return response()->json(['result' => Post::withDrafts()->findOrFail($post)->publish()]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param \App\Post $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($post)
     {
+        $post = Post::withDrafts()->findOrFail($post);
         if ($post->user_id === Auth::user()->id) {
             return response()->json(array("result" => $post->delete()));
         } else {

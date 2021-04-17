@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Events\NotificationEvent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use Ixudra\Curl\Facades\Curl;
 
 class Notification extends Model
 {
@@ -116,35 +115,35 @@ class Notification extends Model
 
                 $notification->save();
 
-                event(new NotificationEvent($notification));
+                broadcast(new NotificationEvent($notification))->toOthers();
 
-                if ($user->pushe_id !== null) {
-                    Curl::to("https://api.push-pole.com/v2/messaging/notifications/")
-                        ->withHeader("authorization: Token " . env("PUSHE_TOKEN"))
-                        ->withContentType('application/json')
-                        ->withData(array(
-                            'app_ids' => ['com.ternobo.connect'],
-                            "filters" => array(
-                                "pushe_id" => [$user->pushe_id],
-                            ),
-                            "data" => array(
-                                "icon" => "https://ternobo.com/apple-touch-icon.png",
-                                "notif_icon" => "apps",
-                                "sound_url" => "https://ternobo.com/blank.mp3",
-                                "show_app" => true,
-                                "title" => "ترنوبو",
-                                "content" => $title,
-                                "wake_screen" => true,
-                                "action" => array(
-                                    "action_type" => "U",
-                                    "action_data" => "https://ternobo.com/notifications",
-                                ),
-                            ),
-                            "time_to_live" => 604800,
-                        ))
-                        ->asJson(true)
-                        ->post();
-                }
+                // if ($user->pushe_ids !== null) {
+                //     Curl::to(APIURls::PUSHEURL)
+                //         ->withHeader("authorization: Token " . env("PUSHE_TOKEN"))
+                //         ->withContentType('application/json')
+                //         ->withData(array(
+                //             'app_ids' => ['com.ternobo.connect'],
+                //             "filters" => array(
+                //                 "pushe_id" => $user->pushe_ids,
+                //             ),
+                //             "data" => array(
+                //                 "icon" => "https://ternobo.com/apple-touch-icon.png",
+                //                 "notif_icon" => "apps",
+                //                 "sound_url" => "https://ternobo.com/blank.mp3",
+                //                 "show_app" => true,
+                //                 "title" => "ترنوبو",
+                //                 "content" => $title,
+                //                 "wake_screen" => true,
+                //                 "action" => array(
+                //                     "action_type" => "U",
+                //                     "action_data" => "https://ternobo.com/notifications",
+                //                 ),
+                //             ),
+                //             "time_to_live" => 604800,
+                //         ))
+                //         ->asJson(true)
+                //         ->post();
+                // }
             }
         }
     }
@@ -170,15 +169,12 @@ class Notification extends Model
         $notification->connected_to = $notifiable_id;
         $notification->text = $text;
         $notification->save();
-        event(new NotificationEvent($notification));
+        broadcast(new NotificationEvent($notification))->toOthers();
         return $notification;
     }
 
     /**
      *
-     * @param integer $notifiable_id
-     * @param integer $to
-     * @param string $text
      */
     public static function sendTo($to, $title, $text, $icon)
     {
@@ -192,7 +188,7 @@ class Notification extends Model
 
         $notification->text = $text;
         $notification->save();
-        event(new NotificationEvent($notification));
+        broadcast(new NotificationEvent($notification))->toOthers();
         return $notification;
     }
 

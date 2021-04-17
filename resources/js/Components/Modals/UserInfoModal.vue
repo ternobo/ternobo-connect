@@ -101,7 +101,7 @@ export default {
 				.then((response) => {
 					if (response.data.result) {
 						this.$emit("update:show", false);
-						this.$store.commit("userUpdate");
+						this.$store.dispatch("loadUser");
 						this.$store.state.ternoboWireApp.reload();
 						this.$emit("saved");
 					} else {

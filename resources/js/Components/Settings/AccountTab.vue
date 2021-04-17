@@ -125,7 +125,7 @@ export default {
 	},
 	methods: {
 		reload() {
-			this.$store.commit("userUpdate");
+			this.$store.dispatch("loadUser");
 		},
 		updateEmail(email) {
 			this.email = email;

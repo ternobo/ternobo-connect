@@ -241,6 +241,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
         Route::post("/posts/{post:id}/embed", "PostController@getEmbed");
 
+        Route::post("/posts/{id}/publish", "PostController@publishPost");
         Route::resource("/posts", "PostController")->only(['store', 'update', 'destroy', "show"]);
 
         //Chats
@@ -290,6 +291,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         Route::get("/{location?}", "PageController@show")->where("location", "about|activities|articles|contact");
 
         Route::post("/actions", "PageController@getActions");
+        Route::post("/drafts", "PageController@getDrafts");
         Route::post("/tags", "PageController@getTags");
 
         // Route::get("/{post}", "ArticlesController@show");

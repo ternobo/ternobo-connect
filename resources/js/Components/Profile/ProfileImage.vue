@@ -72,8 +72,7 @@ export default {
 				.then((response) => {
 					const data = response.data;
 					if (data.result) {
-						this.$store.commit("userUpdate");
-						this.$store.state.ternoboWireApp.reload();
+						this.$store.dispatch("loadUser");
 						if (data.url) {
 							this.picture = data.url;
 						}
