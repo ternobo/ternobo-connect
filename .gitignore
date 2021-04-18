@@ -13,3 +13,6 @@ npm-debug.log
 yarn-error.log
 *.map
 .vscode
+public/js
+public/mix-manifest.json
+public/css/app.css
