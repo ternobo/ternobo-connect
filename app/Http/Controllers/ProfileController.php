@@ -50,8 +50,9 @@ class ProfileController extends Controller
         if ($request->filled("skills") && is_array($request->skills)) {
             $skills = $request->skills;
             $user = Auth::user();
+            Skill::query()->where("user_id", $user->id)->delete();
             foreach ($skills as $skill) {
-                $check = Skill::query()->where("name", $skill['name'])->Where("user_id", $user->id)->first();
+                $check = Skill::query()->where("name", $skill['name'])->where("user_id", $user->id)->first();
                 if ($check == null) {
                     $theSkill = new Skill();
                     $theSkill->name = $skill['name'];
