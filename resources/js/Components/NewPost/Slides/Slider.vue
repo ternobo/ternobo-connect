@@ -3,12 +3,6 @@
 		<div class="text p-0">
 			<div class="textarea">
 				<editor @itemAdd="updateIcon()" @itemRemoved="updateIcon()" ref="editor" :content.sync="slides[activeIndex].content" />
-				<div class="my-3 character-counter">
-					<span class="counter tex-dark">{{ 2500 }}</span>
-					<div class="progress ml-1 mb-0" style="width: 100px; height: 5px">
-						<div class="progress-bar" role="progressbar" :style="{ width: 0 }" aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
-				</div>
 			</div>
 		</div>
 		<div class="new-post-slider-scrollable" ref="slidesList" :class="{ hasArrow: this.slides.length > maxSlides }">

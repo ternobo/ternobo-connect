@@ -1,6 +1,6 @@
 <template>
 	<div class="textarea-content w-100">
-		<div ref="editable" class="editor--text-input" contenteditable @input="input"></div>
+		<div ref="editable" class="editor--text-input" contenteditable @input="input" :data-max-length="max"></div>
 		<div ref="editableHighlight" class="editor--text-input highlight" placeholder="متن خو را وارد کنید"></div>
 	</div>
 </template>
@@ -10,7 +10,7 @@ import TextareaContent from "../../../inputs/TextareaContent.vue";
 import Tribute from "tributejs";
 export default {
 	methods: {
-		input() {
+		input(e) {
 			this.$refs.editableHighlight.innerHTML = this.$refs.editable.innerHTML.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
 			this.$emit("update:content", this.$refs.editable.innerText);
 		},
@@ -30,6 +30,9 @@ export default {
 	props: {
 		content: {
 			default: "",
+		},
+		max: {
+			default: -1,
 		},
 	},
 	mounted() {
@@ -58,6 +61,7 @@ export default {
 			],
 		});
 		tribute.attach(this.$refs.editable);
+		window.maxlengthContentEditableLib();
 	},
 	watch: {
 		text(newValue) {

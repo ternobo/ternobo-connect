@@ -32,4 +32,9 @@ Route::middleware(["auth:api", AdminAPIMiddleware::class])->prefix("/admin")->gr
 
     Route::resource("reports.notes", "Admin\ReportNotesController")->only("store", "destroy", "update");
 
+    Route::resource('tags', "Admin\TagsController")->only(["index"]);
+    Route::delete("/tags/delete", "Admin\TagsController@destory");
+    Route::resource('skills', "Admin\SkillsController")->only(["index"]);
+    Route::delete("/skills/delete", "Admin\SkillsController@destory");
+
 });

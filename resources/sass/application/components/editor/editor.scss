@@ -37,6 +37,10 @@
                 right: 18px;
                 padding: 12px 6px;
 
+                >i:first-child {
+                    margin-left: 12px;
+                }
+
                 i {
                     color: $icons
                 }
@@ -59,13 +63,17 @@
         }
 
         >.actions {
-            color: $light;
+            color: $icons;
             margin-left: 24px;
             width: 68px;
             height: 48px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+
+            >i:first-child {
+                margin-left: 12px;
+            }
         }
     }
 }
@@ -142,6 +150,7 @@
     unicode-bidi: -moz-plaintext;
     unicode-bidi: plaintext;
     text-align: start;
+    word-break: break-all;
 
     padding: .375rem .75rem;
 
@@ -165,6 +174,30 @@
     }
 
     &::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
         -webkit-text-fill-color: $text-color;
         text-fill-color: $text-color;
     }

@@ -17,8 +17,5 @@ mix.webpackConfig(require('./webpack.config'));
 mix.babelConfig({ presets: ['@vue/babel-preset-jsx'] })
 mix.js('resources/js/app.js', 'public/js').vue();
 mix.sass("resources/sass/application/app.scss", "public/css");
-mix.extract(['vue', 'axios'])
-// mix.browserSync({
-//     proxy: "http://localhost:8000"
-// });
+mix.extract(['vue', 'axios']);
 mix.version();

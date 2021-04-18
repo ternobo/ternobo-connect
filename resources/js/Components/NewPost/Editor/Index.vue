@@ -7,14 +7,20 @@
 						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 						<i class="material-icons-outlined hand-hover">unfold_more</i>
 					</div>
-					<component :is="components[element.type]" :content.sync="editorItems[index].content" />
+					<component :is="components[element.type]" :content.sync="editorItems[index].content" :max="2500" />
 				</div>
 			</draggable>
-			<div class="d-flex editor-actions mt-0" v-if="availableOptions.length > 0" :class="{ 'align-items-center': editorItems.length < 1 }">
+			<div class="d-flex editor-actions" v-if="availableOptions.length > 0" :class="{ 'align-items-center': editorItems.length < 1 }">
 				<actions-button @select="addElement($event)" :active-options="availableOptions" />
 				<div class="placeholder-element clickable" v-if="editorItems.length < 1" @click="addElement('text')">
 					<span class="text-superlight font-14">اگر در خویش میل نوشتن سراغ کردی باید سه چیز در تو باشد. شناختی، هنری و سحری (جبران خلیل جبران)</span>
 				</div>
+			</div>
+		</div>
+		<div class="my-3 character-counter" v-if="hasText">
+			<span class="counter tex-dark">{{ leftCharacter }}</span>
+			<div class="progress ml-1 mb-0" style="width: 100px; height: 5px">
+				<div class="progress-bar" role="progressbar" :style="{ width: textProgress }" aria-valuemin="0" aria-valuemax="100"></div>
 			</div>
 		</div>
 	</div>
@@ -70,6 +76,22 @@ export default {
 		},
 	},
 	computed: {
+		hasText() {
+			return this.editorItems.filter((item) => item.type == "text").length > 0;
+		},
+		textItem() {
+			if (this.hasText) {
+				return this.editorItems.filter((item) => item.type == "text")[0];
+			} else {
+				return { content: "" };
+			}
+		},
+		textProgress() {
+			return (this.textItem.content.length / 2500) * 100 + "%";
+		},
+		leftCharacter() {
+			return 2500 - this.textItem.content.length;
+		},
 		availableOptions() {
 			let addedOptions = this.editorItems.map((item) => item.type);
 			return ["text", "title", "media"].filter((item) => !addedOptions.includes(item));

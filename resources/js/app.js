@@ -1,6 +1,6 @@
 require('./bootstrap');
 import Vue from 'vue';
-
+window.maxlengthContentEditableLib = require('maxlength-contenteditable').maxlengthContentEditable;
 import {
     plugin,
 } from 'ternobowire-js';

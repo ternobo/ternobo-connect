@@ -4,7 +4,6 @@ export default {
         let tag = "div";
         let classes = "";
         let content = "";
-
         let text = document.createElement("p");
         switch (contentType) {
             case "title":
@@ -18,6 +17,7 @@ export default {
                     classes += "post-content--text";
                     let text = this.content.content;
                     content = (<dynamic-link text={text}></dynamic-link>);
+
                 }
                 break;
             case "media":
@@ -26,6 +26,7 @@ export default {
                 content = h("img", { attrs: { src: `/${this.content.content}` } });
                 break;
         }
+
         return h(tag, {
             class: classes
         }, [content]);

@@ -159,7 +159,7 @@ class PageController extends Controller
                 ->whereJsonContains("tags", $tag)
                 ->get();
             foreach ($posts as $post) {
-                $postTags = json_decode($post->tags);
+                $postTags = $post->tags;
 
                 $index = array_search($tag, $postTags);
                 if (!is_bool($index)) {
