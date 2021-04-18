@@ -82,7 +82,7 @@
         "vue2-editor": "^2.10.2",
         "vuedraggable": "^2.24.3",
         "vuex": "^3.6.2",
-        "wire-js": "file:../wire-js"
+        "ternobowire-js": "^1.0.0"
     },
     "name": "ternobo"
 }

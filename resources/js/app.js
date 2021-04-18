@@ -3,7 +3,7 @@ import Vue from 'vue';
 
 import {
     plugin,
-} from 'wire-js';
+} from "ternobowire-js";
 import PortalVue from 'portal-vue';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import vSelect from 'vue-select'
