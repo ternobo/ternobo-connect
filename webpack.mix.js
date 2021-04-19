@@ -11,8 +11,12 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-mix.sourceMaps();
-
+mix.babelConfig({
+    plugins: ['@babel/plugin-syntax-dynamic-import'],
+});
+if (!process.env.production) {
+    mix.sourceMaps();
+}
 mix.webpackConfig(require('./webpack.config'));
 mix.babelConfig({ presets: ['@vue/babel-preset-jsx'] })
 mix.js('resources/js/app.js', 'public/js').vue();
