@@ -264,7 +264,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             Route::get("/myfeedbacks", "Feedback\FeedbacksController@myFeedback");
             Route::post("/reply/{feedback:id}", "Feedback\FeedbacksController@addReply");
             Route::delete("/reply/{id}", "Feedback\FeedbacksController@deleteComment");
-            Route::post("/vote", "Feedback\FeedbacksController@voteIdea");
+            Route::post("/vote", "Feedback\FeedbacksController@voteFeedback");
 
             Route::post("/change-type", "Feedback\FeedbacksController@changeType")->middleware(WebAdminMiddleware::class);
         });
