@@ -64,12 +64,19 @@ class AppServiceProvider extends ServiceProvider
                         }
                         return 0;
                     },
+                    'is_admin' => function () {
+                        if (Auth::check()) {
+                            return Auth::user()->is_admin == 1;
+                        }
+                        return false;
+                    },
                     "waitingConnections" => function () {
                         if (Auth::check()) {
                             // return Auth::user()->getWaitingConnectionsIds();
                         }
                         return [];
                     },
+
                     'profile_steps' => function () {
                         if (Auth::check()) {
                             return Auth::user()->getProfileSteps();

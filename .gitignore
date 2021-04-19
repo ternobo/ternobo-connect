@@ -11,6 +11,8 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-package-lock.json
-laravel-echo-server.lock
-.editorconfig
+*.map
+.vscode
+public/js
+public/mix-manifest.json
+public/css/app.css

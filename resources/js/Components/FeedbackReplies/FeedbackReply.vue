@@ -1,0 +1,248 @@
+<template>
+	<div class="mb-3" v-if="!deleted">
+		<div v-if="replyTo != undefined">
+			<span class="text-superlight"> <i class="material-icons">reply</i> پاسخ به {{ feedbackReply.replyto.user.name }} </span>
+		</div>
+		<div class="feedback-reply">
+			<div class="feedback-reply-header">
+				<div class="d-flex align-items-center">
+					<wire-link :href="'/' + feedbackReply.user.username" class="d-flex align-items-center">
+						<img :src="feedbackReply.user.profile" class="profile-sm" />
+						<div class="pr-3 pagedetail">
+							<span class="name">
+								<strong>
+									{{ feedbackReply.user.name }}
+								</strong>
+							</span>
+						</div>
+					</wire-link>
+					<i class="material-icons-outlined mr-2 text-superlight hover-dark clickable" @click="pinReply(true)" v-if="!pinned && replyTo == undefined">push_pin</i>
+					<loading-spinner class="mr-2" style="height: 24px; width: 24px" v-else-if="loadingPin"></loading-spinner>
+					<div v-else-if="pinned" @click="pinReply(false)" class="pinned-badge mr-2 clickable">
+						<i class="material-icons-outlined">push_pin</i>
+						پین شده
+					</div>
+				</div>
+				<div class="d-flex align-items-center">
+					<span class="font-10 text-muted">{{ feedbackReply_time }}</span>
+					<div>
+						<b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
+							<template v-slot:button-content class="p-0">
+								<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
+							</template>
+							<b-dropdown-item>
+								<div class="d-flex align-items-center">
+									<i class="material-icons ml-2 text-dark">link</i>
+									<div>
+										<div>
+											<strong> گزارش تخلف </strong>
+										</div>
+										<small class="text-muted"> این دیدگاه در تضاد با قوانین ترنوبو است </small>
+									</div>
+								</div>
+							</b-dropdown-item>
+							<b-dropdown-item class="hover-danger" @click="deleteComment" v-if="checkUser(feedbackReply.user_id)">
+								<div class="d-flex hover-danger align-items-center">
+									<i class="material-icons-outlined ml-2">delete_sweep</i>
+									<div>
+										<div>
+											<strong> حذف </strong>
+										</div>
+									</div>
+								</div>
+							</b-dropdown-item>
+						</b-dropdown>
+					</div>
+				</div>
+			</div>
+			<div class="feedback-reply-body">
+				<div v-html="feedbackReply.text" style="unicode-bidi: plaintext; width: 100% !important; display: block; text-align: justify"></div>
+			</div>
+		</div>
+		<div class="w-100 d-flex align-content-center justify-content-between pt-2">
+			<div>
+				<div class="d-flex post-likes-text text-muted clickable" v-if="feedbackReply.mutual_likes != null && feedbackReply.mutual_likes.length > 0">
+					<span class="ml-1">پسندیده شده توسط</span>
+					<wire-link v-if="feedbackReply.mutual_likes[0]" :href="'/' + feedbackReply.mutual_likes[0].page.slug" class="text-dark">
+						<strong class="text-light">{{ feedbackReply.mutual_likes[0].page.name }}</strong>
+					</wire-link>
+					<div v-if="feedbackReply.mutual_likes.length > 1">
+						<span class="mr-1">و</span>
+						<wire-link v-if="feedbackReply.mutual_likes[1]" :href="'/' + feedbackReply.mutual_likes[0].page.slug" class="text-dark">
+							<strong class="text-light">{{ feedbackReply.mutual_likes[1].page.name }}</strong>
+						</wire-link>
+					</div>
+					<span class="mx-1" v-if="feedbackReply.mutual_likes.length > 2"> و ... </span>
+				</div>
+			</div>
+			<div class="actions">
+				<strong class="text-light ml-2 clickable" @click="loadReplies">{{ feedbackReply.replies_count }} پاسخ</strong>
+				<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies, 'material-icons': showReplies }" class="hover-dark clickable"> insert_comment </i>
+				<i @click="likeComment" class="hover-danger clickable material-icons" :class="{ 'text-danger': liked }">
+					{{ liked ? "favorite" : "favorite_border" }}
+				</i>
+			</div>
+		</div>
+		<transition name="slide">
+			<div class="feedback-reply-replies" v-if="showReplies">
+				<new-feedback-reply class="mb-3" @submit="submit" :feedback="feedbackReply.feedback_id" :reply-to="feedbackReply.id"></new-feedback-reply>
+				<div class="pr-3" v-if="replyTo === undefined">
+					<feedback-reply v-on:replied="submit" :reply-to="feedbackReply.id" v-for="reply in replies" v-on:deleted="feedbackReplyDelete" :feedback-reply="reply" :key="reply.id"></feedback-reply>
+					<div class="w-100 d-flex p-2 justify-content-center align-items-center" v-if="repliesLoading">
+						<loading-spinner></loading-spinner>
+					</div>
+				</div>
+				<div class="w-100 d-flex align-items-center justify-content-center p-2">
+					<loading-button v-if="next_page_url !== null" @click.native="loadMore" class="btn btn-outline-dark" :loading="loadingMore">بارگیری بیشتر</loading-button>
+				</div>
+			</div>
+		</transition>
+	</div>
+</template>
+
+<script>
+import NewFeedbackReply from "./NewFeedbackReply";
+import TimeAgo from "javascript-time-ago";
+import LoadingSpinner from "../LoadingSpinner";
+// Load locale-specific relative date/time formatting rules.
+import fa from "javascript-time-ago/locale/fa";
+TimeAgo.addLocale(fa);
+export default {
+	mounted() {
+		this.liked = this.feedbackReply.is_liked;
+		this.pinned = this.feedbackReply.pinned;
+	},
+	data() {
+		return {
+			deleted: false,
+			showReply: false,
+			replies: [],
+			repliesLoading: true,
+			showReplies: false,
+			next_page_url: null,
+			loadingMore: false,
+			liked: false,
+
+			pinned: false,
+			loadingPin: false,
+		};
+	},
+	methods: {
+		pinReply(pin) {
+			this.pinned = pin;
+			this.loadingPin = pin;
+			axios
+				.post("/feedback-replies/" + this.feedbackReply.id + "/pin", { pin: pin })
+				.then(() => {
+					this.pinned = pin;
+				})
+				.catch((err) => console.log(err))
+				.then(() => {
+					this.loadingPin = false;
+				});
+		},
+		feedbackReplyDelete() {
+			const index = this.replies.indexOf(comment);
+			if (index > -1) {
+				this.replies.splice(index, 1);
+				this.loadMore();
+			}
+		},
+		likeComment() {
+			if (this.liked) {
+				this.liked = false;
+			} else {
+				this.liked = true;
+			}
+			axios.post(this.$APP_URL + "/feedback-replies/" + this.feedbackReply.id + "/like");
+		},
+		loadReplies() {
+			this.showReplies = !this.showReplies;
+			if (this.showReplies) {
+				this.repliesLoading = true;
+				axios
+					.post(this.$APP_URL + "/feedback-replies/" + this.feedbackReply.id + "/replies")
+					.then((response) => {
+						const data = response.data;
+						if (data.result) {
+							this.next_page_url = data.data.next_page_url;
+							this.replies = data.data.data;
+						}
+						this.repliesLoading = false;
+					})
+					.catch((error) => console.log(error))
+					.then(() => (this.repliesLoading = false));
+			}
+		},
+		deleteComment() {
+			this.deleted = true;
+			axios
+				.delete("/feedback-replies/" + this.feedbackReply.feedback_id + "/replies/" + this.feedbackReply.id)
+				.then((response) => {
+					this.$emit("deleted", this.feedbackReply);
+				})
+				.catch((error) => console.log(error));
+		},
+		loadMore() {
+			if (this.next_page_url !== null && !this.loadingMore) {
+				this.loadingMore = true;
+				axios
+					.get(this.next_page_url)
+					.then((response) => {
+						const data = response.data;
+						if (data.result) {
+							this.next_page_url = data.data.next_page_url;
+							this.replies = this.replies.concat(data.data.data);
+						}
+						this.loadingMore = false;
+					})
+					.catch((error) => console.log(error))
+					.then(() => (this.loadingMore = false));
+			}
+		},
+		submit(comment) {
+			if (this.replyTo !== undefined) {
+				this.$emit("replied", comment);
+			} else {
+				this.replies.unshift(comment);
+				setTimeout(() => {
+					const theComment = this.$el;
+					this.$parent.$el.scrollTop += theComment.getBoundingClientRect().top;
+				}, 300);
+			}
+		},
+	},
+	computed: {
+		feedbackReply_time() {
+			const timeAgo = new TimeAgo("fa-FA");
+			return timeAgo.format(Date.parse(this.feedbackReply.created_at), "twitter");
+		},
+	},
+	components: {
+		NewFeedbackReply,
+		LoadingSpinner,
+		NewFeedbackReply,
+	},
+	props: {
+		replyTo: {
+			default: undefined,
+			required: false,
+		},
+		feedbackReply: {
+			type: Object,
+			default: undefined,
+			required: true,
+		},
+	},
+	name: "FeedbackReply",
+};
+</script>
+
+<style lang="scss" scoped>
+.comment {
+	.pagedetail {
+		display: flex;
+		flex-direction: column;
+	}
+}
+</style>

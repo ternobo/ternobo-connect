@@ -1,42 +1,45 @@
 <template>
-	<div class="idea-card">
+	<div class="card">
 		<div class="card-body">
 			<div class="row">
 				<div class="col-md-2">
 					<div class="vote-box">
-						<div class="idea-votes">
+						<div class="feedback-votes">
 							{{ votes }}
 						</div>
-						<loading-button :loading="loading" @click.native="voteIdea" v-if="idea.status !== 'scheduled' && idea.status !== 'done'" class="btn mt-2 btn-dark w-100" :class="{ voted: voted }">
+						<loading-button :loading="loading" @click.native="voteIdea" v-if="feedback.status !== 'scheduled' && feedback.status !== 'done'" class="btn mt-2 btn-dark w-100" :class="{ voted: voted }">
 							{{ voted ? "ثبت شده" : "ثبت رای" }}
 						</loading-button>
 					</div>
 				</div>
 				<div class="col-md-10">
-					<div class="idea-title mb-2">
+					<div class="feedback-title mb-2">
 						<div>
-							<wire-link :href="'/ideas/' + idea.id"
-								><strong>{{ idea.title }}</strong>
+							<wire-link :href="'/feedbacks/' + feedback.id">
+								<strong>{{ feedback.title }}</strong>
 							</wire-link>
 							<i class="material-icons text-grey clickable" @click="bookmark">
 								{{ bookmarked ? "flag" : "outlined_flag" }}
 							</i>
 						</div>
-						<feedback-label :type="idea.status"> {{ ideaStatus }} </feedback-label>
+						<feedback-label :feedbackId="feedback.id" :type.sync="feedback.status"> {{ feedbackStatus }} </feedback-label>
 					</div>
 					<p>
-						{{ idea.description }}
+						{{ feedback.description }}
 					</p>
 					<div class="d-flex align-items-center font-12">
-						<wire-link :href="'/' + idea.user.username" class="d-flex align-items-center ml-2">
-							<lazy-image :src="idea.user.profile" class="my-0 ml-1" img-class="profile-sm" />
-							<strong class="text-grey"> {{ idea.user.name }}</strong>
+						<wire-link :href="'/' + feedback.user.username" class="d-flex align-items-center ml-2">
+							<lazy-image :src="feedback.user.profile" class="my-0 ml-1" img-class="profile-sm" />
+							<strong class="text-grey"> {{ feedback.user.name }}</strong>
 						</wire-link>
-						<span class="text-grey ml-1">این ایده را به اشتراک گذاشته است</span>
+						<span class="text-grey ml-1">این بازخورد را به اشتراک گذاشته است</span>
 						<span class="mx-2">.</span>
 						<strong class="text-grey">{{ createDate }}</strong>
 						<span class="mx-2">.</span>
-						<span class="text-grey">{{ idea.replies.length }} نظر </span>
+						<span class="text-grey">{{ feedback.replies.length }} نظر </span>
+					</div>
+					<div v-if="feedback.pinned_reply != null" class="pr-3 mt-3 border-right">
+						<pinned-reply-card :feedbackReply="feedback.pinned_reply"></pinned-reply-card>
 					</div>
 				</div>
 			</div>
@@ -47,6 +50,7 @@
 <script>
 import FeedbackLabel from "./FeedbackLabel";
 import PersianDate from "persian-date";
+import PinnedReplyCard from "./PinnedReplyCard.vue";
 export default {
 	data() {
 		return {
@@ -57,23 +61,23 @@ export default {
 		};
 	},
 	created() {
-		this.votes = this.idea.votes;
-		this.voted = this.idea.voted;
-		this.bookmarked = this.idea.isBookmarked;
+		this.votes = this.feedback.votes;
+		this.voted = this.feedback.voted;
+		this.bookmarked = this.feedback.isBookmarked;
 	},
 	methods: {
 		bookmark() {
 			this.bookmarked = !this.bookmarked;
 
-			axios.post(this.$APP_URL + "/ideas/bookmark", {
-				id: this.idea.id,
+			axios.post(this.$APP_URL + "/feedbacks/bookmark", {
+				id: this.feedback.id,
 			});
 		},
 		voteIdea() {
 			this.loading = true;
 			axios
-				.post(this.$APP_URL + "/ideas/vote", {
-					idea: this.idea.id,
+				.post(this.$APP_URL + "/feedbacks/vote", {
+					feedback: this.feedback.id,
 				})
 				.then((respone) => {
 					if (respone.data.result) {
@@ -94,18 +98,18 @@ export default {
 		},
 	},
 	computed: {
-		ideaStatus() {
-			if (this.idea.status === "done") return "انجام شده";
-			else if (this.idea.status === "scheduled") return "برنامه‌ریزی شده";
-			else if (this.idea.status === "closed") return "بسته شده";
-			else return "";
+		feedbackStatus() {
+			if (this.feedback.status === "done") return "انجام شده";
+			else if (this.feedback.status === "scheduled") return "برنامه‌ریزی شده";
+			else if (this.feedback.status === "closed") return "بسته شده";
+			else return "درحال رای گیری";
 		},
 		createDate() {
-			return new PersianDate(Date.parse(this.idea.created_at)).format("D MMMM YYYY");
+			return new PersianDate(Date.parse(this.feedback.created_at)).format("D MMMM YYYY");
 		},
 	},
 	props: {
-		idea: {
+		feedback: {
 			type: Object,
 			default: undefined,
 			required: true,
@@ -113,8 +117,8 @@ export default {
 	},
 	components: {
 		FeedbackLabel,
+		PinnedReplyCard,
 	},
 };
 </script>
 
-<style></style>

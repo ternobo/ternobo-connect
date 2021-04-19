@@ -92,6 +92,10 @@ export default {
 				this.typeBasedData = {
 					comment_id: this.item,
 				};
+			} else if (this.type == "feedbackreply") {
+				this.typeBasedData = {
+					feedbackreply_id: this.item,
+				};
 			} else {
 				this.typeBasedData = {
 					post_id: this.item,

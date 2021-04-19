@@ -1,5 +1,13 @@
 <?php
 
+<<<<<<< HEAD:app/Http/Controllers/Ideas/IdeasController.php
+namespace App\Http\Controllers\Ideas;
+
+use App\Models\Idea;
+use App\Models\IdeaBookmark;
+use App\Models\IdeaReply;
+use App\Models\IdeaVote;
+=======
 namespace App\Http\Controllers\Feedback;
 
 use App\Http\Controllers\Controller;
@@ -8,6 +16,7 @@ use App\Models\Feedback;
 use App\Models\FeedbackBookmark;
 use App\Models\FeedbackReply;
 use App\Models\FeedbackVote;
+>>>>>>> production:app/Http/Controllers/Feedback/FeedbacksController.php
 use App\Models\Page;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;

@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\FollowMiddlware;
 use App\Http\Middleware\LocaleMiddleware;
+use App\Http\Middleware\WebAdminMiddleware;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Passport;
@@ -202,16 +203,6 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
             Route::post("/bookmark/{post_id}", "PostController@bookmarkPost");
 
-            Route::prefix("/ideas")->group(function () {
-                Route::post("/bookmark", "Ideas\IdeasController@bookmark");
-                Route::get("/myideas", "Ideas\IdeasController@myIdeas");
-                Route::post("/reply/{idea:id}", "Ideas\IdeasController@addReply");
-                Route::delete("/reply/{id}", "Ideas\IdeasController@deleteComment");
-                Route::post("/vote", "Ideas\IdeasController@voteIdea");
-            });
-
-            Route::resource("/ideas", "Ideas\IdeasController");
-
             Route::get("/settings", "Auth\UsersController@settingsPage");
 
             Route::post("/reportpost", "PostController@report");
@@ -268,11 +259,26 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         Route::get('/notifications', 'NotificationController@index')->name('notifications');
 
         // Start Idea Comments
-        Route::any("/idea-replies/{id}/replies", "Ideas\RepliesCotnroller@replies");
-        Route::post("/idea-replies/{id}/like", "Ideas\RepliesCotnroller@likeIdeaReply");
 
-        Route::resource('ideas.replies', "Ideas\RepliesCotnroller");
-        // End Comments
+        Route::prefix("/feedbacks")->group(function () {
+            Route::post("/bookmark", "Feedback\FeedbacksController@bookmark");
+            Route::get("/myfeedbacks", "Feedback\FeedbacksController@myFeedback");
+            Route::post("/reply/{feedback:id}", "Feedback\FeedbacksController@addReply");
+            Route::delete("/reply/{id}", "Feedback\FeedbacksController@deleteComment");
+            Route::post("/vote", "Feedback\FeedbacksController@voteIdea");
+
+            Route::post("/change-type", "Feedback\FeedbacksController@changeType")->middleware(WebAdminMiddleware::class);
+        });
+
+        Route::resource("/feedbacks", "Feedback\FeedbacksController");
+
+        Route::resource('feedbacks.replies', "Feedback\RepliesCotnroller");
+
+        Route::any("/feedback-replies/{id}/replies", "Feedback\RepliesCotnroller@replies");
+        Route::post("/feedback-replies/{id}/like", "Feedback\RepliesCotnroller@likeIdeaReply");
+        Route::post("/feedback-replies/{id}/pin", "Feedback\RepliesCotnroller@pinnReply");
+
+        // End IdeaComments
     });
     //End Auth
 

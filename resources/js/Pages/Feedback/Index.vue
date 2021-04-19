@@ -1,32 +1,32 @@
 <template>
-	<base-layout>
+	<base-layout :class="{ 'justify-content-center': pages.length < 1 }">
 		<div class="content-container-right">
 			<div class="card mb-3 w-100">
 				<div class="card-body">
 					<div class="d-flex align-items-center justify-content-between" style="min-height: 39px">
 						<h2 class="font-16 bold m-0">ما چطور می‌توانیم کیفیت خدماتمان را در ترنوبو بهبود ببخشیم؟</h2>
 						<transition name="fade">
-							<button @click="showNewIdea = true" v-if="!showNewIdea" class="btn bold btn-action rounded-pill">
+							<button @click="showNewFeedback = true" v-if="!showNewFeedback" class="btn bold btn-action rounded-pill">
 								<i class="material-icons-outlined">emoji_objects</i>
-								ثبت ایده جدید
+								ثبت بازخورد جدید
 							</button>
 						</transition>
 					</div>
 					<transition name="slide">
-						<div v-if="showNewIdea">
+						<div v-if="showNewFeedback">
 							<div class="d-flex align-items-center">
-								<input type="text" class="form-control bg-body border-0" placeholder="ایده‌ی خودتان را با ما به اشتراک بگذارید" max="150" maxlength="150" v-model="ideaTitle" />
+								<input type="text" class="form-control bg-body border-0" placeholder="بازخورد‌ خودتان را با ما به اشتراک بگذارید" max="150" maxlength="150" v-model="feedbackTitle" />
 								<div class="d-flex w-25 align-items-center">
-									<span class="mx-2"> {{ 150 - ideaTitle.length }} </span>
-									<b-progress :value="(ideaTitle.length / 150) * 100" :max="100" class="w-100"></b-progress>
+									<span class="mx-2"> {{ 150 - feedbackTitle.length }} </span>
+									<b-progress :value="(feedbackTitle.length / 150) * 100" :max="100" class="w-100"></b-progress>
 								</div>
 							</div>
 							<div class="py-2">
-								<textarea-autosize v-model="ideaDescription" maxlength="2500" :min-height="230" class="form-control" placeholder="کمی بیشتری در رابطه با ایده خودتان توضیح دهید...(اختیاری)"></textarea-autosize>
+								<textarea-autosize v-model="feedbackDescription" maxlength="2500" :min-height="230" class="form-control" placeholder="کمی بیشتری در رابطه با بازخورد خودتان توضیح دهید...(اختیاری)"></textarea-autosize>
 							</div>
 							<div class="d-flex align-items-center flex-row-reverse pt-3">
-								<loading-button :loading="loading" class="btn btn-primary" @click.native="saveIdea">ارسال</loading-button>
-								<button :disabled="loading" class="btn btn-transparent text-light" @click="showNewIdea = false">لغو</button>
+								<loading-button :loading="loading" class="btn btn-primary" @click.native="saveFeedback">ارسال</loading-button>
+								<button :disabled="loading" class="btn btn-transparent text-light" @click="showNewFeedback = false">لغو</button>
 							</div>
 						</div>
 					</transition>
@@ -44,26 +44,26 @@
 						<a>انجام شده</a>
 					</li>
 
-					<li style="left: 0" class="position-absolute" @click="status = 'my-ideas'" :class="{ 'is-active': status === 'my-ideas' }">
+					<li style="left: 0" class="position-absolute" @click="status = 'my-feedbacks'" :class="{ 'is-active': status === 'my-feedbacks' }">
 						<a class="active"><i class="material-icons">outlined_flag</i> پیشنهادات من</a>
 					</li>
 				</ul>
 			</div>
-			<div class="ideas" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="12">
+			<div class="feedbacks" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="12">
 				<div class="item-filters mb-3 mt-2">
 					<div class="filter-item" :class="{ active: filter == 'mostnew' }" @click="filter = 'mostnew'"><i class="material-icons-outlined">new_releases</i> جدید‌ترین‌ها</div>
 					<div class="filter-item" :class="{ active: filter == 'fav' }" @click="filter = 'fav'"><i class="material-icons-outlined">favorite_border</i> محبوب‌ترین‌ها</div>
 				</div>
-				<FeedbackCard v-for="idea in ideasArray" :key="idea.id" :idea="idea"></FeedbackCard>
+				<FeedbackCard class="mb-3" v-for="feedback in feedbacksArray" :key="feedback.id" :feedback="feedback"></FeedbackCard>
 				<div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
 					<loading-spinner class="image__spinner" />
 				</div>
 				<div v-if="next_page_url === null && !loadingPage">
-					<no-content> هیچ ایده‌ای وجود ندارد </no-content>
+					<no-content> هیچ بازخورد‌ی وجود ندارد </no-content>
 				</div>
 			</div>
 		</div>
-		<sidebar-left>
+		<sidebar-left v-if="pages.length > 0">
 			<div class="card">
 				<div class="card-body px-2 py-1">
 					<people-suggestion v-for="page in pages" :page="page" :key="page.id"></people-suggestion>
@@ -81,8 +81,8 @@ import NoContent from "../../Components/NoContent";
 export default {
 	watch: {
 		filter(newValue, oldValue) {
-			if (this.status == "my-ideas") {
-				this.loadMyIdeas();
+			if (this.status == "my-feedbacks") {
+				this.loadMyFeedbacks();
 			} else {
 				let parms = {
 					status: this.status,
@@ -92,14 +92,14 @@ export default {
 					parms.fav = true;
 				}
 
-				this.ideasArray = [];
+				this.feedbacksArray = [];
 				this.loadingPage = true;
 				this.$store.state.ternoboWireApp
-					.getData(this.$APP_URL + "/ideas?" + this.encodeQueryData(parms), false)
+					.getData(this.$APP_URL + "/feedbacks?" + this.encodeQueryData(parms), false)
 					.then((response) => {
-						const data = response.ideas;
+						const data = response.feedbacks;
 						if (data) {
-							this.ideasArray = data.data;
+							this.feedbacksArray = data.data;
 							this.page = data.current_page;
 							this.next_page_url = data.next_page_url;
 						}
@@ -109,7 +109,7 @@ export default {
 						self.$nextTick(() => {
 							self.filter = oldValue;
 						});
-						this.ideasArray = this.ideas.data;
+						this.feedbacksArray = this.feedbacks.data;
 					})
 					.then(() => {
 						this.loadingPage = false;
@@ -125,17 +125,17 @@ export default {
 				parms.fav = true;
 			}
 
-			if (newValue == "my-ideas") {
-				this.loadMyIdeas();
+			if (newValue == "my-feedbacks") {
+				this.loadMyFeedbacks();
 			} else {
-				this.ideasArray = [];
+				this.feedbacksArray = [];
 				this.loadingPage = true;
 				this.$store.state.ternoboWireApp
-					.getData(this.$APP_URL + "/ideas?" + this.encodeQueryData(parms), false)
+					.getData(this.$APP_URL + "/feedbacks?" + this.encodeQueryData(parms), false)
 					.then((response) => {
-						const data = response.ideas;
+						const data = response.feedbacks;
 						if (data) {
-							this.ideasArray = data.data;
+							this.feedbacksArray = data.data;
 							this.page = data.current_page;
 							this.next_page_url = data.next_page_url;
 						}
@@ -145,7 +145,7 @@ export default {
 						self.$nextTick(() => {
 							self.status = oldValue;
 						});
-						this.ideasArray = this.ideas.data;
+						this.feedbacksArray = this.feedbacks.data;
 					})
 					.then(() => {
 						this.loadingPage = false;
@@ -154,12 +154,12 @@ export default {
 		},
 	},
 	created() {
-		this.ideasArray = this.ideas.data;
-		this.page = this.ideas.current_page;
-		this.next_page_url = this.ideas.next_page_url;
+		this.feedbacksArray = this.feedbacks.data;
+		this.page = this.feedbacks.current_page;
+		this.next_page_url = this.feedbacks.next_page_url;
 	},
 	methods: {
-		loadMyIdeas() {
+		loadMyFeedbacks() {
 			let parms = {
 				onlyMy: true,
 			};
@@ -168,24 +168,21 @@ export default {
 				parms.fav = true;
 			}
 
-			this.ideasArray = [];
+			this.feedbacksArray = [];
 			this.loadingPage = true;
 			this.$store.state.ternoboWireApp
-				.getData(this.$APP_URL + "/ideas?" + this.encodeQueryData(parms), false)
+				.getData(this.$APP_URL + "/feedbacks?" + this.encodeQueryData(parms), false)
 				.then((response) => {
-					const data = response.ideas;
+					const data = response.feedbacks;
 					if (data) {
-						this.ideasArray = data.data;
+						this.feedbacksArray = data.data;
 						this.page = data.current_page;
 						this.next_page_url = data.next_page_url;
 					}
 				})
 				.catch((error) => {
 					console.log(error);
-					self.$nextTick(() => {
-						// self.filter = oldValue;
-					});
-					this.ideasArray = this.ideas.data;
+					this.feedbacksArray = this.feedbacks.data;
 				})
 				.then(() => {
 					this.loadingPage = false;
@@ -198,9 +195,9 @@ export default {
 				this.$store.state.ternoboWireApp
 					.getData(url, false)
 					.then((response) => {
-						const data = response.data.props.ideas;
+						const data = response.data.props.feedbacks;
 						if (data) {
-							this.ideasArray = this.ideasArray.concat(data.data);
+							this.feedbacksArray = this.feedbacksArray.concat(data.data);
 							this.page = data.current_page;
 							this.next_page_url = data.next_page_url;
 						}
@@ -213,19 +210,19 @@ export default {
 					});
 			}
 		},
-		saveIdea() {
+		saveFeedback() {
 			const $this = this;
 			this.loading = true;
 			axios
-				.post("/ideas", {
-					title: this.ideaTitle,
-					description: this.ideaDescription,
+				.post("/feedbacks", {
+					title: this.feedbackTitle,
+					description: this.feedbackDescription,
 				})
 				.then(function (response) {
 					if (response.data.result) {
-						$this.ideaDescription = null;
-						$this.ideaTitle = "";
-						$this.ideasArray.unshift(response.data.idea);
+						$this.feedbackDescription = null;
+						$this.feedbackTitle = "";
+						$this.feedbacksArray.unshift(response.data.feedback);
 					} else {
 						const errors = response.data.errors;
 						Object.keys(errors).forEach(function (item, index) {
@@ -243,11 +240,11 @@ export default {
 	},
 	data() {
 		return {
-			showNewIdea: undefined,
-			ideaTitle: "",
-			ideaDescription: "",
+			showNewFeedback: undefined,
+			feedbackTitle: "",
+			feedbackDescription: "",
 			loading: false,
-			ideasArray: [],
+			feedbacksArray: [],
 			page: 1,
 			next_page_url: undefined,
 			loadingPage: false,
@@ -257,7 +254,7 @@ export default {
 		};
 	},
 	props: {
-		ideas: {
+		feedbacks: {
 			type: Object,
 			default: undefined,
 		},
