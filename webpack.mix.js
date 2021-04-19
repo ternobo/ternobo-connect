@@ -14,7 +14,9 @@ const mix = require('laravel-mix');
 mix.babelConfig({
     plugins: ['@babel/plugin-syntax-dynamic-import'],
 });
-mix.sourceMaps();
+if (!process.env.production) {
+    mix.sourceMaps();
+}
 mix.webpackConfig(require('./webpack.config'));
 mix.js('resources/js/app.js', 'public/js').vue();
 mix.sass("resources/sass/application/app.scss", "public/css");
