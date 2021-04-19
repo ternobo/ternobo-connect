@@ -1,8 +1,3 @@
-.idea-card {
-    @extend .card;
-    @extend .my-2;
-}
-
 .feedback-tabs-white {
     padding: 1rem;
     background: $white;
@@ -44,14 +39,14 @@
     color: $white;
 }
 
-.idea-title {
+.feedback-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 5px 0px;
 }
 
-.idea-votes {
+.feedback-votes {
     background: #EEEEEE;
     display: flex;
     justify-content: center;

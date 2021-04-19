@@ -1,11 +1,11 @@
 <template>
-	<div class="sendidea clearfix" v-if="$store.state.user != null">
+	<div class="sendfeedback clearfix" v-if="$store.state.user != null">
 		<div class="input-group-btn mb-0">
-			<img class="idea-profile" :src="$store.state.user.profile" />
-			<MaterialTextArea v-model="text" input-class="form-control autoresize" class="w-100" placeholder="نظر شما چیست؟" name="text" maxlength="2500"></MaterialTextArea>
+			<img class="feedback-profile" :src="$store.state.user.profile" />
+			<textarea-autosize v-model="text" class="form-control autoresize border-0 shadow" :minHeight="63" placeholder="نظر شما چیست؟" name="text" maxlength="2500"></textarea-autosize>
 		</div>
-		<transition name="slide">
-			<div class="justify-content-end mt-0" v-if="showSubmit">
+		<transition name="fade">
+			<div class="justify-content-end mt-3" v-if="showSubmit">
 				<loading-button @click.native="submit" :loading="loading" class="btn btn-primary">ارسال</loading-button>
 			</div>
 		</transition>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import MaterialTextArea from "../inputs/MaterialTextArea";
+import TextareaAutosize from "../inputs/TextareaAutosize.vue";
 export default {
 	watch: {
 		text(newValue) {
@@ -25,7 +25,7 @@ export default {
 		},
 	},
 	props: {
-		idea: {
+		feedback: {
 			type: Number,
 			default: undefined,
 			required: true,
@@ -53,7 +53,7 @@ export default {
 					data.reply_to = this.replyTo;
 				}
 				axios
-					.post(this.$APP_URL + "/ideas/" + this.idea + "/replies", data)
+					.post(this.$APP_URL + "/feedbacks/" + this.feedback + "/replies", data)
 					.then((response) => {
 						if (response.data.result) {
 							this.text = "";
@@ -68,9 +68,9 @@ export default {
 			}
 		},
 	},
-	name: "NewIdeaReply",
+	name: "NewFeedbackReply",
 	components: {
-		MaterialTextArea,
+		TextareaAutosize,
 	},
 };
 </script>

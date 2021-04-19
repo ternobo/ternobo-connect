@@ -1,4 +1,4 @@
-.idea-reply {
+.feedback-reply {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -7,7 +7,7 @@
     color: $text-color;
     padding: 20px;
 
-    .idea-reply-header {
+    .feedback-reply-header {
         position: relative;
         display: flex;
         justify-content: space-between;
@@ -27,13 +27,27 @@
     }
 
 
-    .idea-reply-body {
+    .feedback-reply-body {
         padding: .4rem;
         width: 100%;
     }
 }
 
-.idea-replies {
+.pinned-badge {
+    background-color: rgba($color: $action, $alpha: 0.2);
+    color: $grey;
+    font-size: 12px;
+    border-radius: 14px;
+    padding: 4px 8px;
+
+    i {
+        font-size: 18px;
+        color: $action;
+    }
+
+}
+
+.feedback-replies {
     .list::-webkit-scrollbar {
         width: 0.3em;
         background: #DEDEDE;
@@ -48,7 +62,7 @@
         padding: 0.5rem;
     }
 
-    .sendidea {
+    .sendfeedback {
         div {
             display: flex;
             align-items: center;
@@ -64,7 +78,7 @@
             padding: 0.5rem;
         }
 
-        .idea-profile {
+        .feedback-profile {
             width: 52px;
             height: 52px;
             border-radius: 50%;
@@ -73,7 +87,7 @@
     }
 
     .list {
-        .idea {
+        .feedback {
             display: flex;
             justify-content: flex-start;
             @extend .mt-3;

@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Feedback;
 
-use App\Models\Idea;
-use App\Models\IdeaBookmark;
-use App\Models\IdeaReply;
-use App\Models\IdeaVote;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangeFeedbackTypeRequest;
+use App\Models\Feedback;
+use App\Models\FeedbackBookmark;
+use App\Models\FeedbackReply;
+use App\Models\FeedbackVote;
 use App\Models\Page;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
@@ -15,7 +17,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Ternobo\TernoboWire\TernoboWire;
 
-class IdeasController extends Controller
+class FeedbacksController extends Controller
 {
     public function __construct()
     {
@@ -30,7 +32,7 @@ class IdeasController extends Controller
     public function index(Request $request)
     {
         if ($request->has("onlyMy")) {
-            return $this->myIdeas($request);
+            return $this->myFeedbacks($request);
         }
 
         $mostFav = false;
@@ -43,21 +45,21 @@ class IdeasController extends Controller
             $status = $request->status;
         }
 
-        SEOTools::setTitle("ایده‌ها");
-        $ideas = null;
+        SEOTools::setTitle("بازخوردها");
+        $feedbacks = null;
         if ($mostFav) {
-            $ideas = Idea::query()->with("user")
-                ->selectRaw("*,(SELECT COUNT(*) as votes from idea_votes where idea_votes.idea_id = ideas.id) as votes_num")
+            $feedbacks = Feedback::query()->with(["user"])
+                ->selectRaw("*,(SELECT COUNT(*) as votes from feedback_votes where feedback_votes.feedback_id = feedbacks.id) as votes_num")
                 ->where("status", $status)->orderByDesc("votes_num")
                 ->paginate(5);
-            $ideas->appends(array("fav" => "1"));
+            $feedbacks->appends(array("fav" => "1"));
         } else {
-            $ideas = Idea::query()->with("votes")->with("user")->where("status", $status)->latest()->paginate(15);
+            $feedbacks = Feedback::query()->with("votes")->with("user")->where("status", $status)->latest()->paginate(15);
         }
-        return TernoboWire::render("Feedback/Index", ["ideas" => $ideas, "pages" => Page::getSuggestions()]);
+        return TernoboWire::render("Feedback/Index", ["feedbacks" => $feedbacks, "pages" => Page::getSuggestions()]);
     }
 
-    public function myIdeas(Request $request)
+    public function myFeedbacks(Request $request)
     {
         $mostFav = false;
         $status = "voting";
@@ -66,24 +68,20 @@ class IdeasController extends Controller
             $mostFav = true;
         }
 
-        SEOTools::setTitle("ایده‌ها");
-        $ideas = null;
+        SEOTools::setTitle("بازخوردها");
+        $feedbacks = null;
 
-        $ideas = Idea::query()->with("user")
-            ->selectRaw("*,(SELECT COUNT(*) as votes from idea_votes where idea_votes.idea_id = ideas.id) as votes_num")
+        $feedbacks = Feedback::query()->with(["user", "votes"])
+            ->selectRaw("*,(SELECT COUNT(*) as votes from feedback_votes where feedback_votes.feedback_id = feedbacks.id) as votes_num")
             ->where("user_id", Auth::user()->id);
 
         if ($mostFav) {
-            $idea = $idea->orderByDesc("votes_num");
-            // $ideas->appends(array("fav" => "1"));
+            $feedbacks = $feedbacks->orderByDesc("votes_num");
         } else {
-            $ideas = Idea::query()->with("votes")->with("user")
-                ->where("user_id", Auth::user()->id)
-                ->latest()
-                ->paginate(5);
+            $feedbacks = $feedbacks->latest();
         }
 
-        $contributed_ideas = Idea::query()
+        $contributed_feedbacks = Feedback::query()
             ->where(function ($query) {
                 $query->whereHas("votes", function ($query) {
                     $query->where("user_id", Auth::user()->id);
@@ -91,26 +89,25 @@ class IdeasController extends Controller
                     $query->Where("user_id", Auth::user()->id);
                 });
             })
-            ->where("status", "!=", "closed")
-            ->distinct("ideas.id")
+            ->distinct("feedbacks.id")
             ->paginate(10);
 
-        $bookmarks = IdeaBookmark::query()->with("idea")->where("user_id", Auth::user()->id)->get()->pluck("idea");
+        $bookmarks = FeedbackBookmark::query()->with("feedback")->where("user_id", Auth::user()->id)->get()->pluck("feedback");
 
-        return TernoboWire::render("Feedback/Index", ["bookmarks" => $bookmarks, "ideas" => $contributed_ideas, "my_ideas" => $ideas->paginate(5), "myoffers" => true]);
+        return TernoboWire::render("Feedback/Index", ["bookmarks" => $bookmarks, "contributed_feedbacks" => $contributed_feedbacks, "feedbacks" => $feedbacks->paginate(15), "myoffers" => true]);
     }
 
-    public function voteIdea(Request $request)
+    public function voteFeedback(Request $request)
     {
-        $idea = Idea::query()->findOrFail($request->idea);
-        if ($idea->status !== "done" || $idea->status !== "scheduled") {
-            if (!IdeaVote::query()->where("user_id", Auth::user()->id)->where("idea_id", $idea->id)->exists()) {
-                $vote = new IdeaVote();
+        $feedback = Feedback::query()->findOrFail($request->feedback);
+        if ($feedback->status !== "done" || $feedback->status !== "scheduled") {
+            if (!FeedbackVote::query()->where("user_id", Auth::user()->id)->where("feedback_id", $feedback->id)->exists()) {
+                $vote = new FeedbackVote();
                 $vote->user_id = Auth::user()->id;
-                $vote->idea_id = $idea->id;
+                $vote->feedback_id = $feedback->id;
                 return response()->json(array("result" => $vote->save(), "vote" => true, "msg" => "رای شما با موفقیت ثبت شد"));
             } else {
-                IdeaVote::query()->where("user_id", Auth::user()->id)->where("idea_id", $idea->id)->first()->delete();
+                FeedbackVote::query()->where("user_id", Auth::user()->id)->where("feedback_id", $feedback->id)->first()->delete();
                 return response()->json(array("result" => true, "vote" => false, "msg" => "رای شما با برداشته ثبت شد"));
             }
         }
@@ -123,15 +120,15 @@ class IdeasController extends Controller
             return abort(400);
         }
         $user = Auth::user();
-        $idea = Idea::query()->findOrFail($request->id);
-        if (!(IdeaBookmark::query()->where("idea_id", $idea->id)->where("user_id", $user->id)->exists())) {
-            $bookmark = new IdeaBookmark();
-            $bookmark->idea_id = $idea->id;
+        $feedback = Feedback::query()->findOrFail($request->id);
+        if (!(FeedbackBookmark::query()->where("feedback_id", $feedback->id)->where("user_id", $user->id)->exists())) {
+            $bookmark = new FeedbackBookmark();
+            $bookmark->feedback_id = $feedback->id;
             $bookmark->user_id = Auth::user()->id;
             return response()->json(["result" => $bookmark->save(), "bookmark" => true]);
         } else {
             try {
-                IdeaBookmark::query()->where("idea_id", $idea->id)->where("user_id", $user->id)->firstOrFail()->delete();
+                FeedbackBookmark::query()->where("feedback_id", $feedback->id)->where("user_id", $user->id)->firstOrFail()->delete();
             } catch (\Exception $e) {
                 return abort(400);
             }
@@ -140,9 +137,19 @@ class IdeasController extends Controller
 
     }
 
+    public function changeType(ChangeFeedbackTypeRequest $request)
+    {
+        $type = $request->type;
+        $feedback_id = $request->feedback_id;
+
+        return response()->json([
+            'result' => Feedback::query()->where('id', $feedback_id)->update(['status' => $type]),
+        ]);
+    }
+
     public function deleteComment($reply)
     {
-        $reply = IdeaReply::findOrFail($reply);
+        $reply = FeedbackReply::findOrFail($reply);
         if ($reply->user_id === Auth::user()->id) {
             $reply->delete();
             return response()->json(["result" => true]);
@@ -173,17 +180,17 @@ class IdeasController extends Controller
         }
         $title = $request->title;
         $description = $request->description;
-        $idea = new Idea();
-        $idea->title = $title;
-        $idea->status = "voting";
-        $idea->user_id = Auth::user()->id;
-        $idea->description = $description;
-        $result = $idea->save();
-        return response()->json(array("result" => $result, "idea" => $idea));
+        $feedback = new Feedback();
+        $feedback->title = $title;
+        $feedback->status = "voting";
+        $feedback->user_id = Auth::user()->id;
+        $feedback->description = $description;
+        $result = $feedback->save();
+        return response()->json(array("result" => $result, "feedback" => $feedback));
 
     }
 
-    public function addReply(Idea $idea, Request $request)
+    public function addReply(Feedback $feedback, Request $request)
     {
         $messages = [
             "text.required" => "متن دیدگاه اجباری است",
@@ -196,8 +203,8 @@ class IdeasController extends Controller
             return response()->json(["result" => false, "errors" => $validator->errors()]);
         }
 
-        $reply = new IdeaReply();
-        $reply->idea_id = $idea->id;
+        $reply = new FeedbackReply();
+        $reply->feedback_id = $feedback->id;
         $reply->text = $request->text;
         $reply->user_id = Auth::user()->id;
         $reply->save();
@@ -207,25 +214,25 @@ class IdeasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Idea $idea
+     * @param Feedback $feedback
      * @return View
      */
-    public function show(Idea $idea)
+    public function show(Feedback $feedback)
     {
-        $replies = $idea->replies()->paginate(10);
-        return TernoboWire::render("Feedback/IdeaPage", ["idea" => $idea, "replies" => $replies, "pages" => Page::getSuggestions()]);
+        $replies = $feedback->replies()->paginate(10);
+        return TernoboWire::render("Feedback/FeedbackPage", ["feedback" => $feedback, "replies" => $replies, "pages" => Page::getSuggestions()]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Idea $idea
+     * @param Feedback $feedback
      * @return Response
      */
-    public function destroy(Idea $idea)
+    public function destroy(Feedback $feedback)
     {
-        if (Auth::user()->id === $idea->user_id) {
-            $idea->delete();
+        if (Auth::user()->id === $feedback->user_id) {
+            $feedback->delete();
             return response()->json(array("result" => true));
         }
         return abort(404);

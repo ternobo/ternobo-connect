@@ -1,19 +1,30 @@
 <template>
-	<div class="mb-3">
-		<div class="idea-reply" v-if="!deleted">
-			<div class="idea-reply-header">
-				<wire-link :href="'/' + ideaReply.user.username" class="d-flex align-items-center">
-					<img :src="ideaReply.user.profile" class="profile-sm" />
-					<div class="pr-3 pagedetail">
-						<span class="name">
-							<strong>
-								{{ ideaReply.user.name }}
-							</strong>
-						</span>
-					</div>
-				</wire-link>
+	<div class="mb-3" v-if="!deleted">
+		<div v-if="replyTo != undefined">
+			<span class="text-superlight"> <i class="material-icons">reply</i> پاسخ به {{ feedbackReply.replyto.user.name }} </span>
+		</div>
+		<div class="feedback-reply">
+			<div class="feedback-reply-header">
 				<div class="d-flex align-items-center">
-					<span class="font-10 text-muted">{{ ideaReply_time }}</span>
+					<wire-link :href="'/' + feedbackReply.user.username" class="d-flex align-items-center">
+						<img :src="feedbackReply.user.profile" class="profile-sm" />
+						<div class="pr-3 pagedetail">
+							<span class="name">
+								<strong>
+									{{ feedbackReply.user.name }}
+								</strong>
+							</span>
+						</div>
+					</wire-link>
+					<i class="material-icons-outlined mr-2 text-superlight hover-dark clickable" @click="pinReply(true)" v-if="!pinned && replyTo == undefined">push_pin</i>
+					<loading-spinner class="mr-2" style="height: 24px; width: 24px" v-else-if="loadingPin"></loading-spinner>
+					<div v-else-if="pinned" @click="pinReply(false)" class="pinned-badge mr-2 clickable">
+						<i class="material-icons-outlined">push_pin</i>
+						پین شده
+					</div>
+				</div>
+				<div class="d-flex align-items-center">
+					<span class="font-10 text-muted">{{ feedbackReply_time }}</span>
 					<div>
 						<b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
 							<template v-slot:button-content class="p-0">
@@ -30,7 +41,7 @@
 									</div>
 								</div>
 							</b-dropdown-item>
-							<b-dropdown-item class="hover-danger" @click="deleteComment" v-if="checkUser(ideaReply.user_id)">
+							<b-dropdown-item class="hover-danger" @click="deleteComment" v-if="checkUser(feedbackReply.user_id)">
 								<div class="d-flex hover-danger align-items-center">
 									<i class="material-icons-outlined ml-2">delete_sweep</i>
 									<div>
@@ -44,13 +55,28 @@
 					</div>
 				</div>
 			</div>
-			<div class="idea-reply-body">
-				<div v-html="ideaReply.text" style="unicode-bidi: plaintext; width: 100% !important; display: block; text-align: justify"></div>
+			<div class="feedback-reply-body">
+				<div v-html="feedbackReply.text" style="unicode-bidi: plaintext; width: 100% !important; display: block; text-align: justify"></div>
 			</div>
 		</div>
 		<div class="w-100 d-flex align-content-center justify-content-between pt-2">
-			<span v-html="ideaReply.liked_by"></span>
+			<div>
+				<div class="d-flex post-likes-text text-muted clickable" v-if="feedbackReply.mutual_likes != null && feedbackReply.mutual_likes.length > 0">
+					<span class="ml-1">پسندیده شده توسط</span>
+					<wire-link v-if="feedbackReply.mutual_likes[0]" :href="'/' + feedbackReply.mutual_likes[0].page.slug" class="text-dark">
+						<strong class="text-light">{{ feedbackReply.mutual_likes[0].page.name }}</strong>
+					</wire-link>
+					<div v-if="feedbackReply.mutual_likes.length > 1">
+						<span class="mr-1">و</span>
+						<wire-link v-if="feedbackReply.mutual_likes[1]" :href="'/' + feedbackReply.mutual_likes[0].page.slug" class="text-dark">
+							<strong class="text-light">{{ feedbackReply.mutual_likes[1].page.name }}</strong>
+						</wire-link>
+					</div>
+					<span class="mx-1" v-if="feedbackReply.mutual_likes.length > 2"> و ... </span>
+				</div>
+			</div>
 			<div class="actions">
+				<strong class="text-light ml-2 clickable" @click="loadReplies">{{ feedbackReply.replies_count }} پاسخ</strong>
 				<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies, 'material-icons': showReplies }" class="hover-dark clickable"> insert_comment </i>
 				<i @click="likeComment" class="hover-danger clickable material-icons" :class="{ 'text-danger': liked }">
 					{{ liked ? "favorite" : "favorite_border" }}
@@ -58,10 +84,10 @@
 			</div>
 		</div>
 		<transition name="slide">
-			<div class="idea-reply-replies" v-if="showReplies">
-				<new-idea-reply @submit="submit" :idea="ideaReply.idea_id" :reply-to="ideaReply.id"></new-idea-reply>
-				<div class="border-right pr-3" style="border-color: #212121 !important" v-if="replyTo === undefined">
-					<idea-reply v-on:replied="submit" :reply-to="ideaReply.id" v-for="reply in replies" v-on:deleted="ideaReplyDelete" :idea-reply="reply" :key="reply.id"></idea-reply>
+			<div class="feedback-reply-replies" v-if="showReplies">
+				<new-feedback-reply class="mb-3" @submit="submit" :feedback="feedbackReply.feedback_id" :reply-to="feedbackReply.id"></new-feedback-reply>
+				<div class="pr-3" v-if="replyTo === undefined">
+					<feedback-reply v-on:replied="submit" :reply-to="feedbackReply.id" v-for="reply in replies" v-on:deleted="feedbackReplyDelete" :feedback-reply="reply" :key="reply.id"></feedback-reply>
 					<div class="w-100 d-flex p-2 justify-content-center align-items-center" v-if="repliesLoading">
 						<loading-spinner></loading-spinner>
 					</div>
@@ -75,7 +101,7 @@
 </template>
 
 <script>
-import NewIdeaReply from "./NewIdeaReply";
+import NewFeedbackReply from "./NewFeedbackReply";
 import TimeAgo from "javascript-time-ago";
 import LoadingSpinner from "../LoadingSpinner";
 // Load locale-specific relative date/time formatting rules.
@@ -83,7 +109,8 @@ import fa from "javascript-time-ago/locale/fa";
 TimeAgo.addLocale(fa);
 export default {
 	mounted() {
-		this.liked = this.ideaReply.is_liked;
+		this.liked = this.feedbackReply.is_liked;
+		this.pinned = this.feedbackReply.pinned;
 	},
 	data() {
 		return {
@@ -95,10 +122,26 @@ export default {
 			next_page_url: null,
 			loadingMore: false,
 			liked: false,
+
+			pinned: false,
+			loadingPin: false,
 		};
 	},
 	methods: {
-		commentDelete() {
+		pinReply(pin) {
+			this.pinned = pin;
+			this.loadingPin = pin;
+			axios
+				.post("/feedback-replies/" + this.feedbackReply.id + "/pin", { pin: pin })
+				.then(() => {
+					this.pinned = pin;
+				})
+				.catch((err) => console.log(err))
+				.then(() => {
+					this.loadingPin = false;
+				});
+		},
+		feedbackReplyDelete() {
 			const index = this.replies.indexOf(comment);
 			if (index > -1) {
 				this.replies.splice(index, 1);
@@ -111,14 +154,14 @@ export default {
 			} else {
 				this.liked = true;
 			}
-			axios.post(this.$APP_URL + "/idea-replies/" + this.ideaReply.id + "/like");
+			axios.post(this.$APP_URL + "/feedback-replies/" + this.feedbackReply.id + "/like");
 		},
 		loadReplies() {
 			this.showReplies = !this.showReplies;
 			if (this.showReplies) {
 				this.repliesLoading = true;
 				axios
-					.post(this.$APP_URL + "/idea-replies/" + this.ideaReply.id + "/replies")
+					.post(this.$APP_URL + "/feedback-replies/" + this.feedbackReply.id + "/replies")
 					.then((response) => {
 						const data = response.data;
 						if (data.result) {
@@ -134,9 +177,9 @@ export default {
 		deleteComment() {
 			this.deleted = true;
 			axios
-				.delete("/idea-replies/" + this.ideaReply.idea_id + "/replies/" + this.ideaReply.id)
+				.delete("/feedback-replies/" + this.feedbackReply.feedback_id + "/replies/" + this.feedbackReply.id)
 				.then((response) => {
-					this.$emit("deleted", this.ideaReply);
+					this.$emit("deleted", this.feedbackReply);
 				})
 				.catch((error) => console.log(error));
 		},
@@ -170,28 +213,28 @@ export default {
 		},
 	},
 	computed: {
-		ideaReply_time() {
+		feedbackReply_time() {
 			const timeAgo = new TimeAgo("fa-FA");
-			return timeAgo.format(Date.parse(this.ideaReply.created_at), "twitter");
+			return timeAgo.format(Date.parse(this.feedbackReply.created_at), "twitter");
 		},
 	},
 	components: {
-		NewIdeaReply,
+		NewFeedbackReply,
 		LoadingSpinner,
-		NewIdeaReply,
+		NewFeedbackReply,
 	},
 	props: {
 		replyTo: {
 			default: undefined,
 			required: false,
 		},
-		ideaReply: {
+		feedbackReply: {
 			type: Object,
 			default: undefined,
 			required: true,
 		},
 	},
-	name: "IdeaReply",
+	name: "FeedbackReply",
 };
 </script>
 

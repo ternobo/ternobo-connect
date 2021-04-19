@@ -7,15 +7,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 
-class IdeaReply extends Model
+class FeedbackReply extends Model
 {
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
 
-    public function idea()
+    protected $fillable = ['pinned'];
+
+    public function feedback()
     {
-        return $this->belongsTo("App\Models\Idea", "idea_id");
+        return $this->belongsTo("App\Models\Feedback", "feedback_id");
     }
 
     public function user()
@@ -25,18 +27,42 @@ class IdeaReply extends Model
 
     public function likes()
     {
-        return $this->hasMany("App\Models\Like", "idea_reply");
+        return $this->hasMany("App\Models\Like", "feedback_reply");
+    }
+
+    public function replyto()
+    {
+        return $this->belongsTo("App\Models\FeedbackReply", "reply_to");
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(FeedbackReply::class, "parent_id");
     }
 
     /**
      * Get liked by Text
      * @return string
      */
+    public function mutualLikes()
+    {
+        return $this->hasMany("App\Models\Like", "comment_id")
+            ->with("page")
+            ->whereHas("page", function ($query) {
+                $query->whereRaw("id in (select following from followings where user_id = ?)", Auth::user()->id);
+            })
+            ->latest();
+    }
+
+/**
+ * Get liked by Text
+ * @return string
+ */
     public function getLikedBy()
     {
         $myConnection = Like::query()
             ->join("pages", "likes.page_id", "=", "pages.id")
-            ->where("likes.idea_reply", $this->id)
+            ->where("likes.comment_id", $this->id)
             ->whereIn("pages.user_id", Auth::user()->getConnections())
             ->latest()
             ->limit(2)

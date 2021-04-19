@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class IdeaVote extends Model
+class FeedbackVote extends Model
 {
     public function idea()
     {

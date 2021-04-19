@@ -547,7 +547,7 @@ img {
 }
 
 .card,
-.idea-card {
+.feedback-card {
     border: none;
     border-radius: 0 !important;
     box-shadow: 0 1rem 40px rgba(0, 0, 0, .02);
@@ -786,9 +786,6 @@ pre {
 
 @import "./pages/user-profile.scss";
 
-@import "./components/feedback/card.scss";
-@import "./components/feedback/label.scss";
-
 @import "./components/cropper/actions.scss";
 
 @import "./components/material/input.scss";
@@ -796,8 +793,8 @@ pre {
 @import "./components/comments/comments.scss";
 @import "./components/comments/comment.scss";
 
-@import "./components/idea-replies/idea-replies.scss";
-@import "./components/idea-replies/idea-reply.scss";
+@import "./components/feedback-replies/feedback-replies.scss";
+@import "./components/feedback-replies/feedback-reply.scss";
 
 .modal-content {
     border-radius: 0;
@@ -1518,3 +1515,8 @@ a:focus {
 @import "./pages/chats.scss";
 @import "./components/chat-widget.scss";
 @import "./components/textarea-content.scss";
+
+
+
+@import "./components/feedback/card.scss";
+@import "./components/feedback/label.scss";
