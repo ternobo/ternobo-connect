@@ -1,6 +1,6 @@
 <template>
 	<base-layout :class="{ 'justify-content-center': pages.length < 1 }">
-		<div :class="{ 'content-container-right': pages.length > 0, 'content-container-right': pages.length < 1 }" v-infinite-scroll="loadMore" :infinite-scroll-distance="5">
+		<div class="content-container-right" v-infinite-scroll="loadMore" :infinite-scroll-distance="5">
 			<div class="w-100 d-flex justify-content-end align-items-center py-3">
 				<wire-link class="text-grey" href="/feedbacks">
 					بازگشت
