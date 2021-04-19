@@ -90,7 +90,7 @@ class Post extends Model
 
     public function bookmarks()
     {
-        return $this->belongsToMany('App\User', 'bookmarks', 'post_id', 'user_id');
+        return $this->belongsToMany('App\Models\User', 'bookmarks', 'post_id', 'user_id');
     }
 
     public function is_bookmarked()
