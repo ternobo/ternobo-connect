@@ -18,7 +18,7 @@ class TagsController extends Controller
      */
     public function index()
     {
-        $tags = Tag::query()->paginate();
+        $tags = Tag::query()->select(['name'])->paginate();
         return response()->json(["result" => true, "tags" => $tags]);
     }
 
