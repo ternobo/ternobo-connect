@@ -19,6 +19,11 @@ class Notification extends Model
         return $this->belongsTo("App\Models\Page", "from");
     }
 
+    public function receiver()
+    {
+        return $this->belongsTo("App\Models\Page", "to");
+    }
+
     public function notifiable()
     {
         return $this->morphTo("notifiable");

@@ -11,7 +11,7 @@ class NotificationsController extends Controller
 {
     public function index()
     {
-        $notifications = Notification::query()->with("notifiable")->where("from", "-1")->latest()->paginate(10);
+        $notifications = Notification::query()->with(["notifiable", "receiver.user"])->where("from", "-1")->latest()->paginate(10);
         return response()->json(['result' => true, "data" => $notifications]);
     }
 
