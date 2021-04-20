@@ -7,7 +7,7 @@
 						<div class="feedback-votes">
 							{{ votes }}
 						</div>
-						<loading-button :loading="loading" @click.native="voteIdea" v-if="feedback.status !== 'scheduled' && feedback.status !== 'done'" class="btn mt-2 btn-dark w-100" :class="{ voted: voted }">
+						<loading-button :loading="loading" @click.native="voteIdea" v-if="feedback.status !== 'scheduled' && feedback.status !== 'done'" class="btn mt-1 btn-dark w-100" :class="{ voted: voted }">
 							{{ voted ? "ثبت شده" : "ثبت رای" }}
 						</loading-button>
 					</div>
@@ -36,7 +36,7 @@
 						<span class="mx-2">.</span>
 						<strong class="text-grey">{{ createDate }}</strong>
 						<span class="mx-2">.</span>
-						<span class="text-grey">{{ feedback.replies.length }} نظر </span>
+						<span class="text-grey" v-if="feedback.replies.length > 0">{{ feedback.replies.length }} نظر </span>
 					</div>
 					<div v-if="feedback.pinned_reply != null" class="pr-3 mt-3 border-right">
 						<pinned-reply-card :feedbackReply="feedback.pinned_reply"></pinned-reply-card>

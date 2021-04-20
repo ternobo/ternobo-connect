@@ -76,7 +76,7 @@
 				</div>
 			</div>
 			<div class="actions">
-				<strong class="text-light ml-2 clickable" @click="loadReplies">{{ feedbackReply.replies_count }} پاسخ</strong>
+				<strong class="text-light ml-2 clickable" v-if="feedbackReply.replies_count > 0" @click="loadReplies">{{ feedbackReply.replies_count }} پاسخ</strong>
 				<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies, 'material-icons': showReplies }" class="hover-dark clickable"> insert_comment </i>
 				<i @click="likeComment" class="hover-danger clickable material-icons" :class="{ 'text-danger': liked }">
 					{{ liked ? "favorite" : "favorite_border" }}

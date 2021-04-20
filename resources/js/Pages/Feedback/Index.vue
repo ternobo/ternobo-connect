@@ -6,7 +6,7 @@
 					<div class="d-flex align-items-center justify-content-between" style="min-height: 39px">
 						<h2 class="font-16 bold m-0">ما چطور می‌توانیم کیفیت خدماتمان را در ترنوبو بهبود ببخشیم؟</h2>
 						<transition name="fade">
-							<button @click="showNewFeedback = true" v-if="!showNewFeedback" class="btn bold btn-action rounded-pill">
+							<button @click="showNewFeedback = true" v-if="!showNewFeedback" class="btn btn-action">
 								<i class="material-icons-outlined">emoji_objects</i>
 								ثبت بازخورد جدید
 							</button>
@@ -55,6 +55,9 @@
 					<div class="filter-item" :class="{ active: filter == 'fav' }" @click="filter = 'fav'"><i class="material-icons-outlined">favorite_border</i> محبوب‌ترین‌ها</div>
 				</div>
 				<FeedbackCard class="mb-3" v-for="feedback in feedbacksArray" :key="feedback.id" :feedback="feedback"></FeedbackCard>
+
+				<FeedbackCard class="mb-3" v-for="feedback in contributedFeedbacks" :key="feedback.id" :feedback="feedback"></FeedbackCard>
+
 				<div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
 					<loading-spinner class="image__spinner" />
 				</div>
@@ -245,6 +248,7 @@ export default {
 			feedbackDescription: "",
 			loading: false,
 			feedbacksArray: [],
+
 			page: 1,
 			next_page_url: undefined,
 			loadingPage: false,

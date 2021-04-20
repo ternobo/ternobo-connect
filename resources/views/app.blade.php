@@ -22,18 +22,9 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="mobile-web-app-capable" content="yes">
 
-    <link rel="preload" href="/fonts/google-material/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2" />
-    <link rel="preload" href="/manifest.js" as="script">
-    <link rel="preload" href="/js/vendor.js" as="script">
-    <link rel="preload" href="/js/app.js" as="script">
-
     <link rel="preload" href="/fonts/dana/woff2/dana-noen-bold.woff2">
     <link rel="preload" href="/fonts/dana/woff2/dana-noen-regular.woff2">
     <link rel="preload" href="/fonts/roboto/Roboto-Regular.ttf">
-    <link rel="preload" href="/fonts/google-material/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2">
-
-    <!-- Add to homescreen for Chrome on Android -->
-
     <script>
         var APP_URL = "{{ url('/') }}";
         var country = "Iran"
@@ -44,11 +35,6 @@
             });
 
     </script>
-    <script>
-        var user_id = false;
-
-    </script>
-
 </head>
 
 <body class="font-sans antialiased" data-wire='{{ $tuuid }}'>

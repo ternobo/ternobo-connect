@@ -1,5 +1,4 @@
 const path = require('path');
-var LiveReloadPlugin = require('webpack-livereload-plugin');
 
 module.exports = {
     output: {
@@ -9,7 +8,7 @@ module.exports = {
     resolve: {
         alias: {
             '@': path.resolve('resources/js'),
-            'vue$': 'vue/dist/vue.runtime.common.js',
+            'vue$': 'vue/dist/vue.js',
         },
     },
 };
