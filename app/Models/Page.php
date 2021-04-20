@@ -39,6 +39,11 @@ class Page extends Model
         return $this->hasOne("App\Models\AboutData", "page_id");
     }
 
+    public function page()
+    {
+        return $this->hasOne("App\Models\Page", "id")->where("id", '-2');
+    }
+
     /**
      * list page's categories (App\Category)
      * @var array()
