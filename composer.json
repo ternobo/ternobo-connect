@@ -8,10 +8,6 @@
     ],
     "license": "MIT",
     "repositories": {
-        "ternobo-wire": {
-            "type": "git",
-            "url": "https://git.ternobo.info/Ternobo/ternobo-wire.git"
-        },
         "ternobo-chat": {
             "type": "git",
             "url": "https://git.ternobo.info/Ternobo/ternobo-chat.git"
@@ -24,7 +20,6 @@
         "doctrine/dbal": "^3.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
-        "graham-campbell/throttle": "^8.1",
         "guzzlehttp/guzzle": "^7.0.1",
         "htmlmin/htmlmin": "^8.0",
         "inertiajs/inertia-laravel": "^0.2.12",

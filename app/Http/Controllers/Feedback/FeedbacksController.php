@@ -73,7 +73,14 @@ class FeedbacksController extends Controller
 
         $feedbacks = Feedback::query()->with(["user", "votes"])
             ->selectRaw("*,(SELECT COUNT(*) as votes from feedback_votes where feedback_votes.feedback_id = feedbacks.id) as votes_num")
-            ->where("user_id", Auth::user()->id);
+            ->where("user_id", Auth::user()->id)
+            ->orWhere(function ($query) {
+                $query->whereHas("votes", function ($query) {
+                    $query->where("user_id", Auth::user()->id);
+                })->orWhereHas("replies", function ($query) {
+                    $query->Where("user_id", Auth::user()->id);
+                });
+            });
 
         if ($mostFav) {
             $feedbacks = $feedbacks->orderByDesc("votes_num");
@@ -81,20 +88,9 @@ class FeedbacksController extends Controller
             $feedbacks = $feedbacks->latest();
         }
 
-        $contributed_feedbacks = Feedback::query()
-            ->where(function ($query) {
-                $query->whereHas("votes", function ($query) {
-                    $query->where("user_id", Auth::user()->id);
-                })->orWhereHas("replies", function ($query) {
-                    $query->Where("user_id", Auth::user()->id);
-                });
-            })
-            ->distinct("feedbacks.id")
-            ->paginate(10);
-
         $bookmarks = FeedbackBookmark::query()->with("feedback")->where("user_id", Auth::user()->id)->get()->pluck("feedback");
 
-        return TernoboWire::render("Feedback/Index", ["bookmarks" => $bookmarks, "contributed_feedbacks" => $contributed_feedbacks, "feedbacks" => $feedbacks->paginate(15), "myoffers" => true]);
+        return TernoboWire::render("Feedback/Index", ["bookmarks" => $bookmarks, "feedbacks" => $feedbacks->paginate(15), "myoffers" => true]);
     }
 
     public function voteFeedback(Request $request)

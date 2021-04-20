@@ -22,20 +22,9 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="mobile-web-app-capable" content="yes">
 
-    <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
-
-    <link rel="preload" href="/fonts/google-material/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2" />
-    <link rel="preload" href="/js/manifest.js" as="script">
-    <link rel="preload" href="/js/vendor.js" as="script">
-    <link rel="preload" href="/js/app.js" as="script">
-
-    <link rel="preload" href="/fonts/dana/woff2/dana-noen-bold.woff2" as="font">
-    <link rel="preload" href="/fonts/dana/woff2/dana-noen-regular.woff2" as="font">
-    <link rel="preload" href="/fonts/roboto/Roboto-Regular.ttf" as="font">
-    <link rel="preload" href="/fonts/google-material/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2" as="font">
-
-    <!-- Add to homescreen for Chrome on Android -->
-
+    <link rel="preload" href="/fonts/dana/woff2/dana-noen-bold.woff2">
+    <link rel="preload" href="/fonts/dana/woff2/dana-noen-regular.woff2">
+    <link rel="preload" href="/fonts/roboto/Roboto-Regular.ttf">
     <script>
         var APP_URL = "{{ url('/') }}";
         var country = "Iran"
@@ -46,11 +35,6 @@
             });
 
     </script>
-    <script>
-        var user_id = false;
-
-    </script>
-
 </head>
 
 <body class="font-sans antialiased" data-wire='{{ $tuuid }}'>

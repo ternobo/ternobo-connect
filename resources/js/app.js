@@ -122,6 +122,16 @@ document.addEventListener('ternobo:userloaded', event => {
     }
 
     if (user && !isSocketConnected) {
+        setInterval(() => {
+            const seen_request = Vue.prototype.seen_request;
+            if (seen_request.length > 0) {
+                axios.post("/seenPost", {
+                    posts: seen_request
+                }).then(() => {
+                    Vue.prototype.seen_request = [];
+                })
+            }
+        }, 3000);
         if (window.hasOwnProperty("Notification")) {
             Notification.requestPermission();
         }

@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Ternobo\TernoboWire\TernoboWire;
 use Throwable;
 
 class Handler extends ExceptionHandler

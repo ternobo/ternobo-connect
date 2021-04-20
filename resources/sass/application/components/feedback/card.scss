@@ -37,6 +37,11 @@
 .btn-action {
     background: $action;
     color: $white;
+
+    &:hover {
+        color: $white;
+        background-color: #0486c7;
+    }
 }
 
 .feedback-title {
