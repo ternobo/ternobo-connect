@@ -314,7 +314,7 @@ export default {
 	},
 	computed: {
 		canEdit() {
-			return this.page.user_id == this.$store.state.user.id;
+			return this.checkUser(this.page.user.id);
 		},
 	},
 	name: "UserProfile",
