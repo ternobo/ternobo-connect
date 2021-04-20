@@ -98,7 +98,9 @@ export default {
 		},
 	},
 	mounted() {
-		this.maxSlides = Math.floor(this.$refs.slidesList.getBoundingClientRect().width / 76) - 1;
+		setTimeout(() => {
+			this.maxSlides = Math.floor(this.$refs.slidesList.getBoundingClientRect().width / 76) - 1;
+		}, 2000);
 	},
 	created() {
 		if (this.value) {
