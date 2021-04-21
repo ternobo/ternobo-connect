@@ -35,7 +35,12 @@ export default {
             case "media":
                 tag = "div";
                 classes = "slider-media-image";
-                content = h("img", { attrs: { src: `/${this.content.content}` } });
+
+                let source = this.content.content.startsWith("http") ? this.content.content : `/${this.content.content}`
+
+                let mediaTag = this.content.content.endsWith("mp4") ? "video" : `img`;
+
+                content = h(mediaTag, { attrs: { src: source } });
                 break;
         }
 
