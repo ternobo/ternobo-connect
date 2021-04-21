@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddTagRequest;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -20,6 +21,14 @@ class TagsController extends Controller
     {
         $tags = Tag::query()->select(['name'])->paginate();
         return response()->json(["result" => true, "tags" => $tags]);
+    }
+
+    public function store(AddTagRequest $request)
+    {
+
+        $name = $request->name;
+        $tag = Tag::create(['name' => $name]);
+        return response()->json(['result' => $tag != null, "tag" => $tag]);
     }
 
     /**
