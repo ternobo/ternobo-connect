@@ -4,7 +4,6 @@ namespace App\Exceptions;
 
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Ternobo\TernoboWire\TernoboWire;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -40,10 +39,9 @@ class Handler extends ExceptionHandler
 
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        if ($request->acceptsJson()) {
+        if ($request->expectsJson()) {
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
-
         return route('welcome');
     }
 
@@ -57,7 +55,7 @@ class Handler extends ExceptionHandler
     // {
     //     $response = parent::render($request, $e);
 
-    //     if ($request->acceptsJson()) {
+    //     if ($request->expectsJson()) {
     //         return response()->json(['error' => $response->status()], $response->status());
     //     }
 

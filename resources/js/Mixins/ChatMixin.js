@@ -3,7 +3,7 @@ import Conversation from "../Components/Chat/Conversation.vue";
 import NoChatSelected from "../Components/Chat/NoChatSelected.vue";
 import LazyImage from "../Components/LazyImage.vue";
 import ChatSkeleton from "../Components/Skeletons/ChatSkeleton.vue";
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 
 export default {
     computed: {
@@ -81,7 +81,6 @@ export default {
                         .then(() => {
                             this.searchLoading = false;
                         });
-
                 }, 500);
             } else {
                 this.connections = [];
