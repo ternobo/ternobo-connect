@@ -471,11 +471,14 @@
         font-size: 18px;
         line-height: 28px;
         text-align: start;
+
     }
 
     pre {
         font-size: 16px;
         line-height: 24px;
+        white-space: pre-line;
+        width: 100%;
     }
 }
 
