@@ -50,7 +50,7 @@ class FixOldPosts extends Command
             ]);
             $sort = 0;
 
-            $tags = $post->tags;
+            $tags = (array) $post->tags;
             $tagsHTML = "";
             foreach ($tags as $tag) {
                 $tagsHTML .= "#$tag ";
@@ -60,8 +60,7 @@ class FixOldPosts extends Command
                 $content = PostContent::create([
                     "page_id" => $post->page_id,
                     "slide_id" => $slide->id,
-                    "text" => $text . "\n\n\n" . $tagsHTML,
-                    "media" => null,
+                    "content" => $text . "\n\n\n" . $tagsHTML,
                     "type" => "text",
                     "sort" => $sort,
                 ]);
@@ -71,9 +70,8 @@ class FixOldPosts extends Command
                 $content = PostContent::create([
                     "page_id" => $post->page_id,
                     "slide_id" => $slide->id,
-                    "text" => null,
-                    "media" => $media,
-                    "type" => "text",
+                    "content" => $media,
+                    "type" => "media",
                     "sort" => $sort,
                 ]);
             }
