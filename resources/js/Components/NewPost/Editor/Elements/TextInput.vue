@@ -10,7 +10,7 @@ import TextareaContent from "../../../inputs/TextareaContent.vue";
 import Tribute from "tributejs";
 export default {
 	methods: {
-		input(e) {
+		input() {
 			this.$refs.editableHighlight.innerHTML = this.$refs.editable.innerHTML.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
 			this.$emit("update:content", this.$refs.editable.innerText);
 		},

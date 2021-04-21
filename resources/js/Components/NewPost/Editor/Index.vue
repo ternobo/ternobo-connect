@@ -7,7 +7,7 @@
 						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 						<i class="material-icons-outlined hand-hover">unfold_more</i>
 					</div>
-					<component :is="components[element.type]" :content.sync="editorItems[index].content" :max="2500" />
+					<component :is="components[element.type]" :content.sync="editorItems[index].content" :key="'item_type_' + element.id" :max="2500" />
 				</div>
 			</draggable>
 			<div class="d-flex editor-actions" v-if="availableOptions.length > 0" :class="{ 'align-items-center': editorItems.length < 1 }">
@@ -31,6 +31,8 @@ import ActionsButton from "./ActionsButton.vue";
 import TextInput from "./Elements/TextInput.vue";
 import TitleInput from "./Elements/TitleInput.vue";
 import Media from "./Elements/Media";
+import uuidv4 from "uuid";
+
 export default {
 	watch: {
 		editorItems: {
@@ -51,11 +53,11 @@ export default {
 		addElement(type) {
 			switch (type) {
 				case "text":
-					this.editorItems.push({ type: "text", content: "" });
+					this.editorItems.push({ id: uuidv4(), type: "text", content: "" });
 					this.$emit("itemAdd");
 					break;
 				case "title":
-					this.editorItems.push({ type: "title", content: "" });
+					this.editorItems.push({ id: uuidv4(), type: "title", content: "" });
 					this.$emit("itemAdd");
 					break;
 				case "media":
@@ -64,7 +66,7 @@ export default {
 					fileChooser.onchange = (e) => {
 						let file = e.target.files[0];
 						if (file.type.startsWith("image") && !file.type.includes("svg+xml")) {
-							this.editorItems.push({ type: "media", content: file });
+							this.editorItems.push({ id: uuidv4(), type: "media", content: file });
 							this.$emit("itemAdd");
 						} else {
 							this.toast("فقط امکان فایل‌های jpeg, png, jpg, gif مجاز است");
