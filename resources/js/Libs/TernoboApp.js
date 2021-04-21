@@ -68,7 +68,7 @@ TernoboApp.install = function (Vue, options) {
         props: ['text'],
         methods: {
             convertHashTags: function (str) {
-                const spanned = `<span>${str}</span>`
+                const spanned = `<pre class='post-content--text'>${str}</pre>`
                 return spanned.replace(/\B#(\S+)/gu, "<wire-link href='/tags/$1' class='text-action'>#$1</wire-link>").replace(/\B@(\w+)/gu, "<wire-link href='/$1'  class='mention-item'>@$1</wire-link>");
             }
         },
