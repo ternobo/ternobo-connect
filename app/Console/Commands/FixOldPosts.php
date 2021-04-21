@@ -53,7 +53,8 @@ class FixOldPosts extends Command
             $tags = (array) $post->tags;
             $tagsHTML = "";
             foreach ($tags as $tag) {
-                $tagsHTML .= "#$tag ";
+                $tagtext = str_replace(" ", "_", $tag);
+                $tagsHTML .= "#$tagtext ";
             }
 
             if ($text != null && strlen($text) > 0) {
