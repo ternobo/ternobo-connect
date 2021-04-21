@@ -14,7 +14,7 @@ const mix = require('laravel-mix');
 mix.babelConfig({
     plugins: ['@babel/plugin-syntax-dynamic-import'],
 });
-if (!process.env.production) {
+if (!mix.inProduction()) {
     mix.sourceMaps();
 }
 mix.webpackConfig(require('./webpack.config'));
