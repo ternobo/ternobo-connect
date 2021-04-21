@@ -2,6 +2,7 @@
 namespace App;
 
 use App\Models\Notification;
+use App\Models\Page;
 
 class SocialMediaTools
 {

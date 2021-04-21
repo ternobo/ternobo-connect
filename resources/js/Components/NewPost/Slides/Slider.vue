@@ -98,9 +98,12 @@ export default {
 		},
 	},
 	mounted() {
-		setTimeout(() => {
+		this.loadTimeout = setTimeout(() => {
 			this.maxSlides = Math.floor(this.$refs.slidesList.getBoundingClientRect().width / 76) - 1;
-		}, 2000);
+		}, 1000);
+	},
+	destroyed() {
+		clearTimeout(this.loadTimeout);
 	},
 	created() {
 		if (this.value) {
@@ -112,6 +115,8 @@ export default {
 			slides: [{ id: uuidv4(), content: [], icon: "more_horiz", active: true }],
 			transformBy: 0,
 			maxSlides: 6,
+
+			loadTimeout: false,
 		};
 	},
 	components: { SlideItem, Editor },

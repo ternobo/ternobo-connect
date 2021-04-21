@@ -15,8 +15,20 @@ export default {
                 if (this.content.content != null) {
                     tag = "pre";
                     classes += "post-content--text";
-                    let text = this.content.content;
-                    content = (<dynamic-link text={text}></dynamic-link>);
+                    this.text = this.content.content;
+
+                    let action = "";
+
+                    if (this.text.split(" ").length > 100) {
+                        action = (<div class="text-action font-12 clickable" onClick={this.toggleShowFullText}>{this.showFullText ? "نمایش کمتر" : "نمایش بیشتر"}</div>);;
+                    }
+
+                    content = (
+                        <div>
+                            <dynamic-link text={this.textToShow}></dynamic-link>
+                            {action}
+                        </div>
+                    );
 
                 }
                 break;
@@ -30,6 +42,22 @@ export default {
         return h(tag, {
             class: classes
         }, [content]);
+    },
+    data() {
+        return {
+            text: "",
+            showFullText: false,
+        };
+    },
+    methods: {
+        toggleShowFullText() {
+            this.showFullText = !this.showFullText;
+        }
+    },
+    computed: {
+        textToShow() {
+            return this.showFullText || this.text.split(" ").length < 100 ? this.text : (this.text.split(" ").slice(0, 40).join(" ") + "...");
+        }
     },
     props: {
         content: {

@@ -2,7 +2,7 @@
 	<div class="position-relative" v-click-outside="hideList">
 		<button class="btn btn-action-light rounded-circle add-action-btn" :class="{ active: showList }" @click="toggleList"><i class="material-icons font-20">add</i></button>
 		<transition name="fade">
-			<div class="editors-actions-list" style="left: -290px; top: 0" v-if="showList">
+			<div class="editors-actions-list" style="left: -302px; top: 0" v-if="showList">
 				<div class="text-type-list">
 					<div class="editor-list-item">
 						<strong>تیتر</strong>
@@ -43,8 +43,6 @@ export default {
 		emitAcion(type) {
 			if (this.activeOptions.includes(type)) {
 				this.showList = false;
-				console.log(type);
-
 				this.$emit("select", type);
 			}
 		},
