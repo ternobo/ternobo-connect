@@ -64,7 +64,7 @@ class ActiveSession extends Model
         }
 
         $session->save();
-        Cookie::queue('ternobo_remembered_session_id', $session->id, 60 * 24 * 365 * 20);
+        cookie()->queue(cookie()->forever('ternobo_remembered_session_id', $session->id));
         return $session;
     }
 

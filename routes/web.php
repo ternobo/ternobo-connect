@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\FollowMiddlware;
 use App\Http\Middleware\LocaleMiddleware;
 use App\Http\Middleware\WebAdminMiddleware;
@@ -45,8 +46,6 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
     Route::get("/", "IndexController@index")->name("welcome");
     Broadcast::routes();
     Route::any("/search", "HomeController@search");
-
-    // Route::resource("/articles", "ArticlesController");
 
     /**
      * Auth Start
@@ -123,7 +122,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         Route::post("/unfollow/{page_id}", "ConnectionsController@unfollow");
         //Follow Actions End
 
-        Route::middleware([FollowMiddlware::class, "auth"])->group(function () {
+        Route::middleware([FollowMiddlware::class, Authenticate::class])->group(function () {
             Route::get('/feed', 'HomeController@index')->name('home');
 
             // Seen Post
