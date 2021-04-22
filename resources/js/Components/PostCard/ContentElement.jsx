@@ -38,7 +38,7 @@ export default {
 
                 let source = this.content.content.startsWith("http") ? this.content.content : `/${this.content.content}`
 
-                content = this.content.content.endsWith("mp4") ? h("video", { attrs: { src: source, controls: true, class: "w-100" } }) : h("img", { attrs: { src: source } });
+                content = this.content.content.endsWith("mp4") ? (<video src={source} controls class={'w-100'}></video>) : (<lazy-image style={{ minHeight: '300px' }} src={source} />);
                 break;
         }
 

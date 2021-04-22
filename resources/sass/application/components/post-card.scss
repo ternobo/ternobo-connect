@@ -472,6 +472,9 @@
         line-height: 28px;
         text-align: start;
 
+        @media screen and(max-width: $sm-size) {
+            font-size: 16px;
+        }
     }
 
     pre {
@@ -479,6 +482,10 @@
         line-height: 24px;
         white-space: pre-line;
         width: 100%;
+
+        @media screen and(max-width: $sm-size) {
+            font-size: 12px;
+        }
     }
 }
 
@@ -489,6 +496,7 @@
     padding: 2px 6px;
     background: $fixed-elements;
     color: $grey;
+    margin-bottom: 0 !important;
 
     i {
         font-size: 20px;
@@ -504,6 +512,11 @@
 
     i:first-child {
         margin-right: 12px;
+
+        @media screen and (max-width: $sm-size) {
+            font-size: 10px;
+        }
+
     }
 
     i:last-child {
