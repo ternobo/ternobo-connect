@@ -18,3 +18,4 @@ public/mix-manifest.json
 public/css/app.css
 composer.lock
 *.lock
+laravel-echo-server.lock
