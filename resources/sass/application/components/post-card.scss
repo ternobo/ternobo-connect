@@ -513,10 +513,6 @@
     i:first-child {
         margin-right: 12px;
 
-        @media screen and (max-width: $sm-size) {
-            font-size: 10px;
-        }
-
     }
 
     i:last-child {
