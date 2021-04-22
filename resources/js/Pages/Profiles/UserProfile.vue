@@ -22,7 +22,7 @@
 							</div>
 						</button>
 					</div>
-					<div v-else-if="current_tab == 'activities'">
+					<div v-else-if="current_tab == 'activities' && canEdit">
 						<button class="btn d-flex align-items-center justify-content-center btn-edit" @click="draft = !draft">
 							<span v-if="!draft"> پیش‌نویس <i class="material-icons-outlined mr-2">save</i> </span>
 							<span v-else> منتشر شده <i class="material-icons-outlined mr-2">article</i> </span>

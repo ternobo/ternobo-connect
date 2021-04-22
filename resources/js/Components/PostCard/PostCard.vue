@@ -11,6 +11,9 @@
 					<span class="publisher--shortbio">
 						{{ post.page.short_bio }}
 					</span>
+					<span class="text-superlight text-10">
+						{{ post_time }}
+					</span>
 				</div>
 			</wire-link>
 			<div class="actions position-relative">
