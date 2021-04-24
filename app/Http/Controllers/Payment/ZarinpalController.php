@@ -67,6 +67,5 @@ class ZarinpalController extends Controller
             $transaction->save();
             return response()->json(['result' => false, 'message' => "تراکنش ناموفق"]);
         }
-
     }
 }
