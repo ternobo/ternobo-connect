@@ -193,6 +193,16 @@ class User extends Authenticatable implements Messageable
         return $this->hasMany(ActiveSession::class);
     }
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function tips()
+    {
+        return $this->hasManyThrough(Tip::class, Post::class);
+    }
+
     /**
      * Return profile steps
      */

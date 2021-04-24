@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Transactions\TransactionsController;
 use App\Http\Middleware\AdminAPIMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -36,5 +37,7 @@ Route::middleware(["auth:api", AdminAPIMiddleware::class])->prefix("/admin")->gr
     Route::delete("/tags/delete", "Admin\TagsController@destory");
     Route::resource('skills', "Admin\SkillsController")->only(["index"]);
     Route::delete("/skills/delete", "Admin\SkillsController@destory");
+
+    Route::resource('transactions', TransactionsController::class)->only(['index', 'show']);
 
 });

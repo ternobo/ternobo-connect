@@ -39,6 +39,7 @@
         "pragmarx/google2fa": "^8.0",
         "pragmarx/recovery": "^0.1.0",
         "saeedpooyanfar/zarinpal": "^5.0",
+        "shetabit/payment": "^4.0",
         "silviolleite/laravelpwa": "^2.0",
         "soroosh/ternobo-chat": "@dev",
         "soroosh/ternobo-wire": "@dev",

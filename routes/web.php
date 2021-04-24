@@ -21,16 +21,12 @@ use Ternobo\TernoboWire\TernoboWire;
  */
 Passport::routes();
 TernoboWire::routes();
+Broadcast::routes();
 
 Route::get('/sitemap.xml', 'SiteMapController@all');
 Route::get('/sitemap-posts.xml', 'SiteMapController@posts');
 Route::get('/sitemap-posts.xml', 'SiteMapController@posts');
 Route::get('/sitemap-profiles.xml', 'SiteMapController@profiles');
-
-Route::get('/test', function () {
-    $slide = [];
-    dd(isset($slide['id']));
-});
 
 /**
  * File Access Start
@@ -42,9 +38,7 @@ Route::get("/medias/{image}", "DownloadsController@media");
  */
 
 Route::group(['middleware' => LocaleMiddleware::class], function () {
-
     Route::get("/", "IndexController@index")->name("welcome");
-    Broadcast::routes();
     Route::any("/search", "HomeController@search");
 
     /**
@@ -276,8 +270,11 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         Route::any("/feedback-replies/{id}/replies", "Feedback\RepliesCotnroller@replies");
         Route::post("/feedback-replies/{id}/like", "Feedback\RepliesCotnroller@likeIdeaReply");
         Route::post("/feedback-replies/{id}/pin", "Feedback\RepliesCotnroller@pinnReply");
-
         // End IdeaComments
+
+        Route::get('/zarinpal/pay', "Payment\ZarinpalController@tipPost");
+        Route::get('/zarinpal/callback', "Payment\ZarinpalController@callback");
+
     });
     //End Auth
 

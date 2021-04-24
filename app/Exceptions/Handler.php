@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Ternobo\TernoboWire\TernoboWire;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -58,8 +59,7 @@ class Handler extends ExceptionHandler
         if ($request->expectsJson()) {
             return response()->json(['error' => $response->status()], $response->status());
         }
-
-        if (!app()->isDebug) {
+        if (!config('app.debug')) {
             if (in_array($response->status(), [500, 503, 404, 403])) {
                 return TernoboWire::render('Error', ['status' => $response->status()]);
             } else if ($response->status() === 419) {
