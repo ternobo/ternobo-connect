@@ -275,6 +275,12 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         Route::get('/zarinpal/pay', "Payment\ZarinpalController@tipPost");
         Route::get('/zarinpal/callback', "Payment\ZarinpalController@callback");
 
+        // Donations Start
+        Route::get("/donations", "Donation\DontaionsController@index");
+        Route::post("/donations", "Donation\DontaionsController@getDonations");
+        Route::post("/donations/settings", "Donation\DontaionsController@settings");
+        Route::put("/donations/settings", "Donation\DontaionsController@setPaymentGateways");
+        // Donations End
     });
     //End Auth
 

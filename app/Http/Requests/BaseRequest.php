@@ -4,9 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\ValidationException;
 
 class BaseRequest extends FormRequest
 {
@@ -22,10 +22,7 @@ class BaseRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        throw (new ValidationException($validator))
-            ->errorBag($this->errorBag)
-            ->status(200)
-            ->redirectTo($this->getRedirectUrl());
+        throw new HttpResponseException(response()->json(['result' => false, 'errors' => $validator->errors(), 200]));
     }
 
     /**

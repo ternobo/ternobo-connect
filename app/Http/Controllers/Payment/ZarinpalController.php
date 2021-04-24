@@ -52,12 +52,13 @@ class ZarinpalController extends Controller
                 $tip = Tip::create([
                     'post_id' => $transaction->meta['post_id'],
                     'amount' => $transaction->amount,
-                    'user_id' => $transaction->meta['anonymous'] ? null : $transaction->user_id,
+                    'user_id' => $transaction->user_id,
+                    "anonymous" => $transaction->meta['anonymous'],
                     'meta' => [],
                 ]);
 
                 // You can show payment referenceId to the user.
-                return response()->json(['result' => true, 'tip' => $tip]);
+                return response()->json(['result' => true, 'tip' => $tip, 'receipt' => $receipt]);
             } catch (InvalidPaymentException $exception) {
                 return response()->json(['result' => false, 'message' => $exception->getMessage()]);
 
