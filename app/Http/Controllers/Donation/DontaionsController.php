@@ -51,19 +51,16 @@ class DontaionsController extends Controller
                 'enabled' => false,
             ],
         ]);
-        return response()->json(['result' => true, ['gateways' => $gateways]]);
+        return response()->json(['result' => true, 'gateways' => $gateways]);
     }
 
     public function setPaymentGateways(PaymentGatewaysRequest $request)
     {
+        // dd($request->all());
         $value = [
-            'paypal' => [
-                'email' => $request->paypal->email,
-                'enabled' => $request->paypal->enabled,
-            ],
             'zarinpal' => [
-                'merchant_id' => $request->zarinpal->merchant_id,
-                'enabled' => $request->zarinpal->enabled,
+                'merchant_id' => $request->zarinpal["merchant_id"],
+                'enabled' => $request->zarinpal["enabled"],
             ],
         ];
         return response()->json(['result' => true, 'option' => UserOption::setOption("payment_gateways", $value)]);

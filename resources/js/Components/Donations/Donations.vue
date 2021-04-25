@@ -10,7 +10,8 @@
 					dir="rtl"
 					:items="[
 						{ name: 'همه', value: 'all', icon: 'filter_alt' },
-						{ name: 'حمایت‌های من', value: 'my', icon: 'filter_alt' },
+						{ name: 'از طرف شما', value: 'my', icon: 'filter_alt' },
+						{ name: 'برای شما', value: 'my', icon: 'filter_alt' },
 					]"
 					:showNewItem="false"
 					v-model="type"

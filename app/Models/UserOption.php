@@ -15,6 +15,10 @@ class UserOption extends Model
         "value",
     ];
 
+    protected $casts = [
+        'value' => "array",
+    ];
+
     use HasFactory;
 
     public static function getOption($key, $default = null)
@@ -25,11 +29,12 @@ class UserOption extends Model
 
     public static function setOption($key, $value)
     {
-        $option = UserOption::query()->where("user_id", Auth::user()->id)->where("key", $key)->firstOrCreate([
+        $option = UserOption::query()->firstOrNew([
             'key' => $key,
-            'value' => $value,
             'user_id' => Auth::user()->id,
         ]);
+        $option->value = $value;
+        $option->save();
         return $option->value;
     }
 

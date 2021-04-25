@@ -1,9 +1,78 @@
 <template>
-	<div></div>
+	<div class="payment-gateways">
+		<div class="card">
+			<div class="card-body">
+				<div class="d-flex justify-content-center payment-logo">
+					<img src="/images/zarinpal-logo.png" />
+				</div>
+				<strong class="text-superlight font-14">کد درگاه پرداخت</strong>
+				<div class="payment-input text-center" v-if="!loading">
+					<input type="text" class="form-control" v-model="merchant" spellcheck="false" v-if="!active" />
+					<span class="text-muted payment-code" v-else>{{ merchant }}</span>
+				</div>
+				<div class="payment-input text-center" v-else>
+					<Skeleton style="width: 110px" height="33px" />
+				</div>
+				<div class="d-flex justify-content-between align-items-lg-center payment-active-gateway">
+					<label class="activation-label">فعال سازی</label>
+					<switches v-model="active" :disabled="disabled"></switches>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
-export default {};
+import Switches from "../inputs/Switch.vue";
+import { Skeleton } from "vue-loading-skeleton";
+
+export default {
+	mounted() {
+		this.loading = true;
+		axios
+			.post("/donations/settings")
+			.then((response) => {
+				this.merchant = response.data.gateways.zarinpal.merchant_id;
+				this.active = response.data.gateways.zarinpal.enabled;
+			})
+			.catch((err) => {
+				console.log(err);
+				this.toast("خظا در دریافت اطلاعات");
+			})
+			.then(() => (this.loading = false));
+	},
+	watch: {
+		active() {
+			this.loading = true;
+			axios
+				.put("/donations/settings", {
+					zarinpal: {
+						merchant_id: this.merchant,
+						enabled: this.active,
+					},
+				})
+				.catch((err) => {
+					console.log(err);
+					this.toast("خظا در دریافت اطلاعات");
+				})
+				.then(() => (this.loading = false));
+		},
+	},
+	computed: {
+		disabled() {
+			return this.loading || this.merchant.length < 36;
+		},
+	},
+	data() {
+		return {
+			active: false,
+			merchant: "",
+
+			loading: true,
+		};
+	},
+	components: { Switches, Skeleton },
+};
 </script>
 
 <style>

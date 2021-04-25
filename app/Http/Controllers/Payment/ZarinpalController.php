@@ -23,7 +23,7 @@ class ZarinpalController extends Controller
         $amount = (int) $request->amount;
         $invoice->amount($amount);
 
-        return Payment::config(['callbackUrl' => url('/zarinpal/callback'), 'merchantId' => '"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"', "description" => "حمایت از محتوای " . $post->page->name])
+        return Payment::config(['callbackUrl' => url('/zarinpal/callback'), 'merchantId' => 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', "description" => "حمایت از محتوای " . $post->page->name])
             ->purchase($invoice, function ($driver, $transactionId) use ($amount, $post, $anonymous) {
                 $transaction = new Transaction();
                 $transaction->user_id = Auth::user()->id;
@@ -45,7 +45,7 @@ class ZarinpalController extends Controller
 
         if ($status == "OK") {
             try {
-                $receipt = Payment::config(['merchantId' => '"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"'])->amount((int) $transaction->amount)->transactionId($transaction_id)->verify();
+                $receipt = Payment::config(['merchantId' => 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'])->amount((int) $transaction->amount)->transactionId($transaction_id)->verify();
                 $transaction->success = true;
                 $transaction->save();
 

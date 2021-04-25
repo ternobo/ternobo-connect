@@ -1,6 +1,6 @@
 <template>
 	<div class="donation-item">
-		<div class="d-flex align-items-center justify-content-between col-4">
+		<div class="d-flex align-items-center justify-content-between col-5">
 			<div class="d-flex align-items-center">
 				<i class="material-icons donate-type" :class="{ received: !tip.donate_by_me }">play_for_work</i>
 				<lazy-image :src="profile" class="profile-sm tip-profile mb-0" imgClass="profile-sm"></lazy-image>
@@ -21,7 +21,7 @@
 			<span class="clickable">مشاهده محتوا</span>
 		</wire-link>
 		<div>
-			<button class="btn tip-btn">جزئیات بیشتر</button>
+			<button class="btn tip-btn">جزئیات</button>
 		</div>
 	</div>
 </template>
