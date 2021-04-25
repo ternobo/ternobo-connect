@@ -23,6 +23,7 @@ class DonationResource extends JsonResource
             "anonymous" => $this->anonymous,
             "user_id" => $this->when(!$this->anonymous || $this->user_id == Auth::user()->id, $this->user_id),
             "user" => $this->when(!$this->anonymous, $this->user),
+            "meta" => $this->when(!$this->anonymous || $request->is("/donations"), $this->meta),
             "donate_by_me" => $this->user_id == Auth::user()->id,
             'created_at' => $this->created_at,
         ];

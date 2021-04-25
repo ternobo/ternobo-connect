@@ -21,17 +21,21 @@ class DontaionsController extends Controller
 
     public function getDonations(Request $request)
     {
-        $filters = $request->filled("filters") ? $request->filters : [
+        $filters = $request->filled("filter") ? $request->filter : [
             'sort' => "DESC",
             "my_tips" => false,
         ];
 
-        $tips = Tip::query()->orderBy("created_at", $filters['sort']);
+        $tips = Tip::query()->whereHas("user")->orderBy("created_at", $filters['sort']);
+
+        $page_id = Auth::user()->personalPage->id;
 
         if ($filters['my_tips']) {
             $tips = $tips->where("user_id", Auth::user()->id);
+        } else {
+            $tips = $tips->whereRaw("post_id in (select id from posts where page_id = ?)", [$page_id]);
+            $tips = $tips->orWhere("user_id", Auth::user()->id);
         }
-
         return new DonationCollection($tips->paginate(20));
     }
 

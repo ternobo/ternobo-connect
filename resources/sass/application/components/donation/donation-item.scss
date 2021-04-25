@@ -1,0 +1,63 @@
+.donation-item {
+    height: 72px;
+    padding: 16px 24px;
+    background: $white;
+    box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+
+    .donate-type {
+        color: $action;
+        transform: rotate(180deg);
+        margin-left: 24px;
+    }
+
+    .donate-type.received {
+        color: $success;
+        transform: rotate(0deg);
+    }
+
+    .tip-profile {
+        margin-left: 16px;
+    }
+
+    .doantion-time {
+        color: $grey;
+        font-size: 16px;
+    }
+
+    .tip-btn {
+        color: $grey;
+        background: #EEEEEE;
+        padding: 8px 24px;
+    }
+
+}
+
+.donations-header {
+    margin-bottom: 24px;
+}
+
+.tselect-filter {
+    background: #FFF;
+    border-radius: 0;
+
+
+    .title-text,
+    .tselect_item {
+        i {
+            font-family: "Material Icons Outlined" !important;
+        }
+    }
+
+    .tselect_title {
+        background: $white;
+        border-radius: 0;
+    }
+
+    .tselect-items {
+        background: $white;
+    }
+}

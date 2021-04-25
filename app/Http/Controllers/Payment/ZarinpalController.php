@@ -54,7 +54,11 @@ class ZarinpalController extends Controller
                     'amount' => $transaction->amount,
                     'user_id' => $transaction->user_id,
                     "anonymous" => $transaction->meta['anonymous'],
-                    'meta' => [],
+                    'meta' => [
+                        'ip' => $request->ip(),
+                        'transaction_id' => $transaction_id,
+                        "reference_id" => $receipt->getReferenceId(),
+                    ],
                 ]);
 
                 // You can show payment referenceId to the user.

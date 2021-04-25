@@ -15,6 +15,9 @@
 		<div class="card-body p-0">
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item headermenu-item d-flex flex-column px-2 pt-3">
+					<wire-link href="/donations" class="m-0"><i class="material-icons-outlined">savings</i> حمایت‌ها</wire-link>
+				</li>
+				<li class="list-group-item border-0 headermenu-item d-flex flex-column px-2 pt-3">
 					<wire-link href="/settings" class="m-0"><i class="material-icons-outlined">settings</i> تنظیمات و حریم خصوصی </wire-link>
 				</li>
 				<li class="list-group-item border-top-0 headermenu-item d-flex flex-column pb-3 px-2">

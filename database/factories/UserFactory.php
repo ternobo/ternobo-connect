@@ -3,8 +3,8 @@ namespace Database\Factories;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use App\Models\User;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
@@ -28,7 +28,6 @@ class UserFactory extends Factory
         return [
             "first_name" => $firstname,
             "last_name" => $lastname,
-            'name' => $firstname . " " . $lastname,
             'gender' => $gender,
             "profile" => $profile,
             "cover" => url("/img/cover.jpg"),
