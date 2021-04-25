@@ -321,3 +321,13 @@
         }
     }
 }
+
+.btn-suprelight {
+    color: $grey;
+    background: #F5F5F5;
+
+    &:disabled {
+        color: #C8C8C8;
+        cursor: not-allowed;
+    }
+}

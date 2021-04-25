@@ -70,6 +70,7 @@
         "vue-infinite-scroll": "^2.0.2",
         "vue-loading-skeleton": "^1.1.9",
         "vue-mention": "^0.1.7",
+        "vue-numeric": "^2.4.1",
         "vue-persian-datetime-picker": "^2.5.0",
         "vue-select": "^3.11.2",
         "vue-server-renderer": "^2.6.12",

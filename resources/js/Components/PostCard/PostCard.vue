@@ -3,6 +3,7 @@
 		<EmbedCodeModal :post="post" :show.sync="showEmbed"></EmbedCodeModal>
 		<new-post-modal :post="post" :show.sync="edit"></new-post-modal>
 		<likes-modal :item="post.id" :show.sync="showLikes"></likes-modal>
+		<donation-modal :post="post.id" :show.sync="showTips"></donation-modal>
 		<div class="post-header pt-0">
 			<wire-link class="publisher" :href="'/' + post.page.slug">
 				<lazy-image class="profile-sm mb-0" img-class="profile-sm" :src="post.page.profile" />
@@ -67,6 +68,7 @@ import EmbedCodeModal from "../Modals/EmbedCodeModal";
 import fa from "javascript-time-ago/locale/fa";
 import PostMenu from "../Menues/PostMenu.vue";
 import NewPostModal from "../NewPost/NewPostModal";
+import DonationModal from "./Donation/DonationModal.vue";
 
 TimeAgo.addLocale(fa);
 export default {
@@ -89,6 +91,7 @@ export default {
 		EmbedCodeModal: EmbedCodeModal,
 		PostMenu,
 		NewPostModal,
+		DonationModal,
 	},
 	methods: {
 		like() {
@@ -138,6 +141,7 @@ export default {
 			showEmbed: false,
 			showReshare: false,
 			showLikes: false,
+			showTips: false,
 
 			deleted: false,
 

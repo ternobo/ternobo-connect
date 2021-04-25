@@ -72,49 +72,9 @@
     </style>
 </head>
 
-<body onload="submitForm();">
-    <div class="spinner">
-        <div class="bounce1"></div>
-        <div class="bounce2"></div>
-        <div class="bounce3"></div>
-    </div>
-    <form class="text-center mt-2" method="{{ $method }}" action="{{ $action }}">
-        <p class="text-center">درحال انتقال به درگاه پرداخت</p>
-        <p class="text-center">
-            <span id="countdown">5</span>
-            ثانیه...
-        </p>
-        @foreach ($inputs as $name => $value)
-            <input type="hidden" name="{{ $name }}" value="{{ $value }}">
-        @endforeach
-
-        <button type="submit" class="btn btn-primary">انتقال بدون وقفه</button>
-    </form>
-    <script>
-        // Total seconds to wait
-        var seconds = 5;
-
-        function submitForm() {
-            document.forms[0].submit();
-        }
-
-        function countdown() {
-            seconds = seconds - 1;
-            if (seconds <= 0) {
-                // submit the form
-                submitForm();
-            } else {
-                // Update remaining seconds
-                document.getElementById("countdown").innerHTML = seconds;
-                // Count down using javascript
-                window.setTimeout("countdown()", 1000);
-            }
-        }
-
-        // Run countdown function
-        countdown();
-
-    </script>
+<body class="p-5 text-center">
+    <h2 class="text-danger mb-3 text-center">توکن پرداخت انتشار دهنده محتوا نامعتبر است</h2>
+    <button class="btn btn-primary" onclick="window.close()">بستن</button>
 </body>
 
 </html>

@@ -1,0 +1,82 @@
+.currency-selector {
+    background: $body-bg;
+    width: 177px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    margin-bottom: 12px;
+
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 19px;
+    /* identical to box height */
+    text-align: right;
+    color: #757575;
+
+    padding: 12px;
+
+    cursor: not-allowed;
+}
+
+
+.donate-modal-header {
+    margin-bottom: 18px;
+}
+
+.donate-modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .donate-amount-input {
+        text-align: start;
+        width: 288px;
+        margin-bottom: 24px;
+        unicode-bidi: -moz-plaintext;
+        unicode-bidi: plaintext;
+    }
+
+}
+
+.donate-payanonymouse {
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.donate-amount-badge {
+    width: 114px;
+    height: 48px;
+    padding: 12px;
+    border-radius: 20px;
+    background: $body-bg;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &:not(:last-child) {
+        margin-left: 24px;
+    }
+
+    &.active {
+        background: $light-green;
+        color: $green;
+    }
+}
+
+.payment-way {
+    width: 170px;
+
+    img {
+        width: 73px;
+        height: 16px;
+    }
+}
