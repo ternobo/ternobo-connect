@@ -77,7 +77,7 @@ class ZarinpalController extends Controller
                     ],
                 ]);
 
-                // You can show payment referenceId to the user.
+                // Show Payment Done
                 return view("payment-done");
             } catch (InvalidPaymentException $exception) {
                 return view("payment-error");

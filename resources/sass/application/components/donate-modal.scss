@@ -30,6 +30,68 @@
     margin-bottom: 18px;
 }
 
+
+.donation-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 52px;
+
+    &:first-child {
+        padding-top: 8px;
+    }
+
+    .donation-user {
+        display: flex;
+        align-items: center;
+
+        .profile-xxsm {
+            height: 36px;
+            width: 36px;
+
+            min-height: 36px;
+            min-width: 36px;
+
+            max-height: 36px;
+            max-width: 36px;
+        }
+
+        .user-profile {
+            margin-left: 16px;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 22px;
+
+            color: $dark;
+        }
+    }
+
+    .donation-amount {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 25px;
+        color: $action;
+
+        &.received {
+            color: $success;
+        }
+
+    }
+
+}
+
+.donations-list {
+    @extend .nice-scroll;
+    max-height: 164px;
+    width: 100%;
+    border-top: 2px solid #EEEEEE;
+    overflow: auto;
+    margin-top: 24px;
+}
+
 .donate-modal-body {
     display: flex;
     flex-direction: column;

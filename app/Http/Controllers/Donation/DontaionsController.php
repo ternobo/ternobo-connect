@@ -39,6 +39,12 @@ class DontaionsController extends Controller
         return new DonationCollection($tips->paginate(20));
     }
 
+    public function getPostDonations($post_id, Request $request)
+    {
+        $tips = Tip::query()->whereHas("user")->where("post_id", $post_id)->paginate(20);
+        return new DonationCollection($tips);
+    }
+
     public function settings()
     {
         $gateways = UserOption::getOption('payment_gateways', [
@@ -56,7 +62,6 @@ class DontaionsController extends Controller
 
     public function setPaymentGateways(PaymentGatewaysRequest $request)
     {
-        // dd($request->all());
         $value = [
             'zarinpal' => [
                 'merchant_id' => $request->zarinpal["merchant_id"],

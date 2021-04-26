@@ -37,6 +37,7 @@
 			</div>
 			<loading-button :loading="loading" @click.native="pay" :disabled="payAmount < 1000 || loading" class="btn btn-suprelight" style="width: 196px">پرداخت</loading-button>
 		</div>
+		<donations-list :post="post" />
 	</b-modal>
 </template>
 
@@ -44,6 +45,7 @@
 import { mapState } from "vuex";
 import ModalMixin from "../../../Mixins/Modal";
 import VueNumeric from "vue-numeric";
+import DonationsList from "./List/DonationsList.vue";
 
 export default {
 	methods: {
@@ -59,7 +61,7 @@ export default {
 			loading: false,
 		};
 	},
-	components: { VueNumeric },
+	components: { VueNumeric, DonationsList },
 	mixins: [ModalMixin],
 	computed: {
 		...mapState(["user"]),

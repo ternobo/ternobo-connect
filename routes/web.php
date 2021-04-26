@@ -280,7 +280,13 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         Route::post("/donations", "Donation\DontaionsController@getDonations");
         Route::post("/donations/settings", "Donation\DontaionsController@settings");
         Route::put("/donations/settings", "Donation\DontaionsController@setPaymentGateways");
+
+        // Get Donations list in Donate to post modal
+        Route::post("/posts/{post}/donations", "Donation\DontaionsController@getPostDonations");
+        //End
+
         // Donations End
+
     });
     //End Auth
 
