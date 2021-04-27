@@ -106,6 +106,11 @@ class Notification extends Model
                     $url = url("/posts/$notifiable_id");
                     $title = $thename . " " . "در یک محتوا از شما نام برده";
                     break;
+                case "donation":
+                    $type = "post";
+                    $notifiable_type = Post::class;
+                    $url = url("/posts/$notifiable_id");
+                    break;
             }
             if ($to != $from->id) {
                 $notification = new Notification();
