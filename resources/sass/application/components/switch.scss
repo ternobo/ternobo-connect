@@ -1,15 +1,3 @@
-$green: #56c080;
-
-*,
-*:before,
-*:after {
-    box-sizing: border-box;
-}
-
-body {
-    font-family: -apple-system, ".SFNSText-Regular", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
-}
-
 .toggle {
     cursor: pointer;
     display: inline-block;
@@ -26,10 +14,10 @@ body {
     vertical-align: middle;
     transition: all 0.25s;
 
-    &.disabled{
+    &.disabled {
         border-color: $icons;
 
-        &::before{
+        &::before {
             background: $icons;
         }
     }
