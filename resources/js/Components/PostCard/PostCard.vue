@@ -3,7 +3,7 @@
 		<EmbedCodeModal :post="post" :show.sync="showEmbed"></EmbedCodeModal>
 		<new-post-modal :post="post" :show.sync="edit"></new-post-modal>
 		<likes-modal :item="post.id" :show.sync="showLikes"></likes-modal>
-		<donation-modal :post="post.id" :show.sync="showTips" :showDonate="!checkUser(post.page.user_id)"></donation-modal>
+		<donation-modal :post="post.id" :show.sync="showTips" :showDonate="!checkUser(post.page.user_id) && post.can_tip"></donation-modal>
 		<div class="post-header pt-0">
 			<wire-link class="publisher" :href="'/' + post.page.slug">
 				<lazy-image class="profile-sm mb-0" img-class="profile-sm" :src="post.page.profile" />
@@ -29,7 +29,7 @@
 		<div class="post-footer">
 			<div class="actions" v-if="$store.state.user">
 				<div>
-					<div class="clickale text-muted clickable hover-dark" v-if="post.page.has_donate" @click="showTips = true">
+					<div class="clickale text-muted clickable hover-dark" v-if="post.page.has_donate && post.can_tip" @click="showTips = true">
 						<i class="material-icons-outlined">savings</i>
 						حمایت
 					</div>

@@ -33,8 +33,7 @@
 					<div class="donate-amount-badge" :class="{ active: amount == 20000 }" @click="amount = 20000">20,000 تومان</div>
 				</div>
 				<div class="donate-payanonymouse">
-					<input type="checkbox" id="donate-anonymous" v-model="anonymous" class="form-check-input" />
-					<label for="donate-payanonymous" class="pr-3 clickable font-14 font-weight-bold text-muted">حمایت به صورت ناشناس</label>
+					<checkbox v-model="anonymous" class="text-superlight light">حمایت به صورت ناشناس</checkbox>
 				</div>
 				<loading-button :loading="loading" @click.native="pay" :disabled="payAmount < 1000 || loading" class="btn btn-suprelight" style="width: 196px">پرداخت</loading-button>
 			</div>
@@ -48,6 +47,7 @@ import { mapState } from "vuex";
 import ModalMixin from "../../../Mixins/Modal";
 import VueNumeric from "vue-numeric";
 import DonationsList from "./List/DonationsList.vue";
+import Checkbox from "../../inputs/Checkbox.vue";
 
 export default {
 	methods: {
@@ -63,7 +63,7 @@ export default {
 			loading: false,
 		};
 	},
-	components: { VueNumeric, DonationsList },
+	components: { VueNumeric, DonationsList, Checkbox },
 	mixins: [ModalMixin],
 	computed: {
 		...mapState(["user"]),

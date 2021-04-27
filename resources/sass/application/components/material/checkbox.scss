@@ -52,6 +52,18 @@ $md-checkbox-label-padding: .75em;
         }
     }
 
+
+    &.light {
+        input[type="checkbox"] {
+            &:checked {
+                +label:before {
+                    background: $grey;
+                    border: 3px solid #E0E0E0;
+                }
+            }
+        }
+    }
+
     input[type="checkbox"] {
         outline: 0;
         visibility: hidden;
@@ -60,6 +72,7 @@ $md-checkbox-label-padding: .75em;
         display: block;
         float: right;
         font-size: inherit;
+
 
         &:checked {
             +label:before {

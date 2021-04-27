@@ -36,6 +36,7 @@ class Post extends Model
         'category_id',
         'medias',
         "show",
+        "can_tip",
     ];
 
     protected $with = ["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"];

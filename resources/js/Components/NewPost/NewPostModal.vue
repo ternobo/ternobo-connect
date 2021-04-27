@@ -8,6 +8,15 @@
 						<strong>{{ $store.state.user.name }}</strong>
 					</div>
 					<div class="categoryandtype">
+						<div class="ml-2 p-0 col-lg-7">
+							<div class="can-tip-post-check clickable mr-3" @click="canDonate = !canDonate">
+								<div>
+									<i class="material-icons-outlined font-20 ml-1">savings</i>
+									حمایت مالی
+								</div>
+								<checkbox v-model="canDonate" class="mt-1 m-0 text-superlight light"></checkbox>
+							</div>
+						</div>
 						<div class="ml-1 p-0 col-lg-7">
 							<tselect v-on:new-item="newCategory" :items="categories" value-option="name" :showNewItem="true" v-model="category" direction="rtl"> <i class="material-icons-outlined">layers</i> دسته‌بندی </tselect>
 						</div>
@@ -31,6 +40,7 @@ import Slider from "./Slides/Slider.vue";
 
 import uuidv4 from "uuid";
 import isUUID from "is-uuid";
+import Checkbox from "../inputs/Checkbox.vue";
 
 export default {
 	props: {
@@ -118,7 +128,7 @@ export default {
 			}
 
 			formData.append("draft", draft ? "1" : "0");
-
+			formData.append("canDonate", this.canDonate ? "1" : "0");
 			let url = this.post != null ? `/posts/${this.post.id}` : "/posts";
 
 			let requestConfig = {
@@ -172,12 +182,15 @@ export default {
 			loadingDraft: false,
 			deletedSlides: [],
 			content: [{ id: uuidv4(), content: [], icon: "more_horiz", active: true }],
+
+			canDonate: false,
 		};
 	},
 	components: {
 		TagInput,
 		FileInput,
 		Slider,
+		Checkbox,
 	},
 	mixins: [ModalMixin],
 	name: "NewPostModal",

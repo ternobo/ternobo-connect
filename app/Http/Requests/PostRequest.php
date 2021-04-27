@@ -52,6 +52,7 @@ class PostRequest extends FormRequest
             "slides.*.media" => ["mimes:jpeg,png,jpg,gif"],
             "deletedSlides" => ["json"],
             "draft" => [Rule::in(['1', '0'])],
+            "canDonate" => [Rule::in(['1', '0'])],
         ];
     }
 }

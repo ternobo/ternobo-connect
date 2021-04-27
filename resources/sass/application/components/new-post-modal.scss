@@ -38,6 +38,25 @@
         opacity: 1;
     }
 
+    .can-tip-post-check {
+        display: flex;
+        align-items: center;
+        width: 170px;
+        border: 2px solid $icons;
+        height: 40px;
+
+        >div:first-child {
+            display: flex;
+            align-items: center;
+        }
+
+        font-weight: 600;
+        font-size: 12px;
+        justify-content: space-between;
+
+        padding: 10px 12px;
+    }
+
     .selections {
         .categoryandtype {
             display: flex;

@@ -66,6 +66,7 @@ class PostController extends Controller
             'medias' => [],
             'show' => "public",
             "category_id" => $category,
+            'can_tip' => $request->canDonate,
         ]);
 
         foreach ($slides as $slide_input) {
@@ -337,11 +338,10 @@ class PostController extends Controller
 
         $deletedSlides = [];
 
-        if ($draft) {
-            $post->update([
-                'type' => "draft_post",
-            ]);
-        }
+        $post->update([
+            'type' => $draft ? "draft_post" : "post",
+            'can_tip' => $request->canDonate,
+        ]);
 
         if ($request->filled("deletedSlides")) {
             $deletedSlides = json_decode($request->deletedSlides);
