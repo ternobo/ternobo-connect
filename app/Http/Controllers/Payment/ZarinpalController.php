@@ -21,7 +21,16 @@ class ZarinpalController extends Controller
     public function tipPost(IRTipPostRequest $request)
     {
 
-        $gateways = UserOption::getOption("payment_gateways");
+        $gateways = UserOption::getOption("payment_gateways", [
+            'paypal' => [
+                'email' => '',
+                'enabled' => false,
+            ],
+            'zarinpal' => [
+                'merchant_id' => '',
+                'enabled' => false,
+            ],
+        ]);
 
         if ($gateways['zarinpal']['enabled']) {
 

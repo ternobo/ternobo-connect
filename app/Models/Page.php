@@ -203,6 +203,19 @@ class Page extends Model
         // get the original array to be displayed
         $data = parent::toArray();
 
+        $gateways = UserOption::getOption("payment_gateways", [
+            'paypal' => [
+                'email' => '',
+                'enabled' => false,
+            ],
+            'zarinpal' => [
+                'merchant_id' => '',
+                'enabled' => false,
+            ],
+        ], $data['user_id']);
+
+        $data['has_donate'] = $gateways['zarinpal']['enabled'];
+
         $user = User::query()->where("id", $data['user_id'])->first();
         if ($user instanceof User) {
             $data['is_verified'] = $user->is_verified;

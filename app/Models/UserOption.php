@@ -21,9 +21,12 @@ class UserOption extends Model
 
     use HasFactory;
 
-    public static function getOption($key, $default = null)
+    public static function getOption($key, $default = null, $user = null)
     {
-        $value = UserOption::query()->where("user_id", Auth::user()->id)->where("key", $key)->first();
+        if ($user == null) {
+            $user = Auth::user()->id;
+        }
+        $value = UserOption::query()->where("user_id", $user)->where("key", $key)->first();
         return $value != null ? $value->value : $default;
     }
 

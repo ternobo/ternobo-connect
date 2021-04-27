@@ -28,9 +28,11 @@
 
 		<div class="post-footer">
 			<div class="actions" v-if="$store.state.user">
-				<div class="clickale text-muted clickable hover-dark" @click="showTips = true">
-					<i class="material-icons-outlined">savings</i>
-					حمایت
+				<div>
+					<div class="clickale text-muted clickable hover-dark" v-if="post.page.has_donate" @click="showTips = true">
+						<i class="material-icons-outlined">savings</i>
+						حمایت
+					</div>
 				</div>
 				<div class="buttons">
 					<i class="material-icons bookmark-icon clickale text-muted clickable hover-dark" @click="bookmark">{{ bookmarked ? "bookmark" : "bookmark_border" }}</i>
