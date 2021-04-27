@@ -131,6 +131,7 @@ class PostController extends Controller
         SocialMediaTools::callMentions($mentions, $post->id);
         $post->tags = $tags;
         $post->save();
+        $user->personalPage->addAction("post", $post->id);
         return response()->json(array("result" => true));
     }
 
