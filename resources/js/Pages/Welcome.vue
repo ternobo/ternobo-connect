@@ -26,8 +26,6 @@
 				</wire-link>
 
 				<button v-if="!$store.state.user" class="btn btn-transparent font-14 py-1" :class="{ 'text-dark': !hasBG }" @click="showLogin = !showLogin">ورود</button>
-				<span v-if="!$store.state.user" class="splitor-line"></span>
-				<button v-if="!$store.state.user" class="btn btn-transparent font-14 py-1" :class="{ 'text-dark': !hasBG }" @click="showSignup = !showSignup">ثبت‌نام</button>
 			</div>
 		</div>
 		<div class="search-section" :class="{ noBG: !hasBG }">

@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\FollowMiddlware;
+use App\Http\Middleware\InviteLinkMiddleware;
 use App\Http\Middleware\LocaleMiddleware;
 use App\Http\Middleware\WebAdminMiddleware;
 use Illuminate\Support\Facades\Broadcast;
@@ -50,13 +51,15 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         Route::post('login', 'Auth\LoginController@login');
         Route::post('verify-tfa', 'Auth\LoginController@twoFactorVerify');
 
-        Route::post('logout', 'Auth\LoginController@logout');
-        Route::post('verification', 'Auth\UsersController@sendVcode');
-        Route::post('verifycode', 'Auth\UsersController@verifyCode');
-        Route::post("signup", "Auth\UsersController@signupUser");
-        Route::post("setpassword", "Auth\UsersController@savePassword");
+        Route::post('verification', 'Auth\UsersController@sendVcode')->middleware(InviteLinkMiddleware::class);
+        Route::post('verifycode', 'Auth\UsersController@verifyCode')->middleware(InviteLinkMiddleware::class);
+        Route::post("signup", "Auth\UsersController@signupUser")->middleware(InviteLinkMiddleware::class);
+        Route::post("setpassword", "Auth\UsersController@savePassword")->middleware(InviteLinkMiddleware::class);
 
         Route::group(['auth'], function () {
+
+            Route::post('logout', 'Auth\LoginController@logout');
+
             /** Username Start */
             Route::post('/suggest-username', "Auth\SettingsController@suggest");
             Route::post('/set-username', "Auth\SettingsController@set");
