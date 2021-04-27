@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IRTipPostRequest;
+use App\Models\Notification;
 use App\Models\Post;
 use App\Models\Tip;
 use App\Models\Transaction;
@@ -65,6 +66,8 @@ class ZarinpalController extends Controller
                 $transaction->success = true;
                 $transaction->save();
 
+                $post = Post::query()->find($transaction->meta['post_id']);
+
                 $tip = Tip::create([
                     'post_id' => $transaction->meta['post_id'],
                     'amount' => $transaction->amount,
@@ -76,6 +79,8 @@ class ZarinpalController extends Controller
                         "reference_id" => $receipt->getReferenceId(),
                     ],
                 ]);
+
+                Notification::sendNotification("donation", $transaction->meta['post_id'], $post->page_id, $tip->id);
 
                 // Show Payment Done
                 return view("payment-done");

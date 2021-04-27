@@ -3,7 +3,7 @@
 		<EmbedCodeModal :post="post" :show.sync="showEmbed"></EmbedCodeModal>
 		<new-post-modal :post="post" :show.sync="edit"></new-post-modal>
 		<likes-modal :item="post.id" :show.sync="showLikes"></likes-modal>
-		<donation-modal :post="post.id" :show.sync="showTips"></donation-modal>
+		<donation-modal :post="post.id" :show.sync="showTips" :showDonate="!checkUser(post.page.user_id)"></donation-modal>
 		<div class="post-header pt-0">
 			<wire-link class="publisher" :href="'/' + post.page.slug">
 				<lazy-image class="profile-sm mb-0" img-class="profile-sm" :src="post.page.profile" />
