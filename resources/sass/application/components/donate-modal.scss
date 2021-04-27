@@ -83,14 +83,6 @@
 
 }
 
-.donations-list {
-    @extend .nice-scroll;
-    max-height: 164px;
-    width: 100%;
-    border-top: 2px solid #EEEEEE;
-    overflow: auto;
-    margin-top: 24px;
-}
 
 .donate-modal-body {
     display: flex;
@@ -105,6 +97,19 @@
         unicode-bidi: plaintext;
     }
 
+}
+
+
+.donation-modal{
+
+.donations-list {
+    @extend .nice-scroll;
+    max-height: 164px;
+    width: 100%;
+    border-top: 2px solid #EEEEEE;
+    overflow: auto;
+    margin-top: 24px;
+}
 }
 
 .donate-payanonymouse {

@@ -1,5 +1,5 @@
 <template>
-	<b-modal v-model="showModal" hide-footer title="حمایت از این محتوا" size="md" :centered="true">
+	<b-modal v-model="showModal" hide-footer title="حمایت از این محتوا" body-class="donation-modal" size="md" :centered="true">
 		<div class="d-flex justify-content-between donate-modal-header">
 			<div class="d-flex align-items-center">
 				<lazy-image :src="user.profile" class="profile-sm mb-0 ml-2" imgClass="profile-sm" />
@@ -50,7 +50,7 @@ import DonationsList from "./List/DonationsList.vue";
 export default {
 	methods: {
 		pay() {
-			window.open(`/zarinpal/pay?post_id=${this.post}&amount=${this.payAmount}&anonymous=${this.anonymous ? 1 : 0}`, "Payment", "height=700,width:700");
+			window.open(`/zarinpal/pay?post_id=${this.post}&amount=${this.payAmount}&anonymous=${this.anonymous ? 1 : 0}`, "Payment");
 		},
 	},
 	data() {

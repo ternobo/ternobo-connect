@@ -28,26 +28,28 @@
 
 		<div class="post-footer">
 			<div class="actions" v-if="$store.state.user">
-				<div>
-					<div @click="showLikes = true" class="d-flex post-likes-text text-muted clickable" v-if="post.mutual_likes != null && post.mutual_likes.length > 0">
-						<span class="ml-1">پسندیده شده توسط</span>
-						<wire-link v-if="post.mutual_likes[0]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
-							<strong class="text-light">{{ post.mutual_likes[0].page.name }}</strong>
-						</wire-link>
-						<div v-if="post.mutual_likes.length > 1">
-							<span class="mr-1">و</span>
-							<wire-link v-if="post.mutual_likes[1]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
-								<strong class="text-light">{{ post.mutual_likes[1].page.name }}</strong>
-							</wire-link>
-						</div>
-						<span class="mx-1" v-if="post.mutual_likes.length > 2"> و ... </span>
-					</div>
+				<div class="clickale text-muted clickable hover-dark" @click="showTips = true">
+					<i class="material-icons-outlined">savings</i>
+					حمایت
 				</div>
 				<div class="buttons">
 					<i class="material-icons bookmark-icon clickale text-muted clickable hover-dark" @click="bookmark">{{ bookmarked ? "bookmark" : "bookmark_border" }}</i>
 					<i :class="{ 'material-icons-outlined': !openComment, 'material-icons': openComment }" v-if="hasComment" v-on:click="openComment = !openComment">comment</i>
 					<i class="material-icons like" v-if="!checkUser(post.page.user_id)" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
 				</div>
+			</div>
+			<div @click="showLikes = true" class="d-flex post-likes-text text-muted clickable" v-if="post.mutual_likes != null && post.mutual_likes.length > 0">
+				<span class="ml-1">پسندیده شده توسط</span>
+				<wire-link v-if="post.mutual_likes[0]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
+					<strong class="text-light">{{ post.mutual_likes[0].page.name }}</strong>
+				</wire-link>
+				<div v-if="post.mutual_likes.length > 1">
+					<span class="mr-1">و</span>
+					<wire-link v-if="post.mutual_likes[1]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
+						<strong class="text-light">{{ post.mutual_likes[1].page.name }}</strong>
+					</wire-link>
+				</div>
+				<span class="mx-1" v-if="post.mutual_likes.length > 2"> و ... </span>
 			</div>
 		</div>
 

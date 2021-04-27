@@ -1,21 +1,23 @@
 <template>
-	<div class="donations-list">
+	<div class="donations-list" :class="{ 'd-flex aling-items-center p-3 justify-content-center': loading }" v-if="loading || donations.length > 0">
+		<loading-spinner v-if="loading"></loading-spinner>
 		<donation-item v-for="donation in donations" :key="`post_donation_item_${donation.id}`" :tip="donation" />
 		<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>
 	</div>
 </template>
 
 <script>
+import LoadingSpinner from "../../../LoadingSpinner.vue";
 import DonationItem from "./DonationItem.vue";
 export default {
-	components: { DonationItem },
+	components: { DonationItem, LoadingSpinner },
 	data() {
 		return {
 			loading: false,
 			loading_next_page: false,
 
 			donations: [],
-			next_page_url: "",
+			next_page_url: null,
 		};
 	},
 	methods: {

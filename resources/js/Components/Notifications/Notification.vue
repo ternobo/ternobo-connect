@@ -5,6 +5,7 @@
 <script>
 import CommentLikeNotification from "./ComentLikeNotification";
 import CommentNotification from "./CommentNotification";
+import DonateNotification from "./DonateNotification.vue";
 import FollowNotification from "./FollowNotification";
 import LikeNotification from "./LikeNotification";
 import MentionNotification from "./MentionNotification";
@@ -39,6 +40,8 @@ export default {
 			case "mention":
 				this.component = MentionNotification;
 				break;
+			case "donation":
+				this.component = DonateNotification;
 		}
 	},
 	name: "Notification",
