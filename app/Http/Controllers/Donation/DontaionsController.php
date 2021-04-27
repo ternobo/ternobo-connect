@@ -45,6 +45,22 @@ class DontaionsController extends Controller
         return new DonationCollection($tips);
     }
 
+    public function canEnableDonate()
+    {
+        $gateways = UserOption::getOption("payment_gateways", [
+            'paypal' => [
+                'email' => '',
+                'enabled' => false,
+            ],
+            'zarinpal' => [
+                'merchant_id' => '',
+                'enabled' => false,
+            ],
+        ]);
+
+        return response()->json(['result' => $gateways['zarinpal']['enabled']]);
+    }
+
     public function settings()
     {
         $gateways = UserOption::getOption('payment_gateways', [

@@ -1,35 +1,34 @@
 <template>
-	<b-modal v-if="$store.state.user != null" v-model="showModal" @show="shown" no-close-on-esc no-close-on-backdrop hide-footer no modal-class="new-post-modal" size="md" title="تولید محتوای تازه" :centered="true">
-		<div action="/posts" data-ajax method="POST" data-reload="1" enctype="multipart/form-data" class="w-100">
-			<div class="new-post position-relative">
-				<div class="selections">
-					<div class="d-flex align-items-center">
-						<lazy-image :src="$store.state.user.profile" class="profile-sm mb-0 ml-2" img-class="profile-sm" loading="lazy" />
-						<strong>{{ $store.state.user.name }}</strong>
-					</div>
-					<div class="categoryandtype">
-						<div class="ml-2 p-0 col-lg-7">
-							<div class="can-tip-post-check clickable mr-3" @click="canDonate = !canDonate">
+	<div>
+		<b-modal v-if="user != null" v-model="showModal" @show="shown" no-close-on-esc no-close-on-backdrop hide-footer no modal-class="new-post-modal" size="md" title="تولید محتوای تازه" :centered="true">
+			<div action="/posts" data-ajax method="POST" data-reload="1" enctype="multipart/form-data" class="w-100">
+				<div class="new-post position-relative">
+					<div class="selections">
+						<div class="d-flex align-items-center">
+							<lazy-image :src="user.profile" class="profile-sm mb-0 ml-2" img-class="profile-sm" loading="lazy" />
+							<strong>{{ user.name }}</strong>
+						</div>
+						<div class="categoryandtype">
+							<div class="can-tip-post-check clickable" @click="canDonate = !canDonate">
 								<div>
 									<i class="material-icons-outlined font-20 ml-1">savings</i>
 									حمایت مالی
 								</div>
-								<checkbox v-model="canDonate" class="mt-1 m-0 text-superlight light"></checkbox>
+								<loading-spinner v-if="loadingCanDonate" style="height: 12px; width: 12px; border-width: 1px"></loading-spinner>
+								<checkbox v-else v-model="canDonate" :status="canDonate" class="mt-1 m-0 text-superlight light"></checkbox>
 							</div>
-						</div>
-						<div class="ml-1 p-0 col-lg-7">
 							<tselect v-on:new-item="newCategory" :items="categories" value-option="name" :showNewItem="true" v-model="category" direction="rtl"> <i class="material-icons-outlined">layers</i> دسته‌بندی </tselect>
 						</div>
 					</div>
-				</div>
-				<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
-				<div class="d-flex justify-content-center align-items-center">
-					<loading-button :loading="loadingDraft" class="btn btn-transparent button-transparent text-muted font-14" @click.native="submitPost(true)"> پیش نویس </loading-button>
-					<loading-button :loading="loading" class="btn btn-primary font-14" @click.native="submitPost(false)"> انتشار </loading-button>
+					<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
+					<div class="d-flex justify-content-center align-items-center">
+						<loading-button :loading="loadingDraft" class="btn btn-transparent button-transparent text-muted font-14" @click.native="submitPost(true)"> پیش نویس </loading-button>
+						<loading-button :loading="loading" class="btn btn-primary font-14" @click.native="submitPost(false)"> انتشار </loading-button>
+					</div>
 				</div>
 			</div>
-		</div>
-	</b-modal>
+		</b-modal>
+	</div>
 </template>
 
 <script>
@@ -41,6 +40,8 @@ import Slider from "./Slides/Slider.vue";
 import uuidv4 from "uuid";
 import isUUID from "is-uuid";
 import Checkbox from "../inputs/Checkbox.vue";
+import { mapState } from "vuex";
+import LoadingSpinner from "../LoadingSpinner.vue";
 
 export default {
 	props: {
@@ -166,6 +167,39 @@ export default {
 				this.leftCharacter = 2500 - newValue.length;
 			}
 		},
+		canDonate(newValue) {
+			if (newValue) {
+				this.loadingCanDonate = true;
+				axios
+					.post("/can-donate")
+					.then((response) => {
+						if (!response.data.result) {
+							this.canDonate = false;
+							this.$bvModal
+								.msgBoxConfirm("درحال حاضر هیچ درگاه متصل به حساب کاربری شما وجود ندارد. جهت فعال‌سازی حمایت مالی برای محتوای خود نسبت به افزودن درگاه پرداخت اقدام کنید.", {
+									title: "فعال‌سازی درگاه پرداخت",
+									cancelVariant: "transparent text-muted",
+									cancelTitle: "رد کردن",
+									okTitle: "فعال‌سازی",
+									centered: true,
+									hideBackdrop: false,
+									hideHeaderClose: false,
+								})
+								.then((value) => {
+									if (value) {
+										window.open("/donations");
+									}
+								});
+						}
+					})
+					.catch((err) => {
+						console.log(err);
+						this.toast("خظا در برقرار ارتباط");
+						this.canDonate = false;
+					})
+					.then(() => (this.loadingCanDonate = false));
+			}
+		},
 	},
 	mounted() {
 		if (this.$store.state.user) {
@@ -173,6 +207,9 @@ export default {
 				this.categories = this.$store.state.shared.currentPage.categories;
 			}
 		}
+	},
+	computed: {
+		...mapState(["user", "shared"]),
 	},
 	data() {
 		return {
@@ -184,6 +221,7 @@ export default {
 			content: [{ id: uuidv4(), content: [], icon: "more_horiz", active: true }],
 
 			canDonate: false,
+			loadingCanDonate: false,
 		};
 	},
 	components: {
@@ -191,6 +229,7 @@ export default {
 		FileInput,
 		Slider,
 		Checkbox,
+		LoadingSpinner,
 	},
 	mixins: [ModalMixin],
 	name: "NewPostModal",

@@ -7,6 +7,7 @@ use App\Models\Notification;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\Skill;
+use App\Models\UserOption;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -54,6 +55,23 @@ class AppServiceProvider extends ServiceProvider
                             // })->count();
                         }
                         return 0;
+                    },
+                    "canDonate" => function () {
+                        if (Auth::check()) {
+                            $gateways = UserOption::getOption("payment_gateways", [
+                                'paypal' => [
+                                    'email' => '',
+                                    'enabled' => false,
+                                ],
+                                'zarinpal' => [
+                                    'merchant_id' => '',
+                                    'enabled' => false,
+                                ],
+                            ], Auth::user()->id);
+
+                            return $gateways['zarinpal']['enabled'];
+                        }
+                        return false;
                     },
                     'notifications_count' => function () {
                         if (Auth::check()) {

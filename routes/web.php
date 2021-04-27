@@ -122,6 +122,8 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         Route::middleware([FollowMiddlware::class, Authenticate::class])->group(function () {
             Route::get('/feed', 'HomeController@index')->name('home');
 
+            Route::post("/can-donate", "Donation\DontaionsController@canEnableDonate");
+
             // Seen Post
             Route::post("/seenPost", "PostController@seenPost");
 
