@@ -187,7 +187,7 @@ export default {
 								})
 								.then((value) => {
 									if (value) {
-										window.open("/donations");
+										window.open("/donations?tab=settings");
 									}
 								});
 						}

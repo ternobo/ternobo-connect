@@ -28,6 +28,7 @@
 
 .donate-modal-header {
     margin-bottom: 18px;
+    align-items: flex-start;
 }
 
 
@@ -135,19 +136,24 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    white-space: nowrap;
 
     &:not(:last-child) {
         margin-left: 24px;
     }
 
     &.active {
-        background: $light-green;
+        background: $light-success;
         color: $green;
+
     }
 }
 
 .payment-way {
     width: 170px;
+    display: flex;
+    align-items: center;
+
 
     img {
         width: 73px;

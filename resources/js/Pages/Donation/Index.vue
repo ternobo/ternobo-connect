@@ -1,6 +1,6 @@
 <template>
 	<base-layout>
-		<div class="sidebar-right sticky-settings">
+		<div class="sidebar-right sticky-settings pl-0">
 			<div class="card settings-card p-0">
 				<div class="settings-item" :class="{ active: tab == 'donations' }" @click="tab = 'donations'">
 					<i class="material-icons-outlined ml-2">savings</i>
@@ -21,6 +21,10 @@
 <script>
 import AppLayout from "../../Layouts/AppLayout.vue";
 export default {
+	mounted() {
+		let params = new URLSearchParams(window.location.search);
+		this.tab = params.get("tab") != null ? params.get("tab") : "donations";
+	},
 	data() {
 		return {
 			tab: "donations",

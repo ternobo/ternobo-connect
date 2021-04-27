@@ -1,9 +1,9 @@
 <template>
 	<b-modal v-model="showModal" hide-footer title="حمایت از این محتوا" body-class="donation-modal" size="md" :centered="true">
-		<div v-if="showDonate">
+		<div>
 			<div class="d-flex justify-content-between donate-modal-header">
 				<div class="d-flex align-items-center">
-					<lazy-image :src="user.profile" class="profile-sm mb-0 ml-2" imgClass="profile-sm" />
+					<lazy-image :src="user.profile" class="profile-xsm mb-0 ml-2" imgClass="profile-xsm" />
 					<strong>{{ user.name }}</strong>
 				</div>
 				<div>
@@ -12,11 +12,9 @@
 							<img src="/images/iran-flag.png" alt="iran" width="24" />
 							<span class="mr-2">تومان ایران</span>
 						</div>
-
-						<i class="material-icons">keyboard_arrow_down</i>
 					</div>
 					<div class="d-flex justify-content-between payment-way">
-						<span>پرداخت با: </span>
+						<span>درگاه: </span>
 
 						<img src="/images/zarinpal-pay-logo.png" alt="زرین‌پال" width="73" />
 					</div>
@@ -25,17 +23,19 @@
 
 			<div class="donate-modal-body">
 				<div>
-					<input v-model="amount" class="form-control donate-amount-input" placeholder="مبلغ دلخواه (حداقل ۱,۰۰۰ تومان)" />
+					<input v-numericOnly v-model="amount" class="form-control donate-amount-input" placeholder="مبلغ دلخواه (حداقل ۱,۰۰۰ تومان)" />
 				</div>
 				<div class="d-flex">
 					<div class="donate-amount-badge" :class="{ active: amount == 100000 }" @click="amount = 100000">100,000 تومان</div>
 					<div class="donate-amount-badge" :class="{ active: amount == 50000 }" @click="amount = 50000">50,000 تومان</div>
 					<div class="donate-amount-badge" :class="{ active: amount == 20000 }" @click="amount = 20000">20,000 تومان</div>
 				</div>
-				<div class="donate-payanonymouse">
-					<checkbox v-model="anonymous" class="text-superlight light">حمایت به صورت ناشناس</checkbox>
+				<div class="d-flex align-items-center">
+					<div class="donate-payanonymouse ml-3">
+						<checkbox v-model="anonymous" class="text-superlight light">حمایت به صورت ناشناس</checkbox>
+					</div>
+					<loading-button :loading="loading" @click.native="pay" :disabled="payAmount < 1000 || loading" class="btn btn-suprelight" style="width: 196px">پرداخت</loading-button>
 				</div>
-				<loading-button :loading="loading" @click.native="pay" :disabled="payAmount < 1000 || loading" class="btn btn-suprelight" style="width: 196px">پرداخت</loading-button>
 			</div>
 		</div>
 		<donations-list :class="{ 'cant-donate': !showDonate }" :post="post" />
