@@ -3,6 +3,9 @@
 @import '~bootstrap-vue';
 
 
+:root {
+    font-size: 16px;
+}
 
 ::-moz-selection {
     color: $dark;
@@ -401,10 +404,6 @@ img {
 @import "./components/form-control";
 @import "./components/TProgress";
 
-.container {
-    max-width: 1580px !important;
-}
-
 .profileimage {
     width: 64px;
     height: 64px;
@@ -492,62 +491,6 @@ img {
     display: none;
 }
 
-#app {
-    max-width: 1295px;
-    margin: auto;
-    min-height: calc(100vh - 80px);
-
-    @media screen and (min-width: 991px) {
-        .content-container-settings {
-            padding-right: 30px;
-        }
-
-        .content-container-settings {
-            max-width: 78.4%;
-            flex: 78.4%;
-        }
-
-        .content-container-profile {
-            padding-left: 30px;
-        }
-
-        .content-container-right {
-            padding-left: 30px;
-        }
-
-
-        .content-container-profile {
-            max-width: 70.7%;
-            flex: 70.7%;
-        }
-
-        .content-container-full {
-            max-width: 78.4%;
-            flex: 78.4%;
-        }
-
-        .content-container-right {
-            max-width: 70.7%;
-            flex: 70.7%;
-        }
-
-        .sidebar-right {
-            max-width: 21.6%;
-            flex: 21.6%;
-        }
-
-
-        .content-container {
-            max-width: 49.1%;
-            flex: 49.1%;
-        }
-
-        .sidebar-left {
-            max-width: 29.3%;
-            flex: 29.3%;
-        }
-    }
-}
 
 .card,
 .feedback-card {

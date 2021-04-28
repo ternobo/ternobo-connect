@@ -1,7 +1,7 @@
 <template>
 	<base-layout>
-		<div class="sidebar-right sticky-settings pl-0">
-			<div class="card settings-card p-0">
+		<div class="sidebar-right sticky-settings">
+			<div class="card settings-card sticky-aside">
 				<div class="settings-item" :class="{ active: tab == 'donations' }" @click="tab = 'donations'">
 					<i class="material-icons-outlined ml-2">savings</i>
 					<span>حمایت‌ها</span>

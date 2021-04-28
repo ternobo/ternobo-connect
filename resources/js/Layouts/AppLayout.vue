@@ -1,7 +1,7 @@
 <template>
-	<div id="app">
+	<div id="app" class="container">
 		<AppHeader></AppHeader>
-		<div class="px-3" :class="{ 'has-bnav': !$root.isDesktop }">
+		<div :class="{ 'has-bnav': !$root.isDesktop }">
 			<transition mode="out-in" name="fade">
 				<slot></slot>
 			</transition>

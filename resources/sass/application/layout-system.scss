@@ -6,13 +6,14 @@
  .container-xl,
  .container-xxl {
      width: 100%;
-     padding-right: 1rem;
-     padding-left: 1rem;
+     padding-right: 1.5rem;
+     padding-left: 1.5rem;
      margin-right: auto;
      margin-left: auto;
  }
 
  @media (min-width: 576px) {
+
      .container,
      .container-sm {
          max-width: 540px;
@@ -62,7 +63,7 @@
  }
 
  .row {
-     --bs-gutter-x: 1.5rem;
+     --bs-gutter-x: 24px;
      --bs-gutter-y: 0;
      display: flex;
      flex-wrap: wrap;
@@ -4992,5 +4993,50 @@
 
      .d-print-none {
          display: none !important;
+     }
+ }
+
+
+ #app {
+     max-width: 1188px;
+     margin: auto;
+     min-height: calc(100vh - 80px);
+
+     @media screen and (min-width: 991px) {
+         .content-container-settings {
+             max-width: 79.467354%;
+             flex: 79.467354%;
+         }
+
+         .content-container-profile {
+             max-width: 70.0171821%;
+             flex: 70.0171821%;
+         }
+
+         .content-container-full {
+             max-width: 79.467354%;
+             flex: 79.467354%;
+         }
+
+         .content-container-right {
+             max-width: 70.19%;
+             flex: 70.19%;
+         }
+
+         .sidebar-right {
+             max-width: 20.532646%;
+             flex: 20.532646%;
+         }
+
+
+         .content-container {
+             max-width: 49.4845361%;
+             flex: 49.4845361%;
+         }
+
+         .sidebar-left {
+             max-width: 29.9828179%;
+             flex: 29.9828179%;
+         }
      }
  }
