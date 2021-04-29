@@ -41,6 +41,11 @@
             vertical-align: middle;
             font-size: 20px;
             color: $icons;
+
+            &.invite-link {
+                transform: rotate(-15deg);
+                color: $action;
+            }
         }
     }
 

@@ -1,0 +1,52 @@
+.invite-links-header {
+    margin-bottom: 40px;
+}
+
+.invite-links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    >.invite {
+        padding: 12px 10px;
+        width: 100%;
+        max-width: 176px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        >*:not(:last-child) {
+            margin-bottom: 12px;
+        }
+    }
+
+    .invite-icon {
+        font-size: 40px;
+        color: $action;
+        transform: rotate(-15deg);
+    }
+
+    margin-bottom: 40px;
+}
+
+.invite-description {
+    font-size: 14px;
+    line-height: 2;
+
+    ul {
+        list-style: none;
+        padding-right: 0;
+
+        li::before {
+            content: " ";
+            background: $icons;
+            font-size: 24px;
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin-left: 8px;
+            border-radius: 50%;
+
+        }
+    }
+}

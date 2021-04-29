@@ -17,6 +17,10 @@
 				<i class="navheader-icon" :class="{ unread: $store.state.shared.notifications_count > 0 && $store.state.url != '/notifications' }">{{ $store.state.url === "/notifications" ? "notifications" : "notifications_none" }}</i>
 				<div class="navheader-text">اعلان‌ها</div>
 			</wire-link>
+			<wire-link :class="{ active: $store.state.url === '/invite' }" href="/invite">
+				<i class="navheader-icon invite-link">{{ $store.state.url === "/invite" ? "confirmation_number" : "confirmation_number" }}</i>
+				<div class="navheader-text">دعوت‌ها</div>
+			</wire-link>
 			<wire-link :class="{ active: $store.state.url === '/bookmarks' }" href="/bookmarks">
 				<i class="navheader-icon">bookmarks</i>
 				<div class="navheader-text">نشان‌ها</div>

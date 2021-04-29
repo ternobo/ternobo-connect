@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
+
+class InviteLink extends Model
+{
+    use HasFactory;
+    use SoftDeletes;
+
+    protected $fillable = [
+        'code',
+        'user_id',
+    ];
+
+    public static function createLink($user_id)
+    {
+        return InviteLink::create([
+            'user_id' => $user_id,
+            'code' => Str::uuid(),
+        ]);
+    }
+
+}

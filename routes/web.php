@@ -289,8 +289,9 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         // Get Donations list in Donate to post modal
         Route::post("/posts/{post}/donations", "Donation\DontaionsController@getPostDonations");
         //End
-
         // Donations End
+
+        Route::get("/invite", "InviteLinksController@index");
 
     });
     //End Auth
