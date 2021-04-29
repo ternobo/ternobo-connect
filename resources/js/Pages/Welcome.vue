@@ -1,5 +1,5 @@
 <template>
-	<div class="container-fluid">
+	<div class="container-fluid px-3">
 		<LoginModal :show.sync="showLogin"></LoginModal>
 		<LawsModal :show.sync="showLaws"></LawsModal>
 		<SignupModal :show.sync="showSignup"></SignupModal>
