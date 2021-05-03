@@ -1,0 +1,109 @@
+.register-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-width: $breakpoint;
+    margin: auto;
+
+    .register-header {
+        background-color: $body-bg;
+        position: relative;
+        display: flex;
+        height: 96px;
+        padding: 16px;
+        align-items: center;
+        justify-content: space-between;
+
+        @media screen and (max-width: $sm-size) {
+            height: 56px;
+        }
+
+        &::after {
+            content: " ";
+            position: absolute;
+            width: calc(100% - 32px);
+            bottom: 0;
+            height: 2px;
+            background: #E0E0E0;
+        }
+
+    }
+
+    .register-content {
+        display: flex;
+        flex: 1 1 auto;
+        padding: 16px;
+    }
+
+    .register-steps {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+
+
+
+        .invite-step {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+
+            >* {
+
+                margin: 12px 0;
+            }
+        }
+    }
+
+    .password-tips {
+        text-align: right;
+        margin: auto;
+        margin-top: 40px;
+    }
+
+    .profile-register {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+
+        min-height: 100px;
+        max-height: 100px;
+        min-width: 100px;
+        max-width: 100px;
+    }
+
+    .upload-profile-btn {
+        padding: 8px 20px;
+        color: $icons;
+        border: 2px solid $icons;
+        transition: 0.3s all;
+        width: 129px;
+        border-radius: 16px;
+        margin-top: 24px;
+        height: 48px;
+
+        &:hover {
+            color: $grey;
+            border-color: $grey;
+        }
+    }
+
+    .followed-peoplenum {
+        color: $dark;
+        background: $white;
+        border-radius: 10px;
+        padding: 8px 12px;
+        line-height: 1.5;
+        height: 32px;
+        display: flex;
+        align-items: center;
+
+        @media screen and(max-width:$sm-size) {
+            font-weight: 600;
+            font-size: 12px;
+        }
+    }
+}

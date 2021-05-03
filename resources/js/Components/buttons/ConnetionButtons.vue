@@ -12,9 +12,11 @@ export default {
 	methods: {
 		onFollowed() {
 			this.followed = true;
+			this.$emit("followed");
 		},
 		onUnfollowed() {
 			this.followed = false;
+			this.$emit("unfollowed");
 		},
 		onConnected() {
 			this.connected = true;

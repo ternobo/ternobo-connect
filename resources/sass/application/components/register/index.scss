@@ -1,0 +1,39 @@
+.register-step-title {
+    color: $dark;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    text-align: center;
+    width: 288px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid $dark;
+    margin: auto;
+    margin-bottom: 36px;
+
+    @media screen and (max-width:$sm-size) {
+        font-size: 14px;
+        min-width: 96px;
+        width: -webkit-max-content;
+        width: -moz-max-content;
+        margin-bottom: 32px;
+
+        width: max-content;
+    }
+}
+
+.register-card {
+    width: 600px;
+    box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.03);
+    padding: 80px;
+    padding-top: 24px;
+    padding-bottom: 40px;
+    background: $white;
+
+    @media screen and (max-width:$sm-size) {
+        padding: 30px;
+        padding-top: 16px;
+        padding-bottom: 36px;
+        width: 100%;
+    }
+
+}

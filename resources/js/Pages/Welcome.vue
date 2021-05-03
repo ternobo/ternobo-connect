@@ -52,9 +52,6 @@
 					</div>
 				</transition>
 			</div>
-			<div class="clickable showlanding" :class="{ 'bg-dark': !hasBG }" v-on:click="showLanding = true">
-				<i class="material-icons" :class="{ 'text-white': !hasBG }">flight_land</i>
-			</div>
 			<div v-if="$root.isMobile">
 				<img src="/images/logo-white.svg" class="thelogo" v-if="hasBG" style="width: 24px" />
 				<img src="/images/logo.svg" class="thelogo" v-if="!hasBG" style="width: 24px" />
@@ -64,9 +61,6 @@
 				<img src="/images/logo-en-dark.svg" class="thelogo" v-if="!hasBG" style="width: 110px" />
 			</div>
 		</div>
-		<transition name="slide">
-			<landing v-if="showLanding" :articles="articles"></landing>
-		</transition>
 	</div>
 </template>
 

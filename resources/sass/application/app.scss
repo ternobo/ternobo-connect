@@ -152,7 +152,7 @@ a {
 @import "./components/input-group-icon";
 @import "./layout-system";
 
-@import "./pages/landing";
+// @import "./pages/landing";
 @import "./components/buttons";
 @import "./components/tabs";
 @import "vue-select/src/scss/vue-select.scss";
@@ -1482,3 +1482,5 @@ a:focus {
 
 @import "./components/donate-modal.scss";
 @import "./pages/invite-links.scss";
+@import "./components/register/index.scss";
+@import "./pages/register.scss";

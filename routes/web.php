@@ -42,6 +42,8 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
     Route::get("/", "IndexController@index")->name("welcome");
     Route::any("/search", "HomeController@search");
 
+    Route::get("/register/{code}", "Auth\RegisterController@index");
+
     /**
      * Auth Start
      */
@@ -112,7 +114,8 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         });
 
         // Follow Suggestion Page
-        Route::get("/follow-people", "IndexController@followSuggestions");
+        Route::get("/follow-people", "Auth\FollowSuggestionController@index");
+        Route::post("/follow-people/get", "Auth\FollowSuggestionController@get");
 
         // Follow Actions Start
         Route::post("/follow/{page_id}", "ConnectionsController@follow")->name("follow");

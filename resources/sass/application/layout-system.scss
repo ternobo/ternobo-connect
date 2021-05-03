@@ -4998,45 +4998,45 @@
 
 
  #app {
-     max-width: 1188px;
+     max-width: $breakpoint;
      margin: auto;
      min-height: calc(100vh - 80px);
 
      @media screen and (min-width: 991px) {
          .content-container-settings {
-             max-width: 79.467354%;
-             flex: 79.467354%;
+             max-width: 79.72%;
+             flex: 79.72%;
          }
 
          .content-container-profile {
-             max-width: 70.0171821%;
-             flex: 70.0171821%;
+             max-width: 70.27%;
+             flex: 70.27%;
          }
 
          .content-container-full {
-             max-width: 79.467354%;
-             flex: 79.467354%;
+             max-width: 79.72%;
+             flex: 79.72%;
          }
 
          .content-container-right {
-             max-width: 70.19%;
-             flex: 70.19%;
+             max-width: 70.27%;
+             flex: 70.27%;
          }
 
          .sidebar-right {
-             max-width: 20.532646%;
-             flex: 20.532646%;
+             max-width: 20.27%;
+             flex: 20.27%;
          }
 
 
          .content-container {
-             max-width: 49.4845361%;
-             flex: 49.4845361%;
+             max-width: 50%;
+             flex: 50%;
          }
 
          .sidebar-left {
-             max-width: 29.9828179%;
-             flex: 29.9828179%;
+             max-width: ‌29.72%;
+             flex: 29.72%;
          }
      }
  }

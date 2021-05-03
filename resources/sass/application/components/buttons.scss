@@ -91,7 +91,7 @@
 .loading-button {
     position: relative;
     display: inline-block;
-    font-size: 15px;
+    font-size: 16px;
     letter-spacing: 0;
     outline: 0;
     border: 1px solid transparent;
@@ -329,5 +329,11 @@
     &:disabled {
         color: #C8C8C8;
         cursor: not-allowed;
+    }
+}
+
+.btn {
+    @media screen and (max-width: $sm-size) {
+        font-size: 14px;
     }
 }

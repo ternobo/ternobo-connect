@@ -17,6 +17,11 @@ class InviteLink extends Model
         'user_id',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, "user_id");
+    }
+
     public static function createLink($user_id)
     {
         return InviteLink::create([

@@ -57,6 +57,7 @@
         "libphonenumber-js": "^1.9.9",
         "material-design-icons": "^3.0.1",
         "maxlength-contenteditable": "^1.0.1",
+        "moment": "^2.29.1",
         "noise-gate": "0.0.3",
         "numeral": "^2.0.6",
         "socket.io-client": "^2.4.0",

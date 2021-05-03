@@ -17,7 +17,7 @@ class CreateInviteLinksTable extends Migration
             $table->id();
             $table->string("code");
             $table->bigInteger("user_id");
-            $table->boolean("valid")->default(false);
+            $table->boolean("valid")->default(true);
             $table->string("used_by")->nullable();
             $table->timestamps();
         });
