@@ -40,7 +40,7 @@ Route::get("/medias/{image}", "DownloadsController@media");
 
 Route::group(['middleware' => LocaleMiddleware::class], function () {
     Route::get("/", "IndexController@index")->name("welcome");
-    Route::any("/search", "HomeController@search");
+    Route::any("/search", "Content\SearchController@search");
 
     Route::get("/register/{code}", "Auth\RegisterController@index");
 
@@ -123,14 +123,14 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         //Follow Actions End
 
         Route::middleware([FollowMiddlware::class, Authenticate::class])->group(function () {
-            Route::get('/feed', 'HomeController@index')->name('home');
+            Route::get('/feed', 'Content\FeedController@index')->name('home');
 
             Route::post("/can-donate", "Donation\DontaionsController@canEnableDonate");
 
             // Seen Post
             Route::post("/seenPost", "PostController@seenPost");
 
-            Route::get("/bookmarks", "HomeController@bookmarks");
+            Route::get("/bookmarks", "Content\BookmarksController@bookmarks");
 
             // Request Verifiation
             Route::post("/verificationRequest", "Auth\UsersController@verificationRequest");
@@ -202,7 +202,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             Route::resource("/skills/credit", "Skills\SkillCreditController");
             Route::post("/skills/sort/{id}", "Skills\SkillController@sort");
 
-            Route::post("/bookmark/{post_id}", "PostController@bookmarkPost");
+            Route::post("/bookmark/{post_id}", "Content\BookmarksController@bookmarkPost");
 
             Route::get("/settings", "Auth\UsersController@settingsPage");
 
@@ -299,7 +299,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
     });
     //End Auth
 
-    Route::get("/tags/{name}", "HomeController@tag");
+    Route::get("/tags/{name}", "Content\TagsController@index");
 
     Route::post("/contact/contact-option", "ContactsController@getContactOptions");
     Route::post("/contact/website-option", "ContactsController@getWebsiteOptions");

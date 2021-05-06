@@ -181,6 +181,7 @@ document.addEventListener("ternobo:loaded", event => {
     el.innerHTML = "<head>" + vue_app.$store.state.shared.SEO + "</head>";
     let title = el.getElementsByTagName("title")[0].text
     document.title = title;
+    twemoji.parse(document.body)
 });
 
 document.addEventListener("ternobo:finish", event => {

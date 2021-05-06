@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
 use App\Models\Action;
-use App\Models\Bookmark;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\ContentSeen;
@@ -26,12 +25,6 @@ use Ternobo\TernoboWire\TernoboWire;
 
 class PostController extends Controller
 {
-
-    public function startsWith($string, $startString)
-    {
-        $len = strlen($startString);
-        return (substr($string, 0, $len) === $startString);
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -133,24 +126,6 @@ class PostController extends Controller
         $post->save();
         $user->personalPage->addAction("post", $post->id);
         return response()->json(array("result" => true));
-    }
-
-    public function bookmarkPost($post_id)
-    {
-        $post = Post::findOrFail($post_id);
-        $bookmark = Bookmark::query()->where("user_id", Auth::user()->id)->where("post_id", $post_id)->first();
-        $result = false;
-        $is_bookmark = true;
-        if ($bookmark instanceof Bookmark) {
-            $result = $bookmark->delete();
-            $is_bookmark = false;
-        } else {
-            $bookmark = new Bookmark();
-            $bookmark->user_id = Auth::user()->id;
-            $bookmark->post_id = $post_id;
-            $result = $bookmark->save();
-        }
-        return response()->json(array("result" => $result, "like" => $is_bookmark));
     }
 
     public function likePost($post_id)

@@ -1,14 +1,18 @@
 <template>
 	<base-layout>
-		<sidebar-right>
-			<user-card></user-card>
-		</sidebar-right>
-		<div class="content-container">
+		<div class="d-flex p-3 justify-content-center">
+			<div class="tag-card">فا</div>
+		</div>
+		<div class="w-100">
 			<div v-if="postsArray.length < 1">
 				<no-content> هیچ محتوایی با این برچسب منتشر نشده </no-content>
 			</div>
 			<div v-if="postsArray.length > 0" class="posts" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="5">
-				<PostCard v-for="(post, index) in postsArray" :key="'post_item_' + index" :post="post"></PostCard>
+				<div class="row">
+					<div class="col-md-6" v-for="(post, index) in postsArray" :key="'post_item_' + index">
+						<PostCard :post="post"></PostCard>
+					</div>
+				</div>
 				<div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
 					<loading-spinner class="image__spinner" />
 				</div>
@@ -17,9 +21,6 @@
 				</div>
 			</div>
 		</div>
-		<sidebar-left>
-			<app-footer></app-footer>
-		</sidebar-left>
 	</base-layout>
 </template>
 

@@ -1,6 +1,7 @@
 window._ = require('lodash');
 import NoiseGate from "noise-gate";
 window.moment = require('jalali-moment');
+require("./Libs/Emojify");
 window.moment.isSameWeek = function (firstDay, secondDay, offset = -1) {
     var firstMoment = moment(firstDay);
     var secondMoment = moment(secondDay);

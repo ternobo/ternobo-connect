@@ -7,7 +7,7 @@
 						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 						<i class="material-icons-outlined hand-hover">unfold_more</i>
 					</div>
-					<component :is="components[element.type]" :content.sync="editorItems[index].content" :key="'item_type_' + element.id" :max="2500" />
+					<component :is="components[element.type]" :ref="`${element.type}`" :content.sync="editorItems[index].content" :key="'item_type_' + element.id" :max="2500" />
 				</div>
 			</draggable>
 			<div class="d-flex editor-actions" v-if="availableOptions.length > 0" :class="{ 'align-items-center': editorItems.length < 1 }">
@@ -17,10 +17,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="my-3 character-counter" v-if="hasText">
-			<span class="counter tex-dark">{{ leftCharacter }}</span>
-			<div class="progress ml-1 mb-0" style="width: 100px; height: 5px">
-				<div class="progress-bar" role="progressbar" :style="{ width: textProgress }" aria-valuemin="0" aria-valuemax="100"></div>
+		<div class="d-flex align-items-center justify-content-between" v-if="hasText">
+			<emoji-picker @pick="appendEmoji" />
+			<div class="my-3 character-counter">
+				<span class="counter tex-dark">{{ leftCharacter }}</span>
+				<div class="progress ml-1 mb-0" style="width: 100px; height: 5px">
+					<div class="progress-bar" role="progressbar" :style="{ width: textProgress }" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -32,6 +35,7 @@ import TextInput from "./Elements/TextInput.vue";
 import TitleInput from "./Elements/TitleInput.vue";
 import Media from "./Elements/Media";
 import uuidv4 from "uuid";
+import EmojiPicker from "../../EmojiPicker/EmojiPicker.vue";
 
 export default {
 	watch: {
@@ -45,6 +49,12 @@ export default {
 	methods: {
 		getData() {
 			return this.editorItems;
+		},
+		appendEmoji(emoji) {
+			if (this.$refs.text && this.$refs.text.length > 0) {
+				this.$refs.text[0].$refs.editable.append(emoji);
+				this.$refs.text[0].input();
+			}
 		},
 		deleteElem(index) {
 			this.editorItems.splice(index, 1);
@@ -107,7 +117,7 @@ export default {
 			};
 		},
 	},
-	components: { ActionsButton },
+	components: { ActionsButton, EmojiPicker },
 	data() {
 		return {
 			editorItems: [],

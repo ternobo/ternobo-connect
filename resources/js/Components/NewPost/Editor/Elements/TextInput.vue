@@ -8,11 +8,17 @@
 <script>
 import TextareaContent from "../../../inputs/TextareaContent.vue";
 import Tribute from "tributejs";
+import TextareaParser from "../TextareaParser";
 export default {
 	methods: {
 		input() {
 			this.$refs.editableHighlight.innerHTML = this.$refs.editable.innerHTML.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
-			this.$emit("update:content", this.$refs.editable.innerText);
+			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
+			this.$emit("update:content", content);
+			this.$nextTick(() => {
+				twemoji.parse(this.$refs.editableHighlight);
+				twemoji.parse(this.$refs.editable);
+			});
 		},
 		searchForTags(text, cb) {
 			axios.get(this.$APP_URL + "/gettags?term=" + text + "&q=" + text).then((response) => {
@@ -39,6 +45,17 @@ export default {
 		document.execCommand("defaultParagraphSeparator", false, "br");
 		this.$refs.editable.innerHTML = this.content;
 		this.$refs.editableHighlight.innerHTML = this.$refs.editable.innerHTML.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
+
+		this.$refs.editable.addEventListener("paste", function (e) {
+			// cancel paste
+			e.preventDefault();
+
+			// get text representation of clipboard
+			var text = (e.originalEvent || e).clipboardData.getData("text/plain");
+
+			// insert text manually
+			document.execCommand("insertHTML", false, text);
+		});
 
 		let tribute = new Tribute({
 			collection: [

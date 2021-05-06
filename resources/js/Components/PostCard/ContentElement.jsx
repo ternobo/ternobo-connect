@@ -8,7 +8,7 @@ export default {
         switch (contentType) {
             case "title":
                 tag = "h2";
-                text.innerHTML = this.content.content
+                text.innerHTML = twemoji.parse(this.content.content)
                 content = (text.innerText);
                 break;
             case "text":
@@ -25,7 +25,7 @@ export default {
 
                     content = (
                         <div>
-                            <dynamic-link text={this.textToShow}></dynamic-link>
+                            <social-content text={this.textToShow}></social-content>
                             {action}
                         </div>
                     );

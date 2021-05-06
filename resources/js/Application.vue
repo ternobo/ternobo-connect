@@ -21,6 +21,7 @@ import Toast from "./Components/Toast";
 import { v4 as uuidv4 } from "uuid";
 import WidgetContainer from "./Components/ChatWidget/WidgetContainer.vue";
 import { mapState } from "vuex";
+import EmojiPicker from "./Components/EmojiPicker/EmojiPicker.vue";
 export default {
 	methods: {
 		addToast(toast) {
@@ -70,6 +71,8 @@ export default {
 		WireApp,
 		Toast,
 		WidgetContainer,
+		EmojiPicker,
 	},
 };
 </script>
+
