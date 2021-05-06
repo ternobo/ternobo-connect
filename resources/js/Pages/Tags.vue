@@ -1,7 +1,13 @@
 <template>
 	<base-layout>
 		<div class="d-flex p-3 justify-content-center">
-			<div class="tag-card">فا</div>
+			<div class="tag-card">
+				<div>
+					<strong>#{{ tag }}</strong>
+					<small>{{ posts.total }} مطلب</small>
+				</div>
+				<loading-button class="btn follow-btn" @click.native="follow" :class="{ 'btn-followed-connected': isFollowed }" :loading="loading">دنبال کردن</loading-button>
+			</div>
 		</div>
 		<div class="w-100">
 			<div v-if="postsArray.length < 1">
@@ -16,9 +22,6 @@
 				<div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
 					<loading-spinner class="image__spinner" />
 				</div>
-				<div v-if="next_page_url === null && !loadingPage">
-					<no-content> محتوای بیشتری وجود ندارد </no-content>
-				</div>
 			</div>
 		</div>
 	</base-layout>
@@ -29,9 +32,25 @@ import AppLayout from "../Layouts/AppLayout";
 import AppFooter from "../Components/App/AppFooter";
 import NoContent from "../Components/NoContent";
 import PostCard from "../Components/PostCard/PostCard";
+import LoadingButton from "../Components/buttons/LoadingButton.vue";
 
 export default {
 	methods: {
+		follow() {
+			this.loading = true;
+			axios
+				.post(`/tags/${this.tag}/follow`)
+				.then((response) => {
+					this.isFollowed = response.data.follow;
+				})
+				.catch((err) => {
+					console.log(err);
+					this.toast("خطا در برقراری ارتباط");
+				})
+				.then(() => {
+					this.loading = false;
+				});
+		},
 		loadMore() {
 			if (!this.loadingPage && this.next_page_url !== null) {
 				let url = this.next_page_url;
@@ -56,9 +75,9 @@ export default {
 			}
 		},
 	},
-	name: "Bookmarks",
+	name: "Tags",
 	watch: {
-		posts(newValue) {
+		posts() {
 			this.postsArray = this.posts.data;
 		},
 	},
@@ -66,6 +85,7 @@ export default {
 		this.postsArray = this.posts.data;
 		this.page = this.posts.current_page;
 		this.next_page_url = this.posts.next_page_url;
+		this.isFollowed = this.followed;
 	},
 	data() {
 		return {
@@ -73,19 +93,17 @@ export default {
 			page: 1,
 			next_page_url: null,
 			loadingPage: false,
+			loading: false,
+			isFollowed: false,
 		};
 	},
-	props: {
-		posts: {
-			type: Object,
-			default: undefined,
-		},
-	},
+	props: ["posts", "tag", "followed"],
 	components: {
 		AppFooter,
 		NoContent,
 		PostCard,
 	},
 	layout: AppLayout,
+	LoadingButton,
 };
 </script>

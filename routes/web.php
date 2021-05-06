@@ -120,6 +120,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         // Follow Actions Start
         Route::post("/follow/{page_id}", "ConnectionsController@follow")->name("follow");
         Route::post("/unfollow/{page_id}", "ConnectionsController@unfollow");
+        Route::post("/tags/{tag}/follow", "Content\TagsController@toggleFollowTag");
         //Follow Actions End
 
         Route::middleware([FollowMiddlware::class, Authenticate::class])->group(function () {

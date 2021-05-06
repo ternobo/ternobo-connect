@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\FollowingUsersScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +11,12 @@ class Following extends Model
 {
 
     use SoftDeletes;
+
+    protected $fillable = [
+        'user_id',
+        "following",
+        "type",
+    ];
 
     protected $dates = ['deleted_at'];
 
@@ -27,6 +34,16 @@ class Following extends Model
     public function follower()
     {
         return $this->belongsTo("App\Models\Page", "user_id")->with("user");
+    }
+
+    public static function tags()
+    {
+        return static::withoutGlobalScope(FollowingUsersScope::class)->where("type", "tag");
+    }
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new FollowingUsersScope);
     }
 
     public function toArray()

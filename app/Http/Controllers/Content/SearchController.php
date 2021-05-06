@@ -31,7 +31,6 @@ class SearchController extends Controller
                 $result .= " +$keyword*";
             }
         }
-        //    dd(($replaces));
         return $result;
     }
 

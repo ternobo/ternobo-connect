@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
+use App\Models\Following;
 use App\Models\Page;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -29,16 +30,15 @@ class FeedController extends Controller
             })
             ->select(array("posts.*", "content_seens.created_at as seen_at"))
             ->where(function ($query) {
-                $query->whereRaw("(posts.page_id IN (select following from followings WHERE user_id = '" . Auth::user()->id . "' ) or `posts`.`user_id` = '" . Auth::user()->id . "')");
-                // ->orWhere()
+                $query->whereRaw("(posts.page_id IN (select following from followings WHERE user_id = '" . Auth::user()->id . "' ) or `posts`.`user_id` = '" . Auth::user()->id . "')")
+                    ->orWhereJsonContains("posts.tags", Following::query()->where("type", "tag")->where("user_id", Auth::user()->id)->pluck("following"));
             })
             ->whereHas("page.user", function ($query) {
                 $query->where("active", true);
             })
             ->orderByRaw("posts.user_id = '" . Auth::user()->id . "' AND seen_at IS NULL DESC ,seen_at IS NULL DESC, seen_at DESC, posts.created_at")
             ->distinct("posts.id")
-            ->paginate(10);
-
+            ->paginate(20);
         return TernoboWire::render("Feed", array("posts" => $posts, "pages" => $pages));
     }
 }
