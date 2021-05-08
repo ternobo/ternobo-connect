@@ -9,11 +9,8 @@ export default {
 	mounted() {
 		if (this.$store.state.user !== null) {
 			let page = this.page;
-			if (typeof page != "number") {
-				page = parseInt(page);
-			}
 			this.page_id = page;
-			if (this.$store.state.shared.followings.includes(page)) {
+			if (this.$store.state.shared.followings.includes(String(page))) {
 				this.followed = true;
 				this.text = "دنبال شده";
 				this.$emit("followed");
