@@ -13,8 +13,8 @@
 					<div class="invite-links">
 						<div class="invite" v-for="inviteLink in inviteLinks" :key="`invite_link_${inviteLink.id}`">
 							<i class="material-icons-outlined invite-icon">confirmation_number</i>
-							<input class="text-input-light" type="text" readonly :value="`${$APP_URL}/${inviteLink.code}`" />
-							<button class="btn btn-action-light rounded-0 w-100" v-clipboard="`${$APP_URL}/${inviteLink.code}`">استفاده</button>
+							<input class="text-input-light" type="text" readonly :value="`${$APP_URL}/register?code=${inviteLink.code}`" />
+							<button class="btn btn-action-light rounded-0 w-100" v-clipboard="`${$APP_URL}/register?code=${inviteLink.code}`">استفاده</button>
 						</div>
 					</div>
 					<div class="invite-description">

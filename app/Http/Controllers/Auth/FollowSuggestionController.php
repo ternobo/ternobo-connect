@@ -18,7 +18,7 @@ class FollowSuggestionController extends Controller
 
     public function index()
     {
-        return TernoboWire::render("FollowingSuggestion");
+        return TernoboWire::render("FollowingSuggestion", false);
     }
 
     public function get()

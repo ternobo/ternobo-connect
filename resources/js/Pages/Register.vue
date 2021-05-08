@@ -105,10 +105,10 @@ export default {
 					}
 					break;
 				case 2:
-					status = this.first_name.length > 0 && this.last_name.length > 0 && this.username.length > 0 && this.gender != undefined;
+					status = !(this.first_name.length > 0 && this.last_name.length > 0 && this.username.length > 0 && this.gender != undefined);
 					break;
 				case 3:
-					status = this.password == this.password_repeat && this.password.length >= 8;
+					status = !(this.password == this.password_repeat && this.password.length >= 8);
 					break;
 			}
 			return status;
@@ -226,18 +226,20 @@ export default {
 			};
 
 			axios(config)
-				.then(function (response) {
+				.then((response) => {
 					if (response.data.result) {
-						this.step = 4;
+						this.step = 3;
 					} else {
 						const errors = response.data.errors;
-						$this.handleError(errors);
+						this.handleError(errors);
 					}
-					$this.loading = false;
+					this.loading = false;
 				})
-				.catch(function (error) {
-					$this.loading = false;
-				});
+				.catch((error) => {
+					console.log(error);
+					this.loading = false;
+				})
+				.then(() => (this.loading = false));
 		},
 		savePassword() {
 			var $this = this;
@@ -255,7 +257,7 @@ export default {
 				axios(config)
 					.then(function (response) {
 						if (response.data.result) {
-							this.step = 5;
+							window.location = "/follow-people";
 						} else {
 							const errors = response.data.errors;
 							$this.handleError(errors);

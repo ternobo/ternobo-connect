@@ -3,8 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\InviteLinkMiddleware;
+use App\Models\ActiveSession;
 use App\Models\InviteLink;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Ternobo\TernoboWire\TernoboWire;
 
 class RegisterController extends Controller
@@ -27,7 +35,6 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -37,11 +44,13 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('throttle:20,1');
-        // $this->middleware(InviteLinkMiddleware::class);
+        $this->middleware(InviteLinkMiddleware::class);
     }
 
-    public function index($code)
+    public function index(Request $request)
     {
+        $code = $request->code;
+        session()->put("invite_code", $code);
         $invite = InviteLink::query()->with(['user'])->where("code", $code)->whereNull('used_by')->where("valid", "1")->firstOrFail();
         return TernoboWire::render("Register", ['user' => $invite->user]);
     }
@@ -117,12 +126,18 @@ class RegisterController extends Controller
         if (session()->has("passwd")) {
             $user = session()->get("theUser")['user'];
             $user->password = Hash::make($request->password);
+            $invite = InviteLink::query()->where("code", session("invite_code"))->first();
+            $user->invited_by = $invite->user_id;
             $user->save();
+
+            InviteLink::createLink($user->id);
+            InviteLink::createLink($user->id);
 
             $page = $user->makePage()->save();
 
             ActiveSession::addSession($user->id);
             Auth::login($user, true);
+            $invite->delete();
             return response()->json(array("result" => true));
         }
         return abort(400);

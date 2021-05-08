@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Mail;
 use App\Models\Verification;
 use App\SMS;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class VerificationController extends Controller

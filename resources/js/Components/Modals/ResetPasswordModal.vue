@@ -49,7 +49,7 @@ export default {
 					const data = response.data;
 					if (data !== false) {
 						if (data.result) {
-							this.$store.state.ternoboWireApp.visit("/feed");
+							window.location = "/feed";
 						} else {
 							this.handleError(data.errors);
 						}

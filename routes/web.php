@@ -42,7 +42,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
     Route::get("/", "IndexController@index")->name("welcome");
     Route::any("/search", "Content\SearchController@search");
 
-    Route::get("/register/{code}", "Auth\RegisterController@index");
+    Route::get("/register", "Auth\RegisterController@index");
 
     /**
      * Auth Start
@@ -53,10 +53,10 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         Route::post('login', 'Auth\LoginController@login');
         Route::post('verify-tfa', 'Auth\LoginController@twoFactorVerify');
 
-        Route::post('verification', 'Auth\UsersController@sendVcode')->middleware(InviteLinkMiddleware::class);
-        Route::post('verifycode', 'Auth\UsersController@verifyCode')->middleware(InviteLinkMiddleware::class);
-        Route::post("signup", "Auth\UsersController@signupUser")->middleware(InviteLinkMiddleware::class);
-        Route::post("setpassword", "Auth\UsersController@savePassword")->middleware(InviteLinkMiddleware::class);
+        Route::post('verification', 'Auth\VerificationController@sendVcode')->middleware(InviteLinkMiddleware::class);
+        Route::post('verifycode', 'Auth\VerificationController@verifyCode')->middleware(InviteLinkMiddleware::class);
+        Route::post("signup", "Auth\RegisterController@signupUser")->middleware(InviteLinkMiddleware::class);
+        Route::post("setpassword", "Auth\RegisterController@savePassword")->middleware(InviteLinkMiddleware::class);
 
         Route::group(['auth'], function () {
 

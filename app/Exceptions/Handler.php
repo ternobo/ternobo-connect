@@ -61,13 +61,14 @@ class Handler extends ExceptionHandler
             if ($request->expectsJson()) {
                 return response()->json(['error' => $response->status()], $response->status());
             } else if (in_array($response->status(), [500, 503, 404, 403])) {
-                return TernoboWire::render('Error', ['status' => $response->status()]);
+                return TernoboWire::render('Error', ['status' => $response->status()], false, $response->status());
             } else if ($response->status() === 419) {
                 return back()->with([
                     'message' => 'نشست شما منقضی شده لطفا مجدد تلاش کنید.',
                 ]);
             }
         }
+
         return $response;
     }
 }
