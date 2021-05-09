@@ -1,7 +1,7 @@
 <template>
 	<div class="d-flex" :class="{ 'flex-column': vertical }">
 		<!-- <ConnectionButton @connected="onConnected" @disconnected="onDisconnect" :class="{'splitor-l': (!vertical && connected && followed),'splitor-b': (vertical && connected && followed)}" :style="btnStyle" :user="userId"></ConnectionButton> -->
-		<FollowButton @followed="onFollowed" @unfollowed="onUnfollowed" :style="btnStyle" :page="pageId"></FollowButton>
+		<FollowButton @followed="onFollowed" :class="btnClass" @unfollowed="onUnfollowed" :style="btnStyle" :page="pageId"></FollowButton>
 	</div>
 </template>
 
@@ -43,6 +43,10 @@ export default {
 		pageId: {
 			default: undefined,
 			required: true,
+		},
+		btnClass: {
+			type: String,
+			default: "",
 		},
 		btnStyle: {
 			type: String,

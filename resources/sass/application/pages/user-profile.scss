@@ -4,6 +4,13 @@ div.page-cover {
     margin: 0 -32px;
     width: calc(100% + 64px);
 
+
+    @media screen and (max-width: $sm-size) {
+        margin: 0 -15px;
+        width: calc(100% + 32px);
+
+    }
+
     img {
         min-height: 200px;
         -o-object-fit: cover;
@@ -21,6 +28,12 @@ div.page-cover {
     padding: 4px;
     height: 36px;
     width: 36px;
+
+    @media screen and(max-width: $sm-size) {
+        padding: 2px;
+        height: 24px;
+        width: 24px;
+    }
 }
 
 .card-img-top {
@@ -51,6 +64,11 @@ div.page-cover {
     @extend .card;
     padding: 32px;
     padding-top: 0;
+
+    @media screen and (max-width: $sm-size) {
+        padding: 16px;
+        padding-top: 0;
+    }
 }
 
 .page-name {
@@ -61,7 +79,7 @@ div.page-cover {
     padding-bottom: 0;
 
     @media screen and (max-width: $sm-size) {
-        padding-top: 8px;
+        padding-top: 12px;
     }
 
     .profile-info {
@@ -84,21 +102,44 @@ div.page-cover {
         strong.name {
             font-size: 20px;
             line-height: 1;
+
+            @media screen and (max-width: $sm-size) {
+                font-weight: 600;
+                font-size: 14px;
+            }
         }
 
         .location {
             font-size: 16px;
-            color: $grey;
+            color: $icons;
+
+            @media screen and (max-width: $sm-size) {
+                font-size: 12px;
+
+                i {
+                    font-size: 16px;
+                }
+            }
         }
 
         .short_bio {
             font-size: 16px;
             color: $grey;
+
+            @media screen and (max-width: $sm-size) {
+                font-size: 12px;
+            }
         }
 
         .profile-box {
             margin-bottom: 24px;
             margin-right: -8px;
+
+            @media screen and (max-width: $sm-size) {
+                margin-right: -4px;
+
+                margin-bottom: 12px;
+            }
 
             .profile img {
                 border: 8px solid $white;
@@ -111,7 +152,7 @@ div.page-cover {
         margin-left: 12px;
 
         @media screen and (max-width: $sm-size) {
-            i {
+            span {
                 display: none;
             }
         }
@@ -120,12 +161,41 @@ div.page-cover {
 }
 
 
+.profile-header-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+
+    @media screen and (max-width: $sm-size) {
+        margin-top: 16px;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        >*:not(:first-child) {
+            margin: 8px 0;
+        }
+
+        >*:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+}
+
 .invite_badge {
     display: flex;
     flex-direction: row;
 
     .invite_profile {
         margin-left: 16px;
+
+        @media screen and (max-width: $sm-size) {
+            margin-left: 12px;
+
+        }
     }
 
     .invite_info {
@@ -133,7 +203,12 @@ div.page-cover {
         flex-direction: column;
 
         .invite_date {
-            font-size: 14px;
+            font-size: 12px;
+
+            @media screen and (max-width: $sm-size) {
+                font-size: 12px;
+            }
+
             color: $grey;
 
             &.bold {
@@ -142,7 +217,11 @@ div.page-cover {
         }
 
         .invited_by {
-            font-size: 16px;
+            font-size: 14px;
+
+            @media screen and (max-width: $sm-size) {
+                font-size: 12px;
+            }
         }
     }
 }
@@ -176,13 +255,15 @@ div.page-cover {
         @media screen and (max-width: $sm-size) {
             opacity: 1;
             height: 24px;
-            bottom: 6px;
             width: 24px;
             top: unset;
-            right: 31px;
+            right: 8px;
+            bottom: 8px;
             font-size: 16px;
             background: #191919;
             border-radius: 8px;
+            font-size: 16px;
+
         }
 
 

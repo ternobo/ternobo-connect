@@ -21,11 +21,11 @@
 			</div>
 			<div class="d-flex flex-column align-items-end justify-content-between">
 				<div class="d-flex align-items-center">
-					<span class="connection-actions clickable"> <i class="material-icons-outlined">group</i> شبکه</span>
+					<div class="connection-actions clickable"><i class="material-icons-outlined">group</i> <span>شبکه</span></div>
 					<i class="btn profile-header-btn-edit material-icons-outlined" v-if="canEdit" @click="edit = true">edit</i>
 					<i class="material-icons-outlined" v-else @click="showReport = true">report</i>
 				</div>
-				<div class="invite_badge">
+				<div class="invite_badge" v-if="$root.isDesktop">
 					<div class="invite_profile" v-if="invited_by != null">
 						<lazy-image :src="invited_by.profile" class="profile-sm mb-0" imgClass="profile-sm" />
 					</div>
@@ -38,18 +38,35 @@
 				</div>
 			</div>
 		</div>
-		<a class="p-3 d-flex align-items-center pr-4 clickable" @click="showFriends = true" v-if="mutuals != null && mutuals.list.length > 0">
-			<div class="d-flex mr-2">
-				<div class="profile-photos">
-					<img :src="mutuals.list[0].profile" />
-					<img v-if="mutuals.list.length > 1" :src="mutuals.list[1].profile" />
+		<div class="profile-header-actions">
+			<div>
+				<a class="p-3 d-flex align-items-center pr-4 clickable" @click="showFriends = true" v-if="mutuals != null && mutuals.list.length > 0">
+					<div class="d-flex mr-2">
+						<div class="profile-photos">
+							<img :src="mutuals.list[0].profile" />
+							<img v-if="mutuals.list.length > 1" :src="mutuals.list[1].profile" />
+						</div>
+					</div>
+
+					<div class="d-flex flex-column px-3">
+						<strong class="text-dark" :class="{ 'font-12': !$root.isDesktop }">{{ mutuals.count }} دوست مشترک</strong>
+						<span class="text-superlight font-10">{{ mutuals.text }}</span>
+					</div>
+				</a>
+			</div>
+			<div class="invite_badge" v-if="!$root.isDesktop">
+				<div class="invite_profile" v-if="invited_by != null">
+					<lazy-image :src="invited_by.profile" :class="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" class="mb-0" :imgClass="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" />
+				</div>
+				<div class="invite_info">
+					<span class="invite_date" :class="{ bold: invited_by == null }">محلق شده در {{ joinTime }}</span>
+					<span :href="`/${invited_by.username}`" class="invited_by" v-if="invited_by != null">
+						دعوت شده توسط <wire-link class="clickable" :href="`/${invited_by.username}`" as="strong">{{ invited_by.name }}</wire-link>
+					</span>
 				</div>
 			</div>
-			<div class="d-flex flex-column px-3">
-				<strong class="text-dark" :class="{ 'font-12': !$root.isDesktop }">{{ mutuals.count }} دوست مشترک</strong>
-				<span class="text-superlight font-10">{{ mutuals.text }}</span>
-			</div>
-		</a>
+			<connetion-buttons v-if="!canEdit" btnClass="w-100" :class="{ 'w-100': !$root.isDesktop }" :pageId="page.id" />
+		</div>
 	</div>
 </template>
 
@@ -60,6 +77,7 @@ import MaterialTextField from "../inputs/MaterialTextField";
 import ReportPageModal from "../Modals/ReportPageModal.vue";
 import MutualFriendsModal from "../Modals/MutualFriendsModal.vue";
 import UserInfoModal from "../Modals/UserInfoModal.vue";
+import ConnetionButtons from "../buttons/ConnetionButtons.vue";
 
 export default {
 	methods: {
@@ -139,6 +157,7 @@ export default {
 		MaterialTextField,
 		ReportPageModal,
 		MutualFriendsModal,
+		ConnetionButtons,
 	},
 	props: {
 		canEdit: {
