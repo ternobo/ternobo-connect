@@ -31,7 +31,7 @@ class PageController extends Controller
             ->with("categories")
             ->with("education")
             ->with("expreciences")
-            ->with("user.skills")
+            ->with("skills")
             ->with("achievements")
             ->where("slug", $page)
             ->firstOrFail();

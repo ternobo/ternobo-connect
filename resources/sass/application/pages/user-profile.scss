@@ -139,6 +139,17 @@ div.page-cover {
                 margin-right: -4px;
 
                 margin-bottom: 12px;
+                max-height: 96px;
+                max-width: 96px;
+                width: 96px;
+                height: 96px;
+
+                .profile-xlg {
+                    max-height: 96px;
+                    max-width: 96px;
+                    width: 96px;
+                    height: 96px;
+                }
             }
 
             .profile img {
@@ -272,11 +283,6 @@ div.page-cover {
 
     >figure {
         transition: 0.3s all;
-
-        img {
-            border: 5px solid #FFF;
-        }
-
     }
 
     &:hover {

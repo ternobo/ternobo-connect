@@ -88,8 +88,8 @@ export default {
 		},
 	},
 	created() {
-		if (this.page.user.skills != null && this.page.user.skills != undefined) {
-			this.skills = this.page.user.skills;
+		if (this.page.skills != null && this.page.skills != undefined) {
+			this.skills = this.page.skills;
 		} else {
 			this.skills = [];
 		}

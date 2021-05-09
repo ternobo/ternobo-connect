@@ -64,12 +64,8 @@ class Page extends Model
 
     public function skills()
     {
-        if ($this->type === "personal") {
-            return $this->hasMany("App\Models\Skill", "user_id", "user_id")
-                ->with("credits");
-        } else {
-            return new HasManyEmpty(Page::query(), $this, '', '');
-        }
+        return $this->hasMany(Skill::class, "user_id", "user_id")
+            ->with("credits");
     }
 
     public function posts()

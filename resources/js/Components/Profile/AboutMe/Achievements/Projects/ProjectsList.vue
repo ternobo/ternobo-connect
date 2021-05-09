@@ -1,22 +1,20 @@
 <template>
-	<div v-if="projects.length > 0">
-		<div class="py-3">
-			<div class="d-flex mb-2 align-items-center clickable justify-content-between" @click="showDetailed">
-				<div class="d-flex align-items-center mb-3">
-					<h2 class="mb-0 about-me--card--subtitle">پروژه‌ها</h2>
-					<div class="mr-2 badge-light">{{ projects.length }}</div>
-				</div>
-				<i class="material-icons open-achievements" v-if="!edit" :class="{ active: open }">arrow_drop_down</i>
+	<div class="achievement-item" v-if="projects.length > 0">
+		<div class="achievement-header" @click="showDetailed">
+			<div class="achievement-title">
+				<h2 class="mb-0 about-me--card--subtitle">پروژه‌ها</h2>
+				<div class="mr-2 badge-light">{{ projects.length }}</div>
 			</div>
-			<ul class="projects-list p-0" v-if="loading">
-				<li>
-					<Skeleton :count="4" :heigth="25" />
-				</li>
-			</ul>
-			<draggable group="projects" ref="draggable" tag="ul" v-bind="dragOptions" v-model="projects" class="achievement-list p-0" :disabled="!edit" handle=".hand-hover">
-				<ProjectItem :detailed="open" :class="{ 'edit w-100': edit }" @deleted="onDelete(index)" v-model="projects[index]" :edit="edit" v-for="(project, index) in projects" :page="page" :key="'project_' + project.id" />
-			</draggable>
+			<i class="material-icons open-achievements" v-if="!edit" :class="{ active: open }">arrow_drop_down</i>
 		</div>
+		<ul class="projects-list p-0" v-if="loading">
+			<li>
+				<Skeleton :count="4" :heigth="25" />
+			</li>
+		</ul>
+		<draggable group="projects" ref="draggable" tag="ul" v-bind="dragOptions" v-model="projects" class="achievement-list p-0" :disabled="!edit" handle=".hand-hover">
+			<ProjectItem :detailed="open" :class="{ 'edit w-100': edit }" @deleted="onDelete(index)" v-model="projects[index]" :edit="edit" v-for="(project, index) in projects" :page="page" :key="'project_' + project.id" />
+		</draggable>
 	</div>
 </template>
 

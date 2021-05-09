@@ -2,8 +2,8 @@
 	<div class="about-me">
 		<div v-if="canShow()">
 			<Biography v-if="checkUser(this.page.user_id) || (about != null && about.length > 0)" v-model="about" :edit="edit"></Biography>
-			<ExperienceList v-if="showExperiences" ref="experiences" class="mt-3" :edit="edit"></ExperienceList>
-			<EducationsList v-if="showExperiences" ref="educations" class="mt-3" :edit="edit"></EducationsList>
+			<!-- <ExperienceList v-if="showExperiences" ref="experiences" class="mt-3" :edit="edit"></ExperienceList>
+			<EducationsList v-if="showExperiences" ref="educations" class="mt-3" :edit="edit"></EducationsList> -->
 			<Skills v-if="showSkills" ref="skills" :edit="edit" :page="page" class="mt-3"></Skills>
 			<AchievementsCard v-if="showAchievements" ref="achievements" class="mt-3" :edit="edit" :page="page"></AchievementsCard>
 		</div>
@@ -25,7 +25,7 @@ export default {
 	},
 	computed: {
 		showSkills() {
-			if (this.checkUser(this.page.user_id) || (this.page.user.skills != null && this.page.user.skills.length > 0)) {
+			if (this.checkUser(this.page.user_id) || (this.page.skills != null && this.page.skills.length > 0)) {
 				return true;
 			}
 			return false;
@@ -81,8 +81,8 @@ export default {
 		getData() {
 			return {
 				about: this.about,
-				experiences: this.$refs.experiences.getData(),
-				educations: this.$refs.educations.getData(),
+				// experiences: this.$refs.experiences.getData(),
+				// educations: this.$refs.educations.getData(),
 				skills: this.$refs.skills.getData(),
 				achievements: this.$refs.achievements.getData(),
 			};

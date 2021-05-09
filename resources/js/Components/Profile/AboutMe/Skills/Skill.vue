@@ -1,7 +1,7 @@
 <template>
 	<li v-if="skill != undefined">
 		<SkillCreditModal @credited="credited" v-if="$store.state.user != null && !checkUser(user.id)" :show.sync="creditModal" :user="user" :skill="skillVal"></SkillCreditModal>
-		<skeleton :height="'24px'" v-if="loading"></skeleton>
+		<skeleton :height="'24px'" v-if="loading && !edit"></skeleton>
 		<div v-else>
 			<div class="skill-name" v-if="!edit">
 				<div class="endorsement" v-if="$store.state.user != null && !checkUser(user.id)">
