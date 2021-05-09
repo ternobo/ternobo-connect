@@ -1,6 +1,6 @@
 <template>
 	<li class="category-item">
-		<span class="clickable" ref="name"><i class="material-icons">layers</i> {{ category.name }}</span>
+		<span class="clickable" ref="name">{{ category.name }}</span>
 	</li>
 </template>
 

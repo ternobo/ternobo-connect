@@ -35,10 +35,10 @@
 				</tab>
 				<tab v-if="hasActivity || canEdit" name="فعالیت‌ها" id="activities" :href="'/' + page.slug + '/activities'" :selected="current_tab === 'activities'">
 					<div class="row">
-						<div class="col-md-4" v-if="$root.isDesktop">
+						<div class="categories-sidebar" v-if="$root.isDesktop">
 							<Categories v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug"></Categories>
 						</div>
-						<div class="col-md-8">
+						<div class="posts-container-profile">
 							<div v-if="draft">
 								<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
 									<draft-card class="mb-3" v-for="action in actionsList" :post="action" :key="action.id"></draft-card>

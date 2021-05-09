@@ -2,48 +2,21 @@
 	<div class="sticky-aside">
 		<CategoriesModal @categoryAdded="addCategory" :show.sync="edit" :categories.sync="list"></CategoriesModal>
 
-		<div class="card mb-3">
-			<div class="card-body">
-				<div class="actions-list">
-					<button class="action-item" @click="action = 'all'" :class="{ active: action == 'all' }"><i class="material-icons">library_books</i> همه مطالب</button>
-					<button class="action-item" @click="action = 'comments'" :class="{ active: action == 'comments' }"><i class="material-icons-outlined">comment</i> نظرات</button>
-					<button class="action-item" @click="action = 'likes'" :class="{ active: action == 'likes' }"><i class="material-icons">favorite_border</i> پسند‌ها</button>
-				</div>
+		<div class="categories-sidebar-card">
+			<div class="actions-list">
+				<button class="action-item" @click="action = 'all'" :class="{ active: action == 'all' }"><i class="material-icons-outlined">article</i> مطالب</button>
+				<button class="action-item" @click="action = 'likes'" :class="{ active: action == 'likes' }"><i class="material-icons">favorite_border</i> پسند‌ها</button>
+				<button class="action-item" @click="action = 'comments'" :class="{ active: action == 'comments' }"><i class="material-icons-outlined">comment</i> نظرات</button>
 			</div>
-		</div>
-
-		<div class="card">
-			<div class="card-body">
-				<div class="categories">
-					<div class="d-flex justify-content-between">
-						<h2 class="category--title">دسته‌بندی‌ها</h2>
-						<i class="clickable hover-dark material-icons-outlined" v-if="checkUser(pageId)" @click="edit = !edit">{{ !edit ? "edit" : "save" }}</i>
-					</div>
-					<ul>
-						<category-item v-for="category in list" :class="{ active: category.id == activeCategory }" @click.native="categorySelect(category.id)" :key="category.id" :category="category"></category-item>
-					</ul>
-
-					<hr v-if="tags.length > 0" />
-
-					<div class="d-flex justify-content-between" v-if="tags.length > 0">
-						<h2 class="category--title">برچسب‌ها</h2>
-						<div class="d-flex align-items-center" v-if="checkUser(pageId)">
-							<i class="clickable hover-dark material-icons-outlined" v-if="!tagsEdit" @click="tagsEdit = !tagsEdit">edit</i>
-
-							<i class="clickable hover-dark material-icons-outlined" v-if="tagsEdit" @click="cancelRemove">close</i>
-							<i class="clickable hover-dark material-icons-outlined" v-if="tagsEdit" @click="saveTagRemove">save</i>
-						</div>
-					</div>
-					<div>
-						<input class="form-control my-2 rounded-pill" placeholder="جستجو" v-model="searchTag" />
-					</div>
-					<div class="profile-tags tags" :class="{ 'tag-edit': tagsEdit }">
-						<div class="tag-item" :class="{ active: tag == activeTag }" @click="tagAction(tag)" v-for="tag in tagsToShow" :key="'tag_item_' + tag">
-							{{ tag }}
-						</div>
-					</div>
-					<span class="text-action clickable mt-2" v-if="tags.length > 5 && 5 * tagPage < tags.length" @click="tagPage++">نمایش بیشتر</span>
+			<hr />
+			<div class="categories">
+				<div class="d-flex align-items-start justify-content-between">
+					<h2 class="category--title"><i class="material-icons-outlined">layers</i> دسته‌بندی‌ها</h2>
+					<i class="btn btn-edit material-icons-outlined font-16" style="height: 25px; width: 25px; padding: 2px" v-if="checkUser(pageId)" @click="edit = !edit">edit</i>
 				</div>
+				<ul>
+					<category-item v-for="category in list" :class="{ active: category.id == activeCategory }" @click.native="categorySelect(category.id)" :key="category.id" :category="category"></category-item>
+				</ul>
 			</div>
 		</div>
 	</div>

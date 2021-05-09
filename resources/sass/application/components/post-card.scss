@@ -40,6 +40,23 @@
 }
 
 .post-box {
+
+
+    .category-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 2px 6px;
+        background: $fixed-elements;
+        color: $grey;
+        margin-bottom: 0 !important;
+
+        i {
+            font-size: 20px;
+            margin-left: 3px;
+        }
+    }
+
     .post-header {
         display: flex;
         justify-content: space-between;
@@ -493,20 +510,6 @@
     }
 }
 
-.category-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 2px 6px;
-    background: $fixed-elements;
-    color: $grey;
-    margin-bottom: 0 !important;
-
-    i {
-        font-size: 20px;
-        margin-left: 3px;
-    }
-}
 
 .slider-arrows {
     display: flex;
