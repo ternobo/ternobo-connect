@@ -22,10 +22,10 @@
 							</div>
 						</button>
 					</div>
-					<div v-else-if="current_tab == 'activities' && canEdit">
-						<button class="btn d-flex align-items-center justify-content-center btn-edit" @click="draft = !draft">
-							<span v-if="!draft"> پیش‌نویس <i class="material-icons-outlined mr-2">save</i> </span>
-							<span v-else> منتشر شده <i class="material-icons-outlined mr-2">article</i> </span>
+					<div class="d-flex algin-items-center" v-else-if="current_tab == 'activities' && canEdit">
+						<button class="btn btn-edit" @click="draft = !draft">
+							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-if="!draft"><span v-if="$root.isDesktop"> پیش‌نویس </span><i class="material-icons-outlined" :class="{ 'mr-2': $root.isDesktop }">save</i></div>
+							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-else><span v-if="$root.isDesktop"> منتشر شده </span><i class="material-icons-outlined" :class="{ 'mr-2': $root.isDesktop }">article</i></div>
 						</button>
 					</div>
 				</template>

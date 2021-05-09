@@ -1,6 +1,6 @@
 <template>
 	<div class="md-checkbox">
-		<input :id="id" type="checkbox" :checked="status" :disabled="disabled" :class="inputClass" :value="value" />
+		<input :id="id" type="checkbox" v-model="status" :disabled="disabled" :class="inputClass" :value="value" />
 		<label :for="id">
 			<slot></slot>
 		</label>
@@ -10,14 +10,14 @@
 <script>
 export default {
 	created() {
-		this.status = this.value;
+		this.status = this.value != false;
 	},
 	watch: {
-		status(val) {
+		status() {
 			this.$emit("input", this.status);
 		},
 		value() {
-			this.status = this.value;
+			this.status = this.value != false;
 		},
 	},
 	props: {

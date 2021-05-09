@@ -54,7 +54,7 @@
 					<MaterialTextField v-model="val.publisher" :required="true" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="نام ناشر"></MaterialTextField>
 				</div>
 				<div class="col-md-6 py-4">
-					<strong>تاریخ شروع <span class="text-action">*</span></strong>
+					<strong>تاریخ انتشار <span class="text-action">*</span></strong>
 					<DatePicker v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
 				</div>
 				<div class="col-md-6 py-4 d-flex align-items-end" v-if="showMore">

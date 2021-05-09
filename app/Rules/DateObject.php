@@ -32,7 +32,7 @@ class DateObject implements Rule
             if (isset($value->month) || isset($value->year)) {
                 return true;
             }
-        } elseif (gettype($value) == 'boolean' && $value) {
+        } elseif (gettype($value) == 'boolean') {
             return true;
         }
         return false;

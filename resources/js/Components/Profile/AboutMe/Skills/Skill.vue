@@ -1,5 +1,5 @@
 <template>
-	<li v-if="skill != undefined">
+	<li :class="{ 'skill-edit': edit }" v-if="skill != undefined">
 		<SkillCreditModal @credited="credited" v-if="$store.state.user != null && !checkUser(user.id)" :show.sync="creditModal" :user="user" :skill="skillVal"></SkillCreditModal>
 		<skeleton :height="'24px'" v-if="loading && !edit"></skeleton>
 		<div v-else>

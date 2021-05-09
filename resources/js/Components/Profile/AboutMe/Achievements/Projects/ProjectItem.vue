@@ -59,9 +59,9 @@
 				</div>
 				<div class="col-md-6" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }">
 					<strong>تاریخ پایان <span class="text-action">*</span></strong>
-					<DatePicker v-if="typeof val.endDate !== 'boolean' || val.endDate == false" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{ year: year }"></DatePicker>
+					<DatePicker v-if="!noEndDate" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{ year: year }"></DatePicker>
 					<input v-else type="text" readonly value="تا کنون" class="form-control w-75 bg-white" />
-					<Checkbox v-model="val.endDate"> همچنان در حال کار بر روی این پروژه هستم </Checkbox>
+					<Checkbox v-model="noEndDate"> همچنان در حال کار بر روی این پروژه هستم </Checkbox>
 				</div>
 				<div class="col-md-6" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
 					<v-select :searchable="false" :placeholder="'مرتبط با'" class="datepicker-list w-75" dir="rtl" v-model="val.skill" :options="relatedTo">
@@ -106,6 +106,9 @@ export default {
 	created() {
 		if (this.value.name) {
 			this.val = this.value;
+			if (this.val.endDate == true) {
+				this.noEndDate = true;
+			}
 		}
 	},
 	watch: {
@@ -118,6 +121,11 @@ export default {
 				}
 			},
 			deep: true,
+		},
+		noEndDate() {
+			if (this.noEndDate) {
+				this.val.endDate = true;
+			}
 		},
 	},
 	props: {
@@ -172,11 +180,13 @@ export default {
 	},
 	data() {
 		return {
+			noEndDate: false,
 			val: {
 				name: "",
 				skill: undefined,
 				startDate: null,
-				endDate: null,
+				endDate: false,
+
 				link: "",
 				description: "",
 			},
