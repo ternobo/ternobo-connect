@@ -1486,3 +1486,9 @@ a:focus {
 @import "./pages/register.scss";
 @import "./components/emoji-picker.scss";
 @import "./components/tags.scss";
+
+.connections-tab {
+    ul {
+        margin-bottom: 0;
+    }
+}

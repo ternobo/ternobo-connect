@@ -58,8 +58,8 @@ export default {
 			tabs: [],
 		};
 	},
-	created() {
-		this.tabs = this.$children;
+	mounted() {
+		this.tabs = this.$children.filter((item) => item.$options.name == "Tab");
 	},
 	methods: {
 		selectTab: function (selectedTab) {

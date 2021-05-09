@@ -106,78 +106,40 @@ class ConnectionsController extends Controller
 
     }
 
-    public function followings(Request $request)
+    public function followings($page, Request $request)
     {
-        $user = Auth::user();
-        SEOTools::setTitle("شبکه من");
-        $followings = Following::query()
-            ->with("page")
-            ->with("page.user")
-            ->whereHas("page.user", function ($query) {
-                $query->where("active", true);
-            })
-            ->where("user_id", Auth::user()->id)
-            ->latest();
-        $pending_connections = Connection::query()->where("user_id", Auth::user()->id)
-            ->where("accepted", false)
-            ->paginate(5);
-
+        $page = Page::query()->where("slug", $page)->firstOrFail();
+        // dd($page);
+        $followings = $page->followings();
         if ($request->filled("q")) {
             $followings = $followings->whereHas("page", function ($query) use ($request) {
-                $query->where('name', 'like', "%{$request->q}%");
-            })->paginate(20)->appends("q", $request->q);
+                $query->where('name', 'like', "%$request->q%");
+            })->paginate(20)->appends("q", $request->q)->toArray();
         } else {
-            $followings = $followings->paginate(20);
+            $followings = $followings->paginate()->toArray();
         }
 
-        // counts
-        $connections_count = count(Connection::query()->where("accepted", true)->whereRaw("(connection_id = '$user->id' or user_id = '$user->id')")->get());
-        $followers_count = count(Following::query()->where("following", Auth::user()->id)->get());
-        $following_count = count(Following::query()->where("user_id", Auth::user()->id)->get());
-
-        return TernoboWire::render("MyConnections", array("connections" => $followings, "pending_connections" => $pending_connections,
-            "connections_count" => $connections_count,
-            "following_count" => $following_count, "followers_count" => $followers_count));
+        if ($page->user_id != Auth::user()->id) {
+            unset($followings['total']);
+        }
+        return response()->json(['result' => true, "connections" => $followings]);
     }
 
-    public function followers(Request $request)
+    public function followers($page, Request $request)
     {
-        $user = Auth::user();
-        SEOTools::setTitle("شبکه من");
-        $followings = Following::query()
-            ->with("follower")
-            ->with("follower.user")
-            ->whereHas("follower.user", function ($query) {
-                $query->where("active", true);
-            })
-            ->where("following", Auth::user()->id)
-            ->latest();
-
+        $page = Page::query()->where("slug", $page)->firstOrFail();
+        $followers = $page->followers();
         if ($request->filled("q")) {
-            $followings = $followings
-                ->whereHas("follower", function ($query) use ($request) {
-                    $query->where('name', 'like', "%{$request->q}%");
-                })
-                ->paginate(20)
-                ->appends("q", $request->q);
-            // dd($followings->toSql());
+            $followers = $followers->whereHas("page", function ($query) use ($request) {
+                $query->where('name', 'like', "%$request->q%");
+            })->paginate(20)->appends("q", $request->q)->toArray();
         } else {
-            $followings = $followings->paginate(20);
+            $followers = $followers->paginate()->toArray();
         }
-
-        $pending_connections = Connection::query()->where("user_id", Auth::user()->id)
-            ->where("accepted", false)
-            ->select(array("users.name", "users.profile", "users.cover", "users.short_bio", "connections.*"))
-            ->paginate(5);
-
-        // counts
-        $connections_count = count(Connection::query()->where("accepted", true)->whereRaw("(connection_id = '$user->id' or user_id = '$user->id')")->get());
-        $followers_count = count(Following::query()->where("following", Auth::user()->id)->get());
-        $following_count = count(Following::query()->where("user_id", Auth::user()->id)->get());
-
-        return TernoboWire::render("MyConnections", array("connections" => $followings->paginate(20), "pending_connections" => $pending_connections,
-            "connections_count" => $connections_count,
-            "following_count" => $following_count, "followers_count" => $followers_count));
+        if ($page->user_id != Auth::user()->id) {
+            unset($followers['total']);
+        }
+        return response()->json(['result' => true, "connections" => $followers]);
     }
 
     public function follow($page_id)

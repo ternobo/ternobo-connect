@@ -318,7 +318,9 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         Route::post("/drafts", "PageController@getDrafts");
         Route::post("/tags", "PageController@getTags");
 
-        // Route::get("/{post}", "ArticlesController@show");
+        Route::post("/followings", "ConnectionsController@followings");
+        Route::post("/followers", "ConnectionsController@followers");
+
     });
 
 });

@@ -69,108 +69,109 @@ div.page-cover {
         padding: 16px;
         padding-top: 0;
     }
-}
 
-.page-name {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 16px 0;
-    padding-bottom: 0;
 
-    @media screen and (max-width: $sm-size) {
-        padding-top: 12px;
-    }
-
-    .profile-info {
+    .page-name {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 16px 0;
+        padding-bottom: 0;
 
-        @media screen and (min-width: $sm-size) {
-            margin-top: -80px;
+        @media screen and (max-width: $sm-size) {
+            padding-top: 12px;
         }
 
+        .profile-info {
+            display: flex;
+            flex-direction: column;
 
-        >*:not(:last-child) {
-            margin-bottom: 8px;
-        }
-
-        span.name {
-            margin-bottom: 4px;
-        }
-
-        strong.name {
-            font-size: 20px;
-            line-height: 1;
-
-            @media screen and (max-width: $sm-size) {
-                font-weight: 600;
-                font-size: 14px;
+            @media screen and (min-width: $sm-size) {
+                margin-top: -80px;
             }
-        }
 
-        .location {
-            font-size: 16px;
-            color: $icons;
 
-            @media screen and (max-width: $sm-size) {
-                font-size: 12px;
+            >*:not(:last-child) {
+                margin-bottom: 8px;
+            }
 
-                i {
-                    font-size: 16px;
+            span.name {
+                margin-bottom: 4px;
+            }
+
+            strong.name {
+                font-size: 20px;
+                line-height: 1;
+
+                @media screen and (max-width: $sm-size) {
+                    font-weight: 600;
+                    font-size: 14px;
                 }
             }
-        }
 
-        .short_bio {
-            font-size: 16px;
-            color: $grey;
+            .location {
+                font-size: 16px;
+                color: $icons;
 
-            @media screen and (max-width: $sm-size) {
-                font-size: 12px;
+                @media screen and (max-width: $sm-size) {
+                    font-size: 12px;
+
+                    i {
+                        font-size: 16px;
+                    }
+                }
             }
-        }
 
-        .profile-box {
-            margin-bottom: 24px;
-            margin-right: -8px;
+            .short_bio {
+                font-size: 16px;
+                color: $grey;
 
-            @media screen and (max-width: $sm-size) {
-                margin-right: -4px;
+                @media screen and (max-width: $sm-size) {
+                    font-size: 12px;
+                }
+            }
 
-                margin-bottom: 12px;
-                max-height: 96px;
-                max-width: 96px;
-                width: 96px;
-                height: 96px;
+            .profile-box {
+                margin-bottom: 24px;
+                margin-right: -8px;
 
-                .profile-xlg {
+                @media screen and (max-width: $sm-size) {
+                    margin-right: -4px;
+
+                    margin-bottom: 12px;
                     max-height: 96px;
                     max-width: 96px;
                     width: 96px;
                     height: 96px;
+
+                    .profile-xlg {
+                        max-height: 96px;
+                        max-width: 96px;
+                        width: 96px;
+                        height: 96px;
+                    }
+                }
+
+                .profile img {
+                    border: 8px solid $white;
+                }
+            }
+        }
+
+        .connection-actions {
+            color: $grey;
+            margin-left: 12px;
+
+            @media screen and (max-width: $sm-size) {
+                span {
+                    display: none;
                 }
             }
 
-            .profile img {
-                border: 8px solid $white;
-            }
         }
     }
 
-    .connection-actions {
-        color: $grey;
-        margin-left: 12px;
-
-        @media screen and (max-width: $sm-size) {
-            span {
-                display: none;
-            }
-        }
-
-    }
 }
-
 
 .profile-header-actions {
     display: flex;

@@ -4,6 +4,7 @@
 		<ProfileCover :canChange="canEdit" :src="page.cover"></ProfileCover>
 		<report-page-modal :show.sync="showReport" :page-id="page.id"></report-page-modal>
 		<mutual-friends-modal :show.sync="showFriends" :page-id="page.id"></mutual-friends-modal>
+		<connetions-modal :show.sync="showConnections" :page="page"></connetions-modal>
 		<div class="page-name">
 			<div class="profile-info">
 				<ProfileImage ref="profileImage" :canChange="canEdit" :src="page.profile"></ProfileImage>
@@ -21,7 +22,7 @@
 			</div>
 			<div class="d-flex flex-column align-items-end justify-content-between">
 				<div class="d-flex align-items-center">
-					<div class="connection-actions clickable"><i class="material-icons-outlined">group</i> <span>شبکه</span></div>
+					<div class="connection-actions clickable" @click="showConnections = true"><i class="material-icons-outlined">group</i> <span>شبکه</span></div>
 					<i class="btn profile-header-btn-edit material-icons-outlined" v-if="canEdit" @click="edit = true">edit</i>
 					<i class="material-icons-outlined" v-else @click="showReport = true">report</i>
 				</div>
@@ -38,7 +39,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="profile-header-actions">
+		<div class="profile-header-actions" v-if="!canEdit || !$root.isDesktop">
 			<div>
 				<a class="p-3 d-flex align-items-center pr-4 clickable" @click="showFriends = true" v-if="mutuals != null && mutuals.list.length > 0">
 					<div class="d-flex mr-2">
@@ -78,6 +79,7 @@ import ReportPageModal from "../Modals/ReportPageModal.vue";
 import MutualFriendsModal from "../Modals/MutualFriendsModal.vue";
 import UserInfoModal from "../Modals/UserInfoModal.vue";
 import ConnetionButtons from "../buttons/ConnetionButtons.vue";
+import ConnetionsModal from "../Modals/ConnetionsModal.vue";
 
 export default {
 	methods: {
@@ -138,6 +140,7 @@ export default {
 	},
 	data() {
 		return {
+			showConnections: false,
 			loading: false,
 			edit: false,
 			firstName: null,
@@ -158,6 +161,7 @@ export default {
 		ReportPageModal,
 		MutualFriendsModal,
 		ConnetionButtons,
+		ConnetionsModal,
 	},
 	props: {
 		canEdit: {

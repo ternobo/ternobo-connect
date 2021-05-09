@@ -44,6 +44,15 @@ class Page extends Model
         return $this->hasOne("App\Models\Page", "id")->where("id", '-2');
     }
 
+    public function followers()
+    {
+        return Following::query()->where("following", $this->id);
+    }
+    public function followings()
+    {
+        return Following::query()->where("user_id", $this->user_id);
+    }
+
     /**
      * list page's categories (App\Category)
      * @var array()

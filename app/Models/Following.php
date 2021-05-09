@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Scopes\FollowingUsersScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Auth;
 
 class Following extends Model
 {
@@ -49,11 +48,8 @@ class Following extends Model
     public function toArray()
     {
         $array = parent::toArray();
-        if (Auth::user()->id === $this->following) {
-            $array['page'] = $this->follower;
-        } else {
-            $array['page'] = $this->page;
-        }
+        $array['follower'] = $this->follower;
+        $array['following'] = $this->page;
         return $array;
     }
 
