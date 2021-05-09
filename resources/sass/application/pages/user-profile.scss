@@ -216,6 +216,7 @@ div.page-cover {
     .invite_info {
         display: flex;
         flex-direction: column;
+        justify-content: center;
 
         .invite_date {
             font-size: 12px;
