@@ -10,7 +10,7 @@
 							<i class="material-icons text-muted hover-dark" v-if="edit" @click="cancelEdit">close</i>
 						</div>
 						<button class="btn d-flex align-items-center justify-content-center btn-edit" @click="doEdit">
-							<span v-if="!edit && $root.isDesktop"><i class="material-icons-outlined">edit</i> ویرایش اطلاعات</span>
+							<span v-if="!edit && $root.isDesktop"><i class="material-icons-outlined">edit</i> <span style="font-weight: 600"> ویرایش</span></span>
 							<i v-if="!edit && !$root.isDesktop" class="material-icons-outlined">edit</i>
 
 							<div class="d-flex align-items-center justify-content-center" v-if="edit">
@@ -22,8 +22,8 @@
 					</div>
 					<div class="d-flex algin-items-center" v-else-if="current_tab == 'activities' && canEdit">
 						<button class="btn btn-edit" @click="draft = !draft">
-							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-if="!draft"><i class="material-icons-outlined" :class="{ 'ml-2': $root.isDesktop }">save</i><span v-if="$root.isDesktop"> پیش‌نویس </span></div>
-							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-else><i class="material-icons-outlined" :class="{ 'ml-2': $root.isDesktop }">article</i><span v-if="$root.isDesktop"> منتشر شده </span></div>
+							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-if="!draft"><i class="material-icons-outlined" :class="{ 'ml-1': $root.isDesktop }">save</i><span style="font-weight: 600" v-if="$root.isDesktop"> پیش‌نویس </span></div>
+							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-else><i class="material-icons-outlined" :class="{ 'ml-1': $root.isDesktop }">article</i><span style="font-weight: 600" v-if="$root.isDesktop"> منتشر شده </span></div>
 						</button>
 					</div>
 				</template>

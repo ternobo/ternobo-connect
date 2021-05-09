@@ -51,6 +51,9 @@
 .categories {
     color: $icons;
 
+    .btn-edit {
+        border-radius: 8px;
+    }
 
     .category-item {
         background: $fixed-elements;

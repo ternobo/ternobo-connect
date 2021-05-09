@@ -21,7 +21,7 @@
 				</small>
 			</div>
 			<div class="d-flex flex-column align-items-end justify-content-between">
-				<div class="d-flex align-items-center">
+				<div class="d-flex align-items-center" style="margin-left: -8px">
 					<div class="connection-actions clickable" @click="showConnections = true"><i class="material-icons-outlined">group</i> <span>شبکه</span></div>
 					<i class="btn profile-header-btn-edit material-icons-outlined" v-if="canEdit" @click="edit = true">edit</i>
 					<i class="material-icons-outlined" v-else @click="showReport = true">report</i>

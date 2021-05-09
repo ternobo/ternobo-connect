@@ -1304,7 +1304,11 @@ a:focus {
 }
 
 .new-post-body {
-    padding: 12px 20px;
+    padding: 24px;
+
+    .profile-sm {
+        margin: -2px 0 -2px 0;
+    }
 }
 
 .new-post-actions {

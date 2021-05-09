@@ -22,9 +22,6 @@
         vertical-align: top;
         transition: all 0.3s;
         border-bottom: 2px solid transparent;
-        font-weight: 600;
-
-
 
         &.disabled {
             color: #C8C8C8 !important;
@@ -61,6 +58,7 @@
             &.is-active a {
                 border-bottom-color: $primary;
                 color: $primary;
+                font-weight: 600;
 
                 &.disabled {
                     border-color: #c8c8c8;

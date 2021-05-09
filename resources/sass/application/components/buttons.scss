@@ -310,10 +310,12 @@
 .add-to-resume-btn {
     @extend .follow-btn;
     @extend .btn;
-    padding: 8px 16px !important;
+    padding: 4px !important;
     color: $action;
     border-radius: 16px;
     min-width: unset;
+    height: 32px;
+    width: 32px;
 
     @media screen and (max-width: $sm-size) {
         padding: 8px 8px !important;

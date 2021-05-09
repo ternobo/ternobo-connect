@@ -29,7 +29,7 @@
 			<div class="col-md-4 mt-3">
 				<MaterialTextField class="material--sm w-100" input-class="w-100" :value="location" v-model="location" placeholder="موقعیت"></MaterialTextField>
 			</div>
-			<div class="col-md-12 d-flex justify-content-center align-items-center mt-3" style="margin-bottom: -16px">
+			<div class="col-md-12 d-flex justify-content-center align-items-center mt-3">
 				<loading-button class="btn btn-dark px-4" :loading="loading" @click.native="save">ثبت</loading-button>
 			</div>
 		</div>
