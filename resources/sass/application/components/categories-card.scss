@@ -11,7 +11,11 @@
 
 .categories-sidebar-card {
     @extend .card;
-    padding: 24px 12px;
+    padding: 24px 16px;
+
+    hr {
+        margin: 24px 0;
+    }
 }
 
 .actions-list {
@@ -19,11 +23,16 @@
     align-items: center;
     flex-wrap: wrap;
 
+    gap: 16px 0;
+
     .action-item {
+        display: flex;
+        align-items: center;
+        gap: 2px;
         background: transparent;
         padding: 6px;
         border-radius: 10px;
-        margin: 4px;
+        margin: 2px;
         color: $grey;
         border: none;
     }
@@ -105,9 +114,14 @@
 
 
 .category--title {
-    font-size: 18px;
-    color: $grey;
+    font-size: 16px;
+    font-weight: 600;
+    color: $dark;
     margin-bottom: 28px;
+
+    i {
+        color: $grey;
+    }
 }
 
 .profile-tags {

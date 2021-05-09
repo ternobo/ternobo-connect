@@ -22,8 +22,8 @@
 					</div>
 					<div class="d-flex algin-items-center" v-else-if="current_tab == 'activities' && canEdit">
 						<button class="btn btn-edit" @click="draft = !draft">
-							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-if="!draft"><span v-if="$root.isDesktop"> پیش‌نویس </span><i class="material-icons-outlined" :class="{ 'mr-2': $root.isDesktop }">save</i></div>
-							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-else><span v-if="$root.isDesktop"> منتشر شده </span><i class="material-icons-outlined" :class="{ 'mr-2': $root.isDesktop }">article</i></div>
+							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-if="!draft"><i class="material-icons-outlined" :class="{ 'ml-2': $root.isDesktop }">save</i><span v-if="$root.isDesktop"> پیش‌نویس </span></div>
+							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-else><i class="material-icons-outlined" :class="{ 'ml-2': $root.isDesktop }">article</i><span v-if="$root.isDesktop"> منتشر شده </span></div>
 						</button>
 					</div>
 				</template>
