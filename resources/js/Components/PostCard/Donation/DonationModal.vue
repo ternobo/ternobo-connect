@@ -1,6 +1,6 @@
 <template>
 	<b-modal v-model="showModal" hide-footer title="حمایت از این محتوا" body-class="donation-modal" size="md" :centered="true">
-		<div>
+		<div v-if="showDonate">
 			<div class="d-flex justify-content-between donate-modal-header">
 				<div class="d-flex align-items-center">
 					<lazy-image :src="user.profile" class="profile-xsm mb-0 ml-2" imgClass="profile-xsm" />
