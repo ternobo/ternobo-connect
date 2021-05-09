@@ -395,7 +395,7 @@ class PageController extends Controller
         } else {
             $page = Auth::user()->getPage();
             $page->name = $request->firstname . " " . $request->lastname;
-            if ($request->filled("location")) {
+            if ($request->has("location")) {
                 $page->location = $request->location;
             }
             $user = Auth::user();

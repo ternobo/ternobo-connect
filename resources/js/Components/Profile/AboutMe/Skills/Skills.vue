@@ -1,7 +1,7 @@
 <template>
 	<div class="card">
 		<div class="card-body">
-			<div class="d-flex mb-2 aling-items-center justify-content-between">
+			<div class="about-me--card-title-container">
 				<h2 class="about-me--card-title">مهارت‌ها</h2>
 				<button class="add-to-resume-btn" v-if="edit" @click="addSkill">
 					<i class="material-icons">add</i>
@@ -15,10 +15,10 @@
 			<div class="w-100 text-center" v-else-if="skills.length < 1">
 				<span class="font-16 text-superlight">هیچ مهارتی ثبت نشده</span>
 			</div>
-			<draggable group="skills" ref="draggable" tag="ul" v-bind="dragOptions" v-model="skills" class="skills-list mb-2 p-0" :disabled="!edit" handle=".hand-hover">
-				<Skill @deleted="onDelete(index)" v-model="skills[index]" :user="page.user" :edit="edit" v-for="(skill, index) in skillsToShow" :skill="skill" :key="'skill_' + skill.id" />
+			<draggable group="skills" ref="draggable" tag="ul" v-bind="dragOptions" v-model="skills" class="skills-list" :disabled="!edit" handle=".hand-hover">
+				<Skill @deleted="onDelete(index)" v-model="skills[index]" :user="page.user" :edit="edit" v-for="(skill, index) in skillsToShow" :key="'skill_' + skill.id" />
 			</draggable>
-			<span class="show-all-skills" @click="showMore = true" v-if="!showMore && skills != null && skills.length > 3 && !edit">نمایش تمام مهارت‌ها</span>
+			<div class="show-all-skills" @click="showMore = true" v-if="!showMore && skills != null && skills.length > 3 && !edit">نمایش تمام مهارت‌ها</div>
 		</div>
 	</div>
 </template>

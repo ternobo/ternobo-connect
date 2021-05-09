@@ -49,19 +49,9 @@ class SkillCreditController extends Controller
 
     public function checkCredit(Request $request)
     {
-        $skill = Skill::find($request->skill);
-        if ($skill != null) {
-            if (Auth::check()) {
-                if ($skill->user_id == Auth::user()->id) {
-                    return response()->json([
-                        "canCredit" => false,
-                    ]);
-                }
-            }
-
-        }
+        $skill = Skill::findOrFail($request->skill);
         return response()->json([
-            "canCredit" => !Auth::user()->isCredit($request->skill),
+            "canCredit" => Auth::check() ? !Auth::user()->isCredit($request->skill) : false,
         ]);
     }
 

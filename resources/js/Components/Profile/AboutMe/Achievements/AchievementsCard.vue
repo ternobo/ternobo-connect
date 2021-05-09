@@ -1,7 +1,7 @@
 <template>
 	<div class="card achievments-card">
 		<div class="card-body" v-if="mounted">
-			<div class="d-flex mb-2 aling-items-center justify-content-between">
+			<div class="about-me--card-title-container">
 				<h2 class="about-me--card-title">دستاورد‌ها</h2>
 				<DropdownBtn
 					v-if="edit"

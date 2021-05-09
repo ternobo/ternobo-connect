@@ -1,18 +1,16 @@
 <template>
 	<base-layout>
 		<mobile-categories v-if="!$root.isDesktop" :categories="page.categories" :show.sync="showMobileCategory"></mobile-categories>
-		<verify-modal @verified="reloadUser" :show.sync="showVerification"></verify-modal>
 		<div class="content-container-profile" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
-			<profile-steps @action="stepsAction" class="mb-3" :steps="$store.state.shared.profile_steps" v-if="$store.state.user && $store.state.shared.profile_steps.percent < 100 && checkUser(page.user_id)"></profile-steps>
 			<ProfileHeader ref="ProfileHeader" :page="page" :can-edit="canEdit"></ProfileHeader>
-			<tabs :compact="true" :disabled="edit" class="py-3" @selected="tabChange" :state-tab="true">
+			<tabs :compact="true" :disabled="edit" class="profile-tabs" @selected="tabChange" :state-tab="true">
 				<template slot="custom-item">
 					<div class="d-flex align-items-center" v-if="canEdit && showEdit">
 						<div class="ml-3 rounded-circle clickable" v-if="edit">
 							<i class="material-icons text-muted hover-dark" v-if="edit" @click="cancelEdit">close</i>
 						</div>
 						<button class="btn d-flex align-items-center justify-content-center btn-edit" @click="doEdit">
-							<span v-if="!edit && $root.isDesktop"> ویرایش اطلاعات <i class="material-icons-outlined">edit</i> </span>
+							<span v-if="!edit && $root.isDesktop"><i class="material-icons-outlined">edit</i> ویرایش اطلاعات</span>
 							<i v-if="!edit && !$root.isDesktop" class="material-icons-outlined">edit</i>
 
 							<div class="d-flex align-items-center justify-content-center" v-if="edit">

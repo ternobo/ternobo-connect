@@ -126,3 +126,53 @@
 .pageinfo-card {
     z-index: 2;
 }
+
+.profile-tabs {
+    padding-top: 40px;
+    padding-bottom: 24px;
+
+    @media screen and(max-width: $sm-size) {
+        padding-top: 24px;
+        padding-bottom: 16px;
+
+    }
+
+    .tabs>ul {
+        margin-bottom: 0;
+        padding-bottom: 24px;
+
+        @media screen and(max-width: $sm-size) {
+            padding-bottom: 16px;
+
+        }
+    }
+
+    li {
+        &.is-active {
+            font-weight: 600;
+        }
+
+        a {
+            font-size: 18px;
+
+            @media screen and(max-width: $sm-size) {
+                font-size: 12px;
+
+            }
+        }
+    }
+
+    .btn-edit {
+        font-size: 18px;
+
+        i {
+            font-size: 28px;
+
+            @media screen and(max-width: $sm-size) {
+                font-size: 16px;
+            }
+        }
+
+    }
+
+}

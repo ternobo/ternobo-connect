@@ -1,15 +1,15 @@
 <template>
-	<li :class="{ 'skill-edit': edit }" v-if="skill != undefined">
+	<li :class="{ 'skill-edit': edit }" v-if="value != undefined">
 		<SkillCreditModal @credited="credited" v-if="$store.state.user != null && !checkUser(user.id)" :show.sync="creditModal" :user="user" :skill="skillVal"></SkillCreditModal>
 		<skeleton :height="'24px'" v-if="loading && !edit"></skeleton>
 		<div v-else>
 			<div class="skill-name" v-if="!edit">
-				<div class="endorsement" v-if="$store.state.user != null && !checkUser(user.id)">
+				<div class="endorsement" :class="{ disabled: checkUser(user.id) }" v-if="$store.state.user != null">
 					<i class="material-icons" @click="credit">
 						{{ canCredit ? "arrow_circle_up" : "remove_circle_outline" }}
 					</i>
-					<span class="action" v-if="skillVal.credit_text != null">
-						{{ formatNumber(skillVal.credit_text.nums, "0a") }}
+					<span class="action">
+						{{ skillVal.credit_text == null ? 0 : formatNumber(skillVal.credit_text.nums, "0a") }}
 					</span>
 				</div>
 				<div class="d-flex flex-column justify-content-center">
@@ -107,8 +107,8 @@ export default {
 		}
 	},
 	created() {
-		if (this.skill != undefined && this.skill != null) {
-			this.skillVal = this.skill;
+		if (this.value != undefined && this.value != null) {
+			this.skillVal = this.value;
 		}
 	},
 	data() {
@@ -125,7 +125,7 @@ export default {
 			default: undefined,
 			required: true,
 		},
-		skill: {
+		value: {
 			type: Object,
 			default: undefined,
 		},

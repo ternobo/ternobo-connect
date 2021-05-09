@@ -1,7 +1,7 @@
 <template>
 	<div class="card">
 		<div class="card-body">
-			<div class="d-flex aling-items-center justify-content-between" :class="{ 'mb-3': $root.isDesktop }">
+			<div class="about-me--card-title-container">
 				<h2 class="about-me--card-title">بایوگرافی</h2>
 				<div class="character-counter" v-if="edit">
 					<span class="counter tex-dark">{{ leftCharacter }}</span>
