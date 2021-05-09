@@ -1,66 +1,40 @@
 <template>
-	<div class="card">
-		<UserInfoModal :user="page.user" :page-location="page.location" v-if="canEdit" :show.sync="edit"></UserInfoModal>
+	<div class="profile-header-card">
+		<user-info-modal :user="page.user" :page-location="page.location" v-if="canEdit" :show.sync="edit"></user-info-modal>
 		<ProfileCover :canChange="canEdit" :src="page.cover"></ProfileCover>
 		<report-page-modal :show.sync="showReport" :page-id="page.id"></report-page-modal>
 		<mutual-friends-modal :show.sync="showFriends" :page-id="page.id"></mutual-friends-modal>
-		<div class="pageinfo-card">
-			<i v-if="canEdit && !$root.isDesktop" class="material-icons-outlined btn d-flex align-items-center justify-content-center btn-edit" @click="edit = true">edit</i>
-			<ProfileImage ref="profileImage" :canChange="canEdit" :src="page.profile"></ProfileImage>
-			<div class="d-flex align-items-center" v-if="$root.isDesktop">
-				<ConnetionButtons class="follow-buttons" v-if="!canEdit" :page-id="page.id" :user-id="page.user_id"></ConnetionButtons>
-				<div v-if="$store.state.user != null">
-					<b-dropdown v-if="!canEdit" size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
-						<template v-slot:button-content class="p-0">
-							<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
-						</template>
-						<b-dropdown-item>
-							<div class="d-flex align-items-center" @click="showReport = true">
-								<i class="material-icons ml-2 text-dark">link</i>
-								<div>
-									<div>
-										<strong> گزارش تخلف </strong>
-									</div>
-									<small class="text-muted"> این صفحه در تضاد با قوانین ترنوبو است </small>
-								</div>
-							</div>
-						</b-dropdown-item>
-					</b-dropdown>
-				</div>
-			</div>
-		</div>
 		<div class="page-name">
-			<span class="d-flex align-items-center">
-				<strong class="user-fullname">
-					{{ page.name }}
-					<i v-if="page.user.is_verified === 1" class="verificationcheck mr-1 font-20">check_circle</i>
-				</strong>
-				<i v-if="canEdit && $root.isDesktop" class="mr-2 material-icons-outlined font-16 hover-dark clickable text-superlight" @click="edit = true">edit</i>
-			</span>
-			<small class="user--short-bio">{{ page.short_bio }}</small>
-			<small v-if="page.location != null && page.location.length > 0" class="mt-1 text-superlight user-location">
-				<i class="material-icons-outlined">location_on</i>
-				{{ page.location }}
-			</small>
-			<div class="d-flex align-items-center" v-if="!$root.isDesktop">
-				<ConnetionButtons class="follow-buttons" v-if="!canEdit" :page-id="page.id" :user-id="page.user_id"></ConnetionButtons>
-				<div v-if="$store.state.user != null">
-					<b-dropdown v-if="!canEdit" size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
-						<template v-slot:button-content class="p-0">
-							<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
-						</template>
-						<b-dropdown-item>
-							<div class="d-flex align-items-center" @click="showReport = true">
-								<i class="material-icons ml-2 text-dark">link</i>
-								<div>
-									<div>
-										<strong> گزارش تخلف </strong>
-									</div>
-									<small class="text-muted"> این صفحه در تضاد با قوانین ترنوبو است </small>
-								</div>
-							</div>
-						</b-dropdown-item>
-					</b-dropdown>
+			<div class="profile-info">
+				<ProfileImage ref="profileImage" :canChange="canEdit" :src="page.profile"></ProfileImage>
+				<span class="name d-flex align-items-center">
+					<strong class="name">
+						{{ page.name }}
+						<i v-if="page.user.is_verified === 1" class="verificationcheck mr-1 font-20">check_circle</i>
+					</strong>
+				</span>
+				<small class="short_bio">{{ page.short_bio }}</small>
+				<small v-if="page.location != null && page.location.length > 0" class="location">
+					<i class="material-icons-outlined">location_on</i>
+					{{ page.location }}
+				</small>
+			</div>
+			<div class="d-flex flex-column align-items-end justify-content-between">
+				<div class="d-flex align-items-center">
+					<span class="connection-actions clickable"> <i class="material-icons-outlined">group</i> شبکه</span>
+					<i class="btn profile-header-btn-edit material-icons-outlined" v-if="canEdit" @click="edit = true">edit</i>
+					<i class="material-icons-outlined" v-else @click="showReport = true">report</i>
+				</div>
+				<div class="invite_badge">
+					<div class="invite_profile" v-if="invited_by != null">
+						<lazy-image :src="invited_by.profile" class="profile-sm mb-0" imgClass="profile-sm" />
+					</div>
+					<div class="invite_info">
+						<span class="invite_date" :class="{ bold: invited_by == null }">محلق شده در {{ joinTime }}</span>
+						<span :href="`/${invited_by.username}`" class="invited_by" v-if="invited_by != null">
+							دعوت شده توسط <wire-link class="clickable" :href="`/${invited_by.username}`" as="strong">{{ invited_by.name }}</wire-link>
+						</span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -82,11 +56,10 @@
 <script>
 import ProfileCover from "./ProfileCover";
 import ProfileImage from "./ProfileImage";
-import UserInfoModal from "../Modals/UserInfoModal";
-
 import MaterialTextField from "../inputs/MaterialTextField";
 import ReportPageModal from "../Modals/ReportPageModal.vue";
 import MutualFriendsModal from "../Modals/MutualFriendsModal.vue";
+import UserInfoModal from "../Modals/UserInfoModal.vue";
 
 export default {
 	methods: {
@@ -120,6 +93,14 @@ export default {
 			this.shortBio = this.page.user.short_bio;
 			this.gender = JSON.parse(this.page.user.gender);
 			this.edit = false;
+		},
+	},
+	computed: {
+		joinTime() {
+			return this.formatTime(this.page.created_at, "D MMMM YYYY");
+		},
+		invited_by() {
+			return this.page.user.invited_by;
 		},
 	},
 	created() {

@@ -69,6 +69,7 @@ class PageController extends Controller
     public function handlePersonalProfile(Page $page, $location = "home", Request $request, $category = null)
     {
         SEOTools::setTitle($page->name);
+        $page->load("user.invited_by");
         if ($page->about !== null && $page->about !== "") {
             SEOTools::setDescription($page->about);
         } else {

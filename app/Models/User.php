@@ -95,6 +95,11 @@ class User extends Authenticatable implements Messageable
         return Conversation::query()->whereJsonContains("members", $this->id);
     }
 
+    public function invited_by()
+    {
+        return $this->belongsTo(User::class, "invited_by");
+    }
+
     public function generateToken()
     {
         $token = "";

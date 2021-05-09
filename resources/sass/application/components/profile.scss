@@ -8,6 +8,7 @@
     min-width: 40px;
     max-width: 40px;
 }
+
 .profile-xsm {
     border-radius: 50%;
     height: 44px;
@@ -54,14 +55,14 @@
 }
 
 .profile-xlg {
-    height: 148px;
-    width: 148px;
+    height: 120px;
+    width: 120px;
     border-radius: 50%;
 
-    min-height: 148px;
-    max-height: 148px;
-    min-width: 148px;
-    max-width: 148px;
+    min-height: 120px;
+    max-height: 120px;
+    min-width: 120px;
+    max-width: 120px;
 }
 
 @media screen and (max-width: 768px) {

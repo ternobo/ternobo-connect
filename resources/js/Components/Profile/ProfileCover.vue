@@ -1,11 +1,11 @@
 <template>
-	<div class="card-img-top position-relative page-cover">
+	<div class="position-relative page-cover">
 		<div class="position-absolute d-flex align-items-center justify-content-center" style="top: 0px; left: 0px; right: 0px; bottom: 0px; width: calc(100%); height: calc(100%); background: rgba(0, 0, 0, 0.5); z-index: 1" v-if="loading">
 			<loading-spinner></loading-spinner>
 		</div>
 		<CropperModal title="انتخاب تصویر پروفایل" v-if="canChange" :show.sync="crop" :aspect-ratio="25 / 7.8" :image="image" @cropped="upload"></CropperModal>
 		<input type="file" class="d-none" ref="imageFile" @change="imageSelect" />
-		<lazy-image style="min-height: 87px" :src="src" img-class="w-100" class="mb-0 page-cover" />
+		<lazy-image :src="src" img-class="w-100" class="mb-0 page-cover" />
 		<i class="material-icons-outlined camera-btn clickable" v-if="canChange" @click="openFileSelect">photo_camera</i>
 	</div>
 </template>

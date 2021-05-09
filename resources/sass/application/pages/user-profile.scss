@@ -1,7 +1,26 @@
-.page-cover {
+div.page-cover {
     height: auto;
-    -o-object-fit: cover;
-    object-fit: cover;
+
+    margin: 0 -32px;
+    width: calc(100% + 64px);
+
+    img {
+        min-height: 200px;
+        -o-object-fit: cover;
+        object-fit: cover;
+
+        @media screen and (max-width: $sm-size) {
+            min-height: 84px;
+        }
+    }
+
+}
+
+.profile-header-btn-edit {
+    @extend .btn-edit;
+    padding: 4px;
+    height: 36px;
+    width: 36px;
 }
 
 .card-img-top {
@@ -19,10 +38,6 @@
     padding: 16px;
     padding-bottom: 0;
 
-    @media screen and (max-width: $sm-size) {
-        justify-content: center;
-    }
-
     .btn-edit {
         position: absolute;
         right: 16px;
@@ -32,54 +47,110 @@
     }
 }
 
+.profile-header-card {
+    @extend .card;
+    padding: 32px;
+    padding-top: 0;
+}
+
 .page-name {
     display: flex;
-    flex-direction: column;
-    padding: 16px;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 16px 0;
+    padding-bottom: 0;
 
     @media screen and (max-width: $sm-size) {
         padding-top: 8px;
-        align-items: center;
     }
 
-    .follow-buttons {
-        margin-top: 10px;
+    .profile-info {
+        display: flex;
+        flex-direction: column;
+
+        @media screen and (min-width: $sm-size) {
+            margin-top: -80px;
+        }
+
+
+        >*:not(:last-child) {
+            margin-bottom: 8px;
+        }
+
+        span.name {
+            margin-bottom: 4px;
+        }
+
+        strong.name {
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .location {
+            font-size: 16px;
+            color: $grey;
+        }
+
+        .short_bio {
+            font-size: 16px;
+            color: $grey;
+        }
+
+        .profile-box {
+            margin-bottom: 24px;
+            margin-right: -8px;
+
+            .profile img {
+                border: 8px solid $white;
+            }
+        }
     }
 
-    .user-fullname {
-        font-weight: 600;
-        font-size: 20px;
+    .connection-actions {
+        color: $grey;
+        margin-left: 12px;
 
         @media screen and (max-width: $sm-size) {
+            i {
+                display: none;
+            }
+        }
+
+    }
+}
+
+
+.invite_badge {
+    display: flex;
+    flex-direction: row;
+
+    .invite_profile {
+        margin-left: 16px;
+    }
+
+    .invite_info {
+        display: flex;
+        flex-direction: column;
+
+        .invite_date {
             font-size: 14px;
-        }
-    }
+            color: $grey;
 
-    .user--short-bio {
-        font-size: 14px;
-
-        @media screen and (max-width: $sm-size) {
-            font-size: 12px;
-        }
-    }
-
-    .user-location {
-        font-size: 14px;
-
-        @media screen and (max-width: $sm-size) {
-            font-size: 12px;
+            &.bold {
+                font-weight: 600;
+            }
         }
 
-        i {
+        .invited_by {
             font-size: 16px;
         }
     }
 }
 
 .profile-box {
-    margin-top: -104px;
     position: relative;
     background: #FFF;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
 
     @media screen and (max-width: $sm-size) {
         margin-top: -64px;

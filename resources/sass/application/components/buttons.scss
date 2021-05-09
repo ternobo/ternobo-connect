@@ -259,6 +259,9 @@
     border: 2px solid $icons;
     color: #757575;
     transition: 0.3s all;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media screen and (max-width: 768px) {

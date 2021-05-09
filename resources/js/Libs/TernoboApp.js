@@ -160,6 +160,10 @@ TernoboApp.install = function (Vue, options) {
         return years;
     }
 
+    Vue.prototype.formatTime = function (time, format) {
+        return new PersianDate(time).format(format);
+    }
+
     Vue.prototype.months = function (to) {
         to = to || 12;
         let months = [];
