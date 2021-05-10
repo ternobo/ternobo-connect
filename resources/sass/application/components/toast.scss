@@ -19,15 +19,16 @@
 
     .msg {
         display: flex;
-        font-family: dana, roboto;
+        font-family: dana, 'Open Sans', sans-serif;
+        ;
         align-items: center;
         color: $white;
         padding: 20px 16px;
         z-index: 2;
         -webkit-user-select: none;
-           -moz-user-select: none;
-            -ms-user-select: none;
-                user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 
     .btn-toast {
@@ -47,21 +48,32 @@
         transition: 0.3s all;
         z-index: 1;
         -webkit-animation-name: toastProgress;
-                animation-name: toastProgress;
+        animation-name: toastProgress;
         -webkit-animation-duration: 4s;
-                animation-duration: 4s;
+        animation-duration: 4s;
     }
-    &:not(:last-child){
+
+    &:not(:last-child) {
         margin-bottom: 14px;
     }
 }
 
-@-webkit-keyframes toastProgress{
-    from {width: 0;}
-    to {width: 100%}
+@-webkit-keyframes toastProgress {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%
+    }
 }
 
-@keyframes toastProgress{
-    from {width: 0;}
-    to {width: 100%}
+@keyframes toastProgress {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%
+    }
 }

@@ -24,14 +24,14 @@
 				<div class="d-flex align-items-center" style="margin-left: -8px">
 					<div class="connection-actions clickable" @click="showConnections = true"><i class="material-icons-outlined">group</i> <span>شبکه</span></div>
 					<i class="btn profile-header-btn-edit material-icons-outlined" v-if="canEdit" @click="edit = true">edit</i>
-					<i class="material-icons-outlined" v-else @click="showReport = true">report</i>
+					<i class="material-icons-outlined report-icon" v-else @click="showReport = true">report</i>
 				</div>
 				<div class="invite_badge" v-if="$root.isDesktop">
 					<div class="invite_profile" v-if="invited_by != null">
 						<lazy-image :src="invited_by.profile" class="profile-sm mb-0" imgClass="profile-sm" />
 					</div>
 					<div class="invite_info">
-						<span class="invite_date" :class="{ bold: invited_by == null }">محلق شده در {{ joinTime }}</span>
+						<span class="invite_date" :class="{ bold: invited_by == null }">ملحق شده در {{ joinTime }}</span>
 						<span :href="`/${invited_by.username}`" class="invited_by" v-if="invited_by != null">
 							دعوت شده توسط <wire-link class="clickable" :href="`/${invited_by.username}`" as="strong">{{ invited_by.name }}</wire-link>
 						</span>

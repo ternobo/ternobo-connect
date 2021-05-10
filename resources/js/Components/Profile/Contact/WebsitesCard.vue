@@ -1,9 +1,7 @@
 <template>
 	<div>
 		<add-website-modal @add="addWebsite" :show.sync="showAddWebsite" :websiteOptions="usableOptions"></add-website-modal>
-		<div class="d-flex mb-2 aling-items-center justify-content-between">
-			<h5 class="contact--title"><i class="material-icons">public</i> وب‌سایت‌ها</h5>
-		</div>
+		<h5 class="contact--title"><i class="material-icons">public</i>وب‌سایت‌ها</h5>
 		<div v-if="loading" class="contact-list">
 			<Skeleton width="238px" height="66px" v-for="i in 3" :key="`skeleton_${i}`" />
 		</div>

@@ -399,7 +399,6 @@ class PageController extends Controller
                 $page->location = $request->location;
             }
             $user = Auth::user();
-            $user->name = $request->firstname . " " . $request->lastname;
             $user->first_name = $request->firstname;
             $user->last_name = $request->lastname;
             $user->gender = $request->gender;

@@ -1,9 +1,6 @@
 <template>
-	<div>
-		<div class="d-flex mb-2 aling-items-center justify-content-between">
-			<h5 class="contact--title"><i class="material-icons">alternate_email</i> راه‌های ارتباطی</h5>
-		</div>
-
+	<div class="socials-container">
+		<h5 class="contact--title"><i class="material-icons">alternate_email</i>راه‌های ارتباطی</h5>
 		<div v-if="loading" class="contact-list">
 			<Skeleton width="238px" height="66px" v-for="i in 1" :key="`skeleton_${i}`" />
 		</div>
@@ -14,7 +11,8 @@
 			<div @click="openGmail" class="contact-item" :class="{ clickable: !edit, 'border-only': options.google == undefined }">
 				<div>
 					<i class="material-icons clickable hover-danger text-grey" v-if="options.google != undefined && edit" @click="disconnect">close</i>
-					<i class="material-icons clickable hover-danger text-action" v-else-if="edit" @click="addSocial('google')">add</i>
+					<i class="material-icons clickable text-action" v-else-if="edit" @click="addSocial('google')">add</i>
+					<i class="material-icons clickable text-grey" v-else>launch</i>
 				</div>
 				<div class="socail-info">
 					<span>Gmail</span>
@@ -39,13 +37,13 @@ export default {
 		},
 		addSocial(name) {
 			let accountWindow = window.open(`/connect/${name}/login`, "Login", "height=700,width=700");
-			accountWindow.onbeforeunload = () => {
+			accountWindow.addEventListener("beforeunload", () => {
 				this.loading = true;
 				axios.post("/contact/social-option").then((response) => {
 					this.options = response.data.options;
 					this.loading = false;
 				});
-			};
+			});
 		},
 		validate() {
 			return this.$children.every((item) => {

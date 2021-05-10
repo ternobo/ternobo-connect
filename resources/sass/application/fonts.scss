@@ -106,20 +106,6 @@
 }
 
 @font-face {
-    font-family: roboto;
-    font-style: normal;
-    font-weight: normal;
-    src: url('/fonts/roboto/Roboto-Regular.ttf');
-}
-
-@font-face {
-    font-family: roboto;
-    font-style: bold;
-    font-weight: bold;
-    src: url('/fonts/roboto/Roboto-Bold.ttf');
-}
-
-@font-face {
     font-family: dana;
     font-style: normal;
     font-weight: 10;
@@ -380,7 +366,8 @@
 }
 
 body {
-    font-family: dana, roboto;
+    font-family: dana, 'Open Sans', sans-serif;
+    ;
 }
 
 

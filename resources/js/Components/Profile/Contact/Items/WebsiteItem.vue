@@ -1,9 +1,9 @@
 <template>
-	<div class="contact-item">
+	<div class="contact-item website-item">
 		<i class="material-icons clickable hover-danger text-grey" v-if="edit" @click="$emit('deleted')">close</i>
 		<i class="material-icons clickable hover-dark text-grey" v-else @click="window.open(website.url)">launch</i>
 		<div class="website-info">
-			<span class="font-14 text-action">{{ website.url }}</span>
+			<strong class="font-14 text-action">{{ website.url }}</strong>
 			<span class="font-14">{{ website.option.name }}</span>
 		</div>
 	</div>

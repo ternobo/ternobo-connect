@@ -28,6 +28,7 @@ div.page-cover {
     padding: 4px;
     height: 36px;
     width: 36px;
+    margin-top: -8px;
     border-radius: 12px;
 
     @media screen and(max-width: $sm-size) {
@@ -76,7 +77,7 @@ div.page-cover {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        padding: 16px 0;
+        padding: 32px 0;
         padding-bottom: 0;
         min-height: 200px;
 
@@ -164,6 +165,10 @@ div.page-cover {
         .connection-actions {
             color: $grey;
             margin-left: 12px;
+
+            span {
+                font-weight: 600;
+            }
 
             @media screen and (max-width: $sm-size) {
                 span {
@@ -382,6 +387,15 @@ div.page-cover {
     }
 }
 
+.report-icon {
+    color: $grey;
+    cursor: pointer;
+
+    &:hover {
+        color: $dark;
+    }
+}
+
 .slug-item {
     &.profile-slug-contact {
         background: $white;
@@ -393,6 +407,16 @@ div.page-cover {
             font-size: 10px;
             line-height: 1.5;
         }
+    }
+}
+
+.contact--title {
+    font-size: 16px;
+    margin-bottom: 24px;
+    font-weight: 600;
+
+    i {
+        margin-left: 8px;
     }
 }
 

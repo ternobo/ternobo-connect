@@ -5,7 +5,7 @@
 				<div class="connections-list">
 					<div v-for="connections in connections" :key="'connections_' + connections.id" class="connection-item">
 						<wire-link :href="'/' + connections.following.slug" class="userinfo">
-							<lazy-image class="mb-0 ml-2 profile-sm" imgClass="profile-sm" :src="connections.following.profile"></lazy-image>
+							<lazy-image class="mb-0 profile-standard" imgClass="profile-standard" :src="connections.following.profile"></lazy-image>
 							<div class="page-name d-flex flex-column">
 								<strong> {{ connections.following.name }} <i v-if="connections.following.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 								<span class="shortbio"> {{ connections.following.short_bio }} </span>
@@ -18,7 +18,7 @@
 						<loading-spinner></loading-spinner>
 					</div>
 					<div class="d-flex justify-content-center w-100 py-4" v-else-if="connections.length < 1">
-						<strong class="font-20 text-superlight">هیچ دنبال شده‌ای یافت نشد</strong>
+						<span class="font-16 text-superlight">هیچ دنبال شده‌ای یافت نشد</span>
 					</div>
 				</div>
 			</tab>
@@ -26,7 +26,7 @@
 				<div class="connections-list">
 					<div v-for="connections in connections" :key="'connections_' + connections.id" class="connection-item">
 						<wire-link :href="'/' + connections.follower.slug" class="userinfo">
-							<lazy-image class="mb-0 ml-2 profile-sm" imgClass="profile-sm" :src="connections.follower.profile"></lazy-image>
+							<lazy-image class="mb-0 profile-standard" imgClass="profile-standard" :src="connections.follower.profile"></lazy-image>
 							<div class="page-name d-flex flex-column">
 								<strong> {{ connections.follower.name }} <i v-if="connections.follower.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 								<span class="shortbio"> {{ connections.follower.short_bio }} </span>
@@ -39,7 +39,7 @@
 						<loading-spinner></loading-spinner>
 					</div>
 					<div class="d-flex justify-content-center w-100 py-4" v-else-if="connections.length < 1">
-						<strong class="font-20 text-superlight">هیچ دنبال شده‌ای یافت نشد</strong>
+						<span class="font-16 text-superlight">هیچ دنبال کننده‌ای یافت نشد</span>
 					</div>
 				</div>
 			</tab>

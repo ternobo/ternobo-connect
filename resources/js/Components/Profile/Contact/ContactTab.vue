@@ -2,8 +2,7 @@
 	<div class="w-100">
 		<SlugCard ref="contacts" :edit="edit" :page="page" v-model="slug"></SlugCard>
 		<div class="contact-card">
-			<SocialsCard class="mb-3" :edit="edit" :page="page" ref="socials" />
-
+			<SocialsCard :edit="edit" :page="page" ref="socials" />
 			<WebsiteCard :edit="edit" :page="page" ref="websites" />
 		</div>
 	</div>

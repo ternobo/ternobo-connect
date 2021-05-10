@@ -6,6 +6,13 @@
     flex-direction: row;
     align-items: center;
 
+
+    .slug-info {
+        img {
+            margin-left: 8px;
+        }
+    }
+
     .slug-data {
         color: $grey;
 
@@ -15,8 +22,8 @@
             direction: ltr;
             line-height: 1;
 
-            >*:not(:last-child) {
-                margin: 0 2px;
+            >*:not(:first-child) {
+                margin: 0 8px;
             }
 
             i {
@@ -33,6 +40,14 @@
             line-height: 1;
             padding: 10px 16px;
             background: $body-bg;
+
+            span {
+                margin-top: 4px;
+            }
+
+            strong {
+                margin-top: 2px
+            }
 
             i {
                 margin-right: 8px;

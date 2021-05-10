@@ -441,7 +441,7 @@ img {
 
 .modal-header {
     border: none;
-    padding: 20px 24px;
+    padding: 24px;
 
     @media screen and (max-width: $sm-size) {
         padding: 20px 12px;
@@ -482,6 +482,12 @@ img {
     padding: 0;
     margin: 0;
     height: 24px;
+    transition: 0.3s all;
+
+    &:hover {
+        opacity: 1;
+        color: $grey;
+    }
 }
 
 .b-sidebar-backdrop {
@@ -964,7 +970,8 @@ pre {
 }
 
 .tooltip-inner {
-    font-family: dana, roboto;
+    font-family: dana, 'Open Sans', sans-serif;
+    ;
 }
 
 .action {
