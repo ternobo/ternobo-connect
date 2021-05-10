@@ -1,0 +1,46 @@
+.slug-card {
+    @extend .card;
+    padding: 12px 28px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+
+    .slug-data {
+        color: $grey;
+
+        .slug-data-edit {
+            display: flex;
+            align-items: center;
+            direction: ltr;
+            line-height: 1;
+
+            >*:not(:last-child) {
+                margin: 0 2px;
+            }
+
+            i {
+                color: $icons;
+                cursor: not-allowed;
+                margin-right: 8px;
+            }
+        }
+
+        .slug-data-view {
+            display: flex;
+            align-items: center;
+            direction: ltr;
+            line-height: 1;
+            padding: 10px 16px;
+            background: $body-bg;
+
+            i {
+                margin-right: 8px;
+            }
+        }
+
+        i {
+            color: $text-color;
+        }
+    }
+}

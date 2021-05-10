@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ConnectedAccount;
 use App\Models\ContactData;
 use App\Models\ContactOption;
 use App\Models\Page;
-use App\Models\Social;
 use App\Models\WebsiteOption;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
 
 class ContactsController extends Controller
 {
@@ -35,7 +34,7 @@ class ContactsController extends Controller
 
     public function getSocialOptions()
     {
-        $options = Social::all();
+        $options = ConnectedAccount::query()->where("user_id", Auth::user()->id)->select("driver", "meta")->pluck("meta", "driver");
         return response()->json(['result' => true, "options" => $options]);
     }
 

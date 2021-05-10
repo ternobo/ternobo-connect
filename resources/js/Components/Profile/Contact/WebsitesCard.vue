@@ -1,60 +1,43 @@
 <template>
-	<div class="card">
-		<div class="py-3 card-body">
-			<div class="d-flex mb-2 aling-items-center justify-content-between">
-				<h5 class="contact--title">وب‌سایت‌ها</h5>
-				<button class="btn follow-btn rounded-pill px-3 py-1" v-if="edit && usableOptions.length > 0 && websites.length < options.length" @click="addWebsite">
-					<i class="material-icons">add</i>
-				</button>
-			</div>
-
-			<ul class="websites-list p-0" v-if="loading">
-				<li>
-					<Skeleton :count="2" :heigth="25" />
-				</li>
-			</ul>
-			<div class="w-100 text-center" v-else-if="websites.length < 1">
-				<span class="font-16 text-superlight">هیچ وب‌سایتی ثبت نشده</span>
-			</div>
-			<ul class="websites-list p-0" v-else>
-				<WebsiteItem @deleted="onDelete(index)" @input="updateData" :options="usableOptions" :edit="edit" v-for="(website, index) in websites" :website="website" :key="'contact_item_num_' + website.id"></WebsiteItem>
-			</ul>
+	<div>
+		<add-website-modal @add="addWebsite" :show.sync="showAddWebsite" :websiteOptions="usableOptions"></add-website-modal>
+		<div class="d-flex mb-2 aling-items-center justify-content-between">
+			<h5 class="contact--title"><i class="material-icons">public</i> وب‌سایت‌ها</h5>
+		</div>
+		<div v-if="loading" class="contact-list">
+			<Skeleton width="238px" height="66px" v-for="i in 3" :key="`skeleton_${i}`" />
+		</div>
+		<div class="no-contact-container" v-else-if="websites.length < 1 && !edit">
+			<span class="font-16 text-grey">موردی ثبت نشده</span>
+		</div>
+		<div class="contact-list p-0" v-else>
+			<WebsiteItem @deleted="onDelete(index)" :edit="edit" v-for="(website, index) in websites" :website.sync="websites[index]" :key="website.id"></WebsiteItem>
+			<button v-if="edit" @click="showAddWebsite = true" class="rounded-add-btn"><i class="material-icons">add</i></button>
 		</div>
 	</div>
 </template>
 
 <script>
 import { Skeleton } from "vue-loading-skeleton";
+import AddWebsiteModal from "./AddWebsiteModal.vue";
 import WebsiteItem from "./Items/WebsiteItem";
+import { v4 as uuidv4 } from "uuid";
 export default {
+	computed: {
+		usableOptions() {
+			return this.options.filter((option) => {
+				return this.websites.filter((website) => website.option.id == option.id).length < 1;
+			});
+		},
+	},
 	methods: {
 		onDelete(index) {
 			this.websites.splice(index, 1);
 		},
-		addWebsite() {
-			if (this.usableOptions.length > 0) {
-				this.websites.push({
-					name: "",
-					id: "social_" + Math.round(new Date().getTime()),
-					isNew: true,
-				});
-			}
-		},
-		updateData() {
-			this.websites = this.getData();
-			this.usableOptions = [];
-			this.options.forEach((option) => {
-				let canAdd = true;
-				this.websites.forEach((contact) => {
-					if (contact.option != null) {
-						if (contact.option.id == option.id) {
-							canAdd = false;
-						}
-					}
-				});
-				if (canAdd) {
-					this.usableOptions.push(option);
-				}
+		addWebsite(website) {
+			this.websites.push({
+				id: "social_" + uuidv4(),
+				...website,
 			});
 		},
 		validate() {
@@ -67,19 +50,15 @@ export default {
 			});
 		},
 		getData() {
-			let data = [];
-			this.$children.forEach((item) => {
-				data.push(item.value);
-			});
-			return data;
+			return this.websites;
 		},
 	},
 	data() {
 		return {
 			loading: true,
 			options: [],
-			usableOptions: [],
 			websites: [],
+			showAddWebsite: false,
 		};
 	},
 	props: {
@@ -98,29 +77,16 @@ export default {
 		this.loading = true;
 		axios.post("/contact/website-option").then((response) => {
 			this.options = response.data.options;
-			if (this.page.contact_data != null) {
+			if (this.page.contact_data != null && this.page.contact_data.websites) {
 				this.websites = this.page.contact_data.websites;
 			}
-			this.$nextTick(() => {
-				this.options.forEach((option) => {
-					let canAdd = true;
-					this.websites.forEach((social) => {
-						if (social.option.id == option.id) {
-							canAdd = false;
-						}
-					});
-					if (canAdd) {
-						this.usableOptions.push(option);
-					}
-				});
-			});
-
 			this.loading = false;
 		});
 	},
 	components: {
 		Skeleton,
 		WebsiteItem,
+		AddWebsiteModal,
 	},
 };
 </script>

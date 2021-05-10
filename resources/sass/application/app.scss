@@ -885,7 +885,7 @@ pre {
         padding: 32px;
     }
 
-    .about-me .card-body .add-to-resume-btn {
+    .about-me .card-body .rounded-add-btn {
         margin-left: -20px;
     }
 }
@@ -978,9 +978,6 @@ pre {
 .modal-dialog {
     padding: 16px;
 }
-
-@import "./components/website-card";
-@import "./components/contacts-card";
 
 @import "./components/skills.scss";
 
@@ -1490,6 +1487,7 @@ a:focus {
 @import "./pages/register.scss";
 @import "./components/emoji-picker.scss";
 @import "./components/tags.scss";
+@import "./components/about-me/index.scss";
 
 .connections-tab {
     ul {

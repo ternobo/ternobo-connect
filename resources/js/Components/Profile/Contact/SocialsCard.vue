@@ -1,61 +1,51 @@
 <template>
-	<div class="card">
-		<div class="py-3 card-body">
-			<div class="d-flex mb-2 aling-items-center justify-content-between">
-				<h5 class="contact--title">شبکه‌های اجتماعی</h5>
-				<button class="btn follow-btn rounded-pill px-3 py-1" v-if="edit && usableOptions.length > 0 && socials.length < options.length" @click="addSocial">
-					<i class="material-icons">add</i>
-				</button>
-			</div>
+	<div>
+		<div class="d-flex mb-2 aling-items-center justify-content-between">
+			<h5 class="contact--title"><i class="material-icons">alternate_email</i> راه‌های ارتباطی</h5>
+		</div>
 
-			<ul class="socials-list p-0" v-if="loading">
-				<li class="w-100">
-					<Skeleton :count="2" :heigth="25" />
-				</li>
-			</ul>
-			<div class="w-100 text-center" v-else-if="socials.length < 1">
-				<span class="font-16 text-superlight">هیچ مهارتی ثبت نشده</span>
+		<div v-if="loading" class="contact-list">
+			<Skeleton width="238px" height="66px" v-for="i in 1" :key="`skeleton_${i}`" />
+		</div>
+		<div class="no-contact-container" v-else-if="options.google == undefined && !edit">
+			<span class="font-16 text-grey">موردی ثبت نشده</span>
+		</div>
+		<div class="contact-list p-0" v-else>
+			<div @click="openGmail" class="contact-item" :class="{ clickable: !edit }">
+				<div>
+					<i class="material-icons clickable hover-danger text-grey" v-if="options.google != undefined && edit" @click="disconnect">close</i>
+					<i class="material-icons clickable hover-danger text-action" v-else-if="edit" @click="addSocial('google')">add</i>
+				</div>
+				<div class="socail-info">
+					<span>Gmail</span>
+					<img src="/images/gmail-logo.png" width="24px" />
+				</div>
 			</div>
-			<ul class="socials-list p-0" v-else>
-				<SocialItem @deleted="onDelete(index)" @input="updateData" :options="usableOptions" :edit="edit" v-for="(social, index) in socials" :social="social" :key="'social_item_num_' + social.id"></SocialItem>
-			</ul>
 		</div>
 	</div>
 </template>
 
 <script>
 import { Skeleton } from "vue-loading-skeleton";
-import SocialItem from "./Items/SocialItem";
+
 export default {
+	components: { Skeleton },
 	methods: {
-		onDelete(index) {
-			this.socials.splice(index, 1);
+		openGmail() {
+			if (!this.edit) window.open(`mailto:${this.options.google.email}`);
 		},
-		addSocial() {
-			if (this.usableOptions.length > 0) {
-				this.socials.push({
-					name: "",
-					id: "social_" + Math.round(new Date().getTime()),
-					isNew: true,
-				});
-			}
+		disconnect() {
+			this.options = {};
 		},
-		updateData() {
-			this.socials = this.getData();
-			this.usableOptions = [];
-			this.options.forEach((option) => {
-				let canAdd = true;
-				this.socials.forEach((social) => {
-					if (social.option != null) {
-						if (social.option.id == option.id) {
-							canAdd = false;
-						}
-					}
+		addSocial(name) {
+			let accountWindow = window.open(`/connect/${name}/login`, "Login", "height=700,width=700");
+			accountWindow.onbeforeunload = () => {
+				this.loading = true;
+				axios.post("/contact/social-option").then((response) => {
+					this.options = response.data.options;
+					this.loading = false;
 				});
-				if (canAdd) {
-					this.usableOptions.push(option);
-				}
-			});
+			};
 		},
 		validate() {
 			return this.$children.every((item) => {
@@ -67,19 +57,13 @@ export default {
 			});
 		},
 		getData() {
-			let data = [];
-			this.$children.forEach((item) => {
-				data.push(item.value);
-			});
-			return data;
+			return this.options;
 		},
 	},
 	data() {
 		return {
 			loading: true,
-			options: [],
-			usableOptions: [],
-			socials: [],
+			options: {},
 		};
 	},
 	props: {
@@ -94,34 +78,12 @@ export default {
 			required: true,
 		},
 	},
-	created() {
+	mounted() {
 		this.loading = true;
 		axios.post("/contact/social-option").then((response) => {
 			this.options = response.data.options;
-			if (this.page.contact_data != null) {
-				this.socials = this.page.contact_data.socials;
-			}
-			this.$nextTick(() => {
-				this.options.forEach((option) => {
-					let canAdd = true;
-
-					this.socials.forEach((social) => {
-						if (social.option.id == option.id) {
-							canAdd = false;
-						}
-					});
-					if (canAdd) {
-						this.usableOptions.push(option);
-					}
-				});
-			});
-
 			this.loading = false;
 		});
-	},
-	components: {
-		Skeleton,
-		SocialItem,
 	},
 };
 </script>

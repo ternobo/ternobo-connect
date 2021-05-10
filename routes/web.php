@@ -295,6 +295,14 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         //End
         // Donations End
 
+        //Conneted Accounts Actions
+        // Google Start
+        Route::get("/connect/google/login", "Socialite\GoogleController@login");
+        Route::get("/connect/google/callback", "Socialite\GoogleController@callback");
+        // Google End
+
+        // Connected Device Actions
+
         Route::get("/invite", "InviteLinksController@index");
 
     });
