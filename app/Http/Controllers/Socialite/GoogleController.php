@@ -11,6 +11,7 @@ class GoogleController extends Controller
 {
     public function login()
     {
+        ConnectedAccount::query()->where("user_id", Auth::user()->id)->where("driver", "google")->delete();
         return Socialite::driver('google')
             ->with(['user' => Auth::user()->id])
             ->redirect();

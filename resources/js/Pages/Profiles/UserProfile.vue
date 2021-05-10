@@ -104,6 +104,8 @@ import ProfileSteps from "../../Components/Profile/ProfileSteps.vue";
 import VerifyModal from "../../Components/Modals/VerifyModal.vue";
 import DraftCard from "../../Components/PostCard/DraftCard.vue";
 import AppLayout from "../../Layouts/AppLayout.vue";
+import ContactTab from "../../Components/Profile/Contact/ContactTab";
+import AboutTab from "../../Components/Profile/AboutMe/AboutMeTab";
 export default {
 	watch: {
 		filters() {
@@ -409,21 +411,13 @@ export default {
 
        */
 	components: {
-		AboutTab: () =>
-			import(
-				/* webpackChunkName: "AboutMeTabProfile" */
-				"../../Components/Profile/AboutMe/AboutMeTab"
-			),
+		AboutTab,
 		NewPostCard: () => import("../../Components/Cards/NewPostCard"),
 		Categories: () => import("../../Components/Profile/Categories"),
 		ActionCard: () => import("../../Components/PostCard/ActionCard"),
 		NoContent,
 		PostCard: () => import("../../Components/PostCard/PostCard"),
-		ContactTab: () =>
-			import(
-				/* webpackChunkName: "ContactTabProfile" */
-				"../../Components/Profile/Contact/ContactTab"
-			),
+		ContactTab,
 		ProfileHeader,
 		MobileCategories,
 		CategoriesMobile,

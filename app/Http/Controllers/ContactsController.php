@@ -45,6 +45,10 @@ class ContactsController extends Controller
         $contact->page_id = $page->id;
         $contact->data = json_encode($request->contacts);
 
+        if (!isset($request->socials->google)) {
+            ConnectedAccount::query()->where("user_id", Auth::user()->id)->where("driver", "google")->delete();
+        }
+
         $page->slug = $request->contacts['slug'];
 
         $contact->save();

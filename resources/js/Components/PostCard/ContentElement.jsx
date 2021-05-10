@@ -57,6 +57,16 @@ export default {
             this.showFullText = !this.showFullText;
         }
     },
+    mounted() {
+        twemoji.parse(this.$el);
+    },
+    watch: {
+        textToShow() {
+            this.$nextTick(() => {
+                twemoji.parse(this.$el);
+            });
+        }
+    },
     computed: {
         textToShow() {
             return this.showFullText || this.text.split(" ").length < 100 ? this.text : (this.text.split(" ").slice(0, 40).join(" ") + "...");

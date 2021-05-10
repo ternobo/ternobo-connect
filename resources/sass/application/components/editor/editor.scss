@@ -154,11 +154,12 @@
 
     padding: .375rem .75rem;
 
-    p {
+    * {
         unicode-bidi: -moz-plaintext;
         unicode-bidi: plaintext;
         text-align: start;
     }
+
 
     &:not(.highlight) {
         -webkit-text-fill-color: transparent;
@@ -174,6 +175,12 @@
     }
 
     &::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
         -webkit-text-fill-color: $text-color;
         text-fill-color: $text-color;
     }

@@ -1,6 +1,6 @@
 <template>
 	<div class="textarea-content w-100">
-		<div ref="editable" class="editor--text-input" contenteditable @input="input" :data-max-length="max"></div>
+		<div ref="editable" class="editor--text-input" contenteditable @keydown.exact.enter="onEnter" @input="input" :data-max-length="max"></div>
 		<div ref="editableHighlight" class="editor--text-input highlight" placeholder="متن خو را وارد کنید"></div>
 	</div>
 </template>
@@ -11,9 +11,11 @@ import Tribute from "tributejs";
 import TextareaParser from "../TextareaParser";
 export default {
 	methods: {
+		onEnter(e) {},
 		input() {
 			this.$refs.editableHighlight.innerHTML = this.$refs.editable.innerHTML.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
 			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
+			content = TextareaParser.escapeHTML(content);
 			this.$emit("update:content", content);
 			this.$nextTick(() => {
 				twemoji.parse(this.$refs.editableHighlight);

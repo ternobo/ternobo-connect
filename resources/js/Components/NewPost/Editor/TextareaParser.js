@@ -11,18 +11,9 @@ export default {
             .replace(/&#039;/g, "'");
     },
     escapeHTML(text) {
-        const divEscapedHtml = document.createElement('div');
-        const escapedHtmlTextNode = divEscapedHtml.appendChild(
-            document.createTextNode(text)
-        );
-
-        const escapedHtml = escapedHtmlTextNode.parentNode;
-        const escapedHtmlContent = escapedHtml.innerText;
-
-        escapedHtml.removeChild(escapedHtmlTextNode);
-        divEscapedHtml.parentNode?.removeChild(divEscapedHtml);
-
-        // eslint-disable-next-line
+        const divEscapedHtml = document.createElement('pre');
+        divEscapedHtml.innerHTML = text;
+        let escapedHtmlContent = divEscapedHtml.innerText;
         return escapedHtmlContent;
     }
 };

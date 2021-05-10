@@ -11,7 +11,7 @@
 			<span class="font-16 text-grey">موردی ثبت نشده</span>
 		</div>
 		<div class="contact-list p-0" v-else>
-			<div @click="openGmail" class="contact-item" :class="{ clickable: !edit }">
+			<div @click="openGmail" class="contact-item" :class="{ clickable: !edit, 'border-only': options.google == undefined }">
 				<div>
 					<i class="material-icons clickable hover-danger text-grey" v-if="options.google != undefined && edit" @click="disconnect">close</i>
 					<i class="material-icons clickable hover-danger text-action" v-else-if="edit" @click="addSocial('google')">add</i>

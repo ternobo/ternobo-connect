@@ -53,6 +53,20 @@
         background: $body-bg;
         min-width: 238px;
         align-items: center;
+
+        &.border-only {
+            background: transparent;
+            border: 2px solid $fixed-elements;
+        }
+
+        .socail-info {
+            vertical-align: middle;
+            font-weight: 600;
+
+            img {
+                margin-right: 8px;
+            }
+        }
     }
 
 }

@@ -68,9 +68,8 @@ TernoboApp.install = function (Vue, options) {
         template: '<component v-bind:is="transformed"></component>',
         props: ['text'],
         methods: {
-            convertHashTags: function (str) {
-                let content = twemoji.parse(TextareaParser.escapeHTML(str));
-                content = content.replace(/\B#(\S+)/gu, "<wire-link href='/tags/$1' class='text-action'>#$1</wire-link>").replace(/\B@(\w+)/gu, "<wire-link href='/$1'  class='mention-item'>@$1</wire-link>");
+            convertHashTags: function (content) {
+                content = content.replace(/\B#(\S+)/gu, "<wire-link href='/tags/$1' class='text-action'>#$1</wire-link>").replace(/\B@(\w+)/gu, "<wire-link href='/$1' class='mention-item'>@$1</wire-link>");
                 const spanned = `<pre class='post-content--text'>${content}</pre>`
                 return spanned;
             }
