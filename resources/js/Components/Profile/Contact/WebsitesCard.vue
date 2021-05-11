@@ -10,7 +10,7 @@
 		</div>
 		<div class="contact-list p-0" v-else>
 			<WebsiteItem @deleted="onDelete(index)" :edit="edit" v-for="(website, index) in websites" :website.sync="websites[index]" :key="website.id"></WebsiteItem>
-			<button v-if="edit" @click="showAddWebsite = true" class="rounded-add-btn"><i class="material-icons">add</i></button>
+			<button v-if="edit" @click="showAddWebsite = true" class="rounded-add-btn btn-light-action"><i class="material-icons">add</i></button>
 		</div>
 	</div>
 </template>

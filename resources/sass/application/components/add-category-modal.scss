@@ -1,0 +1,28 @@
+.add-category-container {
+    display: flex;
+    align-items: center;
+    margin: 0 -12px;
+    margin-bottom: 24px;
+
+    >* {
+        margin: 0 12px;
+    }
+
+}
+
+.edit-categories-list .category-item {
+    display: flex;
+    align-items: center;
+    height: 64px;
+    justify-content: space-between;
+
+    .category-content {
+        display: flex;
+        align-items: center;
+        margin: 0 -8px;
+
+        >* {
+            margin: 0 8px;
+        }
+    }
+}

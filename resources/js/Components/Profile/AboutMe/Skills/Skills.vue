@@ -3,7 +3,7 @@
 		<div class="card-body">
 			<div class="about-me--card-title-container">
 				<h2 class="about-me--card-title">مهارت‌ها</h2>
-				<button class="rounded-add-btn" v-if="edit" @click="addSkill">
+				<button class="rounded-add-btn btn-light-action" v-if="edit" @click="addSkill">
 					<i class="material-icons">add</i>
 				</button>
 			</div>

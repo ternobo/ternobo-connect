@@ -312,11 +312,24 @@
     }
 }
 
+.btn-light-action {
+    color: rgb(8, 152, 223);
+    background: rgba(231, 242, 255, 1);
+    color: $action;
+}
+
+.add-btn-light-grey {
+    background-color: $fixed-elements;
+    color: $text-color;
+
+    &:disabled {
+        color: $icons;
+    }
+}
+
 .rounded-add-btn {
-    @extend .follow-btn;
     @extend .btn;
     padding: 4px !important;
-    color: $action;
     border-radius: 12px;
     min-width: unset;
     height: 32px;

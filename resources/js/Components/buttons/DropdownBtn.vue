@@ -1,6 +1,6 @@
 <template>
 	<div class="bg-light-blue dropndown-btn" style="height: fit-content" :class="{ active: open }">
-		<button class="rounded-add-btn" @click="open = !open">
+		<button class="rounded-add-btn btn-light-action" @click="open = !open">
 			<i class="material-icons">add</i>
 		</button>
 		<transition name="slide">
