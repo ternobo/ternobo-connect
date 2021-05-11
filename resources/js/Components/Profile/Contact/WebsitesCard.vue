@@ -9,7 +9,7 @@
 		<div class="contact-list p-0">
 			<WebsiteItem @deleted="onDelete(index)" :edit="edit" v-for="(website, index) in websites" :website.sync="websites[index]" :key="website.id"></WebsiteItem>
 			<button v-if="edit && usableOptions.length > 0" @click="showAddWebsite = true" class="rounded-add-btn btn-light-action"><i class="material-icons">add</i></button>
-			<div class="no-contact-container" v-if="websites.length < 1">
+			<div class="no-contact-container" v-if="websites.length < 1 && !loading">
 				<span class="font-16 text-grey">موردی ثبت نشده</span>
 			</div>
 		</div>
