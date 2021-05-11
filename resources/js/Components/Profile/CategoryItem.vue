@@ -1,5 +1,5 @@
 <template>
-	<li class="category-item">
+	<li class="category-badge">
 		<span class="clickable" ref="name">{{ category.name }}</span>
 	</li>
 </template>
