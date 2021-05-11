@@ -1,15 +1,15 @@
 <template>
 	<b-modal v-model="showModal" hide-footer title="ویرایش دسته‌بندی‌ها" size="md" :centered="true">
 		<div class="add-category-container">
-			<add-btn :disabled="!(input != null && input.length > 0)" @click="addCategory" class="add-btn-light-grey d-flex justify-content-center align-items-center">
+			<add-btn :disabled="!(input != null && input.length > 0) || loading || disabled" @click="addCategory" class="add-btn-light-grey d-flex justify-content-center align-items-center">
 				<i v-if="!loading" class="material-icons">add</i>
 				<span style="height: 14px; width: 14px; border-width: 2px" v-if="loading" class="loadingspinner"></span>
 			</add-btn>
-			<input type="text" placeholder="دسته‌جدید را وارد کنید" maxlength="50" v-model="input" class="form-control text-input" />
+			<input type="text" :readonly="disabled" placeholder="دسته‌جدید را وارد کنید" maxlength="50" v-model="input" class="form-control text-input" />
 		</div>
 		<div class="edit-categories-list">
 			<draggable @end="save" v-model="list" handle=".hand-hover">
-				<category-item v-for="(category, index) in list" :key="'category_' + category.id" @deleted="doDelete(index)" :category="category"></category-item>
+				<category-item v-for="(category, index) in list" :key="'category_' + category.id" :disabled="disabled" @deleted="doDelete(index)" @editChanged="editChanged" :category="category"></category-item>
 			</draggable>
 		</div>
 	</b-modal>
@@ -21,6 +21,9 @@ import AddBtn from "../../buttons/AddBtn.vue";
 import CategoryItem from "./CategoryItem";
 export default {
 	methods: {
+		editChanged(edit) {
+			this.disabled = edit;
+		},
 		addCategory() {
 			this.loading = true;
 			axios
@@ -58,6 +61,8 @@ export default {
 			list: [],
 			input: null,
 			loading: false,
+
+			disabled: false,
 		};
 	},
 	components: {

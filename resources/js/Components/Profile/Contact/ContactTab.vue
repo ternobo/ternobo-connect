@@ -10,7 +10,6 @@
 
 <script>
 import SlugCard from "./SlugCard";
-import ContactCard from "./ContactCard";
 import WebsiteCard from "./WebsitesCard";
 import SocialsCard from "./SocialsCard";
 export default {
@@ -72,7 +71,6 @@ export default {
 	components: {
 		SlugCard,
 		WebsiteCard,
-		ContactCard,
 		SocialsCard,
 	},
 };

@@ -16,6 +16,16 @@
     }
 }
 
+.btn {
+    padding: 8px 24px;
+
+    &:disabled {
+        background: $icons;
+        color: $grey;
+        border-color: $icons;
+    }
+}
+
 .btn-action-light {
     background: #E7F3FF;
     border-radius: 12px;
@@ -45,7 +55,6 @@
 
 .btn-transparent:hover {
     background: rgba(255, 255, 255, 0.2);
-    color: #FFF;
 }
 
 .btn-transparent:active {
@@ -306,8 +315,8 @@
 .page-cover {
     .camera-btn {
         position: absolute;
-        top: 12px;
-        left: 12px;
+        top: 24px;
+        left: 24px;
         padding-top: 5px;
     }
 }
@@ -334,6 +343,9 @@
     min-width: unset;
     height: 32px;
     width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     @media screen and (max-width: $sm-size) {
         padding: 8px 8px !important;

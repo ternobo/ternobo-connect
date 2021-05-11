@@ -5,12 +5,13 @@
 		<div v-if="loading" class="contact-list">
 			<Skeleton width="238px" height="66px" v-for="i in 3" :key="`skeleton_${i}`" />
 		</div>
-		<div class="no-contact-container" v-else-if="websites.length < 1 && !edit">
-			<span class="font-16 text-grey">موردی ثبت نشده</span>
-		</div>
-		<div class="contact-list p-0" v-else>
+
+		<div class="contact-list p-0">
 			<WebsiteItem @deleted="onDelete(index)" :edit="edit" v-for="(website, index) in websites" :website.sync="websites[index]" :key="website.id"></WebsiteItem>
-			<button v-if="edit" @click="showAddWebsite = true" class="rounded-add-btn btn-light-action"><i class="material-icons">add</i></button>
+			<button v-if="edit && usableOptions.length > 0" @click="showAddWebsite = true" class="rounded-add-btn btn-light-action"><i class="material-icons">add</i></button>
+			<div class="no-contact-container" v-if="websites.length < 1">
+				<span class="font-16 text-grey">موردی ثبت نشده</span>
+			</div>
 		</div>
 	</div>
 </template>
@@ -18,7 +19,7 @@
 <script>
 import { Skeleton } from "vue-loading-skeleton";
 import AddWebsiteModal from "./AddWebsiteModal.vue";
-import WebsiteItem from "./Items/WebsiteItem";
+import WebsiteItem from "./Items/WebsiteItem.jsx";
 import { v4 as uuidv4 } from "uuid";
 export default {
 	computed: {
@@ -33,6 +34,7 @@ export default {
 			this.websites.splice(index, 1);
 		},
 		addWebsite(website) {
+			console.log(website);
 			this.websites.push({
 				id: "social_" + uuidv4(),
 				...website,

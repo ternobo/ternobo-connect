@@ -16,6 +16,33 @@
     height: 64px;
     justify-content: space-between;
 
+    &.disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    .category-edit-action-icon {
+        color: $icons;
+
+        &:hover {
+            color: $grey;
+        }
+    }
+
+    .save-edit-action-icons {
+        display: flex;
+        align-items: center;
+        margin: 0 -4px;
+
+        .btn-edit {
+            border-radius: 8px;
+        }
+
+        i {
+            margin: 0 4px;
+        }
+    }
+
     .category-content {
         display: flex;
         align-items: center;

@@ -8,10 +8,10 @@
 			<span class="font-16 text-grey">موردی ثبت نشده</span>
 		</div>
 		<div class="contact-list p-0" v-else>
-			<div @click="openGmail" class="contact-item" :class="{ clickable: !edit, 'border-only': options.google == undefined }">
+			<div @click="cardClickAction" class="contact-item clickable" :class="{ 'border-only': options.google == undefined }">
 				<div>
-					<i class="material-icons clickable hover-danger text-grey" v-if="options.google != undefined && edit" @click="disconnect">close</i>
-					<i class="material-icons clickable text-action" v-else-if="edit" @click="addSocial('google')">add</i>
+					<i class="material-icons clickable text-grey" v-if="options.google != undefined && edit">close</i>
+					<i class="material-icons clickable text-action" v-else-if="edit">add</i>
 					<i class="material-icons clickable text-grey" v-else>launch</i>
 				</div>
 				<div class="socail-info">
@@ -29,8 +29,25 @@ import { Skeleton } from "vue-loading-skeleton";
 export default {
 	components: { Skeleton },
 	methods: {
+		cardClickAction() {
+			if (this.edit && this.options.google == undefined) {
+				this.addSocial("google");
+			} else if (this.edit) {
+				const h = this.$createElement;
+
+				this.confirmDialog(["ایا از حذف ", h("strong", {}, ["Gmail"]), " اطمینان دارید؟"]).then((value) => {
+					if (value) {
+						this.disconnect();
+					}
+				});
+			} else {
+				this.openGmail();
+			}
+		},
 		openGmail() {
-			if (!this.edit) window.open(`mailto:${this.options.google.email}`);
+			if (!this.edit) {
+				window.open(`mailto:${this.options.google.email}`);
+			}
 		},
 		disconnect() {
 			this.options = {};

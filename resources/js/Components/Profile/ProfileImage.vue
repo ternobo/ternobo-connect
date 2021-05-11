@@ -1,5 +1,5 @@
 <template>
-	<div class="profile-box" :class="[size, { clickable: !loading }]" @click="openFileSelect">
+	<div class="profile-box" :class="[size, { clickable: !loading && canChange }]" @click="openFileSelect">
 		<CropperModal title="انتخاب تصویر پروفایل" :show.sync="crop" v-if="canChange" :aspect-ratio="1 / 1" :image="image" @cropped="upload"></CropperModal>
 		<input type="file" class="d-none" v-if="canChange" ref="imageFile" @change="imageSelect" />
 

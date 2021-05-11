@@ -737,7 +737,6 @@ pre {
 
 @import "./components/new-post-modal";
 
-@import "./pages/user-profile.scss";
 
 @import "./components/cropper/actions.scss";
 
@@ -1095,6 +1094,13 @@ a:focus {
     border: 2px solid $danger !important;
 }
 
+.vs__selected-options {
+    align-items: center;
+}
+
+.vs__dropdown-option {
+    padding: 12px 16px;
+}
 
 @media (min-width: 576px) {
     .modal-md {
@@ -1259,6 +1265,7 @@ a:focus {
 
 
 @import "./components/report-modal.scss";
+@import "./pages/user-profile.scss";
 
 
 .item-filters {

@@ -38,7 +38,7 @@ export default {
 	props: {
 		user: {
 			default: undefined,
-			required: true,
+			// required: true,
 		},
 	},
 	methods: {

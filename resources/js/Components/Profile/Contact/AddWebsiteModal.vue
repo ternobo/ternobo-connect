@@ -1,7 +1,7 @@
 <template>
 	<b-modal v-model="showModal" hide-footer title="افزودن وب‌سایت" no-close-on-backdrop size="md" :centered="true">
 		<div class="add-webiste-container">
-			<material-text-field :notValid="!isValid" placeholder="آدرس وب‌سایت" v-model="url" :maxlength="700" class="material--xsm w-100" inputClass="w-100"></material-text-field>
+			<material-text-field placeholder="آدرس وب‌سایت" v-model="url" :maxlength="700" class="w-100" inputClass="w-100"></material-text-field>
 			<v-select class="dropdown-list w-50" placeholder="نوع وب‌سایت" dir="rtl" :searchable="false" v-model="type" label="name" :options="websiteOptions">
 				<template #open-indicator="{ attributes }">
 					<span v-bind="attributes">
@@ -34,6 +34,7 @@ export default {
 					url: this.url,
 					option: this.type,
 				});
+				this.url = "";
 				this.$emit("update:show", false);
 			}
 		},

@@ -38,7 +38,7 @@ export default {
 	props: {
 		userId: {
 			default: undefined,
-			required: true,
+			// required: true,
 		},
 		pageId: {
 			default: undefined,

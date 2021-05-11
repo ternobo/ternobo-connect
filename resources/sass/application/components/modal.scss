@@ -19,6 +19,18 @@
     }
 }
 
+.confirm-dialog-body {
+    padding-bottom: 40px;
+}
+
+.modal-sm {
+    max-width: 354px;
+}
+
+.modal-footer {
+    border: none;
+}
+
 .modal-header .close {
     z-index: 99;
 }

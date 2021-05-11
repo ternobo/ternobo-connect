@@ -27,12 +27,12 @@
 					<i class="material-icons-outlined report-icon" v-else @click="showReport = true">report</i>
 				</div>
 				<div class="invite_badge" v-if="$root.isDesktop">
-					<div class="invite_profile" v-if="invited_by != null">
+					<wire-link as="div" :href="`/${invited_by.username}`" class="invite_profile clickable" v-if="invited_by != null">
 						<lazy-image :src="invited_by.profile" class="profile-sm mb-0" imgClass="profile-sm" />
-					</div>
+					</wire-link>
 					<div class="invite_info">
 						<span class="invite_date" :class="{ bold: invited_by == null }">ملحق شده در {{ joinTime }}</span>
-						<span :href="`/${invited_by.username}`" class="invited_by" v-if="invited_by != null">
+						<span class="invited_by" v-if="invited_by != null">
 							دعوت شده توسط <wire-link class="clickable" :href="`/${invited_by.username}`" as="strong">{{ invited_by.name }}</wire-link>
 						</span>
 					</div>

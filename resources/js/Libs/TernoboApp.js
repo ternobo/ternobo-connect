@@ -211,6 +211,19 @@ TernoboApp.install = function (Vue, options) {
             setup(this);
         },
         methods: {
+            confirmDialog(content, modalOptions = {}) {
+                return this.$bvModal
+                    .msgBoxConfirm(content, {
+                        size: "sm",
+                        okTitle: "تایید",
+                        cancelTitle: "لغو",
+                        hideHeaderClose: false,
+                        cancelVariant: "transparent text-grey",
+                        centered: true,
+                        bodyClass: 'confirm-dialog-body',
+                        ...modalOptions
+                    })
+            },
             checkUser(id) {
                 if (this.$store.state.user !== null) {
                     return this.$store.state.user.id == id;
