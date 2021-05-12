@@ -2,19 +2,7 @@
     max-height: 500px;
     overflow: auto;
     padding: 0 8px;
-    scrollbar-color: $dark $light;
-    scrollbar-width: thin;
-    scroll-behavior: smooth;
-
-    &::-webkit-scrollbar {
-        width: 0.3em;
-        background: #DEDEDE;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: $dark;
-        outline: 1px solid slategrey;
-    }
+    @extend .nice-scroll;
 
     .like-item {
         display: flex;
@@ -45,23 +33,11 @@
 
 
 .connections-list {
+    @extend .nice-scroll;
     max-height: 500px;
     overflow: auto;
     padding: 24px 8px;
-    scrollbar-color: $dark $light;
-    scrollbar-width: thin;
-    scroll-behavior: smooth;
     margin: 0 -8px;
-
-    &::-webkit-scrollbar {
-        width: 0.3em;
-        background: #DEDEDE;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: $dark;
-        outline: 1px solid slategrey;
-    }
 
     figure.profile-standard {
         margin-left: 24px;

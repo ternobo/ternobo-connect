@@ -24,10 +24,10 @@
 					<i class="material-icons hand-hover">unfold_more</i>
 					<i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
 				</div>
-				<button class="mt-2 btn font-12 ml-1 follow-btn" v-if="$root.isDesktop" @click="showMore = !showMore">
+				<span class="mt-2 clickable font-12 ml-1 text-grey" v-if="$root.isDesktop" @click="showMore = !showMore">
 					{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
-				</button>
-				<span v-else class="text-action clickable font-10 mt-2" @click="showMore = !showMore">
+				</span>
+				<span v-else class="text-grey clickable font-10 mt-2" @click="showMore = !showMore">
 					{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
 				</span>
 			</div>
@@ -58,7 +58,7 @@
 				<div class="col-md-6" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
 					<MaterialTextField v-model="val.code" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="کد دوره"></MaterialTextField>
 				</div>
-				<div class="col-md-6" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
+				<div class="col-md-6" :class="{ 'pb-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
 					<v-select :placeholder="'مرتبط با'" class="datepicker-list w-75" dir="rtl" v-model="val.skill" label="name" :options="page.user.skills">
 						<template #open-indicator="{ attributes }">
 							<span v-bind="attributes">
@@ -68,7 +68,7 @@
 						<template #no-options>موردی یافت نشد</template>
 					</v-select>
 				</div>
-				<div class="col-md-12" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
+				<div class="col-md-12" :class="{ 'pb-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
 					<strong>توضیحات</strong>
 					<div class="character-counter">
 						<span class="counter tex-dark">{{ leftCharacter }}</span>

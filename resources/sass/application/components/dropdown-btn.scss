@@ -6,6 +6,7 @@
     transition: 0.3s all;
     z-index: 99;
     border-radius: 50rem;
+    width: 0;
 
     >button {
         z-index: 1;
@@ -25,6 +26,7 @@
 
         >button>i {
             transform: rotate(-45deg);
+            color: $dark;
         }
     }
 

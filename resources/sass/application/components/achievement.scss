@@ -1,11 +1,15 @@
 .achievement-item {
-    border-bottom: 2px solid #E0E0E0;
+
+    &:not(:last-child) {
+        border-bottom: 2px solid #E0E0E0;
+        padding: 0 24px;
+    }
 
     &:not(:first-child) {
-        padding: 16px 0;
+        padding: 24px 0;
 
         @media screen and(max-width: $sm-size) {
-            padding: 12px 0;
+            padding: 16px 0;
         }
     }
 
@@ -44,7 +48,7 @@
     margin: 0;
 
     li {
-        padding: 8px 0;
+        padding: 24px 0;
         position: relative;
 
         &:not(:last-child)::after {
@@ -87,19 +91,22 @@
             gap: 10px;
 
             .actions {
-                border-radius: 32px;
+                border-radius: 16px;
                 display: flex;
                 flex-direction: row;
-                color: $icons;
+                color: $grey;
                 background: $body-bg;
-                padding: 2px;
                 margin-left: 24px;
-                padding: 8px 12px;
+                padding: 8px 8px;
                 width: 80px;
                 height: 40px;
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
+                justify-content: center;
+
+                >* {
+                    margin: 0 4px;
+                }
 
                 @media screen and (max-width: $sm-size) {
                     max-width: 56px;

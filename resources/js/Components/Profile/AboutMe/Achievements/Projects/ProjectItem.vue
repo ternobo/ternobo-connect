@@ -30,16 +30,19 @@
 					<i class="material-icons hand-hover">unfold_more</i>
 					<i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
 				</div>
-				<button class="mt-2 btn font-12 ml-1 follow-btn" @click="showMore = !showMore">
+				<span class="mt-2 clickable font-12 ml-1 text-grey" v-if="$root.isDesktop" @click="showMore = !showMore">
 					{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
-				</button>
+				</span>
+				<span v-else class="text-grey clickable font-10 mt-2" @click="showMore = !showMore">
+					{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
+				</span>
 			</div>
 
 			<!--
             Content Edit
         !-->
 			<div class="row w-100">
-				<div class="col-md-12" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }">
+				<div class="col-md-12" :class="{ 'pt-4': $root.isDesktop, 'py-2': !$root.isDesktop }">
 					<div class="d-flex align-items-center w-100">
 						<div class="ml-2" v-if="!$root.isDesktop">
 							<div class="actions mx-0">
@@ -53,17 +56,17 @@
 						<MaterialTextField v-model="val.name" :required="true" input-class="w-100" class="d-flex align-items-center material--sm p-0 col-md-6" placeholder="نام پروژه"></MaterialTextField>
 					</div>
 				</div>
-				<div class="col-md-6" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }">
+				<div class="col-md-6" :class="{ 'pt-4': $root.isDesktop, 'py-2': !$root.isDesktop }">
 					<strong>تاریخ شروع <span class="text-action">*</span></strong>
-					<DatePicker v-model="val.startDate" :max="{ year: year }"></DatePicker>
+					<DatePicker class="mt-3" v-model="val.startDate" :max="{ year: year }"></DatePicker>
 				</div>
-				<div class="col-md-6" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }">
+				<div class="col-md-6" :class="{ 'pt-4': $root.isDesktop, 'py-2': !$root.isDesktop }">
 					<strong>تاریخ پایان <span class="text-action">*</span></strong>
-					<DatePicker v-if="!noEndDate" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{ year: year }"></DatePicker>
-					<input v-else type="text" readonly value="تا کنون" class="form-control w-75 bg-white" />
+					<DatePicker class="mt-3" v-if="!noEndDate" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{ year: year }"></DatePicker>
+					<input v-else type="text" readonly value="تا کنون" class="form-control w-75 bg-white mt-3" />
 					<Checkbox v-model="noEndDate"> همچنان در حال کار بر روی این پروژه هستم </Checkbox>
 				</div>
-				<div class="col-md-6" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
+				<div class="col-md-6" :class="{ 'pt-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
 					<v-select :searchable="false" :placeholder="'مرتبط با'" class="datepicker-list w-75" dir="rtl" v-model="val.skill" :options="relatedTo">
 						<template #open-indicator="{ attributes }">
 							<span v-bind="attributes">
@@ -73,10 +76,10 @@
 						<template #no-options>موردی یافت نشد</template>
 					</v-select>
 				</div>
-				<div class="col-md-6" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
+				<div class="col-md-6" :class="{ 'pt-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
 					<MaterialTextField v-model="val.link" class="d-flex align-items-center material--sm" placeholder="لینک پروژه"></MaterialTextField>
 				</div>
-				<div class="col-md-12" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
+				<div class="col-md-12" :class="{ 'pt-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
 					<strong>توضیحات</strong>
 					<div class="character-counter">
 						<span class="counter tex-dark">{{ leftCharacter }}</span>

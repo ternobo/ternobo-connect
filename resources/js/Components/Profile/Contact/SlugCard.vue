@@ -7,13 +7,11 @@
 		</div>
 		<div class="slug-data">
 			<div class="slug-data-edit" v-if="edit">
-				<span>{{ url }}/</span>
 				<material-text-field class="material--sm" v-model="slug" />
 			</div>
-			<div class="slug-data-view" v-else>
-				<i class="material-icons-outlined clickable" v-clipboard="slug">file_copy</i>
-				<span>{{ url }}/</span>
-				<strong>{{ slug }}</strong>
+			<div key="slug-data-view-element" v-clipboard="slugUrl" class="slug-data-view clickable" v-else>
+				<i class="material-icons-outlined">file_copy</i>
+				<strong>@{{ slug }}</strong>
 			</div>
 		</div>
 	</div>
@@ -35,8 +33,8 @@ export default {
 		},
 	},
 	computed: {
-		url() {
-			return this.$APP_URL.replace("http://", "").replace("https://");
+		slugUrl() {
+			return `${window.origin}/${this.slug}`;
 		},
 	},
 	props: {

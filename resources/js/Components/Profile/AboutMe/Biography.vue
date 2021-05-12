@@ -14,7 +14,7 @@
 				<div class="content" :class="{ 'font-12': !$root.isDesktop, 'text-superlight text-center': text == null || text.length < 1 }" v-if="!edit">
 					{{ text != null && text.length > 0 ? text : "هیچ اطلاعاتی ثبت نشده" }}
 				</div>
-				<textarea-autosize class="form-control" v-else v-model="text"></textarea-autosize>
+				<textarea-autosize class="form-control" :minHeight="83" v-else v-model="text"></textarea-autosize>
 			</div>
 		</div>
 	</div>

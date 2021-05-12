@@ -889,10 +889,6 @@ pre {
     .about-me .card-body {
         padding: 32px;
     }
-
-    .about-me .card-body .rounded-add-btn {
-        margin-left: -20px;
-    }
 }
 
 @import "./components/datepicker.scss";
@@ -1411,7 +1407,7 @@ a:focus {
 }
 
 .base-layout {
-    margin-top: 24px;
+    margin-top: 40px;
 }
 
 #usermenu-show {

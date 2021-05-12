@@ -1,18 +1,27 @@
 export default {
     render: function (h) {
-        let iconClose = (<i class="material-icons clickable hover-danger text-grey" onClick={this.doDelete}>close</i>);
+        let iconClose = (<i class="material-icons clickable hover-danger text-grey">close</i>);
         let iconLaunch = (<i class="material-icons clickable hover-dark text-grey">launch</i>)
         let tag = this.edit ? "div" : "a";
-        let paramters = this.edit ? {} : { attrs: { href: this.websiteURL, target: '_blank' } };
+        let paramters = this.edit ? {
+            on: {
+                click: this.doDelete
+            }
+        } : { attrs: { href: this.websiteURL, target: '_blank' } };
         let content = (<div class="website-info">
             <strong class="font-14 text-action">{this.website.url}</strong>
             <span class="font-14">{this.website.option.name}</span>
         </div>);
-        return h(tag, { class: ['website-item', "contact-item"], ...paramters }, [this.edit ? iconClose : iconLaunch, content]);
+        return h(tag, { class: ['website-item', "contact-item", 'clickable'], ...paramters }, [this.edit ? iconClose : iconLaunch, content]);
     },
     methods: {
         doDelete() {
-            this.$emit('deleted');
+            const h = this.$createElement;
+            this.confirmDialog(["ایا از حذف ", h("strong", {}, [this.website.url]), " اطمینان دارید؟"]).then((value) => {
+                if (value) {
+                    this.$emit('deleted');
+                }
+            });
         }
     },
     computed: {

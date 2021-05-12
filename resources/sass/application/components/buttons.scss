@@ -321,21 +321,6 @@
     }
 }
 
-.btn-light-action {
-    color: rgb(8, 152, 223);
-    background: rgba(231, 242, 255, 1);
-    color: $action;
-}
-
-.add-btn-light-grey {
-    background-color: $fixed-elements;
-    color: $text-color;
-
-    &:disabled {
-        color: $icons;
-    }
-}
-
 .rounded-add-btn {
     @extend .btn;
     padding: 4px !important;
@@ -354,6 +339,27 @@
         i {
             font-size: 16px;
         }
+    }
+}
+
+
+.btn-light-action {
+    color: rgb(8, 152, 223);
+    background: rgba(231, 242, 255, 1);
+    color: $action;
+}
+
+.add-btn-light-grey {
+    background: $fixed-elements;
+    border-color: $fixed-elements;
+
+    color: $text-color;
+
+    &:disabled {
+        cursor: not-allowed;
+        background: $fixed-elements;
+        border-color: $fixed-elements;
+        color: $icons;
     }
 }
 

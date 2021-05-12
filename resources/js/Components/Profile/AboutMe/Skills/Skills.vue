@@ -26,6 +26,7 @@
 <script>
 import { Skeleton } from "vue-loading-skeleton";
 import Skill from "./Skill";
+import { v4 as uuidv4 } from "uuid";
 export default {
 	watch: {
 		edit(val) {
@@ -39,12 +40,17 @@ export default {
 	},
 	methods: {
 		onDelete(index) {
-			this.skills.splice(index, 1);
+			const h = this.$createElement;
+			this.confirmDialog(["ایا از حذف مهارت ", h("strong", {}, [this.skills[index].name]), " اطمینان دارید؟"]).then((value) => {
+				if (value) {
+					this.skills.splice(index, 1);
+				}
+			});
 		},
 		addSkill() {
 			this.skills.push({
 				name: "",
-				id: "skill_" + Math.round(new Date().getTime()),
+				id: "skill_" + uuidv4(),
 				isNew: true,
 			});
 		},

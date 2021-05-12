@@ -8,7 +8,7 @@
     }
 
     .rounded-add-btn {
-        margin-right: 24px;
+        margin-right: 16px;
 
         &:first-child {
             margin-right: 12px;
@@ -63,6 +63,12 @@
         align-items: center;
         height: 65px;
 
+        &:not(.website-item) {
+            div:first-child {
+                height: 24px;
+            }
+        }
+
         &:hover i {
             color: $dark !important;
         }
@@ -77,6 +83,14 @@
         }
 
         .socail-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            span {
+                height: 16px;
+            }
+
             vertical-align: middle;
             font-weight: 600;
 

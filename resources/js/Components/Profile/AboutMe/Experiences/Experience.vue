@@ -58,13 +58,13 @@
 				</div>
 				<div class="col-md-6" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }">
 					<strong>تاریخ شروع <span class="text-action">*</span></strong>
-					<DatePicker v-model="val.startDate" :max="{ year: year }"></DatePicker>
+					<DatePicker class="mt-2" v-model="val.startDate" :max="{ year: year }"></DatePicker>
 				</div>
 				<div class="col-md-6">
 					<strong>تاریخ پایان <span class="text-action">*</span></strong>
-					<DatePicker v-if="typeof val.endDate !== 'boolean' || val.endDate == false" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{ year: year }"></DatePicker>
+					<DatePicker class="mt-2" v-if="typeof val.endDate !== 'boolean' || val.endDate == false" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{ year: year }"></DatePicker>
 					<input v-else type="text" readonly value="تا کنون" class="form-control w-75 bg-white" />
-					<Checkbox v-model="val.endDate" :checked="typeof val.endDate == 'boolean'"> همچنان در این سمت فعالیت می‌کنم </Checkbox>
+					<Checkbox class="mt-2" v-model="val.endDate" :checked="typeof val.endDate == 'boolean'"> همچنان در این سمت فعالیت می‌کنم </Checkbox>
 				</div>
 				<div class="col-md-6" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
 					<v-select

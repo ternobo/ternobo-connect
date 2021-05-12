@@ -70,22 +70,22 @@
             }
 
             .actions {
-                border-radius: 32px;
+                border-radius: 16px;
                 display: flex;
                 flex-direction: row;
-                color: $icons;
+                color: $grey;
                 background: $body-bg;
-                height: -webkit-max-content;
-                height: -moz-max-content;
-                height: max-content;
-                padding: 2px;
                 margin-left: 24px;
-                padding: 8px;
-                width: 78px;
-                height: 44px;
+                padding: 8px 8px;
+                width: 80px;
+                height: 40px;
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
+                justify-content: center;
+
+                >* {
+                    margin: 0 4px;
+                }
 
                 @media screen and (max-width: $sm-size) {
                     max-width: 56px;
@@ -95,6 +95,7 @@
                         font-size: 20px;
                     }
                 }
+
             }
 
 

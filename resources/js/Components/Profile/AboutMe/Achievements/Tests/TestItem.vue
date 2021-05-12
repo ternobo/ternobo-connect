@@ -25,9 +25,12 @@
 					<i class="material-icons hand-hover">unfold_more</i>
 					<i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
 				</div>
-				<button class="mt-2 btn font-12 ml-1 follow-btn" @click="showMore = !showMore">
+				<span class="mt-2 font-12 ml-1 text-grey" v-if="$root.isDesktop" @click="showMore = !showMore">
 					{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
-				</button>
+				</span>
+				<span v-else class="text-grey clickable font-10 mt-2" @click="showMore = !showMore">
+					{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
+				</span>
 			</div>
 
 			<!--
@@ -60,7 +63,7 @@
 				</div>
 				<div class="col-md-6 py-4">
 					<strong>تاریخ آزمون <span class="text-action">*</span></strong>
-					<DatePicker v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
+					<DatePicker class="mt-2" v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
 				</div>
 				<div class="col-md-6 py-4">
 					<MaterialTextField style="margin-top: 21px" v-model="val.score" :required="true" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="نمره"></MaterialTextField>
