@@ -24,16 +24,13 @@ Passport::routes();
 TernoboWire::routes();
 Broadcast::routes();
 
-Route::get('/sitemap.xml', 'SiteMapController@all');
-Route::get('/sitemap-posts.xml', 'SiteMapController@posts');
-Route::get('/sitemap-posts.xml', 'SiteMapController@posts');
-Route::get('/sitemap-profiles.xml', 'SiteMapController@profiles');
+require base_path("routes/sitemap_routes.php");
 
 /**
  * File Access Start
  */
-Route::get("/profiles/{image}", "DownloadsController@profile");
-Route::get("/medias/{image}", "DownloadsController@media");
+require base_path("routes/file_access.php");
+
 /**
  * File Access End
  */
@@ -118,8 +115,8 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
         Route::post("/follow-people/get", "Auth\FollowSuggestionController@get");
 
         // Follow Actions Start
-        Route::post("/follow/{page_id}", "ConnectionsController@follow")->name("follow");
-        Route::post("/unfollow/{page_id}", "ConnectionsController@unfollow");
+        Route::post("/follow/{page_id}", "Profile\ConnectionsController@follow")->name("follow");
+        Route::post("/unfollow/{page_id}", "Profile\ConnectionsController@unfollow");
         Route::post("/tags/{tag}/follow", "Content\TagsController@toggleFollowTag");
         //Follow Actions End
 
@@ -136,9 +133,9 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             // Request Verifiation
             Route::post("/verificationRequest", "Auth\UsersController@verificationRequest");
 
-            Route::post("/mutual-friends", "PageController@getMutualFriends");
+            Route::post("/mutual-friends", "Profile\PageController@getMutualFriends");
 
-            Route::post("/slugsearch", "PageController@search");
+            Route::post("/slugsearch", "Profile\PageController@search");
 
             Route::get("/gettags", "PostController@getTags");
 
@@ -149,27 +146,27 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
             Route::post("/comments/{comment_id}/like", "CommentController@likeComment");
 
             // Connections
-            // Route::get("/connections", "ConnectionsController@index");
-            // Route::post("/connections", "ConnectionsController@getConnections");
-            // Route::post("/connection/accept", "ConnectionsController@acceptRequest");
-            // Route::post("/connection/delete", "ConnectionsController@removeConnectionRequest");
-            // Route::post("/connect/{user_id}", "ConnectionsController@connectionRequest");
-            // Route::post("/disconnect/{user_id}", "ConnectionsController@disconnect");
+            // Route::get("/connections", "Profile\ConnectionsController@index");
+            // Route::post("/connections", "Profile\ConnectionsController@getConnections");
+            // Route::post("/connection/accept", "Profile\ConnectionsController@acceptRequest");
+            // Route::post("/connection/delete", "Profile\ConnectionsController@removeConnectionRequest");
+            // Route::post("/connect/{user_id}", "Profile\ConnectionsController@connectionRequest");
+            // Route::post("/disconnect/{user_id}", "Profile\ConnectionsController@disconnect");
 
             // Follows
-            Route::get("/followings", "ConnectionsController@followings");
-            Route::get("/followers", "ConnectionsController@followers");
+            Route::get("/followings", "Profile\ConnectionsController@followings");
+            Route::get("/followers", "Profile\ConnectionsController@followers");
             //end Connections
 
             //Start Page Edit
             Route::prefix('/save')->group(function () {
-                Route::post("/resume", "ProfileController@saveAboutMe");
+                Route::post("/resume", "Profile\ProfileController@saveAboutMe");
             });
             Route::prefix("/usersave")->group(function () {
-                Route::post("/profile", "PageController@saveProfile");
-                Route::post("/bio", "PageController@saveBio");
-                Route::post("/shortbio", "PageController@saveShortBio");
-                Route::post("/username", "PageController@saveUsername");
+                Route::post("/profile", "Profile\PageController@saveProfile");
+                Route::post("/bio", "Profile\PageController@saveBio");
+                Route::post("/shortbio", "Profile\PageController@saveShortBio");
+                Route::post("/username", "Profile\PageController@saveUsername");
             });
             // End Page Edit
 
@@ -186,7 +183,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
             Route::post("/reportpost", "PostController@report");
 
-            Route::post("/reportpage", "PageController@report");
+            Route::post("/reportpage", "Profile\PageController@report");
 
             // Settings Start
             Route::post("/change-password", "Auth\UsersController@changePassword");
@@ -209,16 +206,16 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
             Route::post("/reportpost", "PostController@report");
 
-            Route::post("tags/delete", "PageController@removeTags");
+            Route::post("tags/delete", "Profile\PageController@removeTags");
         });
 
         /**
          * Pages API
          */
         Route::prefix("/pages")->group(function () {
-            Route::post('info', "PageController@getPageInfo");
-            Route::post('posts', "PageController@getPosts");
-            Route::resource("categories", "CategoryController");
+            Route::post('info', "Profile\PageController@getPageInfo");
+            Route::post('posts', "Profile\PageController@getPosts");
+            Route::resource("categories", "Profile\CategoryController");
 
             Route::post('save-resume', "PageController@saveResume");
 
@@ -253,9 +250,9 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
         Route::post("/share/{post_id}", "PostController@sharePost");
 
-        Route::post("/categories/sort/{id}", "CategoryController@sort");
+        Route::post("/categories/sort/{id}", "Profile\CategoryController@sort");
 
-        Route::resource("categories", "CategoryController");
+        Route::resource("categories", "Profile\CategoryController");
 
         // Notifications
         Route::get('/notifications', 'NotificationController@index')->name('notifications');
@@ -309,24 +306,24 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
     Route::get("/tags/{name}", "Content\TagsController@index");
 
-    Route::post("/contact/contact-option", "ContactsController@getContactOptions");
-    Route::post("/contact/website-option", "ContactsController@getWebsiteOptions");
-    Route::post("/contact/social-option", "ContactsController@getSocialOptions");
+    Route::post("/contact/contact-option", "Profile\ContactsController@getContactOptions");
+    Route::post("/contact/website-option", "Profile\ContactsController@getWebsiteOptions");
+    Route::post("/contact/social-option", "Profile\ContactsController@getSocialOptions");
 
-    Route::post("/contacts/", "ContactsController@saveData");
-    Route::post("/contacts/{page}", "ContactsController@getContactData");
+    Route::post("/contacts/", "Profile\ContactsController@saveData");
+    Route::post("/contacts/{page}", "Profile\ContactsController@getContactData");
 
     // Pages
     Route::prefix('/{page:slug}')->group(function () {
 
-        Route::get("/{location?}", "PageController@show")->where("location", "about|activities|articles|contact");
+        Route::get("/{location?}", "Profile\PageController@show")->where("location", "about|activities|articles|contact");
 
-        Route::post("/actions", "PageController@getActions");
-        Route::post("/drafts", "PageController@getDrafts");
-        Route::post("/tags", "PageController@getTags");
+        Route::post("/actions", "Profile\PageController@getActions");
+        Route::post("/drafts", "Profile\PageController@getDrafts");
+        Route::post("/tags", "Profile\PageController@getTags");
 
-        Route::post("/followings", "ConnectionsController@followings");
-        Route::post("/followers", "ConnectionsController@followers");
+        Route::post("/followings", "Profile\ConnectionsController@followings");
+        Route::post("/followers", "Profile\ConnectionsController@followers");
 
     });
 
