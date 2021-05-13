@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Profile;
 
+use App\Http\Controllers\Controller;
 use App\Models\ConnectedAccount;
 use App\Models\ContactData;
 use App\Models\ContactOption;

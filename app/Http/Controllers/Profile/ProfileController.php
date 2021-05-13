@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Profile;
 
+use App\Http\Controllers\Controller;
 use App\Models\AboutData;
 use App\Models\Skill;
 use App\Rules\DateObject;
