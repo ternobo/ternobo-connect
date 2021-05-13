@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Socialite;
 
+use App\Events\ReloadSocialOptions;
 use App\Http\Controllers\Controller;
 use App\Models\ConnectedAccount;
 use Illuminate\Support\Facades\Auth;

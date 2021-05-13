@@ -60,14 +60,7 @@ export default {
 			this.options = {};
 		},
 		addSocial(name) {
-			let accountWindow = window.open(`/connect/${name}/login`, "Login", "height=700,width=700");
-			accountWindow.addEventListener("beforeunload", () => {
-				this.loading = true;
-				axios.post("/contact/social-option").then((response) => {
-					this.options = response.data.options;
-					this.loading = false;
-				});
-			});
+			window.open(`/connect/${name}/login`, "Login", "height=700,width=700");
 		},
 		validate() {
 			return this.$children.every((item) => {
@@ -101,9 +94,11 @@ export default {
 		},
 	},
 	mounted() {
-		Echo.private("user." + user.id).listen("ReloadSocialOptions", () => {
-			this.loadOptions();
-		});
+		if (this.$store.state.user) {
+			Echo.private("user." + this.$store.state.user.id).listen("ReloadSocialOptions", () => {
+				this.loadOptions();
+			});
+		}
 		this.loadOptions();
 	},
 };
