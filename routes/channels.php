@@ -1,5 +1,7 @@
 <?php
 
+use App\Broadcasting\NotificationsChannel;
+use App\Broadcasting\UserChannel;
 use Illuminate\Support\Facades\Broadcast;
 use Ternobo\TernoboChat\TernoboChat;
 
@@ -13,7 +15,7 @@ use Ternobo\TernoboChat\TernoboChat;
 | used to check if an authenticated user can listen to the channel.
 |
  */
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
-});
+Broadcast::channel('user.{id}', UserChannel::class);
+Broadcast::channel('notifications.{id}', NotificationsChannel::class);
+
 TernoboChat::broadcastChannels();

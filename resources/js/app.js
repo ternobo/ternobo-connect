@@ -135,15 +135,15 @@ document.addEventListener('ternobo:userloaded', event => {
         if (window.hasOwnProperty("Notification")) {
             Notification.requestPermission();
         }
-        const notificationChannel = window.Echo.private("notification." + user.id);
+        const notificationChannel = window.Echo.private("notifications." + user.id);
         notificationChannel.listen("NotificationEvent", function (data) {
-            let event = new CustomEvent('notification:new', {
+            let notificationEvent = new CustomEvent('notification:new', {
                 bubbles: true,
                 detail: {
                     notification: data.message
                 }
             });
-            document.dispatchEvent(event);
+            document.dispatchEvent(notificationEvent);
             vue_app.$store.state.notifications_count += 1;
         });
 
@@ -161,13 +161,13 @@ document.addEventListener('ternobo:userloaded', event => {
                     });
                 }
             }
-            let event = new CustomEvent('message:new', {
+            let messageEvent = new CustomEvent('message:new', {
                 bubbles: true,
                 detail: {
                     message: data.message
                 }
             });
-            document.dispatchEvent(event);
+            document.dispatchEvent(messageEvent);
         });
     }
 });

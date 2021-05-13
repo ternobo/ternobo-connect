@@ -32,7 +32,7 @@ class TwitchController extends Controller
                 'id' => $user->id,
             ],
         ]);
-        // dd($user);
+        event(new ReloadSocialOptions(Auth::user()));
         return view("onOAuthDone");
     }
 }

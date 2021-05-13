@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Socialite;
 
+use App\Events\ReloadSocialOptions;
 use App\Http\Controllers\Controller;
 use App\Models\ConnectedAccount;
 use Illuminate\Support\Facades\Auth;
@@ -27,11 +28,13 @@ class DiscordController extends Controller
             'user_id' => Auth::user()->id,
             'expiresIn' => $user->expiresIn,
             'meta' => [
-                'value' => $user->nickname,
+                'username' => $user->nickname,
+                'value' => $user->id,
                 'email' => $user->email,
                 'id' => $user->id,
             ],
         ]);
+        event(new ReloadSocialOptions(Auth::user()));
         return view("onOAuthDone");
     }
 }

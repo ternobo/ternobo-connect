@@ -29,6 +29,13 @@ import { Skeleton } from "vue-loading-skeleton";
 export default {
 	components: { Skeleton },
 	methods: {
+		loadOptions() {
+			this.loading = true;
+			axios.post("/contact/social-option").then((response) => {
+				this.options = response.data.options;
+				this.loading = false;
+			});
+		},
 		cardClickAction() {
 			if (this.edit && this.options.google == undefined) {
 				this.addSocial("google");
@@ -94,11 +101,10 @@ export default {
 		},
 	},
 	mounted() {
-		this.loading = true;
-		axios.post("/contact/social-option").then((response) => {
-			this.options = response.data.options;
-			this.loading = false;
+		Echo.private("user." + user.id).listen("ReloadSocialOptions", () => {
+			this.loadOptions();
 		});
+		this.loadOptions();
 	},
 };
 </script>

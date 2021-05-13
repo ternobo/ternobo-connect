@@ -32,6 +32,7 @@ class GoogleController extends Controller
                 'id' => $user->id,
             ],
         ]);
+        event(new ReloadSocialOptions(Auth::user()));
         return view("onOAuthDone");
     }
 }

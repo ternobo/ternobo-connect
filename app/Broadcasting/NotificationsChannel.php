@@ -3,9 +3,8 @@
 namespace App\Broadcasting;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
-class UserChannel
+class NotificationsChannel
 {
     /**
      * Create a new channel instance.
