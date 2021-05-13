@@ -15,7 +15,6 @@ class NotificationController extends Controller
             ->where("seen", false)
             ->where("to", Auth::user()->personalPage->id)->update(['seen' => true]);
         $notifications = Auth::user()->getNotifications();
-        // return response()->json($notifications);
         return TernoboWire::render("Notifications", array("notifications" => $notifications));
     }
 

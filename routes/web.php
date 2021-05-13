@@ -297,8 +297,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
         //Conneted Accounts Actions
         // Google Start
-        Route::get("/connect/google/login", "Socialite\GoogleController@login");
-        Route::get("/connect/google/callback", "Socialite\GoogleController@callback");
+        require (base_path('routes/oauth_applicatons.php'));
         // Google End
 
         // Connected Device Actions

@@ -17,7 +17,7 @@ class MediaUploadController extends Controller
         $file = $request->file("media");
         $mime = $file->getClientMimeType();
         if (Str::startsWith($mime, 'audio')) {
-            $filename = MediaConverter::convertToMP3($voiceFile->store("voices"));
+            $filename = MediaConverter::convertToMP3($file->store("voices"));
         }
 
         return response()->json([

@@ -10,7 +10,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Following;
 use App\Models\FollowSuggestion;
-use App\Models\Page;
 use App\Models\Post;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
@@ -52,26 +51,6 @@ class IndexController extends Controller
     {
         $CSRFToken = csrf_token();
         return response()->json(["token" => $CSRFToken]);
-    }
-
-    public function redirectCategory(Page $page, $category, $id)
-    {
-        return redirect("/$page->slug/category/$category#$id");
-    }
-
-    public function redirectActivities(Page $page)
-    {
-        return redirect("/$page->slug#activities");
-    }
-
-    public function redirectArticles(Page $page)
-    {
-        return redirect("/$page->slug#articles");
-    }
-
-    public function redirectContact(Page $page)
-    {
-        return redirect("/$page->slug#contact");
     }
 
     public function getUser(Request $request)

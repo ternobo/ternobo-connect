@@ -7,10 +7,8 @@ use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Following;
 use App\Models\Page;
-use App\Models\PageSocial;
 use App\Models\Post;
 use App\Models\Report;
-use App\Models\Social;
 use App\Models\Website;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\SEOTools;
@@ -294,26 +292,6 @@ class PageController extends Controller
                 $option = (object) $option;
                 Website::where("page_id", $page->id)->where("option_id", $option->key)->delete();
                 $result = Website::setOption($option->key, $option->value, $page->id);
-            }
-            return response()->json(array("result" => $result));
-        }
-    }
-
-    public function saveSocials(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            "option" => "required|max:12",
-        ]);
-        if ($validator->fails()) {
-            return response()->json(array("result" => false, "errors" => $validator->errors()));
-        } else {
-            $options = $request->input("option");
-            $page = Auth::user()->getPage();
-            $result = true;
-            foreach ($options as $option) {
-                $option = (object) $option;
-                PageSocial::where("page_id", $page->id)->where("option_id", $option->key)->delete();
-                $result = Social::setOption($option->key, $option->value, $page->id);
             }
             return response()->json(array("result" => $result));
         }

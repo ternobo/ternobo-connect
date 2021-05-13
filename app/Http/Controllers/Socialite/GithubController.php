@@ -7,27 +7,26 @@ use App\Models\ConnectedAccount;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
-class GoogleController extends Controller
-{
-    public function login()
+class GithubController extends Controller
+{public function login()
     {
-        return Socialite::driver('google')
-            ->with(['user' => Auth::user()->id])
-            ->redirect();
-    }
+    return Socialite::driver('github')
+        ->with(['user' => Auth::user()->id])
+        ->redirect();
+}
 
     public function callback()
     {
-        ConnectedAccount::query()->where("user_id", Auth::user()->id)->where("driver", "google")->delete();
-        $user = Socialite::driver('google')->user();
+        ConnectedAccount::query()->where("user_id", Auth::user()->id)->where("driver", "github")->delete();
+        $user = Socialite::driver('github')->user();
         ConnectedAccount::create([
             'name' => $user->name,
-            'driver' => 'google',
+            'driver' => 'github',
             'token' => $user->token,
             'user_id' => Auth::user()->id,
             'expiresIn' => $user->expiresIn,
             'meta' => [
-                'value' => $user->email,
+                'value' => $user->nickname,
                 'email' => $user->email,
                 'id' => $user->id,
             ],

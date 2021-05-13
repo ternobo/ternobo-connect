@@ -143,65 +143,6 @@ class Page extends Model
         return $websites;
     }
 
-    /**
-     * Get list of all social media links
-     * @return array
-     */
-    public function getSocials()
-    {
-        $socials = PageSocial::query()->where("page_id", $this->id)->join("socials", "page_socials.option_id", "=", "socials.id")->get();
-        foreach ($socials as $social) {
-            if (!$this->startsWith($social->url, $social->starts_with)) {
-                $social->url = $social->starts_with . $social->url;
-            }
-        }
-        return $socials;
-    }
-
-    /**
-     * list of available website options
-     * @return array
-     */
-    public static function SocialOptions()
-    {
-        $socialoptions = Social::all();
-        return $socialoptions;
-    }
-
-    /**
-     * return social media link base on option id
-     * @param integer $name
-     * @return string
-     */
-    public function getSocialValue($name)
-    {
-        $contact = PageSocial::query()->where("page_id", $this->id)->where("option_id", $name);
-        if ($contact instanceof PageSocial) {
-            return $contact->url;
-        }
-        return null;
-    }
-
-    /**
-     * return contact option value base on option id
-     * @param integer $name
-     * @return string
-     */
-    public function getContactValue($name)
-    {
-        $contact = Contact::query()->where("page_id", $this->id)->where("option_id", $name)->get();
-        if ($contact instanceof Contact) {
-            return $contact->url;
-        }
-        return null;
-    }
-
-    public static function getContactOptions()
-    {
-        $contactoptions = ContactOption::all();
-        return $contactoptions;
-    }
-
     // override the toArray function (called by toJson)
     public function toArray()
     {

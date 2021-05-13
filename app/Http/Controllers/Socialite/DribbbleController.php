@@ -7,31 +7,32 @@ use App\Models\ConnectedAccount;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
-class GoogleController extends Controller
+class DribbbleController extends Controller
 {
     public function login()
     {
-        return Socialite::driver('google')
+        return Socialite::driver('dribbble')
             ->with(['user' => Auth::user()->id])
             ->redirect();
     }
 
     public function callback()
     {
-        ConnectedAccount::query()->where("user_id", Auth::user()->id)->where("driver", "google")->delete();
-        $user = Socialite::driver('google')->user();
+        ConnectedAccount::query()->where("user_id", Auth::user()->id)->where("driver", "dribbble")->delete();
+        $user = Socialite::driver('dribbble')->user();
         ConnectedAccount::create([
             'name' => $user->name,
-            'driver' => 'google',
+            'driver' => 'dribbble',
             'token' => $user->token,
             'user_id' => Auth::user()->id,
-            'expiresIn' => $user->expiresIn,
+            'expiresIn' => "9000",
             'meta' => [
-                'value' => $user->email,
+                'value' => $user->nickname,
                 'email' => $user->email,
                 'id' => $user->id,
             ],
         ]);
+        // dd($user);
         return view("onOAuthDone");
     }
 }
