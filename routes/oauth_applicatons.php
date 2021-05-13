@@ -28,3 +28,9 @@ Route::get("/connect/twitch/callback", "Socialite\TwitchController@callback");
 
 Route::get("/connect/telegram/login", "Socialite\TelegramController@login");
 Route::get("/connect/telegram/callback", "Socialite\TelegramController@callback");
+
+Route::get("/connect/twitter/login", "Socialite\TwitterController@login");
+Route::get("/connect/twitter/callback", "Socialite\TwitterController@callback");
+
+Route::get("/connect/yahoo/login", "Socialite\YahooController@login");
+Route::get("/connect/yahoo/callback", "Socialite\YahooController@callback");

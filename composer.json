@@ -51,6 +51,8 @@
         "socialiteproviders/instagram-basic": "^4.1",
         "socialiteproviders/telegram": "^4.1",
         "socialiteproviders/twitch": "^5.3",
+        "socialiteproviders/twitter": "^4.1",
+        "socialiteproviders/yahoo": "^4.1",
         "socialiteproviders/youtube": "^4.1",
         "socialiteproviders/zoho": "^4.1",
         "soroosh/ternobo-chat": "@dev",

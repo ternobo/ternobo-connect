@@ -8,12 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 class GithubController extends Controller
-{public function login()
+{
+    public function login()
     {
-    return Socialite::driver('github')
-        ->with(['user' => Auth::user()->id])
-        ->redirect();
-}
+        return Socialite::driver('github')
+            ->with(['user' => Auth::user()->id])
+            ->redirect();
+    }
 
     public function callback()
     {

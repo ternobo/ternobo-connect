@@ -55,6 +55,16 @@ return [
         'client_secret' => env('TWITCH_CLIENT_SECRET'),
         'redirect' => env('TWITCH_REDIRECT_URI'),
     ],
+    'yahoo' => [
+        'client_id' => env('YAHOO_CLIENT_ID'),
+        'client_secret' => env('YAHOO_CLIENT_SECRET'),
+        'redirect' => env('YAHOO_REDIRECT_URI'),
+    ],
+    'twitter' => [
+        'client_id' => env('TWITTER_CLIENT_ID'),
+        'client_secret' => env('TWITTER_CLIENT_SECRET'),
+        'redirect' => env('TWITTER_REDIRECT_URI'),
+    ],
     'discord' => [
         'client_id' => env('DISCORD_CLIENT_ID'),
         'client_secret' => env('DISCORD_CLIENT_SECRET'),
