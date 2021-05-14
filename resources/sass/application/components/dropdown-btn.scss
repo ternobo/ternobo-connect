@@ -5,8 +5,10 @@
     align-items: flex-end;
     transition: 0.3s all;
     z-index: 99;
-    border-radius: 50rem;
-    width: 0;
+    border-radius: 50%;
+    min-height: 32px;
+    min-width: 32px;
+
 
     >button {
         z-index: 1;
@@ -20,33 +22,43 @@
     &.active {
         border-radius: 0;
 
+        .items {
+            box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.03);
+        }
+
         >button {
             border-radius: 0 !important;
+            background: $body-bg;
         }
 
         >button>i {
             transform: rotate(-45deg);
-            color: $dark;
+            background: $body-bg;
+            color: $grey;
         }
     }
 
     .items {
         padding-right: 0;
         min-width: 130px;
-        left: -20px;
+        left: 0;
         transition: 0.3s all;
-        background: #e7f2ff;
+        background: $body-bg;
         padding-top: 40px;
         position: absolute;
 
+        @media screen and (min-width: $sm-size) {
+            min-width: 200px;
+        }
+
         li {
-            padding: 10px 15px;
+            padding: 12px 16px;
             transition: 0.3s all;
             cursor: pointer;
         }
 
         li:hover {
-            background: #CDEAF9;
+            background: #E0E0E0;
         }
 
         li:active {

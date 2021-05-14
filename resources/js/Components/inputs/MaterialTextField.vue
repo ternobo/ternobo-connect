@@ -1,17 +1,27 @@
 <template>
 	<div class="material-textfield">
-		<input v-if="noSpace" :type="type" @keydown.space.prevent placeholder=" " :class="[inputClass, { invalid: invalid }]" @blur="check" @focus="$emit('focus')" @input="$emit('input', val)" v-model="val" :maxlength="maxlength" class="input" />
-		<input v-else :type="type" :placeholder="inputPlaceholder ? inputPlaceholder : ' '" :class="[inputClass, { invalid: invalid }]" @blur="check" @focus="$emit('focus')" @input="$emit('input', val)" v-model="val" :maxlength="maxlength" class="input" />
-		<label class="d-flex" v-if="placeholder !== undefined">{{ placeholder }} <span class="text-action" v-if="required">*</span></label>
+		<input v-if="noSpace" :type="type" @keydown.space.prevent placeholder=" " :class="[inputClass, { invalid: invalid }]" @blur="check" @focus="onFocus" @input="$emit('input', val)" v-model="val" :maxlength="maxlength" class="input" />
+		<input v-else :type="type" :placeholder="inputPlaceholder ? inputPlaceholder : ' '" :class="[inputClass, { invalid: invalid }]" @blur="check" @focus="onFocus" @input="$emit('input', val)" v-model="val" :maxlength="maxlength" class="input" />
+		<label class="d-flex" v-if="placeholder !== undefined">{{ placeholder }} <span class="text-action" v-if="showStar">*</span></label>
 		<slot></slot>
 	</div>
 </template>
 
 <script>
 export default {
+	computed: {
+		showStar() {
+			return this.required && !this.focus && this.val != null && this.val.length < 1;
+		},
+	},
 	methods: {
+		onFocus() {
+			this.$emit("focus");
+			this.focus = true;
+		},
 		check() {
 			this.$emit("blur");
+			this.focus = false;
 			if (((this.val == null || this.val.length < 1) && this.required) || this.notValid) {
 				this.invalid = true;
 			} else {
@@ -31,6 +41,7 @@ export default {
 		return {
 			val: "",
 			invalid: false,
+			focus: false,
 		};
 	},
 	props: {

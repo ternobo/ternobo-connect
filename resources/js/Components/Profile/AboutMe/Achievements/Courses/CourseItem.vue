@@ -58,7 +58,7 @@
 				<div class="col-md-6" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
 					<MaterialTextField v-model="val.code" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="کد دوره"></MaterialTextField>
 				</div>
-				<div class="col-md-6" :class="{ 'pb-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
+				<div class="col-md-6" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
 					<v-select :placeholder="'مرتبط با'" class="datepicker-list w-75" dir="rtl" v-model="val.skill" label="name" :options="page.user.skills">
 						<template #open-indicator="{ attributes }">
 							<span v-bind="attributes">
@@ -68,7 +68,7 @@
 						<template #no-options>موردی یافت نشد</template>
 					</v-select>
 				</div>
-				<div class="col-md-12" :class="{ 'pb-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
+				<div class="col-md-12" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
 					<strong>توضیحات</strong>
 					<div class="character-counter">
 						<span class="counter tex-dark">{{ leftCharacter }}</span>
@@ -90,11 +90,7 @@
 </template>
 
 <script>
-import PersianDate from "persian-date";
-import DatePicker from "../../../../inputs/DatePicker";
 import MaterialTextField from "../../../../inputs/MaterialTextField";
-import Checkbox from "../../../../inputs/Checkbox";
-
 import AchievementsItem from "../../../../../Mixins/AchievementsItem";
 export default {
 	mixins: [AchievementsItem],

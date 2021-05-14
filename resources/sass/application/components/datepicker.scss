@@ -1,12 +1,14 @@
 .datepicker-list {
 
+    font-size: 14px;
+
     .vs__search::-webkit-input-placeholder {
         background: transparent;
         border-radius: 0;
         color: $light;
         min-height: 35px;
         padding-bottom: 0;
-        border-color: $fixed-elements;
+        border-color: #E0E0E0;
         border-width: 2px;
     }
 
@@ -16,7 +18,7 @@
         color: $light;
         min-height: 35px;
         padding-bottom: 0;
-        border-color: $fixed-elements;
+        border-color: #E0E0E0;
         border-width: 2px;
     }
 
@@ -26,7 +28,7 @@
         color: $light;
         min-height: 35px;
         padding-bottom: 0;
-        border-color: $fixed-elements;
+        border-color: #E0E0E0;
         border-width: 2px;
     }
 
@@ -36,7 +38,7 @@
         color: $light;
         min-height: 35px;
         padding-bottom: 0;
-        border-color: $fixed-elements;
+        border-color: #E0E0E0;
         border-width: 2px;
     }
 
@@ -49,12 +51,12 @@
         color: $light;
         min-height: 35px;
         padding-bottom: 0;
-        border-color: $fixed-elements;
+        border-color: #E0E0E0;
         border-width: 2px;
     }
 
     .vs__dropdown-menu {
-        background: $fixed-elements;
+        background: #E0E0E0;
     }
 
     .vs__no-options {
@@ -68,19 +70,7 @@
     .vs__dropdown-menu {
         max-height: 200px;
         min-width: 30px;
-        scrollbar-color: $dark $light;
-        scrollbar-width: thin;
-        scroll-behavior: smooth;
-        padding-top: 0;
-
-        &::-webkit-scrollbar {
-            width: 0.3em;
-            background: #DEDEDE;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background-color: $dark;
-        }
+        @extend .nice-scroll;
     }
 
     .v-select[dir=rtl] .vs__actions {
@@ -89,7 +79,7 @@
 
     .vs__actions {
         min-height: 36px;
-        background: $fixed-elements;
+        background: #E0E0E0;
         max-width: 26px;
         margin-left: -1px
     }

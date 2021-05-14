@@ -14,20 +14,20 @@
 				{{ languageVal.name }}
 			</span>
 		</div>
-		<div class="editItem" v-else>
-			<div class="actions mx-0" v-if="edit">
-				<i class="material-icons hand-hover">unfold_more</i>
-				<i class="material-icons-outlined hover-danger clickable" @click="doDelete">delete</i>
+		<div class="achievement-edit-row" v-else>
+			<div>
+				<div class="delete-move-actions">
+					<i class="material-icons hand-hover">unfold_more</i>
+					<i class="material-icons-outlined hover-danger clickable" @click="doDelete">delete</i>
+				</div>
 			</div>
-			<div class="language-edit-input">
+			<div>
 				<MaterialTextField placeholder="زبان" :required="true" v-model="languageVal.name" class="material--sm w-100" input-class="w-100 py-1"></MaterialTextField>
-				<v-select
-					:searchable="false"
-					class="datepicker-list"
-					:placeholder="'تسلط'"
+			</div>
+			<div>
+				<tselect
 					dir="rtl"
-					v-model="language.level"
-					:options="[
+					:items="[
 						{
 							label: 'مبتدی',
 							level: 1,
@@ -45,9 +45,11 @@
 							level: 4,
 						},
 					]"
+					v-model="languageVal.level"
+					labelOption="label"
+					valueOption="level"
+					>سطح</tselect
 				>
-					<template #no-options>موردی یافت نشد</template>
-				</v-select>
 			</div>
 		</div>
 	</li>
@@ -55,7 +57,6 @@
 
 <script>
 import RadioButton from "../../../../inputs/RadioButton";
-
 import AchievementsItem from "../../../../../Mixins/AchievementsItem";
 export default {
 	mixins: [AchievementsItem],

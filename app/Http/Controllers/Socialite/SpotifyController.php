@@ -27,12 +27,11 @@ class SpotifyController extends Controller
             'user_id' => Auth::user()->id,
             'expiresIn' => "9000",
             'meta' => [
-                'value' => $user->nickname,
+                'value' => $user->id,
                 'email' => $user->email,
                 'id' => $user->id,
             ],
         ]);
-        dd($user);
         event(new ReloadSocialOptions(Auth::user()));
         return view("onOAuthDone");
     }

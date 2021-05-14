@@ -11,6 +11,7 @@
 
     .title-text {
         font-size: 12px;
+        margin-left: 16px;
     }
 
     .tselect_title {
@@ -20,8 +21,13 @@
         background: $fixed-elements;
         color: $sub-heading;
         border-radius: 0;
-        padding: 10px;
+        padding: 12px 16px;
         height: 40px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 
     .tselect_title.active {

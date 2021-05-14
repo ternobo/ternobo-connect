@@ -1,15 +1,18 @@
-.dropdown-menu {
+.v-select.dropdown-menu {
     border: none;
     box-shadow: 0 0 .3rem 0 rgba(0, 0, 0, .1);
-    background: $fixed-elements;
+    background: #E0E0E0;
     color: $dark;
     display: block !important;
     border-radius: 0;
     padding: 0;
+    font-size: 14px;
 
     .vs__dropdown-menu {
-        background: $fixed-elements;
+        background: #E0E0E0;
+        font-size: 14px;
     }
+
     .vs__no-options {
         padding-top: 7px;
     }
@@ -55,9 +58,10 @@
 
 
 .dropdown-list {
-    .vs__search::placeholder,
-    .vs__dropdown-toggle,
-    .vs__dropdown-menu {
+
+
+
+    .vs__search::-webkit-input-placeholder {
         background: $fixed-elements;
         border: none;
         border-radius: 0;
@@ -65,28 +69,84 @@
         min-height: 35px;
     }
 
-    .vs__dropdown-menu{
-        max-height: 200px;
-        min-width: 30px;
-        scrollbar-color: $dark $light;
-        scrollbar-width: thin;
-        scroll-behavior: smooth;
-
-        &::-webkit-scrollbar {
-            width: 0.3em;
-            background: #DEDEDE;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background-color: $dark;
-        }
+    .vs__search::-moz-placeholder {
+        background: $fixed-elements;
+        border: none;
+        border-radius: 0;
+        color: $light;
+        min-height: 35px;
     }
 
-    .vs__search{
+    .vs__search:-ms-input-placeholder {
+        background: $fixed-elements;
+        border: none;
+        border-radius: 0;
+        color: $light;
+        min-height: 35px;
+    }
+
+    .vs__search::-ms-input-placeholder {
+        background: $fixed-elements;
+        border: none;
+        border-radius: 0;
+        color: $light;
+        min-height: 35px;
+    }
+
+    .vs__dropdown-toggle {
+        padding: 12px 16px;
+
+    }
+
+    .vs__search::-webkit-input-placeholder {
+        background: $fixed-elements;
+        border: none;
+        border-radius: 0;
+        color: $light;
+    }
+
+    .vs__search::-moz-placeholder {
+        background: $fixed-elements;
+        border: none;
+        border-radius: 0;
+        color: $light;
+    }
+
+    .vs__search:-ms-input-placeholder {
+        background: $fixed-elements;
+        border: none;
+        border-radius: 0;
+        color: $light;
+    }
+
+    .vs__search::-ms-input-placeholder {
+        background: $fixed-elements;
+        border: none;
+        border-radius: 0;
+        color: $light;
+    }
+
+    .vs__search::placeholder,
+    .vs__dropdown-toggle,
+    .vs__dropdown-menu {
+        background: $fixed-elements;
+        border: none;
+        border-radius: 0;
+        color: $light;
+    }
+
+    .vs__dropdown-menu {
+        max-height: 200px;
+        min-width: 30px;
+        @extend .nice-scroll;
+    }
+
+    .vs__search {
         position: absolute;
         width: 100%;
         height: 30px;
     }
+
     .vs__clear,
     .vs__open-indicator {
         fill: $light;
@@ -96,7 +156,8 @@
         background: $fixed-elements;
         width: 100%;
         color: $light;
-        &.vs__dropdown-option--highlight{
+
+        &.vs__dropdown-option--highlight {
             background: $border-color;
             color: $dark;
         }

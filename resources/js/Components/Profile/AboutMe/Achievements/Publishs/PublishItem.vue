@@ -58,7 +58,7 @@
 				</div>
 				<div class="col-md-6 py-4">
 					<strong>تاریخ انتشار <span class="text-action">*</span></strong>
-					<DatePicker class="mt-2" v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
+					<DatePicker class="mt-3" v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
 				</div>
 				<div class="col-md-6 py-4 d-flex align-items-end" v-if="showMore">
 					<MaterialTextField v-model="val.link" class="d-flex align-items-center material--sm" placeholder="لینک ناشر"></MaterialTextField>

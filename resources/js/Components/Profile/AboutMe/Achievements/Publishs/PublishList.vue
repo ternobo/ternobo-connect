@@ -21,7 +21,9 @@
 <script>
 import { Skeleton } from "vue-loading-skeleton";
 import PublishItem from "./PublishItem";
+import AchievementsMxixin from "../../../../../Mixins/AchievementsMixin";
 export default {
+	mixins: [AchievementsMxixin],
 	methods: {
 		onDelete(index) {
 			this.publishs.splice(index, 1);

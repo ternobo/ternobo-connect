@@ -44,7 +44,7 @@
             Content Edit
         !-->
 			<div class="row">
-				<div class="col-md-6" :class="{ 'pb-4': $root.isDesktop, 'py-2': !$root.isDesktop }">
+				<div class="col-md-6" :class="{ 'py-3': $root.isDesktop, 'py-2': !$root.isDesktop }">
 					<div class="d-flex align-items-center w-100">
 						<div class="ml-2" v-if="!$root.isDesktop">
 							<div class="actions mx-0">
@@ -58,46 +58,48 @@
 						<MaterialTextField v-model="val.name" :required="true" class="d-flex align-items-center material--sm p-0" placeholder="نام اختراع"></MaterialTextField>
 					</div>
 				</div>
-				<div class="col-md-6" :class="{ 'pt-4': $root.isDesktop, 'py-2': !$root.isDesktop }">
+				<div class="col-md-6" :class="{ 'py-3': $root.isDesktop, 'py-2': !$root.isDesktop }">
 					<MaterialTextField v-model="val.organization" :required="true" class="d-flex align-items-center material--sm p-0" placeholder="اداره ثبت اختراع"></MaterialTextField>
 				</div>
-				<div class="col-md-6" :class="{ 'pt-4': $root.isDesktop, 'py-2': !$root.isDesktop }">
+				<div class="col-md-6" :class="{ 'py-3': $root.isDesktop, 'py-2': !$root.isDesktop }">
 					<MaterialTextField v-model="val.registerCode" :required="true" class="d-flex align-items-center material--sm p-0" placeholder="شماره ثبت"></MaterialTextField>
 				</div>
-				<div class="col-md-6" :class="{ 'pt-4': $root.isDesktop, 'py-2': !$root.isDesktop }">
+				<div class="col-md-6" :class="{ 'py-3': $root.isDesktop, 'py-2': !$root.isDesktop }">
 					<MaterialTextField v-model="val.link" class="d-flex align-items-center material--sm p-0" placeholder="لینک ثبت اختراع"></MaterialTextField>
 				</div>
-				<div class="col-md-6" :class="{ 'pt-4': $root.isDesktop, 'py-2': !$root.isDesktop }">
-					<v-select
-						:searchable="false"
-						:placeholder="'وضعیت'"
-						class="datepicker-list w-75"
-						dir="rtl"
-						v-model="val.status"
-						:options="[
-							{
-								label: 'حق ثبت اختراع صادر شده',
-								id: 1,
-							},
-							{
-								label: 'حق ثبت اختراع درحال ثبت شدن است',
-								id: 2,
-							},
-						]"
-					>
-						<template #open-indicator="{ attributes }">
-							<span v-bind="attributes">
-								<i class="material-icons">keyboard_arrow_down</i>
-							</span>
-						</template>
-						<template #no-options>موردی یافت نشد</template>
-					</v-select>
+				<div class="col-md-6" :class="{ 'py-3': $root.isDesktop, 'py-2': !$root.isDesktop }">
+					<div class="d-flex align-items-end h-100">
+						<v-select
+							:searchable="false"
+							:placeholder="'وضعیت'"
+							class="datepicker-list w-100"
+							dir="rtl"
+							v-model="val.status"
+							:options="[
+								{
+									label: 'حق ثبت اختراع صادر شده',
+									id: 1,
+								},
+								{
+									label: 'حق ثبت اختراع درحال ثبت شدن است',
+									id: 2,
+								},
+							]"
+						>
+							<template #open-indicator="{ attributes }">
+								<span v-bind="attributes">
+									<i class="material-icons">keyboard_arrow_down</i>
+								</span>
+							</template>
+							<template #no-options>موردی یافت نشد</template>
+						</v-select>
+					</div>
 				</div>
-				<div class="col-md-6" :class="{ 'pt-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
+				<div class="col-md-6" :class="{ 'py-3': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
 					<strong>تاریخ صدور ثبت اختراع</strong>
 					<DatePicker class="mt-2" :showDays="true" v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
 				</div>
-				<div class="col-md-12" :class="{ 'pt-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
+				<div class="col-md-12" :class="{ 'py-3': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
 					<strong>توضیحات</strong>
 					<div class="character-counter">
 						<span class="counter tex-dark">{{ leftCharacter }}</span>
