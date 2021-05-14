@@ -49,6 +49,7 @@
         "socialiteproviders/github": "^4.1",
         "socialiteproviders/instagram": "^4.1",
         "socialiteproviders/instagram-basic": "^4.1",
+        "socialiteproviders/spotify": "^4.1",
         "socialiteproviders/telegram": "^4.1",
         "socialiteproviders/twitch": "^5.3",
         "socialiteproviders/twitter": "^4.1",

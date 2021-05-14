@@ -29,6 +29,7 @@ class EventServiceProvider extends ServiceProvider
             'SocialiteProviders\Telegram\TelegramExtendSocialite@handle',
             'SocialiteProviders\Twitter\TwitterExtendSocialite@handle',
             'SocialiteProviders\Yahoo\YahooExtendSocialite@handle',
+            'SocialiteProviders\Spotify\SpotifyExtendSocialite@handle',
         ],
     ];
 

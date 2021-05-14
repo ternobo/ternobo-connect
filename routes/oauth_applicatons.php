@@ -34,3 +34,6 @@ Route::get("/connect/twitter/callback", "Socialite\TwitterController@callback");
 
 Route::get("/connect/yahoo/login", "Socialite\YahooController@login");
 Route::get("/connect/yahoo/callback", "Socialite\YahooController@callback");
+
+Route::get("/connect/spotify/login", "Socialite\SpotifyController@login");
+Route::get("/connect/spotify/callback", "Socialite\SpotifyController@callback");

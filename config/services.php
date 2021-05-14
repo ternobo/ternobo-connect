@@ -44,6 +44,11 @@ return [
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
         'redirect' => env('FACEBOOK_REDIRECT_URI'),
     ],
+    'spotify' => [
+        'client_id' => env('SPOTIFY_CLIENT_ID'),
+        'client_secret' => env('SPOTIFY_CLIENT_SECRET'),
+        'redirect' => env('SPOTIFY_REDIRECT_URI'),
+    ],
     'telegram' => [
         'bot' => env('TELEGRAM_BOT_NAME'), // The bot's username
         'client_id' => null,
