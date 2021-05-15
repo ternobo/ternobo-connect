@@ -21,9 +21,9 @@
 			<LanguagesList :value="this.achievements.langs" ref="langs" :edit="edit" :page="page"></LanguagesList>
 			<ProjectsList :value="this.achievements.projects" ref="projects" :edit="edit" :page="page"></ProjectsList>
 			<PublishList :value="this.achievements.publishs" ref="publishs" :edit="edit" :page="page"></PublishList>
-			<AwardsList :value="this.achievements.awards" ref="awards" :edit="edit" :page="page"></AwardsList>
-			<CoursesList :value="this.achievements.courses" ref="courses" :edit="edit" :page="page"></CoursesList>
 			<InventionsList :value="this.achievements.inventions" ref="inventions" :edit="edit" :page="page"></InventionsList>
+			<CoursesList :value="this.achievements.courses" ref="courses" :edit="edit" :page="page"></CoursesList>
+			<AwardsList :value="this.achievements.awards" ref="awards" :edit="edit" :page="page"></AwardsList>
 			<TestsList :value="this.achievements.tests" ref="tests" :edit="edit" :page="page"></TestsList>
 
 			<div class="w-100 text-center" v-if="this.achievements.langs < 1 && this.achievements.projects < 1 && this.achievements.publishs < 1 && this.achievements.awards < 1 && this.achievements.courses < 1 && this.achievements.inventions < 1 && this.achievements.tests < 1">

@@ -1,11 +1,13 @@
 .achievement-edit {
     display: flex;
+    padding: 12px 0;
 
     .actions-container {
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 12px;
+        position: relative;
     }
 
     .achievement-edit-row {
@@ -22,6 +24,8 @@
 
     .show-more-container {
         margin-top: 12px;
+        position: absolute;
+        top: 52px;
     }
 
 }
@@ -29,10 +33,10 @@
 .achievement-edit-row {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
     height: -webkit-max-content;
     height: -moz-max-content;
     height: max-content;
-    flex-direction: row;
     margin: -12px;
 
     .row-first-only {
@@ -102,23 +106,11 @@
 
 
 
-.achievement {
-    .achievement-edit-row:not(:last-child):after {
-        content: " ";
-        position: absolute;
-        width: calc(100% - 48px);
-        left: 24px;
-        right: 24px;
-        bottom: 0;
-        height: 2px;
-        background-color: #E0E0E0;
-    }
-}
-
 .achievement-item {
+
     &:not(:last-child) {
-        border-bottom: 2px solid #E0E0E0;
         padding: 0 24px;
+        border-bottom: 2px solid #C8C8C8;
     }
 
     &:not(:first-child) {
@@ -166,11 +158,12 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    padding: 0;
     margin: 0;
 
     li {
-        padding: 24px 0;
         position: relative;
+
 
         &:not(:last-child)::after {
             position: absolute;
@@ -178,9 +171,8 @@
             bottom: 0;
             height: 2px;
             background-color: #EEE;
-            left: 24px;
-            right: 24px;
-            width: calc(100%-48px);
+            left: 0;
+            right: 116px;
 
             @media screen and (max-width: $sm-size) {
                 left: 16px;
@@ -201,52 +193,7 @@
 
         &:not(:last-child) {
             padding-left: 0.5rem;
-            border-left: 1px solid #C8C8C8;
             margin-left: 0.5rem;
-        }
-
-        .editItem {
-            width: 100%;
-            display: flex;
-            align-items: baseline;
-            gap: 10px;
-
-            .actions {
-                border-radius: 16px;
-                display: flex;
-                flex-direction: row;
-                color: $grey;
-                background: $body-bg;
-                margin-left: 24px;
-                padding: 8px 8px;
-                width: 80px;
-                height: 40px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                >* {
-                    margin: 0 4px;
-                }
-
-                @media screen and (max-width: $sm-size) {
-                    max-width: 56px;
-                    max-height: 28px;
-
-                    i {
-                        font-size: 20px;
-                    }
-                }
-
-            }
-
-
-            &:not(:last-child) {
-                padding-bottom: 1rem;
-                border-bottom: 1px solid #C8C8C8;
-                margin-bottom: 1rem;
-            }
-
         }
 
     }

@@ -1,7 +1,7 @@
 <template>
 	<div class="category-item" :class="{ disabled: !edit && disabled, edit: edit }">
 		<div class="category-content">
-			<div class="actions">
+			<div class="delete-move-actions">
 				<i class="material-icons-outlined text-light p-1" :class="{ 'hand-hover hover-dark': !edit && !disabled }">unfold_more</i>
 				<i class="material-icons-outlined text-light p-1" :class="{ 'hover-danger clickable': !edit && !disabled }" @click="doDelete()">delete</i>
 			</div>

@@ -12,7 +12,7 @@
 				<Skeleton :count="4" :heigth="25" />
 			</li>
 		</ul>
-		<draggable group="inventions" ref="draggable" tag="ul" v-bind="dragOptions" v-model="inventions" class="achievement-list p-0" :disabled="!edit" handle=".hand-hover">
+		<draggable group="inventions" ref="draggable" tag="ul" v-bind="dragOptions" v-model="inventions" class="achievement-list" :disabled="!edit" handle=".hand-hover">
 			<InventionItem :detailed="open" :class="{ 'edit w-100': edit }" @deleted="onDelete(index)" v-model="inventions[index]" :edit="edit" v-for="(invention, index) in inventions" :page="page" :key="'invention_' + invention.id" />
 		</draggable>
 	</div>

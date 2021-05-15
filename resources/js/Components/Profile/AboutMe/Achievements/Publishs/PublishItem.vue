@@ -37,10 +37,10 @@
 				<div>
 					<MaterialTextField v-model="val.name" :required="true" inputClass="w-100" class="material--sm" placeholder="عنوان"></MaterialTextField>
 				</div>
-				<div v-if="showMore">
+				<div>
 					<MaterialTextField v-model="val.publisher" inputClass="w-100" class="material--sm" placeholder="نام ناشر"></MaterialTextField>
 				</div>
-				<div v-if="showMore">
+				<div>
 					<strong>تاریخ انتشار <span class="text-action">*</span></strong>
 					<DatePicker class="mt-3" v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
 				</div>

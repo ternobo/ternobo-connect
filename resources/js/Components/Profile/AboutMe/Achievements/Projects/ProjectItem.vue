@@ -43,7 +43,7 @@
 				<div>
 					<strong>تاریخ پایان <span class="text-action">*</span></strong>
 					<DatePicker class="mt-3" :disabled="noEndDate" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{ year: year }"></DatePicker>
-					<Checkbox v-model="noEndDate"> همچنان در حال کار بر روی این پروژه هستم </Checkbox>
+					<Checkbox class="mb-0" v-model="noEndDate"> همچنان در حال کار بر روی این پروژه هستم </Checkbox>
 				</div>
 				<div class="col-md-6" v-if="showMore">
 					<MaterialTextField v-model="val.link" class="material--sm" placeholder="لینک پروژه"></MaterialTextField>

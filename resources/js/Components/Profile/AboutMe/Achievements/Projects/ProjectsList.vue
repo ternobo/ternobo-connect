@@ -12,7 +12,7 @@
 				<Skeleton :count="4" :heigth="25" />
 			</li>
 		</ul>
-		<draggable group="projects" ref="draggable" tag="ul" v-bind="dragOptions" v-model="projects" class="achievement-list p-0" :disabled="!edit" handle=".hand-hover">
+		<draggable group="projects" ref="draggable" tag="ul" v-bind="dragOptions" v-model="projects" class="achievement-list" :disabled="!edit" handle=".hand-hover">
 			<ProjectItem :detailed="open" :class="{ 'edit w-100': edit }" @deleted="onDelete(index)" v-model="projects[index]" :edit="edit" v-for="(project, index) in projects" :page="page" :key="'project_' + project.id" />
 		</draggable>
 	</div>

@@ -7,13 +7,13 @@
 			</div>
 			<i class="material-icons open-achievements" v-if="!edit" :class="{ active: open }">arrow_drop_down</i>
 		</div>
-		<ul class="achievement-list p-0" v-if="loading">
+		<ul class="achievement-list" v-if="loading">
 			<li>
 				<Skeleton :count="4" :heigth="25" />
 			</li>
 		</ul>
-		<draggable group="publishs" ref="draggable" tag="ul" v-bind="dragOptions" v-model="publishs" class="achievement-list p-0" :disabled="!edit" handle=".hand-hover">
-			<PublishItem :detailed="open" @deleted="onDelete(index)" v-model="publishs[index]" :edit="edit" v-for="(publish, index) in publishs" :page="page" :key="'publish_' + publish.id" />
+		<draggable group="publishs" ref="draggable" tag="ul" v-bind="dragOptions" v-model="publishs" class="achievement-list" :disabled="!edit" handle=".hand-hover">
+			<PublishItem :detailed="open" :class="{ 'edit w-100': edit }" @deleted="onDelete(index)" v-model="publishs[index]" :edit="edit" v-for="(publish, index) in publishs" :page="page" :key="'publish_' + publish.id" />
 		</draggable>
 	</div>
 </template>

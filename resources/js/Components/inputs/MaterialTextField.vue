@@ -22,7 +22,7 @@ export default {
 		check() {
 			this.$emit("blur");
 			this.focus = false;
-			if (((this.val == null || this.val.length < 1) && this.required) || this.notValid) {
+			if (this.notValid) {
 				this.invalid = true;
 			} else {
 				this.invalid = false;
