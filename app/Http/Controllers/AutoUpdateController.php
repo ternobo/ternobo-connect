@@ -10,8 +10,9 @@ class AutoUpdateController extends Controller
     {
         if ($request->secret == env("GIT_SECRET")) {
             $path = base_path();
-            exec("cd $path && git pull && npm run production");
+            $output = exec("cd $path && git pull && npm run production" . ' > /dev/null 2>&1 & echo $!');
+            return response()->json(['job' => "pid $output"]);
         }
-        return abort(401);
+        return response()->json(['msg' => 'wrong secret', "data" => $request->secret], 401);
     }
 }
