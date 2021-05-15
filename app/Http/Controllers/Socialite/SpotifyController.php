@@ -24,7 +24,7 @@ class SpotifyController extends Controller
         $token = $user->token;
         $response = Http::withHeaders([
             "Authorization" => "Bearer $token",
-        ])->post('https://api.spotify.com/v1/me');
+        ])->get('https://api.spotify.com/v1/me');
 
         ConnectedAccount::create([
             'name' => $user->name,
