@@ -22,7 +22,7 @@ class SpotifyController extends Controller
         ConnectedAccount::query()->where("user_id", Auth::user()->id)->where("driver", "spotify")->delete();
         $user = Socialite::driver('spotify')->user();
         $token = $user->token;
-        $response = Http::withToken($token)->get('https://api.spotify.com/v1/me') > json();
+        $response = Http::withToken($token)->get('https://api.spotify.com/v1/me')->json();
         ConnectedAccount::create([
             'name' => $user->name,
             'driver' => 'spotify',
