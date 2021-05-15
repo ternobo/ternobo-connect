@@ -185,6 +185,8 @@ TernoboApp.install = function (Vue, options) {
         return '/' + user.username;
     }
 
+
+
     const setup = function (vm) {
         Vue.prototype.toast = function (msessage, icon = 'error_outline', iconClass = 'text-warning') {
             this.$root.application.addToast({

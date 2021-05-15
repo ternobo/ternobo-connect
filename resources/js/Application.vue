@@ -43,26 +43,6 @@ export default {
 	computed: {
 		...mapState(["url", "user"]),
 	},
-	mounted() {
-		// setTimeout(() => {
-		// 	this.$store.watch(
-		// 		(state) => {
-		// 			return state.user; // could also put a Getter here
-		// 		},
-		// 		(newValue) => {
-		// 			if (newValue) {
-		// 				this.hasUser = true;
-		// 			} else {
-		// 				this.hasUser = false;
-		// 			}
-		// 		},
-		// 		//Optional Deep if you need it
-		// 		{
-		// 			deep: true,
-		// 		}
-		// 	);
-		// }, 10000);
-	},
 	created() {
 		this.$root.application = this;
 	},

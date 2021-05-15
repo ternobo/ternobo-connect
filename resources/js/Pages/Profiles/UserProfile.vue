@@ -162,6 +162,20 @@ export default {
 			.catch((err) => console.log(err))
 			.then(() => (this.loadingActions = false));
 	},
+	beforeRouteLeave(to, from, next, vm) {
+		if (vm.edit) {
+			vm.confirmDialog("با خروج از صفحه ممکن اطلاعات از بین‌بروند!").then((value) => {
+				if (value) {
+					next();
+				}
+			});
+		} else {
+			next();
+		}
+	},
+	destroyed() {
+		window.onbeforeunload = null;
+	},
 	methods: {
 		reloadUser() {
 			this.$store.dispatch("loadUser");
@@ -282,6 +296,7 @@ export default {
 							.then((response) => {
 								if (response.data.result) {
 									this.$store.commit("setProfileEdit", false);
+									window.onbeforeunload = null;
 								} else {
 									this.handleError(response.data.errors);
 								}
@@ -304,6 +319,7 @@ export default {
 						.then((response) => {
 							if (response.data.result) {
 								this.$store.commit("setProfileEdit", false);
+								window.onbeforeunload = null;
 								this.reloadUser();
 							} else {
 								this.handleError(response.data.errors, response.data.type);
@@ -320,6 +336,17 @@ export default {
 				}
 			} else {
 				this.$store.commit("setProfileEdit", true);
+				window.onbeforeunload = function (e) {
+					var message = "در صورت خروج تغییرات پروفایل از بین‌می‌رود!",
+						e = e || window.event;
+					// For IE and Firefox
+					if (e) {
+						e.returnValue = message;
+					}
+
+					// For Safari
+					return message;
+				};
 			}
 		},
 		cancelEdit() {
