@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>انتقال به درگاه پرداخت</title>
+    <title>‌اتصال شبکه‌اجتماعی به ترنوبو</title>
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
 
     <style>
@@ -85,9 +85,10 @@
         حساب کاربری متصل شد
     </h2>
     <script>
-        setTimeout(()=>{
+        setTimeout(() => {
             window.close();
-        },1000);
+        }, 1000);
+
     </script>
 </body>
 
