@@ -3,12 +3,12 @@
 		<div class="w-100" v-if="!edit">
 			<div class="d-flex justify-content-start" v-if="detailed">
 				<div class="title">
-					<a :href="val.link" v-if="val.link != null && val.link.length > 0"
-						><strong>{{ val.name }}</strong></a
-					>
-					<span v-else
-						><strong>{{ val.name }}</strong></span
-					>
+					<a :href="val.link" v-if="val.link != null && val.link.length > 0">
+						<strong>{{ val.name }}</strong>
+					</a>
+					<span v-else>
+						<strong>{{ val.name }}</strong>
+					</span>
 					<span class="font-12 text-muted">{{ time_text }}</span>
 				</div>
 				<p class="bg-body py-2 px-3" v-if="val.description != null && val.description.length > 0">
@@ -16,70 +16,39 @@
 				</p>
 			</div>
 			<div class="achievement-name" v-else>
-				<a :href="val.link" v-if="val.link != null && val.link.length > 0"
-					><strong>{{ val.name }}</strong></a
-				>
-				<span v-else
-					><strong>{{ val.name }}</strong></span
-				>
+				<a :href="val.link" v-if="val.link != null && val.link.length > 0">
+					<strong>{{ val.name }} </strong>
+				</a>
+				<span v-else>
+					<strong>{{ val.name }}</strong>
+				</span>
 			</div>
 		</div>
-		<div class="editItem" v-else>
-			<div class="d-flex flex-column align-items-center ml-3" v-if="edit && $root.isDesktop">
-				<div class="actions mx-0">
+		<div class="achievement-edit" v-else>
+			<div class="actions-container">
+				<div class="delete-move-actions">
 					<i class="material-icons hand-hover">unfold_more</i>
 					<i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
 				</div>
-				<span class="mt-2 clickable font-12 ml-1 text-grey" v-if="$root.isDesktop" @click="showMore = !showMore">
-					{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
-				</span>
-				<span v-else class="text-grey clickable font-10 mt-2" @click="showMore = !showMore">
-					{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
-				</span>
+				<show-more v-model="showMore" />
 			</div>
-
-			<!--
-            Content Edit
-        !-->
-			<div class="row w-100">
-				<div class="col-md-12" :class="{ 'pt-4': $root.isDesktop, 'py-2': !$root.isDesktop }">
-					<div class="d-flex align-items-center w-100">
-						<div class="ml-2" v-if="!$root.isDesktop">
-							<div class="actions mx-0">
-								<i class="material-icons hand-hover">unfold_more</i>
-								<i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
-							</div>
-							<span class="mt-2 font-10 text-action clickable" @click="showMore = !showMore">
-								{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
-							</span>
-						</div>
-						<MaterialTextField v-model="val.name" :required="true" input-class="w-100" class="d-flex align-items-center material--sm p-0 col-md-6" placeholder="نام پروژه"></MaterialTextField>
-					</div>
+			<div class="achievement-edit-row">
+				<div class="col-md-12">
+					<MaterialTextField v-model="val.name" :required="true" input-class="w-75" class="material--sm" placeholder="نام پروژه"></MaterialTextField>
 				</div>
-				<div class="col-md-6" :class="{ 'pt-4': $root.isDesktop, 'py-2': !$root.isDesktop }">
+				<div>
 					<strong>تاریخ شروع <span class="text-action">*</span></strong>
 					<DatePicker class="mt-3" v-model="val.startDate" :max="{ year: year }"></DatePicker>
 				</div>
-				<div class="col-md-6" :class="{ 'pt-4': $root.isDesktop, 'py-2': !$root.isDesktop }">
+				<div>
 					<strong>تاریخ پایان <span class="text-action">*</span></strong>
-					<DatePicker class="mt-3" v-if="!noEndDate" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{ year: year }"></DatePicker>
-					<input v-else type="text" readonly value="تا کنون" class="form-control w-75 bg-white mt-3" />
+					<DatePicker class="mt-3" :disabled="noEndDate" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{ year: year }"></DatePicker>
 					<Checkbox v-model="noEndDate"> همچنان در حال کار بر روی این پروژه هستم </Checkbox>
 				</div>
-				<div class="col-md-6" :class="{ 'pt-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
-					<v-select :searchable="false" :placeholder="'مرتبط با'" class="datepicker-list w-75" dir="rtl" v-model="val.skill" :options="relatedTo">
-						<template #open-indicator="{ attributes }">
-							<span v-bind="attributes">
-								<i class="material-icons">keyboard_arrow_down</i>
-							</span>
-						</template>
-						<template #no-options>موردی یافت نشد</template>
-					</v-select>
+				<div class="col-md-6" v-if="showMore">
+					<MaterialTextField v-model="val.link" class="material--sm" placeholder="لینک پروژه"></MaterialTextField>
 				</div>
-				<div class="col-md-6" :class="{ 'pt-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
-					<MaterialTextField v-model="val.link" class="d-flex align-items-center material--sm" placeholder="لینک پروژه"></MaterialTextField>
-				</div>
-				<div class="col-md-12" :class="{ 'pt-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
+				<div class="col-md-12" v-if="showMore">
 					<strong>توضیحات</strong>
 					<div class="character-counter">
 						<span class="counter tex-dark">{{ leftCharacter }}</span>
@@ -104,12 +73,13 @@ import MaterialTextField from "../../../../inputs/MaterialTextField";
 import Checkbox from "../../../../inputs/Checkbox";
 
 import AchievementsItem from "../../../../../Mixins/AchievementsItem";
+import ShowMore from "../ShowMore.vue";
 export default {
 	mixins: [AchievementsItem],
 	created() {
 		if (this.value.name) {
 			this.val = this.value;
-			if (this.val.endDate == true) {
+			if (typeof this.val.endDate == "boolean" || this.val.endDate == { year: undefined, month: undefined, day: undefined }) {
 				this.noEndDate = true;
 			}
 		}
@@ -151,17 +121,9 @@ export default {
 		MaterialTextField,
 		Checkbox,
 		DatePicker,
+		ShowMore,
 	},
 	computed: {
-		relatedTo() {
-			let experience = this.page.about_data.experiences;
-			let computed = [];
-			experience.forEach((item, index) => {
-				computed.push(item.title + " در " + item.company);
-			});
-			computed.push("دیگر");
-			return computed;
-		},
 		time_text() {
 			let startText = "";
 			let endText = "تا کنون";

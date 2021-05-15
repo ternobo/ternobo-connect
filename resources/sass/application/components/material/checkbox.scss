@@ -27,6 +27,8 @@ $md-checkbox-label-padding: .75em;
         vertical-align: top;
         clear: both;
         padding-right: 1px;
+        color: $grey;
+        font-size: 14px;
 
         &:not(:empty) {
             padding-right: $md-checkbox-label-padding;

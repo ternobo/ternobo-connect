@@ -3,25 +3,39 @@
     align-items: center;
     flex-wrap: wrap;
     margin-bottom: 0;
+    padding: 16px 0;
 
     li {
-        padding: 16px 0;
+
         position: relative;
 
-        &:not(:last-child)::after {
-            position: absolute;
-            content: " ";
-            bottom: 0;
-            height: 2px;
-            background-color: #EEE;
-            left: 24px;
-            right: 24px;
-            width: calc(100%-48px);
+        &.detailed {
+            padding: 8px 0;
+        }
 
-            @media screen and (max-width: $sm-size) {
-                left: 16px;
-                right: 16px;
-                width: calc(100% - 32px);
+
+
+        .achievement-edit-row {
+            width: 100%;
+        }
+
+        &:not(:last-child) {
+            .achievement-edit-row::after {
+                content: " ";
+                position: absolute;
+                width: calc(100% - 48px);
+                left: 24px;
+                right: 24px;
+                bottom: 0;
+                height: 2px;
+                background-color: #E0E0E0;
+            }
+
+        }
+
+        &:last-child {
+            .achievement-edit-row {
+                border-bottom: none;
             }
         }
 
@@ -38,44 +52,6 @@
             padding-left: 0.5rem;
             border-left: 1px solid #C8C8C8;
             margin-left: 0.5rem;
-        }
-
-        .editItem {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-
-            @media screen and (max-width: $sm-size) {
-                align-items: flex-start;
-            }
-
-            .language-edit-input {
-                width: 100%;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-
-                .v-select {
-                    width: 50%;
-                }
-
-                @media screen and (max-width: $sm-size) {
-                    .v-select {
-                        width: 100%;
-                    }
-
-                    flex-direction: column;
-                }
-            }
-
-
-            &:not(:last-child) {
-                padding-bottom: 1rem;
-                border-bottom: 1px solid #C8C8C8;
-                margin-bottom: 1rem;
-            }
-
         }
 
     }

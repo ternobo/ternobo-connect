@@ -27,6 +27,9 @@ class DateObject implements Rule
      */
     public function passes($attribute, $value)
     {
+        if ($value == null) {
+            return true;
+        }
         if (is_object($value) || is_array($value)) {
             $value = (object) $value;
             if (isset($value->month) || isset($value->year)) {

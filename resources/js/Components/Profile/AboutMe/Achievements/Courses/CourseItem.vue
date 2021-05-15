@@ -18,57 +18,25 @@
 				>
 			</div>
 		</div>
-		<div class="editItem" v-else>
-			<div class="d-flex flex-column align-items-center ml-3" v-if="edit && $root.isDesktop">
-				<div class="actions mx-0" v-if="edit">
+		<div class="achievement-edit" v-else>
+			<div class="actions-container">
+				<div class="delete-move-actions">
 					<i class="material-icons hand-hover">unfold_more</i>
 					<i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
 				</div>
-				<span class="mt-2 clickable font-12 ml-1 text-grey" v-if="$root.isDesktop" @click="showMore = !showMore">
-					{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
-				</span>
-				<span v-else class="text-grey clickable font-10 mt-2" @click="showMore = !showMore">
-					{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
-				</span>
+				<show-more v-model="showMore" />
 			</div>
-
-			<!--
-            Content Edit
-        !-->
-			<div class="row w-100 m-0">
-				<div class="col-md-6" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }">
-					<div class="d-flex align-items-center w-100">
-						<div class="ml-2" v-if="!$root.isDesktop">
-							<div class="actions mx-0">
-								<i class="material-icons hand-hover">unfold_more</i>
-								<i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
-							</div>
-							<span class="mt-2 font-10 text-action clickable" @click="showMore = !showMore">
-								{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
-							</span>
-						</div>
-						<MaterialTextField v-model="val.name" :required="true" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="نام دوره"></MaterialTextField>
-					</div>
+			<div class="achievement-edit-row">
+				<div>
+					<MaterialTextField v-model="val.name" :required="true" class="center material--sm" placeholder="نام دوره"></MaterialTextField>
 				</div>
-
-				<!--
-                More Content
-             !-->
-
-				<div class="col-md-6" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
+				<div v-if="showMore">
 					<MaterialTextField v-model="val.code" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="کد دوره"></MaterialTextField>
 				</div>
-				<div class="col-md-6" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
-					<v-select :placeholder="'مرتبط با'" class="datepicker-list w-75" dir="rtl" v-model="val.skill" label="name" :options="page.user.skills">
-						<template #open-indicator="{ attributes }">
-							<span v-bind="attributes">
-								<i class="material-icons">keyboard_arrow_down</i>
-							</span>
-						</template>
-						<template #no-options>موردی یافت نشد</template>
-					</v-select>
+				<div class="col-md-12" v-if="showMore">
+					<tselect dir="rtl" :items="page.skills" labelOption="name" valueOption="name" v-model="value.skill">مرتبط با</tselect>
 				</div>
-				<div class="col-md-12" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
+				<div class="col-md-12" v-if="showMore">
 					<strong>توضیحات</strong>
 					<div class="character-counter">
 						<span class="counter tex-dark">{{ leftCharacter }}</span>
@@ -78,13 +46,7 @@
 					</div>
 					<textarea-autosize maxlength="1000" class="form-control" v-model="val.description"></textarea-autosize>
 				</div>
-				<!--
-                End More Content
-            !-->
 			</div>
-			<!--
-            Content Edit End
-        !-->
 		</div>
 	</li>
 </template>
@@ -92,6 +54,8 @@
 <script>
 import MaterialTextField from "../../../../inputs/MaterialTextField";
 import AchievementsItem from "../../../../../Mixins/AchievementsItem";
+import ShowMore from "../ShowMore.vue";
+import Tselect from "../../../../Tselect.vue";
 export default {
 	mixins: [AchievementsItem],
 	created() {
@@ -129,6 +93,8 @@ export default {
 	},
 	components: {
 		MaterialTextField,
+		ShowMore,
+		Tselect,
 	},
 	data() {
 		return {

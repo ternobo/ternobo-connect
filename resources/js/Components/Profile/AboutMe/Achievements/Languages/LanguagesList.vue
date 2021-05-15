@@ -12,8 +12,8 @@
 				<Skeleton :count="4" :heigth="25" />
 			</li>
 		</ul>
-		<draggable group="langs" ref="draggable" tag="ul" v-bind="dragOptions" v-model="languages" class="languages-list p-0" :disabled="!edit" handle=".hand-hover">
-			<LanguageItem :detailed="open" :class="{ 'edit w-100': edit, open: open }" @deleted="onDelete(index)" v-model="languages[index]" :user="page.user" :edit="edit" v-for="(language, index) in languages" :language="language" :key="'language_' + language.id" />
+		<draggable group="langs" ref="draggable" tag="ul" v-bind="dragOptions" v-model="languages" class="languages-list" :disabled="!edit" handle=".hand-hover">
+			<LanguageItem :detailed="open" :class="{ 'edit w-100': edit, open: open }" @deleted="onDelete(index)" v-model="languages[index]" :user="page.user" :edit="edit" v-for="(language, index) in languages" :key="'language_' + language.id" />
 		</draggable>
 	</div>
 </template>

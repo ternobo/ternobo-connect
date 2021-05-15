@@ -3,13 +3,13 @@
 		<div class="w-100" v-if="!edit">
 			<div class="d-flex justify-content-start" v-if="detailed">
 				<div class="title">
-					<span
-						><strong>{{ val.name }}</strong></span
-					>
+					<span>
+						<strong>{{ val.name }}</strong>
+					</span>
 					<span v-if="val.from != null && val.from.length > 0" class="text-muted">{{ val.from }}</span>
 					<span class="font-12 text-muted">{{ time_text }}</span>
-					<span v-if="val.skill != null && val.skill.name != undefined && val.skill != null" class="text-muted"
-						><strong>{{ val.skill.name }}</strong>
+					<span v-if="val.skill != null && val.skill.name != undefined && val.skill != null" class="text-muted">
+						<strong>{{ val.skill.name }}</strong>
 					</span>
 				</div>
 				<p class="bg-body py-2 px-3" v-if="val.description != null && val.description.length > 0">
@@ -17,65 +17,31 @@
 				</p>
 			</div>
 			<div class="achievement-name" v-else>
-				<span
-					><strong>{{ val.name }}</strong></span
-				>
+				<span>
+					<strong>{{ val.name }}</strong>
+				</span>
 			</div>
 		</div>
-		<div class="editItem" v-else>
-			<div class="d-flex flex-column align-items-center ml-3" v-if="$root.isDesktop">
-				<div class="actions mx-0" v-if="edit">
+		<div class="achievement-edit" v-else>
+			<div class="actions-container">
+				<div class="delete-move-actions">
 					<i class="material-icons hand-hover">unfold_more</i>
 					<i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
 				</div>
-				<span class="mt-2 clickable font-12 ml-1 text-grey" v-if="$root.isDesktop" @click="showMore = !showMore">
-					{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
-				</span>
-				<span v-else class="text-grey clickable font-10 mt-2" @click="showMore = !showMore">
-					{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
-				</span>
+				<show-more v-model="showMore" />
 			</div>
-
-			<!--
-            Content Edit
-        !-->
-			<div class="row w-100 m-0">
-				<div class="col-md-6 py-4">
-					<div class="d-flex align-items-center w-100">
-						<div class="ml-2" v-if="!$root.isDesktop">
-							<div class="actions mx-0">
-								<i class="material-icons hand-hover">unfold_more</i>
-								<i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
-							</div>
-							<span class="mt-2 font-10 text-action clickable" @click="showMore = !showMore">
-								{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
-							</span>
-						</div>
-						<MaterialTextField v-model="val.name" :required="true" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="عنوان"></MaterialTextField>
-					</div>
+			<div class="achievement-edit-row">
+				<div class="col-md-12">
+					<MaterialTextField v-model="val.name" :required="true" class="material--sm" placeholder="عنوان"></MaterialTextField>
 				</div>
-
-				<!--
-                More Content
-             !-->
-				<div class="col-md-6 py-4" v-if="showMore">
-					<v-select :placeholder="'مرتبط با'" class="datepicker-list w-75" dir="rtl" v-model="val.skill" label="name" :options="page.user.skills">
-						<template #open-indicator="{ attributes }">
-							<span v-bind="attributes">
-								<i class="material-icons">keyboard_arrow_down</i>
-							</span>
-						</template>
-						<template #no-options>موردی یافت نشد</template>
-					</v-select>
-				</div>
-				<div class="col-md-6 pb-4" v-if="showMore">
-					<MaterialTextField v-model="val.from" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="صادر کننده"></MaterialTextField>
-				</div>
-				<div class="col-md-6 pb-4" v-if="showMore">
+				<div v-if="showMore">
 					<strong>تاریخ صدور</strong>
-					<DatePicker class="mt-2" v-model="val.startDate" :max="{ year: year, month: month }"></DatePicker>
+					<DatePicker class="mt-3" v-model="val.startDate" :max="{ year: year, month: month }"></DatePicker>
 				</div>
-				<div class="col-md-12 pt-4" v-if="showMore">
+				<div class="d-flex align-items-end" v-if="showMore">
+					<MaterialTextField v-model="val.from" class="material--sm" placeholder="صادر کننده"></MaterialTextField>
+				</div>
+				<div class="col-md-12" v-if="showMore">
 					<strong>توضیحات</strong>
 					<div class="character-counter">
 						<span class="counter tex-dark">{{ leftCharacter }}</span>
@@ -103,6 +69,7 @@ import MaterialTextField from "../../../../inputs/MaterialTextField";
 import Checkbox from "../../../../inputs/Checkbox";
 
 import AchievementsItem from "../../../../../Mixins/AchievementsItem";
+import ShowMore from "../ShowMore.vue";
 export default {
 	mixins: [AchievementsItem],
 	created() {
@@ -142,6 +109,7 @@ export default {
 		MaterialTextField,
 		Checkbox,
 		DatePicker,
+		ShowMore,
 	},
 	computed: {
 		time_text() {

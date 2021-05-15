@@ -123,21 +123,20 @@ class ProfileController extends Controller
                 ],
                 'publishs' => [
                     'name' => "required|max:50",
-                    "date" => ["required", new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
-                    "publisher" => "required|max:50",
+                    "date" => [new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
                 ],
                 'inventions' => [
                     'name' => "required|max:50",
-                    "organization" => "required|max:50",
-                    "registerCode" => "required|numeric",
+                    "organization" => "max:50",
+                    "registerCode" => "numeric",
                 ],
                 'courses' => [
                     'name' => "required|max:50",
                 ],
                 'tests' => [
                     'name' => "required|max:50",
-                    "score" => "required|numeric",
-                    "date" => ["required", new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
+                    "score" => "numeric",
+                    "date" => [new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
                 ],
             ];
 

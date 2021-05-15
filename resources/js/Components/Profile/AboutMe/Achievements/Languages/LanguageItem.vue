@@ -1,5 +1,5 @@
 <template>
-	<li :class="{ detailed: detailed }" v-if="language != undefined">
+	<li :class="{ detailed: detailed }" v-if="value">
 		<div class="language-name" v-if="!edit">
 			<div class="d-flex" v-if="detailed">
 				<span>
@@ -7,49 +7,51 @@
 				</span>
 
 				<div class="mr-4 badge-success">
-					{{ language.level.label }}
+					{{ languageVal.level.label }}
 				</div>
 			</div>
 			<span v-else>
 				{{ languageVal.name }}
 			</span>
 		</div>
-		<div class="achievement-edit-row" v-else>
-			<div>
+		<div class="achievement-edit" v-else>
+			<div class="actions-container">
 				<div class="delete-move-actions">
 					<i class="material-icons hand-hover">unfold_more</i>
 					<i class="material-icons-outlined hover-danger clickable" @click="doDelete">delete</i>
 				</div>
 			</div>
-			<div>
-				<MaterialTextField placeholder="زبان" :required="true" v-model="languageVal.name" class="material--sm w-100" input-class="w-100 py-1"></MaterialTextField>
-			</div>
-			<div>
-				<tselect
-					dir="rtl"
-					:items="[
-						{
-							label: 'مبتدی',
-							level: 1,
-						},
-						{
-							label: 'متوسط',
-							level: 2,
-						},
-						{
-							label: 'حرفه‌ای',
-							level: 3,
-						},
-						{
-							label: 'زبان مادری',
-							level: 4,
-						},
-					]"
-					v-model="languageVal.level"
-					labelOption="label"
-					valueOption="level"
-					>سطح</tselect
-				>
+			<div class="achievement-edit-row">
+				<div>
+					<MaterialTextField placeholder="زبان" :required="true" v-model="languageVal.name" class="material--sm w-100" input-class="w-100 py-1"></MaterialTextField>
+				</div>
+				<div>
+					<tselect
+						dir="rtl"
+						:items="[
+							{
+								label: 'مبتدی',
+								level: 1,
+							},
+							{
+								label: 'متوسط',
+								level: 2,
+							},
+							{
+								label: 'حرفه‌ای',
+								level: 3,
+							},
+							{
+								label: 'زبان مادری',
+								level: 4,
+							},
+						]"
+						v-model="languageVal.level"
+						labelOption="label"
+						valueOption="level"
+						>سطح</tselect
+					>
+				</div>
 			</div>
 		</div>
 	</li>
@@ -74,8 +76,9 @@ export default {
 		},
 	},
 	created() {
-		if (this.language != undefined && this.language != null) {
-			this.languageVal = this.language;
+		if (this.value) {
+			console.log("hi");
+			this.languageVal = this.value;
 		}
 	},
 	data() {
@@ -84,7 +87,7 @@ export default {
 		};
 	},
 	props: {
-		language: {
+		value: {
 			type: Object,
 			default: undefined,
 		},

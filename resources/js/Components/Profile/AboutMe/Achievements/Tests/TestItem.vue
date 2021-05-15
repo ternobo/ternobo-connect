@@ -3,9 +3,9 @@
 		<div class="w-100" v-if="!edit">
 			<div class="d-flex justify-content-start" v-if="detailed">
 				<div class="title">
-					<span
-						><strong>{{ val.name }}</strong></span
-					>
+					<span>
+						<strong>{{ val.name }}</strong>
+					</span>
 					<span class="mr-4 badge-success">{{ val.score }}</span>
 					<span class="font-12 text-muted">{{ time_text }}</span>
 				</div>
@@ -14,61 +14,34 @@
 				</p>
 			</div>
 			<div class="achievement-name" v-else>
-				<span
-					><strong>{{ val.name }}</strong></span
-				>
+				<span>
+					<strong>{{ val.name }}</strong>
+				</span>
 			</div>
 		</div>
-		<div class="editItem" v-else>
-			<div class="d-flex flex-column align-items-center ml-3" v-if="edit">
-				<div class="actions mx-0">
+		<div class="achievement-edit" v-else>
+			<div class="actions-container">
+				<div class="delete-move-actions">
 					<i class="material-icons hand-hover">unfold_more</i>
 					<i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
 				</div>
-				<span class="mt-2 font-12 ml-1 text-grey" v-if="$root.isDesktop" @click="showMore = !showMore">
-					{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
-				</span>
-				<span v-else class="text-grey clickable font-10 mt-2" @click="showMore = !showMore">
-					{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
-				</span>
+				<show-more v-model="showMore" />
 			</div>
-
-			<!--
-            Content Edit
-        !-->
-			<div class="row w-100">
-				<div class="col-md-6 py-4">
-					<div class="d-flex align-items-center w-100">
-						<div class="ml-2" v-if="!$root.isDesktop">
-							<div class="actions mx-0">
-								<i class="material-icons hand-hover">unfold_more</i>
-								<i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
-							</div>
-							<span class="mt-2 font-10 text-action clickable" @click="showMore = !showMore">
-								{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
-							</span>
-						</div>
-						<MaterialTextField v-model="val.name" :required="true" class="d-flex align-items-center material--sm p-0" placeholder="عنوان"></MaterialTextField>
-					</div>
+			<div class="achievement-edit-row">
+				<div>
+					<MaterialTextField v-model="val.name" :required="true" class="material--sm" placeholder="عنوان"></MaterialTextField>
 				</div>
-				<div class="col-md-6 py-4">
-					<v-select :searchable="false" :placeholder="'مرتبط با'" class="datepicker-list w-75" dir="rtl" v-model="val.skills" label="name" :options="page.user.skills">
-						<template #open-indicator="{ attributes }">
-							<span v-bind="attributes">
-								<i class="material-icons">keyboard_arrow_down</i>
-							</span>
-						</template>
-						<template #no-options>موردی یافت نشد</template>
-					</v-select>
+				<div>
+					<tselect dir="rtl" v-model="val.skill" :items="page.skills">مرتبط با</tselect>
 				</div>
-				<div class="col-md-6 py-4">
-					<strong>تاریخ آزمون <span class="text-action">*</span></strong>
-					<DatePicker class="mt-2" v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
+				<div class="col-md-6" v-if="showMore">
+					<strong>تاریخ آزمون</strong>
+					<DatePicker class="mt-3" v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
 				</div>
-				<div class="col-md-6 py-4">
-					<MaterialTextField style="margin-top: 21px" v-model="val.score" :required="true" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="نمره"></MaterialTextField>
+				<div class="d-flex align-items-end" v-if="showMore">
+					<MaterialTextField v-model="val.score" class="material--sm" placeholder="نمره"></MaterialTextField>
 				</div>
-				<div class="col-md-12 py-4" v-if="showMore">
+				<div class="col-md-12" v-if="showMore">
 					<strong>توضیحات</strong>
 					<div class="character-counter">
 						<span class="counter tex-dark">{{ leftCharacter }}</span>
@@ -93,6 +66,8 @@ import MaterialTextField from "../../../../inputs/MaterialTextField";
 import Checkbox from "../../../../inputs/Checkbox";
 
 import AchievementsItem from "../../../../../Mixins/AchievementsItem";
+import ShowMore from "../ShowMore.vue";
+import Tselect from "../../../../Tselect.vue";
 export default {
 	mixins: [AchievementsItem],
 	created() {
@@ -132,6 +107,8 @@ export default {
 		MaterialTextField,
 		Checkbox,
 		DatePicker,
+		ShowMore,
+		Tselect,
 	},
 	computed: {
 		time_text() {

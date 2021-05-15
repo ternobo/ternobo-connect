@@ -1,5 +1,5 @@
 <template>
-	<div class="tselect" :dir="direction" v-click-outside="close">
+	<div class="tselect" :class="{ disabled: disabled }" :dir="direction" v-click-outside="close">
 		<div class="tselect_title" ref="titleSection" @click="openDropdown">
 			<div class="title-text">
 				<span v-if="!selectedItem">
@@ -7,20 +7,23 @@
 				</span>
 				<span v-else>
 					<i class="material-icons verical-middle" v-if="selectedItem.hasOwnProperty('icon')">{{ selectedItem.icon }}</i>
-					<span> {{ selectedItem[labelOption] }} </span>
+					<span> {{ getItemLabel(selectedItem) }} </span>
 				</span>
 			</div>
 			<i class="material-icons tselect_arrow">keyboard_arrow_down</i>
 		</div>
 		<transition name="slide">
 			<div class="tselect-items" :style="{ width: dropdownWidth }" ref="itemsElement" v-if="showItems">
-				<div class="items">
-					<div class="tselect_item" v-for="item in items" :class="{ active: isChecked(item) }" :key="item[valueOption]" @click="selectItem(item)">
+				<div class="items" v-if="items && items.length > 0">
+					<div class="tselect_item" v-for="item in items" :class="{ active: isChecked(item) }" :key="getItemValue(item)" @click="selectItem(item)">
 						<label class="tselect_item--text">
 							<i class="material-icons verical-middle" v-if="item.hasOwnProperty('icon')">{{ item.icon }}</i>
-							{{ item[labelOption] }}
+							{{ getItemLabel(item) }}
 						</label>
 					</div>
+				</div>
+				<div class="items p-3" v-else>
+					<span class="font-10">{{ noItem }}</span>
 				</div>
 				<div class="tselect_new-item" v-if="showNewItem">
 					<div class="d-flex w-100 px-1">
@@ -69,13 +72,22 @@ export default {
 		},
 	},
 	props: {
+		noItem: {
+			type: String,
+			default: "موردی یافت نشد",
+			required: false,
+		},
+		disabled: {
+			type: Boolean,
+			default: false,
+			required: false,
+		},
 		newItemPlaceholder: {
 			type: String,
 			default: "New Item",
 			required: false,
 		},
 		value: {
-			type: Object,
 			default: undefined,
 			required: false,
 		},
@@ -115,15 +127,27 @@ export default {
 	},
 	name: "Tselect",
 	methods: {
-		close(event) {
+		close() {
 			this.showItems = false;
 			this.$refs.titleSection.classList.remove("active");
 		},
 		isChecked(item) {
-			if (this.selectedItem !== undefined) {
-				return this.selectedItem[this.valueOption] === item[this.valueOption];
+			if (this.selectedItem) {
+				return this.getItemValue(this.selectedItem) === this.getItemValue(item);
 			}
 			return false;
+		},
+		getItemLabel(item) {
+			if (typeof item == "object") {
+				return item[this.labelOption];
+			}
+			return item;
+		},
+		getItemValue(item) {
+			if (typeof item == "object") {
+				return item[this.valueOption];
+			}
+			return item;
 		},
 		selectItem(item) {
 			this.selectedItem = item;
@@ -136,10 +160,12 @@ export default {
 			this.newItemInput = undefined;
 		},
 		openDropdown() {
-			this.$refs.titleSection.classList.toggle("active");
-			const width = this.$refs.titleSection.offsetWidth;
-			this.showItems = !this.showItems;
-			this.dropdownWidth = width + "px";
+			if (!this.disabled) {
+				this.$refs.titleSection.classList.toggle("active");
+				const width = this.$refs.titleSection.offsetWidth;
+				this.showItems = !this.showItems;
+				this.dropdownWidth = width + "px";
+			}
 		},
 	},
 };

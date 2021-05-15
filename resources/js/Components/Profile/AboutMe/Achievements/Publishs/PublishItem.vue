@@ -3,12 +3,12 @@
 		<div class="w-100" v-if="!edit">
 			<div class="d-flex justify-content-start" v-if="detailed">
 				<div class="title">
-					<a :href="val.link" v-if="val.link != null && val.link.length > 0"
-						><strong>{{ val.name }}</strong></a
-					>
-					<span v-else
-						><strong>{{ val.name }}</strong></span
-					>
+					<a :href="val.link" v-if="val.link != null && val.link.length > 0">
+						<strong>{{ val.name }}</strong>
+					</a>
+					<span v-else>
+						<strong>{{ val.name }}</strong>
+					</span>
 					<span class="font-12 text-muted">{{ time_text }}</span>
 				</div>
 				<p class="bg-body py-2 px-3" v-if="val.description != null && val.description.length > 0">
@@ -16,54 +16,38 @@
 				</p>
 			</div>
 			<div class="achievement-name" v-else>
-				<a :href="val.link" v-if="val.link != null && val.link.length > 0"
-					><strong>{{ val.name }}</strong></a
-				>
-				<span v-else
-					><strong>{{ val.name }}</strong></span
-				>
+				<a :href="val.link" v-if="val.link != null && val.link.length > 0">
+					<strong>{{ val.name }}</strong>
+				</a>
+				<span v-else>
+					<strong>{{ val.name }}</strong>
+				</span>
 			</div>
 		</div>
 
-		<div class="editItem" v-else>
-			<div class="d-flex flex-column align-items-center ml-3">
-				<div class="actions mx-0 mb-3">
+		<div class="achievement-edit" v-else>
+			<div class="actions-container">
+				<div class="delete-move-actions">
 					<i class="material-icons hand-hover">unfold_more</i>
 					<i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
 				</div>
-				<span class="mt-2 font-12 ml-1 text-grey" v-if="$root.isDesktop" @click="showMore = !showMore">
-					{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
-				</span>
-				<span v-else class="text-grey clickable font-10 mt-2" @click="showMore = !showMore">
-					{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
-				</span>
+				<show-more v-model="showMore" />
 			</div>
-			<div class="row w-100 m-0">
-				<div class="col-md-6 py-4">
-					<div class="d-flex align-items-center w-100">
-						<div class="ml-2" v-if="!$root.isDesktop">
-							<div class="actions mx-0">
-								<i class="material-icons hand-hover">unfold_more</i>
-								<i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
-							</div>
-							<span class="mt-2 font-10 text-action clickable" @click="showMore = !showMore">
-								{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
-							</span>
-						</div>
-						<MaterialTextField v-model="val.name" :required="true" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="عنوان"></MaterialTextField>
-					</div>
+			<div class="achievement-edit-row">
+				<div>
+					<MaterialTextField v-model="val.name" :required="true" inputClass="w-100" class="material--sm" placeholder="عنوان"></MaterialTextField>
 				</div>
-				<div class="col-md-6 py-4">
-					<MaterialTextField v-model="val.publisher" :required="true" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="نام ناشر"></MaterialTextField>
+				<div v-if="showMore">
+					<MaterialTextField v-model="val.publisher" inputClass="w-100" class="material--sm" placeholder="نام ناشر"></MaterialTextField>
 				</div>
-				<div class="col-md-6 py-4">
+				<div v-if="showMore">
 					<strong>تاریخ انتشار <span class="text-action">*</span></strong>
 					<DatePicker class="mt-3" v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
 				</div>
-				<div class="col-md-6 py-4 d-flex align-items-end" v-if="showMore">
-					<MaterialTextField v-model="val.link" class="d-flex align-items-center material--sm" placeholder="لینک ناشر"></MaterialTextField>
+				<div class="col-md-6 d-flex align-items-end" v-if="showMore">
+					<MaterialTextField v-model="val.link" class="material--sm" placeholder="لینک ناشر"></MaterialTextField>
 				</div>
-				<div class="col-md-12 py-4" v-if="showMore">
+				<div class="col-md-12" v-if="showMore">
 					<strong>توضیحات</strong>
 					<div class="character-counter">
 						<span class="counter tex-dark">{{ leftCharacter }}</span>
@@ -83,6 +67,7 @@ import PersianDate from "persian-date";
 import DatePicker from "../../../../inputs/DatePicker";
 import MaterialTextField from "../../../../inputs/MaterialTextField";
 import Checkbox from "../../../../inputs/Checkbox";
+import ShowMore from "../ShowMore.vue";
 
 export default {
 	created() {
@@ -112,6 +97,11 @@ export default {
 			type: Object,
 			default: null,
 		},
+		detailed: {
+			type: Boolean,
+			default: false,
+			required: false,
+		},
 		edit: {
 			type: Boolean,
 			default: false,
@@ -122,6 +112,7 @@ export default {
 		MaterialTextField,
 		Checkbox,
 		DatePicker,
+		ShowMore,
 	},
 	computed: {
 		time_text() {
@@ -129,6 +120,7 @@ export default {
 			if (this.val.startDate) {
 				startText = new PersianDate([this.val.startDate.year, this.val.startDate.month.id]).format("MMMM YYYY");
 			}
+			return startText;
 		},
 		now() {
 			return new PersianDate(new Date()).toLocale("en").format("L");

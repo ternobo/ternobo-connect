@@ -11,7 +11,19 @@
 
     .title-text {
         font-size: 12px;
+        font-weight: 600;
+        color: $grey;
         margin-left: 16px;
+    }
+
+    &.disabled {
+        opacity: 0.5;
+    }
+
+    &:not(.disabled) {
+        .tselect_title {
+            cursor: pointer;
+        }
     }
 
     .tselect_title {
@@ -23,7 +35,6 @@
         border-radius: 0;
         padding: 12px 16px;
         height: 40px;
-        cursor: pointer;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
