@@ -33,7 +33,7 @@ class SpotifyController extends Controller
             'user_id' => Auth::user()->id,
             'expiresIn' => "9000",
             'meta' => [
-                'value' => $response->href,
+                'value' => $user->id,
                 'email' => $user->email,
                 'id' => $user->id,
             ],
