@@ -24,6 +24,8 @@ Passport::routes();
 TernoboWire::routes();
 Broadcast::routes();
 
+Route::post('/ternobo-actions/update', "AutoUpdateController@update");
+
 require base_path("routes/sitemap_routes.php");
 
 /**
