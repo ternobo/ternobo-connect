@@ -34,10 +34,18 @@ div.page-cover {
     align-items: center;
     justify-content: center;
 
+    >i {
+        @media screen and(max-width: $sm-size) {
+            margin-left: 0;
+        }
+    }
+
     @media screen and(max-width: $sm-size) {
         padding: 2px;
         height: 24px;
         width: 24px;
+
+
     }
 }
 
@@ -319,13 +327,13 @@ div.page-cover {
             top: 69px;
             z-index: 999;
             background: #F5F5F5;
-            margin-bottom: 8px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
-            padding: 5px 0;
-            padding-top: 8px;
+            padding: 4px 0;
 
             ul {
+                padding-bottom: 0;
                 margin-bottom: 0;
             }
         }

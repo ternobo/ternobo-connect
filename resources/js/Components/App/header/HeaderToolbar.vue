@@ -9,10 +9,6 @@
 				<i class="navheader-icon" :class="{ unread: $store.state.shared.unread_messages_count > 0 && $store.state.url != '/chats' }">textsms</i>
 				<div class="navheader-text">گفتگو</div>
 			</wire-link> -->
-			<wire-link :class="{ active: $store.state.url === '/followings' }" href="/followings">
-				<i class="navheader-icon">group</i>
-				<div class="navheader-text">شبکه من</div>
-			</wire-link>
 			<wire-link :class="{ active: $store.state.url === '/notifications' }" href="/notifications">
 				<i class="navheader-icon" :class="{ unread: $store.state.shared.notifications_count > 0 && $store.state.url != '/notifications' }">{{ $store.state.url === "/notifications" ? "notifications" : "notifications_none" }}</i>
 				<div class="navheader-text">اعلان‌ها</div>

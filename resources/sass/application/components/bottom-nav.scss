@@ -54,6 +54,11 @@
             img {
                 border: 2px solid $dark;
             }
+
+            &.invite-link {
+                transform: rotate(-15deg);
+                color: $action;
+            }
         }
 
         .navheader-icon::after {

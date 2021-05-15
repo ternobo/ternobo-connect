@@ -1408,6 +1408,10 @@ a:focus {
 
 .base-layout {
     margin-top: 40px;
+
+    @media screen and (max-width: $sm-size) {
+        margin-top: 12px;
+    }
 }
 
 #usermenu-show {
