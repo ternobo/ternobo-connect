@@ -138,6 +138,12 @@
         align-items: flex-end;
         justify-content: space-between;
 
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: pointer;
+
         >.open-achievements {
             margin-bottom: -16px;
         }
@@ -165,7 +171,7 @@
         position: relative;
 
 
-        &:not(:last-child)::after {
+        &.active:not(:last-child)::after {
             position: absolute;
             content: " ";
             bottom: 0;
@@ -196,6 +202,10 @@
             margin-left: 0.5rem;
         }
 
+    }
+
+    li:not(.edit) {
+        padding: 12px 0;
     }
 
     li.edit {

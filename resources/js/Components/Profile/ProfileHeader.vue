@@ -1,13 +1,13 @@
 <template>
 	<div class="profile-header-card">
 		<user-info-modal :user="page.user" :page-location="page.location" v-if="canEdit" :show.sync="edit"></user-info-modal>
-		<ProfileCover :canChange="canEdit" :src="page.cover"></ProfileCover>
+		<ProfileCover :canChange="canEdit && !profileEdit" :src="page.cover"></ProfileCover>
 		<report-page-modal :show.sync="showReport" :page-id="page.id"></report-page-modal>
 		<mutual-friends-modal :show.sync="showFriends" :page-id="page.id"></mutual-friends-modal>
 		<connetions-modal :show.sync="showConnections" :page="page"></connetions-modal>
 		<div class="page-name">
 			<div class="profile-info">
-				<ProfileImage ref="profileImage" :canChange="canEdit" :src="page.profile"></ProfileImage>
+				<ProfileImage ref="profileImage" :canChange="canEdit && !profileEdit" :class="{ disabled: profileEdit }" :src="page.profile"></ProfileImage>
 				<span class="name d-flex align-items-center">
 					<strong class="name">
 						{{ page.name }}
@@ -23,7 +23,7 @@
 			<div class="d-flex flex-column align-items-end justify-content-between">
 				<div class="d-flex align-items-center" style="margin-left: -8px">
 					<div class="connection-actions clickable" @click="showConnections = true"><i class="material-icons-outlined">group</i> <span>شبکه</span></div>
-					<i class="btn profile-header-btn-edit material-icons-outlined" v-if="canEdit" @click="edit = true">edit</i>
+					<i class="btn profile-header-btn-edit material-icons-outlined" :class="{ disabled: profileEdit }" v-if="canEdit" @click="doEdit">edit</i>
 					<i class="material-icons-outlined report-icon" v-else @click="showReport = true">report</i>
 				</div>
 				<div class="invite_badge" v-if="$root.isDesktop">
@@ -80,9 +80,15 @@ import MutualFriendsModal from "../Modals/MutualFriendsModal.vue";
 import UserInfoModal from "../Modals/UserInfoModal.vue";
 import ConnetionButtons from "../buttons/ConnetionButtons.vue";
 import ConnetionsModal from "../Modals/ConnetionsModal.vue";
+import { mapState } from "vuex";
 
 export default {
 	methods: {
+		doEdit() {
+			if (!this.profileEdit) {
+				this.edit = true;
+			}
+		},
 		setProfileImage() {
 			this.$refs.profileImage.openFileSelect();
 		},
@@ -116,6 +122,7 @@ export default {
 		},
 	},
 	computed: {
+		...mapState(["profileEdit"]),
 		joinTime() {
 			return this.formatTime(this.page.created_at, "D MMMM YYYY");
 		},

@@ -7,6 +7,7 @@
 		</div>
 		<div class="slug-data">
 			<div class="slug-data-edit" v-if="edit">
+				<span>{{ websiteUrl }}</span>
 				<material-text-field class="material--sm" v-model="slug" />
 			</div>
 			<div key="slug-data-view-element" v-clipboard="slugUrl" class="slug-data-view clickable" v-else>
@@ -33,6 +34,9 @@ export default {
 		},
 	},
 	computed: {
+		websiteUrl() {
+			return `${window.origin}/`;
+		},
 		slugUrl() {
 			return `${window.origin}/${this.slug}`;
 		},

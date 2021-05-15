@@ -79,7 +79,8 @@ export default {
 	created() {
 		if (this.value.name) {
 			this.val = this.value;
-			if (typeof this.val.endDate == "boolean" || this.val.endDate == { year: undefined, month: undefined, day: undefined }) {
+			if (typeof this.val.endDate == "boolean" || !this.val.endDate.year) {
+				this.val.endDate = true;
 				this.noEndDate = true;
 			}
 		}
@@ -87,7 +88,12 @@ export default {
 	watch: {
 		val: {
 			handler(newValue) {
+				if (typeof this.val.endDate == "boolean" || !this.val.endDate.year) {
+					this.val.endDate = true;
+					this.noEndDate = true;
+				}
 				this.$emit("input", newValue);
+
 				if (newValue.description != null) {
 					this.progress = (newValue.description.length / 1000) * 100 + "%";
 					this.leftCharacter = 1000 - newValue.description.length;

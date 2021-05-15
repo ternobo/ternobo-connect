@@ -12,6 +12,8 @@ export default store({
         connections_next_page_url: null,
 
         url: window.location.pathname,
+
+        profileEdit: false,
     },
     actions: {
         loadChats({ commit }) {
@@ -56,6 +58,12 @@ export default store({
         }
     },
     mutations: {
+        // Profile
+        setProfileEdit(state, payload) {
+            state.profileEdit = payload;
+        },
+        // End Profile
+
         setConnections(state, payload) {
             state.connections = payload;
         },

@@ -179,7 +179,6 @@ export default {
 				.then(() => (this.loadingActions = false));
 		},
 		stepsAction(action) {
-			console.log(action);
 			switch (action) {
 				case "upload_profile":
 					this.$refs.ProfileHeader.setProfileImage();
@@ -190,12 +189,12 @@ export default {
 				case "set_biography":
 					this.current_tab = "home";
 					this.loadTab("/" + this.page.slug);
-					this.edit = true;
+					this.doEdit();
 					break;
 				case "set_skills":
 					this.current_tab = "home";
 					this.loadTab("/" + this.page.slug);
-					this.edit = true;
+					this.doEdit();
 					break;
 				case "add_post":
 					this.current_tab = "activities";
@@ -282,11 +281,15 @@ export default {
 							})
 							.then((response) => {
 								if (response.data.result) {
-									this.edit = false;
+									this.$store.commit("setProfileEdit", false);
 								} else {
 									this.handleError(response.data.errors);
 								}
 								this.loadingSave = false;
+							})
+							.catch((err) => {
+								console.log(err);
+								this.toast("خطا در ذخیره اطلاعات");
 							})
 							.then(() => {
 								this.loadingSave = false;
@@ -296,24 +299,27 @@ export default {
 						this.toast("ورودی‌ها نامعتبر است");
 					}
 				} else if (this.current_tab === "home") {
-					let data = this.$refs.about.getData();
 					axios
 						.post("/save/resume", this.$refs.about.getData())
 						.then((response) => {
 							if (response.data.result) {
-								this.edit = false;
+								this.$store.commit("setProfileEdit", false);
 								this.reloadUser();
 							} else {
 								this.handleError(response.data.errors, response.data.type);
 							}
 							this.loadingSave = false;
 						})
+						.catch((err) => {
+							console.log(err);
+							this.toast("خطا در ذخیره اطلاعات");
+						})
 						.then(() => {
 							this.loadingSave = false;
 						});
 				}
 			} else {
-				this.edit = true;
+				this.$store.commit("setProfileEdit", true);
 			}
 		},
 		cancelEdit() {
@@ -324,12 +330,11 @@ export default {
 			setTimeout(() => {
 				this.loadingTab = false;
 			}, 300);
-			this.edit = false;
+			this.$store.commit("setProfileEdit", false);
 		},
 	},
 	data() {
 		return {
-			edit: false,
 			about: null,
 			loadingSave: false,
 			current_tab: "",
@@ -358,6 +363,9 @@ export default {
 		};
 	},
 	computed: {
+		edit() {
+			return this.$store.state.profileEdit;
+		},
 		canEdit() {
 			return this.checkUser(this.page.user.id);
 		},
