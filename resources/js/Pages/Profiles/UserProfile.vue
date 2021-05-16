@@ -82,7 +82,7 @@
 					</strong>
 					<span class="mr-1"> دنبال می‌کند </span>
 				</div>
-				<div class="card-body px-2 py-1">
+				<div class="people-suggestion-card-body card-body">
 					<people-suggestion v-for="page in pages" :page="page" :key="page.id"></people-suggestion>
 				</div>
 			</div>

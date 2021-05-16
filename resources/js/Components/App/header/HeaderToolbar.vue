@@ -3,23 +3,18 @@
 		<div class="header-menu" v-if="$store.state.user != null">
 			<wire-link :class="{ active: $store.state.url === '/feed' }" href="/feed">
 				<i class="navheader-icon">home</i>
-				<div class="navheader-text">خانه</div>
 			</wire-link>
 			<!-- <wire-link :class="{ active: $store.state.url === '/chats' }" href="/chats">
 				<i class="navheader-icon" :class="{ unread: $store.state.shared.unread_messages_count > 0 && $store.state.url != '/chats' }">textsms</i>
-				<div class="navheader-text">گفتگو</div>
 			</wire-link> -->
 			<wire-link :class="{ active: $store.state.url === '/notifications' }" href="/notifications">
 				<i class="navheader-icon" :class="{ unread: $store.state.shared.notifications_count > 0 && $store.state.url != '/notifications' }">{{ $store.state.url === "/notifications" ? "notifications" : "notifications_none" }}</i>
-				<div class="navheader-text">اعلان‌ها</div>
 			</wire-link>
 			<wire-link :class="{ active: $store.state.url === '/invite' }" href="/invite">
 				<i class="navheader-icon invite-link">{{ $store.state.url === "/invite" ? "confirmation_number" : "confirmation_number" }}</i>
-				<div class="navheader-text">دعوت‌ها</div>
 			</wire-link>
 			<wire-link :class="{ active: $store.state.url === '/bookmarks' }" href="/bookmarks">
 				<i class="navheader-icon">bookmarks</i>
-				<div class="navheader-text">نشان‌ها</div>
 			</wire-link>
 		</div>
 		<div v-else>
@@ -27,15 +22,13 @@
 			<signup-modal :show.sync="showSignup"></signup-modal>
 			<div class="d-flex align-items-center">
 				<button class="text-dark btn btn-transparent font-14 py-1" @click="showLogin = true">ورود</button>
-				<span class="splitor-line"></span>
-				<button class="text-dark btn btn-transparent font-14 py-1" @click="showSignup = true">ثبت‌نام</button>
 			</div>
 		</div>
 
-		<div id="usermenu-show" v-if="$store.state.user != null" class="usertoolbar h-100 d-flex align-items-center mr-2 py-3" @mouseenter="showUserMenu" @mouseleave="menuVisible = false">
-			<div class="d-flex align-items-center">
+		<div id="usermenu-show" v-if="$store.state.user != null" class="usertoolbar" @mouseenter="showUserMenu" @mouseleave="menuVisible = false">
+			<div class="usertoolbar-container">
 				<div class="d-flex align-items-center">
-					<span style="white-space: nowrap; user-select: none" dir="ltr" class="ml-2">{{ $store.state.user.username }} <i v-if="$store.state.user.is_verified === 1" class="verificationcheck">check_circle</i> </span>
+					<span dir="ltr" class="user-username">{{ $store.state.user.username }} <i v-if="$store.state.user.is_verified === 1" class="verificationcheck">check_circle</i> </span>
 					<img v-bind:src="$store.state.user.profile" class="profile-xxsm" />
 				</div>
 				<i class="material-icons text-light">more_vert</i>

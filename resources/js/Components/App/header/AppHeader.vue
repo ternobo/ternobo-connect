@@ -4,18 +4,15 @@
 		<div class="container">
 			<div class="d-flex align-items-center w-100">
 				<wire-link href="/feed" class="logodesktop" v-if="$root.isDesktop">
-					<img src="/images/farsi-logo.png" class="w-100" />
+					<img src="/images/farsi-logo.svg" class="w-100" />
 				</wire-link>
 				<wire-link href="/feed" class="logo-sm" v-if="!$root.isDesktop">
 					<img src="/images/logo.svg" class="mr-2" />
 				</wire-link>
 
-				<form method="get" action="/search" class="searchfield d-flex mr-3">
+				<form method="get" action="/search" class="searchfield d-flex">
 					<autocomplete class="search-field w-100" :default-value="searchVal" :search="search" id="searchforminput" autocomplete="off" required type="text" name="q" placeholder="هر چیزی که در جستن آنی، آنی" />
-					<div class="text-muted align-items-center justify-content-center d-lg-flex d-none nowrap font-12" style="width: max-content; margin-right: 24px !important">
-						<img src="/images/beta.svg" width="36" class="verical-middle" />
-						<span class="mx-1 text-nowrap" style="margin-top: 3px">۰.۶ V</span>
-					</div>
+					<div class="text-muted align-items-center justify-content-center d-lg-flex d-none nowrap font-12" style="padding-right: 36px !important"><img src="/images/beta.svg" width="36" class="verical-middle" /> <span class="mr-2 text-nowrap">۰.۶ V</span></div>
 				</form>
 				<div v-if="!$root.isDesktop">
 					<i class="material-icons hover-dark clickable" @click="showOptions = true">more_vert</i>

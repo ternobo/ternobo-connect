@@ -1,0 +1,29 @@
+.lang-select {
+    background: $white;
+    width: 100%;
+    font-weight: 600;
+    padding: 0;
+
+    .tselect-items {
+        background: $white;
+        color: $text-color;
+        width: 100%;
+        font-weight: 600;
+        padding: 16px;
+    }
+
+    .tselect_title {
+
+        background: $white;
+        color: $text-color;
+        width: 100%;
+        font-weight: 600;
+        padding: 16px;
+        height: 52px;
+        padding-right: 20px;
+    }
+
+    .title-text {
+        margin-left: 4px;
+    }
+}

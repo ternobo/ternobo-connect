@@ -5,9 +5,13 @@
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    height: 70px;
+    height: 88px;
     z-index: 1000;
     transition: 0.3s all;
+
+    .searchfield {
+        margin-right: 32px;
+    }
 }
 
 .useroptions-header {
@@ -122,11 +126,34 @@
 
 
 .usertoolbar {
-    text-decoration: none !important;
-    color: $grey !important;
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
 
-    &:hover * {
-        text-decoration: none !important;
+    .usertoolbar-container {
+        padding: 16px 0;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        display: flex;
+        align-items: center;
+
+        >i {
+            margin-right: 6px;
+        }
+    }
+
+    .user-username {
+        line-height: 1;
+        font-weight: 600;
+        color: $dark;
+        margin: 0 16px;
+
+        display: flex;
+        align-items: center;
+        padding-top: 4px;
+        height: 24px;
     }
 }
 

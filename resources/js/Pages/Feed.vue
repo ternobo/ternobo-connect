@@ -17,7 +17,7 @@
 		</div>
 		<sidebar-left v-if="!$root.isMobile">
 			<div class="card" style="margin-bottom: 24px" v-if="pages != undefined && pages != null && pages.length > 0">
-				<div class="card-body px-2 py-1">
+				<div class="people-suggestion-card-body card-body">
 					<people-suggestion v-for="page in pages" :page="page" :key="page.id"></people-suggestion>
 				</div>
 			</div>

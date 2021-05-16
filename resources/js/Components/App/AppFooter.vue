@@ -2,30 +2,29 @@
 	<div>
 		<LawsModal :show.sync="showLaws"></LawsModal>
 		<div class="sticky-aside d-flex align-items-center flex-column">
-			<Langdropdown
-				style="max-width: 200px; height: 45px"
-				class="dropdown-list clickable mb-3"
+			<langdropdown
+				class="mb-3"
 				dir="rtl"
-				:value="{ label: 'فارسی', value: 'fa', icon: '/img/iranicon.png' }"
+				:value="{ label: 'فارسی', value: 'fa', icon: '/images/iran-flag.png' }"
 				:items="[
-					{ label: 'فارسی', value: 'fa', icon: '/img/iranicon.png' },
+					{ label: 'فارسی', value: 'fa', icon: '/images/iran-flag.png' },
 					{ label: 'English', value: 'en', icon: '/img/en.png', disabled: true },
 				]"
 			>
 				<template v-slot:selected="{ item }">
-					<div class="d-flex justify-content-between w-100">
-						<span> {{ item.label }}</span>
-						<img :src="item.icon" style="width: 16px; height: 16px" />
+					<div class="d-flex justify-content-between align-items-center w-100">
+						<span class="font-14"> {{ item.label }}</span>
+						<img :src="item.icon" />
 					</div>
 				</template>
 
 				<template v-slot:item="{ item }">
-					<div class="d-flex justify-content-between px-2 w-100">
-						<span> {{ item.label }}</span>
-						<img :src="item.icon" style="width: 16px; height: 16px" />
+					<div class="d-flex justify-content-between align-items-center w-100">
+						<span class="font-14"> {{ item.label }}</span>
+						<img :src="item.icon" style="width: 24px; height: 24px" />
 					</div>
 				</template>
-			</Langdropdown>
+			</langdropdown>
 			<div class="d-lg-block d-none text-muted">
 				<div class="sidemenu-links d-flex justify-content-center align-items-center mb-1">
 					<a class="text-muted hover-dark clickable ml-3" @click="showLaws = true">قوانین و مقررات</a>

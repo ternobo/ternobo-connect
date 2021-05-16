@@ -39,8 +39,8 @@
             direction: ltr;
             -webkit-font-smoothing: antialiased;
             vertical-align: middle;
-            font-size: 20px;
-            color: $icons;
+            font-size: 24px;
+            color: $grey;
 
             &.invite-link {
                 transform: rotate(-15deg);
@@ -76,21 +76,17 @@
         content: " ";
         height: 2px;
         background: $icon-hover;
-        width: 100%;
+        width: 24px;
         position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -5px;
+        left: 12px;
+        right: 12px;
+        bottom: 0;
         transform: scaleX(0) translateY(8px);
     }
 
     a.active::after {
         color: $icon-hover;
-        width: 100%;
-        transform: scaleX(1) translateY(-6px);
-    }
-
-    a:hover:not(.active)::after {
+        width: 24px;
         transform: scaleX(1) translateY(8px);
     }
 }

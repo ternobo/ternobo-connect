@@ -13,7 +13,7 @@
 		</div>
 		<sidebar-left v-if="pages.length > 0">
 			<div class="card">
-				<div class="card-body px-2 py-1">
+				<div class="people-suggestion-card-body card-body">
 					<people-suggestion v-for="page in pages" :page="page" :key="page.id"></people-suggestion>
 				</div>
 			</div>

@@ -111,7 +111,7 @@ body {
 .sticky-aside {
     position: -webkit-sticky;
     position: sticky;
-    top: 90px;
+    top: 106px;
 }
 
 .form-control,
@@ -393,10 +393,6 @@ img {
     display: flex;
 }
 
-.searchfield {
-    min-width: 330px;
-}
-
 .modal-backdrop {
     background-color: $dark;
     opacity: 0.4;
@@ -571,26 +567,50 @@ img {
 }
 
 .userinfo-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-}
+    @extend .card;
 
-.userinfo-card {
-    .profile-image {
-        margin-top: -60px;
-        position: relative;
+    .card-img-top {
+        margin-bottom: 12px;
     }
 
-    .image__wrapper {
-        width: 72px;
-        height: 72px;
-        margin-top: -174px;
+    .userinfo-card-body {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 0 16px;
 
-        img {
-            border-radius: 50%;
+        .profile-content {
+            display: flex;
+            flex-direction: column;
+
+            strong {
+                font-weight: 600;
+            }
+
+            .image__wrapper {
+                box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
+                margin-top: -40%;
+                margin-bottom: 5px;
+
+
+                img {
+                    border: 5px solid $white;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        .copyprofile-icon {
+            color: $grey;
+            font-size: 20px;
+            border-radius: 6px;
+            background-color: $fixed-elements;
+            cursor: pointer;
+
+            &:hover {
+                color: $dark;
+            }
         }
     }
 }
@@ -783,30 +803,31 @@ pre {
     padding: 8px 12px 8px 48px;
     transition: 0.3s all;
     border-radius: 16px;
-    height: 40px;
+    height: 44px;
     background-color: #FFF !important;
     background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iYmxhY2siIHdpZHRoPSIxOHB4IiBoZWlnaHQ9IjE4cHgiPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMFYweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGZpbGw9IiM3NTc1NzUiIGQ9Ik0xNS41IDE0aC0uNzlsLS4yOC0uMjdDMTUuNDEgMTIuNTkgMTYgMTEuMTEgMTYgOS41IDE2IDUuOTEgMTMuMDkgMyA5LjUgM1MzIDUuOTEgMyA5LjUgNS45MSAxNiA5LjUgMTZjMS42MSAwIDMuMDktLjU5IDQuMjMtMS41N2wuMjcuMjh2Ljc5bDUgNC45OUwyMC40OSAxOWwtNC45OS01em0tNiAwQzcuMDEgMTQgNSAxMS45OSA1IDkuNVM3LjAxIDUgOS41IDUgMTQgNy4wMSAxNCA5LjUgMTEuOTkgMTQgOS41IDE0eiIvPjwvc3ZnPg==');
     background-size: 24px;
     font-size: 14px;
+    border-color: $icons;
 
     &::-webkit-input-placeholder {
-        color: $icons;
+        color: $grey;
     }
 
     &::-moz-placeholder {
-        color: $icons;
+        color: $grey;
     }
 
     &:-ms-input-placeholder {
-        color: $icons;
+        color: $grey;
     }
 
     &::-ms-input-placeholder {
-        color: $icons;
+        color: $grey;
     }
 
     &::placeholder {
-        color: $icons;
+        color: $grey;
     }
 }
 
@@ -849,10 +870,6 @@ pre {
 
 .shadow-0 {
     box-shadow: none !important;
-}
-
-.lang-select {
-    background-color: $body-bg !important;
 }
 
 .shadow {
@@ -1510,3 +1527,5 @@ a:focus {
         margin-bottom: 0;
     }
 }
+
+@import "./components/lang-select.scss";

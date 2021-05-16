@@ -1,13 +1,13 @@
 <template>
-	<div class="tselect border position-relative rounded-0" :dir="direction" v-click-outside="close">
-		<div class="tselect_title lang-select rounded-0" ref="titleSection" @click="openDropdown">
+	<div class="tselect lang-select" :dir="direction" v-click-outside="close">
+		<div class="tselect_title rounded-0" ref="titleSection" @click="openDropdown">
 			<div class="title-text w-100">
 				<slot name="selected" v-bind:item="selectedItem"> </slot>
 			</div>
 			<i class="material-icons tselect_arrow">keyboard_arrow_down</i>
 		</div>
 		<transition name="slide">
-			<div class="tselect-items rounded-0 p-0 shadow border" style="margin-top: -5px; left: 0; max-width: 150px" :style="{ width: dropdownWidth, bacground: '#EEE' }" ref="itemsElement" v-if="showItems">
+			<div class="tselect-items" ref="itemsElement" v-if="showItems">
 				<div class="items">
 					<div class="tselect_item w-100" v-for="item in items" :class="{ disabled: item.disabled, 'hover-dropdown': !item.disabled }" :key="item[valueOption]" @click="selectItem(item)">
 						<slot name="item" v-bind:item="item">
