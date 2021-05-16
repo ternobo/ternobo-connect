@@ -42,11 +42,13 @@
 					<MaterialTextField v-model="val.from" class="material--sm" placeholder="صادر کننده"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
-					<strong>توضیحات</strong>
-					<div class="character-counter">
-						<span class="counter tex-dark">{{ leftCharacter }}</span>
-						<div class="progress ml-1 mb-0" style="width: 100px; height: 5px">
-							<div class="progress-bar" role="progressbar" :style="{ width: progress }" aria-valuemin="0" aria-valuemax="100"></div>
+					<div class="d-flex align-items-center justify-content-between mb-3">
+						<strong>توضیحات</strong>
+						<div class="character-counter">
+							<span class="counter tex-dark">{{ leftCharacter }}</span>
+							<div class="progress ml-1 mb-0" style="width: 100px; height: 5px">
+								<div class="progress-bar" role="progressbar" :style="{ width: progress }" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
 						</div>
 					</div>
 					<textarea-autosize maxlenth="1000" class="form-control" v-model="val.description"></textarea-autosize>

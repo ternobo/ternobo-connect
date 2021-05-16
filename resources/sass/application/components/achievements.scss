@@ -107,7 +107,6 @@
 
 
 .achievement-item {
-
     &:not(:last-child) {
         padding: 0 24px;
         border-bottom: 2px solid #C8C8C8;
@@ -129,7 +128,7 @@
 
     .achievement-title {
         display: flex;
-        align-items: center;
+        align-items: baseline;
         font-size: 16px;
     }
 
@@ -164,14 +163,15 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    padding: 0;
     margin: 0;
+    padding: 16px 0;
+
 
     li {
         position: relative;
 
 
-        &.active:not(:last-child)::after {
+        &.edit:not(:last-child)::after {
             position: absolute;
             content: " ";
             bottom: 0;
@@ -190,22 +190,37 @@
         .achievement-name {
             display: flex;
             align-items: center;
+            font-weight: 600;
+            color: $grey;
+
+            strong {
+                font-weight: 600;
+            }
+
+            a {
+                font-weight: 600;
+                color: $grey;
+
+                &:hover {
+                    color: $dark;
+                }
+            }
 
             @media screen and (max-width: $sm-size) {
                 font-size: 12px;
             }
         }
 
-
-        &:not(:last-child) {
-            padding-left: 0.5rem;
-            margin-left: 0.5rem;
-        }
-
     }
 
     li:not(.edit) {
-        padding: 12px 0;
+        &:not(.detailed) {
+            &:not(:last-child) {
+                padding-left: 16px;
+                border-left: 2px solid #C8C8C8;
+                margin-left: 16px;
+            }
+        }
     }
 
     li.edit {

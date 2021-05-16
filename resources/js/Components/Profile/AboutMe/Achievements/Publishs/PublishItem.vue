@@ -1,11 +1,9 @@
 <template>
-	<li class="achievement w-100">
+	<li class="achievement">
 		<div class="w-100" v-if="!edit">
 			<div class="d-flex justify-content-start" v-if="detailed">
 				<div class="title">
-					<a :href="val.link" v-if="val.link != null && val.link.length > 0">
-						<strong>{{ val.name }}</strong>
-					</a>
+					<a :href="val.link" v-if="val.link != null && val.link.length > 0" target="_blank"> </a>
 					<span v-else>
 						<strong>{{ val.name }}</strong>
 					</span>
@@ -16,7 +14,7 @@
 				</p>
 			</div>
 			<div class="achievement-name" v-else>
-				<a :href="val.link" v-if="val.link != null && val.link.length > 0">
+				<a :href="val.link" v-if="val.link != null && val.link.length > 0" target="_blank">
 					<strong>{{ val.name }}</strong>
 				</a>
 				<span v-else>
@@ -48,11 +46,13 @@
 					<MaterialTextField v-model="val.link" class="material--sm" placeholder="لینک ناشر"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
-					<strong>توضیحات</strong>
-					<div class="character-counter">
-						<span class="counter tex-dark">{{ leftCharacter }}</span>
-						<div class="progress ml-1 mb-0" style="width: 100px; height: 5px">
-							<div class="progress-bar" role="progressbar" :style="{ width: progress }" aria-valuemin="0" aria-valuemax="100"></div>
+					<div class="d-flex align-items-center justify-content-between mb-3">
+						<strong>توضیحات</strong>
+						<div class="character-counter">
+							<span class="counter tex-dark">{{ leftCharacter }}</span>
+							<div class="progress ml-1 mb-0" style="width: 100px; height: 5px">
+								<div class="progress-bar" role="progressbar" :style="{ width: progress }" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
 						</div>
 					</div>
 					<textarea-autosize class="form-control" v-model="val.description"></textarea-autosize>

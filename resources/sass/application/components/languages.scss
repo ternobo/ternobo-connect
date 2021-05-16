@@ -40,6 +40,8 @@
         .language-name {
             display: flex;
             align-items: center;
+            font-weight: 600;
+            color: $grey;
 
             @media screen and (max-width: $sm-size) {
                 font-size: 12px;
@@ -47,9 +49,9 @@
         }
 
         &:not(:last-child) {
-            padding-left: 0.5rem;
-            border-left: 1px solid #C8C8C8;
-            margin-left: 0.5rem;
+            padding-left: 16px;
+            border-left: 2px solid #C8C8C8;
+            margin-left: 16px;
         }
 
     }

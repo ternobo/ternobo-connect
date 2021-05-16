@@ -3,12 +3,12 @@
 		<div class="w-100" v-if="!edit">
 			<div class="d-flex justify-content-start" v-if="detailed">
 				<div class="title">
-					<a :href="val.link" v-if="val.link != null && val.link.length > 0"
-						><strong>{{ val.name }}</strong></a
-					>
-					<span v-else
-						><strong>{{ val.name }}</strong></span
-					>
+					<a :href="val.link" v-if="val.link != null && val.link.length > 0" target="_blank">
+						<strong>{{ val.name }}</strong>
+					</a>
+					<span v-else>
+						<strong>{{ val.name }}</strong>
+					</span>
 					<span class="font-12 text-muted">{{ time_text }}</span>
 					<span class="font-12 text-muted">{{ val.organization }} | {{ val.registerCode }}</span>
 					<span class="font-12 text-muted">{{ val.organization }} | {{ val.status.label }}</span>
@@ -18,12 +18,12 @@
 				</p>
 			</div>
 			<div class="achievement-name" v-else>
-				<a :href="val.link" v-if="val.link != null && val.link.length > 0"
-					><strong>{{ val.name }}</strong></a
-				>
-				<span v-else
-					><strong>{{ val.name }}</strong></span
-				>
+				<a :href="val.link" v-if="val.link != null && val.link.length > 0" target="_blank">
+					<strong>{{ val.name }}</strong>
+				</a>
+				<span v-else>
+					<strong>{{ val.name }}</strong>
+				</span>
 			</div>
 		</div>
 		<div class="achievement-edit" v-else>
@@ -38,11 +38,11 @@
 				<div>
 					<MaterialTextField v-model="val.name" :required="true" class="material--sm" placeholder="نام اختراع"></MaterialTextField>
 				</div>
-				<div v-if="showMore">
-					<MaterialTextField v-model="val.organization" class="material--sm" placeholder="اداره ثبت اختراع"></MaterialTextField>
+				<div>
+					<tselect :items="countries" dir="rtl" v-model="val.organization" style="min-width: 234px">اداره ثبت اختراع</tselect>
 				</div>
-				<div v-if="showMore">
-					<MaterialTextField v-model="val.registerCode" class="material--sm" placeholder="شماره ثبت"></MaterialTextField>
+				<div>
+					<MaterialTextField v-model="val.registerCode" :required="true" class="material--sm" placeholder="شماره ثبت"></MaterialTextField>
 				</div>
 				<div v-if="showMore">
 					<MaterialTextField v-model="val.link" class="material--sm" placeholder="لینک ثبت اختراع"></MaterialTextField>
@@ -73,11 +73,13 @@
 					<DatePicker class="mt-2" :showDays="true" v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
 				</div>
 				<div class="col-md-12" v-if="showMore">
-					<strong>توضیحات</strong>
-					<div class="character-counter">
-						<span class="counter tex-dark">{{ leftCharacter }}</span>
-						<div class="progress ml-1 mb-0" style="width: 100px; height: 5px">
-							<div class="progress-bar" role="progressbar" :style="{ width: progress }" aria-valuemin="0" aria-valuemax="100"></div>
+					<div class="d-flex align-items-center justify-content-between mb-3">
+						<strong>توضیحات</strong>
+						<div class="character-counter">
+							<span class="counter tex-dark">{{ leftCharacter }}</span>
+							<div class="progress ml-1 mb-0" style="width: 100px; height: 5px">
+								<div class="progress-bar" role="progressbar" :style="{ width: progress }" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
 						</div>
 					</div>
 					<textarea-autosize maxlength="1000" class="form-control" v-model="val.description"></textarea-autosize>
@@ -96,6 +98,8 @@ import Checkbox from "../../../../inputs/Checkbox";
 import AchievementsItem from "../../../../../Mixins/AchievementsItem";
 import ShowMore from "../ShowMore.vue";
 import Tselect from "../../../../Tselect.vue";
+import CountriesFa from "../../../../../Libs/Countries-fa";
+
 export default {
 	mixins: [AchievementsItem],
 	created() {
@@ -139,6 +143,9 @@ export default {
 		Tselect,
 	},
 	computed: {
+		countries() {
+			return CountriesFa.map((item) => item.fa_name);
+		},
 		time_text() {
 			let dateText = "";
 			if (typeof this.val.date == "object") {

@@ -164,7 +164,7 @@ export default {
 	},
 	beforeRouteLeave(to, from, next, vm) {
 		if (vm.edit) {
-			vm.confirmDialog("با خروج از صفحه ممکن اطلاعات از بین‌بروند!").then((value) => {
+			vm.confirmDialog("با خروج از صفحه ممکن اطلاعات از بین‌بروند.").then((value) => {
 				if (value) {
 					vm.$store.commit("setProfileEdit", false);
 					vm.$forceUpdate();

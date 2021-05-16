@@ -103,6 +103,8 @@ class ProfileController extends Controller
                 'date.required' => 'تاریخ {{ type }} اجباری است.',
                 'organization.required' => 'اداره ثبت اختراع اجباری است.',
                 'score.required' => 'نمره آزمون اجباری است.',
+                'score.digits_between' => 'نمره آزمون باید عدد باشد',
+                'registerCode.max' => "شماره ثبت اختراع نمی‌تواند بیشتر از 30 کاراکتر باشد",
             ];
 
             $errors = [];
@@ -128,14 +130,14 @@ class ProfileController extends Controller
                 'inventions' => [
                     'name' => "required|max:50",
                     "organization" => "max:50",
-                    "registerCode" => "numeric",
+                    "registerCode" => "max:30",
                 ],
                 'courses' => [
                     'name' => "required|max:50",
                 ],
                 'tests' => [
                     'name' => "required|max:50",
-                    "score" => "numeric",
+                    "score" => "digits_between:0,4",
                     "date" => [new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
                 ],
             ];
