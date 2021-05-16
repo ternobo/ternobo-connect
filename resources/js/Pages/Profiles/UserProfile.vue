@@ -166,10 +166,13 @@ export default {
 		if (vm.edit) {
 			vm.confirmDialog("با خروج از صفحه ممکن اطلاعات از بین‌بروند!").then((value) => {
 				if (value) {
+					vm.$store.commit("setProfileEdit", false);
+					vm.$forceUpdate();
 					next();
 				}
 			});
 		} else {
+			vm.$forceUpdate();
 			next();
 		}
 	},
