@@ -12,7 +12,9 @@
 			</div>
 			<div>
 				<div class="content" :class="{ 'font-12': !$root.isDesktop, 'text-superlight text-center': text == null || text.length < 1 }" v-if="!edit">
-					{{ text != null && text.length > 0 ? text : "هیچ اطلاعاتی ثبت نشده" }}
+					{{ textToShow != null && textToShow.length > 0 ? textToShow : "هیچ اطلاعاتی ثبت نشده" }}
+					<br />
+					<div class="show-more-text--clickable" @click="showFullText = !showFullText">{{ showFullText ? "نمایش کمتر" : "نمایش بیشتر" }}</div>
 				</div>
 				<textarea-autosize class="form-control" :minHeight="83" v-else v-model="text"></textarea-autosize>
 			</div>
@@ -24,6 +26,11 @@
 export default {
 	created() {
 		this.text = this.value;
+	},
+	computed: {
+		textToShow() {
+			return this.showFullText || this.text.split(" ").length < 40 ? this.text : this.text.split(" ").slice(0, 40).join(" ") + "...";
+		},
 	},
 	watch: {
 		text(newValue) {
@@ -51,6 +58,8 @@ export default {
 	},
 	data() {
 		return {
+			showFullText: false,
+
 			text: null,
 			leftCharacter: 2500,
 			progress: 0,

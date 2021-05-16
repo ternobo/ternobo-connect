@@ -3,11 +3,13 @@
     flex: 28.9%;
 }
 
-.posts-container-profile {
-    max-width: 71.1%;
-    flex: 71.1%;
-}
+@media screen and (min-width: $sm-size) {
+    .posts-container-profile {
+        max-width: 71.1%;
+        flex: 71.1%;
+    }
 
+}
 
 .categories-sidebar-card {
     @extend .card;
@@ -68,7 +70,8 @@
     overflow: hidden;
 
     &.active {
-        color: $dark;
+        background-color: $dark;
+        color: $white;
     }
 }
 
@@ -155,21 +158,7 @@
     max-height: 380px;
     border-right: 2px solid #C8C8C8;
     padding-right: 28px;
-
-    overflow-y: auto;
-    scrollbar-color: $dark $light;
-    scrollbar-width: thin;
-    scroll-behavior: smooth;
-
-    &::-webkit-scrollbar {
-        width: 0.3em;
-        background: #DEDEDE;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: $dark;
-    }
-
+    max-width: 100%;
 
     li {
         color: $grey;
@@ -179,9 +168,12 @@
         display: flex;
         align-items: center;
         position: relative;
-        width: -webkit-max-content;
-        width: -moz-max-content;
-        width: max-content;
+
+        .category-badge {
+            max-width: 100%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
 
         .close-icon {
             color: $grey;
@@ -198,8 +190,10 @@
         }
 
         &.active {
-            color: $white;
-            background-color: $dark;
+            .category-badge {
+                color: $white;
+                background-color: $dark;
+            }
         }
     }
 }

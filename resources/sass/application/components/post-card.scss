@@ -498,11 +498,16 @@
         }
     }
 
+    div.post-content--text {
+        margin-bottom: 16px;
+    }
+
     pre {
         font-size: 16px;
         line-height: 24px;
         white-space: pre-line;
         width: 100%;
+        margin-bottom: 0;
 
         @media screen and(max-width: $sm-size) {
             font-size: 12px;

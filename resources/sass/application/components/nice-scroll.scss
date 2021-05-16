@@ -7,13 +7,14 @@
         cursor: pointer;
         width: 4px;
         background: $fixed-elements;
+
+        max-height: 4px;
     }
 
     &::-webkit-scrollbar-thumb {
         cursor: -webkit-grab;
         cursor: grab;
         width: 4px;
-
         background-color: $icons;
     }
 

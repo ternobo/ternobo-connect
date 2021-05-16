@@ -320,12 +320,26 @@ div.page-cover {
 }
 
 .content-container-profile {
-    @media screen and (max-width: $sm-size) {
-        .tabs.compact {
+    .tabs.compact {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 70px;
+        z-index: 999;
+        background: #F5F5F5;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        height: 80px;
+        padding: 12px 0;
+        align-items: flex-end;
+
+        @media screen and (max-width: $sm-size) {
+
             position: -webkit-sticky;
             position: sticky;
             top: 69px;
             z-index: 999;
+            height: auto;
             background: #F5F5F5;
             margin-bottom: 16px;
             display: flex;

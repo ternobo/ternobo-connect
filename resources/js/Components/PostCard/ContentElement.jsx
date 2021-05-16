@@ -13,14 +13,14 @@ export default {
                 break;
             case "text":
                 if (this.content.content != null) {
-                    tag = "pre";
+                    tag = "div";
                     classes += "post-content--text";
                     this.text = this.content.content;
 
                     let action = "";
 
                     if (this.text.split(" ").length > 100) {
-                        action = (<div class="text-action font-12 clickable" onClick={this.toggleShowFullText}>{this.showFullText ? "نمایش کمتر" : "نمایش بیشتر"}</div>);;
+                        action = (<div class="show-more-text--clickable" onClick={this.toggleShowFullText}>{this.showFullText ? "نمایش کمتر" : "نمایش بیشتر"}</div>);
                     }
 
                     content = (

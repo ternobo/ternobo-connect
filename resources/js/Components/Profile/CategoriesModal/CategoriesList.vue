@@ -18,7 +18,7 @@
 		<ul class="categories-list-mobile">
 			<li v-for="category in categories" :class="{ active: category === activeCategory }" :key="'mobile_category_' + category.id">
 				<i class="material-icons close-icon text-muted" @click="$emit('update:activeCategory', null)" v-if="category == activeCategory">close</i>
-				<div @click="$emit('update:activeCategory', category)"><i class="material-icons-outlined">layers</i> {{ category.name }}</div>
+				<div class="category-badge" @click="$emit('update:activeCategory', category)">{{ category.name }}</div>
 			</li>
 		</ul>
 	</b-modal>
