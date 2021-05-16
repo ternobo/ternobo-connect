@@ -1,18 +1,15 @@
 <template>
 	<li class="project-item achievement" :class="{ detailed: detailed }" v-if="val != undefined">
 		<div class="w-100" v-if="!edit">
-			<div class="d-flex justify-content-start" v-if="detailed">
-				<div class="title">
-					<span>
-						<strong>{{ val.name }}</strong>
-					</span>
-					<span v-if="val.from != null && val.from.length > 0" class="text-muted">{{ val.from }}</span>
-					<span class="font-12 text-muted">{{ time_text }}</span>
-					<span v-if="val.skill != null && val.skill.name != undefined && val.skill != null" class="text-muted">
-						<strong>{{ val.skill.name }}</strong>
-					</span>
+			<div class="achievement-name detailed" v-if="detailed">
+				<span class="title">
+					{{ val.name }}
+				</span>
+				<div class="achievement-details" v-if="showDetails">
+					<span v-if="Boolean(val.skill)">{{ val.skill.name }}</span>
+					<span v-if="Boolean(time_text)">{{ time_text }}</span>
 				</div>
-				<p class="bg-body py-2 px-3" v-if="val.description != null && val.description.length > 0">
+				<p class="achievement-description" v-if="val.description != null && val.description.length > 0">
 					{{ val.description }}
 				</p>
 			</div>
@@ -31,8 +28,11 @@
 				<show-more v-model="showMore" />
 			</div>
 			<div class="achievement-edit-row">
-				<div class="col-md-12">
+				<div>
 					<MaterialTextField v-model="val.name" :required="true" class="material--sm" placeholder="عنوان"></MaterialTextField>
+				</div>
+				<div>
+					<tselect dir="rtl" :items="page.skills" labelOption="name" valueOption="name" v-model="val.skill">مرتبط با</tselect>
 				</div>
 				<div v-if="showMore">
 					<strong>تاریخ صدور</strong>
@@ -75,8 +75,11 @@ import ShowMore from "../ShowMore.vue";
 export default {
 	mixins: [AchievementsItem],
 	created() {
-		if (this.value.name) {
-			this.val = this.value;
+		if (this.value) {
+			this.val = {
+				...this.val,
+				...this.value,
+			};
 		}
 	},
 	watch: {
@@ -114,6 +117,10 @@ export default {
 		ShowMore,
 	},
 	computed: {
+		showDetails() {
+			let val = this.val;
+			return Boolean(val.skill) || this.time_text.length > 0 || Boolean(val.from);
+		},
 		time_text() {
 			let startText = "";
 			if (typeof this.val.startDate == "object") {
@@ -134,6 +141,7 @@ export default {
 	data() {
 		return {
 			val: {
+				id: null,
 				name: "",
 				skill: null,
 				from: null,

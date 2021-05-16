@@ -1,11 +1,11 @@
 <template>
 	<div class="achievement-item" v-if="languages.length > 0">
-		<div class="achievement-header" @click="showDetailed">
-			<div class="achievement-title">
+		<div class="achievement-header">
+			<div class="achievement-title" @click="toggleDetailed">
 				<h2 class="mb-0 about-me--card--subtitle">زبان‌ها</h2>
 				<div class="mr-2 badge-light">{{ languages.length }}</div>
 			</div>
-			<i class="material-icons open-achievements" v-if="!edit" :class="{ active: open }">arrow_drop_down</i>
+			<i class="material-icons open-achievements" v-if="!edit" :class="{ active: open }" @click="toggleDetailed">keyboard_arrow_down</i>
 		</div>
 		<ul class="languages-list p-0" v-if="loading">
 			<li>
@@ -27,12 +27,12 @@ export default {
 	mixins: [AchievementsMxixin],
 	methods: {
 		onDelete(index) {
-			this.languages.splice(index, 1);
+			this.deleteConfirmModal(`زبان ${this.languages[index].name}`, index, this.languages);
 		},
 		addLanguege() {
 			this.languages.push({
 				name: "",
-				id: "lang_" + Math.round(new Date().getTime()),
+				id: "lang_" + _.uniqueId(),
 				level: null,
 			});
 		},

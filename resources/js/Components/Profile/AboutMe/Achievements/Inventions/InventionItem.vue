@@ -1,28 +1,25 @@
 <template>
 	<li class="project-item achievement" :class="{ detailed: detailed }" v-if="val != undefined">
 		<div class="w-100" v-if="!edit">
-			<div class="d-flex justify-content-start" v-if="detailed">
-				<div class="title">
-					<a :href="val.link" v-if="val.link != null && val.link.length > 0" target="_blank">
-						<strong>{{ val.name }}</strong>
-					</a>
-					<span v-else>
-						<strong>{{ val.name }}</strong>
-					</span>
-					<span class="font-12 text-muted">{{ time_text }}</span>
-					<span class="font-12 text-muted">{{ val.organization }} | {{ val.registerCode }}</span>
-					<span class="font-12 text-muted">{{ val.organization }} | {{ val.status.label }}</span>
+			<div class="achievement-name detailed" v-if="detailed">
+				<a class="title" :href="val.link" v-if="val.link != null && val.link.length > 0" target="_blank">
+					{{ val.name }}
+				</a>
+				<span class="title" v-else>
+					{{ val.name }}
+				</span>
+				<div class="achievement-details">
+					<span v-if="time_text.length > 0">{{ time_text }}</span>
+					<span> {{ val.organization }} - {{ val.registerCode }} </span>
+					<span v-if="val.status">{{ val.status.label }}</span>
 				</div>
-				<p class="bg-body py-2 px-3" v-if="val.description != null && val.description.length > 0">
+				<p class="achievement-description" v-if="val.description != null && val.description.length > 0">
 					{{ val.description }}
 				</p>
 			</div>
 			<div class="achievement-name" v-else>
-				<a :href="val.link" v-if="val.link != null && val.link.length > 0" target="_blank">
-					<strong>{{ val.name }}</strong>
-				</a>
-				<span v-else>
-					<strong>{{ val.name }}</strong>
+				<span>
+					{{ val.name }}
 				</span>
 			</div>
 		</div>
@@ -39,7 +36,7 @@
 					<MaterialTextField v-model="val.name" :required="true" class="material--sm" placeholder="نام اختراع"></MaterialTextField>
 				</div>
 				<div>
-					<tselect :items="countries" dir="rtl" v-model="val.organization" style="min-width: 234px">اداره ثبت اختراع</tselect>
+					<tselect :items="countries" :required="true" dir="rtl" v-model="val.organization" style="min-width: 234px">اداره ثبت اختراع</tselect>
 				</div>
 				<div>
 					<MaterialTextField v-model="val.registerCode" :required="true" class="material--sm" placeholder="شماره ثبت"></MaterialTextField>
@@ -103,8 +100,11 @@ import CountriesFa from "../../../../../Libs/Countries-fa";
 export default {
 	mixins: [AchievementsItem],
 	created() {
-		if (this.value.name) {
-			this.val = this.value;
+		if (this.value) {
+			this.val = {
+				...this.val,
+				...this.value,
+			};
 		}
 	},
 	watch: {
@@ -166,6 +166,7 @@ export default {
 	data() {
 		return {
 			val: {
+				id: null,
 				name: "",
 				organization: null,
 				registerCode: null,

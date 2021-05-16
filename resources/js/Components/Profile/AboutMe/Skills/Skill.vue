@@ -37,7 +37,7 @@
 					<i class="material-icons hand-hover">unfold_more</i>
 					<i class="material-icons-outlined hover-danger clickable" @click="doDelete">delete</i>
 				</div>
-				<MaterialTextField v-if="skillVal.isNew" v-model="skillVal.name" class="material--sm w-75" input-class="w-100"></MaterialTextField>
+				<MaterialTextField v-if="skillVal.isNew" maxlength="50" v-model="skillVal.name" class="material--sm w-75" input-class="w-100"></MaterialTextField>
 				<span class="skill-name" v-else>
 					{{ skillVal.name }}
 				</span>

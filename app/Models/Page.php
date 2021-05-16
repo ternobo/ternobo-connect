@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class Page extends Model
 {
@@ -46,11 +45,11 @@ class Page extends Model
 
     public function followers()
     {
-        return Following::query()->where("following", $this->id);
+        return $this->hasMany(Following::class, "following");
     }
     public function followings()
     {
-        return Following::query()->where("user_id", $this->user_id);
+        return $this->hasMany(Following::class, "user_id", $user_id);
     }
 
     /**
@@ -304,73 +303,77 @@ class Page extends Model
 
     public function mutualFriends()
     {
-        $userA = Auth::user()->id;
-        $usertB = $this->user_id;
-        $mutuals = array();
-        $users = array();
-        $connections = DB::select("SELECT" .
-            "       *  " .
-            "   FROM  " .
-            "       (  " .
-            "       SELECT  " .
-            "           *  " .
-            "       FROM  " .
-            "           connections  " .
-            "       WHERE  " .
-            "           connections.user_id = $userA OR connections.connection_id = $userA  " .
-            "   ) AS UserAConnetions " .
-            "   INNER JOIN(  " .
-            "       SELECT  " .
-            "           *  " .
-            "       FROM  " .
-            "           connections  " .
-            "       WHERE  " .
-            "           connections.user_id = $usertB OR connections.connection_id = $usertB  " .
-            "   ) AS UserBConnetions  " .
-            "   ON  " .
-            "       (  " .
-            "           UserBConnetions.user_id = UserAConnetions.user_id OR UserAConnetions.connection_id = UserBConnetions.connection OR UserBConnetions.user_id = UserAConnetions.connection OR UserAConnetions.user_id = UserBConnetions.connection  " .
-            "      )  "
-            . " INNER JOIN users on (UserBConnetions.user_id = users.id or UserBConnetions.connection_id = users.id)"
-            . "where users.id != $this->user_id and users.id != $userA and users.id != $usertB"
-        );
-        foreach ($connections as $connection) {
-            if (!in_array($connection->username, array_column($mutuals, "username"))) {
-                if (Auth::user()->isAcceptedConnection($connection->id)) {
 
-                    unset($connection->token);
-                    unset($connection->accepted);
-                    unset($connection->api_token);
-                    unset($connection->created_at);
-                    unset($connection->deleted_at);
-                    unset($connection->email);
-                    unset($connection->phone);
-                    unset($connection->pushe_id);
-                    unset($connection->remember_token);
-                    unset($connection->phone_verified_at);
-                    unset($connection->nationalcard);
-                    unset($connection->nationalcode);
-                    unset($connection->connection);
-                    unset($connection->password);
+        // $userA = Auth::user()->id;
+        // $usertB = $this->user_id;
+        // $mutuals = array();
+        // $users = array();
+        // $connections = DB::select("SELECT" .
+        //     "       *  " .
+        //     "   FROM  " .
+        //     "       (  " .
+        //     "       SELECT  " .
+        //     "           *  " .
+        //     "       FROM  " .
+        //     "           connections  " .
+        //     "       WHERE  " .
+        //     "           connections.user_id = $userA OR connections.connection_id = $userA  " .
+        //     "   ) AS UserAConnetions " .
+        //     "   INNER JOIN(  " .
+        //     "       SELECT  " .
+        //     "           *  " .
+        //     "       FROM  " .
+        //     "           connections  " .
+        //     "       WHERE  " .
+        //     "           connections.user_id = $usertB OR connections.connection_id = $usertB  " .
+        //     "   ) AS UserBConnetions  " .
+        //     "   ON  " .
+        //     "       (  " .
+        //     "           UserBConnetions.user_id = UserAConnetions.user_id OR UserAConnetions.connection_id = UserBConnetions.connection OR UserBConnetions.user_id = UserAConnetions.connection OR UserAConnetions.user_id = UserBConnetions.connection  " .
+        //     "      )  "
+        //     . " INNER JOIN users on (UserBConnetions.user_id = users.id or UserBConnetions.connection_id = users.id)"
+        //     . "where users.id != $this->user_id and users.id != $userA and users.id != $usertB"
+        // );
+        // foreach ($connections as $connection) {
+        //     if (!in_array($connection->username, array_column($mutuals, "username"))) {
+        //         if (Auth::user()->isAcceptedConnection($connection->id)) {
 
-                    unset($connection->two_factor);
-                    unset($connection->active);
-                    unset($connection->is_verified);
-                    unset($connection->id);
-                    unset($connection->two_factor_type);
-                    unset($connection->email_verified_at);
-                    unset($connection->two_factor_secret);
-                    unset($connection->two_factor_recovery_codes);
-                    unset($connection->updated_at);
+        //             unset($connection->token);
+        //             unset($connection->accepted);
+        //             unset($connection->api_token);
+        //             unset($connection->created_at);
+        //             unset($connection->deleted_at);
+        //             unset($connection->email);
+        //             unset($connection->phone);
+        //             unset($connection->pushe_id);
+        //             unset($connection->remember_token);
+        //             unset($connection->phone_verified_at);
+        //             unset($connection->nationalcard);
+        //             unset($connection->nationalcode);
+        //             unset($connection->connection);
+        //             unset($connection->password);
 
-                    // $connection->user = User::query()->find($connection->user_id);
-                    unset($connection->user_id);
+        //             unset($connection->two_factor);
+        //             unset($connection->active);
+        //             unset($connection->is_verified);
+        //             unset($connection->id);
+        //             unset($connection->two_factor_type);
+        //             unset($connection->email_verified_at);
+        //             unset($connection->two_factor_secret);
+        //             unset($connection->two_factor_recovery_codes);
+        //             unset($connection->updated_at);
 
-                    $mutuals[] = $connection;
-                }
-            }
-        }
-        return $mutuals;
+        //             // $connection->user = User::query()->find($connection->user_id);
+        //             unset($connection->user_id);
+
+        //             $mutuals[] = $connection;
+        //         }
+        //     }
+        // }
+        return Page::query()->whereHas("followers", function ($query) {
+            $personalPage = Auth::user();
+            $query->whereIn("following", $personalPage->followings->pluck(['following']));
+        })->get();
     }
 
     /**

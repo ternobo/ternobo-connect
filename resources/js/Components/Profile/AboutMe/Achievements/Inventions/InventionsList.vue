@@ -1,11 +1,11 @@
 <template>
 	<div class="achievement-item" v-if="inventions.length > 0">
-		<div class="achievement-header" @click="showDetailed">
-			<div class="achievement-title">
+		<div class="achievement-header">
+			<div class="achievement-title" @click="toggleDetailed">
 				<h2 class="mb-0 about-me--card--subtitle">اختراعات</h2>
 				<div class="mr-2 badge-light">{{ inventions.length }}</div>
 			</div>
-			<i class="material-icons open-achievements" v-if="!edit" :class="{ active: open }">arrow_drop_down</i>
+			<i class="material-icons open-achievements" v-if="!edit" :class="{ active: open }" @click="toggleDetailed">keyboard_arrow_down</i>
 		</div>
 		<ul class="inventions-list p-0" v-if="loading">
 			<li>
@@ -27,11 +27,11 @@ export default {
 	mixins: [AchievementsMxixin],
 	methods: {
 		onDelete(index) {
-			this.inventions.splice(index, 1);
+			this.deleteConfirmModal(`اختراع ${this.inventions[index].name}`, index, this.inventions);
 		},
 		addInvention() {
 			this.inventions.push({
-				id: "invention_" + Math.round(new Date().getTime()),
+				id: "invention_" + _.uniqueId(),
 			});
 		},
 		getData() {

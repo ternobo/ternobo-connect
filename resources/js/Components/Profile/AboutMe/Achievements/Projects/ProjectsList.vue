@@ -1,11 +1,11 @@
 <template>
 	<div class="achievement-item" v-if="projects.length > 0">
-		<div class="achievement-header" @click="showDetailed">
-			<div class="achievement-title">
+		<div class="achievement-header">
+			<div class="achievement-title" @click="toggleDetailed">
 				<h2 class="mb-0 about-me--card--subtitle">پروژه‌ها</h2>
 				<div class="mr-2 badge-light">{{ projects.length }}</div>
 			</div>
-			<i class="material-icons open-achievements" v-if="!edit" :class="{ active: open }">arrow_drop_down</i>
+			<i class="material-icons open-achievements" v-if="!edit" :class="{ active: open }" @click="toggleDetailed">keyboard_arrow_down</i>
 		</div>
 		<ul class="projects-list p-0" v-if="loading">
 			<li>
@@ -28,11 +28,11 @@ export default {
 	mixins: [AchievementsMxixin],
 	methods: {
 		onDelete(index) {
-			this.projects.splice(index, 1);
+			this.deleteConfirmModal(`پروژه ${this.projects[index].name}`, index, this.projects);
 		},
 		addProject() {
 			this.projects.push({
-				id: "project_" + uuidv4(),
+				id: "project_" + _.uniqueId(),
 			});
 		},
 		getData() {
@@ -61,7 +61,7 @@ export default {
 			this.projects = this.value;
 			this.projects.forEach((element) => {
 				if (!element.id) {
-					element.id = uuidv4();
+					element.id = _.uniqueId();
 				}
 			});
 		}

@@ -4,12 +4,12 @@ import {
 
 const AchievementsMixin = {
     methods: {
-        showDetailed(){
+        toggleDetailed() {
             this.open = !this.open;
-        }
+        },
     },
-    data(){
-        return{
+    data() {
+        return {
             open: false,
         }
     },

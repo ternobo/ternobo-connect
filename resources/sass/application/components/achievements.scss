@@ -52,6 +52,63 @@
     }
 }
 
+
+.achievement {
+    &.detailed {
+        margin: 16px 0;
+    }
+
+    .achievement-name {
+        display: flex;
+        flex-direction: column;
+
+        &.detailed {
+            width: 100%;
+        }
+
+        .achievement-details {
+            color: $dark;
+            font-weight: normal;
+            font-size: 14px;
+
+            >*:not(:last-child) {
+                padding-left: 12px;
+                border-left: 2px solid #C8C8C8;
+                margin-left: 12px;
+            }
+        }
+
+        .title {
+            font-weight: 600;
+            font-size: 16px;
+            color: $dark;
+
+            line-height: 24px;
+
+            &:not(:last-child) {
+                margin-bottom: 12px;
+            }
+        }
+
+        a.title {
+            color: $action;
+
+            &:hover {
+                color: $action-hover;
+            }
+        }
+
+        .achievement-description {
+            margin-top: 12px;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 30px;
+            color: $grey;
+            margin-bottom: 0;
+        }
+    }
+}
+
 .languages-list {
     .tselect {
         min-width: 116px;
@@ -112,6 +169,11 @@
         border-bottom: 2px solid #C8C8C8;
     }
 
+    &:last-child {
+        padding-bottom: 0;
+        margin-bottom: -24px;
+    }
+
     &:not(:first-child) {
         padding: 8px 0;
         margin: 24px 0;
@@ -130,6 +192,8 @@
         display: flex;
         align-items: baseline;
         font-size: 16px;
+
+        cursor: pointer;
     }
 
     .achievement-header {
@@ -141,10 +205,9 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-        cursor: pointer;
 
         >.open-achievements {
-            margin-bottom: -16px;
+            cursor: pointer;
         }
 
         @media screen and(max-width: $sm-size) {
@@ -188,8 +251,6 @@
         }
 
         .achievement-name {
-            display: flex;
-            align-items: center;
             font-weight: 600;
             color: $grey;
 

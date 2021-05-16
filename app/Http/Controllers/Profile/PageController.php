@@ -135,7 +135,7 @@ class PageController extends Controller
         $tags = [];
 
         foreach ($posts as $post) {
-            $postTags = json_decode($post->tags);
+            $postTags = $post->tags;
             $postTags = $postTags == null ? [] : $postTags;
             $tags = array_merge($tags, $postTags);
         }
@@ -472,7 +472,7 @@ class PageController extends Controller
         $page = Page::query()->find($request->page_id);
         $list = $page->mutualFriends();
         $data = [
-            "list" => array_slice($list, 0, 2),
+            "list" => $list,
             "text" => $page->getMutualsText($list),
             "count" => count($list),
         ];

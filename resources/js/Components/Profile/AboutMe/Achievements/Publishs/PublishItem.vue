@@ -1,28 +1,27 @@
 <template>
-	<li class="achievement">
+	<li class="achievement" :class="{ detailed: detailed }">
 		<div class="w-100" v-if="!edit">
-			<div class="d-flex justify-content-start" v-if="detailed">
-				<div class="title">
-					<a :href="val.link" v-if="val.link != null && val.link.length > 0" target="_blank"> </a>
-					<span v-else>
-						<strong>{{ val.name }}</strong>
-					</span>
-					<span class="font-12 text-muted">{{ time_text }}</span>
+			<div class="achievement-name detailed" v-if="detailed">
+				<a class="title" :href="val.link" v-if="val.link != null && val.link.length > 0" target="_blank">
+					{{ val.name }}
+				</a>
+				<span class="title" v-else>
+					{{ val.name }}
+				</span>
+				<div class="achievement-details">
+					<span v-if="time_text.length > 0">{{ time_text }}</span>
+					<span v-if="val.publisher && val.publisher.length > 0">{{ val.publisher }}</span>
 				</div>
-				<p class="bg-body py-2 px-3" v-if="val.description != null && val.description.length > 0">
+				<p class="achievement-description" v-if="val.description != null && val.description.length > 0">
 					{{ val.description }}
 				</p>
 			</div>
 			<div class="achievement-name" v-else>
-				<a :href="val.link" v-if="val.link != null && val.link.length > 0" target="_blank">
-					<strong>{{ val.name }}</strong>
-				</a>
-				<span v-else>
-					<strong>{{ val.name }}</strong>
+				<span>
+					{{ val.name }}
 				</span>
 			</div>
 		</div>
-
 		<div class="achievement-edit" v-else>
 			<div class="actions-container">
 				<div class="delete-move-actions">
@@ -71,8 +70,11 @@ import ShowMore from "../ShowMore.vue";
 
 export default {
 	created() {
-		if (this.value.name) {
-			this.val = this.value;
+		if (this.value) {
+			this.val = {
+				...this.val,
+				...this.value,
+			};
 		}
 	},
 	watch: {
@@ -117,8 +119,8 @@ export default {
 	computed: {
 		time_text() {
 			let startText = "";
-			if (this.val.startDate) {
-				startText = new PersianDate([this.val.startDate.year, this.val.startDate.month.id]).format("MMMM YYYY");
+			if (this.val.date) {
+				startText = new PersianDate([this.val.date.year, this.val.date.month.id]).format("MMMM YYYY");
 			}
 			return startText;
 		},
@@ -135,6 +137,7 @@ export default {
 	data() {
 		return {
 			val: {
+				id: null,
 				name: "",
 				publisher: undefined,
 				date: null,

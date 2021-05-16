@@ -1,21 +1,22 @@
 <template>
 	<li class="project-item achievement" :class="{ detailed: detailed }" v-if="val != undefined">
 		<div class="w-100" v-if="!edit">
-			<div class="d-flex justify-content-start" v-if="detailed">
-				<div class="title">
-					<span>
-						<strong>{{ val.name }}</strong>
-					</span>
-					<span class="mr-4 badge-success">{{ val.score }}</span>
-					<span class="font-12 text-muted">{{ time_text }}</span>
+			<div class="achievement-name detailed" v-if="detailed">
+				<span class="title">
+					{{ val.name }}
+				</span>
+				<div class="achievement-details">
+					<span v-if="time_text.length > 0">{{ time_text }}</span>
+					<span v-if="val.score && val.score.length > 0">نمره {{ val.score }}</span>
+					<span v-if="val.skill && val.skill.length > 0">{{ val.skill.name }}</span>
 				</div>
-				<p class="bg-body py-2 px-3" v-if="val.description != null && val.description.length > 0">
+				<p class="achievement-description" v-if="val.description != null && val.description.length > 0">
 					{{ val.description }}
 				</p>
 			</div>
 			<div class="achievement-name" v-else>
 				<span>
-					<strong>{{ val.name }}</strong>
+					{{ val.name }}
 				</span>
 			</div>
 		</div>
@@ -54,9 +55,6 @@
 					<textarea-autosize maxlength="1000" class="form-control" v-model="val.description"></textarea-autosize>
 				</div>
 			</div>
-			<!--
-            Content Edit End
-        !-->
 		</div>
 	</li>
 </template>
@@ -73,8 +71,11 @@ import Tselect from "../../../../Tselect.vue";
 export default {
 	mixins: [AchievementsItem],
 	created() {
-		if (this.value.name) {
-			this.val = this.value;
+		if (this.value) {
+			this.val = {
+				...this.val,
+				...this.value,
+			};
 		}
 	},
 	watch: {
@@ -113,9 +114,13 @@ export default {
 		Tselect,
 	},
 	computed: {
+		showDetails() {
+			let val = this.val;
+			return Boolean(val.skill) || Boolean(val.score);
+		},
 		time_text() {
 			let dateText = "";
-			if (typeof this.val.date == "object") {
+			if (typeof this.val.date == "object" && this.val.date != null) {
 				dateText = new PersianDate([this.val.date.year, this.val.date.month.id]).format("MMMM YYYY");
 			}
 			return dateText;
@@ -133,6 +138,7 @@ export default {
 	data() {
 		return {
 			val: {
+				id: null,
 				name: "",
 				skill: null,
 				date: null,

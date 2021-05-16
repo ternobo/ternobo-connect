@@ -226,6 +226,24 @@ TernoboApp.install = function (Vue, options) {
                         ...modalOptions
                     })
             },
+            deleteConfirmModal(itemName, index, arr) {
+                const h = this.$createElement;
+                let content = ["ایا از حذف ", h("strong", {}, [itemName]), " اطمینان دارید؟"]
+                return this.$bvModal
+                    .msgBoxConfirm(content, {
+                        size: "sm",
+                        okTitle: "تایید",
+                        cancelTitle: "لغو",
+                        hideHeaderClose: false,
+                        cancelVariant: "transparent text-grey",
+                        centered: true,
+                        bodyClass: 'confirm-dialog-body',
+                    }).then((value) => {
+                        if (value) {
+                            arr.splice(index, 1);
+                        }
+                    })
+            },
             checkUser(id) {
                 if (this.$store.state.user !== null) {
                     return this.$store.state.user.id == id;

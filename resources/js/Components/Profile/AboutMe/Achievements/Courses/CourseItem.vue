@@ -1,21 +1,22 @@
 <template>
 	<li class="project-item achievement" :class="{ detailed: detailed }" v-if="val != undefined">
 		<div class="w-100" v-if="!edit">
-			<div class="d-flex justify-content-start" v-if="detailed">
-				<div class="title">
-					<span
-						><strong>{{ val.name }}</strong></span
-					>
-					<span v-if="val.code != null && val.code.length > 0" class="text-muted">{{ val.code }}</span>
+			<div class="achievement-name detailed" v-if="detailed">
+				<span class="title">
+					{{ val.name }}
+				</span>
+				<div class="achievement-details" v-if="showDetails">
+					<span>{{ val.skill.name }}</span>
+					<span>{{ val.code }}</span>
 				</div>
-				<p class="bg-body py-2 px-3" v-if="val.description != null && val.description.length > 0">
+				<p class="achievement-description" v-if="val.description != null && val.description.length > 0">
 					{{ val.description }}
 				</p>
 			</div>
 			<div class="achievement-name" v-else>
-				<span
-					><strong>{{ val.name }}</strong></span
-				>
+				<span>
+					{{ val.name }}
+				</span>
 			</div>
 		</div>
 		<div class="achievement-edit" v-else>
@@ -34,7 +35,7 @@
 					<MaterialTextField v-model="val.code" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="کد دوره"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
-					<tselect dir="rtl" :items="page.skills" labelOption="name" valueOption="name" v-model="value.skill">مرتبط با</tselect>
+					<tselect dir="rtl" :items="page.skills" labelOption="name" valueOption="name" v-model="val.skill">مرتبط با</tselect>
 				</div>
 				<div class="col-md-12" v-if="showMore">
 					<div class="d-flex align-items-center justify-content-between mb-3">
@@ -61,9 +62,18 @@ import Tselect from "../../../../Tselect.vue";
 export default {
 	mixins: [AchievementsItem],
 	created() {
-		if (this.value.name) {
-			this.val = this.value;
+		if (this.value) {
+			this.val = {
+				...this.val,
+				...this.value,
+			};
 		}
+	},
+	computed: {
+		showDetails() {
+			let val = this.val;
+			return Boolean(val.skill) || Boolean(val.code);
+		},
 	},
 	watch: {
 		val: {
@@ -101,6 +111,7 @@ export default {
 	data() {
 		return {
 			val: {
+				id: null,
 				name: "",
 				skill: null,
 				code: null,

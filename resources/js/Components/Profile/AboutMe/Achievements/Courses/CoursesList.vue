@@ -1,11 +1,11 @@
 <template>
 	<div class="achievement-item" v-if="courses.length > 0">
-		<div class="achievement-header" @click="showDetailed">
-			<div class="achievement-title">
+		<div class="achievement-header">
+			<div class="achievement-title" @click="toggleDetailed">
 				<h2 class="mb-0 about-me--card--subtitle">دوره‌ها</h2>
 				<div class="mr-2 badge-light">{{ courses.length }}</div>
 			</div>
-			<i class="material-icons open-achievements" v-if="!edit" :class="{ active: open }">arrow_drop_down</i>
+			<i class="material-icons open-achievements" v-if="!edit" :class="{ active: open }" @click="toggleDetailed">keyboard_arrow_down</i>
 		</div>
 		<ul class="courses-list p-0" v-if="loading">
 			<li>
@@ -26,11 +26,11 @@ export default {
 	mixins: [AchievementsMxixin],
 	methods: {
 		onDelete(index) {
-			this.courses.splice(index, 1);
+			this.deleteConfirmModal(`دوره ${this.courses[index].name}`, index, this.courses);
 		},
 		addCourse() {
 			this.courses.push({
-				id: "course_" + Math.round(new Date().getTime()),
+				id: "course_" + _.uniqueId(),
 				name: null,
 				code: null,
 				skill: null,

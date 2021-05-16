@@ -1,11 +1,11 @@
 <template>
 	<div class="achievement-item" v-if="publishs.length > 0">
-		<div class="achievement-header" @click="showDetailed">
-			<div class="achievement-title">
+		<div class="achievement-header">
+			<div class="achievement-title" @click="toggleDetailed">
 				<h2 class="mb-0 about-me--card--subtitle">انتشارات</h2>
 				<div class="mr-2 badge-light">{{ publishs.length }}</div>
 			</div>
-			<i class="material-icons open-achievements" v-if="!edit" :class="{ active: open }">arrow_drop_down</i>
+			<i class="material-icons open-achievements" v-if="!edit" :class="{ active: open }" @click="toggleDetailed">keyboard_arrow_down</i>
 		</div>
 		<ul class="achievement-list" v-if="loading">
 			<li>
@@ -26,11 +26,11 @@ export default {
 	mixins: [AchievementsMxixin],
 	methods: {
 		onDelete(index) {
-			this.publishs.splice(index, 1);
+			this.deleteConfirmModal(`انتشار ${this.publishs[index].name}`, index, this.publishs);
 		},
 		addPublish() {
 			this.publishs.push({
-				id: "publish_" + Math.round(new Date().getTime()),
+				id: "publish_" + _.uniqueId(),
 			});
 		},
 		getData() {

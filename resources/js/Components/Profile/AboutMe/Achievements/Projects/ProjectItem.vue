@@ -1,17 +1,17 @@
 <template>
 	<li class="project-item achievement" :class="{ detailed: detailed }" v-if="val != undefined">
 		<div class="w-100" v-if="!edit">
-			<div class="d-flex justify-content-start" v-if="detailed">
-				<div class="title">
-					<a :href="val.link" v-if="val.link != null && val.link.length > 0" target="_blank">
-						<strong>{{ val.name }}</strong>
-					</a>
-					<span v-else>
-						<strong>{{ val.name }}</strong>
-					</span>
-					<span class="font-12 text-muted">{{ time_text }}</span>
+			<div class="achievement-name detailed" v-if="detailed">
+				<a class="title" :href="val.link" v-if="val.link != null && val.link.length > 0" target="_blank">
+					{{ val.name }}
+				</a>
+				<span class="title" v-else>
+					{{ val.name }}
+				</span>
+				<div class="achievement-details" v-if="time_text.length > 0">
+					<span>{{ time_text }}</span>
 				</div>
-				<p class="bg-body py-2 px-3" v-if="val.description != null && val.description.length > 0">
+				<p class="achievement-description" v-if="val.description != null && val.description.length > 0">
 					{{ val.description }}
 				</p>
 			</div>
@@ -79,8 +79,11 @@ import ShowMore from "../ShowMore.vue";
 export default {
 	mixins: [AchievementsItem],
 	created() {
-		if (this.value.name) {
-			this.val = this.value;
+		if (this.value) {
+			this.val = {
+				...this.val,
+				...this.value,
+			};
 			if (typeof this.val.endDate == "boolean" || !this.val.endDate.year) {
 				this.val.endDate = true;
 				this.noEndDate = true;
@@ -161,6 +164,7 @@ export default {
 		return {
 			noEndDate: false,
 			val: {
+				id: null,
 				name: "",
 				skill: undefined,
 				startDate: null,
