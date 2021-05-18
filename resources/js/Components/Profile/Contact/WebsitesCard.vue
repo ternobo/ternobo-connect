@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<add-website-modal @add="addWebsite" :show.sync="showAddWebsite" :websiteOptions="usableOptions"></add-website-modal>
+		<add-website-modal @add="addWebsite" :show.sync="showAddWebsite" :websites="websites" :websiteOptions="options"></add-website-modal>
 		<h5 class="contact--title"><i class="material-icons">public</i>وب‌سایت‌ها</h5>
 		<div v-if="loading" class="contact-list">
 			<Skeleton width="238px" height="66px" v-for="i in 3" :key="`skeleton_${i}`" />
@@ -8,7 +8,7 @@
 
 		<div class="contact-list p-0">
 			<WebsiteItem @deleted="onDelete(index)" :edit="edit" v-for="(website, index) in websites" :website.sync="websites[index]" :key="website.id"></WebsiteItem>
-			<button v-if="edit && usableOptions.length > 0" @click="showAddWebsite = true" class="rounded-add-btn btn-light-action"><i class="material-icons">add</i></button>
+			<button v-if="edit && websites.length <= 9" @click="showAddWebsite = true" class="rounded-add-btn btn-light-action"><i class="material-icons">add</i></button>
 			<div class="no-contact-container" v-if="websites.length < 1 && !loading">
 				<span class="font-16 text-grey">موردی ثبت نشده</span>
 			</div>
@@ -22,19 +22,11 @@ import AddWebsiteModal from "./AddWebsiteModal.vue";
 import WebsiteItem from "./Items/WebsiteItem.jsx";
 import { v4 as uuidv4 } from "uuid";
 export default {
-	computed: {
-		usableOptions() {
-			return this.options.filter((option) => {
-				return this.websites.filter((website) => website.option.id == option.id).length < 1;
-			});
-		},
-	},
 	methods: {
 		onDelete(index) {
 			this.websites.splice(index, 1);
 		},
 		addWebsite(website) {
-			console.log(website);
 			this.websites.push({
 				id: "social_" + uuidv4(),
 				...website,

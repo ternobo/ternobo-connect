@@ -1,10 +1,11 @@
 <template>
 	<li :class="{ 'skill-edit': edit }" v-if="value != undefined">
 		<SkillCreditModal @credited="credited" v-if="$store.state.user != null && !checkUser(user.id)" :show.sync="creditModal" :user="user" :skill="skillVal"></SkillCreditModal>
+		<credits-modal :skill="skillVal.id" :show.sync="creditsListModal"></credits-modal>
 		<skeleton :height="'24px'" v-if="loading && !edit"></skeleton>
 		<div v-else>
 			<div class="skill-name" v-if="!edit">
-				<div class="endorsement" :class="{ disabled: checkUser(user.id) }" v-if="$store.state.user != null">
+				<div class="endorsement" v-if="$store.state.user != null && !checkUser(user.id)">
 					<i class="material-icons" @click="credit">
 						{{ canCredit ? "arrow_circle_up" : "remove_circle_outline" }}
 					</i>
@@ -16,20 +17,27 @@
 					<span class="d-flex medium align-items-center clickale">
 						<wire-link :href="'/search?q=' + skillVal.name">{{ skillVal.name }}</wire-link>
 					</span>
-					<span class="font-11 clickable" v-if="skillVal.credit_text != null && skillVal.credit_text.nums >= 1">
-						<wire-link v-if="skillVal.credit_text.first" :href="userURL(skillVal.credit_text.first)" class="text-dark">
-							<strong class="text-light">{{ skillVal.credit_text.first.name }}</strong>
-						</wire-link>
-						<span v-if="skillVal.credit_text.nums > 2">،</span>
-						<span v-if="skillVal.credit_text.nums == 2">و</span>
-						<wire-link v-if="skillVal.credit_text.second" :href="userURL(skillVal.credit_text.second)" class="text-dark">
-							<strong class="text-light">{{ skillVal.credit_text.second.name }}</strong>
-						</wire-link>
-						<span v-if="skillVal.credit_text.nums > 2">و</span>
-						<span v-if="skillVal.credit_text.nums - 2 > 0">{{ formatNumber(skillVal.credit_text.nums - 2, "0a") }} نفر دیگر این مهارت را تایید کرده‌اند</span>
-						<span v-else-if="(skillVal.credit_text.nums = 1)">این مهارت را تایید کرده است</span>
-						<span v-else-if="skillVal.credit_text.nums == 2">این مهارت را تایید کرده‌اند</span>
-					</span>
+					<div class="skill-credits clickable" @click="if (skillVal.credit_text.nums >= 1) creditsListModal = true;">
+						<div class="credit-icon">
+							{{ skillVal.credit_text == null ? 0 : formatNumber(skillVal.credit_text.nums, "0a") }}
+							<i class="material-icons">arrow_circle_up</i>
+						</div>
+						<span class="font-14" v-if="skillVal.credit_text != null && skillVal.credit_text.nums >= 1">
+							<wire-link v-if="skillVal.credit_text.first" :href="userURL(skillVal.credit_text.first)">
+								<strong class="font-14">{{ skillVal.credit_text.first.name }}</strong>
+								{{ skillVal.credit_text.nums > 2 ? "،" : "" }}
+							</wire-link>
+
+							<span v-if="skillVal.credit_text.nums == 2">و</span>
+							<wire-link v-if="skillVal.credit_text.second" :href="userURL(skillVal.credit_text.second)">
+								<strong class="font-14">{{ skillVal.credit_text.second.name }}</strong>
+							</wire-link>
+							<span v-if="skillVal.credit_text.nums > 2">و</span>
+							<span v-if="skillVal.credit_text.nums - 2 > 0">{{ formatNumber(skillVal.credit_text.nums - 2, "0a") }} نفر دیگر این مهارت را تایید کرده‌اند</span>
+							<span v-else-if="(skillVal.credit_text.nums = 1)">این مهارت را تایید کرده است</span>
+							<span v-else-if="skillVal.credit_text.nums == 2">این مهارت را تایید کرده‌اند</span>
+						</span>
+					</div>
 				</div>
 			</div>
 			<div class="editItem" v-else>
@@ -49,10 +57,12 @@
 <script>
 import RadioButton from "../../../inputs/RadioButton";
 import SkillCreditModal from "../../../Modals/SkillCreditModal";
+import CreditsModal from "./CreditsModal.vue";
 export default {
 	components: {
 		RadioButton,
 		SkillCreditModal,
+		CreditsModal,
 	},
 	watch: {
 		skillVal() {
@@ -83,7 +93,9 @@ export default {
 							this.handleError(response.data.errors);
 						}
 					})
-					.catch((errors) => {})
+					.catch((errors) => {
+						console.log(errors);
+					})
 					.then(() => (this.loading = false));
 			}
 		},
@@ -117,6 +129,7 @@ export default {
 			creditModal: false,
 			canCredit: true,
 			loading: true,
+			creditsListModal: false,
 		};
 	},
 	props: {

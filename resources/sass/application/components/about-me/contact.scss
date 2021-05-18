@@ -33,17 +33,22 @@
 }
 
 .add-webiste-container {
-    display: flex;
-    align-items: center;
-    margin: 0 -12px;
+
     margin-bottom: 40px;
 
-    .vs__dropdown-toggle {
-        height: 52px;
-    }
+    .flex-container {
+        display: flex;
+        align-items: center;
+        margin: 0 -12px;
 
-    >* {
-        margin: 0 12px
+        .tselect {
+            min-width: 140px;
+            max-width: 140px;
+        }
+
+        >* {
+            margin: 0 12px
+        }
     }
 }
 
@@ -92,14 +97,14 @@
             justify-content: center;
 
             span {
-                height: 16px;
+                height: 20px;
             }
 
             vertical-align: middle;
             font-weight: 600;
 
             img {
-                margin-right: 8px;
+                margin-right: 12px;
             }
         }
     }

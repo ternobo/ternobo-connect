@@ -49,7 +49,7 @@ class Page extends Model
     }
     public function followings()
     {
-        return $this->hasMany(Following::class, "user_id", $user_id);
+        return $this->hasMany(Following::class, "user_id", "user_id");
     }
 
     /**

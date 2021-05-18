@@ -23,7 +23,7 @@
 			</div>
 			<div class="achievement-edit-row">
 				<div>
-					<MaterialTextField placeholder="زبان" :required="true" v-model="languageVal.name" class="material--sm w-100" input-class="w-100 py-1"></MaterialTextField>
+					<MaterialTextField placeholder="زبان" maxlength="52" :required="true" v-model="languageVal.name" class="material--sm w-100" input-class="w-100 py-1"></MaterialTextField>
 				</div>
 				<div>
 					<tselect

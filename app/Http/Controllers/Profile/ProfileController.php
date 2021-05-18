@@ -52,7 +52,7 @@ class ProfileController extends Controller
         if ($request->filled("skills") && is_array($request->skills)) {
             $skills = $request->skills;
             $user = Auth::user();
-            Skill::query()->where("user_id", $user->id)->delete();
+            Skill::query()->where("user_id", $user->id)->whereNotIn("name", array_column($skills, "name"))->delete();
             foreach ($skills as $skill) {
                 $check = Skill::query()->where("name", $skill['name'])->where("user_id", $user->id)->first();
                 if ($check == null) {
@@ -104,7 +104,7 @@ class ProfileController extends Controller
                 'endDate.required' => 'تاریخ پایان {{ type }} اجباری است.',
                 'date.required' => 'تاریخ {{ type }} اجباری است.',
                 'organization.required' => 'اداره ثبت اختراع اجباری است.',
-                'score.required' => 'نمره آزمون اجباری است.',
+                'score.max' => 'نمره آزمون حداکثر ۲۰ کاراکتر است.',
                 'score.digits_between' => 'نمره آزمون باید عدد باشد',
                 'registerCode.max' => "شماره ثبت اختراع نمی‌تواند بیشتر از 30 کاراکتر باشد",
                 'link.regex' => "لینک {{ type }} نامعتبر است",
@@ -145,7 +145,7 @@ class ProfileController extends Controller
                 ],
                 'tests' => [
                     'name' => "required|max:50",
-                    "score" => "digits_between:0,4",
+                    "score" => "max:20",
                     "date" => [new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
                     'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
                 ],

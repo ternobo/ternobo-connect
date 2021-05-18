@@ -29,7 +29,8 @@ export default {
 	methods: {
 		doDelete() {
 			if (!this.edit && !this.disabled) {
-				this.confirmDialog(`از حذف دسته‌بندی ${this.name} اطمینان دارید؟`).then((value) => {
+				const h = this.$createElement;
+				this.confirmDialog(["ایا از حذف ", h("strong", {}, [this.category.name]), " اطمینان دارید؟"]).then((value) => {
 					if (value) {
 						this.loading = true;
 						axios

@@ -35,17 +35,17 @@
 			</div>
 			<div class="achievement-edit-row">
 				<div>
-					<MaterialTextField v-model="val.name" :required="true" inputClass="w-100" class="material--sm" placeholder="عنوان"></MaterialTextField>
+					<MaterialTextField v-model="val.name" maxlength="52" :required="true" inputClass="w-100" class="material--sm" placeholder="عنوان"></MaterialTextField>
 				</div>
 				<div>
-					<MaterialTextField v-model="val.publisher" inputClass="w-100" class="material--sm" placeholder="نام ناشر"></MaterialTextField>
+					<MaterialTextField v-model="val.publisher" maxlength="52" inputClass="w-100" class="material--sm" placeholder="نام ناشر"></MaterialTextField>
 				</div>
 				<div>
 					<strong>تاریخ انتشار <span class="text-action">*</span></strong>
 					<DatePicker class="mt-3" v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
 				</div>
 				<div class="col-md-6 d-flex align-items-end" v-if="showMore">
-					<MaterialTextField v-model="val.link" class="material--sm" placeholder="لینک ناشر"></MaterialTextField>
+					<MaterialTextField v-model="val.link" maxlength="52" class="material--sm" placeholder="لینک ناشر"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
 					<div class="d-flex align-items-center justify-content-between mb-3">

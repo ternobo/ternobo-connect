@@ -71,7 +71,7 @@ export default {
 			required: false,
 		},
 		maxlength: {
-			type: Number,
+			type: [Number, String],
 			default: 15000,
 			required: false,
 		},

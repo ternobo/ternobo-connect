@@ -6,8 +6,8 @@
 					{{ val.name }}
 				</span>
 				<div class="achievement-details" v-if="showDetails">
-					<span>{{ val.skill.name }}</span>
-					<span>{{ val.code }}</span>
+					<span v-if="val.skill">{{ val.skill.name }}</span>
+					<span v-if="Boolean(val.code)">{{ val.code }}</span>
 				</div>
 				<p class="achievement-description" v-if="val.description != null && val.description.length > 0">
 					{{ val.description }}
@@ -29,13 +29,13 @@
 			</div>
 			<div class="achievement-edit-row">
 				<div>
-					<MaterialTextField v-model="val.name" :required="true" class="center material--sm" placeholder="نام دوره"></MaterialTextField>
+					<MaterialTextField v-model="val.name" maxlength="52" :required="true" class="center material--sm" placeholder="نام دوره"></MaterialTextField>
 				</div>
 				<div v-if="showMore">
-					<MaterialTextField v-model="val.code" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="کد دوره"></MaterialTextField>
+					<MaterialTextField v-model="val.code" maxlength="52" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="کد دوره"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
-					<tselect dir="rtl" :items="page.skills" labelOption="name" valueOption="name" v-model="val.skill" style="min-width: 234px">مرتبط با</tselect>
+					<tselect dir="rtl" :items="page.skills" maxlength="52" labelOption="name" valueOption="name" v-model="val.skill" style="min-width: 234px">مرتبط با</tselect>
 				</div>
 				<div class="col-md-12" v-if="showMore">
 					<div class="d-flex align-items-center justify-content-between mb-3">

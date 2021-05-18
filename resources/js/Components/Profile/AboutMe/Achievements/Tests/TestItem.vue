@@ -7,8 +7,10 @@
 				</span>
 				<div class="achievement-details">
 					<span v-if="time_text.length > 0">{{ time_text }}</span>
-					<span v-if="val.score && val.score.length > 0">نمره {{ val.score }}</span>
-					<span v-if="val.skill && val.skill.length > 0">{{ val.skill.name }}</span>
+					<span style="width: max-content" v-if="val.score && val.score.length > 0">
+						<span class="badge-success">{{ val.score }}</span>
+					</span>
+					<span v-if="val.skill">{{ val.skill.name }}</span>
 				</div>
 				<p class="achievement-description" v-if="val.description != null && val.description.length > 0">
 					{{ val.description }}
@@ -30,17 +32,17 @@
 			</div>
 			<div class="achievement-edit-row">
 				<div>
-					<MaterialTextField v-model="val.name" :required="true" class="material--sm" placeholder="عنوان"></MaterialTextField>
+					<MaterialTextField v-model="val.name" maxlength="52" :required="true" class="material--sm" placeholder="عنوان"></MaterialTextField>
 				</div>
 				<div>
-					<tselect dir="rtl" v-model="val.skill" :items="page.skills" style="min-width: 234px">مرتبط با</tselect>
+					<tselect dir="rtl" v-model="val.skill" maxlength="52" :items="page.skills" style="min-width: 234px">مرتبط با</tselect>
 				</div>
-				<div class="col-md-6" v-if="showMore">
+				<div v-if="showMore">
 					<strong>تاریخ آزمون</strong>
 					<DatePicker class="mt-3" v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
 				</div>
 				<div class="d-flex align-items-end" v-if="showMore">
-					<MaterialTextField v-model="val.score" class="material--sm" placeholder="نمره"></MaterialTextField>
+					<MaterialTextField v-model="val.score" maxlength="15" class="material--sm" placeholder="نمره"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
 					<div class="d-flex align-items-center justify-content-between mb-3">

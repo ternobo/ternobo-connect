@@ -5,7 +5,7 @@
 				<i v-if="!loading" class="material-icons">add</i>
 				<span style="height: 14px; width: 14px; border-width: 2px" v-if="loading" class="loadingspinner"></span>
 			</add-btn>
-			<input type="text" :readonly="disabled" placeholder="دسته‌جدید را وارد کنید" maxlength="50" v-model="input" class="form-control text-input" />
+			<input type="text" :readonly="disabled" placeholder="دسته‌جدید را وارد کنید" maxlength="52" v-model="input" class="form-control text-input" />
 		</div>
 		<div class="edit-categories-list">
 			<draggable @end="save" v-model="list" handle=".hand-hover">
@@ -48,7 +48,6 @@ export default {
 			this.$emit("update:categories", this.list);
 		},
 		doDelete(index) {
-			console.log(this.list.splice(index, 1));
 			this.$emit("update:categories", this.list);
 		},
 	},

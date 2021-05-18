@@ -34,7 +34,7 @@
 			</div>
 			<div class="achievement-edit-row">
 				<div class="col-md-12">
-					<MaterialTextField v-model="val.name" :required="true" input-class="w-75" class="material--sm" placeholder="نام پروژه"></MaterialTextField>
+					<MaterialTextField v-model="val.name" maxlength="52" :required="true" input-class="w-75" class="material--sm" placeholder="نام پروژه"></MaterialTextField>
 				</div>
 				<div>
 					<strong>تاریخ شروع <span class="text-action">*</span></strong>
@@ -46,7 +46,7 @@
 					<Checkbox class="mb-0" v-model="val.noEndDate"> همچنان در حال کار بر روی این پروژه هستم </Checkbox>
 				</div>
 				<div class="col-md-6" v-if="showMore">
-					<MaterialTextField v-model="val.link" class="material--sm" placeholder="لینک پروژه"></MaterialTextField>
+					<MaterialTextField v-model="val.link" maxlength="52" class="material--sm" placeholder="لینک پروژه"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
 					<div class="d-flex align-items-center justify-content-between mb-3">

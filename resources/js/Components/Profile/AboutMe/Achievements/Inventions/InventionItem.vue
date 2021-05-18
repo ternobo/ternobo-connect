@@ -36,16 +36,16 @@
 			</div>
 			<div class="achievement-edit-row">
 				<div>
-					<MaterialTextField v-model="val.name" :required="true" class="material--sm" placeholder="نام اختراع"></MaterialTextField>
+					<MaterialTextField v-model="val.name" maxlength="52" :required="true" class="material--sm" placeholder="نام اختراع"></MaterialTextField>
 				</div>
 				<div>
-					<tselect :items="countries" :required="true" dir="rtl" v-model="val.organization" style="min-width: 234px">اداره ثبت اختراع</tselect>
+					<tselect :items="countries" :required="true" maxlength="52" dir="rtl" v-model="val.organization" style="min-width: 234px">اداره ثبت اختراع</tselect>
 				</div>
 				<div>
-					<MaterialTextField v-model="val.registerCode" :required="true" class="material--sm" placeholder="شماره ثبت"></MaterialTextField>
+					<MaterialTextField v-model="val.registerCode" maxlength="52" :required="true" class="material--sm" placeholder="شماره ثبت"></MaterialTextField>
 				</div>
 				<div v-if="showMore">
-					<MaterialTextField v-model="val.link" class="material--sm" placeholder="لینک ثبت اختراع"></MaterialTextField>
+					<MaterialTextField v-model="val.link" maxlength="52" class="material--sm" placeholder="لینک ثبت اختراع"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
 					<tselect

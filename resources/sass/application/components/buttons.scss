@@ -18,11 +18,13 @@
 
 .btn {
     padding: 8px 24px;
+    font-weight: 600;
 
     &:disabled {
-        background: $icons;
+        background: #E0E0E0;
         color: $grey;
-        border-color: $icons;
+        border-color: #E0E0E0;
+        opacity: 0.5;
     }
 }
 

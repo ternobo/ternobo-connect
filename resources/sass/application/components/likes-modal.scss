@@ -2,29 +2,39 @@
     max-height: 500px;
     overflow: auto;
     padding: 0 8px;
+    margin-left: -12px;
+    padding-left: 12px;
     @extend .nice-scroll;
 
     .like-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: 12px 0;
 
         .userinfo {
             display: flex;
             align-items: center;
 
             .page-name {
-                padding-right: 0 8px !important;
+                .shortbio {
+                    max-width: 200px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+
+                padding:0 8px;
 
                 @media screen and (max-width: $sm-size) {
                     font-size: 12px;
-                    padding-right: 0 4px !important;
+                    padding: 0 4px;
                 }
             }
         }
 
         &:not(:last-child) {
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
     }
@@ -38,6 +48,8 @@
     overflow: auto;
     padding: 24px 8px;
     margin: 0 -8px;
+    margin-left: -12px;
+    padding-left: 12px;
 
     figure.profile-standard {
         margin-left: 24px;
@@ -54,11 +66,18 @@
             align-items: center;
 
             .page-name {
-                padding-right: 0 8px !important;
+                .shortbio {
+                    max-width: 200px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+
+                padding:0 8px;
 
                 @media screen and (max-width: $sm-size) {
                     font-size: 12px;
-                    padding-right: 0 4px !important;
+                    padding: 0 4px;
                 }
             }
         }

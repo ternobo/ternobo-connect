@@ -5,16 +5,16 @@
 
     &::-webkit-scrollbar {
         cursor: pointer;
-        width: 4px;
+        width: 6px;
         background: $fixed-elements;
 
-        max-height: 4px;
+        max-height: 6px;
     }
 
     &::-webkit-scrollbar-thumb {
         cursor: -webkit-grab;
         cursor: grab;
-        width: 4px;
+        width: 6px;
         background-color: $icons;
     }
 

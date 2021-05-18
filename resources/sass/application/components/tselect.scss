@@ -9,6 +9,8 @@
 .tselect {
     height: 44px;
 
+
+
     .title-text {
         font-size: 12px;
         font-weight: 600;
@@ -120,4 +122,13 @@
         align-items: center;
         margin-top: 10px;
     }
+
+    &.tselect-lg {
+        height: 52px;
+
+        .tselect_title {
+            height: 52px;
+        }
+    }
+
 }

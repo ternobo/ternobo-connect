@@ -12,7 +12,10 @@
 			</div>
 			<div key="slug-data-view-element" v-clipboard="slugUrl" class="slug-data-view clickable" v-else>
 				<i class="material-icons-outlined">file_copy</i>
-				<strong>@{{ slug }}</strong>
+				<div>
+					<span class="font-14">{{ websiteUrl }} </span>
+					<strong>{{ slug }}</strong>
+				</div>
 			</div>
 		</div>
 	</div>

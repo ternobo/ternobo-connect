@@ -1066,15 +1066,15 @@ a:focus {
 
 .badge-success {
     @extend .badge-light;
-    border-radius: 50rem;
+    border-radius: 8px;
     background-color: $light-success;
     color: $success;
     white-space: nowrap;
     width: auto;
-    padding: 5px 11px;
+    padding: 4px 12px;
 
     span {
-        height: 13pt;
+        height: 14pt;
     }
 
     @media screen and (max-width: $sm-size) {

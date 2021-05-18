@@ -172,3 +172,51 @@
         font-size: 12px;
     }
 }
+
+.skill-credits {
+    display: flex;
+    align-items: center;
+    margin: 0 -12px;
+    color: $grey;
+    font-weight: normal;
+
+    a {
+        color: $grey;
+
+    }
+
+    strong {
+        font-weight: 600;
+    }
+
+    .credit-icon {
+        font-weight: 600;
+        vertical-align: middle;
+        height: 20px;
+
+        i {
+            color: $grey;
+            font-size: 20px;
+            margin-right: 4px;
+            vertical-align: middle;
+        }
+
+    }
+
+    >* {
+        padding: 0 12px;
+
+        &:not(:last-child) {
+            position: relative;
+
+            &::after {
+                position: absolute;
+                content: " ";
+                left: 0;
+                width: 2px;
+                height: 20px;
+                background: $icons;
+            }
+        }
+    }
+}

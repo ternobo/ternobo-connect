@@ -7,6 +7,7 @@
 				</span>
 				<div class="achievement-details" v-if="showDetails">
 					<span v-if="Boolean(val.skill)">{{ val.skill.name }}</span>
+					<span v-if="Boolean(val.from)">{{ val.from }}</span>
 					<span v-if="Boolean(time_text)">{{ time_text }}</span>
 				</div>
 				<p class="achievement-description" v-if="val.description != null && val.description.length > 0">
@@ -29,17 +30,17 @@
 			</div>
 			<div class="achievement-edit-row">
 				<div>
-					<MaterialTextField v-model="val.name" :required="true" class="material--sm" placeholder="عنوان"></MaterialTextField>
+					<MaterialTextField v-model="val.name" maxlength="52" :required="true" class="material--sm" placeholder="عنوان"></MaterialTextField>
 				</div>
 				<div>
-					<tselect dir="rtl" :items="page.skills" labelOption="name" valueOption="name" v-model="val.skill" style="min-width: 234px">مرتبط با</tselect>
+					<tselect dir="rtl" :items="page.skills" maxlength="52" labelOption="name" valueOption="name" v-model="val.skill" style="min-width: 234px">مرتبط با</tselect>
 				</div>
 				<div v-if="showMore">
 					<strong>تاریخ صدور</strong>
-					<DatePicker class="mt-3" v-model="val.startDate" :max="{ year: year, month: month }"></DatePicker>
+					<DatePicker class="mt-3" v-model="val.startDate" maxlength="52" :max="{ year: year, month: month }"></DatePicker>
 				</div>
 				<div class="d-flex align-items-end" v-if="showMore">
-					<MaterialTextField v-model="val.from" class="material--sm" placeholder="صادر کننده"></MaterialTextField>
+					<MaterialTextField v-model="val.from" maxlength="52" class="material--sm" placeholder="صادر کننده"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
 					<div class="d-flex align-items-center justify-content-between mb-3">
@@ -51,7 +52,7 @@
 							</div>
 						</div>
 					</div>
-					<textarea-autosize maxlenth="1000" class="form-control" v-model="val.description"></textarea-autosize>
+					<textarea-autosize maxlength="1000" class="form-control" v-model="val.description"></textarea-autosize>
 				</div>
 				<!--
                 End More Content
