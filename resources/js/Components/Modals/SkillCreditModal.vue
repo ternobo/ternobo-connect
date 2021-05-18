@@ -14,14 +14,15 @@
 		></RadioButton>
 		<div class="w-100">
 			<h4>چرا این امتیاز را به {{ user.first_name }} می‌دهید؟</h4>
-			<v-select
+			<tselect
 				ref="reasonSelect"
 				class="datepicker-list w-100"
 				:placeholder="'انتخاب دلیل'"
-				label="label"
+				labelOption="label"
+				valueOption="value"
 				dir="rtl"
 				v-model="reason"
-				:options="[
+				:items="[
 					{
 						label: 'با هم روی یک پروژه کار کرده‌ایم',
 						value: 'با هم روی یک پروژه کار کرده‌ایم',
@@ -44,13 +45,8 @@
 					},
 				]"
 			>
-				<template #open-indicator="{ attributes }">
-					<span v-bind="attributes">
-						<i class="material-icons">keyboard_arrow_down</i>
-					</span>
-				</template>
-				<template #no-options>موردی یافت نشد</template>
-			</v-select>
+				انتخاب دلیل
+			</tselect>
 		</div>
 		<div class="w-100 d-flex mt-3 justify-content-center">
 			<loading-button :loading="loading" @click.native="onCredit" class="btn btn-dark">ثبت</loading-button>

@@ -14,6 +14,7 @@ class SocialDriver extends Model
         'name',
         'icon',
         'driver',
+        "active",
     ];
 
     public function account()

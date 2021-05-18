@@ -39,10 +39,6 @@ class SeedSocials extends Seeder
                 'icon' => '/images/socials/instagram.png',
                 'name' => "Instagram",
             ],
-            'microsoft' => [
-                'icon' => '/images/socials/microsoft.png',
-                'name' => "Microsoft",
-            ],
             'telegram' => [
                 'icon' => '/images/socials/telegram.png',
                 'name' => "telegram",
@@ -52,11 +48,11 @@ class SeedSocials extends Seeder
                 'name' => "Twitter",
             ],
             'twitch' => [
-                'icon' => '/images/socials/twitch.svg',
+                'icon' => '/images/socials/twitch.png',
                 'name' => "Twitch",
             ],
             'dribbble' => [
-                'icon' => '/images/socials/dribbble.svg',
+                'icon' => '/images/socials/dribbble.png',
                 'name' => "Dribbble",
             ],
             'spotify' => [

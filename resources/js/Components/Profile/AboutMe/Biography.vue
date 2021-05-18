@@ -16,7 +16,7 @@
 					<br />
 					<div class="show-more-text--clickable" @click="showFullText = !showFullText">{{ showFullText ? "نمایش کمتر" : "نمایش بیشتر" }}</div>
 				</div>
-				<textarea-autosize class="form-control" :minHeight="83" v-else v-model="text"></textarea-autosize>
+				<textarea-autosize class="form-control" :minHeight="83" maxlength="2500" v-else v-model="text"></textarea-autosize>
 			</div>
 		</div>
 	</div>

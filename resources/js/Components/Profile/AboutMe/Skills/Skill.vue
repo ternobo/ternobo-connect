@@ -18,7 +18,7 @@
 						<wire-link :href="'/search?q=' + skillVal.name">{{ skillVal.name }}</wire-link>
 					</span>
 					<div class="skill-credits clickable" @click="if (skillVal.credit_text.nums >= 1) creditsListModal = true;">
-						<div class="credit-icon">
+						<div class="credit-icon" v-if="store.state.user != null && checkUser(user.id)">
 							{{ skillVal.credit_text == null ? 0 : formatNumber(skillVal.credit_text.nums, "0a") }}
 							<i class="material-icons">arrow_circle_up</i>
 						</div>
