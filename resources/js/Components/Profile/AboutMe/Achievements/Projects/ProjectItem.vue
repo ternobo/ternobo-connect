@@ -2,7 +2,7 @@
 	<li class="project-item achievement" :class="{ detailed: detailed }" v-if="val != undefined">
 		<div class="w-100" v-if="!edit">
 			<div class="achievement-name detailed" v-if="detailed">
-				<a class="title" :href="val.link" v-if="val.link != null && val.link.length > 0" target="_blank">
+				<a class="title" :href="toURL(val.link)" v-if="val.link != null && val.link.length > 0" target="_blank">
 					{{ val.name }}
 				</a>
 				<span class="title" v-else>
@@ -16,7 +16,7 @@
 				</p>
 			</div>
 			<div class="achievement-name" v-else>
-				<a :href="val.link" v-if="val.link != null && val.link.length > 0" target="_blank">
+				<a :href="toURL(val.link)" v-if="val.link != null && val.link.length > 0" target="_blank">
 					<strong>{{ val.name }} </strong>
 				</a>
 				<span v-else>
@@ -42,8 +42,8 @@
 				</div>
 				<div>
 					<strong>تاریخ پایان <span class="text-action">*</span></strong>
-					<DatePicker class="mt-3" :disabled="noEndDate" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{ year: year }"></DatePicker>
-					<Checkbox class="mb-0" v-model="noEndDate"> همچنان در حال کار بر روی این پروژه هستم </Checkbox>
+					<DatePicker class="mt-3" :disabled="val.noEndDate" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{ year: year }"></DatePicker>
+					<Checkbox class="mb-0" v-model="val.noEndDate"> همچنان در حال کار بر روی این پروژه هستم </Checkbox>
 				</div>
 				<div class="col-md-6" v-if="showMore">
 					<MaterialTextField v-model="val.link" class="material--sm" placeholder="لینک پروژه"></MaterialTextField>
@@ -84,32 +84,18 @@ export default {
 				...this.val,
 				...this.value,
 			};
-			if (typeof this.val.endDate == "boolean" || !this.val.endDate.year) {
-				this.val.endDate = true;
-				this.noEndDate = true;
-			}
 		}
 	},
 	watch: {
 		val: {
 			handler(newValue) {
-				if (typeof this.val.endDate == "boolean" || !this.val.endDate.year) {
-					this.val.endDate = true;
-					this.noEndDate = true;
-				}
 				this.$emit("input", newValue);
-
 				if (newValue.description != null) {
 					this.progress = (newValue.description.length / 1000) * 100 + "%";
 					this.leftCharacter = 1000 - newValue.description.length;
 				}
 			},
 			deep: true,
-		},
-		noEndDate() {
-			if (this.noEndDate) {
-				this.val.endDate = true;
-			}
 		},
 	},
 	props: {
@@ -142,7 +128,7 @@ export default {
 				startText = new PersianDate([this.val.startDate.year, this.val.startDate.month.id]).format("MMMM YYYY");
 			}
 
-			if (typeof this.val.endDate == "object") {
+			if (!this.val.noEndDate) {
 				endText = new PersianDate([this.val.endDate.year, this.val.endDate.month.id]).format("MMMM YYYY");
 			}
 			return (startText.length > 0 ? startText + " - " : "") + endText;
@@ -162,13 +148,13 @@ export default {
 	},
 	data() {
 		return {
-			noEndDate: false,
 			val: {
 				id: null,
 				name: "",
 				skill: undefined,
 				startDate: null,
 				endDate: false,
+				noEndDate: false,
 
 				link: "",
 				description: "",

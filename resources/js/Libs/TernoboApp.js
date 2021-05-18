@@ -185,6 +185,9 @@ TernoboApp.install = function (Vue, options) {
         return '/' + user.username;
     }
 
+    Vue.prototype.toURL = (text) => {
+        return text.startsWith("https://") || text.startsWith("http://") || text.startsWith("//") ? text : `http://${text}`;
+    }
 
 
     const setup = function (vm) {

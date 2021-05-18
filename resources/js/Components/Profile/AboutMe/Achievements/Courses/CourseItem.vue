@@ -35,7 +35,7 @@
 					<MaterialTextField v-model="val.code" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="کد دوره"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
-					<tselect dir="rtl" :items="page.skills" labelOption="name" valueOption="name" v-model="val.skill">مرتبط با</tselect>
+					<tselect dir="rtl" :items="page.skills" labelOption="name" valueOption="name" v-model="val.skill" style="min-width: 234px">مرتبط با</tselect>
 				</div>
 				<div class="col-md-12" v-if="showMore">
 					<div class="d-flex align-items-center justify-content-between mb-3">

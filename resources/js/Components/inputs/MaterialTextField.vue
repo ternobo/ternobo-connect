@@ -11,7 +11,7 @@
 export default {
 	computed: {
 		showStar() {
-			return this.required && !this.focus && this.val != null && this.val.length < 1;
+			return this.required && !this.focus && !Boolean(this.val);
 		},
 	},
 	methods: {

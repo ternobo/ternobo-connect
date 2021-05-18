@@ -59,7 +59,7 @@
 
 .btn-transparent:active {
     box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2) inset;
-    color: #FFF;
+    // color: #FFF;
 }
 
 .btn:focus,
@@ -305,7 +305,7 @@
 
 
 
-.btn-edit:hover {
+.btn-edit:not(.disabled):hover {
     border-color: #191919;
     color: #191919;
 }
@@ -334,6 +334,10 @@
         left: 24px;
         padding-top: 5px;
     }
+}
+
+.btn.disabled:hover {
+    color: #C8C8C8;
 }
 
 .rounded-add-btn {

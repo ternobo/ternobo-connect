@@ -27,7 +27,11 @@ export default {
 	mixins: [AchievementsMxixin],
 	methods: {
 		onDelete(index) {
-			this.deleteConfirmModal(`زبان ${this.languages[index].name}`, index, this.languages);
+			if (Boolean(this.languages[index].name)) {
+				this.deleteConfirmModal(`زبان ${this.languages[index].name}`, index, this.languages);
+			} else {
+				this.languages.splice(index, 1);
+			}
 		},
 		addLanguege() {
 			this.languages.push({

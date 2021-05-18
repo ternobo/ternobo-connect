@@ -52,11 +52,11 @@ class SeedSocials extends Seeder
                 'name' => "Twitter",
             ],
             'twitch' => [
-                'icon' => '/images/socials/twitch.png',
+                'icon' => '/images/socials/twitch.svg',
                 'name' => "Twitch",
             ],
             'dribbble' => [
-                'icon' => '/images/socials/dribbble.png',
+                'icon' => '/images/socials/dribbble.svg',
                 'name' => "Dribbble",
             ],
             'spotify' => [

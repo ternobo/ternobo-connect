@@ -7,6 +7,7 @@ use App\Models\AboutData;
 use App\Models\Skill;
 use App\Rules\DateObject;
 use App\Rules\LevelObject;
+use App\URLTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -99,12 +100,14 @@ class ProfileController extends Controller
                 'name.required' => 'نام، {{ type }} اجباری است.',
                 'level.required' => 'میزان تسلط به زبان اجباری است.',
                 'startDate.required' => 'تاریخ شروع {{ type }} اجباری است.',
+                'endDate.required_if' => 'تاریخ پایان {{ type }} اجباری است.',
                 'endDate.required' => 'تاریخ پایان {{ type }} اجباری است.',
                 'date.required' => 'تاریخ {{ type }} اجباری است.',
                 'organization.required' => 'اداره ثبت اختراع اجباری است.',
                 'score.required' => 'نمره آزمون اجباری است.',
                 'score.digits_between' => 'نمره آزمون باید عدد باشد',
                 'registerCode.max' => "شماره ثبت اختراع نمی‌تواند بیشتر از 30 کاراکتر باشد",
+                'link.regex' => "لینک {{ type }} نامعتبر است",
             ];
 
             $errors = [];
@@ -117,20 +120,25 @@ class ProfileController extends Controller
                 ],
                 'awards' => [
                     'name' => "required|max:50",
+                    'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
                 ],
                 'projects' => [
                     'name' => "required|max:50",
                     "startDate" => ["required", new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
-                    "endDate" => ['required', new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
+                    "endDate" => ['required_if:noEndDate,false', new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
+                    "noEndDate" => ["boolean"],
+                    'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
                 ],
                 'publishs' => [
                     'name' => "required|max:50",
-                    "date" => [new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
+                    "date" => ['required', new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
+                    'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
                 ],
                 'inventions' => [
                     'name' => "required|max:50",
                     "organization" => "max:50",
                     "registerCode" => "max:30",
+                    'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
                 ],
                 'courses' => [
                     'name' => "required|max:50",
@@ -139,16 +147,23 @@ class ProfileController extends Controller
                     'name' => "required|max:50",
                     "score" => "digits_between:0,4",
                     "date" => [new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
+                    'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
                 ],
             ];
 
             foreach ($achievements as $type => $list) {
+                $result = [];
                 foreach ($list as $data) {
+                    if (isset($data["link"])) {
+                        $data['link'] = URLTools::toURL($data['link']);
+                    }
                     $validator = Validator::make($data, $validatorRules[$type], $messages);
                     if ($validator->fails()) {
                         return response()->json(['result' => false, "type" => ProfileController::getTypeName($type), "errors" => $validator->errors()]);
                     }
+                    $result[] = $data;
                 }
+                $achievements[$type] = $result;
             }
         }
         $data = [

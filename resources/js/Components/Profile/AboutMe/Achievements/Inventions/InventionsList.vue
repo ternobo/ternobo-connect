@@ -27,7 +27,11 @@ export default {
 	mixins: [AchievementsMxixin],
 	methods: {
 		onDelete(index) {
-			this.deleteConfirmModal(`اختراع ${this.inventions[index].name}`, index, this.inventions);
+			if (Boolean(this.inventions[index].name)) {
+				this.deleteConfirmModal(`اختراع ${this.inventions[index].name}`, index, this.inventions);
+			} else {
+				this.inventions.splice(index, 1);
+			}
 		},
 		addInvention() {
 			this.inventions.push({

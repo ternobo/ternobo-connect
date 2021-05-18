@@ -1,10 +1,8 @@
 <template>
-	<div class="tselect" :class="{ disabled: disabled }" :dir="direction" v-click-outside="close">
+	<div class="tselect" tabindex="0" :class="{ disabled: disabled }" :dir="direction" @blur="toggleDropdown" @focus="openDropdown" v-click-outside="close">
 		<div class="tselect_title" ref="titleSection" @click="openDropdown">
 			<div class="title-text">
-				<span v-if="!selectedItem">
-					<slot></slot>
-				</span>
+				<span v-if="!selectedItem"> <slot></slot><span v-if="required" class="text-action">*</span> </span>
 				<span v-else>
 					<i class="material-icons verical-middle" v-if="selectedItem.hasOwnProperty('icon')">{{ selectedItem.icon }}</i>
 					<span> {{ getItemLabel(selectedItem) }} </span>
@@ -72,6 +70,11 @@ export default {
 		},
 	},
 	props: {
+		required: {
+			type: Boolean,
+			default: false,
+			required: false,
+		},
 		noItem: {
 			type: String,
 			default: "موردی یافت نشد",
@@ -160,6 +163,14 @@ export default {
 			this.newItemInput = undefined;
 		},
 		openDropdown() {
+			if (!this.disabled) {
+				this.$refs.titleSection.classList.add("active");
+				const width = this.$refs.titleSection.offsetWidth;
+				this.showItems = true;
+				this.dropdownWidth = width + "px";
+			}
+		},
+		toggleDropdown() {
 			if (!this.disabled) {
 				this.$refs.titleSection.classList.toggle("active");
 				const width = this.$refs.titleSection.offsetWidth;

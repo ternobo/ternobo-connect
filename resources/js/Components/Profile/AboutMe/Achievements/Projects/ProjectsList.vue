@@ -28,7 +28,11 @@ export default {
 	mixins: [AchievementsMxixin],
 	methods: {
 		onDelete(index) {
-			this.deleteConfirmModal(`پروژه ${this.projects[index].name}`, index, this.projects);
+			if (Boolean(this.projects[index].name)) {
+				this.deleteConfirmModal(`پروژه ${this.projects[index].name}`, index, this.projects);
+			} else {
+				this.projects.splice(index, 1);
+			}
 		},
 		addProject() {
 			this.projects.push({

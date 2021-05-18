@@ -27,7 +27,11 @@ export default {
 	mixins: [AchievementsMxixin],
 	methods: {
 		onDelete(index) {
-			this.deleteConfirmModal(`آزمون ${this.tests[index].name}`, index, this.tests);
+			if (Boolean(this.tests[index].name)) {
+				this.deleteConfirmModal(`آزمون ${this.tests[index].name}`, index, this.tests);
+			} else {
+				this.tests.splice(index, 1);
+			}
 		},
 		addTest() {
 			this.tests.push({

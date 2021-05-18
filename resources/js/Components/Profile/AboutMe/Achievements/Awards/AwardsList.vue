@@ -26,7 +26,11 @@ export default {
 	mixins: [AchievementsMxixin],
 	methods: {
 		onDelete(index) {
-			this.deleteConfirmModal(`جایزه ${this.awards[index].name}`, index, this.awards);
+			if (Boolean(this.awards[index].name)) {
+				this.deleteConfirmModal(`جایزه ${this.awards[index].name}`, index, this.awards);
+			} else {
+				this.awards.splice(index, 1);
+			}
 		},
 		addAward() {
 			this.awards.push({

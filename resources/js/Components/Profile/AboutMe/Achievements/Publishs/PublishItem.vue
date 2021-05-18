@@ -2,7 +2,7 @@
 	<li class="achievement" :class="{ detailed: detailed }">
 		<div class="w-100" v-if="!edit">
 			<div class="achievement-name detailed" v-if="detailed">
-				<a class="title" :href="val.link" v-if="val.link != null && val.link.length > 0" target="_blank">
+				<a class="title" :href="toURL(val.link)" v-if="val.link != null && val.link.length > 0" target="_blank">
 					{{ val.name }}
 				</a>
 				<span class="title" v-else>
@@ -17,7 +17,10 @@
 				</p>
 			</div>
 			<div class="achievement-name" v-else>
-				<span>
+				<a class="title" :href="toURL(val.link)" v-if="val.link != null && val.link.length > 0" target="_blank">
+					{{ val.name }}
+				</a>
+				<span class="title" v-else>
 					{{ val.name }}
 				</span>
 			</div>

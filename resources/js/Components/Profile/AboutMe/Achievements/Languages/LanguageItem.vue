@@ -49,7 +49,7 @@
 						v-model="languageVal.level"
 						labelOption="label"
 						valueOption="level"
-						>سطح</tselect
+						>سطح <span class="text-action">*</span></tselect
 					>
 				</div>
 			</div>

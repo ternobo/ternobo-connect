@@ -2,7 +2,7 @@
 	<li class="project-item achievement" :class="{ detailed: detailed }" v-if="val != undefined">
 		<div class="w-100" v-if="!edit">
 			<div class="achievement-name detailed" v-if="detailed">
-				<a class="title" :href="val.link" v-if="val.link != null && val.link.length > 0" target="_blank">
+				<a class="title" :href="toURL(val.link)" v-if="val.link != null && val.link.length > 0" target="_blank">
 					{{ val.name }}
 				</a>
 				<span class="title" v-else>
@@ -18,7 +18,10 @@
 				</p>
 			</div>
 			<div class="achievement-name" v-else>
-				<span>
+				<a class="title" :href="toURL(val.link)" v-if="val.link != null && val.link.length > 0" target="_blank">
+					{{ val.name }}
+				</a>
+				<span class="title" v-else>
 					{{ val.name }}
 				</span>
 			</div>
@@ -148,7 +151,7 @@ export default {
 		},
 		time_text() {
 			let dateText = "";
-			if (typeof this.val.date == "object") {
+			if (typeof this.val.date == "object" && this.val.date != null) {
 				dateText = new PersianDate([this.val.date.year, this.val.date.month.id, this.val.date.day]).format("d MMMM YYYY");
 			}
 			return dateText;
@@ -168,9 +171,9 @@ export default {
 			val: {
 				id: null,
 				name: "",
-				organization: null,
-				registerCode: null,
-				link: null,
+				organization: "",
+				registerCode: "",
+				link: "",
 				status: null,
 				date: null,
 				description: "",
