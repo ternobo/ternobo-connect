@@ -1,6 +1,6 @@
 <template>
 	<li :class="{ 'skill-edit': edit }" v-if="value != undefined">
-		<SkillCreditModal @credited="credited" v-if="$store.state.user != null && !checkUser(user.id)" :show.sync="creditModal" :user="user" :skill="skillVal"></SkillCreditModal>
+		<SkillCreditModal @credited="credited" :show.sync="creditModal" :user="user" :skill="skillVal"></SkillCreditModal>
 		<credits-modal :skill="skillVal.id" :show.sync="creditsListModal"></credits-modal>
 		<skeleton :height="'24px'" v-if="loading && !edit"></skeleton>
 		<div v-else>
@@ -18,9 +18,9 @@
 						<wire-link :href="'/search?q=' + skillVal.name">{{ skillVal.name }}</wire-link>
 					</span>
 					<div class="skill-credits clickable" @click="if (skillVal.credit_text.nums >= 1) creditsListModal = true;">
-						<div class="credit-icon" v-if="store.state.user != null && checkUser(user.id)">
-							{{ skillVal.credit_text == null ? 0 : formatNumber(skillVal.credit_text.nums, "0a") }}
+						<div class="credit-icon" v-if="$store.state.user != null && checkUser(user.id)">
 							<i class="material-icons">arrow_circle_up</i>
+							<span>{{ skillVal.credit_text == null ? 0 : formatNumber(skillVal.credit_text.nums, "0a") }}</span>
 						</div>
 						<span class="font-14" v-if="skillVal.credit_text != null && skillVal.credit_text.nums >= 1">
 							<wire-link v-if="skillVal.credit_text.first" :href="userURL(skillVal.credit_text.first)">

@@ -2,7 +2,7 @@
 	<b-modal v-model="showModal" hide-footer title="افزودن وب‌سایت" no-close-on-backdrop size="md" :centered="true">
 		<div class="add-webiste-container">
 			<div class="flex-container">
-				<material-text-field placeholder="آدرس وب‌سایت" v-model="url" :notValid="!isValid" :maxlength="700" class="material--sm w-100" inputClass="w-100"></material-text-field>
+				<material-text-field placeholder="آدرس وب‌سایت" v-model="url" :notValid="invalid" :maxlength="700" class="material--sm w-100" inputClass="w-100"></material-text-field>
 				<tselect dir="rtl" v-model="type" valueOption="name" :items="websiteOptions"> نوع وب‌سایت </tselect>
 			</div>
 			<div class="mt-2 position-absolute">
@@ -22,6 +22,12 @@ import MaterialTextField from "../../inputs/MaterialTextField.vue";
 export default {
 	components: { MaterialTextField },
 	computed: {
+		invalid() {
+			if (Boolean(this.url)) {
+				return !this.websiteRegex.test(this.url);
+			}
+			return false;
+		},
 		isValid() {
 			return this.websiteRegex.test(this.url) && this.notAdded;
 		},

@@ -4,6 +4,8 @@
     min-height: 270px;
     background-color: $white;
 
+
+
     .elements {
         .placeholder-element {
             margin-right: 16px;
@@ -88,6 +90,11 @@
 }
 
 .add-action-btn {
+    height: 32px;
+    width: 32px;
+    padding: 4px;
+    border-radius: 12px !important;
+
     i {
         transition: 0.3s transform;
     }
@@ -175,6 +182,30 @@
     }
 
     &::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
         -webkit-text-fill-color: $text-color;
         text-fill-color: $text-color;
     }

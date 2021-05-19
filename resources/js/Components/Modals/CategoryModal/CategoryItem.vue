@@ -62,7 +62,7 @@ export default {
 					})
 					.then((response) => {
 						if (response.data.result) {
-							this.$emit("update:name", this.name);
+							this.$emit("update:category", { ...this.category, name: this.name });
 							this.edit = false;
 						} else {
 							this.handleError(response.data.errors);

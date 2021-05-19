@@ -29,7 +29,7 @@
     @extend .card;
     @extend .px-0;
     @extend .col-md-12;
-    padding: 16px 0;
+    padding: 24px 0 16px;
 
     @media screen and (max-width: $sm-size) {
         padding: 12px 0;
@@ -141,7 +141,7 @@
     .post-body {
         flex: 1 1 auto;
         padding: 16px 24px;
-        padding-bottom: 20px;
+        padding-bottom: 0;
         text-align: justify;
         position: relative;
         line-height: 2;
@@ -303,9 +303,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 16px;
-            padding-left: 20px;
-            padding-right: 24px;
+            padding: 16px 20px 16px;
 
             @media screen and (max-width: $sm-size) {
                 padding-left: 12px;
@@ -323,9 +321,8 @@
 
         .post-likes-text {
             position: relative;
-            padding: 12px 24px;
+            padding: 16px 24px;
             padding-bottom: 0;
-            margin-top: 8px;
 
             &::before {
                 content: " ";
@@ -523,7 +520,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 52px;
 
     i:first-child {
         margin-right: 12px;
@@ -555,6 +552,10 @@
 
     &:not(:last-child) {
         margin-bottom: 12px
+    }
+
+    &:last-child {
+        margin-bottom: -28px;
     }
 
 }

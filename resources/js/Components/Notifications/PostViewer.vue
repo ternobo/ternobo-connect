@@ -1,5 +1,5 @@
 <template>
-	<wire-link as="div" class="post-content clickable" style="text-align: justify" :href="$APP_URL + '/posts/' + post.id">
+	<wire-link class="post-content clickable" style="text-align: justify" :href="$APP_URL + '/posts/' + post.id">
 		<Content v-for="content in post.slides[0].content" :content="content" :key="`content_item_${content.id}`"></Content>
 	</wire-link>
 </template>

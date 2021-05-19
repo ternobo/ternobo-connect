@@ -10,10 +10,10 @@
 					<span>نمایش پس زمینه</span>
 					<switches v-model="hasBG"></switches>
 				</div>
-				<wire-link v-if="$store.state.user" href="/logout" method="post" as="div" class="b-sidebar-item hover-danger w-100 d-flex justify-content-between align-items-center">
+				<a v-if="$store.state.user" href="/logout" method="post" class="b-sidebar-item hover-danger w-100 d-flex justify-content-between align-items-center">
 					<span>خروج از حساب کاربری</span>
 					<i class="material-icons">power_settings_new</i>
-				</wire-link>
+				</a>
 			</div>
 		</b-sidebar>
 		<div class="header-search d-flex justify-content-between align-items-center">

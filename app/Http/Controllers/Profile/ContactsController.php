@@ -33,7 +33,12 @@ class ContactsController extends Controller
         $user_id = Page::findOrFail($page_id)->user_id;
         $options = SocialDriver::with(['account' => function ($query) use ($user_id) {
             $query->where("user_id", $user_id);
-        }])->where("active", true)->get();
+        }])
+            ->leftJoin("connected_accounts", "social_drivers.driver", "connected_accounts.driver")
+            ->select("social_drivers.*")
+            ->where("active", true)
+            ->orderBy("connected_accounts.created_at", "DESC")
+            ->get();
         return response()->json(['result' => true, "options" => $options]);
     }
 
@@ -46,8 +51,13 @@ class ContactsController extends Controller
         $contact->page_id = $page->id;
         $contact->data = json_encode($request->contacts);
 
-        if (!isset($request->socials->google)) {
-            ConnectedAccount::query()->where("user_id", Auth::user()->id)->where("driver", "google")->delete();
+        $socials = $request->contacts["socials"];
+        // dd($socials);
+        foreach ($socials as $social) {
+            $social = (object) $social;
+            if ($social->account == null) {
+                ConnectedAccount::query()->where("user_id", Auth::user()->id)->where("driver", $social->driver)->delete();
+            }
         }
 
         $page->slug = $request->contacts['slug'];

@@ -9,7 +9,7 @@
         width: 100%;
         flex: 100%;
 
-        padding: 8px 0;
+        padding: 16px 0;
 
         @media screen and (max-width: $sm-size) {
             padding: 12px 0;
@@ -177,6 +177,7 @@
     display: flex;
     align-items: center;
     margin: 0 -12px;
+    margin-top: 8px;
     color: $grey;
     font-weight: normal;
 
@@ -192,12 +193,19 @@
     .credit-icon {
         font-weight: 600;
         vertical-align: middle;
+        display: flex;
+        align-items: center;
+
         height: 20px;
+
+        span {
+            height: 20px;
+        }
 
         i {
             color: $grey;
             font-size: 20px;
-            margin-right: 4px;
+            margin-left: 4px;
             vertical-align: middle;
         }
 

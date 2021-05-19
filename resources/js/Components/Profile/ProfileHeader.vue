@@ -27,13 +27,13 @@
 					<i class="material-icons-outlined report-icon" v-else @click="showReport = true">report</i>
 				</div>
 				<div class="invite_badge" v-if="$root.isDesktop">
-					<wire-link as="div" :href="`/${invited_by.username}`" class="invite_profile clickable" v-if="invited_by != null">
+					<wire-link :href="`/${invited_by.username}`" class="invite_profile clickable" v-if="invited_by != null">
 						<lazy-image :src="invited_by.profile" class="profile-sm mb-0" imgClass="profile-sm" />
 					</wire-link>
 					<div class="invite_info">
 						<span class="invite_date" :class="{ bold: invited_by == null }">ملحق شده در {{ joinTime }}</span>
 						<span class="invited_by" v-if="invited_by != null">
-							دعوت شده توسط <wire-link class="clickable" :href="`/${invited_by.username}`" as="strong">{{ invited_by.name }}</wire-link>
+							دعوت شده توسط <wire-link class="clickable" :href="`/${invited_by.username}`">{{ invited_by.name }}</wire-link>
 						</span>
 					</div>
 				</div>
@@ -41,7 +41,7 @@
 		</div>
 		<div class="profile-header-actions" v-if="!canEdit || !$root.isDesktop">
 			<div>
-				<a class="p-3 d-flex align-items-center pr-4 clickable" @click="showFriends = true" v-if="mutuals != null && mutuals.list.length > 0">
+				<a class="d-flex align-items-center clickable" @click="showFriends = true" v-if="mutuals != null && mutuals.list.length > 0">
 					<div class="d-flex mr-2">
 						<div class="profile-photos">
 							<img :src="mutuals.list[0].profile" />
@@ -49,9 +49,9 @@
 						</div>
 					</div>
 
-					<div class="d-flex flex-column px-3">
-						<strong class="text-dark" :class="{ 'font-12': !$root.isDesktop }">{{ mutuals.count }} دوست مشترک</strong>
-						<span class="text-superlight font-10">{{ mutuals.text }}</span>
+					<div class="mutual-friends-container">
+						<strong class="text-dark font-demibold" :class="{ 'font-12': !$root.isDesktop }">{{ mutuals.count }} دوست مشترک</strong>
+						<span class="text-grey mr-2 font-12">{{ mutuals.text }}</span>
 					</div>
 				</a>
 			</div>

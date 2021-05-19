@@ -3,15 +3,15 @@
 		<tabs @selected="tabSelect" tabsClass="connections-tab" :centered="false" :compact="true">
 			<tab :name="`دنبال شده‌ها`" id="followings" :selected="true">
 				<div class="connections-list">
-					<div v-for="connections in connections" :key="'connections_' + connections.id" class="connection-item">
-						<wire-link :href="'/' + connections.following.slug" class="userinfo">
-							<lazy-image class="mb-0 profile-standard" imgClass="profile-standard" :src="connections.following.profile"></lazy-image>
+					<div v-for="connection in connections" :key="'connections_' + connection.id" class="connection-item">
+						<wire-link :href="'/' + connection.following.slug" class="userinfo">
+							<lazy-image class="mb-0 profile-standard" imgClass="profile-standard" :src="connection.following.profile"></lazy-image>
 							<div class="page-name d-flex flex-column">
-								<strong> {{ connections.following.name }} <i v-if="connections.following.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
-								<span class="shortbio"> {{ connections.following.short_bio }} </span>
+								<strong> {{ connection.following.name }} <i v-if="connection.following.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+								<span class="shortbio"> {{ connection.following.short_bio }} </span>
 							</div>
 						</wire-link>
-						<follow-button :page="connections.following.id"></follow-button>
+						<follow-button :page="connection.following.id"></follow-button>
 					</div>
 					<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>
 					<div class="d-flex justify-content-center w-100 py-4" v-if="loading">
@@ -24,15 +24,15 @@
 			</tab>
 			<tab :name="`دنبال کننده‌ها`" id="followers">
 				<div class="connections-list">
-					<div v-for="connections in connections" :key="'connections_' + connections.id" class="connection-item">
-						<wire-link :href="'/' + connections.follower.slug" class="userinfo">
-							<lazy-image class="mb-0 profile-standard" imgClass="profile-standard" :src="connections.follower.profile"></lazy-image>
+					<div v-for="connection in connections" :key="'connections_' + connection.id" class="connection-item">
+						<wire-link :href="'/' + connection.follower.slug" class="userinfo">
+							<lazy-image class="mb-0 profile-standard" imgClass="profile-standard" :src="connection.follower.profile"></lazy-image>
 							<div class="page-name d-flex flex-column">
-								<strong> {{ connections.follower.name }} <i v-if="connections.follower.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
-								<span class="shortbio"> {{ connections.follower.short_bio }} </span>
+								<strong> {{ connection.follower.name }} <i v-if="connection.follower.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+								<span class="shortbio"> {{ connection.follower.short_bio }} </span>
 							</div>
 						</wire-link>
-						<follow-button :page="connections.follower.id"></follow-button>
+						<follow-button :page="connection.follower.id"></follow-button>
 					</div>
 					<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>
 					<div class="d-flex justify-content-center w-100 py-4" v-if="loading">
@@ -65,6 +65,7 @@ import PageInfoCard from "../Cards/PageInfoCard";
 import ModalMixin from "../../Mixins/Modal";
 import LoadingSpinner from "../LoadingSpinner.vue";
 import FollowButton from "../buttons/FollowButton.vue";
+import { mapState } from "vuex";
 export default {
 	mixins: [ModalMixin],
 	name: "ConnetionsModal",
@@ -92,6 +93,7 @@ export default {
 		},
 	},
 	computed: {
+		...mapState(["user"]),
 		countConnections() {
 			if (this.$store.state.user.id == this.page.user_id) {
 				return `(${this.total})`;

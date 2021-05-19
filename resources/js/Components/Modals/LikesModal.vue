@@ -17,7 +17,7 @@
 						<span class="shortbio"> {{ like.page.short_bio }} </span>
 					</div>
 				</wire-link>
-				<follow-button :page="like.page.id"></follow-button>
+				<follow-button v-if="like.page.slug != user.username" :page="like.page.id"></follow-button>
 			</div>
 			<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>
 		</div>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import ModalMixin from "../../Mixins/Modal";
 import FollowButton from "../buttons/FollowButton.vue";
 import LazyImage from "../LazyImage.vue";
@@ -35,6 +36,9 @@ export default {
 			this.likes = newValue.data;
 			this.next_page_url = newValue.next_page_url;
 		},
+	},
+	computed: {
+		...mapState(["user"]),
 	},
 	props: {
 		item: {

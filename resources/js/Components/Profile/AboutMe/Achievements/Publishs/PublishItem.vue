@@ -57,7 +57,7 @@
 							</div>
 						</div>
 					</div>
-					<textarea-autosize class="form-control" v-model="val.description"></textarea-autosize>
+					<textarea-autosize class="form-control" maxlength="2500" v-model="val.description"></textarea-autosize>
 				</div>
 			</div>
 		</div>

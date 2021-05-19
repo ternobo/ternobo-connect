@@ -1,7 +1,7 @@
 <template>
-	<b-modal v-if="$store.state.user != null" v-model="showModal" no-close-on-backdrop hide-footer body-class="pb-0" :title="'تایید مهارت ' + user.name" size="md" :centered="true">
+	<b-modal v-if="$store.state.user != null" v-model="showModal" no-close-on-backdrop hide-footer :title="'تایید مهارت ' + user.name" size="md" :centered="true">
 		<p>
-			به مهارت <span class="mx-1">{{ user.first_name }}</span> در <span class="mx1">{{ skill.name }}</span> چه امتیازی می‌دهید؟
+			به مهارت <span class="mx-1">{{ user.first_name }}</span> در <strong class="mx1">{{ skill.name }}</strong> چه امتیازی می‌دهید؟
 		</p>
 		<RadioButton
 			class="d-flex justify-content-around"
@@ -13,11 +13,11 @@
 			v-model="level"
 		></RadioButton>
 		<div class="w-100">
-			<h4>چرا این امتیاز را به {{ user.first_name }} می‌دهید؟</h4>
+			<div class="my-3">
+				<strong class="font-16">چرا این امتیاز را به {{ user.first_name }} می‌دهید؟</strong>
+			</div>
 			<tselect
-				ref="reasonSelect"
-				class="datepicker-list w-100"
-				:placeholder="'انتخاب دلیل'"
+				class="tselect-lg"
 				labelOption="label"
 				valueOption="value"
 				dir="rtl"
@@ -48,7 +48,7 @@
 				انتخاب دلیل
 			</tselect>
 		</div>
-		<div class="w-100 d-flex mt-3 justify-content-center">
+		<div class="w-100 d-flex mt-4 justify-content-center">
 			<loading-button :loading="loading" @click.native="onCredit" class="btn btn-dark">ثبت</loading-button>
 		</div>
 	</b-modal>

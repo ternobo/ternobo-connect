@@ -1,6 +1,10 @@
 .categories-sidebar {
     max-width: 28.9%;
     flex: 28.9%;
+
+    .sticky-aside {
+        top: 160px;
+    }
 }
 
 @media screen and (min-width: $sm-size) {
@@ -14,6 +18,8 @@
 .categories-sidebar-card {
     @extend .card;
     padding: 24px 16px;
+
+
 
     hr {
         margin: 24px 0;

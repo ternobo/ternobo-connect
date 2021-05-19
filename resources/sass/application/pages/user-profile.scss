@@ -100,6 +100,7 @@ div.page-cover {
         .profile-info {
             display: flex;
             flex-direction: column;
+            z-index: 1;
 
             @media screen and (min-width: $sm-size) {
                 margin-top: -85px;
@@ -257,6 +258,11 @@ div.page-cover {
         .invited_by {
             font-size: 14px;
 
+            a {
+                font-weight: 600;
+                color: $text-color;
+            }
+
             @media screen and (max-width: $sm-size) {
                 font-size: 12px;
             }
@@ -323,7 +329,7 @@ div.page-cover {
     .tabs.compact {
         position: -webkit-sticky;
         position: sticky;
-        top: 88px;
+        top: 72px;
         z-index: 999;
         background: #F5F5F5;
         margin-bottom: 16px;
@@ -462,17 +468,17 @@ div.page-cover {
     flex-wrap: nowrap;
 }
 
+.mutual-friends-container {
+    padding-right: 12px;
+}
+
 .profile-photos {
     img {
         margin-right: -15px;
-        width: 30px;
-        min-width: 30px;
-        height: 30px;
+        width: 32px;
+        min-width: 32px;
+        height: 32px;
         border-radius: 50%;
         border: 1px solid #FFF;
-    }
-
-    img:first-child {
-        margin-top: -10px;
     }
 }

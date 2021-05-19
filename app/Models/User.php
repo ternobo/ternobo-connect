@@ -581,6 +581,7 @@ class User extends Authenticatable implements Messageable
     public function toArray()
     {
         $array = parent::toArray();
+        $array['personal_page_id'] = $this->personalPage->id;
         if (!ActiveSession::isAdmin()) {
             unset($array['is_admin']);
         }

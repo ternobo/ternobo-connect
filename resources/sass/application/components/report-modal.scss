@@ -12,8 +12,19 @@
     user-select: none;
     transition: 0.3s all;
 
+    padding: 16px 4px;
+    height: 52px;
+    margin: 8px 20px;
+
     &:hover {
         background-color: $body-bg;
+    }
+}
+
+.report-modal {
+    .moreinfo {
+
+        margin-bottom: 24px;
     }
 }
 

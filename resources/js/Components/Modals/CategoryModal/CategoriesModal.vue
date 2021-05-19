@@ -9,7 +9,7 @@
 		</div>
 		<div class="edit-categories-list">
 			<draggable @end="save" v-model="list" handle=".hand-hover">
-				<category-item v-for="(category, index) in list" :key="'category_' + category.id" :disabled="disabled" @deleted="doDelete(index)" @editChanged="editChanged" :category="category"></category-item>
+				<category-item v-for="(category, index) in list" :key="'category_' + category.id" :disabled="disabled" @deleted="doDelete(index)" @editChanged="editChanged" :category.sync="list[index]"></category-item>
 			</draggable>
 		</div>
 	</b-modal>
@@ -23,6 +23,7 @@ export default {
 	methods: {
 		editChanged(edit) {
 			this.disabled = edit;
+			this.$emit("update:categories", this.list);
 		},
 		addCategory() {
 			this.loading = true;
@@ -48,6 +49,7 @@ export default {
 			this.$emit("update:categories", this.list);
 		},
 		doDelete(index) {
+			this.categories.splice(index, 1);
 			this.$emit("update:categories", this.list);
 		},
 	},

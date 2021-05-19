@@ -6,7 +6,7 @@
 					<lazy-image :src="notifications[0].sender.profile" class="profile-xxsm" img-class="profile-xxsm" />
 				</wire-link>
 				<div class="notification-text">
-					<wire-link as="div" class="title clickable" :href="notifications[0].sender.slug">
+					<wire-link class="title clickable" :href="notifications[0].sender.slug">
 						<span>{{ notifications[0].sender.name }}</span>
 						<span class="font-weight-normal date-text">{{ createdAt }}</span>
 					</wire-link>

@@ -70,7 +70,7 @@
 				</div>
 				<div v-if="showMore">
 					<strong>تاریخ صدور ثبت اختراع</strong>
-					<DatePicker class="mt-2" :showDays="true" v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
+					<DatePicker class="mt-2" v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
 				</div>
 				<div class="col-md-12" v-if="showMore">
 					<div class="d-flex align-items-center justify-content-between mb-3">
@@ -152,7 +152,7 @@ export default {
 		time_text() {
 			let dateText = "";
 			if (typeof this.val.date == "object" && this.val.date != null) {
-				dateText = new PersianDate([this.val.date.year, this.val.date.month.id, this.val.date.day]).format("d MMMM YYYY");
+				dateText = new PersianDate([this.val.date.year, this.val.date.month.id]).format("MMMM YYYY");
 			}
 			return dateText;
 		},

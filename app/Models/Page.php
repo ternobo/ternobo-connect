@@ -392,15 +392,15 @@ class Page extends Model
             $first = $connections[0]->name;
             $second = $connections[1]->name;
             $nums -= 2;
-            return "شما و $this->name هر دو  $first , $second و $nums نفر دیگر را می‌شناسید";
+            return "$first, $second و ...";
         } elseif ($nums === 2) {
             $first = $connections[0]->name;
             $second = $connections[1]->name;
             $nums -= 2;
-            return "شما و $this->name هر دو $first و $second می‌شناسید";
+            return " $first و $second";
         } elseif ($nums > 0) {
             $first = $connections[0]->name;
-            return "$this->name $first را می‌شناسد";
+            return "$first";
         }
         return "";
     }

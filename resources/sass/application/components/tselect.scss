@@ -12,7 +12,7 @@
 
 
     .title-text {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 600;
         color: $grey;
         margin-left: 16px;
@@ -97,7 +97,7 @@
         justify-content: space-between;
         cursor: pointer;
         width: 100%;
-        padding: 8px 12px !important;
+        padding: 8px 12px;
 
         &:hover,
         &.active {
@@ -125,6 +125,15 @@
 
     &.tselect-lg {
         height: 52px;
+
+        .tselect_item {
+            .tselect_item--text {
+                font-size: 14px;
+            }
+
+            padding: 12px 16px;
+
+        }
 
         .tselect_title {
             height: 52px;

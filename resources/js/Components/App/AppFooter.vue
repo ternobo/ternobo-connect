@@ -25,14 +25,14 @@
 					</div>
 				</template>
 			</langdropdown>
-			<div class="d-lg-block d-none text-muted">
-				<div class="sidemenu-links d-flex justify-content-center align-items-center mb-1">
+			<div class="app-footer">
+				<div class="sidemenu-links d-flex justify-content-center align-items-center mb-2">
 					<a class="text-muted hover-dark clickable ml-3" @click="showLaws = true">قوانین و مقررات</a>
 					<a class="text-muted hover-dark" href="https://ternobo.info" target="_blank">درباره ما</a>
 				</div>
 				<div class="copyright-text d-flex justify-content-center align-items-center">
-					<img src="/favicon.png" class="mr-1" style="max-width: 15px" />
-					<span class="mr-1">ترنوبو</span> © ۱۳۹۹
+					<img src="/favicon.png" class="mr-1" style="max-width: 16px" />
+					<span class="mr-1 ml-2">ترنوبو</span>© ۱۳۹۹
 				</div>
 			</div>
 		</div>

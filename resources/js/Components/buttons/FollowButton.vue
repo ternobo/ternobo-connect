@@ -1,8 +1,9 @@
 <template>
-	<LoadingButton v-if="$store.state.user !== null" :loading="loading" class="btn follow-btn" :class="{ 'btn-followed-connected': followed }" @click.native="follow">{{ text }}</LoadingButton>
+	<LoadingButton v-if="$store.state.user !== null && user.personal_page_id != page_id" :loading="loading" class="btn follow-btn" :class="{ 'btn-followed-connected': followed }" @click.native="follow">{{ text }}</LoadingButton>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import LoadingButton from "./LoadingButton";
 
 export default {
@@ -32,6 +33,9 @@ export default {
 			default: undefined,
 			required: true,
 		},
+	},
+	computed: {
+		...mapState(["user"]),
 	},
 	methods: {
 		follow() {

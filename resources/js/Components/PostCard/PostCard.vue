@@ -24,7 +24,7 @@
 				</div>
 			</div>
 		</div>
-		<component v-if="post != null && post != undefined" class="mb-3" :post="post" :has-comment="hasComment" v-bind:is="componentType"></component>
+		<component v-if="post != null && post != undefined" :post="post" :has-comment="hasComment" v-bind:is="componentType"></component>
 
 		<div class="post-footer">
 			<div class="actions" v-if="$store.state.user">

@@ -1,6 +1,7 @@
 @import "./variables";
 @import '~bootstrap-v4-rtl';
 @import '~bootstrap-vue';
+@import "./utilities.scss";
 
 
 :root {
@@ -111,7 +112,7 @@ body {
 .sticky-aside {
     position: -webkit-sticky;
     position: sticky;
-    top: 106px;
+    top: 92px;
 }
 
 .form-control,
@@ -388,8 +389,8 @@ img {
 
 .logodesktop {
     margin-bottom: 1px;
-    min-width: 80px;
-    max-width: 80px;
+    min-width: 94px;
+    max-width: 94px;
     display: flex;
 }
 
@@ -1424,7 +1425,7 @@ a:focus {
 }
 
 .base-layout {
-    margin-top: 40px;
+    margin-top: 32px;
 
     @media screen and (max-width: $sm-size) {
         margin-top: 12px;
@@ -1529,3 +1530,4 @@ a:focus {
 }
 
 @import "./components/lang-select.scss";
+@import "./text-utilies.scss";

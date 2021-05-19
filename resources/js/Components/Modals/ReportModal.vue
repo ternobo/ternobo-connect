@@ -145,7 +145,7 @@
 		</div>
 		<div class="d-flex pt-3 justify-content-between" v-else-if="reportFor != null">
 			<div class="align-self-start">
-				<button class="btn btn-outline-primary rounded-pill" @click="moreInfo = true">ارائه توضیحات</button>
+				<button class="btn btn-edit" @click="moreInfo = true">ارائه توضیحات</button>
 			</div>
 			<div class="d-flex">
 				<button class="btn button-transparent" @click="reportFor = null">برگشت</button>

@@ -26,10 +26,10 @@ export default {
 	mixins: [AchievementsMxixin],
 	methods: {
 		onDelete(index) {
-			if (Boolean(this.projects[index].name)) {
+			if (Boolean(this.publishs[index].name)) {
 				this.deleteConfirmModal(`انتشار ${this.publishs[index].name}`, index, this.publishs);
 			} else {
-				this.projects.splice(index, 1);
+				this.publishs.splice(index, 1);
 			}
 		},
 		addPublish() {
