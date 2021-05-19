@@ -96,7 +96,7 @@ class PageController extends Controller
 
         $actions = $page->getActions(null, 5);
 
-        $hasAbout = !($page->aboutData == null || count((array) $page->aboutData) < 1) || ($page->about != null && $page->about != "") || $page->user->skills != null;
+        $hasAbout = ($page->aboutData != null && count((array) $page->aboutData) > 0) || ($page->about != null && $page->about != "") || count($page->user->skills) > 0;
 
         if (!$hasAbout) {
             $location = "activities";

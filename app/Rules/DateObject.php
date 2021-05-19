@@ -32,7 +32,7 @@ class DateObject implements Rule
         }
         if (is_object($value) || is_array($value)) {
             $value = (object) $value;
-            if (isset($value->month) || isset($value->year)) {
+            if (isset($value->month) && isset($value->year)) {
                 return true;
             }
         } elseif (gettype($value) == 'boolean') {

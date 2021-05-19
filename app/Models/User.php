@@ -624,7 +624,10 @@ class User extends Authenticatable implements Messageable
         } elseif ($this->profile == null) {
             $this->profile = url("/img/man-profile.png");
         }
-        $this->cover = url("/img/cover.jpg");
+
+        if ($this->cover == null) {
+            $this->cover = url("/img/cover.jpg");
+        }
 
         $page = $this->personalPage;
 

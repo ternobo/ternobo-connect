@@ -64,32 +64,21 @@ class UsersController extends Controller
 
     public function setCover(Request $request)
     {
-        if ($request->has("cover")) {
+        if ($request->has("cover") && $request->has("sizes")) {
             if (Auth::check()) {
                 $file = $request->file("cover")->store("profiles");
-                //      dd(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
                 $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
-                if ($request->has("sizes")) {
-                    $sizes = (json_decode($request->sizes));
-                    $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->left), intval($sizes->top));
-                }
+                $sizes = (json_decode($request->sizes));
+                $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->left), intval($sizes->top));
                 $image->save(null, 90, "jpg");
-                $user = $request->user();
-                $page = $user->getPage();
+                $user = Auth::user();
                 $user->cover = url($file);
-                $page->cover = url($file);
                 $user->save();
-                $page->save();
-                if ($request->has("json")) {
-                    return response()->json(array("result" => true));
-                }
-                return redirect("/home");
-            } else {
-                return abort(404);
+                return response()->json(array("result" => true));
             }
-        } else {
-            return redirect("/home");
+            return abort(401);
         }
+        return abort(400);
     }
 
     public function verificationRequest(Request $request)

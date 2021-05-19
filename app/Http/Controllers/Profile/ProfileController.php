@@ -124,20 +124,21 @@ class ProfileController extends Controller
                 ],
                 'projects' => [
                     'name' => "required|max:50",
-                    "startDate" => ["required", new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
-                    "endDate" => ['required_if:noEndDate,false', new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
+                    "startDate" => ["required", new DateObject('تاریخ پایان {{ type }} را تکمیل کنید.')],
+                    "endDate" => ['required_if:noEndDate,false', new DateObject('تاریخ پایان {{ type }} را تکمیل کنید.')],
                     "noEndDate" => ["boolean"],
                     'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
                 ],
                 'publishs' => [
                     'name' => "required|max:50",
-                    "date" => ['required', new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
+                    "date" => ['required', new DateObject('تاریخ پایان {{ type }} را تکمیل کنید.')],
                     'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
                 ],
                 'inventions' => [
                     'name' => "required|max:50",
                     "organization" => "max:50",
                     "registerCode" => "max:30",
+                    "date" => [new DateObject('تاریخ ثبت {{ type }} را تکمیل کنید.')],
                     'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
                 ],
                 'courses' => [
@@ -146,7 +147,7 @@ class ProfileController extends Controller
                 'tests' => [
                     'name' => "required|max:50",
                     "score" => "max:20",
-                    "date" => [new DateObject('تاریخ پایان {{ type }} نامعتبر است.')],
+                    "date" => [new DateObject('تاریخ پایان {{ type }} را تکمیل کنید.')],
                     'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
                 ],
             ];
