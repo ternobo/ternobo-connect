@@ -27,7 +27,7 @@ export default {
 	methods: {
 		loadOptions() {
 			this.loading = true;
-			axios.post("/contact/social-option").then((response) => {
+			axios.post(`/contact/social-option/${this.page.id}`).then((response) => {
 				this.options = response.data.options;
 				this.loading = false;
 			});
