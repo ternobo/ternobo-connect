@@ -28,9 +28,12 @@ class ContactsController extends Controller
         return response()->json(['result' => true, "options" => $options]);
     }
 
-    public function getSocialOptions()
+    public function getSocialOptions($page_id)
     {
-        $options = SocialDriver::with('account')->where("active", true)->get();
+        $user_id = Page::findOrFail($page_id)->user_id;
+        $options = SocialDriver::with(['account' => function ($query) use ($user_id) {
+            $query->where("user_id", $user_id);
+        }])->where("active", true)->get();
         return response()->json(['result' => true, "options" => $options]);
     }
 

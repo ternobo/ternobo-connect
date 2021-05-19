@@ -311,7 +311,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
     Route::post("/contact/contact-option", "Profile\ContactsController@getContactOptions");
     Route::post("/contact/website-option", "Profile\ContactsController@getWebsiteOptions");
-    Route::post("/contact/social-option", "Profile\ContactsController@getSocialOptions");
+    Route::post("/contact/social-option/{page_id}", "Profile\ContactsController@getSocialOptions");
 
     Route::post("/contacts/", "Profile\ContactsController@saveData");
     Route::post("/contacts/{page}", "Profile\ContactsController@getContactData");
