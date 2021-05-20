@@ -112,12 +112,13 @@ class UsersController extends Controller
         return TernoboWire::render("Settings");
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         ActiveSession::removeSession();
         Cookie::forget("ternobo_remembered_session_id");
         Cookie::forget("ternobo_current_page_id");
         Auth::logout();
+        $request->session()->invalidate();
         return redirect("/");
     }
 
