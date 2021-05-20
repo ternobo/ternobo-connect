@@ -19,3 +19,6 @@ public/css/app.css
 composer.lock
 *.lock
 laravel-echo-server.lock
+laravel-echo-server.json
+package-lock.json
+socket-server.json
