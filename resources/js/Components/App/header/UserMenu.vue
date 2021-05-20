@@ -14,18 +14,18 @@
 		</div>
 		<div class="card-body p-0">
 			<ul class="list-group list-group-flush">
-				<li class="list-group-item headermenu-item d-flex flex-column px-2 pt-3">
-					<wire-link href="/donations" class="m-0"><i class="material-icons-outlined">savings</i> حمایت‌ها</wire-link>
-				</li>
-				<li class="list-group-item border-0 headermenu-item d-flex flex-column px-2 pt-3">
-					<wire-link href="/settings" class="m-0"><i class="material-icons-outlined">settings</i> تنظیمات و حریم خصوصی </wire-link>
-				</li>
-				<li class="list-group-item border-top-0 headermenu-item d-flex flex-column pb-3 px-2">
-					<wire-link href="/feedbacks" class="m-0"><i class="material-icons-outlined">emoji_objects</i> بازخورد ها </wire-link>
-				</li>
-				<li class="list-group-item headermenu-item d-flex flex-column px-2 pb-2">
+				<wire-link href="/donations" as="li" class="list-group-item border-0 headermenu-item">
+					<a class="m-0"><i class="material-icons-outlined">savings</i> حمایت‌ها</a>
+				</wire-link>
+				<wire-link href="/settings" as="li" class="list-group-item border-0 headermenu-item">
+					<a class="m-0"><i class="material-icons-outlined">settings</i> تنظیمات و حریم خصوصی </a>
+				</wire-link>
+				<wire-link href="/feedbacks" as="li" class="list-group-item border-0 headermenu-item">
+					<a class="m-0"><i class="material-icons-outlined">emoji_objects</i> بازخورد ها </a>
+				</wire-link>
+				<li class="list-group-item border-top headermenu-item">
 					<form action="/logout" method="POST">
-						<button type="submit" class="text-right bg-transparent hover-danger m-0 border-0 text-grey"><i class="material-icons">power_settings_new</i> خروج</button>
+						<button type="submit" class="text-right bg-transparent hover-danger m-0 p-0 border-0 text-grey"><i class="material-icons">power_settings_new</i> خروج</button>
 					</form>
 				</li>
 			</ul>

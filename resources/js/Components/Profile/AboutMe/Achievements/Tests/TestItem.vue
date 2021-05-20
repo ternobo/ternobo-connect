@@ -8,7 +8,9 @@
 				<div class="achievement-details">
 					<span v-if="time_text.length > 0">{{ time_text }}</span>
 					<span style="width: max-content" v-if="val.score && val.score.length > 0">
-						<span style="width: max-content" class="badge-success">{{ val.score }}</span>
+						<div style="width: max-content" class="badge-blue">
+							<span>{{ val.score }}</span>
+						</div>
 					</span>
 					<span v-if="val.skill">{{ val.skill.name }}</span>
 				</div>

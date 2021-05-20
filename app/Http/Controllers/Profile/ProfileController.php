@@ -10,10 +10,100 @@ use App\Rules\LevelObject;
 use App\URLTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 
 class ProfileController extends Controller
 {
+
+    public function setProfile(Request $request)
+    {
+        $requestValidator = Validator::make($request->all(), [
+            'profile' => ["required", "mimes:png,jpg,jpeg,bmp"],
+            "sizes" => ["required", 'json'],
+        ]);
+        if ($requestValidator->passes()) {
+            $sizes = json_decode($request->sizes);
+
+            $sizesValidator = Validator::make((array) $sizes, [
+                'width' => ["required", "integer", "min:30"],
+                'height' => ["required", "integer", "min:30"],
+            ]);
+            if ($sizesValidator->passes()) {
+                $current_profile = substr(str_replace(url('/'), "", Auth::user()->profile), 1);
+                Storage::delete($current_profile);
+                $file = ($request->file("profile")->store("profiles"));
+                $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
+                $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->left), intval($sizes->top));
+                $image->resize(200, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $image->save();
+                $user = $request->user();
+                $page = $user->getPage();
+                $user->profile = url($file);
+                $page->profile = url($file);
+                $user->save();
+                $page->save();
+                return response()->json(array("result" => true, "url" => url($file)));
+            }
+            return response()->json(array("result" => true, "errors" => $sizesValidator->errors()));
+        }
+        return response()->json(array("result" => true, "errors" => $requestValidator->errors()));
+
+    }
+
+    public function setCover(Request $request)
+    {
+        $requestValidator = Validator::make($request->all(), [
+            'cover' => ["required", "mimes:png,jpg,jpeg,bmp"],
+            "sizes" => ["required", 'json'],
+        ]);
+        if ($requestValidator->passes()) {
+            $sizes = json_decode($request->sizes);
+
+            $sizesValidator = Validator::make((array) $sizes, [
+                'width' => ["required", "integer", "min:30"],
+                'height' => ["required", "integer", "min:30"],
+            ]);
+            if ($sizesValidator->passes()) {
+                $file = $request->file("cover")->store("profiles");
+                $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
+                $sizes = (json_decode($request->sizes));
+                $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->left), intval($sizes->top));
+                $image->resize(794, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $image->save(null, 90, "jpg");
+                $user = Auth::user();
+                $user->cover = url($file);
+                $user->save();
+                return response()->json(array("result" => true, "url" => url($file)));
+            }
+            return response()->json(array("result" => true, "errors" => $sizesValidator->errors()));
+        }
+        return response()->json(array("result" => true, "errors" => $requestValidator->errors()));
+    }
+
+    public function deleteProfileImage()
+    {
+        $user = Auth::user();
+        $user->profile = null;
+        $user->save();
+        return response()->json(["result" => true, "url" => $user->profile]);
+    }
+
+    public function deleteCoverImage()
+    {
+        $user = Auth::user();
+        $user->cover = null;
+        $user->save();
+        return response()->json(["result" => true, "url" => $user->cover]);
+    }
+
     public function saveAboutMe(Request $request)
     {
         $about = null;
@@ -107,6 +197,7 @@ class ProfileController extends Controller
                 'score.max' => 'نمره آزمون حداکثر ۲۰ کاراکتر است.',
                 'score.digits_between' => 'نمره آزمون باید عدد باشد',
                 'registerCode.max' => "شماره ثبت اختراع نمی‌تواند بیشتر از 30 کاراکتر باشد",
+                "registerCode.required" => "شماره ثبت اختراع اجباری است",
                 'link.regex' => "لینک {{ type }} نامعتبر است",
             ];
 
@@ -120,11 +211,12 @@ class ProfileController extends Controller
                 ],
                 'awards' => [
                     'name' => "required|max:50",
+                    "date" => [new DateObject('تاریخ صدور {{ type }} را تکمیل کنید.')],
                     'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
                 ],
                 'projects' => [
                     'name' => "required|max:50",
-                    "startDate" => ["required", new DateObject('تاریخ پایان {{ type }} را تکمیل کنید.')],
+                    "startDate" => ["required", new DateObject('تاریخ شروع {{ type }} را تکمیل کنید.')],
                     "endDate" => ['required_if:noEndDate,false', new DateObject('تاریخ پایان {{ type }} را تکمیل کنید.')],
                     "noEndDate" => ["boolean"],
                     'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
@@ -136,8 +228,8 @@ class ProfileController extends Controller
                 ],
                 'inventions' => [
                     'name' => "required|max:50",
-                    "organization" => "max:50",
-                    "registerCode" => "max:30",
+                    "organization" => "required|max:50",
+                    "registerCode" => "required|max:30",
                     "date" => [new DateObject('تاریخ ثبت {{ type }} را تکمیل کنید.')],
                     'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
                 ],

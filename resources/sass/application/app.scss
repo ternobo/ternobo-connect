@@ -804,7 +804,7 @@ pre {
     padding: 8px 12px 8px 48px;
     transition: 0.3s all;
     border-radius: 16px;
-    height: 44px;
+    height: 40px;
     background-color: #FFF !important;
     background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iYmxhY2siIHdpZHRoPSIxOHB4IiBoZWlnaHQ9IjE4cHgiPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMFYweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGZpbGw9IiM3NTc1NzUiIGQ9Ik0xNS41IDE0aC0uNzlsLS4yOC0uMjdDMTUuNDEgMTIuNTkgMTYgMTEuMTEgMTYgOS41IDE2IDUuOTEgMTMuMDkgMyA5LjUgM1MzIDUuOTEgMyA5LjUgNS45MSAxNiA5LjUgMTZjMS42MSAwIDMuMDktLjU5IDQuMjMtMS41N2wuMjcuMjh2Ljc5bDUgNC45OUwyMC40OSAxOWwtNC45OS01em0tNiAwQzcuMDEgMTQgNSAxMS45OSA1IDkuNVM3LjAxIDUgOS41IDUgMTQgNy4wMSAxNCA5LjUgMTEuOTkgMTQgOS41IDE0eiIvPjwvc3ZnPg==');
     background-size: 24px;
@@ -1032,7 +1032,7 @@ pre {
     padding-top: 5px;
 
     span {
-        height: 13pt;
+        height: 14pt;
     }
 
     @media screen and (max-width: $sm-size) {
@@ -1073,13 +1073,34 @@ a:focus {
     white-space: nowrap;
     width: auto;
     padding: 4px 12px;
-
-    span {
-        height: 14pt;
-    }
+    line-height: 24px;
 
     @media screen and (max-width: $sm-size) {
+        align-items: center;
+        display: flex;
+        padding: 6px 8px;
         font-size: 10px;
+        height: 24px;
+    }
+}
+
+.badge-blue {
+    @extend .badge-light;
+    border-radius: 8px;
+    background-color: $light-blue;
+    color: $action;
+    white-space: nowrap;
+    width: auto;
+    padding: 8px 12px;
+    height: 32px;
+    line-height: 24px;
+
+    @media screen and (max-width: $sm-size) {
+        align-items: center;
+        display: flex;
+        padding: 6px 8px;
+        font-size: 10px;
+        height: 24px;
     }
 }
 

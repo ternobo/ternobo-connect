@@ -4,6 +4,7 @@ namespace Database\Factories;
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UserFactory extends Factory
@@ -34,7 +35,7 @@ class UserFactory extends Factory
             "username" => $faker->unique()->userName,
             "phone_verified_at" => time(),
             "short_bio" => $faker->sentence(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => Hash::make("12345678"), // password
             'remember_token' => Str::random(10),
         ];
     }

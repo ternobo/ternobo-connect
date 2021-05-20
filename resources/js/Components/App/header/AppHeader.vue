@@ -12,7 +12,7 @@
 
 				<form method="get" action="/search" class="searchfield d-flex">
 					<autocomplete class="search-field w-100" :default-value="searchVal" :search="search" id="searchforminput" autocomplete="off" required type="text" name="q" placeholder="هر چیزی که در جستن آنی، آنی" />
-					<div class="text-muted align-items-center justify-content-center d-lg-flex d-none nowrap font-12" style="padding-right: 36px !important"><img src="/images/beta.svg" width="36" class="verical-middle" /> <span class="mr-2 text-nowrap">۰.۶ V</span></div>
+					<div class="text-muted align-items-center justify-content-center d-lg-flex d-none nowrap font-12" style="padding-right: 24px !important"><img src="/images/beta.svg" width="36" class="verical-middle" /> <span class="mr-2 text-nowrap">۰.۶ V</span></div>
 				</form>
 				<div v-if="!$root.isDesktop">
 					<i class="material-icons hover-dark clickable" @click="showOptions = true">more_vert</i>

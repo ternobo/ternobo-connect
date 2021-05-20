@@ -63,7 +63,6 @@ export default {
 			axios
 				.get(`/skills/${this.skill}/credit`)
 				.then((response) => {
-					console.log(response.data);
 					this.credits = response.data.credits.data;
 					this.next_page_url = response.data.credits.next_page_url;
 				})

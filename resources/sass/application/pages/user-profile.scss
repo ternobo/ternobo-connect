@@ -279,39 +279,19 @@ div.page-cover {
         margin-top: -64px;
     }
 
-    >i {
+
+    >.edit-icons {
         position: absolute;
-        top: 8px;
-        left: 8px;
         right: 8px;
         bottom: 8px;
-        width: calc(100% - 16px);
-        height: calc(100% - 16px);
         display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #FFF;
-        border-radius: 50%;
-        background: rgba($color: #191919, $alpha: 0.5);
+        flex-direction: column;
         opacity: 0;
         transition: 0.3s all;
 
         @media screen and (max-width: $sm-size) {
             opacity: 1;
-            height: 24px;
-            width: 24px;
-            top: unset;
-            right: 8px;
-            bottom: 8px;
-            font-size: 16px;
-            background: #191919;
-            border-radius: 8px;
-            font-size: 16px;
-
         }
-
-
-
     }
 
     >figure {
@@ -319,7 +299,7 @@ div.page-cover {
     }
 
     &:hover {
-        >i {
+        >.edit-icons {
             opacity: 1;
         }
     }
@@ -332,12 +312,11 @@ div.page-cover {
         top: 72px;
         z-index: 999;
         background: #F5F5F5;
-        margin-bottom: 16px;
         display: flex;
         align-items: center;
-        height: 80px;
+        height: 85px;
         padding: 12px 0;
-        align-items: flex-end;
+        align-items: center;
 
         @media screen and (max-width: $sm-size) {
 

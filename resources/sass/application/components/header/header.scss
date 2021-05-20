@@ -10,7 +10,7 @@
     transition: 0.3s all;
 
     .searchfield {
-        margin-right: 24px;
+        margin-right: 12px;
     }
 }
 
@@ -88,7 +88,7 @@
 .header {
     .container {
         overflow: hidden;
-        padding: 0px 10px;
+        padding: 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -114,7 +114,7 @@
 .usermenu {
     position: fixed;
     display: none;
-    top: 60px;
+    top: 70px;
     min-width: 300px;
     left: 1rem;
     z-index: 1000;
@@ -131,7 +131,7 @@
 
         .user-short-bio {
             font-size: 14px;
-            margin-top: 4px;
+            margin-top: 8px;
             color: $grey;
         }
     }
@@ -173,8 +173,8 @@
     .user-username {
         line-height: 1;
         font-weight: 600;
-        color: $dark;
-        margin: 0 16px;
+        color: $grey;
+        margin: 0 12px;
 
         display: flex;
         align-items: center;
@@ -192,6 +192,24 @@
     flex-direction: column;
     padding-right: 0;
     margin-bottom: 0;
+
+    >.list-group-item {
+        padding: 16px 24px;
+        border-color: #EEEEEE;
+        border-width: 2px;
+        cursor: pointer;
+        &:hover {
+            background: $body-bg;
+        }
+
+        a {
+            color: $grey;
+
+            i {
+                margin-left: 12px;
+            }
+        }
+    }
 }
 
 @import "./toolbar";

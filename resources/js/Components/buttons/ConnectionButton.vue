@@ -53,7 +53,6 @@ export default {
 
 				axios(config)
 					.then((response) => {
-						// console.log(response.data);
 						if (response.data.result) {
 							this.loading = false;
 							this.$store.commit("addWaitingConnection", this.user_id);
@@ -76,14 +75,11 @@ export default {
 						this.loading = false;
 					});
 			} else {
-				var config = {
+				axios({
 					method: "post",
 					url: this.$APP_URL + "/disconnect/" + this.user,
-				};
-
-				axios(config)
+				})
 					.then((response) => {
-						// console.log(response.data);
 						if (response.data.result) {
 							this.loading = false;
 							this.text = "متصل شدن";

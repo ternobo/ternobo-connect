@@ -49,10 +49,9 @@ export default {
 
 				axios(config)
 					.then((response) => {
-						// console.log(response.data);
 						if (response.data.result) {
 							this.loading = false;
-							this.$store.commit("addFollower", this.page_id);
+							this.$store.commit("addFollower", String(this.page_id));
 							this.text = "دنبال شده";
 							this.followed = true;
 							this.$emit("followed");
@@ -80,13 +79,12 @@ export default {
 
 				axios(config)
 					.then((response) => {
-						// console.log(response.data);
 						if (response.data.result) {
 							this.loading = false;
 							this.text = "دنبال کردن";
 							this.followed = false;
 							this.$emit("unfollowed");
-							this.$store.commit("unfollow", this.$store.state.followings.indexOf(this.page_id));
+							this.$store.commit("unfollow", this.$store.state.shared.followings.indexOf(String(this.page_id)));
 						} else {
 							const errors = response.data.errors;
 							Object.keys(errors).forEach((item, index) => {
@@ -100,7 +98,8 @@ export default {
 						}
 						this.loading = false;
 					})
-					.catch(function (error) {
+					.catch((error) => {
+						console.log(error);
 						this.loading = false;
 					});
 			}

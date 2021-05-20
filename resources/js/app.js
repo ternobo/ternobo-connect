@@ -77,10 +77,7 @@ const vue_app = new Vue({
         h(Application, {
             props: {
                 dataToken: dataToken,
-                resolveComponent: (component) => {
-                    import(`./Pages/${component}`).then((item) => console.log(item.default))
-                    return (import(`./Pages/${component}`));
-                },
+                resolveComponent: (component) => import(`./Pages/${component}`),
             },
         }),
     data() {

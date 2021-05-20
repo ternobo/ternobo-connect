@@ -24,6 +24,10 @@ Passport::routes();
 TernoboWire::routes();
 Broadcast::routes();
 
+Route::get('/test', function () {
+    dd(Hash::make("12345678"));
+});
+
 Route::post('/ternobo-actions/update', "AutoUpdateController@update");
 
 require base_path("routes/sitemap_routes.php");
@@ -141,8 +145,11 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
             Route::get("/gettags", "PostController@getTags");
 
-            Route::post("/setprofile", "Auth\UsersController@setProfile")->name("profile-setup");
-            Route::post("/setcover", "Auth\UsersController@setCover")->name("profile-cover");
+            Route::post("/setprofile", "Profile\ProfileController@setProfile")->name("profile-setup");
+            Route::post("/setcover", "Profile\ProfileController@setCover")->name("profile-cover");
+
+            Route::post("/delete-profile", "Profile\ProfileController@deleteProfileImage")->name("profile-delete");
+            Route::post("/delete-cover", "Profile\ProfileController@deleteCoverImage")->name("profile-delete");
 
             Route::post("/like/{post_id}", "PostController@likePost");
             Route::post("/comments/{comment_id}/like", "CommentController@likeComment");

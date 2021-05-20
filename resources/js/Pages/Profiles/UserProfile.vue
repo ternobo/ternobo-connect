@@ -76,7 +76,7 @@
 		</div>
 		<sidebar-left v-if="$root.isDesktop">
 			<div class="card" style="margin-bottom: 16px" v-if="pages.length > 0">
-				<div class="card-header pb-2 pt-3">
+				<div class="card-header pt-4 px-4 pb-0 font-14">
 					<strong>
 						{{ page.slug }}
 					</strong>

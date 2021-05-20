@@ -107,8 +107,6 @@ export default {
 			axios
 				.post(`/${this.page.slug}/${this.current_tab}`)
 				.then((response) => {
-					console.log(response.data);
-
 					this.connections = response.data.connections.data;
 					this.connections = response.data.connections.data;
 					this.next_page_url = response.data.connections.next_page_url;

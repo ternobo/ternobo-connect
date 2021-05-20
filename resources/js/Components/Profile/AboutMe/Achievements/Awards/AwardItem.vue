@@ -37,7 +37,7 @@
 				</div>
 				<div v-if="showMore">
 					<strong>تاریخ صدور</strong>
-					<DatePicker class="mt-3" v-model="val.startDate" maxlength="52" :max="{ year: year, month: month }"></DatePicker>
+					<DatePicker class="mt-3" v-model="val.date" maxlength="52" :max="{ year: year, month: month }"></DatePicker>
 				</div>
 				<div class="d-flex align-items-end" v-if="showMore">
 					<MaterialTextField v-model="val.from" maxlength="52" class="material--sm" placeholder="صادر کننده"></MaterialTextField>
@@ -124,8 +124,8 @@ export default {
 		},
 		time_text() {
 			let startText = "";
-			if (typeof this.val.startDate == "object") {
-				startText = new PersianDate([this.val.startDate.year, this.val.startDate.month.id]).format("MMMM YYYY");
+			if (typeof this.val.date == "object") {
+				startText = new PersianDate([this.val.date.year, this.val.date.month.id]).format("MMMM YYYY");
 			}
 			return startText;
 		},

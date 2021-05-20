@@ -43,6 +43,11 @@
             font-weight: 600;
             color: $grey;
 
+            span {
+                display: flex;
+                align-items: center;
+            }
+
             @media screen and (max-width: $sm-size) {
                 font-size: 12px;
             }

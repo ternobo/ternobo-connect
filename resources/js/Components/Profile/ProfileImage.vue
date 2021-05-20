@@ -1,10 +1,13 @@
 <template>
-	<div class="profile-box" :class="[size, { clickable: !loading && canChange }]" @click="openFileSelect">
+	<div class="profile-box" :class="[size]">
 		<CropperModal title="انتخاب تصویر پروفایل" :show.sync="crop" v-if="canChange" :aspect-ratio="1 / 1" :image="image" @cropped="upload"></CropperModal>
 		<input type="file" class="d-none" v-if="canChange" ref="imageFile" @change="imageSelect" />
 
 		<lazy-image :src="picture" img-class="rounded-circle" class="profile mb-0" :class="size" />
-		<i class="material-icons-outlined" v-if="canChange && !loading">camera_alt</i>
+		<div class="edit-icons" v-if="canChange && !loading">
+			<i class="material-icons-outlined camera-btn clickable" @click="openFileSelect">camera_alt</i>
+			<i class="material-icons-outlined camera-btn clickable mt-1" v-if="showDeleteImage" @click="deleteProfile">delete</i>
+		</div>
 		<div class="position-absolute d-flex align-items-center justify-content-center" style="inset: 3px; border-radius: 50%; background: rgba(0, 0, 0, 0.5)" v-if="loading">
 			<loading-spinner></loading-spinner>
 		</div>
@@ -46,6 +49,29 @@ export default {
 				this.$refs.imageFile.click();
 			}
 		},
+		deleteProfile() {
+			this.loading = true;
+			axios
+				.post("/delete-profile")
+				.then((response) => {
+					if (response.data.result) {
+						let data = response.data;
+						if (data.url) {
+							this.picture = data.url;
+							this.$store.dispatch("loadUser");
+							this.$store.state.ternoboWireApp.reload();
+						}
+						this.$emit("updated");
+					} else {
+						this.toast("خطا در حذف پروفایل");
+					}
+				})
+				.catch((err) => {
+					console.log(err);
+					this.toast("خطا در حذف پروفایل");
+				})
+				.then(() => (this.loading = false));
+		},
 		imageSelect(event) {
 			var input = event.target;
 			if (input.files && input.files[0]) {
@@ -83,6 +109,11 @@ export default {
 					}
 				})
 				.then(() => (this.loading = false));
+		},
+	},
+	computed: {
+		showDeleteImage() {
+			return !this.picture.endsWith("/img/woman-profile.png") && !this.picture.endsWith("/img/man-profile.png");
 		},
 	},
 	data() {

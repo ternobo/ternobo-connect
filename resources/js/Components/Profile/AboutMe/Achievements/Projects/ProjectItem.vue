@@ -42,7 +42,7 @@
 				</div>
 				<div>
 					<strong>تاریخ پایان <span class="text-action">*</span></strong>
-					<DatePicker class="mt-3" :disabled="val.noEndDate" v-model="val.endDate" :minYear="val.startDate ? val.startDate.year : 1357" :max="{ year: year }"></DatePicker>
+					<DatePicker class="mt-3" :disabled="val.noEndDate" v-model="val.endDate" noYearPlaceholder="سال شروع انتخاب نشده" :minYear="val.startDate ? val.startDate.year : 1357" :max="{ year: year }"></DatePicker>
 					<Checkbox class="mb-0" v-model="val.noEndDate"> همچنان در حال کار بر روی این پروژه هستم </Checkbox>
 				</div>
 				<div class="col-md-6" v-if="showMore">

@@ -330,11 +330,13 @@
 }
 
 .page-cover {
-    .camera-btn {
+    .edit-icons {
         position: absolute;
         top: 24px;
         left: 24px;
         padding-top: 5px;
+        display: flex;
+        flex-direction: column;
     }
 }
 
