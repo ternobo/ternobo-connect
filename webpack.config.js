@@ -1,6 +1,11 @@
 const path = require('path');
+const RTLCSSPlugin = require('rtlcss-webpack-mix-plugin');
 
 module.exports = {
+    plugins: [
+        new RTLCSSPlugin({
+            filename: '[name].ltr.css',
+        })],
     output: {
         filename: '[name].js',
         chunkFilename: 'js/[name].js?id=[chunkhash]',
