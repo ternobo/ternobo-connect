@@ -300,6 +300,9 @@ export default {
 								if (response.data.result) {
 									this.$store.commit("setProfileEdit", false);
 									window.onbeforeunload = null;
+									if (response.data.redirectTo != null) {
+										window.location = response.data.redirectTo;
+									}
 								} else {
 									this.handleError(response.data.errors);
 								}

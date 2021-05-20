@@ -14,7 +14,7 @@
 				<div class="content" :class="{ 'font-12': !$root.isDesktop, 'text-superlight text-center': text == null || text.length < 1 }" v-if="!edit">
 					{{ textToShow != null && textToShow.length > 0 ? textToShow : "هیچ اطلاعاتی ثبت نشده" }}
 					<br />
-					<div class="show-more-text--clickable" @click="showFullText = !showFullText">{{ showFullText ? "نمایش کمتر" : "نمایش بیشتر" }}</div>
+					<div class="show-more-text--clickable" v-if="showMore" @click="showFullText = !showFullText">{{ showFullText ? "نمایش کمتر" : "نمایش بیشتر" }}</div>
 				</div>
 				<textarea-autosize class="form-control" :minHeight="83" maxlength="2500" v-else v-model="text"></textarea-autosize>
 			</div>
@@ -28,6 +28,9 @@ export default {
 		this.text = this.value;
 	},
 	computed: {
+		showMore() {
+			return this.text != null && this.text.length > 40;
+		},
 		textToShow() {
 			return this.showFullText || this.text.split(" ").length < 40 ? this.text : this.text.split(" ").slice(0, 40).join(" ") + "...";
 		},

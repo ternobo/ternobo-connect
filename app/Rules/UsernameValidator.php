@@ -79,13 +79,14 @@ class UsernameValidator implements Rule
         if (in_array(strtolower($username), $invalid)) {
             return false;
         }
-        // dd($username);
 
         if (!preg_match("/^[a-zA-Z0-9]+([a-zA-Z0-9](_|-| )[a-zA-Z0-9])*[a-zA-Z0-9]+$/", $username)) {
+            // dd($username);
             return false;
         }
+
         if (!Page::checkSlug($username, $this->ignore)) {
-            $this->messageText = "نام کاربری نامعتبر است";
+            $this->messageText = "نام کاربری تکراری است";
             return false;
         }
 

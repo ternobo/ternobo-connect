@@ -8,8 +8,12 @@ use App\Models\ContactData;
 use App\Models\Page;
 use App\Models\SocialDriver;
 use App\Models\WebsiteOption;
+use App\Rules\UsernameValidator;
+use App\Rules\WebsiteURL;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ContactsController extends Controller
 {
@@ -44,9 +48,23 @@ class ContactsController extends Controller
 
     public function saveData(Request $request)
     {
-        $websiteOptions = WebsiteOption::all()->pluck("name");
-        $socialOptions = SocialDriver::all()->pluck("driver");
+        if (!$request->filled("contacts")) {
+            return abort(400);
+        }
         $page = Auth::user()->personalPage;
+        $socialOptions = SocialDriver::all()->pluck("driver");
+        $validator = Validator::make($request->contacts, [
+            "slug" => [new UsernameValidator($page->slug), "required"],
+            "socials" => ['array'],
+            "socials.driver" => [Rule::in($socialOptions)],
+            "websites" => ['array'],
+            "websites.url" => ['nullable', new WebsiteURL()],
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['result' => false, 'errors' => $validator->errors()]);
+        }
+        $websiteOptions = WebsiteOption::all()->pluck("name");
+
         $contact = ContactData::query()->where("page_id", $page->id)->firstOrNew();
         $contact->page_id = $page->id;
         $contact->data = json_encode($request->contacts);
@@ -60,11 +78,18 @@ class ContactsController extends Controller
             }
         }
 
-        $page->slug = $request->contacts['slug'];
+        $redirectTo = null;
+
+        if ($page->slug != $request->contacts['slug']) {
+            $page->slug = $request->contacts['slug'];
+            $page->user->username = $request->contacts['slug'];
+            $slug = $request->contacts['slug'];
+            $redirectTo = "/$slug";
+        }
 
         $contact->save();
         $page->save();
 
-        return response()->json(["result" => true]);
+        return response()->json(["result" => true, "redirectTo" => $redirectTo]);
     }
 }

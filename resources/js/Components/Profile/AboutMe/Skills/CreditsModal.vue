@@ -8,7 +8,7 @@
 				<span class="text-muted">خطا در برقراری ارتباط</span>
 			</div>
 		</div>
-		<div class="likes-list" v-if="!loading && !error" v-infinite-scroll="loadMore" :infinite-scroll-distance="10">
+		<div class="likes-list" v-else-if="credits.length > 0" v-infinite-scroll="loadMore" :infinite-scroll-distance="10">
 			<div v-for="credit in credits" :key="'credit_' + credit.id" class="like-item">
 				<wire-link :href="'/' + credit.user.username" class="userinfo">
 					<lazy-image class="mb-0" :class="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" :imgClass="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" :src="credit.user.profile"></lazy-image>
@@ -20,6 +20,9 @@
 				<follow-button v-if="credit.user.username != user.username" :page="credit.user.id"></follow-button>
 			</div>
 			<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>
+		</div>
+		<div class="likes-list d-flex justify-content-center align-items-center" v-else>
+			<span class="text-center font-16 text-grey pb-5">این مهارت توسط کسی تایید نشده</span>
 		</div>
 	</b-modal>
 </template>
