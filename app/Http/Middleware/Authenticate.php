@@ -14,15 +14,16 @@ class Authenticate extends Middleware
     public function handle($request, Closure $next, ...$guards)
     {
         if (ActiveSession::checkSession()) {
-            Cookie::forget("ternobo_remembered_session_id");
-            Cookie::forget("ternobo_current_page_id");
-            Auth::logout();
-            if ($request->expectsJson()) {
-                return response()->json(['error' => 'Unauthenticated.'], 401);
-            }
-            return route('welcome');
+            return $next($request);
         }
-        return $next($request);
+        Cookie::forget("ternobo_remembered_session_id");
+        Cookie::forget("ternobo_current_page_id");
+        Auth::logout();
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+        return route('welcome');
+
     }
 
     /**
