@@ -115,9 +115,9 @@ class UsersController extends Controller
     public function logout()
     {
         ActiveSession::removeSession();
-        Auth::logout();
         Cookie::forget("ternobo_remembered_session_id");
         Cookie::forget("ternobo_current_page_id");
+        Auth::logout();
         return redirect("/");
     }
 

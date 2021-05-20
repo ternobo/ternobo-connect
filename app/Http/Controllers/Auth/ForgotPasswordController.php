@@ -56,7 +56,7 @@ class ForgotPasswordController extends Controller
                     $sms = new SMS($user->phone);
                     $sms->sendUltraFastSMS(array(SMS::makeParameter("passreset", $passwordrest->token)), "24525");
                     session()->put("email", $user->phone);
-                    return response()->json(array("result" => true, "msg" => ['error' => "کد فعالسازی برای شما پیامک شد"]));
+                    return response()->json(array("result" => true, "msg" => "کد فعالسازی برای شما پیامک شد"));
                 } else {
                     $html = view('emails.forgotpass', array("code" => $passwordrest->token, "username" => $user->username))->render();
                     $text = "بازیابی رمزعبور در ترنوبو";
@@ -68,7 +68,7 @@ class ForgotPasswordController extends Controller
                     return response()->json(array("result" => true, "msg" => "کد فعالسازی برای شما ایمیل شد"));
                 }
             } else {
-                return response()->json(array("result" => false, "errors" => array('msg' => ['error' => "هیچ کاربری با این اطلاعات یافت نشد!"])));
+                return response()->json(array("result" => false, "errors" => array('msg' => "هیچ کاربری با این اطلاعات یافت نشد!")));
             }
         }
     }
