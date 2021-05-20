@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\ActiveSession;
 use Closure;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 
 class Authenticate extends Middleware
