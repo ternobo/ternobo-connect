@@ -32,18 +32,19 @@ class UsersController extends Controller
 
     public function setProfile(Request $request)
     {
-        if ($request->has("profile")) {
+        if ($request->has("profile") && $request->has("sizes")) {
             if (Auth::check()) {
                 $current_profile = substr(str_replace(url('/'), "", Auth::user()->profile), 1);
                 Storage::delete($current_profile);
                 $file = ($request->file("profile")->store("profiles"));
-                //   dd(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
                 $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
-                if ($request->has("sizes")) {
-                    $sizes = (json_decode($request->sizes));
-                    $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->left), intval($sizes->top));
-                    $image->save();
-                }
+                $sizes = (json_decode($request->sizes));
+                $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->left), intval($sizes->top));
+                $image->resize(200, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $image->save();
                 $user = $request->user();
                 $page = $user->getPage();
                 $user->profile = url($file);
@@ -70,6 +71,10 @@ class UsersController extends Controller
                 $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
                 $sizes = (json_decode($request->sizes));
                 $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->left), intval($sizes->top));
+                $image->resize(794, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
                 $image->save(null, 90, "jpg");
                 $user = Auth::user();
                 $user->cover = url($file);
