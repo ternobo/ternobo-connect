@@ -112,7 +112,6 @@ class ActiveSession extends Model
     public static function checkSession()
     {
         if (Auth::check()) {
-            // dd(Request::userAgent());
             $cookie = Cookie::get('ternobo_remembered_session_id');
             if ($cookie != null) {
                 $session = ActiveSession::query()->where("id", $cookie)->first();
