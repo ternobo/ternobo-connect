@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 use Ternobo\TernoboWire\TernoboWire;
 
 class PostController extends Controller
@@ -109,11 +110,13 @@ class PostController extends Controller
 
                     case "media":
                         $media = $content->store("medias");
+                        $image = SocialMediaTools::fitPostImage(Image::make(base_path("storage/app/$media")));
+                        $image->save(base_path("storage/app/$media.webp"), 50, "webp");
                         PostContent::query()->create([
                             'slide_id' => $slide->id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
-                            'content' => $media,
+                            'content' => "$media.webp",
                             'type' => 'media',
                         ]);
                         break;
@@ -209,7 +212,7 @@ class PostController extends Controller
 
             if (($categories->total() > 1) && !$request->has("page")) {
                 $more = true;
-            } elseif (($categories->total() > $request->page)) {
+            } elseif ($categories->total() > $request->page) {
                 $more = true;
             }
         }
@@ -314,8 +317,14 @@ class PostController extends Controller
 
         $deletedSlides = [];
 
+        $category = $request->filled("category") ? Category::query()->firstOrCreate([
+            'page_id' => $post->page_id,
+            'name' => $request->category,
+            'type' => "post",
+        ])->id : null;
         $post->update([
             'type' => $draft ? "draft_post" : "post",
+            'category_id' => $category,
             'can_tip' => $request->canDonate,
         ]);
 
