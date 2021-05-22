@@ -5,8 +5,8 @@
 				<div class="new-post position-relative">
 					<div class="selections">
 						<div class="d-flex align-items-center">
-							<lazy-image :src="user.profile" class="profile-sm mb-0 ml-2" img-class="profile-sm" loading="lazy" />
-							<strong>{{ user.name }}</strong>
+							<lazy-image :src="user.profile" class="profile-sm mb-0" img-class="profile-sm" loading="lazy" />
+							<strong class="user-profile-name">{{ username }}</strong>
 						</div>
 						<div class="categoryandtype">
 							<div class="can-tip-post-check clickable" @click="canDonate = !canDonate">
@@ -21,7 +21,7 @@
 						</div>
 					</div>
 					<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
-					<div class="d-flex justify-content-center align-items-center">
+					<div class="d-flex justify-content-center align-items-center mt-3 mb-2">
 						<loading-button :loading="loadingDraft" class="btn btn-transparent button-transparent text-muted font-14" @click.native="submitPost(true)"> پیش نویس </loading-button>
 						<loading-button :loading="loading" class="btn btn-primary font-14" @click.native="submitPost(false)"> انتشار </loading-button>
 					</div>
@@ -210,6 +210,9 @@ export default {
 	},
 	computed: {
 		...mapState(["user", "shared"]),
+		username() {
+			return this.user.name.length > 40 ? this.user.name.substr(0, 40) : this.user.name;
+		},
 	},
 	data() {
 		return {

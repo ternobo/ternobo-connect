@@ -1,6 +1,6 @@
 <template>
 	<div class="textarea-content w-100">
-		<div ref="editable" class="editor--text-input" contenteditable @keydown.exact.enter="onEnter" @input="input" :data-max-length="max"></div>
+		<div ref="editable" class="editor--text-input" contenteditable @keydown="onKeyDown" @paste="onPaste" @input="input"></div>
 		<div ref="editableHighlight" class="editor--text-input highlight" placeholder="متن خو را وارد کنید"></div>
 	</div>
 </template>
@@ -11,7 +11,56 @@ import Tribute from "tributejs";
 import TextareaParser from "../TextareaParser";
 export default {
 	methods: {
-		onEnter(e) {},
+		onPaste(e) {
+			e.preventDefault();
+
+			this.$refs.editableHighlight.innerHTML = this.$refs.editable.innerHTML.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
+			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
+			content = TextareaParser.escapeHTML(content);
+
+			// get text representation of clipboard
+			var text = (e.originalEvent || e).clipboardData.getData("text/plain");
+			let len = text.length + content.length;
+
+			let contentLen = content.length;
+
+			if (contentLen >= this.max) {
+				return;
+			} else if (len >= this.max) {
+				text = text.substr(0, this.max - contentLen);
+			}
+			// insert text manually
+			document.execCommand("insertHTML", false, text);
+		},
+		onKeyDown(e) {
+			let utils = {
+				special: [8, 16, 17, 18, 46],
+				navigational: [38, 37, 39, 40],
+				isSpecial(e) {
+					return this.special.includes(e.keyCode);
+				},
+				isNavigational(e) {
+					return this.navigational.includes(e.keyCode);
+				},
+			};
+
+			let len = e.target.innerText.trim().length;
+			let hasSelection = false;
+			let selection = window.getSelection();
+			let isSpecial = utils.isSpecial(e);
+			let isNavigational = utils.isNavigational(e);
+
+			if (selection) {
+				hasSelection = !!selection.toString();
+			}
+
+			if (isSpecial || isNavigational) {
+				return true;
+			} else if (len >= this.max && !hasSelection) {
+				e.preventDefault();
+				return false;
+			}
+		},
 		input() {
 			this.$refs.editableHighlight.innerHTML = this.$refs.editable.innerHTML.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
 			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
@@ -40,24 +89,13 @@ export default {
 			default: "",
 		},
 		max: {
-			default: -1,
+			default: 1000,
 		},
 	},
 	mounted() {
 		document.execCommand("defaultParagraphSeparator", false, "br");
 		this.$refs.editable.innerHTML = this.content;
 		this.$refs.editableHighlight.innerHTML = this.$refs.editable.innerHTML.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
-
-		this.$refs.editable.addEventListener("paste", function (e) {
-			// cancel paste
-			e.preventDefault();
-
-			// get text representation of clipboard
-			var text = (e.originalEvent || e).clipboardData.getData("text/plain");
-
-			// insert text manually
-			document.execCommand("insertHTML", false, text);
-		});
 
 		let tribute = new Tribute({
 			collection: [

@@ -18,7 +18,7 @@
 				</div>
 			</wire-link>
 			<div class="actions position-relative">
-				<span class="category-item" v-if="this.post.category != null"><i class="material-icons-outlined">layers</i>{{ this.post.category.name }}</span>
+				<span class="category-item" v-if="this.post.category != null">{{ this.post.category.name }}</span>
 				<div>
 					<post-menu :post="post" @embed="showEmbed = true" @edit="edit = true" @deleted="doDelete"></post-menu>
 				</div>

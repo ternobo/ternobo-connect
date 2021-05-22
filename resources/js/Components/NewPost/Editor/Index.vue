@@ -1,13 +1,13 @@
 <template>
 	<div class="content-editor--container">
 		<div class="elements">
-			<draggable class="list-group" v-model="editorItems" handle=".hand-hover" tag="div" v-bind="dragOptions" @start="drag = true" @end="drag = false">
+			<draggable class="list-group" v-model="editorItems" v-if="editorItems.length > 0" handle=".hand-hover" tag="div" v-bind="dragOptions" @start="drag = true" @end="drag = false">
 				<div class="editor-item" :class="{ 'image-item': element.type == 'media' }" v-for="(element, index) in editorItems" :key="'item_type_' + element.type">
-					<div class="actions">
+					<div class="delete-move-actions">
 						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 						<i class="material-icons-outlined hand-hover">unfold_more</i>
 					</div>
-					<component :is="components[element.type]" :ref="`${element.type}`" :content.sync="editorItems[index].content" :key="'item_type_' + element.id" :max="2500" />
+					<component :is="components[element.type]" :ref="`${element.type}`" :content.sync="editorItems[index].content" :key="'item_type_' + element.id" :max="1000" />
 				</div>
 			</draggable>
 			<div class="d-flex editor-actions" v-if="availableOptions.length > 0" :class="{ 'align-items-center': editorItems.length < 1 }">
@@ -99,10 +99,10 @@ export default {
 			}
 		},
 		textProgress() {
-			return (this.textItem.content.length / 2500) * 100 + "%";
+			return (this.textItem.content.length / 1000) * 100 + "%";
 		},
 		leftCharacter() {
-			return 2500 - this.textItem.content.length;
+			return 1000 - this.textItem.content.length;
 		},
 		availableOptions() {
 			let addedOptions = this.editorItems.map((item) => item.type);

@@ -14,6 +14,16 @@
 }
 
 .new-post {
+    .profile-sm {
+        margin-left: 12px;
+    }
+
+    .user-profile-name {
+        font-size: 14px;
+        word-break: break-word;
+        max-width: 126px;
+    }
+
     .text {
         flex: 1 1 auto;
         display: flex;
@@ -25,7 +35,7 @@
 
     .selections {
         padding-bottom: 24px;
-        padding-top: 16px;
+        padding-top: 0;
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
@@ -43,8 +53,8 @@
         display: flex;
         align-items: center;
         width: 140px;
-        border: 2px solid $icons;
-        height: 40px;
+        border: 2px solid $fixed-elements;
+        height: 44px;
         margin-left: 12px;
 
         >div:first-child {
@@ -70,7 +80,13 @@
             @extend .p-0;
 
             .tselect {
-                width: 170px;
+                max-width: 158px;
+
+                .title-text {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
             }
         }
 
@@ -185,7 +201,7 @@
 
 
     .scrollable-list {
-        padding: 24px 20px;
+        padding: 16px 0 32px;
     }
 
     &.hasArrow {
