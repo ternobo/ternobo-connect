@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { Skeleton } from "vue-loading-skeleton";
 import AwardItem from "./AwardItem";
 import AchievementsMxixin from "../../../../../Mixins/AchievementsMixin";
 export default {
@@ -80,7 +79,6 @@ export default {
 		},
 	},
 	components: {
-		Skeleton,
 		AwardItem,
 	},
 };

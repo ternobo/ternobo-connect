@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import { Skeleton } from "vue-loading-skeleton";
 import Education from "./Education";
 export default {
 	methods: {
@@ -69,7 +68,6 @@ export default {
 		},
 	},
 	components: {
-		Skeleton,
 		Education,
 	},
 };

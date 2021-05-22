@@ -11,11 +11,6 @@
 </template>
 
 <script>
-import { Skeleton } from "vue-loading-skeleton";
-
-export default {
-	components: { Skeleton },
-};
 </script>
 
 <style>

@@ -1,7 +1,7 @@
 <template>
 	<div class="chat-item" :class="{ active: selected }" @click="createChat">
 		<div class="chat-info">
-			<lazy-image :src="chat ? chat.user.profile : user.profile" class="profile-image"></lazy-image>
+			<lazy-image :loadingColor="skeletonOptions.profileColor" :src="chat ? chat.user.profile : user.profile" class="profile-image"></lazy-image>
 			<div class="d-flex flex-column">
 				<span class="profile-name"> {{ chatTitle }}<i class="verificationcheck" style="margin-right: 2px" v-if="chat ? chat.user.is_verified : user.is_verified">check_circle</i> <i class="material-icons-outlined text-superlight font-16 font-light" v-if="chat ? chat.muted : false">volume_off</i></span>
 				<span class="last-message" v-if="chat" v-html="lastPreview"></span>

@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { Skeleton } from "vue-loading-skeleton";
 import LanguageItem from "./LanguageItem";
 
 import AchievementsMxixin from "../../../../../Mixins/AchievementsMixin";
@@ -82,7 +81,6 @@ export default {
 		},
 	},
 	components: {
-		Skeleton,
 		LanguageItem,
 	},
 };

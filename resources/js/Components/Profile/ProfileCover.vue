@@ -5,7 +5,7 @@
 		</div>
 		<CropperModal title="انتخاب تصویر پروفایل" v-if="canChange" :show.sync="crop" :aspect-ratio="25 / 7.8" :image="image" @cropped="upload"></CropperModal>
 		<input type="file" class="d-none" ref="imageFile" @change="imageSelect" />
-		<lazy-image :src="image" img-class="w-100" class="mb-0 page-cover" />
+		<lazy-image :loadingColor="skeletonOptions.coverColor" :src="image" img-class="w-100" class="mb-0 page-cover" />
 		<transition name="fade">
 			<div class="edit-icons" v-if="canChange && (showIcons || !$root.isDesktop)">
 				<i class="material-icons-outlined camera-btn clickable" @click="openFileSelect">photo_camera</i>

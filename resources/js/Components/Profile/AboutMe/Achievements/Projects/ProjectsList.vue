@@ -19,10 +19,8 @@
 </template>
 
 <script>
-import { Skeleton } from "vue-loading-skeleton";
 import ProjectItem from "./ProjectItem";
 import { v4 as uuidv4 } from "uuid";
-
 import AchievementsMxixin from "../../../../../Mixins/AchievementsMixin";
 export default {
 	mixins: [AchievementsMxixin],
@@ -87,7 +85,6 @@ export default {
 		},
 	},
 	components: {
-		Skeleton,
 		ProjectItem,
 	},
 };

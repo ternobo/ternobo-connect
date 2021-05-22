@@ -1,7 +1,7 @@
 <template>
 	<div class="people-sugestion">
 		<wire-link class="suggestion-info-link" :href="'/' + page.slug">
-			<lazy-image class="profile-sm" img-class="profile-sm" :src="page.profile" />
+			<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-sm" img-class="profile-sm" :src="page.profile" />
 			<div class="suggestion-info">
 				<strong class="person-name">{{ page.name }} <i v-if="page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 				<small class="person-short-bio">{{ page.short_bio }}</small>

@@ -3,7 +3,7 @@
 		<CropperModal title="انتخاب تصویر پروفایل" :show.sync="crop" v-if="canChange" :aspect-ratio="1 / 1" :image="image" @cropped="upload"></CropperModal>
 		<input type="file" class="d-none" v-if="canChange" ref="imageFile" @change="imageSelect" />
 
-		<lazy-image :src="picture" img-class="rounded-circle" class="profile mb-0" :class="size" />
+		<lazy-image :loadingColor="skeletonOptions.profileColor" :src="picture" img-class="rounded-circle" class="profile mb-0" :class="size" />
 		<div class="edit-icons" v-if="canChange && !loading">
 			<i class="material-icons-outlined camera-btn clickable" @click="openFileSelect">camera_alt</i>
 			<i class="material-icons-outlined camera-btn clickable mt-1" v-if="showDeleteImage" @click="deleteProfile">delete</i>

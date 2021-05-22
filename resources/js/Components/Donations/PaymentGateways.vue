@@ -24,8 +24,6 @@
 
 <script>
 import Switches from "../inputs/Switch.vue";
-import { Skeleton } from "vue-loading-skeleton";
-
 export default {
 	mounted() {
 		this.loading = true;
@@ -71,7 +69,7 @@ export default {
 			loading: true,
 		};
 	},
-	components: { Switches, Skeleton },
+	components: { Switches },
 };
 </script>
 

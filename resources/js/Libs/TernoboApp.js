@@ -21,9 +21,8 @@ import MaterialTextArea from "../Components/inputs/MaterialTextArea";
 
 import PersianDate from 'persian-date';
 
-import {
-    Skeleton
-} from 'vue-loading-skeleton'
+import Skeleton from "../Components/Skeleton/Skeleton.vue";
+
 import TextareaParser from "../Components/NewPost/Editor/TextareaParser";
 
 window.PersianDate = PersianDate;
@@ -212,6 +211,15 @@ TernoboApp.install = function (Vue, options) {
     };
 
     Vue.mixin({
+        data() {
+            return {
+                skeletonOptions: {
+                    coverColor: "#C8C8C8",
+                    profileColor: "#E0E0E0",
+                    dafaultColor: "#EEEEEE"
+                }
+            }
+        },
         beforeCreate() {
             setup(this);
         },

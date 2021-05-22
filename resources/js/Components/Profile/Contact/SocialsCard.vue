@@ -14,11 +14,10 @@
 </template>
 
 <script>
-import { Skeleton } from "vue-loading-skeleton";
 import SocialItem from "./Items/SocialItem";
 
 export default {
-	components: { Skeleton, SocialItem },
+	components: { SocialItem },
 	computed: {
 		activeSocials() {
 			return this.options.filter((social) => social.account != null || this.edit);

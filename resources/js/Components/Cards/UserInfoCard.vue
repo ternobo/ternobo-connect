@@ -1,10 +1,10 @@
 <template>
 	<div class="userinfo-card sticky-aside pb-3" v-if="$store.state.user != null">
-		<lazy-image class="card-img-top page-cover" :src="$store.state.user.cover" />
+		<lazy-image style="min-height: 66px" :loadingColor="skeletonOptions.coverColor" class="card-img-top page-cover" :src="$store.state.user.cover" />
 		<div class="userinfo-card-body">
 			<wire-link :href="'/' + $store.state.user.username" class="profile-content">
 				<div class="profile-image">
-					<lazy-image class="profile-md" imgClass="profile-md" :src="$store.state.user.profile" />
+					<lazy-image class="profile-md bg-white" imgClass="profile-md" :loadingColor="skeletonOptions.profileColor" :src="$store.state.user.profile" />
 				</div>
 				<strong class="text-black">{{ this.$store.state.user.name }} <i v-if="$store.state.user.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 				<small class="text-muted">{{ this.$store.state.user.short_bio }}</small>

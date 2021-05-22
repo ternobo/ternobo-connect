@@ -57,7 +57,7 @@
 			</div>
 			<div class="invite_badge" v-if="!$root.isDesktop">
 				<div class="invite_profile" v-if="invited_by != null">
-					<lazy-image :src="invited_by.profile" :class="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" class="mb-0" :imgClass="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" />
+					<lazy-image :loadingColor="skeletonOptions.profileColor" :src="invited_by.profile" :class="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" class="mb-0" :imgClass="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" />
 				</div>
 				<div class="invite_info">
 					<span class="invite_date" :class="{ bold: invited_by == null }">محلق شده در {{ joinTime }}</span>

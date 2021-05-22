@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import { Skeleton } from "vue-loading-skeleton";
 import AddWebsiteModal from "./AddWebsiteModal.vue";
 import WebsiteItem from "./Items/WebsiteItem.jsx";
 import { v4 as uuidv4 } from "uuid";
@@ -76,7 +75,6 @@ export default {
 		});
 	},
 	components: {
-		Skeleton,
 		WebsiteItem,
 		AddWebsiteModal,
 	},
