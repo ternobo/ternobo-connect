@@ -1,5 +1,5 @@
 <template>
-	<div class="post-box" v-if="post !== undefined && !deleted">
+	<div class="post-box" v-if="post !== undefined && post.page && !deleted">
 		<new-post-modal :post="post" :show.sync="edit"></new-post-modal>
 		<div class="post-header pt-0">
 			<wire-link class="publisher" :href="'/' + post.page.slug">

@@ -1,8 +1,8 @@
 <template>
 	<div class="post-body">
-		<div class="slider-content">
+		<transition-group name="no-mode-translate-fade" :duration="500" class="slider-content" mode="out-in">
 			<Content v-for="content in post.slides[active].content" :content="content" :key="`content_item_${content.id}`"></Content>
-		</div>
+		</transition-group>
 		<div dir="ltr" class="slider-arrows" v-if="post.slides.length > 1">
 			<i class="material-icons clickable" :class="{ disabled: active < 1 }" @click="goPrevSlide">keyboard_arrow_left</i>
 			<div class="dot" v-for="(dot, index) in post.slides" :key="'dot_' + dot.id" @click="active = index" :class="{ active: index == active, clickable: index != active }"></div>

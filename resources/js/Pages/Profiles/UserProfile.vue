@@ -144,23 +144,27 @@ export default {
 		},
 	},
 	created() {
-		this.current_tab = this.location;
-
-		if (this.location.endsWith("articles") || this.location.endsWith("activities")) {
+		if (window.location.hash == "#drafts") {
+			this.current_tab = "activities";
+			this.draft = true;
 			this.showEdit = false;
+		} else {
+			this.current_tab = this.location;
+		}
+
+		if (this.current_tab.endsWith("activities")) {
+			this.showEdit = false;
+			axios
+				.post("/" + this.page.slug + "/actions", this.filters)
+				.then((response) => {
+					this.actionsList = response.data.actions.data;
+					this.next_page_url = response.data.actions.next_page_url;
+				})
+				.catch((err) => console.log(err))
+				.then(() => (this.loadingActions = false));
 		} else {
 			this.showEdit = true;
 		}
-		this.current_tab = this.location;
-
-		axios
-			.post("/" + this.page.slug + "/actions", this.filters)
-			.then((response) => {
-				this.actionsList = response.data.actions.data;
-				this.next_page_url = response.data.actions.next_page_url;
-			})
-			.catch((err) => console.log(err))
-			.then(() => (this.loadingActions = false));
 	},
 	beforeRouteLeave(to, from, next, vm) {
 		if (vm.edit) {

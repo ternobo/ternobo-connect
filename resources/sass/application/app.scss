@@ -258,6 +258,21 @@ ul {
     max-height: 0;
 }
 
+.no-mode-translate-fade-enter-active,
+.no-mode-translate-fade-leave-active {
+    transition: all 1s;
+}
+
+.no-mode-translate-fade-enter,
+.no-mode-translate-fade-leave-active {
+    opacity: 0;
+}
+
+.no-mode-translate-fade-leave-active {
+    opacity: 0;
+    position: absolute;
+}
+
 a:hover {
     text-decoration: none;
 }
