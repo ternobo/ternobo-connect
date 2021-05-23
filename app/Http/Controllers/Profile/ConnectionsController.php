@@ -63,7 +63,7 @@ class ConnectionsController extends Controller
         // counts
         $connections_count = count(Connection::query()->where("accepted", true)->whereRaw("(connection_id = '$user->id' or user_id = '$user->id')")->get());
         $followers_count = count(Following::query()->where("following", Auth::user()->id)->get());
-        $following_count = count(Following::query()->where("user_id", Auth::user()->id)->get());
+        $following_count = count(Following::query()->where("page_id", Auth::user()->id)->get());
 
         return TernoboWire::render("MyConnections", [
             "connections" => $accpeted_connections,
@@ -146,7 +146,7 @@ class ConnectionsController extends Controller
     public function follow($page_id)
     {
         $page = Page::findOrFail($page_id);
-        $followRow = Following::query()->where("user_id", Auth::user()->id)->where("following", $page_id)->firstOrNew();
+        $followRow = Following::query()->where("page_id", Auth::user()->id)->where("following", $page_id)->firstOrNew();
         $followRow->following = $page_id;
         $followRow->user_id = Auth::user()->id;
         $result = $followRow->save();
@@ -156,7 +156,7 @@ class ConnectionsController extends Controller
     public function unfollow($page_id)
     {
         $page = Page::findOrFail($page_id);
-        $followRow = Following::query()->where("user_id", Auth::user()->id)
+        $followRow = Following::query()->where("page_id", Auth::user()->id)
             ->where(function ($query) use ($page_id) {
                 $query->where("following", $page_id);
             })->firstOrFail();

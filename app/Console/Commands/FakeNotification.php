@@ -87,7 +87,7 @@ class FakeNotification extends Command
                     $connected_to = $comment->id;
                     break;
                 case 'follow':
-                    $followRow = Following::query()->where("user_id", $from->id)->where("following", $user->id)->firstOrNew();
+                    $followRow = Following::query()->where("page_id", $from->id)->where("following", $user->id)->firstOrNew();
                     $followRow->following = $from->id;
                     $followRow->user_id = $user->id;
                     $followRow->save();

@@ -32,7 +32,7 @@ class Following extends Model
 
     public function follower()
     {
-        return $this->belongsTo("App\Models\Page", "user_id")->with("user");
+        return $this->belongsTo(Page::class, "page_id")->with("user");
     }
 
     public static function tags()

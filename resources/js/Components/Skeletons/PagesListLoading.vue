@@ -8,13 +8,19 @@
 					<skeleton class="mt-2" :style="{ height: '16px', width: '150px' }"></skeleton>
 				</div>
 			</div>
-			<skeleton :style="{ height: '30px', width: '100px' }"></skeleton>
+			<skeleton v-if="showFollowing" :style="{ height: '30px', width: '100px' }"></skeleton>
 		</div>
 	</div>
 </template>
 
 <script>
-export default {};
+export default {
+	props: {
+		showFollowing: {
+			default: true,
+		},
+	},
+};
 </script>
 
 <style>

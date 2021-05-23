@@ -86,7 +86,7 @@ class PageController extends Controller
 
         $pages = array();
         if (Auth::check()) {
-            $pages = Following::where("followings.user_id", $page->user->id)
+            $pages = Following::where("followings.page_id", $page->id)
                 ->join("pages", "pages.id", "=", "followings.following")
                 ->where("pages.id", "!=", $page->id)
                 ->where("pages.id", "!=", Auth::user()->getPage()->id)

@@ -163,7 +163,7 @@ class User extends Authenticatable implements Messageable
 
     public function followings()
     {
-        return $this->hasMany("App\Models\Following");
+        return $this->hasManyThrough("App\Models\Following", Page::class);
     }
     public function posts()
     {
@@ -175,7 +175,7 @@ class User extends Authenticatable implements Messageable
     }
     public function followers()
     {
-        return $this->hasMany("App\Models\Following", "following");
+        return $this->hasManyThrough("App\Models\Following", Page::class);
     }
 
     public function likes()
@@ -306,7 +306,7 @@ class User extends Authenticatable implements Messageable
     public function isFollowing($id)
     {
         $page = Page::getPersonalPage($id);
-        $connection = Following::where("user_id", $this->id)->where("following", $page->id);
+        $connection = Following::where("page_id", $this->id)->where("following", $page->id);
         return $connection->first();
     }
 

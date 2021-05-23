@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Following;
 use App\Models\Page;
+use App\Ternobo;
 use Illuminate\Support\Facades\Auth;
 use Ternobo\TernoboWire\TernoboWire;
 
@@ -23,7 +24,7 @@ class FollowSuggestionController extends Controller
 
     public function get()
     {
-        $followings = Following::query()->where("user_id", Auth::user()->id)->count();
+        $followings = Following::query()->where("page_id", Ternobo::currentPage()->id)->count();
         $suggestions = Page::query()->with(['user'])->where('pages.id', "!=", Auth::user()->personalPage->id)
             ->leftJoin("follow_suggestions", "pages.id", "=", "follow_suggestions.page_id")
             ->select(['pages.*', "follow_suggestions.created_at as score"])

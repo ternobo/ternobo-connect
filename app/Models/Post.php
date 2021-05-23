@@ -174,7 +174,7 @@ class Post extends Model
             return $this->hasMany("App\Models\Like", "post_id")
                 ->with("page")
                 ->whereHas("page", function ($query) {
-                    $query->whereRaw("id in (select following from followings where user_id = ?)", Auth::user()->id);
+                    $query->whereRaw("id in (select following from followings where page_id = ?)", Auth::user()->id);
                 })
                 ->latest();
         }

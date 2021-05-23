@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Ternobo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +50,7 @@ class Page extends Model
     }
     public function followings()
     {
-        return $this->hasMany(Following::class, "user_id", "user_id");
+        return $this->hasMany(Following::class, "page_id");
     }
 
     /**
@@ -374,7 +375,10 @@ class Page extends Model
         //     $query->whereIn("following", Auth::user()->followings()->select(['following']))
         //         ->where("following", "!=", Auth::user()->id);
         // })->with(['followers'])->get()->toArray());
-        return Auth::check() ? [] : [];
+        return Auth::check() ? Page::query()->whereIn("id", Ternobo::currentPage()->followings()->select("following"))
+            ->whereIn("id", $this->followers()->select("page_id"))
+            ->where("id", "!=", Ternobo::currentPage()->id)
+            ->get() : [];
     }
 
     /**
@@ -421,8 +425,8 @@ class Page extends Model
                 $pages = Following::query()
                     ->distinct("pages.id")
                     ->join("pages", "pages.id", "=", "followings.following")
-                    ->whereRaw("followings.user_id IN (SELECT following from followings where user_id='$user->id')")
-                    ->whereRaw("followings.following NOT IN (SELECT following from followings where user_id='$user->id')")
+                    ->whereRaw("followings.page_id IN (SELECT following from followings where page_id='$user->id')")
+                    ->whereRaw("followings.following NOT IN (SELECT following from followings where page_id='$user->id')")
                     ->where("pages.user_id", "!=", Auth::user()->id)
                     ->select(array("pages.*"))
                     ->get();

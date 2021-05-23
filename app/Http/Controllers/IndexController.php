@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use App\Models\Following;
 use App\Models\FollowSuggestion;
 use App\Models\Post;
+use App\Ternobo;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +41,7 @@ class IndexController extends Controller
             $more = true;
         }
         $suggestion = FollowSuggestion::query()->with('page')->paginate($num);
-        $followings = count(Following::query()->where("user_id", Auth::user()->id)->get());
+        $followings = count(Following::query()->where("page_id", Ternobo::currentPage()->id)->get());
         if ($followings >= 3) {
             return redirect("/home");
         }
