@@ -17,11 +17,12 @@ use Laravel\Socialite\Facades\Socialite; ?>
         }
 
     </style>
-    {{-- {!! Socialite::driver('telegram')->getScript() !!} --}}
+
 </head>
 
 <body>
-
+    <script async src="https://telegram.org/js/telegram-widget.js?15" data-telegram-login="ternobo_bot" data-size="medium" data-auth-url="{{ url('/connect/telegram/callback') }}"
+        data-request-access="write"></script>
 </body>
 
 </html>

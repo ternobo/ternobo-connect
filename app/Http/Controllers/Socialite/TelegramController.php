@@ -12,9 +12,7 @@ class TelegramController extends Controller
 {
     public function login()
     {
-        return Socialite::driver('telegram')
-            ->with(['user' => Auth::user()->id])
-            ->redirect();
+        return view("telegram-login");
     }
 
     public function callback()
