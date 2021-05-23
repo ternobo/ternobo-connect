@@ -3,7 +3,7 @@
 		<div class="position-absolute d-flex align-items-center justify-content-center" style="top: 0px; left: 0px; right: 0px; bottom: 0px; width: calc(100%); height: calc(100%); background: rgba(0, 0, 0, 0.5); z-index: 1" v-if="loading">
 			<loading-spinner></loading-spinner>
 		</div>
-		<CropperModal title="انتخاب تصویر پروفایل" v-if="canChange" :show.sync="crop" :aspect-ratio="25 / 7.8" :image="image" @cropped="upload"></CropperModal>
+		<CropperModal title="انتخاب تصویر پروفایل" v-if="canChange" :show.sync="crop" :aspect-ratio="25 / 7.8" :image="imageToCrop" @cropped="upload"></CropperModal>
 		<input type="file" class="d-none" ref="imageFile" @change="imageSelect" />
 		<lazy-image :loadingColor="skeletonOptions.coverColor" :src="image" img-class="w-100" class="mb-0 page-cover" />
 		<transition name="fade">
@@ -71,7 +71,7 @@ export default {
 				let blobURL = URL.createObjectURL(file);
 				if (filetype.startsWith("image")) {
 					this.file = file;
-					this.image = blobURL;
+					this.imageToCrop = blobURL;
 					this.crop = true;
 				} else {
 					this.toast("فایل انتخابی تصویر نیست!");
@@ -110,7 +110,7 @@ export default {
 			image: "",
 			file: null,
 			loading: false,
-
+			imageToCrop: "",
 			showIcons: false,
 		};
 	},

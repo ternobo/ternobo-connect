@@ -9,7 +9,7 @@
 		</div>
 		<ul class="achievement-list" v-if="loading">
 			<li>
-				<Skeleton :count="4" :heigth="25" />
+				<skeleton :count="4" :heigth="25" />
 			</li>
 		</ul>
 		<draggable group="publishs" ref="draggable" tag="ul" v-bind="dragOptions" v-model="publishs" class="achievement-list" :disabled="!edit" handle=".hand-hover">

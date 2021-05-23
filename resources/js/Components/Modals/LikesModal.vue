@@ -1,14 +1,14 @@
 <template>
 	<b-modal v-model="showModal" hide-footer @show="onShown" title="پسند‌ها" size="md" :centered="true">
-		<div style="min-height: 200px" class="d-flex align-items-center justify-content-center loading" v-if="loading || error">
-			<loading-spinner v-if="loading"></loading-spinner>
-			<div class="d-flex flex-column justify-center align-items-center w-100 err" v-if="error">
+		<pages-list-loading style="min-height: 200px" v-if="loading"></pages-list-loading>
+		<div style="min-height: 200px" class="d-flex align-items-center justify-content-center loading" v-else-if="error">
+			<div class="d-flex flex-column justify-center align-items-center w-100 err">
 				<i @click="onShown" class="hover-dark text-muted material-icons-outlined">refresh</i>
 				<br />
 				<span class="text-muted">خطا در برقراری ارتباط</span>
 			</div>
 		</div>
-		<div class="likes-list" v-if="!loading && !error" v-infinite-scroll="loadMore" :infinite-scroll-distance="10">
+		<div class="likes-list" v-else v-infinite-scroll="loadMore" :infinite-scroll-distance="10">
 			<div v-for="like in likes" :key="'like_' + like.id" class="like-item">
 				<wire-link :href="'/' + like.page.slug" class="userinfo">
 					<lazy-image class="mb-0" :class="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" :loadingColor="skeletonOptions.profileColor" :imgClass="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" :src="like.page.profile"></lazy-image>
@@ -30,6 +30,7 @@ import ModalMixin from "../../Mixins/Modal";
 import FollowButton from "../buttons/FollowButton.vue";
 import LazyImage from "../LazyImage.vue";
 import LoadingSpinner from "../LoadingSpinner.vue";
+import PagesListLoading from "../Skeletons/PagesListLoading.vue";
 export default {
 	watch: {
 		likesPaginate(newValue) {
@@ -117,7 +118,7 @@ export default {
 				.then(() => (this.loading = false));
 		},
 	},
-	components: { LazyImage, FollowButton, LoadingSpinner },
+	components: { LazyImage, FollowButton, LoadingSpinner, PagesListLoading },
 
 	mixins: [ModalMixin],
 	name: "LikesModal",

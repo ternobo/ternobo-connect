@@ -9,7 +9,7 @@
 			</div>
 			<ul class="experiences-list p-0" v-if="loading">
 				<li>
-					<Skeleton :count="3" heigth="80px" />
+					<skeleton :count="3" heigth="80px" />
 				</li>
 			</ul>
 			<div class="w-100 text-center" v-else-if="experiences.length < 1">

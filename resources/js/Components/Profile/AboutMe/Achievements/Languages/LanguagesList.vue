@@ -9,7 +9,7 @@
 		</div>
 		<ul class="languages-list p-0" v-if="loading">
 			<li>
-				<Skeleton :count="4" :heigth="25" />
+				<skeleton :count="4" :heigth="25" />
 			</li>
 		</ul>
 		<draggable group="langs" ref="draggable" tag="ul" v-bind="dragOptions" v-model="languages" class="languages-list" :disabled="!edit" handle=".hand-hover">

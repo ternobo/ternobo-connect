@@ -9,7 +9,7 @@
 			</div>
 			<ul class="skills-list p-0" v-if="skills == null">
 				<li>
-					<Skeleton :count="4" :heigth="25" />
+					<skeleton :count="4" :heigth="25" />
 				</li>
 			</ul>
 			<div class="w-100 text-center" v-else-if="skills.length < 1">
@@ -39,12 +39,16 @@ export default {
 	},
 	methods: {
 		onDelete(index) {
-			const h = this.$createElement;
-			this.confirmDialog(["ایا از حذف مهارت ", h("strong", {}, [this.skills[index].name]), " اطمینان دارید؟"]).then((value) => {
-				if (value) {
-					this.skills.splice(index, 1);
-				}
-			});
+			if (Boolean(this.skills[index].name)) {
+				const h = this.$createElement;
+				this.confirmDialog(["ایا از حذف مهارت ", h("strong", {}, [this.skills[index].name]), " اطمینان دارید؟"]).then((value) => {
+					if (value) {
+						this.skills.splice(index, 1);
+					}
+				});
+			} else {
+				this.skills.splice(index, 1);
+			}
 		},
 		addSkill() {
 			this.skills.push({

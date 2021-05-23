@@ -2,7 +2,7 @@
 	<div class="socials-container">
 		<h5 class="contact--title"><i class="material-icons">alternate_email</i>راه‌های ارتباطی</h5>
 		<div v-if="loading" class="contact-list">
-			<Skeleton width="238px" height="66px" v-for="i in 1" :key="`skeleton_${i}`" />
+			<skeleton width="238px" height="66px" v-for="i in 1" :key="`skeleton_${i}`" />
 		</div>
 		<div class="no-contact-container" v-else-if="activeSocials.length < 1 && !edit">
 			<span class="font-16 text-grey">موردی ثبت نشده</span>

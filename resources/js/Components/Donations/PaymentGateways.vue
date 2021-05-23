@@ -11,7 +11,7 @@
 					<span class="text-muted payment-code" v-else>{{ merchant }}</span>
 				</div>
 				<div class="payment-input text-center" v-else>
-					<Skeleton style="width: 110px" height="33px" />
+					<skeleton style="width: 110px" height="33px" />
 				</div>
 				<div class="d-flex justify-content-between align-items-lg-center payment-active-gateway">
 					<label class="activation-label">فعال سازی</label>

@@ -2,7 +2,18 @@
 	<b-modal v-model="showModal" @show="onShow" hide-footer title="شبکه" size="md" :centered="true">
 		<tabs @selected="tabSelect" tabsClass="connections-tab" :centered="false" :compact="true">
 			<tab :name="`دنبال شده‌ها`" id="followings" :selected="true">
-				<div class="connections-list">
+				<pages-list-loading style="min-height: 200px" v-if="loading"></pages-list-loading>
+				<div style="min-height: 200px" class="d-flex align-items-center justify-content-center loading" v-else-if="error">
+					<div class="d-flex flex-column justify-center align-items-center w-100 err">
+						<i @click="onShown" class="hover-dark text-muted material-icons-outlined">refresh</i>
+						<br />
+						<span class="text-muted">خطا در برقراری ارتباط</span>
+					</div>
+				</div>
+				<div class="d-flex justify-content-center w-100 py-4" v-else-if="connections.length < 1">
+					<span class="font-16 text-superlight">هیچ دنبال شده‌ای یافت نشد</span>
+				</div>
+				<div class="connections-list" v-else>
 					<div v-for="connection in connections" :key="'connections_' + connection.id" class="connection-item">
 						<wire-link :href="'/' + connection.following.slug" class="userinfo">
 							<lazy-image class="mb-0 profile-standard" imgClass="profile-standard" :src="connection.following.profile"></lazy-image>
@@ -14,16 +25,21 @@
 						<follow-button :page="connection.following.id"></follow-button>
 					</div>
 					<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>
-					<div class="d-flex justify-content-center w-100 py-4" v-if="loading">
-						<loading-spinner></loading-spinner>
-					</div>
-					<div class="d-flex justify-content-center w-100 py-4" v-else-if="connections.length < 1">
-						<span class="font-16 text-superlight">هیچ دنبال شده‌ای یافت نشد</span>
-					</div>
 				</div>
 			</tab>
 			<tab :name="`دنبال کننده‌ها`" id="followers">
-				<div class="connections-list">
+				<pages-list-loading style="min-height: 200px" v-if="loading"></pages-list-loading>
+				<div style="min-height: 200px" class="d-flex align-items-center justify-content-center loading" v-else-if="error">
+					<div class="d-flex flex-column justify-center align-items-center w-100 err">
+						<i @click="onShown" class="hover-dark text-muted material-icons-outlined">refresh</i>
+						<br />
+						<span class="text-muted">خطا در برقراری ارتباط</span>
+					</div>
+				</div>
+				<div class="d-flex justify-content-center w-100 py-4" v-else-if="connections.length < 1">
+					<span class="font-16 text-superlight">هیچ دنبال شده‌ای یافت نشد</span>
+				</div>
+				<div class="connections-list" v-else>
 					<div v-for="connection in connections" :key="'connections_' + connection.id" class="connection-item">
 						<wire-link :href="'/' + connection.follower.slug" class="userinfo">
 							<lazy-image class="mb-0 profile-standard" imgClass="profile-standard" :src="connection.follower.profile"></lazy-image>
@@ -35,12 +51,6 @@
 						<follow-button :page="connection.follower.id"></follow-button>
 					</div>
 					<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>
-					<div class="d-flex justify-content-center w-100 py-4" v-if="loading">
-						<loading-spinner></loading-spinner>
-					</div>
-					<div class="d-flex justify-content-center w-100 py-4" v-else-if="connections.length < 1">
-						<span class="font-16 text-superlight">هیچ دنبال کننده‌ای یافت نشد</span>
-					</div>
 				</div>
 			</tab>
 			<template slot="custom-item">
@@ -66,6 +76,7 @@ import ModalMixin from "../../Mixins/Modal";
 import LoadingSpinner from "../LoadingSpinner.vue";
 import FollowButton from "../buttons/FollowButton.vue";
 import { mapState } from "vuex";
+import PagesListLoading from "../Skeletons/PagesListLoading.vue";
 export default {
 	mixins: [ModalMixin],
 	name: "ConnetionsModal",
@@ -113,6 +124,7 @@ export default {
 				})
 				.catch((err) => {
 					console.log(err);
+					this.error = true;
 					this.toast("خطا در دریافت اطلاعات");
 				})
 				.then(() => {
@@ -135,6 +147,7 @@ export default {
 					})
 					.catch((err) => {
 						console.log(err);
+						this.error = true;
 						this.toast("خطا در دریافت اطلاعات");
 					})
 					.then(() => {
@@ -156,6 +169,7 @@ export default {
 					})
 					.catch((error) => {
 						console.error(error);
+						this.toast("خطا در دریافت اطلاعات");
 					})
 					.then(() => {
 						this.loadingMoreConnection = false;
@@ -169,6 +183,7 @@ export default {
 		return {
 			current_tab: "followings",
 			total: 0,
+			error: false,
 			connections: [],
 			search: "",
 			loading: false,
@@ -188,6 +203,7 @@ export default {
 		PageInfoCard,
 		LoadingSpinner,
 		FollowButton,
+		PagesListLoading,
 	},
 };
 </script>

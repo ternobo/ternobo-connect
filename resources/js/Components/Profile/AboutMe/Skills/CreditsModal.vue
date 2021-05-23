@@ -1,8 +1,8 @@
 <template>
 	<b-modal v-if="$store.state.user != null" @show="onShown" v-model="showModal" hide-footer :title="'تایید مهارت '" size="md" :centered="true">
-		<div style="min-height: 200px" class="d-flex align-items-center justify-content-center loading" v-if="loading || error">
-			<loading-spinner v-if="loading"></loading-spinner>
-			<div class="d-flex flex-column justify-center align-items-center w-100 err" v-if="error">
+		<pages-list-loading style="min-height: 200px" v-if="loading"></pages-list-loading>
+		<div style="min-height: 200px" class="d-flex align-items-center justify-content-center loading" v-else-if="error">
+			<div class="d-flex flex-column justify-center align-items-center w-100 err">
 				<i @click="onShown" class="hover-dark text-muted material-icons-outlined">refresh</i>
 				<br />
 				<span class="text-muted">خطا در برقراری ارتباط</span>
@@ -31,9 +31,10 @@
 import { mapState } from "vuex";
 import ModalMixin from "../../../../Mixins/Modal";
 import FollowButton from "../../../buttons/FollowButton.vue";
+import PagesListLoading from "../../../Skeletons/PagesListLoading.vue";
 
 export default {
-	components: { FollowButton },
+	components: { FollowButton, PagesListLoading },
 	computed: {
 		...mapState(["user"]),
 	},

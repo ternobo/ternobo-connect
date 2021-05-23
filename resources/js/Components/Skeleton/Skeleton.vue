@@ -23,7 +23,7 @@ export default {
         default: "#EEEEEE",
     },
     classes:{
-       default:[],
+       default:()=>[],
     },
     styles:{
       default: ()=>[],
@@ -61,9 +61,8 @@ export default {
     const classes = [`${prefix}-skeleton`,...this.classes];
     const elements = [];
     const styles = { ...themeStyle(this.color), ...styles };
-  console.log(this.color);
 
-  console.log(themeStyle(this.color));
+
     if (width) styles.width = width;
     if (height) styles.height = height;
     if (circle) styles.borderRadius = '50%';

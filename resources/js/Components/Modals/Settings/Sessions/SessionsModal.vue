@@ -1,7 +1,7 @@
 <template>
 	<b-modal v-model="showModal" hide-footer @show="onShow" title="دستگاه‌های متصل" size="md" :centered="true">
 		<div v-if="loading">
-			<Skeleton :count="5" :height="3"></Skeleton>
+			<skeleton :count="5" :height="3"></skeleton>
 		</div>
 		<div v-else>
 			<div class="row">

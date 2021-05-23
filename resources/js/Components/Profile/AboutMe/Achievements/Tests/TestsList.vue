@@ -9,7 +9,7 @@
 		</div>
 		<ul class="tests-list p-0" v-if="loading">
 			<li>
-				<Skeleton :count="4" :heigth="25" />
+				<skeleton :count="4" :heigth="25" />
 			</li>
 		</ul>
 		<draggable group="tests" ref="draggable" tag="ul" v-bind="dragOptions" v-model="tests" class="achievement-list" :disabled="!edit" handle=".hand-hover">

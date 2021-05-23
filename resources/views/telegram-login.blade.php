@@ -21,8 +21,8 @@ use Laravel\Socialite\Facades\Socialite; ?>
 </head>
 
 <body>
-    <script async src="https://telegram.org/js/telegram-widget.js?15" data-telegram-login="ternobo_bot" data-size="medium" data-auth-url="{{ url('/connect/telegram/callback') }}"
-        data-request-access="write"></script>
+    <script async src="https://telegram.org/js/telegram-widget.js?15" data-telegram-login="ternobo_bot" data-size="large" data-radius="0"
+        data-auth-url="{{ url('/connect/telegram/callback') }}" data-request-access="write"></script>
 </body>
 
 </html>

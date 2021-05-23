@@ -18,8 +18,8 @@ export default {
 	props: {
 		noYearPlaceholder: {
 			type: String,
-			default: false,
-			required: "موردی یافت نشد",
+			default: "موردی یافت نشد",
+			require: false,
 		},
 		disabled: {
 			type: Boolean,

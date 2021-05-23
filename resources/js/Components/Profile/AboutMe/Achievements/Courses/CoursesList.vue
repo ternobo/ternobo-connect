@@ -9,7 +9,7 @@
 		</div>
 		<ul class="courses-list p-0" v-if="loading">
 			<li>
-				<Skeleton :count="4" :heigth="25" />
+				<skeleton :count="4" :heigth="25" />
 			</li>
 		</ul>
 		<draggable group="courses" ref="draggable" tag="ul" v-bind="dragOptions" v-model="courses" class="achievement-list" :disabled="!edit" handle=".hand-hover">
@@ -25,7 +25,11 @@ export default {
 	mixins: [AchievementsMxixin],
 	methods: {
 		onDelete(index) {
-			this.deleteConfirmModal(`دوره ${this.courses[index].name}`, index, this.courses);
+			if (Boolean(this.courses[index].name)) {
+				this.deleteConfirmModal(`دوره ${this.courses[index].name}`, index, this.courses);
+			} else {
+				this.courses.splice(index, 1);
+			}
 		},
 		addCourse() {
 			this.courses.push({

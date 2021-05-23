@@ -3,7 +3,7 @@
 		<add-website-modal @add="addWebsite" :show.sync="showAddWebsite" :websites="websites" :websiteOptions="options"></add-website-modal>
 		<h5 class="contact--title"><i class="material-icons">public</i>وب‌سایت‌ها</h5>
 		<div v-if="loading" class="contact-list">
-			<Skeleton width="238px" height="66px" v-for="i in 3" :key="`skeleton_${i}`" />
+			<skeleton width="238px" height="66px" v-for="i in 3" :key="`skeleton_${i}`" />
 		</div>
 
 		<div class="contact-list p-0">
