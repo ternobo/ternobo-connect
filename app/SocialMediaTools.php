@@ -56,6 +56,13 @@ class SocialMediaTools
         }, $text, $limit);
     }
 
+    public static function uploadPostImage($media, $quality = 70)
+    {
+        $image = SocialMediaTools::fitPostImage(ImageFacades::make(base_path("storage/app/$media")));
+        $image->save(base_path("storage/app/$media.webp"), $quality, "webp");
+        return "$media.webp";
+    }
+
     public static function fitPostImage(Image $image)
     {
         $callback = function ($constraint) {

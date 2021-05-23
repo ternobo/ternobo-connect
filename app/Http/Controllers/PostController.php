@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
 use Ternobo\TernoboWire\TernoboWire;
 
 class PostController extends Controller
@@ -110,13 +109,11 @@ class PostController extends Controller
 
                     case "media":
                         $media = $content->store("medias");
-                        $image = SocialMediaTools::fitPostImage(Image::make(base_path("storage/app/$media")));
-                        $image->save(base_path("storage/app/$media.webp"), 50, "webp");
                         PostContent::query()->create([
                             'slide_id' => $slide->id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
-                            'content' => "$media.webp",
+                            'content' => SocialMediaTools::uploadPostImage($media, 70),
                             'type' => 'media',
                         ]);
                         break;
@@ -422,24 +419,21 @@ class PostController extends Controller
                                 'slide_id' => $slide->id,
                                 'page_id' => $user->personalPage->id,
                                 'sort' => $sort,
-                                'content' => $media,
+                                'content' => SocialMediaTools::uploadPostImage($media, 70),
                                 'type' => 'media',
                             ]);
                         } else {
                             $postContent->update([
                                 'sort' => $sort,
-                                'content' => $media,
+                                'content' => SocialMediaTools::uploadPostImage($media, 70),
                             ]);
                         }
                         break;
                     case "media_notChange":
                         if ($postContent != null) {
-
                             $postContent->update([
                                 'sort' => $sort,
                             ]);
-                            // dd($postContent);
-
                             break;
                         }
                 }
