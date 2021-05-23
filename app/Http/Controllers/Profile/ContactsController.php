@@ -10,6 +10,7 @@ use App\Models\SocialDriver;
 use App\Models\WebsiteOption;
 use App\Rules\UsernameValidator;
 use App\Rules\WebsiteURL;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -37,12 +38,12 @@ class ContactsController extends Controller
         $user_id = Page::findOrFail($page_id)->user_id;
         $options = SocialDriver::with(['account' => function ($query) use ($user_id) {
             $query->where("user_id", $user_id);
-        }])
-            ->leftJoin("connected_accounts", "social_drivers.driver", "connected_accounts.driver")
-            ->select("social_drivers.*")
-            ->where("active", true)
-            ->orderBy("connected_accounts.created_at", "DESC")
-            ->get();
+        }])->get()->sortBy(function ($item) {
+            if ($item->account) {
+                return Carbon::createFromTimeString($item->account->created_at)->timestamp;
+            }
+            return 999;
+        }, SORT_REGULAR, true)->values()->all();
         return response()->json(['result' => true, "options" => $options]);
     }
 
@@ -54,7 +55,7 @@ class ContactsController extends Controller
         $page = Auth::user()->personalPage;
         $socialOptions = SocialDriver::all()->pluck("driver");
         $validator = Validator::make($request->contacts, [
-            "slug" => [new UsernameValidator($page->slug), "required"],
+            "slug" => [new UsernameValidator($page->id), "required"],
             "socials" => ['array'],
             "socials.driver" => [Rule::in($socialOptions)],
             "websites" => ['array'],

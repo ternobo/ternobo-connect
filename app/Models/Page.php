@@ -370,6 +370,10 @@ class Page extends Model
         //         }
         //     }
         // }
+        dd(Page::query()->where("id", $this->id)->whereHas("followers", function ($query) {
+            // $query->whereIn("following", Auth::user()->followings()->select(['following']))
+            //     ->where("following", "!=", $this->id);
+        })->with(['followers'])->get()->toArray());
         return Auth::check() ? Page::query()->whereHas("followers", function ($query) {
             $query->whereIn("following", Auth::user()->followings()->select(['following']))
                 ->where("following", "!=", $this->id);
