@@ -5,7 +5,7 @@ use Laravel\Socialite\Facades\Socialite; ?>
 
 <head>
     <meta charset="UTF-8">
-    <title>انتقال به درگاه پرداخت</title>
+    <title>Login with Telegram</title>
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
 
     <style>
