@@ -60,6 +60,7 @@
         "soroosh/ternobo-wire": "@dev",
         "spatie/laravel-backup": "^6.14",
         "stevebauman/location": "^5.2",
+        "symfony/process": "^5.2",
         "taylornetwork/laravel-username-generator": "^2.4",
         "tedivm/jshrink": "^1.3"
     },
