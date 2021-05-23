@@ -1,8 +1,8 @@
 const ModalMixin = {
-    created: function(){
+    created: function () {
         this.showModal = this.show;
     },
-    data: function() {
+    data: function () {
         return {
             showModal: false
         }
@@ -13,6 +13,9 @@ const ModalMixin = {
         },
         showModal(newValue) {
             this.$emit("update:show", newValue);
+            if (!newValue) {
+                this.$emit("hide");
+            }
         },
 
     },

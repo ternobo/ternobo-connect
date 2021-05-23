@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Profile;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
+use App\Ternobo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -40,8 +42,8 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            "name" => "required",
-        ], ["name.required" => "نام دسته بندی اجباری است."]);
+            "name" => ["required", Rule::unique("categories", "name")->where("page_id", Ternobo::currentPage()->id)],
+        ], ["name.required" => "نام دسته بندی اجباری است.", "name.unique" => "نام دسته بندی تکراری است."]);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {

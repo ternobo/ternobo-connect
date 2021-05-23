@@ -1,6 +1,8 @@
 <template>
 	<div>
-		<b-modal v-if="user != null" v-model="showModal" @show="shown" no-close-on-esc hide-footer no modal-class="new-post-modal" size="md" title="تولید محتوای تازه" :centered="true">
+		<category-select-modal :categories.sync="categories" @hide="onCategoryClose" :selectedCategory.sync="category" :show.sync="showCategoryModal"></category-select-modal>
+
+		<b-modal v-if="user != null" v-model="showModal" @show="shown" no-close-on-esc hide-footer no-stacking modal-class="new-post-modal" size="md" title="تولید محتوای تازه" :centered="true">
 			<div action="/posts" data-ajax method="POST" data-reload="1" enctype="multipart/form-data" class="w-100">
 				<div class="new-post position-relative">
 					<div class="selections">
@@ -17,7 +19,11 @@
 								<loading-spinner v-if="loadingCanDonate" style="height: 12px; width: 12px; border-width: 1px"></loading-spinner>
 								<checkbox v-else v-model="canDonate" :status="canDonate" class="mt-1 m-0 text-superlight light"></checkbox>
 							</div>
-							<tselect v-on:new-item="newCategory" :items="categories" value-option="name" :showNewItem="true" v-model="category" direction="rtl"> <i class="material-icons-outlined">layers</i> دسته‌بندی </tselect>
+							<div class="category-select" @click="showCategoryModal = true">
+								<i class="material-icons-outlined">layers</i>
+								<span>{{ category == null ? "دسته‌بندی‌ها" : category.name }}</span>
+							</div>
+							<!-- <tselect v-on:new-item="newCategory" :items="categories" value-option="name" :showNewItem="true" v-model="category" direction="rtl"> <i class="material-icons-outlined">layers</i> دسته‌بندی </tselect> -->
 						</div>
 					</div>
 					<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
@@ -42,6 +48,8 @@ import isUUID from "is-uuid";
 import Checkbox from "../inputs/Checkbox.vue";
 import { mapState } from "vuex";
 import LoadingSpinner from "../LoadingSpinner.vue";
+import CategorySelect from "../CategorySelect/CategorySelect.vue";
+import CategorySelectModal from "../CategorySelect/CategorySelectModal.vue";
 
 export default {
 	props: {
@@ -52,6 +60,9 @@ export default {
 		},
 	},
 	methods: {
+		onCategoryClose() {
+			this.$emit("update:show", true);
+		},
 		onSlideDelete(id) {
 			if (!isUUID.v4(id)) {
 				this.deletedSlides.push(id);
@@ -220,6 +231,9 @@ export default {
 			category: undefined,
 			loading: false,
 			loadingDraft: false,
+
+			showCategoryModal: false,
+
 			deletedSlides: [],
 			content: [{ id: uuidv4(), content: [], icon: "more_horiz", active: true }],
 
@@ -233,6 +247,8 @@ export default {
 		Slider,
 		Checkbox,
 		LoadingSpinner,
+		CategorySelect,
+		CategorySelectModal,
 	},
 	mixins: [ModalMixin],
 	name: "NewPostModal",

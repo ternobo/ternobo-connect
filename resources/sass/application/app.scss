@@ -447,7 +447,12 @@ img {
     .close {
         font-size: 24px;
         @extend .material-icons;
-        color: $icons;
+        color: $grey;
+
+        &:hover {
+            color: $dark;
+        }
+
         opacity: 1;
     }
 
@@ -1553,3 +1558,4 @@ a:focus {
 
 @import "./components/lang-select.scss";
 @import "./text-utilies.scss";
+@import "./components/category-select.scss";

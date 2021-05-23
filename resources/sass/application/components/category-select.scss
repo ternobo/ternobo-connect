@@ -1,0 +1,42 @@
+.category-select {
+    display: flex;
+    align-items: center;
+    background: $fixed-elements;
+    color: $text-color;
+    font-weight: 600;
+    padding: 12px 16px;
+    height: 40px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 12px;
+    font-weight: 600;
+
+    i {
+        margin-left: 8px
+    }
+}
+
+[dir=rtl] .category-select-modal {
+    .close {
+        transform: rotate(180deg)
+    }
+}
+
+.category-selection-list {
+    @extend .nice-scroll;
+    max-height: 360px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: -8px;
+
+    .category-badge {
+        padding: 4px 12px;
+    }
+
+    >* {
+        margin: 8px;
+    }
+}
