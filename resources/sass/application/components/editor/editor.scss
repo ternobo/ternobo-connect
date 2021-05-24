@@ -43,9 +43,9 @@
                 width: 100%;
                 max-height: 744px;
                 -o-object-fit: cover;
-                   object-fit: cover;
+                object-fit: cover;
                 -o-object-position: center;
-                   object-position: center;
+                object-position: center;
             }
 
             .delete-move-actions {
@@ -775,6 +775,12 @@
         text-fill-color: $text-color;
     }
 
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
     &::-moz-selection, *::-moz-selection {
         -webkit-text-fill-color: $text-color;
         text-fill-color: $text-color;
@@ -845,7 +851,6 @@
 /** Tag Selector **/
 
 .title-input {
-    background: $fixed-elements;
     width: 100%;
     display: flex;
     align-items: center;

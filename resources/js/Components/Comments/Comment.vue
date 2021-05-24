@@ -3,24 +3,26 @@
 		<report-modal :show.sync="showReport" type="comment" :comment-id="comment.id"></report-modal>
 		<likes-modal :item="comment.id" type="comment" :show.sync="showLikes"></likes-modal>
 
-		<div v-if="replyTo != undefined && comment.replyto.page">
-			<span class="text-superlight"> <i class="material-icons">reply</i> پاسخ به {{ comment.replyto.page.name }} </span>
+		<div class="reply-to-container" v-if="replyTo != undefined && comment.replyto.page">
+			<span>
+				<i class="material-icons">reply</i> پاسخ به <strong class="font-demibold">{{ comment.replyto.page.name }}</strong>
+			</span>
 		</div>
 		<div class="comment" v-if="!deleted">
 			<div class="comment-header">
 				<wire-link :href="'/' + comment.page.slug" class="d-flex align-items-center">
 					<img :src="comment.page.profile" class="profile-sm" />
-					<div class="pr-2 pagedetail">
+					<div class="pagedetail">
 						<span class="name">
 							<strong> {{ comment.page.name }} <i v-if="comment.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 						</span>
-						<small class="text-muted" v-if="comment.page.short_bio">
+						<small class="short-bio" v-if="comment.page.short_bio">
 							{{ comment.page.short_bio }}
 						</small>
 					</div>
 				</wire-link>
 				<div class="d-flex align-items-center">
-					<span class="font-10 text-muted">{{ comment_time }}</span>
+					<span class="comment-time">{{ comment_time }}</span>
 					<div>
 						<b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
 							<template v-slot:button-content class="p-0">
@@ -52,7 +54,7 @@
 				</div>
 			</div>
 			<div class="comment-body">
-				<div v-html="comment.text" style="unicode-bidi: plaintext; width: 100% !important; display: block; text-align: justify"></div>
+				{{ comment.text }}
 			</div>
 		</div>
 
@@ -73,7 +75,7 @@
 				</div>
 			</div>
 			<div class="actions">
-				<small class="clickable ml-2" @click="loadReplies(false)" v-if="comment.replies_count > 0 && replyTo == undefined">
+				<small class="clickable ml-1" @click="loadReplies(false)" v-if="comment.replies_count > 0 && replyTo == undefined">
 					<strong :class="{ 'text-muted': !showReplies, 'text-dark': showReplies }"> {{ comment.replies_count }} پاسخ </strong>
 				</small>
 				<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies || !showNewComment, 'material-icons': showReplies && showNewComment }" class="hover-dark clickable"> insert_comment </i>
@@ -86,7 +88,7 @@
 		<transition name="slide">
 			<div class="comment-replies" v-if="showReplies">
 				<new-comment @submit="submit" v-if="showNewComment" :post="comment.post_id" :reply-to="comment.id"></new-comment>
-				<div class="border-right pr-3" style="border-color: #212121 !important" v-if="replyTo === undefined">
+				<div class="replies" v-if="replyTo === undefined">
 					<comment v-on:replied="submit" :reply-to="comment.id" v-for="reply in replies" v-on:deleted="commentDelete" :comment="reply" :key="reply.id"></comment>
 					<div class="w-100 d-flex p-2 justify-content-center align-items-center" v-if="repliesLoading">
 						<loading-spinner></loading-spinner>
@@ -235,12 +237,3 @@ export default {
 	name: "Comment",
 };
 </script>
-
-<style lang="scss" scoped>
-.comment {
-	.pagedetail {
-		display: flex;
-		flex-direction: column;
-	}
-}
-</style>

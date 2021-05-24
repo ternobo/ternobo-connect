@@ -1,13 +1,11 @@
 <template>
 	<div class="sendcomment clearfix" v-if="$store.state.user != null">
-		<div class="input-group-btn mb-0">
-			<img :loadingColor="skeletonOptions.profileColor" class="profile-sm ml-3" :src="$store.state.user.profile" />
-			<MaterialTextArea v-model="text" input-class="form-control autoresize" class="w-100" placeholder="نظر شما چیست؟" name="text" maxlength="2500"></MaterialTextArea>
+		<div class="input-container">
+			<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-sm ml-3 mb-0" imgClass="profile-sm" :src="$store.state.user.profile" />
+			<MaterialTextArea v-model="text" input-class="w-100" maxlength="1000" class="material--sm w-100" placeholder="نظر شما چیست؟" name="text"></MaterialTextArea>
 		</div>
 		<transition name="slide">
-			<div class="justify-content-end mt-0" v-if="showSubmit">
-				<loading-button @click.native="submit" :loading="loading" class="btn btn-primary">ارسال</loading-button>
-			</div>
+			<loading-button @click.native="submit" v-if="showSubmit" :loading="loading" class="btn btn-primary">ارسال</loading-button>
 		</transition>
 	</div>
 </template>
@@ -15,15 +13,6 @@
 <script>
 import MaterialTextArea from "../inputs/MaterialTextArea";
 export default {
-	watch: {
-		text(newValue) {
-			if (newValue.length > 0) {
-				this.showSubmit = true;
-			} else {
-				this.showSubmit = false;
-			}
-		},
-	},
 	props: {
 		post: {
 			type: Number,
@@ -38,9 +27,13 @@ export default {
 	data() {
 		return {
 			loading: false,
-			showSubmit: false,
 			text: "",
 		};
+	},
+	computed: {
+		showSubmit() {
+			return this.text.length > 0;
+		},
 	},
 	methods: {
 		submit() {

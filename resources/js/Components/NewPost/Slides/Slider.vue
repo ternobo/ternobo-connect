@@ -6,16 +6,18 @@
 			</div>
 		</div>
 		<div class="new-post-slider-scrollable" ref="slidesList" :class="{ hasArrow: this.slides.length > maxSlides }">
-			<i class="material-icons arrow" v-if="this.slides.length > maxSlides" @click="updateTransform(-96)">keyboard_arrow_right</i>
+			<i class="material-icons arrow" v-if="this.slides.length > maxSlides" @click="updateTransform(-200)">keyboard_arrow_right</i>
 			<div class="scrollable-list">
 				<div class="new-post-slider" :style="{ transform: `translateX(${transformBy}px)` }">
-					<slide-item v-for="(slide, index) in slides" :key="`slides_${slide.id}`" :hide-delete="index == 0" :class="{ active: slide.id == slides[activeIndex].id }" @delete="deleteItem(index)">
-						<i @click="selectSlide(index)" class="material-icons-outlined">{{ slide.icon }}</i>
-					</slide-item>
-					<div class="add-slide" @click="addSlide"><i class="material-icons">add</i></div>
+					<draggable v-bind="dragOptions" class="drag-container" handle=".slide-item" v-model="slides">
+						<slide-item v-for="(slide, index) in slides" :key="`slides_${slide.id}`" :class="{ active: slide.id == slides[activeIndex].id }" @delete="deleteItem(index)">
+							<i @click="selectSlide(index)" class="material-icons-outlined">{{ slide.icon }}</i>
+						</slide-item>
+					</draggable>
+					<div class="add-slide" @click="addSlide" v-if="slides.length < 12"><i class="material-icons">add</i></div>
 				</div>
 			</div>
-			<i class="material-icons arrow" v-if="this.slides.length > maxSlides" @click="updateTransform(96)">keyboard_arrow_left</i>
+			<i class="material-icons arrow" v-if="this.slides.length > maxSlides" @click="updateTransform(200)">keyboard_arrow_left</i>
 		</div>
 	</div>
 </template>
@@ -44,20 +46,32 @@ export default {
 			return this.slides.filter((item) => item.content.length > 0);
 		},
 		updateTransform(value) {
-			let maxTransform = Math.min(this.slides.length, 5);
-			if (value + this.transformBy <= 0 && value + this.transformBy >= -(maxTransform * 96)) {
+			let maxTransform = Math.min(Math.ceil((this.slides.length + 1) / this.maxSlides), this.maxSlides);
+			if (value + this.transformBy <= 0 && value + this.transformBy >= -(maxTransform * 200)) {
 				this.transformBy += value;
 			}
 		},
 		deleteItem(index) {
 			if (index == this.activeIndex) {
-				this.selectSlide(index - 1);
+				if (index == 0 && this.slides.length == 1) {
+					let slide = this.slides[index];
+					slide.content = [];
+					this.$set(this.slides, index, slide);
+					this.$nextTick(() => {
+						this.updateIcon();
+					});
+				} else if (index == 0) {
+					this.selectSlide(index + 1);
+				} else {
+					this.selectSlide(index - 1);
+				}
 			}
-
-			this.$nextTick(() => {
-				let deletedItem = this.slides.splice(index, 1);
-				this.$emit("delete", deletedItem[0].id);
-			});
+			if (this.slides.length > 1) {
+				this.$nextTick(() => {
+					let deletedItem = this.slides.splice(index, 1)[0];
+					this.$emit("delete", deletedItem.id);
+				});
+			}
 		},
 		updateIcon() {
 			this.slides.forEach((item) => {
@@ -79,6 +93,7 @@ export default {
 		addSlide() {
 			if (this.slides.length < 12) {
 				this.slides.push({ id: uuidv4(), content: [], icon: "more_horiz", active: false });
+				this.selectSlide(this.slides.length - 1);
 			}
 		},
 		selectSlide(index) {
@@ -92,6 +107,14 @@ export default {
 		},
 	},
 	computed: {
+		dragOptions() {
+			return {
+				animation: 200,
+				group: "slides",
+				disabled: false,
+				ghostClass: "ghost",
+			};
+		},
 		activeIndex() {
 			const index = this.slides.findIndex((item) => item.active);
 			return index != -1 ? index : 0;

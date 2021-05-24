@@ -228,6 +228,10 @@ a {
 
 @import "./components/tselect.scss";
 
+.ghost {
+    opacity: 0;
+}
+
 .clickable {
     cursor: pointer;
 }

@@ -183,6 +183,20 @@
     display: flex;
     align-items: center;
     width: 100%;
+    margin-bottom: 32px;
+
+    .add-slide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 4px solid #EEEEEE;
+        box-sizing: border-box;
+        border-radius: 24px;
+        min-width: 64px;
+        height: 64px;
+        color: $action;
+        cursor: pointer;
+    }
 
     >.arrow:not(:nth-child(2)) {
         background: #EEEEEE;
@@ -201,7 +215,7 @@
 
 
     .scrollable-list {
-        padding: 16px 0 32px;
+        padding: 16px 0;
     }
 
     &.hasArrow {
@@ -246,74 +260,78 @@
     max-width: -moz-max-content;
     max-width: max-content;
 
-    .slide-item {
-        position: relative;
-        background: #EEEEEE;
-        border-radius: 24px;
+    .add-slide {
+        margin-left: 12px;
+    }
 
-        min-width: 64px;
-        height: 64px;
+    .drag-container {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
+        flex-direction: row-reverse;
+        transition: 0.3s all;
+        padding: 0 8px;
 
-        &:not(:last-child) {
-            margin-right: 12px;
-        }
+        .slide-item {
+            position: relative;
+            background: #EEEEEE;
+            border-radius: 24px;
 
-        >i:not(.delete-icon) {
-            font-size: 32px;
             min-width: 64px;
             height: 64px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: $grey;
-        }
+            cursor: pointer;
 
-        &.active {
-            background: $dark;
+            &:not(:last-child) {
+                margin-right: 12px;
+            }
 
             >i:not(.delete-icon) {
-                color: $white;
-
+                font-size: 32px;
+                min-width: 64px;
+                height: 64px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: $grey;
             }
-        }
 
-        .delete-icon {
-            position: absolute;
-            bottom: -12px;
-            background: white;
-            display: none;
-            box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            color: $grey;
+            &.active {
+                background: $dark;
+
+                >i:not(.delete-icon) {
+                    color: $white;
+
+                }
+            }
+
+            .delete-icon {
+                position: absolute;
+                bottom: -12px;
+                background: white;
+                display: none;
+                box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.2);
+                border-radius: 8px;
+                color: $grey;
+
+                height: 24px;
+                width: 24px;
+                align-items: center;
+                justify-content: center;
+                font-size: 16px;
+
+                &:hover {
+                    color: $danger;
+                }
+            }
 
             &:hover {
-                color: $danger;
+                .delete-icon {
+                    display: flex;
+                }
             }
-        }
 
-        &:hover {
-            .delete-icon {
-                display: block;
-            }
         }
-
     }
 
-
-    .add-slide {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 4px solid #EEEEEE;
-        box-sizing: border-box;
-        border-radius: 24px;
-        min-width: 64px;
-        height: 64px;
-        color: $action;
-        cursor: pointer;
-    }
 }

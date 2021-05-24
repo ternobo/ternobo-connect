@@ -97,3 +97,14 @@
         }
     }
 }
+
+.material-textarea {
+    label {
+        top: 42%;
+
+        @media screen and (min-width:$sm-size) {
+
+            margin: 0 12px;
+        }
+    }
+}

@@ -45,6 +45,9 @@ export default {
 				this.$emit("update:content", newValue);
 			},
 		},
+		content() {
+			this.editorItems = this.content;
+		},
 	},
 	methods: {
 		getData() {

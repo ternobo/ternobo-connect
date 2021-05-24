@@ -1,6 +1,6 @@
 <template>
 	<div class="title-input">
-		<input type="text" class="bg-transparent border-0 form-control shadow-0" v-model="text" />
+		<input type="text" maxlength="112" class="form-control shadow-0" v-model="text" />
 	</div>
 </template>
 

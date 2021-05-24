@@ -1,23 +1,33 @@
 .comments {
-    max-height: 500px;
-    overflow-y: auto;
-    scrollbar-color: $dark $light;
-    scrollbar-width: thin;
-    scroll-behavior: smooth;
-
-    &::-webkit-scrollbar {
-        width: 0.3em;
-        background: #DEDEDE;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: $dark;
-    }
+    max-height: 700px;
+    overflow: auto;
+    margin-bottom: -16px;
+    @extend .nice-scroll;
 }
 
 
 .comment-replies {
     border-radius: 1px solid $sub-heading;
+
+    >.sendcomment {
+        margin: 8px 0;
+    }
+
+    .replies {
+        border-right: 2px solid $grey;
+        padding-right: 16px;
+    }
+
+    .reply-to-container {
+        margin-bottom: 8px;
+
+        i {
+            color: $icons;
+            margin-left: 4px;
+        }
+
+        color: $grey;
+    }
 }
 
 
@@ -34,31 +44,24 @@
 
     .list {
         max-height: 800px;
-        padding: 0.5rem;
+        padding: 8px;
         overflow-y: auto;
     }
 
+    >.sendcomment {
+        margin-bottom: 32px;
+    }
+
     .sendcomment {
-        div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        .input-container {
             display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-            margin-top: 1rem;
-        }
-
-        textarea {
-            border: 2px solid $light;
             width: 100%;
-            height: 52px;
-            resize: none;
-            padding: 0.5rem;
-        }
-
-        .comment-profile {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            margin-left: 0.9rem;
+            align-items: flex-start;
+            padding: 16px 0;
         }
     }
 
@@ -66,7 +69,7 @@
         .comment {
             display: flex;
             justify-content: flex-start;
-            @extend .mt-3;
+            margin-bottom: 24px;
         }
 
     }

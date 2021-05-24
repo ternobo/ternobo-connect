@@ -33,7 +33,7 @@ class PostRequest extends FormRequest
     public function messages()
     {
         return [
-            'slides.required' => 'slides are required',
+            'slides.required' => 'هیچ محتوایی وجود ندارد',
             'slides.array' => 'slides is not array',
             'slides.max' => 'you can\'t have more than 12 slides in one post',
             'slides.*.media.mimes' => "فقط امکان فایل‌های jpeg, png, jpg, gif مجاز است",

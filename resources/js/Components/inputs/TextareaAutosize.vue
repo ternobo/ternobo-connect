@@ -1,5 +1,5 @@
 <template>
-	<textarea :style="computedStyles" v-model="val" @focus="resize"></textarea>
+	<textarea rows="1" :style="computedStyles" v-model="val" @focus="resize"></textarea>
 </template>
 
 <script>
@@ -16,7 +16,7 @@ export default {
 		},
 		minHeight: {
 			type: [Number],
-			default: null,
+			default: 20,
 		},
 		maxHeight: {
 			type: [Number],
