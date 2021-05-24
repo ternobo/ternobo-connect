@@ -1,5 +1,7 @@
 <?php
 
+use App\Broadcasting\DonateChannel;
+use App\Broadcasting\LikeChannel;
 use App\Broadcasting\NotificationsChannel;
 use App\Broadcasting\UserChannel;
 use Illuminate\Support\Facades\Broadcast;
@@ -17,5 +19,7 @@ use Ternobo\TernoboChat\TernoboChat;
  */
 Broadcast::channel('user.{id}', UserChannel::class);
 Broadcast::channel('notifications.{id}', NotificationsChannel::class);
+Broadcast::channel('donate.post.{id}', DonateChannel::class);
+Broadcast::channel('likes.post.{id}', LikeChannel::class);
 
 TernoboChat::broadcastChannels();

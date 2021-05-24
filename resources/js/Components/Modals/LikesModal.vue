@@ -9,16 +9,18 @@
 			</div>
 		</div>
 		<div class="likes-list" v-else v-infinite-scroll="loadMore" :infinite-scroll-distance="10">
-			<div v-for="like in likes" :key="'like_' + like.id" class="like-item">
-				<wire-link :href="'/' + like.page.slug" class="userinfo">
-					<lazy-image class="mb-0" :class="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" :loadingColor="skeletonOptions.profileColor" :imgClass="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" :src="like.page.profile"></lazy-image>
-					<div class="page-name d-flex flex-column">
-						<strong> {{ like.page.name }} <i v-if="like.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
-						<span class="shortbio"> {{ like.page.short_bio }} </span>
-					</div>
-				</wire-link>
-				<follow-button v-if="like.page.slug != user.username" :page="like.page.id"></follow-button>
-			</div>
+			<transition-group name="flip-list">
+				<div v-for="like in likes" :key="'like_' + like.id" class="like-item">
+					<wire-link :href="'/' + like.page.slug" class="userinfo">
+						<lazy-image class="mb-0" :class="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" :loadingColor="skeletonOptions.profileColor" :imgClass="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" :src="like.page.profile"></lazy-image>
+						<div class="page-name d-flex flex-column">
+							<strong> {{ like.page.name }} <i v-if="like.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+							<span class="shortbio"> {{ like.page.short_bio }} </span>
+						</div>
+					</wire-link>
+					<follow-button v-if="like.page.slug != user.username" :page="like.page.id"></follow-button>
+				</div>
+			</transition-group>
 			<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>
 		</div>
 	</b-modal>
@@ -92,6 +94,10 @@ export default {
 			this.likes = true;
 			this.loading = true;
 			this.error = false;
+
+			Echo.private(`likes.post.${this.item}`).listen("LikeEvent", (data) => {
+				this.likes.unshift(data.like);
+			});
 
 			if (this.type == "comment") {
 				this.typeBasedData = {

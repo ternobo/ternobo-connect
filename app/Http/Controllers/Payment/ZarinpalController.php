@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Payment;
 
+use App\Events\DonateEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IRTipPostRequest;
 use App\Models\Notification;
@@ -90,7 +91,7 @@ class ZarinpalController extends Controller
                 ]);
 
                 Notification::sendNotification("donation", $transaction->meta['post_id'], $post->page_id, $tip->id);
-
+                event(new DonateEvent($tip));
                 // Show Payment Done
                 return view("payment-done");
             } catch (InvalidPaymentException $exception) {

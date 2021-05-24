@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LikeEvent;
 use App\Http\Requests\PostRequest;
 use App\Models\Action;
 use App\Models\Category;
@@ -147,6 +148,7 @@ class PostController extends Controller
             $result = $like->save();
             $page->addAction("like", $post_id, $like->id);
             Notification::sendNotification("like", $post_id, $post->page_id, $like->id);
+            event(new LikeEvent($like));
         }
         return response()->json(array("result" => $result, "like" => $is_like));
     }

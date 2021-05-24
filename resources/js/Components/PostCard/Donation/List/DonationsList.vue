@@ -2,7 +2,9 @@
 	<div class="donations-list" :class="{ 'd-flex align-items-center p-3 justify-content-center': loading || donations.length < 1 }">
 		<loading-spinner v-if="loading"></loading-spinner>
 		<span class="font-20 text-superlight" v-else-if="donations.length < 1">هیچ حمایتی ثبت نشده</span>
-		<donation-item v-for="donation in donations" :key="`post_donation_item_${donation.id}`" :tip="donation" />
+		<transition-group name="flip-list">
+			<donation-item v-for="donation in donations" :key="`post_donation_item_${donation.id}`" :tip="donation" />
+		</transition-group>
 		<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>
 	</div>
 </template>
@@ -43,6 +45,9 @@ export default {
 		},
 	},
 	mounted() {
+		Echo.private(`donate.post.${this.post}`).listen("DonateEvent", (data) => {
+			this.donations.unshift(data.tip);
+		});
 		this.loading = true;
 		axios
 			.post(`/posts/${this.post}/donations`)

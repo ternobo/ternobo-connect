@@ -240,6 +240,10 @@ ul {
     list-style: none;
 }
 
+.flip-list-move {
+    transition: transform 1s;
+}
+
 .slide-enter-active {
     transition-duration: 0.3s;
     transition-timing-function: ease-in;

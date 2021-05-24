@@ -11,7 +11,7 @@
 					:items="[
 						{ name: 'همه', value: 'all', icon: 'filter_alt' },
 						{ name: 'از طرف شما', value: 'my', icon: 'filter_alt' },
-						{ name: 'برای شما', value: 'my', icon: 'filter_alt' },
+						{ name: 'برای شما', value: 'forme', icon: 'filter_alt' },
 					]"
 					:showNewItem="false"
 					v-model="type"
@@ -37,8 +37,9 @@
 				<donation-skeleton v-for="i in 5" :key="`item_${i}`"></donation-skeleton>
 			</div>
 			<div v-else>
-				<donation-item v-for="donation in donations" :key="`donation_item_${donation.id}`" :tip="donation"></donation-item>
-
+				<transition-group name="flip-list">
+					<donation-item v-for="donation in donations" :key="`donation_item_${donation.id}`" :tip="donation"></donation-item>
+				</transition-group>
 				<div class="w-100 d-flex justify-content-center py-3" v-if="loading_next_page">
 					<loading-spinner class="image__spinner" />
 				</div>
@@ -51,6 +52,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import NoContent from "../NoContent.vue";
 import Tselect from "../Tselect.vue";
 import DonationItem from "./DonationItem/DonationItem";
@@ -70,6 +72,7 @@ export default {
 	},
 	components: { DonationSkeleton, DonationItem, Tselect, NoContent },
 	computed: {
+		...mapState(["user"]),
 		filter() {
 			return {
 				sort: this.order.value,
@@ -115,6 +118,17 @@ export default {
 	},
 	mounted() {
 		this.loading = true;
+		Echo.private(`user.${this.user.id}`).listen("DonateEvent", (data) => {
+			if (this.order.value == "desc") {
+				if ((this.type.value == "my" && data.tip.donate_by_me) || this.type.value == "all" || (this.type.value == "forme" && !data.tip.donate_by_me)) {
+					this.donations.unshift(data.tip);
+				}
+			} else {
+				if ((this.type.value == "my" && data.tip.donate_by_me) || this.type.value == "all" || (this.type.value == "forme" && !data.tip.donate_by_me)) {
+					this.donations.push(data.tip);
+				}
+			}
+		});
 		axios
 			.post("/donations", { filter: this.filter })
 			.then((response) => {
