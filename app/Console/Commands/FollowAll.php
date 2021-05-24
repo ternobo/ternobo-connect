@@ -43,7 +43,7 @@ class FollowAll extends Command
         $users = Page::query()->where("id", "!=", $auth)->get();
         foreach ($users as $user) {
             $following = new Following();
-            $following->user_id = 301;
+            $following->page_id = 301;
             $following->following = $user->id;
             $following->save();
         }

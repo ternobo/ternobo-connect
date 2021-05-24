@@ -7,6 +7,7 @@ use App\Models\Connection;
 use App\Models\Following;
 use App\Models\Notification;
 use App\Models\Page;
+use App\Ternobo;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,8 +63,8 @@ class ConnectionsController extends Controller
 
         // counts
         $connections_count = count(Connection::query()->where("accepted", true)->whereRaw("(connection_id = '$user->id' or user_id = '$user->id')")->get());
-        $followers_count = count(Following::query()->where("following", Auth::user()->id)->get());
-        $following_count = count(Following::query()->where("page_id", Auth::user()->id)->get());
+        $followers_count = count(Following::query()->where("following", Ternobo::currentPage()->id)->get());
+        $following_count = count(Following::query()->where("page_id", Ternobo::currentPage()->id)->get());
 
         return TernoboWire::render("MyConnections", [
             "connections" => $accpeted_connections,
@@ -146,9 +147,9 @@ class ConnectionsController extends Controller
     public function follow($page_id)
     {
         $page = Page::findOrFail($page_id);
-        $followRow = Following::query()->where("page_id", Auth::user()->id)->where("following", $page_id)->firstOrNew();
+        $followRow = Following::query()->where("page_id", Ternobo::currentPage()->id)->where("following", $page_id)->firstOrNew();
         $followRow->following = $page_id;
-        $followRow->user_id = Auth::user()->id;
+        $followRow->page_id = Auth::user()->id;
         $result = $followRow->save();
         return response()->json(array("result" => $result, "connection" => $followRow->id));
     }
@@ -156,7 +157,7 @@ class ConnectionsController extends Controller
     public function unfollow($page_id)
     {
         $page = Page::findOrFail($page_id);
-        $followRow = Following::query()->where("page_id", Auth::user()->id)
+        $followRow = Following::query()->where("page_id", Ternobo::currentPage()->id)
             ->where(function ($query) use ($page_id) {
                 $query->where("following", $page_id);
             })->firstOrFail();
