@@ -114,7 +114,7 @@ class PostController extends Controller
                             'slide_id' => $slide->id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
-                            'content' => SocialMediaTools::uploadPostImage($media, 70),
+                            'content' => SocialMediaTools::uploadPostImage($media, 90),
                             'type' => 'media',
                         ]);
                         break;
@@ -421,13 +421,13 @@ class PostController extends Controller
                                 'slide_id' => $slide->id,
                                 'page_id' => $user->personalPage->id,
                                 'sort' => $sort,
-                                'content' => SocialMediaTools::uploadPostImage($media, 70),
+                                'content' => SocialMediaTools::uploadPostImage($media, 90),
                                 'type' => 'media',
                             ]);
                         } else {
                             $postContent->update([
                                 'sort' => $sort,
-                                'content' => SocialMediaTools::uploadPostImage($media, 70),
+                                'content' => SocialMediaTools::uploadPostImage($media, 90),
                             ]);
                         }
                         break;

@@ -9,8 +9,8 @@ use Intervention\Image\Image;
 class SocialMediaTools
 {
 
-    public static $imageMaxWidth = 1116;
-    public static $imageMaxHeight = 1488;
+    public static $imageMaxWidth = 1440;
+    public static $imageMaxHeight = 1920;
     public static $imageMinHeight = 112;
     public static $imageMinWidth = 558;
 
@@ -65,30 +65,11 @@ class SocialMediaTools
 
     public static function fitPostImage(Image $image)
     {
-        $callback = function ($constraint) {
-            $constraint->upsize();
-            $constraint->aspectRatio();
-        };
-
-        // $newImage = ImageFacades::canvas($image->width(), $image->height(), "#ffffff")->insert(($image));
-
-        $resizedImage = ImageFacades::make($image)->resize(static::$imageMaxWidth, null, function ($constraint) {
+        return ImageFacades::make($image)->resize(static::$imageMaxWidth, null, function ($constraint) {
             $constraint->upsize();
             $constraint->aspectRatio();
         });
 
-        // // $width = ;
-        // $height = 0;
-
-        // if ($resizedImage->height() > static::$imageMaxHeight) {
-        //     $height = static::$imageMaxHeight;
-        // } else {
-        //     $height = $resizedImage->height();
-        // }
-
-        // $image = $image->fit(static::$imageMaxWidth, null, $callback);
-
-        return $resizedImage;
     }
 
     public static function callMentions($mentions, $post_id)
