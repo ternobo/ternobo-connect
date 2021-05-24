@@ -7,10 +7,10 @@
 			<div class="skill-name" v-if="!edit">
 				<div class="endorsement" v-if="$store.state.user != null && !checkUser(user.id)">
 					<i class="material-icons" @click="credit">
-						{{ canCredit ? "arrow_circle_up" : "remove_circle_outline" }}
+						{{ canCredit ? "arrow_circle_up" : "highlight_off" }}
 					</i>
 					<span class="action">
-						{{ skillVal.credit_text == null ? 0 : formatNumber(skillVal.credit_text.nums, "0a") }}
+						{{ formatNumber(credits_count, "0a") }}
 					</span>
 				</div>
 				<div class="d-flex flex-column justify-content-center">
@@ -20,7 +20,7 @@
 					<div class="skill-credits clickable" @click="creditsListModal = true">
 						<div class="credit-icon" v-if="$store.state.user != null && checkUser(user.id)">
 							<i class="material-icons">arrow_circle_up</i>
-							<span>{{ skillVal.credit_text == null ? 0 : formatNumber(skillVal.credit_text.nums, "0a") }}</span>
+							<span>{{ formatNumber(credits_count, "0a") }}</span>
 						</div>
 						<span class="font-14" v-if="skillVal.credit_text != null && skillVal.credit_text.nums >= 1">
 							<wire-link v-if="skillVal.credit_text.first" :href="userURL(skillVal.credit_text.first)">
@@ -72,9 +72,7 @@ export default {
 	methods: {
 		credited() {
 			this.canCredit = false;
-			if (this.skillVal.credit_text) {
-				this.skillVal.credit_text.nums += 1;
-			}
+			this.credits_count += 1;
 		},
 		credit() {
 			if (this.canCredit) {
@@ -111,6 +109,7 @@ export default {
 				})
 				.then((response) => {
 					this.canCredit = response.data.canCredit;
+					this.credits_count = response.data.credits_count;
 				})
 				.catch((err) => {})
 				.then(() => (this.loading = false));
@@ -130,6 +129,8 @@ export default {
 			canCredit: true,
 			loading: true,
 			creditsListModal: false,
+
+			credits_count: 0,
 		};
 	},
 	props: {

@@ -10,7 +10,7 @@
 			<div class="scrollable-list">
 				<div class="new-post-slider" :style="{ transform: `translateX(${transformBy}px)` }">
 					<draggable v-bind="dragOptions" class="drag-container" handle=".slide-item" v-model="slides">
-						<slide-item v-for="(slide, index) in slides" :key="`slides_${slide.id}`" :class="{ active: slide.id == slides[activeIndex].id }" @delete="deleteItem(index)">
+						<slide-item v-for="(slide, index) in slides" :hideDelete="slides.length <= 1" :key="`slides_${slide.id}`" :class="{ active: slide.id == slides[activeIndex].id }" @delete="deleteItem(index)">
 							<i @click="selectSlide(index)" class="material-icons-outlined">{{ slide.icon }}</i>
 						</slide-item>
 					</draggable>

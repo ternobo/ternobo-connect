@@ -89,7 +89,7 @@ export default {
 			default: "",
 		},
 		max: {
-			default: 1000,
+			default: 1200,
 		},
 	},
 	mounted() {

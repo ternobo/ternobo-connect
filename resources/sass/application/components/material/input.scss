@@ -1,5 +1,6 @@
 .material-textfield {
     position: relative;
+    display: flex;
 
     label {
         position: absolute;
@@ -8,7 +9,7 @@
         top: 50%;
         transform: translateY(-50%);
         background-color: white;
-        color: #E0E0E0;
+        color: $grey;
         padding: 0;
         margin: 0 8px;
         transition: .1s ease-out;
@@ -20,7 +21,7 @@
     .input {
         font-size: 16px;
         outline: none;
-        border: 2px solid #E0E0E0;
+        border: 2px solid #C8C8C8;
         border-radius: 0;
         padding: 15px 16px;
         color: $text-color;
@@ -57,7 +58,6 @@
     }
 
     .input {
-
         border: none;
         border-bottom: 2px solid #E0E0E0;
         background-color: transparent;
@@ -98,13 +98,44 @@
     }
 }
 
-.material-textarea {
-    label {
-        top: 42%;
+@media screen and (min-width:$sm-size) {
 
-        @media screen and (min-width:$sm-size) {
+    .material-textarea {
+        label {
 
             margin: 0 12px;
         }
     }
+}
+
+
+.material-input-group-btn {
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    min-height: 40px;
+
+    .material-textfield {
+        width: 100%;
+        height: 100%;
+
+        .input {
+            padding-left: 90px;
+        }
+    }
+
+    .btn {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        color: $grey;
+        height: 48px;
+        border: none;
+        background: transparent;
+
+        &:disabled {
+            color: $icons;
+        }
+    }
+
 }

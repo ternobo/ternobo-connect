@@ -56,8 +56,10 @@ class SkillCreditController extends Controller
     public function checkCredit(Request $request)
     {
         $skill = Skill::findOrFail($request->skill);
+        $credit_nums = $skill->loadCount("credits");
         return response()->json([
             "canCredit" => Auth::check() ? !Auth::user()->isCredit($request->skill) : false,
+            'credits_count' => $credit_nums->credits_count,
         ]);
     }
 

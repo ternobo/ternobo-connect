@@ -102,10 +102,10 @@ export default {
 			}
 		},
 		textProgress() {
-			return (this.textItem.content.length / 1000) * 100 + "%";
+			return (this.textItem.content.length / 1200) * 100 + "%";
 		},
 		leftCharacter() {
-			return 1000 - this.textItem.content.length;
+			return 1200 - this.textItem.content.length;
 		},
 		availableOptions() {
 			let addedOptions = this.editorItems.map((item) => item.type);

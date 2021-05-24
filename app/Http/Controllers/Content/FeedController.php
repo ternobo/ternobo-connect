@@ -37,7 +37,7 @@ class FeedController extends Controller
             ->whereHas("page.user", function ($query) {
                 $query->where("active", true);
             })
-            ->orderByRaw("posts.user_id = '" . Auth::user()->id . "' AND seen_at IS NULL DESC ,seen_at IS NULL DESC, seen_at DESC, posts.created_at")
+            ->orderByRaw("posts.user_id = '" . Auth::user()->id . "' AND seen_at IS NULL DESC ,seen_at IS NULL DESC ,posts.created_at DESC ,seen_at DESC")
             ->distinct("posts.id")
             ->paginate(20);
         return TernoboWire::render("Feed", array("posts" => $posts, "pages" => $pages));
