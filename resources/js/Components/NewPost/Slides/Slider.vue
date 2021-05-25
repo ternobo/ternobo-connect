@@ -33,6 +33,9 @@ export default {
 			deep: true,
 			handler(newValue) {
 				this.$emit("input", newValue);
+				if (this.slides.length <= this.maxSlides) {
+					this.transformBy = 0;
+				}
 			},
 		},
 	},

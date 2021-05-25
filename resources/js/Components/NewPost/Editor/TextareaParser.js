@@ -13,7 +13,6 @@ export default {
     escapeHTML(text) {
         const divEscapedHtml = document.createElement('pre');
         divEscapedHtml.innerHTML = text;
-        let escapedHtmlContent = divEscapedHtml.innerText;
-        return escapedHtmlContent;
+        return divEscapedHtml.innerText;
     }
 };

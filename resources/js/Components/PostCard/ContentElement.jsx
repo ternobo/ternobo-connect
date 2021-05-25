@@ -1,3 +1,5 @@
+import TextareaParser from "../NewPost/Editor/TextareaParser";
+
 export default {
     render: function (h) {
         let contentType = this.content.type;
@@ -15,7 +17,7 @@ export default {
                 if (this.content.content != null) {
                     tag = "div";
                     classes += "post-content--text";
-                    this.text = this.content.content;
+                    this.text = TextareaParser.escapeHTML(TextareaParser.unescapeHtml(this.content.content));
 
                     let action = "";
 

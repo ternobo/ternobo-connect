@@ -3,6 +3,7 @@ namespace App;
 
 use App\Models\Notification;
 use App\Models\Page;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image as ImageFacades;
 use Intervention\Image\Image;
 
@@ -60,7 +61,7 @@ class SocialMediaTools
     {
         $image = SocialMediaTools::fitPostImage(ImageFacades::make(base_path("storage/app/$media")));
         $image->save(base_path("storage/app/$media.webp"), $quality, "webp");
-        Storage::delete("$media.webp");
+        Storage::delete("$media");
         return "$media.webp";
     }
 

@@ -34,9 +34,9 @@
 
         &.image-item {
             position: relative;
-            margin-left: -40px;
-            margin-right: -40px;
-            width: calc(100% + 80px);
+            margin-left: -48px;
+            margin-right: -48px;
+            width: calc(100% + 96px);
 
             img,
             figure {
@@ -183,6 +183,12 @@
     }
 
     &::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
         -webkit-text-fill-color: $text-color;
         text-fill-color: $text-color;
     }
