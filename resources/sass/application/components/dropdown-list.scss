@@ -1,0 +1,19 @@
+.dropdown-menu {
+    background: $white;
+    padding: 0;
+    border: none;
+    box-shadow: $card-shadow;
+
+    .dropdown-item {
+        padding: 12px 16px;
+
+        @media screen and (max-width: $sm-size) {
+            padding: 8px 12px;
+        }
+
+        &:focus,
+        &:hover {
+            background-color: $fixed-elements;
+        }
+    }
+}

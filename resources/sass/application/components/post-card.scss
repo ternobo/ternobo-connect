@@ -358,6 +358,15 @@
             .buttons {
                 display: flex;
                 align-items: center;
+
+                i {
+                    color: $grey;
+
+                    &.active,
+                    &:hover {
+                        color: $dark;
+                    }
+                }
             }
 
             text {
@@ -543,9 +552,9 @@
 
 
     i {
-
         background: #F5F5F5;
         border-radius: 4px;
+        font-size: 16px;
     }
 
     i:first-child {

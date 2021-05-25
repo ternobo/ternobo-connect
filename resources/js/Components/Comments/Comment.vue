@@ -11,7 +11,7 @@
 		<div class="comment" v-if="!deleted">
 			<div class="comment-header">
 				<wire-link :href="'/' + comment.page.slug" class="d-flex align-items-center">
-					<img :src="comment.page.profile" class="profile-sm" />
+					<img :src="comment.page.profile" class="profile-xsm" />
 					<div class="pagedetail">
 						<span class="name">
 							<strong> {{ comment.page.name }} <i v-if="comment.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
@@ -78,7 +78,7 @@
 				<small class="clickable ml-1" @click="loadReplies(false)" v-if="comment.replies_count > 0 && replyTo == undefined">
 					<strong :class="{ 'text-muted': !showReplies, 'text-dark': showReplies }"> {{ comment.replies_count }} پاسخ </strong>
 				</small>
-				<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies || !showNewComment, 'material-icons': showReplies && showNewComment }" class="hover-dark clickable"> insert_comment </i>
+				<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies || !showNewComment, 'material-icons text-dark': showReplies && showNewComment }" class="hover-dark clickable"> insert_comment </i>
 				<i @click="likeComment" v-if="!checkUser(comment.page.user_id)" class="hover-dark clickable material-icons" :class="{ 'text-danger': liked }">
 					{{ liked ? "favorite" : "favorite_border" }}
 				</i>

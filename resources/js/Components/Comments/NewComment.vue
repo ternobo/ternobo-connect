@@ -1,9 +1,9 @@
 <template>
 	<div class="sendcomment clearfix" v-if="$store.state.user != null">
 		<div class="input-container">
-			<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-sm ml-3 mb-0" imgClass="profile-sm" :src="$store.state.user.profile" />
+			<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xsm ml-3 mb-0" imgClass="profile-xsm" :src="$store.state.user.profile" />
 			<div class="material-input-group-btn w-100">
-				<MaterialTextArea v-model="text" input-class="w-100" maxlength="1000" class="material--sm w-100" placeholder="نظر شما چیست؟" name="text"></MaterialTextArea>
+				<MaterialTextArea v-model="text" input-class="w-100" maxlength="1000" class="material--xsm w-100" placeholder="نظر شما چیست؟" name="text"></MaterialTextArea>
 				<loading-button @click.native="submit" :disabled="!showSubmit" :loading="loading" class="btn">ارسال</loading-button>
 			</div>
 		</div>

@@ -35,8 +35,8 @@
 					</div>
 				</div>
 				<div class="buttons">
-					<i class="material-icons bookmark-icon clickale text-muted clickable hover-dark" @click="bookmark">{{ bookmarked ? "bookmark" : "bookmark_border" }}</i>
-					<i :class="{ 'material-icons-outlined': !openComment, 'material-icons': openComment }" v-if="hasComment" v-on:click="openComment = !openComment">comment</i>
+					<i class="material-icons bookmark-icon clickable hover-dark" :class="{ active: bookmarked }" @click="bookmark">{{ bookmarked ? "bookmark" : "bookmark_border" }}</i>
+					<i :class="{ 'material-icons-outlined': !openComment, 'material-icons active': openComment }" v-if="hasComment" v-on:click="openComment = !openComment">comment</i>
 					<i class="material-icons like" v-if="!checkUser(post.page.user_id)" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
 				</div>
 			</div>

@@ -6,7 +6,7 @@
     position: sticky;
     top: 0;
     height: 72px;
-    z-index: 1000;
+    z-index: 99999;
     transition: 0.3s all;
 
     .searchfield {
@@ -198,6 +198,7 @@
         border-color: #EEEEEE;
         border-width: 2px;
         cursor: pointer;
+
         &:hover {
             background: $body-bg;
         }
