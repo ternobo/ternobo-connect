@@ -43,18 +43,18 @@ class SearchController extends Controller
         $results = array();
         if ($request->has("type") && $request->type === "content") {
             $posts = Post::query()
-                ->with("page")
-                ->with("likes")
-                ->with("mutualLikes")
-                ->with("category")
+                ->with(["page", "content" => function ($query) use ($search) {
+                    $query->selectRaw("MATCH (`content`) AGAINST(? IN BOOLEAN MODE) as score", [$search])
+                        ->orderBy("score");
+                }, "mutualLikes", "category"])
                 ->selectRaw("MATCH (`title`, `text`) AGAINST(? IN BOOLEAN MODE) as score, posts.*", [$search])
                 ->whereRaw("MATCH (`title`, `text`) AGAINST(? IN BOOLEAN MODE) > 0", [$search])
+                ->orWhereHas("content", function ($query) use ($search) {
+                    $query->whereRaw("MATCH (`content`) AGAINST(? IN BOOLEAN MODE) > 0", [$search]);
+                })
+                ->orWhereJsonContains("tags", $search)
                 ->orderBy("score")
                 ->distinct("posts.id");
-
-            $posts->whereHas("user", function ($query) {
-                $query->where("active", true);
-            });
 
             SEOTools::setTitle("جستجو برای " . $request->q);
             SEOTools::setDescription("نتایج جستجو برای $request->q در ترنوبو");

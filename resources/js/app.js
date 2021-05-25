@@ -17,7 +17,9 @@ import Dialog from 'bootstrap-vue-dialog/dist/bootstrap-vue-dialog';
 import InfiniteLoading from 'vue-infinite-loading';
 import Application from "./Application.vue";
 import Vuex from "vuex";
+import VueMasonry from 'vue-masonry-css';
 
+Vue.use(VueMasonry);
 Vue.use(InfiniteLoading, { /* options */ });
 
 Vue.prototype.window = window.window;

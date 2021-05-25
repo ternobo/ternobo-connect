@@ -7,43 +7,44 @@
 
 			<tabs :compact="true" :centered="true" class="justify-content-center" @selected="loadTabContent">
 				<tab name="کاربران" id="page" :selected="currentTab === 'page'">
-					<div class="row" v-if="currentTab === 'page'">
-						<div class="col-md-6" v-for="(page, index) in data" :key="page.id + '_index_' + index">
-							<div class="user">
-								<div class="card mb-3">
-									<div class="card-body py-2">
-										<div class="people-sugestion border-0 d-flex justify-content-between align-items-center bg-white">
-											<wire-link class="d-flex h-100 align-items-center w-100" :href="$APP_URL + '/' + page.slug">
-												<lazy-image class="mb-0 ml-2" imgStyle="height: 80px; width: 80px" imgClass="rounded-circle" :src="page.profile" />
-												<div class="d-flex ml-2 align-items-start flex-column justify-content-center">
-													<span class="person-name"> {{ page.name }} <i v-if="page.is_verified === 1" class="verificationcheck">check_circle</i> </span>
-													<small class="text-muted"> {{ page.short_bio }}</small>
-												</div>
-											</wire-link>
-											<ConnetionButtons :page-id="page.id" :user-id="page.user_id"></ConnetionButtons>
-										</div>
-									</div>
+					<div class="row pt-3" v-if="!loadingPage">
+						<div class="col-md-6 pb-3" v-for="(page, index) in data" :key="page.id + '_index_' + index">
+							<div class="card">
+								<div class="card-body">
+									<people-suggestion class="p-0" :page="page"></people-suggestion>
 								</div>
 							</div>
 						</div>
-						<div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
+						<div class="col-md-12 d-flex justify-content-center py-3" v-if="loading_more">
 							<loading-spinner class="image__spinner" />
 						</div>
-						<div class="w-100" v-if="next_page_url === null && !loadingPage">
-							<no-content>نتیجه بیشتری وجود ندارد</no-content>
+					</div>
+					<div class="row pt-3" v-else>
+						<div class="col-md-6 mb-3" v-for="i in 6" :key="`post_loading_skeleton_${i}`">
+							<div class="card">
+								<div class="card-body">
+									<page-skeleton></page-skeleton>
+								</div>
+							</div>
 						</div>
 					</div>
 				</tab>
 				<tab name="مطالب" id="content" :selected="currentTab === 'content'">
-					<div class="row" v-if="currentTab === 'content' && !loadingPage">
-						<div class="col-md-6 mb-3" v-for="(post, index) in data" :key="post.id + '_index_' + index">
+					<masonry v-if="!loadingPage" :cols="2" :gutter="32">
+						<div v-for="(post, index) in data" class="py-3" :key="post.id + '_index_' + index">
 							<PostCard class="h-100 m-0" :post="post"></PostCard>
 						</div>
+					</masonry>
+
+					<div class="row pt-3" v-else>
+						<div class="col-md-6 mb-3" v-for="i in 6" :key="`post_loading_skeleton_${i}`">
+							<post-skeleton></post-skeleton>
+						</div>
 					</div>
-					<div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
+					<div class="col-md-12 d-flex justify-content-center py-3" v-if="loading_more">
 						<loading-spinner class="image__spinner" />
 					</div>
-					<div class="w-100" v-if="next_page_url === null && !loadingPage">
+					<div class="w-100" v-if="next_page_url === null && !loadingPage && total.total > 20">
 						<no-content>نتیجه بیشتری وجود ندارد</no-content>
 					</div>
 				</tab>
@@ -56,6 +57,9 @@
 import AppLayout from "../Layouts/AppLayout";
 import NoContent from "../Components/NoContent";
 import PostCard from "../Components/PostCard/PostCard";
+import PeopleSuggestion from "../Components/App/PeopleSuggestion.vue";
+import PostSkeleton from "../Components/Skeletons/PostSkeleton.vue";
+import PageSkeleton from "../Components/Skeletons/PageSkeleton.vue";
 export default {
 	created() {
 		this.data = this.results.data;
@@ -77,6 +81,8 @@ export default {
 			next_page_url: undefined,
 			loadingPage: false,
 			total: 0,
+
+			loading_more: false,
 		};
 	},
 	methods: {
@@ -106,8 +112,8 @@ export default {
 			}
 		},
 		loadMore() {
-			if (!this.loadingPage && this.next_page_url !== null) {
-				this.loadingPage = true;
+			if (!this.loading_more && this.next_page_url !== null) {
+				this.loading_more = true;
 				this.$store.state.ternoboWireApp
 					.getData(this.next_page_url, false)
 					.then((response) => {
@@ -122,9 +128,8 @@ export default {
 						this.next_page_url = options.url;
 					})
 					.then(() => {
-						this.loadingPage = false;
+						this.loading_more = false;
 					});
-				axios(options);
 			}
 		},
 	},
@@ -140,7 +145,10 @@ export default {
 	},
 	components: {
 		NoContent,
+		PeopleSuggestion,
 		PostCard,
+		PostSkeleton,
+		PageSkeleton,
 	},
 	name: "Search",
 	layout: AppLayout,
