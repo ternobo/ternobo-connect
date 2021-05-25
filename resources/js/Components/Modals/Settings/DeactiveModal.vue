@@ -1,5 +1,5 @@
 <template>
-	<b-modal v-model="showModal" hide-footer title="غیرفعال کردن حساب" body-class="modal-signup" size="lang" :centered="true">
+	<b-modal v-model="showModal" hide-footer title="غیرفعال کردن حساب" body-class="modal-signup" size="md" :centered="true">
 		<div class="d-flex flex-column align-items-center">
 			<div class="d-flex w-100 flex-column" style="align-items: center">
 				<material-text-field class="material--sm w-50 mx-1 text-right my-4" input-class="w-100" :required="true" v-model="password" type="password" name="current_password" placeholder="رمزعبور" />

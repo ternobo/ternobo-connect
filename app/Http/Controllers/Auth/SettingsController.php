@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActiveSession;
 use App\Models\Page;
 use App\Models\Verification;
 use App\Rules\UsernameValidator;
@@ -102,7 +103,7 @@ class SettingsController extends Controller
     public function verifyNewEmail(Request $request)
     {
         if ($request->has("code")) {
-            $verification = Verification::query()->where("code", $request->code)->where("phone", session()->get("email"))->first();
+            $verification = Verification::query()->where("code", $request->code)->where("email", session()->get("email"))->first();
             if ($verification instanceof Verification) {
                 $user = Auth::user();
                 $user->email = session()->get("email");
@@ -123,6 +124,8 @@ class SettingsController extends Controller
         return response()->json([
             'email' => $user->email,
             'phone' => $user->phone,
+            'two_factor_verification' => $user->two_factor,
+            'connected_devices' => ActiveSession::getActiveSessionsCount(),
         ]);
     }
 

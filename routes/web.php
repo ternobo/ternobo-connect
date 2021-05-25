@@ -2,7 +2,6 @@
 
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\FollowMiddlware;
-use App\Http\Middleware\InviteLinkMiddleware;
 use App\Http\Middleware\LocaleMiddleware;
 use App\Http\Middleware\WebAdminMiddleware;
 use Illuminate\Support\Facades\Broadcast;
@@ -50,42 +49,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
     /**
      * Auth Start
      */
-    Route::post("/rest-password", "Auth\ForgotPasswordController@resetPassword");
-    Route::post("/updatepassword", "Auth\ForgotPasswordController@updatePassword");
-    Route::prefix("/auth")->group(function () {
-        Route::post('login', 'Auth\LoginController@login');
-        Route::post('verify-tfa', 'Auth\LoginController@twoFactorVerify');
-
-        Route::post('verification', 'Auth\VerificationController@sendVcode')->middleware(InviteLinkMiddleware::class);
-        Route::post('verifycode', 'Auth\VerificationController@verifyCode')->middleware(InviteLinkMiddleware::class);
-        Route::post("signup", "Auth\RegisterController@signupUser")->middleware(InviteLinkMiddleware::class);
-        Route::post("setpassword", "Auth\RegisterController@savePassword")->middleware(InviteLinkMiddleware::class);
-
-        Route::group(['auth'], function () {
-
-            Route::post('logout', 'Auth\LoginController@logout');
-
-            /** Username Start */
-            Route::post('/suggest-username', "Auth\SettingsController@suggest");
-            Route::post('/set-username', "Auth\SettingsController@set");
-            Route::post('/check-username', "Auth\SettingsController@check");
-            /** Username End */
-
-            /** Settings */
-            Route::post("/get-info", "Auth\SettingsController@getUserInfo");
-            Route::post("/verify-phone", "Auth\SettingsController@verifyNewPhone");
-            Route::post("/verify-email", "Auth\SettingsController@verifyNewEmail");
-            /** Settings End */
-
-            /**
-             * Password
-             */
-            Route::post("/change-password", "Auth\SettingsController@changePassword");
-
-            // Deactive
-            Route::post("/deactive", "Auth\SettingsController@deactiveAccount");
-        });
-    });
+    require base_path("routes/auth_routes.php");
     /**
      * Auth End
      */
@@ -212,7 +176,7 @@ Route::group(['middleware' => LocaleMiddleware::class], function () {
 
             Route::post("/bookmark/{post_id}", "Content\BookmarksController@bookmarkPost");
 
-            Route::get("/settings", "Auth\UsersController@settingsPage");
+            require base_path("routes/settings_routes.php");
 
             Route::post("/reportpost", "PostController@report");
 

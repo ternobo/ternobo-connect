@@ -1,8 +1,8 @@
 <template>
 	<b-modal v-model="showModal" hide-footer title="ثبت / ویرایش ایمیل" body-class="modal-signup" size="md" :centered="true">
 		<div class="d-flex ephone-input-group py-0 justify-content-between align-items-center">
-			<LoadingButton class="btn signup-save-btn btn-dark" :loading="loading" @click.native="sendVcode()">ثبت</LoadingButton>
-			<input type="tel" class="form-control mx-1 text-left" :readonly="verification_step" v-model="email" placeholder="example@ternobo.com" />
+			<input type="email" class="form-control mx-1 text-left" dir="ltr" :readonly="verification_step" @keypress.enter="sendVcode()" v-model="email" placeholder="example@ternobo.com" />
+			<LoadingButton class="btn signup-save-btn btn-primary" :disabled="verification_step" :loading="loading && !verification_step" @click.native="sendVcode()">ثبت</LoadingButton>
 		</div>
 		<transition name="slide">
 			<div v-if="verification_step">
@@ -10,12 +10,14 @@
 
 				<div class="input-group d-flex align-items-center flex-column justify-content-center mt-4">
 					<label class="w-100">کد تایید خود ‌را وارد کنید</label>
-					<div class="input-group-icon">
-						<input type="tel" class="form-control mx-1 text-center" v-model="code" placeholder="111111" maxlength="6" />
+					<div class="d-flex align-items-center">
+						<otp-input input-class="w-100" class="material--sm mx-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" />
 						<i class="material-icons-outlined">verified_user</i>
 					</div>
 				</div>
-				<LoadingButton :loading="loading" class="btn btn-dark mx-3 mt-4 w-50" @click.native="verifyCode">بعدی</LoadingButton>
+				<div class="d-flex justify-content-end">
+					<LoadingButton :loading="loading" class="btn btn-primary mx-3 mt-4" @click.native="verifyCode">بعدی</LoadingButton>
+				</div>
 			</div>
 		</transition>
 	</b-modal>
@@ -25,6 +27,7 @@
 import ModalMixin from "../../../Mixins/Modal";
 import LoadingButton from "../../buttons/LoadingButton.vue";
 import LoadingSpinner from "../../LoadingSpinner.vue";
+import OtpInput from "../../OtpInput/OtpInput.vue";
 export default {
 	methods: {
 		sendVcode() {
@@ -35,7 +38,7 @@ export default {
 
 			var config = {
 				method: "post",
-				url: this.$APP_URL + "/auth/verification",
+				url: "/settings/verification",
 				data: data,
 			};
 
@@ -50,6 +53,7 @@ export default {
 					this.loading = false;
 				})
 				.catch((error) => {
+					console.log(error);
 					this.loading = false;
 				});
 		},
@@ -60,7 +64,7 @@ export default {
 
 			var config = {
 				method: "post",
-				url: this.$APP_URL + "/auth/verify-email",
+				url: this.$APP_URL + "/settings/verify-email",
 				data: data,
 			};
 
@@ -69,6 +73,7 @@ export default {
 					if (response.data.result) {
 						this.$emit("update:show", false);
 						this.$emit("updated", this.email);
+						this.verification_step = false;
 					} else {
 						this.toast("کد تایید نامعتبر است");
 					}
@@ -99,6 +104,7 @@ export default {
 	components: {
 		LoadingButton,
 		LoadingSpinner,
+		OtpInput,
 	},
 	mixins: [ModalMixin],
 	name: "EmailModal",

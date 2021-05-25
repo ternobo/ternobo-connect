@@ -1,8 +1,8 @@
 <template>
 	<b-modal v-model="showModal" hide-footer title="ثبت / ویرایش تلفن همراه" body-class="modal-signup" size="md" :centered="true">
 		<div class="d-flex ephone-input-group py-0 justify-content-between align-items-center">
-			<LoadingButton class="btn btn-dark signup-save-btn" :loading="loading" :disabled="verification_step" @click.native="sendVcode()">ثبت</LoadingButton>
-			<input type="tel" class="form-control mx-1 text-left" :readonly="verification_step" v-model="phone" placeholder="09126667152" />
+			<input type="email" class="form-control mx-1 text-left" dir="ltr" :readonly="verification_step" @keypress.enter="sendVcode()" v-model="phone" placeholder="09123456789" />
+			<LoadingButton class="btn signup-save-btn btn-primary" :disabled="verification_step" :loading="loading && !verification_step" @click.native="sendVcode()">ثبت</LoadingButton>
 		</div>
 		<transition name="slide">
 			<div v-if="verification_step" class="text">
@@ -12,9 +12,11 @@
 					<label class="w-100">کد تایید خود ‌را وارد کنید</label>
 					<div class="d-flex align-items-center">
 						<otp-input input-class="w-100" class="material--sm mx-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" />
-						<i class="material-icons-outlined mr-3" :class="{ 'text-muted': !invalidCode && !completedCode, 'text-danger': invalidCode, 'text-success': !invalidCode }">verified_user</i>
+						<i class="material-icons-outlined">verified_user</i>
 					</div>
-					<LoadingButton :loading="nextLoading" class="btn btn-dark mt-4" @click.native="verifyCode">تایید</LoadingButton>
+				</div>
+				<div class="d-flex justify-content-end">
+					<LoadingButton :loading="loading" class="btn btn-primary mx-3 mt-4" @click.native="verifyCode">بعدی</LoadingButton>
 				</div>
 			</div>
 		</transition>
@@ -28,9 +30,8 @@ import LoadingSpinner from "../../LoadingSpinner.vue";
 import OtpInput from "../../OtpInput/OtpInput.vue";
 export default {
 	methods: {
-		sendVcode(type) {
+		sendVcode() {
 			this.loading = true;
-			const $this = this;
 			var data = new FormData();
 			data.append("phone", this.phone);
 
@@ -71,6 +72,7 @@ export default {
 						this.$emit("update:show", false);
 						this.$emit("updated", this.phone);
 						this.invalidCode = false;
+						this.verification_step = false;
 					} else {
 						this.invalidCode = true;
 					}

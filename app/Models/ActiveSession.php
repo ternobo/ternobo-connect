@@ -26,6 +26,15 @@ class ActiveSession extends Model
         return [];
     }
 
+    public static function getActiveSessionsCount()
+    {
+        if (Auth::check()) {
+            $sessions = ActiveSession::query()->where("user_id", Auth::user()->id)->count();
+            return $sessions;
+        }
+        return 0;
+    }
+
     public static function isAdmin()
     {
         $api_key = Request::header("api-key");

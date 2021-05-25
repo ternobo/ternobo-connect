@@ -10,7 +10,7 @@
 		<SessionsModal :show.sync="showActiveSessions"></SessionsModal>
 		<h2 class="font-20 mb-4">ورود و امنیت</h2>
 		<div class="card">
-			<div class="card-body py-0 px-4">
+			<div class="settings-card-body">
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined ml-2">account_circle</i>
@@ -19,14 +19,16 @@
 
 					<div class="d-flex align-items-center">
 						<div class="content">
-							<section class="slugItem clickable" v-clipboard="$APP_URL + '/' + $store.state.user.username">
+							<div class="badge-bg-container clickable" v-clipboard="$APP_URL + '/' + $store.state.user.username">
 								<div class="ml-2 d-flex align-items-center" style="direction: ltr">
-									<span class="mr-1">{{ $root.isDesktop ? $APP_URL + "/" : "" }} {{ $store.state.user.username }}</span>
+									<span class="mr-1">
+										{{ $root.isDesktop ? `${websiteUrl}/` : "" }} <span class="text-dark">{{ $store.state.user.username }}</span>
+									</span>
 								</div>
 								<section class="icon clickable">
 									<i class="font-18 material-icons-outlined">copy</i>
 								</section>
-							</section>
+							</div>
 						</div>
 						<i class="btn setting-btn material-icons-outlined mr-3" @click="showUsernameModal = true">edit</i>
 					</div>
@@ -39,7 +41,7 @@
 
 					<div class="d-flex align-items-center">
 						<div class="content">
-							<span class="mr-1">{{ phone }}</span>
+							<span class="badge-bg-container">{{ phone }}</span>
 						</div>
 						<i class="btn setting-btn material-icons-outlined mr-3" @click="showPhoneModal = true">edit</i>
 					</div>
@@ -51,7 +53,7 @@
 					</div>
 					<div class="d-flex align-items-center">
 						<div class="content">
-							<span class="mr-1">{{ email }}</span>
+							<span class="badge-bg-container" v-if="Boolean(email)">{{ email }}</span>
 						</div>
 						<i class="btn setting-btn material-icons-outlined mr-3" @click="showEmailModal = true">edit</i>
 					</div>
@@ -70,20 +72,30 @@
 						<i class="material-icons-outlined ml-2">devices</i>
 						<span>دستگاه‌های متصل</span>
 					</div>
-					<i class="btn setting-btn material-icons-outlined mr-3" @click="showActiveSessions = true">keyboard_arrow_left</i>
+					<div class="d-flex align-items-center">
+						<div class="content">
+							<span class="badge-bg-container" v-if="Boolean(active_sessions)">{{ active_sessions }}</span>
+						</div>
+						<i class="btn setting-btn material-icons-outlined mr-3" @click="showActiveSessions = true">keyboard_arrow_left</i>
+					</div>
 				</div>
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined ml-2">privacy_tip</i>
 						<span>تایید 2 مرحله‌ای</span>
 					</div>
-					<i class="btn setting-btn material-icons-outlined mr-3" @click="showTwoFAModal = true">keyboard_arrow_left</i>
+					<div class="d-flex align-items-center">
+						<div class="content">
+							<span class="badge-bg-container">{{ two_factor_verification ? "فعال" : "غیرفعال" }}</span>
+						</div>
+						<i class="btn setting-btn material-icons-outlined mr-3" @click="showTwoFAModal = true">keyboard_arrow_left</i>
+					</div>
 				</div>
 			</div>
 		</div>
 		<h2 class="font-20 my-4">اطلاعات و دسترسی‌ها</h2>
 		<div class="card">
-			<div class="card-body py-0 px-4">
+			<div class="settings-card-body">
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined ml-2">translate</i>
@@ -118,9 +130,11 @@
 <script>
 export default {
 	created() {
-		axios.post("/auth/get-info").then((response) => {
+		axios.post("/settings/get-info").then((response) => {
 			this.phone = response.data.phone;
 			this.email = response.data.email;
+			this.two_factor_verification = response.data.two_factor_verification;
+			this.active_sessions = response.data.connected_devices;
 		});
 	},
 	methods: {
@@ -134,6 +148,11 @@ export default {
 			this.phone = phone;
 		},
 	},
+	computed: {
+		websiteUrl() {
+			return window.location.origin.replace("https://", "").replace("http://", "");
+		},
+	},
 	data() {
 		return {
 			showUsernameModal: false,
@@ -143,6 +162,9 @@ export default {
 			showLangModal: false,
 			showDeactiveModal: false,
 			showTwoFAModal: false,
+
+			active_sessions: 0,
+			two_factor_verification: false,
 
 			showActiveSessions: false,
 

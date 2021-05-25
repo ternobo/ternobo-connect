@@ -8,7 +8,7 @@
 				</div>
 				<div class="settings-item" :class="{ active: tab == 'about' }" @click="tab = 'about'">
 					<i class="material-icons-outlined ml-2">
-						<img src="/images/logo.svg" class="thelogo" style="width: 24px" />
+						<img src="/images/logo-grey.svg" class="thelogo" style="width: 24px" />
 					</i>
 					<span>درباره ترنوبو</span>
 				</div>
