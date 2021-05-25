@@ -3,6 +3,7 @@
 @import '~bootstrap-vue';
 @import "./utilities.scss";
 
+@import "./components/skeleton.scss";
 
 :root {
     font-size: 16px;
@@ -824,74 +825,10 @@ pre {
     box-shadow: none !important;
 }
 
-.autocomplete[data-loading=true]:after {
-    display: none !important;
-}
-
-
-.autocomplete-input {
-    padding: 8px 12px 8px 48px;
-    transition: 0.3s all;
-    border-radius: 16px;
-    height: 40px;
-    background-color: #FFF !important;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iYmxhY2siIHdpZHRoPSIxOHB4IiBoZWlnaHQ9IjE4cHgiPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMFYweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGZpbGw9IiM3NTc1NzUiIGQ9Ik0xNS41IDE0aC0uNzlsLS4yOC0uMjdDMTUuNDEgMTIuNTkgMTYgMTEuMTEgMTYgOS41IDE2IDUuOTEgMTMuMDkgMyA5LjUgM1MzIDUuOTEgMyA5LjUgNS45MSAxNiA5LjUgMTZjMS42MSAwIDMuMDktLjU5IDQuMjMtMS41N2wuMjcuMjh2Ljc5bDUgNC45OUwyMC40OSAxOWwtNC45OS01em0tNiAwQzcuMDEgMTQgNSAxMS45OSA1IDkuNVM3LjAxIDUgOS41IDUgMTQgNy4wMSAxNCA5LjUgMTEuOTkgMTQgOS41IDE0eiIvPjwvc3ZnPg==');
-    background-size: 24px;
-    font-size: 14px;
-    border-color: $icons;
-
-    &::-webkit-input-placeholder {
-        color: $grey;
-    }
-
-    &::-moz-placeholder {
-        color: $grey;
-    }
-
-    &:-ms-input-placeholder {
-        color: $grey;
-    }
-
-    &::-ms-input-placeholder {
-        color: $grey;
-    }
-
-    &::placeholder {
-        color: $grey;
-    }
-}
-
-@media screen and (max-width: 425px) {
-    .autocomplete-input {
-        font-size: 12px;
-    }
-}
-
 @import "./components/nice-scroll.scss";
-
-.autocomplete-input:focus,
-.autocomplete-input[aria-expanded=true] {
-    border-color: #191919 !important;
-    box-shadow: none !important;
-}
-
 
 .flip-list-move {
     transition: transform 0.5s;
-}
-
-.autocomplete-input[aria-expanded=true] {
-    border-radius: 12px 12px 0 0 !important;
-    border-bottom: none !important;
-    z-index: 2;
-}
-
-.autocomplete-result-list {
-    box-shadow: 0 1rem 40px rgba(0, 0, 0, 0.02) !important;
-    margin-top: -18px !important;
-
-    border: 2px solid #191919;
-    border-radius: 0 0 12px 12px !important;
 }
 
 @import "./components/notifications.scss";
@@ -1136,12 +1073,6 @@ a:focus {
 .card-header {
     background-color: $white;
     border: 0;
-}
-
-.autocomplete-result {
-    cursor: pointer;
-    padding: 12px;
-    background-image: none;
 }
 
 .open-achievements {
@@ -1583,3 +1514,4 @@ a:focus {
 @import "./text-utilies.scss";
 @import "./components/category-select.scss";
 @import "./components/dropdown-list.scss";
+@import "./components/autocomplete.scss";

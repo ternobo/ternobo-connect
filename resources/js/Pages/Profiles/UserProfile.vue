@@ -43,7 +43,8 @@
 								<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
 									<draft-card class="mb-3" v-for="action in actionsList" :post="action" :key="action.id"></draft-card>
 								</div>
-								<div class="w-100 d-flex justify-content-center py-3" v-if="loadingActions || loadingMore">
+								<posts-loading v-if="loadingActions" :count="3" />
+								<div class="w-100 d-flex justify-content-center py-3" v-else-if="loadingMore">
 									<loading-spinner class="image__spinner" />
 								</div>
 								<div v-if="next_page_url === null && !loadingActions">
@@ -56,7 +57,8 @@
 								<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
 									<ActionCard v-for="action in actionsList" :page="page" :action="action" :key="action.id"></ActionCard>
 								</div>
-								<div class="w-100 d-flex justify-content-center py-3" v-if="loadingActions || loadingMore">
+								<posts-loading v-if="loadingActions" :count="3" />
+								<div class="w-100 d-flex justify-content-center py-3" v-else-if="loadingMore">
 									<loading-spinner class="image__spinner" />
 								</div>
 								<div v-if="next_page_url === null && !loadingActions">
@@ -64,9 +66,6 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="w-100 d-flex justify-content-center py-3" v-if="loadingTab">
-						<loading-spinner class="image__spinner" />
 					</div>
 				</tab>
 				<tab name="تماس با من" id="contact" :href="'/' + page.slug + '/contact'" :selected="current_tab === 'contact'">
@@ -106,6 +105,7 @@ import DraftCard from "../../Components/PostCard/DraftCard.vue";
 import AppLayout from "../../Layouts/AppLayout.vue";
 import ContactTab from "../../Components/Profile/Contact/ContactTab";
 import AboutTab from "../../Components/Profile/AboutMe/AboutMeTab";
+import PostsLoading from "../../Components/Skeletons/PostsLoading.vue";
 export default {
 	watch: {
 		filters() {
@@ -152,7 +152,7 @@ export default {
 			this.current_tab = this.location;
 		}
 
-		if (this.current_tab.endsWith("activities")) {
+		if (this.current_tab == "activities") {
 			this.showEdit = false;
 			axios
 				.post("/" + this.page.slug + "/actions", this.filters)
@@ -257,25 +257,20 @@ export default {
 			if (link.endsWith("articles") || link.endsWith("activities")) {
 				this.showEdit = false;
 				this.loadingTab = true;
-				TernoboWire.getInstance(this)
-					.getData(link, false)
-					.then((data) => {
-						if (data) {
-							if (data.actions) {
-								this.actionsList = data.actions.data;
-								this.next_page_url = data.actions.next_page_url;
-							}
-							if (data.articles) {
-								this.articlesList = data.articles.data;
-								this.next_page_url = data.articles.next_page_url;
-							}
-						}
+				this.loadingActions = true;
+				axios
+					.post("/" + this.page.slug + "/actions", this.filters)
+					.then((response) => {
+						this.actionsList = response.data.actions.data;
+						this.next_page_url = response.data.actions.next_page_url;
 					})
-					.catch(() => {
-						this.next_page_url = options.url;
+					.catch((err) => {
+						console.log(err);
+						this.toast("خطا در دریفات اطلاعات");
 					})
 					.then(() => {
 						this.loadingTab = false;
+						this.loadingActions = false;
 					});
 			} else {
 				this.showEdit = true;
@@ -469,6 +464,7 @@ export default {
 		ProfileSteps,
 		VerifyModal,
 		DraftCard,
+		PostsLoading,
 	},
 	layout: AppLayout,
 };

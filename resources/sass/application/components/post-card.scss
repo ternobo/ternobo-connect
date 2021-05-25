@@ -164,6 +164,12 @@
         unicode-bidi: plaintext;
 
 
+        .skeleton-container {
+            >.pu-skeleton:not(:last-child) {
+                margin-bottom: 8px;
+            }
+        }
+
         ::-moz-selection {
             color: $dark;
             background: #BDE8FF;
@@ -355,25 +361,14 @@
         }
 
         .actions {
-            .buttons {
-                display: flex;
-                align-items: center;
-
-                i {
-                    color: $grey;
-
-                    &.active,
-                    &:hover {
-                        color: $dark;
-                    }
-                }
-            }
-
             text {
                 @extend .text-muted;
             }
 
             .buttons {
+                display: flex;
+                align-items: center;
+
                 i {
                     margin-left: 16px;
 
@@ -381,18 +376,23 @@
                         margin-left: 8px;
                     }
 
-                    color: $grey;
-                    cursor: pointer;
-                    transition: 0.3s all;
+                    &:not(.disabled) {
+                        color: $grey;
+
+                        &.active,
+                        &:hover {
+                            color: $dark;
+                        }
+
+                        cursor: pointer;
+                        transition: 0.3s all;
+                    }
+
                 }
 
                 i:last-child {
                     margin-left: 0;
                 }
-            }
-
-            i:hover {
-                color: $dark;
             }
         }
     }
@@ -464,9 +464,21 @@
 }
 
 .actionText {
-    padding: 8px;
+    position: relative;
+    padding: 16px 24px;
     font-size: 14px;
     color: #757575;
+
+    &::after {
+        position: absolute;
+        content: " ";
+        width: calc(100% - 48px);
+        left: 24px;
+        right: 24px;
+        bottom: 0;
+        height: 2px;
+        background: $icons;
+    }
 
     @media screen and (max-width: $sm-size) {
         font-size: 12px;

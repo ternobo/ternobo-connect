@@ -94,7 +94,7 @@ class SearchController extends Controller
         $pages = Page::getSuggestions();
         if ($request->has("q") && strlen($request->q) < 1) {
             if ($request->isMethod("POST")) {
-                return response()->json(array("result" => true, "pages" => []));
+                return response()->json(array("result" => true, "suggestions" => []));
             } else {
                 return redirect("/");
             }

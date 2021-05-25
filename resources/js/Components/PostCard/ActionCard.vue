@@ -1,8 +1,6 @@
 <template>
 	<div class="action bg-white px-0 mb-3" v-if="action.post !== null">
-		<div class="actionText border-bottom" v-if="action.action !== 'post'">
-			{{ actionText }}
-		</div>
+		<div class="actionText" v-if="action.action !== 'post'">{{ actionText }}.</div>
 		<post-card :post="action.post" />
 	</div>
 </template>

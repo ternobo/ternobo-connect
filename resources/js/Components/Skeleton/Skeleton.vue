@@ -60,7 +60,7 @@ export default {
     } = this;
     const classes = [`${prefix}-skeleton`,...this.classes];
     const elements = [];
-    const styles = { ...themeStyle(this.color), ...styles };
+    const styles = { ...themeStyle(this.color), ...this.styles };
 
 
     if (width) styles.width = width;
@@ -78,29 +78,9 @@ export default {
     }
     const showLoading = typeof isLoading !== 'undefined' ? isLoading : isEmptyVNode(this.$slots.default);
     if (tag) {
-      return h(tag, !showLoading ? this.$slots.default : elements);
+      return h(tag,{class: "skeleton-container"}, !showLoading ? this.$slots.default : elements);
     }
-    return (!showLoading ? this.$slots.default : <span>{ elements }</span>);
+    return (!showLoading ? this.$slots.default : <span class="skeleton-container">{ elements }</span>);
   }
 };
 </script>
-
-<style>
-.pu-skeleton {
-	background-size: 200px 100%;
-	background-repeat: no-repeat;
-	border-radius: 3px;
-	display: inline-block;
-	line-height: 1;
-	width: 100%;
-	height: inherit;
-}
-@keyframes SkeletonLoading {
-	0% {
-		background-position: -200px 0;
-	}
-	100% {
-		background-position: calc(200px + 100%) 0;
-	}
-}
-</style>
