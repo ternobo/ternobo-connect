@@ -1,8 +1,8 @@
 <template>
-	<b-modal v-model="showModal" hide-footer title="ثبت / ویرایش تلفن همراه" body-class="modal-signup" size="md" :centered="true">
+	<b-modal v-model="showModal" @show="onShow" hide-footer title="ویرایش تلفن همراه" body-class="modal-signup" size="md" :centered="true">
 		<div class="d-flex ephone-input-group py-0 justify-content-between align-items-center">
-			<input type="email" class="form-control mx-1 text-left" dir="ltr" :readonly="verification_step" @keypress.enter="sendVcode()" v-model="phone" placeholder="09123456789" />
-			<LoadingButton class="btn signup-save-btn btn-primary" :disabled="verification_step" :loading="loading && !verification_step" @click.native="sendVcode()">ثبت</LoadingButton>
+			<input type="email" class="form-control mx-1 text-input" dir="ltr" :readonly="verification_step" @keypress.enter="sendVcode()" v-model="phone" placeholder="09123456789" />
+			<LoadingButton class="btn signup-save-btn btn-primary" :disabled="verification_step || phone.length < 1 || notChanged" :loading="loading && !verification_step" @click.native="sendVcode()">ثبت</LoadingButton>
 		</div>
 		<transition name="slide">
 			<div v-if="verification_step" class="text">
@@ -83,22 +83,28 @@ export default {
 				})
 				.then(() => (this.completedCode = true));
 		},
+		onShow() {
+			if (this.value != null) {
+				this.phone = this.value;
+			}
+		},
 	},
 	props: {
 		value: {
 			default: null,
 		},
 	},
-	mounted() {
-		this.phone = this.value;
+	computed: {
+		notChanged() {
+			return this.phone == this.value;
+		},
 	},
-
 	data() {
 		return {
 			loading: false,
 			code: null,
 			verification_step: false,
-			phone: null,
+			phone: "",
 			nextLoading: false,
 
 			invalidCode: false,

@@ -87,7 +87,7 @@ button:focus {
 }
 
 body {
-    font-family: dana, 'Open Sans';
+    font-family: 'Open Sans', dana;
     direction: rtl;
     margin: 0;
     padding: 0;
@@ -389,7 +389,7 @@ img {
 }
 
 .text-superlight {
-    color: $icons;
+    color: $icons !important;
 }
 
 .text-grey {
@@ -497,7 +497,7 @@ img {
 }
 
 .modal-body {
-    padding: 24px;
+    padding: 32px;
 
     @media screen and (max-width: $sm-size) {
         padding: 12px;
@@ -772,7 +772,7 @@ pre {
     direction: rtl;
     unicode-bidi: -moz-plaintext;
     unicode-bidi: plaintext;
-    font-family: dana, 'Open Sans';
+    font-family: 'Open Sans', dana;
     letter-spacing: 0 !important;
     overflow: hidden;
     line-break: normal;
@@ -949,8 +949,7 @@ pre {
 }
 
 .tooltip-inner {
-    font-family: dana, 'Open Sans', sans-serif;
-    ;
+    font-family: 'Open Sans', dana, sans-serif;
 }
 
 .action {
@@ -1357,21 +1356,24 @@ a:focus {
 }
 
 .signup-save-btn {
-    padding: 8px 16px;
+    padding: 8px 24px;
 }
 
 @media screen and (min-width: $sm-size) {
     .modal-signup {
-        padding: 24px;
+        padding: 32px;
     }
 
     .ephone-input-group {
         padding-top: 24px;
         padding-bottom: 16px;
 
-        .btn,
+        .btn {
+            padding: 8px 24px;
+        }
+
         input {
-            height: 40px;
+            width: 255px;
         }
 
         input {

@@ -1,8 +1,8 @@
 <template>
-	<b-modal v-model="showModal" hide-footer title="ثبت / ویرایش ایمیل" body-class="modal-signup" size="md" :centered="true">
+	<b-modal v-model="showModal" @show="onShow" hide-footer title="ثبت / ویرایش ایمیل" body-class="modal-signup" size="md" :centered="true">
 		<div class="d-flex ephone-input-group py-0 justify-content-between align-items-center">
-			<input type="email" class="form-control mx-1 text-left" dir="ltr" :readonly="verification_step" @keypress.enter="sendVcode()" v-model="email" placeholder="example@ternobo.com" />
-			<LoadingButton class="btn signup-save-btn btn-primary" :disabled="verification_step" :loading="loading && !verification_step" @click.native="sendVcode()">ثبت</LoadingButton>
+			<input type="email" class="form-control mx-1 text-input" dir="ltr" :readonly="verification_step" @keypress.enter="sendVcode()" v-model="email" placeholder="example@ternobo.com" />
+			<LoadingButton class="btn signup-save-btn btn-primary" :disabled="verification_step || email.length < 1 || notChanged" :loading="loading && !verification_step" @click.native="sendVcode()">ثبت</LoadingButton>
 		</div>
 		<transition name="slide">
 			<div v-if="verification_step">
@@ -83,14 +83,21 @@ export default {
 					this.loading = false;
 				});
 		},
+		onShow() {
+			if (this.value != null) {
+				this.email = this.value;
+			}
+		},
+	},
+	computed: {
+		notChanged() {
+			return this.email == this.value;
+		},
 	},
 	props: {
 		value: {
 			default: null,
 		},
-	},
-	mounted() {
-		this.email = this.value;
 	},
 
 	data() {
@@ -98,7 +105,7 @@ export default {
 			loading: false,
 			code: null,
 			verification_step: false,
-			email: null,
+			email: "",
 		};
 	},
 	components: {

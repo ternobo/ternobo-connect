@@ -16,6 +16,17 @@
     }
 }
 
+.btn-danger {
+    background: $light-error;
+    color: $red;
+
+    &:hover {
+        background: $light-error-darker;
+        color: $red;
+        border-color: $light-error-darker;
+    }
+}
+
 .btn {
     padding: 8px 24px;
     font-weight: 600;

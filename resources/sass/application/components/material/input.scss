@@ -11,7 +11,7 @@
         background-color: white;
         color: $grey;
         padding: 0;
-        margin: 0 8px;
+        margin: 0 16px;
         transition: .1s ease-out;
         transform-origin: right top;
         pointer-events: none;
@@ -38,7 +38,7 @@
         color: $black;
         top: 0;
         padding: 0 4px;
-        margin: 0 8px;
+        margin: 0 16px;
         font-size: 10px;
         transform: translateY(-50%);
     }

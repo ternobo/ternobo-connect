@@ -8,8 +8,8 @@
 		<DeactiveModal :show.sync="showDeactiveModal"></DeactiveModal>
 		<TwoFAModal :phone="phone" :email="email" :show.sync="showTwoFAModal"></TwoFAModal>
 		<SessionsModal :show.sync="showActiveSessions"></SessionsModal>
-		<h2 class="font-20 mb-4">ورود و امنیت</h2>
-		<div class="card">
+		<h2 class="font-18 font-demibold mb-4">ورود و امنیت</h2>
+		<div class="card mb-2">
 			<div class="settings-card-body">
 				<div class="setting-action">
 					<div class="name">
@@ -21,13 +21,10 @@
 						<div class="content">
 							<div class="badge-bg-container clickable" v-clipboard="$APP_URL + '/' + $store.state.user.username">
 								<div class="ml-2 d-flex align-items-center" style="direction: ltr">
-									<span class="mr-1">
+									<span class="mr-1 text-grey">
 										{{ $root.isDesktop ? `${websiteUrl}/` : "" }} <span class="text-dark">{{ $store.state.user.username }}</span>
 									</span>
 								</div>
-								<section class="icon clickable">
-									<i class="font-18 material-icons-outlined">copy</i>
-								</section>
 							</div>
 						</div>
 						<i class="btn setting-btn material-icons-outlined mr-3" @click="showUsernameModal = true">edit</i>
@@ -53,7 +50,7 @@
 					</div>
 					<div class="d-flex align-items-center">
 						<div class="content">
-							<span class="badge-bg-container" v-if="Boolean(email)">{{ email }}</span>
+							<span class="badge-bg-container">{{ Boolean(email) ? email : "ایمیلی ثبت نشده" }}</span>
 						</div>
 						<i class="btn setting-btn material-icons-outlined mr-3" @click="showEmailModal = true">edit</i>
 					</div>
@@ -93,7 +90,7 @@
 				</div>
 			</div>
 		</div>
-		<h2 class="font-20 my-4">اطلاعات و دسترسی‌ها</h2>
+		<h2 class="font-18 font-demibold my-4">اطلاعات و دسترسی‌ها</h2>
 		<div class="card">
 			<div class="settings-card-body">
 				<div class="setting-action">
@@ -104,7 +101,7 @@
 
 					<div class="d-flex align-items-center">
 						<div class="content">
-							<div class="d-flex justify-content-between w-100">
+							<div class="badge-bg-container d-flex justify-content-between w-100">
 								<span class="ml-2"> فارسی (Persian) </span>
 								<img src="/img/iranicon.png" style="width: 16px; height: 16px" />
 							</div>

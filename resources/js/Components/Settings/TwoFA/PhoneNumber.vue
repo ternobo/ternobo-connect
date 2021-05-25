@@ -1,13 +1,13 @@
 <template>
 	<div class="d-flex flex-column">
-		<div>
+		<div class="mb-3">
 			<div class="d-flex justify-content-between align-content-center">
 				<strong> یک کد تایید برای شما ارسال شد </strong>
 
 				<span>{{ phone }}</span>
 			</div>
 			<div class="d-flex justify-content-between mt-4 align-items-end">
-				<material-text-field placeholder="کد را وارد کنید" class="material--sm" v-model="code"></material-text-field>
+				<material-text-field placeholder="کد را وارد کنید" v-model="code"></material-text-field>
 
 				<div class="d-flex justify-content-end" style="height: min-content">
 					<button class="btn button-transparent" @click="$emit('cancel')">لغو</button>
@@ -15,16 +15,17 @@
 				</div>
 			</div>
 
-			<div class="mt-2">
+			<div class="mt-3">
 				<span
-					class="clickable"
+					class="clickable font-14"
 					:class="{
 						'disabled text-muted': countdown > 0,
 						'text-action': !(countdown > 0),
 					}"
 					@click="resend"
-					>ارسال مجدد {{ countdown > 0 ? "(" + countdown + ")" : "" }}</span
 				>
+					ارسال مجدد {{ countdown > 0 ? "(" + countdown + ")" : "" }}
+				</span>
 			</div>
 		</div>
 	</div>

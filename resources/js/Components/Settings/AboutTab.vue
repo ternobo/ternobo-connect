@@ -3,9 +3,9 @@
 		<CookiesModal :show.sync="showCookiesModal"></CookiesModal>
 		<LawsModal :show.sync="showLawsModal"></LawsModal>
 
-		<h2 class="font-20 mb-4">امنیت اطلاعات</h2>
+		<h2 class="font-18 font-demibold mb-4">امنیت اطلاعات</h2>
 		<div class="card">
-			<div class="card-body py-0 px-4">
+			<div class="settings-card-body">
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined ml-2">gavel</i>

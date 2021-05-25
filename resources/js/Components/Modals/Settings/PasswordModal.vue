@@ -2,10 +2,10 @@
 	<b-modal v-model="showModal" hide-footer title="تغییر رمزعبور" body-class="modal-signup" size="md" :centered="true">
 		<div class="d-flex flex-column align-items-center">
 			<div class="d-flex w-100 flex-column" style="align-items: center">
-				<material-text-field class="material--sm w-50 mx-1 text-right mb-4" input-class="w-100" v-model="current_password" type="password" name="current_password" placeholder="رمزعبور فعلی" />
+				<material-text-field class="w-50 mx-1 text-right mb-4" input-class="w-100" v-model="current_password" type="password" name="current_password" placeholder="رمزعبور فعلی" />
 
-				<material-text-field class="material--sm w-50 mx-1 text-right mb-4" input-class="w-100" v-model="password" type="password" name="password" placeholder="رمزعبور" />
-				<material-text-field class="material--sm w-50 mx-1 text-right" input-class="w-100" v-model="password_repeat" type="password" name="password" placeholder="تکرار رمزعبور" />
+				<material-text-field class="w-50 mx-1 text-right mb-4" input-class="w-100" v-model="password" type="password" name="password" placeholder="رمزعبور" />
+				<material-text-field class="w-50 mx-1 text-right" input-class="w-100" v-model="password_repeat" type="password" name="password" placeholder="تکرار رمزعبور" />
 			</div>
 			<div class="mt-5">
 				<p class="font-18">نکات امنیتی</p>
