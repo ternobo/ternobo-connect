@@ -1,9 +1,9 @@
 <template>
 	<base-layout>
-		<div class="d-flex p-3 justify-content-center">
+		<div class="tag-page-header">
 			<div class="tag-card">
-				<div>
-					<strong>#{{ tag }}</strong>
+				<div class="d-flex align-content-center">
+					<strong class="tag">#{{ tag }}</strong>
 					<small>{{ posts.total }} مطلب</small>
 				</div>
 				<loading-button class="btn follow-btn" @click.native="follow" :class="{ 'btn-followed-connected': isFollowed }" :loading="loading">دنبال کردن</loading-button>

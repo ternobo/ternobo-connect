@@ -17,7 +17,6 @@
 .settings-item {
     padding: 24px 32px;
     color: $grey;
-    font-weight: 600;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -46,6 +45,8 @@
     }
 
     &.active {
+
+        font-weight: 600;
         color: $dark;
     }
 

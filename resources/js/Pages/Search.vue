@@ -1,8 +1,8 @@
 <template>
 	<base-layout>
 		<div class="w-100" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="5">
-			<p class="text-center font-18 text-muted">
-				{{ total }} نتیجه جستجو برای <strong>{{ search }}</strong> یافت شد
+			<p class="text-center font-16 mb-4 text-muted">
+				{{ total }} نتیجه جستجو برای <strong class="text-dark font-demibold">{{ search }}</strong> یافت شد
 			</p>
 
 			<tabs :compact="true" :centered="true" class="justify-content-center" @selected="loadTabContent">
@@ -20,7 +20,7 @@
 						</div>
 					</div>
 					<div class="row pt-3" v-else>
-						<div class="col-md-6 mb-3" v-for="i in 6" :key="`post_loading_skeleton_${i}`">
+						<div class="col-md-6 mb-3" v-for="i in 4" :key="`post_loading_skeleton_${i}`">
 							<div class="card">
 								<div class="card-body">
 									<page-skeleton></page-skeleton>
@@ -37,7 +37,7 @@
 					</masonry>
 
 					<div class="row pt-3" v-else>
-						<div class="col-md-6 mb-3" v-for="i in 6" :key="`post_loading_skeleton_${i}`">
+						<div class="col-md-6 mb-3" v-for="i in 4" :key="`post_loading_skeleton_${i}`">
 							<post-skeleton></post-skeleton>
 						</div>
 					</div>

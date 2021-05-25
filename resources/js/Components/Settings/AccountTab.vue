@@ -21,7 +21,7 @@
 						<div class="content">
 							<div class="badge-bg-container clickable" v-clipboard="$APP_URL + '/' + $store.state.user.username">
 								<div class="ml-2 d-flex align-items-center" style="direction: ltr">
-									<span class="mr-1 text-grey">
+									<span class="text-grey">
 										{{ $root.isDesktop ? `${websiteUrl}/` : "" }} <span class="text-dark">{{ $store.state.user.username }}</span>
 									</span>
 								</div>
@@ -90,7 +90,7 @@
 				</div>
 			</div>
 		</div>
-		<h2 class="font-18 font-demibold my-4">اطلاعات و دسترسی‌ها</h2>
+		<h2 class="font-18 font-demibold my-4 pt-3">اطلاعات و دسترسی‌ها</h2>
 		<div class="card">
 			<div class="settings-card-body">
 				<div class="setting-action">
@@ -103,7 +103,7 @@
 						<div class="content">
 							<div class="badge-bg-container d-flex justify-content-between w-100">
 								<span class="ml-2"> فارسی (Persian) </span>
-								<img src="/img/iranicon.png" style="width: 16px; height: 16px" />
+								<img src="/images/iran-flag.png" style="width: 24px" />
 							</div>
 						</div>
 						<i class="btn setting-btn material-icons-outlined mr-3" @click="showLangModal = true">keyboard_arrow_left</i>

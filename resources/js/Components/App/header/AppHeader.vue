@@ -11,7 +11,7 @@
 				</wire-link>
 
 				<form method="get" action="/search" ref="searchfield" class="searchfield d-flex">
-					<auto-complete class="search-field w-100" icon="search" v-model="searchVal" @search="$refs.searchfield.submit()" required type="text" :suggestionPosition="17" name="q" placeholder="هر چیزی که در جستن آنی، آنی" />
+					<auto-complete class="search-field w-100" icon="search" v-model="searchVal" @search="submitsearch" required type="text" :suggestionPosition="17" name="q" placeholder="هر چیزی که در جستن آنی، آنی" />
 					<div class="text-muted align-items-center justify-content-center d-lg-flex d-none nowrap font-12" style="padding-right: 24px !important"><img src="/images/beta.svg" width="36" class="verical-middle" /> <span class="mr-2 text-nowrap">۰.۶ V</span></div>
 				</form>
 				<div v-if="!$root.isDesktop">
@@ -36,11 +36,14 @@ export default {
 	},
 	data() {
 		return {
-			searchVal: null,
+			searchVal: "",
 			showOptions: false,
 		};
 	},
 	methods: {
+		submitsearch() {
+			if (this.searchVal.length > 0) $refs.searchfield.submit();
+		},
 		search(input) {
 			const element = document.getElementById("searchforminput").parentElement;
 			element.style.position = "unset";

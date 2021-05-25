@@ -3,7 +3,7 @@
 		<div class="d-flex align-items-center justify-content-between col-5">
 			<div class="d-flex align-items-center">
 				<i class="material-icons donate-type" :class="{ received: !tip.donate_by_me }">play_for_work</i>
-				<lazy-image :src="profile" class="profile-sm tip-profile mb-0" imgClass="profile-sm"></lazy-image>
+				<lazy-image :src="profile" class="profile-xsm tip-profile mb-0" imgClass="profile-xsm"></lazy-image>
 				<strong class="tip-name">{{ name }}</strong>
 			</div>
 			<div>

@@ -1409,6 +1409,7 @@ a:focus {
 
 .base-layout {
     margin-top: 32px;
+    padding-bottom: 300px;
 
     @media screen and (max-width: $sm-size) {
         margin-top: 12px;

@@ -1,3 +1,9 @@
+.tag-page-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+
 .tag-card {
     @extend .card;
     height: 60px;
@@ -6,16 +12,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px;
+    padding: 24px;
     flex-direction: row;
 
     small {
-        font-size: 12px;
+        font-size: 14px;
         color: $grey;
     }
 
     strong {
         font-size: 16px;
         color: $dark;
+        font-weight: 600;
+        margin-left: 8px;
     }
 }
