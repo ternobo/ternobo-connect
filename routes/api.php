@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\Transactions\TransactionsController;
+use App\Http\Controllers\Admin\Tips\Transactions\TransactionsController;
 use App\Http\Middleware\AdminAPIMiddleware;
 use Illuminate\Support\Facades\Route;
 
