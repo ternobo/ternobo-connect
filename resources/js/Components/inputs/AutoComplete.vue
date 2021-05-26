@@ -1,6 +1,6 @@
 <template>
 	<div class="auto-complete-container input-group-icon">
-		<input :type="type" v-bind="{ ...$attrs, ...$props }" autocomplete="off" v-on="$listeners" ref="input" v-model="input" @input="onInput" class="form-control" />
+		<input :type="type" v-bind="{ ...$attrs, ...$props }" autocomplete="off" v-on="$listeners" ref="input" v-model="input" @input="onInput" @blur="suggestions = []" class="form-control" />
 		<i class="material-icons clickable" @click="$emit('search')">{{ icon }}</i>
 		<ul v-if="suggestions.length > 0" :style="{ top: `${top}px`, left: `${left}px`, width: `${width}px` }">
 			<li v-for="(suggestion, index) in suggestions" @click="suggestionClick(suggestion)" :key="`search_suggestion_${index}`">{{ suggestion }}</li>
