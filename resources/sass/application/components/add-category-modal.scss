@@ -54,10 +54,10 @@
         display: flex;
         align-items: center;
         margin: 0 -8px;
-        width: 100%;
+        width: calc(100% - 16px);
 
         .category-badge {
-            max-width: calc(100% - 120px);
+            max-width: calc(100% - 150px);
         }
 
         >* {

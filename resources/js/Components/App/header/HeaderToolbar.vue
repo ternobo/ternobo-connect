@@ -1,9 +1,9 @@
 <template>
 	<div class="toolbar">
 		<div class="header-menu" v-if="$store.state.user != null">
-			<wire-link :class="{ active: $store.state.url === '/feed' }" href="/feed">
+			<a :class="{ active: $store.state.url === '/feed' }" href="/feed" @click="onHomeClick">
 				<i class="navheader-icon">home</i>
-			</wire-link>
+			</a>
 			<!-- <wire-link :class="{ active: $store.state.url === '/chats' }" href="/chats">
 				<i class="navheader-icon" :class="{ unread: $store.state.shared.unread_messages_count > 0 && $store.state.url != '/chats' }">textsms</i>
 			</wire-link> -->
@@ -58,6 +58,14 @@ export default {
 		};
 	},
 	methods: {
+		onHomeClick(e) {
+			e.preventDefault();
+			if (window.location.pathname === "/feed") {
+				window.scrollTo(0, 0);
+			} else {
+				this.$store.state.ternoboWireApp.visit("/feed");
+			}
+		},
 		showUserMenu(e) {
 			this.menuVisible = true;
 			const $this = this;

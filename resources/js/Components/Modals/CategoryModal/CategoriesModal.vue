@@ -8,7 +8,7 @@
 			<input type="text" :readonly="disabled" placeholder="دسته‌جدید را وارد کنید" maxlength="52" v-model="input" class="form-control text-input" />
 		</div>
 		<div class="edit-categories-list">
-			<draggable @end="save" v-model="list" handle=".hand-hover">
+			<draggable v-bind="dragOptions" @end="save" v-model="list" handle=".hand-hover">
 				<category-item v-for="(category, index) in list" :key="'category_' + category.id" :disabled="disabled" @deleted="doDelete(index)" @editChanged="editChanged" :category.sync="list[index]"></category-item>
 			</draggable>
 		</div>
@@ -20,6 +20,16 @@ import ModalMixin from "../../../Mixins/Modal";
 import AddBtn from "../../buttons/AddBtn.vue";
 import CategoryItem from "./CategoryItem";
 export default {
+	computed: {
+		dragOptions() {
+			return {
+				animation: 200,
+				group: "description",
+				disabled: false,
+				ghostClass: "ghost",
+			};
+		},
+	},
 	methods: {
 		editChanged(edit) {
 			this.disabled = edit;

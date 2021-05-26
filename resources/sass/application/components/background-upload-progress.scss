@@ -1,0 +1,19 @@
+.background-upload-progress {
+    position: fixed;
+    @extend .card;
+    padding: 20px 16px;
+    right: 40px;
+    bottom: 40px;
+    width: 300px;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+
+    .progress {
+        width: 100%;
+        margin-left: 12px;
+
+    }
+}

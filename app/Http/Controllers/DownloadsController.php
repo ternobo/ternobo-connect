@@ -17,23 +17,32 @@ class DownloadsController extends Controller
 
     public function profile($image)
     {
-        $response = (Storage::download("profiles/$image"));
-        ob_end_clean();
-        return $response;
+        if (Storage::exists("profiles/$image")) {
+            $response = (Storage::download("profiles/$image"));
+            ob_end_clean();
+            return $response;
+        }
+        return abort(404);
     }
 
     public function media($image)
     {
-        $response = (Storage::download("medias/$image"));
-        ob_end_clean();
-        return $response;
+        if (Storage::exists("medias/$image")) {
+            $response = (Storage::download("medias/$image"));
+            ob_end_clean();
+            return $response;
+        }
+        return abort(404);
     }
 
     public function nationalCards($image)
     {
-        $response = (Storage::download("nationalcards/$image"));
-        ob_end_clean();
-        return $response;
+        if (Storage::exists("nationalcards/$image")) {
+            $response = (Storage::download("nationalcards/$image"));
+            ob_end_clean();
+            return $response;
+        }
+        return abort(404);
     }
 
     public function voices($file)

@@ -7,6 +7,7 @@
 
 :root {
     font-size: 16px;
+    scroll-behavior: smooth;
 }
 
 ::-moz-selection {
@@ -1539,3 +1540,4 @@ a:focus {
 @import "./components/category-select.scss";
 @import "./components/dropdown-list.scss";
 @import "./components/autocomplete.scss";
+@import "./components//background-upload-progress.scss";

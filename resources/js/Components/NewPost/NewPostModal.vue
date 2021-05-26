@@ -149,7 +149,8 @@ export default {
 				data: formData,
 			};
 
-			axios(requestConfig)
+			this.$root.application
+				.backgroundUpload(requestConfig)
 				.then((response) => {
 					if (response.data.result) {
 						this.toast("با موفقیت منتشر شد", "check", "text-success");
