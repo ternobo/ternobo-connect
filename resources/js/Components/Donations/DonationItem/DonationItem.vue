@@ -1,34 +1,42 @@
 <template>
 	<div class="donation-item">
-		<div class="d-flex align-items-center justify-content-between col-5">
-			<div class="d-flex align-items-center">
-				<i class="material-icons donate-type" :class="{ received: !tip.donate_by_me }">play_for_work</i>
-				<lazy-image :src="profile" class="profile-xsm tip-profile mb-0" imgClass="profile-xsm"></lazy-image>
-				<strong class="tip-name">{{ name }}</strong>
-			</div>
-			<div>
-				<strong :class="{ 'text-success': !tip.donate_by_me, 'text-action': tip.donate_by_me }">{{ formatNumber(tip.amount, "0,0") }}</strong>
+		<donation-detail-modal :show.sync="showModal" :tip="tip"></donation-detail-modal>
+		<div class="donate-payer-info">
+			<i class="material-icons donate-type" :class="{ received: !tip.donate_by_me }">play_for_work</i>
+			<lazy-image :src="profile" circle :loadingColor="skeletonOptions.profileColor" class="profile-xxsm tip-profile mb-0" imgClass="profile-xxsm"></lazy-image>
+			<strong class="tip-name">{{ name }}</strong>
+		</div>
+		<div class="donate-detail-group">
+			<div :class="{ 'badge-success': !tip.donate_by_me, 'badge-blue': tip.donate_by_me }">
+				<strong class="font-demibold">{{ formatNumber(tip.amount, "0,0") }}</strong>
 				<span>تومان</span>
 			</div>
-		</div>
-		<div class="doantion-time">
-			<span>{{ time }}</span>
-			<strong class="mx-2">|</strong>
-			<span>{{ date }}</span>
-		</div>
-		<wire-link :href="`/posts/${tip.post_id}`" class="cliackable text-grey">
-			<i class="material-icons">launch</i>
-			<span class="clickable">مشاهده محتوا</span>
-		</wire-link>
-		<div>
-			<button class="btn tip-btn">جزئیات</button>
+			<div class="doantion-time">
+				<span>{{ time }}</span>
+				<strong class="mx-2">|</strong>
+				<span>{{ date }}</span>
+			</div>
+			<wire-link :href="`/posts/${tip.post_id}`" class="cliackable text-grey">
+				<i class="material-icons">launch</i>
+				<span class="clickable">مشاهده محتوا</span>
+			</wire-link>
+			<div>
+				<button class="btn tip-btn" @click="showModal = !showModal">جزئیات</button>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import DonationDetailModal from "../DonationDetailModal.vue";
 export default {
+	components: { DonationDetailModal },
 	name: "DonationItem",
+	data() {
+		return {
+			showModal: false,
+		};
+	},
 	props: ["tip"],
 	computed: {
 		time() {

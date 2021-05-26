@@ -12,7 +12,7 @@
 					<span class="publisher--shortbio">
 						{{ post_data.page.short_bio }}
 					</span>
-					<span class="text-superlight font-11">
+					<span class="publisher--shortbio font-10">
 						{{ post_time }}
 					</span>
 				</div>

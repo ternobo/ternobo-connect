@@ -1,6 +1,6 @@
 <template>
 	<div v-infinite-scroll="loadMore" :infinite-scroll-disabled="loading_next_page" infinite-scroll-distance="5">
-		<div class="d-flex align-items-center justify-content-between py-2 donations-header">
+		<div class="d-flex align-items-start justify-content-between donations-header">
 			<h1 class="font-18 mb-0">حمایت‌ها</h1>
 
 			<div class="d-flex">

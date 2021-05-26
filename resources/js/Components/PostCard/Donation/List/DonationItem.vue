@@ -4,7 +4,9 @@
 			<lazy-image :src="profile" imgClass="profile-xxsm" class="profile-xxsm mb-0 user-profile" />
 			<strong class="user-name">{{ isByMe ? "شما" : name }}</strong>
 		</div>
-		<div class="donation-amount" :class="{ received: !isByMe }">{{ amount }} تومان</div>
+		<div class="donation-amount" :class="{ received: !isByMe }">
+			<span>{{ amount }}</span> <span>تومان</span>
+		</div>
 	</div>
 </template>
 

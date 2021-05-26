@@ -1,9 +1,8 @@
+@import "./components/skeleton.scss";
 @import "./variables";
 @import '~bootstrap-v4-rtl';
 @import '~bootstrap-vue';
 @import "./utilities.scss";
-
-@import "./components/skeleton.scss";
 
 :root {
     font-size: 16px;

@@ -36,7 +36,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 52px;
+    padding: 16px 32px;
 
     &:first-child {
         padding-top: 8px;
@@ -72,12 +72,29 @@
 
     .donation-amount {
         font-weight: 600;
-        font-size: 16px;
+        font-size: 14px;
         line-height: 25px;
         color: $action;
+        line-height: 1;
+        @extend .badge-blue;
 
         &.received {
             color: $success;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 25px;
+            padding: 8px 12px;
+            height: 32px;
+            @extend .badge-success;
+        }
+
+        span {
+            height: 12px;
+        }
+
+        >*:last-child {
+            font-weight: normal;
+            margin-right: 4px;
         }
 
     }
@@ -116,7 +133,6 @@
             max-height: 400px;
             border-top: none;
             min-height: 400px;
-
         }
     }
 }

@@ -1,21 +1,26 @@
 .donation-item {
-    height: 72px;
-    padding: 16px 24px;
+    height: 76px;
+    padding: 20px 24px;
     background: $white;
     box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.03);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 4px;
+    margin-bottom: 12px;
+
+    .donate-payer-info {
+        display: flex;
+        align-items: center;
+    }
 
     .donate-type {
-        color: $action;
+        color: $dark-blue;
         transform: rotate(180deg);
-        margin-left: 24px;
+        margin-left: 16px;
     }
 
     .donate-type.received {
-        color: $success;
+        color: $dark-green;
         transform: rotate(0deg);
     }
 
@@ -28,16 +33,147 @@
         font-size: 16px;
     }
 
+
+    .donate-detail-group {
+        display: flex;
+        align-items: center;
+        margin: 0 -12px;
+
+        >* {
+            margin: 0 12px;
+        }
+    }
+
     .tip-btn {
         color: $grey;
         background: #EEEEEE;
-        padding: 8px 24px;
+        padding: 8px 16px;
+    }
+
+
+    .badge-blue,
+    .badge-success {
+        display: flex;
+        align-items: center;
+        line-height: 1;
+        height: 36px;
+        padding: 8px 16px;
+        font-size: 14px;
+
+        strong {
+            font-weight: 600;
+            height: 12px;
+        }
+
+        span {
+            font-weight: normal;
+            color: $dark-blue;
+            height: 12px;
+
+            &.received {
+                color: $dark-green;
+
+            }
+        }
+
+        >*:first-child {
+            margin-left: 4px;
+        }
+    }
+
+}
+
+.donation-detail-content {
+    .donation-detail-item {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 0;
+
+        &:first-child {
+            padding-top: 16px;
+        }
+    }
+}
+
+.donation-modal-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+
+
+    .donate-payer-info {
+        display: flex;
+        align-items: center;
+        margin: 0 -6px;
+
+        .donated_by {
+            font-weight: 600;
+            color: $grey;
+        }
+
+        >* {
+            margin: 0 6px;
+        }
+    }
+
+    .donation-amount-detail {
+        display: flex;
+        align-items: center;
+        margin: 0 -6px;
+
+        >* {
+            margin: 0 6px;
+        }
+
+
+        .badge-blue {
+            display: flex;
+            align-items: center;
+            line-height: 1;
+            height: 36px;
+            padding: 8px 16px;
+            font-size: 14px;
+
+            strong {
+                font-weight: 600;
+                height: 12px;
+            }
+
+            span {
+                font-weight: normal;
+                color: $dark-blue;
+                height: 12px;
+
+                &.received {
+                    color: $dark-green;
+
+                }
+            }
+
+            >*:first-child {
+                margin-left: 4px;
+            }
+        }
+    }
+
+    .donate-type {
+        color: $dark-blue;
+        transform: rotate(180deg);
+        margin-left: 16px;
+    }
+
+    .donate-type.received {
+        color: $dark-green;
+        transform: rotate(0deg);
     }
 
 }
 
 .donations-header {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 }
 
 .tselect-filter {

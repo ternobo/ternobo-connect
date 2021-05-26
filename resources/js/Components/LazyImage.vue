@@ -1,6 +1,6 @@
 <template>
 	<figure v-lazyload="{ onLoad: loaded }" class="image__wrapper">
-		<skeleton style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; right: 0px; display: flex" :color="loadingColor" :styles="styles" :classes="[imgClass]" ref="loader" v-if="loading"></skeleton>
+		<skeleton style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; right: 0px; display: flex" :circle="circle" :color="loadingColor" :styles="styles" :classes="[imgClass]" ref="loader" v-if="loading"></skeleton>
 		<i class="material-icons error_icon">error_outline</i>
 		<img class="image__item" ref="imageItem" :style="imgStyle" :class="imgClass" :data-url="src" :alt="alt" />
 	</figure>
@@ -13,7 +13,7 @@ export default {
 		if (typeof this.imgClass != "object") {
 			this.$refs.loader.$el.firstElementChild.classList.add(this.imgClass);
 		}
-		this.styles = this.$refs.imageItem.style;
+		this.styles = this.imgStyle;
 	},
 	data() {
 		return {
@@ -31,15 +31,6 @@ export default {
 		},
 	},
 	watch: {
-		loading() {
-			if (this.loading) {
-				this.$refs.imageItem.style.opacity = 0;
-				this.$refs.loader.$el.firstElementChild.classList.add(this.imgClass);
-				this.$refs.loader.$el.firstElementChild.style.top = "0";
-				this.$refs.loader.$el.firstElementChild.style.position = "absolute";
-				this.$refs.loader.$el.firstElementChild.style.borderRadius = getComputedStyle(this.$refs.imageItem).borderRadius;
-			}
-		},
 		src(val) {
 			this.$el.classList.remove("loaded");
 			this.$refs.imageItem.src = val;
@@ -47,6 +38,9 @@ export default {
 	},
 	name: "LazyImage",
 	props: {
+		circle: {
+			default: false,
+		},
 		loadingColor: {
 			default: "#EEEEEE",
 		},
