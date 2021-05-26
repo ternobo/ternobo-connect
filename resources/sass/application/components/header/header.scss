@@ -76,12 +76,13 @@
 :not(.active) .unread::after {
     content: " ";
     position: absolute;
-    width: 5px;
-    height: 5px;
-    background: #ff0076;
-    bottom: 3px;
-    left: 12px;
-    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    border: 2px solid $body-bg;
+    background: $red;
+    bottom: 2px;
+    right: 0px;
+    border-radius: 4px;
 }
 
 
