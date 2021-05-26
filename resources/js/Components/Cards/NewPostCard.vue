@@ -1,6 +1,6 @@
 <template>
 	<div class="position-relative card" v-if="$store.state.user != null">
-		<new-post-modal @done="$emit('done')" :show.sync="showPostModal"></new-post-modal>
+		<new-post-modal @posted="onPosted" :show.sync="showPostModal"></new-post-modal>
 		<div class="new-post-body">
 			<div class="text d-flex align-items-center">
 				<lazy-image :loadingColor="skeletonOptions.profileColor" img-class="profile-sm" class="profile-sm" loading="lazy" :src="$store.state.user.profile" />
@@ -18,6 +18,11 @@
 <script>
 import NewPostModal from "../NewPost/NewPostModal";
 export default {
+	methods: {
+		onPosted(post) {
+			this.$emit("posted", post);
+		},
+	},
 	components: { NewPostModal },
 	props: {
 		showDraft: {

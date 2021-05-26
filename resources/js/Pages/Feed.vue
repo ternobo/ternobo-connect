@@ -4,15 +4,15 @@
 			<user-card></user-card>
 		</sidebar-right>
 		<div class="content-container">
-			<new-post-card class="mb-3"></new-post-card>
-			<div class="posts" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="5">
+			<new-post-card @posted="postAdded" class="mb-3"></new-post-card>
+			<transition-group name="flip-list" tag="div" class="posts" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="5">
 				<PostCard v-for="post in postsArray" :key="'post_item_' + uuidV4(post)" :post="post"></PostCard>
-				<div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
-					<loading-spinner class="image__spinner" />
-				</div>
-				<div v-if="next_page_url === null && !loadingPage">
-					<no-content></no-content>
-				</div>
+			</transition-group>
+			<div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
+				<loading-spinner class="image__spinner" />
+			</div>
+			<div v-if="next_page_url === null && !loadingPage">
+				<no-content></no-content>
 			</div>
 		</div>
 		<sidebar-left v-if="!$root.isMobile">
@@ -56,6 +56,9 @@ export default {
 	methods: {
 		uuidV4(post) {
 			return "post_id_" + post.id + uuidv4();
+		},
+		postAdded(post) {
+			this.postsArray.unshift(post);
 		},
 		loadMore() {
 			if (!this.loadingPage && this.next_page_url !== null) {

@@ -52,7 +52,7 @@
 								</div>
 							</div>
 							<div v-else>
-								<NewPostCard :showDraft="false" @done="onPostAdded" ref="newPostCard" v-if="canEdit"></NewPostCard>
+								<NewPostCard :showDraft="false" @posted="onPostAdded" ref="newPostCard" v-if="canEdit"></NewPostCard>
 								<categories-mobile v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug" v-if="!$root.isDesktop"></categories-mobile>
 								<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
 									<ActionCard v-for="action in actionsList" :page="page" :action="action" :key="action.id"></ActionCard>

@@ -126,7 +126,10 @@ class PostController extends Controller
         $post->tags = $tags;
         $post->save();
         $user->personalPage->addAction("post", $post->id);
-        return response()->json(array("result" => true));
+
+        $post->load(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
+
+        return response()->json(array("result" => true, "post" => $post));
     }
 
     public function likePost($post_id)
@@ -444,7 +447,10 @@ class PostController extends Controller
         }
         $post->tags = $tags;
         $post->save();
-        return response()->json(array("result" => true));
+
+        $post->load(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
+
+        return response()->json(array("result" => true, "post" => $post));
     }
 
     public function publishPost($post)

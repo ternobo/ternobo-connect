@@ -11,8 +11,9 @@
 			</div>
 		</transition>
 
-		<upload-widget :progress="uploadProgress" />
-
+		<transition name="fade">
+			<upload-widget v-if="uploading" :error="error" @reload="onReload" @cancel="uploading = false" :progress="uploadProgress" />
+		</transition>
 		<!-- <widget-container v-if="this.url != '/' && this.url != '/chats' && this.user != null && $root.isDesktop"></widget-container> -->
 	</div>
 </template>
@@ -44,7 +45,10 @@ export default {
 					return response;
 				},
 				(error) => {
-					this.uploading = false;
+					this.error = true;
+					this.onReload = () => {
+						this.backgroundUpload(config);
+					};
 					console.log(error);
 					return Promise.reject(error);
 				}
@@ -68,6 +72,10 @@ export default {
 			hasUser: false,
 
 			uploading: false,
+			error: false,
+
+			onReload: () => {},
+
 			uploadProgress: 0,
 		};
 	},
