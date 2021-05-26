@@ -87,7 +87,6 @@ button:focus {
 }
 
 body {
-    font-family: 'Open Sans', dana;
     direction: rtl;
     margin: 0;
     padding: 0;
@@ -772,7 +771,9 @@ pre {
     direction: rtl;
     unicode-bidi: -moz-plaintext;
     unicode-bidi: plaintext;
-    font-family: 'Open Sans', dana;
+    font-family: Vazir,
+        'Open Sans',
+        sans-serif;
     letter-spacing: 0 !important;
     overflow: hidden;
     line-break: normal;
@@ -949,7 +950,8 @@ pre {
 }
 
 .tooltip-inner {
-    font-family: 'Open Sans', dana, sans-serif;
+    font-family: Vazir, 'Open Sans', sans-serif;
+    ;
 }
 
 .action {
@@ -1035,6 +1037,25 @@ a:focus {
     border-radius: 8px;
     background-color: $light-success;
     color: $success;
+    white-space: nowrap;
+    width: auto;
+    padding: 4px 12px;
+    line-height: 24px;
+
+    @media screen and (max-width: $sm-size) {
+        align-items: center;
+        display: flex;
+        padding: 6px 8px;
+        font-size: 10px;
+        height: 24px;
+    }
+}
+
+.badge-danger {
+    @extend .badge-light;
+    border-radius: 8px;
+    background-color: $light-error;
+    color: $error;
     white-space: nowrap;
     width: auto;
     padding: 4px 12px;

@@ -124,8 +124,8 @@ export default {
 		},
 		time_text() {
 			let startText = "";
-			if (typeof this.val.date == "object") {
-				startText = new PersianDate([this.val.date.year, this.val.date.month.id]).format("MMMM YYYY");
+			if (typeof this.val.date == "object" && this.val.date != null) {
+				startText = new PersianDate([this.val.date?.year, this.val.date?.month.id]).format("MMMM YYYY");
 			}
 			return startText;
 		},

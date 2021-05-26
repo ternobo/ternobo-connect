@@ -28,10 +28,6 @@
 									id: 'phone',
 									label: 'تلفن همراه',
 								},
-								{
-									id: 'email',
-									label: 'ایمیل',
-								},
 							]"
 							>روش تایید</tselect
 						>
@@ -120,11 +116,12 @@ export default {
 	},
 	computed: {
 		theComponent() {
+			// else if (this.type.id == "email") {
+			// 		// return () => import("../../Settings/TwoFA/Email");
+			// 	}
 			if (this.type != null) {
 				if (this.type.id == "app") {
 					return () => import("../../Settings/TwoFA/GoogleAuth");
-				} else if (this.type.id == "email") {
-					return () => import("../../Settings/TwoFA/Email");
 				} else if (this.type.id == "phone") {
 					return () => import("../../Settings/TwoFA/PhoneNumber");
 				}

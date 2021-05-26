@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<UsernameModal :show.sync="showUsernameModal" @updated="reload" :value="$store.state.user.username"></UsernameModal>
-		<email-modal :show.sync="showEmailModal" @updated="updateEmail" :value="email"></email-modal>
+		<!-- <email-modal :show.sync="showEmailModal" @updated="updateEmail" :value="email"></email-modal> -->
 		<phone-number-modal :show.sync="showPhoneModal" @updated="updatePhone" :value="phone"></phone-number-modal>
 		<PasswordModal :show.sync="showPasswordMdal"></PasswordModal>
 		<ChangeLanguageModal :show.sync="showLangModal"></ChangeLanguageModal>
@@ -43,7 +43,7 @@
 						<i class="btn setting-btn material-icons-outlined mr-3" @click="showPhoneModal = true">edit</i>
 					</div>
 				</div>
-				<div class="setting-action">
+				<!-- <div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined ml-2">email</i>
 						<span>پست الکترونیک</span>
@@ -54,7 +54,7 @@
 						</div>
 						<i class="btn setting-btn material-icons-outlined mr-3" @click="showEmailModal = true">edit</i>
 					</div>
-				</div>
+				</div> -->
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined ml-2">vpn_key</i>
@@ -83,7 +83,7 @@
 					</div>
 					<div class="d-flex align-items-center">
 						<div class="content">
-							<span class="badge-bg-container">{{ two_factor_verification ? "فعال" : "غیرفعال" }}</span>
+							<span class="font-16 h-auto" style="padding: 12px" :class="{ 'badge-danger': !two_factor_verification, 'badge-success': two_factor_verification }">{{ two_factor_verification ? "فعال" : "غیرفعال" }}</span>
 						</div>
 						<i class="btn setting-btn material-icons-outlined mr-3" @click="showTwoFAModal = true">keyboard_arrow_left</i>
 					</div>

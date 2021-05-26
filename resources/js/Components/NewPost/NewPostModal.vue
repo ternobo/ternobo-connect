@@ -222,7 +222,7 @@ export default {
 	computed: {
 		...mapState(["user", "shared"]),
 		username() {
-			return Boolean(this.user) && this.user.name.length > 40 ? this.user.name.substr(0, 40) : this.user.name;
+			return Boolean(this.user) && Boolean(this.user.name) && this.user.name.length > 40 ? this.user.name.substr(0, 40) : this.user.name;
 		},
 	},
 	data() {
