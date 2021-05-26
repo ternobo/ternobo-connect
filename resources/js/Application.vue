@@ -31,6 +31,8 @@ export default {
 	methods: {
 		backgroundUpload(config) {
 			this.uploading = true;
+			this.error = false;
+			this.onReload = () => {};
 			const axiosInstance = axios.create({
 				"content-type:": "multipart/form-data",
 				onUploadProgress: (progressEvent) => {

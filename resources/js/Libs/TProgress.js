@@ -11,7 +11,7 @@ var Settings = TProgress.settings = {
     speed: 200,
     trickle: true,
     trickleSpeed: 200,
-    showSpinner: true,
+    showSpinner: false,
     barSelector: '[role="bar"]',
     spinnerSelector: '[role="spinner"]',
     parent: 'body',

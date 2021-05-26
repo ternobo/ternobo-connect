@@ -1,13 +1,12 @@
-
 /* Make clicks pass-through */
 #tprogress {
   pointer-events: none;
 }
 
 #tprogress .bar {
-  background: #29d;
+  background: $dark;
   position: fixed;
-  z-index: 1031;
+  z-index: 1050;
   top: 0;
   left: 0;
   width: 100%;
@@ -21,7 +20,7 @@
   right: 0px;
   width: 100px;
   height: 100%;
-  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+  box-shadow: 0 0 10px $dark, 0 0 5px $dark;
   opacity: 1.0;
   transform: rotate(3deg) translate(0px, -4px);
 }
@@ -40,8 +39,8 @@
   height: 25px;
   box-sizing: border-box;
   border: solid 2px transparent;
-  border-top-color: #29d;
-  border-left-color: #29d;
+  border-top-color: $dark;
+  border-left-color: $dark;
   border-radius: 50%;
   -webkit-animation: tprogress-spinner 400ms linear infinite;
   animation: tprogress-spinner 400ms linear infinite;
@@ -61,6 +60,7 @@
   0% {
     -webkit-transform: rotate(0deg);
   }
+
   100% {
     -webkit-transform: rotate(360deg);
   }
@@ -70,6 +70,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
