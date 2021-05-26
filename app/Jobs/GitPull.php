@@ -30,6 +30,7 @@ class GitPull implements ShouldQueue, ShouldBeUnique
      */
     public function handle()
     {
-        //
+        $path = base_path();
+        $output = exec("cd $path && git pull && npm run production");
     }
 }
