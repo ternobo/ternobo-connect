@@ -24,7 +24,7 @@
 				</div>
 			</div>
 		</div>
-		<component v-if="post != null && post != undefined" :post="post" :has-comment="hasComment" v-bind:is="componentType"></component>
+		<component v-if="post_data != null && post_data != undefined" :post="post_data" :has-comment="hasComment" v-bind:is="componentType"></component>
 
 		<div class="post-footer">
 			<div class="actions" v-if="$store.state.user">
@@ -40,8 +40,8 @@
 					<i class="material-icons like" v-if="!checkUser(post_data.page.user_id)" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
 				</div>
 			</div>
-			<div @click="showLikes = true" class="d-flex post-likes-text text-muted clickable" v-if="post_data.mutual_likes != null && post_data.mutual_likes.length > 0">
-				<span class="ml-1">پسندیده شده توسط</span>
+			<div class="d-flex post-likes-text text-muted clickable" v-if="post_data.mutual_likes != null && post_data.mutual_likes.length > 0">
+				<span @click="showLikes = true" class="ml-1">پسندیده شده توسط</span>
 				<wire-link v-if="post_data.mutual_likes[0]" :href="'/' + post_data.mutual_likes[0].page.slug" class="text-dark">
 					<strong class="text-light">{{ post_data.mutual_likes[0].page.name }}</strong>
 				</wire-link>
@@ -110,8 +110,12 @@ export default {
 			}).catch((error) => {});
 		},
 		doDelete() {
-			this.deleted = true;
-			axios.delete("/posts/" + this.post_data.id);
+			this.confirmDialog("آیا از حذف این پست اطمینان دارید؟").then((value) => {
+				if (value) {
+					this.deleted = true;
+					axios.delete("/posts/" + this.post_data.id);
+				}
+			});
 		},
 		bookmark() {
 			if (this.bookmarked) {

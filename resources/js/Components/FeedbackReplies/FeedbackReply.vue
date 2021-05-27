@@ -34,7 +34,7 @@
 							</template>
 							<b-dropdown-item>
 								<div class="d-flex align-items-center">
-									<i class="material-icons ml-2 text-dark">link</i>
+									<i class="material-icons text-dark">link</i>
 									<div>
 										<div>
 											<strong> گزارش تخلف </strong>
@@ -45,7 +45,7 @@
 							</b-dropdown-item>
 							<b-dropdown-item class="hover-danger" @click="deleteComment" v-if="checkUser(feedbackReply.user_id)">
 								<div class="d-flex hover-danger align-items-center">
-									<i class="material-icons-outlined ml-2">delete_sweep</i>
+									<i class="material-icons-outlined">delete_sweep</i>
 									<div>
 										<div>
 											<strong> حذف </strong>

@@ -196,6 +196,11 @@
         height: 64px;
         color: $action;
         cursor: pointer;
+        transition: 0.3s all;
+
+        &:hover {
+            border-color: #E0E0E0;
+        }
     }
 
     >.arrow:not(:nth-child(2)) {

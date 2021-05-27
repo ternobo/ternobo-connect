@@ -104,6 +104,10 @@
 .add-action-btn.active {
     background: #EEEEEE;
 
+    &:hover {
+        background: #E0E0E0;
+    }
+
     i {
         color: $light;
         transform: rotate(45deg);
@@ -133,6 +137,7 @@
             color: $white;
             height: 40px;
             width: 40px;
+            font-size: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -183,6 +188,18 @@
     }
 
     &::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
         -webkit-text-fill-color: $text-color;
         text-fill-color: $text-color;
     }

@@ -1,6 +1,14 @@
-.notification-item:not(:last-child) {
-    .post-notification {
-        border-bottom: 2px solid #E0E0E0;
+.notification-item {
+    &:not(:last-child) {
+        .post-notification {
+            border-bottom: 2px solid #E0E0E0;
+        }
+    }
+
+    &:last-child {
+        .post-notification {
+            padding-bottom: 0;
+        }
     }
 }
 
@@ -22,7 +30,7 @@
         font-size: 18px;
         line-height: 28px;
         color: $dark;
-        margin-bottom: 24px;
+        margin-bottom: 0;
     }
 
     &:not(:first-child) {

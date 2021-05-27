@@ -24,7 +24,7 @@
 						<small class="text-muted">مثال : گزارش حساب ساختگی یا جعل شده</small>
 					</label>
 
-					<div class="md-checkbox" @click="reason = 'فکر می‌کنم این حساب کاربری غیرواقعی است'">
+					<div class="md-radio" @click="reason = 'فکر می‌کنم این حساب کاربری غیرواقعی است'">
 						<input type="radio" name="reason" value="فکر می‌کنم این حساب کاربری غیرواقعی است" v-model="reason" />
 						<label> </label>
 					</div>
@@ -35,7 +35,7 @@
 						<small class="text-muted">مثال : اطلاعات ارائه شده در <span class="reportTitle">این صفحه</span> نادرست بوده و تحت عنوان اطلاعت درست و واقعی ارائه شده است</small>
 					</label>
 
-					<div class="md-checkbox" @click="reason = 'فکر می‌‌کنم این صفحه دارای اطلاعات نادرست است'">
+					<div class="md-radio" @click="reason = 'فکر می‌‌کنم این صفحه دارای اطلاعات نادرست است'">
 						<input type="radio" name="reason" value="فکر می‌‌کنم این صفحه دارای اطلاعات نادرست است" v-model="reason" />
 						<label> </label>
 					</div>
@@ -45,7 +45,7 @@
 						<span>فکر می‌کنم <span class="reportTitle">این صفحه</span> هرز است</span>
 						<small class="text-muted">مثال : <span class="reportTitle">این صفحه</span> دارای ارزش خاصی نمی‌باشد و صرفا جهت جذب بازدید ارائه شده است</small>
 					</label>
-					<div class="md-checkbox" @click="reason = 'فکر می این صفحه هرز است'">
+					<div class="md-radio" @click="reason = 'فکر می این صفحه هرز است'">
 						<input type="radio" name="reason" value="فکر می این صفحه هرز است" v-model="reason" />
 						<label> </label>
 					</div>
@@ -55,7 +55,7 @@
 						<span>فکر می‌کنم <span class="reportTitle">این صفحه</span> جهت کلاهبرداری، فیشینگ یا انتقال ویروس و باج افزار ارائه شده‌</span>
 						<small class="text-muted">مثال : <span class="reportTitle">این صفحه</span> به جهت دریافت اطلاعات شخصی، پول یا ارائه لینک‌های مشکوک و آلوده قرار گرفته است.</small>
 					</label>
-					<div class="md-checkbox" @click="reason = 'فکر می‌‌کنم این صفحه جهت کلاهبرداری، فیشینگ یا انتقال ویروس و باج افزار ارائه شده'">
+					<div class="md-radio" @click="reason = 'فکر می‌‌کنم این صفحه جهت کلاهبرداری، فیشینگ یا انتقال ویروس و باج افزار ارائه شده'">
 						<input type="radio" name="reason" value="فکر می‌‌کنم این صفحه جهت کلاهبرداری، فیشینگ یا انتقال ویروس و باج افزار ارائه شده" v-model="reason" />
 						<label> </label>
 					</div>
@@ -70,7 +70,7 @@
 						<small class="text-muted">مثال : <span class="reportTitle">این صفحه</span> به صوتر هدفمند به اشخصا حقیقی، قومیت یا مذهبی خاص توهین کرده است</small>
 					</label>
 
-					<div class="md-checkbox" @click="reason = 'فکر می‌کنم این صفحه توهین آمیز است'">
+					<div class="md-radio" @click="reason = 'فکر می‌کنم این صفحه توهین آمیز است'">
 						<input type="radio" name="reason" value="فکر می‌کنم این صفحه توهین آمیز است" v-model="reason" />
 						<label> </label>
 					</div>
@@ -80,7 +80,7 @@
 						<span>فکر می‌کنم شامل محتوای جنسی است</span>
 						<small class="text-muted">مثال : شامل محتوای برهنگی، صحنه‌ها و زبان جنسی، فحشا یا قاچاق جنسی است</small>
 					</label>
-					<div class="md-checkbox" @click="reason = 'فکر می‌‌کنم شامل محتوای جنسی است'">
+					<div class="md-radio" @click="reason = 'فکر می‌‌کنم شامل محتوای جنسی است'">
 						<input type="radio" name="reason" value="فکر می‌‌کنم شامل محتوای جنسی است" v-model="reason" />
 						<label> </label>
 					</div>
@@ -90,7 +90,7 @@
 						<span>فکر می‌کنم <span class="reportTitle">این صفحه</span> اشاعه دهنده خشونت و تروریسم است</span>
 						<small class="text-muted">مثال : شامل شکنجه، تجاوز یا سوء استفاده، عمل تروریستی یا عضوگیری برای گروه‌های تروریستی است</small>
 					</label>
-					<div class="md-checkbox" @click="reason = 'فکر می‌کنم  این صفحه اشاعه دهنده خشونت و تروریسم است'">
+					<div class="md-radio" @click="reason = 'فکر می‌کنم  این صفحه اشاعه دهنده خشونت و تروریسم است'">
 						<input type="radio" name="reason" value="فکر می‌کنم  این صفحه اشاعه دهنده خشونت و تروریسم است" v-model="reason" />
 						<label> </label>
 					</div>
@@ -100,7 +100,7 @@
 						<span>فکر می‌کنم <span class="reportTitle">این صفحه</span> آزار دهنده و تهدید آمیز است‌</span>
 						<small class="text-muted">مثال : شامل حمله به شخص/اشخاص یا تهدید و قلدری است</small>
 					</label>
-					<div class="md-checkbox clickable" @click="reason = 'فکر می‌‌کنم این صفحه آزار دهنده و تهدید آمیز است'">
+					<div class="md-radio clickable" @click="reason = 'فکر می‌‌کنم این صفحه آزار دهنده و تهدید آمیز است'">
 						<input type="radio" name="reason" value="فکر می‌‌کنم این صفحه آزار دهنده و تهدید آمیز است" v-model="reason" />
 						<label> </label>
 					</div>
@@ -110,7 +110,7 @@
 						<span>من نگران هستم این فرد بخواهد خودکشی کند‌</span>
 						<small class="text-muted">مثال : این شخص تهدید می‌کند که به خودش آسیب می‌رساند</small>
 					</label>
-					<div class="md-checkbox" @click="reason = 'من نگران هستم این فرد بخواهد خودکشی کند'">
+					<div class="md-radio" @click="reason = 'من نگران هستم این فرد بخواهد خودکشی کند'">
 						<input type="radio" name="reason" value="من نگران هستم این فرد بخواهد خودکشی کند" v-model="reason" />
 						<label> </label>
 					</div>
@@ -120,7 +120,7 @@
 						<span><span class="reportTitle">این صفحه</span> حقوق شخصی مرا نقض می‌کند‌‌</span>
 						<small class="text-muted">مثال : اقتراء، نقص حقوق چاپ یا علائم تجاری است</small>
 					</label>
-					<div class="md-checkbox" @click="reason = 'این صفحه حقوق شخصی مرا نقض می‌کند'">
+					<div class="md-radio" @click="reason = 'این صفحه حقوق شخصی مرا نقض می‌کند'">
 						<input type="radio" name="reason" value="این صفحه حقوق شخصی مرا نقض می‌کند" v-model="reason" />
 						<label> </label>
 					</div>

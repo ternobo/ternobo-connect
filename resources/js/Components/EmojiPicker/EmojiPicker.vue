@@ -1,6 +1,6 @@
 <template>
-	<div class="emoji-container" v-click-outside="hide">
-		<i class="material-icons-outlined text-muted font-32" @click="toggle">sentiment_very_satisfied</i>
+	<div class="emoji-container" :class="{ active: visible }" v-click-outside="hide">
+		<i class="material-icons-outlined font-32" @click="toggle">sentiment_very_satisfied</i>
 		<transition name="fade">
 			<div class="emoji-picker" v-if="visible">
 				<div class="search-emoji">

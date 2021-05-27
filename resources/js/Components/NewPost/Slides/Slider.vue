@@ -7,7 +7,7 @@
 		</div>
 		<div class="new-post-slider-scrollable" ref="slidesList" :class="{ hasArrow: this.slides.length > maxSlides }">
 			<i class="material-icons arrow" v-if="this.slides.length > maxSlides" @click="updateTransform(-200)">keyboard_arrow_right</i>
-			<div class="scrollable-list">
+			<div class="scrollable-list" @wheel="onWheel">
 				<div class="new-post-slider" :style="{ transform: `translateX(${transformBy}px)` }">
 					<draggable v-bind="dragOptions" class="drag-container" handle=".slide-item" v-model="slides">
 						<slide-item v-for="(slide, index) in slides" :hideDelete="slides.length <= 1" :key="`slides_${slide.id}`" :class="{ active: slide.id == slides[activeIndex].id }" @delete="deleteItem(index)">
@@ -45,6 +45,11 @@ export default {
 		},
 	},
 	methods: {
+		onWheel(e) {
+			if (this.slides.length > this.maxSlides) {
+				this.updateTransform(e.deltaY);
+			}
+		},
 		getData() {
 			return this.slides.filter((item) => item.content.length > 0);
 		},

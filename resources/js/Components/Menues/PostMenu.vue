@@ -13,13 +13,13 @@
 				</b-dropdown-item>
 				<b-dropdown-item @click="$emit('edit')" v-if="checkUser(post.page.user_id) && post.type != 'article'">
 					<div class="d-flex align-items-center">
-						<i class="material-icons-outlined ml-2 text-dark">edit</i>
+						<i class="material-icons-outlined text-dark">edit</i>
 						<strong> ویرایش </strong>
 					</div>
 				</b-dropdown-item>
 				<b-dropdown-item @click.native="$emit('embed')">
 					<div class="d-flex align-items-center">
-						<i class="material-icons ml-2 text-dark">code</i>
+						<i class="material-icons text-dark">code</i>
 						<div>
 							<div>
 								<strong> دریافت کد امبد </strong>
@@ -30,7 +30,7 @@
 				</b-dropdown-item>
 				<b-dropdown-item v-if="!checkUser(post.page.user_id)" @click="showReport = true">
 					<div class="d-flex align-items-center">
-						<i class="material-icons-outlined ml-2 text-dark">report</i>
+						<i class="material-icons-outlined text-dark">report</i>
 						<div>
 							<div>
 								<strong> گزارش تخلف </strong>
@@ -42,7 +42,7 @@
 
 				<b-dropdown-item @click="showConfirm = true" v-if="!checkUser(post.page.user_id) && following">
 					<div class="d-flex align-items-center">
-						<i class="material-icons ml-2 text-dark">not_interested</i>
+						<i class="material-icons text-dark">not_interested</i>
 						<div>
 							<div>
 								<strong> دنبال نکردن {{ post.page.name }} </strong>
@@ -53,7 +53,7 @@
 				</b-dropdown-item>
 				<b-dropdown-item class="hover-danger" @click="$emit('deleted')" v-if="checkUser(post.page.user_id)">
 					<div class="d-flex align-items-center">
-						<i class="material-icons-outlined ml-2 text-dark">delete_sweep</i>
+						<i class="material-icons-outlined text-dark">delete_sweep</i>
 						<div>
 							<strong>حذف کردن</strong>
 						</div>

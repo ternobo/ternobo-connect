@@ -1,0 +1,100 @@
+$md-radio-checked-color: $dark;
+$md-radio-border-color: $border-color;
+$md-radio-border-color-disabled: $border-color;
+$md-radio-checked-color-disabled: $icons;
+
+$md-radio-margin: 1em 0;
+$md-radio-size: 1em;
+$md-radio-padding: .25em;
+$md-radio-border-width: 3px;
+$md-radio-border-radius: 50%;
+$md-checkmark-width: 0.125em;
+$md-radio-label-padding: .75em;
+
+.md-radio {
+    position: relative;
+    margin: $md-radio-margin;
+    text-align: right;
+
+    &.md-radio-inline {
+        display: inline-block;
+    }
+
+    label {
+        cursor: pointer;
+        display: inline;
+        line-height: $md-radio-size;
+        vertical-align: top;
+        clear: both;
+        padding-right: 1px;
+        color: $grey;
+        font-size: 14px;
+        margin-bottom: 0;
+
+        &:not(:empty) {
+            padding-right: $md-radio-label-padding;
+        }
+
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        &:before {
+            // box
+            width: $md-radio-size;
+            height: $md-radio-size;
+            background: #fff;
+            border: $md-radio-border-width solid $md-radio-border-color;
+            border-radius: $md-radio-border-radius;
+            cursor: pointer;
+            transition: all .3s;
+        }
+    }
+
+
+    &.light {
+        input[type="radio"] {
+            &:checked {
+                +label:before {
+                    background: $grey;
+                    border: 3px solid #E0E0E0;
+                }
+            }
+        }
+    }
+
+    input[type="radio"] {
+        outline: 0;
+        visibility: hidden;
+        width: $md-radio-size;
+        margin: 0;
+        display: block;
+        float: right;
+        font-size: inherit;
+
+
+        &:checked {
+            +label:before {
+                background: $md-radio-checked-color;
+                border: 3px solid #E0E0E0;
+            }
+        }
+
+        &:disabled {
+            +label:before {
+                border-color: $md-radio-border-color-disabled;
+            }
+
+            &:checked {
+                +label:before {
+                    background: $md-radio-checked-color-disabled;
+                }
+            }
+        }
+    }
+
+}

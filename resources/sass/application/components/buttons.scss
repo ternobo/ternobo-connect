@@ -45,6 +45,11 @@
     border-radius: 12px;
     color: $action;
 
+    &:hover {
+        color: $action;
+        background: $blue-light-hover;
+    }
+
 }
 
 .follow-btn:hover {
@@ -65,7 +70,11 @@
 
 .btn-transparent {
     background: transparent;
-    color: #FFF;
+    color: $grey;
+
+    &:hover {
+        color: $dark;
+    }
 }
 
 .btn-transparent:hover {

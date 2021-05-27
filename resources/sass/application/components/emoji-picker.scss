@@ -9,6 +9,22 @@
 
 .emoji-container {
     position: relative;
+
+    >i {
+        cursor: pointer;
+        transition: 0.3s all;
+        color: $grey;
+
+        &:hover {
+            color: $dark;
+        }
+    }
+
+    &.active {
+        >i {
+            color: $dark;
+        }
+    }
 }
 
 .emoji-picker {

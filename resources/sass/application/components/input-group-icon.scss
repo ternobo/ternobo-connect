@@ -11,7 +11,7 @@
         padding-left: 24px;
     }
 
-    i,
+    >i,
     .actions {
         z-index: 1000;
         color: $grey;
@@ -27,7 +27,7 @@
         transition: 0.3s all;
     }
 
-    i:hover {
+    >i:hover {
         color: $dark;
     }
 }

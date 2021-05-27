@@ -2,7 +2,7 @@
 	<div>
 		<category-select-modal :categories.sync="categories" @hide="onCategoryClose" :selectedCategory.sync="category" :show.sync="showCategoryModal"></category-select-modal>
 
-		<b-modal v-if="user != null" v-model="showModal" @show="shown" no-close-on-esc hide-footer no-stacking modal-class="new-post-modal" size="md" title="تولید محتوای تازه" :centered="true">
+		<b-modal v-if="user != null" v-model="showModal" @hide="hide" @show="shown" no-close-on-esc hide-footer no-stacking modal-class="new-post-modal" size="md" title="تولید محتوای تازه" :centered="true">
 			<div action="/posts" data-ajax method="POST" data-reload="1" enctype="multipart/form-data" class="w-100">
 				<div class="new-post position-relative">
 					<div class="selections">
@@ -23,13 +23,12 @@
 								<i class="material-icons-outlined">layers</i>
 								<span>{{ category == null ? "دسته‌بندی‌ها" : category.name }}</span>
 							</div>
-							<!-- <tselect v-on:new-item="newCategory" :items="categories" value-option="name" :showNewItem="true" v-model="category" direction="rtl"> <i class="material-icons-outlined">layers</i> دسته‌بندی </tselect> -->
 						</div>
 					</div>
 					<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
 					<div class="d-flex justify-content-center align-items-center mt-3 mb-2">
-						<loading-button :loading="loadingDraft" class="btn btn-transparent button-transparent text-muted font-14" @click.native="submitPost(true)"> پیش نویس </loading-button>
-						<loading-button :loading="loading" class="btn btn-primary font-14" @click.native="submitPost(false)"> انتشار </loading-button>
+						<loading-button :loading="loadingDraft" class="btn btn-transparent font-14" @click.native="submitPost(true)"> پیش نویس </loading-button>
+						<loading-button :loading="loading" class="btn btn-primary font-14" @click.native="submitPost(false)"> {{ post ? "ذخیره" : "انتشار" }} </loading-button>
 					</div>
 				</div>
 			</div>
@@ -60,6 +59,9 @@ export default {
 		},
 	},
 	methods: {
+		hide() {
+			window.onbeforeunload = null;
+		},
 		onCategoryClose() {
 			this.$emit("update:show", true);
 		},
@@ -86,8 +88,20 @@ export default {
 			}
 		},
 		shown() {
+			window.onbeforeunload = function (e) {
+				var message = "در صورت خروج اطلاعات از بین‌می‌رود!",
+					e = e || window.event;
+				// For IE and Firefox
+				if (e) {
+					e.returnValue = message;
+				}
+
+				// For Safari
+				return message;
+			};
 			this.deletedSlides = [];
 			if (this.post) {
+				this.canDonate = this.post.can_tip;
 				let content = _.cloneDeep(this.post.slides);
 				for (let i = 0; i < content.length; i++) {
 					let item = content[i];
@@ -153,16 +167,17 @@ export default {
 				.backgroundUpload(requestConfig)
 				.then((response) => {
 					if (response.data.result) {
-						this.toast("با موفقیت منتشر شد", "check", "text-success");
 						if (this.post) {
 							this.$emit("update:post", response.data.post);
 							this.deletedSlides = [];
+							this.toast("با موفقیت ذخیره شد", "check", "text-success");
 						} else {
 							this.$emit("posted", response.data.post);
 							this.content = [{ id: uuidv4(), content: [], icon: "more_horiz", active: true }];
 							this.category = undefined;
 							this.canDonate = false;
 							this.deletedSlides = [];
+							this.toast("با موفقیت منتشر شد", "check", "text-success");
 						}
 					} else {
 						this.handleError(response.data.errors);

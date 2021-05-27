@@ -21,7 +21,7 @@ export default {
 
                     let action = "";
 
-                    if (this.text.split(" ").length > 100) {
+                    if (this.text.length > 200) {
                         action = (<div class="show-more-text--clickable" onClick={this.toggleShowFullText}>{this.showFullText ? "نمایش کمتر" : "نمایش بیشتر"}</div>);
                     }
 
@@ -71,7 +71,7 @@ export default {
     },
     computed: {
         textToShow() {
-            return this.showFullText || this.text.split(" ").length < 100 ? this.text : (this.text.split(" ").slice(0, 40).join(" ") + "...");
+            return this.showFullText || this.text.length < 200 ? this.text : this.text.substring(0, 200) + "...";
         }
     },
     props: {
