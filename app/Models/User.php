@@ -558,7 +558,7 @@ class User extends Authenticatable implements Messageable
             $prevGroup = $index;
         }
         uasort($groups, function ($a, $b) {
-            return $b['updated_at']->greaterThan($a['updated_at']);
+            return $b['updated_at']->greaterThan($a['updated_at']) ? 1 : 0;
         });
         return ["data" => array_values($groups), 'next_page_url' => $notificationsPaginator->nextPageUrl()];
     }
