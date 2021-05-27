@@ -37,12 +37,14 @@
         border-color: #E0E0E0;
         opacity: 0.5;
     }
+
 }
 
 .btn-action-light {
     background: #E7F3FF;
     border-radius: 12px;
-    color: $action !important;
+    color: $action;
+
 }
 
 .follow-btn:hover {
@@ -408,6 +410,6 @@
 
 .btn {
     @media screen and (max-width: $sm-size) {
-        font-size: 14px;
+        font-size: 10px;
     }
 }

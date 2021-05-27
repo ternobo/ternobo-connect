@@ -13,7 +13,7 @@
 					<div class="action">در این محتوا از شما نام برده</div>
 				</div>
 			</div>
-			<i class="material-icons-outlined text-action">account_circle</i>
+			<i class="material-icons-outlined text-grey">alternate_email</i>
 		</div>
 		<div class="notification-content">
 			<post-viewer :post="notificationGroup.notifiable"></post-viewer>

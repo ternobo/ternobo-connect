@@ -1,6 +1,6 @@
 <template>
 	<div class="feedback-replies px-2">
-		<new-feedback-reply class="mb-3" :feedback="feedback" @submit="submit"></new-feedback-reply>
+		<new-feedback-reply :feedback="feedback" @submit="submit"></new-feedback-reply>
 		<feedback-reply v-for="reply in feedbackReplies" v-on:deleted="feedbackReplyDelete" :feedback-reply="reply" :key="'feedback_reply_' + reply.id"></feedback-reply>
 		<div class="d-flex w-100 justify-content-center align-items-center py-3" v-if="feedbackRepliesLoading">
 			<loading-spinner></loading-spinner>

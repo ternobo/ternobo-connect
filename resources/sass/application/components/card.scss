@@ -1,0 +1,38 @@
+.card {
+    background: $box-on-bg;
+
+    .card-body {
+        padding: 24px;
+
+        @media screen and (max-width: $sm-size) {
+            padding: 16px;
+        }
+    }
+
+    .card-footer {
+        position: relative;
+        padding: 16px 24px;
+        background-color: $box-on-bg;
+        border: none;
+
+        &::after {
+            content: " ";
+            position: absolute;
+            top: 0;
+            left: 24px;
+            width: calc(100% - 48px);
+            height: 2px;
+            background-color: $fixed-elements;
+        }
+
+        @media screen and (max-width: $sm-size) {
+            padding: 16px;
+
+            &::after {
+                left: 16px;
+                width: calc(100% - 32px);
+            }
+        }
+
+    }
+}

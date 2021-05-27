@@ -1,14 +1,12 @@
 <template>
 	<div class="sendfeedback clearfix" v-if="$store.state.user != null">
-		<div class="input-group-btn mb-0">
-			<img class="feedback-profile" :src="$store.state.user.profile" />
-			<textarea-autosize v-model="text" class="form-control autoresize border-0 shadow" :minHeight="63" placeholder="نظر شما چیست؟" name="text" maxlength="2500"></textarea-autosize>
-		</div>
-		<transition name="fade">
-			<div class="justify-content-end mt-3" v-if="showSubmit">
-				<loading-button @click.native="submit" :loading="loading" class="btn btn-primary">ارسال</loading-button>
+		<div class="input-container">
+			<lazy-image circle :loadingColor="skeletonOptions.profileColor" class="profile-xsm ml-3 mb-0" imgClass="profile-xsm" :src="$store.state.user.profile" />
+			<div class="material-input-group-btn w-100">
+				<MaterialTextArea v-model="text" input-class="w-100" maxlength="1000" class="material--xsm w-100" placeholder="نظر شما چیست؟" name="text"></MaterialTextArea>
+				<loading-button @click.native="submit" :disabled="!showSubmit" :loading="loading" class="btn">ارسال</loading-button>
 			</div>
-		</transition>
+		</div>
 	</div>
 </template>
 

@@ -1,48 +1,48 @@
 <template>
-	<div class="card">
+	<div class="feedback-card">
 		<div class="card-body">
-			<div class="row">
-				<div class="col-md-2">
-					<div class="vote-box">
-						<div class="feedback-votes">
-							{{ votes }}
-						</div>
-						<loading-button :loading="loading" @click.native="voteIdea" v-if="feedback.status !== 'scheduled' && feedback.status !== 'done'" class="btn mt-1 btn-dark w-100" :class="{ voted: voted }">
-							{{ voted ? "ثبت شده" : "ثبت رای" }}
-						</loading-button>
-					</div>
+			<div class="feedback-actions">
+				<div class="feedback-votes">
+					{{ votes }}
 				</div>
-				<div class="col-md-10">
-					<div class="feedback-title mb-2">
-						<div>
-							<wire-link :href="'/feedbacks/' + feedback.id">
-								<strong>{{ feedback.title }}</strong>
-							</wire-link>
-							<i class="material-icons text-grey clickable" @click="bookmark">
-								{{ bookmarked ? "flag" : "outlined_flag" }}
-							</i>
-						</div>
-						<feedback-label :feedbackId="feedback.id" :type.sync="feedback.status"> {{ feedbackStatus }} </feedback-label>
-					</div>
-					<p>
-						{{ feedback.description }}
-					</p>
-					<div class="d-flex align-items-center font-12">
-						<wire-link :href="'/' + feedback.user.username" class="d-flex align-items-center ml-2">
-							<lazy-image :src="feedback.user.profile" class="my-0 ml-1" img-class="profile-sm" />
-							<strong class="text-grey"> {{ feedback.user.name }}</strong>
-						</wire-link>
-						<span class="text-grey ml-1">این بازخورد را به اشتراک گذاشته است</span>
-						<span class="mx-2">.</span>
-						<strong class="text-grey">{{ createDate }}</strong>
-						<span class="mx-2">.</span>
-						<span class="text-grey" v-if="feedback.replies.length > 0">{{ feedback.replies.length }} نظر </span>
-					</div>
-					<div v-if="feedback.pinned_reply != null" class="pr-3 mt-3 border-right">
-						<pinned-reply-card :feedbackReply="feedback.pinned_reply"></pinned-reply-card>
-					</div>
-				</div>
+				<loading-button v-b-tooltip.hover.ds700 :title="voted ? `برداشتن رای` : `ثبت رای`" :loading="loading" @click.native="voteIdea" v-if="feedback.status == 'voting'" class="btn btn-primary feedback-vote-button" :class="{ voted: voted }">
+					<i class="material-icons-outlined">{{ voted ? "highlight_off" : "arrow_circle_up" }}</i>
+				</loading-button>
+				<loading-button @click.native="bookmark" class="btn feedback-flag-button">
+					<i class="material-icons">
+						{{ bookmarked ? "flag" : "outlined_flag" }}
+					</i>
+				</loading-button>
 			</div>
+
+			<div class="feedback-content">
+				<wire-link class="feedback-title" :href="'/feedbacks/' + feedback.id">
+					{{ feedback.title }}
+				</wire-link>
+				<p class="feedback-description-text">
+					{{ feedback.description }}
+				</p>
+			</div>
+			<feedback-label :feedbackId="feedback.id" :type.sync="feedback.status"> {{ feedbackStatus }} </feedback-label>
+		</div>
+		<div class="card-footer">
+			<div class="feedback-publisher-info">
+				<wire-link :href="'/' + feedback.user.username" class="publisher-name">
+					<lazy-image :src="feedback.user.profile" class="mb-0 profile-xxsm" img-class="profile-xxsm" />
+					<div class="d-flex flex-column">
+						<div class="d-flex align-items-center">
+							<strong class="ml-1"> {{ feedback.user.name }}</strong>
+							<span class="text-grey">این بازخورد را به اشتراک گذاشته است</span>
+						</div>
+						<div class="publish_time">{{ createDate }}</div>
+					</div>
+				</wire-link>
+				<wire-link class="comments-viewer" :href="'/feedbacks/' + feedback.id">
+					<span class="text-grey" v-if="feedback.replies.length > 0">{{ feedback.replies.length }} نظر </span>
+					<i class="material-icons-outlined text-grey mr-2">comment</i>
+				</wire-link>
+			</div>
+			<pinned-reply-card v-if="feedback.pinned_reply != null && showPinned" :feedbackReply="feedback.pinned_reply"></pinned-reply-card>
 		</div>
 	</div>
 </template>
@@ -113,6 +113,11 @@ export default {
 			type: Object,
 			default: undefined,
 			required: true,
+		},
+		showPinned: {
+			type: Boolean,
+			default: true,
+			required: false,
 		},
 	},
 	components: {

@@ -5,7 +5,9 @@
 </template>
 
 <script>
+import Content from "../PostCard/ContentElement";
 export default {
+	components: { Content },
 	props: {
 		post: {
 			type: Object,

@@ -1,19 +1,65 @@
-.feedback-replies {
-    scrollbar-color: $dark $light;
-    scrollbar-width: thin;
-    scroll-behavior: smooth;
+.feedback-reply {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    justify-content: flex-start;
+    background: $white;
+    color: $text-color;
 
-    &::-webkit-scrollbar {
-        width: 0.3em;
-        background: #DEDEDE;
+    .pin-icon {
+        transform: rotate(45deg);
     }
 
-    &::-webkit-scrollbar-thumb {
-        background-color: $dark;
+    .feedback-reply-header {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 24px;
+
+        .pagedetail {
+            margin-right: 12px;
+            display: flex;
+            flex-direction: column;
+            margin-left: 12px;
+
+            .short-bio {
+                font-size: 12px;
+                color: $grey;
+            }
+        }
+
+        .feedback-reply-time {
+            margin-left: 8px;
+            color: $text-color;
+            font-size: 12px;
+            line-height: 18px;
+        }
+
+        &::after {
+            content: " ";
+            position: absolute;
+            width: calc(100% - 40px);
+            left: 20px;
+            right: 20px;
+            bottom: 0;
+            height: 2px;
+            background: #e0e0e0;
+        }
     }
+
+    .feedback-reply-body {
+        padding: 16px 24px;
+        width: 100%;
+        unicode-bidi: -moz-plaintext;
+        unicode-bidi: plaintext;
+        text-align: start;
+    }
+
 }
 
-
-.feedback-reply-replies {
-    border-radius: 1px solid $sub-heading;
+.feedback-reply-item {
+    &:not(:last-child) {
+        margin-bottom: 24px;
+    }
 }

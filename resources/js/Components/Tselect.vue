@@ -1,10 +1,12 @@
 <template>
-	<div class="tselect" tabindex="0" :class="{ disabled: disabled }" :dir="direction" @blur="toggleDropdown" @focus="openDropdown" v-click-outside="close">
+	<div class="tselect" tabindex="0" :class="{ disabled: disabled, active: showItems }" :dir="direction" @blur="toggleDropdown" @focus="openDropdown" v-click-outside="close">
 		<div class="tselect_title" ref="titleSection" @click="openDropdown">
 			<div class="title-text">
 				<span v-if="!selectedItem"> <slot></slot><span v-if="required" class="text-action">*</span> </span>
 				<span v-else>
-					<i class="material-icons verical-middle" v-if="selectedItem.hasOwnProperty('icon')">{{ selectedItem.icon }}</i>
+					<slot name="icon">
+						<i class="material-icons verical-middle" v-if="selectedItem.hasOwnProperty('icon')">{{ selectedItem.icon }}</i>
+					</slot>
 					<span> {{ getItemLabel(selectedItem) }} </span>
 				</span>
 			</div>

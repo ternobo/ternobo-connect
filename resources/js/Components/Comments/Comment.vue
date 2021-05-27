@@ -75,8 +75,8 @@
 				</div>
 			</div>
 			<div class="actions">
-				<small class="clickable ml-1" @click="loadReplies(false)" v-if="comment.replies_count > 0 && replyTo == undefined">
-					<strong :class="{ 'text-muted': !showReplies, 'text-dark': showReplies }"> {{ comment.replies_count }} پاسخ </strong>
+				<small class="clickable ml-1" @click="loadReplies(false)" v-if="replies_count > 0 && replyTo == undefined">
+					<strong :class="{ 'text-muted': !showReplies, 'text-dark': showReplies }"> {{ replies_count }} پاسخ </strong>
 				</small>
 				<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies || !showNewComment, 'material-icons text-dark': showReplies && showNewComment }" class="hover-dark clickable"> insert_comment </i>
 				<i @click="likeComment" v-if="!checkUser(comment.page.user_id)" class="hover-dark clickable material-icons" :class="{ 'text-danger': liked }">
@@ -115,12 +115,14 @@ TimeAgo.addLocale(fa);
 export default {
 	mounted() {
 		this.liked = this.comment.is_liked;
+		this.replies_count = this.comment.replies_count;
 	},
 	data() {
 		return {
 			deleted: false,
 			showReply: false,
 			replies: [],
+			replies_count: 0,
 			repliesLoading: true,
 			showReplies: false,
 			next_page_url: null,
@@ -204,6 +206,7 @@ export default {
 				this.$emit("replied", comment);
 			} else {
 				this.replies.unshift(comment);
+				this.replies_count++;
 				setTimeout(() => {
 					const theComment = this.$el;
 					this.$parent.$el.scrollTop += theComment.getBoundingClientRect().top;

@@ -1,29 +1,31 @@
 <template>
-	<div class="mb-3" v-if="!deleted">
-		<div v-if="replyTo != undefined">
-			<span class="text-superlight"> <i class="material-icons">reply</i> پاسخ به {{ feedbackReply.replyto.user.name }} </span>
+	<div class="feedback-item" v-if="!deleted">
+		<div class="reply-to-container" v-if="replyTo != undefined && feedbackReply.replyto.user">
+			<span>
+				<i class="material-icons">reply</i> پاسخ به <strong class="font-demibold">{{ feedbackReply.replyto.user.name }}</strong>
+			</span>
 		</div>
 		<div class="feedback-reply">
 			<div class="feedback-reply-header">
 				<div class="d-flex align-items-center">
 					<wire-link :href="'/' + feedbackReply.user.username" class="d-flex align-items-center">
-						<img :src="feedbackReply.user.profile" class="profile-sm" />
-						<div class="pr-3 pagedetail">
+						<img :src="feedbackReply.user.profile" class="profile-xsm" />
+						<div class="pagedetail">
 							<span class="name">
-								<strong>
-									{{ feedbackReply.user.name }}
-								</strong>
+								<strong> {{ feedbackReply.user.name }} <i v-if="feedbackReply.user.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 							</span>
+							<small class="short-bio" v-if="feedbackReply.user.short_bio">
+								{{ feedbackReply.user.short_bio }}
+							</small>
 						</div>
 					</wire-link>
-					<i class="material-icons-outlined mr-2 text-superlight hover-dark clickable" @click="pinReply(true)" v-if="!pinned && replyTo == undefined">push_pin</i>
-					<loading-spinner class="mr-2" style="height: 24px; width: 24px" v-else-if="loadingPin"></loading-spinner>
-					<div v-else-if="pinned" @click="pinReply(false)" class="pinned-badge mr-2 clickable">
-						<i class="material-icons-outlined">push_pin</i>
-						پین شده
-					</div>
 				</div>
 				<div class="d-flex align-items-center">
+					<i class="material-icons-outlined ml-2 text-superlight hover-dark clickable" @click="pinReply(true)" v-if="!pinned && replyTo == undefined && shared.is_admin">push_pin</i>
+					<loading-spinner class="ml-2" style="height: 24px; width: 24px" v-else-if="loadingPin && shared.is_admin"></loading-spinner>
+					<div v-else-if="pinned" @click="pinReply(false)" class="text-action pin-icon ml-2 clickable">
+						<i class="material-icons-outlined">push_pin</i>
+					</div>
 					<span class="font-10 text-muted">{{ feedbackReply_time }}</span>
 					<div>
 						<b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
@@ -77,7 +79,7 @@
 			</div>
 			<div class="actions">
 				<strong class="text-light ml-2 clickable" v-if="feedbackReply.replies_count > 0" @click="loadReplies">{{ feedbackReply.replies_count }} پاسخ</strong>
-				<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies, 'material-icons': showReplies }" class="hover-dark clickable"> insert_comment </i>
+				<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies, 'material-icons': showReplies }" class="hover-dark ml-2 clickable"> insert_comment </i>
 				<i @click="likeComment" class="hover-danger clickable material-icons" :class="{ 'text-danger': liked }">
 					{{ liked ? "favorite" : "favorite_border" }}
 				</i>
@@ -86,13 +88,13 @@
 		<transition name="slide">
 			<div class="feedback-reply-replies" v-if="showReplies">
 				<new-feedback-reply class="mb-3" @submit="submit" :feedback="feedbackReply.feedback_id" :reply-to="feedbackReply.id"></new-feedback-reply>
-				<div class="pr-3" v-if="replyTo === undefined">
+				<div class="replies" v-if="replyTo === undefined">
 					<feedback-reply v-on:replied="submit" :reply-to="feedbackReply.id" v-for="reply in replies" v-on:deleted="feedbackReplyDelete" :feedback-reply="reply" :key="reply.id"></feedback-reply>
 					<div class="w-100 d-flex p-2 justify-content-center align-items-center" v-if="repliesLoading">
 						<loading-spinner></loading-spinner>
 					</div>
 				</div>
-				<div class="w-100 d-flex align-items-center justify-content-center p-2">
+				<div class="w-100 d-flex align-items-center justify-content-center p-2" v-if="next_page_url !== null">
 					<loading-button v-if="next_page_url !== null" @click.native="loadMore" class="btn btn-outline-dark" :loading="loadingMore">بارگیری بیشتر</loading-button>
 				</div>
 			</div>
@@ -106,6 +108,7 @@ import TimeAgo from "javascript-time-ago";
 import LoadingSpinner from "../LoadingSpinner";
 // Load locale-specific relative date/time formatting rules.
 import fa from "javascript-time-ago/locale/fa";
+import { mapState } from "vuex";
 TimeAgo.addLocale(fa);
 export default {
 	mounted() {
@@ -125,21 +128,25 @@ export default {
 
 			pinned: false,
 			loadingPin: false,
+
+			showPinned: false,
 		};
 	},
 	methods: {
 		pinReply(pin) {
-			this.pinned = pin;
-			this.loadingPin = pin;
-			axios
-				.post("/feedback-replies/" + this.feedbackReply.id + "/pin", { pin: pin })
-				.then(() => {
-					this.pinned = pin;
-				})
-				.catch((err) => console.log(err))
-				.then(() => {
-					this.loadingPin = false;
-				});
+			if (this.shared.is_admin) {
+				this.pinned = pin;
+				this.loadingPin = pin;
+				axios
+					.post("/feedback-replies/" + this.feedbackReply.id + "/pin", { pin: pin })
+					.then(() => {
+						this.pinned = pin;
+					})
+					.catch((err) => console.log(err))
+					.then(() => {
+						this.loadingPin = false;
+					});
+			}
 		},
 		feedbackReplyDelete() {
 			const index = this.replies.indexOf(comment);
@@ -213,6 +220,7 @@ export default {
 		},
 	},
 	computed: {
+		...mapState(["shared"]),
 		feedbackReply_time() {
 			const timeAgo = new TimeAgo("fa-FA");
 			return timeAgo.format(Date.parse(this.feedbackReply.created_at), "twitter");

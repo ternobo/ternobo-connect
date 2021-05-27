@@ -1,15 +1,17 @@
 <template>
 	<base-layout :class="{ 'justify-content-center': pages.length < 1 }">
 		<div class="content-container-right" v-infinite-scroll="loadMore" :infinite-scroll-distance="5">
-			<div class="w-100 d-flex justify-content-end align-items-center py-3">
+			<div class="w-100 d-flex align-items-center mb-3">
 				<wire-link class="text-grey" href="/feedbacks">
+					<i class="material-icons" style="transform: rotate(180deg)">keyboard_backspace</i>
 					بازگشت
-					<i class="material-icons">keyboard_backspace</i>
 				</wire-link>
 			</div>
-			<FeedbackCard :feedback="feedback"></FeedbackCard>
-
-			<feedback-replies ref="replies" class="mt-3" :feedback="feedback.id"></feedback-replies>
+			<FeedbackCard :showPinned="false" :feedback="feedback"></FeedbackCard>
+			<div class="mt-4">
+				<strong>نظرات</strong>
+				<feedback-replies ref="replies" :feedback="feedback.id"></feedback-replies>
+			</div>
 		</div>
 		<sidebar-left v-if="pages.length > 0">
 			<div class="card">

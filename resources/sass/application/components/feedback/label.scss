@@ -3,14 +3,14 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    padding: 8px;
+    padding: 8px 16px;
     font-size: 14px;
     width: 100%;
     text-align: center;
 
     &.scheduled {
-        background-color: $light-warning;
-        color: $dark-warning;
+        background-color: $yellow-light-hover;
+        color: $yellow-dark-hover;
     }
 
     &.closed {
@@ -26,5 +26,11 @@
     &.voting {
         background-color: $body-bg;
         color: $light;
+    }
+
+
+    @media screen and(max-width: $sm-size) {
+        font-size: 12px;
+        padding: 4px 8px;
     }
 }

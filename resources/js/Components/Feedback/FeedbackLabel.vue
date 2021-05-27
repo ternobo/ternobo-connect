@@ -74,10 +74,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.feedback-label-container {
-	position: relative;
-	min-width: 120px;
-}
 .feedback-option-chnage {
 	width: 100%;
 	position: absolute;

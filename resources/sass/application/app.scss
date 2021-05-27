@@ -130,17 +130,7 @@ body {
     border-radius: 0;
 }
 
-.card {
-    background: $box-on-bg;
-}
-
-.card-body {
-    padding: 24px;
-
-    @media screen and (max-width: $sm-size) {
-        padding: 16px;
-    }
-}
+@import "./components/card.scss";
 
 a {
     color: $text-color;
@@ -242,28 +232,6 @@ ul {
 
 .flip-list-move {
     transition: transform 1s;
-}
-
-.slide-enter-active {
-    transition-duration: 0.3s;
-    transition-timing-function: ease-in;
-}
-
-.slide-leave-active {
-    transition-duration: 0.3s;
-    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-}
-
-.slide-enter-to,
-.slide-leave {
-    max-height: 100px;
-    overflow: hidden;
-}
-
-.slide-enter,
-.slide-leave-to {
-    overflow: hidden;
-    max-height: 0;
 }
 
 .no-mode-translate-fade-enter-active,
@@ -434,7 +402,7 @@ img {
 }
 
 .text-action {
-    color: #0898df !important;
+    color: $action !important;
 }
 
 .slide-enter-active {
@@ -449,7 +417,7 @@ img {
 
 .slide-enter-to,
 .slide-leave {
-    max-height: 100px;
+    max-height: 200px;
     overflow: hidden;
 }
 
@@ -1281,53 +1249,6 @@ a:focus {
 
 @import "./components/report-modal.scss";
 @import "./pages/user-profile.scss";
-
-
-.item-filters {
-    background: $white;
-    padding: 20px;
-    box-shadow: $card-shadow;
-    color: $light;
-    display: flex;
-    gap: 10;
-    align-items: center;
-
-    @media screen and (max-width: $sm-size) {
-        font-size: 10px;
-        justify-content: space-between;
-        padding: 8px;
-    }
-
-    .filter-item {
-        padding: 8px;
-        border-radius: 16px;
-        cursor: pointer;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-
-        @media screen and (max-width: $sm-size) {
-            font-size: 10px;
-            padding: 4px;
-        }
-
-        font-weight: 600;
-
-        i {
-            @media screen and (max-width: $sm-size) {
-                font-size: 16px;
-            }
-
-            margin-left: 4px;
-        }
-
-        &.active {
-            background-color: $body-bg;
-            color: $dark;
-        }
-    }
-}
 
 .new-post-body {
     padding: 24px;

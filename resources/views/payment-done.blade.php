@@ -81,10 +81,10 @@
 </head>
 
 <body>
-    <h2 class="text-center text-success">
+    <h2 class="text-center font-18 text-success">
         پرداخت موفق
     </h2>
-    <p class="text-center text-success">
+    <p class="text-center font-16 text-success">
         می‌توانید اطلاعات پرداخت را در صفحه حمایت‌های خود مشاهده کنید
     </p>
     <button class="btn btn-primary" onclick="window.close()">بستن</button>

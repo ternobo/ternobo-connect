@@ -9,13 +9,16 @@
 					class="tselect-filter"
 					dir="rtl"
 					:items="[
-						{ name: 'همه', value: 'all', icon: 'filter_alt' },
-						{ name: 'از طرف شما', value: 'my', icon: 'filter_alt' },
-						{ name: 'برای شما', value: 'forme', icon: 'filter_alt' },
+						{ name: 'همه', value: 'all' },
+						{ name: 'از طرف شما', value: 'my' },
+						{ name: 'برای شما', value: 'forme' },
 					]"
 					:showNewItem="false"
 					v-model="type"
 				>
+					<template #icon>
+						<i class="material-icons">filter_alt</i>
+					</template>
 				</tselect>
 
 				<tselect
@@ -23,12 +26,15 @@
 					class="tselect-filter mr-3"
 					dir="rtl"
 					:items="[
-						{ name: 'جدید‌ترین‌ها', value: 'desc', icon: 'filter_list' },
-						{ name: 'قدیمی‌ترین‌ها', value: 'asc', icon: 'filter_list' },
+						{ name: 'جدید‌ترین‌ها', value: 'desc' },
+						{ name: 'قدیمی‌ترین‌ها', value: 'asc' },
 					]"
 					:showNewItem="false"
 					v-model="order"
 				>
+					<template #icon>
+						<i class="material-icons">filter_list</i>
+					</template>
 				</tselect>
 			</div>
 		</div>

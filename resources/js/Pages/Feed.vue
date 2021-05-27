@@ -55,7 +55,7 @@ export default {
 	},
 	methods: {
 		uuidV4(post) {
-			return "post_id_" + post.id + uuidv4();
+			return "post_id_" + post.id;
 		},
 		postAdded(post) {
 			this.postsArray.unshift(post);

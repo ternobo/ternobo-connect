@@ -5,6 +5,13 @@
     .sticky-aside {
         top: 160px;
     }
+
+    @media screen and (max-width: $sm-size) {
+        max-width: 100%;
+        flex: 100%;
+    }
+
+
 }
 
 @media screen and (min-width: $sm-size) {

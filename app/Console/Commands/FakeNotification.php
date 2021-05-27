@@ -89,7 +89,7 @@ class FakeNotification extends Command
                 case 'follow':
                     $followRow = Following::query()->where("page_id", $from->id)->where("following", $user->id)->firstOrNew();
                     $followRow->following = $from->id;
-                    $followRow->user_id = $user->id;
+                    $followRow->page_id = $user->id;
                     $followRow->save();
                     $notificationable_id = $from->id;
                     $connected_to = $followRow->id;
@@ -108,8 +108,6 @@ class FakeNotification extends Command
             $notification->created_at = Carbon::today()->subDays(rand(0, 30));
             $notification->timestamps = false;
             $notification->save();
-
-            // event(new NotificationEvent($notification));
 
         }
         return 0;

@@ -1,38 +1,3 @@
-.feedback-reply {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    background: $white;
-    box-shadow: $card-shadow;
-    color: $text-color;
-    padding: 20px;
-
-    .feedback-reply-header {
-        position: relative;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 12px;
-        margin-bottom: 12px;
-
-        &::after {
-            content: " ";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 2px;
-            background: #e0e0e0;
-        }
-    }
-
-
-    .feedback-reply-body {
-        padding: .4rem;
-        width: 100%;
-    }
-}
-
 .pinned-badge {
     background-color: rgba($color: $action, $alpha: 0.2);
     color: $grey;
@@ -43,46 +8,72 @@
     i {
         font-size: 18px;
         color: $action;
+        transform: rotate(-45deg);
     }
 
 }
 
 .feedback-replies {
-    .list::-webkit-scrollbar {
-        width: 0.3em;
-        background: #DEDEDE;
+    overflow: auto;
+    margin-bottom: -16px;
+    @extend .nice-scroll;
+}
+
+.feedback-item {
+    margin-bottom: 24px;
+}
+
+
+.feedback-replies {
+    border-radius: 1px solid $sub-heading;
+
+    >.sendfeedback {
+        margin: 8px 0;
     }
 
-    .list::-webkit-scrollbar-thumb {
-        background-color: $dark;
-        outline: 1px solid slategrey;
+    .replies {
+        border-right: 2px solid $grey;
+        padding-right: 16px;
     }
 
+    .reply-to-container {
+        margin-bottom: 8px;
+
+        i {
+            color: $icons;
+            margin-left: 4px;
+        }
+
+        color: $grey;
+    }
+}
+
+
+.feedback-replies {
     .list {
-        padding: 0.5rem;
+        padding: 8px;
+        overflow-y: auto;
+    }
+
+    .replies {
+        border-right: 2px solid $grey;
+        padding-right: 16px;
+    }
+
+    >.sendfeedback {
+        margin-bottom: 32px;
     }
 
     .sendfeedback {
-        div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        .input-container {
             display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-            margin-top: 1rem;
-        }
-
-        textarea {
-            border: 2px solid $icons;
             width: 100%;
-            height: 52px;
-            resize: none;
-            padding: 0.5rem;
-        }
-
-        .feedback-profile {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            margin-left: 0.9rem;
+            align-items: flex-start;
+            padding: 16px 0;
         }
     }
 
@@ -90,7 +81,7 @@
         .feedback {
             display: flex;
             justify-content: flex-start;
-            @extend .mt-3;
+            margin-bottom: 24px;
         }
 
     }

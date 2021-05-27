@@ -81,10 +81,10 @@
 </head>
 
 <body>
-    <h2 class="text-center text-danger">
+    <h2 class="text-center font-18 text-danger">
         تراکنش با خطا مواجه شد
     </h2>
-    <p class="text-center text-success">
+    <p class="text-center font-16 text-success">
         در صورتی که مبلغ تراکنش از حساب شما کسر شده، حداکثر تا ۷۲ ساعت آینده برگشت خواهد خورد.
     </p>
     <button class="btn btn-primary" onclick="window.close()">بستن</button>

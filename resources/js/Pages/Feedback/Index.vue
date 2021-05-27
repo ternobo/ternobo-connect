@@ -1,12 +1,12 @@
 <template>
 	<base-layout :class="{ 'justify-content-center': pages.length < 1 }">
 		<div class="content-container-right">
-			<div class="card mb-3 w-100">
+			<div class="new-feedback-card">
 				<div class="card-body">
-					<div class="d-flex align-items-center justify-content-between" style="min-height: 39px">
-						<h2 class="font-16 bold m-0">ما چطور می‌توانیم کیفیت خدماتمان را در ترنوبو بهبود ببخشیم؟</h2>
+					<div class="how-to-improve-header" style="min-height: 39px">
+						<strong>ما چطور می‌توانیم کیفیت خدماتمان را در ترنوبو بهبود ببخشیم؟</strong>
 						<transition name="fade">
-							<button @click="showNewFeedback = true" v-if="!showNewFeedback" class="btn btn-action">
+							<button @click="showNewFeedback = true" v-if="!showNewFeedback" class="btn btn-action-light feedback-button">
 								<i class="material-icons-outlined">emoji_objects</i>
 								ثبت بازخورد جدید
 							</button>
@@ -14,64 +14,74 @@
 					</div>
 					<transition name="slide">
 						<div v-if="showNewFeedback">
-							<div class="d-flex align-items-center">
-								<input type="text" class="form-control bg-body border-0" placeholder="بازخورد‌ خودتان را با ما به اشتراک بگذارید" max="150" maxlength="150" v-model="feedbackTitle" />
-								<div class="d-flex w-25 align-items-center">
+							<div class="how-to-improve-title-input">
+								<div class="progress-container">
 									<span class="mx-2"> {{ 150 - feedbackTitle.length }} </span>
-									<b-progress :value="(feedbackTitle.length / 150) * 100" :max="100" class="w-100"></b-progress>
+									<b-progress :value="(feedbackTitle.length / 150) * 100" :max="100"></b-progress>
 								</div>
+								<input type="text" class="form-control text-input" placeholder="بازخورد‌ خودتان را با ما به اشتراک بگذارید" max="150" maxlength="150" v-model="feedbackTitle" />
 							</div>
-							<div class="py-2">
-								<textarea-autosize v-model="feedbackDescription" maxlength="2500" :min-height="230" class="form-control" placeholder="کمی بیشتری در رابطه با بازخورد خودتان توضیح دهید...(اختیاری)"></textarea-autosize>
+							<div class="pb-2 pt-4 d-flex flex-column">
+								<div class="d-flex justify-content-between mb-3">
+									<strong class="font-demibold">کمی بیشتر در رابطه با بازخورد خودتان توضیح دهید...<span class="text-superlight">(اختیاری)</span></strong>
+									<div class="progress-container">
+										<span class="mx-2"> {{ 2500 - feedbackDescription.length }} </span>
+										<b-progress :value="(feedbackDescription.length / 2500) * 100" :max="100"></b-progress>
+									</div>
+								</div>
+								<textarea-autosize v-model="feedbackDescription" maxlength="2500" :min-height="230" class="form-control"></textarea-autosize>
 							</div>
 							<div class="d-flex align-items-center flex-row-reverse pt-3">
-								<loading-button :loading="loading" class="btn btn-primary" @click.native="saveFeedback">ارسال</loading-button>
-								<button :disabled="loading" class="btn btn-transparent text-light" @click="showNewFeedback = false">لغو</button>
+								<loading-button :loading="loading" class="btn btn-action-light rounded-0" :clas="{ disabled: feedbackTitle.length < 3 }" :disabled="feedbackTitle.length < 3" @click.native="saveFeedback">ثبت بازخورد</loading-button>
+								<button class="btn btn-transparent text-grey" @click="showNewFeedback = false">لغو</button>
 							</div>
 						</div>
 					</transition>
 				</div>
 			</div>
-			<div class="tabs">
+			<div class="tabs pt-3">
 				<ul class="default position-relative">
 					<li @click="status = 'voting'" :class="{ 'is-active': status === 'voting' }">
-						<a>درحال رای‌گیری</a>
+						<a :class="{ 'font-18': $root.isDesktop }">درحال رای‌گیری</a>
 					</li>
 					<li @click="status = 'scheduled'" :class="{ 'is-active': status === 'scheduled' }">
-						<a>برنامه ریزی شده</a>
+						<a :class="{ 'font-18': $root.isDesktop }">برنامه ریزی شده</a>
 					</li>
 					<li @click="status = 'done'" :class="{ 'is-active': status === 'done' }">
-						<a>انجام شده</a>
+						<a :class="{ 'font-18': $root.isDesktop }">انجام شده</a>
 					</li>
 
 					<li style="left: 0" class="position-absolute" @click="status = 'my-feedbacks'" :class="{ 'is-active': status === 'my-feedbacks' }">
-						<a class="active"><i class="material-icons">outlined_flag</i> پیشنهادات من</a>
+						<a class="active" :class="{ 'font-18': $root.isDesktop }"><i class="material-icons ml-2">outlined_flag</i> پیشنهادات من</a>
 					</li>
 				</ul>
 			</div>
-			<div class="feedbacks" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="12">
-				<div class="item-filters mb-3 mt-2">
-					<div class="filter-item" :class="{ active: filter == 'mostnew' }" @click="filter = 'mostnew'"><i class="material-icons-outlined">new_releases</i> جدید‌ترین‌ها</div>
-					<div class="filter-item" :class="{ active: filter == 'fav' }" @click="filter = 'fav'"><i class="material-icons-outlined">favorite_border</i> محبوب‌ترین‌ها</div>
+			<div class="row mt-2" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="12">
+				<div class="w-100">
+					<div class="item-filters">
+						<div class="filter-item" :class="{ active: filter == 'mostnew' }" @click="filter = 'mostnew'"><i class="material-icons-outlined">new_releases</i> جدید‌ترین‌ها</div>
+						<div class="filter-item" :class="{ active: filter == 'fav' }" @click="filter = 'fav'"><i class="material-icons-outlined">favorite_border</i> محبوب‌ترین‌ها</div>
+					</div>
 				</div>
-				<FeedbackCard class="mb-3" v-for="feedback in feedbacksArray" :key="feedback.id" :feedback="feedback"></FeedbackCard>
+				<div class="w-100">
+					<FeedbackCard class="mb-3" v-for="feedback in feedbacksArray" :key="feedback.id" :feedback="feedback"></FeedbackCard>
 
-				<FeedbackCard class="mb-3" v-for="feedback in contributedFeedbacks" :key="feedback.id" :feedback="feedback"></FeedbackCard>
-
-				<div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
-					<loading-spinner class="image__spinner" />
-				</div>
-				<div v-if="next_page_url === null && !loadingPage">
-					<no-content> هیچ بازخورد‌ی وجود ندارد </no-content>
+					<div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
+						<loading-spinner class="image__spinner" />
+					</div>
+					<div v-if="next_page_url === null && !loadingPage">
+						<no-content> هیچ بازخورد‌ی وجود ندارد </no-content>
+					</div>
 				</div>
 			</div>
 		</div>
 		<sidebar-left v-if="pages.length > 0">
-			<div class="card">
+			<div class="card mb-3">
 				<div class="people-suggestion-card-body card-body">
 					<people-suggestion v-for="page in pages" :page="page" :key="page.id"></people-suggestion>
 				</div>
 			</div>
+			<app-footer></app-footer>
 		</sidebar-left>
 	</base-layout>
 </template>
@@ -223,7 +233,7 @@ export default {
 				})
 				.then(function (response) {
 					if (response.data.result) {
-						$this.feedbackDescription = null;
+						$this.feedbackDescription = "";
 						$this.feedbackTitle = "";
 						$this.feedbacksArray.unshift(response.data.feedback);
 					} else {

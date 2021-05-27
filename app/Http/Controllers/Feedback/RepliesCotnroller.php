@@ -51,7 +51,7 @@ class RepliesCotnroller extends Controller
         $feedbackReply->text = $text;
         $feedbackReply->save();
 
-        $feedbackReply->user = $feedbackReply->user;
+        $feedbackReply->load(['replyto', "replyto.user", "user"]);
 
         return response()->json(array("result" => true, "reply" => $feedbackReply));
     }

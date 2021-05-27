@@ -37,6 +37,10 @@ input {
     background-clip: padding-box;
     border: 2px solid $border-color;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+    @media screen and (max-width:$sm-size) {
+        font-size: 12px;
+    }
 }
 
 .form-control::-ms-expand {
@@ -131,7 +135,28 @@ input[type=text] {
     min-width: 368px;
 }
 
-@media screen and (max-width:992px) {
+@media screen and (max-width:$sm-size) {
+
+    ::-webkit-input-placeholder {
+        font-size: 12px;
+    }
+
+    ::-moz-placeholder {
+        font-size: 12px;
+    }
+
+    :-ms-input-placeholder {
+        font-size: 12px;
+    }
+
+    ::-ms-input-placeholder {
+        font-size: 12px;
+    }
+
+    ::placeholder {
+        font-size: 12px;
+    }
+
     .searchfield {
         min-width: auto;
     }
