@@ -12,7 +12,7 @@ class FakeTip extends Command
      *
      * @var string
      */
-    protected $signature = 'fake:tip {nums}';
+    protected $signature = 'fake:tip {nums} {post_id?}';
 
     /**
      * The console command description.
@@ -39,7 +39,14 @@ class FakeTip extends Command
     public function handle()
     {
         $numbers = $this->argument("nums");
-        $posts = Tip::factory()->count($numbers)->make();
+        $post_id = $this->argument("post_id");
+        $overrides = [];
+        if ($post_id) {
+            $overrides = [
+                'post_id' => $post_id,
+            ];
+        }
+        $posts = Tip::factory()->count($numbers)->make($overrides);
         foreach ($posts as $post) {
             $post->save();
         }
