@@ -42,17 +42,17 @@
 			<div class="tabs pt-3">
 				<ul class="default position-relative">
 					<li @click="status = 'voting'" :class="{ 'is-active': status === 'voting' }">
-						<a :class="{ 'font-18': $root.isDesktop }">درحال رای‌گیری</a>
+						<a :class="{ 'font-16': $root.isDesktop }">درحال رای‌گیری</a>
 					</li>
 					<li @click="status = 'scheduled'" :class="{ 'is-active': status === 'scheduled' }">
-						<a :class="{ 'font-18': $root.isDesktop }">برنامه ریزی شده</a>
+						<a :class="{ 'font-16': $root.isDesktop }">برنامه ریزی شده</a>
 					</li>
 					<li @click="status = 'done'" :class="{ 'is-active': status === 'done' }">
-						<a :class="{ 'font-18': $root.isDesktop }">انجام شده</a>
+						<a :class="{ 'font-16': $root.isDesktop }">انجام شده</a>
 					</li>
 
 					<li style="left: 0" class="position-absolute" @click="status = 'my-feedbacks'" :class="{ 'is-active': status === 'my-feedbacks' }">
-						<a class="active" :class="{ 'font-18': $root.isDesktop }"><i class="material-icons ml-2">outlined_flag</i> پیشنهادات من</a>
+						<a class="active" :class="{ 'font-16': $root.isDesktop }"><i class="material-icons ml-2">outlined_flag</i> پیشنهادات من</a>
 					</li>
 				</ul>
 			</div>
@@ -69,8 +69,8 @@
 					<div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
 						<loading-spinner class="image__spinner" />
 					</div>
-					<div v-if="next_page_url === null && !loadingPage">
-						<no-content> هیچ بازخورد‌ی وجود ندارد </no-content>
+					<div v-if="next_page_url === null && !loadingPage && feedbacksArray.length > 4">
+						<no-content> هیچ بازخورد‌ دیگری ندارد </no-content>
 					</div>
 				</div>
 			</div>

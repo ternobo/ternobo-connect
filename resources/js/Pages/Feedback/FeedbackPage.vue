@@ -7,7 +7,7 @@
 					بازگشت
 				</wire-link>
 			</div>
-			<FeedbackCard :showPinned="false" :feedback="feedback"></FeedbackCard>
+			<FeedbackCard :showComment="false" :showPinned="false" :feedback="feedback"></FeedbackCard>
 			<div class="mt-4">
 				<strong>نظرات</strong>
 				<feedback-replies ref="replies" :feedback="feedback.id"></feedback-replies>

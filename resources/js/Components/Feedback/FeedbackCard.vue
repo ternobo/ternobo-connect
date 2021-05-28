@@ -8,7 +8,7 @@
 				<loading-button v-b-tooltip.hover.ds700 :title="voted ? `برداشتن رای` : `ثبت رای`" :loading="loading" @click.native="voteIdea" v-if="feedback.status == 'voting'" class="btn btn-primary feedback-vote-button" :class="{ voted: voted }">
 					<i class="material-icons-outlined">{{ voted ? "highlight_off" : "arrow_circle_up" }}</i>
 				</loading-button>
-				<loading-button @click.native="bookmark" class="btn feedback-flag-button">
+				<loading-button @click.native="bookmark" :class="{ 'text-dark': bookmarked }" class="btn feedback-flag-button">
 					<i class="material-icons">
 						{{ bookmarked ? "flag" : "outlined_flag" }}
 					</i>
@@ -27,20 +27,24 @@
 		</div>
 		<div class="card-footer">
 			<div class="feedback-publisher-info">
-				<wire-link :href="'/' + feedback.user.username" class="publisher-name">
-					<lazy-image :src="feedback.user.profile" class="mb-0 profile-xxsm" img-class="profile-xxsm" />
+				<div class="publisher-name">
+					<wire-link :href="'/' + feedback.user.username"><lazy-image :src="feedback.user.profile" class="mb-0 profile-xxsm" img-class="profile-xxsm" /> </wire-link>
 					<div class="d-flex flex-column">
 						<div class="d-flex align-items-center">
-							<strong class="ml-1"> {{ feedback.user.name }}</strong>
+							<wire-link as="strong" :href="'/' + feedback.user.username" class="ml-1 clickable"> {{ feedback.user.name }}</wire-link>
 							<span class="text-grey">این بازخورد را به اشتراک گذاشته است</span>
 						</div>
 						<div class="publish_time">{{ createDate }}</div>
 					</div>
-				</wire-link>
-				<wire-link class="comments-viewer" :href="'/feedbacks/' + feedback.id">
+				</div>
+				<wire-link class="comments-viewer" v-if="showComment" :href="'/feedbacks/' + feedback.id">
 					<span class="text-grey" v-if="feedback.replies.length > 0">{{ feedback.replies.length }} نظر </span>
 					<i class="material-icons-outlined text-grey mr-2">comment</i>
 				</wire-link>
+				<div class="comments-viewer" v-else :href="'/feedbacks/' + feedback.id">
+					<span class="text-grey" v-if="feedback.replies.length > 0">{{ feedback.replies.length }} نظر </span>
+					<i class="material-icons-outlined text-grey mr-2">comment</i>
+				</div>
 			</div>
 			<pinned-reply-card v-if="feedback.pinned_reply != null && showPinned" :feedbackReply="feedback.pinned_reply"></pinned-reply-card>
 		</div>
@@ -115,6 +119,11 @@ export default {
 			required: true,
 		},
 		showPinned: {
+			type: Boolean,
+			default: true,
+			required: false,
+		},
+		showComment: {
 			type: Boolean,
 			default: true,
 			required: false,
