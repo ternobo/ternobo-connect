@@ -519,9 +519,11 @@ class User extends Authenticatable implements Messageable
             })
             ->where("created_at", ">=", Carbon::now()->subMonth())
             ->whereHasMorph("notifiable", [Post::class, Skill::class, Comment::class, Page::class])
-            ->orderByDesc("pin", "created_at")
+            ->orderByDesc("pin")
+            ->latest()
             ->with(["sender", "notifiable"])
             ->paginate(30);
+        //
         $notifications = $notificationsPaginator;
 
         $next_page_url = $notificationsPaginator->nextPageUrl();
