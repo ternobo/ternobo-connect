@@ -2,10 +2,10 @@
 	<div class="donation-list-item">
 		<div class="donation-user">
 			<lazy-image :src="profile" imgClass="profile-xxsm" class="profile-xxsm mb-0 user-profile" />
-			<strong class="user-name">{{ isByMe ? "شما" : name }}</strong>
+			<strong class="user-name">{{ name }}</strong>
 		</div>
 		<div class="donation-amount" :class="{ received: !isByMe }">
-			<span>{{ amount }}</span> <span>تومان</span>
+			<span>{{ formatNumber(amount, "0,0") }}</span> <span>تومان</span>
 		</div>
 	</div>
 </template>

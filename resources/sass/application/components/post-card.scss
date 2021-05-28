@@ -622,6 +622,10 @@
 }
 
 .post-content--text {
+    pre {
+        margin-bottom: 0;
+    }
+
     >a {
         color: $action;
     }

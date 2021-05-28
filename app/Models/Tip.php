@@ -14,6 +14,7 @@ class Tip extends Model
         'amount',
         'user_id',
         'meta',
+        'anonymous',
     ];
 
     protected $casts = ['meta' => 'array'];

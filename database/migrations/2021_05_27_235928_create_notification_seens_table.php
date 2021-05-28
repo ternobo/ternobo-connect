@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddMetaToNotifications extends Migration
+class CreateNotificationSeensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddMetaToNotifications extends Migration
      */
     public function up()
     {
-        Schema::table('notifications', function (Blueprint $table) {
-            $table->json("meta")->after("text")->nullable();
+        Schema::create('notification_seens', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger("user_id");
+            $table->bigInteger("notification_id");
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddMetaToNotifications extends Migration
      */
     public function down()
     {
-        Schema::table('notifications', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('notification_seens');
     }
 }

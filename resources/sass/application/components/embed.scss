@@ -1,0 +1,22 @@
+.embed-container {
+    display: flex;
+    flex-direction: column;
+
+    .form-control {
+        @extend .nice-scroll;
+        margin-bottom: 20px;
+        background: $white !important;
+        height: 90px;
+        padding: 12px;
+    }
+
+    .the-embed-preview {
+        border: 2px solid $fixed-elements;
+    }
+
+    .btn {
+        height: 32px;
+        border-radius: 11px;
+    }
+
+}

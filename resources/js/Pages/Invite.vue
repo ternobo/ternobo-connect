@@ -11,10 +11,10 @@
 						<strong class="font-14 text-muted"> {{ inviteLinks.length }} عدد</strong>
 					</div>
 					<div class="invite-links">
-						<div class="invite" v-for="inviteLink in inviteLinks" :key="`invite_link_${inviteLink.id}`">
+						<div class="invite" :class="{ disabled: !inviteLink.valid }" v-for="inviteLink in inviteLinks" :key="`invite_link_${inviteLink.id}`">
 							<i class="material-icons-outlined invite-icon">confirmation_number</i>
-							<input class="text-input-light" type="text" readonly :value="`${$APP_URL}/register?code=${inviteLink.code}`" />
-							<button class="btn btn-action-light rounded-0 w-100" v-clipboard="`${$APP_URL}/register?code=${inviteLink.code}`">استفاده</button>
+							<input class="form-control border-0" :class="{ 'text-muted': !inviteLink.valid }" style="background: #fff !important" type="text" readonly :value="`${$APP_URL}/register?code=${inviteLink.code}`" />
+							<button class="btn btn-action-light p-1 rounded-0 w-100" :disabled="!inviteLink.valid" style="height: 32px; border-radius: 12px !important" v-clipboard="`${$APP_URL}/register?code=${inviteLink.code}`">{{ !inviteLink.valid ? "استفاده شده" : "استفاده" }}</button>
 						</div>
 					</div>
 					<div class="invite-description">

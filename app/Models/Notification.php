@@ -34,6 +34,22 @@ class Notification extends Model
         return $this->belongsTo("App\Models\Comment", "connected_to");
     }
 
+    public function seenNotification()
+    {
+        return $this->hasMany(NotificationSeen::class);
+    }
+
+    public function seen()
+    {
+        $seen = NotificationSeen::query()->where("user_id", Auth::user()->id)->where("notification_id", $this->id)->exists();
+        if (!$seen) {
+            $this->pin = false;
+            $this->save();
+            return NotificationSeen::seenNotification($this->id);
+        }
+        return false;
+    }
+
     public function toArray()
     {
         $data = parent::toArray();

@@ -23,18 +23,19 @@
 
 			<div class="donate-modal-body">
 				<div>
-					<input v-numericOnly v-model="amount" class="form-control donate-amount-input" placeholder="مبلغ دلخواه (حداقل ۱,۰۰۰ تومان)" />
+					<label v-if="amount.length > 0 && payAmount < 1000 && !focus" class="text-danger font-12">مبلغ دلخواه کافی نیست</label>
+					<input v-numericOnly v-model="amount" @focus="focus = true" @blur="focus = false" class="form-control text-input donate-amount-input" placeholder="مبلغ دلخواه (حداقل ۱,۰۰۰ تومان)" />
 				</div>
 				<div class="d-flex">
 					<div class="donate-amount-badge" :class="{ active: amount == 100000 }" @click="amount = 100000">100,000 تومان</div>
 					<div class="donate-amount-badge" :class="{ active: amount == 50000 }" @click="amount = 50000">50,000 تومان</div>
 					<div class="donate-amount-badge" :class="{ active: amount == 20000 }" @click="amount = 20000">20,000 تومان</div>
 				</div>
-				<div class="d-flex align-items-center">
+				<div class="d-flex align-items-center pt-3 mt-3">
 					<div class="donate-payanonymouse ml-3">
-						<checkbox v-model="anonymous" class="text-superlight light">حمایت به صورت ناشناس</checkbox>
+						<checkbox v-model="anonymous" class="text-superlight m-0 d-flex light">حمایت به صورت ناشناس</checkbox>
 					</div>
-					<loading-button :loading="loading" @click.native="pay" :disabled="payAmount < 1000 || loading" class="btn btn-suprelight" style="width: 196px">پرداخت</loading-button>
+					<loading-button :loading="loading" @click.native="pay" :disabled="payAmount < 1000 || loading" class="btn btn-primary" style="width: 196px">پرداخت</loading-button>
 				</div>
 			</div>
 		</div>
@@ -59,6 +60,8 @@ export default {
 		return {
 			amount: "",
 			anonymous: false,
+
+			focus: false,
 
 			loading: false,
 		};

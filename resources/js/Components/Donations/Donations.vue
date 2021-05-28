@@ -6,7 +6,7 @@
 			<div class="d-flex">
 				<tselect
 					style="width: 171px"
-					class="tselect-filter"
+					class="tselect-filter tselect-lg"
 					dir="rtl"
 					:items="[
 						{ name: 'همه', value: 'all' },
@@ -23,7 +23,7 @@
 
 				<tselect
 					style="width: 171px"
-					class="tselect-filter mr-3"
+					class="tselect-filter tselect-lg mr-3"
 					dir="rtl"
 					:items="[
 						{ name: 'جدید‌ترین‌ها', value: 'desc' },

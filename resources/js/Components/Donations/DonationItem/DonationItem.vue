@@ -13,11 +13,11 @@
 			</div>
 			<div class="doantion-time">
 				<span>{{ time }}</span>
-				<strong class="mx-2">|</strong>
+				<strong class="mx-2 text-superlight">|</strong>
 				<span>{{ date }}</span>
 			</div>
 			<wire-link :href="`/posts/${tip.post_id}`" class="cliackable text-grey">
-				<i class="material-icons">launch</i>
+				<i class="material-icons font-20 ml-2">launch</i>
 				<span class="clickable">مشاهده محتوا</span>
 			</wire-link>
 			<div>

@@ -9,6 +9,7 @@ use App\Models\Post;
 use App\Models\Skill;
 use App\Models\UserOption;
 use Artesaos\SEOTools\Facades\SEOTools;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Cookie;
@@ -75,10 +76,13 @@ class AppServiceProvider extends ServiceProvider
                     },
                     'notifications_count' => function () {
                         if (Auth::check()) {
-                            return count(Notification::query()
-                                    ->whereHasMorph("notifiable", [Post::class, Skill::class, Comment::class, Page::class])
-                                    ->where("seen", false)
-                                    ->where("to", Auth::user()->personalPage->id)->get());
+                            return Notification::query()
+                                ->where("created_at", ">=", Carbon::now()->subMonth())
+                                ->whereHasMorph("notifiable", [Post::class, Skill::class, Comment::class, Page::class])
+                                ->whereDoesntHave("seenNotification", function ($query) {
+                                    $query->where("user_id", Auth::user()->id);
+                                })
+                                ->where("to", Auth::user()->personalPage->id)->count();
                         }
                         return 0;
                     },

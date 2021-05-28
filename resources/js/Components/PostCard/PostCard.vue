@@ -20,13 +20,13 @@
 			<div class="actions position-relative">
 				<span class="category-item" v-if="this.post_data.category != null">{{ this.post_data.category.name }}</span>
 				<div>
-					<post-menu :post="post" @embed="showEmbed = true" @edit="edit = true" @deleted="doDelete"></post-menu>
+					<post-menu :post="post" v-if="!isEmbed" @embed="showEmbed = true" @edit="edit = true" @deleted="doDelete"></post-menu>
 				</div>
 			</div>
 		</div>
 		<component v-if="post_data != null && post_data != undefined" :post="post_data" :has-comment="hasComment" v-bind:is="componentType"></component>
 
-		<div class="post-footer">
+		<div class="post-footer" v-if="!isEmbed">
 			<div class="actions" v-if="$store.state.user">
 				<div>
 					<div class="clickale text-muted clickable hover-dark" v-if="post_data.page.has_donate && post_data.can_tip" @click="showTips = true">
@@ -166,6 +166,11 @@ export default {
 		hasComment: {
 			type: Boolean,
 			default: true,
+			required: false,
+		},
+		isEmbed: {
+			type: Boolean,
+			default: false,
 			required: false,
 		},
 		post: {

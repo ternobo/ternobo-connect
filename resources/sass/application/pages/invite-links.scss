@@ -18,13 +18,22 @@
         >*:not(:last-child) {
             margin-bottom: 12px;
         }
+
+        .invite-icon {
+            font-size: 40px;
+            color: $action;
+            transform: rotate(-15deg);
+        }
+
+        &.disabled {
+            .invite-icon {
+                color: $icons;
+            }
+        }
+
     }
 
-    .invite-icon {
-        font-size: 40px;
-        color: $action;
-        transform: rotate(-15deg);
-    }
+
 
     margin-bottom: 40px;
 }

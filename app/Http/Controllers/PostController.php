@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\LikeEvent;
+use App\HTMLMinifier;
 use App\Http\Requests\PostRequest;
 use App\Models\Action;
 use App\Models\Category;
@@ -295,7 +296,7 @@ class PostController extends Controller
         $post = url("/embed-posts/" . $post_id);
         $randomhash = (Str::uuid());
         $url = url("/posts/" . $post_id);
-        $html_code = view("embedcode", array("url" => $url, "randomhash" => $randomhash, "post" => $post))->render();
+        $html_code = HTMLMinifier::html(view("embedcode", array("url" => $url, "randomhash" => $randomhash, "post" => $post))->render());
         return response()->json([
             "result" => true,
             "code" => $html_code,

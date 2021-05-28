@@ -4,7 +4,7 @@
 			<div class="notification-title">
 				<div class="profiles">
 					<wire-link class="profile-xxsm clickable" :href="notifications[0].sender.slug"><lazy-image :src="notifications[0].sender.profile" class="profile-xxsm" img-class="profile-xxsm" /></wire-link>
-					<wire-link class="profile-xxsm clickable" :href="notifications[0].sender.slug"><lazy-image v-if="notifications[1]" :src="notifications[1].sender.profile" class="profile-xxsm" img-class="profile-xxsm" /></wire-link>
+					<wire-link class="profile-xxsm clickable" v-if="notifications[1]" :href="notifications[1].sender.slug"><lazy-image v-if="notifications[1]" :src="notifications[1].sender.profile" class="profile-xxsm" img-class="profile-xxsm" /></wire-link>
 				</div>
 				<div class="notification-text">
 					<div class="title">

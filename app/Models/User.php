@@ -512,13 +512,16 @@ class User extends Authenticatable implements Messageable
     /** Get user Notifications */
     public function getNotifications()
     {
-        $notificationsPaginator = Notification::query()->where("to", $this->personalPage->id)
+        $notificationsPaginator = Notification::query()
+            ->where(function ($query) {
+                $query->where("to", $this->personalPage->id)
+                    ->orWhere("to", "-1");
+            })
             ->where("created_at", ">=", Carbon::now()->subMonth())
             ->whereHasMorph("notifiable", [Post::class, Skill::class, Comment::class, Page::class])
-            ->latest("created_at")
+            ->orderByDesc("pin", "created_at")
             ->with(["sender", "notifiable"])
             ->paginate(30);
-        // dd(Carbon::now()->subMonth())    ;
         $notifications = $notificationsPaginator;
 
         $next_page_url = $notificationsPaginator->nextPageUrl();
@@ -527,6 +530,7 @@ class User extends Authenticatable implements Messageable
         $group_index = 0;
         $prevGroup = "unset";
         foreach ($notifications as $notification) {
+            $notification->seen();
             $index = "notifiable_" . $notification->action . '_' . $notification->notifiable_id . "_" . $group_index;
             if (isset($groups[$index])) {
                 $notification = $notification->toArray();
