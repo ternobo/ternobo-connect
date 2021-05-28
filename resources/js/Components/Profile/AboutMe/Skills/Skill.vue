@@ -22,20 +22,18 @@
 							<i class="material-icons">arrow_circle_up</i>
 							<span>{{ formatNumber(credits_count, "0a") }}</span>
 						</div>
-						<span class="font-14" v-if="skillVal.credit_text != null && skillVal.credit_text.nums >= 1">
+						<span class="font-14" v-if="skillVal.credit_text != null && credits_count >= 1">
 							<wire-link v-if="skillVal.credit_text.first" :href="userURL(skillVal.credit_text.first)">
 								<strong class="font-14">{{ skillVal.credit_text.first.name }}</strong>
-								{{ skillVal.credit_text.nums > 2 ? "،" : "" }}
+								{{ credits_count > 2 ? "،" : "" }}
 							</wire-link>
 
-							<span v-if="skillVal.credit_text.nums == 2">و</span>
+							<span v-if="credits_count == 2">و</span>
 							<wire-link v-if="skillVal.credit_text.second" :href="userURL(skillVal.credit_text.second)">
 								<strong class="font-14">{{ skillVal.credit_text.second.name }}</strong>
 							</wire-link>
-							<span v-if="skillVal.credit_text.nums > 2">و</span>
-							<span v-if="skillVal.credit_text.nums - 2 > 0">{{ formatNumber(skillVal.credit_text.nums - 2, "0a") }} نفر دیگر این مهارت را تایید کرده‌اند</span>
-							<span v-else-if="(skillVal.credit_text.nums = 1)">این مهارت را تایید کرده است</span>
-							<span v-else-if="skillVal.credit_text.nums == 2">این مهارت را تایید کرده‌اند</span>
+							<span v-if="credits_count > 2">و</span>
+							<span v-if="credits_count - 1 > 0">{{ credits_count - 2 > 0 ? formatNumber(credits_count - 2, "0a") + "نفر دیگر " : "" }} این مهارت را تایید {{ skillVal.credit_text.verb }}</span>
 						</span>
 					</div>
 				</div>
@@ -85,7 +83,7 @@ export default {
 						if (response.data.result) {
 							this.canCredit = true;
 							if (this.skillVal.credit_text) {
-								this.skillVal.credit_text.nums -= 1;
+								this.credits_count -= 1;
 							}
 						} else {
 							this.handleError(response.data.errors);

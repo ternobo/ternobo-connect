@@ -52,8 +52,9 @@ class Skill extends Model
                 } else {
                     $verb = "کرده اند";
                 }
+
                 return ['first' => $first, "second" => $second, 'verb' => $verb, "nums" => $nums];
-            } elseif ($nums === 2) {
+            } elseif ($nums == 2) {
                 $first = $credits[0]->user;
                 $second = $credits[1]->user;
                 if ($first->id === Auth::user()->id) {
@@ -68,7 +69,8 @@ class Skill extends Model
                 } else {
                     $verb = "کرده اند";
                 }
-                return ['first' => $first, "second" => $second, 'verb' => $verb, "nums" => $nums];
+                // dd($nums);
+                return ['first' => $first, "second" => $second, 'verb' => $verb, "nums" => 2];
             } elseif ($nums > 0) {
                 $first = $credits[0]->user;
 
@@ -81,9 +83,11 @@ class Skill extends Model
                 } else {
                     $verb = "است";
                 }
+                dd($nums);
                 return ['first' => $first, 'verb' => $verb, "nums" => $nums];
             }
         }
+
         return null;
     }
 

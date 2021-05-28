@@ -1,6 +1,6 @@
 <template>
-	<div class="tselect" tabindex="0" :class="{ disabled: disabled, active: showItems }" :dir="direction" @blur="toggleDropdown" @focus="openDropdown" v-click-outside="close">
-		<div class="tselect_title" ref="titleSection" @click="openDropdown">
+	<div class="tselect" tabindex="0" :class="{ disabled: disabled, active: showItems }" :dir="direction" @blur="hideDropdown" @focus="openDropdown" v-click-outside="close">
+		<div class="tselect_title" :class="{ active: showItems }" ref="titleSection" @click="toggleDropdown">
 			<div class="title-text">
 				<span v-if="!selectedItem"> <slot></slot><span v-if="required" class="text-action">*</span> </span>
 				<span v-else>
@@ -128,6 +128,9 @@ export default {
 			dropdownWidth: "0px",
 			newItemInput: undefined,
 			selectedItem: undefined,
+			isOpening: false,
+
+			focus: false,
 		};
 	},
 	name: "Tselect",
@@ -164,20 +167,34 @@ export default {
 			this.$emit("new-item", this.newItemInput);
 			this.newItemInput = undefined;
 		},
-		openDropdown() {
+		hideDropdown() {
+			console.log("hideDropdown");
 			if (!this.disabled) {
-				this.$refs.titleSection.classList.add("active");
-				const width = this.$refs.titleSection.offsetWidth;
+				this.showItems = false;
+			}
+			this.focus = false;
+		},
+		openDropdown() {
+			this.focus = true;
+			if (!this.disabled) {
+				this.isOpening = true;
 				this.showItems = true;
+				const width = this.$refs.titleSection.offsetWidth;
 				this.dropdownWidth = width + "px";
+				setTimeout(() => {
+					this.$nextTick(() => {
+						this.isOpening = false;
+					});
+				}, 400);
 			}
 		},
 		toggleDropdown() {
-			if (!this.disabled) {
-				this.$refs.titleSection.classList.toggle("active");
-				const width = this.$refs.titleSection.offsetWidth;
-				this.showItems = !this.showItems;
-				this.dropdownWidth = width + "px";
+			if (this.focus) {
+				if (!this.disabled && !this.isOpening) {
+					const width = this.$refs.titleSection.offsetWidth;
+					this.showItems = !this.showItems;
+					this.dropdownWidth = width + "px";
+				}
 			}
 		},
 	},

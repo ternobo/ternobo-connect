@@ -23,18 +23,20 @@ class DontaionsController extends Controller
     {
         $filters = $request->filled("filter") ? $request->filter : [
             'sort' => "DESC",
-            "my_tips" => false,
+            "my_tips" => "all",
         ];
 
         $tips = Tip::query()->whereHas("user")->orderBy("created_at", $filters['sort']);
 
         $page_id = Auth::user()->personalPage->id;
-
-        if ($filters['my_tips']) {
+        if ($filters['my_tips'] == "all") {
+            $tips = $tips->whereRaw("post_id in (select id from posts where page_id = ?)", [$page_id]);
+            $tips = $tips->orWhere("user_id", Auth::user()->id);
+        } elseif ($filters['my_tips'] == "my") {
             $tips = $tips->where("user_id", Auth::user()->id);
         } else {
             $tips = $tips->whereRaw("post_id in (select id from posts where page_id = ?)", [$page_id]);
-            $tips = $tips->orWhere("user_id", Auth::user()->id);
+            $tips = $tips->where("user_id", "!=", Auth::user()->id);
         }
         return new DonationCollection($tips->paginate(20));
     }

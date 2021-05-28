@@ -16,49 +16,51 @@
 				</a>
 			</div>
 		</b-sidebar>
-		<div class="header-search d-flex justify-content-between align-items-center">
-			<div class="menu d-flex">
-				<div class="clickable" v-b-toggle.sidebar><i class="material-icons header-btn" :class="{ 'text-dark': !hasBG, 'text-white': hasBG }">menu</i></div>
-			</div>
-			<div class="d-flex align-items-center">
-				<wire-link v-if="$store.state.user" :class="{ 'text-dark': !hasBG, 'text-white': hasBG }" href="/feed">
-					<i class="navheader-icon material-icons-outlined" :class="{ 'text-dark': !hasBG, 'text-white': hasBG }">home</i>
-				</wire-link>
-
-				<button v-if="!$store.state.user" class="btn btn-transparent font-14 py-1" :class="{ 'text-dark': !hasBG }" @click="showLogin = !showLogin">ورود</button>
-			</div>
-		</div>
-		<div class="search-section" :class="{ noBG: !hasBG }">
-			<form action="/search" id="searchform" autocomplete="off">
-				<div class="content-body d-flex justify-content-center align-items-center flex-column">
-					<div class="col-md-6 p-0 d-flex justify-content-center align-items-center flex-column">
-						<img src="/images/logo-type.svg" class="thelogo logo-type" v-if="hasBG" />
-						<img src="/images/logo-type-dark.svg" class="thelogo logo-type" v-if="!hasBG" />
-						<autocomplete style="min-width: 270px" :search="search" id="searchforminput" class="w-100 search-box" autocomplete="off" required type="text" name="q" placeholder="هر چیزی که در جستن آنی، آنی" />
-					</div>
+		<div class="search-page-container">
+			<div class="header-search d-flex justify-content-between align-items-center">
+				<div class="menu d-flex">
+					<div class="clickable" v-b-toggle.sidebar><i class="material-icons header-btn" :class="{ 'text-dark': !hasBG, 'text-white': hasBG }">menu</i></div>
 				</div>
-			</form>
-		</div>
-		<div class="footer p-3 d-flex justify-content-between align-items-center">
-			<div class="bg-downloader d-flex" v-if="hasBG" @mouseenter="showDownloader = true" @mouseleave="showDownloader = false">
-				<i class="material-icons-outlined text-white">add_photo_alternate</i>
-				<transition name="fade">
-					<div class="d-flex py-2 copyright-bg px-4 bg-dark align-items-center text-white" v-if="showDownloader">
-						<div class="d-flex flex-column justify-content-center">
-							<b class="my-1" style="font-size: 0.8rem">علی اطیابی</b>
-							<small style="font-size: 0.8rem">تهران، تهران ایران</small>
+				<div class="d-flex align-items-center">
+					<wire-link v-if="$store.state.user" :class="{ 'text-dark': !hasBG, 'text-white': hasBG }" href="/feed">
+						<i class="navheader-icon material-icons-outlined" :class="{ 'text-dark': !hasBG, 'text-white': hasBG }">home</i>
+					</wire-link>
+
+					<button v-if="!$store.state.user" class="btn btn-transparent font-14 py-1" :class="{ 'text-dark': !hasBG }" @click="showLogin = !showLogin">ورود</button>
+				</div>
+			</div>
+			<div class="search-section" :class="{ noBG: !hasBG }">
+				<form action="/search" id="searchform" autocomplete="off">
+					<div class="content-body d-flex justify-content-center align-items-center flex-column">
+						<div class="col-md-6 p-0 d-flex justify-content-center align-items-center flex-column">
+							<img src="/images/logo-type.svg" class="thelogo logo-type" v-if="hasBG" />
+							<img src="/images/logo-type-dark.svg" class="thelogo logo-type" v-if="!hasBG" />
+							<auto-complete style="min-width: 270px" v-model="search" required type="text" name="q" :icon="'search'" placeholder="هر چیزی که در جستن آنی، آنی" />
 						</div>
-						<a class="d-flex align-items-center" download href="/images/search-background-2x.jpg"><i class="material-icons text-white mr-5">get_app</i></a>
 					</div>
-				</transition>
+				</form>
 			</div>
-			<div v-if="$root.isMobile">
-				<img src="/images/logo-white.svg" class="thelogo" v-if="hasBG" style="width: 24px" />
-				<img src="/images/logo.svg" class="thelogo" v-if="!hasBG" style="width: 24px" />
-			</div>
-			<div v-else>
-				<img src="/images/logo-en.svg" class="thelogo" v-if="hasBG" style="width: 110px" />
-				<img src="/images/logo-en-dark.svg" class="thelogo" v-if="!hasBG" style="width: 110px" />
+			<div class="footer p-3 d-flex justify-content-between align-items-center">
+				<div class="bg-downloader d-flex" v-if="hasBG" @mouseenter="showDownloader = true" @mouseleave="showDownloader = false">
+					<i class="material-icons-outlined text-white">add_photo_alternate</i>
+					<transition name="fade">
+						<div class="d-flex py-2 copyright-bg px-4 bg-dark align-items-center text-white" v-if="showDownloader">
+							<div class="d-flex flex-column justify-content-center">
+								<b class="my-1" style="font-size: 0.8rem">علی اطیابی</b>
+								<small style="font-size: 0.8rem">تهران، تهران ایران</small>
+							</div>
+							<a class="d-flex align-items-center" download href="/images/search-background-2x.jpg"><i class="material-icons text-white mr-5">get_app</i></a>
+						</div>
+					</transition>
+				</div>
+				<div v-if="$root.isMobile">
+					<img src="/images/logo-white.svg" class="thelogo" v-if="hasBG" style="width: 24px" />
+					<img src="/images/logo.svg" class="thelogo" v-if="!hasBG" style="width: 24px" />
+				</div>
+				<div v-else>
+					<img src="/images/logo-en.svg" class="thelogo" v-if="hasBG" style="width: 110px" />
+					<img src="/images/logo-en-dark.svg" class="thelogo" v-if="!hasBG" style="width: 110px" />
+				</div>
 			</div>
 		</div>
 	</div>
@@ -72,8 +74,7 @@ import Landing from "../Components/App/Landing";
 import LoginModal from "../Components/Modals/LoginModal";
 import SignupModal from "../Components/Modals/SignupModal";
 import App from "../Layouts/App";
-
-import Autocomplete from "@trevoreyre/autocomplete-vue";
+import AutoComplete from "../Components/inputs/AutoComplete.vue";
 
 export default {
 	methods: {
@@ -149,7 +150,7 @@ export default {
 		Switches,
 		LoginModal,
 		SignupModal,
-		Autocomplete,
+		AutoComplete,
 	},
 };
 </script>

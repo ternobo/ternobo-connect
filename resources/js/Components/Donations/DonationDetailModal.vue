@@ -12,7 +12,7 @@
 					<div class="donation-amount-detail">
 						<div :class="{ 'badge-success': !tip.donate_by_me, 'badge-blue': tip.donate_by_me }">
 							<strong class="font-demibold">{{ formatNumber(tip.amount, "0,0") }}</strong>
-							<span>تومان</span>
+							<span :class="{ received: !tip.donate_by_me }">تومان</span>
 						</div>
 						<i class="material-icons donate-type" :class="{ received: !tip.donate_by_me }">play_for_work</i>
 					</div>
@@ -27,7 +27,7 @@
 			</div>
 			<div class="donation-detail-item">
 				<span class="text-grey font-16 font-demibold">ساعت</span>
-				<span class="text-grey font-16 font-demibold">{{ date }}</span>
+				<span class="text-grey font-16 font-demibold">{{ time }}</span>
 			</div>
 			<div class="donation-detail-item">
 				<span class="text-grey font-16 font-demibold">کد تراکنش</span>
@@ -35,10 +35,6 @@
 			</div>
 			<div class="donation-detail-item">
 				<span class="text-grey font-16 font-demibold">شماره پیگیری</span>
-				<span class="text-grey font-16 font-demibold">{{ tip.meta.reference_id }}</span>
-			</div>
-			<div class="donation-detail-item">
-				<span class="text-grey font-16 font-demibold">شماره‌ تماس</span>
 				<span class="text-grey font-16 font-demibold">{{ tip.meta.reference_id }}</span>
 			</div>
 			<div class="donation-detail-item">

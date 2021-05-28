@@ -82,7 +82,7 @@ export default {
 		filter() {
 			return {
 				sort: this.order.value,
-				my_tips: this.type.value == "my",
+				my_tips: this.type.value,
 			};
 		},
 	},
@@ -110,7 +110,7 @@ export default {
 				axios
 					.post(this.next_page_url, { filter: this.filter })
 					.then((response) => {
-						this.donations = response.data.data;
+						this.donations = this.donations.concat(response.data.data);
 						this.next_page_url = response.data.links.next;
 					})
 					.catch((err) => {

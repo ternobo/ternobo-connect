@@ -9,7 +9,7 @@
 		<div class="donate-detail-group">
 			<div :class="{ 'badge-success': !tip.donate_by_me, 'badge-blue': tip.donate_by_me }">
 				<strong class="font-demibold">{{ formatNumber(tip.amount, "0,0") }}</strong>
-				<span>تومان</span>
+				<span :class="{ received: !tip.donate_by_me }">تومان</span>
 			</div>
 			<div class="doantion-time">
 				<span>{{ time }}</span>

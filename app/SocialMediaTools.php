@@ -4,6 +4,7 @@ namespace App;
 use App\Models\Notification;
 use App\Models\Page;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image as ImageFacades;
 use Intervention\Image\Image;
 
@@ -59,10 +60,14 @@ class SocialMediaTools
 
     public static function uploadPostImage($media, $quality = 70)
     {
-        $image = SocialMediaTools::fitPostImage(ImageFacades::make(base_path("storage/app/$media")));
-        $image->save(base_path("storage/app/$media.webp"), $quality, "webp");
-        Storage::delete("$media");
-        return "$media.webp";
+        $path = "storage/app/$media";
+        if (!Str::endsWith(Str::lower($path), "gif")) {
+            $path .= ".webp";
+            $image = SocialMediaTools::fitPostImage(ImageFacades::make(base_path("storage/app/$media")));
+            $image->save(base_path($path), $quality, "webp");
+            Storage::delete("$media");
+        }
+        return "$media";
     }
 
     public static function fitPostImage(Image $image)
