@@ -16,6 +16,7 @@ yarn-error.log
 public/js
 public/mix-manifest.json
 public/css/app.css
+public/css/app.ltr.css
 composer.lock
 *.lock
 laravel-echo-server.lock
