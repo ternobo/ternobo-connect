@@ -80,7 +80,7 @@
 			<div class="actions">
 				<strong class="text-light ml-2 clickable" v-if="feedbackReply.replies_count > 0" @click="loadReplies">{{ feedbackReply.replies_count }} پاسخ</strong>
 				<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies, 'material-icons': showReplies }" class="hover-dark ml-2 clickable"> insert_comment </i>
-				<i @click="likeComment" class="hover-danger clickable material-icons" :class="{ 'text-danger': liked }">
+				<i @click="likeComment" class="hover-danger clickable material-icons" v-if="feedbackReply.user.id != $store.state.user.id" :class="{ 'text-danger': liked }">
 					{{ liked ? "favorite" : "favorite_border" }}
 				</i>
 			</div>

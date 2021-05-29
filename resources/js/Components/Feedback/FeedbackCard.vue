@@ -5,7 +5,10 @@
 				<div class="feedback-votes">
 					{{ votes }}
 				</div>
-				<loading-button v-b-tooltip.hover.ds700 :title="voted ? `برداشتن رای` : `ثبت رای`" :loading="loading" @click.native="voteIdea" v-if="feedback.status == 'voting'" class="btn btn-primary feedback-vote-button" :class="{ voted: voted }">
+				<loading-button v-b-tooltip.hover.ds700 key="vote_item" :title="voted ? `برداشتن رای` : `ثبت رای`" :loading="loading" @click.native="voteIdea" v-if="feedback.status == 'voting' && voted && !loading" class="btn btn-primary feedback-vote-button" :class="{ voted: voted }">
+					<i class="material-icons-outlined">{{ voted ? "highlight_off" : "arrow_circle_up" }}</i>
+				</loading-button>
+				<loading-button v-b-tooltip.hover.ds700 key="unvote_item" :title="'برداشتن رای'" :loading="loading" @click.native="voteIdea" v-else-if="feedback.status == 'voting'" class="btn btn-primary feedback-vote-button" :class="{ voted: voted }">
 					<i class="material-icons-outlined">{{ voted ? "highlight_off" : "arrow_circle_up" }}</i>
 				</loading-button>
 				<loading-button @click.native="bookmark" :class="{ 'text-dark': bookmarked }" class="btn feedback-flag-button">
