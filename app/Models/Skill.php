@@ -79,9 +79,9 @@ class Skill extends Model
                     $self = true;
                 }
                 if ($self) {
-                    $verb = "اید";
+                    $verb = "کرده‌اید";
                 } else {
-                    $verb = "است";
+                    $verb = "کرده است";
                 }
                 return ['first' => $first, 'verb' => $verb, "nums" => $nums];
             }
