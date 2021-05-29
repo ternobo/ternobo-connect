@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App\Tools;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Str;
 
 class InviteLink extends Model
 {
@@ -34,9 +34,12 @@ class InviteLink extends Model
 
     public static function createLink($user_id)
     {
+
         return InviteLink::create([
             'user_id' => $user_id,
-            'code' => Str::uuid(),
+            'code' => Tools::randomCode(6, function ($input) {
+                return !InviteLink::query()->where("code", $input)->exists();
+            }),
         ]);
     }
 
