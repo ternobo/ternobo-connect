@@ -33,7 +33,22 @@
 
     }
 
+    .used_by_user_info {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
+        span {
+            font-size: 12px;
+            font-weight: 600;
+            color: $dark;
+        }
+
+        figure {
+            margin-bottom: 16px;
+        }
+    }
 
     margin-bottom: 40px;
 }

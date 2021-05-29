@@ -12,8 +12,12 @@
 					</div>
 					<div class="invite-links">
 						<div class="invite" :class="{ disabled: !inviteLink.valid }" v-for="inviteLink in inviteLinks" :key="`invite_link_${inviteLink.id}`">
-							<i class="material-icons-outlined invite-icon">confirmation_number</i>
-							<input class="form-control border-0" :class="{ 'text-muted': !inviteLink.valid }" style="background: #fff !important" type="text" readonly :value="`${$APP_URL}/register?code=${inviteLink.code}`" />
+							<i class="material-icons-outlined invite-icon" v-if="inviteLink.valid">confirmation_number</i>
+							<input class="form-control border-0" :class="{ 'text-muted': !inviteLink.valid }" v-if="inviteLink.valid" style="background: #fff !important" type="text" readonly :value="`${$APP_URL}/register?code=${inviteLink.code}`" />
+							<div v-else class="used_by_user_info">
+								<lazy-image :src="inviteLink.used_by.profile" class="profile-xxsm" imgClass="profile-xxsm" circle></lazy-image>
+								<span>{{ inviteLink.used_by.name }}</span>
+							</div>
 							<button class="btn btn-action-light p-1 rounded-0 w-100" :disabled="!inviteLink.valid" style="height: 32px; border-radius: 12px !important" v-clipboard="`${$APP_URL}/register?code=${inviteLink.code}`">{{ !inviteLink.valid ? "استفاده شده" : "استفاده" }}</button>
 						</div>
 					</div>

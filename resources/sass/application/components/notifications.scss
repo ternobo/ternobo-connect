@@ -128,10 +128,16 @@
             padding: 24px;
             word-wrap: break-word;
 
+
             @for $i from 1 through 6 {
                 h#{$i} {
                     font-size: 16px;
+                    line-height: 1.5;
                 }
+            }
+
+            .post-content--text:not(:last-child) {
+                margin-bottom: 16px;
             }
 
             .slider-media-image {

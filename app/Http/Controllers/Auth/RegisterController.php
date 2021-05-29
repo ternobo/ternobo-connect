@@ -137,7 +137,10 @@ class RegisterController extends Controller
 
             ActiveSession::addSession($user->id);
             Auth::login($user, true);
-            $invite->delete();
+
+            $invite->valid = false;
+            $invite->used_by = $user->id;
+            $invite->save();
             return response()->json(array("result" => true));
         }
         return abort(400);

@@ -11,9 +11,9 @@
 						<wire-link class="clickable" :href="notifications[0].sender.slug">{{ notifications[0].sender.name }}</wire-link>
 						<wire-link class="clickable" :href="notifications[1].sender.slug" v-if="notifications[1]">، {{ notifications[1].sender.name }}</wire-link>
 						<span v-if="notifications.length > 2">و {{ notifications.length - 2 }} نفر دیگر</span>
-						<div class="action mr-1">شما را {{ notifications.length > 1 ? "دنبال می‌کنند" : "دنبال می‌کند" }}</div>
 						<span class="font-weight-normal date-text">{{ createdAt }}</span>
 					</div>
+					<div class="action mr-1">شما را {{ notifications.length > 1 ? "دنبال می‌کنند" : "دنبال می‌کند" }}</div>
 				</div>
 			</div>
 			<i class="material-icons text-action">group_add</i>

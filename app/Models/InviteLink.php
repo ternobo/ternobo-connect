@@ -22,6 +22,11 @@ class InviteLink extends Model
         return $this->belongsTo(User::class, "user_id");
     }
 
+    public function used_by()
+    {
+        return $this->belongsTo(User::class, "used_by");
+    }
+
     public static function check($code)
     {
         return InviteLink::query()->where("code", $code)->where("valid", true)->exists();

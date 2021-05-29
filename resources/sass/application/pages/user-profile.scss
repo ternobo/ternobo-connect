@@ -261,6 +261,10 @@ div.page-cover {
             a {
                 font-weight: 600;
                 color: $text-color;
+                -webkit-user-select: text;
+                   -moz-user-select: text;
+                    -ms-user-select: text;
+                        user-select: text;
             }
 
             @media screen and (max-width: $sm-size) {

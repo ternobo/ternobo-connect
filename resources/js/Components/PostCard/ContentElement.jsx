@@ -21,7 +21,7 @@ export default {
 
                     let action = "";
 
-                    if (this.text.length > 200) {
+                    if (this.text.length > 200 && !this.hideMore) {
                         action = (<div class="show-more-text--clickable" onClick={this.toggleShowFullText}>{this.showFullText ? "نمایش کمتر" : "نمایش بیشتر"}</div>);
                     }
 
@@ -75,6 +75,9 @@ export default {
         }
     },
     props: {
+        hideMore: {
+            default: false,
+        },
         content: {
             required: true
         }

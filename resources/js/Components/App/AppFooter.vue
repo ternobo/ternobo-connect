@@ -27,7 +27,7 @@
 			</langdropdown>
 			<div class="app-footer">
 				<div class="sidemenu-links d-flex justify-content-center align-items-center mb-2">
-					<a class="text-muted hover-dark clickable ml-3" @click="showLaws = true">قوانین و مقررات</a>
+					<a class="text-muted hover-dark ml-3" @click="showLaws = true">قوانین و مقررات</a>
 					<a class="text-muted hover-dark" href="https://ternobo.info" target="_blank">درباره ما</a>
 				</div>
 				<div class="copyright-text d-flex justify-content-center align-items-center">

@@ -10,7 +10,7 @@ class InviteLinksController extends Controller
 {
     public function index()
     {
-        $invite_links = InviteLink::query()->where("user_id", Auth::user()->id)->get();
+        $invite_links = InviteLink::query()->with(["used_by"])->where("user_id", Auth::user()->id)->get();
         return TernoboWire::render("Invite", ['inviteLinks' => $invite_links]);
     }
 }
