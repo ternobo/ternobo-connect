@@ -93,7 +93,6 @@ class ArticlesController extends Controller
                     } elseif (Str::startsWith($url, "data:image")) {
                         list($type, $data) = explode(';', $data);
                         list(, $data) = explode(',', $data);
-                        dd($type);
                         // $name = time() . uniqid() . Auth::user()->id;
 
                         // Storage::put("medias/" . $name, $data);

@@ -83,7 +83,6 @@ class Skill extends Model
                 } else {
                     $verb = "است";
                 }
-                dd($nums);
                 return ['first' => $first, 'verb' => $verb, "nums" => $nums];
             }
         }
