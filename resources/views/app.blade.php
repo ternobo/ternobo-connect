@@ -34,15 +34,15 @@
     </script>
 </head>
 
-<body dir="rtl" class="font-sans antialiased" data-wire='{{ $tuuid }}'>
+<body dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'rtl' }}" class="font-sans antialiased" data-wire='{{ $tuuid }}'>
     {!! $ternoboApp !!}
     <script src="{{ mix('/js/manifest.js') }}" defer></script>
     <script src="{{ mix('/js/vendor.js') }}" defer></script>
     <script src="{{ mix('/js/app.js') }}" defer></script>
-    @if(app()->getLocale() == 'en')
-    <link href="{{ mix('/css/app.ltr.css') }}" rel="stylesheet" />
+    @if (app()->getLocale() == 'en')
+        <link href="{{ mix('/css/app.ltr.css') }}" rel="stylesheet" />
     @else
-    <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
+        <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
     @endif
 </body>
 
