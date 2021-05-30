@@ -8,7 +8,7 @@
 				:value="{ label: 'فارسی', value: 'fa', icon: '/images/iran-flag.png' }"
 				:items="[
 					{ label: 'فارسی', value: 'fa', icon: '/images/iran-flag.png' },
-					{ label: 'English', value: 'en', icon: '/img/en.png', disabled: true },
+					{ label: 'English', value: 'en', icon: '/img/en.png' },
 				]"
 			>
 				<template v-slot:selected="{ item }">

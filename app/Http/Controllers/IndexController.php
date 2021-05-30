@@ -14,7 +14,9 @@ use App\Models\Post;
 use App\Ternobo;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Ternobo\TernoboWire\TernoboWire;
 
 /**
@@ -30,6 +32,22 @@ class IndexController extends Controller
         SEOTools::setTitle('شبکه اجتماعی متخصصین');
         $articles = Post::query()->where("type", "article")->with("page")->latest()->limit(10)->get();
         return TernoboWire::render("Welcome", ["articles" => $articles]);
+    }
+
+    public function setLanguage(Request $request)
+    {
+        $validator = Validator::make($request->all(), ['locale' => "required"]);
+        if ($validator->fails()) {
+            return response()->json(['result' => false, 'errors' => $validator->errors()]);
+        }
+
+        $locale = $request->locale;
+        if (in_array($locale, ['en', 'fa'])) {
+            App::setLocale($locale);
+            session(["locale" => $locale]);
+            return redirect()->back();
+        }
+        return response()->json(['result' => false, 'errors' => ['locale' => "invalid value"]]);
     }
 
     public function followSuggestions(Request $request)

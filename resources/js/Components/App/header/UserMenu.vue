@@ -13,14 +13,14 @@
 			</wire-link>
 		</div>
 		<div class="card-body p-0">
-			<ul class="list-group list-group-flush">
-				<wire-link href="/donations" as="li" class="list-group-item border-0 headermenu-item">
+			<div class="list-group list-group-flush">
+				<wire-link href="/donations" as="a" class="list-group-item border-0 headermenu-item">
 					<a class="m-0"><i class="material-icons-outlined">savings</i> حمایت‌ها</a>
 				</wire-link>
-				<wire-link href="/settings" as="li" class="list-group-item border-0 headermenu-item">
+				<wire-link href="/settings" as="a" class="list-group-item border-0 headermenu-item">
 					<a class="m-0"><i class="material-icons-outlined">settings</i> تنظیمات و حریم خصوصی </a>
 				</wire-link>
-				<wire-link href="/feedbacks" as="li" class="list-group-item border-0 headermenu-item">
+				<wire-link href="/feedbacks" as="a" class="list-group-item border-0 headermenu-item">
 					<a class="m-0"><i class="material-icons-outlined">emoji_objects</i> بازخورد ها </a>
 				</wire-link>
 				<li class="list-group-item border-top headermenu-item">
@@ -28,7 +28,7 @@
 						<button type="submit" class="text-right bg-transparent hover-danger m-0 p-0 border-0 text-grey"><i class="material-icons">power_settings_new</i> خروج</button>
 					</form>
 				</li>
-			</ul>
+			</div>
 		</div>
 	</div>
 </template>

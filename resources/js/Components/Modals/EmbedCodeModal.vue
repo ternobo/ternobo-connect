@@ -10,7 +10,7 @@
 			<div class="d-flex flex-column">
 				<span class="font-demibold text-dark mb-4"><i class="material-icons-outlined">visibility</i> پیش‌نمایش </span>
 
-				<div class="border-2" v-html="code"></div>
+				<div ref="iframeContainer" v-html="code"></div>
 			</div>
 		</div>
 	</b-modal>
@@ -34,6 +34,16 @@ export default {
 					.then((response) => {
 						if (response.data.result) {
 							this.code = response.data.code;
+							setTimeout(() => {
+								let iframe = this.$refs.iframeContainer.querySelector("iframe");
+								iframe.src = iframe.src + "";
+								iframe.onload = () => {
+									setTimeout(() => {
+										iframe.height = iframe.contentDocument.body.offsetHeight + 4;
+										iframe.onload = null;
+									}, 1000);
+								};
+							}, 1000);
 						}
 					})
 					.catch((error) => {

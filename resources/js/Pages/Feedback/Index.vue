@@ -224,25 +224,25 @@ export default {
 			}
 		},
 		saveFeedback() {
-			const $this = this;
 			this.loading = true;
 			axios
 				.post("/feedbacks", {
 					title: this.feedbackTitle,
 					description: this.feedbackDescription,
 				})
-				.then(function (response) {
+				.then((response) => {
 					if (response.data.result) {
-						$this.feedbackDescription = "";
-						$this.feedbackTitle = "";
-						$this.feedbacksArray.unshift(response.data.feedback);
+						this.feedbackDescription = "";
+						this.feedbackTitle = "";
+						this.feedbacksArray.unshift(response.data.feedback);
+						this.showNewFeedback = false;
 					} else {
 						const errors = response.data.errors;
 						Object.keys(errors).forEach(function (item, index) {
-							$this.toast(errors[item][0]);
+							this.toast(errors[item][0]);
 						});
 					}
-					$this.loading = false;
+					this.loading = false;
 				})
 				.catch(function (error) {
 					console.log(error);

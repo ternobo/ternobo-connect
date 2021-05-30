@@ -68,12 +68,19 @@
     color: rgb(0, 200, 83);
 }
 
-.btn-transparent {
+.btn-transparent,
+.button-transparent {
     background: transparent;
     color: $grey;
 
     &:hover {
         color: $dark;
+    }
+
+    &:disabled {
+        border-color: transparent;
+        background: transparent;
+        color: $fixed-elements;
     }
 }
 

@@ -163,6 +163,9 @@
         unicode-bidi: -moz-plaintext;
         unicode-bidi: plaintext;
 
+        &:last-child {
+            padding-bottom: 12px;
+        }
 
         .skeleton-container {
             >.pu-skeleton:not(:last-child) {

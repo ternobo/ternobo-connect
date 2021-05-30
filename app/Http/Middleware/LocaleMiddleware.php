@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class LocaleMiddleware
 {
@@ -18,9 +19,9 @@ class LocaleMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (session()->has("locale")) {
-            \App::setLocale(session()->get("locale"));
+            App::setLocale(session()->get("locale"));
         } else {
-            \App::setLocale("fa");
+            App::setLocale("fa");
         }
         return $next($request);
     }
