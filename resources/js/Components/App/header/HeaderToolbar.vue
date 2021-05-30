@@ -27,11 +27,8 @@
 
 		<div id="usermenu-show" v-if="$store.state.user != null" class="usertoolbar" @mouseenter="showUserMenu" @mouseleave="menuVisible = false">
 			<div class="usertoolbar-container">
-				<div class="d-flex align-items-center">
-					<span dir="ltr" class="user-username">{{ $store.state.user.username }} <i v-if="$store.state.user.is_verified === 1" class="verificationcheck">check_circle</i> </span>
-					<img v-bind:src="$store.state.user.profile" class="profile-xxsm" />
-				</div>
-				<i class="material-icons text-light">more_vert</i>
+				<span dir="ltr" class="user-username">{{ $store.state.user.username }} <i v-if="$store.state.user.is_verified === 1" class="verificationcheck">check_circle</i> </span>
+				<img v-bind:src="$store.state.user.profile" class="profile-xxsm" />
 			</div>
 			<transition name="fade" mode="out-in">
 				<user-menu v-bind:style="{ left: menuLeft }" v-show="menuVisible"></user-menu>
@@ -68,7 +65,6 @@ export default {
 		},
 		showUserMenu(e) {
 			this.menuVisible = true;
-			const $this = this;
 			const left = document.getElementById("usermenu-show").getBoundingClientRect().x;
 			this.menuLeft = left + "px";
 		},

@@ -9,7 +9,7 @@
 						{{ "به چی فکر می‌کنی " + $store.state.user.first_name + "؟" }}
 					</span>
 				</div>
-				<wire-link v-if="showDraft" :href="`/${$store.state.user.username}#drafts`" as="i" class="material-icons-outlined clickable text-grey mr-4 hover-dark">save</wire-link>
+				<wire-link v-if="showDraft" :href="`/${$store.state.user.username}#drafts`" as="i" class="material-icons-outlined clickable text-grey ms-4 hover-dark">save</wire-link>
 			</div>
 		</div>
 	</div>

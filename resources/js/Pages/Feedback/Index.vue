@@ -52,7 +52,7 @@
 					</li>
 
 					<li style="left: 0" class="position-absolute" @click="status = 'my-feedbacks'" :class="{ 'is-active': status === 'my-feedbacks' }">
-						<a class="active" :class="{ 'font-16': $root.isDesktop }"><i class="material-icons ml-2">outlined_flag</i> پیشنهادات من</a>
+						<a class="active" :class="{ 'font-16': $root.isDesktop }"><i class="material-icons me-2">outlined_flag</i> پیشنهادات من</a>
 					</li>
 				</ul>
 			</div>

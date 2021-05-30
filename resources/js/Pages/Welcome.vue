@@ -49,7 +49,7 @@
 								<b class="my-1" style="font-size: 0.8rem">علی اطیابی</b>
 								<small style="font-size: 0.8rem">تهران، تهران ایران</small>
 							</div>
-							<a class="d-flex align-items-center" download href="/images/search-background-2x.jpg"><i class="material-icons text-white mr-5">get_app</i></a>
+							<a class="d-flex align-items-center" download href="/images/search-background-2x.jpg"><i class="material-icons text-white ms-5">get_app</i></a>
 						</div>
 					</transition>
 				</div>

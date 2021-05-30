@@ -8,7 +8,7 @@
 				<strong>{{ fileName }}</strong>
 			</div>
 			<div class="d-flex align-items-center">
-				<small class="file-size text-muted ml-3">{{ fileSize }}</small>
+				<small class="file-size text-muted me-3">{{ fileSize }}</small>
 				<a download :href="fileUrl"><i class="material-icons font-16 text-muted">file_download</i></a>
 			</div>
 		</div>

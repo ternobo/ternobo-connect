@@ -34,7 +34,7 @@
 					<wire-link :href="'/' + feedback.user.username"><lazy-image :src="feedback.user.profile" class="mb-0 profile-xxsm" img-class="profile-xxsm" /> </wire-link>
 					<div class="d-flex flex-column">
 						<div class="d-flex align-items-center">
-							<wire-link as="strong" :href="'/' + feedback.user.username" class="ml-1 clickable"> {{ feedback.user.name }}</wire-link>
+							<wire-link as="strong" :href="'/' + feedback.user.username" class="me-1 clickable"> {{ feedback.user.name }}</wire-link>
 							<span class="text-grey">این بازخورد را به اشتراک گذاشته است</span>
 						</div>
 						<div class="publish_time">{{ createDate }}</div>

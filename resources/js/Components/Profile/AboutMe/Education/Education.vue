@@ -5,9 +5,9 @@
 			<i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
 		</div>
 		<div class="detail">
-			<div class="d-flex align-items-center flex-column ml-3" v-if="edit || $root.isDesktop">
+			<div class="d-flex align-items-center flex-column me-3" v-if="edit || $root.isDesktop">
 				<lazy-image src="/images/school-profile.png" class="about-me--picture mb-2" v-if="$root.isDesktop" img-class="about-me--picture" />
-				<button class="btn font-12 ml-1 follow-btn" @click="showMore = !showMore" v-if="edit && $root.isDesktop">
+				<button class="btn font-12 me-1 follow-btn" @click="showMore = !showMore" v-if="edit && $root.isDesktop">
 					{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}
 				</button>
 			</div>
@@ -82,7 +82,7 @@
 					<strong>انجمن‌ها و فعالیت‌ها</strong>
 					<div class="character-counter">
 						<span class="counter tex-dark">{{ leftCharacterActivities }}</span>
-						<div class="progress ml-1 mb-0" style="width: 100px; height: 5px">
+						<div class="progress me-1 mb-0" style="width: 100px; height: 5px">
 							<div class="progress-bar" role="progressbar" :style="{ width: progressActivity }" aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
 					</div>
@@ -92,7 +92,7 @@
 					<strong>توضیحات</strong>
 					<div class="character-counter">
 						<span class="counter tex-dark">{{ leftCharacter }}</span>
-						<div class="progress ml-1 mb-0" style="width: 100px; height: 5px">
+						<div class="progress me-1 mb-0" style="width: 100px; height: 5px">
 							<div class="progress-bar" role="progressbar" :style="{ width: progress }" aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
 					</div>

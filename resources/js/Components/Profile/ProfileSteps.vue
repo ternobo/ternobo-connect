@@ -19,7 +19,7 @@
 				</div>
 				<div class="last-step-action">
 					<div class="d-flex align-items-center">
-						<i class="material-icons ml-2" style="font-size: 50px">{{ steps.undone_steps[0].icon }}</i>
+						<i class="material-icons me-2" style="font-size: 50px">{{ steps.undone_steps[0].icon }}</i>
 						<div class="d-flex flex-column">
 							<strong :class="{ 'font-16 ': $root.isDesktop, 'font-14': !$root.isDesktop }">
 								{{ steps.undone_steps[0].name }}

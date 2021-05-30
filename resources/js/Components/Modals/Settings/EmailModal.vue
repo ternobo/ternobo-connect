@@ -6,7 +6,7 @@
 		</div>
 		<transition name="slide">
 			<div v-if="verification_step">
-				<label class="ml-1 mt-2 text-left clickable" @click="verification_step = false">ایمیل اشتباه است؟</label>
+				<label class="me-1 mt-2 text-left clickable" @click="verification_step = false">ایمیل اشتباه است؟</label>
 
 				<div class="input-group d-flex align-items-center flex-column justify-content-center mt-4">
 					<label class="w-100">کد تایید خود ‌را وارد کنید</label>

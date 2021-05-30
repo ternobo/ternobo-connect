@@ -28,12 +28,12 @@
 			<div class="article-actions">
 				<div>
 					<div @click="showLikes = true" class="d-flex text-muted clickable" v-if="post.mutual_likes != null && post.mutual_likes.length > 0">
-						<span class="ml-1">پسندیده شده توسط</span>
+						<span class="me-1">پسندیده شده توسط</span>
 						<wire-link v-if="post.mutual_likes[0]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
 							<strong class="text-light">{{ post.mutual_likes[0].page.name }}</strong>
 						</wire-link>
 						<div v-if="post.mutual_likes.length > 1">
-							<span class="mr-1">و</span>
+							<span class="ms-1">و</span>
 							<wire-link v-if="post.mutual_likes[1]" :href="'/' + post.mutual_likes[0].page.slug" class="text-dark">
 								<strong class="text-light">{{ post.mutual_likes[1].page.name }}</strong>
 							</wire-link>
@@ -48,9 +48,9 @@
 			</div>
 			<div class="my-3 py-2 border-top border-bottom">
 				<div><span class="publisher-title-size text-muted">منتشر شده توسط</span></div>
-				<div class="d-flex justify-content-between flex-lg-row flex-column align-items-center ml-1 mt-2">
+				<div class="d-flex justify-content-between flex-lg-row flex-column align-items-center me-1 mt-2">
 					<wire-link class="d-flex align-items-center text-dark" :href="'/' + post.page.slug">
-						<lazy-image :src="post.page.profile" img-class="profile-md" class="ml-2 mb-0" alt="profile-image" />
+						<lazy-image :src="post.page.profile" img-class="profile-md" class="me-2 mb-0" alt="profile-image" />
 						<div class="d-flex flex-column">
 							<strong>{{ post.page.name }} <i v-if="post.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 							<small class="text-muted" v-if="post.page.short_bio !== null && post.page.short_bio.length > 0">{{ post.page.short_bio }}</small>
@@ -59,7 +59,7 @@
 					</wire-link>
 					<div class="d-flex align-items-center">
 						<div class="d-flex flex-lg-row align-items-center">
-							<span class="ml-2">{{ userposts }} مقاله </span>
+							<span class="me-2">{{ userposts }} مقاله </span>
 							<wire-link :href="'/articles/' + post.id + '/edit'" class="btn btn-outline-primary" v-if="checkUser(post.page.user_id)">ویرایش</wire-link>
 						</div>
 						<post-menu :post="post" @edit="$store.state.ternoboWireApp.visit('/articles/' + post.id + '/edit')" @deleted="doDelete"></post-menu>

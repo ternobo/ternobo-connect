@@ -13,7 +13,7 @@
 						<span v-if="notifications.length > 2">و {{ notifications.length - 2 }} نفر دیگر</span>
 						<span class="font-weight-normal date-text">{{ createdAt }}</span>
 					</div>
-					<div class="action mr-1">مهارت {{ notificationGroup.notifiable.name }} {{ notifications.length > 1 ? "تایید کردند" : "تایید کرد" }}</div>
+					<div class="action ms-1">مهارت {{ notificationGroup.notifiable.name }} {{ notifications.length > 1 ? "تایید کردند" : "تایید کرد" }}</div>
 				</div>
 			</div>
 			<i class="material-icons text-muted">arrow_circle_up</i>

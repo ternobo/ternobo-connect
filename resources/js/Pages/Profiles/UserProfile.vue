@@ -6,7 +6,7 @@
 			<tabs :compact="true" :disabled="edit" class="profile-tabs" @selected="tabChange" :state-tab="true">
 				<template slot="custom-item">
 					<div class="d-flex align-items-center" v-if="canEdit && showEdit">
-						<div class="ml-3 rounded-circle clickable" v-if="edit">
+						<div class="me-3 rounded-circle clickable" v-if="edit">
 							<i class="material-icons text-muted hover-dark" v-if="edit" @click="cancelEdit">close</i>
 						</div>
 						<button class="btn d-flex align-items-center justify-content-center btn-edit" @click="doEdit">
@@ -22,8 +22,8 @@
 					</div>
 					<div class="d-flex algin-items-center" v-else-if="current_tab == 'activities' && canEdit">
 						<button class="btn btn-edit" @click="draft = !draft">
-							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-if="!draft"><i class="material-icons-outlined" :class="{ 'ml-1': $root.isDesktop }">save</i><span style="font-weight: 600" v-if="$root.isDesktop"> پیش‌نویس </span></div>
-							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-else><i class="material-icons-outlined" :class="{ 'ml-1': $root.isDesktop }">article</i><span style="font-weight: 600" v-if="$root.isDesktop"> منتشر شده </span></div>
+							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-if="!draft"><i class="material-icons-outlined" :class="{ 'me-1': $root.isDesktop }">save</i><span style="font-weight: 600" v-if="$root.isDesktop"> پیش‌نویس </span></div>
+							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-else><i class="material-icons-outlined" :class="{ 'me-1': $root.isDesktop }">article</i><span style="font-weight: 600" v-if="$root.isDesktop"> منتشر شده </span></div>
 						</button>
 					</div>
 				</template>
@@ -79,7 +79,7 @@
 					<strong>
 						{{ page.slug }}
 					</strong>
-					<span class="mr-1"> دنبال می‌کند </span>
+					<span class="ms-1"> دنبال می‌کند </span>
 				</div>
 				<div class="people-suggestion-card-body card-body">
 					<people-suggestion v-for="page in pages" :page="page" :key="page.id"></people-suggestion>

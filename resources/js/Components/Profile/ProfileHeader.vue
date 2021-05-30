@@ -11,7 +11,7 @@
 				<span class="name d-flex align-items-center">
 					<strong class="name">
 						{{ page.name }}
-						<i v-if="page.user.is_verified === 1" class="verificationcheck mr-1 font-20">check_circle</i>
+						<i v-if="page.user.is_verified === 1" class="verificationcheck ms-1 font-20">check_circle</i>
 					</strong>
 				</span>
 				<small class="short_bio">{{ page.short_bio }}</small>

@@ -13,26 +13,26 @@
 			<div class="settings-card-body">
 				<div class="setting-action">
 					<div class="name">
-						<i class="material-icons-outlined ml-2">account_circle</i>
+						<i class="material-icons-outlined me-2">account_circle</i>
 						<span>نام کاربری</span>
 					</div>
 
 					<div class="d-flex align-items-center">
 						<div class="content">
 							<div class="badge-bg-container clickable" v-clipboard="$APP_URL + '/' + $store.state.user.username">
-								<div class="ml-2 d-flex align-items-center" style="direction: ltr">
+								<div class="me-2 d-flex align-items-center" style="direction: ltr">
 									<span class="text-grey">
 										{{ $root.isDesktop ? `${websiteUrl}/` : "" }} <span class="text-dark">{{ $store.state.user.username }}</span>
 									</span>
 								</div>
 							</div>
 						</div>
-						<i class="btn setting-btn material-icons-outlined mr-3" @click="showUsernameModal = true">edit</i>
+						<i class="btn setting-btn material-icons-outlined ms-3" @click="showUsernameModal = true">edit</i>
 					</div>
 				</div>
 				<div class="setting-action">
 					<div class="name">
-						<i class="material-icons-outlined ml-2">perm_phone_msg</i>
+						<i class="material-icons-outlined me-2">perm_phone_msg</i>
 						<span>تلفن همراه</span>
 					</div>
 
@@ -40,52 +40,52 @@
 						<div class="content">
 							<span class="badge-bg-container">{{ phone }}</span>
 						</div>
-						<i class="btn setting-btn material-icons-outlined mr-3" @click="showPhoneModal = true">edit</i>
+						<i class="btn setting-btn material-icons-outlined ms-3" @click="showPhoneModal = true">edit</i>
 					</div>
 				</div>
 				<!-- <div class="setting-action">
 					<div class="name">
-						<i class="material-icons-outlined ml-2">email</i>
+						<i class="material-icons-outlined me-2">email</i>
 						<span>پست الکترونیک</span>
 					</div>
 					<div class="d-flex align-items-center">
 						<div class="content">
 							<span class="badge-bg-container">{{ Boolean(email) ? email : "ایمیلی ثبت نشده" }}</span>
 						</div>
-						<i class="btn setting-btn material-icons-outlined mr-3" @click="showEmailModal = true">edit</i>
+						<i class="btn setting-btn material-icons-outlined ms-3" @click="showEmailModal = true">edit</i>
 					</div>
 				</div> -->
 				<div class="setting-action">
 					<div class="name">
-						<i class="material-icons-outlined ml-2">vpn_key</i>
+						<i class="material-icons-outlined me-2">vpn_key</i>
 						<span>رمز عبور</span>
 					</div>
 					<div class="d-flex align-items-center">
-						<i class="btn setting-btn material-icons-outlined mr-3" @click="showPasswordMdal = true">edit</i>
+						<i class="btn setting-btn material-icons-outlined ms-3" @click="showPasswordMdal = true">edit</i>
 					</div>
 				</div>
 				<div class="setting-action">
 					<div class="name">
-						<i class="material-icons-outlined ml-2">devices</i>
+						<i class="material-icons-outlined me-2">devices</i>
 						<span>دستگاه‌های متصل</span>
 					</div>
 					<div class="d-flex align-items-center">
 						<div class="content">
 							<span class="badge-bg-container" v-if="Boolean(active_sessions)">{{ active_sessions }}</span>
 						</div>
-						<i class="btn setting-btn material-icons-outlined mr-3" @click="showActiveSessions = true">keyboard_arrow_left</i>
+						<i class="btn setting-btn material-icons-outlined ms-3" @click="showActiveSessions = true">keyboard_arrow_left</i>
 					</div>
 				</div>
 				<div class="setting-action">
 					<div class="name">
-						<i class="material-icons-outlined ml-2">privacy_tip</i>
+						<i class="material-icons-outlined me-2">privacy_tip</i>
 						<span>تایید 2 مرحله‌ای</span>
 					</div>
 					<div class="d-flex align-items-center">
 						<div class="content">
 							<span class="font-16 h-auto" style="padding: 12px" :class="{ 'badge-danger': !two_factor_verification, 'badge-success': two_factor_verification }">{{ two_factor_verification ? "فعال" : "غیرفعال" }}</span>
 						</div>
-						<i class="btn setting-btn material-icons-outlined mr-3" @click="showTwoFAModal = true">keyboard_arrow_left</i>
+						<i class="btn setting-btn material-icons-outlined ms-3" @click="showTwoFAModal = true">keyboard_arrow_left</i>
 					</div>
 				</div>
 			</div>
@@ -95,28 +95,28 @@
 			<div class="settings-card-body">
 				<div class="setting-action">
 					<div class="name">
-						<i class="material-icons-outlined ml-2">translate</i>
+						<i class="material-icons-outlined me-2">translate</i>
 						<span>زبان نمایش</span>
 					</div>
 
 					<div class="d-flex align-items-center">
 						<div class="content">
 							<div class="badge-bg-container d-flex justify-content-between w-100">
-								<span class="ml-2"> فارسی (Persian) </span>
+								<span class="me-2"> فارسی (Persian) </span>
 								<img src="/images/iran-flag.png" style="width: 24px" />
 							</div>
 						</div>
-						<i class="btn setting-btn material-icons-outlined mr-3" @click="showLangModal = true">keyboard_arrow_left</i>
+						<i class="btn setting-btn material-icons-outlined ms-3" @click="showLangModal = true">keyboard_arrow_left</i>
 					</div>
 				</div>
 				<div class="setting-action">
 					<div class="name">
-						<i class="material-icons-outlined ml-2">cancel</i>
+						<i class="material-icons-outlined me-2">cancel</i>
 						<span>غیرفعال کردن حساب</span>
 					</div>
 
 					<div class="d-flex align-items-center">
-						<i class="btn setting-btn material-icons-outlined mr-3" @click="showDeactiveModal = true">keyboard_arrow_left</i>
+						<i class="btn setting-btn material-icons-outlined ms-3" @click="showDeactiveModal = true">keyboard_arrow_left</i>
 					</div>
 				</div>
 			</div>

@@ -41,12 +41,12 @@
 				</div>
 			</div>
 			<div class="d-flex post-likes-text text-muted clickable" v-if="post_data.mutual_likes != null && post_data.mutual_likes.length > 0">
-				<span @click="showLikes = true" class="ml-1">پسندیده شده توسط</span>
+				<span @click="showLikes = true" class="me-1">پسندیده شده توسط</span>
 				<wire-link v-if="post_data.mutual_likes[0]" :href="'/' + post_data.mutual_likes[0].page.slug" class="text-dark">
 					<strong class="text-light">{{ post_data.mutual_likes[0].page.name }}</strong>
 				</wire-link>
 				<div v-if="post_data.mutual_likes.length > 1">
-					<span class="mr-1">و</span>
+					<span class="ms-1">و</span>
 					<wire-link v-if="post_data.mutual_likes[1]" :href="'/' + post_data.mutual_likes[0].page.slug" class="text-dark">
 						<strong class="text-light">{{ post_data.mutual_likes[1].page.name }}</strong>
 					</wire-link>

@@ -91,7 +91,7 @@
 								<div dir="rtl" class="card-footer bg-landing-grey d-flex align-items-center">
 									<wire-link :href="article.page.slug + '/' + ''">
 										<div class="d-flex align-items-center">
-											<img width="60" class="rounded-circle ml-2" :src="article.page.profile" />
+											<img width="60" class="rounded-circle me-2" :src="article.page.profile" />
 											<div class="d-flex flex-column">
 												<strong class="text-white"> {{ article.page.name }} <i v-if="article.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 												<small class="text-white">{{ article.page.short_bio }}</small>

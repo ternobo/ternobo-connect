@@ -9,7 +9,7 @@
 					<i class="material-icons">layers</i>
 					دسته‌بندی‌ها
 				</div>
-				<i class="material-icons ml-1" @click="$emit('update:show', false)">check</i>
+				<i class="material-icons me-1" @click="$emit('update:show', false)">check</i>
 			</div>
 		</template>
 

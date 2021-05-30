@@ -7,7 +7,7 @@
 			<div class="card">
 				<div class="card-body">
 					<div class="invite-links-header">
-						<strong class="font-16 ml-1">لینک‌های دعوت شما: </strong>
+						<strong class="font-16 me-1">لینک‌های دعوت شما: </strong>
 						<strong class="font-14 text-muted"> {{ inviteLinks.length }} عدد</strong>
 					</div>
 					<div class="invite-links">

@@ -3,7 +3,7 @@
 		<div v-if="showDonate">
 			<div class="d-flex justify-content-between donate-modal-header">
 				<div class="d-flex align-items-center">
-					<lazy-image :src="user.profile" class="profile-xsm mb-0 ml-2" imgClass="profile-xsm" />
+					<lazy-image :src="user.profile" class="profile-xsm mb-0 me-2" imgClass="profile-xsm" />
 					<strong>{{ user.name }}</strong>
 				</div>
 				<div>
@@ -32,7 +32,7 @@
 					<div class="donate-amount-badge" :class="{ active: amount == 20000 }" @click="amount = 20000">20,000 تومان</div>
 				</div>
 				<div class="d-flex align-items-center pt-3 mt-3">
-					<div class="donate-payanonymouse ml-3">
+					<div class="donate-payanonymouse me-3">
 						<checkbox v-model="anonymous" class="text-superlight m-0 d-flex light">حمایت به صورت ناشناس</checkbox>
 					</div>
 					<loading-button :loading="loading" @click.native="pay" :disabled="payAmount < 1000 || loading" class="btn btn-primary" style="width: 196px">پرداخت</loading-button>

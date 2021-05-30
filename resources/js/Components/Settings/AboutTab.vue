@@ -8,31 +8,31 @@
 			<div class="settings-card-body">
 				<div class="setting-action">
 					<div class="name">
-						<i class="material-icons-outlined ml-2">gavel</i>
+						<i class="material-icons-outlined me-2">gavel</i>
 						<span>قوانین و مقررات</span>
 					</div>
-					<i class="btn setting-btn material-icons-outlined mr-3" @click="showLawsModal = true">keyboard_arrow_left</i>
+					<i class="btn setting-btn material-icons-outlined ms-3" @click="showLawsModal = true">keyboard_arrow_left</i>
 				</div>
 				<div class="setting-action">
 					<div class="name">
-						<i class="material-icons-outlined ml-2">build_circle</i>
+						<i class="material-icons-outlined me-2">build_circle</i>
 						<span>کوکی‌ها</span>
 					</div>
-					<i class="btn setting-btn material-icons-outlined mr-3" @click="showCookiesModal = true">keyboard_arrow_left</i>
+					<i class="btn setting-btn material-icons-outlined ms-3" @click="showCookiesModal = true">keyboard_arrow_left</i>
 				</div>
 				<!-- <div class="setting-action">
 					<div class="name">
-						<i class="material-icons-outlined ml-2">privacy_tip</i>
+						<i class="material-icons-outlined me-2">privacy_tip</i>
 						<span>سیاست صیانت از حریم خصوصی</span>
 					</div>
-					<i class="btn setting-btn material-icons-outlined mr-3">keyboard_arrow_left</i>
+					<i class="btn setting-btn material-icons-outlined ms-3">keyboard_arrow_left</i>
 				</div>
 				<div class="setting-action">
 					<div class="name">
-						<i class="material-icons-outlined ml-2">category</i>
+						<i class="material-icons-outlined me-2">category</i>
 						<span>شرایط خدمات</span>
 					</div>
-					<i class="btn setting-btn material-icons-outlined mr-3">keyboard_arrow_left</i>
+					<i class="btn setting-btn material-icons-outlined ms-3">keyboard_arrow_left</i>
 				</div> -->
 			</div>
 		</div>

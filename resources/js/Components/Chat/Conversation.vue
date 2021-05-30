@@ -4,7 +4,7 @@
 		<send-file-modal v-if="selectedFile != null" :file="selectedFile" @send="sendMessage" @canceled="selectedFile = null" :caption.sync="textCaption" :show.sync="showFileModal"></send-file-modal>
 		<div class="conversation-header" v-if="!hideHeader">
 			<div class="pageinfo clickable" @click="showMedia = true">
-				<lazy-image :src="image" class="profile-sm mb-0 ml-2" img-class="profile-sm" />
+				<lazy-image :src="image" class="profile-sm mb-0 me-2" img-class="profile-sm" />
 				<div class="d-flex flex-column">
 					<strong class="">{{ title }} <i class="verificationcheck" v-if="isVerified">check_circle</i></strong>
 					<span class="text-action font-12" v-if="typing">درحال تایپ</span>
@@ -38,7 +38,7 @@
 					</div>
 				</div>
 				<div class="d-flex align-items-center justify-content-center flex-column w-100 h-100" style="min-height: 360px" v-else-if="messages.length < 1">
-					<i class="material-icons-outlined text-superlight font-32 ml-2">sentiment_dissatisfied</i>
+					<i class="material-icons-outlined text-superlight font-32 me-2">sentiment_dissatisfied</i>
 					<span class="text-superlight font-16 no-chat-selected">گفتگویی صورت نگرفته</span>
 				</div>
 				<div v-else class="messages-list" ref="messagesList">

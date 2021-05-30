@@ -6,7 +6,7 @@
 					{{ languageVal.name }}
 				</span>
 
-				<div class="mr-4 badge-blue">
+				<div class="ms-4 badge-blue">
 					{{ languageVal.level.label }}
 				</div>
 			</div>

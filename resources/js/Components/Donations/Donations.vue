@@ -23,7 +23,7 @@
 
 				<tselect
 					style="width: 171px"
-					class="tselect-filter tselect-lg mr-3"
+					class="tselect-filter tselect-lg ms-3"
 					dir="rtl"
 					:items="[
 						{ name: 'جدید‌ترین‌ها', value: 'desc' },

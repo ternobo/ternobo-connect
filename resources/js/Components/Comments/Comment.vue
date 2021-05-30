@@ -61,12 +61,12 @@
 		<div class="w-100 d-flex align-content-center justify-content-between pt-2">
 			<div>
 				<div @click="showLikes = true" class="d-flex post-likes-text text-muted clickable" v-if="comment.mutual_likes != null && comment.mutual_likes.length > 0">
-					<span class="ml-1">پسندیده شده توسط</span>
+					<span class="me-1">پسندیده شده توسط</span>
 					<wire-link v-if="comment.mutual_likes[0]" :href="'/' + comment.mutual_likes[0].page.slug" class="text-dark">
 						<strong class="text-light">{{ comment.mutual_likes[0].page.name }}</strong>
 					</wire-link>
 					<div v-if="comment.mutual_likes.length > 1">
-						<span class="mr-1">و</span>
+						<span class="ms-1">و</span>
 						<wire-link v-if="comment.mutual_likes[1]" :href="'/' + comment.mutual_likes[0].page.slug" class="text-dark">
 							<strong class="text-light">{{ comment.mutual_likes[1].page.name }}</strong>
 						</wire-link>
@@ -75,7 +75,7 @@
 				</div>
 			</div>
 			<div class="actions">
-				<small class="clickable ml-1" @click="loadReplies(false)" v-if="replies_count > 0 && replyTo == undefined">
+				<small class="clickable me-1" @click="loadReplies(false)" v-if="replies_count > 0 && replyTo == undefined">
 					<strong :class="{ 'text-muted': !showReplies, 'text-dark': showReplies }"> {{ replies_count }} پاسخ </strong>
 				</small>
 				<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies || !showNewComment, 'material-icons text-dark': showReplies && showNewComment }" class="hover-dark clickable"> insert_comment </i>

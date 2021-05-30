@@ -11,7 +11,7 @@
 						<div class="mx-1 col-lg-5 p-0">
 							<tselect :items="showTypesItems" :showNewItem="false" v-model="showType" direction="rtl"></tselect>
 						</div>
-						<div class="ml-1 p-0 col-lg-7">
+						<div class="me-1 p-0 col-lg-7">
 							<tselect v-on:new-item="newCategory" :items="categories" value-option="name" :showNewItem="true" v-model="category" direction="rtl"> <i class="material-icons-outlined">layers</i> دسته‌بندی </tselect>
 						</div>
 					</div>
@@ -21,7 +21,7 @@
 						<textarea-autosize :min-height="201" v-model="text" rows="8" placeholder="اگر در خویش میل نوشتن سراغ کردی باید سه چیز در تو باشد. شناختی، هنری و سحری (جبران خلیل جبران)" class="w-100 autoresize autodirection" maxlength="2500"></textarea-autosize>
 						<div class="character-counter">
 							<span class="counter tex-dark">{{ leftCharacter }}</span>
-							<div class="progress ml-1 mb-0" style="width: 100px; height: 5px">
+							<div class="progress me-1 mb-0" style="width: 100px; height: 5px">
 								<div class="progress-bar" role="progressbar" :style="{ width: txtlen }" aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
 						</div>

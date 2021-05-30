@@ -3,11 +3,11 @@
 		<div class="sidebar-right sticky-settings">
 			<div class="card settings-card sticky-aside">
 				<div class="settings-item" :class="{ active: tab == 'donations' }" @click="tab = 'donations'">
-					<i class="material-icons-outlined ml-2">savings</i>
+					<i class="material-icons-outlined me-2">savings</i>
 					<span>حمایت‌ها</span>
 				</div>
 				<div class="settings-item" :class="{ active: tab == 'settings' }" @click="tab = 'settings'">
-					<i class="material-icons-outlined ml-2"> credit_card </i>
+					<i class="material-icons-outlined me-2"> credit_card </i>
 					<span>درگاه پرداخت</span>
 				</div>
 			</div>

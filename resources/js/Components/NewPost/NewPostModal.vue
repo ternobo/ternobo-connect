@@ -13,7 +13,7 @@
 						<div class="categoryandtype">
 							<div class="can-tip-post-check clickable" @click="canDonate = !canDonate">
 								<div>
-									<i class="material-icons-outlined font-20 ml-1">savings</i>
+									<i class="material-icons-outlined font-20 me-1">savings</i>
 									حمایت مالی
 								</div>
 								<loading-spinner v-if="loadingCanDonate" style="height: 12px; width: 12px; border-width: 1px"></loading-spinner>

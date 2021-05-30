@@ -7,7 +7,7 @@
 				<span class="text-action font-demibold"> حساب شما تا زمانی که مجدد وارد نشده‌اید غیرفعال خواهد بود. </span>
 			</div>
 			<div class="d-flex align-items-end justify-content-between w-100 px-2 mb-2 mt-4">
-				<material-text-field class="ml-3" input-class="w-100" v-model="password" type="password" name="current_password" placeholder="رمزعبور" />
+				<material-text-field class="me-3" input-class="w-100" v-model="password" type="password" name="current_password" placeholder="رمزعبور" />
 				<loading-button :loading="loading" style="height: 48px" :disabled="!(this.password != null && this.password.length > 0)" @click.native="deactive" class="btn btn-danger font-14">غیرفعال کردن حساب</loading-button>
 			</div>
 		</div>

@@ -21,9 +21,9 @@
 					</wire-link>
 				</div>
 				<div class="d-flex align-items-center">
-					<i class="material-icons-outlined ml-2 text-superlight hover-dark clickable" @click="pinReply(true)" v-if="!pinned && replyTo == undefined && shared.is_admin">push_pin</i>
-					<loading-spinner class="ml-2" style="height: 24px; width: 24px" v-else-if="loadingPin && shared.is_admin"></loading-spinner>
-					<div v-else-if="pinned" @click="pinReply(false)" class="text-action pin-icon ml-2 clickable">
+					<i class="material-icons-outlined me-2 text-superlight hover-dark clickable" @click="pinReply(true)" v-if="!pinned && replyTo == undefined && shared.is_admin">push_pin</i>
+					<loading-spinner class="me-2" style="height: 24px; width: 24px" v-else-if="loadingPin && shared.is_admin"></loading-spinner>
+					<div v-else-if="pinned" @click="pinReply(false)" class="text-action pin-icon me-2 clickable">
 						<i class="material-icons-outlined">push_pin</i>
 					</div>
 					<span class="font-10 text-muted">{{ feedbackReply_time }}</span>
@@ -64,12 +64,12 @@
 		<div class="w-100 d-flex align-content-center justify-content-between pt-2">
 			<div>
 				<div class="d-flex post-likes-text text-muted clickable" v-if="feedbackReply.mutual_likes != null && feedbackReply.mutual_likes.length > 0">
-					<span class="ml-1">پسندیده شده توسط</span>
+					<span class="me-1">پسندیده شده توسط</span>
 					<wire-link v-if="feedbackReply.mutual_likes[0]" :href="'/' + feedbackReply.mutual_likes[0].page.slug" class="text-dark">
 						<strong class="text-light">{{ feedbackReply.mutual_likes[0].page.name }}</strong>
 					</wire-link>
 					<div v-if="feedbackReply.mutual_likes.length > 1">
-						<span class="mr-1">و</span>
+						<span class="ms-1">و</span>
 						<wire-link v-if="feedbackReply.mutual_likes[1]" :href="'/' + feedbackReply.mutual_likes[0].page.slug" class="text-dark">
 							<strong class="text-light">{{ feedbackReply.mutual_likes[1].page.name }}</strong>
 						</wire-link>
@@ -78,8 +78,8 @@
 				</div>
 			</div>
 			<div class="actions">
-				<strong class="text-light ml-2 clickable" v-if="feedbackReply.replies_count > 0" @click="loadReplies">{{ feedbackReply.replies_count }} پاسخ</strong>
-				<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies, 'material-icons': showReplies }" class="hover-dark ml-2 clickable"> insert_comment </i>
+				<strong class="text-light me-2 clickable" v-if="feedbackReply.replies_count > 0" @click="loadReplies">{{ feedbackReply.replies_count }} پاسخ</strong>
+				<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies, 'material-icons': showReplies }" class="hover-dark me-2 clickable"> insert_comment </i>
 				<i @click="likeComment" class="hover-danger clickable material-icons" v-if="feedbackReply.user.id != $store.state.user.id" :class="{ 'text-danger': liked }">
 					{{ liked ? "favorite" : "favorite_border" }}
 				</i>

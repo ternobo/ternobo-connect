@@ -14,12 +14,15 @@ const mix = require('laravel-mix');
 mix.babelConfig({
     plugins: ['@babel/plugin-syntax-dynamic-import'],
 });
+
 if (!mix.inProduction()) {
     mix.sourceMaps();
 }
+
 mix.webpackConfig(require('./webpack.config'));
 mix.babelConfig({ presets: ['@vue/babel-preset-jsx'] })
 mix.js('resources/js/app.js', 'public/js').vue();
 mix.sass("resources/sass/application/app.scss", "public/css");
+mix.sass("resources/sass/application/main.scss", "public/css");
 mix.extract(['vue', 'axios']);
 mix.version();

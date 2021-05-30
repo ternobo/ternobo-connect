@@ -2,7 +2,9 @@
 @import "./variables";
 @import '~bootstrap-v4-rtl';
 @import '~bootstrap-vue';
-@import "./utilities.scss";
+@import "../bootstrap/bootstrap-utilities.scss";
+
+$direction: rtl;
 
 :root {
     font-size: 16px;

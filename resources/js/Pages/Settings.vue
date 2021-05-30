@@ -3,11 +3,11 @@
 		<div class="sidebar-right sticky-settings">
 			<div class="card settings-card p-0">
 				<div class="settings-item" :class="{ active: tab == 'account' }" @click="tab = 'account'">
-					<i class="material-icons-outlined ml-2">account_circle</i>
+					<i class="material-icons-outlined me-2">account_circle</i>
 					<span>حساب کاربری</span>
 				</div>
 				<div class="settings-item" :class="{ active: tab == 'about' }" @click="tab = 'about'">
-					<i class="material-icons-outlined ml-2">
+					<i class="material-icons-outlined me-2">
 						<img src="/images/logo-grey.svg" class="thelogo" style="width: 24px" />
 					</i>
 					<span>درباره ترنوبو</span>

@@ -17,7 +17,7 @@
 				<span>{{ date }}</span>
 			</div>
 			<wire-link :href="`/posts/${tip.post_id}`" class="cliackable text-grey">
-				<i class="material-icons font-20 ml-2">launch</i>
+				<i class="material-icons font-20 me-2">launch</i>
 				<span class="clickable">مشاهده محتوا</span>
 			</wire-link>
 			<div>

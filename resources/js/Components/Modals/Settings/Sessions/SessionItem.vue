@@ -7,7 +7,7 @@
 			<div class="d-flex flex-column">
 				<strong class="font-14">{{ session.user_agent.platform }}</strong>
 				<div class="text-muted font-12">
-					<span class="ml-1" :class="{ 'text-success': session.isActive }">{{ session.isActive ? "همین دستگاه" : time(session.updated_at) }}</span>
+					<span class="me-1" :class="{ 'text-success': session.isActive }">{{ session.isActive ? "همین دستگاه" : time(session.updated_at) }}</span>
 					<span>{{ session.location }}</span>
 				</div>
 			</div>

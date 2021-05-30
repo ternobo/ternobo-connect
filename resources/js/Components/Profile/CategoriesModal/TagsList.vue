@@ -9,7 +9,7 @@
 					</div>
 				</div>
 				<div class="slideup-title">
-					<i class="material-icons ml-1">layers</i>
+					<i class="material-icons me-1">layers</i>
 					برچسب‌ها
 				</div>
 				<div>

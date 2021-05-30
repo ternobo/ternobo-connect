@@ -27,7 +27,7 @@
 									<div class="d-flex justify-content-center">
 										<div class="d-flex align-items-center">
 											<otp-input input-class="w-100" class="material--sm mx-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" />
-											<i class="material-icons-outlined mr-4" :class="{ 'text-muted': !invalidCode && !completedCode, 'text-danger': invalidCode, 'text-success': !invalidCode }">verified_user</i>
+											<i class="material-icons-outlined ms-4" :class="{ 'text-muted': !invalidCode && !completedCode, 'text-danger': invalidCode, 'text-success': !invalidCode }">verified_user</i>
 										</div>
 									</div>
 								</div>

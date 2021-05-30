@@ -1,6 +1,6 @@
 <template>
 	<div class="feedback-label-container">
-		<div class="feedback-label justify-content-center d-flex align-items-center" :class="[`feedback-color-label ${type}`, { clickable: this.shared.is_admin }]" @click="openChangeType"><slot></slot> <loading-spinner class="mr-1" style="height: 12px; width: 12px" v-if="loading"></loading-spinner></div>
+		<div class="feedback-label justify-content-center d-flex align-items-center" :class="[`feedback-color-label ${type}`, { clickable: this.shared.is_admin }]" @click="openChangeType"><slot></slot> <loading-spinner class="ms-1" style="height: 12px; width: 12px" v-if="loading"></loading-spinner></div>
 		<transition name="slide">
 			<div class="feedback-option-chnage" v-if="showTypeChange">
 				<div v-for="status in feedbackLabels" @click="changeType(status)" :key="`option_item_${status}`" class="feedback-label justify-content-center d-flex" :class="[`feedback-color-label ${status} clickable`]">{{ getTypeText(status) }}</div>

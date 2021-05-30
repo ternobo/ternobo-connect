@@ -3,7 +3,7 @@
 		<div class="py-3">
 			<div class="d-flex justify-content-between align-items-end">
 				<div class="input-group-icon">
-					<i class="material-icons ml-2" v-if="!loading" :class="{ 'text-danger': !valid && !notChanged, 'text-success': valid && !notChanged, 'text-superlight': notChanged }">{{ valid ? "check_circle_outline" : "highlight_off" }}</i>
+					<i class="material-icons me-2" v-if="!loading" :class="{ 'text-danger': !valid && !notChanged, 'text-success': valid && !notChanged, 'text-superlight': notChanged }">{{ valid ? "check_circle_outline" : "highlight_off" }}</i>
 					<material-text-field :no-space="true" placeholder="نام کاربری" v-model="username" :required="true" @blur="checkValidation" :maxlength="30">
 						<loading-spinner style="height: 24px; width: 24px; left: 16px; top: 24%; border-width: 2px" v-if="loading" class="position-absolute"></loading-spinner>
 					</material-text-field>

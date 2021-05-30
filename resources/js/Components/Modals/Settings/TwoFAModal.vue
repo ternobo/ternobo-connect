@@ -13,7 +13,7 @@
 						<strong class="mb-3" v-if="enabled">یک روش تاییده انتخاب کنید</strong>
 						<tselect
 							style="min-width: 250px"
-							class="tselect-lg ml-3"
+							class="tselect-lg me-3"
 							labelOption="label"
 							valueOption="id"
 							dir="rtl"
@@ -75,7 +75,7 @@
 								<span class="font-14">برای کپی کردن کلیک کنید</span>
 
 								<div class="d-flex align-items-center">
-									<i class="material-icons-outlined text-muted hover-dark ml-3 clickable" @click="downloadCodes">get_app</i>
+									<i class="material-icons-outlined text-muted hover-dark me-3 clickable" @click="downloadCodes">get_app</i>
 									<i class="material-icons-outlined text-muted hover-dark clickable" :class="{ rotateAnimation: resetLoading }" @click="resetCodes">loop</i>
 								</div>
 							</div>

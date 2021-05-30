@@ -40,7 +40,7 @@
     <script src="{{ mix('/js/vendor.js') }}" defer></script>
     <script src="{{ mix('/js/app.js') }}" defer></script>
     @if (app()->getLocale() == 'en')
-        <link href="/css/app.ltr.css" rel="stylesheet" />
+        <link href="{{ mix('/css/main.ltr.css') }}" rel="stylesheet" />
     @else
         <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
     @endif

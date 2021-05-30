@@ -42,7 +42,7 @@
 						<strong>توضیحات</strong>
 						<div class="character-counter">
 							<span class="counter tex-dark">{{ leftCharacter }}</span>
-							<div class="progress ml-1 mb-0" style="width: 100px; height: 5px">
+							<div class="progress me-1 mb-0" style="width: 100px; height: 5px">
 								<div class="progress-bar" role="progressbar" :style="{ width: progress }" aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
 						</div>

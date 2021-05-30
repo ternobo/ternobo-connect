@@ -1,11 +1,11 @@
 <template>
-<div class="sidebar-right">
-    <slot></slot>
-</div>
+	<div class="sidebar-start">
+		<slot></slot>
+	</div>
 </template>
 
 <script>
 export default {
-    name: "RightSidebar"
-}
+	name: "RightSidebar",
+};
 </script>

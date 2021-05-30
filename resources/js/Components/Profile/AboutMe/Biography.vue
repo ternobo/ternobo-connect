@@ -5,7 +5,7 @@
 				<h2 class="about-me--card-title">بایوگرافی</h2>
 				<div class="character-counter" v-if="edit">
 					<span class="counter tex-dark">{{ leftCharacter }}</span>
-					<div class="progress ml-1 mb-0" style="width: 100px; height: 5px">
+					<div class="progress me-1 mb-0" style="width: 100px; height: 5px">
 						<div class="progress-bar" role="progressbar" :style="{ width: progress }" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 				</div>
