@@ -1,6 +1,6 @@
 <template>
 	<base-layout>
-		<div class="sidebar-right sticky-settings">
+		<div class="sidebar-start sticky-settings">
 			<div class="card settings-card sticky-aside">
 				<div class="settings-item" :class="{ active: tab == 'donations' }" @click="tab = 'donations'">
 					<i class="material-icons-outlined me-2">savings</i>

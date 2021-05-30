@@ -40,7 +40,7 @@
 					<v-select
 						class="datepicker-list"
 						:placeholder="'جنسیت'"
-						dir="rtl"
+						:dir="appDirection"
 						v-model="gender"
 						:options="[
 							{ label: 'زن', code: '1' },

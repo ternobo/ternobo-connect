@@ -95,6 +95,9 @@
     width: 32px;
     padding: 4px;
     border-radius: 12px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     i {
         transition: 0.3s transform;
@@ -188,6 +191,12 @@
     }
 
     &::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
         -webkit-text-fill-color: $text-color;
         text-fill-color: $text-color;
     }

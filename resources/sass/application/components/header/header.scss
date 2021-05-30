@@ -147,6 +147,14 @@
     }
 }
 
+.beta-badege {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 24px;
+    font-size: 12px;
+}
+
 .usertoolbar:hover .usermenu {
     display: block;
 }
@@ -176,7 +184,7 @@
         line-height: 1;
         font-weight: 600;
         color: $grey;
-        margin: 0 12px;
+        margin: 0 16px;
 
         display: flex;
         align-items: center;

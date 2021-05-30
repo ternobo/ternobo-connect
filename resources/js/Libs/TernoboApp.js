@@ -213,6 +213,7 @@ TernoboApp.install = function (Vue, options) {
     Vue.mixin({
         data() {
             return {
+                appDirection: window.document.body.dir,
                 skeletonOptions: {
                     coverColor: "#C8C8C8",
                     profileColor: "#E0E0E0",

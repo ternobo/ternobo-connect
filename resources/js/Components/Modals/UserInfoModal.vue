@@ -21,7 +21,7 @@
 						{ label: 'مرد', code: '2' },
 					]"
 					v-model="gender"
-					dir="rtl"
+					:dir="appDirection"
 				>
 					جنسیت
 				</tselect>

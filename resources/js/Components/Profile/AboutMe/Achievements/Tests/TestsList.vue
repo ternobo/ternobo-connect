@@ -3,7 +3,7 @@
 		<div class="achievement-header">
 			<div class="achievement-title" @click="toggleDetailed">
 				<h2 class="mb-0 about-me--card--subtitle">آزمون‌ها</h2>
-				<div class="mr-2 badge-light">{{ tests.length }}</div>
+				<div class="ms-2 badge-light">{{ tests.length }}</div>
 			</div>
 			<i class="material-icons open-achievements" v-if="!edit" :class="{ active: open }" @click="toggleDetailed">keyboard_arrow_down</i>
 		</div>

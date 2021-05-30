@@ -88,7 +88,7 @@
 										{{ truncate(extractContent(article.text), 25) }}
 									</p>
 								</div>
-								<div dir="rtl" class="card-footer bg-landing-grey d-flex align-items-center">
+								<div :dir="appDirection" class="card-footer bg-landing-grey d-flex align-items-center">
 									<wire-link :href="article.page.slug + '/' + ''">
 										<div class="d-flex align-items-center">
 											<img width="60" class="rounded-circle me-2" :src="article.page.profile" />

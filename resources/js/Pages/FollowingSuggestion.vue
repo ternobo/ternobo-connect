@@ -4,7 +4,7 @@
 			<div class="register-header">
 				<div class="d-flex align-items-center">
 					<loading-button :loading="loading" :disabled="followings < 3" class="btn btn-primary" @click.native="next">بعدی</loading-button>
-					<div class="mr-2 followed-peoplenum">{{ followings }}/3</div>
+					<div class="ms-2 followed-peoplenum">{{ followings }}/3</div>
 				</div>
 				<img src="/images/logo.svg" />
 			</div>

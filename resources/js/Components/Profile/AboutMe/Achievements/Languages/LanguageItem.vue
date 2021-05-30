@@ -27,7 +27,7 @@
 				</div>
 				<div>
 					<tselect
-						dir="rtl"
+						:dir="appDirection"
 						:items="[
 							{
 								label: 'مبتدی',

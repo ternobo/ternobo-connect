@@ -1,8 +1,8 @@
 <template>
 	<div class="date-picker-container">
-		<tselect dir="rtl" :disabled="disabled" v-if="!hideMonth" valueOption="label" labelOption="label" v-model="month" :items="monthsList">ماه</tselect>
-		<tselect dir="rtl" :disabled="disabled" v-if="!hideYear" v-model="year" :noItem="noYearPlaceholder" :items="years">سال</tselect>
-		<tselect dir="rtl" v-if="showDays" valueOption="label" labelOption="label" v-model="day" :items="daysList" no-item="ماه انتخاب نشده"> روز </tselect>
+		<tselect :dir="appDirection" :disabled="disabled" v-if="!hideMonth" valueOption="label" labelOption="label" v-model="month" :items="monthsList">ماه</tselect>
+		<tselect :dir="appDirection" :disabled="disabled" v-if="!hideYear" v-model="year" :noItem="noYearPlaceholder" :items="years">سال</tselect>
+		<tselect :dir="appDirection" v-if="showDays" valueOption="label" labelOption="label" v-model="day" :items="daysList" no-item="ماه انتخاب نشده"> روز </tselect>
 	</div>
 </template>
 

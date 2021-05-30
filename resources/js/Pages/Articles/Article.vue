@@ -14,7 +14,7 @@
 				<h1 class="article-title">{{ post.title }}</h1>
 				<span class="article-time">{{ post_time }}</span>
 			</div>
-			<div class="article-text ck ck-content" dir="rtl" style="word-break: break-word; height: auto" ref="articleText" v-html="post.text"></div>
+			<div class="article-text ck ck-content" :dir="appDirection" style="word-break: break-word; height: auto" ref="articleText" v-html="post.text"></div>
 			<div class="tagandcate">
 				<div class="tags">
 					<wire-link v-for="(tag, index) in post.tags" :key="tag + '_POST_TAG_' + post.id + '_' + index" class="tag-item" :href="'/tags/' + tag">

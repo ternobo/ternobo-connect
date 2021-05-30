@@ -4,7 +4,7 @@
 		<div class="sticky-aside d-flex align-items-center flex-column">
 			<langdropdown
 				class="mb-3"
-				dir="rtl"
+				:dir="appDirection"
 				:value="{ label: 'فارسی', value: 'fa', icon: '/images/iran-flag.png' }"
 				:items="[
 					{ label: 'فارسی', value: 'fa', icon: '/images/iran-flag.png' },

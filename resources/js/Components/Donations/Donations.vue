@@ -7,7 +7,7 @@
 				<tselect
 					style="width: 171px"
 					class="tselect-filter tselect-lg"
-					dir="rtl"
+					:dir="appDirection"
 					:items="[
 						{ name: 'همه', value: 'all' },
 						{ name: 'از طرف شما', value: 'my' },
@@ -24,7 +24,7 @@
 				<tselect
 					style="width: 171px"
 					class="tselect-filter tselect-lg ms-3"
-					dir="rtl"
+					:dir="appDirection"
 					:items="[
 						{ name: 'جدید‌ترین‌ها', value: 'desc' },
 						{ name: 'قدیمی‌ترین‌ها', value: 'asc' },

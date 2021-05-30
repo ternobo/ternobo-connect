@@ -257,7 +257,11 @@
 
 .new-post-slider {
     display: flex;
-    flex-direction: row-reverse;
+
+    @if $direction=='rtl' {
+        flex-direction: row-reverse;
+    }
+
     transition: 0.3s all;
 
     min-width: 100%;

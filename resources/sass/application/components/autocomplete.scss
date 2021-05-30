@@ -3,10 +3,21 @@
 
     input {
         z-index: 2;
+
+        @if $direction=="ltr" {
+            padding-right: 40px !important;
+        }
     }
 
     >i {
-        left: 16px;
+
+        @if $direction=="ltr" {
+            right: 16px;
+        }
+
+        @else {
+            left: 16px;
+        }
     }
 
     ul {

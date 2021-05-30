@@ -376,13 +376,16 @@
             .buttons {
                 display: flex;
                 align-items: center;
+                margin: 0 -8px;
+
+                @if $direction==ltr {
+                    flex-direction: row-reverse;
+                }
 
                 i {
-                    margin-left: 16px;
+                    margin: 0 8px;
 
-                    @media screen and(max-width:$sm-size) {
-                        margin-left: 8px;
-                    }
+
 
                     &:not(.disabled) {
                         color: $grey;
@@ -396,10 +399,6 @@
                         transition: 0.3s all;
                     }
 
-                }
-
-                i:last-child {
-                    margin-left: 0;
                 }
             }
         }

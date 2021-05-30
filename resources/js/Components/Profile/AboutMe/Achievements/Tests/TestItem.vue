@@ -37,7 +37,7 @@
 					<MaterialTextField v-model="val.name" maxlength="52" :required="true" class="material--sm" placeholder="عنوان"></MaterialTextField>
 				</div>
 				<div>
-					<tselect dir="rtl" v-model="val.skill" maxlength="52" :items="page.skills" style="min-width: 234px">مرتبط با</tselect>
+					<tselect :dir="appDirection" v-model="val.skill" maxlength="52" :items="page.skills" style="min-width: 234px">مرتبط با</tselect>
 				</div>
 				<div v-if="showMore">
 					<strong>تاریخ آزمون</strong>

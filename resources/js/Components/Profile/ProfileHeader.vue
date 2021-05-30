@@ -42,7 +42,7 @@
 		<div class="profile-header-actions" v-if="!canEdit || !$root.isDesktop">
 			<div>
 				<a class="d-flex align-items-center clickable" @click="showFriends = true" v-if="mutuals != null && mutuals.list.length > 0">
-					<div class="d-flex mr-2">
+					<div class="d-flex ms-2">
 						<div class="profile-photos">
 							<img :src="mutuals.list[0].profile" />
 							<img v-if="mutuals.list.length > 1" :src="mutuals.list[1].profile" />
@@ -51,7 +51,7 @@
 
 					<div class="mutual-friends-container">
 						<strong class="text-dark font-demibold" :class="{ 'font-12': !$root.isDesktop }">{{ mutuals.count }} دوست مشترک</strong>
-						<span class="text-grey mr-2 font-12">{{ mutuals.text }}</span>
+						<span class="text-grey ms-2 font-12">{{ mutuals.text }}</span>
 					</div>
 				</a>
 			</div>

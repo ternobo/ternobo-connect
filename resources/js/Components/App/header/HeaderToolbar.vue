@@ -25,13 +25,13 @@
 			</div>
 		</div>
 
-		<div id="usermenu-show" v-if="$store.state.user != null" class="usertoolbar" @mouseenter="showUserMenu" @mouseleave="menuVisible = false">
+		<div ref="usermenushow" v-if="$store.state.user != null" class="usertoolbar" @mouseenter="showUserMenu" @mouseleave="menuVisible = false">
 			<div class="usertoolbar-container">
 				<span dir="ltr" class="user-username">{{ $store.state.user.username }} <i v-if="$store.state.user.is_verified === 1" class="verificationcheck">check_circle</i> </span>
 				<img v-bind:src="$store.state.user.profile" class="profile-xxsm" />
 			</div>
 			<transition name="fade" mode="out-in">
-				<user-menu v-bind:style="{ left: menuLeft }" v-show="menuVisible"></user-menu>
+				<user-menu :style="usermenuStyle" v-show="menuVisible"></user-menu>
 			</transition>
 		</div>
 	</div>
@@ -48,10 +48,10 @@ export default {
 	data() {
 		return {
 			menuVisible: false,
-			menuLeft: 0,
 
 			showLogin: false,
 			showSignup: false,
+			usermenuStyle: {},
 		};
 	},
 	methods: {
@@ -63,10 +63,20 @@ export default {
 				this.$store.state.ternoboWireApp.visit("/feed");
 			}
 		},
-		showUserMenu(e) {
+		showUserMenu() {
+			if (this.appDirection == "rtl") {
+				const left = this.$refs.usermenushow.getBoundingClientRect().x;
+				this.usermenuStyle = {
+					left: `${left}px`,
+				};
+			} else {
+				const right = window.innerWidth - this.$refs.usermenushow.getBoundingClientRect().x - (this.$refs.usermenushow.getBoundingClientRect().width + 16);
+				this.usermenuStyle = {
+					right: `${right}px`,
+				};
+			}
+
 			this.menuVisible = true;
-			const left = document.getElementById("usermenu-show").getBoundingClientRect().x;
-			this.menuLeft = left + "px";
 		},
 	},
 	components: {

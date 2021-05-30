@@ -16,7 +16,7 @@
 							class="tselect-lg me-3"
 							labelOption="label"
 							valueOption="id"
-							dir="rtl"
+							:dir="appDirection"
 							v-model="type"
 							:disabled="!enabled"
 							:items="[

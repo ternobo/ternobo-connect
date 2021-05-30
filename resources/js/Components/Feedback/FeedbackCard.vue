@@ -42,11 +42,11 @@
 				</div>
 				<wire-link class="comments-viewer" v-if="showComment" :href="'/feedbacks/' + feedback.id">
 					<span class="text-grey" v-if="feedback.replies.length > 0">{{ feedback.replies.length }} نظر </span>
-					<i class="material-icons-outlined text-grey mr-2">comment</i>
+					<i class="material-icons-outlined text-grey ms-2">comment</i>
 				</wire-link>
 				<div class="comments-viewer" v-else :href="'/feedbacks/' + feedback.id">
 					<span class="text-grey" v-if="feedback.replies.length > 0">{{ feedback.replies.length }} نظر </span>
-					<i class="material-icons-outlined text-grey mr-2">comment</i>
+					<i class="material-icons-outlined text-grey ms-2">comment</i>
 				</div>
 			</div>
 			<pinned-reply-card v-if="feedback.pinned_reply != null && showPinned" :feedbackReply="feedback.pinned_reply"></pinned-reply-card>

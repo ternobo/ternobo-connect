@@ -160,7 +160,7 @@
 .delete-move-actions {
     border-radius: 16px;
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     color: $grey;
     background: $fixed-elements;
     padding: 8px 12px;

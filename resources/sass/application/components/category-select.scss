@@ -26,7 +26,14 @@
     }
 }
 
+@if($direction==ltr) {
+    .category-select-modal {
+        flex-direction: row;
+    }
+}
+
 [dir=rtl] .category-select-modal {
+
     .close {
         transform: rotate(180deg)
     }

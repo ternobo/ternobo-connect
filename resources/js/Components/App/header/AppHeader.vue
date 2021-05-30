@@ -4,15 +4,18 @@
 		<div class="container">
 			<div class="d-flex align-items-center w-100">
 				<wire-link href="/feed" class="logodesktop" v-if="$root.isDesktop">
-					<img src="/images/farsi-logo.svg" class="w-100" />
+					<img :src="shared.direction == 'rtl' ? '/images/farsi-logo.svg' : '/images/logo-en-dark.svg'" class="w-100" />
 				</wire-link>
 				<wire-link href="/feed" class="logo-sm" v-if="!$root.isDesktop">
-					<img src="/images/logo.svg" class="mr-2" />
+					<img src="/images/logo.svg" class="ms-2" />
 				</wire-link>
 
 				<form method="get" action="/search" ref="searchfield" class="searchfield d-flex">
 					<auto-complete class="search-field w-100" icon="search" v-model="searchVal" @search="submitsearch" required type="text" :suggestionPosition="17" name="q" placeholder="هر چیزی که در جستن آنی، آنی" />
-					<div class="text-muted align-items-center justify-content-center d-lg-flex d-none nowrap font-12" style="padding-right: 24px !important"><img src="/images/beta.svg" width="36" class="verical-middle" /> <span class="mr-2 text-nowrap">۰.۱ V</span></div>
+					<div class="beta-badege">
+						<span class="me-2 text-nowrap">0.1 V</span>
+						<img src="/images/beta.svg" width="36" class="verical-middle" />
+					</div>
 				</form>
 				<div v-if="!$root.isDesktop">
 					<i class="material-icons hover-dark clickable" @click="showOptions = true">more_vert</i>
@@ -30,6 +33,7 @@ import Autocomplete from "@trevoreyre/autocomplete-vue";
 import HeaderToolbar from "./HeaderToolbar";
 import UserOptionModal from "../../Modals/UserOptionModal.vue";
 import AutoComplete from "../../inputs/AutoComplete.vue";
+import { mapState } from "vuex";
 export default {
 	created() {
 		this.searchVal = this.$store.state.search;
@@ -39,6 +43,9 @@ export default {
 			searchVal: "",
 			showOptions: false,
 		};
+	},
+	computed: {
+		...mapState(["shared"]),
 	},
 	methods: {
 		submitsearch() {

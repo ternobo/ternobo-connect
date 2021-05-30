@@ -1,6 +1,6 @@
 <template>
 	<base-layout>
-		<div class="sidebar-right sticky-settings">
+		<div class="sidebar-start sticky-settings">
 			<div class="card settings-card p-0">
 				<div class="settings-item" :class="{ active: tab == 'account' }" @click="tab = 'account'">
 					<i class="material-icons-outlined me-2">account_circle</i>

@@ -39,7 +39,7 @@
 					<MaterialTextField v-model="val.name" maxlength="52" :required="true" class="material--sm" placeholder="نام اختراع"></MaterialTextField>
 				</div>
 				<div>
-					<tselect :items="countries" :required="true" maxlength="52" dir="rtl" v-model="val.organization" style="min-width: 234px">اداره ثبت اختراع</tselect>
+					<tselect :items="countries" :required="true" maxlength="52" :dir="appDirection" v-model="val.organization" style="min-width: 234px">اداره ثبت اختراع</tselect>
 				</div>
 				<div>
 					<MaterialTextField v-model="val.registerCode" maxlength="52" :required="true" class="material--sm" placeholder="شماره ثبت"></MaterialTextField>
@@ -49,7 +49,7 @@
 				</div>
 				<div class="col-md-12" v-if="showMore">
 					<tselect
-						dir="rtl"
+						:dir="appDirection"
 						style="min-width: 260px"
 						v-model="val.status"
 						labelOption="label"

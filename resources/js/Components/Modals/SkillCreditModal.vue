@@ -20,7 +20,7 @@
 				class="tselect-lg"
 				labelOption="label"
 				valueOption="value"
-				dir="rtl"
+				:dir="appDirection"
 				v-model="reason"
 				:items="[
 					{

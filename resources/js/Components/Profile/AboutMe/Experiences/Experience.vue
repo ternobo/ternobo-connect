@@ -71,7 +71,7 @@
 						:searchable="false"
 						:placeholder="'نوع اشتغال'"
 						class="datepicker-list w-75"
-						dir="rtl"
+						:dir="appDirection"
 						v-model="val.jobType"
 						:options="[
 							{ label: 'تمام وقت', code: 'Full-Time' },

@@ -3,7 +3,7 @@
 		<div class="add-webiste-container">
 			<div class="flex-container">
 				<material-text-field placeholder="آدرس وب‌سایت" v-model="url" :notValid="invalid" :maxlength="700" class="material--sm w-100" inputClass="w-100"></material-text-field>
-				<tselect dir="rtl" v-model="type" valueOption="name" :items="websiteOptions"> نوع وب‌سایت </tselect>
+				<tselect :dir="appDirection" v-model="type" valueOption="name" :items="websiteOptions"> نوع وب‌سایت </tselect>
 			</div>
 			<div class="mt-2 position-absolute">
 				<small class="text-danger font-16" v-if="!notAdded">این وب‌سایت قبلا افزوده شده</small>

@@ -16,7 +16,7 @@
 							<div class="d-flex align-items-center justify-content-center" v-if="edit">
 								{{ $root.isDesktop ? "ذخیره" : "" }}
 								<i class="material-icons-outlined" v-if="!$root.isDesktop">save</i>
-								<div style="height: 14px; width: 14px; border-width: 2px" v-if="loadingSave" class="mr-2 loadingspinner"></div>
+								<div style="height: 14px; width: 14px; border-width: 2px" v-if="loadingSave" class="ms-2 loadingspinner"></div>
 							</div>
 						</button>
 					</div>

@@ -6,7 +6,8 @@
 			</div>
 		</div>
 		<div class="new-post-slider-scrollable" ref="slidesList" :class="{ hasArrow: this.slides.length > maxSlides }">
-			<i class="material-icons arrow" v-if="this.slides.length > maxSlides" @click="updateTransform(-200)">keyboard_arrow_right</i>
+			<i class="material-icons arrow" v-if="this.slides.length > maxSlides && direction == 'rtl'" @click="updateTransform(-200)">keyboard_arrow_right</i>
+			<i class="material-icons arrow" v-else-if="this.slides.length > maxSlides" @click="updateTransform(200)">keyboard_arrow_left</i>
 			<div class="scrollable-list" @wheel="onWheel">
 				<div class="new-post-slider" :style="{ transform: `translateX(${transformBy}px)` }">
 					<draggable v-bind="dragOptions" class="drag-container" handle=".slide-item" v-model="slides">
@@ -17,7 +18,8 @@
 					<div class="add-slide" @click="addSlide" v-if="slides.length < 12"><i class="material-icons">add</i></div>
 				</div>
 			</div>
-			<i class="material-icons arrow" v-if="this.slides.length > maxSlides" @click="updateTransform(200)">keyboard_arrow_left</i>
+			<i class="material-icons arrow" v-if="this.slides.length > maxSlides && direction == 'rtl'" @click="updateTransform(200)">keyboard_arrow_left</i>
+			<i class="material-icons arrow" v-else-if="this.slides.length > maxSlides" @click="updateTransform(-200)">keyboard_arrow_right</i>
 		</div>
 	</div>
 </template>
@@ -26,6 +28,7 @@
 import Editor from "../Editor/Index";
 import SlideItem from "./SlideItem.vue";
 import uuidv4 from "uuid";
+import { mapState } from "vuex";
 
 export default {
 	watch: {
@@ -115,6 +118,10 @@ export default {
 		},
 	},
 	computed: {
+		...mapState(["shared"]),
+		direction() {
+			return this.shared.direction;
+		},
 		dragOptions() {
 			return {
 				animation: 200,

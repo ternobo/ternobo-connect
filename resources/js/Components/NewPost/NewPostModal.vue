@@ -217,11 +217,14 @@ export default {
 									cancelVariant: "transparent text-muted",
 									cancelTitle: "رد کردن",
 									okTitle: "فعال‌سازی",
+									headerClass: "category-select-modal",
 									centered: true,
+									headerCloseContent: "arrow_back",
 									hideBackdrop: false,
 									hideHeaderClose: false,
 								})
 								.then((value) => {
+									this.$emit("update:show", true);
 									if (value) {
 										window.open("/donations?tab=settings");
 									}
