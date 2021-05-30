@@ -21,4 +21,12 @@
             background-color: #E0E0E0;
         }
     }
+
 }
+
+/*rtl:raw:
+[dir=ltr] .dropdown-menu.show {
+    left: unset !important;
+    right: 0;
+}
+*/
