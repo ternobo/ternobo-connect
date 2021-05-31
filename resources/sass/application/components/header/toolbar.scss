@@ -1,8 +1,10 @@
 .header-menu {
     display: flex;
-    /*rtl:remove*/
-    flex-direction: row-reverse;
-    /*rtl:remove*/
+
+    @if $direction==rtl {
+        flex-direction: row-reverse;
+    }
+
     align-items: center;
 
     a {
