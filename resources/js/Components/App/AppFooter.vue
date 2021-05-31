@@ -5,7 +5,7 @@
 			<langdropdown
 				class="mb-3"
 				:dir="appDirection"
-				:value="{ label: 'فارسی', value: 'fa', icon: '/images/iran-flag.png' }"
+				:value="lang"
 				:items="[
 					{ label: 'فارسی', value: 'fa', icon: '/images/iran-flag.png' },
 					{ label: 'English', value: 'en', icon: '/img/en.png' },
@@ -14,7 +14,7 @@
 				<template v-slot:selected="{ item }">
 					<div class="d-flex justify-content-between align-items-center w-100">
 						<span class="font-14"> {{ item.label }}</span>
-						<img :src="item.icon" />
+						<img width="24" :src="item.icon" />
 					</div>
 				</template>
 
@@ -45,7 +45,13 @@ export default {
 	data() {
 		return {
 			showLaws: false,
+			lang: { label: "فارسی", value: "fa", icon: "/images/iran-flag.png" },
 		};
+	},
+	mounted() {
+		if (lang == "en") {
+			this.lang = { label: "English", value: "en", icon: "/img/en.png" };
+		}
 	},
 	components: {
 		LawsModal: () =>

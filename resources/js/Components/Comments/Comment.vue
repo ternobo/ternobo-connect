@@ -24,11 +24,11 @@
 				<div class="d-flex align-items-center">
 					<span class="comment-time">{{ comment_time }}</span>
 					<div>
-						<b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
-							<template v-slot:button-content class="p-0">
+						<dropdown-menu size="lg" variant="white" toggle-class="text-decoration-none" no-caret>
+							<template v-slot:button class="p-0">
 								<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
 							</template>
-							<b-dropdown-item v-if="!checkUser(comment.page.user_id)">
+							<dropdown-item v-if="!checkUser(comment.page.user_id)">
 								<div class="d-flex align-items-center" @click="showReport = true">
 									<i class="material-icons text-dark">link</i>
 									<div>
@@ -38,9 +38,9 @@
 										<small class="text-muted"> این دیدگاه در تضاد با قوانین ترنوبو است </small>
 									</div>
 								</div>
-							</b-dropdown-item>
-							<b-dropdown-item @click="deleteComment" v-if="checkUser(comment.page.user_id)">
-								<div class="d-flex hover-danger align-items-center">
+							</dropdown-item>
+							<dropdown-item @click="deleteComment" v-if="checkUser(comment.page.user_id)">
+								<div class="d-flex align-items-center">
 									<i class="material-icons-outlined">delete_sweep</i>
 									<div>
 										<div>
@@ -48,8 +48,8 @@
 										</div>
 									</div>
 								</div>
-							</b-dropdown-item>
-						</b-dropdown>
+							</dropdown-item>
+						</dropdown-menu>
 					</div>
 				</div>
 			</div>

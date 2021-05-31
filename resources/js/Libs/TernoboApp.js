@@ -35,6 +35,9 @@ TernoboApp.install = function (Vue, options) {
     Vue.component("AppHeader", () => import("../Components/App/header/AppHeader"));
     Vue.component("AppFooter", () => import("../Components/App/AppFooter"));
 
+    Vue.component("dropdown-menu", () => import("../Components/Menues/dropdown/DropdownMenu.vue"));
+    Vue.component("dropdown-item", () => import("../Components/Menues/dropdown/DropdonwItem.vue"));
+
     Vue.component("ConnetionButtons", () => import("../Components/buttons/ConnetionButtons.vue"));
 
     Vue.component("skeleton", Skeleton);
