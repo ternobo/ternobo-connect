@@ -73,7 +73,7 @@
 						<div class="content">
 							<span class="badge-bg-container" v-if="Boolean(active_sessions)">{{ active_sessions }}</span>
 						</div>
-						<i class="btn setting-btn material-icons-outlined ms-3" @click="showActiveSessions = true">keyboard_arrow_left</i>
+						<i class="btn setting-btn material-icons-outlined ms-3" @click="showActiveSessions = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 					</div>
 				</div>
 				<div class="setting-action">
@@ -85,7 +85,7 @@
 						<div class="content">
 							<span class="font-16 h-auto" style="padding: 12px" :class="{ 'badge-danger': !two_factor_verification, 'badge-success': two_factor_verification }">{{ two_factor_verification ? "فعال" : "غیرفعال" }}</span>
 						</div>
-						<i class="btn setting-btn material-icons-outlined ms-3" @click="showTwoFAModal = true">keyboard_arrow_left</i>
+						<i class="btn setting-btn material-icons-outlined ms-3" @click="showTwoFAModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 					</div>
 				</div>
 			</div>
@@ -101,12 +101,16 @@
 
 					<div class="d-flex align-items-center">
 						<div class="content">
-							<div class="badge-bg-container d-flex justify-content-between w-100">
+							<div class="badge-bg-container d-flex justify-content-between w-100" v-if="appDirection == 'rtl'">
 								<span class="me-2"> فارسی (Persian) </span>
 								<img src="/images/iran-flag.png" style="width: 24px" />
 							</div>
+							<div class="badge-bg-container d-flex justify-content-between w-100" v-else>
+								<span class="me-2">English (US)</span>
+								<img src="/emoji/72x72/1f1fa-1f1f8.png" style="width: 24px; height: 24px" />
+							</div>
 						</div>
-						<i class="btn setting-btn material-icons-outlined ms-3" @click="showLangModal = true">keyboard_arrow_left</i>
+						<i class="btn setting-btn material-icons-outlined ms-3" @click="showLangModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 					</div>
 				</div>
 				<div class="setting-action">
@@ -116,7 +120,7 @@
 					</div>
 
 					<div class="d-flex align-items-center">
-						<i class="btn setting-btn material-icons-outlined ms-3" @click="showDeactiveModal = true">keyboard_arrow_left</i>
+						<i class="btn setting-btn material-icons-outlined ms-3" @click="showDeactiveModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 					</div>
 				</div>
 			</div>

@@ -99,6 +99,7 @@ import AchievementsItem from "../../../../../Mixins/AchievementsItem";
 import ShowMore from "../ShowMore.vue";
 import Tselect from "../../../../Tselect.vue";
 import CountriesFa from "../../../../../Libs/Countries-fa";
+import CountriesEn from "../../../../../Libs/Countries-en";
 
 export default {
 	mixins: [AchievementsItem],
@@ -147,6 +148,9 @@ export default {
 	},
 	computed: {
 		countries() {
+			if (lang == "en") {
+				return CountriesEn;
+			}
 			return CountriesFa.map((item) => item.fa_name);
 		},
 		time_text() {

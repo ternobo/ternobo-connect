@@ -10,7 +10,18 @@
     >.invite {
         padding: 12px 10px;
         width: 100%;
-        max-width: 176px;
+        max-width: 33.3333333%;
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media screen and(max-width: $sm-size) {
+            max-width: 50%;
+        }
+
         display: flex;
         flex-direction: column;
         align-items: center;

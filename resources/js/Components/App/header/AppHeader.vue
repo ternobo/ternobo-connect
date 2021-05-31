@@ -13,7 +13,7 @@
 				<form method="get" action="/search" ref="searchfield" class="searchfield d-flex">
 					<auto-complete class="search-field w-100" icon="search" v-model="searchVal" @search="submitsearch" required type="text" :suggestionPosition="17" name="q" placeholder="هر چیزی که در جستن آنی، آنی" />
 					<div class="beta-badge">
-						<span class="me-2 text-nowrap">0.1 V</span>
+						<span class="me-2 text-nowrap">v 0.1</span>
 						<img src="/images/beta.svg" width="36" class="verical-middle" />
 					</div>
 				</form>

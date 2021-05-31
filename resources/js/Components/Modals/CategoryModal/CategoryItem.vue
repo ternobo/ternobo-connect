@@ -2,8 +2,8 @@
 	<div class="category-item" :class="{ disabled: !edit && disabled, edit: edit }">
 		<div class="category-content">
 			<div class="delete-move-actions">
-				<i class="material-icons-outlined text-light p-1" :class="{ 'hand-hover hover-dark': !edit && !disabled }">unfold_more</i>
-				<i class="material-icons-outlined text-light p-1" :class="{ 'hover-danger clickable': !edit && !disabled }" @click="doDelete()">delete</i>
+				<i class="material-icons-outlined text-light" :class="{ 'hand-hover hover-dark': !edit && !disabled }">unfold_more</i>
+				<i class="material-icons-outlined text-light" :class="{ 'hover-danger clickable': !edit && !disabled }" @click="doDelete()">delete</i>
 			</div>
 			<span class="category-badge" v-if="!edit">{{ name }}</span>
 			<input type="text" maxlength="50" v-else class="form-controller text-input--xsm" v-model="name" />

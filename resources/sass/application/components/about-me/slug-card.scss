@@ -37,7 +37,11 @@
         .slug-data-edit {
             display: flex;
             align-items: center;
-            direction: ltr;
+
+            @if $direction==rtl {
+                direction: ltr;
+            }
+
             line-height: 1;
 
             >*:not(:first-child) {
@@ -54,7 +58,11 @@
         .slug-data-view {
             display: flex;
             align-items: center;
-            direction: ltr;
+
+            @if $direction==rtl {
+                direction: ltr;
+            }
+
             line-height: 1;
             padding: 8px 16px;
             border-radius: 16px;
@@ -76,7 +84,14 @@
             }
 
             i {
-                margin-right: 8px;
+                @if $direction==rtl {
+                    margin-right: 8px;
+                }
+
+                @else {
+                    margin-left: 8px;
+                }
+
                 color: $grey;
 
                 &:hover {

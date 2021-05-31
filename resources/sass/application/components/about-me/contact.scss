@@ -22,7 +22,11 @@
     .website-info {
         display: flex;
         flex-direction: column;
-        text-align: left;
+
+        @if $direction==rtl {
+            text-align: left;
+        }
+
         line-height: 19px;
     }
 
@@ -72,6 +76,10 @@
         align-items: center;
         height: 65px;
 
+        @if $direction==ltr {
+            flex-direction: row-reverse;
+        }
+
         &:not(.website-item) {
             div:first-child {
                 height: 24px;
@@ -98,8 +106,18 @@
             vertical-align: middle;
             font-weight: 600;
 
+            @if $direction==ltr {
+                flex-direction: row-reverse;
+            }
+
             img {
-                margin-right: 12px;
+                @if $direction==rtl {
+                    margin-right: 12px;
+                }
+
+                @else {
+                    margin-left: 12px;
+                }
             }
         }
     }

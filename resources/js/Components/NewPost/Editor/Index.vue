@@ -4,8 +4,8 @@
 			<draggable class="list-group" v-model="editorItems" v-if="editorItems.length > 0" handle=".hand-hover" tag="div" v-bind="dragOptions" @start="drag = true" @end="drag = false">
 				<div class="editor-item" :class="{ 'image-item': element.type == 'media' }" v-for="(element, index) in editorItems" :key="'item_type_' + element.type">
 					<div class="delete-move-actions">
-						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 						<i class="material-icons-outlined hand-hover">unfold_more</i>
+						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 					</div>
 					<component :is="components[element.type]" :ref="`${element.type}`" :content.sync="editorItems[index].content" :key="'item_type_' + element.id" :max="1200" />
 				</div>

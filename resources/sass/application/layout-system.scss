@@ -4659,3 +4659,8 @@
          cursor: pointer;
      }
  }
+
+ a.text-dark:focus,
+ a.text-dark:hover {
+     color: $dark !important;
+ }

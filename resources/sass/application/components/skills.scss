@@ -199,7 +199,13 @@
         height: 20px;
 
         span {
-            height: 20px;
+            @if $direction==rtl {
+                height: 20px;
+            }
+
+            @else {
+                height: 23px;
+            }
         }
 
         i {

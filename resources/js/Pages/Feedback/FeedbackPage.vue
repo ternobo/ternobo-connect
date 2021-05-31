@@ -3,7 +3,8 @@
 		<div class="content-container-right" v-infinite-scroll="loadMore" :infinite-scroll-distance="5">
 			<div class="w-100 d-flex align-items-center mb-3">
 				<wire-link class="text-grey" href="/feedbacks">
-					<i class="material-icons" style="transform: rotate(180deg)">keyboard_backspace</i>
+					<i class="material-icons" style="transform: rotate(180deg)" v-if="appDirection == 'rtl'">keyboard_backspace</i>
+					<i class="material-icons" v-else>keyboard_backspace</i>
 					بازگشت
 				</wire-link>
 			</div>

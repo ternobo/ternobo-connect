@@ -11,14 +11,14 @@
 						<i class="material-icons-outlined me-2">gavel</i>
 						<span>قوانین و مقررات</span>
 					</div>
-					<i class="btn setting-btn material-icons-outlined ms-3" @click="showLawsModal = true">keyboard_arrow_left</i>
+					<i class="btn setting-btn material-icons-outlined ms-3" @click="showLawsModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 				</div>
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined me-2">build_circle</i>
 						<span>کوکی‌ها</span>
 					</div>
-					<i class="btn setting-btn material-icons-outlined ms-3" @click="showCookiesModal = true">keyboard_arrow_left</i>
+					<i class="btn setting-btn material-icons-outlined ms-3" @click="showCookiesModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 				</div>
 				<!-- <div class="setting-action">
 					<div class="name">

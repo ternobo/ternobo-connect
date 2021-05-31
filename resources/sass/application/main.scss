@@ -381,8 +381,8 @@ img {
 @import "./components/search-page.scss";
 
 .logodesktop {
-    margin-bottom: 1px;
     height: 24px;
+    width: 117px;
     display: flex;
 }
 
@@ -993,7 +993,7 @@ a:focus {
 
 
 .hover-dropdown:hover {
-    background: #e0e0e0;
+    background: $fixed-elements;
 }
 
 .person-name {

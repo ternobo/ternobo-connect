@@ -24,7 +24,9 @@
     border: none;
     box-shadow: $card-shadow;
     padding: 12px 0;
-    width: 300px;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
     height: -webkit-max-content;
     height: -moz-max-content;
     height: max-content;

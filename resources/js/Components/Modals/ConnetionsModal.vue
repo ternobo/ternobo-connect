@@ -56,7 +56,7 @@
 			<template slot="custom-item">
 				<div class="pt-2">
 					<MaterialTextField v-model="search" class="d-flex align-items-center material--transparent material--xsm" input-class="pl-4" placeholder="جستجو نام">
-						<div style="position: absolute; left: 4px">
+						<div class="icon-end">
 							<loading-spinner style="width: 20px; height: 20px" v-if="searchLoading"></loading-spinner>
 							<i v-else class="material-icons">search</i>
 						</div>

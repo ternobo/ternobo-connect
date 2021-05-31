@@ -8,7 +8,7 @@
 				:value="lang"
 				:items="[
 					{ label: 'فارسی', value: 'fa', icon: '/images/iran-flag.png' },
-					{ label: 'English', value: 'en', icon: '/img/en.png' },
+					{ label: 'English (US)', value: 'en', icon: '/emoji/72x72/1f1fa-1f1f8.png' },
 				]"
 			>
 				<template v-slot:selected="{ item }">
@@ -32,7 +32,7 @@
 				</div>
 				<div class="copyright-text d-flex justify-content-center align-items-center">
 					<img src="/favicon.png" class="ms-1" style="max-width: 16px" />
-					<span class="ms-1 me-2">ترنوبو</span>© ۱۳۹۹
+					<span class="ms-1 me-2">ترنوبو</span>© {{ this.lang.value == "fa" ? "۱۴۰۰" : "2021" }}
 				</div>
 			</div>
 		</div>
@@ -50,7 +50,7 @@ export default {
 	},
 	mounted() {
 		if (lang == "en") {
-			this.lang = { label: "English", value: "en", icon: "/img/en.png" };
+			this.lang = { label: "English (US)", value: "en", icon: "/emoji/72x72/1f1fa-1f1f8.png" };
 		}
 	},
 	components: {

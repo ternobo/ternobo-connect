@@ -28,11 +28,11 @@
 					</div>
 					<span class="font-10 text-muted">{{ feedbackReply_time }}</span>
 					<div>
-						<b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
-							<template v-slot:button-content class="p-0">
+						<dropdown-menu size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
+							<template v-slot:button class="p-0">
 								<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
 							</template>
-							<b-dropdown-item>
+							<dropdown-item>
 								<div class="d-flex align-items-center">
 									<i class="material-icons text-dark">link</i>
 									<div>
@@ -42,8 +42,8 @@
 										<small class="text-muted"> این دیدگاه در تضاد با قوانین ترنوبو است </small>
 									</div>
 								</div>
-							</b-dropdown-item>
-							<b-dropdown-item class="hover-danger" @click="deleteComment" v-if="checkUser(feedbackReply.user_id)">
+							</dropdown-item>
+							<dropdown-item class="hover-danger" @click="deleteComment" v-if="checkUser(feedbackReply.user_id)">
 								<div class="d-flex hover-danger align-items-center">
 									<i class="material-icons-outlined">delete_sweep</i>
 									<div>
@@ -52,8 +52,8 @@
 										</div>
 									</div>
 								</div>
-							</b-dropdown-item>
-						</b-dropdown>
+							</dropdown-item>
+						</dropdown-menu>
 					</div>
 				</div>
 			</div>

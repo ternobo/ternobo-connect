@@ -2,6 +2,11 @@
     position: relative;
     display: flex;
 
+    .icon-end {
+        position: absolute;
+        left: 4px;
+    }
+
     label {
         position: absolute;
         font-size: 14px;
