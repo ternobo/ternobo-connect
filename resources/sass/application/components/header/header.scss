@@ -190,6 +190,14 @@
         align-items: center;
         padding-top: 4px;
         height: 24px;
+
+        @if $direction==ltr {
+            margin-left: 0;
+        }
+    }
+
+    @if $direction==ltr {
+        padding-right: 16px;
     }
 }
 
