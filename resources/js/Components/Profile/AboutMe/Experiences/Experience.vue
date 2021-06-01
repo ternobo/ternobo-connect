@@ -67,7 +67,7 @@
 					<Checkbox class="mt-2" v-model="val.endDate" :checked="typeof val.endDate == 'boolean'"> همچنان در این سمت فعالیت می‌کنم </Checkbox>
 				</div>
 				<div class="col-md-6" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
-					<v-select
+					<!-- <v-select
 						:searchable="false"
 						:placeholder="'نوع اشتغال'"
 						class="datepicker-list w-75"
@@ -88,7 +88,7 @@
 							</span>
 						</template>
 						<template #no-options>موردی یافت نشد</template>
-					</v-select>
+					</v-select> -->
 				</div>
 				<div class="col-md-6" :class="{ 'py-4': $root.isDesktop, 'py-2': !$root.isDesktop }" v-if="showMore">
 					<MaterialTextField v-model="val.location" class="d-flex align-items-center material--sm" placeholder="محل فعالیت"></MaterialTextField>

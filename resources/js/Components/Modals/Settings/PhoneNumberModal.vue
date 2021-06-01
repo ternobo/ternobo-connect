@@ -12,11 +12,11 @@
 					<label class="w-100">کد تایید خود ‌را وارد کنید</label>
 					<div class="d-flex align-items-center">
 						<otp-input input-class="w-100" class="material--sm mx-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" />
-						<i class="material-icons-outlined">verified_user</i>
+						<i class="material-icons-outlined" :class="{ 'text-danger': invalidCode }">verified_user</i>
 					</div>
 				</div>
 				<div class="d-flex justify-content-end">
-					<LoadingButton :loading="loading" class="btn btn-primary mx-3 mt-4" @click.native="verifyCode">بعدی</LoadingButton>
+					<LoadingButton :loading="loading" class="btn btn-primary mx-3 mt-4" @click.native="verifyCode">ثبت</LoadingButton>
 				</div>
 			</div>
 		</transition>
@@ -37,7 +37,7 @@ export default {
 
 			var config = {
 				method: "post",
-				url: this.$APP_URL + "/auth/verification",
+				url: "/settings/verification",
 				data: data,
 			};
 
@@ -62,7 +62,7 @@ export default {
 
 			var config = {
 				method: "post",
-				url: this.$APP_URL + "/auth/verify-phone",
+				url: "/settings/verify-phone",
 				data: data,
 			};
 

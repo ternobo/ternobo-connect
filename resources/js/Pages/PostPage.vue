@@ -64,20 +64,11 @@ export default {
 		},
 
 		async doDelete() {
-			const res = await this.$dialog.confirm({
-				text: "آیا از حذف این محتوا اطمینان دارید؟",
-				title: "حذف محتوا",
-				actions: {
-					false: "لغو",
-					true: {
-						text: "تایید",
-						variant: "primary",
-						handle: async () => {
-							axios.delete(this.$APP_URL + "/articles/" + this.post.id);
-							this.$store.state.ternoboWireApp.visit("/feed");
-						},
-					},
-				},
+			this.confirmDialog(["ایا از حذف این محتوا اطمینان دارید؟"]).then((value) => {
+				if (value) {
+					axios.delete(this.$APP_URL + "/articles/" + this.post.id);
+					this.$store.state.ternoboWireApp.visit("/feed");
+				}
 			});
 		},
 		like() {
@@ -86,7 +77,6 @@ export default {
 			} else {
 				this.liked = true;
 			}
-			const $this = this;
 			this.$axios({
 				method: "post",
 				url: this.$APP_URL + "/like/" + this.post.id,

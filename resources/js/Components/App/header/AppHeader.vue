@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import Autocomplete from "@trevoreyre/autocomplete-vue";
 import HeaderToolbar from "./HeaderToolbar";
 import UserOptionModal from "../../Modals/UserOptionModal.vue";
 import AutoComplete from "../../inputs/AutoComplete.vue";
@@ -80,7 +79,6 @@ export default {
 	name: "AppHeader",
 	components: {
 		HeaderToolbar,
-		Autocomplete,
 		UserOptionModal,
 		AutoComplete,
 	},

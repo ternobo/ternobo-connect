@@ -273,7 +273,9 @@ TernoboApp.install = function (Vue, options) {
                     }
 
                     this.$root.application.addToast({
-                        text: msg
+                        text: msg,
+                        icon: "cancel",
+                        iconClass: "material-icons-outlined text-danger",
                     });
                 });
             }

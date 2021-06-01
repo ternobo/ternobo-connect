@@ -95,7 +95,7 @@
 					</div>
 				</div>
 				<div class="w-100 d-flex align-items-center justify-content-center p-2" v-if="next_page_url !== null">
-					<loading-button v-if="next_page_url !== null" @click.native="loadMore" class="btn btn-outline-dark" :loading="loadingMore">بارگیری بیشتر</loading-button>
+					<loading-button v-if="next_page_url !== null" @click.native="loadMore" class="btn btn-outline-dark" :loading="loadingMore">بارگذاری بیشتر</loading-button>
 				</div>
 			</div>
 		</transition>

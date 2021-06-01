@@ -39,25 +39,29 @@ export default {
 	},
 	methods: {
 		changePassord() {
-			this.loading = true;
-			axios
-				.post("updatepassword", {
-					newpassword: this.password,
-					code: this.resetCode,
-				})
-				.then((response) => {
-					const data = response.data;
-					if (data !== false) {
-						if (data.result) {
-							window.location = "/feed";
+			if (this.password1 == this.password) {
+				this.loading = true;
+				axios
+					.post("updatepassword", {
+						newpassword: this.password,
+						code: this.resetCode,
+					})
+					.then((response) => {
+						const data = response.data;
+						if (data !== false) {
+							if (data.result) {
+								window.location = "/feed";
+							} else {
+								this.handleError(data.errors);
+							}
 						} else {
-							this.handleError(data.errors);
+							this.toast("همه فیلد‌ها اجباری است");
 						}
-					} else {
-						this.toast("همه فیلد‌ها اجباری است");
-					}
-				})
-				.then(() => (this.loading = false));
+					})
+					.then(() => (this.loading = false));
+			} else {
+				this.toast("رمزعبور و تاییدیه آن برابر نیست", "cancel", "material-icons-outlined text-danger");
+			}
 		},
 		sendResetCode() {
 			this.loading = true;
@@ -69,7 +73,7 @@ export default {
 					const data = response.data;
 					if (data !== false) {
 						if (data.result) {
-							this.toast(data.msg);
+							this.toast(data.msg, "check", "text-success");
 							this.passwordChage = true;
 						} else {
 							this.handleError(data.errors);

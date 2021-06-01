@@ -24,8 +24,8 @@
 					<a class="m-0"><i class="material-icons-outlined">emoji_objects</i> بازخورد ها </a>
 				</wire-link>
 				<li class="list-group-item border-top headermenu-item">
-					<form action="/logout" method="POST">
-						<button type="submit" class="text-right bg-transparent hover-danger m-0 p-0 border-0 text-grey"><i class="material-icons">power_settings_new</i> خروج</button>
+					<form action="/logout" method="POST" ref="logoutForm">
+						<button type="button" @click="logout" class="text-right bg-transparent m-0 p-0 border-0 text-grey"><i class="material-icons">power_settings_new</i> خروج</button>
 					</form>
 				</li>
 			</div>
@@ -36,5 +36,14 @@
 <script>
 export default {
 	name: "UserMenu",
+	methods: {
+		logout() {
+			this.confirmDialog("آیا می‌خواهید از حساب کاربری خود خارج شوید؟").then((value) => {
+				if (value) {
+					this.$refs.logoutForm.submit();
+				}
+			});
+		},
+	},
 };
 </script>

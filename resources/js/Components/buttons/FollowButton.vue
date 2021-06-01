@@ -57,14 +57,7 @@ export default {
 							this.$emit("followed");
 						} else {
 							const errors = response.data.errors;
-							Object.keys(errors).forEach((item, index) => {
-								this.$bvToast.toast(errors[item][0], {
-									noCloseButton: true,
-									toaster: "b-toaster-bottom-left",
-									bodyClass: ["bg-dark", "text-right", "text-white"],
-									solid: true,
-								});
-							});
+							this.handleError(errors);
 						}
 						this.loading = false;
 					})

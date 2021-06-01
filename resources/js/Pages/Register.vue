@@ -41,18 +41,19 @@
 						<material-text-field input-class="w-100" required class="material--sm mb-3" v-model="first_name" placeholder="نام" />
 						<material-text-field input-class="w-100" required class="material--sm mb-3" v-model="last_name" placeholder="نام خانوادگی" />
 						<material-text-field input-class="w-100" required class="material--sm mb-3" v-model="username" placeholder="نام کاربری" />
-						<v-select
-							class="datepicker-list"
-							:placeholder="'جنسیت'"
-							:dir="appDirection"
-							v-model="gender"
-							:options="[
+						<tselect
+							class="tselect-lg"
+							labelOption="label"
+							valueOption="code"
+							:items="[
 								{ label: 'زن', code: '1' },
 								{ label: 'مرد', code: '2' },
 							]"
+							v-model="gender"
+							:dir="appDirection"
 						>
-							<template #no-options>موردی یافت نشد</template>
-						</v-select>
+							جنسیت
+						</tselect>
 					</div>
 				</div>
 				<div class="invite-step" v-else-if="step == 3">

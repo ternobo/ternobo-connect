@@ -6,14 +6,10 @@ import {
 } from 'ternobowire-js';
 import PortalVue from 'portal-vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import vSelect from 'vue-select'
 import TProgress from "./Libs/TProgress";
-import VueCircle from 'vue2-circle-progress'
 import infiniteScroll from 'vue-infinite-scroll'
 import TernoboApp from "./Libs/TernoboApp";
 import App from "./Layouts/App";
-import '@trevoreyre/autocomplete-vue/dist/style.css'
-import Dialog from 'bootstrap-vue-dialog/dist/bootstrap-vue-dialog';
 import InfiniteLoading from 'vue-infinite-loading';
 import Application from "./Application.vue";
 import Vuex from "vuex";
@@ -22,27 +18,7 @@ import VueMasonry from 'vue-masonry-css';
 Vue.use(VueMasonry);
 Vue.use(InfiniteLoading, { /* options */ });
 
-Vue.prototype.window = window.window;
-
-Vue.use(Dialog);
-
-vSelect.props.components.default = () => ({
-    Deselect: {
-        render: createElement => createElement('i',
-            {
-                attrs: { class: 'material-icons' }
-            }, ''),
-    },
-    OpenIndicator: {
-        render: createElement => createElement('i',
-            {
-                attrs: { class: 'material-icons' }
-            }, 'keyboard_arrow_down'),
-    },
-});
-
-// Install V-Select
-Vue.component('v-select', vSelect);
+Vue.prototype.window = window;
 
 // Install BootstrapVue
 Vue.use(BootstrapVue, { "BModal": { "headerCloseContent": 'close' } })
@@ -58,8 +34,6 @@ Vue.use(TernoboApp);
 
 // Install Infinite Scroll
 Vue.use(infiniteScroll);
-
-Vue.component("vue-circle", VueCircle);
 
 Vue.prototype.$APP_URL = window.APP_URL;
 Vue.prototype.$axios = axios;

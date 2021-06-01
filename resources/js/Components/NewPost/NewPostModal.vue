@@ -27,8 +27,8 @@
 					</div>
 					<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
 					<div class="d-flex justify-content-center align-items-center mt-3 mb-2">
-						<loading-button :loading="loadingDraft" class="btn btn-transparent font-14" @click.native="submitPost(true)"> پیش نویس </loading-button>
-						<loading-button :loading="loading" class="btn btn-primary font-14" @click.native="submitPost(false)"> {{ post ? "ذخیره" : "انتشار" }} </loading-button>
+						<loading-button :loading="loadingDraft" class="btn btn-transparent font-14" :disabled="!checkContent" @click.native="submitPost(true)"> پیش نویس </loading-button>
+						<loading-button :loading="loading" class="btn btn-primary font-14" :class="{ 'text-muted': !checkContent }" :disabled="!checkContent" @click.native="submitPost(false)"> {{ post ? "ذخیره" : "انتشار" }} </loading-button>
 					</div>
 				</div>
 			</div>
@@ -251,6 +251,14 @@ export default {
 		...mapState(["user", "shared"]),
 		username() {
 			return Boolean(this.user) && Boolean(this.user.name) && this.user.name.length > 40 ? this.user.name.substr(0, 40) : this.user.name;
+		},
+
+		checkContent() {
+			return (
+				this.content.filter((item) => {
+					return item.content.length > 0 && item.content.filter((content) => Boolean(content.content)).length > 0;
+				}).length > 0
+			);
 		},
 	},
 	data() {

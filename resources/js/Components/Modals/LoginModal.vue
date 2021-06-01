@@ -7,7 +7,7 @@
 			</div>
 			<div v-if="loginStep" @keydown.enter="login" class="signup-login d-flex flex-column align-items-center justify-content-center clearfix" ref="loginForm" method="POST" action="javascript:;">
 				<div class="w-100">
-					<material-text-field type="text" class="material--sm w-100 bg-transparent mb-2" input-class="w-100" name="username" v-model="username" placeholder="تلفن، ایمیل یا شناسه" />
+					<material-text-field type="text" class="material--sm w-100 bg-transparent mb-2" input-class="w-100" name="username" v-model="username" placeholder="تلفن، شناسه" />
 				</div>
 				<div class="w-100" style="margin-top: 12px">
 					<material-text-field type="password" class="material--sm w-100 bg-transparent" input-class="w-100" name="password" v-model="password" placeholder="رمزعبور" />
@@ -99,7 +99,7 @@ export default {
 				};
 
 				axios(config)
-					.then(function (response) {
+					.then((response) => {
 						if (response.data.result) {
 							window.location = "/feed";
 						} else if (response.data.two_factor) {
@@ -112,25 +112,14 @@ export default {
 							}
 						} else {
 							const errors = response.data.errors;
-							Object.keys(errors).forEach(function (item, index) {
-								$this.$bvToast.toast(errors[item][0], {
-									noCloseButton: true,
-									toaster: "b-toaster-bottom-left",
-									bodyClass: ["bg-dark", "text-right", "text-white"],
-									solid: true,
-								});
-							});
+							this.handleError(errors);
 						}
 						$this.loading = false;
 					})
-					.catch(function (error) {
-						$this.loading = false;
-						$this.$bvToast.toast("خطا در برقراری ارتباط", {
-							noCloseButton: true,
-							toaster: "b-toaster-bottom-left",
-							bodyClass: ["bg-dark", "text-right", "text-white"],
-							solid: true,
-						});
+					.catch((error) => {
+						console.log(error);
+						this.loading = false;
+						this.toast("خطا در برقراری ارتباط");
 					});
 			}
 		},

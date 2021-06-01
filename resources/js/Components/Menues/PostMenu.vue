@@ -35,7 +35,7 @@
 							<div>
 								<strong> گزارش تخلف </strong>
 							</div>
-							<small class="text-muted"> این دیدگاه در تضاد با قوانین ترنوبو است </small>
+							<small class="text-muted"> این محتوا در تضاد با قوانین ترنوبو است </small>
 						</div>
 					</div>
 				</dropdown-item>
