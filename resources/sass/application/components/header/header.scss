@@ -221,11 +221,21 @@
             background: $body-bg;
         }
 
-        a {
+        a,
+        button {
             color: $grey;
 
             i {
                 margin-left: 12px;
+            }
+        }
+
+        &.hover-danger:hover {
+
+            a,
+            button {
+                color: $red;
+
             }
         }
     }

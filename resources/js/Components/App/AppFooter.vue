@@ -30,16 +30,14 @@
 					<a class="text-muted hover-dark me-3" @click="showLaws = true">قوانین و مقررات</a>
 					<a class="text-muted hover-dark" href="https://ternobo.info" target="_blank">درباره ما</a>
 				</div>
-				<div class="copyright-text d-flex justify-content-center align-items-center">
-					<img src="/favicon.png" class="ms-1" style="max-width: 16px" />
-					<span class="ms-1 me-2">ترنوبو</span>© {{ this.lang.value == "fa" ? "۱۴۰۰" : "2021" }}
-				</div>
+				<div class="copyright-text d-flex justify-content-center" style="height: 20px"><img :src="shared.direction == 'rtl' ? '/images/farsi-logo.svg' : '/images/logo-en-dark.svg'" class="mx-1" height="20" /> © {{ this.lang.value == "fa" ? "۱۴۰۰" : "2021" }}</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Langdropdown from "../Langdropdown";
 export default {
 	data() {
@@ -47,6 +45,9 @@ export default {
 			showLaws: false,
 			lang: { label: "فارسی", value: "fa", icon: "/images/iran-flag.png" },
 		};
+	},
+	computed: {
+		...mapState(["shared"]),
 	},
 	mounted() {
 		if (lang == "en") {
