@@ -39,7 +39,7 @@ export default {
 	methods: {
 		logout() {
 			this.confirmDialog("آیا می‌خواهید از حساب کاربری خود خارج شوید؟", {
-				okVariant: "text-danger border-0",
+				okVariant: "danger border-0",
 			}).then((value) => {
 				if (value) {
 					this.$refs.logoutForm.submit();
