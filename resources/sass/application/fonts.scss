@@ -434,8 +434,13 @@
 
 
 body {
-    font-family: Vazir,
-    sans-serif #{"/*!rtl: 'Open Sans',Vazir,sans-serif*/"};
+    @if($direction==rtl) {
+        font-family: Vazir, sans-serif;
+    }
+
+    @else {
+        font-family: 'Open Sans', Vazir, sans-serif;
+    }
 
 }
 
