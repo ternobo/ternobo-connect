@@ -27,10 +27,13 @@
 			</langdropdown>
 			<div class="app-footer">
 				<div class="sidemenu-links d-flex justify-content-center align-items-center mb-2">
-					<a class="text-muted hover-dark me-3" @click="showLaws = true">قوانین و مقررات</a>
-					<a class="text-muted hover-dark" href="https://ternobo.info" target="_blank">درباره ما</a>
+					<a class="text-muted hover-dark font-14 me-3" @click="showLaws = true">قوانین و مقررات</a>
+					<a class="text-muted hover-dark font-14" href="https://ternobo.info" target="_blank">درباره ما</a>
 				</div>
-				<div class="copyright-text d-flex justify-content-center" style="height: 20px"><img :src="shared.direction == 'rtl' ? '/images/farsi-logo.svg' : '/images/logo-en-dark.svg'" class="mx-1" height="20" /> © {{ this.lang.value == "fa" ? "۱۴۰۰" : "2021" }}</div>
+				<div class="copyright-text d-flex align-items-center justify-content-center" style="height: 16px">
+					<img :src="shared.direction == 'rtl' ? '/images/farsi-logo.svg' : '/images/logo-en-dark.svg'" class="mx-1" height="16" />
+					<span class="font-14" style="height: 13px; line-height: 1">© {{ this.lang.value == "fa" ? "۱۴۰۰" : "2021" }}</span>
+				</div>
 			</div>
 		</div>
 	</div>

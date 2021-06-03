@@ -38,13 +38,14 @@ export default {
 	name: "UserMenu",
 	methods: {
 		logout() {
-			this.confirmDialog("آیا می‌خواهید از حساب کاربری خود خارج شوید؟", {
-				okVariant: "danger border-0",
-			}).then((value) => {
-				if (value) {
-					this.$refs.logoutForm.submit();
-				}
-			});
+			this.$refs.logoutForm.submit();
+			// this.confirmDialog("آیا می‌خواهید از حساب کاربری خود خارج شوید؟", {
+			// 	okVariant: "danger border-0",
+			// }).then((value) => {
+			// 	if (value) {
+					
+			// 	}
+			// });
 		},
 	},
 };

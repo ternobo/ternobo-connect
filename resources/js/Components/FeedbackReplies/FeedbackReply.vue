@@ -32,7 +32,7 @@
 							<template v-slot:button class="p-0">
 								<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
 							</template>
-							<dropdown-item>
+							<dropdown-item v-if="!checkUser(feedbackReply.user_id)">
 								<div class="d-flex align-items-center">
 									<i class="material-icons text-dark">link</i>
 									<div>
