@@ -1,7 +1,7 @@
 <?php
 return [
     'Feedbacks' => "بازخوردها",
-    'Vote' => "ثبت رای",
+    'Vote' => "Vote",
     'RemoveVote' => "برداشتن رای",
     'SharedThisFeedback' => "این بازخورد را به اشتراک گذاشته است.",
     'Done' => "انجام شده",
