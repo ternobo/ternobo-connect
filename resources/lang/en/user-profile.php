@@ -1,21 +1,21 @@
 <?php
 return [
-    'Follow' => "دنبال کردن",
-    'Following' => "دنبال شده",
-    'Unfollow' => "دنبال نکردن",
-    'Connections' => "شبکه",
-    'MutualFriends' => "دوستان مشترک",
-    'Biography' => "بایوگرافی",
-    'EndorseSkill' => "تأیید مهارت",
-    'EndorseSkillQ1' => "به مهارت :fname در :skill چه امتیازی می‌دهید؟",
+    'Follow' => "Follow",
+    'Following' => "Followed",
+    'Unfollow' => "Unfollow",
+    'Connections' => "Connections",
+    'MutualFriends' => "Mutual friends",
+    'Biography' => "Biography",
+    'EndorseSkill' => "Endorse skill",
+    'EndorseSkillQ1' => "How do you rate :fname's :skill skills?",
     /*
     :fname - His/Her first Name.
     :skill - His/Her skill.
 
      */
-    'Good' => "خوب",
-    'VeryGood' => "عالی",
-    'HighlySkilled' => "ماهر",
+    'Good' => "Good",
+    'VeryGood' => "Very Good",
+    'HighlySkilled' => "Expert",
     'EndorseSkillQ2' => "چرا این امتیاز را به :fname می‌دهید؟", /*:fname - His/Her first name.*/
     'EndorseRes1' => "با هم روی یک پروژه کار کرده‌ایم",
     'EndorseRes2' => "مدیریت مستقیم روی کارهای :fname داشته‌ام/دارم", /*:fname - His/Her first name.*/

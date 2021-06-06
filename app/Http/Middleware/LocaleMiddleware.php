@@ -29,8 +29,9 @@ class LocaleMiddleware
         $locale = App::getLocale();
         $trans = (collect(File::allFiles(resource_path('lang/' . $locale)))->flatMap(function ($file) use ($locale) {
             $filename = str_replace(".php", "", str_replace(resource_path('lang/' . $locale) . "/", "", $file->getPathname()));
+            $key = str_replace("/", ".", $filename);
             return [
-                "$locale." . $filename => trans($filename),
+                "$locale." . $key => trans($filename),
             ];
         }));
         View::share("trans", $trans);

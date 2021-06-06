@@ -25,7 +25,7 @@
 				</wire-link>
 				<li class="list-group-item border-top headermenu-item hover-danger" @click="logout">
 					<form action="/logout" method="POST" ref="logoutForm">
-						<button type="button" class="text-right bg-transparent m-0 p-0 border-0 text-grey"><i class="material-icons">power_settings_new</i> {{ __.get("auth/auth.signOut") }}</button>
+						<button type="button" class="text-right bg-transparent m-0 p-0 border-0 text-grey"><i class="material-icons">power_settings_new</i> {{ __.get("auth.auth.signOut") }}</button>
 					</form>
 				</li>
 			</div>

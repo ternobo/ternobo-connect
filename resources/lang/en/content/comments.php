@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'Edit' => "ویرایش",
-    'Remove' => "حذف کردن",
-    'Comment' => "دیدگاه|دیدگاه‌ها",
-    'WhatIsYourComment' => "نظر شما چیست؟",
-    'Reply' => "{0} |{1} 1 پاسخ|{2} 2 پاسخ|[3,Inf] :number پاسخ",
+    'Edit' => "Edit",
+    'Remove' => "Delete",
+    'Comment' => "Comment|Comments",
+    'WhatIsYourComment' => "What's your comment?",
+    'Reply' => "reply|Replies",
     /*
     {0} - No reply.
     {1} - Only 1 reply.
@@ -13,5 +13,5 @@ return [
     [3, Inf - For 3 and more than 3 replies.
     :number - Number of replies.
      */
-    'ReplyTo' => "پاسخ به",
+    'ReplyTo' => "Reply to",
 ];

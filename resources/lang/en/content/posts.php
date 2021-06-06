@@ -1,23 +1,23 @@
 <?php
 
 return [
-    'StartPost' => "به چی فکر میکنی :fname ؟", /*:fname - First Name*/
-    'CreateNewPost' => "تولید محتوای تازه",
-    'Category' => "دسته بندی|دسته بندی‌ها",
-    'CreateCategory' => "نام دسته بندی را وارد کنید",
-    'EditCategories' => "ویرایش دسته بندی‌ها",
-    'PostQ' => "اگر در خویش میل نوشتن سراغ کردی باید سه چیز در تو باشد. شناختی، هنری و سحری (جبران خلیل جبران)",
-    'Titr' => "تیتر",
-    'Text' => "متن",
-    'Media' => "رسانه",
-    'EnterText' => "در رابطه با چه چیزی می‌خواهید صحبت کنید؟",
-    'Publish' => "انتشار",
-    'Draft' => "پیشنویس",
-    'CopyLinkToPost' => "رونوشت پیوند این محتوا",
-    'EmbedThisPost' => "دریافت کد امبد",
-    'EmbedDes' => "رونوشت کد امبد را در وبسایت خود قرار دهید.",
-    'Like' => "پسندیدن",
-    'Liked' => "{0} |{1} پسندیده شده توسط :name1.|{2} پسندیده شده توسط :name1 و :name2|[3,Inf] پسندیده شده توسط :name1، :name2 و :number نفر دیگر",
+    'post-card-text' => ":fname, What are you thinking about?", /*:fname - First Name*/
+    'create-new-post' => "Publish Content",
+    'category' => "Category|Categories",
+    'create-category' => "Enter category name",
+    'edit-categories' => "Edit Categories",
+    'post-placeholder' => "If you have a desire to write in yourself, there must be three things in you. Cognitive, Artistic and Magic (Gibran Khalil Gibran)",
+    'heading' => "title",
+    'text' => "text",
+    'media' => "media",
+    'enter-text' => "What do you want to talk about?",
+    'publish' => "publish",
+    'draft' => "draft",
+    'copy-post-link' => "Copy Post Link",
+    'embed-text' => "Get Embed Code",
+    'embed-description' => "Put the embed code on your website.",
+    'like' => "like",
+    'liked-text' => "{0} |{1} Liked by :name1.|{2} Liked By :name1 and :name2|[3,Inf] Liked by :name1، :name2 and :number other people",
     /*
     {0} - No like.
     {1} - Only 1 like.
@@ -27,9 +27,9 @@ return [
     :name2 - Second person to like your content.
     :number - Number of likes.
      */
-    'AndXmorePeople' => "و :number نفر دیگر",
-    'ShowMore' => "نمایش بیشتر",
-    'ShowLess' => "نمایش کمتر",
-    'enter-your-text' => "متن خو را وارد کنید",
-    'Save' => "ذخیره",
+    'AndXmorePeople' => "and :number other people",
+    'ShowMore' => "Show more",
+    'ShowLess' => "Show less",
+    'enter-your-text' => "Enter text",
+    'Save' => "save",
 ];
