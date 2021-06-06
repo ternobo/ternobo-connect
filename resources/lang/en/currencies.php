@@ -10,7 +10,7 @@ return [
     "HKD" => "Hong Kong dollar",
     "HUF" => "Hungarian forint",
     "JPY" => "Japanese yen",
-    "IRR" => "Iranian Rial",
+    "IRR" => "Iranian Toman",
     "MYR" => "Malaysian ringgit",
     "MXN" => "Mexican peso",
     "TWD" => "New Taiwan dollar",

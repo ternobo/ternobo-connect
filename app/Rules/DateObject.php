@@ -7,15 +7,15 @@ use Illuminate\Contracts\Validation\Rule;
 class DateObject implements Rule
 {
 
-    private $msg = '';
+    private $replaces = '';
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct($msg = '')
+    public function __construct($replaces = '')
     {
-        $this->msg = $msg;
+        $this->replaces = $replaces;
     }
 
     /**
@@ -48,6 +48,6 @@ class DateObject implements Rule
      */
     public function message()
     {
-        return $this->msg;
+        return __('validation.date', $this->replaces);
     }
 }

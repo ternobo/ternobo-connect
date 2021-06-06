@@ -15,7 +15,7 @@ class UsernameValidator implements Rule
     private $reserved_usernames;
 
     private $ignore = null;
-    private $messageText = "نام کاربری نامعتبر است";
+    private $messageText = __("validation.invalid_username");;
     /**
      * Create a new rule instance.
      *
@@ -86,7 +86,7 @@ class UsernameValidator implements Rule
         }
 
         if (!Page::checkSlug($username, $this->ignore)) {
-            $this->messageText = "نام کاربری تکراری است";
+            $this->messageText = __("validation.duplicated_username");
             return false;
         }
 

@@ -104,6 +104,9 @@ class ProfileController extends Controller
         return response()->json(["result" => true, "url" => $user->cover]);
     }
 
+    /**
+     * Save About Me data
+     */
     public function saveAboutMe(Request $request)
     {
         $about = null;
@@ -252,7 +255,7 @@ class ProfileController extends Controller
                     }
                     $validator = Validator::make($data, $validatorRules[$type], $messages);
                     if ($validator->fails()) {
-                        return response()->json(['result' => false, "type" => ProfileController::getTypeName($type), "errors" => $validator->errors()]);
+                        return response()->json(['result' => false, "type" => ProfileController::getAchievementTypeName($type), "errors" => $validator->errors()]);
                     }
                     $result[] = $data;
                 }
@@ -279,7 +282,7 @@ class ProfileController extends Controller
          */
     }
 
-    public static function getTypeName($type)
+    public static function getAchievementTypeName($type)
     {
         switch ($type) {
             case 'langs':

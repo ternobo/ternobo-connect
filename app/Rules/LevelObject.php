@@ -25,7 +25,7 @@ class LevelObject implements Rule
      */
     public function passes($attribute, $value)
     {
-        if(is_object($value) || is_array($value)){
+        if (is_object($value) || is_array($value)) {
             $value = (object) $value;
             if (isset($value->label) && isset($value->level)) {
                 if (gettype($value->level) == 'integer') {
@@ -43,6 +43,6 @@ class LevelObject implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return __("validation.lang_level");
     }
 }

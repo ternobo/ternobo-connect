@@ -35,6 +35,6 @@ class WebsiteURL implements Rule
      */
     public function message()
     {
-        return 'آدرس وب‌سایت نامعبتر است';
+        return __("validation.invalid_wesite");
     }
 }
