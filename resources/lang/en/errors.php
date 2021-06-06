@@ -1,4 +1,4 @@
-<?php 
+<?php
 return [
     'there-is-error' => "خطایی رخ داده",
     'connection-error' => "خطا در برقراری ارتباط",
@@ -23,4 +23,4 @@ return [
     'profile-delete-error' => "خطا در حذف تصویر پروفایل",
     'invalid-mime' => "فرمت فایل انتخابی مجاز نیست",
     'no-content' => "هیچ محتوایی وجود ندارد",
-]
+];

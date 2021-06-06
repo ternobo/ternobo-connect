@@ -14,6 +14,9 @@ import InfiniteLoading from 'vue-infinite-loading';
 import Application from "./Application.vue";
 import Vuex from "vuex";
 import VueMasonry from 'vue-masonry-css';
+import Lang from 'lang.js';
+
+console.log(Lang);
 
 Vue.use(VueMasonry);
 Vue.use(InfiniteLoading, { /* options */ });
@@ -38,10 +41,15 @@ Vue.use(infiniteScroll);
 Vue.prototype.$APP_URL = window.APP_URL;
 Vue.prototype.$axios = axios;
 
+Vue.prototype.__ = new Lang();
+Vue.prototype.__.setMessages(window.trans);
+Vue.prototype.__.setLocale(lang);
+
+document.getElementById('translationScript').remove();
+
 const app = document.getElementById('app');
 
 window.TProgress = TProgress;
-
 Vue.prototype.seen_content = [];
 Vue.prototype.seen_request = [];
 
@@ -74,6 +82,7 @@ window.addEventListener('popstate', () => {
 });
 
 let isSocketConnected = false;
+
 
 document.addEventListener('ternobo:userloaded', event => {
     let notification = new Audio("/sounds/notification1.mp3")

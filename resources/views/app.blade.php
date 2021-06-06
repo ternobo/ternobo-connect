@@ -33,6 +33,10 @@
             });
 
     </script>
+    <script id="translationScript">
+        window.trans = @json($trans);
+
+    </script>
 </head>
 
 <body dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'rtl' }}" class="font-sans antialiased" data-wire='{{ $tuuid }}'>

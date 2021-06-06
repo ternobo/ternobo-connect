@@ -44,19 +44,20 @@ class AppServiceProvider extends ServiceProvider
                         'name' => Config::get('app.name'),
                     ],
                     'direction' => App::getLocale() == "fa" ? 'rtl' : 'ltr',
+                    "locale" => App::getLocale(),
                     "SEO" => SEOTools::generate(),
                     "connectedPeople" => function () {
-                        if (Auth::check()) {
-                            // return Auth::user()->getConnectionsIds();
-                        }
+                        // if (Auth::check()) {
+                        //     return Auth::user()->getConnectionsIds();
+                        // }
                         return [];
                     },
                     'unread_messages_count' => function () {
-                        if (Auth::check()) {
-                            // return Auth::user()->conversations()->whereHas('messages', function ($query) {
-                            //     $query->where("seen", false)->where("sender_id", "!=", Auth::user()->id);
-                            // })->count();
-                        }
+                        // if (Auth::check()) {
+                        // return Auth::user()->conversations()->whereHas('messages', function ($query) {
+                        //     $query->where("seen", false)->where("sender_id", "!=", Auth::user()->id);
+                        // })->count();
+                        // }
                         return 0;
                     },
                     "canDonate" => function () {
@@ -95,9 +96,9 @@ class AppServiceProvider extends ServiceProvider
                         return false;
                     },
                     "waitingConnections" => function () {
-                        if (Auth::check()) {
-                            // return Auth::user()->getWaitingConnectionsIds();
-                        }
+                        // if (Auth::check()) {
+                        //     return Auth::user()->getWaitingConnectionsIds();
+                        // }
                         return [];
                     },
 
@@ -109,7 +110,7 @@ class AppServiceProvider extends ServiceProvider
                     },
                     "currentPage" => function () {
                         if (Auth::check()) {
-                            $current_page = Cookie::get('ternobo_current_page_id') !== null ?
+                            return Cookie::get('ternobo_current_page_id') !== null ?
                             Page::query()
                                 ->with("categories")
                                 ->with("skills")
@@ -118,7 +119,6 @@ class AppServiceProvider extends ServiceProvider
                                 ->with("categories")
                                 ->with("skills")
                                 ->first();
-                            return $current_page;
                         }
                         return null;
 

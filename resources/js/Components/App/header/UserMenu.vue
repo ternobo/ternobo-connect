@@ -15,17 +15,17 @@
 		<div class="card-body p-0">
 			<div class="list-group list-group-flush">
 				<wire-link href="/donations" as="a" class="list-group-item border-0 headermenu-item">
-					<a class="m-0"><i class="material-icons-outlined">savings</i> حمایت‌ها</a>
+					<a class="m-0"><i class="material-icons-outlined">savings</i> {{ __.get("donations.donations") }}</a>
 				</wire-link>
 				<wire-link href="/settings" as="a" class="list-group-item border-0 headermenu-item">
-					<a class="m-0"><i class="material-icons-outlined">settings</i> تنظیمات و حریم خصوصی </a>
+					<a class="m-0"><i class="material-icons-outlined">settings</i> {{ __.get("settings.Settings") }} </a>
 				</wire-link>
 				<wire-link href="/feedbacks" as="a" class="list-group-item border-0 headermenu-item">
-					<a class="m-0"><i class="material-icons-outlined">emoji_objects</i> بازخورد ها </a>
+					<a class="m-0"><i class="material-icons-outlined">emoji_objects</i> {{ __.get("feedbacks.Feedbacks") }} </a>
 				</wire-link>
 				<li class="list-group-item border-top headermenu-item hover-danger" @click="logout">
 					<form action="/logout" method="POST" ref="logoutForm">
-						<button type="button" class="text-right bg-transparent m-0 p-0 border-0 text-grey"><i class="material-icons">power_settings_new</i> خروج</button>
+						<button type="button" class="text-right bg-transparent m-0 p-0 border-0 text-grey"><i class="material-icons">power_settings_new</i> {{ __.get("auth/auth.signOut") }}</button>
 					</form>
 				</li>
 			</div>
@@ -43,7 +43,7 @@ export default {
 			// 	okVariant: "danger border-0",
 			// }).then((value) => {
 			// 	if (value) {
-					
+
 			// 	}
 			// });
 		},
