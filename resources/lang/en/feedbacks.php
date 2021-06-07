@@ -1,12 +1,12 @@
 <?php
 return [
-    'Feedbacks' => "بازخوردها",
-    'Vote' => "Vote",
-    'RemoveVote' => "برداشتن رای",
-    'SharedThisFeedback' => "این بازخورد را به اشتراک گذاشته است.",
-    'Done' => "انجام شده",
-    'Scheduled' => "برنامه‌ریزی شده",
-    'Closed' => "بسته شده",
-    'Voting' => "درحال رأی گیری",
-    'Security' => "ورود و امنیت",
+    'feedback' => "Feedback|Feedbacks",
+    'vote' => "Vote",
+    'remove-vote' => "Remove Vote",
+    'shared-this-feedback' => "Shared this feedback.",
+    'done' => "Done",
+    'scheduled' => "Scheduled",
+    'closed' => "Closed",
+    'voting' => "Voting",
+    'security' => "Login & Security",
 ];

@@ -1,4 +1,4 @@
 <?php
 return [
-    "search-palceholder" => "Search",
+    "search-ph" => "Search",
 ];

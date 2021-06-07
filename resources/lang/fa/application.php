@@ -1,4 +1,4 @@
 <?php
 return [
-    "search-palceholder" => "هرچیز که در جستن آنی، آنی",
+    "search-ph" => "هرچیز که در جستن آنی، آنی",
 ];
