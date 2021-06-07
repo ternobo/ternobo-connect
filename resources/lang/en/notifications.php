@@ -1,11 +1,12 @@
 <?php
 return [
-    'LikedYourPost' => "محتوای شما را پسندید.|محتوای شما را پسندیدند.",
-    'LikeYourComment' => "دیدگاه شما را پسندید.|دیدگاه شما را پسندیدند.",
-    'CommentedYourPost' => "برای محتوای شما نظر گذاشت.",
-    'EndorsedYourSkill' => "مهارت :skill شما را تأیید کرد.|مهارت :skill شما را تأیید کردند.", /*:skill - Your skill*/
-    'DonatedYourPost' => "از محتوای شما حمایت کرد.|از محتوای شما حمایت کردند.",
-    'FollowedYou' => "شما را دنبال می‌کند.|شما دنبال می‌کنند.",
-    'MentionedYou' => "در این محتوا از شما نام برده.",
-    'RepliedYou' => "به نظر شما پاسخ داد.",
+    'liked-your-post' => "Liked your post.",
+    'liked-your-comment' => "Liked your comment.",
+    'commented-your-post' => "Commented on your post.",
+    'endorsed-your-skill' => "Endorsed your :skill skill.", /*:skill - Your skill*/
+    'donated-your-post' => "Donated your post.",
+    'following-you' => "Started following you.",
+    'mentioned-you-post' => "Mentioned you in a post.",
+    'mentioned-you-comment' => "Mentioned you in a comment.",
+    'replied-you' => "Replied to your comment.",
 ];

@@ -1,22 +1,9 @@
 <?php
-
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
-    |
-     */
-
-    'create_acoount' => "ایجاد حساب",
+    'create-acoount' => "ایجاد حساب",
     'login' => "ورود",
     'signup' => "ثبت نام",
-    'signOut' => "خروج",
+    'signout' => "خروج",
     'password' => "رمزعبور",
     'username' => "شناسه کاربری",
     'forgot-password' => "رمز عبور خود را فراموش کرده‌اید؟",
@@ -34,4 +21,10 @@ return [
 
     'failed' => 'شناسه، شماره موبایل اشتباه است',
     'throttle' => 'درخواست بیش از حد مجاز، پس از گذشت :seconds ثانیه مجدد تلاش کنید.',
+
+    'reset' => 'بازیابی رمز عبور',
+    'sent' => 'کد بازیابی رمزعبور برای شما پیامک شد',
+    'throttled' => 'پس از گذشت چند ساعت مجدد تلاش کنید',
+    'token' => 'کد بازیابی رمزعبور اشتباه است',
+    'user' => "هیچ کاربری با این شماره وجود ندارد",
 ];
