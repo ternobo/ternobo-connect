@@ -66,6 +66,7 @@ class SocialMediaTools
             $image = SocialMediaTools::fitPostImage(ImageFacades::make(base_path("storage/app/$media")));
             $image->save(base_path($path), $quality, "webp");
             Storage::delete("$media");
+            return "$media.webp";
         }
         return "$media";
     }
