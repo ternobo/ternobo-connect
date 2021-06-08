@@ -2,7 +2,7 @@
 	<div class="achievement-item" v-if="projects.length > 0">
 		<div class="achievement-header">
 			<div class="achievement-title" @click="toggleDetailed">
-				<h2 class="mb-0 about-me--card--subtitle">پروژه‌ها</h2>
+				<h2 class="mb-0 about-me--card--subtitle">{{ __.choice("user-profile.project", 2) }}</h2>
 				<div class="ms-2 badge-light">{{ projects.length }}</div>
 			</div>
 			<i class="material-icons open-achievements" v-if="!edit" :class="{ active: open }" @click="toggleDetailed">keyboard_arrow_down</i>
@@ -20,7 +20,6 @@
 
 <script>
 import ProjectItem from "./ProjectItem";
-import { v4 as uuidv4 } from "uuid";
 import AchievementsMxixin from "../../../../../Mixins/AchievementsMixin";
 export default {
 	mixins: [AchievementsMxixin],

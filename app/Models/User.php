@@ -84,6 +84,7 @@ class User extends Authenticatable implements Messageable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        "is_admin" => "boolean",
     ];
 
     /**

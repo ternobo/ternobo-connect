@@ -1,15 +1,15 @@
 <template>
-	<b-modal v-model="showModal" hide-footer title="ویرایش مشخصات کاربری" :centered="true">
+	<b-modal v-model="showModal" hide-footer :title="__.get('user-profile.edit-user-info')" :centered="true">
 		<div class="row pt-3">
 			<div class="col-md-6">
-				<MaterialTextField class="w-100" input-class="w-100" :value="firstName" v-model="firstName" :required="true" placeholder="نام"></MaterialTextField>
+				<MaterialTextField class="w-100" input-class="w-100" :value="firstName" v-model="firstName" :required="true" :placeholder="__.get('user-profile.firstname')"></MaterialTextField>
 			</div>
 			<div class="col-md-6">
-				<MaterialTextField class="w-100 mt-md-0 mt-3" input-class="w-100" :value="lastName" v-model="lastName" :required="true" placeholder="نام خانوادگی"></MaterialTextField>
+				<MaterialTextField class="w-100 mt-md-0 mt-3" input-class="w-100" :value="lastName" v-model="lastName" :required="true" :placeholder="__.get('user-profile.lastname')"></MaterialTextField>
 			</div>
 			<div class="col-md-8 d-flex flex-column mt-3">
-				<MaterialTextField class="w-100" input-class="w-100" :value="shortBio" v-model="shortBio" placeholder="عنوان"></MaterialTextField>
-				<small class="font-12 mt-2"> این عنوان زیر نام شما نمایش داده می‌شود </small>
+				<MaterialTextField class="w-100" input-class="w-100" :value="shortBio" v-model="shortBio" :placeholder="__.get('user-profile.title')"></MaterialTextField>
+				<small class="font-12 mt-2">{{ __.get("user-profile.user-title-des") }}</small>
 			</div>
 			<div class="col-md-4 mt-3">
 				<tselect
@@ -17,20 +17,20 @@
 					labelOption="label"
 					valueOption="code"
 					:items="[
-						{ label: 'زن', code: '1' },
-						{ label: 'مرد', code: '2' },
+						{ label: __.get('auth.female'), code: '1' },
+						{ label: __.get('auth.male'), code: '2' },
 					]"
 					v-model="gender"
 					:dir="appDirection"
 				>
-					جنسیت
+					{{ __.get("auth.gender") }}
 				</tselect>
 			</div>
 			<div class="col-md-4 mt-3">
-				<MaterialTextField class="w-100" input-class="w-100" :value="location" v-model="location" placeholder="موقعیت"></MaterialTextField>
+				<MaterialTextField class="w-100" input-class="w-100" :value="location" v-model="location" :placeholder="__.get('user-profile.location')"></MaterialTextField>
 			</div>
 			<div class="col-md-12 d-flex justify-content-end align-items-center mt-3">
-				<loading-button class="btn btn-dark px-4" :loading="loading" @click.native="save">ثبت</loading-button>
+				<loading-button class="btn btn-dark px-4" :loading="loading" @click.native="save">{{ __.get("application.save") }}</loading-button>
 			</div>
 		</div>
 	</b-modal>
@@ -64,13 +64,13 @@ export default {
 			switch (this.gender) {
 				case 1:
 					this.gender = {
-						label: "زن",
+						label: __.get("auth.female"),
 						code: "1",
 					};
 					break;
 				case 2:
 					this.gender = {
-						label: "مرد",
+						label: __.get("auth.male"),
 						code: "2",
 					};
 					break;
@@ -96,7 +96,7 @@ export default {
 					lastname: this.lastName,
 					short_bio: this.shortBio,
 					location: this.location,
-					gender: this.gender,
+					gender: this.gender.code,
 				})
 				.then((response) => {
 					if (response.data.result) {

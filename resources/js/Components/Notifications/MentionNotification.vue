@@ -10,7 +10,7 @@
 						<span>{{ notifications[0].sender.name }}</span>
 						<span class="font-weight-normal date-text">{{ createdAt }}</span>
 					</wire-link>
-					<div class="action">در این محتوا از شما نام برده</div>
+					<div class="action">{{ __.get("notifications.mentioned-you-post") }}</div>
 				</div>
 			</div>
 			<i class="material-icons-outlined text-grey">alternate_email</i>

@@ -10,7 +10,7 @@
 						<span>{{ notifications[0].sender.name }}</span>
 						<span class="font-weight-normal date-text">{{ createdAt }}</span>
 					</div>
-					<div class="action">برای محتوای شما نظر گذاشت</div>
+					<div class="action">{{ __.get("notifications.commented-your-post") }}</div>
 				</div>
 			</div>
 			<i class="material-icons-outlined notif-icon">comment</i>

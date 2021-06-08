@@ -10,7 +10,7 @@
 						<span>{{ notifications[0].sender.name }}</span>
 						<span class="font-weight-normal date-text">{{ createdAt }}</span>
 					</wire-link>
-					<div class="action">به نظر شما پاسخ داد</div>
+					<div class="action">{{ __.get("notifications.replied-you") }}</div>
 				</div>
 			</div>
 			<i class="material-icons-outlined text-muted">comment</i>

@@ -1,6 +1,6 @@
 <template>
 	<div class="socials-container">
-		<h5 class="contact--title"><i class="material-icons">alternate_email</i>راه‌های ارتباطی</h5>
+		<h5 class="contact--title"><i class="material-icons">alternate_email</i>{{ __.get("user-profile.contact-info") }}</h5>
 		<div v-if="loading" class="contact-list">
 			<skeleton width="238px" height="66px" v-for="i in 1" :key="`skeleton_${i}`" />
 		</div>

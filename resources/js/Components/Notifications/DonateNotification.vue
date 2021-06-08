@@ -10,7 +10,7 @@
 						<wire-link class="clickable" :href="notifications[0].sender.slug">{{ notifications[0].sender.name }}</wire-link>
 						<span class="font-weight-normal date-text">{{ createdAt }}</span>
 					</div>
-					<div class="action">از محتوای شما {{ notifications.length > 1 ? "حمایت کردند" : "حمایت کرد" }}</div>
+					<div class="action">{{ __.choice("notifications.donated-your-post", notifications.length) }}</div>
 				</div>
 			</div>
 			<i class="material-icons-outlined text-success">savings</i>

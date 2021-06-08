@@ -2,6 +2,9 @@
 return [
     'settings' => "تنظیمات و حریم خصوصی",
     'account' => "حساب کاربری",
+    "cookies" => "کوکی‌ها",
+    'login-and-security' => "ورود و امنیت",
+    'information-security' => "امنیت اطلاعات",
     'about-ternobo' => "درباره ترنوبو",
     'phone-number' => "شماره همراه",
     'two-step-verification' => "تأیید 2 مرحله‌ای",

@@ -34,21 +34,21 @@
 			</div>
 			<div class="achievement-edit-row">
 				<div>
-					<MaterialTextField v-model="val.name" maxlength="52" :required="true" class="material--sm" placeholder="عنوان"></MaterialTextField>
+					<MaterialTextField v-model="val.name" maxlength="52" :required="true" class="material--sm" :placeholder="__.get('user-profile.test-title')"></MaterialTextField>
 				</div>
 				<div>
 					<tselect :dir="appDirection" v-model="val.skill" maxlength="52" :items="page.skills" style="min-width: 234px">مرتبط با</tselect>
 				</div>
 				<div v-if="showMore">
-					<strong>تاریخ آزمون</strong>
+					<strong>{{ __.get("user-profile.test-date") }}</strong>
 					<DatePicker class="mt-3" v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
 				</div>
 				<div class="d-flex align-items-end" v-if="showMore">
-					<MaterialTextField v-model="val.score" maxlength="15" class="material--sm" placeholder="نمره"></MaterialTextField>
+					<MaterialTextField v-model="val.score" maxlength="15" class="material--sm" :placeholder="__.get('user-profile.test-score')"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
 					<div class="d-flex align-items-center justify-content-between mb-3">
-						<strong>توضیحات</strong>
+						<strong>{{ __.get("user-profile.description") }}</strong>
 						<div class="character-counter">
 							<span class="counter tex-dark">{{ leftCharacter }}</span>
 							<div class="progress me-1 mb-0" style="width: 100px; height: 5px">

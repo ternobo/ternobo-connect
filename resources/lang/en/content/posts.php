@@ -29,8 +29,6 @@ return [
     :number - Number of likes.
      */
     'more-people' => "and :number other people",
-    'show-more' => "Show more",
-    'show-less' => "Show less",
     'enter-your-text' => "Enter text",
     'save' => "save",
 ];

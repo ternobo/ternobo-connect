@@ -19,6 +19,10 @@ return [
     "and" => "و",
     "comma" => "،",
     'liked-text' => "پسندیده شده توسط",
+
+    "unfollow-confirm" => "آیا از دنبال نکردن :fname اطمینان دارید؟",
+    "unfollow" => "دنبال نکردن :fname",
+
     /*
     {0} - No like.
     {1} - Only 1 like.
@@ -29,8 +33,6 @@ return [
     :number - Number of likes.
      */
     'more-people' => "و :number نفر دیگر",
-    'show-more' => "نمایش بیشتر",
-    'show-less' => "نمایش کمتر",
     'enter-your-text' => "متن خو را وارد کنید",
     'save' => "ذخیره",
 ];

@@ -10,7 +10,7 @@
 				</div>
 				<div class="slideup-title">
 					<i class="material-icons me-1">layers</i>
-					برچسب‌ها
+					{{ __.get("user-profile.tags") }}
 				</div>
 				<div>
 					<i class="material-icons" @click="$emit('update:show', false)" v-if="!edit">check</i>

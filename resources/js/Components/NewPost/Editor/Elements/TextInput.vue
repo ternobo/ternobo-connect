@@ -1,7 +1,7 @@
 <template>
 	<div class="textarea-content w-100">
 		<div ref="editable" class="editor--text-input" contenteditable @keydown="onKeyDown" @paste="onPaste" @input="input"></div>
-		<div ref="editableHighlight" class="editor--text-input highlight" placeholder="متن خو را وارد کنید"></div>
+		<div ref="editableHighlight" class="editor--text-input highlight" :placeholder="__.get('content/posts.enter-your-text')"></div>
 	</div>
 </template>
 

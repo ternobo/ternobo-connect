@@ -13,7 +13,7 @@
 						<span v-if="notifications.length > 2">و {{ notifications.length - 2 }} نفر دیگر</span>
 						<span class="font-weight-normal date-text">{{ createdAt }}</span>
 					</div>
-					<div class="action ms-1">شما را {{ notifications.length > 1 ? "دنبال می‌کنند" : "دنبال می‌کند" }}</div>
+					<div class="action">{{ __.choice("notifications.following-you", notifications.length) }}</div>
 				</div>
 			</div>
 			<i class="material-icons text-action">group_add</i>

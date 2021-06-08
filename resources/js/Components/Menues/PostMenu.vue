@@ -9,12 +9,12 @@
 				</template>
 				<dropdown-item v-clipboard="$APP_URL + '/posts/' + post.id">
 					<i class="material-icons text-dark">link</i>
-					<strong>رونوشت پیوند این محتوا</strong>
+					<strong>{{ __.get("content/posts.copy-post-link") }}</strong>
 				</dropdown-item>
 				<dropdown-item @click="$emit('edit')" v-if="checkUser(post.page.user_id) && post.type != 'article'">
 					<div class="d-flex align-items-center">
 						<i class="material-icons-outlined text-dark">edit</i>
-						<strong> ویرایش </strong>
+						<strong> {{ __.get("application.edit") }} </strong>
 					</div>
 				</dropdown-item>
 				<dropdown-item @click.native="$emit('embed')">
@@ -22,9 +22,9 @@
 						<i class="material-icons text-dark">code</i>
 						<div>
 							<div>
-								<strong> دریافت کد امبد </strong>
+								<strong> {{ __.get("content/posts.embed-text") }} </strong>
 							</div>
-							<small class="text-muted"> کد امبد را کپی کرده و در وب‌سایت خودتان قرار دهید. </small>
+							<small class="text-muted"> {{ __.get("content/posts.embed-des") }} </small>
 						</div>
 					</div>
 				</dropdown-item>

@@ -36,15 +36,15 @@
 					<tselect :dir="appDirection" :items="page.skills" maxlength="52" labelOption="name" valueOption="name" v-model="val.skill" style="min-width: 234px">مرتبط با</tselect>
 				</div>
 				<div v-if="showMore">
-					<strong>تاریخ صدور</strong>
+					<strong>{{ __.get("user-profile.issue-date") }}</strong>
 					<DatePicker class="mt-3" v-model="val.date" maxlength="52" :max="{ year: year, month: month }"></DatePicker>
 				</div>
 				<div class="d-flex align-items-end" v-if="showMore">
-					<MaterialTextField v-model="val.from" maxlength="52" class="material--sm" placeholder="صادر کننده"></MaterialTextField>
+					<MaterialTextField v-model="val.from" maxlength="52" class="material--sm" :placeholder="__.get('user-profile.issuer')"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
 					<div class="d-flex align-items-center justify-content-between mb-3">
-						<strong>توضیحات</strong>
+						<strong>{{ __.get("user-profile.description") }}</strong>
 						<div class="character-counter">
 							<span class="counter tex-dark">{{ leftCharacter }}</span>
 							<div class="progress me-1 mb-0" style="width: 100px; height: 5px">

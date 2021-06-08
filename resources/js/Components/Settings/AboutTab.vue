@@ -3,20 +3,20 @@
 		<CookiesModal :show.sync="showCookiesModal"></CookiesModal>
 		<LawsModal :show.sync="showLawsModal"></LawsModal>
 
-		<h2 class="font-18 font-demibold mb-4">امنیت اطلاعات</h2>
+		<h2 class="font-18 font-demibold mb-4">{{ __.get("settings.information-security") }}</h2>
 		<div class="card">
 			<div class="settings-card-body">
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined me-2">gavel</i>
-						<span>قوانین و مقررات</span>
+						<span>{{ __.get("application.law") }}</span>
 					</div>
 					<i class="btn setting-btn material-icons-outlined ms-3" @click="showLawsModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 				</div>
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined me-2">build_circle</i>
-						<span>کوکی‌ها</span>
+						<span>{{ __.get("cookies") }}</span>
 					</div>
 					<i class="btn setting-btn material-icons-outlined ms-3" @click="showCookiesModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 				</div>

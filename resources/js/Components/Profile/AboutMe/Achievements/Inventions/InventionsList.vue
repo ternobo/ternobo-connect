@@ -2,7 +2,7 @@
 	<div class="achievement-item" v-if="inventions.length > 0">
 		<div class="achievement-header">
 			<div class="achievement-title" @click="toggleDetailed">
-				<h2 class="mb-0 about-me--card--subtitle">اختراعات</h2>
+				<h2 class="mb-0 about-me--card--subtitle">{{ __.get("user-profile.patent") }}</h2>
 				<div class="ms-2 badge-light">{{ inventions.length }}</div>
 			</div>
 			<i class="material-icons open-achievements" v-if="!edit" :class="{ active: open }" @click="toggleDetailed">keyboard_arrow_down</i>

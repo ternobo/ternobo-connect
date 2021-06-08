@@ -2,7 +2,7 @@
 	<div class="card">
 		<div class="card-body">
 			<div class="about-me--card-title-container mb-3">
-				<h2 class="about-me--card-title">بایوگرافی</h2>
+				<h2 class="about-me--card-title">{{ __.get("user-profile.biography") }}</h2>
 				<div class="character-counter" v-if="edit">
 					<span class="counter tex-dark">{{ leftCharacter }}</span>
 					<div class="progress me-1 mb-0" style="width: 100px; height: 5px">

@@ -10,7 +10,7 @@
 					<div class="currency-selector">
 						<div>
 							<img src="/images/iran-flag.png" alt="iran" width="24" />
-							<span class="ms-2">تومان ایران</span>
+							<span class="ms-2">{{ __.get("currencies.IRR") }}</span>
 						</div>
 					</div>
 					<div class="d-flex justify-content-between payment-way">

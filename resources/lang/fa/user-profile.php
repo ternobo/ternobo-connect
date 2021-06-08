@@ -6,13 +6,26 @@ return [
     'connections' => "شبکه",
     'mutual-friends' => "دوستان مشترک",
     'biography' => "بایوگرافی",
+    'achievements' => "دستاورد‌ها",
     'endorse-skill' => "تأیید مهارت",
     'endorse-skill-q1' => "به مهارت :fname در :skill چه امتیازی می‌دهید؟",
+    'published' => "منتشر شده",
     /*
     :fname - His/Her first Name.
     :skill - His/Her skill.
-
      */
+
+    "tabs" => [
+        'about-me' => "درباره من",
+        'activities' => "فعالیت‌ها",
+        'contact' => "تماس با می",
+    ],
+
+    'firstname' => "نام",
+    'lastname' => "نام خانوادگی",
+    'title' => "عنوان",
+    'location' => "موقعیت",
+
     'good' => "خوب",
     'very-good' => "عالی",
     'highly-skilled' => "ماهر",
@@ -30,8 +43,10 @@ return [
     'issue-date' => "تاریخ صدور",
     'awards' => "جایزه|جوایز",
     'course' => "دوره|دوره‌ها",
+    'languages' => "زبان‌ها",
+    'language' => "زبان‌ها",
     'course-name' => "نام دوره",
-    'course-number' => "کد دوره",
+    'course-code' => "کد دوره",
     'patent' => "اختراع|اختراعات",
     'patent-title' => "عنوان اختراع",
     'patent-office' => "اداره ثبت اختراع",
@@ -45,19 +60,22 @@ return [
     'limited-working' => "متوسط",
     'full-professional' => "حرفه‌ای",
     'native' => "زبان مادری",
-    'project' => "پروژه|پروژه‌ها",
+    'projects' => "پروژه‌ها",
+    'project' => "پروژه",
     'project-name' => "نام پروژه",
     'currently-working-project' => "همچنان در حال کار بر روی این پروژه هستم",
     'start-date' => "تاریخ شروع",
     'end-date' => "تاریخ پایان",
     'project-url' => "لینک پروژه",
     'present' => "تا کنون",
+    "publications" => "انتشارات",
     'publication' => "انتشار|انتشارات",
     'publication-title' => "عنوان",
     'publisher' => "نام ناشر",
     'publication-date' => "تاریخ انتشار",
     'publication-url' => "لینک",
-    'test' => "آزمون|آزمون‌ها",
+    'test' => "آزمون‌ها",
+    'test' => "آزمون",
     'test-title' => "عنوان آزمون",
     'test-score' => "نمره آزمون",
     'test-date' => "تاریخ آزمون",
@@ -65,10 +83,21 @@ return [
     'website' => "وبسایت|وبسایت‌ها",
     'remove-website' => "آیا از حذف وبسایت :website اطمینان دارید؟", /*:website - Your website*/
     'add-website' => "افزودن وبسایت",
+    'add' => "افزودن",
+    "description" => "توضیحات",
     'website-type' => "نوع وبسایت",
     'website-url' => "آدرس وبسایت",
     'contact-info' => "راه‌های ارتباطی",
     'likes' => "پسندها",
     'joined' => "ملحق شده در",
     'nominated-by' => "دعوت شده توسط",
+
+    "posts" => "مطالب",
+    "likes" => "پسند‌ها",
+    "comments" => "دیدگاه‌ها",
+    "tags" => "برچسب‌ها",
+
+    "profile" => "پروفایل",
+
+    "followed" => "<b>:name</b> دنبال می‌کند",
 ];

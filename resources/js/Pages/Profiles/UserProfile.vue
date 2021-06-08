@@ -10,11 +10,13 @@
 							<i class="material-icons text-muted hover-dark" v-if="edit" @click="cancelEdit">close</i>
 						</div>
 						<button class="btn d-flex align-items-center justify-content-center btn-edit" @click="doEdit">
-							<span v-if="!edit && $root.isDesktop"><i class="material-icons-outlined">edit</i> <span style="font-weight: 600"> ویرایش</span></span>
+							<span v-if="!edit && $root.isDesktop"
+								><i class="material-icons-outlined">edit</i> <span style="font-weight: 600"> {{ __.get("application.edit") }}</span></span
+							>
 							<i v-if="!edit && !$root.isDesktop" class="material-icons-outlined">edit</i>
 
 							<div class="d-flex align-items-center justify-content-center" v-if="edit">
-								{{ $root.isDesktop ? "ذخیره" : "" }}
+								{{ $root.isDesktop ? __.get("content/posts.save") : "" }}
 								<i class="material-icons-outlined" v-if="!$root.isDesktop">save</i>
 								<div style="height: 14px; width: 14px; border-width: 2px" v-if="loadingSave" class="ms-2 loadingspinner"></div>
 							</div>
@@ -22,18 +24,22 @@
 					</div>
 					<div class="d-flex algin-items-center" v-else-if="current_tab == 'activities' && canEdit">
 						<button class="btn btn-edit" @click="draft = !draft">
-							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-if="!draft"><i class="material-icons-outlined" :class="{ 'me-1': $root.isDesktop }">save</i><span style="font-weight: 600" v-if="$root.isDesktop"> پیش‌نویس </span></div>
-							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-else><i class="material-icons-outlined" :class="{ 'me-1': $root.isDesktop }">article</i><span style="font-weight: 600" v-if="$root.isDesktop"> منتشر شده </span></div>
+							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-if="!draft">
+								<i class="material-icons-outlined" :class="{ 'me-1': $root.isDesktop }">save</i><span style="font-weight: 600" v-if="$root.isDesktop"> {{ __.get("content/posts.draft") }} </span>
+							</div>
+							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-else>
+								<i class="material-icons-outlined" :class="{ 'me-1': $root.isDesktop }">article</i><span style="font-weight: 600" v-if="$root.isDesktop"> {{ __.get("user-profile.published") }} </span>
+							</div>
 						</button>
 					</div>
 				</template>
-				<tab v-if="hasAbout || canEdit" name="درباره من" id="home" :href="'/' + page.slug" :selected="current_tab === 'home'">
+				<tab v-if="hasAbout || canEdit" :name="__.get('user-profile.tabs.about-me')" id="home" :href="'/' + page.slug" :selected="current_tab === 'home'">
 					<div class="w-100 d-flex justify-content-center py-3" v-if="loadingTab">
 						<loading-spinner class="image__spinner" />
 					</div>
 					<AboutTab v-else ref="about" :edit="edit" :page="page"></AboutTab>
 				</tab>
-				<tab v-if="hasActivity || canEdit" name="فعالیت‌ها" id="activities" :href="'/' + page.slug + '/activities'" :selected="current_tab === 'activities'">
+				<tab v-if="hasActivity || canEdit" :name="__.get('user-profile.tabs.activities')" id="activities" :href="'/' + page.slug + '/activities'" :selected="current_tab === 'activities'">
 					<div class="row">
 						<div class="categories-sidebar" v-if="$root.isDesktop">
 							<Categories v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug"></Categories>
@@ -68,19 +74,14 @@
 						</div>
 					</div>
 				</tab>
-				<tab name="تماس با من" id="contact" :href="'/' + page.slug + '/contact'" :selected="current_tab === 'contact'">
+				<tab :name="__.get('user-profile.tabs.contact')" id="contact" :href="'/' + page.slug + '/contact'" :selected="current_tab === 'contact'">
 					<ContactTab ref="contacts" :edit="edit" :page="page"></ContactTab>
 				</tab>
 			</tabs>
 		</div>
 		<sidebar-left v-if="$root.isDesktop">
 			<div class="card" style="margin-bottom: 16px" v-if="pages.length > 0">
-				<div class="card-header pt-4 px-4 pb-0 font-14">
-					<strong>
-						{{ page.slug }}
-					</strong>
-					<span class="ms-1"> دنبال می‌کند </span>
-				</div>
+				<div class="card-header pt-4 px-4 pb-0 font-14" v-html="__.get('user-profile.followed', { name: page.user.first_name })"></div>
 				<div class="people-suggestion-card-body card-body">
 					<people-suggestion v-for="page in pages" :page="page" :key="page.id"></people-suggestion>
 				</div>
