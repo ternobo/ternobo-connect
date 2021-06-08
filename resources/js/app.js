@@ -45,6 +45,8 @@ Vue.prototype.__ = new Lang();
 Vue.prototype.__.setMessages(window.trans);
 Vue.prototype.__.setLocale(lang);
 
+window.__ = Vue.prototype.__;
+
 document.getElementById('translationScript').remove();
 
 const app = document.getElementById('app');

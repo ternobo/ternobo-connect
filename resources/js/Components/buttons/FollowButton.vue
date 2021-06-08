@@ -13,8 +13,10 @@ export default {
 			this.page_id = page;
 			if (this.$store.state.shared.followings.includes(String(page))) {
 				this.followed = true;
-				this.text = "دنبال شده";
+				this.text = this.__.get("user-profile.following");
 				this.$emit("followed");
+			} else {
+				this.text = this.__.get("user-profile.follow");
 			}
 		}
 	},

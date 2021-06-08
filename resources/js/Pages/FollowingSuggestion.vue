@@ -3,7 +3,7 @@
 		<div class="position-sticky" style="top: 0; z-index: 1000">
 			<div class="register-header">
 				<div class="d-flex align-items-center">
-					<loading-button :loading="loading" :disabled="followings < 3" class="btn btn-primary" @click.native="next">بعدی</loading-button>
+					<loading-button :loading="loading" :disabled="followings < 3" class="btn btn-primary" @click.native="next">{{ __.get("pagination.next") }}</loading-button>
 					<div class="ms-2 followed-peoplenum">{{ followings }}/3</div>
 				</div>
 				<img src="/images/logo.svg" />
@@ -11,7 +11,7 @@
 		</div>
 		<div class="register-content flex-column">
 			<div class="text-center my-4">
-				<h2 class="font-18">پیشنهاد دنبال کردن</h2>
+				<h2 class="font-18">{{ __.get("follow-suggestion.suggestions-title") }}</h2>
 				<p class="text-center">برای بهترین تجربه استفاده از خدمات حداقل <b>۳ نفر</b> را دنبال کنید.</p>
 			</div>
 			<div class="container-fluid">

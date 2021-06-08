@@ -1,10 +1,10 @@
 <template>
-	<b-modal v-model="showModal" hide-footer title="جزئیات حمایت" modal-class="new-post-modal" size="md" :centered="true">
+	<b-modal v-model="showModal" hide-footer :title="__.get('donations.donate-details')" modal-class="new-post-modal" size="md" :centered="true">
 		<div class="new-post position-relative">
 			<div class="selections">
 				<div class="donation-modal-header">
 					<div class="donate-payer-info">
-						<span class="donated_by">حامی:‌ </span>
+						<span class="donated_by">{{ __.get("donations.supporter") }}:‌ </span>
 						<lazy-image :src="profile" circle :loadingColor="skeletonOptions.profileColor" class="profile-xxsm tip-profile mb-0" imgClass="profile-xxsm"></lazy-image>
 						<strong class="tip-name">{{ name }}</strong>
 					</div>
@@ -12,7 +12,7 @@
 					<div class="donation-amount-detail">
 						<div :class="{ 'badge-success': !tip.donate_by_me, 'badge-blue': tip.donate_by_me }">
 							<strong class="font-demibold">{{ formatNumber(tip.amount, "0,0") }}</strong>
-							<span :class="{ received: !tip.donate_by_me }">تومان</span>
+							<span :class="{ received: !tip.donate_by_me }">{{ __.get("currencies.IRR") }}</span>
 						</div>
 						<i class="material-icons donate-type" :class="{ received: !tip.donate_by_me }">play_for_work</i>
 					</div>
@@ -22,23 +22,23 @@
 
 		<div class="donation-detail-content">
 			<div class="donation-detail-item">
-				<span class="text-grey font-16 font-demibold">تاریخ</span>
+				<span class="text-grey font-16 font-demibold">{{ __.get("donations.date") }}</span>
 				<span class="text-grey font-16 font-demibold">{{ date }}</span>
 			</div>
 			<div class="donation-detail-item">
-				<span class="text-grey font-16 font-demibold">ساعت</span>
+				<span class="text-grey font-16 font-demibold">{{ __.get("donations.time") }}</span>
 				<span class="text-grey font-16 font-demibold">{{ time }}</span>
 			</div>
 			<div class="donation-detail-item">
-				<span class="text-grey font-16 font-demibold">کد تراکنش</span>
+				<span class="text-grey font-16 font-demibold">{{ __.get("donations.transaction-id") }}</span>
 				<span class="text-grey font-16 font-demibold">{{ tip.meta.transaction_id }}</span>
 			</div>
 			<div class="donation-detail-item">
-				<span class="text-grey font-16 font-demibold">شماره پیگیری</span>
+				<span class="text-grey font-16 font-demibold">{{ __.get("donations.reference-id") }}</span>
 				<span class="text-grey font-16 font-demibold">{{ tip.meta.reference_id }}</span>
 			</div>
 			<div class="donation-detail-item">
-				<span class="text-grey font-16 font-demibold">آی‌پی پرداخت کننده</span>
+				<span class="text-grey font-16 font-demibold">{{ __.get("donations.supporter-ip") }}</span>
 				<span class="text-grey font-16 font-demibold">{{ tip.meta.ip }}</span>
 			</div>
 		</div>
@@ -59,9 +59,9 @@ export default {
 		},
 		name() {
 			if (!this.tip.donate_by_me && this.tip.anonymous) {
-				return "ناشناس";
+				return this.__.get("donations.unknown");
 			}
-			return this.tip.donate_by_me ? "شما" : this.tip.user.name;
+			return this.tip.donate_by_me ? this.__.get("donations.you") : this.tip.user.name;
 		},
 		profile() {
 			if (!this.tip.donate_by_me && this.tip.anonymous) {

@@ -2,6 +2,7 @@
 return [
     'report' => "گزارش",
     'report-post' => "گزارش محتوا",
+    'report-comment' => "گزارش دیدگاه",
     'report-page' => "گزارش صفحه",
     'report-comment' => "گزارش دیدگاه",
     'report-des-post' => "این محتوا در تضاد با قوانین است.",

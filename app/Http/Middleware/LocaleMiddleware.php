@@ -30,8 +30,19 @@ class LocaleMiddleware
         $trans = (collect(File::allFiles(resource_path('lang/' . $locale)))->flatMap(function ($file) use ($locale) {
             $filename = str_replace(".php", "", str_replace(resource_path('lang/' . $locale) . "/", "", $file->getPathname()));
             $key = str_replace("/", ".", $filename);
+            $result = trans($filename);
+            // foreach ($result as $key => $value) {
+            //     if (gettype($value) == "string") {
+            //         $result[$key] = preg_replace("/(:)(\w+)/", '{{$2}}', $result[$key]);
+            //     } else if (gettype($result) == "array") {
+            //         foreach ($result[$key] as $list_key => $value) {
+            //             $result[$key][$list_key] = preg_replace("/(:)(\w+)/", '{{$2}}', $result[$key][$list_key]);
+            //         }
+            //     }
+            // }
+
             return [
-                "$locale." . $key => trans($filename),
+                "$locale." . $key => $result,
             ];
         }));
         View::share("trans", $trans);

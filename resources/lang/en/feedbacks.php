@@ -1,6 +1,7 @@
 <?php
 return [
     'feedback' => "Feedback|Feedbacks",
+    'feedbacks' => "Feedbacks",
     'vote' => "Vote",
     'remove-vote' => "Remove Vote",
     'shared-this-feedback' => "Shared this feedback.",

@@ -1,5 +1,5 @@
 <template>
-	<b-modal v-model="showModal" hide-footer title="دسته‌بندی‌ها" header-class="category-select-modal" modal-class="new-post-modal" size="md" :centered="true">
+	<b-modal v-model="showModal" hide-footer :title="__.get('application.categories')" header-class="category-select-modal" modal-class="new-post-modal" size="md" :centered="true">
 		<template #modal-header-close> arrow_back </template>
 		<div class="new-post">
 			<div class="selections">

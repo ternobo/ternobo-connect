@@ -3,7 +3,7 @@
 		<div class="tag-page-header">
 			<div class="tag-card">
 				<div class="d-flex align-content-center">
-					<strong class="tag">#{{ tag }}</strong>
+					<strong class="tag" ref="tagelem">#{{ tag }}</strong>
 					<small>{{ posts.total }} مطلب</small>
 				</div>
 				<loading-button class="btn follow-btn" @click.native="follow" :class="{ 'btn-followed-connected': isFollowed }" :loading="loading">دنبال کردن</loading-button>
@@ -86,6 +86,9 @@ export default {
 		this.page = this.posts.current_page;
 		this.next_page_url = this.posts.next_page_url;
 		this.isFollowed = this.followed;
+		this.$nextTick(() => {
+			twemoji.parse(this.$refs.tagelem);
+		});
 	},
 	data() {
 		return {
