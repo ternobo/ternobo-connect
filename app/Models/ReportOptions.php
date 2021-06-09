@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class ReportOptions extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'key',
+        'for',
+        'text',
+        'description',
+        'parent',
+    ];
+
 }
