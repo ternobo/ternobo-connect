@@ -10,6 +10,7 @@ return [
     "copy" => "رونوشت",
     "copied" => "کپی شد",
     "send" => "ارسال",
+    'add' => "افزودن",
     'more-people' => "و :number نفر دیگر",
     'show-more' => "نمایش بیشتر",
     'show-less' => "نمایش کمتر",
