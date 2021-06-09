@@ -18,7 +18,6 @@
 
 <script>
 import ModalMixin from "../../Mixins/Modal";
-import { Cropper } from "vue-advanced-cropper";
 import TagInput from "../inputs/TagInput.vue";
 export default {
 	components: { TagInput },
