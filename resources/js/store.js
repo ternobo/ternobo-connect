@@ -13,9 +13,18 @@ export default store({
 
         url: window.location.pathname,
 
+        reportReasons: [],
+
         profileEdit: false,
     },
     actions: {
+        loadReportReasons({ commit }) {
+            return axios
+                .get("/report-reasons")
+                .then((response) => {
+                    commit("setReportReasons", response.data.options);
+                });
+        },
         loadChats({ commit }) {
             return axios
                 .post("/chats")
@@ -58,6 +67,10 @@ export default store({
         }
     },
     mutations: {
+        setReportReasons(state, payload) {
+            state.reportReasons = payload;
+        },
+
         // Profile
         setProfileEdit(state, payload) {
             state.profileEdit = payload;

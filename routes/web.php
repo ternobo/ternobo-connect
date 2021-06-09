@@ -22,12 +22,8 @@ Passport::routes();
 TernoboWire::routes();
 Broadcast::routes();
 
-Route::get('/test', function () {
-    dd(Hash::make("12345678"));
-});
-
 Route::post('/ternobo-actions/update', "AutoUpdateController@update");
-
+Route::get("/report-reasons", "ReportController@getReportOptions");
 require base_path("routes/sitemap_routes.php");
 
 /**

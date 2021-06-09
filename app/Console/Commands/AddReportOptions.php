@@ -54,8 +54,8 @@ class AddReportOptions extends Command
                 $parent = $reasonModel->id;
                 ReportOptions::create([
                     'key' => $subreasonKey,
-                    'text' => $subreasons['title'],
-                    'description' => $subreasons['description'],
+                    'text' => $subreason['title'],
+                    'description' => $subreason['description'],
                     'for' => "page|post|comment",
                     "parent" => $parent,
                 ]);
