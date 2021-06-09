@@ -1,5 +1,6 @@
 <?php
 return [
-    'no-bookmarks' => "هیچ محتوایی را نشان نکرده‌اید",
-    'no-more-content' => "هیچ محتوای بیشتری وجود ندارد",
+    'no-bookmarks' => "You haven't bookmark any content",
+    'no-more-bookmarks' => 'There is no more bookmarks',
+    'no-more-content' => "There is no more content",
 ];

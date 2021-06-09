@@ -1,31 +1,32 @@
 <?php
 return [
-    'follow' => "دنبال کردن",
-    'following' => "دنبال شده",
-    'unfollow' => "دنبال نکردن",
     'connections' => "شبکه",
     'mutual-friends' => "دوستان مشترک",
-    'biography' => "بایوگرافی",
-    'achievements' => "دستاورد‌ها",
-    'endorse-skill' => "تأیید مهارت",
-    'endorse-skill-q1' => "به مهارت :fname در :skill چه امتیازی می‌دهید؟",
-    'published' => "منتشر شده",
-    /*
-    :fname - His/Her first Name.
-    :skill - His/Her skill.
-     */
+    'joined' => "ملحق شده در",
+    'nominated-by' => "دعوت شده توسط",
+
+    'edit-user-info' => "ویرایش مشخصات کاربری",
+    'title' => "عنوان",
+    'user-title-des' => "این عنوان زیر نام شما نمایش داده می‌شود",
+    'location' => "موقعیت",
 
     "tabs" => [
         'about-me' => "درباره من",
         'activities' => "فعالیت‌ها",
-        'contact' => "تماس با می",
+        'contact-me' => "تماس با من",
     ],
 
-    'firstname' => "نام",
-    'lastname' => "نام خانوادگی",
-    'title' => "عنوان",
-    'location' => "موقعیت",
+    'published' => "منتشر شده",
 
+    'biography' => "بایوگرافی",
+
+    'skill' => "مهارت|مهارت‌ها",
+    'endorse-skill' => "تأیید مهارت",
+    'endorse-skill-q1' => "به مهارت :fname در :skill چه امتیازی می‌دهید؟",
+        /*
+            :fname - His/Her first Name.
+            :skill - His/Her skill.
+        */
     'good' => "خوب",
     'very-good' => "عالی",
     'highly-skilled' => "ماهر",
@@ -36,15 +37,15 @@ return [
     'endorse-res-4' => "درمورد :fname شنیده‌ام", /*:fname - His/Her first name.*/
     'endorse-res-5' => "هیچکدام از موارد بالا",
     'choose-reason' => "انتخاب دلیل",
-    'edit-user-info' => "ویرایش مشخصات کاربری",
-    'user-title-des' => "این عنوان زیر نام شما نمایش داده می‌شود",
+    'remove-skill' => "آیا از حذف مهارت :skill اطمینان دارید؟", /*:skill - Your skill*/
+    
+    'achievements' => "دستاورد‌ها",
     'associated-with' => "مرتبط با",
     'issuer' => "صادر کننده",
     'issue-date' => "تاریخ صدور",
     'awards' => "جایزه|جوایز",
     'course' => "دوره|دوره‌ها",
-    'languages' => "زبان‌ها",
-    'language' => "زبان‌ها",
+    'language' => "زبان|زبان‌ها",
     'course-name' => "نام دوره",
     'course-code' => "کد دوره",
     'patent' => "اختراع|اختراعات",
@@ -52,7 +53,7 @@ return [
     'patent-office' => "اداره ثبت اختراع",
     'patent-number' => "شماره ثبت",
     'patent-url' => "لینک اختراع",
-    'status' => "وضعیت",
+    'patent-status' => "وضعیت",
     'patent-issued' => "حق ثبت اختراع صادر شده",
     'patent-pending' => "حق ثبت اختراع درحال صادر شدن است",
     'proficiency' => "سطح",
@@ -60,42 +61,33 @@ return [
     'limited-working' => "متوسط",
     'full-professional' => "حرفه‌ای",
     'native' => "زبان مادری",
-    'projects' => "پروژه‌ها",
-    'project' => "پروژه",
+    'project' => "پروژه|پروژه‌ها",
     'project-name' => "نام پروژه",
     'currently-working-project' => "همچنان در حال کار بر روی این پروژه هستم",
     'start-date' => "تاریخ شروع",
     'end-date' => "تاریخ پایان",
     'project-url' => "لینک پروژه",
     'present' => "تا کنون",
-    "publications" => "انتشارات",
     'publication' => "انتشار|انتشارات",
     'publication-title' => "عنوان",
     'publisher' => "نام ناشر",
     'publication-date' => "تاریخ انتشار",
     'publication-url' => "لینک",
-    'test' => "آزمون‌ها",
-    'test' => "آزمون",
+    'test' => "آزمون|آزمون‌ها",
     'test-title' => "عنوان آزمون",
     'test-score' => "نمره آزمون",
     'test-date' => "تاریخ آزمون",
-    'remove-skill' => "آیا از حذف مهارت :skill اطمینان دارید؟", /*:skill - Your skill*/
     'website' => "وبسایت|وبسایت‌ها",
     'remove-website' => "آیا از حذف وبسایت :website اطمینان دارید؟", /*:website - Your website*/
     'add-website' => "افزودن وبسایت",
-    'add' => "افزودن",
     "description" => "توضیحات",
     'website-type' => "نوع وبسایت",
     'website-url' => "آدرس وبسایت",
     'contact-info' => "راه‌های ارتباطی",
-    'likes' => "پسندها",
-    'joined' => "ملحق شده در",
-    'nominated-by' => "دعوت شده توسط",
 
-    "posts" => "مطالب",
-    "likes" => "پسند‌ها",
-    "comments" => "دیدگاه‌ها",
-    "tags" => "برچسب‌ها",
+    "posts" => "محتوا|محتواها",
+    "like" => "پسند|پسندها",
+    "comments" => "دیدگاه|دیدگاه‌ها",
 
     "profile" => "پروفایل",
 

@@ -15,24 +15,10 @@ return [
     'copy-post-link' => "رونوشت پیوند این محتوا",
     'embed-text' => "دریافت کد امبد",
     'embed-des' => "رونوشت کد امبد را در وبسایت خود قرار دهید.",
-    'like' => "پسندیدن",
+    'like-post' => "پسندیدن",
     "and" => "و",
     "comma" => "،",
     'liked-text' => "پسندیده شده توسط",
-
-    "unfollow-confirm" => "آیا از دنبال نکردن :fname اطمینان دارید؟",
-    "unfollow" => "دنبال نکردن :fname",
-
-    /*
-    {0} - No like.
-    {1} - Only 1 like.
-    {2} - Only 2 likes.
-    [3, Inf - For 3 and more than 3 likes.
-    :name1 - First person to like your content.
-    :name2 - Second person to like your content.
-    :number - Number of likes.
-     */
-    'more-people' => "و :number نفر دیگر",
     'enter-your-text' => "متن خو را وارد کنید",
     'save' => "ذخیره",
 ];
