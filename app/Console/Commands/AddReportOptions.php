@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\ReportOptions;
+use App\Models\ReportOption;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
@@ -43,7 +43,7 @@ class AddReportOptions extends Command
             return Str::startsWith($key, 'rep-reason-');
         }, ARRAY_FILTER_USE_KEY);
         foreach ($reasons as $key => $reason) {
-            $reasonModel = ReportOptions::create([
+            $reasonModel = ReportOption::create([
                 'key' => $key,
                 'text' => $reason['text'],
                 'for' => "page|post|comment",
@@ -52,7 +52,7 @@ class AddReportOptions extends Command
             $subreasons = $reason['subreasons'];
             foreach ($subreasons as $subreasonKey => $subreason) {
                 $parent = $reasonModel->id;
-                ReportOptions::create([
+                ReportOption::create([
                     'key' => $subreasonKey,
                     'text' => $subreason['title'],
                     'description' => $subreason['description'],
