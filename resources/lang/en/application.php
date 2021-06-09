@@ -9,7 +9,6 @@ return array(
     'save' => "Save",
     'edit' => 'Edit',
     'law' => 'Community Guidelines',
-    'laws' => 'About Us',
     'load-more' => 'Load More',
     'more-people' => 'and :number other people',
     'search-ph' => 'Search',

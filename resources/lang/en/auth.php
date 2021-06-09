@@ -2,7 +2,6 @@
 
 return array (
   'create-account' => 'Create Account',
-  'create-acoount' => 'Create Account',
   'enter-your-picture' => 'Choose a picture',
   'failed' => 'These credentials do not match our records.',
   'female' => 'Female',
