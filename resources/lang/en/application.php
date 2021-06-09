@@ -10,6 +10,7 @@ return [
     'copy' => 'Copy',
     'copied' => 'Copied',
     'send' => 'Send',
+    'add' => "Add",
     'more-people' => "and :number other people",
     'show-less' => 'Show less',
     'show-more' => 'Show more',
