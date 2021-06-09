@@ -2,8 +2,7 @@
 return [
     "search-ph" => "هرچیز که در جستن آنی، آنی",
     "about-us" => "درباره ما",
-    'law' => 'Community Guidelines',
-    "categories" => "دسته‌بندی‌ها",
+    'Comuunity-Guidelines' => 'دستورالعمل‌های ترنوبو',
     "load-more" => "باگذاری بیشتر",
     "delete" => "حذف",
     'save' => "ذخیره",
@@ -14,4 +13,7 @@ return [
     'more-people' => "و :number نفر دیگر",
     'show-more' => "نمایش بیشتر",
     'show-less' => "نمایش کمتر",
+    'follow' => "دنبال کردن",
+    'following' => "دنبال شده",
+    'unfollow' => "دنبال نکردن",
 ];
