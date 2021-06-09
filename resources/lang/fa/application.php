@@ -2,10 +2,11 @@
 return [
     "search-ph" => "هرچیز که در جستن آنی، آنی",
     "about-us" => "درباره ما",
-    "laws" => "قوانین و مقررات",
+    'law' => 'Community Guidelines',
     "categories" => "دسته‌بندی‌ها",
     "load-more" => "باگذاری بیشتر",
     "delete" => "حذف",
+    'save' => "ذخیره",
     "edit" => "ویرایش",
     "copy" => "رونوشت",
     "copied" => "کپی شد",

@@ -176,7 +176,7 @@ div.page-cover {
 
         .connection-actions {
             color: $grey;
-            margin-left: 12px;
+            margin-left: 24px;
             line-height: 20px;
             transition: 0.3s all;
 
@@ -262,9 +262,9 @@ div.page-cover {
                 font-weight: 600;
                 color: $text-color;
                 -webkit-user-select: text;
-                   -moz-user-select: text;
-                    -ms-user-select: text;
-                        user-select: text;
+                -moz-user-select: text;
+                -ms-user-select: text;
+                user-select: text;
             }
 
             @media screen and (max-width: $sm-size) {
