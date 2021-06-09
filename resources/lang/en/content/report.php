@@ -4,83 +4,123 @@ return [
     'report-post' => "Report this post",
     'report-des-post' => "This post is offensive or the account is hacked",
 
-    'report-modal-title' => "Why are you reporting this?",
-
     'description-report' => "Description",
+
+    'report-modal-title' => "Why are you reporting this?",
 
     'rep-reason-1' => [
         'text' => "Suspicious or fake",
         'subreasons' => [
-            'rep-title-11' => "Misinformation",
-            'rep-des-11' => "Spreading false or misleading information as if it were factual",
-            'rep-title-12' => "Fraud or scam",
-            'rep-des-12' => "Deceiving others to obtain money or access private information",
-            'rep-title-13' => "Spam",
-            'rep-des-13' => "Sharing irrelevant or repeated content to boost visibility or for monetary gain",
-            'rep-title-14' => "Fake account",
-            'rep-des-14' => "Inaccurate or misleading representation",
-            'rep-title-15' => "Hacked account",
-            'rep-des-15' => "Unauthorized account takeover",
+            'reason-1' => [
+                'title' => "Misinformation",
+                'description' => "Spreading false or misleading information as if it were factual",
+            ],
+            'reason-2' => [
+                'title' => "Fraud or scam",
+                'description' => "Deceiving others to obtain money or access private information",
+            ],
+            'reason-3' => [
+                'title' => "Spam",
+                'description' => "Sharing irrelevant or repeated content to boost visibility or for monetary gain",
+            ],
+            'reason-4' => [
+                'title' => "Fake account",
+                'description' => "Inaccurate or misleading representation",
+            ],
+            'reason-5' => [
+                'title' => "Hacked account",
+                'description' => "Unauthorized account takeover",
+            ],
         ],
     ],
 
     'rep-reason-2' => [
         'text' => "Harassment or hateful speech",
         'subreasons' => [
-            'rep-title-21' => "Bullying or trolling",
-            'rep-des-21' => "Attacking or intimidating others, or deliberately and repeatedly disrupting conversations",
-            'rep-title-22' => "Sexual harassment",
-            'rep-des-22' => "Unwanted romantic advances, requests for sexual favors, or unwelcome sexual remarks",
-            'rep-title-23' => "Hateful or abusive speech",
-            'rep-des-23' => "Hateful, degrading, or inflammatory speech",
-            'rep-title-24' => "Spam",
-            'rep-des-24' => "Sharing irrelevant or repeated content to boost visibility or for monetary gain",
+            'reason-1' => [
+                'title' => "Bullying or trolling",
+                'description' => "Attacking or intimidating others, or deliberately and repeatedly disrupting conversations",
+            ],
+            'reason-2' => [
+                'title' => "Sexual harassment",
+                'description' => "Unwanted romantic advances, requests for sexual favors, or unwelcome sexual remarks",
+            ],
+            'reason-3' => [
+                'title' => "Hateful or abusive speech",
+                'description' => "Hateful, degrading, or inflammatory speech",
+            ],
+            'reason-4' => [
+                'title' => "Spam",
+                'description' => "Sharing irrelevant or repeated content to boost visibility or for monetary gain",
+            ],
         ],
     ],
 
     'rep-reason-3' => [
         'text' => "Violence of physical harm",
         'subreasons' => [
-            'rep-title-31' => "Incites violence or is a threat",
-            'rep-des-31' => "Encouraging violent acts or threatening physical harm",
-            'rep-title-32' => "Self-harm",
-            'rep-des-32' => "Suicidal remarks or threatening to harm oneself",
-            'rep-title-33' => "Shocking or gory",
-            'rep-des-33' => "Shocking or graphic content",
-            'rep-title-34' => "Terrorism or act of extreme violence",
-            'rep-des-34' => "Depicting or encouraging terrorist acts or severe harm",
+            'reason-1' => [
+                'title' => "Incites violence or is a threat",
+                'description' => "Encouraging violent acts or threatening physical harm",
+            ],
+            'reason-2' => [
+                'title' => "Self-harm",
+                'description' => "Suicidal remarks or threatening to harm oneself",
+            ],
+            'reason-3' => [
+                'title' => "Shocking or gory",
+                'description' => "Shocking or graphic content",
+            ],
+            'reason-4' => [
+                'title' => "Terrorism or act of extreme violence",
+                'description' => "Depicting or encouraging terrorist acts or severe harm",
+            ],
         ],
     ],
 
     'rep-reason-4' => [
         'text' => "Adult content",
         'subreasons' => [
-            'rep-title-41' => "Nudity or sexual content",
-            'rep-des-41' => "Nudity, sexual scenes or language, or sex trafficking",
-            'rep-title-42' => "Shocking or gory",
-            'rep-des-42' => "Shocking or graphic content",
-            'rep-title-43' => "Sexual harassment",
-            'rep-des-43' => "Unwanted romantic advances, requests for sexual favors, or unwelcome sexual remarks",
+            'reason-1' => [
+                'title' => "Nudity or sexual content",
+                'description' => "Nudity, sexual scenes or language, or sex trafficking",
+            ],
+            'reason-2' => [
+                'title' => "Shocking or gory",
+                'description' => "Shocking or graphic content",
+            ],
+            'reason-3' => [
+                'title' => "Sexual harassment",
+                'description' => "Unwanted romantic advances, requests for sexual favors, or unwelcome sexual remarks",
+            ],
         ],
     ],
 
     'rep-reason-5' => [
         'text' => "Child abuse",
         'subreasons' => [
-            'rep-title-5' => "Content that uncludes sexual, predatory, or abusive communications towards minors.",
+            'reason-1' => [
+                'title' => "Content that uncludes sexual, predatory, or abusive communications towards minors.",
+                'description' => null,
+            ],
         ],
     ],
 
     'rep-reason-6' => [
         'text' => "Intellectual property infringement or defamation",
         'subreasons' => [
-            'rep-title-61' => "Copyright infringement",
-            'rep-des-61' => "Using your copyrighted work without your permission",
-            'rep-title-62' => "Trademark infringement",
-            'rep-des-62' => "Using your trademark without your permission",
-            'rep-title-63' => "Defamation",
-            'rep-des-63' => "Sharing falsehoods about you that could harm your reputation",
+            'reason-1' => [
+                'title' => "Copyright infringement",
+                'description' => "Using your copyrighted work without your permission",
+            ],
+            'reason-2' => [
+                'title' => "Trademark infringement",
+                'description' => "Using your trademark without your permission",
+            ],
+            'reason-3' => [
+                'title' => "Defamation",
+                'description' => "Sharing falsehoods about you that could harm your reputation",
+            ],
         ],
     ],
-
 ];
