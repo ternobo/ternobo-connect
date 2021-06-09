@@ -6,7 +6,7 @@
 		<div v-else>
 			<div v-if="!moreInfo">
 				<div class="reportreseaons" v-if="reportFor == null">
-					<div class="report-item" v-for="reportReason in reportReasons" :key="`report_reason_${reportReason.id}`" @click="reportFor = reportReason">
+					<div class="report-item" v-for="reportReason in reportReasons" :key="`report_reason_${reportReason.id}`" @click="setReason(reportReason)">
 						<span class="text">{{ __.get(`content/report.${reportReason.key}.text`) }}</span>
 						<i class="material-icons">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 					</div>
@@ -18,7 +18,7 @@
 								<span>{{ __.get(`content/report.${reportFor.key}.subreasons.${subreason.key}.title`) }}</span>
 								<small v-if="subreason.description != null" class="text-muted">{{ __.get(`content/report.${reportFor.key}.subreasons.${subreason.key}.description`) }}</small>
 							</label>
-							<div class="md-radio" @click="reason = subreason.id">
+							<div class="md-radio" v-if="reportFor.subreasons.length > 1" @click="reason = subreason.id">
 								<input type="radio" name="reason" :value="subreason.id" v-model="reason" />
 								<label></label>
 							</div>
@@ -29,20 +29,20 @@
 
 			<div v-if="moreInfo">
 				<div class="moreinfo">
-					<textarea-autosize class="form-control" :minHeight="150" v-model="description" placeholder="توضیحات خود را اینجا بنویسید" name="moreinfo"></textarea-autosize>
+					<textarea-autosize class="form-control" :minHeight="150" v-model="description" :placeholder="__.get('content/report.description-report-ph')" name="moreinfo"></textarea-autosize>
 				</div>
 				<div class="moreinfo-footer text-left">
-					<button class="btn text-muted btn-transparent" type="button" @click="(moreInfo = false), (description = null)">لغو</button>
-					<button class="btn btn-dark" id="moreinfo-close" @click="moreInfo = false">افزودن</button>
+					<button class="btn text-muted btn-transparent" type="button" @click="(moreInfo = false), (description = null)">{{ __.get("application.cancel") }}</button>
+					<button class="btn btn-dark" id="moreinfo-close" @click="moreInfo = false">{{ __.get("application.add") }}</button>
 				</div>
 			</div>
 			<div class="d-flex pt-3 justify-content-between" v-else-if="reportFor != null">
 				<div class="align-self-start">
-					<button class="btn btn-edit" @click="moreInfo = true">ارائه توضیحات</button>
+					<button class="btn btn-edit" @click="moreInfo = true">{{ __.get("content/report.description-report") }}</button>
 				</div>
 				<div class="d-flex">
-					<button class="btn text-muted btn-transparent" @click="reportFor = null">برگشت</button>
-					<loading-button :loading="loading" :disabled="reason == null" class="btn btn-primary" @click.native="submit">ثبت</loading-button>
+					<button class="btn text-muted btn-transparent" @click="reportFor = null">{{ __.get("application.back") }}</button>
+					<loading-button :loading="loading" :disabled="reason == null" class="btn btn-primary" @click.native="submit">{{ __.get("application.save") }}</loading-button>
 				</div>
 			</div>
 		</div>
@@ -77,7 +77,10 @@ export default {
 			this.loadReportReasons().then(() => (this.loadingData = false));
 		},
 		setReason(val) {
-			this.reason = val;
+			if (val.subreasons.length == 1) {
+				this.reason = val.subreasons[0].id;
+			}
+			this.reportFor = val;
 		},
 		submit() {
 			this.loading = true;
