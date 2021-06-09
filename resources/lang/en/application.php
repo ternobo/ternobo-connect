@@ -14,6 +14,8 @@ return [
     'cancel' => "Cancel",
     'back' => "Back",
     'skip' => "Skip",
+    'previous' => 'Previous',
+    'next' => 'Next',
     'more-people' => "and :number other people",
     'show-less' => 'Show less',
     'show-more' => 'Show more',
