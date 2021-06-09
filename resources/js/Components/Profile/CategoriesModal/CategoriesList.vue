@@ -7,7 +7,7 @@
 				</div>
 				<div class="slideup-title">
 					<i class="material-icons">layers</i>
-					دسته‌بندی‌ها
+					{{ __.get("application.categories") }}
 				</div>
 				<i class="material-icons me-1" @click="$emit('update:show', false)">check</i>
 			</div>

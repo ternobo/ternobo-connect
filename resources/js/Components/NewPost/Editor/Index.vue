@@ -13,7 +13,7 @@
 			<div class="d-flex editor-actions" v-if="availableOptions.length > 0" :class="{ 'align-items-center': editorItems.length < 1 }">
 				<actions-button @select="addElement($event)" :active-options="availableOptions" />
 				<div class="placeholder-element clickable" v-if="editorItems.length < 1" @click="addElement('text')">
-					<span class="text-superlight font-14">اگر در خویش میل نوشتن سراغ کردی باید سه چیز در تو باشد. شناختی، هنری و سحری (جبران خلیل جبران)</span>
+					<span class="text-superlight font-14">{{ __.get("content/posts.post-ph") }}</span>
 				</div>
 			</div>
 		</div>

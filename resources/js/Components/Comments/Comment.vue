@@ -5,7 +5,7 @@
 
 		<div class="reply-to-container" v-if="replyTo != undefined && comment.replyto.page">
 			<span>
-				<i class="material-icons">reply</i> پاسخ به <strong class="font-demibold">{{ comment.replyto.page.name }}</strong>
+				<i class="material-icons">reply</i> {{ __.get("content/comments.reply-to") }} <strong class="font-demibold">{{ comment.replyto.page.name }}</strong>
 			</span>
 		</div>
 		<div class="comment" v-if="!deleted">
@@ -33,7 +33,7 @@
 									<i class="material-icons text-dark">link</i>
 									<div>
 										<div>
-											<strong> گزارش تخلف </strong>
+											<strong> {{ __.get("content/report.report-comment") }} </strong>
 										</div>
 										<small class="text-muted"> این دیدگاه در تضاد با قوانین ترنوبو است </small>
 									</div>
@@ -61,22 +61,22 @@
 		<div class="w-100 d-flex align-content-center justify-content-between pt-2">
 			<div>
 				<div @click="showLikes = true" class="d-flex post-likes-text text-muted clickable" v-if="comment.mutual_likes != null && comment.mutual_likes.length > 0">
-					<span class="me-1">پسندیده شده توسط</span>
+					<span class="me-1">{{ __.get("content/posts.liked-text") }}</span>
 					<wire-link v-if="comment.mutual_likes[0]" :href="'/' + comment.mutual_likes[0].page.slug" class="text-dark">
 						<strong class="text-light">{{ comment.mutual_likes[0].page.name }}</strong>
 					</wire-link>
 					<div v-if="comment.mutual_likes.length > 1">
-						<span class="ms-1">و</span>
+						<span class="ms-1">{{ __.get("contnet/posts.and") }}</span>
 						<wire-link v-if="comment.mutual_likes[1]" :href="'/' + comment.mutual_likes[0].page.slug" class="text-dark">
 							<strong class="text-light">{{ comment.mutual_likes[1].page.name }}</strong>
 						</wire-link>
 					</div>
-					<span class="mx-1" v-if="comment.mutual_likes.length > 2"> و ... </span>
+					<span class="mx-1" v-if="comment.mutual_likes.length > 2"> {{ __.get("contnet/posts.and") }} ... </span>
 				</div>
 			</div>
 			<div class="actions">
 				<small class="clickable me-1" @click="loadReplies(false)" v-if="replies_count > 0 && replyTo == undefined">
-					<strong :class="{ 'text-muted': !showReplies, 'text-dark': showReplies }"> {{ replies_count }} پاسخ </strong>
+					<strong :class="{ 'text-muted': !showReplies, 'text-dark': showReplies }"> {{ replies_count }} {{ __.choice("content/comments.comment", replies_count) }} </strong>
 				</small>
 				<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies || !showNewComment, 'material-icons text-dark': showReplies && showNewComment }" class="hover-dark clickable"> insert_comment </i>
 				<i @click="likeComment" v-if="!checkUser(comment.page.user_id)" class="hover-dark clickable material-icons" :class="{ 'text-danger': liked }">
@@ -95,7 +95,7 @@
 					</div>
 				</div>
 				<div class="w-100 d-flex align-items-center justify-content-center p-2">
-					<loading-button v-if="next_page_url !== null" @click.native="loadMore" class="btn btn-outline-dark" :loading="loadingMore">باگذاری بیشتر</loading-button>
+					<loading-button v-if="next_page_url !== null" @click.native="loadMore" class="btn btn-outline-dark" :loading="loadingMore">{{ __.get("application.load-more") }}</loading-button>
 				</div>
 			</div>
 		</transition>

@@ -20,6 +20,6 @@ class WebAdminMiddleware
         if (Auth::check() && Auth::user()->is_admin) {
             return $next($request);
         }
-        return redirect("/");
+        return abort(403);
     }
 }

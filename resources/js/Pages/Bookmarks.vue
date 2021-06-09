@@ -5,7 +5,7 @@
 		</sidebar-right>
 		<div class="content-container">
 			<div v-if="postsArray.length < 1">
-				<no-content> هیچ محتوایی را نشان نکرده‌اید </no-content>
+				<no-content> {{ __.get("content.list.no-bookmarks") }} </no-content>
 			</div>
 			<div v-if="postsArray.length > 0" class="posts" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="5">
 				<PostCard v-for="(post, index) in postsArray" :key="'post_item_' + index" :post="post.post"></PostCard>
@@ -13,7 +13,7 @@
 					<loading-spinner class="image__spinner" />
 				</div>
 				<div v-if="next_page_url === null && !loadingPage">
-					<no-content> محتوای نشان شده بیشتری وجود ندارد </no-content>
+					<no-content> {{ __.get("content.list.no-more-bookmarks") }} </no-content>
 				</div>
 			</div>
 		</div>

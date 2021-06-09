@@ -5,10 +5,10 @@
 				<div class="feedback-votes">
 					{{ votes }}
 				</div>
-				<loading-button v-b-tooltip.hover.ds700 key="vote_item" :title="`ثبت رای`" :loading="loading" @click.native="voteIdea" v-if="feedback.status == 'voting' && !voted && !loading" class="btn btn-primary feedback-vote-button" :class="{ voted: voted }">
+				<loading-button v-b-tooltip.hover.ds700 key="vote_item" :title="__.get('feedbacks.vote')" :loading="loading" @click.native="voteIdea" v-if="feedback.status == 'voting' && !voted && !loading" class="btn btn-primary feedback-vote-button" :class="{ voted: voted }">
 					<i class="material-icons-outlined">{{ voted ? "highlight_off" : "arrow_circle_up" }}</i>
 				</loading-button>
-				<loading-button v-b-tooltip.hover.ds700 key="unvote_item" :title="'برداشتن رای'" :loading="loading" @click.native="voteIdea" v-else-if="feedback.status == 'voting'" class="btn btn-primary feedback-vote-button" :class="{ voted: voted }">
+				<loading-button v-b-tooltip.hover.ds700 key="unvote_item" :title="__.get('feedbacks.remove-vote')" :loading="loading" @click.native="voteIdea" v-else-if="feedback.status == 'voting'" class="btn btn-primary feedback-vote-button" :class="{ voted: voted }">
 					<i class="material-icons-outlined">{{ voted ? "highlight_off" : "arrow_circle_up" }}</i>
 				</loading-button>
 				<loading-button @click.native="bookmark" :class="{ 'text-dark': bookmarked }" class="btn feedback-flag-button">
@@ -35,17 +35,17 @@
 					<div class="d-flex flex-column">
 						<div class="d-flex align-items-center">
 							<wire-link as="strong" :href="'/' + feedback.user.username" class="me-1 clickable"> {{ feedback.user.name }}</wire-link>
-							<span class="text-grey">این بازخورد را به اشتراک گذاشته است</span>
+							<span class="text-grey">{{ __.get("feedbacks.shared-this-feedback") }}</span>
 						</div>
 						<div class="publish_time">{{ createDate }}</div>
 					</div>
 				</div>
 				<wire-link class="comments-viewer" v-if="showComment" :href="'/feedbacks/' + feedback.id">
-					<span class="text-grey" v-if="feedback.replies.length > 0">{{ feedback.replies.length }} نظر </span>
+					<span class="text-grey" v-if="feedback.replies.length > 0">{{ feedback.replies.length }} {{ __.choice("content/comments.comment", feedback.replies.length) }} </span>
 					<i class="material-icons-outlined text-grey ms-2">comment</i>
 				</wire-link>
 				<div class="comments-viewer" v-else :href="'/feedbacks/' + feedback.id">
-					<span class="text-grey" v-if="feedback.replies.length > 0">{{ feedback.replies.length }} نظر </span>
+					<span class="text-grey" v-if="feedback.replies.length > 0">{{ feedback.replies.length }} {{ __.choice("content/comments.comment", feedback.replies.length) }} </span>
 					<i class="material-icons-outlined text-grey ms-2">comment</i>
 				</div>
 			</div>
@@ -106,10 +106,10 @@ export default {
 	},
 	computed: {
 		feedbackStatus() {
-			if (this.feedback.status === "done") return "انجام شده";
-			else if (this.feedback.status === "scheduled") return "برنامه‌ریزی شده";
-			else if (this.feedback.status === "closed") return "بسته شده";
-			else return "درحال رای گیری";
+			if (this.feedback.status === "done") return __.get("feedbacks.done");
+			else if (this.feedback.status === "scheduled") return __.get("feedbacks.scheduled");
+			else if (this.feedback.status === "closed") return __.get("feedbacks.closed");
+			else return __.get("feedbacks.voting");
 		},
 		createDate() {
 			return new PersianDate(Date.parse(this.feedback.created_at)).format("D MMMM YYYY");

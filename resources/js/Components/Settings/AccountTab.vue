@@ -8,13 +8,13 @@
 		<DeactiveModal :show.sync="showDeactiveModal"></DeactiveModal>
 		<TwoFAModal :phone="phone" :email="email" :show.sync="showTwoFAModal"></TwoFAModal>
 		<SessionsModal :show.sync="showActiveSessions"></SessionsModal>
-		<h2 class="font-18 font-demibold mb-4">ورود و امنیت</h2>
+		<h2 class="font-18 font-demibold mb-4">{{ __.get("settings.login-and-security") }}</h2>
 		<div class="card mb-2">
 			<div class="settings-card-body">
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined me-2">account_circle</i>
-						<span>نام کاربری</span>
+						<span>{{ __.get("auth.username") }}</span>
 					</div>
 
 					<div class="d-flex align-items-center">
@@ -33,7 +33,7 @@
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined me-2">perm_phone_msg</i>
-						<span>تلفن همراه</span>
+						<span>{{ __.get("settings.phone-number") }}</span>
 					</div>
 
 					<div class="d-flex align-items-center">
@@ -58,7 +58,7 @@
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined me-2">vpn_key</i>
-						<span>رمز عبور</span>
+						<span>{{ __.get("auth.password") }}</span>
 					</div>
 					<div class="d-flex align-items-center">
 						<i class="btn setting-btn material-icons-outlined ms-3" @click="showPasswordMdal = true">edit</i>
@@ -67,7 +67,7 @@
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined me-2">devices</i>
-						<span>دستگاه‌های متصل</span>
+						<span>{{ __.get("settings.active-session") }}</span>
 					</div>
 					<div class="d-flex align-items-center">
 						<div class="content">
@@ -79,7 +79,7 @@
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined me-2">privacy_tip</i>
-						<span>تایید 2 مرحله‌ای</span>
+						<span>{{ __.get("settings.two-step-verification") }}</span>
 					</div>
 					<div class="d-flex align-items-center">
 						<div class="content">

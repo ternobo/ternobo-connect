@@ -22,7 +22,9 @@
 			</div>
 			<div class="d-flex flex-column align-items-end justify-content-between">
 				<div class="d-flex align-items-center" style="margin-left: -8px">
-					<div class="connection-actions clickable" @click="showConnections = true"><i class="material-icons-outlined">group</i> <span>شبکه</span></div>
+					<div class="connection-actions clickable" @click="showConnections = true">
+						<i class="material-icons-outlined">group</i> <span>{{ __.get("user-profile.connections") }}</span>
+					</div>
 					<i class="btn profile-header-btn-edit material-icons-outlined" :class="{ disabled: profileEdit }" v-if="canEdit" @click="doEdit">edit</i>
 					<i class="material-icons-outlined report-icon" v-else @click="showReport = true">report</i>
 				</div>
@@ -31,9 +33,9 @@
 						<lazy-image :src="invited_by.profile" class="profile-sm mb-0" imgClass="profile-sm" />
 					</wire-link>
 					<div class="invite_info">
-						<span class="invite_date" :class="{ bold: invited_by == null }">ملحق شده در {{ joinTime }}</span>
+						<span class="invite_date" :class="{ bold: invited_by == null }">{{ __.get("user-profile.joined") }} {{ joinTime }}</span>
 						<span class="invited_by" v-if="invited_by != null">
-							دعوت شده توسط <wire-link class="clickable" :href="`/${invited_by.username}`">{{ invited_by.name }}</wire-link>
+							{{ __.get("user-profile.nominated-by") }} <wire-link class="clickable" :href="`/${invited_by.username}`">{{ invited_by.name }}</wire-link>
 						</span>
 					</div>
 				</div>
@@ -50,7 +52,7 @@
 					</div>
 
 					<div class="mutual-friends-container">
-						<strong class="text-dark font-demibold" :class="{ 'font-12': !$root.isDesktop }">{{ mutuals.count }} دوست مشترک</strong>
+						<strong class="text-dark font-demibold" :class="{ 'font-12': !$root.isDesktop }">{{ mutuals.count }} {{ __.choice("user-profile.mutual-friends", mutuals.count) }}</strong>
 						<span class="text-grey ms-2 font-12">{{ mutuals.text }}</span>
 					</div>
 				</a>
@@ -60,9 +62,9 @@
 					<lazy-image :loadingColor="skeletonOptions.profileColor" :src="invited_by.profile" :class="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" class="mb-0" :imgClass="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" />
 				</div>
 				<div class="invite_info">
-					<span class="invite_date" :class="{ bold: invited_by == null }">محلق شده در {{ joinTime }}</span>
+					<span class="invite_date" :class="{ bold: invited_by == null }">{{ __.get("user-profile.joined") }} {{ joinTime }}</span>
 					<span :href="`/${invited_by.username}`" class="invited_by" v-if="invited_by != null">
-						دعوت شده توسط <wire-link class="clickable" :href="`/${invited_by.username}`" as="strong">{{ invited_by.name }}</wire-link>
+						{{ __.get("user-profile.nominated-by") }} <wire-link class="clickable" :href="`/${invited_by.username}`" as="strong">{{ invited_by.name }}</wire-link>
 					</span>
 				</div>
 			</div>

@@ -5,7 +5,7 @@
 				<div class="d-flex justify-content-center payment-logo">
 					<img src="/images/zarinpal-logo.png" />
 				</div>
-				<strong class="text-superlight font-14">کد درگاه پرداخت</strong>
+				<strong class="text-superlight font-14">{{ __.get("donations.merchant-id") }}</strong>
 				<div class="payment-input text-center" v-if="!loading">
 					<input type="text" class="form-control text-input--md" maxlength="36" v-model="merchant" spellcheck="false" v-if="!active" />
 					<span class="text-muted payment-code" v-else>{{ merchant }}</span>
@@ -14,7 +14,7 @@
 					<skeleton height="33px" />
 				</div>
 				<div class="d-flex justify-content-between align-items-lg-center payment-active-gateway">
-					<label class="activation-label">فعال سازی</label>
+					<label class="activation-label">{{ __.get("donations.activate") }}</label>
 					<switches v-model="active" :disabled="disabled"></switches>
 				</div>
 			</div>

@@ -5,19 +5,19 @@
 		<tags-list :tags="tags" :show.sync="showTagsMenu" :activeTag="activeTag" @remove="removeTag" @select="tagAction" @cancel="cancelRemove" @save="saveTagRemove"></tags-list>
 
 		<div class="profile-action-filter item-filters justify-content-between">
-			<div class="filter-item" @click="action = 'all'" :class="{ active: action == 'all' }"><i class="material-icons-outlined">library_books</i> همه مطالب</div>
-			<div class="filter-item" @click="action = 'likes'" :class="{ active: action == 'likes' }"><i class="material-icons-outlined">favorite_border</i> پسند‌ها</div>
-			<div class="filter-item" @click="action = 'comments'" :class="{ active: action == 'comments' }"><i class="material-icons-outlined">comment</i> نظرات</div>
+			<div class="filter-item" @click="action = 'all'" :class="{ active: action == 'all' }"><i class="material-icons-outlined">library_books</i> {{ __.get("user-profile.posts") }}</div>
+			<div class="filter-item" @click="action = 'likes'" :class="{ active: action == 'likes' }"><i class="material-icons-outlined">favorite_border</i> {{ __.get("user-profile.likes") }}</div>
+			<div class="filter-item" @click="action = 'comments'" :class="{ active: action == 'comments' }"><i class="material-icons-outlined">comment</i> {{ __.get("user-profile.comments") }}</div>
 		</div>
 
 		<div class="profile-filters" ref="catfilters" v-show="!isSticky">
 			<div class="filter-item" @click="showCategoriesMenu = true">
 				<i class="material-icons-outlined">layers</i>
-				دسته‌بندی‌ها
+				{{ __.get("application.categories") }}
 			</div>
 			<div class="filter-item" @click="showTagsMenu = true">
 				<i class="material-icons-outlined">label</i>
-				برچسب‌ها
+				{{ __.get("user-profile.tags") }}
 			</div>
 		</div>
 	</div>

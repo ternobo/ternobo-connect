@@ -22,7 +22,7 @@ export default {
                     let action = "";
 
                     if (this.text.length > 200 && !this.hideMore) {
-                        action = (<div class="show-more-text--clickable" onClick={this.toggleShowFullText}>{this.showFullText ? "نمایش کمتر" : "نمایش بیشتر"}</div>);
+                        action = (<div class="show-more-text--clickable" onClick={this.toggleShowFullText}>{this.showFullText ? __.get("application.show-less") : __.get("application.show-more")}</div>);
                     }
 
                     content = (

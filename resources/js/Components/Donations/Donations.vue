@@ -9,9 +9,9 @@
 					class="tselect-filter tselect-lg"
 					:dir="appDirection"
 					:items="[
-						{ name: 'همه', value: 'all' },
-						{ name: 'از طرف شما', value: 'my' },
-						{ name: 'برای شما', value: 'forme' },
+						{ name: __.get('donations.all'), value: 'all' },
+						{ name: __.get('donations.from-you'), value: 'my' },
+						{ name: __.get('donations.for-you'), value: 'forme' },
 					]"
 					:showNewItem="false"
 					v-model="type"
@@ -26,8 +26,8 @@
 					class="tselect-filter tselect-lg ms-3"
 					:dir="appDirection"
 					:items="[
-						{ name: 'جدید‌ترین‌ها', value: 'desc' },
-						{ name: 'قدیمی‌ترین‌ها', value: 'asc' },
+						{ name: __.get('donations.newest'), value: 'desc' },
+						{ name: __.get('donations.oldest'), value: 'asc' },
 					]"
 					:showNewItem="false"
 					v-model="order"
@@ -50,7 +50,7 @@
 					<loading-spinner class="image__spinner" />
 				</div>
 				<div v-if="next_page_url === null && !loading_next_page && donations.length > 20">
-					<no-content>حمایت بیشتری وجود ندارد</no-content>
+					<no-content>{{ __.get("donations.no-more-donations") }}</no-content>
 				</div>
 			</div>
 		</div>
@@ -72,8 +72,8 @@ export default {
 			next_page_url: null,
 			loading_next_page: false,
 
-			order: { name: "جدید‌ترین‌ها", value: "desc", icon: "filter_list" },
-			type: { name: "همه", value: "all", icon: "filter_alt" },
+			order: { name: __.get("donations.newest"), value: "desc", icon: "filter_list" },
+			type: { name: __.get("donations.all"), value: "all" },
 		};
 	},
 	components: { DonationSkeleton, DonationItem, Tselect, NoContent },

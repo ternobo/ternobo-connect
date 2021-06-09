@@ -29,17 +29,17 @@
 			</div>
 			<div class="achievement-edit-row">
 				<div>
-					<MaterialTextField v-model="val.name" maxlength="52" :required="true" class="center material--sm" placeholder="نام دوره"></MaterialTextField>
+					<MaterialTextField v-model="val.name" maxlength="52" :required="true" class="center material--sm" :placeholder="__.get('course-name')"></MaterialTextField>
 				</div>
 				<div v-if="showMore">
-					<MaterialTextField v-model="val.code" maxlength="52" class="d-flex align-items-center material--sm p-0 col-md-8" placeholder="کد دوره"></MaterialTextField>
+					<MaterialTextField v-model="val.code" maxlength="52" class="d-flex align-items-center material--sm p-0 col-md-8" :placeholder="__.get('course-code')"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
 					<tselect :dir="appDirection" :items="page.skills" maxlength="52" labelOption="name" valueOption="name" v-model="val.skill" style="min-width: 234px">مرتبط با</tselect>
 				</div>
 				<div class="col-md-12" v-if="showMore">
 					<div class="d-flex align-items-center justify-content-between mb-3">
-						<strong>توضیحات</strong>
+						<strong>{{ __.get("user-profile-description") }}</strong>
 						<div class="character-counter">
 							<span class="counter tex-dark">{{ leftCharacter }}</span>
 							<div class="progress me-1 mb-0" style="width: 100px; height: 5px">

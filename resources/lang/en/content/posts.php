@@ -16,7 +16,9 @@ return [
     'embed-text' => "Get Embed Code",
     'embed-des' => "Put the embed code on your website.",
     'like' => "like",
-    'liked-text' => "{0} |{1} Liked by :name1.|{2} Liked By :name1 and :name2|[3,Inf] Liked by :name1, :name2 and :number other people",
+    "and" => "and",
+    "comma" => ",",
+    'liked-text' => "Liked By",
     /*
     {0} - No like.
     {1} - Only 1 like.
@@ -27,8 +29,6 @@ return [
     :number - Number of likes.
      */
     'more-people' => "and :number other people",
-    'show-more' => "Show more",
-    'show-less' => "Show less",
     'enter-your-text' => "Enter text",
     'save' => "save",
 ];

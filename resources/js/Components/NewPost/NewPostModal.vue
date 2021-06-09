@@ -2,7 +2,7 @@
 	<div>
 		<category-select-modal :categories.sync="categories" @hide="onCategoryClose" :selectedCategory.sync="category" :show.sync="showCategoryModal"></category-select-modal>
 
-		<b-modal v-if="user != null" v-model="showModal" @hide="hide" @show="shown" no-close-on-esc hide-footer no-stacking modal-class="new-post-modal" size="md" title="تولید محتوای تازه" :centered="true">
+		<b-modal v-if="user != null" v-model="showModal" @hide="hide" @show="shown" no-close-on-esc hide-footer no-stacking modal-class="new-post-modal" size="md" :title="__.get('content/posts.create-new-post')" :centered="true">
 			<div action="/posts" data-ajax method="POST" data-reload="1" enctype="multipart/form-data" class="w-100">
 				<div class="new-post position-relative">
 					<div class="selections">
@@ -14,21 +14,21 @@
 							<div class="can-tip-post-check clickable" @click="canDonate = !canDonate">
 								<div>
 									<i class="material-icons-outlined font-20 me-1">savings</i>
-									حمایت مالی
+									{{ __.get("donations.donate") }}
 								</div>
 								<loading-spinner v-if="loadingCanDonate" style="height: 12px; width: 12px; border-width: 1px"></loading-spinner>
 								<checkbox v-else v-model="canDonate" :status="canDonate" class="mt-1 m-0 text-superlight light"></checkbox>
 							</div>
 							<div class="category-select" @click="showCategoryModal = true">
 								<i class="material-icons-outlined">layers</i>
-								<span>{{ category == null ? "دسته‌بندی‌ها" : category.name }}</span>
+								<span>{{ category == null ? __.get("application.categories") : category.name }}</span>
 							</div>
 						</div>
 					</div>
 					<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
 					<div class="d-flex justify-content-center align-items-center mt-3 mb-2">
-						<loading-button :loading="loadingDraft" class="btn btn-transparent font-14" :disabled="!checkContent" @click.native="submitPost(true)"> پیش نویس </loading-button>
-						<loading-button :loading="loading" class="btn btn-primary font-14" :class="{ 'text-muted': !checkContent }" :disabled="!checkContent" @click.native="submitPost(false)"> {{ post ? "ذخیره" : "انتشار" }} </loading-button>
+						<loading-button :loading="loadingDraft" class="btn btn-transparent font-14" :disabled="!checkContent" @click.native="submitPost(true)">{{ __.get("content/posts.draft") }}</loading-button>
+						<loading-button :loading="loading" class="btn btn-primary font-14" :class="{ 'text-muted': !checkContent }" :disabled="!checkContent" @click.native="submitPost(false)"> {{ post ? __.get("application.save") : __.get("content/posts.publish") }} </loading-button>
 					</div>
 				</div>
 			</div>

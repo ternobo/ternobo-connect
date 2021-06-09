@@ -2,7 +2,7 @@
 	<div class="slug-card">
 		<div class="slug-info">
 			<img src="/images/logo_24px.svg" width="24" />
-			<span>پروفایل</span>
+			<span>{{ __.get("user-profile.profile") }}</span>
 			<strong>{{ page.user.first_name }}</strong>
 		</div>
 		<div class="slug-data">

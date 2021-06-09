@@ -2,7 +2,7 @@
 	<div class="feedback-item" v-if="!deleted">
 		<div class="reply-to-container" v-if="replyTo != undefined && feedbackReply.replyto.user">
 			<span>
-				<i class="material-icons">reply</i> پاسخ به <strong class="font-demibold">{{ feedbackReply.replyto.user.name }}</strong>
+				<i class="material-icons">reply</i> {{ __.get("content/comments.reply-to") }} <strong class="font-demibold">{{ feedbackReply.replyto.user.name }}</strong>
 			</span>
 		</div>
 		<div class="feedback-reply">
@@ -35,11 +35,14 @@
 							<dropdown-item v-if="!checkUser(feedbackReply.user_id)">
 								<div class="d-flex align-items-center">
 									<i class="material-icons text-dark">link</i>
-									<div>
+									<div class="d-flex align-items-center" @click="showReport = true">
+										<i class="material-icons text-dark">link</i>
 										<div>
-											<strong> گزارش تخلف </strong>
+											<div>
+												<strong> {{ __.get("content/report.report-comment") }} </strong>
+											</div>
+											<small class="text-muted"> این دیدگاه در تضاد با قوانین ترنوبو است </small>
 										</div>
-										<small class="text-muted"> این دیدگاه در تضاد با قوانین ترنوبو است </small>
 									</div>
 								</div>
 							</dropdown-item>
@@ -48,7 +51,7 @@
 									<i class="material-icons-outlined">delete_sweep</i>
 									<div>
 										<div>
-											<strong> حذف </strong>
+											{{ __.get("application.delete") }}
 										</div>
 									</div>
 								</div>

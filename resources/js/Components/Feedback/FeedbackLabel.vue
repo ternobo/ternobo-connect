@@ -48,17 +48,7 @@ export default {
 				});
 		},
 		getTypeText(type) {
-			switch (type) {
-				case "voting":
-					return "درحال رای گیری";
-				case "scheduled":
-					return "برنامه ریزی شده";
-				case "closed":
-					return "بسته شده";
-				case "done":
-					return "انجام شده";
-			}
-			return null;
+			return __.get(`feedbacks.${type}`);
 		},
 	},
 	props: {

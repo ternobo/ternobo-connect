@@ -2,6 +2,9 @@
 return [
     'settings' => "Settings and Privacy",
     'account' => "Account",
+    "cookies" => "Cookies",
+    'login-and-security' => "Login and Security",
+    'information-security' => "Information security",
     'about-ternobo' => "About Ternobo",
     'phone-number' => "Phone Number",
     'two-step-verification' => "Two-step Verification",

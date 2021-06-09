@@ -20,8 +20,8 @@
 			<i class="material-icons hover-danger font-32" @click="doDelete">delete_outline</i>
 
 			<div class="d-flex">
-				<button class="btn btn-transparent button-transparent text-muted font-14" @click="edit = true">ویرایش</button>
-				<loading-button :loading="loading" @click.native="publish" class="btn btn-primary font-14">انتشار</loading-button>
+				<button class="btn btn-transparent button-transparent text-muted font-14" @click="edit = true">{{ __.get("application.edit") }}</button>
+				<loading-button :loading="loading" @click.native="publish" class="btn btn-primary font-14">{{ __.get("content/posts.publish") }}</loading-button>
 			</div>
 		</div>
 	</div>

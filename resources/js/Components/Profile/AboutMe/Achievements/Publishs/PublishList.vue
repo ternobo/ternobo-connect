@@ -2,7 +2,7 @@
 	<div class="achievement-item" v-if="publishs.length > 0">
 		<div class="achievement-header">
 			<div class="achievement-title" @click="toggleDetailed">
-				<h2 class="mb-0 about-me--card--subtitle">انتشارات</h2>
+				<h2 class="mb-0 about-me--card--subtitle">{{ __.get("user-profile.publications") }}</h2>
 				<div class="ms-2 badge-light">{{ publishs.length }}</div>
 			</div>
 			<i class="material-icons open-achievements" v-if="!edit" :class="{ active: open }" @click="toggleDetailed">keyboard_arrow_down</i>

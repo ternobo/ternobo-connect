@@ -10,7 +10,7 @@
 						<span>{{ notifications[0].sender.name }}</span>
 						<span class="font-weight-normal date-text">{{ createdAt }}</span>
 					</wire-link>
-					<div class="action">نظر شما را پسندید</div>
+					<div class="action">{{ __.get("notifications.liked-your-comment") }}</div>
 				</div>
 			</div>
 			<i class="material-icons text-danger">favorite</i>

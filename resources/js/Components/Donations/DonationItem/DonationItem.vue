@@ -9,7 +9,7 @@
 		<div class="donate-detail-group">
 			<div :class="{ 'badge-success': !tip.donate_by_me, 'badge-blue': tip.donate_by_me }">
 				<strong class="font-demibold">{{ formatNumber(tip.amount, "0,0") }}</strong>
-				<span :class="{ received: !tip.donate_by_me }">تومان</span>
+				<span :class="{ received: !tip.donate_by_me }">{{ __.get("currencies.IRR") }}</span>
 			</div>
 			<div class="doantion-time">
 				<span>{{ time }}</span>
@@ -18,10 +18,10 @@
 			</div>
 			<wire-link :href="`/posts/${tip.post_id}`" class="cliackable text-grey">
 				<i class="material-icons font-20 me-2">launch</i>
-				<span class="clickable">مشاهده محتوا</span>
+				<span class="clickable">{{ __.get("donations.view-post") }}</span>
 			</wire-link>
 			<div>
-				<button class="btn tip-btn" @click="showModal = !showModal">جزئیات</button>
+				<button class="btn tip-btn" @click="showModal = !showModal">{{ __.get("donations.details") }}</button>
 			</div>
 		</div>
 	</div>
@@ -47,9 +47,9 @@ export default {
 		},
 		name() {
 			if (!this.tip.donate_by_me && this.tip.anonymous) {
-				return "ناشناس";
+				return this.__.get("donations.unknown");
 			}
-			return this.tip.donate_by_me ? "شما" : this.tip.user.name;
+			return this.tip.donate_by_me ? this.__.get("donations.you") : this.tip.user.name;
 		},
 		profile() {
 			if (!this.tip.donate_by_me && this.tip.anonymous) {

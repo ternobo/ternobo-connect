@@ -2,7 +2,7 @@
 	<div class="category-select" @click="showModal = true">
 		<category-select-modal :categories.sync="categories" :selectedCategory.sync="selectedCategory" :show.sync="showModal"></category-select-modal>
 		<i class="material-icons-outlined">layers</i>
-		<span>{{ selectedCategory == null ? "دسته‌بندی‌ها" : selectedCategory.name }}</span>
+		<span>{{ selectedCategory == null ? __.get("application.categories") : selectedCategory.name }}</span>
 	</div>
 </template>
 

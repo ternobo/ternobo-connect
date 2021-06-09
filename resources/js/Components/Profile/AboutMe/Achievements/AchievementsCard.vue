@@ -2,17 +2,17 @@
 	<div class="card achievments-card">
 		<div class="card-body" v-if="mounted">
 			<div class="about-me--card-title-container">
-				<h2 class="about-me--card-title">دستاورد‌ها</h2>
+				<h2 class="about-me--card-title">{{ __.get("user-profile.achievements") }}</h2>
 				<DropdownBtn
 					v-if="edit"
 					:items="[
-						{ id: 1, name: 'زبان' },
-						{ id: 2, name: 'پروژه' },
-						{ id: 3, name: 'انتشارات' },
-						{ id: 4, name: 'اختراع' },
-						{ id: 5, name: 'دوره' },
-						{ id: 6, name: 'جایزه' },
-						{ id: 7, name: 'آزمون' },
+						{ id: 1, name: __.get('user-profile.language') },
+						{ id: 2, name: __.get('user-profile.projects') },
+						{ id: 3, name: __.get('user-profile.publications') },
+						{ id: 4, name: __.choice('user-profile.patent', 1) },
+						{ id: 5, name: __.choice('user-profile.course', 1) },
+						{ id: 6, name: __.choice('user-profile.award', 1) },
+						{ id: 7, name: __.get('user-profile.test') },
 					]"
 					@click="addNew"
 				></DropdownBtn>
