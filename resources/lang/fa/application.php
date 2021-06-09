@@ -14,6 +14,8 @@ return [
     'cancel' => "لغو",
     'back' => "بازگشت",
     'skip' => "ردکردن",
+    'previous' => 'قبلی',
+    'next' => 'بعدی',
     'more-people' => "و :number نفر دیگر",
     'show-more' => "نمایش بیشتر",
     'show-less' => "نمایش کمتر",
