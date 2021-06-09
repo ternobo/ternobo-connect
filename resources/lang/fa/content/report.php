@@ -5,6 +5,7 @@ return [
     'report-des-post' => "این محتوا یا حساب کاربری در تضاد با قوانین ترنوبو است",
 
     'description-report' => "ارائه توضیحات",
+    'description-report-ph' => "توضیحات خود را بنویسید",
 
     'report-modal-title' => "چرا می‌خواهید این گزارش را ارسال کنید؟",
 

@@ -5,6 +5,7 @@ return [
     'report-des-post' => "This post is offensive or the account is hacked",
 
     'description-report' => "Description",
+    'description-report-ph' => "Write your description",
 
     'report-modal-title' => "Why are you reporting this?",
 
