@@ -6,23 +6,26 @@ return [
 
     'report-modal-title' => "Why are you reporting this?",
 
-    'rep-reason-1' => "Suspicious or fake",
+    'rep-reason-1' => [
+        'text' => "Suspicious or fake",
+        'subreasons' => [
+            'rep-title-11' => "Misinformation",
+            'rep-des-11' => "Spreading false or misleading information as if it were factual",
+            'rep-title-12' => "Fraud or scam",
+            'rep-des-12' => "Deceiving others to obtain money or access private information",
+            'rep-title-13' => "Spam",
+            'rep-des-13' => "Sharing irrelevant or repeated content to boost visibility or for monetary gain",
+            'rep-title-14' => "Fake account",
+            'rep-des-14' => "Inaccurate or misleading representation",
+            'rep-title-15' => "Hacked account",
+            'rep-des-15' => "Unauthorized account takeover",
+        ],
+    ],
     'rep-reason-2' => "Harassment or hateful speech",
     'rep-reason-3' => "Violence of physical harm",
     'rep-reason-4' => "Adult content",
     'rep-reason-5' => "Child abuse",
     'rep-reason-6' => "Intellectual property infringement or defamation",
-
-    'rep-title-11' => "Misinformation",
-    'rep-des-11' => "Spreading false or misleading information as if it were factual",
-    'rep-title-12' => "Fraud or scam",
-    'rep-des-12' => "Deceiving others to obtain money or access private information",
-    'rep-title-13' => "Spam",
-    'rep-des-13' => "Sharing irrelevant or repeated content to boost visibility or for monetary gain",
-    'rep-title-14' => "Fake account",
-    'rep-des-14' => "Inaccurate or misleading representation",
-    'rep-title-15' => "Hacked account",
-    'rep-des-15' => "Unauthorized account takeover",
 
     'rep-title-21' => "Bullying or trolling",
     'rep-des-21' => "Attacking or intimidating others, or deliberately and repeatedly disrupting conversations",
