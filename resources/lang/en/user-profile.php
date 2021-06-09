@@ -84,10 +84,6 @@ return [
     'website-url' => "Website URL",
     'contact-info' => "Contact Info",
 
-    "post" => "Post|Posts",
-    "like" => "Like|Likes",
-    "comment" => "Commnet|Comments",
-
     "profile" => "Profile",
 
     "followed" => "<b>:name</b> follows",

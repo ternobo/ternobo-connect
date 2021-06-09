@@ -17,4 +17,7 @@ return [
     'follow' => "Follow",
     'following' => "Followed",
     'unfollow' => "Unfollow",
+    "post" => "Post|Posts",
+    "like" => "Like|Likes",
+    "comment" => "Commnet|Comments",
 ];
