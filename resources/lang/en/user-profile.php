@@ -69,6 +69,6 @@ return [
     'website-url' => "Website URL",
     'contact-info' => "Contact Info",
     'likes' => "Likes",
-    'joined' => "Joined on",
+    'joined' => "Joined",
     'nominated-by' => "Nominated by",
 ];
