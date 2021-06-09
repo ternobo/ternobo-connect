@@ -25,9 +25,9 @@
 					<i class="material-icons-outlined item-icon text-dark">report</i>
 					<div>
 						<div>
-							<strong> گزارش تخلف </strong>
+							<strong> {{ __.get("content/report.report-post") }} </strong>
 						</div>
-						<small class="text-muted"> این دیدگاه در تضاد با قوانین ترنوبو است </small>
+						<small class="text-muted"> {{ __.get("content/report.report-des-post") }} </small>
 					</div>
 				</li>
 				<li class="d-flex align-items-center" @click="showConfirm = true" v-if="!checkUser(post.page.user_id) && following">

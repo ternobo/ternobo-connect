@@ -33,9 +33,9 @@
 						<i class="material-icons-outlined text-dark">report</i>
 						<div>
 							<div>
-								<strong> گزارش تخلف </strong>
+								<strong> {{ __.get("content/report.report-post") }} </strong>
 							</div>
-							<small class="text-muted"> این محتوا در تضاد با قوانین ترنوبو است </small>
+							<small class="text-muted"> {{ __.get("content/report.report-des-post") }} </small>
 						</div>
 					</div>
 				</dropdown-item>

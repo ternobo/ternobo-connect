@@ -39,9 +39,8 @@
 										<i class="material-icons text-dark">link</i>
 										<div>
 											<div>
-												<strong> {{ __.get("content/report.report-comment") }} </strong>
+												<strong> {{ __.choice("content/report.report", 1) }} </strong>
 											</div>
-											<small class="text-muted"> این دیدگاه در تضاد با قوانین ترنوبو است </small>
 										</div>
 									</div>
 								</div>
