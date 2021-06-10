@@ -15,7 +15,6 @@ return [
   'first-name' => "First Name",
   'last-name' => "Last Name",
   'further-information' => "Further Information",
-  'next' => "Next",
   'security-tips' => "Security Tips",
   'enter-your-picture' => "Choose a picture",
   'failed-username' => 'This username/phone number do not match our records',
