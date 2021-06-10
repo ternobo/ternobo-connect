@@ -152,32 +152,7 @@ TernoboApp.install = function (Vue, options) {
 
     Vue.component('draggable', () => import(/* webpackChunkName: "draggable" */  "vuedraggable"));
 
-    Vue.prototype.yearsFrom = function (startYear, to) {
-        var currentYear = to || new PersianDate().year(), years = [];
-        startYear = startYear || 1980;
-        while (currentYear >= startYear) {
-            years.push(currentYear--);
-        }
-        return years;
-    }
-
-    Vue.prototype.formatTime = function (time, format) {
-        return new PersianDate(time).format(format);
-    }
-
-    Vue.prototype.months = function (to) {
-        to = to || 12;
-        let months = [];
-        for (let i = 1; i <= to; i++) {
-            months.push(
-                {
-                    label: new PersianDate()._monthName(i),
-                    id: i
-                }
-            );
-        }
-        return months;
-    }
+    require("./TimeDate").default(Vue);
 
     Vue.prototype.formatNumber = function (number, format) {
         return numeral(number).format(format);

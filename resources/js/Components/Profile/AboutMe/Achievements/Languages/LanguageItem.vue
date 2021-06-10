@@ -77,7 +77,6 @@ export default {
 	},
 	created() {
 		if (this.value) {
-			console.log("hi");
 			this.languageVal = this.value;
 		}
 	},

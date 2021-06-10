@@ -110,6 +110,7 @@ return [
     'uploaded' => 'بارگذاری فایل :attribute موفقیت آمیز نبود.',
     'url' => ':attribute معتبر نمی‌باشد.',
     'uuid' => ':attribute باید یک UUID معتبر باشد.',
+    "no_end_date" => "فیلد :attribute اجباری است",
 
     'attributes' => [
         'address' => 'نشانی',
@@ -119,17 +120,41 @@ return [
         'city' => 'شهر',
         'content' => 'محتوا',
         'country' => 'کشور',
+
         'date' => 'تاریخ',
         'start-date' => "تاریخ شروع",
         'end-date' => "تاریخ پایان",
-        'project' => "پروژه",
+
+        'project-title' => "عنوان پروژه",
+        'project-start-date' => "تاریخ شروع پروژه",
+        'project-end-date' => "تاریخ پایان پروژه",
+        'project-link' => "لینک پروژه",
+
         'lang' => "نام زبان",
         "lang-level" => "سطح زبان",
+
         'award-title' => 'عنوان جایزه',
+        'award-date' => 'تاریخ جایزه',
+        'award-link' => "لینک جایزه",
+
         'publish-title' => "نام انتشار",
+        'publish-date' => "تاریخ انتشار",
+        'publish-link' => "Publication Link",
+
         'invention-title' => 'عنوان اختراع',
+        'invention-date' => 'تاریخ ثبت اختراع',
+        'invention-link' => "لینک اختراع",
+        "invention-organization" => "اداره ثبت اختراع",
+        "invention-code" => "شماره ثبت اختراع",
+
         'course-title' => 'نام دوره',
+        'course-code' => 'کد دوره',
+
         'test-title' => 'نام آزمون',
+        'test-date' => 'نام آزمون',
+        'test-link' => "لینک آزمون",
+        "test-score" => "نمره آزمون",
+
         'day' => 'روز',
         'description' => 'توضیحات',
         'district' => 'ناحیه',

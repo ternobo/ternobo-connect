@@ -24,7 +24,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <script>
         var APP_URL = "{{ url('/') }}";
-        const lang = document.documentElement.lang;
+        window.lang = document.documentElement.lang;
         var country = "Iran"
         fetch('https://extreme-ip-lookup.com/json/')
             .then(res => res.json())

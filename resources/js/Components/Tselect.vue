@@ -168,7 +168,6 @@ export default {
 			this.newItemInput = undefined;
 		},
 		hideDropdown() {
-			console.log("hideDropdown");
 			if (!this.disabled) {
 				this.showItems = false;
 			}

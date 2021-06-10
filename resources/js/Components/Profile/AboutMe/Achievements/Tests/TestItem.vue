@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import PersianDate from "persian-date";
 import DatePicker from "../../../../inputs/DatePicker";
 import MaterialTextField from "../../../../inputs/MaterialTextField";
 import Checkbox from "../../../../inputs/Checkbox";
@@ -123,20 +122,17 @@ export default {
 			return Boolean(val.skill) || Boolean(val.score);
 		},
 		time_text() {
-			let dateText = "";
-			if (typeof this.val.date == "object" && this.val.date != null) {
-				dateText = new PersianDate([this.val.date.year, this.val.date.month.id]).format("MMMM YYYY");
+			let startText = "";
+			if (this.val.date) {
+				startText = this.formatTime(this.val.date, "YYYY MMMM");
 			}
-			return dateText;
-		},
-		now() {
-			return new PersianDate(new Date()).toLocale("en").format("L");
+			return startText;
 		},
 		month() {
-			return new PersianDate().month();
+			return this.currentMonth();
 		},
 		year() {
-			return new PersianDate().year();
+			return this.currentYear();
 		},
 	},
 	data() {

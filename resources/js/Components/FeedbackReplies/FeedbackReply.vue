@@ -106,12 +106,9 @@
 
 <script>
 import NewFeedbackReply from "./NewFeedbackReply";
-import TimeAgo from "javascript-time-ago";
 import LoadingSpinner from "../LoadingSpinner";
-// Load locale-specific relative date/time formatting rules.
-import fa from "javascript-time-ago/locale/fa";
+
 import { mapState } from "vuex";
-TimeAgo.addLocale(fa);
 export default {
 	mounted() {
 		this.liked = this.feedbackReply.is_liked;
@@ -224,8 +221,7 @@ export default {
 	computed: {
 		...mapState(["shared"]),
 		feedbackReply_time() {
-			const timeAgo = new TimeAgo("fa-FA");
-			return timeAgo.format(Date.parse(this.feedbackReply.created_at), "twitter");
+			return this.timeAgo(this.feedbackReply.created_at);
 		},
 	},
 	components: {
