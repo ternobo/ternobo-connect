@@ -1,6 +1,9 @@
 <?php
 return [
     // Head
+    'crop-profile-title' => "برش تصویر پروفایل",
+    'crop-cover-title' => "برش تصویر کاور",
+    
     'connections' => "شبکه",
     'mutual-friends' => "دوستان مشترک",
     'joined' => "ملحق شده در",
@@ -13,9 +16,6 @@ return [
 
     'followings' => "دنبال شده‌ها",
     'followers' => "دنبال کنندگان",
-
-    'crop-profile-title' => "برش تصویر پروفایل",
-    'crop-cover-title' => "برش تصویر کاور",
 
     //Tabs
     'tabs' => [
