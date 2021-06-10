@@ -23,4 +23,7 @@ return [
     'profile-delete-error' => "خطا در حذف تصویر پروفایل",
     'invalid-mime' => "فرمت فایل انتخابی مجاز نیست",
     'no-content' => "هیچ محتوایی وجود ندارد",
+    'no-bookmarks' => "You haven't bookmark any content",
+    'no-more-bookmarks' => 'There is no more bookmarks',
+    'no-more-content' => "There is no more content",
 ];

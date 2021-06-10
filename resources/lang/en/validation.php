@@ -109,34 +109,51 @@ return [
     "invalid_wesite" => "website url is invalid",
     "lang_level" => "invalid language level",
 
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-     */
-
-    'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
+    'attributes' => [
+        'address' => 'Adress',
+        'age' => 'Age',
+        'area' => 'Area',
+        'available' => 'Available',
+        'city' => 'City',
+        'content' => 'Content',
+        'country' => 'Country',
+        'date' => 'Date',
+        'start-date' => "Start Date",
+        'end-date' => "End Date",
+        'project' => "Project",
+        'lang' => "Language Name",
+        "lang-level" => "Language Level",
+        'award-title' => 'Award Title',
+        'publish-title' => "Publication Title",
+        'invention-title' => 'Patent Title',
+        'course-title' => 'Course Title',
+        'test-title' => 'Test Title',
+        'day' => 'Day',
+        'description' => 'Description',
+        'district' => 'District',
+        'email' => 'Email',
+        'excerpt' => 'Excerpt',
+        'first-name' => 'First Name',
+        'gender' => 'Gender',
+        'hour' => 'Hour',
+        'last-name' => 'Last Name',
+        'minute' => 'Minute',
+        'mobile' => 'Phone Number',
+        'month' => 'Month',
+        'name' => 'Name',
+        'national_code' => 'National Code',
+        'password' => 'Password',
+        'password-confirmation' => 'Password Confirmation',
+        'phone' => 'Phone',
+        'province' => 'Province',
+        'second' => 'Second',
+        'sex' => 'Sex',
+        'size' => 'Size',
+        'terms' => 'Terms',
+        'text' => 'Text',
+        'time' => 'Time',
+        'title' => 'Title',
+        'username' => 'Usename',
+        'year' => 'Year',
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Attributes
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used to swap our attribute placeholder
-    | with something more reader friendly such as "E-Mail Address" instead
-    | of "email". This simply helps us make our message more expressive.
-    |
-     */
-
-    'attributes' => [],
-
 ];
