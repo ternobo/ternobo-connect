@@ -5,6 +5,7 @@ return [
     'about-us' => "درباره ما",
     'comuunity-guidelines' => "دستورالعمل ترنوبو",
     'description' => "توضیحات",
+    'preview' => "پیش‌نمایش",
     'load-more' => "باگذاری بیشتر",
     'delete' => "حذف",
     'save' => "ذخیره",

@@ -5,6 +5,7 @@ return [
     'about-us' => "About Us",
     'comuunity-guidelines' => "Community Guidelines",
     'description' => "Description",
+    'preview' => "Preview",
     'load-more' => "Load More",
     'delete' => "Delete",
     'save' => "Save",
