@@ -21,6 +21,4 @@ return [
     'merchant-id' => "Merchant ID",
     'activate' => "Activate",
     'active-gateway' => "Active Gateway",
-    'active-tip-error' => "There are currently no gateways connected to your account. Add a payment gateway to activate sponsorship for your content.",
-    'no-more-tip' => "There is no more tip",
 ];

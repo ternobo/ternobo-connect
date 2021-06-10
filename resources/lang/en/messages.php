@@ -1,5 +1,6 @@
 <?php
 return [
+    'copied' => "Copied",
     'there-is-error' => "There is an error occurred",
     'connection-error' => "Connection error",
     'following-not-found' => "We can't find any following",
@@ -29,4 +30,12 @@ return [
     'no-more-content' => "There is no more content",
     'no-data' => "We can't find any submited data",
     'delete-confirm' => "Are you sure about deleting <b>:attribute</b>?",
+    'failed-username' => "This username/phone number do not match our records",
+    'throttle' => "Too many login attempts. Please try again in :seconds seconds",
+    'reset-password-success' => "Your password has been reset",
+    'sent-password' => "We have sent your password recover code",
+    'throttled' => "Please wait before retrying",
+    'invalid-password-token' => "This password recover token is invalid",
+    'active-tip-error' => "There are currently no gateways connected to your account. Add a payment gateway to activate sponsorship for your content.",
+    'no-more-tip' => "There is no more tip",
 ];
