@@ -12,10 +12,10 @@ return [
     'location' => "موقعیت",
 
     //Tabs
-    "tabs" => [
-        'about-me' => "درباره من",
+    'tabs' => [
+        'about' => "درباره من",
         'activities' => "فعالیت‌ها",
-        'contact-me' => "تماس با من",
+        'contact' => "تماس با من",
     ],
 
     'published' => "منتشر شده",

@@ -12,10 +12,10 @@ return [
     'location' => "Location",
 
     //Tabs
-    "tabs" => [
-        'about-me' => "About Me",
+    'tabs' => [
+        'about' => "About Me",
         'activities' => "Activities",
-        'contact-me' => "Contact",
+        'contact' => "Contact",
     ],
 
     'published' => "Published",
