@@ -2,7 +2,7 @@
 return [
     "search-ph" => "هرچیز که در جستن آنی، آنی",
     "about-us" => "درباره ما",
-    'Comuunity-Guidelines' => 'دستورالعمل‌های ترنوبو',
+    'comuunity-guidelines' => 'دستورالعمل‌های ترنوبو',
     'description' => "توضیحات",
     "load-more" => "باگذاری بیشتر",
     "delete" => "حذف",
