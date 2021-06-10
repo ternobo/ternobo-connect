@@ -34,6 +34,8 @@ return [
     'good' => "Good",
     'very-good' => "Very Good",
     'highly-skilled' => "Expert",
+    'skill_credit' => "Endorsed This Skill",
+    'skill_credit_my_verb' => "Endorsed The Skill",
     'endorse-skill-q2' => "How do you know about :fname’s :skill skills?", /*:fname - His/Her first name.*/
     'endorse-res-1' => "Worked together directly on the same team or project",
     'endorse-res-2' => "Managed :fname directly", /*:fname - His/Her first name.*/
@@ -100,7 +102,13 @@ return [
     'add-website' => "Add Website",
     'website-url' => "Website URL",
     'website-type' => "Website Type",
+    'website-personal' => "Personal",
+    'website-company' => "Business",
+    'website-blog' => "Blog",
+    'website-rss' => "RSS Feed",
+    'website-portfolio' => "Portfolio",
+    'website-other' => "Other",
     'remove-website' => "Are your sure you want to delete :website?", /*:website - Your website*/
 
-    "followed" => "<b>:name</b> follows",
+    'followed' => "<b>:name</b> follows",
 ];

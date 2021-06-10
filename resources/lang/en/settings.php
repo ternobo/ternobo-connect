@@ -2,7 +2,7 @@
 return [
     'settings' => "Settings and Privacy",
     'account' => "Account",
-    "cookies" => "Cookies",
+    'cookies' => "Cookies",
     'login-and-security' => "Login and Security",
     'information-security' => "Information security",
     'about-ternobo' => "About Ternobo",
@@ -23,4 +23,5 @@ return [
     'change-phone-number' => "Change Phone Number",
     'phone-number-ph' => "09123456789",
     'recover-code' => "Recover Codes|Recover Code",
+    'delete-confirm' => "Are you sure about deleting <b>:attribute</b>?",
 ];
