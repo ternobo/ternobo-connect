@@ -2,6 +2,8 @@
 return [
     'searchq' => "هرچیز که در جستن آنی، آنی",
     'search' => "جستجو",
+    'about-results' => ":number نتیجه جستجو برای :name یافت شد",
+    'people' => "افراد",
     'about-us' => "درباره ما",
     'comuunity-guidelines' => "دستورالعمل ترنوبو",
     'description' => "توضیحات",

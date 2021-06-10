@@ -2,6 +2,8 @@
 return [
     'searchq' => "Search",
     'search' => "Search",
+    'about-results' => "About :number results for :name",
+    'people' => "People",
     'about-us' => "About Us",
     'comuunity-guidelines' => "Community Guidelines",
     'description' => "Description",
