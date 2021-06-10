@@ -47,7 +47,7 @@ export default {
 						this.next_page_url = response.data.pages.next_page_url;
 					})
 					.catch((err) => {
-						this.toast("خطا در برقراری ارتباط");
+						this.toast(__.get("messages.connection-error"));
 						console.log(err);
 					})
 					.then(() => {
@@ -75,7 +75,7 @@ export default {
 				this.next_page_url = response.data.pages.next_page_url;
 			})
 			.catch((err) => {
-				this.toast("خطا در برقراری ارتباط");
+				this.toast(__.get("messages.connection-error"));
 				console.log(err);
 			})
 			.then(() => {

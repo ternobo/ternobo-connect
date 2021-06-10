@@ -248,7 +248,7 @@ export default {
 				})
 				.catch(function (error) {
 					console.log(error);
-					$this.toast("خطا در برقراری ارتباط");
+					$this.toast(__.get("messages.connection-error"));
 					$this.loading = false;
 				});
 		},

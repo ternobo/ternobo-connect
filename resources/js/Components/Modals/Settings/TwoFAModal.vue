@@ -233,7 +233,7 @@ export default {
 					this.resetLoading = false;
 				})
 				.catch((err) => {
-					this.toast("خطا در برقراری ارتباط");
+					this.toast(__.get("messages.connection-error"));
 					this.resetLoading = false;
 				});
 		},

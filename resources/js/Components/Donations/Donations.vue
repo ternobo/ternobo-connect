@@ -96,7 +96,7 @@ export default {
 					this.next_page_url = response.data.links.next;
 				})
 				.catch((err) => {
-					this.toast("خطا در برقراری ارتباط");
+					this.toast(__.get("messages.connection-error"));
 				})
 				.then(() => {
 					this.loading = false;
@@ -114,7 +114,7 @@ export default {
 						this.next_page_url = response.data.links.next;
 					})
 					.catch((err) => {
-						this.toast("خطا در برقراری ارتباط");
+						this.toast(__.get("messages.connection-error"));
 					})
 					.then(() => {
 						this.loading_next_page = false;
@@ -142,7 +142,7 @@ export default {
 				this.next_page_url = response.data.links.next;
 			})
 			.catch((err) => {
-				this.toast("خطا در برقراری ارتباط");
+				this.toast(__.get("messages.connection-error"));
 			})
 			.then(() => {
 				this.loading = false;

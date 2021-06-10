@@ -98,7 +98,7 @@ export default {
 						this.handleError(response.data.errors);
 					}
 				})
-				.catch((err) => this.toast("خطا در برقراری ارتباط"))
+				.catch((err) => this.toast(__.get("messages.connection-error")))
 				.then(() => (this.loading = false));
 		},
 	},
