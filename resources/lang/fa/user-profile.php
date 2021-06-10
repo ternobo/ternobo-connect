@@ -1,5 +1,6 @@
 <?php
 return [
+    // Head
     'connections' => "شبکه",
     'mutual-friends' => "دوستان مشترک",
     'joined' => "ملحق شده در",
@@ -10,16 +11,19 @@ return [
     'user-title-des' => "این عنوان زیر نام شما نمایش داده می‌شود",
     'location' => "موقعیت",
 
-    "tabs" => [
-        'about-me' => "درباره من",
+    //Tabs
+    'tabs' => [
+        'about' => "درباره من",
         'activities' => "فعالیت‌ها",
-        'contact-me' => "تماس با من",
+        'contact' => "تماس با من",
     ],
 
     'published' => "منتشر شده",
 
+    // Biography
     'biography' => "بایوگرافی",
 
+    // Skills
     'skill' => "مهارت|مهارت‌ها",
     'endorse-skill' => "تأیید مهارت",
     'endorse-skill-q1' => "به مهارت :fname در :skill چه امتیازی می‌دهید؟",
@@ -39,15 +43,15 @@ return [
     'choose-reason' => "انتخاب دلیل",
     'remove-skill' => "آیا از حذف مهارت :skill اطمینان دارید؟", /*:skill - Your skill*/
     
+    // Achievments
     'achievements' => "دستاورد‌ها",
-    'associated-with' => "مرتبط با",
-    'issuer' => "صادر کننده",
-    'issue-date' => "تاریخ صدور",
-    'awards' => "جایزه|جوایز",
-    'course' => "دوره|دوره‌ها",
-    'language' => "زبان|زبان‌ها",
-    'course-name' => "نام دوره",
-    'course-code' => "کد دوره",
+
+    'publication' => "انتشار|انتشارات",
+    'publication-title' => "عنوان",
+    'publisher' => "نام ناشر",
+    'publication-date' => "تاریخ انتشار",
+    'publication-url' => "لینک",
+
     'patent' => "اختراع|اختراعات",
     'patent-title' => "عنوان اختراع",
     'patent-office' => "اداره ثبت اختراع",
@@ -56,36 +60,47 @@ return [
     'patent-status' => "وضعیت",
     'patent-issued' => "حق ثبت اختراع صادر شده",
     'patent-pending' => "حق ثبت اختراع درحال صادر شدن است",
+    'issue-date' => "تاریخ صدور",
+
+    'course' => "دوره|دوره‌ها",
+    'course-name' => "نام دوره",
+    'course-code' => "کد دوره",
+    'associated-with' => "مرتبط با",
+
+    'project' => "پروژه|پروژه‌ها",
+    'project-name' => "نام پروژه",
+    'start-date' => "تاریخ شروع",
+    'end-date' => "تاریخ پایان",
+    'present' => "تا کنون",
+    'currently-working-project' => "همچنان در حال کار بر روی این پروژه هستم",
+    'project-url' => "لینک پروژه",
+
+    'awards' => "جایزه|جوایز",
+    'award-title' => "عنوان",
+    'issuer' => "صادر کننده",
+
+    'test' => "آزمون|آزمون‌ها",
+    'test-title' => "عنوان آزمون",
+    'test-date' => "تاریخ آزمون",
+    'test-score' => "نمره آزمون",
+
+    'language' => "زبان|زبان‌ها",
     'proficiency' => "سطح",
     'elementary' => "مبتدی",
     'limited-working' => "متوسط",
     'full-professional' => "حرفه‌ای",
     'native' => "زبان مادری",
-    'project' => "پروژه|پروژه‌ها",
-    'project-name' => "نام پروژه",
-    'currently-working-project' => "همچنان در حال کار بر روی این پروژه هستم",
-    'start-date' => "تاریخ شروع",
-    'end-date' => "تاریخ پایان",
-    'project-url' => "لینک پروژه",
-    'present' => "تا کنون",
-    'publication' => "انتشار|انتشارات",
-    'publication-title' => "عنوان",
-    'publisher' => "نام ناشر",
-    'publication-date' => "تاریخ انتشار",
-    'publication-url' => "لینک",
-    'test' => "آزمون|آزمون‌ها",
-    'test-title' => "عنوان آزمون",
-    'test-score' => "نمره آزمون",
-    'test-date' => "تاریخ آزمون",
-    'website' => "وبسایت|وبسایت‌ها",
-    'remove-website' => "آیا از حذف وبسایت :website اطمینان دارید؟", /*:website - Your website*/
-    'add-website' => "افزودن وبسایت",
-    "description" => "توضیحات",
-    'website-type' => "نوع وبسایت",
-    'website-url' => "آدرس وبسایت",
+
+    // Contact Me
+    "profile" => "پروفایل",
+
     'contact-info' => "راه‌های ارتباطی",
 
-    "profile" => "پروفایل",
+    'website' => "وبسایت|وبسایت‌ها",
+    'add-website' => "افزودن وبسایت",
+    'website-url' => "آدرس وبسایت",
+    'website-type' => "نوع وبسایت",
+    'remove-website' => "آیا از حذف وبسایت :website اطمینان دارید؟", /*:website - Your website*/
 
     "followed" => "<b>:name</b> دنبال می‌کند",
 ];

@@ -15,7 +15,6 @@ return [
     'first-name' => "نام",
     'last-name' => "نام خانوادگی",
     'further-information' => "اطلاعات تکمیلی",
-    'next' => "بعدی",
     'security-tips' => "نکات امنیتی",
     'enter-your-picture' => "تصویر خود را وارد کنید",
     'failed-username' => 'شناسه، شماره موبایل اشتباه است',
