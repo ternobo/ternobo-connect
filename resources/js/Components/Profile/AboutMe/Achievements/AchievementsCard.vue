@@ -6,13 +6,13 @@
 				<DropdownBtn
 					v-if="edit"
 					:items="[
-						{ id: 1, name: __.get('user-profile.language') },
-						{ id: 2, name: __.get('user-profile.projects') },
-						{ id: 3, name: __.get('user-profile.publications') },
+						{ id: 1, name: __.choice('user-profile.language', 1) },
+						{ id: 2, name: __.choice('user-profile.project', 1) },
+						{ id: 3, name: __.choice('user-profile.publication', 1) },
 						{ id: 4, name: __.choice('user-profile.patent', 1) },
 						{ id: 5, name: __.choice('user-profile.course', 1) },
 						{ id: 6, name: __.choice('user-profile.award', 1) },
-						{ id: 7, name: __.get('user-profile.test') },
+						{ id: 7, name: __.choice('user-profile.test', 1) },
 					]"
 					@click="addNew"
 				></DropdownBtn>

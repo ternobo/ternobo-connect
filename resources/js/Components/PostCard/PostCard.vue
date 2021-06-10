@@ -31,7 +31,7 @@
 				<div>
 					<div class="clickale text-muted clickable hover-dark" v-if="post_data.page.has_donate && post_data.can_tip" @click="showTips = true">
 						<i class="material-icons-outlined">savings</i>
-						{{ __.get("donations.donate") }}
+						{{ __.choice("tips.tip", 1) }}
 					</div>
 				</div>
 				<div class="buttons">
@@ -64,27 +64,21 @@
 </template>
 
 <script>
-import TimeAgo from "javascript-time-ago";
 import CommentsList from "../Comments/CommetsList";
 import EmbedCodeModal from "../Modals/EmbedCodeModal";
 
-// Load locale-specific relative date/time formatting rules.
-import fa from "javascript-time-ago/locale/fa";
 import PostMenu from "../Menues/PostMenu.vue";
 import NewPostModal from "../NewPost/NewPostModal";
 import DonationModal from "./Donation/DonationModal.vue";
 
-TimeAgo.addLocale(fa);
 export default {
 	computed: {
 		post_time: function () {
-			const timeAgo = new TimeAgo("fa-FA");
-			return timeAgo.format(Date.parse(this.post_data.created_at), "fa_FA");
+			return this.timeAgo(this.post_data.created_at);
 		},
 		updated_at: function () {
 			if (this.post_data.updated_at !== null) {
-				const timeAgo = new TimeAgo("fa-FA");
-				return timeAgo.format(Date.parse(this.post_data.updated_at), "fa_FA");
+				return this.timeAgo(this.post_data.updated_at);
 			}
 			return "";
 		},

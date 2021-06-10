@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Profile;
 use App\Http\Controllers\Controller;
 use App\Models\AboutData;
 use App\Models\Skill;
-use App\Rules\DateObject;
 use App\Rules\LevelObject;
 use App\URLTools;
 use Illuminate\Http\Request;
@@ -133,8 +132,8 @@ class ProfileController extends Controller
                 $validator = Validator::make($experience, [
                     'company' => "required|max:50",
                     'title' => "required|max:60",
-                    "startDate" => ["required", new DateObject('تاریخ شروع تجربه نامعتبر است.')],
-                    "endDate" => [new DateObject('تاریخ شروع تجربه نامعتبر است.')],
+                    "startDate" => ["required", 'date'],
+                    "endDate" => ['date'],
                 ], $msgs);
                 if ($validator->fails()) {
                     return response()->json(['result' => false, "type" => "experience", "errors" => $validator->errors()]);
@@ -174,8 +173,8 @@ class ProfileController extends Controller
                     'school' => "required|max:50",
                     'major' => "required|max:60",
                     'degree' => "required|max:60",
-                    "startDate" => ["required", new DateObject('تاریخ پایان تحصیلات نامعتبر است.')],
-                    "endDate" => [new DateObject('تاریخ پایان تحصیلات نامعتبر است.')],
+                    "startDate" => ["required", 'date'],
+                    "endDate" => ['date'],
                 ], $msgs);
                 if ($validator->fails()) {
                     return response()->json(['result' => false, "type" => "education", "errors" => $validator->errors()]);
@@ -188,25 +187,46 @@ class ProfileController extends Controller
          */
         if ($request->filled("achievements") && (is_array($request->achievements))) {
             $achievements = (array) $request->achievements;
-
-            $messages = [
-                'name.required' => 'نام، {{ type }} اجباری است.',
-                'level.required' => 'میزان تسلط به زبان اجباری است.',
-                'startDate.required' => 'تاریخ شروع {{ type }} اجباری است.',
-                'endDate.required_if' => 'تاریخ پایان {{ type }} اجباری است.',
-                'endDate.required' => 'تاریخ پایان {{ type }} اجباری است.',
-                'date.required' => 'تاریخ {{ type }} اجباری است.',
-                'organization.required' => 'اداره ثبت اختراع اجباری است.',
-                'score.max' => 'نمره آزمون حداکثر ۲۰ کاراکتر است.',
-                'score.digits_between' => 'نمره آزمون باید عدد باشد',
-                'registerCode.max' => "شماره ثبت اختراع نمی‌تواند بیشتر از 30 کاراکتر باشد",
-                "registerCode.required" => "شماره ثبت اختراع اجباری است",
-                'link.regex' => "لینک {{ type }} نامعتبر است",
+            $attributes = [
+                'langs' => [
+                    'name' => __("validation.attributes.lang"),
+                    'level' => __("validation.attributes.lang-level"),
+                ],
+                'awards' => [
+                    'name' => __("validation.attributes.award-title"),
+                    "date" => __("validation.attributes.award-date"),
+                    'link' => __("validation.attributes.award-link"),
+                ],
+                'projects' => [
+                    'name' => __("validation.attributes.project-title"),
+                    "startDate" => __("validation.attributes.project-start-date"),
+                    "endDate" => __("validation.attributes.project-end-date"),
+                    "noEndDate" => __("validation.attributes.project-end-date"),
+                    'link' => __("validation.attributes.project-link"),
+                ],
+                'publishs' => [
+                    'name' => __("validation.attributes.publish-title"),
+                    "date" => __("validation.attributes.publish-date"),
+                    'link' => __("validation.attributes.project-link"),
+                ],
+                'inventions' => [
+                    'name' => __("validation.attributes.invention-title"),
+                    "organization" => __("validation.attributes.invention-organization"),
+                    "registerCode" => __("validation.attributes.invention-code"),
+                    "date" => __("validation.attributes.invention-date"),
+                    'link' => __("validation.attributes.invention-link"),
+                ],
+                'courses' => [
+                    'name' => __("validation.attributes.course-title"),
+                ],
+                'tests' => [
+                    'name' => __("validation.attributes.test-title"),
+                    "score" => __("validation.attributes.test-score"),
+                    "date" => __("validation.attributes.test-date"),
+                    'link' => __("validation.attributes.test-link"),
+                ],
             ];
 
-            $errors = [];
-
-            // dd($achievements);
             $validatorRules = [
                 'langs' => [
                     'name' => "required|max:50",
@@ -214,26 +234,26 @@ class ProfileController extends Controller
                 ],
                 'awards' => [
                     'name' => "required|max:50",
-                    "date" => [new DateObject('تاریخ صدور {{ type }} را تکمیل کنید.')],
+                    "date" => ['date'],
                     'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
                 ],
                 'projects' => [
                     'name' => "required|max:50",
-                    "startDate" => ["required", new DateObject('تاریخ شروع {{ type }} را تکمیل کنید.')],
-                    "endDate" => ['required_if:noEndDate,false', new DateObject('تاریخ پایان {{ type }} را تکمیل کنید.')],
+                    "startDate" => ["required", 'date'],
+                    "endDate" => ['required_if:noEndDate,false', 'date'],
                     "noEndDate" => ["boolean"],
                     'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
                 ],
                 'publishs' => [
                     'name' => "required|max:50",
-                    "date" => ['required', new DateObject('تاریخ پایان {{ type }} را تکمیل کنید.')],
+                    "date" => ['required', 'date'],
                     'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
                 ],
                 'inventions' => [
                     'name' => "required|max:50",
                     "organization" => "required|max:50",
                     "registerCode" => "required|max:30",
-                    "date" => [new DateObject('تاریخ ثبت {{ type }} را تکمیل کنید.')],
+                    "date" => ['date'],
                     'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
                 ],
                 'courses' => [
@@ -242,7 +262,7 @@ class ProfileController extends Controller
                 'tests' => [
                     'name' => "required|max:50",
                     "score" => "max:20",
-                    "date" => [new DateObject('تاریخ پایان {{ type }} را تکمیل کنید.')],
+                    "date" => ['date'],
                     'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
                 ],
             ];
@@ -253,7 +273,9 @@ class ProfileController extends Controller
                     if (isset($data["link"])) {
                         $data['link'] = URLTools::toURL($data['link']);
                     }
-                    $validator = Validator::make($data, $validatorRules[$type], $messages);
+                    $validator = Validator::make($data, $validatorRules[$type], [
+                        'endDate.required_if' => __("validation.no_end_date"),
+                    ], $attributes[$type]);
                     if ($validator->fails()) {
                         return response()->json(['result' => false, "type" => ProfileController::getAchievementTypeName($type), "errors" => $validator->errors()]);
                     }

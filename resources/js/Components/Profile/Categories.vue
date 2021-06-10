@@ -5,15 +5,15 @@
 		<div class="categories-sidebar-card">
 			<div class="actions-list">
 				<button class="action-item" @click="action = 'all'" :class="{ active: action == 'all' }">
-					<i class="material-icons-outlined">article</i> <span style="margin-top: 1px">{{ __.get("user-profile.posts") }}</span>
+					<i class="material-icons-outlined">article</i> <span style="margin-top: 1px">{{ __.choice("application.post", 2) }}</span>
 				</button>
-				<button class="action-item" @click="action = 'likes'" :class="{ active: action == 'likes' }"><i class="material-icons">favorite_border</i> {{ __.get("user-profile.likes") }}</button>
-				<button class="action-item" @click="action = 'comments'" :class="{ active: action == 'comments' }"><i class="material-icons-outlined">comment</i> {{ __.get("user-profile.comments") }}</button>
+				<button class="action-item" @click="action = 'likes'" :class="{ active: action == 'likes' }"><i class="material-icons">favorite_border</i> {{ __.choice("application.like", 2) }}</button>
+				<button class="action-item" @click="action = 'comments'" :class="{ active: action == 'comments' }"><i class="material-icons-outlined">comment</i> {{ __.choice("application.comment", 2) }}</button>
 			</div>
 			<hr v-if="list.length > 0" />
 			<div class="categories" v-if="list.length > 0">
 				<div class="d-flex align-items-start justify-content-between">
-					<h2 class="category--title"><i class="material-icons-outlined">layers</i> {{ __.get("application.categories") }}</h2>
+					<h2 class="category--title"><i class="material-icons-outlined">layers</i> {{ __.choice("content/posts.category", 2) }}</h2>
 					<i class="btn btn-edit material-icons-outlined font-16" style="height: 25px; width: 25px; padding: 2px" v-if="checkUser(pageId)" @click="edit = !edit">edit</i>
 				</div>
 				<ul>

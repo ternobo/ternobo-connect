@@ -16,7 +16,6 @@ import Vuex from "vuex";
 import VueMasonry from 'vue-masonry-css';
 import Lang from 'lang.js';
 
-console.log(Lang);
 
 Vue.use(VueMasonry);
 Vue.use(InfiniteLoading, { /* options */ });

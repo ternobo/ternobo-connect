@@ -43,7 +43,7 @@
 									<i class="material-icons-outlined">delete_sweep</i>
 									<div>
 										<div>
-											<strong> حذف </strong>
+											{{ __.get("application.delete") }}
 										</div>
 									</div>
 								</div>
@@ -75,7 +75,7 @@
 			</div>
 			<div class="actions">
 				<small class="clickable me-1" @click="loadReplies(false)" v-if="replies_count > 0 && replyTo == undefined">
-					<strong :class="{ 'text-muted': !showReplies, 'text-dark': showReplies }"> {{ replies_count }} {{ __.choice("content/comments.comment", replies_count) }} </strong>
+					<strong :class="{ 'text-muted': !showReplies, 'text-dark': showReplies }"> {{ replies_count }} {{ __.choice("application.comment", replies_count) }} </strong>
 				</small>
 				<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies || !showNewComment, 'material-icons text-dark': showReplies && showNewComment }" class="hover-dark clickable"> insert_comment </i>
 				<i @click="likeComment" v-if="!checkUser(comment.page.user_id)" class="hover-dark clickable material-icons" :class="{ 'text-danger': liked }">
@@ -103,14 +103,11 @@
 
 <script>
 import NewComment from "./NewComment";
-import TimeAgo from "javascript-time-ago";
 import LoadingSpinner from "../LoadingSpinner";
-// Load locale-specific relative date/time formatting rules.
-import fa from "javascript-time-ago/locale/fa";
+
 import ReportModal from "../Modals/ReportModal.vue";
 import LikesModal from "../Modals/LikesModal.vue";
 
-TimeAgo.addLocale(fa);
 export default {
 	mounted() {
 		this.liked = this.comment.is_liked;
@@ -215,8 +212,7 @@ export default {
 	},
 	computed: {
 		comment_time() {
-			const timeAgo = new TimeAgo("fa-FA");
-			return timeAgo.format(Date.parse(this.comment.created_at), "twitter");
+			return this.timeAgo(this.comment.created_at);
 		},
 	},
 	components: {

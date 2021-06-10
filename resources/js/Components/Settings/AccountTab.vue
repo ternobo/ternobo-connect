@@ -14,7 +14,7 @@
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined me-2">account_circle</i>
-						<span>{{ __.get("auth.username") }}</span>
+						<span>{{ __.get("application.username") }}</span>
 					</div>
 
 					<div class="d-flex align-items-center">
@@ -58,7 +58,7 @@
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined me-2">vpn_key</i>
-						<span>{{ __.get("auth.password") }}</span>
+						<span>{{ __.get("application.password") }}</span>
 					</div>
 					<div class="d-flex align-items-center">
 						<i class="btn setting-btn material-icons-outlined ms-3" @click="showPasswordMdal = true">edit</i>

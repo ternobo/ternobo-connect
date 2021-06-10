@@ -66,21 +66,21 @@
 		<div class="w-100 d-flex align-content-center justify-content-between pt-2">
 			<div>
 				<div class="d-flex post-likes-text text-muted clickable" v-if="feedbackReply.mutual_likes != null && feedbackReply.mutual_likes.length > 0">
-					<span class="me-1">پسندیده شده توسط</span>
+					<span class="me-1">{{ __.get("content/posts.liked-text") }}</span>
 					<wire-link v-if="feedbackReply.mutual_likes[0]" :href="'/' + feedbackReply.mutual_likes[0].page.slug" class="text-dark">
 						<strong class="text-light">{{ feedbackReply.mutual_likes[0].page.name }}</strong>
 					</wire-link>
 					<div v-if="feedbackReply.mutual_likes.length > 1">
-						<span class="ms-1">و</span>
+						<span class="ms-1">{{ __.get("contnet/posts.and") }}</span>
 						<wire-link v-if="feedbackReply.mutual_likes[1]" :href="'/' + feedbackReply.mutual_likes[0].page.slug" class="text-dark">
 							<strong class="text-light">{{ feedbackReply.mutual_likes[1].page.name }}</strong>
 						</wire-link>
 					</div>
-					<span class="mx-1" v-if="feedbackReply.mutual_likes.length > 2"> و ... </span>
+					<span class="mx-1" v-if="feedbackReply.mutual_likes.length > 2"> {{ __.get("contnet/posts.and") }} ... </span>
 				</div>
 			</div>
 			<div class="actions">
-				<strong class="text-light me-2 clickable" v-if="feedbackReply.replies_count > 0" @click="loadReplies">{{ feedbackReply.replies_count }} پاسخ</strong>
+				<strong class="text-light me-2 clickable" v-if="feedbackReply.replies_count > 0" @click="loadReplies">{{ feedbackReply.replies_count }} {{ __.choice("content/comments.reply", feedbackReply.replies_count) }}</strong>
 				<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies, 'material-icons': showReplies }" class="hover-dark me-2 clickable"> insert_comment </i>
 				<i @click="likeComment" class="hover-danger clickable material-icons" v-if="feedbackReply.user.id != $store.state.user.id" :class="{ 'text-danger': liked }">
 					{{ liked ? "favorite" : "favorite_border" }}
@@ -97,7 +97,7 @@
 					</div>
 				</div>
 				<div class="w-100 d-flex align-items-center justify-content-center p-2" v-if="next_page_url !== null">
-					<loading-button v-if="next_page_url !== null" @click.native="loadMore" class="btn btn-outline-dark" :loading="loadingMore">بارگذاری بیشتر</loading-button>
+					<loading-button v-if="next_page_url !== null" @click.native="loadMore" class="btn btn-outline-dark" :loading="loadingMore">{{ __.get("application.load-more") }}</loading-button>
 				</div>
 			</div>
 		</transition>
@@ -106,12 +106,9 @@
 
 <script>
 import NewFeedbackReply from "./NewFeedbackReply";
-import TimeAgo from "javascript-time-ago";
 import LoadingSpinner from "../LoadingSpinner";
-// Load locale-specific relative date/time formatting rules.
-import fa from "javascript-time-ago/locale/fa";
+
 import { mapState } from "vuex";
-TimeAgo.addLocale(fa);
 export default {
 	mounted() {
 		this.liked = this.feedbackReply.is_liked;
@@ -224,8 +221,7 @@ export default {
 	computed: {
 		...mapState(["shared"]),
 		feedbackReply_time() {
-			const timeAgo = new TimeAgo("fa-FA");
-			return timeAgo.format(Date.parse(this.feedbackReply.created_at), "twitter");
+			return this.timeAgo(this.feedbackReply.created_at);
 		},
 	},
 	components: {

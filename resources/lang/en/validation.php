@@ -108,6 +108,7 @@ return [
     "duplicated_username" => "Entered Username is duplicated",
     "invalid_wesite" => "website url is invalid",
     "lang_level" => "invalid language level",
+    "no_end_date" => "The :attribute  is rquired",
 
     'attributes' => [
         'address' => 'Adress',
@@ -117,17 +118,41 @@ return [
         'city' => 'City',
         'content' => 'Content',
         'country' => 'Country',
+
         'date' => 'Date',
         'start-date' => "Start Date",
         'end-date' => "End Date",
-        'project' => "Project",
+
+        'project-title' => "Project Title",
+        'project-start-date' => "Project Start Date",
+        'project-end-date' => "Project End Date",
+        'project-link' => "Project Link",
+
         'lang' => "Language Name",
         "lang-level" => "Language Level",
+
         'award-title' => 'Award Title',
+        'award-date' => 'Award Date',
+        'award-link' => "Award Link",
+
         'publish-title' => "Publication Title",
+        'publish-date' => "Publication Date",
+        'publish-link' => "Publication Link",
+
         'invention-title' => 'Patent Title',
+        'invention-date' => 'Patent Date',
+        'invention-link' => "Patent Link",
+        "invention-organization" => "Patent Organization",
+        "invention-code" => "Patent Code",
+
         'course-title' => 'Course Title',
+        'course-code' => 'Course Code',
+
         'test-title' => 'Test Title',
+        'test-date' => 'Test Date',
+        'test-link' => "Test Link",
+        "test-score" => "Test Score",
+
         'day' => 'Day',
         'description' => 'Description',
         'district' => 'District',

@@ -7,12 +7,14 @@
 </template>
 
 <script>
+import jalaali from "jalaali-js";
 export default {
 	created() {
 		if (this.value !== null) {
-			this.year = this.value.year;
-			this.month = this.value.month;
-			this.day = this.value.day;
+			let date = this.getDateObject(this.value);
+			this.year = date.year;
+			this.month = date.month;
+			// this.day = date.day;
 		}
 	},
 	props: {
@@ -46,7 +48,7 @@ export default {
 		},
 		minYear: {
 			type: Number,
-			default: 1357,
+			default: window.lang == "fa" ? 1357 : 1980,
 			required: false,
 		},
 
@@ -92,32 +94,37 @@ export default {
 			return this.months();
 		},
 	},
+	methods: {
+		updateDate() {
+			if (Boolean(this.year) && Boolean(this.month)) {
+				let zeroOne = "01";
+				if (lang == "fa") {
+					let value = jalaali.toGregorian(this.year, this.month.id, this.day ? this.day : 1);
+					console.log(value);
+					this.$emit("input", `${value.gy}/${value.gm}/${this.day ? value.gd : zeroOne}`);
+				} else {
+					console.log(`${this.year}/${this.month.id}/${this.day ? this.day : zeroOne}`);
+					this.$emit("input", `${this.year}/${this.month.id}/${this.day ? this.day : zeroOne}`);
+				}
+			}
+		},
+	},
 	watch: {
 		year() {
-			this.$emit("input", {
-				year: this.year,
-				month: this.month,
-			});
+			this.updateDate();
 		},
 		month() {
-			this.$emit("input", {
-				year: this.year,
-				month: this.month,
-			});
+			this.updateDate();
 		},
 		day() {
-			this.$emit("input", {
-				year: this.year,
-				month: this.month,
-				day: this.day,
-			});
+			this.updateDate();
 		},
 	},
 	data() {
 		return {
 			year: null,
 			month: null,
-			day: null,
+			day: "01",
 		};
 	},
 };

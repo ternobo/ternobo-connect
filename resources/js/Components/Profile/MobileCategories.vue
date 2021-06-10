@@ -3,7 +3,7 @@
 		<template #modal-header>
 			<h5 class="modal-title">
 				<i class="material-icons-outlined">layers</i>
-				<span> {{ __.get("application.categories") }} </span>
+				<span> {{ __.choice("content/posts.category", 2) }} </span>
 			</h5>
 			<button @click="$emit('update:show', false)" type="button" class="close">×</button>
 

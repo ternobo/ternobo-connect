@@ -5,15 +5,15 @@
 		<tags-list :tags="tags" :show.sync="showTagsMenu" :activeTag="activeTag" @remove="removeTag" @select="tagAction" @cancel="cancelRemove" @save="saveTagRemove"></tags-list>
 
 		<div class="profile-action-filter item-filters justify-content-between">
-			<div class="filter-item" @click="action = 'all'" :class="{ active: action == 'all' }"><i class="material-icons-outlined">library_books</i> {{ __.get("user-profile.posts") }}</div>
-			<div class="filter-item" @click="action = 'likes'" :class="{ active: action == 'likes' }"><i class="material-icons-outlined">favorite_border</i> {{ __.get("user-profile.likes") }}</div>
-			<div class="filter-item" @click="action = 'comments'" :class="{ active: action == 'comments' }"><i class="material-icons-outlined">comment</i> {{ __.get("user-profile.comments") }}</div>
+			<div class="filter-item" @click="action = 'all'" :class="{ active: action == 'all' }"><i class="material-icons-outlined">library_books</i> {{ __.choice("application.post", 2) }}</div>
+			<div class="filter-item" @click="action = 'likes'" :class="{ active: action == 'likes' }"><i class="material-icons-outlined">favorite_border</i> {{ __.choice("application.like", 2) }}</div>
+			<div class="filter-item" @click="action = 'comments'" :class="{ active: action == 'comments' }"><i class="material-icons-outlined">comment</i> {{ __.choice("application.comment", 2) }}</div>
 		</div>
 
 		<div class="profile-filters" ref="catfilters" v-show="!isSticky">
 			<div class="filter-item" @click="showCategoriesMenu = true">
 				<i class="material-icons-outlined">layers</i>
-				{{ __.get("application.categories") }}
+				{{ __.choice("content/posts.category", 2) }}
 			</div>
 			<div class="filter-item" @click="showTagsMenu = true">
 				<i class="material-icons-outlined">label</i>
