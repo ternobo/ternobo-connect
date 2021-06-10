@@ -1,6 +1,9 @@
 <?php
 return [
     'tip' => "Tip|Tips",
+    'support-content' => "Support This Content",
+    'gateway' => "Gateway:",
+    'support-anonymously' => "Support Anonymously",
     'tipping' => "Tip",
     'date' => "Date",
     'details' => "Details",

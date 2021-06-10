@@ -1,6 +1,9 @@
 <?php
 return [
     'tip' => "حمایت|حمایت‌ها",
+    'support-content' => "حمایت از این محتوا",
+    'gateway' => "درگاه:",
+    'support-anonymously' => "حمایت به صورت ناشناس",
     'tipping' => "حمایت مالی",
     'date' => "تاریخ",
     'details' => "جزئیات",
