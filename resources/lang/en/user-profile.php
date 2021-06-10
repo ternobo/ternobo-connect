@@ -27,10 +27,10 @@ return [
     'skill' => "Skill|Skills",
     'endorse-skill' => "Endorse skill",
     'endorse-skill-q1' => "How do you rate :fname's :skill skills?",
-        /*
-            :fname - His/Her first Name.
-            :skill - His/Her skill.
-        */
+    /*
+    :fname - His/Her first Name.
+    :skill - His/Her skill.
+     */
     'good' => "Good",
     'very-good' => "Very Good",
     'highly-skilled' => "Expert",
@@ -66,7 +66,7 @@ return [
     'course-name' => "Course Name",
     'course-code' => "Course Number",
     'associated-with' => "Associated with",
-    
+
     'project' => "Project|Projects",
     'project-name' => "Project Name",
     'start-date' => "Start Date",
@@ -103,4 +103,7 @@ return [
     'remove-website' => "Are your sure you want to delete :website?", /*:website - Your website*/
 
     "followed" => "<b>:name</b> follows",
+
+    "skill_credit" => "Endorsed This Skill",
+    "skill_credit_my_verb" => "Endorsed This Skill",
 ];

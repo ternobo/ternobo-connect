@@ -109,6 +109,8 @@ return [
     "invalid_wesite" => "website url is invalid",
     "lang_level" => "invalid language level",
     "no_end_date" => "The :attribute  is rquired",
+    "month_not_selected" => "Month is not selected",
+    'start_year_not_selected' => "Start Date Not Selected",
 
     'attributes' => [
         'address' => 'Adress',

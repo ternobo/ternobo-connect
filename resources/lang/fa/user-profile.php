@@ -27,10 +27,10 @@ return [
     'skill' => "مهارت|مهارت‌ها",
     'endorse-skill' => "تأیید مهارت",
     'endorse-skill-q1' => "به مهارت :fname در :skill چه امتیازی می‌دهید؟",
-        /*
-            :fname - His/Her first Name.
-            :skill - His/Her skill.
-        */
+    /*
+    :fname - His/Her first Name.
+    :skill - His/Her skill.
+     */
     'good' => "خوب",
     'very-good' => "عالی",
     'highly-skilled' => "ماهر",
@@ -42,7 +42,7 @@ return [
     'endorse-res-5' => "هیچکدام از موارد بالا",
     'choose-reason' => "انتخاب دلیل",
     'remove-skill' => "آیا از حذف مهارت :skill اطمینان دارید؟", /*:skill - Your skill*/
-    
+
     // Achievments
     'achievements' => "دستاورد‌ها",
 
@@ -75,7 +75,7 @@ return [
     'currently-working-project' => "همچنان در حال کار بر روی این پروژه هستم",
     'project-url' => "لینک پروژه",
 
-    'awards' => "جایزه|جوایز",
+    'award' => "جایزه|جوایز",
     'award-title' => "عنوان",
     'issuer' => "صادر کننده",
 
@@ -103,4 +103,7 @@ return [
     'remove-website' => "آیا از حذف وبسایت :website اطمینان دارید؟", /*:website - Your website*/
 
     "followed" => "<b>:name</b> دنبال می‌کند",
+
+    "skill_credit" => "این مهارت را تایید کرده است|این مهارت را تایید کرده‌اند",
+    "skill_credit_my_verb" => "تایید کرده‌اید",
 ];

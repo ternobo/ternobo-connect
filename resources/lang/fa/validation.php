@@ -111,6 +111,8 @@ return [
     'url' => ':attribute معتبر نمی‌باشد.',
     'uuid' => ':attribute باید یک UUID معتبر باشد.',
     "no_end_date" => "فیلد :attribute اجباری است",
+    "month_not_selected" => "ماه انتخاب نشده",
+    'start_year_not_selected' => "سال شروع انتخاب نشده",
 
     'attributes' => [
         'address' => 'نشانی',

@@ -41,16 +41,16 @@ class Skill extends Model
                 $first = $credits[0]->user;
                 $second = $credits[1]->user;
                 if ($first->id === Auth::user()->id) {
-                    $first->name = "شما";
+                    $first->name = __("tips.you");
                     $self = true;
                 } elseif ($second->id === Auth::user()->id) {
-                    $second->name = "شما";
+                    $second->name = __("tips.you");
                     $self = true;
                 }
                 if ($self) {
-                    $verb = "کرده اید";
+                    $verb = trans_choice("user-profile.skill_credit_my_verb", $nums);
                 } else {
-                    $verb = "کرده اند";
+                    $verb = trans_choice("user-profile.skill_credit", $nums);
                 }
 
                 return ['first' => $first, "second" => $second, 'verb' => $verb, "nums" => $nums];
@@ -58,16 +58,16 @@ class Skill extends Model
                 $first = $credits[0]->user;
                 $second = $credits[1]->user;
                 if ($first->id === Auth::user()->id) {
-                    $first->name = "شما";
+                    $first->name = __("tips.you");
                     $self = true;
                 } elseif ($second->id === Auth::user()->id) {
-                    $second->name = "شما";
+                    $second->name = __("tips.you");
                     $self = true;
                 }
                 if ($self) {
-                    $verb = "کرده اید";
+                    $verb = trans_choice("user-profile.skill_credit_my_verb", $nums);
                 } else {
-                    $verb = "کرده اند";
+                    $verb = trans_choice("user-profile.skill_credit", $nums);
                 }
                 // dd($nums);
                 return ['first' => $first, "second" => $second, 'verb' => $verb, "nums" => 2];
@@ -75,13 +75,13 @@ class Skill extends Model
                 $first = $credits[0]->user;
 
                 if ($first->id === Auth::user()->id) {
-                    $first->name = "شما";
+                    $first->name = __("tips.you");
                     $self = true;
                 }
                 if ($self) {
-                    $verb = "کرده‌اید";
+                    $verb = trans_choice("user-profile.skill_credit_my_verb", $nums);
                 } else {
-                    $verb = "کرده است";
+                    $verb = trans_choice("user-profile.skill_credit", $nums);
                 }
                 return ['first' => $first, 'verb' => $verb, "nums" => $nums];
             }
