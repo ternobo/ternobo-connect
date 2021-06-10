@@ -49,7 +49,7 @@
 				</div>
 				<div class="col-md-12" v-if="showMore">
 					<div class="d-flex align-items-center justify-content-between mb-3">
-						<strong>{{ __.get("user-profile.description") }}</strong>
+						<strong>{{ __.get("application.description") }}</strong>
 						<div class="character-counter">
 							<span class="counter tex-dark">{{ leftCharacter }}</span>
 							<div class="progress me-1 mb-0" style="width: 100px; height: 5px">

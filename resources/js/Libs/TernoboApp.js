@@ -207,8 +207,8 @@ TernoboApp.install = function (Vue, options) {
                 return this.$bvModal
                     .msgBoxConfirm(content, {
                         size: "sm",
-                        okTitle: "تایید",
-                        cancelTitle: "لغو",
+                        okTitle: __.get("settings.confirm"),
+                        cancelTitle: __.get("application.cancel"),
                         hideHeaderClose: false,
                         cancelVariant: "transparent text-grey",
                         centered: true,
@@ -218,12 +218,12 @@ TernoboApp.install = function (Vue, options) {
             },
             deleteConfirmModal(itemName, index, arr) {
                 const h = this.$createElement;
-                let content = ["ایا از حذف ", h("strong", {}, [itemName]), " اطمینان دارید؟"]
+                let content = h("div", { domProps: { innerHTML: __.get("application.delete-confirm", { attribute: itemName }) } })
                 return this.$bvModal
                     .msgBoxConfirm(content, {
                         size: "sm",
-                        okTitle: "تایید",
-                        cancelTitle: "لغو",
+                        okTitle: __.get("settings.confirm"),
+                        cancelTitle: __.get("application.cancel"),
                         hideHeaderClose: false,
                         cancelVariant: "transparent text-grey",
                         centered: true,

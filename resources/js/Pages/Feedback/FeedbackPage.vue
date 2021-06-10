@@ -33,7 +33,9 @@ import FeedbackReplies from "../../Components/FeedbackReplies/FeedbackReplies.vu
 export default {
 	methods: {
 		loadMore() {
-			this.$refs.replies.loadMore();
+			if (this.$refs.replies) {
+				this.$refs.replies.loadMore();
+			}
 		},
 	},
 	props: {

@@ -26,7 +26,7 @@ export default {
 	methods: {
 		onDelete(index) {
 			if (Boolean(this.publishs[index].name)) {
-				this.deleteConfirmModal(`انتشار ${this.publishs[index].name}`, index, this.publishs);
+				this.deleteConfirmModal(`${__.choice("user-profile.publication", 1)} ${this.publishs[index].name}`, index, this.publishs);
 			} else {
 				this.publishs.splice(index, 1);
 			}

@@ -26,7 +26,7 @@ export default {
 	methods: {
 		onDelete(index) {
 			if (Boolean(this.awards[index].name)) {
-				this.deleteConfirmModal(`جایزه ${this.awards[index].name}`, index, this.awards);
+				this.deleteConfirmModal(`${__.choice("user-profile.award", 1)} ${this.awards[index].name}`, index, this.awards);
 			} else {
 				this.awards.splice(index, 1);
 			}

@@ -26,7 +26,7 @@ export default {
 	methods: {
 		onDelete(index) {
 			if (Boolean(this.projects[index].name)) {
-				this.deleteConfirmModal(`پروژه ${this.projects[index].name}`, index, this.projects);
+				this.deleteConfirmModal(`${__.choice("user-profile.project", 1)} ${this.projects[index].name}`, index, this.projects);
 			} else {
 				this.projects.splice(index, 1);
 			}

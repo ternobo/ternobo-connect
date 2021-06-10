@@ -5,7 +5,7 @@
 			<skeleton width="238px" height="66px" v-for="i in 1" :key="`skeleton_${i}`" />
 		</div>
 		<div class="no-contact-container" v-else-if="activeSocials.length < 1 && !edit">
-			<span class="font-16 text-grey">موردی ثبت نشده</span>
+			<span class="font-16 text-grey">{{ __.get("messages.no-cotent-saved") }}</span>
 		</div>
 		<div class="contact-list p-0" v-else>
 			<social-item v-for="(social, index) in activeSocials" @disconnect="disconnect(index)" :key="`social_item_${social.id}`" :social="social" :edit="edit"></social-item>

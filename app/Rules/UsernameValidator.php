@@ -15,7 +15,7 @@ class UsernameValidator implements Rule
     private $reserved_usernames;
 
     private $ignore = null;
-    private $messageText = __("validation.invalid_username");;
+    private $messageText = null;
     /**
      * Create a new rule instance.
      *
@@ -23,6 +23,7 @@ class UsernameValidator implements Rule
      */
     public function __construct($ignore = null)
     {
+        $this->messageText = __("validation.invalid_username");
         $this->ignore = $ignore;
         $this->reserved_usernames = array_merge([
             'admin',

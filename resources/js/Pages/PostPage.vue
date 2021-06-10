@@ -64,7 +64,7 @@ export default {
 		},
 
 		async doDelete() {
-			this.confirmDialog(["ایا از حذف این محتوا اطمینان دارید؟"]).then((value) => {
+			this.confirmDialog(this.__.get("messages.delete-confirm")).then((value) => {
 				if (value) {
 					axios.delete(this.$APP_URL + "/articles/" + this.post.id);
 					this.$store.state.ternoboWireApp.visit("/feed");

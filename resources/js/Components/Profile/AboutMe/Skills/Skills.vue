@@ -41,7 +41,8 @@ export default {
 		onDelete(index) {
 			if (Boolean(this.skills[index].name)) {
 				const h = this.$createElement;
-				this.confirmDialog(["ایا از حذف مهارت ", h("strong", {}, [this.skills[index].name]), " اطمینان دارید؟"]).then((value) => {
+
+				this.confirmDialog(h("div", { domProps: { innerHTML: this.__.get("application.delete-confirm", { attribute: this.skills[index].name }) } })).then((value) => {
 					if (value) {
 						this.skills.splice(index, 1);
 					}

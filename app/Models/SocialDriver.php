@@ -17,6 +17,10 @@ class SocialDriver extends Model
         "active",
     ];
 
+    protected $hidden = [
+        'token',
+    ];
+
     public function account()
     {
         return $this->hasOne(ConnectedAccount::class, "driver", "driver")->where("user_id", Auth::check() ? Auth::user()->id : '-1')->latest();

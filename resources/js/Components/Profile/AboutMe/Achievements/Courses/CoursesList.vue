@@ -26,7 +26,7 @@ export default {
 	methods: {
 		onDelete(index) {
 			if (Boolean(this.courses[index].name)) {
-				this.deleteConfirmModal(`دوره ${this.courses[index].name}`, index, this.courses);
+				this.deleteConfirmModal(`${__.choice("user-profile.course", 1)} ${this.courses[index].name}`, index, this.courses);
 			} else {
 				this.courses.splice(index, 1);
 			}

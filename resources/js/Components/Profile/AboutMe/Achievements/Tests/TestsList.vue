@@ -27,7 +27,7 @@ export default {
 	methods: {
 		onDelete(index) {
 			if (Boolean(this.tests[index].name)) {
-				this.deleteConfirmModal(`آزمون ${this.tests[index].name}`, index, this.tests);
+				this.deleteConfirmModal(`${__.choice("user-profile.test", 1)} ${this.tests[index].name}`, index, this.tests);
 			} else {
 				this.tests.splice(index, 1);
 			}

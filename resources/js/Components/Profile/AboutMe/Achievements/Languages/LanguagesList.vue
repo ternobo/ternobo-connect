@@ -27,7 +27,7 @@ export default {
 	methods: {
 		onDelete(index) {
 			if (Boolean(this.languages[index].name)) {
-				this.deleteConfirmModal(`زبان ${this.languages[index].name}`, index, this.languages);
+				this.deleteConfirmModal(`${__.choice("user-profile.language", 1)} ${this.languages[index].name}`, index, this.languages);
 			} else {
 				this.languages.splice(index, 1);
 			}

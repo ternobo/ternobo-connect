@@ -36,45 +36,27 @@
 			</div>
 			<div class="achievement-edit-row">
 				<div>
-					<MaterialTextField v-model="val.name" maxlength="52" :required="true" class="material--sm" placeholder="نام اختراع"></MaterialTextField>
+					<MaterialTextField v-model="val.name" maxlength="52" :required="true" class="material--sm" :placeholder="__.get('user-profile.patent-title')"></MaterialTextField>
 				</div>
 				<div>
-					<tselect :items="countries" :required="true" maxlength="52" :dir="appDirection" v-model="val.organization" style="min-width: 234px">اداره ثبت اختراع</tselect>
+					<tselect :items="countries" :required="true" maxlength="52" :dir="appDirection" v-model="val.organization" style="min-width: 234px">{{ __.get("user-profile.patent-office") }}</tselect>
 				</div>
 				<div>
-					<MaterialTextField v-model="val.registerCode" maxlength="52" :required="true" class="material--sm" placeholder="شماره ثبت"></MaterialTextField>
+					<MaterialTextField v-model="val.registerCode" maxlength="52" :required="true" class="material--sm" :placeholder="__.get('user-profile.patent-number')"></MaterialTextField>
 				</div>
 				<div v-if="showMore">
-					<MaterialTextField v-model="val.link" maxlength="52" class="material--sm" placeholder="لینک ثبت اختراع"></MaterialTextField>
+					<MaterialTextField v-model="val.link" maxlength="52" class="material--sm" :placeholder="__.get('user-profile.patent-url')"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
-					<tselect
-						:dir="appDirection"
-						style="min-width: 260px"
-						v-model="val.status"
-						labelOption="label"
-						valueOption="id"
-						:items="[
-							{
-								label: 'حق ثبت اختراع صادر شده',
-								id: 1,
-							},
-							{
-								label: 'حق ثبت اختراع درحال ثبت شدن است',
-								id: 2,
-							},
-						]"
-					>
-						وضعیت
-					</tselect>
+					<tselect :dir="appDirection" style="min-width: 260px" v-model="val.status" labelOption="label" valueOption="id" :items="statusItems"> وضعیت </tselect>
 				</div>
 				<div v-if="showMore">
-					<strong>تاریخ صدور ثبت اختراع</strong>
+					<strong>{{ __.get("user-profile.issue-date") }}</strong>
 					<DatePicker class="mt-2" v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
 				</div>
 				<div class="col-md-12" v-if="showMore">
 					<div class="d-flex align-items-center justify-content-between mb-3">
-						<strong>توضیحات</strong>
+						<strong>{{ __.get("application.description") }}</strong>
 						<div class="character-counter">
 							<span class="counter tex-dark">{{ leftCharacter }}</span>
 							<div class="progress me-1 mb-0" style="width: 100px; height: 5px">
@@ -108,6 +90,7 @@ export default {
 				...this.val,
 				...this.value,
 			};
+			this.val.status = this.statusItems.filter((iterator) => iterator.id == this.val.status.id)[0];
 		}
 	},
 	watch: {
@@ -146,6 +129,18 @@ export default {
 		Tselect,
 	},
 	computed: {
+		statusItems() {
+			return [
+				{
+					label: this.__.get("user-profile.patent-issued"),
+					id: 1,
+				},
+				{
+					label: this.__.get("user-profile.patent-pending"),
+					id: 2,
+				},
+			];
+		},
 		countries() {
 			if (lang == "en") {
 				return CountriesEn;

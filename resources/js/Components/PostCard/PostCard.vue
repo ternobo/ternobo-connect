@@ -104,7 +104,7 @@ export default {
 			}).catch((error) => {});
 		},
 		doDelete() {
-			this.confirmDialog("آیا از حذف این پست اطمینان دارید؟").then((value) => {
+			this.confirmDialog(this.__.get("messages.delete-confirm")).then((value) => {
 				if (value) {
 					this.deleted = true;
 					axios.delete("/posts/" + this.post_data.id);

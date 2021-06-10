@@ -33,7 +33,7 @@
 								<strong class="font-14">{{ skillVal.credit_text.second.name }}</strong>
 							</wire-link>
 							<span v-if="credits_count > 2">و</span>
-							<span>{{ credits_count - 2 > 0 ? formatNumber(credits_count - 2, "0a") + "نفر دیگر " : "" }} این مهارت را تایید {{ skillVal.credit_text.verb }}</span>
+							<span>{{ credits_count - 2 > 0 ? formatNumber(credits_count - 2, "0a") + __.get("application.more-people", { num: credits_count - 2 }) : "" }} {{ skillVal.credit_text.verb }}</span>
 						</span>
 					</div>
 				</div>

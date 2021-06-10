@@ -20,4 +20,8 @@ class ConnectedAccount extends Model
     protected $casts = [
         'meta' => 'array',
     ];
+
+    protected $hidden = [
+        'token',
+    ];
 }

@@ -71,7 +71,7 @@ class ContactsController extends Controller
         $contact->data = json_encode($request->contacts);
 
         $socials = $request->contacts["socials"];
-        // dd($socials);
+
         foreach ($socials as $social) {
             $social = (object) $social;
             if ($social->account == null) {

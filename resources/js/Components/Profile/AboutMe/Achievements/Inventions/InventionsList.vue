@@ -27,7 +27,7 @@ export default {
 	methods: {
 		onDelete(index) {
 			if (Boolean(this.inventions[index].name)) {
-				this.deleteConfirmModal(`اختراع ${this.inventions[index].name}`, index, this.inventions);
+				this.deleteConfirmModal(`${__.choice("user-profile.patent", 1)} ${this.inventions[index].name}`, index, this.inventions);
 			} else {
 				this.inventions.splice(index, 1);
 			}

@@ -1,7 +1,7 @@
 <template>
 	<b-modal v-model="showModal" hide-footer :title="__.get('content/posts.edit-categories')" size="md" :centered="true">
 		<div class="add-category-container">
-			<input type="text" :readonly="disabled" @keypress.enter="addCategory" placeholder="دسته‌جدید را وارد کنید" maxlength="52" v-model="input" class="form-control text-input" />
+			<input type="text" :readonly="disabled" @keypress.enter="addCategory" :placeholder="__.get('content/posts.create-category')" maxlength="52" v-model="input" class="form-control text-input" />
 			<add-btn :disabled="!(input != null && input.length > 0) || loading || disabled" @click="addCategory" class="add-btn-light-grey d-flex justify-content-center align-items-center">
 				<i v-if="!loading" class="material-icons">add</i>
 				<span style="height: 14px; width: 14px; border-width: 2px" v-if="loading" class="loadingspinner"></span>

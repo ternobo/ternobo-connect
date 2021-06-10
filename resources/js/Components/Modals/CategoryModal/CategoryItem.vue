@@ -30,7 +30,7 @@ export default {
 		doDelete() {
 			if (!this.edit && !this.disabled) {
 				const h = this.$createElement;
-				this.confirmDialog(["ایا از حذف ", h("strong", {}, [this.category.name]), " اطمینان دارید؟"]).then((value) => {
+				this.confirmDialog(h("div", { domProps: { innerHTML: this.__.get("application.delete-confirm", { attribute: this.category.name }) } })).then((value) => {
 					if (value) {
 						this.loading = true;
 						axios
