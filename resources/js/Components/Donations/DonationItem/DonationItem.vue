@@ -18,10 +18,10 @@
 			</div>
 			<wire-link :href="`/posts/${tip.post_id}`" class="cliackable text-grey">
 				<i class="material-icons font-20 me-2">launch</i>
-				<span class="clickable">{{ __.get("donations.view-post") }}</span>
+				<span class="clickable">{{ __.get("tips.view-post") }}</span>
 			</wire-link>
 			<div>
-				<button class="btn tip-btn" @click="showModal = !showModal">{{ __.get("donations.details") }}</button>
+				<button class="btn tip-btn" @click="showModal = !showModal">{{ __.get("tips.details") }}</button>
 			</div>
 		</div>
 	</div>
@@ -47,9 +47,9 @@ export default {
 		},
 		name() {
 			if (!this.tip.donate_by_me && this.tip.anonymous) {
-				return this.__.get("donations.unknown");
+				return this.__.get("tips.unknown");
 			}
-			return this.tip.donate_by_me ? this.__.get("donations.you") : this.tip.user.name;
+			return this.tip.donate_by_me ? this.__.get("tips.you") : this.tip.user.name;
 		},
 		profile() {
 			if (!this.tip.donate_by_me && this.tip.anonymous) {

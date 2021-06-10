@@ -23,7 +23,7 @@
 					v-model="gender"
 					:dir="appDirection"
 				>
-					{{ __.get("auth.gender") }}
+					{{ __.get("application.gender") }}
 				</tselect>
 			</div>
 			<div class="col-md-4 mt-3">
@@ -64,13 +64,13 @@ export default {
 			switch (this.gender) {
 				case 1:
 					this.gender = {
-						label: __.get("auth.female"),
+						label: __.get("application.female"),
 						code: "1",
 					};
 					break;
 				case 2:
 					this.gender = {
-						label: __.get("auth.male"),
+						label: __.get("application.male"),
 						code: "2",
 					};
 					break;

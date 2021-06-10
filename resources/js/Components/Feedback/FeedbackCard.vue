@@ -41,11 +41,11 @@
 					</div>
 				</div>
 				<wire-link class="comments-viewer" v-if="showComment" :href="'/feedbacks/' + feedback.id">
-					<span class="text-grey" v-if="feedback.replies.length > 0">{{ feedback.replies.length }} {{ __.choice("content/comments.comment", feedback.replies.length) }} </span>
+					<span class="text-grey" v-if="feedback.replies.length > 0">{{ feedback.replies.length }} {{ __.choice("application.comment", feedback.replies.length) }} </span>
 					<i class="material-icons-outlined text-grey ms-2">comment</i>
 				</wire-link>
 				<div class="comments-viewer" v-else :href="'/feedbacks/' + feedback.id">
-					<span class="text-grey" v-if="feedback.replies.length > 0">{{ feedback.replies.length }} {{ __.choice("content/comments.comment", feedback.replies.length) }} </span>
+					<span class="text-grey" v-if="feedback.replies.length > 0">{{ feedback.replies.length }} {{ __.choice("application.comment", feedback.replies.length) }} </span>
 					<i class="material-icons-outlined text-grey ms-2">comment</i>
 				</div>
 			</div>

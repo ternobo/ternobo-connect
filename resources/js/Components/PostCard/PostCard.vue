@@ -31,7 +31,7 @@
 				<div>
 					<div class="clickale text-muted clickable hover-dark" v-if="post_data.page.has_donate && post_data.can_tip" @click="showTips = true">
 						<i class="material-icons-outlined">savings</i>
-						{{ __.get("donations.donate") }}
+						{{ __.choice("tips.tip", 1) }}
 					</div>
 				</div>
 				<div class="buttons">

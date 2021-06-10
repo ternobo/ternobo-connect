@@ -16,7 +16,7 @@
 							<i v-if="!edit && !$root.isDesktop" class="material-icons-outlined">edit</i>
 
 							<div class="d-flex align-items-center justify-content-center" v-if="edit">
-								{{ $root.isDesktop ? __.get("content/posts.save") : "" }}
+								{{ $root.isDesktop ? __.get("application.save") : "" }}
 								<i class="material-icons-outlined" v-if="!$root.isDesktop">save</i>
 								<div style="height: 14px; width: 14px; border-width: 2px" v-if="loadingSave" class="ms-2 loadingspinner"></div>
 							</div>
@@ -33,7 +33,7 @@
 						</button>
 					</div>
 				</template>
-				<tab v-if="hasAbout || canEdit" :name="__.get('user-profile.tabs.about-me')" id="home" :href="'/' + page.slug" :selected="current_tab === 'home'">
+				<tab v-if="hasAbout || canEdit" :name="__.get('user-profile.tabs.about')" id="home" :href="'/' + page.slug" :selected="current_tab === 'home'">
 					<div class="w-100 d-flex justify-content-center py-3" v-if="loadingTab">
 						<loading-spinner class="image__spinner" />
 					</div>

@@ -2,7 +2,7 @@
 	<div class="card">
 		<div class="card-body">
 			<div class="about-me--card-title-container">
-				<h2 class="about-me--card-title">مهارت‌ها</h2>
+				<h2 class="about-me--card-title">{{ __.choice("user-profile.skill", 2) }}</h2>
 				<button class="rounded-add-btn btn-light-action" v-if="edit" @click="addSkill">
 					<i class="material-icons">add</i>
 				</button>

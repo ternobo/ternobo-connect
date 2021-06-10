@@ -50,7 +50,7 @@
 					<loading-spinner class="image__spinner" />
 				</div>
 				<div v-if="next_page_url === null && !loading_next_page && donations.length > 20">
-					<no-content>{{ __.get("donations.no-more-donations") }}</no-content>
+					<no-content>{{ __.get("tips.no-more-donations") }}</no-content>
 				</div>
 			</div>
 		</div>
@@ -72,8 +72,8 @@ export default {
 			next_page_url: null,
 			loading_next_page: false,
 
-			order: { name: __.get("donations.newest"), value: "desc", icon: "filter_list" },
-			type: { name: __.get("donations.all"), value: "all" },
+			order: { name: __.get("tips.newest"), value: "desc", icon: "filter_list" },
+			type: { name: __.get("tips.all"), value: "all" },
 		};
 	},
 	components: { DonationSkeleton, DonationItem, Tselect, NoContent },

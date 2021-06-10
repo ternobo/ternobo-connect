@@ -5,7 +5,7 @@
 		<SignupModal :show.sync="showSignup"></SignupModal>
 		<b-sidebar id="sidebar" title="" backdrop-variant="dark" right backdrop shadow>
 			<div>
-				<div class="b-sidebar-item w-100 d-flex justify-content-between align-items-center clickable" style="overflow-x: hidden" @click="showLaws = !showLaws">{{ __.get("application.laws") }}</div>
+				<div class="b-sidebar-item w-100 d-flex justify-content-between align-items-center clickable" style="overflow-x: hidden" @click="showLaws = !showLaws">{{ __.get("application.comuunity-guidelines") }}</div>
 				<div class="b-sidebar-item w-100 d-flex justify-content-between align-items-center" style="overflow-x: hidden">
 					<span>نمایش پس زمینه</span>
 					<switches v-model="hasBG"></switches>
@@ -26,7 +26,7 @@
 						<i class="navheader-icon material-icons-outlined" :class="{ 'text-dark': !hasBG, 'text-white': hasBG }">home</i>
 					</wire-link>
 
-					<button v-if="!$store.state.user" class="btn btn-transparent font-14 py-1" :class="{ 'text-dark': !hasBG }" @click="showLogin = !showLogin">{{ __.get("auth.login") }}</button>
+					<button v-if="!$store.state.user" class="btn btn-transparent font-14 py-1" :class="{ 'text-dark': !hasBG }" @click="showLogin = !showLogin">{{ __.get("application.login") }}</button>
 				</div>
 			</div>
 			<div class="search-section" :class="{ noBG: !hasBG }">

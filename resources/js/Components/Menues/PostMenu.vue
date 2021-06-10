@@ -39,23 +39,11 @@
 						</div>
 					</div>
 				</dropdown-item>
-
-				<dropdown-item @click="showConfirm = true" v-if="!checkUser(post.page.user_id) && following">
-					<div class="d-flex align-items-center">
-						<i class="material-icons text-dark">not_interested</i>
-						<div>
-							<div>
-								<strong> دنبال نکردن {{ post.page.name }} </strong>
-							</div>
-							<small class="text-muted"> دیگر محتوای {{ post.page.name }} را تماشا نکنید. </small>
-						</div>
-					</div>
-				</dropdown-item>
 				<dropdown-item class="hover-danger" @click="$emit('deleted')" v-if="checkUser(post.page.user_id)">
 					<div class="d-flex align-items-center">
 						<i class="material-icons-outlined text-dark">delete_sweep</i>
 						<div>
-							<strong>حذف کردن</strong>
+							<strong>{{ __.get("application.delete") }}</strong>
 						</div>
 					</div>
 				</dropdown-item>

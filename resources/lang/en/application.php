@@ -2,7 +2,7 @@
 return [
     'search-ph' => 'Search',
     'about-us' => 'About Us',
-    'Comuunity-Guidelines' => 'Community Guidelines',
+    'comuunity-guidelines' => 'Community Guidelines',
     'description' => "Description",
     'load-more' => 'Load More',
     'delete' => 'Delete',

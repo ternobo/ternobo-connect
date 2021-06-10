@@ -14,14 +14,14 @@
 							<div class="can-tip-post-check clickable" @click="canDonate = !canDonate">
 								<div>
 									<i class="material-icons-outlined font-20 me-1">savings</i>
-									{{ __.get("donations.donate") }}
+									{{ __.choice("tips.tip", 1) }}
 								</div>
 								<loading-spinner v-if="loadingCanDonate" style="height: 12px; width: 12px; border-width: 1px"></loading-spinner>
 								<checkbox v-else v-model="canDonate" :status="canDonate" class="mt-1 m-0 text-superlight light"></checkbox>
 							</div>
 							<div class="category-select" @click="showCategoryModal = true">
 								<i class="material-icons-outlined">layers</i>
-								<span>{{ category == null ? __.get("application.categories") : category.name }}</span>
+								<span>{{ category == null ? __.choice("content/posts.category", 2) : category.name }}</span>
 							</div>
 						</div>
 					</div>
@@ -212,11 +212,11 @@ export default {
 						if (!response.data.result) {
 							this.canDonate = false;
 							this.$bvModal
-								.msgBoxConfirm("درحال حاضر هیچ درگاه متصل به حساب کاربری شما وجود ندارد. جهت فعال‌سازی حمایت مالی برای محتوای خود نسبت به افزودن درگاه پرداخت اقدام کنید.", {
-									title: "فعال‌سازی درگاه پرداخت",
+								.msgBoxConfirm(this.__.get("tips.active-tip-error"), {
+									title: this.__.get("tips.active-gateway"),
 									cancelVariant: "transparent text-muted",
-									cancelTitle: "رد کردن",
-									okTitle: "فعال‌سازی",
+									cancelTitle: this.__.get("settings.skip"),
+									okTitle: this.__.get("tips.activate"),
 									headerClass: "category-select-modal",
 									centered: true,
 									headerCloseContent: "arrow_back",

@@ -6,7 +6,7 @@
 			<ul class="post-menu">
 				<li v-clipboard="$APP_URL + '/posts/' + post.id" @click="showMenu = false">
 					<i class="material-icons text-dark">link</i>
-					<strong>رونوشت پیوند این محتوا</strong>
+					<strong>{{ __.get("content/posts.copy-post-link") }}</strong>
 				</li>
 				<li @click="runAction('edit')" v-if="checkUser(post.page.user_id) && post.type != 'article'">
 					<i class="material-icons-outlined text-dark">edit</i>
@@ -16,9 +16,9 @@
 					<i class="material-icons item-icon text-dark">code</i>
 					<div>
 						<div>
-							<strong> دریافت کد امبد </strong>
+							<strong> {{ __.get("content/posts.embed-text") }} </strong>
 						</div>
-						<small class="text-muted"> کد امبد را کپی کرده و در وب‌سایت خودتان قرار دهید. </small>
+						<small class="text-muted"> {{ __.get("content/posts.embed-des") }} </small>
 					</div>
 				</li>
 				<li class="d-flex align-items-center" v-if="!checkUser(post.page.user_id)" @click="runAction('report')">
@@ -34,16 +34,16 @@
 					<i class="material-icons item-icon text-dark">not_interested</i>
 					<div>
 						<div>
-							<strong> دنبال نکردن {{ post.page.name }} </strong>
+							<strong> {{ __.get("content/report.report-post") }} </strong>
 						</div>
-						<small class="text-muted"> دیگر محتوای {{ post.page.name }} را تماشا نکنید. </small>
+						<small class="text-muted"> {{ __.get("content/report.report-des-post") }} </small>
 					</div>
 				</li>
 				<li class="d-flex align-items-center" @click="runAction('deleted')" v-if="checkUser(post.page.user_id)">
 					<div class="d-flex align-items-center">
 						<i class="material-icons-outlined item-icon text-dark">delete_sweep</i>
 						<div>
-							<strong>حذف کردن</strong>
+							<strong>{{ __.get("application.delete") }}</strong>
 						</div>
 					</div>
 				</li>

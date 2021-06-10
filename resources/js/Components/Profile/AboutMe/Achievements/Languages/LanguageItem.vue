@@ -26,31 +26,7 @@
 					<MaterialTextField placeholder="زبان" maxlength="52" :required="true" v-model="languageVal.name" class="material--sm w-100" input-class="w-100 py-1"></MaterialTextField>
 				</div>
 				<div>
-					<tselect
-						:dir="appDirection"
-						:items="[
-							{
-								label: 'مبتدی',
-								level: 1,
-							},
-							{
-								label: 'متوسط',
-								level: 2,
-							},
-							{
-								label: 'حرفه‌ای',
-								level: 3,
-							},
-							{
-								label: 'زبان مادری',
-								level: 4,
-							},
-						]"
-						v-model="languageVal.level"
-						labelOption="label"
-						valueOption="level"
-						>سطح <span class="text-action">*</span></tselect
-					>
+					<tselect :dir="appDirection" :items="languageItems" v-model="languageVal.level" labelOption="label" valueOption="level"> {{ __.get("user-profile.proficiency") }} <span class="text-action">*</span> </tselect>
 				</div>
 			</div>
 		</div>
@@ -70,6 +46,28 @@ export default {
 			this.$emit("input", this.languageVal);
 		},
 	},
+	computed: {
+		languageItems() {
+			return [
+				{
+					label: __.get("user-profile.elementary"),
+					level: 1,
+				},
+				{
+					label: __.get("user-profile.limited-working"),
+					level: 2,
+				},
+				{
+					label: __.get("user-profile.full-professional"),
+					level: 3,
+				},
+				{
+					label: __.get("user-profile.native"),
+					level: 4,
+				},
+			];
+		},
+	},
 	methods: {
 		doDelete() {
 			this.$emit("deleted");
@@ -78,6 +76,7 @@ export default {
 	created() {
 		if (this.value) {
 			this.languageVal = this.value;
+			this.languageVal.level = this.languageItems.filter((iterator) => iterator.level == this.languageVal.level.level)[0];
 		}
 	},
 	data() {

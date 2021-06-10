@@ -13,10 +13,10 @@ export default {
 			this.page_id = page;
 			if (this.$store.state.shared.followings.includes(String(page))) {
 				this.followed = true;
-				this.text = this.__.get("user-profile.following");
+				this.text = this.__.get("application.following");
 				this.$emit("followed");
 			} else {
-				this.text = this.__.get("user-profile.follow");
+				this.text = this.__.get("application.follow");
 			}
 		}
 	},
@@ -54,7 +54,7 @@ export default {
 						if (response.data.result) {
 							this.loading = false;
 							this.$store.commit("addFollower", String(this.page_id));
-							this.text = "دنبال شده";
+							this.text = this.__.get("application.following");
 							this.followed = true;
 							this.$emit("followed");
 						} else {
@@ -76,7 +76,7 @@ export default {
 					.then((response) => {
 						if (response.data.result) {
 							this.loading = false;
-							this.text = "دنبال کردن";
+							this.text = this.__.get("application.follow");
 							this.followed = false;
 							this.$emit("unfollowed");
 							this.$store.commit("unfollow", this.$store.state.shared.followings.indexOf(String(this.page_id)));

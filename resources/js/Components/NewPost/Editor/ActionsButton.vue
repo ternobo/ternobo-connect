@@ -5,17 +5,17 @@
 			<div class="editors-actions-list" :style="editorsActionListStyle" v-if="showList">
 				<div class="text-type-list">
 					<div class="editor-list-item">
-						<strong>تیتر</strong>
+						<strong>{{ __.get("content/posts.heading") }}</strong>
 						<i class="material-icons" :class="{ disabled: !activeOptions.includes('title') }" @click="emitAcion('title')">title</i>
 					</div>
 					<div class="editor-list-item">
-						<strong>متن</strong>
+						<strong>{{ __.get("content/posts.text") }}</strong>
 						<i class="material-icons" :class="{ disabled: !activeOptions.includes('text') }" @click="emitAcion('text')">text_fields</i>
 					</div>
 				</div>
 				<div class="text-type-list">
 					<div class="editor-list-item">
-						<strong>رسانه</strong>
+						<strong>{{ __.get("content/posts.media") }}</strong>
 						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('media') }" @click="emitAcion('media')">image</i>
 					</div>
 					<div class="editor-list-item">

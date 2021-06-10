@@ -4,7 +4,7 @@
 			<div class="selections">
 				<div class="donation-modal-header">
 					<div class="donate-payer-info">
-						<span class="donated_by">{{ __.get("donations.supporter") }}:‌ </span>
+						<span class="donated_by">{{ __.get("tips.supporter") }}:‌ </span>
 						<lazy-image :src="profile" circle :loadingColor="skeletonOptions.profileColor" class="profile-xxsm tip-profile mb-0" imgClass="profile-xxsm"></lazy-image>
 						<strong class="tip-name">{{ name }}</strong>
 					</div>
@@ -22,23 +22,23 @@
 
 		<div class="donation-detail-content">
 			<div class="donation-detail-item">
-				<span class="text-grey font-16 font-demibold">{{ __.get("donations.date") }}</span>
+				<span class="text-grey font-16 font-demibold">{{ __.get("tips.date") }}</span>
 				<span class="text-grey font-16 font-demibold">{{ date }}</span>
 			</div>
 			<div class="donation-detail-item">
-				<span class="text-grey font-16 font-demibold">{{ __.get("donations.time") }}</span>
+				<span class="text-grey font-16 font-demibold">{{ __.get("tips.time") }}</span>
 				<span class="text-grey font-16 font-demibold">{{ time }}</span>
 			</div>
 			<div class="donation-detail-item">
-				<span class="text-grey font-16 font-demibold">{{ __.get("donations.transaction-id") }}</span>
+				<span class="text-grey font-16 font-demibold">{{ __.get("tips.transaction-id") }}</span>
 				<span class="text-grey font-16 font-demibold">{{ tip.meta.transaction_id }}</span>
 			</div>
 			<div class="donation-detail-item">
-				<span class="text-grey font-16 font-demibold">{{ __.get("donations.reference-id") }}</span>
+				<span class="text-grey font-16 font-demibold">{{ __.get("tips.reference-id") }}</span>
 				<span class="text-grey font-16 font-demibold">{{ tip.meta.reference_id }}</span>
 			</div>
 			<div class="donation-detail-item">
-				<span class="text-grey font-16 font-demibold">{{ __.get("donations.supporter-ip") }}</span>
+				<span class="text-grey font-16 font-demibold">{{ __.get("tips.supporter-ip") }}</span>
 				<span class="text-grey font-16 font-demibold">{{ tip.meta.ip }}</span>
 			</div>
 		</div>
@@ -59,9 +59,9 @@ export default {
 		},
 		name() {
 			if (!this.tip.donate_by_me && this.tip.anonymous) {
-				return this.__.get("donations.unknown");
+				return this.__.get("tips.unknown");
 			}
-			return this.tip.donate_by_me ? this.__.get("donations.you") : this.tip.user.name;
+			return this.tip.donate_by_me ? this.__.get("tips.you") : this.tip.user.name;
 		},
 		profile() {
 			if (!this.tip.donate_by_me && this.tip.anonymous) {
