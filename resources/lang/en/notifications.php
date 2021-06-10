@@ -1,5 +1,8 @@
 <?php
 return [
+    'today' => "Today",
+    'this-week' => "This Week",
+    'this-month' => "This Month",
     'liked-your-post' => "Liked your post.",
     'liked-your-comment' => "Liked your comment.",
     'commented-your-post' => "Commented on your post.",

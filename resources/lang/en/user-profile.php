@@ -1,6 +1,9 @@
 <?php
 return [
     // Head
+    'crop-profile-title' => "Crop Your Avatar",
+    'crop-cover-title' => "Crop Your Cover",
+    
     'connections' => "Connections",
     'mutual-friends' => "Mutual Friend|Mutual Friends",
     'joined' => "Joined",
@@ -13,9 +16,6 @@ return [
 
     'followings' => "Followings",
     'followers' => "Followers",
-
-    'crop-profile-title' => "Crop Your Avatar",
-    'crop-cover-title' => "Crop Your Cover",
 
     //Tabs
     'tabs' => [
