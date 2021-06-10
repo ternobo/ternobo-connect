@@ -42,7 +42,7 @@ export default {
 			if (Boolean(this.skills[index].name)) {
 				const h = this.$createElement;
 
-				this.confirmDialog(h("div", { domProps: { innerHTML: this.__.get("application.delete-confirm", { attribute: this.skills[index].name }) } })).then((value) => {
+				this.confirmDialog(h("div", { domProps: { innerHTML: this.__.get("messages.delete-confirm", { attribute: this.skills[index].name }) } })).then((value) => {
 					if (value) {
 						this.skills.splice(index, 1);
 					}

@@ -218,7 +218,7 @@ TernoboApp.install = function (Vue, options) {
             },
             deleteConfirmModal(itemName, index, arr) {
                 const h = this.$createElement;
-                let content = h("div", { domProps: { innerHTML: __.get("application.delete-confirm", { attribute: itemName }) } })
+                let content = h("div", { domProps: { innerHTML: __.get("messages.delete-confirm", { attribute: itemName }) } })
                 return this.$bvModal
                     .msgBoxConfirm(content, {
                         size: "sm",

@@ -17,7 +17,7 @@ export default {
     methods: {
         doDelete() {
             const h = this.$createElement;
-            this.confirmDialog(h("div", { domProps: { innerHTML: this.__.get("application.delete-confirm", { attribute: this.website.url }) } })).then((value) => {
+            this.confirmDialog(h("div", { domProps: { innerHTML: this.__.get("messages.delete-confirm", { attribute: this.website.url }) } })).then((value) => {
                 if (value) {
                     this.$emit('deleted');
                 }
