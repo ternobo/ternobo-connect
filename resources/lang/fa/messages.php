@@ -11,7 +11,7 @@ return [
     'save-error' => "خطا در ثبت اطلاعات",
     'no-donation' => "هیچ حمایتی ثبت نشده",
     'donation-amount-not-enough' => "مبلغ دلخواه کافی نیست",
-    'delete-confirm' => "آیا از حذف این محتوا اطمینان دارید؟",
+    'delete-post-confirm' => "آیا از حذف این محتوا اطمینان دارید؟",
     'invalid-password' => "رمزعبور فعلی نامعتبر است",
     'confirm-password-error' => "رمزعبور و تاییدیه آن برابر نیست",
     'no-achievement' => "هیچ دستاوردی ثبت نشده",
@@ -26,4 +26,5 @@ return [
     'no-bookmarks' => "هیچ محتوایی را نشان نکرده‌اید",
     'no-more-content' => "هیچ محتوای بیشتری وجود ندارد",
     'no-more-bookmarks' => "محتوای نشان شده بیشتری وجود ندارد",
+    'delete-confirm' => "Are you sure about deleting <b>:attribute</b>?",
 ];

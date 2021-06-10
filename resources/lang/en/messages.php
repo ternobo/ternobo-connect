@@ -11,7 +11,7 @@ return [
     'save-error' => "There is an error saving the information",
     'no-tip' => "We can't find any tip record",
     'tip-amount-not-enough' => "Tip amount is not enough",
-    'delete-confirm' => "Are you sure you want to delete this?",
+    'delete-post-confirm' => "Are you sure you want to delete this?",
     'invalid-password' => "Current password is invalid",
     'confirm-password-error' => "Password and confirmation is not match",
     'no-achievement' => "You have not entered any record for achievement yet",
@@ -26,4 +26,5 @@ return [
     'no-bookmarks' => "You haven't bookmark any content",
     'no-more-bookmarks' => 'There is no more bookmarks',
     'no-more-content' => "There is no more content",
+    'delete-confirm' => "Are you sure about deleting <b>:attribute</b>?",
 ];

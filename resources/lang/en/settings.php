@@ -23,5 +23,4 @@ return [
     'change-phone-number' => "Change Phone Number",
     'phone-number-ph' => "09123456789",
     'recover-code' => "Recover Codes|Recover Code",
-    'delete-confirm' => "Are you sure about deleting <b>:attribute</b>?",
 ];
