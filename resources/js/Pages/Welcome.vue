@@ -35,7 +35,7 @@
 						<div class="col-md-6 p-0 d-flex justify-content-center align-items-center flex-column">
 							<img src="/images/logo-type.svg" class="thelogo logo-type" v-if="hasBG" />
 							<img src="/images/logo-type-dark.svg" class="thelogo logo-type" v-if="!hasBG" />
-							<auto-complete style="min-width: 270px" v-model="search" required type="text" name="q" :icon="'search'" :placeholder="__.get('application.search-ph')" />
+							<auto-complete style="min-width: 270px" v-model="search" required type="text" name="q" :icon="'search'" :placeholder="__.get('application.searchq')" />
 						</div>
 					</div>
 				</form>
