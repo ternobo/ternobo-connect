@@ -22,18 +22,18 @@ export default {
 	computed: {
 		title() {
 			return {
-				503: "503: سرویس دردسترس نیست",
-				500: "500: خطای سمت سرور",
-				404: "404: صفحه مورد نظر یافت نشد",
-				403: "403: عدم دسترسی",
+				503: __.get("messages.http-title.503"),
+				500: __.get("messages.http-title.500"),
+				404: __.get("messages.http-title.404"),
+				403: __.get("messages.http-title.403"),
 			}[this.status];
 		},
 		description() {
 			return {
-				503: "وب‌سایت درحال بروزرسانی است، به زودی بر می‌گردیم",
-				500: "خطایی در سمت سرور رخ داده و ما در تلاش برای حل مشکل هستیم",
-				404: "به نظر می‌رسه ما نمی‌توانیم صفحه‌ای که شما به دنبال آن هستید را پیدا کنیم می‌توانید به صفحه قبل بازگردید",
-				403: "متاسفانه این سرویس در کشور شما دردسترس نیست",
+				503: __.get("messages.http-description.503"),
+				500: __.get("messages.http-description.500"),
+				404: __.get("messages.http-description.404"),
+				403: __.get("messages.http-description.403"),
 			}[this.status];
 		},
 	},

@@ -27,6 +27,7 @@ return [
     'following' => "Followed",
     'unfollow' => "Unfollow",
     'post' => "Post|Posts",
+    "user" => "User|Users",
     'like' => "Like|Likes",
     'comment' => "Commnet|Comments",
     'create-acoount' => "Create Account",

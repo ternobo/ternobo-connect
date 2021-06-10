@@ -14,7 +14,7 @@ const NotificationMixin = {
             return this.notificationGroup.notifications;
         },
         createdAt() {
-            return moment(this.notificationGroup.updated_at).locale('fa').format("jDD jMMMM jYYYY");
+            return this.formatTime(this.notificationGroup.updated_at, "YYYY MMMM DD")
         }
     }
 };

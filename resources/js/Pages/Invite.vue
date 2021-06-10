@@ -7,8 +7,8 @@
 			<div class="card">
 				<div class="card-body">
 					<div class="invite-links-header">
-						<strong class="font-16 me-1">لینک‌های دعوت شما: </strong>
-						<strong class="font-14 text-muted"> {{ inviteLinks.length }} عدد</strong>
+						<strong class="font-16 me-1">{{ __.get("invite-links.your-invite-links") }} </strong>
+						<strong class="font-14 text-muted"> {{ __.get("invite-links.remaining-links", { number: inviteLinks.filter((item) => item.valid).length }) }}</strong>
 					</div>
 					<div class="invite-links">
 						<div class="invite" :class="{ disabled: !inviteLink.valid }" v-for="inviteLink in inviteLinks" :key="`invite_link_${inviteLink.id}`">
@@ -18,21 +18,21 @@
 								<lazy-image :src="inviteLink.used_by.profile" class="profile-xxsm" imgClass="profile-xxsm" circle></lazy-image>
 								<span>{{ inviteLink.used_by.name }}</span>
 							</div>
-							<button class="btn btn-action-light p-1 rounded-0 w-100" :disabled="!inviteLink.valid" style="height: 32px; border-radius: 12px !important" v-clipboard="`${$APP_URL}/register?code=${inviteLink.code}`">{{ !inviteLink.valid ? "استفاده شده" : "استفاده" }}</button>
+							<button class="btn btn-action-light p-1 rounded-0 w-100" :disabled="!inviteLink.valid" style="height: 32px; border-radius: 12px !important" v-clipboard="`${$APP_URL}/register?code=${inviteLink.code}`">{{ !inviteLink.valid ? __.get("invite-links.used") : __.get("invite-links.use") }}</button>
 						</div>
 					</div>
 					<div class="invite-description">
-						<strong class="font-16">لینک‌های دعوت چه هستند؟</strong>
+						<strong class="font-16">{{ __.get("invite-links.what-is-inv") }}</strong>
 						<ul>
-							<li>لینک‌های دعوت کلیدهای ورود به ترنوبو هستند و شما تنها <b>دو لینک دعوت</b> دارید</li>
-							<li>شما می‌توانید با ارسال لینک دعوت به دوستانتان آن‌ها را به ترنوبو دعوت کنید.</li>
+							<li v-html="__.get('invite-links.answer-1')"></li>
+							<li v-html="__.get('invite-links.answer-2')"></li>
 						</ul>
 
 						<div class="mt-3">
-							<strong class="font-16">چند نکته مهم</strong>
+							<strong class="font-16">{{ __.get("invite-links.attention") }}</strong>
 							<ul>
-								<li>پس از استفاده، امکان ایجاد لینک جدید وجود ندارد.</li>
-								<li>خرید و فروش لینک دعوت <b>مجاز نبوده</b> و در صورت مشاهده، حساب کاربر متخلف / خریدار از دسترس خارج می‌شوند</li>
+								<li v-html="__.get('invite-links.answer-3')"></li>
+								<li v-html="__.get('invite-links.answer-4')"></li>
 							</ul>
 						</div>
 					</div>
@@ -50,28 +50,6 @@ import AppFooter from "../Components/App/AppFooter.vue";
 import AppLayout from "../Layouts/AppLayout.vue";
 import BaseLayout from "../Layouts/BaseLayout.vue";
 export default {
-	methods: {
-		copyToClipboard(text) {
-			if (window.clipboardData && window.clipboardData.setData) {
-				// Internet Explorer-specific code path to prevent textarea being shown while dialog is visible.
-				return window.clipboardData.setData("Text", text);
-			} else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
-				var textarea = document.createElement("textarea");
-				textarea.textContent = text;
-				textarea.style.position = "fixed"; // Prevent scrolling to bottom of page in Microsoft Edge.
-				document.body.appendChild(textarea);
-				textarea.select();
-				try {
-					return document.execCommand("copy"); // Security exception may be thrown by some browsers.
-				} catch (ex) {
-					console.warn("Copy to clipboard failed.", ex);
-					return false;
-				} finally {
-					document.body.removeChild(textarea);
-				}
-			}
-		},
-	},
 	layout: AppLayout,
 	components: { BaseLayout, AppFooter },
 	props: ["inviteLinks"],

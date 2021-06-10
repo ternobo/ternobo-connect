@@ -1,12 +1,10 @@
 <template>
 	<base-layout>
 		<div class="w-100" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="5">
-			<p class="text-center font-16 mb-4 text-muted">
-				{{ total }} نتیجه جستجو برای <strong class="text-dark font-demibold">{{ search }}</strong> یافت شد
-			</p>
+			<p class="text-center font-16 mb-4 text-muted" v-html="__.get('messages.search-result-found', { number: total, search: search })"></p>
 
 			<tabs :compact="true" :centered="true" class="justify-content-center" @selected="loadTabContent">
-				<tab name="کاربران" id="page" :selected="currentTab === 'page'">
+				<tab :name="__.choice('application.user', 2)" id="page" :selected="currentTab === 'page'">
 					<div class="row pt-3" v-if="!loadingPage">
 						<div class="col-md-6 pb-3" v-for="(page, index) in data" :key="page.id + '_index_' + index">
 							<div class="card">
@@ -29,7 +27,7 @@
 						</div>
 					</div>
 				</tab>
-				<tab name="مطالب" id="content" :selected="currentTab === 'content'">
+				<tab :name="__.choice('application.post', 2)" id="content" :selected="currentTab === 'content'">
 					<masonry v-if="!loadingPage" :cols="2" :gutter="32">
 						<div v-for="(post, index) in data" class="py-3" :key="post.id + '_index_' + index">
 							<PostCard class="h-100 m-0" :post="post"></PostCard>
@@ -45,7 +43,7 @@
 						<loading-spinner class="image__spinner" />
 					</div>
 					<div class="w-100" v-if="next_page_url === null && !loadingPage && total.total > 20">
-						<no-content>نتیجه بیشتری وجود ندارد</no-content>
+						<no-content>{{ __.get("messages.no-more-result") }}</no-content>
 					</div>
 				</tab>
 			</tabs>

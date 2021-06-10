@@ -38,4 +38,23 @@ return [
     'invalid-password-token' => "This password recover token is invalid",
     'active-tip-error' => "There are currently no gateways connected to your account. Add a payment gateway to activate sponsorship for your content.",
     'no-more-tip' => "There is no more tip",
+    'no-notification' => "You don't have any notification",
+    "no-more-result" => "There isn't more result",
+    'search-result-found' => "<b>:number</b> search results found for <b>:search</b>.",
+    "no-content-with-tag" => "No content has been published with this tag",
+
+    "http-title" => [
+        "404" => "404: Not Found",
+        "503" => "503: Service Unavailable",
+        "500" => "500: Serverside Error",
+        "403" => "403: Forbidden",
+    ],
+
+    "http-description" => [
+        "404" => "Not Found",
+        "503" => "We are updating website, Service will be available soon",
+        "500" => "Opps, There is server-side error. We are trying to solve it",
+        "403" => "Service is forbidden in your country, or you don't have access to this page.",
+    ],
+
 ];

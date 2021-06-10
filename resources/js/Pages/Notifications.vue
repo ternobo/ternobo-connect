@@ -11,7 +11,7 @@
 						<notification :notificationGroup="notification"></notification>
 					</div>
 				</div>
-				<div class="w-100 text-muted font-14 text-center" v-if="groupsKey.length < 1">هیچ اعلانی وجود ندارد</div>
+				<div class="w-100 text-muted font-14 text-center" v-if="groupsKey.length < 1">{{ __.get("messages.no-notification") }}</div>
 				<div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
 					<loading-spinner class="image__spinner" />
 				</div>
@@ -61,11 +61,11 @@ export default {
 		groupedNotifications() {
 			return _.groupBy(this.notificationsArray, function (item) {
 				if (moment(item.updated_at).format("YYYY-MM-DD") == moment().format("YYYY-MM-DD")) {
-					return "امروز";
+					return __.get("notifications.today");
 				} else if (window.moment.isSameWeek(item.updated_at, moment())) {
-					return "این هفته";
+					return __.get("notifications.this-week");
 				} else {
-					return "این ماه";
+					return __.get("notifications.this-month");
 				}
 			});
 		},

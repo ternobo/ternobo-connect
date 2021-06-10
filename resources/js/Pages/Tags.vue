@@ -4,14 +4,14 @@
 			<div class="tag-card">
 				<div class="d-flex align-content-center">
 					<strong class="tag" ref="tagelem">#{{ tag }}</strong>
-					<small>{{ posts.total }} مطلب</small>
+					<small>{{ posts.total }} {{ __.choice("application.post", posts.total) }}</small>
 				</div>
 				<loading-button class="btn follow-btn" @click.native="follow" :class="{ 'btn-followed-connected': isFollowed }" :loading="loading">دنبال کردن</loading-button>
 			</div>
 		</div>
 		<div class="w-100">
 			<div v-if="postsArray.length < 1">
-				<no-content> هیچ محتوایی با این برچسب منتشر نشده </no-content>
+				<no-content> {{ __.get("messages.no-content-with-tag") }} </no-content>
 			</div>
 			<div v-if="postsArray.length > 0" class="posts" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="5">
 				<div class="row">
