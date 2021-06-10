@@ -1,7 +1,7 @@
 <template>
 	<div v-infinite-scroll="loadMore" :infinite-scroll-disabled="loading_next_page" infinite-scroll-distance="5">
 		<div class="d-flex align-items-start justify-content-between donations-header">
-			<h1 class="font-18 mb-0">حمایت‌ها</h1>
+			<span>{{ __.choice("tips.tip", 2) }}</span>
 
 			<div class="d-flex">
 				<tselect
@@ -50,7 +50,7 @@
 					<loading-spinner class="image__spinner" />
 				</div>
 				<div v-if="next_page_url === null && !loading_next_page && donations.length > 20">
-					<no-content>{{ __.get("tips.no-more-donations") }}</no-content>
+					<no-content>{{ __.get("messages.no-more-tip") }}</no-content>
 				</div>
 			</div>
 		</div>

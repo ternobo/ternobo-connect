@@ -24,7 +24,7 @@ return [
     'show-more' => "Show more",
     'show-less' => "Show less",
     'follow' => "Follow",
-    'following' => "Followed",
+    'following' => "Following",
     'unfollow' => "Unfollow",
     'post' => "Post|Posts",
     "user" => "User|Users",
@@ -50,4 +50,5 @@ return [
     'more' => "More",
     'discord' => "Discord",
     'trello' => "Trello",
+    'submit' => "Submit",
 ];

@@ -49,4 +49,5 @@ return [
     'more' => "دیگر",
     'discord' => "دیسکورد",
     'trello' => "ترلو",
+    'submit' => "ثبت",
 ];

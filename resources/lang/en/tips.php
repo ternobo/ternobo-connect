@@ -20,7 +20,7 @@ return [
     'for-you' => "For you",
     'newest' => "Latest",
     'oldest' => "Oldest",
-    'paymentgateway' => "Payment Gateway",
+    'paymentgateway' => "Gateways",
     'merchant-id' => "Merchant ID",
     'activate' => "Activate",
     'active-gateway' => "Active Gateway",

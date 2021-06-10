@@ -10,7 +10,7 @@ export default {
         } : { attrs: { href: this.websiteURL, target: '_blank' } };
         let content = (<div class="website-info">
             <strong class="font-14 text-action">{this.website.url}</strong>
-            <span class="font-14">{this.website.option.name}</span>
+            <span class="font-14">{__.get(this.website.option.id)}</span>
         </div>);
         return h(tag, { class: ['website-item', "contact-item", 'clickable'], ...paramters }, [this.edit ? iconClose : iconLaunch, content]);
     },

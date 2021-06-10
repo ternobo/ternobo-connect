@@ -5,12 +5,12 @@
 				<wire-link class="text-grey" href="/feedbacks">
 					<i class="material-icons" style="transform: rotate(180deg)" v-if="appDirection == 'rtl'">keyboard_backspace</i>
 					<i class="material-icons" v-else>keyboard_backspace</i>
-					بازگشت
+					{{ __.get("application.back") }}
 				</wire-link>
 			</div>
 			<FeedbackCard :showComment="false" :showPinned="false" :feedback="feedback"></FeedbackCard>
 			<div class="mt-4">
-				<strong>نظرات</strong>
+				<strong>{{ __.choice("application.comment", 2) }}</strong>
 				<feedback-replies ref="replies" :feedback="feedback.id"></feedback-replies>
 			</div>
 		</div>

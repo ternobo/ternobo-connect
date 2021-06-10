@@ -4,11 +4,11 @@
 			<div class="new-feedback-card">
 				<div class="card-body">
 					<div class="how-to-improve-header" style="min-height: 39px">
-						<strong>ما چطور می‌توانیم کیفیت خدماتمان را در ترنوبو بهبود ببخشیم؟</strong>
+						<strong>{{ __.get("feedbacks.feedback-q") }}</strong>
 						<transition name="fade">
 							<button @click="showNewFeedback = true" v-if="!showNewFeedback" class="btn btn-action-light feedback-button">
 								<i class="material-icons-outlined">emoji_objects</i>
-								ثبت بازخورد جدید
+								{{ __.get("feedbacks.submit-feedback") }}
 							</button>
 						</transition>
 					</div>
@@ -19,11 +19,13 @@
 									<span class="mx-2"> {{ 150 - feedbackTitle.length }} </span>
 									<b-progress :value="(feedbackTitle.length / 150) * 100" :max="100"></b-progress>
 								</div>
-								<input type="text" class="form-control text-input" placeholder="بازخورد‌ خودتان را با ما به اشتراک بگذارید" max="150" maxlength="150" v-model="feedbackTitle" />
+								<input type="text" class="form-control text-input" :placeholder="__.get('feedbacks.share-feedback')" max="150" maxlength="150" v-model="feedbackTitle" />
 							</div>
 							<div class="pb-2 pt-4 d-flex flex-column">
 								<div class="d-flex justify-content-between mb-3">
-									<strong class="font-demibold">کمی بیشتر در رابطه با بازخورد خودتان توضیح دهید...<span class="text-superlight">(اختیاری)</span></strong>
+									<strong class="font-demibold"
+										>{{ __.get("feedbacks.feedback-describe") }} <span class="text-superlight">{{ __.get("feedbacks.optional") }}</span></strong
+									>
 									<div class="progress-container">
 										<span class="mx-2"> {{ 2500 - feedbackDescription.length }} </span>
 										<b-progress :value="(feedbackDescription.length / 2500) * 100" :max="100"></b-progress>
@@ -32,8 +34,8 @@
 								<textarea-autosize v-model="feedbackDescription" maxlength="2500" :min-height="230" class="form-control"></textarea-autosize>
 							</div>
 							<div class="d-flex align-items-center flex-row-reverse pt-3">
-								<loading-button :loading="loading" class="btn btn-action-light rounded-0" :clas="{ disabled: feedbackTitle.length < 3 }" :disabled="feedbackTitle.length < 3" @click.native="saveFeedback">ثبت بازخورد</loading-button>
-								<button class="btn btn-transparent text-grey" @click="showNewFeedback = false">لغو</button>
+								<loading-button :loading="loading" class="btn btn-action-light rounded-0" :clas="{ disabled: feedbackTitle.length < 3 }" :disabled="feedbackTitle.length < 3" @click.native="saveFeedback">{{ __.get("application.submit") }}</loading-button>
+								<button class="btn btn-transparent text-grey" @click="showNewFeedback = false">{{ __.get("application.cancel") }}</button>
 							</div>
 						</div>
 					</transition>
@@ -42,18 +44,18 @@
 			<div class="tabs pt-3">
 				<ul class="default position-relative">
 					<li @click="status = 'voting'" :class="{ 'is-active': status === 'voting' }">
-						<a :class="{ 'font-16': $root.isDesktop }">درحال رای‌گیری</a>
+						<a :class="{ 'font-16': $root.isDesktop }">{{ __.get("feedbacks.voting") }}</a>
 					</li>
 					<li @click="status = 'scheduled'" :class="{ 'is-active': status === 'scheduled' }">
-						<a :class="{ 'font-16': $root.isDesktop }">برنامه ریزی شده</a>
+						<a :class="{ 'font-16': $root.isDesktop }">{{ __.get("feedbacks.scheduled") }}</a>
 					</li>
 					<li @click="status = 'done'" :class="{ 'is-active': status === 'done' }">
-						<a :class="{ 'font-16': $root.isDesktop }">انجام شده</a>
+						<a :class="{ 'font-16': $root.isDesktop }">{{ __.get("feedbacks.done") }}</a>
 					</li>
 
 					<li class="position-absolute end-0" @click="status = 'my-feedbacks'" :class="{ 'is-active': status === 'my-feedbacks' }">
 						<a class="active" :class="{ 'font-16': $root.isDesktop }"
-							><i class="material-icons me-2">{{ status === "my-feedbacks" ? "flag" : "outlined_flag" }}</i> پیشنهادات من</a
+							><i class="material-icons me-2">{{ status === "my-feedbacks" ? "flag" : "outlined_flag" }}</i> {{ __.get("feedbacks.my-suggestions") }}</a
 						>
 					</li>
 				</ul>
@@ -61,8 +63,8 @@
 			<div class="row mt-2" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="12">
 				<div class="w-100">
 					<div class="item-filters">
-						<div class="filter-item" :class="{ active: filter == 'mostnew' }" @click="filter = 'mostnew'"><i class="material-icons-outlined">new_releases</i> جدید‌ترین‌ها</div>
-						<div class="filter-item" :class="{ active: filter == 'fav' }" @click="filter = 'fav'"><i class="material-icons-outlined">favorite_border</i> محبوب‌ترین‌ها</div>
+						<div class="filter-item" :class="{ active: filter == 'mostnew' }" @click="filter = 'mostnew'"><i class="material-icons-outlined">new_releases</i> {{ __.get("feedbacks.newest") }}</div>
+						<div class="filter-item" :class="{ active: filter == 'fav' }" @click="filter = 'fav'"><i class="material-icons-outlined">favorite_border</i> {{ __.get("feedbacks.most-popular") }}</div>
 					</div>
 				</div>
 				<div class="w-100">

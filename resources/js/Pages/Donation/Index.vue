@@ -4,11 +4,11 @@
 			<div class="card settings-card sticky-aside">
 				<div class="settings-item" :class="{ active: tab == 'donations' }" @click="tab = 'donations'">
 					<i class="material-icons-outlined me-2">savings</i>
-					<span>حمایت‌ها</span>
+					<span>{{ __.choice("tips.tip", 2) }}</span>
 				</div>
 				<div class="settings-item" :class="{ active: tab == 'settings' }" @click="tab = 'settings'">
 					<i class="material-icons-outlined me-2"> credit_card </i>
-					<span>درگاه پرداخت</span>
+					<span>{{ __.get("tips.paymentgateway") }}</span>
 				</div>
 			</div>
 		</div>

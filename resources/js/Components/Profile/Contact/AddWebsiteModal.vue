@@ -3,7 +3,7 @@
 		<div class="add-webiste-container">
 			<div class="flex-container">
 				<material-text-field :placeholder="__.get('user-profile.website-url')" v-model="url" :notValid="invalid" :maxlength="700" class="material--sm w-100" inputClass="w-100"></material-text-field>
-				<tselect :dir="appDirection" v-model="type" valueOption="name" :items="options"> {{ __.get("user-profile.website-type") }} </tselect>
+				<tselect :dir="appDirection" v-model="type" valueOption="id" :items="options"> {{ __.get("user-profile.website-type") }} </tselect>
 			</div>
 			<div class="mt-2 position-absolute">
 				<small class="text-danger font-16" v-if="!notAdded">{{ __.get("application.duplicated-webite") }}</small>
@@ -29,7 +29,12 @@ export default {
 			return false;
 		},
 		options() {
-			return this.websiteOptions.map((item) => __.get(item.name));
+			return this.websiteOptions.map((item) => {
+				return {
+					name: __.get(item.name),
+					id: item.name,
+				};
+			});
 		},
 		isValid() {
 			return this.websiteRegex.test(this.url) && this.notAdded;

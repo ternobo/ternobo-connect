@@ -56,7 +56,6 @@
 
 <script>
 import FeedbackLabel from "./FeedbackLabel";
-import PersianDate from "persian-date";
 import PinnedReplyCard from "./PinnedReplyCard.vue";
 export default {
 	data() {
@@ -112,7 +111,7 @@ export default {
 			else return __.get("feedbacks.voting");
 		},
 		createDate() {
-			return new PersianDate(Date.parse(this.feedback.created_at)).format("D MMMM YYYY");
+			return this.formatTime(this.feedback.created_at, "D MMMM YYYY");
 		},
 	},
 	props: {

@@ -1,10 +1,10 @@
 <?php
 return [
     'feedback' => "Feedback|Feedbacks",
-    'submit-feedback' => "ُSubmit new feedback",
+    'submit-feedback' => "Submit new feedback",
     'feedback-q' => "How can we improve our services?",
     'share-feedback' => "Share your feedback with us",
-    'feddback-describe' => "Describe your idea more...",
+    'feedback-describe' => "Describe your idea more...",
     'optional' => "(Optional)",
 
     'voting' => "Voting",
