@@ -11,6 +11,12 @@ return [
     'user-title-des' => "This title is shown under your name",
     'location' => "Location",
 
+    'followings' => "Followings",
+    'followers' => "Followers",
+
+    'crop-profile-title' => "Crop Your Avatar",
+    'crop-cover-title' => "Crop Your Cover",
+
     //Tabs
     'tabs' => [
         'about' => "About Me",

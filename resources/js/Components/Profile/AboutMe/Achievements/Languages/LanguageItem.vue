@@ -23,7 +23,7 @@
 			</div>
 			<div class="achievement-edit-row">
 				<div>
-					<MaterialTextField placeholder="زبان" maxlength="52" :required="true" v-model="languageVal.name" class="material--sm w-100" input-class="w-100 py-1"></MaterialTextField>
+					<MaterialTextField :placeholder="__.choice('user-profile.language', 1)" maxlength="52" :required="true" v-model="languageVal.name" class="material--sm w-100" input-class="w-100 py-1"></MaterialTextField>
 				</div>
 				<div>
 					<tselect :dir="appDirection" :items="languageItems" v-model="languageVal.level" labelOption="label" valueOption="level"> {{ __.get("user-profile.proficiency") }} <span class="text-action">*</span> </tselect>
@@ -76,7 +76,9 @@ export default {
 	created() {
 		if (this.value) {
 			this.languageVal = this.value;
-			this.languageVal.level = this.languageItems.filter((iterator) => iterator.level == this.languageVal.level.level)[0];
+			if (this.languageVal != null && this.languageVal.level != null) {
+				this.languageVal.level = this.languageItems.filter((iterator) => iterator.level == this.languageVal.level.level)[0];
+			}
 		}
 	},
 	data() {

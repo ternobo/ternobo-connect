@@ -11,6 +11,12 @@ return [
     'user-title-des' => "این عنوان زیر نام شما نمایش داده می‌شود",
     'location' => "موقعیت",
 
+    'followings' => "دنبال شده‌ها",
+    'followers' => "دنبال کنندگان",
+
+    'crop-profile-title' => "برش تصویر پروفایل",
+    'crop-cover-title' => "برش تصویر کاور",
+
     //Tabs
     'tabs' => [
         'about' => "درباره من",

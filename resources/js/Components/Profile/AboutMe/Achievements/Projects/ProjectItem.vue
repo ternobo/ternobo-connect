@@ -132,6 +132,9 @@ export default {
 			}
 			return (startText.length > 0 ? startText + " - " : "") + endText;
 		},
+		yearNow() {
+			return this.currentYear();
+		},
 		month() {
 			return this.currentMonth();
 		},

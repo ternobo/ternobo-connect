@@ -1,6 +1,6 @@
 <template>
 	<div class="profile-box" :class="[size]">
-		<CropperModal title="انتخاب تصویر پروفایل" :show.sync="crop" v-if="canChange" :aspect-ratio="1 / 1" :image="image" @cropped="upload"></CropperModal>
+		<CropperModal :title="__.get('user-profile.crop-cover-title')" :show.sync="crop" v-if="canChange" :aspect-ratio="1 / 1" :image="image" @cropped="upload"></CropperModal>
 		<input type="file" class="d-none" v-if="canChange" ref="imageFile" @change="imageSelect" />
 
 		<lazy-image :loadingColor="skeletonOptions.profileColor" :src="picture" img-class="rounded-circle" class="profile mb-0" :class="size" />

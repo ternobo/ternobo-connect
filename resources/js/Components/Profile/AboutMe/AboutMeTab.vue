@@ -8,7 +8,7 @@
 			<AchievementsCard v-if="showAchievements" ref="achievements" class="mt-3" :edit="edit" :page="page"></AchievementsCard>
 		</div>
 		<div class="w-100 d-flex align-items-center py-5 justify-content-center" v-else>
-			<span class="text-center w-100 font-18 text-grey"> هیچ اطلاعاتی ثبت نشده </span>
+			<span class="text-center w-100 font-18 text-grey"> {{ __.get("messages.no-data") }}</span>
 		</div>
 	</div>
 </template>

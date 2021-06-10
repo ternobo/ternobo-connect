@@ -33,14 +33,11 @@
 								<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
 							</template>
 							<dropdown-item v-if="!checkUser(feedbackReply.user_id)">
-								<div class="d-flex align-items-center">
-									<i class="material-icons text-dark">link</i>
-									<div class="d-flex align-items-center" @click="showReport = true">
-										<i class="material-icons text-dark">link</i>
+								<div class="d-flex align-items-center" @click="showReport = true">
+									<i class="material-icons-outlined text-dark">report</i>
+									<div>
 										<div>
-											<div>
-												<strong> {{ __.choice("content/report.report", 1) }} </strong>
-											</div>
+											<strong> {{ __.choice("content/report.report", 1) }} </strong>
 										</div>
 									</div>
 								</div>

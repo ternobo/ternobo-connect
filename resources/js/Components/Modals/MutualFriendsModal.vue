@@ -1,5 +1,5 @@
 <template>
-	<b-modal v-model="showModal" hide-footer @show="onShown" :title="__.get('user-profile.mutual-friends')" size="md" :centered="true">
+	<b-modal v-model="showModal" hide-footer @show="onShown" :title="__.choice('user-profile.mutual-friends', 2)" size="md" :centered="true">
 		<pages-list-loading style="min-height: 200px" v-if="loading"></pages-list-loading>
 		<div style="min-height: 200px" class="d-flex align-items-center justify-content-center loading" v-else-if="error">
 			<div class="d-flex flex-column justify-center align-items-center w-100 err">

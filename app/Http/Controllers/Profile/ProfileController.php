@@ -240,7 +240,7 @@ class ProfileController extends Controller
                 'projects' => [
                     'name' => "required|max:50",
                     "startDate" => ["required", 'date'],
-                    "endDate" => ['required_if:noEndDate,false', 'date'],
+                    "endDate" => ['required_if:noEndDate,false', "exclude_if:noEndDate,true", 'date', "after_or_equal:startDate"],
                     "noEndDate" => ["boolean"],
                     'link' => ['nullable', 'regex:/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/'],
                 ],

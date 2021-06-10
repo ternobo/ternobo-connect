@@ -36,7 +36,7 @@ export default {
                 } catch (err) {
                     console.warn(err)
                 }
-                vnode.context.toast("کپی شد", 'check', 'text-success');
+                vnode.context.toast(__.get("application.copied"), 'check', 'text-success');
                 setTimeout(() => timeout = null, 5000);
                 document.body.removeChild(textarea);
             }

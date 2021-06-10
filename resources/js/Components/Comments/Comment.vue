@@ -30,7 +30,7 @@
 							</template>
 							<dropdown-item v-if="!checkUser(comment.page.user_id)">
 								<div class="d-flex align-items-center" @click="showReport = true">
-									<i class="material-icons text-dark">link</i>
+									<i class="material-icons-outlined text-dark">report</i>
 									<div>
 										<div>
 											<strong> {{ __.choice("content/report.report", 1) }} </strong>

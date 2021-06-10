@@ -12,9 +12,9 @@
 			</div>
 			<div>
 				<div class="content" :class="{ 'font-12': !$root.isDesktop, 'text-superlight text-center': text == null || text.length < 1 }" v-if="!edit">
-					{{ textToShow != null && textToShow.length > 0 ? textToShow : "هیچ اطلاعاتی ثبت نشده" }}
+					{{ textToShow != null && textToShow.length > 0 ? textToShow : __.get("messages.no-data") }}
 					<br />
-					<div class="show-more-text--clickable" v-if="showMore" @click="showFullText = !showFullText">{{ showFullText ? "نمایش کمتر" : "نمایش بیشتر" }}</div>
+					<div class="show-more-text--clickable" v-if="showMore" @click="showFullText = !showFullText">{{ showFullText ? __.get("application.show-less") : __.get("application.show-more") }}</div>
 				</div>
 				<textarea-autosize class="form-control" :minHeight="83" maxlength="2500" v-else v-model="text"></textarea-autosize>
 			</div>

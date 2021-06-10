@@ -20,7 +20,7 @@
 
 <script>
 import LanguageItem from "./LanguageItem";
-
+import { v4 as uuidv4 } from "uuid";
 import AchievementsMxixin from "../../../../../Mixins/AchievementsMixin";
 export default {
 	mixins: [AchievementsMxixin],
@@ -35,7 +35,7 @@ export default {
 		addLanguege() {
 			this.languages.push({
 				name: "",
-				id: "lang_" + _.uniqueId(),
+				id: "lang_" + uuidv4(),
 				level: null,
 			});
 		},

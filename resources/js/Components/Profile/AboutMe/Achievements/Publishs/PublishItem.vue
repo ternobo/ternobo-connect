@@ -45,7 +45,7 @@
 					<DatePicker class="mt-3" v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
 				</div>
 				<div class="col-md-6 d-flex align-items-end" v-if="showMore">
-					<MaterialTextField v-model="val.link" maxlength="52" class="material--sm" :placeholder="__.get('publication-url')"></MaterialTextField>
+					<MaterialTextField v-model="val.link" maxlength="52" class="material--sm" :placeholder="__.get('user-profile.publication-url')"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
 					<div class="d-flex align-items-center justify-content-between mb-3">

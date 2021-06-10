@@ -48,7 +48,7 @@
 					<MaterialTextField v-model="val.link" maxlength="52" class="material--sm" :placeholder="__.get('user-profile.patent-url')"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
-					<tselect :dir="appDirection" style="min-width: 260px" v-model="val.status" labelOption="label" valueOption="id" :items="statusItems"> وضعیت </tselect>
+					<tselect :dir="appDirection" style="min-width: 260px" v-model="val.status" labelOption="label" valueOption="id" :items="statusItems"> {{ __.get("user-profile.patent-status") }} </tselect>
 				</div>
 				<div v-if="showMore">
 					<strong>{{ __.get("user-profile.issue-date") }}</strong>

@@ -8,12 +8,13 @@
 
 <script>
 import jalaali from "jalaali-js";
+import moment from "jalali-moment";
 export default {
-	created() {
+	mounted() {
 		if (this.value !== null) {
 			let date = this.getDateObject(this.value);
-			this.year = date.year;
-			this.month = date.month;
+			this.year = parseInt(date.year);
+			this.month = parseInt(date.month);
 			// this.day = date.day;
 		}
 	},
@@ -100,11 +101,9 @@ export default {
 				let zeroOne = "01";
 				if (lang == "fa") {
 					let value = jalaali.toGregorian(this.year, this.month.id, this.day ? this.day : 1);
-					console.log(value);
-					this.$emit("input", `${value.gy}/${value.gm}/${this.day ? value.gd : zeroOne}`);
+					this.$emit("input", moment(`${value.gy}/${value.gm}/${this.day ? value.gd : zeroOne}`).format("YYYY/MM/DD"));
 				} else {
-					console.log(`${this.year}/${this.month.id}/${this.day ? this.day : zeroOne}`);
-					this.$emit("input", `${this.year}/${this.month.id}/${this.day ? this.day : zeroOne}`);
+					this.$emit("input", moment(`${this.year}/${this.month.id}/${this.day ? this.day : zeroOne}`).format("YYYY/MM/DD"));
 				}
 			}
 		},
@@ -124,7 +123,7 @@ export default {
 		return {
 			year: null,
 			month: null,
-			day: "01",
+			day: null,
 		};
 	},
 };

@@ -2,10 +2,10 @@
 	<b-modal v-model="showModal" hide-footer :title="__.get('user-profile.edit-user-info')" :centered="true">
 		<div class="row pt-3">
 			<div class="col-md-6">
-				<MaterialTextField class="w-100" input-class="w-100" :value="firstName" v-model="firstName" :required="true" :placeholder="__.get('user-profile.firstname')"></MaterialTextField>
+				<MaterialTextField class="w-100" input-class="w-100" :value="firstName" v-model="firstName" :required="true" :placeholder="__.get('application.first-name')"></MaterialTextField>
 			</div>
 			<div class="col-md-6">
-				<MaterialTextField class="w-100 mt-md-0 mt-3" input-class="w-100" :value="lastName" v-model="lastName" :required="true" :placeholder="__.get('user-profile.lastname')"></MaterialTextField>
+				<MaterialTextField class="w-100 mt-md-0 mt-3" input-class="w-100" :value="lastName" v-model="lastName" :required="true" :placeholder="__.get('application.last-name')"></MaterialTextField>
 			</div>
 			<div class="col-md-8 d-flex flex-column mt-3">
 				<MaterialTextField class="w-100" input-class="w-100" :value="shortBio" v-model="shortBio" :placeholder="__.get('user-profile.title')"></MaterialTextField>
@@ -17,8 +17,8 @@
 					labelOption="label"
 					valueOption="code"
 					:items="[
-						{ label: __.get('auth.female'), code: '1' },
-						{ label: __.get('auth.male'), code: '2' },
+						{ label: __.get('application.female'), code: '1' },
+						{ label: __.get('application.male'), code: '2' },
 					]"
 					v-model="gender"
 					:dir="appDirection"

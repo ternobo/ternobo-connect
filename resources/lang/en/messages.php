@@ -17,7 +17,7 @@ return [
     'no-achievement' => "You have not entered any record for achievement yet",
     'no-credit' => "You don't have any endorse on this skill",
     'no-skill' => "You have not entered any skill yet",
-    'no-cotent-saved' => "We can't find more content",
+    'no-cotent-saved' => "We can't find any record",
     'duplicated-webite' => "This website already entered",
     'delete-error' => "There is an error deleting the information",
     'profile-delete-error' => "There is an error deleting the avatar",
@@ -26,5 +26,6 @@ return [
     'no-bookmarks' => "You haven't bookmark any content",
     'no-more-bookmarks' => 'There is no more bookmarks',
     'no-more-content' => "There is no more content",
+    'no-data' => "We can't find any submited data",
     'delete-confirm' => "Are you sure about deleting <b>:attribute</b>?",
 ];
