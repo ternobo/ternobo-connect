@@ -34,6 +34,8 @@ return [
     'good' => "خوب",
     'very-good' => "عالی",
     'highly-skilled' => "ماهر",
+    'skill_credit' => "این مهارت را تایید کرده است|این مهارت را تایید کرده‌اند",
+    'skill_credit_my_verb' => "تایید کرده‌اید",
     'endorse-skill-q2' => "چطور در رابطه با مهارت :fname در :skill اطلاع پیدا کردید؟", /*:fname - His/Her first name.*/
     'endorse-res-1' => "با هم روی یک پروژه کار کرده‌ایم",
     'endorse-res-2' => "مدیریت مستقیم روی کارهای :fname داشته‌ام/دارم", /*:fname - His/Her first name.*/
@@ -100,6 +102,12 @@ return [
     'add-website' => "افزودن وبسایت",
     'website-url' => "آدرس وبسایت",
     'website-type' => "نوع وبسایت",
+    'website-personal' => "شخصی",
+    'website-company' => "کسب و کار",
+    'website-blog' => "بلاگ",
+    'website-rss' => "فید RSS",
+    'website-portfolio' => "نمونه کار",
+    'website-other' => "دیگر",
     'remove-website' => "آیا از حذف وبسایت :website اطمینان دارید؟", /*:website - Your website*/
 
     "followed" => "<b>:name</b> دنبال می‌کند",
