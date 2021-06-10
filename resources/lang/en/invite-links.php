@@ -10,5 +10,5 @@ return [
     'answer-2' => "You can send your invite links to your friends to invite them to use Ternobo.",
     'attention' => "Attention",
     'answer-3' => "You just be able to use these links for once. It is not possible to create a new link.",
-    'asnwer-4' => "You <b>may not</b> sell your invite links. It's not acceptable to sell or auction your invite links, we will ban both seller and buyer accounts.",
+    'answer-4' => "You <b>may not</b> sell your invite links. It's not acceptable to sell or auction your invite links, we will ban both seller and buyer accounts.",
 ];

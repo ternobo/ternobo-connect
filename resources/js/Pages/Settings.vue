@@ -4,13 +4,13 @@
 			<div class="card settings-card p-0">
 				<div class="settings-item" :class="{ active: tab == 'account' }" @click="tab = 'account'">
 					<i class="material-icons-outlined me-2">account_circle</i>
-					<span>{{ __get.get("settings.account") }}</span>
+					<span>{{ __.get("settings.account") }}</span>
 				</div>
 				<div class="settings-item" :class="{ active: tab == 'about' }" @click="tab = 'about'">
-					<i class="material-icons-outlined me-2">
+					<i class="material-icons-outlined me-1">
 						<img src="/images/logo-grey.svg" class="thelogo" style="width: 24px" />
 					</i>
-					<span>{{ __get.get("settings.about-ternobo") }}</span>
+					<span>{{ __.get("settings.about-ternobo") }}</span>
 				</div>
 			</div>
 		</div>
