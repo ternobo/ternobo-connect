@@ -1,6 +1,7 @@
 <?php
 return [
-    'search-ph' => 'Search',
+    'searchq' => 'Search',
+    'search' => "Search",
     'about-us' => 'About Us',
     'Comuunity-Guidelines' => 'Community Guidelines',
     'description' => "Description",
