@@ -26,5 +26,5 @@ return [
     'no-bookmarks' => "هیچ محتوایی را نشان نکرده‌اید",
     'no-more-content' => "هیچ محتوای بیشتری وجود ندارد",
     'no-more-bookmarks' => "محتوای نشان شده بیشتری وجود ندارد",
-    'delete-confirm' => "Are you sure about deleting <b>:attribute</b>?",
+    'delete-confirm' => "آیا از حذف <b>:attribute</b> اطمینان دارید؟",
 ];
