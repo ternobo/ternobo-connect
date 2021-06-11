@@ -23,6 +23,7 @@ return [
     'confirm' => "Confirm",
     'previous' => "Previous",
     'next' => "Next",
+    'done' => "Done",
     'get-started' => "Get Started",
     'more-people' => "and :number other people",
     'show-more' => "Show more",
