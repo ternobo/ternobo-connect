@@ -1,26 +1,30 @@
 <?php
 return [
     'settings' => "Settings and Privacy",
+
     'account' => "Account",
-    'cookies' => "Cookies",
-    'login-and-security' => "Login and Security",
-    'information-security' => "Information security",
     'about-ternobo' => "About Ternobo",
+
+    'cookies' => "Cookies",
+
+    'login-and-security' => "Login and Security",
+    'information-security' => "Information and Account Accesses",
+
+    'change-username' => "Change Username",
+    'our-suggestion' => "Our Suggestions",
+
     'phone-number' => "Phone Number",
-    'two-step-verification' => "Two-step Verification",
-    'current-session' => "Current Session",
-    'active-session' => "Active Sessions",
-    'language' => "Language|Languages",
-    'deactivate-account' => "Deactivate Account",
-    'active' => "Active",
-    'inactive' => "Inactive",
-    'skip' => "Skip",
-    'cancel' => "Cancel",
+    'change-phone-number' => "Change Phone Number",
+    'phone-number-ph' => "09123456789",
+
     'change-password' => "Change Password",
     'current-password' => "Current Password",
     'confirm-password' => "Confirm Password",
-    'confirm' => "Confirm",
-    'change-phone-number' => "Change Phone Number",
-    'phone-number-ph' => "09123456789",
-    'recover-code' => "Recover Codes|Recover Code",
+
+    'current-session' => "Current Session",
+    'active-session' => "Active Sessions",
+
+    'two-step-verification' => "Two-step Verification",
+
+    'deactivate-account' => "Deactivate Account",
 ];

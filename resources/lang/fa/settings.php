@@ -1,26 +1,30 @@
 <?php
 return [
     'settings' => "تنظیمات و حریم خصوصی",
+
     'account' => "حساب کاربری",
-    "cookies" => "کوکی‌ها",
-    'login-and-security' => "ورود و امنیت",
-    'information-security' => "امنیت اطلاعات",
     'about-ternobo' => "درباره ترنوبو",
+
+    'cookies' => "کوکی‌ها",
+
+    'login-and-security' => "ورود و امنیت",
+    'information-security' => "اطلاعات و دسترسی‌ها",
+
+    'change-username' => "تغییر نام کاربری",
+    'our-suggestion' => "پیشنهادات ما",
+
     'phone-number' => "شماره همراه",
-    'two-step-verification' => "تأیید 2 مرحله‌ای",
-    'current-session' => "همین دستگاه",
-    'active-session' => "دستگاه‌های متصل",
-    'language' => "زبان|زبان‌ها",
-    'deactivate-account' => "غیرفعال کردن حساب",
-    'active' => "فعال کردن",
-    'inactive' => "غیرفعال کردن",
-    'skip' => "رد کردن",
-    'cancel' => "لغو",
+    'change-phone-number' => "تغییر شماره همراه",
+    'phone-number-ph' => "09123456789",
+
     'change-password' => "تغییر رمزعبور",
     'current-password' => "رمزعبور فعلی",
-    'confirm-password' => "تکرار رمزعبور",
-    'confirm' => "تأیید",
-    'change-phone-number' => "ویرایش شماره همراه",
-    'phone-number-ph' => "09123456789",
-    'recover-code' => "کد بازیابی|کدهای بازیابی",
+    'confirm-password' => "تأیید رمزعبور",
+
+    'current-session' => "همین دستگاه",
+    'active-session' => "دستگاه‌های متصل",
+
+    'two-step-verification' => "تأیید 2 مرحله‌ای",
+
+    'deactivate-account' => "غیرفعال کردن حساب",
 ];
