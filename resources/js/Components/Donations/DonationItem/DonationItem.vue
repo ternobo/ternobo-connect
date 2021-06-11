@@ -40,10 +40,10 @@ export default {
 	props: ["tip"],
 	computed: {
 		time() {
-			return new PersianDate(this.tip.created_at).format("HH:mm");
+			return this.formatTime(this.tip.created_at, "HH:mm");
 		},
 		date() {
-			return new PersianDate(this.tip.created_at).format("YYYY/MM/DD");
+			return this.formatTime(this.tip.created_at, "YYYY/MM/DD");
 		},
 		name() {
 			if (!this.tip.donate_by_me && this.tip.anonymous) {
