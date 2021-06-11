@@ -50,7 +50,7 @@ export default {
 						if (data.result) {
 							this.$emit("enabled", JSON.parse(data.recovery));
 						} else {
-							this.toast("کد تایید نامعتبر است");
+							this.toast(__.get("messages.invalid-code"));
 						}
 						this.loading = false;
 					})

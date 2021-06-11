@@ -265,7 +265,7 @@ export default {
 					})
 					.catch((err) => {
 						console.log(err);
-						this.toast("خطا در دریفات اطلاعات");
+						this.toast(__.get("messages.error-in-get-data"));
 					})
 					.then(() => {
 						this.loadingTab = false;
@@ -308,14 +308,14 @@ export default {
 							})
 							.catch((err) => {
 								console.log(err);
-								this.toast("خطا در ذخیره اطلاعات");
+								this.toast(__.get("messages.save-error"));
 							})
 							.then(() => {
 								this.loadingSave = false;
 							});
 					} else {
 						this.loadingSave = false;
-						this.toast("ورودی‌ها نامعتبر است");
+						this.toast(__.get("messages.invalid-inputs"));
 					}
 				} else if (this.current_tab === "home") {
 					axios
@@ -332,7 +332,7 @@ export default {
 						})
 						.catch((err) => {
 							console.log(err);
-							this.toast("خطا در ذخیره اطلاعات");
+							this.toast(__.get("messages.save-error"));
 						})
 						.then(() => {
 							this.loadingSave = false;

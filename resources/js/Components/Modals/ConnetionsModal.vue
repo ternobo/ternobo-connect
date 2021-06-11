@@ -93,7 +93,7 @@ export default {
 					})
 					.catch((err) => {
 						console.log(err);
-						this.toast("خطا در دریافت اطلاعات");
+						this.toast(__.get("messages.error-in-get-data"));
 					})
 					.then(() => {
 						this.searchLoading = false;
@@ -125,7 +125,7 @@ export default {
 				.catch((err) => {
 					console.log(err);
 					this.error = true;
-					this.toast("خطا در دریافت اطلاعات");
+					this.toast(__.get("messages.error-in-get-data"));
 				})
 				.then(() => {
 					this.loading = false;
@@ -148,7 +148,7 @@ export default {
 					.catch((err) => {
 						console.log(err);
 						this.error = true;
-						this.toast("خطا در دریافت اطلاعات");
+						this.toast(__.get("messages.error-in-get-data"));
 					})
 					.then(() => {
 						this.loading = false;
@@ -169,7 +169,7 @@ export default {
 					})
 					.catch((error) => {
 						console.error(error);
-						this.toast("خطا در دریافت اطلاعات");
+						this.toast(__.get("messages.error-in-get-data"));
 					})
 					.then(() => {
 						this.loadingMoreConnection = false;

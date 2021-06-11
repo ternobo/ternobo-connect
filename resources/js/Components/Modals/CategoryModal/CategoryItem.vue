@@ -44,7 +44,7 @@ export default {
 							})
 							.catch((err) => {
 								console.log(err);
-								this.toast("خطا در حذف دسته‌بندی");
+								this.toast(__.get("messages.delete-error"));
 							})
 							.then(() => {
 								this.loading = false;
@@ -70,7 +70,7 @@ export default {
 					})
 					.catch((err) => {
 						console.log(err);
-						this.toast("خطا در تغییر نام دسته‌بندی");
+						this.toast(__.get("messages.connection-error"));
 					})
 					.then(() => {
 						this.loading = false;

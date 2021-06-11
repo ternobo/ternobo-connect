@@ -12,7 +12,7 @@
 		<div class="register-content flex-column">
 			<div class="text-center my-4">
 				<h2 class="font-18">{{ __.get("follow-suggestion.suggestions-title") }}</h2>
-				<p class="text-center">برای بهترین تجربه استفاده از خدمات حداقل <b>۳ نفر</b> را دنبال کنید.</p>
+				<p class="text-center">{{ __.get("follow-suggestion.subtitle") }}</p>
 			</div>
 			<div class="container-fluid">
 				<div class="row justify-content-center">

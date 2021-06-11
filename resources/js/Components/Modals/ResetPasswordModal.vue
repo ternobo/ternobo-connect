@@ -55,12 +55,12 @@ export default {
 								this.handleError(data.errors);
 							}
 						} else {
-							this.toast("همه فیلد‌ها اجباری است");
+							this.toast(__.get("messages.all-inputs-required"));
 						}
 					})
 					.then(() => (this.loading = false));
 			} else {
-				this.toast("رمزعبور و تاییدیه آن برابر نیست", "cancel", "material-icons-outlined text-danger");
+				this.toast(__.get("register.password-not-confirm-match"), "cancel", "material-icons-outlined text-danger");
 			}
 		},
 		sendResetCode() {
@@ -79,7 +79,7 @@ export default {
 							this.handleError(data.errors);
 						}
 					} else {
-						this.toast("همه فیلد‌ها اجباری است");
+						this.toast(__.get("messages.all-inputs-required"));
 					}
 				})
 				.then(() => (this.loading = false));

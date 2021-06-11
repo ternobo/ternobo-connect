@@ -39,7 +39,7 @@ export default {
 						this.$emit("verified", true);
 						this.loading = false;
 					} else {
-						this.toast("کد ملی نامعتبر است");
+						this.toast(__.get("messages.national-code-is-invalid"));
 					}
 				})
 				.catch((err) => {
@@ -59,7 +59,7 @@ export default {
 					this.file = file;
 					this.image = blobURL;
 				} else {
-					this.toast("یک تصویر انتخاب کنید");
+					this.toast(__.get("messages.select-image"));
 				}
 			}
 		},

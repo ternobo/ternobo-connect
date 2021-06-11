@@ -161,16 +161,10 @@ class FeedbacksController extends Controller
      */
     public function store(Request $request)
     {
-        $messages = [
-            "title.required" => "عنوان اجباری است",
-            "title.max" => "عنوان حداکثر می‌تواند ۱۰۰ کاراکتر باشد",
-            "description.max" => "توضیحات حداکثر می‌تواند ۳۰۰۰ کاراکتر باشد",
-
-        ];
         $validator = Validator::make($request->all(), [
             "title" => "required|max:100",
             "description" => "max:3000",
-        ], $messages);
+        ]);
         if ($validator->fails()) {
             return response()->json(["result" => false, "errors" => $validator->errors()]);
         }
@@ -188,13 +182,9 @@ class FeedbacksController extends Controller
 
     public function addReply(Feedback $feedback, Request $request)
     {
-        $messages = [
-            "text.required" => "متن دیدگاه اجباری است",
-            "text.max" => "متن دیدگاه حداکثر می‌تواند ۲۰۰۰ کاراکتر باشد",
-        ];
         $validator = Validator::make($request->all(), [
             "text" => "required|max:3000",
-        ], $messages);
+        ], [], ['text' => __('validation.attributes.comment-text')]);
         if ($validator->fails()) {
             return response()->json(["result" => false, "errors" => $validator->errors()]);
         }

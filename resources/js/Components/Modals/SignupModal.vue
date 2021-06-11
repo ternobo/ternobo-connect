@@ -219,7 +219,7 @@ export default {
 						$this.loading = false;
 					});
 			} else {
-				this.toast("رمزعبور و تاییدیه آن برابر نیست");
+				this.toast(__.get("register.password-not-confirm-match"));
 			}
 		},
 	},

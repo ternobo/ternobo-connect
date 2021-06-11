@@ -324,48 +324,13 @@ class PageController extends Controller
         return response()->json(['result' => true, 'drafts' => $drafts]);
     }
 
-    public function saveResume(Request $request)
-    {
-        $messages = [
-            "about.max" => "بایوگرافی می‌تواند حداکثر 2500 کاراکتر باشد",
-        ];
-        $validator = Validator::make($request->all(), [
-            "about" => "max:2500",
-        ]);
-        if ($validator->fails()) {
-            return response()->json(array("result" => false, "errors" => $validator->errors()));
-        } else {
-            $page = Auth::user()->personalPage;
-            if ($request->filled("about")) {
-                $page->about = $request->about;
-            }
-
-            if ($request->filled("skills")) {
-                $skills = $request->skills;
-            }
-
-            if ($request->filled("achievements")) {
-                $achievements = $request->achievements;
-
-            }
-
-            $page->save();
-
-        }
-    }
-
     public function saveProfile(Request $request)
     {
-        $messages = [
-            "gender.required" => "جنسیت اجباری است",
-            "firstname.required" => "نام اجباری است",
-            "lastname.required" => "نام‌خانوادگی اجباری است",
-        ];
         $validator = Validator::make($request->all(), [
             "firstname" => "required",
             "lastname" => "required",
             "gender" => "required",
-        ]);
+        ], [], ["gender" => __('validation.attributes.sex'), 'firstname' => __("validation.attributes.first-name"), "lastname" => __("validation.attributes.last-name")]);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
@@ -440,14 +405,10 @@ class PageController extends Controller
 
     public function report(Request $request)
     {
-        $messages = [
-            "page_id.exists" => "این صفحه حدف شده",
-            "report" => "دلیل گزارش اجباری است",
-        ];
         $validator = Validator::make($request->all(), [
             "page_id" => "required",
             "report" => "required",
-        ], $messages);
+        ], [], ['report' => __("validation.attributes.report-reason")]);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {

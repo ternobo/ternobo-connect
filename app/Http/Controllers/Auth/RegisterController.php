@@ -57,18 +57,12 @@ class RegisterController extends Controller
 
     public function signupUser(Request $request)
     {
-        $messages = [
-            'required' => __('این فیلد اجباری است'),
-            "unique" => __("نام کاربری تکراری است"),
-            "username.regex" => _("نام کاربری نامعتبر است. فقط حروف انگلیسی و بدون فاصله وارد کنید"),
-        ];
-
         $validator = Validator::make($request->all(), [
             "firstname" => "required",
             "lastname" => "required",
             'username' => 'required|min:3|unique:users,username|regex:/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/',
             "gender" => "required",
-        ], $messages);
+        ], [], ['gender' => __("validation.attributes.sex")]);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {

@@ -63,12 +63,12 @@ export default {
 						}
 						this.$emit("updated");
 					} else {
-						this.toast("خطا در حذف پروفایل");
+						this.toast(__.get("messages.profile-delete-error"));
 					}
 				})
 				.catch((err) => {
 					console.log(err);
-					this.toast("خطا در حذف پروفایل");
+					this.toast(__.get("messages.profile-delete-error"));
 				})
 				.then(() => (this.loading = false));
 		},

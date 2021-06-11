@@ -82,7 +82,7 @@ export default {
 							this.editorItems.push({ id: uuidv4(), type: "media", content: file });
 							this.$emit("itemAdd");
 						} else {
-							this.toast("فقط امکان فایل‌های jpeg, png, jpg, gif مجاز است");
+							this.toast(__.get("messages.invalid-mime"));
 						}
 					};
 					fileChooser.click();

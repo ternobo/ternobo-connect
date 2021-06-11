@@ -13,15 +13,10 @@ class VerificationController extends Controller
 {
     public function sendVcode(Request $request)
     {
-        $messages = [
-            "phone.unique" => __("شماره همراه تکراری است!"),
-            "email.unique" => __("ایمیل تکراری است"),
-            "email" => _("ایمیل نامعتبر است"),
-        ];
         $validator = Validator::make($request->all(), [
             'phone' => 'unique:users,phone',
             'email' => 'email:rfc|unique:users,email',
-        ], $messages);
+        ]);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         }

@@ -247,7 +247,7 @@ export default {
 				this.select_step = false;
 				this.setup_step = true;
 			} else {
-				this.toast("یک شیوه تایید هویت را انتخاب کنید");
+				this.toast(__.get("messages.select-verfication-way"));
 			}
 		},
 		onEnabled(codes) {

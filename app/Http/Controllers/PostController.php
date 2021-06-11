@@ -172,16 +172,11 @@ class PostController extends Controller
 
     public function report(Request $request)
     {
-        $messages = [
-            "post_id.exists" => "این محتوا حدف شده",
-            "comment_id.exists" => "این کامنت حذف شده",
-            "report" => "دلیل گزارش اجباری است",
-        ];
         $validator = Validator::make($request->all(), [
             "comment_id" => "required_without:post_id",
             "post_id" => "required_without:comment_id",
             "report" => "required",
-        ], $messages);
+        ], [], ["report" => __("report-reason")]);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {

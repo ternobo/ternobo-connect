@@ -1,7 +1,12 @@
 <?php
 return [
     'copied' => "Copied",
+    'all-inputs-required' => "All Fields are required",
     'there-is-error' => "There is an error occurred",
+    "select-verfication-way" => "Choose an authentication method",
+    "error-in-get-data" => "Error receiving data",
+    "invalid-inputs" => "Inputs are in valid",
+    'invalid-code' => "Entered Code is invalid",
     'connection-error' => "Connection error",
     'following-not-found' => "We can't find any following",
     'score-reason-is-required' => "It's important to choose Reason",
@@ -9,6 +14,7 @@ return [
     'on-exit-confirm' => "Leave site? Changes you made may not be saved",
     'saved-success' => "Saved successfully",
     'published-success' => "Published successfully",
+    'done-job-message' => "Action was successful",
     'save-error' => "There is an error saving the information",
     'no-tip' => "We can't find any tip record",
     'tip-amount-not-enough' => "Tip amount is not enough",

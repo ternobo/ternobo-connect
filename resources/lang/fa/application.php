@@ -45,6 +45,7 @@ return [
     'last-name' => "نام خانوادگی",
     'further-information' => "اطلاعات تکمیلی",
     'security-tips' => "نکات امنیتی",
+    'upload' => "بارگزاری",
     'enter-your-picture' => "تصویر خود را وارد کنید",
     'more' => "دیگر",
     'discord' => "دیسکورد",

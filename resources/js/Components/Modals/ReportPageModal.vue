@@ -92,7 +92,7 @@ export default {
 				.post("/reportpage", data)
 				.then((response) => {
 					if (response.data.result) {
-						this.toast("درخواست شما با موفقیت ثبت شد", "check", "text-success");
+						this.toast(__.get("messages.done-job-message"), "check", "text-success");
 						this.$emit("update:show", false);
 					} else {
 						this.handleError(response.data.errors);

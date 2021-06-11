@@ -41,7 +41,7 @@ export default {
 					}
 				})
 				.catch((err) => {
-					this.toast("خطا در ثبت اطلاعات");
+					this.toast(__.get("messages.save-error"));
 				})
 				.then(() => {
 					this.loading = false;

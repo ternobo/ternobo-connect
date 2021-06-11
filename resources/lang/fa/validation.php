@@ -113,6 +113,7 @@ return [
     "no_end_date" => "فیلد :attribute اجباری است",
     "month_not_selected" => "ماه انتخاب نشده",
     'start_year_not_selected' => "سال شروع انتخاب نشده",
+    "password_code" => "کد بازیابی رمزعبور اشتباه است",
 
     'attributes' => [
         'address' => 'نشانی',
@@ -180,6 +181,9 @@ return [
         'size' => 'اندازه',
         'terms' => 'شرایط',
         'text' => 'متن',
+        "comment-text" => "متن دیدگاه",
+        "skill-name" => "عنوان مهارت",
+        'report-reason' => "دلیل گزارش",
         'time' => 'زمان',
         'title' => 'عنوان',
         'username' => 'نام کاربری',

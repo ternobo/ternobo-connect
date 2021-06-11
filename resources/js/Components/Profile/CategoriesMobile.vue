@@ -78,7 +78,7 @@ export default {
 					tags: this.removedTags,
 				})
 				.catch((err) => {
-					this.toast("خطا در حذف اطلاعات");
+					this.toast(__.get("messages.delete-error"));
 					let data = {};
 					if (this.activeCategory != null) {
 						data.category = this.activeCategory;

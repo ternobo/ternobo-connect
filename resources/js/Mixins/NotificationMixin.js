@@ -1,4 +1,3 @@
-import moment from "jalali-moment";
 import PostViewer from "../Components/Notifications/PostViewer";
 const NotificationMixin = {
     components: {

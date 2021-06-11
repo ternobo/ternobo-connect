@@ -76,7 +76,7 @@ class ForgotPasswordController extends Controller
     public function updatePassword(Request $request)
     {
         $messages = [
-            "exists" => "کد بازیابی رمزعبور اشتباه است.",
+            "exists" => __("validation.password_code"),
         ];
         $validator = Validator::make($request->all(), [
             "newpassword" => "required",

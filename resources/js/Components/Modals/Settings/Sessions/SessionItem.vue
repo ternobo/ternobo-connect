@@ -34,7 +34,7 @@ export default {
 					if (response.data.result) {
 						this.$emit("deleted");
 					} else {
-						this.toast("خطایی رخ داده");
+						this.toast(__.get("messages.delete-error"));
 					}
 					this.loading = false;
 				})

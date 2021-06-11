@@ -111,6 +111,7 @@ return [
     "no_end_date" => "The :attribute  is rquired",
     "month_not_selected" => "Month is not selected",
     'start_year_not_selected' => "Start Date Not Selected",
+    "password_code" => "Reset Password code is invalid",
 
     'attributes' => [
         'address' => 'Adress',
@@ -174,10 +175,13 @@ return [
         'phone' => 'Phone',
         'province' => 'Province',
         'second' => 'Second',
-        'sex' => 'Sex',
+        'sex' => 'Gender',
         'size' => 'Size',
         'terms' => 'Terms',
         'text' => 'Text',
+        "comment-text" => "Comment Text",
+        "skill-name" => "Skill Title",
+        'report-reason' => "Report Reason",
         'time' => 'Time',
         'title' => 'Title',
         'username' => 'Usename',

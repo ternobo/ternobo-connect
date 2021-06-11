@@ -43,14 +43,14 @@ export default {
 							this.$emit("update:show", false);
 							window.location = this.$APP_URL;
 						} else {
-							this.toast("رمزعبور فعلی نامعتبر است.");
+							this.toast(__.get("messages.invalid-password"));
 						}
 					})
 					.catch((error) => {
 						this.loading = false;
 					});
 			} else {
-				this.toast("رمزعبور و تاییدیه آن برابر نیست");
+				this.toast(__.get("messages.password-not-confirm-match"));
 			}
 		},
 	},

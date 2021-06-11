@@ -6,7 +6,7 @@
 					<strong class="tag" ref="tagelem">#{{ tag }}</strong>
 					<small>{{ posts.total }} {{ __.choice("application.post", posts.total) }}</small>
 				</div>
-				<loading-button class="btn follow-btn" @click.native="follow" :class="{ 'btn-followed-connected': isFollowed }" :loading="loading">دنبال کردن</loading-button>
+				<loading-button class="btn follow-btn" @click.native="follow" :class="{ 'btn-followed-connected': isFollowed }" :loading="loading">{{ __.get("application.follow") }}</loading-button>
 			</div>
 		</div>
 		<div class="w-100">

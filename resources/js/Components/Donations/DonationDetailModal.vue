@@ -1,5 +1,5 @@
 <template>
-	<b-modal v-model="showModal" hide-footer :title="__.get('donations.donate-details')" modal-class="new-post-modal" size="md" :centered="true">
+	<b-modal v-model="showModal" hide-footer :title="__.get('tips.tip-details')" modal-class="new-post-modal" size="md" :centered="true">
 		<div class="new-post position-relative">
 			<div class="selections">
 				<div class="donation-modal-header">
@@ -26,7 +26,7 @@
 				<span class="text-grey font-16 font-demibold">{{ date }}</span>
 			</div>
 			<div class="donation-detail-item">
-				<span class="text-grey font-16 font-demibold">{{ __.get("tips.time") }}</span>
+				<span class="text-grey font-16 font-demibold">{{ __.get("validation.attributes.time") }}</span>
 				<span class="text-grey font-16 font-demibold">{{ time }}</span>
 			</div>
 			<div class="donation-detail-item">
@@ -52,10 +52,10 @@ export default {
 	props: ["tip"],
 	computed: {
 		time() {
-			return new PersianDate(this.tip.created_at).format("HH:mm");
+			return this.formatTime(this.tip.created_at, "HH:mm");
 		},
 		date() {
-			return new PersianDate(this.tip.created_at).format("YYYY/MM/DD");
+			return this.formatTime(this.tip.created_at, "YYYY/MM/DD");
 		},
 		name() {
 			if (!this.tip.donate_by_me && this.tip.anonymous) {

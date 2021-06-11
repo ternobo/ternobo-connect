@@ -41,7 +41,7 @@ return [
     'very-good' => "Very Good",
     'highly-skilled' => "Expert",
     'skill_credit' => "Endorsed This Skill",
-    'skill_credit_my_verb' => "Endorsed The Skill",
+    'skill_credit_my_verb' => "Endorsed This Skill",
     'endorse-skill-q2' => "How do you know about :fname’s :skill skills?", /*:fname - His/Her first name.*/
     'endorse-res-1' => "Worked together directly on the same team or project",
     'endorse-res-2' => "Managed :fname directly", /*:fname - His/Her first name.*/

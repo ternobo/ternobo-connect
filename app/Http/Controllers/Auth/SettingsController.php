@@ -18,10 +18,6 @@ class SettingsController extends Controller
 {
     public function check(Request $request)
     {
-        $messages = [
-            'username.required' => 'نام کاربری اجباری است',
-        ];
-
         $validator = Validator::make($request->all(), [
             'username' => ['required', new UsernameValidator],
         ]);
@@ -35,10 +31,6 @@ class SettingsController extends Controller
     public function set(Request $request)
     {
         $user = Auth::user();
-
-        $messages = [
-            'username.required' => 'نام کاربری اجباری است',
-        ];
 
         $validator = Validator::make($request->all(), [
             'username' => ['required', new UsernameValidator],
@@ -131,13 +123,10 @@ class SettingsController extends Controller
 
     public function changePassword(Request $request)
     {
-        $messages = [
-            "password" => "رمزعبور فعلی نامعتبر است",
-        ];
         $validator = Validator::make($request->all(), [
             'currentpassword' => 'password',
             "password" => "required",
-        ], $messages);
+        ], [], ['currentpassword' => __("validation.attributes.password")]);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         }
@@ -152,12 +141,10 @@ class SettingsController extends Controller
 
     public function deactiveAccount(Request $request)
     {
-        $messages = [
-            "password" => "رمز عبور نامعتبر است",
-        ];
+
         $validator = Validator::make($request->all(), [
             "password" => "password",
-        ], $messages);
+        ]);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         }

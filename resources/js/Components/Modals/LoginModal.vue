@@ -77,7 +77,7 @@ export default {
 						if (response.data.result) {
 							window.location = "/feed";
 						} else {
-							this.toast("کد ورودی نامعتبر است");
+							this.toast(__.get("messages.invalid-code"));
 						}
 						this.loading = false;
 					})

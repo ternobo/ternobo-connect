@@ -7,15 +7,15 @@
 		<div class="register-content">
 			<div class="register-steps">
 				<div class="invite-step" v-if="step == 0">
-					<strong class="font-24">به ترنوبو خوش آمدید</strong>
-					<span class="text-muted font-20">شما از طرف {{ user.first_name }} دعوت شده‌اید</span>
+					<strong class="font-24">{{ __.get("register.welcom") }}</strong>
+					<span class="text-muted font-20">{{ __.get("register.invited-by", { fname: user.first_name }) }}</span>
 					<lazy-image :src="user.profile" imgClass="profile-xlg" class="profile-xlg" />
 					<strong class="font-20">{{ user.name }}</strong>
 					<img class="mt-0" src="/images/invite_illustration_ternobo.svg" height="520" />
 				</div>
 				<div class="invite-step" v-else-if="step == 1">
 					<div class="register-card">
-						<div class="register-step-title">شماره موبایل</div>
+						<div class="register-step-title">{{ __.get("settings.phone-number") }}</div>
 						<div class="input-group ephone-input-group d-flex align-items-center" @keydown.enter="sendVcode()">
 							<i class="material-icons-outlined text-superlight hover-danger" v-if="verification_step" @click="(phone_step = true), (verification_step = false)">edit</i>
 							<input dir="ltr" type="tel" class="form-control mx-1 text-left" :readonly="verification_step" v-model="phone_number" placeholder="09123456789" />
@@ -23,7 +23,7 @@
 						<transition name="slide">
 							<div class="text-center" v-if="verification_step">
 								<div class="input-group d-flex align-items-center flex-column justify-content-center mt-4">
-									<label class="w-100">کد <strong>تایید</strong> ارسال شده ‌را وارد کنید</label>
+									<label class="w-100" v-html="__.get('register.enter-verification-code')"></label>
 									<div class="d-flex justify-content-center">
 										<div class="d-flex align-items-center">
 											<otp-input input-class="w-100" class="material--sm mx-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" />
@@ -37,7 +37,7 @@
 				</div>
 				<div class="invite-step" v-else-if="step == 2">
 					<div class="register-card">
-						<div class="register-step-title">اطلاعات تکمیلی</div>
+						<div class="register-step-title">{{ __.get("application.further-information") }}</div>
 						<material-text-field input-class="w-100" required class="material--sm mb-3" v-model="first_name" placeholder="نام" />
 						<material-text-field input-class="w-100" required class="material--sm mb-3" v-model="last_name" placeholder="نام خانوادگی" />
 						<material-text-field input-class="w-100" required class="material--sm mb-3" v-model="username" placeholder="نام کاربری" />
@@ -46,27 +46,27 @@
 							labelOption="label"
 							valueOption="code"
 							:items="[
-								{ label: 'زن', code: '1' },
-								{ label: 'مرد', code: '2' },
+								{ label: __.get('application.female'), code: '1' },
+								{ label: __.get('application.male'), code: '2' },
 							]"
 							v-model="gender"
 							:dir="appDirection"
 						>
-							جنسیت
+							{{ __.get("application.gender") }}
 						</tselect>
 					</div>
 				</div>
 				<div class="invite-step" v-else-if="step == 3">
 					<div class="register-card">
-						<div class="register-step-title">اطلاعات تکمیلی</div>
+						<div class="register-step-title">{{ __.get("application.further-information") }}</div>
 						<div class="text-center">
 							<material-text-field input-class="w-100" class="material--sm mb-3 w-100" v-model="password" type="password" placeholder="رمزعبور" />
 							<material-text-field input-class="w-100" class="material--sm mb-3 w-100" v-model="password_repeat" type="password" placeholder="تکرار رمزعبور" />
 							<div class="password-tips">
-								<p class="font-18 pr-3">نکات امنیتی</p>
+								<p class="font-18 pr-3">{{ __.get("application.security-tips") }}</p>
 								<ul style="list-style: none" class="font-14 pr-3">
-									<li>رمزعبور حداقل ۸ کاراکتر باشد</li>
-									<li>بهتر است که از حروف کوچک، بزرگ و سمبل‌ها در رمزعبور خود استفاده کنید.</li>
+									<li>{{ __.get("register.password-tip-1") }}</li>
+									<li>{{ __.get("register.password-tip-2") }}</li>
 								</ul>
 							</div>
 						</div>
@@ -74,12 +74,12 @@
 				</div>
 				<div class="invite-step" v-else-if="step == 4">
 					<div class="register-card">
-						<div class="register-step-title">تصویر پروفایل</div>
+						<div class="register-step-title">{{ __.get("register.profile-image") }}</div>
 						<div class="d-flex flex-column align-items-center">
 							<profile-image @updated="updateProfile" ref="profileelem" :canChange="true" size="profile-register" class="m-0" :src="'/images/man-profile.png'"></profile-image>
 							<button class="btn upload-profile-btn" @click="$refs['profileelem'].$el.click()">
 								<i class="material-icons-outlined">cloud_upload</i>
-								بارگزاری
+								{{ __.get("application.upload") }}
 							</button>
 						</div>
 					</div>
@@ -269,7 +269,7 @@ export default {
 						$this.loading = false;
 					});
 			} else {
-				this.toast("رمزعبور و تاییدیه آن برابر نیست");
+				this.toast(__.get("register.password-not-confirm-match"));
 			}
 		},
 	},

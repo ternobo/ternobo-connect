@@ -84,7 +84,7 @@ export default {
 						this.$store.commit("addCategory", { name: value, id: value });
 					});
 			} else {
-				this.toast("نام دسته بندی تکراری است");
+				this.toast(__.get("messages.duplicated-category"));
 			}
 		},
 		shown() {
@@ -170,21 +170,21 @@ export default {
 						if (this.post) {
 							this.$emit("update:post", response.data.post);
 							this.deletedSlides = [];
-							this.toast("با موفقیت ذخیره شد", "check", "text-success");
+							this.toast(__.get("messages.save-success"), "check", "text-success");
 						} else {
 							this.$emit("posted", response.data.post);
 							this.content = [{ id: uuidv4(), content: [], icon: "more_horiz", active: true }];
 							this.category = undefined;
 							this.canDonate = false;
 							this.deletedSlides = [];
-							this.toast("با موفقیت منتشر شد", "check", "text-success");
+							this.toast(__.get("published-success"), "check", "text-success");
 						}
 					} else {
 						this.handleError(response.data.errors);
 					}
 				})
 				.catch((err) => {
-					this.toast("خطا در ثبت اطلاعات");
+					this.toast(__.get("messages.save-error"));
 				})
 				.then(() => {
 					if (draft) {
@@ -233,7 +233,7 @@ export default {
 					})
 					.catch((err) => {
 						console.log(err);
-						this.toast("خظا در برقرار ارتباط");
+						this.toast(__.get("messages.save-error"));
 						this.canDonate = false;
 					})
 					.then(() => (this.loadingCanDonate = false));

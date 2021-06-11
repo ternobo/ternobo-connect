@@ -105,7 +105,7 @@ export default {
 				});
 		},
 		onError() {
-			this.toast("خطا در ارسال اطلاعات");
+			this.toast(__.get("messages.save-error"));
 		},
 		shareUser(connection) {
 			let user_id = connection.user.id;

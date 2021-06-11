@@ -19,13 +19,9 @@ class SkillController extends Controller
      */
     public function store(Request $request)
     {
-        $messages = [
-            "name.required" => "عنوان مهارت اجباری است",
-            "name.max" => "عنوان مهارت حداکثر می‌تواند ۱۰۰ کاراکتر باشد.",
-        ];
         $validator = Validator::make($request->all(), [
             "name" => "required|max:100",
-        ], $messages);
+        ], [], ["name" => __("validation.attributes.skill-name")]);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         }
@@ -79,13 +75,9 @@ class SkillController extends Controller
      */
     public function update(Request $request, Skill $skill)
     {
-        $messages = [
-            "name.required" => "عنوان مهارت اجباری است",
-            "name.max" => "عنوان مهارت حداکثر می‌تواند ۱۰۰ کاراکتر باشد.",
-        ];
         $validator = Validator::make($request->all(), [
             "name" => "required|max:100",
-        ], $messages);
+        ]);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         }

@@ -9,9 +9,9 @@
 					class="tselect-filter tselect-lg"
 					:dir="appDirection"
 					:items="[
-						{ name: __.get('donations.all'), value: 'all' },
-						{ name: __.get('donations.from-you'), value: 'my' },
-						{ name: __.get('donations.for-you'), value: 'forme' },
+						{ name: __.get('tips.all'), value: 'all' },
+						{ name: __.get('tips.from-you'), value: 'my' },
+						{ name: __.get('tips.for-you'), value: 'forme' },
 					]"
 					:showNewItem="false"
 					v-model="type"
@@ -26,8 +26,8 @@
 					class="tselect-filter tselect-lg ms-3"
 					:dir="appDirection"
 					:items="[
-						{ name: __.get('donations.newest'), value: 'desc' },
-						{ name: __.get('donations.oldest'), value: 'asc' },
+						{ name: __.get('tips.newest'), value: 'desc' },
+						{ name: __.get('tips.oldest'), value: 'asc' },
 					]"
 					:showNewItem="false"
 					v-model="order"

@@ -75,7 +75,7 @@ export default {
 						this.$emit("updated", this.email);
 						this.verification_step = false;
 					} else {
-						this.toast("کد تایید نامعتبر است");
+						this.toast(__.get("messages.invalid-code"));
 					}
 					this.loading = false;
 				})

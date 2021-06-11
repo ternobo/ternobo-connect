@@ -1,20 +1,18 @@
 <template>
-	<b-modal v-if="$store.state.user != null" v-model="showModal" hide-footer :title="'تایید مهارت ' + user.name" size="md" :centered="true">
-		<p>
-			به مهارت <span class="mx-1">{{ user.first_name }}</span> در <strong class="mx1">{{ skill.name }}</strong> چه امتیازی می‌دهید؟
-		</p>
+	<b-modal v-if="$store.state.user != null" v-model="showModal" hide-footer :title="__.get('user-profile.endorse-skill')" size="md" :centered="true">
+		<p v-html="__.get('user-profile.endorse-skill-q1', { skill: skill.name, fname: user.first_name })"></p>
 		<RadioButton
 			class="d-flex justify-content-around"
 			:values="[
-				{ label: 'خوب', value: '1' },
-				{ label: 'عالی', value: '2' },
-				{ label: 'ماهر', value: '3' },
+				{ label: __.get('user-profile.good'), value: '1' },
+				{ label: __.get('user-profile.very-good'), value: '2' },
+				{ label: __.get('user-profile.highly-skilled'), value: '3' },
 			]"
 			v-model="level"
 		></RadioButton>
 		<div class="w-100">
 			<div class="my-3">
-				<strong class="font-16">چرا این امتیاز را به {{ user.first_name }} می‌دهید؟</strong>
+				<strong class="font-16">{{ __.get("user-profile.endorse-skill-q2", { skill: skill.name, fname: user.first_name }) }}</strong>
 			</div>
 			<tselect
 				class="tselect-lg"
@@ -24,28 +22,28 @@
 				v-model="reason"
 				:items="[
 					{
-						label: 'با هم روی یک پروژه کار کرده‌ایم',
+						label: __.get('user-profile.endorse-res-1'),
 						value: 'با هم روی یک پروژه کار کرده‌ایم',
 					},
 					{
-						label: 'مدیریت مستقیم روی کار‌های ' + user.first_name + ' دارم/داشته‌ام',
+						label: __.get('user-profile.endorse-res-2', { fname: user.first_name }),
 						value: 'مدیریت مستقیم روی کار‌های ' + user.first_name + ' دارم/داشته‌ام',
 					},
 					{
-						label: 'به طور غیرمستقیم روی یک پروژه کار کرده‌ایم',
+						label: __.get('user-profile.endorse-res-3'),
 						value: 'به طور غیرمستقیم روی یک پروژه کار کرده‌ایم',
 					},
 					{
-						label: 'در مورد ' + user.first_name + ' شنیده‌ام',
+						label: __.get('user-profile.endorse-res-4', { fname: user.first_name }),
 						value: 'در مورد ' + user.first_name + ' شنیده‌ام',
 					},
 					{
-						label: 'هیچ کدام از موارد بالا',
+						label: __.get('user-profile.endorse-res-5'),
 						value: 'هیچ کدام از موارد بالا',
 					},
 				]"
 			>
-				انتخاب دلیل
+				{{ __.get("user-profile.choose-reason") }}
 			</tselect>
 		</div>
 		<div class="w-100 d-flex mt-4 justify-content-center">
@@ -80,7 +78,7 @@ export default {
 					.catch((errors) => {})
 					.then(() => (this.loading = false));
 			} else {
-				this.toast("دلیل امتیاز اجباری است");
+				this.toast(__.get("messages.score-reason-is-required"));
 			}
 		},
 	},

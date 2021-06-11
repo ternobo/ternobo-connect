@@ -36,7 +36,7 @@ export default {
 					.catch((err) => {
 						console.log(err);
 						this.loadMore();
-						this.toast("خطا در دریافت اطلاعات");
+						this.toast(__.get("messages.error-in-get-data"));
 					})
 					.then(() => {
 						this.loading_next_page = false;
@@ -57,7 +57,7 @@ export default {
 			})
 			.catch((err) => {
 				console.log(err);
-				this.toast("خطا در دریافت اطلاعات");
+				this.toast(__.get("messages.error-in-get-data"));
 			})
 			.then(() => {
 				this.loading = false;

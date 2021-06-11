@@ -1,7 +1,13 @@
 <?php
 return [
     'copied' => "کپی شد",
+    'all-inputs-required' => "همه فیلد‌ها اجباری است",
     'there-is-error' => "خطایی رخ داده",
+    "select-verfication-way" => "یک شیوه تایید هویت را انتخاب کنید",
+    'national-code-is-invalid' => "کد ملی نامعتبر است",
+    "error-in-get-data" => "خطا دریافت اطلاعات",
+    "invalid-inputs" => "ورودی‌ها نامعتبر است.",
+    'invalid-code' => "کد ورودی نامعتبر است",
     'connection-error' => "خطا در برقراری ارتباط",
     'following-not-found' => "هیچ دنبال شده‌ای یافت نشد",
     'score-reason-is-required' => "دلیل امتیاز اجباری است",
@@ -9,6 +15,7 @@ return [
     'on-exit-confirm' => "در صورت خروج اطلاعات از بین‌می‌رود!",
     'saved' => "با موفقیت ذخیره شد",
     'published-done' => "با موفقیت منتشر شد",
+    'done-job-message' => "عملیات موفقیت آمیز بود",
     'save-error' => "خطا در ثبت اطلاعات",
     'no-donation' => "هیچ حمایتی ثبت نشده",
     'donation-amount-not-enough' => "مبلغ دلخواه کافی نیست",
