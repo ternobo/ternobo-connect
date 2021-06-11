@@ -23,6 +23,7 @@ return [
     'confirm' => "تأیید",
     'previous' => "قبلی",
     'next' => "بعدی",
+    'get-started' => "شروع کنید",
     'more-people' => "و :number نفر دیگر",
     'show-more' => "نمایش بیشتر",
     'show-less' => "نمایش کمتر",
