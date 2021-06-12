@@ -1,87 +1,198 @@
 <template>
-	<b-modal v-model="showModal" hide-footer title="قوانین و مقررات ترنوبو" size="lg" :centered="true">
-		<div>
-			<p>این متن به منزله یک توافق‌نامه آنلاین می‌باشد و مطابق قانون تجارت الکترونیک هیچ تفاوتی از نظر اصالت و اعتبار و همچنین هیچ تفاوتی با نسخه مکتوب ندارد.</p>
-
-			<p><strong>تعاریف</strong><strong>:</strong></p>
-
-			<p><strong>محتوا</strong><strong>:</strong> هر نوع داده‌ای که در وبسایت تولید شده و نمایش داده می‌شود، که شامل و نه محدود به متن، عکس و ویدیو می‌باشد.</p>
-
-			<p><strong>بستر محتوای آنلاین</strong><strong>:</strong> به سامانه‌ای اینترنتی گفته می‌شود که تمامی محتواهای آن توسط کاربران تولید شده و این سامانه صرفاً برقرارکننده ارتباط بین کاربران است و مسئولیتی در قبال محتواهای تولید شده ندارد.</p>
-
-			<p><strong>ترنوبو</strong><strong>:</strong> ترنوبو یک بستر محتوای آنلاین است و هدف ترنوبو ایجاد بستر برای هم‌افزایی متخصصین و با رعایت و احترام به حقوق تمامی کاربران می‌باشد و البته در این سرویس مسئولیت کلیه فعالیت‌های کاربران به عهده خود اشخاص خواهد بود.</p>
-
-			<p><strong>کاربر</strong><strong>:</strong> تمامی بازدیدکنندگان وبسایت ترنوبو</p>
-
-			<p><strong>پروفایل کاربری</strong><strong>:</strong> محیط کاربری هر فرد در وبسایت ترنوبو است.</p>
-
-			<p><strong>اختیارات ترنوبو</strong><strong>:</strong></p>
-
-			<p>ترنوبو تمام تلاش خود را می‌کند تا درصورت نیاز به تعلیق وبسایت خود، آن را از قبل به اطلاع کاربران برساند، اما در هر صورت ممکن است وبسایت خود را بدون اطلاع قبلی به کاربر، به حالت تعلیق به هر منظور در آورد.</p>
-
-			<p>ترنوبو می‌تواند در صورت مشاهده تخلف از سوی کاربر، محتوای خلاف قوانین او را بدون اطلاع به کاربر، حذف کند و یا در صورت ضرورت پروفایل کاربری او را مسدود کند.</p>
-
-			<p>ترنوبو می‌تواند در صورت درخواست مقام قضایی صالح، اطلاعات نمایه کاربران را در اختیار این مقامات قرار دهد.</p>
-
-			<p>ترنوبو تمام تلاش خود را مبنی بر اطلاع دادن به کاربران در صورت تغییر محتوای صفحات قوانین، شرایط استفاده و حریم خصوصی می‌نماید.</p>
-
-			<p><strong>تعهدات ترنوبو</strong><strong>:</strong></p>
-
-			<p>ترنوبو متعهد است اطلاعات خصوصی کاربران را به هیچ شخص ثالثی اعم از حقوقی و یا حقیقی واگذار نکند مگر با درخواست دستگاه‌های ذیصلاح.</p>
-
-			<p><strong>رفع مسئولیت</strong><strong>:</strong></p>
-
-			<p>ممکن است وبسایت ترنوبو در وبسایت‌های دیگر به منظور تبلیغ قرار گرفته باشد. ترنوبو هیچ مسئولیتی در قبال این وبسایت‌ها ندارد.</p>
-
-			<p>مسئولیت استفاده از هر گونه متن، پیام، توضیح، اطلاعات، عکس، مشخصات تماس، ویدیو، پیام صوتی و انواع داده پیام و موارد مشابه که به ترنوبو ارسال می‌شود یا در آن قرار می‌گیرد، شامل بازتولید، افشاء، مخابره، نشر و پخش آن بر عهده فرستنده اطلاعات است. موارد ذکر شده تنها شامل موارد بیشتر و نه محدود به آن‌ها می‌باشند.</p>
-
-			<p>مسئولیت هر لینک، مطلب و ادعایی مربوط به ترنوبو که به واسطه اشخاص حقیقی و حقوقی دیگر در سایت، بلاگ یا شبکه‌های اجتماعی و باقی رسانه‌ها منتشر می‌شود، با خود این افراد است و ترنوبو مسئولیتی در قبال آن‌ها ندارد. موارد ذکر شده تنها شامل موارد بیشتر و نه محدود به آن‌ها می‌باشند.</p>
-
-			<p>ترنوبو مسئولیتی در قبال صحت اطلاعاتی که کاربران در وبسایت ثبت می‌کنند ندارد و در نتیجه هیچ تضمینی بر اعتبار آن‌ها و تأثیر مثبت یا منفی آن‌ها بر مخاطب وجود ندارد.</p>
-
-			<p><strong>امنیت</strong><strong>:</strong></p>
-
-			<p>ترنوبو تلاش حداکثری خود را جهت صیانت از اطلاعات اعمال می‌نماید. اما هیچ تضمینی در خصوص اطلاعات قرارگرفته در سایت و همچنین خسارات ناشی از به خطر افتادن اطلاعات نمی‌دهد.</p>
-
-			<p>تمامی تبادلات اطلاعات در وبسایت ترنوبو به‌صورت رمزنگاری شده و بر پایه گواهی SSL انجام می‌شود.</p>
-
-			<p><strong>جبران خسارت </strong><strong>:</strong></p>
-
-			<p>کاربر مطلع است که ارسال اطلاعات، چه به صورت حضوری، تلفنی و یا از طریق اینترنت همیشه با خطر افشاء مواجه است و هیچ سیستمی دارای امنیت کامل نمی‌باشد. بنابراین ترنوبو مسئولیتی در قبال نواقص امنیت تکنولوژی نخواهد داشت. با این وجود ترنوبو تمام تلاش خود را به منظور حداقل نمودن و در صورت امکان جلوگیری از دسترسی غیرمجاز و استفاده غیر صحیح از اطلاعات مندرج می‌نماید. در هیچ موردی چنین حمایتی کمتر از استانداردهای معقول مراقبت نخواهد بود.</p>
-
-			<p>تمامی اطلاعات ذخیره شده توسط ترنوبو تحت شرایط ماده ۸ قانون تجارت الکترونیک ذخیره می‌شوند.</p>
-
-			<p><strong>مالکیت مادی و معنوی</strong><strong>:</strong></p>
-
-			<p>تمام محتویات وبسایت ترنوبو از قبیل متون، گرافیک، تصاویر، علائم تجاری، لوگو، صدا، تصویر، قالب سایت، اسکریپت‌ها و... متعلق به ترنوبو است و مشمول حمایت‌های مقرر در قوانین مالکیت فکری داخلی و بین‌المللی است .همچنین هیچ یک از محتویات این سایت قابل تولید مجدد، کپی‌برداری، فروش یا هر نحو سوء استفاده برای مقاصد تجاری و غیرتجاری نیست.</p>
-
-			<p>هرگونه استفاده بدون کسب مجوز کتبی حق پیگرد قانونی را برای ترنوبو را محفوظ می‌دارد.</p>
-
-			<p>استفاده غیرمجاز از محتواهایی که مالکیت فکری آن متعلق به دیگران است، ممنوع بوده و در صورت شکایت صاحب اثر قابل پیگرد قانونی می‌باشد و به صلاحدید ترنوبو اعمال گزارش می‌شود.</p>
-
-			<p>کاربران قادرند برای معرفی آدرس ترنوبو خود و یا سرویس‌های ترنوبو با رعایت اصول برندینگ مربوطه از لوگو و برند ترنوبو استفاده کنند اما سایر استفاده‌ها بدون اجازه مجموعه ترنوبو مجاز نمی‌باشد و ممکن است به حذف حساب کاربری منجر شود.</p>
-
-			<p><strong>حل اختلاف</strong><strong>:</strong></p>
-
-			<p>این توافق‌نامه طبق قوانین و مقررات جمهوری اسلامی ایران تنظیم شده است. هر گونه اختلاف راجع به آن از جمله انعقاد، اعتبار، تفسیر، فسخ، نقض و اجرای آن برای داوری به شورای داوری اتحادیه کسب‌و‌کارهای اینترنتی ارجاع می‌شود. نظر شورای داوری قطعی و لازم‌الاجراست. شرط داوری حاضر موافقت‌نامه‌ای مستقل از قرارداد اصلی تلقی می‌شود و در هر حال قابل اجراست.</p>
-
-			<p><strong>فورس ماژور</strong><strong>:</strong></p>
-
-			<p>هیچ یک از طرفین این توافق‌نامه به دلیل قصور یا تأخیر در اجرای تعهداتش به دلیل حصول شرایطی که فراتر از کنترل معقول وی باشد، مسئول نخواهد بود. این موارد شامل موارد ذیل است اگر چه محدود به آنها نیست: آتش‌سوزی، سیل، زلزله، تصادف، قطع خطوط ارتباطی اینترنت، قطع برق، قطع شبکه و حوادث ناگهانی و غیرقابل پیش‌بینی طبیعی و…</p>
-
-			<p><strong>حریم خصوصی</strong><strong>:</strong></p>
-
-			<p>ترنوبو موظف به صیانت از داده‌های کاربران است. انتشار صوت، تصویر یا فیلم خصوصی یا خانوادگی یا اسرار دیگر بدون رضایت فرد مذکور جز در موارد قانونی، به نحوی که منجر به ضرر یا عرفاً موجب هتک حیثیت او شود، طبق فصل بیست و هفتم از کتاب پنجم قانون مجازات اسلامی مورد برخورد قرار خواهد گرفت.</p>
-
-			<p><strong>مکاتبات </strong><strong>:</strong></p>
-
-			<p>کلیه مکاتبات به صورت کتبی خواهد بود که از طرف ترنوبو از طریق ایمیل به نشانیinfo@Ternobo.com می‌باشد و مطابق ماده ۶ و ۱۲ قانون تجارت این مکاتبات رسمیت لازم و قانونی را دارا می‌باشند.</p>
-
-			<p><strong>تغییرات</strong><strong>:</strong></p>
-
-			<p>شرایط و ضوابط حاضر ممکن است تغییر کند . ترنوبو حق اصلاح این شرایط را در هر زمان و به هر صورت، به صرف تشخیص خود و بدون اطلاع قبلی، حفظ می‌نماید. شرایط و ضوابط جدید از تاریخ انتشار در وبسایت، بر نحوه استفاده از آن اعمال خواهد شد، و ممکن است نسبت به داده‌ها و اطلاعات کاربری و تنظیمات پیشین مؤثر باشد. استفاده از وبسایت حاضر بیانگر پذیرش تمامی موارد اصلاحی است.</p>
-
-			<p>محتویات این صفحه تا زمان تغییر با بروزرسانی آن معتبر و لازم‌الاجراست.</p>
+	<b-modal v-model="showModal" hide-footer title="Ternobo Community Guidelines" size="lg" :centered="true">
+		<div dir="ltr">
+			<p>
+				<span>
+					<span>
+						<b>Last Updated: June 7</b>
+					</span>
+				</span>
+				<span>
+					<sup>
+						<span><b>th</b></span>
+					</sup>
+				</span>
+				<span>
+					<span><b>,2021</b></span>
+				</span>
+			</p>
+			<p>
+				<span>
+					<span> Our community guidelines are meant to explain what is and isn’t allowed on Ternobo, and ensure that everyone has a good experience. If you come across a message that appears to break these rules, please report it to us. We may take a number of steps, including issuing a warning, removing the content, or removing the accounts. </span>
+				</span>
+			</p>
+			<p>
+				<span>Ternobo is currently in early beta and we’re learning a lot each day. As we open up to a broader users, we expect this document to evolve. If you have any feedback or suggestions, we’d love to hear from you.</span>
+			</p>
+			<p>
+				<span> The overwhelming majority of people use Ternobo responsibly, so these guidelines may seem obvious. Still, we want to be clear about the expectations for our users. Every user of Ternobo should feel like their voice can be heard, but not at the expense of someone else. </span>
+			</p>
+			<p>
+				<span>
+					<span style="font-size: large"><b>Here are some rules for using Ternobo:</b></span>
+				</span>
+			</p>
+			<ol dir="ltr">
+				<li>
+					<p>
+						<span><b>You must use a real name or identity on the service</b></span
+						><span>.</span>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span><b>You may not create any account for legal entities</b></span
+						><span>. We don't have any other type of accounts for businesses and fan pages yet, so don't create any account for these purposes.</span>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span><b>You must be at least 15 years of age </b></span><span>to use Ternobo (or older if required by your country).</span>
+					</p>
+				</li>
+			</ol>
+			<p>
+				<span>
+					<span style="font-size: large"><b>Here are some rules for interacting with others:</b></span>
+				</span>
+			</p>
+			<ol dir="ltr" start="4">
+				<li>
+					<p>
+						<a name="_Hlk74153600"></a> <span><b>Do not organize, participate in, or encourage harassment of others</b></span>
+						<span>. Disagreements happen and are normal, but continuous, repetitive, or severe negative comments may cross the line into harassment and are not okay.</span>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span><b>Do not organize, promote, or coordinate around hate speech</b></span>
+						<span>. It’s unacceptable to attack a person or a community based on attributes such as their race, ethnicity, national origin, sex, gender, sexual orientation, religious affiliation, or disabilities.</span>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span><b>Do not make threats of violence or threaten to harm others</b></span>
+						<span>. This includes indirect threats, as well as sharing or threatening to share someone’s private personal information (also known as doxxing).</span>
+					</p>
+				</li>
+			</ol>
+			<p>
+				<span>
+					<span style="font-size: large"><b>Here are some rules for content on Ternobo:</b></span>
+				</span>
+			</p>
+			<ol dir="ltr" start="7">
+				<li>
+					<p>
+						<span><b>Do not share any NSFW content in Ternobo</b></span
+						><span>.</span>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span><b>You may not sexualize minors in any way</b></span>
+						<span> . This includes sharing content or links which depict minors in a pornographic, sexually suggestive, or violent manner, and includes illustrated or digitally altered pornography that depicts minors (such as lolicon, shotacon, or cub). We report illegal content to the <a href="https://www.missingkids.org/gethelpnow/cybertipline">National Center for Missing and Exploited Children</a>. </span>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span><b>You may not share sexually explicit content of other people with/without their consent</b></span>
+						<span>, or share or promote sharing of non-consensual intimate imagery (also known as revenge porn) in an attempt to shame or degrade someone.</span>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span><b>You may not share content that glorifies or promotes suicide or self-harm</b></span
+						><span>, including any encouragement to others to cut themselves, or embrace eating disorders such as anorexia or bulimia.</span>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span><b>You may not share images of sadistic gore or animal cruelty</b></span
+						><span>.</span>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span><b>You may not use Ternobo for the organization, promotion, or support of violent extremism</b></span
+						><span>. We don't let anybody to invite or promote any violent things in Ternobo.</span>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span><b>You may not share a post to sell or facilitate the sales of prohibited or potentially dangerous goods</b></span
+						><span>. This includes firearms, ammunition, drugs, and controlled substances.</span>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span><b>You may not promote, distribute, or provide access to content involving the hacking, cracking, or distribution of pirated software or stolen accounts</b></span
+						><span>.</span>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span>In general, </span><span><b>you should not promote, encourage or engage in any illegal behavior</b></span
+						><span>. This is very likely to get you kicked off Ternobo, and may get you reported to law enforcement.</span>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span><b>Do not share viruses or malware</b></span
+						><span>, attempt to phish others, or hack or DDoS them.</span>
+					</p>
+				</li>
+			</ol>
+			<p>
+				<span>
+					<span style="font-size: large"><b>Finally, we ask that you respect Ternobo itself:</b></span>
+				</span>
+			</p>
+			<ol dir="ltr" start="17">
+				<li>
+					<p>
+						<span><b>You may not sell your account</b></span
+						><span>.</span>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span><b>You may not sell your invite links</b></span
+						><span>. It's not acceptable to sell or auction your invite links, we will ban both seller and buyer accounts.</span>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span><b>You may not use self-bots or user-bots to access Ternobo</b></span
+						><span>.</span>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span><b>You may not share content that violates anyone's intellectual property or other rights</b></span
+						><span>.</span>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span><b>You may not spam Ternobo</b></span>
+						<span> , especially our Customer Support and Trust &amp; Safety teams. Making false and malicious reports, sending multiple reports about the same issue, or asking a group of users to all report the same content may lead to action being taken on your account. </span>
+					</p>
+				</li>
+			</ol>
+			<p>
+				<span>
+					<span style="font-size: large"><b>Contact</b></span>
+				</span>
+			</p>
+			<p>
+				<span>We take these Community Guidelines seriously and ask that you follow them in the spirit in which they are intended. If you see any activity that violates these guidelines, you can report it to us by using Report option.</span>
+			</p>
+			<p>
+				<span>We further recognize that these guidelines must continually evolve, so you can do contact us with questions, suggestions, or comments in our Discord server in <a href="https://discord.gg/ApQzyxsKQG">here</a>.</span>
+			</p>
+			<p><span>Thank you for reading, and for helping us build an amazing community!</span></p>
+			<p><span>Team Ternobo</span></p>
 		</div>
 	</b-modal>
 </template>
