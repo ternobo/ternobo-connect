@@ -18,7 +18,7 @@ class ConnectionsController extends Controller
 
     public function index(Request $request)
     {
-        SEOTools::setTitle("شبکه من");
+        SEOTools::setTitle(__("seo.my-connections"));
         $user = Auth::user();
         $accpeted_connections = Connection::query()
             ->distinct()

@@ -29,7 +29,7 @@ class IndexController extends Controller
 
     public function index()
     {
-        SEOTools::setTitle('شبکه اجتماعی متخصصین');
+        SEOTools::setTitle(__("seo.ternobo"));
         $articles = Post::query()->where("type", "article")->with("page")->latest()->limit(10)->get();
         return TernoboWire::render("Welcome", ["articles" => $articles]);
     }

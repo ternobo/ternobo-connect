@@ -25,7 +25,7 @@ class ArticlesController extends Controller
     public function create()
     {
         if (Auth::check()) {
-            SEOTools::setTitle("نوشتن مقاله جدید");
+            SEOTools::setTitle(__("seo.new-article"));
             return TernoboWire::render("Articles/NewArticle");
         } else {
             return redirect("/");
@@ -191,7 +191,7 @@ class ArticlesController extends Controller
                 ->with("category")
                 ->findOrFail($article);
             if ($article->type === "article" && $article->user_id === Auth::user()->id) {
-                SEOTools::setTitle("ویرایش مقاله $article->title");
+                SEOTools::setTitle(__("seo.edit-article", ['name' => $article->title]));
 
                 return TernoboWire::render("Articles/NewArticle", array("article" => $article));
             } else {

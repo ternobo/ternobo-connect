@@ -91,7 +91,7 @@
 				<li>
 					<p>
 						<span><b>You may not sexualize minors in any way</b></span>
-						<span> . This includes sharing content or links which depict minors in a pornographic, sexually suggestive, or violent manner, and includes illustrated or digitally altered pornography that depicts minors (such as lolicon, shotacon, or cub). We report illegal content to the <a href="https://www.missingkids.org/gethelpnow/cybertipline">National Center for Missing and Exploited Children</a>. </span>
+						<span> . This includes sharing content or links which depict minors in a pornographic, sexually suggestive, or violent manner, and includes illustrated or digitally altered pornography that depicts minors (such as lolicon, shotacon, or cub). We report illegal content to the <a href="https://www.missingkids.org/gethelpnow/cybertipline" class="text-action">National Center for Missing and Exploited Children</a>. </span>
 					</p>
 				</li>
 				<li>
@@ -189,7 +189,7 @@
 				<span>We take these Community Guidelines seriously and ask that you follow them in the spirit in which they are intended. If you see any activity that violates these guidelines, you can report it to us by using Report option.</span>
 			</p>
 			<p>
-				<span>We further recognize that these guidelines must continually evolve, so you can do contact us with questions, suggestions, or comments in our Discord server in <a href="https://discord.gg/ApQzyxsKQG">here</a>.</span>
+				<span>We further recognize that these guidelines must continually evolve, so you can do contact us with questions, suggestions, or comments in our Discord server in <a href="https://discord.gg/ApQzyxsKQG" class="text-action">here</a>.</span>
 			</p>
 			<p><span>Thank you for reading, and for helping us build an amazing community!</span></p>
 			<p><span>Team Ternobo</span></p>

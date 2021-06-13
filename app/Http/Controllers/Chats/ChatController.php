@@ -22,7 +22,7 @@ class ChatController extends Controller
 
     public function index()
     {
-        SEOTools::setTitle("گفتگو");
+        SEOTools::setTitle(__("seo.chat"));
         return TernoboWire::render("Chats");
     }
 

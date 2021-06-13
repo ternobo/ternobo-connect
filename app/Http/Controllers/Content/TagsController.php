@@ -15,7 +15,7 @@ class TagsController extends Controller
 
     public function index($name)
     {
-        SEOTools::setTitle("برچسب " . $name);
+        SEOTools::setTitle(__("seo.tag", ['tag' => $name]));
         SEOTools::setDescription("مطالب منتشر شده با برچسب " . $name);
         SEOTools::opengraph()->setUrl(url("/tags/" . $name));
         SEOTools::setCanonical(url("/tags/" . $name));

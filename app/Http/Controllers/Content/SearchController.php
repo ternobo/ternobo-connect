@@ -56,8 +56,8 @@ class SearchController extends Controller
                 ->orderBy("score")
                 ->distinct("posts.id");
 
-            SEOTools::setTitle("جستجو برای " . $request->q);
-            SEOTools::setDescription("نتایج جستجو برای $request->q در ترنوبو");
+            SEOTools::setTitle(__("seo.search-for", ['name' => $request->q]));
+            SEOTools::setDescription(__("seo.search-results-for", ['name' => $request->q]));
             SEOTools::setCanonical(\Illuminate\Support\Facades\URL::current() . "?q=$request->q&type=content");
             $results = $posts->paginate(20);
             $results->appends(['q' => $request->q, "type" => "content"]);
@@ -75,8 +75,8 @@ class SearchController extends Controller
                     return $query->where("active", true);
                 })
                 ->paginate(20);
-            SEOTools::setTitle("جستجو برای " . $request->q);
-            SEOTools::setDescription("نتایج جستجو برای $request->q در ترنوبو");
+            SEOTools::setTitle(__("seo.search-for", ['name' => $request->q]));
+            SEOTools::setDescription(__("seo.search-results-for", ['name' => $request->q]));
             SEOTools::setCanonical(\Illuminate\Support\Facades\URL::current() . "?q=$request->q");
             foreach ($users as $user) {
                 SEOTools::metatags()->addKeyword($user->name);

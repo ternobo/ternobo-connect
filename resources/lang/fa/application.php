@@ -54,7 +54,8 @@ return [
     'upload' => "بارگزاری",
     'enter-your-picture' => "تصویر خود را وارد کنید",
     'more' => "دیگر",
-    'discord' => "دیسکورد",
-    'trello' => "ترلو",
+    'discord' => "Discord",
+    'trello' => "Trello",
     'submit' => "ثبت",
+    'deactivate' => "غیرفعال کردن",
 ];

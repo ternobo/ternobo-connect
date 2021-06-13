@@ -36,8 +36,10 @@ export default {
 			let utils = {
 				special: [8, 16, 17, 18, 46],
 				navigational: [38, 37, 39, 40],
-				isSpecial(e) {
-					return this.special.includes(e.keyCode);
+				isSpecial(event) {
+					let result = this.special.includes(event.keyCode) || (event.ctrlKey && [90, 83, 65].includes(event.keyCode));
+					console.log(result);
+					return result;
 				},
 				isNavigational(e) {
 					return this.navigational.includes(e.keyCode);
@@ -53,7 +55,6 @@ export default {
 			if (selection) {
 				hasSelection = !!selection.toString();
 			}
-
 			if (isSpecial || isNavigational) {
 				return true;
 			} else if (len >= this.max && !hasSelection) {

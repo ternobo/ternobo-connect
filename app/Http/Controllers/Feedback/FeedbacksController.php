@@ -45,7 +45,7 @@ class FeedbacksController extends Controller
             $status = $request->status;
         }
 
-        SEOTools::setTitle("بازخوردها");
+        SEOTools::setTitle(__("seo.feedbacks"));
         $feedbacks = null;
         if ($mostFav) {
             $feedbacks = Feedback::query()->with(["user"])
@@ -68,7 +68,7 @@ class FeedbacksController extends Controller
             $mostFav = true;
         }
 
-        SEOTools::setTitle("بازخوردها");
+        SEOTools::setTitle(__("seo.feedbacks"));
         $feedbacks = null;
 
         $feedbacks = Feedback::query()->with(["user", "votes"])

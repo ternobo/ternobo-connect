@@ -3,7 +3,7 @@
 		<CookiesModal :show.sync="showCookiesModal"></CookiesModal>
 		<LawsModal :show.sync="showLawsModal"></LawsModal>
 
-		<h2 class="font-18 font-demibold mb-4">{{ __.get("settings.information-security") }}</h2>
+		<h2 class="font-18 font-demibold mb-4">{{ __.get("settings.about-ternobo") }}</h2>
 		<div class="card">
 			<div class="settings-card-body">
 				<div class="setting-action">
@@ -15,10 +15,21 @@
 				</div>
 				<div class="setting-action">
 					<div class="name">
-						<i class="material-icons-outlined me-2">build_circle</i>
-						<span>{{ __.get("settings.cookies") }}</span>
+						<i class="material-icons-outlined me-2">
+							<img src="/images/socials/discord.png" />
+						</i>
+						<span>{{ __.get("application.discord") }}</span>
 					</div>
-					<i class="btn setting-btn material-icons-outlined ms-3" @click="showCookiesModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+					<a class="btn setting-btn material-icons-outlined ms-3" href="https://discord.gg/unXsnGHsNj" target="_blank">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</a>
+				</div>
+				<div class="setting-action">
+					<div class="name">
+						<i class="material-icons-outlined me-2">
+							<img src="/images/socials/trello.svg" width="24" />
+						</i>
+						<span>{{ __.get("application.trello") }}</span>
+					</div>
+					<a class="btn setting-btn material-icons-outlined ms-3" href="https://trello.com/b/Vku6XmjN/ternobo" target="_blank">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</a>
 				</div>
 				<!-- <div class="setting-action">
 					<div class="name">

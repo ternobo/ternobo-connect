@@ -29,6 +29,8 @@
 			<p class="mt-4">
 				{{ __.get("settings.ts-des-11") }}
 			</p>
+
+			<button class="btn btn-transparent p-0 hover-danger mt-3" @click="deactivate"><i class="material-icons-outlined">power_settings_new</i> {{ __.get("application.deactivate") }}</button>
 		</div>
 		<div class="d-flex flex-column align-items-end" v-else>
 			<p>
@@ -149,8 +151,11 @@ export default {
 				}
 			});
 		},
-		onEnable(codes) {},
-		deactive() {
+		onEnable(codes) {
+			this.recoveryCodes = codes;
+			this.enabled = true;
+		},
+		deactivate() {
 			axios.post("/two-factor-auth/deactive");
 			this.cancel();
 		},

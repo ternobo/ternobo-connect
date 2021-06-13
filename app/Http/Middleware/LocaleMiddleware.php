@@ -21,6 +21,7 @@ class LocaleMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+
         if (Cookie::get("website_locale") != null) {
             App::setLocale(Cookie::get("website_locale"));
         } else {
@@ -37,7 +38,6 @@ class LocaleMiddleware
             ];
         }));
         View::share("trans", $trans);
-
         return $next($request);
     }
 }

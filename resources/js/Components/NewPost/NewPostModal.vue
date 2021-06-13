@@ -177,7 +177,7 @@ export default {
 							this.category = undefined;
 							this.canDonate = false;
 							this.deletedSlides = [];
-							this.toast(__.get("published-success"), "check", "text-success");
+							this.toast(__.get("messages.published-success"), "check", "text-success");
 						}
 					} else {
 						this.handleError(response.data.errors);

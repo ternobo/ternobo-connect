@@ -10,11 +10,11 @@ return [
          * The default configurations to be used by the meta generator.
          */
         'defaults' => [
-            'title' => "ترنوبو", // set false to total remove
+            'title' => "Ternobo", // set false to total remove
             'titleBefore' => false, // Put defaults.title before page title, like 'It's Over 9000! - Dashboard'
             'description' => '', // set false to total remove
             'separator' => ' | ',
-            'keywords' => ["ternobo", "شبکه اجتماعی", "ترنوبو", 'رزومه آنلاین'],
+            'keywords' => ["ternobo", 'social media'],
             'canonical' => null, // Set null for using Url::current(), set false to total remove
             'robots' => 'all', // Set to 'all', 'none' or any combination of index/noindex and follow/nofollow
         ],
@@ -37,7 +37,7 @@ return [
          * The default configurations to be used by the opengraph generator.
          */
         'defaults' => [
-            'title' => 'ترنوبو', // set false to total remove
+            'title' => "Ternobo", // set false to total remove
             'description' => '', // set false to total remove
             'url' => null, // Set null for using Url::current(), set false to total remove
             'type' => "Social Media",
@@ -59,7 +59,7 @@ return [
          * The default configurations to be used by the json-ld generator.
          */
         'defaults' => [
-            'title' => 'ترنوبو', // set false to total remove
+            'title' => "Ternobo", // set false to total remove
             'description' => '', // set false to total remove
             'url' => null, // Set null for using Url::current(), set false to total remove
             'type' => 'WebPage',

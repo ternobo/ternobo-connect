@@ -30,7 +30,7 @@
 					<a class="text-muted hover-dark font-14 me-3" @click="showLaws = true">{{ __.get("application.comuunity-guidelines") }}</a>
 					<a class="text-muted hover-dark font-14 me-3" href="https://ternobo.info" target="_blank">{{ __.get("application.about-us") }}</a>
 					<a class="text-muted hover-dark font-14 me-3" href="https://discord.gg/unXsnGHsNj" target="_blank">{{ __.get("application.discord") }}</a>
-					<a class="text-muted hover-dark font-14" href="https://discord.gg/unXsnGHsNj" target="_blank">{{ __.get("application.trello") }}</a>
+					<a class="text-muted hover-dark font-14" href="https://trello.com/b/Vku6XmjN/ternobo" target="_blank">{{ __.get("application.trello") }}</a>
 				</div>
 				<div class="copyright-text d-flex align-items-center justify-content-center" style="height: 16px">
 					<img :src="shared.direction == 'rtl' ? '/images/farsi-logo.svg' : '/images/logo-en-dark.svg'" class="mx-1" height="16" />
