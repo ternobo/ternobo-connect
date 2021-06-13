@@ -28,7 +28,6 @@
 			<div class="app-footer">
 				<div class="sidemenu-links d-flex flex-wrap justify-content-center align-items-center mb-2">
 					<a class="text-muted hover-dark font-14 me-3" @click="showLaws = true">{{ __.get("application.comuunity-guidelines") }}</a>
-					<a class="text-muted hover-dark font-14 me-3" href="https://ternobo.info" target="_blank">{{ __.get("application.about-us") }}</a>
 					<a class="text-muted hover-dark font-14 me-3" href="https://discord.gg/unXsnGHsNj" target="_blank">{{ __.get("application.discord") }}</a>
 					<a class="text-muted hover-dark font-14" href="https://trello.com/b/Vku6XmjN/ternobo" target="_blank">{{ __.get("application.trello") }}</a>
 				</div>

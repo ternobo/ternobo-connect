@@ -5,30 +5,22 @@
 </template>
 
 <script>
+import Verification from "./Verification.vue";
 export default {
-	props: {
-		phone: {
-			type: String,
-			default: undefined,
-			required: true,
-		},
-	},
-	created() {
+	components: { Verification },
+	mounted() {
 		axios.post("/two-factor-auth/setup", {
 			type: "phone",
 		});
 	},
-	mounted() {
-		this.countDownTimer();
-	},
 	methods: {
-		verify() {
-			if (this.code != null && this.code.length > 0) {
+		verify(code) {
+			if (code != null && code.length > 0) {
 				this.loading = true;
 				axios
 					.post("/two-factor-auth/enable", {
 						type: "phone",
-						code: this.code,
+						code: code,
 					})
 					.then((response) => {
 						const data = response.data;

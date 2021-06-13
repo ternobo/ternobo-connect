@@ -4,18 +4,17 @@
 			<p>{{ __.get("settings.ts-des-6") }}</p>
 			<div class="d-flex align-items-center">
 				<otp-input input-class="w-100" class="material--sm mx-1 text-center" @completed="$emit('action', code)" v-model="code" :numInputs="6" />
-				<i class="material-icons-outlined" :class="{ 'text-danger': invalidCode }">verified_user</i>
 			</div>
-			<div class="mt-3" v-if="type == 'phone'">
+			<div class="mt-3" style="width: 170px" v-if="type == 'phone'">
 				<span
-					class="clickable font-14"
+					class="clickable d-flex justify-content-between align-items-center font-14"
 					:class="{
 						'disabled text-muted': countdown > 0,
 						'text-action': !(countdown > 0),
 					}"
 					@click="resend"
 				>
-					{{ __.get() }} {{ countdown > 0 ? "(" + countdown + ")" : "" }}
+					<span>{{ __.get("settings.resend") }}</span> <span>{{ countdown > 0 ? "(" + countdown + ")" : "" }}</span>
 				</span>
 			</div>
 		</div>
@@ -30,6 +29,9 @@ import OtpInput from "../../OtpInput/OtpInput.vue";
 export default {
 	components: { OtpInput },
 	props: ["type", "invalidCode", "loading"],
+	mounted() {
+		this.countDownTimer();
+	},
 	methods: {
 		resend() {
 			if (this.countdown <= 0) {

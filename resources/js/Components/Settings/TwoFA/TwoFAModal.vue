@@ -157,7 +157,9 @@ export default {
 		},
 		deactivate() {
 			axios.post("/two-factor-auth/deactive");
-			this.cancel();
+			this.enabled = false;
+			this.chooseWay = false;
+			this.type = null;
 		},
 		downloadCodes() {
 			var csvStr = this.recoveryCodes.join("\n");
