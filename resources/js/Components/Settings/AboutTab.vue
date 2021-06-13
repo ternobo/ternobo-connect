@@ -9,14 +9,14 @@
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined me-2">gavel</i>
-						<span>{{ __.get("application.law") }}</span>
+						<span>{{ __.get("application.comuunity-guidelines") }}</span>
 					</div>
 					<i class="btn setting-btn material-icons-outlined ms-3" @click="showLawsModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 				</div>
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined me-2">build_circle</i>
-						<span>{{ __.get("cookies") }}</span>
+						<span>{{ __.get("settings.cookies") }}</span>
 					</div>
 					<i class="btn setting-btn material-icons-outlined ms-3" @click="showCookiesModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 				</div>

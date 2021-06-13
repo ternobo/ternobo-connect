@@ -7,9 +7,7 @@
 					<span>{{ __.get("settings.account") }}</span>
 				</div>
 				<div class="settings-item" :class="{ active: tab == 'about' }" @click="tab = 'about'">
-					<i class="material-icons-outlined me-1">
-						<img src="/images/logo-grey.svg" class="thelogo" style="width: 24px" />
-					</i>
+					<i class="ternoboiconslogo-grey me-1 font-24"></i>
 					<span>{{ __.get("settings.about-ternobo") }}</span>
 				</div>
 			</div>
