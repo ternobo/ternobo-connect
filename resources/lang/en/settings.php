@@ -48,6 +48,7 @@ return [
     'ts-des-7' => "We'll ask you for a code in addition to your password when you log in on a device we don't recognize.",
     'ts-des-8' => "Enter the 6-digit code we sent to your phone to finish setting up two-step verification.",
     'ts-des-9' => "We'll text a code to this number any time you try to log in on a device we don't recognize.",
+    'click-copy' => "Click to copy",
     'ts-des-10' => "If you lose your phone or can't receive a code via text message or an authentication app, you can use these codes to get back into your account. Save them in a safe place.",
     'ts-des-11' => "Each code can only be used once. You can also get new codes if you're worried this set has been stolen, or if you've already used most of them.",
     "click-to-copy" => "Click to Copy",
