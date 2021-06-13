@@ -1,5 +1,5 @@
 <template>
-	<b-modal v-model="showModal" hide-footer title="حمایت از این محتوا" body-class="donation-modal" size="md" :centered="true">
+	<b-modal v-model="showModal" hide-footer :title="__.get('posts.tip-this-post')" body-class="donation-modal" size="md" :centered="true">
 		<div v-if="showDonate">
 			<div class="d-flex justify-content-between donate-modal-header">
 				<div class="d-flex align-items-center">
@@ -10,12 +10,11 @@
 					<div class="currency-selector">
 						<div>
 							<img src="/images/iran-flag.png" alt="iran" width="24" />
-							<span class="ms-2">{{ __.get("currencies.IRR") }}</span>
+							<span class="ms-2">{{ __.get("currencies.IRR-n") }}</span>
 						</div>
 					</div>
 					<div class="d-flex justify-content-between payment-way">
-						<span>درگاه: </span>
-
+						<span>{{ __.get("tips.gateway") }} </span>
 						<img src="/images/zarinpal-pay-logo.png" alt="زرین‌پال" width="73" />
 					</div>
 				</div>
@@ -23,19 +22,19 @@
 
 			<div class="donate-modal-body">
 				<div>
-					<label v-if="amount.length > 0 && payAmount < 1000 && !focus" class="text-danger font-12">مبلغ دلخواه کافی نیست</label>
+					<label v-if="amount.length > 0 && payAmount < 1000 && !focus" class="text-danger font-12">{{ __.get("messages.donation-amount-not-enough") }}</label>
 					<input v-numericOnly v-model="amount" @focus="focus = true" @blur="focus = false" class="form-control text-input donate-amount-input" placeholder="مبلغ دلخواه (حداقل ۱,۰۰۰ تومان)" />
 				</div>
 				<div class="d-flex">
-					<div class="donate-amount-badge" :class="{ active: amount == 100000 }" @click="amount = 100000">100,000 تومان</div>
-					<div class="donate-amount-badge" :class="{ active: amount == 50000 }" @click="amount = 50000">50,000 تومان</div>
-					<div class="donate-amount-badge" :class="{ active: amount == 20000 }" @click="amount = 20000">20,000 تومان</div>
+					<div class="donate-amount-badge" :class="{ active: amount == 100000 }" @click="amount = 100000">100,000 {{ __.get("currencies.IRR") }}</div>
+					<div class="donate-amount-badge" :class="{ active: amount == 50000 }" @click="amount = 50000">50,000 {{ __.get("currencies.IRR") }}</div>
+					<div class="donate-amount-badge" :class="{ active: amount == 20000 }" @click="amount = 20000">20,000 {{ __.get("currencies.IRR") }}</div>
 				</div>
 				<div class="d-flex align-items-center pt-3 mt-3">
 					<div class="donate-payanonymouse me-3">
-						<checkbox v-model="anonymous" class="text-superlight m-0 d-flex light">حمایت به صورت ناشناس</checkbox>
+						<checkbox v-model="anonymous" class="text-superlight m-0 d-flex light">{{ __.get("tips.support-anonymously") }}</checkbox>
 					</div>
-					<loading-button :loading="loading" @click.native="pay" :disabled="payAmount < 1000 || loading" class="btn btn-primary" style="width: 196px">پرداخت</loading-button>
+					<loading-button :loading="loading" @click.native="pay" :disabled="payAmount < 1000 || loading" class="btn btn-primary" style="width: 196px">{{ __.get("tips.pay") }}</loading-button>
 				</div>
 			</div>
 		</div>

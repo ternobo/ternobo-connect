@@ -22,6 +22,10 @@
 
 		<div class="donation-detail-content">
 			<div class="donation-detail-item">
+				<span class="text-grey font-16 font-demibold">{{ __.get("tips.currency-name") }}</span>
+				<span class="text-grey font-16 font-demibold">{{ __.get("currencies.IRR-n") }}</span>
+			</div>
+			<div class="donation-detail-item">
 				<span class="text-grey font-16 font-demibold">{{ __.get("tips.date") }}</span>
 				<span class="text-grey font-16 font-demibold">{{ date }}</span>
 			</div>

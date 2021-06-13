@@ -24,4 +24,5 @@ return [
     'merchant-id' => "Merchant ID",
     'activate' => "Activate",
     'active-gateway' => "Active Gateway",
+    'pay' => "Pay",
 ];
