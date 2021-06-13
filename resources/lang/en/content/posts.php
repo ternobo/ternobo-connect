@@ -5,7 +5,7 @@ return [
     'category' => "Category|Categories",
     'create-category' => "Enter category name",
     'edit-categories' => "Edit Categories",
-    'post-ph' => "If you have a desire to write, in yourself, there must be three things in you. Cognitive, Artistic and Magic (Gibran Khalil Gibran)",
+    'post-ph' => "What's on your mind, :fname?",
     'heading' => "Title",
     'text' => "Text",
     'media' => "Media",

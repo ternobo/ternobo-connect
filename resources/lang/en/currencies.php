@@ -10,13 +10,14 @@ return [
     'HKD' => "HK$", //Hong Kong Dollar
     'HUF' => "ft", //Hungarian Forint
     'JPY' => "¥", //Japanese Yen
-    'IRR' => "تومان", //Iranian Toman
+    'IRR' => "Toman", //Iranian Toman
     'MYR' => "RM", //Malaysian Ringgit
     'MXN' => "Mex$", //Mexican Peso
     'TWD' => "NT$", //New Taiwan Dollar
     'NZD' => "NZ$", //New Zealand Dollar
     'NOK' => "kr", //Norwegian Krone
     
+    'currency-name' => "Currency Name:",
     'AUD-n' => "Australian Dollar",
     'BRL-n' => "Brazilian Real",
     'CAD-n' => "Canadian Dollar",
