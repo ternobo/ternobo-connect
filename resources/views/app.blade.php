@@ -12,6 +12,8 @@
 
     <link rel="stylesheet" href="/ternobo-socials/style.css">
     <link rel="stylesheet" href="/ternobo-telegram/style.css">
+    <link rel="stylesheet" href="/ternoboicons/style.css">
+
     {!! SEO::generate() !!}
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">

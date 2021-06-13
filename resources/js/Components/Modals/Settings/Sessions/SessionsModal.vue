@@ -1,5 +1,5 @@
 <template>
-	<b-modal v-model="showModal" hide-footer @show="onShow" title="دستگاه‌های متصل" size="md" :centered="true">
+	<b-modal v-model="showModal" hide-footer @show="onShow" :title="__.get('settings.active-session')" size="md" :centered="true">
 		<div v-if="loading">
 			<skeleton :count="3" :styles="{ marginBottom: '12px' }" height="24px"></skeleton>
 		</div>

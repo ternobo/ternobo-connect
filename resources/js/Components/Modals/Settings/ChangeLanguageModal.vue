@@ -1,5 +1,5 @@
 <template>
-	<b-modal v-model="showModal" hide-footer title="زبان نمایش" size="md" :centered="true">
+	<b-modal v-model="showModal" hide-footer :title="__.get('settings.website-lang')" size="md" :centered="true">
 		<div class="d-flex">
 			<a :href="appDirection != 'ltr' ? '/set-language?locale=en' : null" class="mx-2 d-flex align-items-center" :class="{ 'text-dark badge-bg-container': appDirection == 'ltr' }">
 				<img src="/emoji/72x72/1f1fa-1f1f8.png" class="me-1" style="width: 24px; height: 24px" />

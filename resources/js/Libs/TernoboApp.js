@@ -207,7 +207,7 @@ TernoboApp.install = function (Vue, options) {
                 return this.$bvModal
                     .msgBoxConfirm(content, {
                         size: "sm",
-                        okTitle: __.get("settings.confirm"),
+                        okTitle: __.get("application.confirm"),
                         cancelTitle: __.get("application.cancel"),
                         hideHeaderClose: false,
                         cancelVariant: "transparent text-grey",
@@ -222,7 +222,7 @@ TernoboApp.install = function (Vue, options) {
                 return this.$bvModal
                     .msgBoxConfirm(content, {
                         size: "sm",
-                        okTitle: __.get("settings.confirm"),
+                        okTitle: __.get("application.confirm"),
                         cancelTitle: __.get("application.cancel"),
                         hideHeaderClose: false,
                         cancelVariant: "transparent text-grey",

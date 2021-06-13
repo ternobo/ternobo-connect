@@ -212,10 +212,10 @@ export default {
 						if (!response.data.result) {
 							this.canDonate = false;
 							this.$bvModal
-								.msgBoxConfirm(this.__.get("tips.active-tip-error"), {
+								.msgBoxConfirm(this.__.get("messages.active-tip-error"), {
 									title: this.__.get("tips.active-gateway"),
 									cancelVariant: "transparent text-muted",
-									cancelTitle: this.__.get("settings.skip"),
+									cancelTitle: this.__.get("application.skip"),
 									okTitle: this.__.get("tips.activate"),
 									headerClass: "category-select-modal",
 									centered: true,

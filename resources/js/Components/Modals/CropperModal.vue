@@ -4,7 +4,7 @@
 			<cropper class="cropper" check-orientation default-boundaries="fill" imageRestriction="stencil" ref="cropper" :autoZoom="true" priority="coordinates" :moveImage="{ touch: true, mouse: true }" :src="image" :stencil-props="{ aspectRatio: aspectRatio }"></cropper>
 		</div>
 		<div class="w-100 align-items-center justify-content-end pt-3 px-2 d-flex">
-			<button class="btn btn-primary" @click="cropImage">{{ __.get("settings.confirm") }}</button>
+			<button class="btn btn-primary" @click="cropImage">{{ __.get("application.confirm") }}</button>
 		</div>
 	</b-modal>
 </template>

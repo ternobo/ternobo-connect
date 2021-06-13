@@ -1,32 +1,35 @@
 <template>
 	<div class="d-flex flex-column">
-		<strong> تایید هویت دو مرحله‌ای توسط اپلیکیشن </strong>
+		<div v-if="!verification">
+			<div class="d-flex flex-column align-items-center">
+				<div class="mb-3">
+					<img :src="qr" style="max-width: 130px" v-if="qr != null" />
+					<skeleton :height="'130px'" :width="'130px'" v-else></skeleton>
+				</div>
 
-		<ul class="mt-3 p-0">
-			<li>اپلیکیشن <span class="text-action">تایید هویت</span>، یا یک اپلیکیشن تایید هویت به انتخاب خودتان نصب کنید.</li>
-			<li>اپلیکیشن را اجرا و سپس QRCode زیر اسکن کنید</li>
-		</ul>
-
-		<div class="w-100 my-3 d-flex justify-content-center">
-			<img :src="qr" style="max-width: 130px" v-if="qr != null" />
-			<skeleton :height="'130px'" :width="'130px'" v-else></skeleton>
-		</div>
-
-		<div class="d-flex justify-content-between align-items-end my-4">
-			<div>
-				<label class="mt-4 mb-3">کد نمایان شده را اینجا وارد کنید</label>
-				<material-text-field placeholder="کد را وارد کنید" v-model="code"></material-text-field>
+				<p>
+					{{ __.get("settings.ts-des-3") }}
+				</p>
+				<p>
+					{{ __.get("settings.ts-des-4") }}
+				</p>
+				<p>
+					{{ __.get("settings.ts-des-5") }}
+				</p>
 			</div>
-			<div class="d-flex">
-				<button class="btn text-grey button-transparent" @click="$emit('cancel')">لغو</button>
-				<loading-button class="btn btn-primary" :disabled="code.length < 1" :loading="loading" @click.native="verify">تایید</loading-button>
+
+			<div class="d-flex justify-content-end align-items-end">
+				<button class="btn btn-primary mt-4" @click="verification = true">{{ __.get("application.next") }}</button>
 			</div>
 		</div>
+		<verification v-else @action="verify" :loading="loading" type="app"></verification>
 	</div>
 </template>
 
 <script>
+import Verification from "./Verification.vue";
 export default {
+	components: { Verification },
 	created() {
 		axios
 			.post("/two-factor-auth/setup", {
@@ -37,13 +40,13 @@ export default {
 			});
 	},
 	methods: {
-		verify() {
-			if (this.code != null && this.code.length > 0) {
+		verify(code) {
+			if (code != null && code.length > 0) {
 				this.loading = true;
 				axios
 					.post("/two-factor-auth/enable", {
 						type: "app",
-						code: this.code,
+						code: code,
 					})
 					.then((response) => {
 						const data = response.data;
@@ -62,7 +65,7 @@ export default {
 	data() {
 		return {
 			loading: false,
-
+			verification: false,
 			code: "",
 			qr: null,
 		};

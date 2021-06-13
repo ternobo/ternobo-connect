@@ -8,7 +8,7 @@
 				<button class="btn category-badge px-2 py-1" @click="copy"><i class="material-icons-outlined font-20">file_copy</i> {{ __.get("application.copy") }}</button>
 			</div>
 			<div class="d-flex flex-column">
-				<span class="font-demibold text-dark mb-4"><i class="material-icons-outlined">visibility</i> {{ __.get("application.previe") }} </span>
+				<span class="font-demibold text-dark mb-4"><i class="material-icons-outlined">visibility</i> {{ __.get("application.preview") }} </span>
 
 				<div ref="iframeContainer" v-html="code"></div>
 			</div>
@@ -23,7 +23,7 @@ export default {
 		copy() {
 			this.$refs.textarea.select();
 			document.execCommand("copy");
-			this.toast(__.get("messages.copied"));
+			this.toast(__.get("messages.copied"), "check", "text-success");
 		},
 	},
 	watch: {

@@ -101,7 +101,8 @@ class PageController extends Controller
 
         if (!$hasAbout) {
             $location = "activities";
-        } elseif (!$hasActivity) {
+        }
+        if (!$hasActivity) {
             $location = "contact";
         }
 

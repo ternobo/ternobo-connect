@@ -6,7 +6,7 @@
 		<PasswordModal :show.sync="showPasswordMdal"></PasswordModal>
 		<ChangeLanguageModal :show.sync="showLangModal"></ChangeLanguageModal>
 		<DeactiveModal :show.sync="showDeactiveModal"></DeactiveModal>
-		<TwoFAModal :phone="phone" :email="email" :show.sync="showTwoFAModal"></TwoFAModal>
+		<TwoFAModal :status="two_factor_verification" :phone="phone" :email="email" :show.sync="showTwoFAModal"></TwoFAModal>
 		<SessionsModal :show.sync="showActiveSessions"></SessionsModal>
 		<h2 class="font-18 font-demibold mb-4">{{ __.get("settings.login-and-security") }}</h2>
 		<div class="card mb-2">
@@ -83,20 +83,20 @@
 					</div>
 					<div class="d-flex align-items-center">
 						<div class="content">
-							<span class="font-16 h-auto" style="padding: 12px" :class="{ 'badge-danger': !two_factor_verification, 'badge-success': two_factor_verification }">{{ two_factor_verification ? "فعال" : "غیرفعال" }}</span>
+							<span class="font-16 h-auto" style="padding: 12px" :class="{ 'badge-danger': !two_factor_verification, 'badge-success': two_factor_verification }">{{ two_factor_verification ? __.get("application.active") : __.get("application.inactive") }}</span>
 						</div>
 						<i class="btn setting-btn material-icons-outlined ms-3" @click="showTwoFAModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 					</div>
 				</div>
 			</div>
 		</div>
-		<h2 class="font-18 font-demibold my-4 pt-3">اطلاعات و دسترسی‌ها</h2>
+		<h2 class="font-18 font-demibold my-4 pt-3">{{ __.get("settings.information-security") }}</h2>
 		<div class="card">
 			<div class="settings-card-body">
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined me-2">translate</i>
-						<span>زبان نمایش</span>
+						<span>{{ __.get("settings.website-lang") }}</span>
 					</div>
 
 					<div class="d-flex align-items-center">
@@ -116,7 +116,7 @@
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined me-2">cancel</i>
-						<span>غیرفعال کردن حساب</span>
+						<span>{{ __.get("settings.deactivate-account") }}</span>
 					</div>
 
 					<div class="d-flex align-items-center">
@@ -182,7 +182,7 @@ export default {
 		ChangeLanguageModal: () => import("../Modals/Settings/ChangeLanguageModal"),
 		DeactiveModal: () => import("../Modals/Settings/DeactiveModal"),
 
-		TwoFAModal: () => import("../Modals/Settings/TwoFAModal"),
+		TwoFAModal: () => import("./TwoFA/TwoFAModal"),
 
 		SessionsModal: () => import("../Modals/Settings/Sessions/SessionsModal"),
 	},

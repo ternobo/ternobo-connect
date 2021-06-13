@@ -1,22 +1,22 @@
 <template>
-	<b-modal v-model="showModal" @show="onShow" hide-footer title="ویرایش تلفن همراه" body-class="modal-signup" size="md" :centered="true">
+	<b-modal v-model="showModal" @show="onShow" hide-footer :title="__.get('settings.change-phone-number')" body-class="modal-signup" size="md" :centered="true">
 		<div class="d-flex ephone-input-group py-0 justify-content-between align-items-center">
 			<input type="email" class="form-control mx-1 text-input" dir="ltr" :readonly="verification_step" @keypress.enter="sendVcode()" v-model="phone" placeholder="09123456789" />
 			<LoadingButton class="btn signup-save-btn btn-primary" :disabled="verification_step || phone.length < 1 || notChanged" :loading="loading && !verification_step" @click.native="sendVcode()">ثبت</LoadingButton>
 		</div>
 		<transition name="slide">
 			<div v-if="verification_step" class="text">
-				<label class="me-1 mt-2 text-left clickable" @click="verification_step = false">شماره همراه اشتباه است؟</label>
+				<label class="me-1 mt-2 text-left clickable" @click="verification_step = false">{{ __.get("") }}</label>
 
 				<div class="input-group d-flex align-items-center flex-column justify-content-center mt-4">
-					<label class="w-100">کد تایید خود ‌را وارد کنید</label>
+					<label class="w-100" v-html="__.get('register.enter-verification-code')"></label>
 					<div class="d-flex align-items-center">
 						<otp-input input-class="w-100" class="material--sm mx-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" />
 						<i class="material-icons-outlined" :class="{ 'text-danger': invalidCode }">verified_user</i>
 					</div>
 				</div>
 				<div class="d-flex justify-content-end">
-					<LoadingButton :loading="loading" class="btn btn-primary mx-3 mt-4" @click.native="verifyCode">ثبت</LoadingButton>
+					<LoadingButton :loading="loading" class="btn btn-primary mx-3 mt-4" @click.native="verifyCode">{{ __.get("application.confirm") }}</LoadingButton>
 				</div>
 			</div>
 		</transition>
