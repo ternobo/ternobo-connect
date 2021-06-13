@@ -45,7 +45,7 @@ class IndexController extends Controller
         if (in_array($locale, ['en', 'fa'])) {
             App::setLocale($locale);
             session(["locale" => $locale]);
-            return redirect()->back();
+            return redirect()->back()->withCookie(cookie()->forever("website_locale", $locale));
         }
         return response()->json(['result' => false, 'errors' => ['locale' => "invalid value"]]);
     }
