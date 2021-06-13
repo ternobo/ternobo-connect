@@ -1,20 +1,20 @@
 <template>
-	<b-modal v-model="showModal" hide-footer title="تغییر رمزعبور" body-class="modal-signup" size="md" :centered="true">
+	<b-modal v-model="showModal" hide-footer :title="__.get('settings.change-password')" body-class="modal-signup" size="md" :centered="true">
 		<div class="d-flex flex-column align-items-center">
 			<div class="d-flex w-100 flex-column" style="align-items: center">
-				<material-text-field class="w-50 mx-1 text-right mb-4" input-class="w-100" v-model="current_password" type="password" name="current_password" placeholder="رمزعبور فعلی" />
+				<material-text-field class="w-50 mx-1 text-right mb-4" input-class="w-100" v-model="current_password" type="password" name="current_password" :placeholder="__.get('settings.current-password')" />
 
-				<material-text-field class="w-50 mx-1 text-right mb-4" input-class="w-100" v-model="password" type="password" name="password" placeholder="رمزعبور" />
-				<material-text-field class="w-50 mx-1 text-right" input-class="w-100" v-model="password_repeat" type="password" name="password" placeholder="تکرار رمزعبور" />
+				<material-text-field class="w-50 mx-1 text-right mb-4" input-class="w-100" v-model="password" type="password" name="password" :placeholder="__.get('application.password')" />
+				<material-text-field class="w-50 mx-1 text-right" input-class="w-100" v-model="password_repeat" type="password" name="password" :placeholder="__.get('settings.confirm-password')" />
 			</div>
 			<div class="mt-5">
-				<p class="font-18">نکات امنیتی</p>
+				<p class="font-18">{{ __.get("application.security-tips") }}</p>
 				<ul style="list-style: none" class="font-14 p-0">
-					<li>رمزعبور حداقل ۸ کاراکتر باشد</li>
-					<li>بهتر است که از حروف کوچک، بزرگ و سمبل‌ها در رمزعبور خود استفاده کنید.</li>
+					<li>{{ __.get("register.password-tip-1") }}</li>
+					<li>{{ __.get("register.password-tip-2") }}</li>
 				</ul>
 			</div>
-			<LoadingButton :loading="loading" class="btn btn-dark mx-auto mt-4 signup-save-btn" @click.native="savePassword">تایید</LoadingButton>
+			<LoadingButton :loading="loading" class="btn btn-dark mx-auto mt-4 signup-save-btn" @click.native="savePassword">{{ __.get("application.confirm") }}</LoadingButton>
 		</div>
 	</b-modal>
 </template>

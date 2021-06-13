@@ -48,6 +48,7 @@ return [
     "no-more-result" => "There isn't more result",
     'search-result-found' => "<b>:number</b> search results found for <b>:search</b>.",
     "no-content-with-tag" => "No content has been published with this tag",
+    "too-many-attempts" => "Too Many Attempts!",
 
     "http-title" => [
         "404" => "404: Not Found",

@@ -49,6 +49,7 @@ return [
     'no-more-result' => "نتیجه بیشتری وجود ندارد",
     'search-result-found' => "<b>:number</b> نتیجه جستجو برای <b>:search</b> یافت شد",
     "no-content-with-tag" => "هیچ محتوایی با این برچسب منتشر نشده",
+    "too-many-attempts" => "تلاش بیش حد، لطفا بعد از چند دقه مجدد امتحان کنید",
 
     "http-title" => [
         "503" => "503: سرویس دردسترس نیست",

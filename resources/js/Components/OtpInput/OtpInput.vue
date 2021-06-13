@@ -1,5 +1,5 @@
 <template>
-	<div style="display: flex; flex-direction: row-reverse">
+	<div dir="ltr" class="d-flex">
 		<input v-if="inputType === 'password'" autocomplete="off" name="hidden" type="text" style="display: none" />
 		<single-otp-input v-for="(item, i) in numInputs" :key="i" :focus="activeInput === i" :value="otp[i]" :separator="separator" :input-type="inputType" :input-classes="inputClasses" :is-last-child="i === numInputs - 1" :should-auto-focus="shouldAutoFocus" @on-change="handleOnChange" @on-keydown="handleOnKeyDown" @on-paste="handleOnPaste" @on-focus="handleOnFocus(i)" @on-blur="handleOnBlur" />
 	</div>

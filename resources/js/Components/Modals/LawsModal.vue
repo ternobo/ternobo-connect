@@ -59,7 +59,7 @@
 			<ol dir="ltr" start="4">
 				<li>
 					<p>
-						<a name="_Hlk74153600"></a> <span><b>Do not organize, participate in, or encourage harassment of others</b></span>
+						<a name="Hlk74153600"></a> <span><b>Do not organize, participate in, or encourage harassment of others</b></span>
 						<span>. Disagreements happen and are normal, but continuous, repetitive, or severe negative comments may cross the line into harassment and are not okay.</span>
 					</p>
 				</li>
