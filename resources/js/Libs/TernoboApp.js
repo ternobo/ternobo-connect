@@ -18,6 +18,7 @@ TimeAgo.addLocale(fa);
 
 import MaterialTextField from "../Components/inputs/MaterialTextField";
 import MaterialTextArea from "../Components/inputs/MaterialTextArea";
+import ContenteditableMax from "../Directives/ContenteditableMax";
 
 import PersianDate from 'persian-date';
 
@@ -97,6 +98,8 @@ TernoboApp.install = function (Vue, options) {
             })
         }
     })
+
+    Vue.directive("max-contenteditable", ContenteditableMax)
 
     Vue.directive('click-outside', {
         inserted: function (el, binding, vnode) {

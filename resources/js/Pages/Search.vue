@@ -89,7 +89,7 @@ export default {
 				this.data = [];
 				this.currentTab = tab;
 				this.loadingPage = true;
-
+				let prevUrl = this.next_page_url;
 				this.$store.state.ternoboWireApp
 					.getData(this.$APP_URL + "/search?type=" + tab + "&q=" + this.search, false)
 					.then((response) => {
@@ -102,7 +102,7 @@ export default {
 						}
 					})
 					.catch((error) => {
-						this.next_page_url = options.url;
+						this.next_page_url = prevUrl;
 					})
 					.then(() => {
 						this.loadingPage = false;
@@ -123,7 +123,7 @@ export default {
 						}
 					})
 					.catch((error) => {
-						this.next_page_url = options.url;
+						this.next_page_url = prevUrl;
 					})
 					.then(() => {
 						this.loading_more = false;

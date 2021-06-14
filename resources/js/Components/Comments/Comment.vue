@@ -52,7 +52,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="comment-body">
+			<div class="comment-body" ref="body">
 				{{ comment.text }}
 			</div>
 		</div>
@@ -112,6 +112,7 @@ export default {
 	mounted() {
 		this.liked = this.comment.is_liked;
 		this.replies_count = this.comment.replies_count;
+		twemoji.parse(this.$refs.body);
 	},
 	data() {
 		return {

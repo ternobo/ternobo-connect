@@ -72,11 +72,6 @@ export default {
 			default: undefined,
 			required: true,
 		},
-		edit: {
-			type: Boolean,
-			default: false,
-			required: false,
-		},
 	},
 	components: {
 		AwardItem,

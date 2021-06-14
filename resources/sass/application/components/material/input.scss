@@ -43,12 +43,12 @@
         color: $black;
         top: 0;
         padding: 0 4px;
-        margin: 0 16px;
+        margin: 0 8px;
         font-size: 10px;
         transform: translateY(-50%);
     }
 
-    .input:not(:placeholder-shown)+label {
+    .input:not(:placeholder-shown):not(div)+label {
         top: 0;
         padding: 0 4px;
         margin: 0 8px;
@@ -106,8 +106,21 @@
 @media screen and (min-width:$sm-size) {
 
     .material-textarea {
-        label {
+        &.active {
+            label {
+                top: 0;
+                padding: 0 4px;
+                margin: 0 8px;
+                font-size: 10px;
+                transform: translateY(-50%);
+            }
+        }
 
+        .input {
+            height: auto;
+        }
+
+        label {
             margin: 0 12px;
         }
     }

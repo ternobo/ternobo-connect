@@ -12,7 +12,7 @@ class AddFullTextToPostContents extends Migration
      */
     public function up()
     {
-        DB::statement("ALTER TABLE `ternobo`.`post_contents` ADD FULLTEXT `full_text` (`content`);");
+        DB::statement("ALTER TABLE `post_contents` ADD FULLTEXT `full_text` (`content`);");
     }
 
     /**

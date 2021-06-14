@@ -38,7 +38,6 @@ export default {
 				navigational: [38, 37, 39, 40],
 				isSpecial(event) {
 					let result = this.special.includes(event.keyCode) || (event.ctrlKey && [90, 83, 65].includes(event.keyCode));
-					console.log(result);
 					return result;
 				},
 				isNavigational(e) {

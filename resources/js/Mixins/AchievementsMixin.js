@@ -5,7 +5,10 @@ import {
 const AchievementsMixin = {
     methods: {
         toggleDetailed() {
-            this.open = !this.open;
+            if (!this.edit) {
+                this.open = !this.open;
+
+            }
         },
     },
     data() {
@@ -18,6 +21,11 @@ const AchievementsMixin = {
             type: Boolean,
             default: false,
             required: false
+        },
+        edit: {
+            type: Boolean,
+            default: false,
+            required: false,
         },
     },
     components: {
