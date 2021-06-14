@@ -25,4 +25,5 @@ return [
     'activate' => "Activate",
     'active-gateway' => "Active Gateway",
     'pay' => "Pay",
+    "enter-amount" => "Enter Amount (min: 1,000 Toman)",
 ];

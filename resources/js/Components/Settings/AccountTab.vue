@@ -6,7 +6,7 @@
 		<PasswordModal :show.sync="showPasswordMdal"></PasswordModal>
 		<ChangeLanguageModal :show.sync="showLangModal"></ChangeLanguageModal>
 		<DeactiveModal :show.sync="showDeactiveModal"></DeactiveModal>
-		<TwoFAModal :status="two_factor_verification" :phone="phone" :email="email" :show.sync="showTwoFAModal"></TwoFAModal>
+		<TwoFAModal :status.sync="two_factor_verification" :phone="phone" :email="email" :show.sync="showTwoFAModal"></TwoFAModal>
 		<SessionsModal :show.sync="showActiveSessions"></SessionsModal>
 		<h2 class="font-18 font-demibold mb-4">{{ __.get("settings.login-and-security") }}</h2>
 		<div class="card mb-2">

@@ -29,6 +29,11 @@
 <script>
 import Verification from "./Verification.vue";
 export default {
+	watch: {
+		verification(newVal) {
+			this.$emit("update:verification", newVal);
+		},
+	},
 	components: { Verification },
 	created() {
 		axios

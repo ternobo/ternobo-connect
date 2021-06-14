@@ -1,8 +1,8 @@
 <template>
 	<b-modal v-model="showModal" @show="onShow" hide-footer :title="modalTitle" size="md" :centered="true">
 		<choose-way v-if="chooseWay" @action="setType"></choose-way>
-		<google-auth v-else-if="!enabled && type == 'app'" @enabled="onEnable"></google-auth>
-		<phone-number v-else-if="!enabled && type == 'phone'" @enabled="onEnable"></phone-number>
+		<google-auth v-else-if="!enabled && type == 'app'" @enabled="onEnable" :verification.sync="verification_step"></google-auth>
+		<phone-number v-else-if="!enabled && type == 'phone'" @enabled="onEnable" :verification.sync="verification_step"></phone-number>
 		<div v-else-if="enabled">
 			<p>
 				{{ __.get("settings.ts-des-10") }}
@@ -66,8 +66,12 @@ export default {
 		modalTitle() {
 			if (this.chooseWay) {
 				return __.get("settings.ts-title-2");
-			} else if (this.type == "app" || this.type == "phone") {
+			} else if (this.verification_step) {
+				return __.get("settings.confirmation-code");
+			} else if (this.type == "app") {
 				return __.get("settings.ts-title-3");
+			} else if (this.type == "phone") {
+				return __.get("settings.confirmation-code");
 			}
 
 			return __.get("settings.two-step-verification");
@@ -114,8 +118,7 @@ export default {
 
 			isSetuped: false,
 
-			select_step: true,
-			setup_step: false,
+			verification_step: false,
 
 			resetLoading: false,
 		};
@@ -154,9 +157,13 @@ export default {
 		onEnable(codes) {
 			this.recoveryCodes = codes;
 			this.enabled = true;
+			this.$emit("update:status", true);
 		},
 		deactivate() {
 			axios.post("/two-factor-auth/deactive");
+			this.$emit("update:status", false);
+			this.$emit("update:show", false);
+
 			this.enabled = false;
 			this.chooseWay = false;
 			this.type = null;
