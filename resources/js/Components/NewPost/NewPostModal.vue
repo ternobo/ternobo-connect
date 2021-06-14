@@ -226,7 +226,7 @@ export default {
 								.then((value) => {
 									this.$emit("update:show", true);
 									if (value) {
-										window.open("/donations?tab=settings");
+										window.open("/tips?tab=settings");
 									}
 								});
 						}

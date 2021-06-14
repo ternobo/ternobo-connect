@@ -259,7 +259,7 @@
     display: flex;
 
     @if $direction=='rtl' {
-        flex-direction: row-reverse;
+        direction: ltr;
     }
 
     transition: 0.3s all;
@@ -270,12 +270,18 @@
     max-width: max-content;
 
     .add-slide {
-        margin-left: 12px;
+        @if $direction=='rtl' {
+            margin-right: 12px;
+        }
+
+        @else {
+            margin-left: 12px;
+        }
     }
 
     .drag-container {
         display: flex;
-        flex-direction: row-reverse;
+        flex-direction: row;
         transition: 0.3s all;
         padding: 0 8px;
 
@@ -292,7 +298,13 @@
             cursor: pointer;
 
             &:not(:last-child) {
-                margin-right: 12px;
+                @if $direction=='rtl' {
+                    margin-right: 12px;
+                }
+
+                @else {
+                    margin-left: 12px;
+                }
             }
 
             >i:not(.delete-icon) {

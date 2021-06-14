@@ -251,13 +251,13 @@ Route::group(['auth'], function () {
     Route::get('/zarinpal/callback', "Payment\ZarinpalController@callback");
 
     // Donations Start
-    Route::get("/donations", "Donation\DontaionsController@index");
-    Route::post("/donations", "Donation\DontaionsController@getDonations");
-    Route::post("/donations/settings", "Donation\DontaionsController@settings");
-    Route::put("/donations/settings", "Donation\DontaionsController@setPaymentGateways");
+    Route::get("/tips", "Donation\DontaionsController@index");
+    Route::post("/tips", "Donation\DontaionsController@getDonations");
+    Route::post("/tips/settings", "Donation\DontaionsController@settings");
+    Route::put("/tips/settings", "Donation\DontaionsController@setPaymentGateways");
 
     // Get Donations list in Donate to post modal
-    Route::post("/posts/{post}/donations", "Donation\DontaionsController@getPostDonations");
+    Route::post("/posts/{post}/tips", "Donation\DontaionsController@getPostDonations");
     //End
     // Donations End
 

@@ -28,7 +28,7 @@ export default {
 	mounted() {
 		this.loading = true;
 		axios
-			.post("/donations/settings")
+			.post("/tips/settings")
 			.then((response) => {
 				this.merchant = response.data.gateways.zarinpal.merchant_id;
 				this.active = response.data.gateways.zarinpal.enabled;
@@ -43,7 +43,7 @@ export default {
 		active() {
 			this.loading = true;
 			axios
-				.put("/donations/settings", {
+				.put("/tips/settings", {
 					zarinpal: {
 						merchant_id: this.merchant,
 						enabled: this.active,

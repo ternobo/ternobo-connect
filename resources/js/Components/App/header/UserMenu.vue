@@ -14,7 +14,7 @@
 		</div>
 		<div class="card-body p-0">
 			<div class="list-group list-group-flush">
-				<wire-link href="/donations" as="a" class="list-group-item border-0 headermenu-item">
+				<wire-link href="/tips" as="a" class="list-group-item border-0 headermenu-item">
 					<a class="m-0"><i class="material-icons-outlined">savings</i> {{ __.choice("tips.tip", 2) }}</a>
 				</wire-link>
 				<wire-link href="/settings" as="a" class="list-group-item border-0 headermenu-item">
