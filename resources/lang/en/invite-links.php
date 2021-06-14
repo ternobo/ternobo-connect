@@ -1,14 +1,14 @@
 <?php
 return [
-    'invite-link' => "Invite Link|Invite Links",
+    'invite-link' => "Invitation Link|Invitation Links",
     'use' => "Use",
     'used' => "Used",
-    'your-invite-links' => "Your invite links:",
+    'your-invite-links' => "Your invitation links:",
     'remaining-links' => ":number remaining",
-    'what-is-inv' => "What are Invite Links?",
-    'answer-1' => "Invite links are keys of entering Ternobo. You only have <b>2 invite links</b>.",
-    'answer-2' => "You can send your invite links to your friends to invite them to use Ternobo.",
+    'what-is-inv' => "What are Invitation Links?",
+    'answer-1' => "Invitation links are keys for entering Ternobo which you only have <b>2</b>.",
+    'answer-2' => "You can share your invitation links whith your friends and invite them to Ternobo.",
     'attention' => "Attention",
-    'answer-3' => "You just be able to use these links for once. It is not possible to create a new link.",
-    'answer-4' => "You <b>may not</b> sell your invite links. It's not acceptable to sell or auction your invite links, we will ban both seller and buyer accounts.",
+    'answer-3' => "You can only invite 1 user per invitation link. It is not possible to create a new link.",
+    'answer-4' => "You <b>must not</b> sell your invitation links. It's not acceptable to sell or auction your invitation links, both seller and buyer accounts will be banned.",
 ];

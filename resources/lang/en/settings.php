@@ -28,9 +28,9 @@ return [
     'current-session' => "Current Session",
     'active-session' => "Active Sessions",
 
-    'deactive-device-des-1' => 'Note: Disabling your account will make your content and page inaccessible to other users.',
+    'deactive-device-des-1' => 'Disabling your account will make your content and page inaccessible to other users.',
     'deactive-device-des-2' => 'If your account is inactive for more than <strong class="text-danger">2 years</strong>, all your information <span class="text-grey">(content, profile information and your personal page)</span> will be irrevocably deleted.',
-    'deactive-device-des-3' => 'Your account will be deactivated until you log in again.',
+    'deactive-device-des-3' => 'Your account will be deactivated until you log back in.',
 
     'two-step-verification' => "Two-step Verification",
     'ts-des-1' => "Two-step verification protects your account by requiring an additional code when you log in on a device we don't recognize.",

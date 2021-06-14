@@ -17,6 +17,7 @@ return [
     'NZD' => "NZ$", //New Zealand Dollar
     'NOK' => "kr", //Norwegian Krone
     
+    'currency-name' => "نام ارز:",
     'AUD-n' => "دلار استرالیا",
     'BRL-n' => "رئال برزیل",
     'CAD-n' => "دلار کانادا",
