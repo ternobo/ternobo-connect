@@ -1,7 +1,7 @@
 <template>
 	<div class="donations-list" :class="{ 'd-flex align-items-center p-3 justify-content-center': loading || donations.length < 1 }">
 		<loading-spinner v-if="loading"></loading-spinner>
-		<span class="font-20 text-superlight" v-else-if="donations.length < 1">{{ __.get("messages.no-donation") }}</span>
+		<span class="font-20 text-superlight" v-else-if="donations.length < 1">{{ __.get("messages.no-tip") }}</span>
 		<transition-group name="flip-list">
 			<donation-item v-for="donation in donations" :key="`post_donation_item_${donation.id}`" :tip="donation" />
 		</transition-group>

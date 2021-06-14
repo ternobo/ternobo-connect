@@ -17,7 +17,7 @@ return [
     'published-done' => "با موفقیت منتشر شد",
     'done-job-message' => "عملیات موفقیت آمیز بود",
     'save-error' => "خطا در ثبت اطلاعات",
-    'no-donation' => "هیچ حمایتی ثبت نشده",
+    'no-tip' => "هیچ حمایتی ثبت نشده",
     'donation-amount-not-enough' => "مبلغ دلخواه کافی نیست",
     'delete-post-confirm' => "آیا از حذف این محتوا اطمینان دارید؟",
     'invalid-password' => "رمزعبور فعلی نامعتبر است",
