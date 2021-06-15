@@ -121,14 +121,12 @@ input[type=text] {
     color: #191919;
 }
 
-.input-group-icon {
-    .form-control {
-        padding-left: 24px;
-    }
-}
-
 .rounded-pill {
     border-radius: 50rem !important;
+}
+
+[type=password] {
+    font: small-caption;
 }
 
 .searchfield {

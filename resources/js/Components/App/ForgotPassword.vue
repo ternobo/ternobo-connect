@@ -1,19 +1,19 @@
 <template>
 	<div class="forgot-password-container">
-		<div class="d-flex justify-content-between align-items-center mb-5">
-			<strong>{{ __.get("landing.forgot_password_title") }}</strong>
-			<i class="material-icons-outlined clickable" v-if="step <= 1" @click="back">arrow_back</i>
+		<div class="d-flex align-items-center mb-5">
+			<i class="material-icons-outlined clickable me-12px" :class="{ 'rotate-180': appDirection == 'rtl' }" v-if="step <= 1" @click="back">arrow_back</i>
+			<strong class="font-20">{{ __.get("landing.forgot_password_title") }}</strong>
 		</div>
 		<div>
 			<div v-if="step == 0">
-				<label class="mb-2 fnot-demibold">{{ __.get("application.username") }}<span class="text-muted"> / </span>{{ __.get("validation.attributes.email") }}</label>
-				<input type="text" class="text-input-light" v-model="input" />
+				<label class="mb-12px font-12 font-demibold">{{ __.get("application.username") }} <span class="text-superlight"> / </span>{{ __.get("validation.attributes.phone_number") }}</label>
+				<input type="text" class="text-input-light text-input--md" v-model="input" />
 			</div>
 			<div class="d-flex flex-column align-items-center" v-else-if="step == 1">
 				<div class="d-flex align-items-center">
 					<otp-input input-class="w-100" class="material--sm mx-1 text-center" @completed="checkCode" v-model="resetCode" :numInputs="6" />
 				</div>
-				<div class="mt-3" style="width: 170px">
+				<div class="mt-32px ps-3" style="width: 170px">
 					<span
 						class="clickable d-flex justify-content-between align-items-center font-14"
 						:class="{
@@ -22,19 +22,19 @@
 						}"
 						@click="sendResetCode"
 					>
-						<span>{{ __.get("settings.resend") }}</span> <span>{{ countdown > 0 ? "(" + countdown + ")" : "" }}</span>
+						<span>{{ __.get("settings.resend") }}</span> <span class="text-dark">{{ countdown > 0 ? "00:" + countdown : "" }}</span>
 					</span>
 				</div>
 			</div>
 			<div v-else-if="step == 2">
 				<div>
-					<label class="mb-2 fnot-demibold">{{ __.get("application.password") }}</label>
-					<input type="password" class="text-input-light" v-model="password" />
+					<label class="mb-12px font-12 font-demibold">{{ __.get("application.password") }}</label>
+					<input type="password" class="text-input-light text-input--md" v-model="password" />
 				</div>
 				<div class="mt-3">
-					<label class="mb-2 fnot-demibold">{{ __.get("settings.confirm-password") }}</label>
+					<label class="mb-12px font-12 font-demibold">{{ __.get("settings.confirm-password") }}</label>
 					<div class="input-group-icon w-100">
-						<input :type="showpassword ? 'text' : 'password'" v-model="password1" class="text-input-light" />
+						<input :type="showpassword ? 'text' : 'password'" v-model="password1" class="text-input-light text-input--md" />
 						<i class="material-icons-outlined clickable text-muted" @click="showpassword = !showpassword">visibility{{ showpassword ? "_off" : "" }}</i>
 					</div>
 				</div>
@@ -100,6 +100,7 @@ export default {
 					if (data !== false) {
 						if (data.result) {
 							this.toast(data.msg, "check", "text-success");
+							this.countdown = 30;
 							this.countDownTimer();
 							this.step = 1;
 						} else {

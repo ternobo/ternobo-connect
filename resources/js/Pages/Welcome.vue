@@ -3,20 +3,20 @@
 		<login-header></login-header>
 		<div class="login-content">
 			<div class="about-ternobo" v-if="$root.isDesktop">
-				<h1 class="font-20">{{ __.get("landing.welcome") }}</h1>
-				<p>
+				<h1 class="font-weight-bold mb-32px font-20">{{ __.get("landing.welcome") }}</h1>
+				<p class="line-height-32px" :style="{ marginBottom: image.top }">
 					{{ __.get("landing.about-ternobo") }}
 				</p>
-				<img src="/images/invite_illustration_ternobo.svg" />
+				<img class="position-absolute" :src="image.url" :width="image.width" />
 			</div>
 			<div class="login-form">
 				<div class="login-form w-100">
 					<div class="login-card card w-100">
 						<div class="card-body">
 							<div v-if="!forgotpassword">
-								<label class="font-weight-bold font-20 mb-5 text-dark">{{ __.get("application.login") }}</label>
+								<label class="font-weight-bold font-20 mb-32px text-dark">{{ __.get("application.login") }}</label>
 								<div v-if="verifyStep">
-									<label class="mb-2">{{ __.get("landing.auth_app_text") }}</label>
+									<label class="mb-12px font-12">{{ __.get("landing.auth_app_text") }}</label>
 									<div class="text-start d-flex flex-column align-items-center">
 										<otp-input input-class="w-100" class="material--sm mb-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" v-if="!recovery" />
 										<small class="text-muted clickable" @click="recovery = true" v-if="!recovery"></small>
@@ -31,17 +31,17 @@
 								<div v-else>
 									<div>
 										<div>
-											<label class="mb-2 font-demibold">{{ __.get("application.username") }}<span class="text-muted"> / </span>{{ __.get("validation.attributes.email") }}</label>
-											<input type="text" v-model="username" class="text-input-light" />
+											<label class="inputlabel font-12 font-demibold">{{ __.get("application.username") }} <span class="text-superlight"> / </span>{{ __.get("validation.attributes.phone_number") }}</label>
+											<input type="text" v-model="username" class="text-input-light text-input--md" />
 										</div>
 										<div class="mt-3">
-											<label class="mb-2 font-demibold">{{ __.get("application.password") }}<span class="text-muted">/</span>{{ __.get("validation.attributes.email") }}</label>
+											<label class="inputlabel font-12 font-demibold">{{ __.get("application.password") }}</label>
 											<div class="d-flex flex-column align-items-end">
 												<div class="input-group-icon w-100">
-													<input :type="showpassword ? 'text' : 'password'" v-model="password" class="text-input-light" />
+													<input :type="showpassword ? 'text' : 'password'" v-model="password" class="text-input-light text-input--md" />
 													<i class="material-icons-outlined clickable text-muted" @click="showpassword = !showpassword">visibility{{ showpassword ? "_off" : "" }}</i>
 												</div>
-												<small class="clickable hover-dark font-12 mt-2" @click="forgotpassword = true">{{ __.get("landing.forgot_password") }}</small>
+												<small class="clickable hover-dark font-12 mt-12px" @click="forgotpassword = true">{{ __.get("landing.forgot_password") }}</small>
 											</div>
 										</div>
 										<div class="login-button-container">
@@ -50,7 +50,7 @@
 									</div>
 									<div class="d-flex">
 										<img src="/images/invite_icon.svg" width="40" />
-										<div class="ms-3">
+										<div class="ms-3 font-14">
 											{{ __.get("landing.signup-description") }}
 										</div>
 									</div>
@@ -60,11 +60,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="w-100 text-center">
-					<div class="copyright-text d-flex align-items-center justify-content-center" style="height: 16px">
-						<img :src="appDirection == 'rtl' ? '/images/farsi-logo.svg' : '/images/logo-en-dark.svg'" class="mx-1" height="16" />
-						<span class="font-14" style="height: 13px; line-height: 1">© {{ lang == "fa" ? "۱۴۰۰" : "2021" }}</span>
-					</div>
+				<div class="copyright-text d-flex align-items-center justify-content-center" style="height: 20px">
+					<img :src="appDirection == 'rtl' ? '/images/farsi-logo.svg' : '/images/logo-en-dark.svg'" class="me-1" height="20" />
+					<span class="font-14" style="height: 13px; line-height: 1">© {{ lang == "fa" ? "۱۴۰۰" : "2021" }}</span>
 				</div>
 			</div>
 		</div>
@@ -82,6 +80,8 @@ export default {
 			lang: "en",
 			forgotpassword: false,
 			showpassword: false,
+
+			image: {},
 
 			loading: false,
 			username: "",
@@ -151,7 +151,30 @@ export default {
 	},
 	created() {
 		this.lang = window.lang;
-		// random =
+		let imageIndex = Math.floor(Math.random() * 4);
+		let images = [
+			{
+				url: "/images/landing/dev.svg",
+				width: 750,
+				top: "164px",
+			},
+			{
+				url: "/images/landing/bizz.svg",
+				width: 500,
+				top: "84px",
+			},
+			{
+				url: "/images/landing/des.svg",
+				width: 500,
+				top: "84px",
+			},
+			{
+				url: "/images/landing/bitcoin.svg",
+				width: 500,
+				top: "84px",
+			},
+		];
+		this.image = images[imageIndex];
 	},
 	components: { LoginHeader, Button, ForgotPassword, OtpInput },
 };

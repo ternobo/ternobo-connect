@@ -173,6 +173,7 @@ return [
         'password' => 'Password',
         'password-confirmation' => 'Password Confirmation',
         'phone' => 'Phone',
+        "phone_number" => "Phone",
         'province' => 'Province',
         'second' => 'Second',
         'sex' => 'Gender',

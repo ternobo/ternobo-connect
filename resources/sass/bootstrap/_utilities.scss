@@ -406,3 +406,27 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
     transform: rotate(#{$i}deg);
   }
 }
+
+@for $i from 1 through 40 {
+  .mt-#{$i}px {
+    margin-top: #{$i}px;
+  }
+
+  .mb-#{$i}px {
+    margin-bottom: #{$i}px;
+  }
+
+  .ms-#{$i}px {
+    margin-right: #{$i}px;
+  }
+
+  .me-#{$i}px {
+    margin-left: #{$i}px;
+  }
+}
+
+@for $i from 12 through 40 {
+  .line-height-#{$i}px {
+    line-height: #{$i}px;
+  }
+}

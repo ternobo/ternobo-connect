@@ -35,7 +35,7 @@ require base_path("routes/file_access.php");
  * File Access End
  */
 
-Route::get("/", "IndexController@index")->name("welcome");
+Route::get("/", "IndexController@index")->name("welcome")->middleware("guest");
 Route::get("/set-language", "IndexController@setLanguage");
 Route::any("/search", "Content\SearchController@search");
 

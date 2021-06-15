@@ -175,6 +175,7 @@ return [
         'password' => 'رمز عبور',
         'password-confirmation' => 'تکرار رمز عبور',
         'phone' => 'شماره ثابت',
+        'phone_number' => 'شماره همراه',
         'province' => 'استان',
         'second' => 'ثانیه',
         'sex' => 'جنسیت',
