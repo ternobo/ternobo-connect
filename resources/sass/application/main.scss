@@ -93,7 +93,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: $background;
-    text-align: right;
+    text-align: start;
     font-size: 16px;
     color: $text-color;
 }
@@ -1463,3 +1463,4 @@ a:focus {
 @import "./components/autocomplete.scss";
 @import "./components//background-upload-progress.scss";
 @import "./components/embed";
+@import "./pages/login-page.scss";

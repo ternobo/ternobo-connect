@@ -56,7 +56,7 @@ class ForgotPasswordController extends Controller
                     $sms = new SMS($user->phone);
                     $sms->sendUltraFastSMS(array(SMS::makeParameter("passreset", $passwordrest->token)), "24525");
                     session()->put("email", $user->phone);
-                    return response()->json(array("result" => true, "msg" => "کد فعالسازی برای شما پیامک شد"));
+                    return response()->json(array("result" => true, "msg" => __("messages.reset-sms-success-message")));
                 } else {
                     $html = view('emails.forgotpass', array("code" => $passwordrest->token, "username" => $user->username))->render();
                     $text = "بازیابی رمزعبور در ترنوبو";
@@ -68,9 +68,20 @@ class ForgotPasswordController extends Controller
                     return response()->json(array("result" => true, "msg" => "کد فعالسازی برای شما ایمیل شد"));
                 }
             } else {
-                return response()->json(array("result" => false, "errors" => array('msg' => "هیچ کاربری با این اطلاعات یافت نشد!")));
+                return response()->json(array("result" => false, "errors" => array('msg' => ['error' => __("messages.user-not-found")])));
             }
         }
+    }
+
+    public function checkCode(Request $request)
+    {
+        return response()->json([
+            'result' => !Validator::make($request->all(), [
+                "code" => "required|exists:password_resets,token",
+            ], [
+                "exists" => __("validation.password_code"),
+            ])->fails(),
+        ]);
     }
 
     public function updatePassword(Request $request)
@@ -79,7 +90,7 @@ class ForgotPasswordController extends Controller
             "exists" => __("validation.password_code"),
         ];
         $validator = Validator::make($request->all(), [
-            "newpassword" => "required",
+            "newpassword" => "required|min:8",
             "code" => "required|exists:password_resets,token",
         ], $messages);
         if ($validator->fails()) {

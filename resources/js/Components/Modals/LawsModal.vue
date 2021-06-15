@@ -205,5 +205,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+[dir="ltr"] * {
+	text-align: left;
+}
 </style>

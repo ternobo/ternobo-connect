@@ -168,9 +168,12 @@ input[type=text] {
 
 .text-input-light {
     @extend .form-control;
-    border: 0;
-    background: #F5F5F5;
-    color: #C8C8C8;
-    font-size: 12px;
-    text-align: center;
+    border: $body-bg;
+    background: $body-bg;
+    color: $grey;
+    text-align: start;
+
+    &:focus {
+        background: $body-bg;
+    }
 }

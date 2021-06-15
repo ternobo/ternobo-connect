@@ -49,6 +49,8 @@ return [
     'search-result-found' => "<b>:number</b> search results found for <b>:search</b>.",
     "no-content-with-tag" => "No content has been published with this tag",
     "too-many-attempts" => "Too Many Attempts!",
+    'reset-sms-success-message' => "The password recovery code texted to you",
+    'user-not-found' => "No users found with this information!",
 
     "http-title" => [
         "404" => "404: Not Found",

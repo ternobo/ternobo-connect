@@ -50,6 +50,8 @@ return [
     'search-result-found' => "<b>:number</b> نتیجه جستجو برای <b>:search</b> یافت شد",
     "no-content-with-tag" => "هیچ محتوایی با این برچسب منتشر نشده",
     "too-many-attempts" => "تلاش بیش حد، لطفا بعد از چند دقه مجدد امتحان کنید",
+    'reset-sms-success-message' => "کد فعالسازی برای شما پیامک شد",
+    'user-not-found' => "هیچ کاربری با این اطلاعات یافت نشد!",
 
     "http-title" => [
         "503" => "503: سرویس دردسترس نیست",

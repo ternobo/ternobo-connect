@@ -38,31 +38,6 @@ export default {
 		};
 	},
 	methods: {
-		changePassord() {
-			if (this.password1 == this.password) {
-				this.loading = true;
-				axios
-					.post("updatepassword", {
-						newpassword: this.password,
-						code: this.resetCode,
-					})
-					.then((response) => {
-						const data = response.data;
-						if (data !== false) {
-							if (data.result) {
-								window.location = "/feed";
-							} else {
-								this.handleError(data.errors);
-							}
-						} else {
-							this.toast(__.get("messages.all-inputs-required"));
-						}
-					})
-					.then(() => (this.loading = false));
-			} else {
-				this.toast(__.get("register.password-not-confirm-match"), "cancel", "material-icons-outlined text-danger");
-			}
-		},
 		sendResetCode() {
 			this.loading = true;
 			axios

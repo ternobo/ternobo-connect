@@ -1,65 +1,70 @@
 <template>
-	<div class="container-fluid px-3">
-		<LoginModal :show.sync="showLogin"></LoginModal>
-		<LawsModal :show.sync="showLaws"></LawsModal>
-		<SignupModal :show.sync="showSignup"></SignupModal>
-		<b-sidebar id="sidebar" title="" backdrop-variant="dark" right backdrop shadow>
-			<div>
-				<div class="b-sidebar-item w-100 d-flex justify-content-between align-items-center clickable" style="overflow-x: hidden" @click="showLaws = !showLaws">{{ __.get("application.comuunity-guidelines") }}</div>
-				<div class="b-sidebar-item w-100 d-flex justify-content-between align-items-center" style="overflow-x: hidden">
-					<span>نمایش پس زمینه</span>
-					<switches v-model="hasBG"></switches>
-				</div>
-				<a v-if="$store.state.user" href="/logout" method="post" class="b-sidebar-item hover-danger w-100 d-flex justify-content-between align-items-center">
-					<span>خروج از حساب کاربری</span>
-					<i class="material-icons">power_settings_new</i>
-				</a>
+	<div class="login-page">
+		<login-header></login-header>
+		<div class="login-content">
+			<div class="about-ternobo" v-if="$root.isDesktop">
+				<h1 class="font-20">{{ __.get("landing.welcome") }}</h1>
+				<p>
+					{{ __.get("landing.about-ternobo") }}
+				</p>
+				<img src="/images/invite_illustration_ternobo.svg" />
 			</div>
-		</b-sidebar>
-		<div class="search-page-container">
-			<div class="header-search d-flex justify-content-between align-items-center">
-				<div class="menu d-flex">
-					<div class="clickable" v-b-toggle.sidebar><i class="material-icons header-btn" :class="{ 'text-dark': !hasBG, 'text-white': hasBG }">menu</i></div>
-				</div>
-				<div class="d-flex align-items-center">
-					<wire-link v-if="$store.state.user" :class="{ 'text-dark': !hasBG, 'text-white': hasBG }" href="/feed">
-						<i class="navheader-icon material-icons-outlined" :class="{ 'text-dark': !hasBG, 'text-white': hasBG }">home</i>
-					</wire-link>
+			<div class="login-form">
+				<div class="login-form w-100">
+					<div class="login-card card w-100">
+						<div class="card-body">
+							<div v-if="!forgotpassword">
+								<label class="font-weight-bold font-20 mb-5 text-dark">{{ __.get("application.login") }}</label>
+								<div v-if="verifyStep">
+									<label class="mb-2">{{ __.get("landing.auth_app_text") }}</label>
+									<div class="text-start d-flex flex-column align-items-center">
+										<otp-input input-class="w-100" class="material--sm mb-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" v-if="!recovery" />
+										<small class="text-muted clickable" @click="recovery = true" v-if="!recovery"></small>
 
-					<button v-if="!$store.state.user" class="btn btn-transparent font-14 py-1" :class="{ 'text-dark': !hasBG }" @click="showLogin = !showLogin">{{ __.get("application.login") }}</button>
-				</div>
-			</div>
-			<div class="search-section" :class="{ noBG: !hasBG }">
-				<form action="/search" id="searchform" autocomplete="off">
-					<div class="content-body d-flex justify-content-center align-items-center flex-column">
-						<div class="col-md-6 p-0 d-flex justify-content-center align-items-center flex-column">
-							<img src="/images/logo-type.svg" class="thelogo logo-type" v-if="hasBG" />
-							<img src="/images/logo-type-dark.svg" class="thelogo logo-type" v-if="!hasBG" />
-							<auto-complete style="min-width: 270px" v-model="search" required type="text" name="q" :icon="'search'" :placeholder="__.get('application.searchq')" />
+										<input class="form-control" :placeholder="__.get('landing.enter_recover_code')" v-model="code" maxlength="8" v-if="recovery" />
+										<small class="text-muted clickable" @click="recovery = false" v-if="recovery">{{ __.get("landing.user_recovery_code") }}</small>
+									</div>
+									<div class="login-button-container">
+										<loading-button :loading="loading" class="btn btn-primary" @click.native="verifyCode">{{ __.get("application.login") }}</loading-button>
+									</div>
+								</div>
+								<div v-else>
+									<div>
+										<div>
+											<label class="mb-2 font-demibold">{{ __.get("application.username") }}<span class="text-muted"> / </span>{{ __.get("validation.attributes.email") }}</label>
+											<input type="text" v-model="username" class="text-input-light" />
+										</div>
+										<div class="mt-3">
+											<label class="mb-2 font-demibold">{{ __.get("application.password") }}<span class="text-muted">/</span>{{ __.get("validation.attributes.email") }}</label>
+											<div class="d-flex flex-column align-items-end">
+												<div class="input-group-icon w-100">
+													<input :type="showpassword ? 'text' : 'password'" v-model="password" class="text-input-light" />
+													<i class="material-icons-outlined clickable text-muted" @click="showpassword = !showpassword">visibility{{ showpassword ? "_off" : "" }}</i>
+												</div>
+												<small class="clickable hover-dark font-12 mt-2" @click="forgotpassword = true">{{ __.get("landing.forgot_password") }}</small>
+											</div>
+										</div>
+										<div class="login-button-container">
+											<loading-button :loading="loading" class="btn btn-primary" @click.native="login">{{ __.get("application.login") }}</loading-button>
+										</div>
+									</div>
+									<div class="d-flex">
+										<img src="/images/invite_icon.svg" width="40" />
+										<div class="ms-3">
+											{{ __.get("landing.signup-description") }}
+										</div>
+									</div>
+								</div>
+							</div>
+							<forgot-password v-else @back="forgotpassword = false" />
 						</div>
 					</div>
-				</form>
-			</div>
-			<div class="footer p-3 d-flex justify-content-between align-items-center">
-				<div class="bg-downloader d-flex" v-if="hasBG" @mouseenter="showDownloader = true" @mouseleave="showDownloader = false">
-					<i class="material-icons-outlined text-white">add_photo_alternate</i>
-					<transition name="fade">
-						<div class="d-flex py-2 copyright-bg px-4 bg-dark align-items-center text-white" v-if="showDownloader">
-							<div class="d-flex flex-column justify-content-center">
-								<b class="my-1" style="font-size: 0.8rem">علی اطیابی</b>
-								<small style="font-size: 0.8rem">تهران، تهران ایران</small>
-							</div>
-							<a class="d-flex align-items-center" download href="/images/search-background-2x.jpg"><i class="material-icons text-white ms-5">get_app</i></a>
-						</div>
-					</transition>
 				</div>
-				<div v-if="$root.isMobile">
-					<img src="/images/logo-white.svg" class="thelogo" v-if="hasBG" style="width: 24px" />
-					<img src="/images/logo.svg" class="thelogo" v-if="!hasBG" style="width: 24px" />
-				</div>
-				<div v-else>
-					<img src="/images/logo-en.svg" class="thelogo" v-if="hasBG" style="width: 110px" />
-					<img src="/images/logo-en-dark.svg" class="thelogo" v-if="!hasBG" style="width: 110px" />
+				<div class="w-100 text-center">
+					<div class="copyright-text d-flex align-items-center justify-content-center" style="height: 16px">
+						<img :src="appDirection == 'rtl' ? '/images/farsi-logo.svg' : '/images/logo-en-dark.svg'" class="mx-1" height="16" />
+						<span class="font-14" style="height: 13px; line-height: 1">© {{ lang == "fa" ? "۱۴۰۰" : "2021" }}</span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -67,90 +72,87 @@
 </template>
 
 <script>
-import Switches from "vue-switches";
-import LawsModal from "../Components/Modals/LawsModal";
-import AppHeader from "../Components/App/header/AppHeader";
-import Landing from "../Components/App/Landing";
-import LoginModal from "../Components/Modals/LoginModal";
-import SignupModal from "../Components/Modals/SignupModal";
-import App from "../Layouts/App";
-import AutoComplete from "../Components/inputs/AutoComplete.vue";
-
+import Button from "../../../vendor/laravel/jetstream/stubs/inertia/resources/js/Jetstream/Button.vue";
+import ForgotPassword from "../Components/App/ForgotPassword.vue";
+import LoginHeader from "../Components/App/LoginHeader.vue";
+import OtpInput from "../Components/OtpInput/OtpInput.vue";
 export default {
-	methods: {
-		search(input) {
-			const element = document.getElementById("searchforminput").parentElement;
-			element.style.position = "unset";
-			if (element.getElementsByClassName("autocomplete-result-list").length > 0) {
-				element.getElementsByClassName("autocomplete-result-list")[0].style.width = element.getBoundingClientRect().width + "px";
-				element.getElementsByClassName("autocomplete-result-list")[0].style.marginTop = "-14px";
-			}
-
-			if (input.length < 2) {
-				return [];
-			}
-			return new Promise((resolve, reject) => {
-				axios
-					.post(this.$APP_URL + "/search", {
-						q: input,
-					})
-					.then((response) => {
-						if (response.data.result) {
-							resolve(response.data.suggestions);
-						} else {
-							resolve([]);
-						}
-					});
-			});
-		},
-	},
 	data() {
 		return {
-			showLanding: false,
-			showDownloader: false,
-			hasBG: true,
-			showLogin: false,
-			showLaws: false,
-			showSignup: false,
+			lang: "en",
+			forgotpassword: false,
+			showpassword: false,
+
+			loading: false,
+			username: "",
+			password: "",
+			verifyStep: false,
+			recovery: false,
+			code: null,
 		};
 	},
-	watch: {
-		showLanding: function () {
-			setTimeout(function () {
-				window.scrollTo(0, 800);
-			}, 500);
+	methods: {
+		verifyCode() {
+			if (this.code != null) {
+				this.loading = true;
+				let data = {
+					code: this.code,
+				};
+				if (this.recovery) {
+					data.type = "recovery";
+				}
+
+				axios
+					.post("/auth/verify-tfa", data)
+					.then((response) => {
+						if (response.data.result) {
+							window.location = "/feed";
+						} else {
+							this.toast(__.get("messages.invalid-code"));
+						}
+						this.loading = false;
+					})
+					.catch((err) => (this.loading = true));
+			}
+		},
+		login() {
+			if (this.username !== undefined && this.username !== "" && this.password !== undefined && this.password !== "") {
+				this.loading = true;
+				var data = new FormData();
+				data.append("username", this.username);
+				data.append("password", this.password);
+
+				var config = {
+					method: "post",
+					url: this.$APP_URL + "/auth/login",
+					data: data,
+				};
+
+				axios(config)
+					.then((response) => {
+						if (response.data.result) {
+							window.location = "/feed";
+						} else if (response.data.two_factor) {
+							this.loginStep = false;
+							this.verifyStep = true;
+						} else {
+							const errors = response.data.errors;
+							this.handleError(errors);
+						}
+						this.loading = false;
+					})
+					.catch((error) => {
+						console.log(error);
+						this.loading = false;
+						this.toast(__.get("messages.connection-error"));
+					});
+			}
 		},
 	},
-	mounted() {
-		// const $this = this;
-		// var i = 0;
-		// var txt = "شبکه اجتماعی متخصصین";
-		// var speed = 130;
-		// function typeWriter() {
-		// 	if (i < txt.length) {
-		// 		$this.$refs.typewritingdescript.innerHTML += txt.charAt(i);
-		// 		i++;
-		// 		setTimeout(typeWriter, speed);
-		// 	}
-		// }
-		// typeWriter();
+	created() {
+		this.lang = window.lang;
+		// random =
 	},
-	props: {
-		articles: {
-			type: Array,
-			default: undefined,
-		},
-	},
-	layout: App,
-	name: "Welcome",
-	components: {
-		LawsModal,
-		AppHeader,
-		Landing,
-		Switches,
-		LoginModal,
-		SignupModal,
-		AutoComplete,
-	},
+	components: { LoginHeader, Button, ForgotPassword, OtpInput },
 };
 </script>

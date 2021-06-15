@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post("/rest-password", "Auth\ForgotPasswordController@resetPassword");
 Route::post("/updatepassword", "Auth\ForgotPasswordController@updatePassword");
+Route::post("/passowrd-reset-verification", "Auth\ForgotPasswordController@checkCode");
 
 Route::prefix("/auth")->group(function () {
     Route::post('login', 'Auth\LoginController@login');

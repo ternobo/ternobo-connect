@@ -93,7 +93,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: $background;
-    text-align: right;
+    text-align: start;
     font-size: 16px;
     color: $text-color;
 }
@@ -994,7 +994,8 @@ a:focus {
 
 
 .hover-dropdown:hover {
-    background: $fixed-elements;}
+    background: $fixed-elements;
+}
 
 .person-name {
     font-weight: 600;
@@ -1464,3 +1465,5 @@ a:focus {
 @import "./components/autocomplete.scss";
 @import "./components//background-upload-progress.scss";
 @import "./components/embed";
+
+@import "./pages/login-page.scss";
