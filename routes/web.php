@@ -21,6 +21,7 @@ use Ternobo\TernoboWire\TernoboWire;
 Passport::routes();
 TernoboWire::routes();
 Broadcast::routes();
+Route::get("/refresh-csrf", "Controller@getCsrf");
 
 Route::post('/ternobo-actions/update', "AutoUpdateController@update");
 Route::get("/report-reasons", "ReportController@getReportOptions");
@@ -79,6 +80,8 @@ Route::group(['auth'], function () {
     Route::get("/follow-people", "Auth\FollowSuggestionController@index");
     Route::post("/follow-people/get", "Auth\FollowSuggestionController@get");
 
+    Route::post("/setprofile", "Profile\ProfileController@setProfile")->name("profile-setup");
+
     // Follow Actions Start
     Route::post("/follow/{page_id}", "Profile\ConnectionsController@follow")->name("follow");
     Route::post("/unfollow/{page_id}", "Profile\ConnectionsController@unfollow");
@@ -104,7 +107,6 @@ Route::group(['auth'], function () {
 
         Route::get("/gettags", "PostController@getTags");
 
-        Route::post("/setprofile", "Profile\ProfileController@setProfile")->name("profile-setup");
         Route::post("/setcover", "Profile\ProfileController@setCover")->name("profile-cover");
 
         Route::post("/delete-profile", "Profile\ProfileController@deleteProfileImage")->name("profile-delete");

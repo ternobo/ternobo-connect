@@ -14,6 +14,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         "/logout",
         "/ternobo-actions/update",
-        // "/broadcasting/auth",
+        "/refresh-csrf",
     ];
 }

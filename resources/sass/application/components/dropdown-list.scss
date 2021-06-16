@@ -15,6 +15,17 @@
         align-items: center;
         justify-content: center;
     }
+
+
+    &.disabled {
+        cursor: not-allowed !important;
+
+        button {
+            cursor: not-allowed !important;
+
+        }
+    }
+
 }
 
 .dropdown-menu {
@@ -30,6 +41,7 @@
     height: -webkit-max-content;
     height: -moz-max-content;
     height: max-content;
+    border-radius: 0;
 
     .dropdown-item {
         padding: 12px 16px;

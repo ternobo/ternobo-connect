@@ -23,7 +23,6 @@ return [
     'confirm' => "تأیید",
     'previous' => "قبلی",
     'next' => "بعدی",
-    'done' => "انجام شد",
     'get-started' => "شروع کنید",
     'more-people' => "و :number نفر دیگر",
     'show-more' => "نمایش بیشتر",
@@ -58,4 +57,5 @@ return [
     'trello' => "Trello",
     'submit' => "ثبت",
     'deactivate' => "غیرفعال کردن",
+    'done' => "تمام",
 ];

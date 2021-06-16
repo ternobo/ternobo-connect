@@ -28,6 +28,15 @@ window.axios.defaults.headers.common['Cache-Control'] = 'no-cache';
 window.axios.defaults.headers.common['Pragma'] = 'no-cache';
 window.axios.defaults.headers.common['Expires'] = '0';
 
+
+window.updateCsrf = () => {
+    axios.get("/refresh-csrf").then((response) => {
+        document.querySelector('meta[name="csrf-token"]').content = response.data.csrf;
+        window.axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.csrf;
+    });
+}
+
+
 window.NoiseGate = NoiseGate;
 
 /**

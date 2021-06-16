@@ -407,21 +407,21 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
   }
 }
 
-@for $i from 1 through 40 {
+@for $i from 1 through 90 {
   .mt-#{$i}px {
-    margin-top: #{$i}px;
+    margin-top: #{$i}px !important;
   }
 
   .mb-#{$i}px {
-    margin-bottom: #{$i}px;
+    margin-bottom: #{$i}px !important;
   }
 
   .ms-#{$i}px {
-    margin-right: #{$i}px;
+    margin-right: #{$i}px !important;
   }
 
   .me-#{$i}px {
-    margin-left: #{$i}px;
+    margin-left: #{$i}px !important;
   }
 }
 

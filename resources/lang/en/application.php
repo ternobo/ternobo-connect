@@ -58,4 +58,5 @@ return [
     'trello' => "Trello",
     'submit' => "Submit",
     'deactivate' => "Deactivate",
+    'done' => "Done",
 ];
