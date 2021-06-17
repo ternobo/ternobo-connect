@@ -1,5 +1,6 @@
 <?php
 return [
+    'login' => "Username or Phone is incorrect",
     'accepted' => 'The :attribute must be accepted.',
     'active_url' => 'The :attribute is not a valid URL.',
     'after' => 'The :attribute must be a date after :date.',
@@ -27,6 +28,7 @@ return [
     'dimensions' => 'The :attribute has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',
     'email' => 'The :attribute must be a valid email address.',
+    'phone' => 'You must enter a valid phone number.',
     'ends_with' => 'The :attribute must end with one of the following: :values.',
     'exists' => 'The selected :attribute is invalid.',
     'file' => 'The :attribute must be a file.',
@@ -173,7 +175,7 @@ return [
         'password' => 'Password',
         'password-confirmation' => 'Password Confirmation',
         'phone' => 'Phone',
-        "phone_number" => "Phone",
+        "phone_number" => "Phone Number",
         'province' => 'Province',
         'second' => 'Second',
         'sex' => 'Gender',

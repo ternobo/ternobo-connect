@@ -1185,17 +1185,7 @@ a:focus {
 
 @import "./components/toast.scss";
 
-.otp-input-single {
-    max-width: 16px;
-    margin-right: 12px;
-
-    .input {
-        padding: 8px 0;
-        text-align: center;
-        padding-bottom: 0;
-        max-width: 100%;
-    }
-}
+@import "./components/otp-input.scss";
 
 .vue-switcher-theme--default.vue-switcher-color--default div {
     background-color: #757575 !important;

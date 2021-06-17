@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Mail;
 use App\Models\Verification;
+use App\Rules\PhoneNumber;
 use App\SMS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -14,7 +15,7 @@ class VerificationController extends Controller
     public function sendVcode(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'phone' => 'unique:users,phone',
+            'phone' => ['unique:users,phone', new PhoneNumber()],
             'email' => 'email:rfc|unique:users,email',
         ]);
         if ($validator->fails()) {

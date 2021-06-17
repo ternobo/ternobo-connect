@@ -40,7 +40,7 @@ class LoginController extends Controller
 
             if (!Hash::check($request->password, $user->password)) {
                 $exception = ValidationException::withMessages([
-                    "password" => [trans('رمزعبور اشتباه است.')],
+                    "password" => [trans('validation.password')],
                 ]);
                 return response()->json(["result" => false, "errors" => $exception->errors()]);
             }
@@ -87,7 +87,7 @@ class LoginController extends Controller
 
         }
         $exception = ValidationException::withMessages([
-            "email" => [trans('نام‌کاربری، ایمیل یا شماره همراه اشتباه است.')],
+            "email" => [trans('validation.login')],
         ]);
         return response()->json(["result" => false, "errors" => $exception->errors()]);
     }

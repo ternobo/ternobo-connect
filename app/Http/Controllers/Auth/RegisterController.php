@@ -43,7 +43,6 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('throttle:20,1');
         $this->middleware(InviteLinkMiddleware::class);
     }
 

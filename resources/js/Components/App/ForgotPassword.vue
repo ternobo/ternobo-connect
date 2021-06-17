@@ -11,9 +11,9 @@
 			</div>
 			<div class="d-flex flex-column align-items-center" v-else-if="step == 1">
 				<div class="d-flex align-items-center">
-					<otp-input input-class="w-100" class="material--sm mx-1 text-center" @completed="checkCode" v-model="resetCode" :numInputs="6" />
+					<otp-input input-class="w-100" class="text-center" @completed="checkCode" v-model="resetCode" :numInputs="6" />
 				</div>
-				<div class="mt-32px ps-3" style="width: 170px">
+				<div class="mt-32px ps-3" style="width: 160px">
 					<span
 						class="clickable d-flex justify-content-between align-items-center font-14"
 						:class="{

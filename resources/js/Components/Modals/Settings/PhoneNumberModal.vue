@@ -11,7 +11,7 @@
 				<div class="input-group d-flex align-items-center flex-column justify-content-center mt-4">
 					<label class="w-100" v-html="__.get('register.enter-verification-code')"></label>
 					<div class="d-flex align-items-center">
-						<otp-input input-class="w-100" class="material--sm mx-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" />
+						<otp-input input-class="w-100" class="text-center" @completed="verifyCode" v-model="code" :numInputs="6" />
 						<i class="material-icons-outlined" :class="{ 'text-danger': invalidCode }">verified_user</i>
 					</div>
 				</div>

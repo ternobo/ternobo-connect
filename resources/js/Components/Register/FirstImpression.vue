@@ -5,7 +5,8 @@
 			<p class="line-height-32px" :style="{ marginBottom: '40px' }">
 				{{ __.get("landing.about-ternobo") }}
 			</p>
-			<img class="position-absolute" src="/images/register-illustration.svg" />
+			<img class="position-absolute" src="/images/register-illustration.svg" width="750" v-if="appDirection == 'rtl'" />
+			<img class="position-absolute" src="/images/Illustration_register_ltr.svg" width="750" v-else />
 		</div>
 		<div class="login-form">
 			<div class="login-form w-100">

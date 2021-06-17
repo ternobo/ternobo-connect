@@ -1,5 +1,6 @@
 <?php
 return [
+    'login' => "نام کاربری یا شماره‌همراه اشتباه است",
     'accepted' => ':attribute باید پذیرفته شده باشد.',
     'active_url' => 'آدرس :attribute معتبر نیست.',
     'after' => ':attribute باید تاریخی بعد از :date باشد.',
@@ -28,6 +29,7 @@ return [
     'dimensions' => 'ابعاد تصویر :attribute قابل قبول نیست.',
     'distinct' => 'فیلد :attribute مقدار تکراری دارد.',
     'email' => ':attribute باید یک ایمیل معتبر باشد.',
+    'phone' => 'باید یک شماره همراه معتبر وارد کنید',
     'ends_with' => 'فیلد :attribute باید با یکی از مقادیر زیر خاتمه یابد: :values',
     'exists' => ':attribute انتخاب شده، معتبر نیست.',
     'file' => ':attribute باید یک فایل معتبر باشد.',

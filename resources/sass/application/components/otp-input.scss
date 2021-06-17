@@ -1,0 +1,17 @@
+.otp-input {
+    margin: 0 -6px;
+
+
+}
+
+.otp-input-single {
+    max-width: 16px;
+    margin: 0 6px;
+
+    .input {
+        padding: 8px 0;
+        text-align: center;
+        padding-bottom: 0;
+        max-width: 100%;
+    }
+}

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\ActiveSession;
-use App\Models\Mail;
 use App\Models\PasswordReset;
 use App\Models\User;
 use App\SMS;
@@ -43,32 +42,17 @@ class ForgotPasswordController extends Controller
             if ($user instanceof User) {
 
                 $passwordrest = new PasswordReset();
-
-                if ($user->phone !== null) {
-                    $passwordrest->email = $user->phone;
-                } else {
-                    $passwordrest->email = $user->email;
-                }
+                $passwordrest->email = $user->phone;
                 $passwordrest->token = random_int(111111, 999999);
+                $passwordrest->save();
 
-                if (!$this->checkEmail($request->input)) {
-                    $passwordrest->save();
-                    $sms = new SMS($user->phone);
-                    $sms->sendUltraFastSMS(array(SMS::makeParameter("passreset", $passwordrest->token)), "24525");
-                    session()->put("email", $user->phone);
-                    return response()->json(array("result" => true, "msg" => __("messages.reset-sms-success-message")));
-                } else {
-                    $html = view('emails.forgotpass', array("code" => $passwordrest->token, "username" => $user->username))->render();
-                    $text = "بازیابی رمزعبور در ترنوبو";
-                    $title = "بازیابی رمزعبور ترنوبو";
-                    $mail = new Mail();
-                    $mail->addAddress($user->email);
-                    $mail->send($title, $text, $html);
-                    $passwordrest->save();
-                    return response()->json(array("result" => true, "msg" => "کد فعالسازی برای شما ایمیل شد"));
-                }
+                $sms = new SMS($user->phone);
+                $sms->sendUltraFastSMS(array(SMS::makeParameter("passreset", $passwordrest->token)), "24525");
+                session()->put("email", $user->phone);
+                return response()->json(array("result" => true, "msg" => __("messages.reset-sms-success-message")));
+
             } else {
-                return response()->json(array("result" => false, "errors" => array('msg' => ['error' => __("messages.user-not-found")])));
+                return response()->json(array("result" => false, "errors" => array('msg' => [__("messages.user-not-found")])));
             }
         }
     }
