@@ -73,7 +73,9 @@ class Skill extends Model
                 return ['first' => $first, "second" => $second, 'verb' => $verb, "nums" => 2];
             } elseif ($nums > 0) {
                 $first = $credits[0]->user;
-
+                if (!isset($first)) {
+                    return null;
+                }
                 if ($first->id === Auth::user()->id) {
                     $first->name = __("tips.you");
                     $self = true;
