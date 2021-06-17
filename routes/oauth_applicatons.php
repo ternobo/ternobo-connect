@@ -17,6 +17,8 @@ Route::get("/connect/instagram/callback", "Socialite\InstagramController@callbac
 Route::get("/connect/facebook/login", "Socialite\FacebookController@login");
 Route::get("/connect/facebook/callback", "Socialite\FacebookController@callback");
 
+Route::get("/connect/facebook/delete", "Socialite\FacebookController@delete");
+
 Route::get("/connect/github/login", "Socialite\GithubController@login");
 Route::get("/connect/github/callback", "Socialite\GithubController@callback");
 

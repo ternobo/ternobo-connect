@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\ActiveSession;
-use App\Models\Mail;
 use App\Models\User;
 use App\Models\Verification;
 use App\SMS;
@@ -45,33 +44,16 @@ class LoginController extends Controller
                 return response()->json(["result" => false, "errors" => $exception->errors()]);
             }
             if ($user->two_factor) {
-                if ($user->two_factor_type === 'email') {
-                    $code = random_int(111111, 999999);
+                $code = random_int(111111, 999999);
 
-                    $verification = new Verification();
-                    $verification->code = $code;
-                    $verification->email = $user->email;
-                    $verification->save();
-                    session()->put("email", $user->email);
-                    $html = preg_replace("/\r|\n/", "", view('emails.twoFactor', array("vcode" => $code))->render());
-                    $text = "کد تایید هویت شما در ترنوبو : $code";
-                    $title = "کد تایید ترنوبو";
-                    $mail = new Mail();
-                    $mail->addAddress($user->email);
-                    $mail->send($title, $text, $html);
-                    session()->put("email", $user->email);
-                } elseif ($user->two_factor_type == 'phone') {
-                    $code = random_int(111111, 999999);
+                $verification = new Verification();
+                $verification->code = $code;
+                $verification->phone = $user->phone;
+                $verification->save();
 
-                    $verification = new Verification();
-                    $verification->code = $code;
-                    $verification->phone = $user->phone;
-                    $verification->save();
-
-                    $sms = new SMS($user->phone);
-                    $sms->sendUltraFastSMS([SMS::makeParameter("code", $code)], "36529");
-                    $user->save();
-                }
+                $sms = new SMS($user->phone);
+                $sms->sendUltraFastSMS([SMS::makeParameter("code", $code)], "36529");
+                $user->save();
 
                 session()->put("user_to_login", $user);
 

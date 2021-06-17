@@ -24,7 +24,7 @@ return [
     'previous' => "Previous",
     'next' => "Next",
     'done' => "Done",
-    'get-started' => "Get Started",
+    'get-started' => "Get Start",
     'more-people' => "and :number other people",
     'show-more' => "Show more",
     'show-less' => "Show less",

@@ -2,7 +2,6 @@
 return [
     "welcome" => "به ترنوبو خوش آمدید",
     "invited-by" => "شما توسط :fname دعوت شده‌اید",
-    'start-signup' => "شروع ثبت‌نام",
     "profile-image" => "تصویر پروفایل",
     "verification" => "کد تایید",
     'enter-verification-code' => "کد <strong>تایید</strong> ارسال شده ‌را وارد کنید",
