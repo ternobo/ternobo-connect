@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\HasUser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Cookie;
 class FeedbackReply extends Model
 {
     use SoftDeletes;
+    use HasUser;
 
     protected $dates = ['deleted_at'];
 

@@ -2,6 +2,9 @@
 
 namespace App\Console;
 
+use App\Jobs\CleanDatabase;
+use App\Jobs\FreshPasswordResets;
+use App\Jobs\GitPull;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,8 +27,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('backup:clean')->weekly();
+        $schedule->command('backup:clean')->monthly();
         $schedule->command('backup:run --only-to-disk=ftp')->weekly();
+        $schedule->job(new CleanDatabase())->yearly();
+        $schedule->job(new FreshPasswordResets())->daily();
+        $schedule->job(new GitPull())->daily();
     }
 
     /**

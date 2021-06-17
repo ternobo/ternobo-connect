@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\HasUser;
 use App\Ternobo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,6 +12,7 @@ class Page extends Model
 {
 
     use SoftDeletes;
+    use HasUser;
 
     protected $dates = ['deleted_at'];
 

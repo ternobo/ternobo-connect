@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\HasPage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Cookie;
 class Comment extends Model
 {
 
+    use HasPage;
     /**
      *  sender page id
      * @var integer

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\HasUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,6 +17,12 @@ class ActiveSession extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use HasUser;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public static function getActiveSessions()
     {

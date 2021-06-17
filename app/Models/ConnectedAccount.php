@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\HasUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ConnectedAccount extends Model
 {
     use HasFactory;
+    use HasUser;
+
     protected $fillable = [
         'name',
         'driver',
@@ -24,4 +27,10 @@ class ConnectedAccount extends Model
     protected $hidden = [
         'token',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

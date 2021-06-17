@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\HasPage;
 use App\Scopes\FollowingUsersScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,6 +11,7 @@ class Following extends Model
 {
 
     use SoftDeletes;
+    use HasPage;
 
     protected $fillable = [
         'user_id',

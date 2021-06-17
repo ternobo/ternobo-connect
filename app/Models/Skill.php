@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\HasUser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class Skill extends Model
 {
+    use HasUser;
 
     public function user()
     {
@@ -40,10 +42,10 @@ class Skill extends Model
             if ($nums > 2) {
                 $first = $credits[0]->user;
                 $second = $credits[1]->user;
-                if ($first->id === Auth::user()->id) {
+                if (isset($first) && $first->id === Auth::user()->id) {
                     $first->name = __("tips.you");
                     $self = true;
-                } elseif ($second->id === Auth::user()->id) {
+                } elseif (isset($second) && $second->id === Auth::user()->id) {
                     $second->name = __("tips.you");
                     $self = true;
                 }
@@ -57,10 +59,10 @@ class Skill extends Model
             } elseif ($nums == 2) {
                 $first = $credits[0]->user;
                 $second = $credits[1]->user;
-                if ($first->id === Auth::user()->id) {
+                if (isset($first) && $first->id === Auth::user()->id) {
                     $first->name = __("tips.you");
                     $self = true;
-                } elseif ($second->id === Auth::user()->id) {
+                } elseif (isset($second) && $second->id === Auth::user()->id) {
                     $second->name = __("tips.you");
                     $self = true;
                 }

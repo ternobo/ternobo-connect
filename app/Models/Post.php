@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\HasPage;
 use App\Scopes\PostDraftScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,8 @@ class Post extends Model
 {
 
     use SoftDeletes;
+
+    use HasPage;
 
     use HasFactory;
 

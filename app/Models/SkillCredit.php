@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\HasUser;
 use Illuminate\Database\Eloquent\Model;
 
 class SkillCredit extends Model
 {
+    use HasUser;
 
     public function user()
     {

@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\HasPage;
 use Illuminate\Database\Eloquent\Model;
 
 class Like extends Model
 {
+    use HasPage;
+
     /**
      * Page that like the post
      * @var \App\Page

@@ -24,7 +24,7 @@ class InviteLink extends Model
 
     public function used_by()
     {
-        return $this->belongsTo(User::class, "used_by");
+        return $this->belongsTo(User::class, "used_by")->where("acitve", true);
     }
 
     public static function check($code)

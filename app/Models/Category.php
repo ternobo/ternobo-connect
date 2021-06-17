@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\HasPage;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Category extends Model
 {
+    use HasPage;
     /**
      * category name
      * @var string
