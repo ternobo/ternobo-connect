@@ -12,7 +12,7 @@
 				<div class="login-card card w-100">
 					<div class="card-body">
 						<label class="font-weight-bold font-20 mb-40px text-dark">{{ __.get("register.invited-by", { fname: user.first_name }) }}</label>
-						<div>
+						<div class="d-flex flex-column align-items-center">
 							<lazy-image :src="user.profile" imgClass="profile-md" class="profile-md mb-4" />
 							<strong class="font-demibold font-20px">{{ user.name }}</strong>
 						</div>
