@@ -28,7 +28,7 @@ class YahooController extends Controller
             'user_id' => Auth::user()->id,
             'expiresIn' => "9000",
             'meta' => [
-                'value' => $user->nickname,
+                'value' => $user->email,
                 'email' => $user->email,
                 'id' => $user->id,
             ],
