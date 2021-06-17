@@ -52,6 +52,7 @@ return [
     'last-name' => "Last Name",
     'further-information' => "Further Information",
     'security-tips' => "Security Tips",
+    'upload' => "Upload",
     'enter-your-picture' => "Choose a picture",
     'more' => "More",
     'discord' => "Discord",
