@@ -12,9 +12,6 @@
 				<span class="beta-badge">Beta</span>
 			</div>
 			<div class="login-header-menu">
-				<a href="https://trello.com/b/Vku6XmjN/ternobo" target="trello" v-if="step < 1">{{ __.get("application.trello") }}</a>
-				<a href="https://discord.gg/unXsnGHsNj" target="discord" v-if="step < 1">{{ __.get("application.discord") }}</a>
-				<a href="#" @click="showlaws = !showlaws" v-if="step < 1">{{ __.get("application.comuunity-guidelines") }}</a>
 				<dropdown-menu class="me-3 pe-0" :disabled="step > 0" variant="white">
 					<template #button="{ active }">
 						<i class="material-icons transition" v-if="step < 1" :class="{ 'rotate-180': active }">keyboard_arrow_down</i>
@@ -37,7 +34,7 @@
 					<phone-verification @next="step = 2" />
 				</div>
 				<div class="invite-step" v-else-if="step == 2">
-					<further-information @next="onPersonalSave" />
+					<further-information @showlaws="showlaws = true" @next="onPersonalSave" />
 				</div>
 				<div class="invite-step" v-else-if="step == 3">
 					<password-enter @next="step = 4" />

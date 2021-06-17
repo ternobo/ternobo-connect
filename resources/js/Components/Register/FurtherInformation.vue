@@ -32,9 +32,14 @@
 						>
 							{{ __.get("application.gender") }}
 						</tselect>
+
+						<div class="mt-52px">
+							<checkbox v-model="agree" v-if="appDirection == 'rtl'">با <span class="clickable text-action" @click="$emit('showlaws')">دستورالعمل ترنوبو</span> موافقم</checkbox>
+							<checkbox v-model="agree" v-else>I agree with <span class="clickable text-action" @click="$emit('showlaws')">Ternobo's Community Guidlines</span></checkbox>
+						</div>
 					</div>
 					<div class="login-button-container w-100 h-auto">
-						<loading-button :loading="loading" class="btn btn-primary w-100" @click.native="savePersonal">{{ __.get("application.next") }}</loading-button>
+						<loading-button :loading="loading" :disabled="disabled" class="btn btn-primary w-100" @click.native="savePersonal">{{ __.get("application.next") }}</loading-button>
 					</div>
 				</div>
 			</div>
@@ -43,15 +48,24 @@
 </template>
 
 <script>
+import Checkbox from "../inputs/Checkbox.vue";
+
 export default {
+	components: { Checkbox },
 	data() {
 		return {
 			first_name: "",
 			last_name: "",
 			username: "",
 			loading: false,
+			agree: false,
 			gender: undefined,
 		};
+	},
+	computed: {
+		disabled() {
+			return !(this.agree && Boolean(this.first_name) && Boolean(this.last_name) && Boolean(this.gender) && Boolean(this.username));
+		},
 	},
 	methods: {
 		savePersonal() {
