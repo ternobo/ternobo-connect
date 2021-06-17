@@ -19,6 +19,6 @@ class GitPull implements ShouldQueue
     public function handle()
     {
         $path = base_path();
-        exec("cd $path && git pull && php artisan migrate && npm run production &");
+        exec("cd $path && git pull && php artisan migrate && nvm use 12 && npm run production &");
     }
 }
