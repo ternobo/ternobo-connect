@@ -87,7 +87,7 @@ class SeedSocials extends Seeder
                 "link" => "https://t.me/",
             ],
         ];
-        SocialDriver::all()->delete();
+        SocialDriver::query()->truncate();
         foreach ($social_drivers as $key => $social) {
             SocialDriver::create([
                 'driver' => $key,
