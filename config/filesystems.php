@@ -66,9 +66,9 @@ return [
         ],
         'ftp' => [
             'driver' => 'ftp',
-            'host' => 'b104961.parspack.org',
-            'username' => 'b104961',
-            'password' => 'THIUOIBGBzl3uU',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
             'passive' => true,
         ],
     ],
