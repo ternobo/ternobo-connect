@@ -577,12 +577,25 @@
     }
 
     i:first-child {
-        margin-right: 12px;
+        @if($direction=='rtl') {
+            margin-right: 12px;
+        }
+
+        @else {
+            margin-left: 12px;
+        }
+
 
     }
 
     i:last-child {
-        margin-left: 12px;
+        @if($direction=='rtl') {
+            margin-right: 12px;
+        }
+
+        @else {
+            margin-left: 12px;
+        }
     }
 
     .dot {
@@ -592,7 +605,13 @@
         border-radius: 4px;
 
         &:not(:nth-last-child(2)) {
-            margin-right: 8px;
+            @if($direction=='rtl') {
+                margin-right: 8px;
+            }
+
+            @else {
+                margin-left: 8px;
+            }
         }
 
         &.active {

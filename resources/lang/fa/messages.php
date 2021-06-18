@@ -12,6 +12,7 @@ return [
     'following-not-found' => "هیچ دنبال شده‌ای یافت نشد",
     'score-reason-is-required' => "دلیل امتیاز اجباری است",
     'duplicated-category' => "نام دسته بندی تکراری است",
+    'save-success' => "با موفقیت ذخیره شد",
     'on-exit-confirm' => "در صورت خروج اطلاعات از بین‌می‌رود!",
     'saved' => "با موفقیت ذخیره شد",
     'published-done' => "با موفقیت منتشر شد",

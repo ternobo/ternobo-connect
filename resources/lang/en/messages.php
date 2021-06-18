@@ -12,7 +12,7 @@ return [
     'score-reason-is-required' => "It's important to choose Reason",
     'duplicated-category' => "The category name is duplicate",
     'on-exit-confirm' => "Leave site? Changes you made may not be saved",
-    'saved-success' => "Saved successfully",
+    'save-success' => "Saved successfully",
     'published-success' => "Published successfully",
     'done-job-message' => "Action was successful",
     'save-error' => "There is an error saving the information",
