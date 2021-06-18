@@ -101,10 +101,12 @@ export default {
 			this.$axios({
 				method: "post",
 				url: this.$APP_URL + "/like/" + this.post_data.id,
-			}).catch((error) => {});
+			}).catch((error) => {
+				console.log(error);
+			});
 		},
 		doDelete() {
-			this.confirmDialog(this.__.get("messages.delete-confirm")).then((value) => {
+			this.confirmDialog(__.get("messages.delete-post-confirm")).then((value) => {
 				if (value) {
 					this.deleted = true;
 					axios.delete("/posts/" + this.post_data.id);
