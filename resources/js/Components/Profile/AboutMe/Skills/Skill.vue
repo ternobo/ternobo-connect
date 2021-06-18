@@ -32,8 +32,7 @@
 							<wire-link v-if="skillVal.credit_text.second" :href="userURL(skillVal.credit_text.second)">
 								<strong class="font-14">{{ skillVal.credit_text.second.name }}</strong>
 							</wire-link>
-							<span v-if="credits_count > 2">و</span>
-							<span>{{ credits_count - 2 > 0 ? formatNumber(credits_count - 2, "0a") + __.get("application.more-people", { num: credits_count - 2 }) : "" }} {{ skillVal.credit_text.verb }}</span>
+							<span>{{ credits_count - 2 > 0 ? " " + __.get("application.more-people", { number: credits_count - 2 }) : "" }} {{ skillVal.credit_text.verb }}</span>
 						</span>
 					</div>
 				</div>
