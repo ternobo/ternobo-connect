@@ -22,9 +22,8 @@ export default function (Vue) {
     Vue.prototype.months = function (to) {
         to = to || 12;
         let months = [];
-        const monthNames = ["January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        ];
+        const monthNames = ["", "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"];
         for (let i = 1; i <= to; i++) {
             months.push(
                 {
@@ -58,7 +57,7 @@ export default function (Vue) {
             }
         }
 
-        const monthNames = ["January", "February", "March", "April", "May", "June",
+        const monthNames = ["", "January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
         ];
         date = new Date(date);
