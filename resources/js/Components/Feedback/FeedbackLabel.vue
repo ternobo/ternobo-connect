@@ -62,10 +62,3 @@ export default {
 	},
 };
 </script>
-
-<style lang="scss" scoped>
-.feedback-option-chnage {
-	width: 100%;
-	position: absolute;
-}
-</style>

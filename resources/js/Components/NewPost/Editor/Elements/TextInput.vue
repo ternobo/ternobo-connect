@@ -14,9 +14,10 @@ export default {
 		onPaste(e) {
 			e.preventDefault();
 
-			this.$refs.editableHighlight.innerHTML = this.$refs.editable.innerHTML.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
 			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
 			content = TextareaParser.escapeHTML(TextareaParser.unescapeHtml(content));
+
+			this.$refs.editableHighlight.innerHTML = content.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
 
 			// get text representation of clipboard
 			var text = (e.originalEvent || e).clipboardData.getData("text/plain");
@@ -62,9 +63,10 @@ export default {
 			}
 		},
 		input() {
-			this.$refs.editableHighlight.innerHTML = this.$refs.editable.innerHTML.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
 			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
 			content = TextareaParser.escapeHTML(TextareaParser.unescapeHtml(content));
+			this.$refs.editableHighlight.innerHTML = content.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
+
 			this.$emit("update:content", content);
 			this.$nextTick(() => {
 				twemoji.parse(this.$refs.editableHighlight);
@@ -103,6 +105,7 @@ export default {
 					trigger: "@",
 					values: this.serachForMentions,
 					selectTemplate: (item) => "@" + item.original.key,
+					noMatchTemplate: "HI",
 					menuItemTemplate: function (item) {
 						return item.original.name;
 					},
@@ -110,9 +113,7 @@ export default {
 				{
 					trigger: "#",
 					values: this.searchForTags,
-					noMatchTemplate: function () {
-						return '<span style:"visibility: hidden;"></span>';
-					},
+					noMatchTemplate: null,
 					selectTemplate: (item) => "#" + item.original.key,
 				},
 			],

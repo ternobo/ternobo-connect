@@ -2,6 +2,7 @@
 return [
     'searchq' => "Search",
     'search' => "Search",
+    'not-matching-found' => "Not Matching Found",
     'about-results' => "About :number results for :name",
     'people' => "People",
     'about-us' => "About Us",

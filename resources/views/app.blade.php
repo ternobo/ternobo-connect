@@ -47,7 +47,7 @@
     <script src="{{ mix('/js/vendor.js') }}" defer></script>
     <script src="{{ mix('/js/app.js') }}" defer></script>
     @if (app()->getLocale() == 'en')
-        <link href="{{ !config('app.debug') ? '/css/main.ltr.css' : mix('/css/main.ltr.css') }}" rel="stylesheet" />
+        <link href="{{ env('ASSETS_ENV') != 'local' ? '/css/main.ltr.css' : mix('/css/main.ltr.css') }}" rel="stylesheet" />
     @else
         <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
     @endif

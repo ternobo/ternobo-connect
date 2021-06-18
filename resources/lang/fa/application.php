@@ -2,6 +2,7 @@
 return [
     'searchq' => "هرچیز که در جستن آنی، آنی",
     'search' => "جستجو",
+    'not-matching-found' => "نتیجه‌ای یافت نشد",
     'about-results' => ":number نتیجه جستجو برای :name یافت شد",
     'people' => "افراد",
     'about-us' => "درباره ما",
