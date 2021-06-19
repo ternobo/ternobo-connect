@@ -15,7 +15,7 @@ export default {
 			e.preventDefault();
 
 			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
-			content = TextareaParser.escapeHTML(TextareaParser.unescapeHtml(content));
+			content = TextareaParser.unescapeHtml(content);
 
 			this.$refs.editableHighlight.innerHTML = content.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
 
@@ -64,7 +64,7 @@ export default {
 		},
 		input() {
 			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
-			content = TextareaParser.escapeHTML(TextareaParser.unescapeHtml(content));
+			content = TextareaParser.unescapeHtml(content);
 			this.$refs.editableHighlight.innerHTML = content.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
 
 			this.$emit("update:content", content);
@@ -96,7 +96,7 @@ export default {
 	},
 	mounted() {
 		document.execCommand("defaultParagraphSeparator", false, "br");
-		this.$refs.editable.innerHTML = TextareaParser.escapeHTML(TextareaParser.unescapeHtml(this.content));
+		this.$refs.editable.innerHTML = TextareaParser.unescapeHtml(this.content);
 		this.$refs.editableHighlight.innerHTML = this.$refs.editable.innerHTML.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
 
 		let tribute = new Tribute({

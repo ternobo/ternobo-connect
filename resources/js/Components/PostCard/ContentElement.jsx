@@ -17,7 +17,7 @@ export default {
                 if (this.content.content != null) {
                     tag = "div";
                     classes += "post-content--text";
-                    this.text = TextareaParser.escapeHTML(TextareaParser.unescapeHtml(this.content.content));
+                    this.text = (TextareaParser.unescapeHtml(this.content.content));
 
                     let action = "";
 

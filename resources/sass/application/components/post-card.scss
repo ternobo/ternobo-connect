@@ -636,6 +636,11 @@
 .post-content--text {
     pre {
         margin-bottom: 0;
+
+        * {
+            unicode-bidi: -moz-plaintext;
+            unicode-bidi: plaintext;
+        }
     }
 
     >a {
