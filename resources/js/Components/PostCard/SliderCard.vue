@@ -32,6 +32,13 @@ export default {
 			showFullText: false,
 		};
 	},
+	watch: {
+		active() {
+			this.$nextTick(() => {
+				this.$parent.$el.scrollIntoView({ behavior: "smooth", block: "start", inline: "start" });
+			});
+		},
+	},
 	mounted() {
 		let options = {
 			root: null,
