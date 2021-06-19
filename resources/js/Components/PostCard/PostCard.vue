@@ -122,7 +122,11 @@ export default {
 			this.$axios({
 				method: "post",
 				url: this.$APP_URL + "/bookmark/" + this.post_data.id,
-			}).catch((error) => {});
+			}).catch((error) => {
+				console.log(error);
+				this.bookmark = false;
+				this.toast(__("messages.connection-error"), "error_outlined", "text-danger");
+			});
 		},
 	},
 	created() {

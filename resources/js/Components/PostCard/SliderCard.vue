@@ -42,6 +42,17 @@ export default {
 				});
 			});
 		},
+		showFullText() {
+			if (!this.showFullText) {
+				this.$nextTick(() => {
+					const y = this.$parent.$el.getBoundingClientRect().top + window.scrollY;
+					window.scroll({
+						top: y - 92,
+						behavior: "smooth",
+					});
+				});
+			}
+		},
 	},
 	mounted() {
 		let options = {
