@@ -35,7 +35,11 @@ export default {
 	watch: {
 		active() {
 			this.$nextTick(() => {
-				this.$parent.$el.scrollIntoView({ behavior: "smooth", block: "start", inline: "start" });
+				const y = this.$parent.$el.getBoundingClientRect().top + window.scrollY;
+				window.scroll({
+					top: y - 92,
+					behavior: "smooth",
+				});
 			});
 		},
 	},
