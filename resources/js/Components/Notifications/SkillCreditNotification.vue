@@ -10,7 +10,7 @@
 					<div class="title">
 						<wire-link class="clickable" :href="notifications[0].sender.slug">{{ notifications[0].sender.name }}</wire-link>
 						<wire-link class="clickable" :href="notifications[1].sender.slug" v-if="notifications[1]">، {{ notifications[1].sender.name }}</wire-link>
-						<span v-if="notifications.length > 2">{{ notifications.length - 2 }} نفر دیگر</span>
+						<span v-if="notifications.length > 2">{{ __.get("application.more-people", { number: notifications.length - 2 }) }}</span>
 						<span class="font-weight-normal date-text">{{ createdAt }}</span>
 					</div>
 					<div class="action">{{ __.choice("notifications.endorsed-your-skill", notifications.length, { skill: notificationGroup.notifiable.name }) }}</div>
