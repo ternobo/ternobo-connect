@@ -813,6 +813,12 @@
         text-fill-color: $text-color;
     }
 
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
     &::-moz-selection, *::-moz-selection {
         -webkit-text-fill-color: $text-color;
         text-fill-color: $text-color;
@@ -872,12 +878,6 @@
 
 .tribute-container .menu-highlighted {
     font-weight: bold;
-}
-
-.mention-item {
-    background: rgba($color: $action, $alpha: 0.3);
-    color: $action;
-    padding: 0;
 }
 
 /** Tag Selector **/
