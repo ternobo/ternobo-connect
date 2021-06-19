@@ -5,8 +5,8 @@
 		</sidebar-right>
 		<div class="content-container">
 			<div class="card p-0">
-				<post-card class="pb-0 shadow-0" style="margin-bottom: 0 !important" :post="post" :has-comment="false"></post-card>
-				<div class="comments px-3 pb-3" style="max-height: max-content" v-if="$store.state.user">
+				<post-card class="shadow-0" style="margin-bottom: 0 !important" :post="post" :has-comment="false"></post-card>
+				<div class="comments px-3 pb-3 m-0" style="max-height: max-content" v-if="$store.state.user">
 					<new-comment :post="post.id" @submit="submitComment"></new-comment>
 					<comment v-for="comment in comments" v-on:deleted="commentDelete" :comment="comment" :key="'comment_' + comment.id"></comment>
 					<div class="d-flex w-100 justify-content-center align-items-center py-3" v-if="commentsLoading">
