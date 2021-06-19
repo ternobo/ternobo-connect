@@ -420,6 +420,7 @@ img {
 .slide-enter-to,
 .slide-leave {
     max-height: 200px;
+    will-change: max-height;
     overflow: hidden;
 }
 

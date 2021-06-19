@@ -157,11 +157,16 @@
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-line-clamp: 5;
-        -webkit-box-orient: vertical;
         transition: 0.3s all;
         direction: rtl;
         unicode-bidi: -moz-plaintext;
         unicode-bidi: plaintext;
+        display: flex;
+        flex-direction: column;
+
+        .slider-content {
+            flex: 1 1 auto;
+        }
 
         &:last-child {
             padding-bottom: 12px;
@@ -608,6 +613,7 @@
 
 .slider-media-image {
     margin: 0 -24px;
+    will-change: auto;
 
     &:not(:first-child) {
         margin-top: 24px;

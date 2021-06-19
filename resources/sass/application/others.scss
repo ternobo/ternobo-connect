@@ -45,3 +45,16 @@
     color: $action;
     padding: 0;
 }
+
+
+
+.postslide-enter-active,
+.postslide-leave-active {
+    transition: opacity .5s;
+    position: absolute;
+}
+
+.postslide-enter,
+.postslide-leave-to {
+    opacity: 0;
+}
