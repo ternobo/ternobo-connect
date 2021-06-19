@@ -51,12 +51,11 @@ export default {
     data() {
         return {
             text: "",
-            showFullText: false,
         };
     },
     methods: {
         toggleShowFullText() {
-            this.showFullText = !this.showFullText;
+            this.$emit("update:showFullText", !this.showFullText)
         }
     },
     mounted() {
@@ -75,6 +74,10 @@ export default {
         }
     },
     props: {
+        showFullText: {
+            type: Boolean,
+            require: false,
+        },
         hideMore: {
             default: false,
         },
