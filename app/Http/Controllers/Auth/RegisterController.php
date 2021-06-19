@@ -7,6 +7,7 @@ use App\Http\Middleware\InviteLinkMiddleware;
 use App\Models\ActiveSession;
 use App\Models\InviteLink;
 use App\Models\User;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -51,6 +52,7 @@ class RegisterController extends Controller
         $code = $request->code;
         session()->put("invite_code", $code);
         $invite = InviteLink::query()->with(['user'])->where("code", $code)->whereNull('used_by')->where("valid", "1")->firstOrFail();
+        SEOTools::setDescription(__("register.welcome"));
         return TernoboWire::render("Register", ['user' => $invite->user]);
     }
 
