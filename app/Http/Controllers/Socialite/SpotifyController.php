@@ -21,22 +21,28 @@ class SpotifyController extends Controller
     public function callback()
     {
         ConnectedAccount::query()->where("user_id", Auth::user()->id)->where("driver", "spotify")->delete();
-        $user = Socialite::driver('spotify')->user();
-        $token = $user->token;
-        $response = Http::withToken($token)->get('https://api.spotify.com/v1/me')->json();
-        ConnectedAccount::create([
-            'name' => $user->name,
-            'driver' => 'spotify',
-            'token' => $user->token,
-            'user_id' => Auth::user()->id,
-            'expiresIn' => "9000",
-            'meta' => [
-                'value' => $response['external_urls']['spotify'],
-                'email' => $user->email,
-                'id' => $user->id,
-            ],
-        ]);
-        event(new ReloadSocialOptions(Auth::user()));
-        return view("onOAuthDone");
+
+        try {
+            $user = Socialite::driver('spotify')->user();
+            $token = $user->token;
+            $response = Http::withToken($token)->get('https://api.spotify.com/v1/me')->json();
+            ConnectedAccount::create([
+                'name' => $user->name,
+                'driver' => 'spotify',
+                'token' => $user->token,
+                'user_id' => Auth::user()->id,
+                'expiresIn' => "9000",
+                'meta' => [
+                    'value' => $response['external_urls']['spotify'],
+                    'email' => $user->email,
+                    'id' => $user->id,
+                ],
+            ]);
+            event(new ReloadSocialOptions(Auth::user()));
+            return view("onOAuthDone");
+        } catch (\Throwable $th) {
+            return view("onOAuthFaild");
+        }
+
     }
 }

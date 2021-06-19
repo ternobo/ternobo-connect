@@ -125,6 +125,13 @@
             font-size: 14px;
         }
 
+        @for $i from 1 through 6 {
+            h#{$i} {
+                unicode-bidi: -moz-plaintext;
+                unicode-bidi: plaintext;
+            }
+        }
+
         .post-content {
             padding: 24px;
             word-wrap: break-word;

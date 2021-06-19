@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{{ __('socials.title') }}</title>
+    <title>{{ __("socials.title") }}</title>
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
 
     <style>
@@ -82,7 +82,7 @@
 
 <body>
     <h2 class="text-center text-success">
-        {{ __('socials.conneted-done') }}
+        {{ __("socials.error-connection") }}
     </h2>
     <script>
         setTimeout(() => {

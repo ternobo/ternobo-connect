@@ -20,20 +20,25 @@ class GithubController extends Controller
     public function callback()
     {
         ConnectedAccount::query()->where("user_id", Auth::user()->id)->where("driver", "github")->delete();
-        $user = Socialite::driver('github')->user();
-        ConnectedAccount::create([
-            'name' => $user->name,
-            'driver' => 'github',
-            'token' => $user->token,
-            'user_id' => Auth::user()->id,
-            'expiresIn' => $user->expiresIn,
-            'meta' => [
-                'value' => $user->nickname,
-                'email' => $user->email,
-                'id' => $user->id,
-            ],
-        ]);
-        event(new ReloadSocialOptions(Auth::user()));
-        return view("onOAuthDone");
+        try {
+            $user = Socialite::driver('github')->user();
+            ConnectedAccount::create([
+                'name' => $user->name,
+                'driver' => 'github',
+                'token' => $user->token,
+                'user_id' => Auth::user()->id,
+                'expiresIn' => $user->expiresIn,
+                'meta' => [
+                    'value' => $user->nickname,
+                    'email' => $user->email,
+                    'id' => $user->id,
+                ],
+            ]);
+            event(new ReloadSocialOptions(Auth::user()));
+            return view("onOAuthDone");
+        } catch (\Throwable $th) {
+            return view("onOAuthFaild");
+        }
+
     }
 }

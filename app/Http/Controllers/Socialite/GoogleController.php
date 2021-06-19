@@ -20,20 +20,25 @@ class GoogleController extends Controller
     public function callback()
     {
         ConnectedAccount::query()->where("user_id", Auth::user()->id)->where("driver", "google")->delete();
-        $user = Socialite::driver('google')->user();
-        ConnectedAccount::create([
-            'name' => $user->name,
-            'driver' => 'google',
-            'token' => $user->token,
-            'user_id' => Auth::user()->id,
-            'expiresIn' => $user->expiresIn,
-            'meta' => [
-                'value' => $user->email,
-                'email' => $user->email,
-                'id' => $user->id,
-            ],
-        ]);
-        event(new ReloadSocialOptions(Auth::user()));
-        return view("onOAuthDone");
+        try {
+            $user = Socialite::driver('google')->user();
+            ConnectedAccount::create([
+                'name' => $user->name,
+                'driver' => 'google',
+                'token' => $user->token,
+                'user_id' => Auth::user()->id,
+                'expiresIn' => $user->expiresIn,
+                'meta' => [
+                    'value' => $user->email,
+                    'email' => $user->email,
+                    'id' => $user->id,
+                ],
+            ]);
+            event(new ReloadSocialOptions(Auth::user()));
+            return view("onOAuthDone");
+        } catch (\Throwable $th) {
+            return view("onOAuthFaild");
+        }
+
     }
 }
