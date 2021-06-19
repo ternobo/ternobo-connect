@@ -189,7 +189,8 @@ class PageController extends Controller
                     if ($request->filled("tag")) {
                         $query->whereJsonContains("tags", $request->tag);
                     }
-                });
+                })
+                ->latest();
 
             if (Auth::check()) {
                 $actions = $actions->with("post.mutualLikes");
@@ -204,7 +205,8 @@ class PageController extends Controller
                 ->where("action", "post")
                 ->whereHas("post", function ($query) use ($request) {
                     $query->whereJsonContains("tags", $request->tag);
-                });
+                })
+                ->latest();
 
             if (Auth::check()) {
                 $actions = $actions->with("post.mutualLikes");
