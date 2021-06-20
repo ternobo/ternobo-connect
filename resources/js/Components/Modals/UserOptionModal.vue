@@ -29,9 +29,8 @@
 					</li>
 				</ul>
 				<div class="langs">
-					<div class="lang-item disabled"><img src="/img/franch.png" width="24" height="24" /> <span>Française</span></div>
-					<div class="lang-item disabled"><img src="/img/en.png" width="24" height="24" /> <span>English</span></div>
-					<div class="lang-item"><img src="/img/iranicon.png" width="24" height="24" /> <span>فارسی</span></div>
+					<language-link lang="en" class="lang-item"><img src="/img/en.png" width="24" height="24" /> <span>English</span></language-link>
+					<language-link lang="fa" class="lang-item"><img src="/img/iranicon.png" width="24" height="24" /> <span>فارسی</span></language-link>
 				</div>
 				<ul class="mb-0 p-0">
 					<li class="list-item">

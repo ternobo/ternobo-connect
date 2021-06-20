@@ -84,3 +84,12 @@
         justify-content: center;
     }
 }
+
+.modal-menu-header {
+    &::after {
+        display: none;
+    }
+
+    padding: 16px;
+    padding-bottom: 12px;
+}

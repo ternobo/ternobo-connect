@@ -19,7 +19,6 @@
 		</div>
 		<div v-else>
 			<login-modal :show.sync="showLogin"></login-modal>
-			<signup-modal :show.sync="showSignup"></signup-modal>
 			<div class="d-flex align-items-center">
 				<button class="text-dark btn btn-transparent font-14 py-1" @click="showLogin = true">ورود</button>
 			</div>

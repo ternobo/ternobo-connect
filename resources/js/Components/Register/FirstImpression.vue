@@ -1,11 +1,11 @@
 <template>
 	<div class="login-content">
-		<div class="about-ternobo" v-if="$root.isDesktop">
+		<div class="about-ternobo">
 			<h1 class="font-weight-bold mb-32px font-20">{{ __.get("landing.welcome") }}</h1>
 			<p class="line-height-32px" :style="{ marginBottom: '40px' }">
 				{{ __.get("landing.about-ternobo") }}
 			</p>
-			<img class="position-absolute" src="/images/register-illustration.svg" width="450" />
+			<img class="position-absolute" src="/images/register-illustration.svg" width="450" v-if="$root.isDesktop" />
 		</div>
 		<div class="login-form">
 			<div class="login-form w-100">
@@ -23,6 +23,7 @@
 					</div>
 				</div>
 			</div>
+			<img src="/images/register-illustration.svg" class="mt-5" width="450" v-if="!$root.isDesktop" />
 		</div>
 	</div>
 </template>

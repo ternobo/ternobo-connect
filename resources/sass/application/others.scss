@@ -46,15 +46,30 @@
     padding: 0;
 }
 
+.postslide-enter-active {
+    transition-duration: 0.8s;
+    transition-timing-function: linear;
+}
 
-
-.postslide-enter-active,
 .postslide-leave-active {
-    transition: opacity .5s;
-    position: absolute;
+    transition-duration: 0.8s;
+    transition-timing-function: linear;
+}
+
+.postslide-enter-to,
+.postslide-leave {
+    max-height: 1000px;
+    will-change: max-height;
 }
 
 .postslide-enter,
 .postslide-leave-to {
-    opacity: 0;
+    // overflow: hidden;
+    max-height: 40px;
+}
+
+
+.logo-sm {
+    height: 24px;
+    width: 24px;
 }

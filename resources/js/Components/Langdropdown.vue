@@ -9,17 +9,18 @@
 		<transition name="slide">
 			<div class="tselect-items" ref="itemsElement" v-if="showItems">
 				<div class="items">
-					<a class="tselect_item w-100" v-for="item in items" :href="`/set-language?locale=${item.value}`" :class="{ disabled: item.disabled, 'hover-dropdown': !item.disabled }" :key="item[valueOption]" @click="selectItem(item)">
+					<language-link :lang="item.value" class="tselect_item w-100" v-for="item in items" :class="{ disabled: item.disabled, 'hover-dropdown': !item.disabled }" :key="item[valueOption]" @click="selectItem(item)">
 						<slot name="item" v-bind:item="item">
-							<label class="tselect_item--text"
-								><i class="material-icons verical-middle" v-if="item.hasOwnProperty('icon')">{{ item.icon }}</i> {{ item[labelOption] }}</label
-							>
+							<label class="tselect_item--text">
+								<i class="material-icons verical-middle" v-if="item.hasOwnProperty('icon')">{{ item.icon }}</i>
+								{{ item[labelOption] }}
+							</label>
 							<div class="tdc-radio">
 								<input type="radio" class="tdc-radio_input" :checked="isChecked(item)" />
 								<span class="tdc-radio_checkmark"></span>
 							</div>
 						</slot>
-					</a>
+					</language-link>
 				</div>
 			</div>
 		</transition>

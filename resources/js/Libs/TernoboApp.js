@@ -10,6 +10,7 @@ import LoadingSpinner from "../Components/LoadingSpinner";
 import CopyToClipboard from "../Directives/CopyToClipboard";
 import TimeAgo from 'javascript-time-ago';
 import numeral from "numeral";
+import LanguageLink from "../Components/App/LanguageLink.vue";
 
 // Load locale-specific relative date/time formatting rules.
 import fa from "javascript-time-ago/locale/fa";
@@ -52,7 +53,7 @@ TernoboApp.install = function (Vue, options) {
     Vue.component("sidebar-left", LeftSidbar);
     Vue.component("sidebar-right", RightSidebar);
     Vue.component("user-card", () => import(/* webpackChunkName: "UserInfoCard" */ "../Components/Cards/UserInfoCard"));
-
+    Vue.component("language-link", LanguageLink)
     Vue.component("likes-modal", () => import(/* webpackChunkName: "LikesModal" */ "../Components/Modals/LikesModal"));
 
     Vue.component("post-card", () => import("../Components/PostCard/PostCard"));

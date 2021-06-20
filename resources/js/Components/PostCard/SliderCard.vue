@@ -13,6 +13,7 @@
 
 <script>
 import Content from "./ContentElement";
+import Slide from "./SliderCard/Slide.vue";
 export default {
 	methods: {
 		goPrevSlide() {
@@ -68,7 +69,7 @@ export default {
 		}, options);
 		observer.observe(this.$el);
 	},
-	components: { Content },
+	components: { Content, Slide },
 	name: "SliderCard",
 	props: {
 		hasComment: {
