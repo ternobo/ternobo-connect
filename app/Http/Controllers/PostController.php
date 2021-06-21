@@ -80,7 +80,7 @@ class PostController extends Controller
                         $rawText = htmlentities($content);
                         $text_mentions = SocialMediaTools::getMentions($rawText);
 
-                        $text = $rawText;
+                        $text = SocialMediaTools::replaceUrls($rawText);
 
                         $slideTags = array_slice(SocialMediaTools::getHashtags($rawText), 0, 3);
 
@@ -376,7 +376,7 @@ class PostController extends Controller
                         // Process
                         $rawText = htmlentities($content);
                         $mentions = SocialMediaTools::getMentions($rawText);
-                        $text = SocialMediaTools::replacHashtags(SocialMediaTools::replaceMentions(SocialMediaTools::replaceUrls($rawText)), 3);
+                        $text = SocialMediaTools::replaceUrls($rawText);
 
                         $slideTags = array_slice(SocialMediaTools::getHashtags($rawText), 0, 3);
 
