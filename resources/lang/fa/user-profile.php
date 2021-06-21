@@ -3,7 +3,7 @@ return [
     // Head
     'crop-profile-title' => "برش تصویر پروفایل",
     'crop-cover-title' => "برش تصویر کاور",
-    
+
     'connections' => "شبکه",
     'mutual-friends' => "دوستان مشترک",
     'joined' => "ملحق شده در",
@@ -120,4 +120,6 @@ return [
 
     "skill_credit" => "این مهارت را تایید کرده است|این مهارت را تایید کرده‌اند",
     "skill_credit_my_verb" => "تایید کرده‌اید",
+
+    "tag" => "برچسب|برچسب‌ها",
 ];

@@ -3,7 +3,7 @@ return [
     // Head
     'crop-profile-title' => "Crop Your Avatar",
     'crop-cover-title' => "Crop Your Cover",
-    
+
     'connections' => "Connections",
     'mutual-friends' => "Mutual Friend|Mutual Friends",
     'joined' => "Joined",
@@ -120,4 +120,6 @@ return [
 
     "skill_credit" => "Endorsed This Skill",
     "skill_credit_my_verb" => "Endorsed This Skill",
+
+    "tag" => "Tag|Tags",
 ];

@@ -6,7 +6,7 @@ div.page-cover {
 
 
     @media screen and (max-width: $sm-size) {
-        margin: 0 -15px;
+        margin: 0 -16px;
         width: calc(100% + 32px);
 
     }
@@ -168,7 +168,7 @@ div.page-cover {
                     }
                 }
 
-                .profile img {
+                img {
                     border: 8px solid $white;
                 }
             }

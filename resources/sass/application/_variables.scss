@@ -1,6 +1,11 @@
 // Body
 $body-bg: #F5F5F5;
 
+$border-widths: 2px;
+$spacer-desktop: 16px;
+$spacer-mobile: 12px;
+
+
 $breakpoint: 1188px;
 
 // Typography
@@ -23,7 +28,6 @@ $sub-heading: #757575;
 $icon-hover: #191919;
 $text-color: #424242;
 $headings: #191919;
-
 
 // Colors
 $border-color: rgb(224, 224, 224);
@@ -55,50 +59,53 @@ $error: #F44336;
 
 // Base grayscale colors definitions
 $white: #fff !default;
-$gray-100: #f8f9fa !default;
-$gray-200: #e9ecef !default;
-$gray-300: #dee2e6 !default;
-$gray-400: #ced4da !default;
-$gray-500: #adb5bd !default;
-$gray-600: #6c757d !default;
-$gray-700: #495057 !default;
-$gray-800: #343a40 !default;
-$gray-900: #212529 !default;
+$gray-100: #F5F5F5 !default;
+$gray-200: #EEEEEE !default;
+$gray-300: #E0E0E0 !default;
+$gray-400: #C8C8C8 !default;
+$gray-500: #757575 !default;
+$gray-600: #424242 !default;
 $black: #191919 !default;
 
 // Base colors definitions
 $blue: #0898DF !default;
-$indigo: #6610f2 !default;
-$purple: #6f42c1 !default;
-$pink: #e83e8c !default;
 $red: #F44336 !default;
 $orange: #E4CF23 !default;
 $yellow: #ffc107 !default;
 $green: #28a745 !default;
-$teal: #20c997 !default;
-$cyan: #17a2b8 !default;
+
+
+// Blue Varients
+$blue-dark: #3670AA;
+$blue-100: #E7F3FF;
+$blue-200: #CDEAF9;
+$blue-300: #0898DF;
+$blue-400: #0784C1;
+
+// Green Varients
+$green-dark: #3B955D;
+$green-100: #E5FAED;
+$green-200: #C7FEDC;
+$green-300: #00C853;
+
 
 // Theme color default definitions
 $primary: $dark !default;
 $secondary: $action !default;
 $success: $success !default;
-$info: $cyan !default;
+$info: $blue-300 !default;
 $warning: $dark-warning !default;
 $danger: $red !default;
 $light: #C8C8C8 !default;
 $dark: $black !default;
 
-// This table defines the theme colors (variant names)
-$theme-colors: () !default;
-$theme-colors: map-merge(('primary': $primary,
-        'secondary': $secondary,
-        'success': $success,
-        'info': $info,
-        'warning': $warning,
-        'danger': $danger,
-        'light': $light,
-        'dark': $dark),
-    $theme-colors);
-
+$theme-colors: ('primary': $primary,
+    'secondary': $secondary,
+    'success': $success,
+    'info': $info,
+    'warning': $warning,
+    'danger': $danger,
+    'light': $light,
+    'dark': $dark);
 
 $sm-size: 768px;

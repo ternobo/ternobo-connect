@@ -1,5 +1,5 @@
 <template>
-	<b-modal v-model="showModal" hide-footer title="Ternobo Community Guidelines" size="lg" :centered="true">
+	<b-modal v-model="showModal" hide-footer title="Community Guidelines" size="lg" :centered="true">
 		<div dir="ltr">
 			<p>
 				<span>

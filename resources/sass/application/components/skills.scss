@@ -181,6 +181,14 @@
     color: $grey;
     font-weight: normal;
 
+    .credits-text {
+        font-size: 14px;
+
+        @media screen and (max-width: $sm-size) {
+            font-size: 10px;
+        }
+    }
+
     a {
         color: $grey;
 

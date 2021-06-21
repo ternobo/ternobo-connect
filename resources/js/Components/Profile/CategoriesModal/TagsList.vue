@@ -10,7 +10,7 @@
 				</div>
 				<div class="slideup-title">
 					<i class="material-icons me-1">layers</i>
-					{{ __.get("user-profile.tags") }}
+					{{ __.choice("user-profile.tag", 2) }}
 				</div>
 				<div>
 					<i class="material-icons" @click="$emit('update:show', false)" v-if="!edit">check</i>

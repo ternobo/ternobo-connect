@@ -459,14 +459,6 @@ img {
     }
 }
 
-.modal-body {
-    padding: 32px;
-
-    @media screen and (max-width: $sm-size) {
-        padding: 12px;
-    }
-}
-
 .modal-header .close {
     padding: 0;
     margin: 0;

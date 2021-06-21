@@ -7,7 +7,7 @@
 		<connetions-modal :show.sync="showConnections" :page="page"></connetions-modal>
 		<div class="page-name">
 			<div class="profile-info">
-				<ProfileImage ref="profileImage" :canChange="canEdit && !profileEdit" :class="{ disabled: profileEdit }" :src="page.profile"></ProfileImage>
+				<ProfileImage ref="profileImage" :canChange="canEdit && !profileEdit" :class="{ disabled: profileEdit }" class="profile-xxlg" imgClass="profile-xxlg" :src="page.profile"></ProfileImage>
 				<span class="name d-flex align-items-center">
 					<strong class="name">
 						{{ page.name }}

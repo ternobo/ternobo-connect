@@ -17,7 +17,7 @@
 			</div>
 			<div class="filter-item" @click="showTagsMenu = true">
 				<i class="material-icons-outlined">label</i>
-				{{ __.get("user-profile.tags") }}
+				{{ __.choice("user-profile.tag", 2) }}
 			</div>
 		</div>
 	</div>

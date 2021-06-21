@@ -5,7 +5,7 @@
 			<div class="d-flex flex-column justify-center align-items-center w-100 err">
 				<i @click="onShown" class="hover-dark text-muted material-icons-outlined">refresh</i>
 				<br />
-				<span class="text-muted">{{ __.get("messages.connetion-error") }}</span>
+				<span class="text-muted">{{ __.get("messages.connection-error") }}</span>
 			</div>
 		</div>
 		<div class="likes-list" v-else v-infinite-scroll="loadMore" :infinite-scroll-distance="10">

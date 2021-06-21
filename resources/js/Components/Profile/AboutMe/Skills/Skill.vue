@@ -22,15 +22,15 @@
 							<i class="material-icons">arrow_circle_up</i>
 							<span>{{ formatNumber(credits_count, "0a") }}</span>
 						</div>
-						<span class="font-14" v-if="skillVal.credit_text != null && credits_count >= 1">
+						<span class="credits-text" v-if="skillVal.credit_text != null && credits_count >= 1">
 							<wire-link v-if="skillVal.credit_text.first" :href="userURL(skillVal.credit_text.first)">
-								<strong class="font-14">{{ skillVal.credit_text.first.name }}</strong>
+								<strong>{{ skillVal.credit_text.first.name }}</strong>
 								{{ credits_count > 2 ? "،" : "" }}
 							</wire-link>
 
 							<span v-if="credits_count == 2">و</span>
 							<wire-link v-if="skillVal.credit_text.second" :href="userURL(skillVal.credit_text.second)">
-								<strong class="font-14">{{ skillVal.credit_text.second.name }}</strong>
+								<strong>{{ skillVal.credit_text.second.name }}</strong>
 							</wire-link>
 							<span>{{ credits_count - 2 > 0 ? " " + __.get("application.more-people", { number: credits_count - 2 }) : "" }} {{ skillVal.credit_text.verb }}</span>
 						</span>

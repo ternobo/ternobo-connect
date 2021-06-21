@@ -13,9 +13,18 @@
     align-items: center;
 
     @media screen and (max-width: $sm-size) {
-        font-size: 12px;
-        top: 16px;
+        font-size: 14px;
+        top: 24px;
 
+    }
+}
+
+
+.modal-body {
+    padding: 32px;
+
+    @media screen and (max-width: $sm-size) {
+        padding: 20px;
     }
 }
 

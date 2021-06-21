@@ -47,8 +47,8 @@
 									<div class="d-flex align-items-center mb-5">
 										<label class="font-weight-bold mb-0 font-20 text-dark">{{ __.get("register.profile-image") }}</label>
 									</div>
-									<div class="d-flex align-content-center justify-content-center">
-										<profile-image @updated="updateProfile" ref="profileelem" :canChange="true" :showIcons="false" size="profile-register" class="mb-0 me-32px" :src="profile"></profile-image>
+									<div class="d-flex align-items-center justify-content-center">
+										<profile-image @updated="updateProfile" ref="profileelem" :canChange="true" :showIcons="false" size="profile-lg" class="mb-0 mt-0 me-32px" :src="profile"></profile-image>
 										<button class="btn upload-profile-btn" @click="$refs['profileelem'].openFileSelect()">
 											<i class="material-icons-outlined text-dark me-2">cloud_upload</i>
 											{{ __.get("application.upload") }}
