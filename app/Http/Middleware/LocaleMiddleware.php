@@ -23,8 +23,6 @@ class LocaleMiddleware
     {
         if (Cookie::get("website_locale") != null) {
             App::setLocale(Cookie::get("website_locale"));
-        } else {
-            App::setLocale("fa");
         }
 
         $locale = App::getLocale();
