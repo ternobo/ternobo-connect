@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image as ImageFacades;
 use Intervention\Image\Image;
+use PHPHtmlParser\Dom;
+use PHPHtmlParser\Options;
 
 class SocialMediaTools
 {
@@ -44,6 +46,19 @@ class SocialMediaTools
                 return "<a target='_blank' href='" . URLTools::toURL($match) . "'>$match</a>";
             }
         }, $text));
+    }
+
+    public static function safeHTML($content)
+    {
+        $dom = new Dom();
+        $dom->setOptions((new Options())
+                ->setRemoveSmartyScripts(true)
+                ->setPreserveLineBreaks(true)
+                ->setWhitespaceTextNode(true)
+                ->setRemoveScripts(true)
+                ->setRemoveStyles(true));
+        $dom->loadStr($content);
+        return $dom->outerHtml;
     }
 
     public static function replaceMentions($text)

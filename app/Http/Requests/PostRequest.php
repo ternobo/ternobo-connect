@@ -36,7 +36,7 @@ class PostRequest extends FormRequest
             'slides.required' => 'هیچ محتوایی وجود ندارد',
             'slides.array' => 'slides is not array',
             'slides.max' => 'you can\'t have more than 12 slides in one post',
-            'slides.*.media.mimes' => "فقط امکان فایل‌های jpeg, png, jpg, gif مجاز است",
+            'slides.*.media.content.mimes' => "فقط امکان فایل‌های jpeg, png, jpg, gif مجاز است",
         ];
     }
 
@@ -49,7 +49,7 @@ class PostRequest extends FormRequest
     {
         return [
             "slides" => ['required', 'array', 'min:1', "max:12"],
-            "slides.*.media" => ["mimes:jpeg,png,jpg,gif"],
+            "slides.*.media.content" => ["mimes:jpeg,png,jpg,gif"],
             "deletedSlides" => ["json"],
             "draft" => [Rule::in(['1', '0'])],
             "canDonate" => [Rule::in(['1', '0'])],

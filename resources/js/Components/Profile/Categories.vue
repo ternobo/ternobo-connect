@@ -149,6 +149,12 @@ export default {
 	},
 	created() {
 		this.list = this.categories;
+		if (typeof this.value == "object") {
+			this.activeCategory = this.value.category;
+			this.activeTag = this.value.activeTag;
+		} else {
+			this.action = this.value;
+		}
 	},
 	data() {
 		return {
@@ -184,6 +190,9 @@ export default {
 		CategoriesModal,
 	},
 	props: {
+		value: {
+			default: "all",
+		},
 		pageId: {
 			default: 0,
 			required: true,

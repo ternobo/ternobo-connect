@@ -131,13 +131,16 @@ export default {
 			let data = this.content;
 			let formData = new FormData();
 			data.forEach((item, index) => {
-				for (let slide of item.content) {
+				for (let sort = 0; sort < item.content.length; sort++) {
+					let slide = item.content[sort];
 					if (slide.content != "" && slide.content != null) {
 						if (slide.type == "media" && typeof slide.content != "object") {
-							formData.append(`slides[${index}][${slide.type}_notChange]`, slide.content);
+							formData.append(`slides[${index}][${slide.type}_notChange][content]`, slide.content);
+							formData.append(`slides[${index}][${slide.type}_notChange][sort]`, sort);
 							continue;
 						}
-						formData.append(`slides[${index}][${slide.type}]`, slide.content);
+						formData.append(`slides[${index}][${slide.type}][content]`, slide.content);
+						formData.append(`slides[${index}][${slide.type}][sort]`, sort);
 					}
 				}
 				if (this.post && !isUUID.v4(item.id)) {
@@ -184,7 +187,7 @@ export default {
 					}
 				})
 				.catch((err) => {
-					this.toast(__.get("messages.save-error"));
+					console.log(err);
 				})
 				.then(() => {
 					if (draft) {

@@ -153,6 +153,10 @@ export default {
 
 		if (this.current_tab == "activities") {
 			this.showEdit = false;
+			const params = new URLSearchParams(window.location.search)
+			if(params.get("filters")){
+				this.filters = JSON.parse(params.get("filters"));
+			}
 			axios
 				.post("/" + this.page.slug + "/actions", this.filters)
 				.then((response) => {

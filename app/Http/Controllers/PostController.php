@@ -63,7 +63,6 @@ class PostController extends Controller
             "category_id" => $category,
             'can_tip' => $request->canDonate,
         ]);
-
         foreach ($slides as $slide_input) {
             if (!(count($slide_input) > 0)) {
                 continue;
@@ -72,17 +71,16 @@ class PostController extends Controller
                 'page_id' => $user->personalPage->id,
                 'post_id' => $post->id,
             ]);
-            $sort = 0;
             foreach ($slide_input as $type => $content) {
+                $sort = (int) $content['sort'];
+                $content = $content['content'];
                 switch ($type) {
                     case "text":
                         // Process
-                        $rawText = htmlentities($content);
-                        $text_mentions = SocialMediaTools::getMentions($rawText);
+                        $text = SocialMediaTools::safeHTML($content);
+                        $text_mentions = SocialMediaTools::getMentions($text);
 
-                        $text = SocialMediaTools::replaceUrls($rawText);
-
-                        $slideTags = array_slice(SocialMediaTools::getHashtags($rawText), 0, 3);
+                        $slideTags = array_slice(SocialMediaTools::getHashtags($text), 0, 3);
 
                         PostContent::query()->create([
                             'slide_id' => $slide->id,
@@ -120,7 +118,6 @@ class PostController extends Controller
                         ]);
                         break;
                 }
-                $sort++;
             }
         }
         SocialMediaTools::callMentions($mentions, $post->id);
@@ -349,7 +346,6 @@ class PostController extends Controller
                 'page_id' => $user->personalPage->id,
                 'post_id' => $post->id,
             ]);
-            $sort = 0;
 
             $added_elements = [];
 
@@ -359,6 +355,9 @@ class PostController extends Controller
                 if ($type == "id") {
                     continue;
                 }
+
+                $sort = (int) $content['sort'];
+                $content = $content['content'];
                 $typeSql = $type;
                 if ($type == "media_notChange") {
                     $typeSql = "media";
@@ -374,11 +373,10 @@ class PostController extends Controller
                         array_push($items, "text");
 
                         // Process
-                        $rawText = htmlentities($content);
-                        $mentions = SocialMediaTools::getMentions($rawText);
-                        $text = SocialMediaTools::replaceUrls($rawText);
+                        $text = SocialMediaTools::safeHTML($content);
+                        $mentions = SocialMediaTools::getMentions($text);
 
-                        $slideTags = array_slice(SocialMediaTools::getHashtags($rawText), 0, 3);
+                        $slideTags = array_slice(SocialMediaTools::getHashtags($text), 0, 3);
 
                         if ($postContent == null) {
                             PostContent::query()->create([
@@ -445,9 +443,6 @@ class PostController extends Controller
                             break;
                         }
                 }
-
-                $sort++;
-
             }
             $deletedItems = array_diff($availableOptions, $items);
             PostContent::query()->whereIn("type", $deletedItems)->where("slide_id", $slide->id)->delete();
