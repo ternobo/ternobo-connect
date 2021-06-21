@@ -398,7 +398,6 @@ class PostController extends Controller
                         if (count($tags) < 3) {
                             $tags = array_merge($slideTags, $tags);
                         }
-
                         break;
 
                     case "title":

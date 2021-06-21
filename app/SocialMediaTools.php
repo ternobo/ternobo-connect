@@ -39,7 +39,7 @@ class SocialMediaTools
         // The Regular Expression filter
         $reg_exUrl = "/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/";
 
-        return (preg_replace_callback($reg_exUrl, function ($matches) use($this) {
+        return (preg_replace_callback($reg_exUrl, function ($matches) {
             foreach ($matches as $match) {
                 return "<a target='_blank' href='" . URLTools::toURL($match) . "'>$match</a>";
             }
