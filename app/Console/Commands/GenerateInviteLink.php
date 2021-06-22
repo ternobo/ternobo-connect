@@ -13,7 +13,7 @@ class GenerateInviteLink extends Command
      *
      * @var string
      */
-    protected $signature = 'make:invite';
+    protected $signature = 'make:invite {user_id?}';
 
     /**
      * The console command description.
@@ -39,7 +39,13 @@ class GenerateInviteLink extends Command
      */
     public function handle()
     {
-        $users = User::all();
+        $users = [];
+        if ($this->argument("user_id") != null) {
+            $users = User::query()->where("id", $this->argument("user_id"))->get();
+        } else {
+            $users = User::all();
+        }
+
         foreach ($users as $user) {
             InviteLink::createLink($user->id);
             InviteLink::createLink($user->id);
