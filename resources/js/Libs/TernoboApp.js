@@ -25,8 +25,6 @@ import PersianDate from 'persian-date';
 
 import Skeleton from "../Components/Skeleton/Skeleton.vue";
 
-import TextareaParser from "../Components/NewPost/Editor/TextareaParser";
-
 window.PersianDate = PersianDate;
 
 const TernoboApp = {};

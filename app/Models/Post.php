@@ -213,5 +213,4 @@ class Post extends Model
     {
         static::addGlobalScope(new PostDraftScope);
     }
-
 }
