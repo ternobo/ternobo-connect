@@ -99,29 +99,6 @@ export default {
 				// For Safari
 				return message;
 			};
-			this.deletedSlides = [];
-			if (this.post) {
-				this.category = this.post.category;
-				this.canDonate = this.post.can_tip;
-				let content = _.cloneDeep(this.post.slides);
-				for (let i = 0; i < content.length; i++) {
-					let item = content[i];
-					item.icon = "more_horiz";
-					let items = item.content;
-					for (let i = 0; i < items.length; i++) {
-						let elem = items[i];
-						if (elem.type == "media") {
-							item.icon = "image";
-							break;
-						} else {
-							item.icon = "text_fields";
-						}
-					}
-					item.active = false;
-				}
-				content[0].active = true;
-				this.content = content;
-			}
 		},
 		submitPost(draft = false) {
 			if (draft) {
@@ -249,6 +226,29 @@ export default {
 			if (this.$store.state.shared.currentPage.categories != null) {
 				this.categories = this.$store.state.shared.currentPage.categories;
 			}
+		}
+		this.deletedSlides = [];
+		if (this.post) {
+			this.canDonate = this.post.can_tip;
+			this.category = this.post.category;
+			let content = _.cloneDeep(this.post.slides);
+			for (let i = 0; i < content.length; i++) {
+				let item = content[i];
+				item.icon = "more_horiz";
+				let items = item.content;
+				for (let i = 0; i < items.length; i++) {
+					let elem = items[i];
+					if (elem.type == "media") {
+						item.icon = "image";
+						break;
+					} else {
+						item.icon = "text_fields";
+					}
+				}
+				item.active = false;
+			}
+			content[0].active = true;
+			this.content = content;
 		}
 	},
 	computed: {
