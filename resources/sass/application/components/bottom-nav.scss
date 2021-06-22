@@ -11,6 +11,14 @@
     z-index: 999;
     background: $body-bg;
 
+    @if $direction=='rtl' {
+        direction: ltr;
+    }
+
+    @else {
+        direction: rtl;
+    }
+
     a {
         @extend .col;
         display: flex;

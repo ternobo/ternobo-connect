@@ -1,5 +1,5 @@
 <template>
-	<b-modal v-model="showMenu" hide-footer title="" modal-class="slide-up" body-class="p-0" size="md" :centered="true">
+	<b-modal v-model="show" hide-footer title="" modal-class="slide-up" body-class="p-0" size="md" :centered="true">
 		<template #modal-header>
 			<h5 class="modal-title">
 				<i class="material-icons-outlined">layers</i>

@@ -15,7 +15,7 @@ import SocialsCard from "./SocialsCard";
 export default {
 	computed: {
 		showWebsites() {
-			if (this.checkUser(this.page.user_id) || (this.page.contact_data != null && this.page.contact_data.websites != null)) {
+			if (this.checkUser(this.page.user_id) || (this.page.contact_data != null && this.page.contact_data.websites != null && this.page.contact_data.websites.length > 0)) {
 				return true;
 			}
 			return false;

@@ -101,6 +101,7 @@ export default {
 			};
 			this.deletedSlides = [];
 			if (this.post) {
+				this.category = this.post.category;
 				this.canDonate = this.post.can_tip;
 				let content = _.cloneDeep(this.post.slides);
 				for (let i = 0; i < content.length; i++) {

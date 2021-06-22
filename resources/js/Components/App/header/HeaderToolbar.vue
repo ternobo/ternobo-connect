@@ -20,7 +20,7 @@
 		<div v-else>
 			<login-modal :show.sync="showLogin"></login-modal>
 			<div class="d-flex align-items-center">
-				<button class="text-dark btn btn-transparent font-14 py-1" @click="showLogin = true">ورود</button>
+				<button class="text-dark btn btn-transparent font-14 py-1" @click="showLogin = true">{{ __.get("application.login") }}</button>
 			</div>
 		</div>
 

@@ -21,6 +21,7 @@ class ZarinpalController extends Controller
 {
     public function tipPost(IRTipPostRequest $request)
     {
+        $post = Post::query()->findOrFail($request->post_id);
 
         $gateways = UserOption::getOption("payment_gateways", [
             'paypal' => [
@@ -31,13 +32,12 @@ class ZarinpalController extends Controller
                 'merchant_id' => '',
                 'enabled' => false,
             ],
-        ]);
+        ], $post->page->user_id);
 
         if ($gateways['zarinpal']['enabled']) {
 
             $merchantId = $gateways['zarinpal']['merchant_id'];
 
-            $post = Post::find($request->post_id);
             $anonymous = $request->anonymous;
             $invoice = new Invoice();
             $amount = (int) $request->amount;

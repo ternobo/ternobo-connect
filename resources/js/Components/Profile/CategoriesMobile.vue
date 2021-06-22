@@ -2,7 +2,7 @@
 	<div :class="{ 'mobile-filters-sticky': isSticky }">
 		<CategoriesModal @categoryAdded="addCategory" :show.sync="edit" :categories.sync="list"></CategoriesModal>
 		<categories-list :categories="list" :show.sync="showCategoriesMenu" @edit="edit = true" :active-category.sync="activeCategory"></categories-list>
-		<tags-list :tags="tags" :show.sync="showTagsMenu" :activeTag="activeTag" @remove="removeTag" @select="tagAction" @cancel="cancelRemove" @save="saveTagRemove"></tags-list>
+		<tags-list :tags="tags" :show.sync="showTagsMenu" :pageId="pageId" :activeTag="activeTag" @remove="removeTag" @select="tagAction" @cancel="cancelRemove" @save="saveTagRemove"></tags-list>
 
 		<div class="profile-action-filter item-filters justify-content-between">
 			<div class="filter-item" @click="action = 'all'" :class="{ active: action == 'all' }"><i class="material-icons-outlined">library_books</i> {{ __.choice("application.post", 2) }}</div>
