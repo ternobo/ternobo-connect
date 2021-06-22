@@ -73,7 +73,18 @@ TernoboApp.install = function (Vue, options) {
         props: ['text'],
         methods: {
             convertHashTags: function (content) {
-                content = content.replace(/\B#(\S+)/gu, "<wire-link href='/tags/$1' class='text-action'>#$1</wire-link>").replace(/\B@(\w+)/gu, "<wire-link href='/$1' class='mention-item'>@$1</wire-link>");
+                content = content.replace(/\B#(\S+)/gu, "<wire-link href='/tags/$1' class='text-action'>#$1</wire-link>")
+                    .replace(/\B@(\w+)/gu, "<wire-link href='/$1' class='mention-item'>@$1</wire-link>")
+                    .replace(
+                        /(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/gi,
+                        function (match, space, url) {
+                            var hyperlink = url;
+                            if (!hyperlink.match("^https?://")) {
+                                hyperlink = "http://" + hyperlink;
+                            }
+                            return " " + '<a target="' + url + '" href="' + hyperlink + '">' + url + "</a>";
+                        }
+                    );;
                 const spanned = `<pre class='post-content--text'>${content}</pre>`
                 return spanned;
             }
