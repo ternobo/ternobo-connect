@@ -9,7 +9,7 @@
 				<strong class="text-black">{{ this.$store.state.user.name }} <i v-if="$store.state.user.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 				<small class="text-muted">{{ this.$store.state.user.short_bio }}</small>
 			</wire-link>
-			<i class="material-icons-outlined copyprofile-icon" v-clipboard="profile_url">link</i>
+			<i class="material-icons-outlined copyprofile-icon" v-b-tooltip.hover.ds700 key="copyusername_item" :title="__.get('application.copy')" v-clipboard="profile_url">link</i>
 		</div>
 	</div>
 </template>

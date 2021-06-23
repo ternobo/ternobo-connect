@@ -23,7 +23,7 @@
 				<wire-link href="/feedbacks" as="a" class="list-group-item border-0 headermenu-item">
 					<a class="m-0"><i class="material-icons-outlined">emoji_objects</i> {{ __.choice("feedbacks.feedback", 2) }} </a>
 				</wire-link>
-				<li class="list-group-item border-top headermenu-item hover-danger" @click="logout">
+				<li class="list-group-item border-0 headermenu-item hover-danger" @click="logout">
 					<form action="/logout" method="POST" ref="logoutForm">
 						<button type="button" class="text-right bg-transparent m-0 p-0 border-0 text-grey"><i class="material-icons" v-if="appDirection == 'ltr'">logout</i> <i class="material-icons" style="transform: rotate(180deg)" v-else>logout</i> {{ __.get("application.signout") }}</button>
 					</form>
