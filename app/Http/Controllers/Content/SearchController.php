@@ -85,7 +85,9 @@ class SearchController extends Controller
             $users->appends(['q' => $request->q]);
             $results = $users;
         }
-        SearchSuggestion::query()->where("name", $request->q)->firstOrCreate(array("name" => $request->q));
+        if (count($results) > 0) {
+            SearchSuggestion::query()->where("name", $request->q)->firstOrCreate(array("name" => $request->q));
+        }
         return $results;
     }
 
