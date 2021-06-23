@@ -61,5 +61,5 @@ return [
     'submit' => "Submit",
     'deactivate' => "Deactivate",
     'done' => "Done",
-
+    'close' => "Close",
 ];

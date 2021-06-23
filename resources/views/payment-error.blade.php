@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>انتقال به درگاه پرداخت</title>
+    <title>{{ __('payment.payment-error-title') }}</title>
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
 
     <style>
@@ -82,12 +82,12 @@
 
 <body>
     <h2 class="text-center font-18 text-danger">
-        تراکنش با خطا مواجه شد
+        {{ __('payment.payment-error-title') }}
     </h2>
     <p class="text-center font-16 text-success">
-        در صورتی که مبلغ تراکنش از حساب شما کسر شده، حداکثر تا ۷۲ ساعت آینده برگشت خواهد خورد.
+        {{ __('payment.payment-error-info') }}
     </p>
-    <button class="btn btn-primary" onclick="window.close()">بستن</button>
+    <button class="btn btn-primary" onclick="window.close()">{{ __('application.close') }}</button>
 </body>
 
 </html>

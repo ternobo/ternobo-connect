@@ -60,4 +60,5 @@ return [
     'submit' => "ثبت",
     'deactivate' => "غیرفعال کردن",
     'done' => "تمام",
+    'close' => "بستن",
 ];

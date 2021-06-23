@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>انتقال به درگاه پرداخت</title>
+    <title>{{ __('payment.payment-success') }}</title>
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
 
     <style>
@@ -82,12 +82,12 @@
 
 <body>
     <h2 class="text-center font-18 text-success">
-        پرداخت موفق
+        {{ __('payment.payment-success') }}
     </h2>
     <p class="text-center font-16 text-success">
-        می‌توانید اطلاعات پرداخت را در صفحه حمایت‌های خود مشاهده کنید
+        {{ __('payment.payment-done-info') }}
     </p>
-    <button class="btn btn-primary" onclick="window.close()">بستن</button>
+    <button class="btn btn-primary" onclick="window.close()">{{ __('application.close') }}</button>
 </body>
 
 </html>

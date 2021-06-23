@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>انتقال به درگاه پرداخت</title>
+    <title>{{ __('payment.payment-error-title') }}</title>
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
 
     <style>
@@ -73,8 +73,8 @@
 </head>
 
 <body class="p-5 text-center">
-    <h2 class="text-danger font-18 mb-3 text-center">توکن پرداخت انتشار دهنده محتوا نامعتبر است</h2>
-    <button class="btn btn-primary" onclick="window.close()">بستن</button>
+    <h2 class="text-danger font-18 mb-3 text-center">{{ __('payment.invalid-token') }}</h2>
+    <button class="btn btn-primary" onclick="window.close()">{{ __('application.close') }}</button>
 </body>
 
 </html>
