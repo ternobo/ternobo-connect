@@ -26,7 +26,7 @@
 						<i class="material-icons-outlined">group</i> <span>{{ __.get("user-profile.connections") }}</span>
 					</div>
 					<i class="btn profile-header-btn-edit material-icons-outlined" :class="{ disabled: profileEdit }" v-if="canEdit" @click="doEdit">edit</i>
-					<i class="material-icons-outlined report-icon" v-else @click="showReport = true">report</i>
+					<i class="material-icons-outlined report-icon" v-else-if="Boolean($store.user)" @click="showReport = true">report</i>
 				</div>
 				<div class="invite_badge" v-if="$root.isDesktop">
 					<wire-link :href="`/${invited_by.username}`" class="invite_profile clickable" v-if="invited_by != null">

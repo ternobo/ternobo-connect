@@ -1,11 +1,11 @@
 <template>
 	<b-modal v-model="showModal" @show="onShow" hide-footer :title="__.get('user-profile.connections')" size="md" :centered="true">
 		<tabs @selected="tabSelect" tabsClass="connections-tab" :centered="false" :compact="true">
-			<tab :name="__.get('user-profile.followings')" id="followings" :selected="true">
+			<tab :name="__.get('user-profile.followings')" id="followings" :selected="current_tab == 'followings'">
 				<pages-list-loading style="min-height: 200px" v-if="loading"></pages-list-loading>
 				<div style="min-height: 200px" class="d-flex align-items-center justify-content-center loading" v-else-if="error">
 					<div class="d-flex flex-column justify-center align-items-center w-100 err">
-						<i @click="onShown" class="hover-dark text-muted material-icons-outlined">refresh</i>
+						<i @click="onShow" class="hover-dark text-muted material-icons-outlined">refresh</i>
 						<br />
 						<span class="text-muted">{{ __.get("messages.connection-error") }}</span>
 					</div>
@@ -24,14 +24,14 @@
 						</wire-link>
 						<follow-button :page="connection.following.id"></follow-button>
 					</div>
-					<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>
+					<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMoreConnection"></infinite-loading>
 				</div>
 			</tab>
-			<tab :name="__.get('user-profile.followers')" id="followers">
+			<tab :name="__.get('user-profile.followers')" id="followers" :selected="current_tab == 'followers'">
 				<pages-list-loading style="min-height: 200px" v-if="loading"></pages-list-loading>
 				<div style="min-height: 200px" class="d-flex align-items-center justify-content-center loading" v-else-if="error">
 					<div class="d-flex flex-column justify-center align-items-center w-100 err">
-						<i @click="onShown" class="hover-dark text-muted material-icons-outlined">refresh</i>
+						<i @click="onShow" class="hover-dark text-muted material-icons-outlined">refresh</i>
 						<br />
 						<span class="text-muted">{{ __.get("messages.connection-error") }}</span>
 					</div>
@@ -50,7 +50,7 @@
 						</wire-link>
 						<follow-button :page="connection.follower.id"></follow-button>
 					</div>
-					<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>
+					<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMoreConnection"></infinite-loading>
 				</div>
 			</tab>
 			<template slot="custom-item">
@@ -138,6 +138,7 @@ export default {
 			if (tab !== this.current_tab) {
 				this.connections = [];
 				this.loading = true;
+				this.error = false;
 				this.current_tab = tab;
 				axios
 					.post(`/${this.page.slug}/${this.current_tab}`)

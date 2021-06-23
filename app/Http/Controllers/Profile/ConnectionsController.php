@@ -112,7 +112,7 @@ class ConnectionsController extends Controller
     {
         $page = Page::query()->where("slug", $page)->firstOrFail();
         // dd($page);
-        $followings = $page->followings();
+        $followings = $page->followings()->whereHas("page");
         if ($request->filled("q")) {
             $followings = $followings->whereHas("page", function ($query) use ($request) {
                 $query->where('name', 'like', "%$request->q%");
@@ -120,8 +120,9 @@ class ConnectionsController extends Controller
         } else {
             $followings = $followings->paginate()->toArray();
         }
-
-        if ($page->user_id != Auth::user()->id) {
+        if (Auth::guest()) {
+            unset($followings['total']);
+        } elseif ($page->user_id != Auth::user()->id) {
             unset($followings['total']);
         }
         return response()->json(['result' => true, "connections" => $followings]);
@@ -132,13 +133,15 @@ class ConnectionsController extends Controller
         $page = Page::query()->where("slug", $page)->firstOrFail();
         $followers = $page->followers();
         if ($request->filled("q")) {
-            $followers = $followers->whereHas("page", function ($query) use ($request) {
+            $followers = $followers->whereHas("follower", function ($query) use ($request) {
                 $query->where('name', 'like', "%$request->q%");
             })->paginate(20)->appends("q", $request->q)->toArray();
         } else {
-            $followers = $followers->paginate()->toArray();
+            $followers = $followers->whereHas("follower")->paginate()->toArray();
         }
-        if ($page->user_id != Auth::user()->id) {
+        if (Auth::guest()) {
+            unset($followers['total']);
+        } elseif ($page->user_id != Auth::user()->id) {
             unset($followers['total']);
         }
         return response()->json(['result' => true, "connections" => $followers]);
