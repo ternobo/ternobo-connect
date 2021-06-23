@@ -3,8 +3,8 @@
 		<div v-if="showDonate">
 			<div class="d-flex justify-content-between donate-modal-header">
 				<div class="d-flex align-items-center">
-					<lazy-image :src="user.profile" class="profile-xsm mb-0 me-2" imgClass="profile-xsm" />
-					<strong>{{ user.name }}</strong>
+					<lazy-image :src="post_data.page.profile" class="profile-xsm mb-0 me-2" imgClass="profile-xsm" />
+					<strong>{{ post_data.page.name }}</strong>
 				</div>
 				<div>
 					<div class="currency-selector">
@@ -73,7 +73,7 @@ export default {
 			return !isNaN(parseInt(this.amount)) ? parseInt(this.amount) : 0;
 		},
 	},
-	props: ["post", "showDonate"],
+	props: ["post", "post_data", "showDonate"],
 	name: "DonationModal",
 };
 </script>

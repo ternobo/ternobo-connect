@@ -3,7 +3,7 @@
 		<EmbedCodeModal :post="post_data" :show.sync="showEmbed"></EmbedCodeModal>
 		<new-post-modal v-if="checkUser(post_data.page.user_id)" :post.sync="post_data" :show.sync="edit"></new-post-modal>
 		<likes-modal :item="post_data.id" :show.sync="showLikes"></likes-modal>
-		<donation-modal :post="post_data.id" :show.sync="showTips" :showDonate="!checkUser(post_data.page.user_id) && post_data.can_tip"></donation-modal>
+		<donation-modal :post="post_data.id" :post_data="post_data" :show.sync="showTips" :showDonate="!checkUser(post_data.page.user_id) && post_data.can_tip"></donation-modal>
 		<div class="post-header pt-0">
 			<wire-link class="publisher" :href="'/' + post_data.page.slug">
 				<lazy-image class="profile-sm mb-0" img-class="profile-sm" :src="post_data.page.profile" />
