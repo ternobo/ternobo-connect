@@ -1,6 +1,7 @@
 import TimeAgo from "javascript-time-ago";
 import fa from "javascript-time-ago/locale/fa";
 import en from "javascript-time-ago/locale/en";
+import moment from "jalali-moment";
 
 TimeAgo.addLocale(fa);
 TimeAgo.addLocale(en);
@@ -44,12 +45,12 @@ export default function (Vue) {
     }
 
     Vue.prototype.formatTime = function (time, format) {
-        return window.lang == "fa" ? new PersianDate(time).format(format) : moment(time).format(format);
+        return window.lang == "fa" ? moment.from(time, "en").locale("fa").format(format) : moment(time).format(format);
     }
 
     Vue.prototype.getDateObject = (date) => {
         if (window.lang == "fa") {
-            date = new PersianDate(date);
+            date = moment(date).locale("fa");
             return {
                 year: date.year(),
                 month: { id: date.month(), label: new PersianDate()._monthName(date.month()) },
