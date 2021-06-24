@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\CaseInsensitiveUriValidator;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Matching\UriValidator;
+use Illuminate\Routing\Route as IlluminateRoute;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +39,12 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->configureRateLimiting();
+
+        $validators = IlluminateRoute::getValidators();
+        $validators[] = new CaseInsensitiveUriValidator;
+        IlluminateRoute::$validators = array_filter($validators, function ($validator) {
+            return get_class($validator) != UriValidator::class;
+        });
 
         $this->routes(function () {
             Route::prefix('api')

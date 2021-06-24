@@ -10,7 +10,7 @@
 			<i class="material-icons arrow" v-else-if="this.slides.length > maxSlides" @click="updateTransform(200)">keyboard_arrow_left</i>
 			<div class="scrollable-list" @wheel="onWheel">
 				<div class="new-post-slider" :style="{ transform: `translateX(${transformBy}px)` }">
-					<draggable v-bind="dragOptions" :list="slides" draggable=".slide-item" class="drag-container" v-model="slides">
+					<draggable v-bind="dragOptions" draggable=".slide-item" class="drag-container" v-model="slides">
 						<slide-item v-for="(slide, index) in slides" :hideDelete="slides.length <= 1" :key="`slides_${slide.id}`" :class="{ active: slide.id == slides[activeIndex].id }" @delete="deleteItem(index)">
 							<i @click="selectSlide(index)" class="material-icons-outlined">{{ slide.icon }}</i>
 						</slide-item>

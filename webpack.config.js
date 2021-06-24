@@ -1,3 +1,4 @@
+const mix = require('laravel-mix');
 const path = require('path');
 const RTLCSSPlugin = require('rtlcss-webpack-mix-plugin');
 
@@ -19,7 +20,7 @@ module.exports = {
     resolve: {
         alias: {
             '@': path.resolve('resources/js'),
-            'vue$': 'vue/dist/vue.js',
+            'vue$': mix.inProduction() ? 'vue/dist/vue.min.js' : 'vue/dist/vue.js',
         },
     },
 };
