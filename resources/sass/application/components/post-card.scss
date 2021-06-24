@@ -556,6 +556,14 @@
 
     div.post-content--text {
         margin-bottom: 16px;
+
+        a {
+            color: $action;
+
+            &:hover {
+                color: $action-hover;
+            }
+        }
     }
 
     pre {
