@@ -19,16 +19,15 @@ class SearchController extends Controller
         $result = "";
         $replaces = array("+" => "", "-" => "", ">" => "", "<" => "", "(" => "", ")" => "", "~" => "", "*" => "", "“" => "", "”" => "", "\"" => "", "\"" => "", "ا" => "+ا*" . " +آ*");
         foreach ($search as $keyword) {
-            foreach ($replaces as $key => $value) {
-                //     echo $key;
-                $keyword = str_replace(mb_convert_encoding($value, 'UTF-8'), $key, $keyword);
-            }
-
+            // foreach ($replaces as $key => $value) {
+            //     $keyword = str_replace($key, mb_convert_encoding($value, 'UTF-8'), $keyword);
+            // }
+            $search = preg_replace('/[+\-><\(\)~*\"@]+/', ' ', preg_replace('/[^\p{L}\p{N}_]+/u', ' ', $keyword));
             if ($first) {
-                $result .= "+$keyword*";
+                $result .= "+$search*";
                 $first = false;
             } else {
-                $result .= " +$keyword*";
+                $result .= " +$search*";
             }
         }
         return $result;
@@ -36,8 +35,9 @@ class SearchController extends Controller
 
     private function handleGetSearch(Request $request)
     {
-        if ($request->q === ".*" || $request->q === "*") {
-            return abort(401);
+        $invalid = ['*', ".*", "+", "@"];
+        if (in_array($request->q, $invalid)) {
+            return abort(400);
         }
         $search = $this->generateSearch(explode(" ", $request->q));
         $results = array();

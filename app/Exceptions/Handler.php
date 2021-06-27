@@ -60,7 +60,7 @@ class Handler extends ExceptionHandler
         if (!config('app.debug')) {
             if ($request->expectsJson()) {
                 return response()->json(['error' => $response->status()], $response->status());
-            } else if (in_array($response->status(), [500, 503, 404, 403])) {
+            } else if (in_array($response->status(), [500, 503, 404, 403, 400])) {
                 return TernoboWire::render('Error', ['status' => $response->status()], false, $response->status());
             } else if ($response->status() === 419) {
                 return back()->with([
