@@ -11,6 +11,7 @@ use App\Models\Page;
 use App\Models\Post;
 use App\Models\Report;
 use App\Models\Website;
+use App\Ternobo;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
@@ -264,9 +265,18 @@ class PageController extends Controller
     public function search(Request $request)
     {
         $results = array();
-        $suggestions = Page::query()->whereHas("user", function ($query) {
-            $query->where("active", true);
-        })->whereRaw("slug like ?", ['%' . $request->q . '%'])->limit(10)->get();
+        $page = Ternobo::currentPage();
+        $suggestions = Page::query()
+            ->whereRaw("slug like ?", ['%' . $request->q . '%'])
+            ->orWhereRaw("name like ?", ['%' . $request->q . '%'])
+            ->leftJoinSub(Following::query()->where("page_id", $page->id), "followings", function ($join) {
+                $join->on('followings.following', '=', 'pages.id');
+            })
+            ->limit(10)
+            ->orderByRaw("followings.created_at DESC")
+            ->select(['pages.*'])
+            ->get();
+        // dd($suggestions->toArray());
         foreach ($suggestions as $value) {
             $result = array();
             $result["key"] = $value->slug;

@@ -90,10 +90,21 @@ export default {
 				this.currentTab = tab;
 				this.loadingPage = true;
 				let prevUrl = this.next_page_url;
-				this.$store.state.ternoboWireApp
-					.getData(this.$APP_URL + "/search?type=" + tab + "&q=" + this.search, false)
+				axios({
+					method: "GET",
+					params: {
+						q: this.search,
+						type: tab,
+					},
+					url: this.$APP_URL + "/search",
+					headers: {
+						"X-TernoboWire": true,
+						Accept: "text/html, application/xhtml+xml",
+						"X-Requested-With": "XMLHttpRequest",
+					},
+				})
 					.then((response) => {
-						const data = response.results;
+						const data = response.data.data.results;
 						if (data) {
 							this.data = data.data;
 							this.total = data.total;

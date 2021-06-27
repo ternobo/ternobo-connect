@@ -41,6 +41,7 @@ class SearchController extends Controller
         }
         $search = $this->generateSearch(explode(" ", $request->q));
         $results = array();
+        // dd($search);
         if ($request->has("type") && $request->type === "content") {
             $posts = Post::query()
                 ->with(["page", "content" => function ($query) use ($search) {
@@ -97,8 +98,6 @@ class SearchController extends Controller
         if ($request->has("q") && strlen($request->q) < 1) {
             if ($request->isMethod("POST")) {
                 return response()->json(array("result" => true, "suggestions" => []));
-            } else {
-                return redirect("/");
             }
         }
         $search = "";
