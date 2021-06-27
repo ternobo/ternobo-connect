@@ -17,12 +17,12 @@ class SearchController extends Controller
     {
         $first = true;
         $result = "";
-        $replaces = array("+" => "", "-" => "", ">" => "", "<" => "", "(" => "", ")" => "", "~" => "", "*" => "", "“" => "", "”" => "", "\"" => "", "\"" => "", "ا" => "+ا*" . " +آ*");
+        $replaces = array("ـ" => "_");
         foreach ($search as $keyword) {
-            // foreach ($replaces as $key => $value) {
-            //     $keyword = str_replace($key, mb_convert_encoding($value, 'UTF-8'), $keyword);
-            // }
-            $search = preg_replace('/[+\-><\(\)~*\"@]+/', ' ', preg_replace('/[^\p{L}\p{N}_]+/u', ' ', $keyword));
+            foreach ($replaces as $key => $value) {
+                $keyword = str_replace($key, mb_convert_encoding($value, 'UTF-8'), $keyword);
+            }
+            $search = preg_replace('/[+\-><\(\)~*\"@#]+/', ' ', preg_replace('/[^\p{L}\p{N}_]+/u', ' ', $keyword));
             if ($first) {
                 $result .= "+$search*";
                 $first = false;
