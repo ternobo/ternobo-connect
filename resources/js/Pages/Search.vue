@@ -71,6 +71,9 @@ export default {
 			this.loadTabContent("content");
 		}
 	},
+	destroyed() {
+		this.$store.commit("setSearch", "");
+	},
 	data() {
 		return {
 			currentTab: "page",

@@ -11,6 +11,12 @@
 
     .searchfield {
         margin-right: 24px;
+
+        @media screen and (max-width: $sm-size) {
+            margin-right: 16px;
+            margin-left: 8px;
+            justify-content: flex-end;
+        }
     }
 
     .beta-badge {
@@ -43,15 +49,19 @@
         border-bottom: 2px solid #E0E0E0;
         align-items: center;
         gap: 10px;
-        padding: 16px 0;
+        padding: 10px 0;
 
         .lang-item {
             border-radius: 10px;
             display: flex;
             gap: 8px;
-            padding-left: 8px;
+            padding: 0 8px;
             align-items: center;
-            padding-right: 2px;
+
+            .emoji {
+                height: 20px;
+                width: 20px;
+            }
 
             &.active {
                 background: $fixed-elements;

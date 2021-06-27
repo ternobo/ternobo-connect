@@ -160,7 +160,7 @@ input[type=text] {
     }
 
     .searchfield {
-        width: 100% !important;
+        width: calc(100% - 124px) !important;
     }
 }
 

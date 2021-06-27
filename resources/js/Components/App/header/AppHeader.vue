@@ -7,7 +7,7 @@
 					<img :src="shared.direction == 'rtl' ? '/images/farsi-logo.svg' : '/images/logo-en-dark.svg'" class="w-100" />
 				</wire-link>
 				<wire-link href="/feed" class="logo-sm" v-if="!$root.isDesktop">
-					<img src="/images/logo.svg" class="ms-2" />
+					<img :src="shared.direction == 'rtl' ? '/images/logo-type-fa-mobile.svg' : '/images/logo-en-dark.svg'" height="24" />
 				</wire-link>
 
 				<form method="get" action="/search" ref="searchfield" class="searchfield d-flex">
@@ -39,6 +39,9 @@ export default {
 			searchVal: "",
 			showOptions: false,
 		};
+	},
+	mounted() {
+		this.searchVal = this.$store.state.search;
 	},
 	computed: {
 		...mapState(["shared"]),

@@ -4,7 +4,7 @@ import {
 } from "ternobowire-js";
 export default store({
     state: {
-        search: null,
+        search: "",
         chats: [],
         chats_next_page_url: null,
 
