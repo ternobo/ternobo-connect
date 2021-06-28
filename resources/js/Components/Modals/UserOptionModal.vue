@@ -1,12 +1,12 @@
 <template>
 	<div>
 		<login-modal :show.sync="showLogin"></login-modal>
-		<b-modal v-model="showModal" hide-footer hide-header @show="onShow" body-class="pb-0" ref="modal" size="lg">
+		<b-modal v-model="showModal" hide-footer header-class="modal-menu-header justify-content-end pb-0" @show="onShow" body-class="pb-0 py-2" ref="modal" size="lg">
 			<div class="useroptions" v-if="$store.state.user">
 				<div class="useroptions-header">
 					<wire-link @click="$emit('update:show', false)" :href="'/' + $store.state.user.username" class="d-flex aling-items-center">
 						<img class="profile-sm" :src="$store.state.user.profile" />
-						<span class="mx-2 d-flex flex-column justify-content-center">
+						<span class="ms-3 d-flex flex-column justify-content-center">
 							<strong class="text-black"
 								>{{ $store.state.user.name }}
 								<i v-if="$store.state.user.is_verified === 1" class="position-relative verificationcheck">check_circle</i>
@@ -14,9 +14,8 @@
 							<small>{{ $store.state.user.short_bio }}</small>
 						</span>
 					</wire-link>
-					<i class="close material-icons text-muted hover-dark" @click="$emit('update:show', false)">close</i>
 				</div>
-				<ul class="p-0 menu">
+				<ul class="py-2 px-0 menu">
 					<li class="list-item d-flex flex-column">
 						<wire-link @click="$emit('update:show', false)" href="/settings" class="m-0"><i class="material-icons-outlined">settings</i> {{ __.get("settings.settings") }}</wire-link>
 					</li>
@@ -28,8 +27,8 @@
 					</li>
 				</ul>
 				<div class="langs">
-					<language-link lang="en" class="lang-item"><img src="/img/en.png" width="24" height="24" /> <span>English</span></language-link>
-					<language-link lang="fa" class="lang-item"><img src="/img/iranicon.png" width="24" height="24" /> <span>فارسی</span></language-link>
+					<language-link lang="en" class="lang-item"> <img class="emoji" draggable="false" alt="🇺🇸" src="/emoji/72x72/1f1fa-1f1f8.png" /> <span>English</span> </language-link>
+					<language-link lang="fa" class="lang-item"> <img class="emoji" draggable="false" alt="🇮🇷" src="/emoji/72x72/1f1ee-1f1f7.png" /> <span>فارسی</span> </language-link>
 				</div>
 				<ul class="mb-0 p-0">
 					<li class="list-item">
