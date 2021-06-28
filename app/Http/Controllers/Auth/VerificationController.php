@@ -9,6 +9,7 @@ use App\Rules\PhoneNumber;
 use App\SMS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class VerificationController extends Controller
 {
@@ -25,14 +26,20 @@ class VerificationController extends Controller
         session()->remove("email");
 
         if ($request->has("phone")) {
+            $phone = $request->phone;
             $sms = new SMS($request->phone);
-            $code = random_int(111111, 999999);
-            $verification = new Verification();
-            $verification->code = $code;
-            $verification->phone = $request->phone;
-            $verification->save();
-            session()->put("phone", $request->phone);
-            return response()->json(array("result" => $sms->sendUltraFastSMS(array(SMS::makeParameter("VerificationCode", $code)), "23109")));
+            if (Str::startsWith($phone, '+98')) {
+                $code = random_int(111111, 999999);
+                $verification = new Verification();
+                $verification->code = $code;
+                $verification->phone = $request->phone;
+                $verification->save();
+                session()->put("phone", $request->phone);
+                return response()->json(array("result" => $sms->sendUltraFastSMS(array(SMS::makeParameter("VerificationCode", $code)), "23109")));
+            } else {
+                return response()->json($sms->globalVerification());
+            }
+
         } elseif ($request->has("email")) {
             $code = random_int(111111, 999999);
             $verification = new Verification();
@@ -60,6 +67,15 @@ class VerificationController extends Controller
             $verification = null;
             if (session()->has("phone")) {
                 $phone = session()->get("phone");
+
+                if (session()->has("otp_id")) {
+                    $result = SMS::verifyGlobalAuth($request->code);
+                    return response()->json([
+                        'result' => $result['status'],
+                        'msg' => $result['message'],
+                    ]);
+                }
+
                 $verification = Verification::query()->where("code", $request->code)->where("phone", $phone)->first();
             } elseif (session()->has("email")) {
                 $email = session()->get("email");
@@ -69,7 +85,7 @@ class VerificationController extends Controller
                 $verification->delete();
                 return response()->json(array("result" => true));
             } else {
-                return response()->json(array("result" => false, "msg" => __("کد فعال سازی نامعتبر است!")));
+                return response()->json(array("result" => false, "msg" => __("otp.invalid")));
             }
         }
         return abort(400);

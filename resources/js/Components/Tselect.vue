@@ -4,7 +4,7 @@
 			<div class="title-text">
 				<span v-if="!selectedItem"> <slot></slot><span v-if="required" class="text-action">*</span> </span>
 				<span v-else>
-					<slot name="icon">
+					<slot name="icon" v-bind:icon="selectedItem.icon">
 						<i class="material-icons verical-middle" v-if="selectedItem.hasOwnProperty('icon')">{{ selectedItem.icon }}</i>
 					</slot>
 					<span> {{ getItemLabel(selectedItem) }} </span>
@@ -17,7 +17,9 @@
 				<div class="items" v-if="items && items.length > 0">
 					<div class="tselect_item" v-for="item in items" :class="{ active: isChecked(item) }" :key="getItemValue(item)" @click="selectItem(item)">
 						<label class="tselect_item--text">
-							<i class="material-icons verical-middle" v-if="item.hasOwnProperty('icon')">{{ item.icon }}</i>
+							<slot name="itemIcon" v-bind:icon="item.icon">
+								<i class="material-icons verical-middle" v-if="item.hasOwnProperty('icon')">{{ item.icon }}</i>
+							</slot>
 							{{ getItemLabel(item) }}
 						</label>
 					</div>
@@ -162,6 +164,7 @@ export default {
 			this.$emit("input", item);
 			this.showItems = false;
 			this.$refs.titleSection.classList.remove("active");
+			this.$emit("change");
 		},
 		newItem() {
 			this.$emit("new-item", this.newItemInput);

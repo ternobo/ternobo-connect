@@ -14,7 +14,7 @@ class Following extends Model
     use HasPage;
 
     protected $fillable = [
-        'user_id',
+        'page_id',
         "following",
         "type",
     ];

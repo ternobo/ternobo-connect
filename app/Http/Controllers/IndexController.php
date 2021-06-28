@@ -16,7 +16,9 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\View;
 use Ternobo\TernoboWire\TernoboWire;
 
 /**
@@ -64,6 +66,20 @@ class IndexController extends Controller
             return redirect("/home");
         }
         return view("FollowingSuggestion", ["suggestions" => $suggestion, "followings" => $followings, "more" => $more]);
+    }
+
+    public function translations()
+    {
+        $locale = App::getLocale();
+        $trans = (collect(File::allFiles(resource_path('lang/' . $locale)))->flatMap(function ($file) use ($locale) {
+            $filename = str_replace(".php", "", str_replace(resource_path('lang/' . $locale) . "/", "", $file->getPathname()));
+            $key = str_replace("/", ".", $filename);
+            $result = trans($filename);
+            return [
+                "$locale." . $key => $result,
+            ];
+        }));
+        return response()->view("translation", ['trans' => $trans])->header('Content-Type', 'application/javascript');
     }
 
     public function getToken()

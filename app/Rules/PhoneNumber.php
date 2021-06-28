@@ -2,7 +2,9 @@
 
 namespace App\Rules;
 
+use App\SMS;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Str;
 
 class PhoneNumber implements Rule
 {
@@ -25,7 +27,8 @@ class PhoneNumber implements Rule
      */
     public function passes($attribute, $value)
     {
-        return preg_match("/(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})/", $value);
+        $codes = array_keys(SMS::$countryCodes);
+        return Str::startsWith($value, $codes) && preg_match("/(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})/", $value);
     }
 
     /**

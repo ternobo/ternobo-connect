@@ -8,6 +8,14 @@
 						<label class="font-weight-bold mb-0 font-20 text-dark">{{ title }}</label>
 					</div>
 					<div>
+						<tselect :items="country_codes" @change="phone = countryCode.code" class="mb-3" valueOption="code" labelOption="country" v-model="countryCode">
+							<template v-slot:icon>
+								<span v-html="countryIcon"></span>
+							</template>
+							<template v-slot:itemIcon="{ icon }">
+								<span v-html="getCountryIcon(icon)"></span>
+							</template>
+						</tselect>
 						<input class="text-input-light text-input--md" :readonly="verification_step" v-model="phone" />
 					</div>
 					<div class="d-flex flex-column align-items-center mt-4" v-if="verification_step">
@@ -39,17 +47,36 @@
 <script>
 import CountDownMixin from "../../Mixins/CountDownMixin";
 import OtpInput from "../OtpInput/OtpInput.vue";
+import CountryCodesFa from "../../Libs/CountryCodes-fa";
+import CountryCodesEn from "../../Libs/CountryCodes-en";
+const lookup = require("country-code-lookup");
+import { AsYouType } from "libphonenumber-js";
+import parsePhoneNumber from "libphonenumber-js";
+
 export default {
 	components: { OtpInput },
 	mixins: [CountDownMixin],
 	data() {
 		return {
-			phone: "",
+			phone: "+98",
 			loading: false,
 			verification_step: false,
 			phone_step: true,
 			code: "",
+			countryCode: {
+				country: "Iran (+98)",
+				code: "+98",
+				icon: "🇮🇷",
+			},
 		};
+	},
+	watch: {
+		phone() {
+			let countryCode = parsePhoneNumber(new AsYouType().input(this.phone))?.countryCallingCode;
+			if (countryCode) {
+				this.countryCode = this.country_codes.filter((item) => item.code == `+${countryCode}`)[0];
+			}
+		},
 	},
 	computed: {
 		title() {
@@ -58,8 +85,46 @@ export default {
 			}
 			return __.get("validation.attributes.phone_number");
 		},
+		countriesObject() {
+			let countriesObject = CountryCodesFa;
+			if (window.lang == "en") {
+				countriesObject = CountryCodesEn;
+			}
+			return countriesObject;
+		},
+		country_codes() {
+			let list = [];
+			for (const [key, value] of Object.entries(this.countriesObject)) {
+				list.push({
+					country: key,
+					code: value,
+					icon: this.getFlagEmoji(lookup.byCountry(key.replace(/\(([^)]+)\)/, "").trim())?.internet),
+				});
+			}
+			return list;
+		},
+		countryIcon() {
+			return twemoji.parse(this.countryCode.icon);
+		},
 	},
 	methods: {
+		getCountryIcon(icon) {
+			if (icon != null) {
+				return twemoji.parse(icon);
+			}
+			return twemoji.parse("🇦🇳");
+		},
+		getFlagEmoji(countryCode) {
+			if (countryCode == null) {
+				return "🇦🇳";
+			}
+			const codePoints = countryCode
+				.toUpperCase()
+				.split("")
+				.map((char) => 127397 + char.charCodeAt());
+			return String.fromCodePoint(...codePoints);
+		},
+
 		sendVcode() {
 			this.loading = true;
 			this.countdown = 30;
