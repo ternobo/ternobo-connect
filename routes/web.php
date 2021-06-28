@@ -25,6 +25,7 @@ Route::get("/refresh-csrf", "Controller@getCsrf");
 
 Route::post('/ternobo-actions/update', "AutoUpdateController@update");
 Route::get("/report-reasons", "ReportController@getReportOptions");
+Route::get("/translations.js", "IndexController@translations");
 require base_path("routes/sitemap_routes.php");
 
 /**

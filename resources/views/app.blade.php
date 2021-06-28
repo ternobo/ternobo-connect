@@ -35,10 +35,7 @@
             });
 
     </script>
-    <script id="translationScript">
-        window.trans = @json($trans);
-
-    </script>
+    <script id="translationScript" async defer src="/translations.js"></script>
 </head>
 
 <body dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'rtl' }}" class="font-sans antialiased" data-wire='{{ $tuuid }}'>
