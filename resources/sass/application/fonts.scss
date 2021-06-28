@@ -460,6 +460,10 @@ body {
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
     vertical-align: middle;
+
+    @media screen and (max-width: $sm-size) {
+        font-size: 20px;
+    }
 }
 
 .material-icons-outlined {
@@ -477,6 +481,10 @@ body {
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
     vertical-align: middle;
+
+    @media screen and (max-width: $sm-size) {
+        font-size: 20px;
+    }
 }
 
 .material-icons-round {
@@ -494,6 +502,10 @@ body {
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
     vertical-align: middle;
+
+    @media screen and (max-width: $sm-size) {
+        font-size: 20px;
+    }
 }
 
 .material-icons-sharp {
@@ -511,6 +523,10 @@ body {
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
     vertical-align: middle;
+
+    @media screen and (max-width: $sm-size) {
+        font-size: 20px;
+    }
 }
 
 .material-icons-two-tone {
@@ -527,4 +543,8 @@ body {
     direction: ltr;
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
+
+    @media screen and (max-width: $sm-size) {
+        font-size: 20px;
+    }
 }
