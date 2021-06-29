@@ -52,7 +52,7 @@ import CountryCodesEn from "../../Libs/CountryCodes-en";
 const lookup = require("country-code-lookup");
 import { AsYouType } from "libphonenumber-js";
 import parsePhoneNumber from "libphonenumber-js";
-
+import { v4 as uuidv4 } from "uuid";
 export default {
 	components: { OtpInput },
 	mixins: [CountDownMixin],
@@ -72,6 +72,10 @@ export default {
 	},
 	watch: {
 		phone() {
+			if (this.phone.startsWith("00")) {
+				this.phone = this.phone.replace("00", "+");
+				return;
+			}
 			let countryCode = parsePhoneNumber(new AsYouType().input(this.phone))?.countryCallingCode;
 			if (countryCode) {
 				this.countryCode = this.country_codes.filter((item) => item.code == `+${countryCode}`)[0];
@@ -94,13 +98,16 @@ export default {
 		},
 		country_codes() {
 			let list = [];
-			for (const [key, value] of Object.entries(this.countriesObject)) {
+
+			for (const item of this.countriesObject) {
 				list.push({
-					country: key,
-					code: value,
-					icon: this.getFlagEmoji(lookup.byCountry(key.replace(/\(([^)]+)\)/, "").trim())?.internet),
+					id: uuidv4(),
+					country: item.country,
+					code: item.code,
+					icon: item.icon,
 				});
 			}
+
 			return list;
 		},
 		countryIcon() {
