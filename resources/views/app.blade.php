@@ -35,7 +35,7 @@
             });
 
     </script>
-    <script id="translationScript" async defer src="/translations.js"></script>
+    <script id="translationScript" async defer src="/translations.js?version={{ time() }}"></script>
 </head>
 
 <body dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'rtl' }}" class="font-sans antialiased" data-wire='{{ $tuuid }}'>
