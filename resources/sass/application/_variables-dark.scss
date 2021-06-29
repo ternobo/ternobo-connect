@@ -1,5 +1,24 @@
 // Body
-$body-bg: #191919;
+$body-bg: #F5F5F5;
+
+$border-widths: 2px;
+
+$spacing: 1rem;
+$root-size: 16px;
+$root-size-mobile:12px;
+
+$spacings: (1: $spacing / 4,
+  2: $spacing / 2,
+  3: $spacing * 0.75,
+  4: $spacing,
+  5: $spacing * 1.5,
+  6: $spacing * 2,
+  7: $spacing * 2.5,
+  8: $spacing * 3.25,
+  9: $spacing * 4,
+) !default;
+
+$breakpoint: 1188px;
 
 // Typography
 $font-family-sans-serif: 'dana, PT Sans, serif';
@@ -13,76 +32,92 @@ $full-width-container: 1920px;
 
 
 // Colors
-$background: #191919;
-$box-on-bg: #212121;
-$fixed-elements: #424242;
-$icons: #757575;
-$sub-heading: #C8C8C8;
-$icon-hover: #EEE;
-$text-color: #EEE;
-$headings: #F5F5F5;
+$background: #F5F5F5;
+$box-on-bg: #FFF;
+$fixed-elements: #EEE;
+$icons: #C8C8C8;
+$sub-heading: #757575;
+$icon-hover: #191919;
+$text-color: #424242;
+$headings: #191919;
 
-
-//Colors
-$border-color: #E0E0E0;
+// Colors
+$border-color: rgb(224, 224, 224);
 $primary: #191919;
 $action: #0898DF;
 $wating: #FFEB3B;
 $wating-bg: #E1F5FF;
 $red: #F44336;
 $success: #00C853;
-$white: #191919 !default;
+$white: #FFFF !default;
 $grey: #757575;
+$action-hover:#0373AB;
+$light-blue:rgba(231, 243, 255, 1);
+$dark-blue: #3670AA;
+$dark-green:#3B955D;
+$yellow-dark-hover:#9C902B;
+$yellow-light-hover:#FFFACD;
+$blue-light-hover:#CDEAF9;
 
 $dark: #191919;
 $light-green: #E1F5FF;
 $light: #757575;
 $light-warning: #FFFCE1;
 $dark-warning: #E4CF23;
+$light-success: #E5FAED;
 $light-error: #FEECEA;
+$light-error-darker:#FFD3CE;
 $error: #F44336;
 
-$gray-100: #212529 !default;
-$gray-200: #343a40 !default;
-$gray-300: #495057 !default;
-$gray-400: #6c757d !default;
-$gray-500: #adb5bd !default;
-$gray-600: #ced4da !default;
-$gray-700: #dee2e6 !default;
-$gray-800: #e9ecef !default;
-$gray-900: #f8f9fa !default;
+// Base grayscale colors definitions
+$white: #fff !default;
+$gray-100: #F5F5F5 !default;
+$gray-200: #EEEEEE !default;
+$gray-300: #E0E0E0 !default;
+$gray-400: #C8C8C8 !default;
+$gray-500: #757575 !default;
+$gray-600: #424242 !default;
 $black: #191919 !default;
 
 // Base colors definitions
 $blue: #0898DF !default;
-$indigo: #6610f2 !default;
-$purple: #6f42c1 !default;
-$pink: #e83e8c !default;
 $red: #F44336 !default;
 $orange: #E4CF23 !default;
 $yellow: #ffc107 !default;
-$green: #00C853 !default;
-$teal: #20c997 !default;
-$cyan: #17a2b8 !default;
+$green: #28a745 !default;
+
+
+// Blue Varients
+$blue-dark: #3670AA;
+$blue-100: #E7F3FF;
+$blue-200: #CDEAF9;
+$blue-300: #0898DF;
+$blue-400: #0784C1;
+
+// Green Varients
+$green-dark: #3B955D;
+$green-100: #E5FAED;
+$green-200: #C7FEDC;
+$green-300: #00C853;
+
 
 // Theme color default definitions
 $primary: $dark !default;
 $secondary: $action !default;
 $success: $success !default;
-$info: $cyan !default;
+$info: $blue-300 !default;
 $warning: $dark-warning !default;
 $danger: $red !default;
-$light: $text-color !default;
-$dark: $white !default;
+$light: #C8C8C8 !default;
+$dark: $black !default;
 
-// This table defines the theme colors (variant names)
-$theme-colors: () !default;
-$theme-colors: map-merge(('primary': $primary,
-    'secondary': $secondary,
-    'success': $success,
-    'info': $info,
-    'warning': $warning,
-    'danger': $danger,
-    'light': $light,
-    'dark': $dark),
-  $theme-colors);
+$theme-colors: ('primary': $primary,
+  'secondary': $secondary,
+  'success': $success,
+  'info': $info,
+  'warning': $warning,
+  'danger': $danger,
+  'light': $light,
+  'dark': $dark);
+
+$sm-size: 768px;

@@ -8,7 +8,7 @@
 						<label class="font-weight-bold mb-0 font-20 text-dark">{{ title }}</label>
 					</div>
 					<div>
-						<tselect :items="country_codes" @change="phone = countryCode.code" class="mb-3" valueOption="code" labelOption="country" v-model="countryCode">
+						<tselect :items="country_codes" @change="phone = countryCode.code" class="mb-3" valueOption="id" labelOption="country" v-model="countryCode">
 							<template v-slot:icon>
 								<span v-html="countryIcon"></span>
 							</template>
@@ -16,7 +16,7 @@
 								<span v-html="getCountryIcon(icon)"></span>
 							</template>
 						</tselect>
-						<input class="text-input-light text-input--md" :readonly="verification_step" v-model="phone" />
+						<input dir="ltr" class="text-input-light text-input--md" :readonly="verification_step" v-model="phone" />
 					</div>
 					<div class="d-flex flex-column align-items-center mt-4" v-if="verification_step">
 						<div class="d-flex align-items-center">

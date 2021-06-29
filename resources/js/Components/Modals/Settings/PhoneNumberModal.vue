@@ -1,7 +1,17 @@
 <template>
 	<b-modal v-model="showModal" @show="onShow" hide-footer :title="__.get('settings.change-phone-number')" body-class="modal-signup" size="md" :centered="true">
 		<div class="d-flex ephone-input-group py-0 justify-content-between align-items-center">
-			<input type="email" class="form-control mx-1 text-input" dir="ltr" :readonly="verification_step" @keypress.enter="sendVcode()" v-model="phone" placeholder="09123456789" />
+			<div class="d-flex me-4 flex-column">
+				<tselect :items="country_codes" @change="phone = countryCode.code" class="mb-3" valueOption="id" labelOption="country" v-model="countryCode">
+					<template v-slot:icon>
+						<span v-html="countryIcon"></span>
+					</template>
+					<template v-slot:itemIcon="{ icon }">
+						<span v-html="getCountryIcon(icon)"></span>
+					</template>
+				</tselect>
+				<input type="email" class="form-control mx-0 mt-3 text-input" dir="ltr" :readonly="verification_step" @keypress.enter="sendVcode()" v-model="phone" placeholder="+989123456789" />
+			</div>
 			<LoadingButton class="btn signup-save-btn btn-primary" :disabled="verification_step || phone.length < 1 || notChanged" :loading="loading && !verification_step" @click.native="sendVcode()">ثبت</LoadingButton>
 		</div>
 		<transition name="slide">
@@ -28,8 +38,30 @@ import ModalMixin from "../../../Mixins/Modal";
 import LoadingButton from "../../buttons/LoadingButton.vue";
 import LoadingSpinner from "../../LoadingSpinner.vue";
 import OtpInput from "../../OtpInput/OtpInput.vue";
+import CountryCodesFa from "../../../Libs/CountryCodes-fa";
+import CountryCodesEn from "../../../Libs/CountryCodes-en";
+import { AsYouType } from "libphonenumber-js";
+import parsePhoneNumber from "libphonenumber-js";
+import { v4 as uuidv4 } from "uuid";
 export default {
 	methods: {
+		getCountryIcon(icon) {
+			if (icon != null) {
+				return twemoji.parse(icon);
+			}
+			return twemoji.parse("🇦🇳");
+		},
+		getFlagEmoji(countryCode) {
+			if (countryCode == null) {
+				return "🇦🇳";
+			}
+			const codePoints = countryCode
+				.toUpperCase()
+				.split("")
+				.map((char) => 127397 + char.charCodeAt());
+			return String.fromCodePoint(...codePoints);
+		},
+
 		sendVcode() {
 			this.loading = true;
 			var data = new FormData();
@@ -94,9 +126,46 @@ export default {
 			default: null,
 		},
 	},
+	watch: {
+		phone() {
+			if (this.phone.startsWith("00")) {
+				this.phone = this.phone.replace("00", "+");
+				return;
+			}
+			let countryCode = parsePhoneNumber(new AsYouType().input(this.phone))?.countryCallingCode;
+			if (countryCode) {
+				this.countryCode = this.country_codes.filter((item) => item.code == `+${countryCode}`)[0];
+			}
+		},
+	},
 	computed: {
 		notChanged() {
 			return this.phone == this.value;
+		},
+
+		countriesObject() {
+			let countriesObject = CountryCodesFa;
+			if (window.lang == "en") {
+				countriesObject = CountryCodesEn;
+			}
+			return countriesObject;
+		},
+		country_codes() {
+			let list = [];
+
+			for (const item of this.countriesObject) {
+				list.push({
+					id: uuidv4(),
+					country: item.country,
+					code: item.code,
+					icon: item.icon,
+				});
+			}
+
+			return list;
+		},
+		countryIcon() {
+			return twemoji.parse(this.countryCode.icon);
 		},
 	},
 	data() {
@@ -109,6 +178,12 @@ export default {
 
 			invalidCode: false,
 			completedCode: false,
+
+			countryCode: {
+				country: "Iran (+98)",
+				code: "+98",
+				icon: "🇮🇷",
+			},
 		};
 	},
 	components: {

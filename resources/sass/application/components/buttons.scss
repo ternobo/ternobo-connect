@@ -2,7 +2,7 @@
     color: rgb(8, 152, 223);
     background: rgba(231, 242, 255, 1);
     border: none;
-    padding: 8px;
+    padding: map-get($spacings, 2);
     font-weight: bold;
     font-size: 12px !important;
     transition: 0.3s all;
@@ -10,7 +10,6 @@
     white-space: nowrap;
 
     @media screen and (max-width: $sm-size) {
-        padding: 4px;
         font-size: 10px !important;
 
     }
@@ -299,7 +298,7 @@
     color: $icons;
     font-weight: 600;
     @extend .clickable;
-    margin-top: 8px;
+    margin-top: map-get($spacings, 2);
 
     @media screen and (max-width:$sm-size) {
         font-size: 12px;
@@ -328,7 +327,7 @@
 
     i {
         @media screen and(min-width: $sm-size) {
-            margin-left: 8px;
+            margin-left: map-get($spacings, 2);
         }
     }
 }
@@ -343,7 +342,7 @@
 .camera-btn {
     background: #191919;
     border-radius: 12px;
-    padding: 4px;
+    padding: map-get($spacings, 1);
     color: #E0E0E0;
     -webkit-filter: drop-shadow(0px 10px 40px rgba(0, 0, 0, 0.2));
     filter: drop-shadow(0px 10px 40px rgba(0, 0, 0, 0.2));

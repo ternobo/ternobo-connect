@@ -41,7 +41,7 @@ class SearchController extends Controller
         }
         $search = $this->generateSearch(explode(" ", $request->q));
         $results = array();
-        // dd($search);
+
         if ($request->has("type") && $request->type === "content") {
             $posts = Post::query()
                 ->with(["page", "content" => function ($query) use ($search) {

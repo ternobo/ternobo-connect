@@ -66,7 +66,6 @@ export default {
 			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
 			content = TextareaParser.unescapeHtml(content);
 			this.$refs.editableHighlight.innerHTML = content.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
-
 			this.$emit("update:content", content);
 			this.$nextTick(() => {
 				twemoji.parse(this.$refs.editableHighlight);
@@ -105,7 +104,9 @@ export default {
 					trigger: "@",
 					values: this.serachForMentions,
 					selectTemplate: (item) => "@" + item.original.key,
-					noMatchTemplate: "HI",
+					noMatchTemplate: function () {
+						return false;
+					},
 					menuItemTemplate: function (item) {
 						return item.original.name;
 					},
@@ -113,7 +114,9 @@ export default {
 				{
 					trigger: "#",
 					values: this.searchForTags,
-					noMatchTemplate: null,
+					noMatchTemplate: function () {
+						return false;
+					},
 					selectTemplate: (item) => "#" + item.original.key,
 				},
 			],

@@ -151,7 +151,7 @@
 
         @media screen and (max-width: $sm-size) {
             font-size: 12px;
-            padding: 4px;
+            padding: map-get($spacings, 1);
             margin-bottom: 0;
         }
 

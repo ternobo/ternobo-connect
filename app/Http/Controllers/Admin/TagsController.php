@@ -25,7 +25,6 @@ class TagsController extends Controller
 
     public function store(AddTagRequest $request)
     {
-
         $name = $request->name;
         $tag = Tag::create(['name' => $name]);
         return response()->json(['result' => $tag != null, "tag" => $tag]);

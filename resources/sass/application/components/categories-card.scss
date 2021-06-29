@@ -177,7 +177,7 @@
     li {
         color: $grey;
         font-size: 10px;
-        padding: 4px;
+        padding: map-get($spacings, 1);
         min-width: 50px;
         display: flex;
         align-items: center;

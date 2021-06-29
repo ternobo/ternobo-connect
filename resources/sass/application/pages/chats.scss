@@ -47,7 +47,7 @@
 
         .unread-badge {
             background: $action;
-            padding: 4px;
+            padding: map-get($spacings, 1);
             padding-top: 7px;
             border-radius: 4px;
             color: $white;
@@ -519,7 +519,7 @@
 .media-message {
     background: #E7F3FF;
 
-    padding: 4px;
+    padding: map-get($spacings, 1);
     border-radius: 4px;
 
     img {

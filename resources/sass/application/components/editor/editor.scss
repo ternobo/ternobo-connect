@@ -93,7 +93,7 @@
 .add-action-btn {
     height: 32px;
     width: 32px;
-    padding: 4px;
+    padding: map-get($spacings, 1);
     border-radius: 12px !important;
     display: flex;
     align-items: center;

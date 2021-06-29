@@ -67,7 +67,7 @@ button:focus {
         background: $fixed-elements;
         color: $grey;
         cursor: pointer;
-        margin-left: 8px;
+        margin-left: map-get($spacings, 2);
         padding: 4px 16px;
         transition: 0.3s all;
         font-size: 14px;
@@ -576,7 +576,7 @@ img {
             .image__wrapper {
                 box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
                 margin-top: -52px;
-                margin-bottom: 8px;
+                margin-bottom: map-get($spacings, 2);
 
 
                 img {
@@ -1286,18 +1286,9 @@ a:focus {
 
     .ephone-input-group {
         padding-top: 24px;
-        padding-bottom: 16px;
 
         .btn {
             padding: 8px 24px;
-        }
-
-        input {
-            width: 255px;
-        }
-
-        input {
-            margin-left: 36px !important;
         }
     }
 }
