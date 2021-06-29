@@ -79,7 +79,12 @@ class IndexController extends Controller
                 "$locale." . $key => $result,
             ];
         }));
-        return response()->view("translation", ['trans' => $trans])->header('Content-Type', 'application/javascript');
+        return response()->view("translation", ['trans' => $trans], 200, [
+            'Content-Type' => 'application/javascript',
+            'version' => Str::uuid(),
+            "Pragma" => "no-cache",
+            "Cache-Control" => "no-cache, no-store, must-revalidate",
+        ]);
     }
 
     public function getToken()
