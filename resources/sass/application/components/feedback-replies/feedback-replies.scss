@@ -74,6 +74,10 @@
             width: 100%;
             align-items: flex-start;
             padding: 16px 0;
+
+            .material-input-group-btn {
+                width: calc(100% - 58px);
+            }
         }
     }
 
