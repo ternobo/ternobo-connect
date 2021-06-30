@@ -7,6 +7,7 @@ use App\Models\ActiveSession;
 use App\Models\Page;
 use App\Models\Verification;
 use App\Rules\UsernameValidator;
+use App\SMS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -78,14 +79,27 @@ class SettingsController extends Controller
     public function verifyNewPhone(Request $request)
     {
         if ($request->has("code")) {
-            $verification = Verification::query()->where("code", $request->code)->where("phone", session()->get("phone"))->first();
-            if ($verification instanceof Verification) {
-                $user = Auth::user();
-                $user->phone = session()->get("phone");
-                $user->save();
-                return response()->json(array("result" => true));
+            if (session()->has("otp_id")) {
+                $result = SMS::verifyGlobalAuth($request->code);
+                if ($result['status']) {
+                    $user = Auth::user();
+                    $user->phone = session()->get("phone");
+                    $user->save();
+                }
+                return response()->json([
+                    'result' => $result['status'],
+                    'msg' => $result['message'],
+                ]);
             } else {
-                return response()->json(array("result" => false, "msg" => __("کد فعال سازی نامعتبر است!")));
+                $verification = Verification::query()->where("code", $request->code)->where("phone", session()->get("phone"))->first();
+                if ($verification instanceof Verification) {
+                    $user = Auth::user();
+                    $user->phone = session()->get("phone");
+                    $user->save();
+                    return response()->json(array("result" => true));
+                } else {
+                    return response()->json(array("result" => false, "msg" => __("کد فعال سازی نامعتبر است!")));
+                }
             }
         } else {
             abort(402);

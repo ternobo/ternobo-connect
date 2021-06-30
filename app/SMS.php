@@ -247,11 +247,16 @@ class SMS
                 'apikey' => env("SMS_API_TOKEN"),
             ])->asJson()
                 ->post();
+            if (isset($respose->otpStatus) && $respose->otpStatus == "EXPIRED") {
+                session()->forget("otp_id");
+                return $this->globalVerification();
+            }
         } else {
             $respose = Curl::to(static::$GLOBALBASE . "/2fa/v1/otp?number=$this->phone&applicationId=$application_id")->withHeaders([
                 'apikey' => env("SMS_API_TOKEN"),
             ])->asJson()
                 ->post();
+
         }
 
         if (isset($respose->otpId)) {
@@ -268,6 +273,8 @@ class SMS
             'apikey' => env("SMS_API_TOKEN"),
         ])->asJson()
             ->post();
+
+        dd($respose);
 
         $return = ["status" => false, "message" => __("otp.invalid")];
         switch ($respose->otpStatus) {
