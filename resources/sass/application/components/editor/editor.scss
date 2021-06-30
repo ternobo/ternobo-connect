@@ -164,15 +164,15 @@
     width: 100%;
     color: $text-color;
     unicode-bidi: -moz-plaintext;
-    unicode-bidi: plaintext;
+    // unicode-bidi: plaintext;
     text-align: start;
     word-break: break-word;
 
     padding: 0;
 
     * {
-        unicode-bidi: -moz-plaintext;
-        unicode-bidi: plaintext;
+        // unicode-bidi: -moz-plaintext;
+        // unicode-bidi: plaintext;
         text-align: start;
     }
 
@@ -191,6 +191,12 @@
     }
 
     &::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
         -webkit-text-fill-color: $text-color;
         text-fill-color: $text-color;
     }

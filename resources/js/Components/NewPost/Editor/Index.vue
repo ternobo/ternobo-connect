@@ -13,7 +13,7 @@
 			<div class="d-flex editor-actions" v-if="availableOptions.length > 0" :class="{ 'align-items-center': editorItems.length < 1 }">
 				<actions-button @select="addElement($event)" :active-options="availableOptions" />
 				<div class="placeholder-element clickable" v-if="editorItems.length < 1" @click="addElement('text')">
-					<span class="text-superlight font-14">{{ __.get("content/posts.post-ph",{fname: user.first_name}) }}</span>
+					<span class="text-superlight font-14">{{ __.get("content/posts.post-ph", { fname: user.first_name }) }}</span>
 				</div>
 			</div>
 		</div>
@@ -36,7 +36,8 @@ import TitleInput from "./Elements/TitleInput.vue";
 import Media from "./Elements/Media";
 import uuidv4 from "uuid";
 import EmojiPicker from "../../EmojiPicker/EmojiPicker.vue";
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
+import TextareaParser from "./TextareaParser";
 
 export default {
 	watch: {
@@ -92,7 +93,7 @@ export default {
 		},
 	},
 	computed: {
-		...mapState(['user']),
+		...mapState(["user"]),
 		hasText() {
 			return this.editorItems.filter((item) => item.type == "text").length > 0;
 		},
@@ -104,10 +105,12 @@ export default {
 			}
 		},
 		textProgress() {
-			return (this.textItem.content.length / 1200) * 100 + "%";
+			let content = TextareaParser.escapeHTML(this.textItem.content);
+			return (content.length / 1200) * 100 + "%";
 		},
 		leftCharacter() {
-			return 1200 - this.textItem.content.length;
+			let content = TextareaParser.escapeHTML(this.textItem.content);
+			return 1200 - content.length;
 		},
 		availableOptions() {
 			let addedOptions = this.editorItems.map((item) => item.type);

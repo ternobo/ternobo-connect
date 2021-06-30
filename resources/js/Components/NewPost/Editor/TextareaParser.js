@@ -11,8 +11,11 @@ export default {
             .replace(/&#039;/g, "'");
     },
     escapeHTML(text) {
-        const divEscapedHtml = document.createElement('pre');
+        const divEscapedHtml = document.createElement('div');
+        document.body.appendChild(divEscapedHtml);
         divEscapedHtml.innerHTML = text;
-        return divEscapedHtml.innerText;
+        text = divEscapedHtml.innerText;
+        document.body.removeChild(divEscapedHtml)
+        return text;
     }
 };

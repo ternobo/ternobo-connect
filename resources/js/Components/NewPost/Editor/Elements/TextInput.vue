@@ -1,7 +1,7 @@
 <template>
 	<div class="textarea-content w-100">
-		<div ref="editable" class="editor--text-input" contenteditable @keydown="onKeyDown" @paste="onPaste" @input="input"></div>
-		<div ref="editableHighlight" class="editor--text-input highlight" :placeholder="__.get('content/posts.enter-your-text')"></div>
+		<div ref="editable" class="editor--text-input" contenteditable @keydown="onKeyDown" dir="auto" @paste="onPaste" @input="input"></div>
+		<div ref="editableHighlight" class="editor--text-input highlight" dir="auto" :placeholder="__.get('content/posts.enter-your-text')"></div>
 	</div>
 </template>
 
@@ -13,25 +13,20 @@ export default {
 	methods: {
 		onPaste(e) {
 			e.preventDefault();
+			var text = (e.originalEvent || e).clipboardData.getData("text/plain");
+			let len = this.$refs.editable.innerText.length + text.length;
+
+			if (len > this.max) {
+				text = text.substr(0, this.max - this.$refs.editable.innerText.length);
+			}
+
+			document.execCommand("insertHTML", false, text);
 
 			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
 			content = TextareaParser.unescapeHtml(content);
-
 			this.$refs.editableHighlight.innerHTML = content.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
 
-			// get text representation of clipboard
-			var text = (e.originalEvent || e).clipboardData.getData("text/plain");
-			let len = text.length + content.length;
-
-			let contentLen = content.length;
-
-			if (contentLen >= this.max) {
-				return;
-			} else if (len >= this.max) {
-				text = text.substr(0, this.max - contentLen);
-			}
-			// insert text manually
-			document.execCommand("insertHTML", false, text);
+			this.fixDirection();
 		},
 		onKeyDown(e) {
 			let utils = {
@@ -46,7 +41,7 @@ export default {
 				},
 			};
 
-			let len = e.target.innerText.trim().length;
+			let len = e.target.innerText.length;
 			let hasSelection = false;
 			let selection = window.getSelection();
 			let isSpecial = utils.isSpecial(e);
@@ -70,6 +65,16 @@ export default {
 			this.$nextTick(() => {
 				twemoji.parse(this.$refs.editableHighlight);
 				twemoji.parse(this.$refs.editable);
+				this.fixDirection();
+			});
+		},
+		fixDirection() {
+			HTMLCollection.prototype.forEach = Array.prototype.forEach;
+			this.$refs.editable.children.forEach((item) => {
+				item.dir = "auto";
+			});
+			this.$refs.editableHighlight.children.forEach((item) => {
+				item.dir = "auto";
 			});
 		},
 		searchForTags(text, cb) {
@@ -94,7 +99,7 @@ export default {
 		},
 	},
 	mounted() {
-		document.execCommand("defaultParagraphSeparator", false, "br");
+		document.execCommand("defaultParagraphSeparator", false, "p");
 		this.$refs.editable.innerHTML = TextareaParser.unescapeHtml(this.content);
 		this.$refs.editableHighlight.innerHTML = this.$refs.editable.innerHTML.replace(/\B#(\S+)/gu, "<span class='text-action'>#$1</span>").replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
 
@@ -123,11 +128,9 @@ export default {
 		});
 		tribute.attach(this.$refs.editable);
 		window.maxlengthContentEditableLib();
-	},
-	watch: {
-		text(newValue) {
-			this.$emit("input", newValue);
-		},
+		this.$nextTick(() => {
+			this.$refs.content.focus();
+		});
 	},
 	components: { TextareaContent },
 };
