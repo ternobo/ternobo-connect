@@ -240,14 +240,15 @@ class SMS
     public function globalVerification()
     {
         $respose = [];
+        $application_id = env("SMS_APPLICATION_ID");
         if (session()->has("otp_id")) {
             $otp_id = session()->get("otp_id");
-            $respose = Curl::to(static::$GLOBALBASE . "/2fa/v1/otp/$")->withHeaders([
+            $respose = Curl::to(static::$GLOBALBASE . "/2fa/v1/otp/$otp_id?applicationId=$application_id")->withHeaders([
                 'apikey' => env("SMS_API_TOKEN"),
             ])->asJson()
                 ->post();
         } else {
-            $respose = Curl::to(static::$GLOBALBASE . "/2fa/v1/otp?number=$this->phone")->withHeaders([
+            $respose = Curl::to(static::$GLOBALBASE . "/2fa/v1/otp?number=$this->phone&applicationId=$application_id")->withHeaders([
                 'apikey' => env("SMS_API_TOKEN"),
             ])->asJson()
                 ->post();
