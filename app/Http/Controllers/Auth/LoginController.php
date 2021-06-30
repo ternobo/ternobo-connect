@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use PragmaRX\Google2FA\Google2FA;
 
@@ -44,16 +45,9 @@ class LoginController extends Controller
                 return response()->json(["result" => false, "errors" => $exception->errors()]);
             }
             if ($user->two_factor) {
-                $code = random_int(111111, 999999);
-
-                $verification = new Verification();
-                $verification->code = $code;
-                $verification->phone = $user->phone;
-                $verification->save();
-
-                $sms = new SMS($user->phone);
-                $sms->sendUltraFastSMS([SMS::makeParameter("code", $code)], "36529");
-                $user->save();
+                if ($user->two_factor_type == "phone") {
+                    $this->sendCodeToPhone($user->phone);
+                }
 
                 session()->put("user_to_login", $user);
 
@@ -72,6 +66,21 @@ class LoginController extends Controller
             "email" => [trans('validation.login')],
         ]);
         return response()->json(["result" => false, "errors" => $exception->errors()]);
+    }
+
+    private function sendCodeToPhone($phone)
+    {
+        $sms = new SMS($phone);
+        if (Str::startsWith($phone, '+98')) {
+            $code = random_int(111111, 999999);
+            $verification = new Verification();
+            $verification->code = $code;
+            $verification->phone = $phone;
+            $verification->save();
+
+            return $sms->sendUltraFastSMS([SMS::makeParameter("code", $code)], "36529");
+        }
+        return $sms->globalVerification();
     }
 
     public function twoFactorVerify(Request $request)
@@ -101,8 +110,17 @@ class LoginController extends Controller
 
             }
         }
-        // dd($user);
+
         if ($user->two_factor_type === 'email' || $user->two_factor_type == "phone") {
+
+            if (session()->has("otp_id")) {
+                $result = SMS::verifyGlobalAuth($request->code);
+                return response()->json([
+                    'result' => $result['status'],
+                    'msg' => $result['message'],
+                ]);
+            }
+
             $verification = $user->two_factor_type == "phone" ?
             Verification::query()->where("code", $request->code)->where("phone", $user->phone)->first()
             : Verification::query()->where("code", $request->code)->where("email", $user->email)->first();
