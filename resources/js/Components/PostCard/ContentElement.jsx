@@ -27,7 +27,7 @@ export default {
 
                     content = (
                         <div>
-                            <social-content text={this.textToShow}></social-content>
+                            <social-content text={this.textToShow} tags={this.tags}></social-content>
                             {action}
                         </div>
                     );
@@ -83,6 +83,10 @@ export default {
         },
         content: {
             required: true
+        },
+        tags: {
+            required: true,
+            default: [],
         }
     }
 }

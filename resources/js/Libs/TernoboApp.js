@@ -68,11 +68,10 @@ TernoboApp.install = function (Vue, options) {
 
     Vue.component('social-content', {
         template: '<component v-bind:is="transformed"></component>',
-        props: ['text'],
+        props: ['text', 'tags'],
         methods: {
-            convertHashTags: function (content) {
-                content = content.replace(/\B#(\S+)/gu, "<wire-link href='/tags/$1' class='text-action'>#$1</wire-link>")
-                    .replace(/\B@(\w+)/gu, "<wire-link href='/$1' class='mention-item'>@$1</wire-link>")
+            convertHashTags: function (content, tags = []) {
+                content = content.replace(/\B@(\w+)/gu, "<wire-link href='/$1' class='mention-item'>@$1</wire-link>")
                     .replace(
                         /(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/gi,
                         function (match, space, url) {
@@ -82,14 +81,21 @@ TernoboApp.install = function (Vue, options) {
                             }
                             return " " + '<a target="' + url + '" href="' + hyperlink + '">' + url + "</a>";
                         }
-                    );;
+                    );
+
+                tags?.forEach((item) => {
+                    content = content.replace(`#${item}`, function (tag) {
+                        return `<wire-link href='/${tag}' class='text-action'>${tag}</wire-link>`;
+                    })
+                })
+
                 const spanned = `<pre class='post-content--text'>${content}</pre>`
                 return spanned;
             }
         },
         computed: {
             transformed() {
-                const template = this.convertHashTags(this.text);
+                const template = this.convertHashTags(this.text, this.tags);
                 return {
                     template: template,
                     props: this.$options.props

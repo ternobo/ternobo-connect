@@ -1,7 +1,7 @@
 <template>
 	<div class="post-body">
 		<div class="slider-content">
-			<Content v-for="content in post.slides[active].content" :content="content" :showFullText.sync="showFullText" :key="`content_item_${content.id}`"></Content>
+			<Content v-for="content in post.slides[active].content" :content="content" :showFullText.sync="showFullText" :tags="post.tags" :key="`content_item_${content.id}`"></Content>
 		</div>
 		<div dir="ltr" class="slider-arrows" v-if="post.slides.length > 1">
 			<i class="material-icons clickable" :class="{ disabled: active < 1 }" @click="goPrevSlide">keyboard_arrow_left</i>

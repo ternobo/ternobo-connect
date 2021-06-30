@@ -110,28 +110,26 @@
     }
 }
 
-@media screen and (min-width:$sm-size) {
-
-    .material-textarea {
-        &.active {
-            label {
-                top: 0;
-                padding: 0 4px;
-                margin: 0 8px;
-                font-size: 10px;
-                transform: translateY(-50%);
-            }
-        }
-
-        .input {
-            height: auto;
-        }
-
+.material-textarea {
+    &.active {
         label {
-            margin: 0 12px;
+            top: 0;
+            padding: 0 4px;
+            margin: 0 8px;
+            font-size: 10px;
+            transform: translateY(-50%);
         }
     }
+
+    .input {
+        height: auto;
+    }
+
+    label {
+        margin: 0 12px;
+    }
 }
+
 
 
 .material-input-group-btn {
@@ -141,7 +139,7 @@
     min-height: 40px;
 
     .material-textfield {
-        width: 100%;
+        width: calc(100% - 12px);
         height: 100%;
 
         .input {

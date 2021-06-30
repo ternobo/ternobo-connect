@@ -19,9 +19,13 @@
         }
     }
 
-    .beta-badge {
-        display: none;
+    @media screen and (max-width: $sm-size) {
+
+        .beta-badge {
+            display: none;
+        }
     }
+
 }
 
 .useroptions-header {
