@@ -274,8 +274,6 @@ class SMS
         ])->asJson()
             ->post();
 
-        dd($respose);
-
         $return = ["status" => false, "message" => __("otp.invalid")];
         switch ($respose->otpStatus) {
             case "VERIFIED":
