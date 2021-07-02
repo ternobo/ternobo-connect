@@ -36,7 +36,7 @@
 						</div>
 					</div>
 					<div class="login-button-container w-100 h-auto">
-						<loading-button :loading="loading" class="btn btn-primary w-100" @click.native="sendVcode">{{ __.get("application.next") }}</loading-button>
+						<loading-button :loading="loading" class="btn btn-primary w-100" @click.native="next">{{ __.get("application.next") }}</loading-button>
 					</div>
 				</div>
 			</div>
@@ -115,6 +115,12 @@ export default {
 		},
 	},
 	methods: {
+		next() {
+			if (this.verification_step) {
+				return this.verifyCode();
+			}
+			return this.sendVcode();
+		},
 		getCountryIcon(icon) {
 			if (icon != null) {
 				return twemoji.parse(icon);

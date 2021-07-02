@@ -93,11 +93,13 @@ class RegisterController extends Controller
             $user = new User();
             $user->first_name = $request->firstname;
             $user->last_name = $request->lastname;
+
             if (session()->has("phone")) {
-                $user->phone = session()->get("phone");
+                $user->phone = session()->pull("phone");
             } elseif (session()->has("email")) {
-                $user->email = session()->get("email");
+                $user->email = session()->pull("email");
             }
+
             $user->username = strtolower($request->username);
             $user->phone_verified_at = time();
             $user->gender = $request->gender;

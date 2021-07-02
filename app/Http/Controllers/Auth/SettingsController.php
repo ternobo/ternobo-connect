@@ -7,7 +7,6 @@ use App\Models\ActiveSession;
 use App\Models\Page;
 use App\Models\Verification;
 use App\Rules\UsernameValidator;
-use App\SMS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -83,9 +82,10 @@ class SettingsController extends Controller
                 $result = SMS::verifyGlobalAuth($request->code);
                 if ($result['status']) {
                     $user = Auth::user();
-                    $user->phone = session()->get("phone");
+                    $user->phone = session()->pull("phone");
                     $user->save();
                 }
+
                 return response()->json([
                     'result' => $result['status'],
                     'msg' => $result['message'],
@@ -94,7 +94,7 @@ class SettingsController extends Controller
                 $verification = Verification::query()->where("code", $request->code)->where("phone", session()->get("phone"))->first();
                 if ($verification instanceof Verification) {
                     $user = Auth::user();
-                    $user->phone = session()->get("phone");
+                    $user->phone = session()->pull("phone");
                     $user->save();
                     return response()->json(array("result" => true));
                 } else {

@@ -28,7 +28,7 @@ class VerificationController extends Controller
         if ($request->has("phone")) {
             $phone = $request->phone;
             $sms = new SMS($request->phone);
-            if (Str::startsWith($phone, '+98')) {
+            if (Str::startsWith($phone, '+a98')) {
                 $code = random_int(111111, 999999);
                 $verification = new Verification();
                 $verification->code = $code;
@@ -37,6 +37,7 @@ class VerificationController extends Controller
                 session()->put("phone", $request->phone);
                 return response()->json(array("result" => $sms->sendUltraFastSMS(array(SMS::makeParameter("VerificationCode", $code)), "23109")));
             } else {
+                session()->put("phone", $request->phone);
                 return response()->json($sms->globalVerification());
             }
 
