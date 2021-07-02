@@ -28,7 +28,7 @@ class VerificationController extends Controller
         if ($request->has("phone")) {
             $phone = $request->phone;
             $sms = new SMS($request->phone);
-            if (Str::startsWith($phone, '+a98')) {
+            if (Str::startsWith($phone, '+98')) {
                 $code = random_int(111111, 999999);
                 $verification = new Verification();
                 $verification->code = $code;
