@@ -7,6 +7,7 @@ use App\Models\ActiveSession;
 use App\Models\Page;
 use App\Models\Verification;
 use App\Rules\UsernameValidator;
+use App\SMS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;

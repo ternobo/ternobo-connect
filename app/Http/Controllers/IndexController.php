@@ -12,7 +12,6 @@ use App\Models\Following;
 use App\Models\FollowSuggestion;
 use App\Models\Post;
 use App\Ternobo;
-use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +31,6 @@ class IndexController extends Controller
 
     public function index()
     {
-        SEOTools::setTitle(__("seo.ternobo"));
         $articles = Post::query()->where("type", "article")->with("page")->latest()->limit(10)->get();
         return TernoboWire::render("Welcome", ["articles" => $articles]);
     }
