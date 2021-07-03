@@ -825,6 +825,12 @@
         text-fill-color: $text-color;
     }
 
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
     &::-moz-selection, *::-moz-selection {
         -webkit-text-fill-color: $text-color;
         text-fill-color: $text-color;
@@ -868,18 +874,11 @@
 .tribute-container li {
     padding: 5px 5px;
     cursor: pointer;
-}
-
-.tribute-container li.highlight {
-    background: #ddd;
-}
-
-.tribute-container li span {
     font-weight: bold;
-}
 
-.tribute-container li.no-match {
-    cursor: default;
+    &:hover {
+        background: #ddd;
+    }
 }
 
 .tribute-container .menu-highlighted {

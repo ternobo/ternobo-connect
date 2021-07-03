@@ -85,7 +85,7 @@ TernoboApp.install = function (Vue, options) {
 
                 tags?.forEach((item) => {
                     content = content.replace(`#${item}`, function (tag) {
-                        return `<wire-link href='/${tag}' class='text-action'>${tag}</wire-link>`;
+                        return `<wire-link href='/tags/${tag}' class='text-action'>${tag}</wire-link>`;
                     })
                 })
 

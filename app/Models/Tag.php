@@ -11,6 +11,19 @@ class Tag extends Model
         'name',
     ];
 
+    public static function addTag($tags)
+    {
+        $list = [];
+        foreach ($tags as $tag) {
+            if (!Tag::query()->where("name", $tag)->exists()) {
+                array_push($tags, Tag::create([
+                    'name' => $tag,
+                ]));
+            }
+        }
+        return $list;
+    }
+
     private function posts_count()
     {
         return Post::query()->whereJsonContains("tags", $this->name)->count();
