@@ -30,8 +30,8 @@
                 bottom: 0;
                 height: 2px;
                 background-color: #EEE;
-                left: 24px;
-                right: 24px;
+                left: 1.5rem;
+                right: 1.5rem;
                 width: calc(100% - 48px);
 
                 @media screen and (max-width: $sm-size) {
@@ -89,7 +89,7 @@
                     font-size: 30px;
 
                     @media screen and (max-width: $sm-size) {
-                        font-size: 24px;
+                        font-size: 1.5rem;
                     }
                 }
 
@@ -121,7 +121,7 @@
                 flex-direction: row;
                 color: $grey;
                 background: $body-bg;
-                margin-left: 24px;
+                margin-left: 1.5rem;
                 padding: 8px 8px;
                 width: 80px;
                 height: 40px;
@@ -166,7 +166,7 @@
     font-size: 16px;
     color: $icons;
     @extend .clickable;
-    margin-top: 32px;
+    margin-top: 2rem;
 
     @media screen and (max-width:$sm-size) {
         font-size: 12px;

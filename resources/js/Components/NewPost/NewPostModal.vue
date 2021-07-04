@@ -17,7 +17,7 @@
 									{{ __.choice("tips.tip", 1) }}
 								</div>
 								<loading-spinner v-if="loadingCanDonate" style="height: 12px; width: 12px; border-width: 1px"></loading-spinner>
-								<checkbox v-else v-model="canDonate" :status="canDonate" class="mt-1 m-0 text-superlight light"></checkbox>
+								<checkbox v-else v-model="canDonate" :status="canDonate" class="m-0 text-superlight light"></checkbox>
 							</div>
 							<div class="category-select" @click="showCategoryModal = true">
 								<i class="material-icons-outlined">layers</i>
@@ -185,7 +185,7 @@ export default {
 			}
 		},
 		canDonate(newValue) {
-			if (newValue) {
+			if (newValue && this.show) {
 				this.loadingCanDonate = true;
 				axios
 					.post("/can-donate")

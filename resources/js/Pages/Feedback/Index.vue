@@ -44,17 +44,17 @@
 			<div class="tabs pt-3">
 				<ul class="default position-relative">
 					<li @click="status = 'voting'" :class="{ 'is-active': status === 'voting' }">
-						<a :class="{ 'font-16': $root.isDesktop }">{{ __.get("feedbacks.voting") }}</a>
+						<a class="font-16">{{ __.get("feedbacks.voting") }}</a>
 					</li>
 					<li @click="status = 'scheduled'" :class="{ 'is-active': status === 'scheduled' }">
-						<a :class="{ 'font-16': $root.isDesktop }">{{ __.get("feedbacks.scheduled") }}</a>
+						<a class="font-16">{{ __.get("feedbacks.scheduled") }}</a>
 					</li>
 					<li @click="status = 'done'" :class="{ 'is-active': status === 'done' }">
-						<a :class="{ 'font-16': $root.isDesktop }">{{ __.get("feedbacks.done") }}</a>
+						<a class="font-16">>{{ __.get("feedbacks.done") }}</a>
 					</li>
 
 					<li class="position-absolute end-0" @click="status = 'my-feedbacks'" :class="{ 'is-active': status === 'my-feedbacks' }">
-						<a class="active" :class="{ 'font-16': $root.isDesktop }"
+						<a class="active font-16"
 							><i class="material-icons me-2">{{ status === "my-feedbacks" ? "flag" : "outlined_flag" }}</i> {{ __.get("feedbacks.my-suggestions") }}</a
 						>
 					</li>

@@ -3,8 +3,8 @@ $md-checkbox-border-color: $border-color;
 $md-checkbox-border-color-disabled: $border-color;
 $md-checkbox-checked-color-disabled: $icons;
 
-$md-checkbox-margin: 1em 0;
-$md-checkbox-size: 1em;
+$md-checkbox-margin: 0.75rem 0;
+$md-checkbox-size: 0.75rem;
 $md-checkbox-padding: .25em;
 $md-checkbox-border-width: 3px;
 $md-checkbox-border-radius: 0.125em;
@@ -15,6 +15,7 @@ $md-checkbox-label-padding: .75em;
     position: relative;
     margin: $md-checkbox-margin;
     text-align: right;
+    height: 0.75rem;
 
     &.md-checkbox-inline {
         display: inline-block;
@@ -28,7 +29,7 @@ $md-checkbox-label-padding: .75em;
         clear: both;
         padding-right: 1px;
         color: $grey;
-        font-size: 14px;
+        font-size: 0.875rem;
         margin-bottom: 0;
 
         &:not(:empty) {
@@ -63,7 +64,7 @@ $md-checkbox-label-padding: .75em;
             &:checked {
                 +label:before {
                     background: $grey;
-                    border: 3px solid #E0E0E0;
+                    border: 2px solid #E0E0E0;
                 }
             }
         }
@@ -83,7 +84,7 @@ $md-checkbox-label-padding: .75em;
         &:checked {
             +label:before {
                 background: $md-checkbox-checked-color;
-                border: 3px solid #E0E0E0;
+                border: 2px solid #E0E0E0;
             }
         }
 

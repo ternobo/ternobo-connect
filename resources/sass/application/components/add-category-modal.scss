@@ -3,10 +3,10 @@
     align-items: center;
 
     margin: 0 -6px;
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
 
     >* {
-        margin: 0 12px;
+        margin: 0 0.75rem;
     }
 
 }
@@ -40,29 +40,29 @@
     .save-edit-action-icons {
         display: flex;
         align-items: center;
-        margin: 0 -4px;
+        margin: 0 -0.25rem;
 
         .btn-edit {
             border-radius: 8px;
         }
 
         i {
-            margin: 0 4px;
+            margin: 0 0.25rem;
         }
     }
 
     .category-content {
         display: flex;
         align-items: center;
-        margin: 0 -8px;
-        width: calc(100% - 16px);
+        margin: 0 -0.5rem;
+        width: calc(100% - 1rem);
 
         .category-badge {
             max-width: calc(100% - 150px);
         }
 
         >* {
-            margin: 0 8px;
+            margin: 0 0.5rem;
         }
     }
 }

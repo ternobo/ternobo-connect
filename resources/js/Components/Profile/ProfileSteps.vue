@@ -21,10 +21,10 @@
 					<div class="d-flex align-items-center">
 						<i class="material-icons me-2" style="font-size: 50px">{{ steps.undone_steps[0].icon }}</i>
 						<div class="d-flex flex-column">
-							<strong :class="{ 'font-16 ': $root.isDesktop, 'font-14': !$root.isDesktop }">
+							<strong class="font-16">
 								{{ steps.undone_steps[0].name }}
 							</strong>
-							<span class="text-muted" :class="{ 'font-14 ': $root.isDesktop, 'font-12': !$root.isDesktop }" style="max-width: 200px">{{ steps.undone_steps[0].text }}</span>
+							<span class="text-muted font-14" style="max-width: 200px">{{ steps.undone_steps[0].text }}</span>
 						</div>
 					</div>
 					<button class="btn btn-dark" @click="$emit('action', steps.undone_steps[0].action)">{{ steps.undone_steps[0].button }}</button>

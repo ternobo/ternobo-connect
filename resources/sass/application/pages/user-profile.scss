@@ -42,8 +42,8 @@ div.page-cover {
 
     @media screen and(max-width: $sm-size) {
         padding: 2px;
-        height: 24px;
-        width: 24px;
+        height: 1.5rem;
+        width: 1.5rem;
 
 
     }
@@ -68,14 +68,14 @@ div.page-cover {
         position: absolute;
         right: 16px;
         top: 14px;
-        height: 24px;
-        width: 24px;
+        height: 1.5rem;
+        width: 1.5rem;
     }
 }
 
 .profile-header-card {
     @extend .card;
-    padding: 32px;
+    padding: 2rem;
     padding-top: 0;
 
     @media screen and (max-width: $sm-size) {
@@ -148,7 +148,7 @@ div.page-cover {
             }
 
             .profile-box {
-                margin-bottom: 24px;
+                margin-bottom: 1.5rem;
                 margin-right: -8px;
 
                 @media screen and (max-width: $sm-size) {
@@ -176,7 +176,7 @@ div.page-cover {
 
         .connection-actions {
             color: $grey;
-            margin-left: 24px;
+            margin-left: 1.5rem;
             line-height: 20px;
             transition: 0.3s all;
 
@@ -204,7 +204,7 @@ div.page-cover {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: 32px;
+    margin-top: 2rem;
 
     @media screen and (max-width: $sm-size) {
         margin-top: 16px;
@@ -398,7 +398,7 @@ div.page-cover {
     }
 
     .slug-logo {
-        max-width: 24px;
+        max-width: 1.5rem;
         margin-left: 8px;
 
         @media screen and (max-width: $sm-size) {
@@ -432,7 +432,7 @@ div.page-cover {
 
 .contact--title {
     font-size: 16px;
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
     font-weight: 600;
 
     i {
@@ -458,9 +458,9 @@ div.page-cover {
 .profile-photos {
     img {
         margin-right: -15px;
-        width: 32px;
-        min-width: 32px;
-        height: 32px;
+        width: 2rem;
+        min-width: 2rem;
+        height: 2rem;
         border-radius: 50%;
         border: 1px solid #FFF;
     }

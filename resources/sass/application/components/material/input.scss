@@ -84,7 +84,7 @@
 .material--sm {
     .input {
         padding: 11px 16px;
-        height: 44px;
+        height: 2.75rem;
 
         @media screen and (max-width: $sm-size) {
             padding: 6px 8px;
@@ -152,7 +152,7 @@
         left: 0;
         bottom: 0;
         color: $dark;
-        height: 44px;
+        height: 2.75rem;
         font-size: 14px;
         border: none;
         background: transparent;

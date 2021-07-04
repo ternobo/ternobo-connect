@@ -52,7 +52,7 @@
 					</div>
 
 					<div class="mutual-friends-container">
-						<strong class="text-dark font-demibold" :class="{ 'font-12': !$root.isDesktop }">{{ mutuals.count }} {{ __.choice("user-profile.mutual-friends", mutuals.count) }}</strong>
+						<strong class="text-dark font-demibold">{{ mutuals.count }} {{ __.choice("user-profile.mutual-friends", mutuals.count) }}</strong>
 						<span class="text-grey ms-2 font-12">{{ mutuals.text }}</span>
 					</div>
 				</a>

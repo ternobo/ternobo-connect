@@ -10,7 +10,7 @@
     transition: 0.3s all;
 
     .searchfield {
-        margin-right: 24px;
+        margin-right: 1.5rem;
 
         @media screen and (max-width: $sm-size) {
             margin-right: 16px;
@@ -142,7 +142,7 @@
     z-index: 1000;
 
     .card-header {
-        padding: 24px;
+        padding: 1.5rem;
         position: relative;
 
         &::after {
@@ -151,8 +151,8 @@
             background: $fixed-elements;
             height: 2px;
             width: calc(100% - 48px);
-            left: 24px;
-            right: 24px;
+            left: 1.5rem;
+            right: 1.5rem;
             bottom: 0;
         }
 
@@ -180,8 +180,8 @@
             background: $fixed-elements;
             height: 2px;
             width: calc(100% - 48px);
-            left: 24px;
-            right: 24px;
+            left: 1.5rem;
+            right: 1.5rem;
             top: 0;
         }
     }
@@ -190,7 +190,7 @@
         display: flex;
         flex-direction: column;
         margin-right: 12px;
-        height: 44px;
+        height: 2.75rem;
         line-height: 1;
         justify-content: center;
     }
@@ -200,7 +200,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 24px;
+    margin-right: 1.5rem;
     font-size: 12px;
 }
 
@@ -238,7 +238,7 @@
         display: flex;
         align-items: center;
         padding-top: 4px;
-        height: 24px;
+        height: 1.5rem;
 
         @if $direction==ltr {
             margin-left: 0;
@@ -261,7 +261,7 @@
     margin-bottom: 0;
 
     >.list-group-item {
-        padding: 16px 24px;
+        padding: 16px 1.5rem;
         border-color: #EEEEEE;
         border-width: 2px;
         cursor: pointer;

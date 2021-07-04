@@ -77,14 +77,14 @@
         display: flex;
 
         .profile-image {
-            width: 44px;
-            height: 44px;
+            width: 2.75rem;
+            height: 2.75rem;
             margin-left: 16px;
             margin-bottom: 0;
 
             img {
-                width: 44px;
-                height: 44px;
+                width: 2.75rem;
+                height: 2.75rem;
                 border-radius: 50%;
             }
         }
@@ -218,8 +218,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
     background: #C7FEDC;
     border-radius: 8px;
 }
@@ -399,7 +399,7 @@
             .reload-btn {
                 color: $action;
                 margin-right: -32px;
-                max-height: 44px;
+                max-height: 2.75rem;
                 display: flex;
                 align-items: center;
                 margin-left: 8px;
@@ -437,7 +437,7 @@
 
                 .reload-btn {
                     margin-left: -32px;
-                    max-height: 44px;
+                    max-height: 2.75rem;
                     display: flex;
                     align-items: center;
                     margin-right: 8px;
@@ -478,7 +478,7 @@
             border-radius: 14px;
             height: 40px;
             width: 40px;
-            font-size: 32px;
+            font-size: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;

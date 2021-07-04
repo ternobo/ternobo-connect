@@ -492,7 +492,7 @@
       cursor: pointer;
       display: inline-block;
       float: left;
-      height: 24px;
+      height: 1.5rem;
       padding: 3px 5px;
       width: 28px;
     }
@@ -684,7 +684,7 @@
       float: left;
       font-size: 14px;
       font-weight: 500;
-      height: 24px;
+      height: 1.5rem;
       position: relative;
       vertical-align: middle;
     }
@@ -764,8 +764,8 @@
       }
   
       .ql-picker-item {
-        height: 24px;
-        width: 24px;
+        height: 1.5rem;
+        width: 1.5rem;
         padding: 2px 4px;
       }
     }
@@ -924,7 +924,7 @@
           }
   
           &[data-value=huge]::before {
-            font-size: 32px;
+            font-size: 2rem;
           }
         }
       }

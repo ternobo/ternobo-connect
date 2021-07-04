@@ -4,13 +4,15 @@
     background-color: $fixed-elements;
     margin: 0;
     padding: 0;
+    font-size: 1rem;
 
     li {
-        padding: 8px 16px;
+        padding: 1rem 1.5rem;
         color: $sub-heading;
+        cursor: pointer;
 
-        .item-icon {
-            margin-left: 12px;
+        i {
+            margin-left: 1rem;
         }
 
         &:hover {
@@ -29,18 +31,14 @@
     @extend .card;
     @extend .px-0;
     @extend .col-md-12;
-    padding: 24px 0 16px;
+    padding: 1.5rem 0 1rem;
 
-    @media screen and (max-width: $sm-size) {
-        padding: 12px 0;
-    }
 
     display: flex;
     flex-direction: column;
 }
 
 .post-box {
-
 
     .category-item {
         padding: 2px 8px;
@@ -74,27 +72,9 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        padding: 16px 20px;
-        padding-left: 16px;
+        padding: 1rem 1.25rem;
+        padding-left: 1rem;
         position: relative;
-
-        // &::after {
-        //     content: " ";
-        //     position: absolute;
-        //     width: calc(100% - 48px);
-        //     left: 24px;
-        //     right: 24px;
-        //     bottom: 0;
-        //     height: 2px;
-        //     background: $border-color;
-
-        //     @media screen and (max-width: $sm-size) {
-        //         width: calc(100% - 24px);
-        //         left: 12px;
-        //         right: 12px;
-        //     }
-
-        // }
     }
 
     .post-header {
@@ -103,21 +83,13 @@
             align-items: center;
 
             .publisher--name {
-                font-size: 14px;
+                font-size: 0.875rem;
                 font-weight: 600;
-
-                @media screen and (max-width: $sm-size) {
-                    font-size: 12px;
-                }
             }
 
             .publisher--shortbio {
-                font-size: 12px;
+                font-size: 0.75rem;
                 color: $grey;
-
-                @media screen and (max-width: $sm-size) {
-                    font-size: 10px;
-                }
             }
         }
 
@@ -125,13 +97,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-
-            @media screen and (max-width: $sm-size) {
-                i {
-                    font-size: 20px;
-                }
-            }
-
         }
 
         .publisher {
@@ -139,7 +104,7 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                margin-right: 12px;
+                margin-right: 0.75rem;
             }
 
             img {
@@ -153,7 +118,7 @@
 
     .post-body {
         flex: 1 1 auto;
-        padding: 16px 24px;
+        padding: 1rem 1.5rem;
         padding-bottom: 0;
         text-align: justify;
         position: relative;
@@ -174,12 +139,12 @@
         }
 
         &:last-child {
-            padding-bottom: 12px;
+            padding-bottom: 0.75rem;
         }
 
         .skeleton-container {
             >.pu-skeleton:not(:last-child) {
-                margin-bottom: 8px;
+                margin-bottom: 0.5rem;
             }
         }
 
@@ -199,12 +164,8 @@
         .text {
             max-height: 84px;
             margin: 0;
-            font-size: 14px;
+            font-size: 0.875rem;
             color: $text-color;
-
-            @media screen and (max-width: $sm-size) {
-                font-size: 12px;
-            }
 
             &.open {
                 max-height: unset;
@@ -220,7 +181,7 @@
 
     .post-body {
         .articleimg {
-            margin: -24px -24px 0;
+            margin: -1.5rem -1.5re, 0;
             max-width: 645px;
             max-height: 480px;
         }
@@ -251,12 +212,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 24px;
-
-
-            @media screen and (max-width: $sm-size) {
-                padding: 16px 12px;
-            }
+            padding: 1rem 1.5rem;
 
             padding-top: 0;
         }
@@ -332,7 +288,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 20px 16px;
+            padding: 1rem 1.25rem 1rem;
 
             @if $direction==ltr {
                 flex-direction: row-reverse;
@@ -358,22 +314,20 @@
 
         .post-likes-text {
             position: relative;
-            padding: 16px 24px;
+            padding: 1rem 1.5rem;
             padding-bottom: 0;
 
             &::before {
                 content: " ";
                 position: absolute;
-                left: 24px;
-                right: 24px;
+                left: 1.5rem;
+                right: 1.5rem;
                 top: 0;
                 height: 2px;
                 background: $fixed-elements;
 
                 @media screen and (max-width: $sm-size) {
-                    width: calc(100% - 24px);
-                    left: 12px;
-                    right: 12px;
+                    width: calc(100% - 3rem);
                 }
             }
         }
@@ -386,14 +340,14 @@
             .buttons {
                 display: flex;
                 align-items: center;
-                margin: 0 -8px;
+                margin: 0 -0.5rem;
 
                 @if $direction==ltr {
                     flex-direction: row-reverse;
                 }
 
                 i {
-                    margin: 0 8px;
+                    margin: 0 0.5rem;
 
 
 
@@ -420,7 +374,7 @@
 
 
     .comments {
-        padding: 24px;
+        padding: 1.5rem;
     }
 
 }
@@ -446,17 +400,14 @@
             background: $fixed-elements;
             color: $grey;
             cursor: pointer;
-            margin-left: 8px;
-            padding: 4px 16px;
+            margin-left: 0.5rem;
+            padding: 0.25rem 1rem;
             transition: 0.3s all;
-            font-size: 14px;
+            font-size: 0.875rem;
 
             @media screen and (max-width: $sm-size) {
-                padding: 2px 12px;
-                font-size: 12px;
                 vertical-align: baseline;
                 height: 20px;
-                margin-left: 4px;
             }
 
         }
@@ -482,36 +433,28 @@
 
 .actionText {
     position: relative;
-    padding: 16px 24px;
-    font-size: 14px;
+    padding: 1rem 1.5rem;
+    font-size: 0.875rem;
     color: #757575;
 
     &::after {
         position: absolute;
         content: " ";
-        width: calc(100% - 48px);
-        left: 24px;
-        right: 24px;
+        width: calc(100% - 3rem);
+        left: 1.5rem;
+        right: 1.5rem;
         bottom: 0;
         height: 2px;
         background: $icons;
-    }
-
-    @media screen and (max-width: $sm-size) {
-        font-size: 12px;
     }
 }
 
 .article-title {
     font-size: 20px;
     font-weight: 600;
-    margin-top: 16px;
+    margin-top: 1rem;
     margin-right: -8px;
 
-    @media screen and (max-width: $sm-size) {
-        margin-top: 12px;
-        font-size: 16px;
-    }
 }
 
 .reshared-post {
@@ -525,19 +468,10 @@
     flex-direction: row !important;
     margin: 0 !important;
     justify-content: flex-start !important;
-
-    i {
-        font-size: 14px;
-        color: #C8C8C8 !important;
-    }
 }
 
 .post-likes-text {
-    font-size: 14px;
-
-    @media screen and (max-width: $sm-size) {
-        font-size: 10px;
-    }
+    font-size: 0.875rem;
 }
 
 .slider-content {
@@ -545,17 +479,13 @@
         unicode-bidi: -moz-plaintext;
         unicode-bidi: plaintext;
         font-weight: 600;
-        font-size: 18px;
+        font-size: 1.125rem;
         line-height: 28px;
         text-align: start;
-
-        @media screen and(max-width: $sm-size) {
-            font-size: 16px;
-        }
     }
 
     div.post-content--text {
-        margin-bottom: 16px;
+        margin-bottom: 1rem;
         text-align: start;
 
         a {
@@ -568,16 +498,11 @@
     }
 
     pre {
-        font-size: 16px;
-        line-height: 24px;
+        font-size: 1rem;
         white-space: pre-line;
         width: 100%;
         margin-bottom: 0;
         line-height: 1.8;
-
-        @media screen and(max-width: $sm-size) {
-            font-size: 12px;
-        }
     }
 }
 
@@ -596,11 +521,11 @@
     }
 
     i:first-child {
-        margin: 0 12px;
+        margin: 0 0.75rem;
     }
 
     i:last-child {
-        margin: 0 12px;
+        margin: 0 0.75rem;
     }
 
     .dot {
@@ -611,11 +536,11 @@
 
         &:not(:nth-last-child(2)) {
             @if($direction=='rtl') {
-                margin-right: 8px;
+                margin-right: 0.5rem;
             }
 
             @else {
-                margin-left: 8px;
+                margin-left: 0.5rem;
             }
         }
 
@@ -626,11 +551,11 @@
 }
 
 .slider-media-image {
-    margin: 0 -24px;
+    margin: 0 -1.4rem;
     will-change: auto;
 
     &:not(:first-child) {
-        margin-top: 24px;
+        margin-top: 1.5rem;
     }
 
     img {
@@ -644,11 +569,11 @@
     }
 
     &:not(:last-child) {
-        margin-bottom: 12px
+        margin-bottom: 0.75rem
     }
 
     &:last-child {
-        margin-bottom: -28px;
+        margin-bottom: -1.75rem;
     }
 
 }

@@ -4,25 +4,29 @@
     background: $fixed-elements;
     color: $text-color;
     font-weight: 600;
-    padding: 12px 16px;
+    padding: 0.75rem 1rem;
     height: 40px;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 600;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
 
     span {
         max-width: 80px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+
     }
 
     i {
-        margin-left: 8px
+        margin-left: 0.5rem
     }
 }
 
@@ -44,13 +48,16 @@
     max-height: 360px;
     display: flex;
     flex-wrap: wrap;
-    margin: -8px;
+    margin: -0.5rem;
 
     .category-badge {
-        padding: 4px 12px;
+        padding: 0.25rem 0.75rem;
+        height: -webkit-max-content;
+        height: -moz-max-content;
+        height: max-content;
     }
 
     >* {
-        margin: 8px;
+        margin: 0.5rem;
     }
 }

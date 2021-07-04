@@ -4,15 +4,10 @@
     border: none;
     padding: map-get($spacings, 2);
     font-weight: bold;
-    font-size: 12px !important;
+    font-size: 0.75rem !important;
     transition: 0.3s all;
     min-width: 80px;
     white-space: nowrap;
-
-    @media screen and (max-width: $sm-size) {
-        font-size: 10px !important;
-
-    }
 }
 
 .btn-danger {
@@ -27,7 +22,7 @@
 }
 
 .btn {
-    padding: 8px 24px;
+    padding: 0.5rem 1.5rem;
     font-weight: 600;
 
     &:disabled {
@@ -41,7 +36,7 @@
 
 .btn-action-light {
     background: #E7F3FF;
-    border-radius: 12px;
+    border-radius: 0.75rem;
     color: $action;
 
     &:not(:disabled):hover {
@@ -130,7 +125,7 @@
 .loading-button {
     position: relative;
     display: inline-block;
-    font-size: 16px;
+    font-size: 1rem;
     letter-spacing: 0;
     outline: 0;
     border: 1px solid transparent;
@@ -273,9 +268,9 @@
 .splitor-b::after {
     content: " ";
     bottom: 0px;
-    right: 10px;
-    left: 10px;
-    width: calc(100% - 20px);
+    right: 0.625rem;
+    left: 0.625rem;
+    width: calc(100% - 1.25rem);
     height: 1px;
     position: absolute;
     margin-top: -2px;
@@ -294,36 +289,22 @@
 
 
 .show-more-text--clickable {
-    font-size: 14px;
+    font-size: 0.875rem;
     color: $icons;
     font-weight: 600;
     @extend .clickable;
     margin-top: map-get($spacings, 2);
-
-    @media screen and (max-width:$sm-size) {
-        font-size: 12px;
-    }
 }
 
 .btn-edit {
-    border-radius: 16px;
+    border-radius: 1rem;
     border: 2px solid $icons;
     color: #757575;
     transition: 0.3s all;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8px 16px;
-
-    @media screen and (max-width: 768px) {
-        border-radius: 8px;
-        padding: 2px;
-        font-size: 16px !important;
-
-        i {
-            font-size: 16px;
-        }
-    }
+    padding: 0.5rem 1rem;
 
     i {
         @media screen and(min-width: $sm-size) {
@@ -359,8 +340,8 @@
 .page-cover {
     .edit-icons {
         position: absolute;
-        top: 24px;
-        left: 24px;
+        top: 1.5rem;
+        left: 1.5rem;
         padding-top: 5px;
         display: flex;
         flex-direction: column;
@@ -378,11 +359,11 @@
 
 .rounded-add-btn {
     @extend .btn;
-    padding: 4px !important;
+    padding: 0.25rem !important;
     border-radius: 12px;
     min-width: unset;
-    height: 32px;
-    width: 32px;
+    height: 2rem;
+    width: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -432,4 +413,25 @@
     @media screen and (max-width: $sm-size) {
         font-size: 10px;
     }
+}
+
+
+.btn-grey-10 {
+    background: $body-bg;
+    color: $light;
+    border: 2px solid $icons;
+    transition: 0.3s all;
+}
+
+.btn-grey-10:hover {
+    background: $icons;
+    color: $text-color;
+}
+
+.btn:active:not(:disabled) {
+    box-shadow: none !important;
+}
+
+.btn-dark:active:not(:disabled) {
+    box-shadow: none !important;
 }

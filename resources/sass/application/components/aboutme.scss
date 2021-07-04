@@ -13,17 +13,17 @@
 
 
 .about-me--card--subtitle {
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 17px;
     font-weight: 600;
 
     @media screen and (max-width:$sm-size) {
-        font-size: 12px;
+        font-size: 1rem;
     }
 }
 
 .about-me--card-title-container {
-    margin-bottom: 32px;
+    margin-bottom: 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -35,13 +35,9 @@
 }
 
 .about-me--card-title {
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 700;
     margin-bottom: 0;
-
-    @media screen and (max-width:$sm-size) {
-        font-size: 14px;
-    }
 }
 
 .about-me--company-info {
@@ -54,7 +50,7 @@
 }
 
 .about-me--title {
-    font-size: 14px;
+    font-size: 0.875rem;
     color: $text-color;
 
     @media screen and (max-width:$sm-size) {

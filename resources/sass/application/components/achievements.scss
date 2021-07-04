@@ -1,18 +1,18 @@
 .achievement-edit {
     display: flex;
-    padding: 12px 0;
+    padding: 0.75rem 0;
 
     .actions-container {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 12px;
+        padding: 0.75rem;
         position: relative;
     }
 
     .achievement-edit-row {
         position: relative;
-        padding: 12px;
+        padding: 0.75rem;
         width: 100%;
     }
 
@@ -23,7 +23,7 @@
     }
 
     .show-more-container {
-        margin-top: 12px;
+        margin-top: 0.75rem;
         position: absolute;
         top: 52px;
     }
@@ -37,7 +37,7 @@
     height: -webkit-max-content;
     height: -moz-max-content;
     height: max-content;
-    margin: -12px;
+    margin: -0.75rem;
 
     .row-first-only {
         width: calc(70% - 104px);
@@ -48,20 +48,19 @@
     }
 
     >* {
-        padding: 12px;
+        padding: 0.75rem;
     }
 }
 
 
 .achievement {
     &.detailed {
-        margin: 16px 0;
+        margin: 1rem 0;
     }
 
     .achievement-name {
         display: flex;
         flex-direction: column;
-
 
 
         &.detailed {
@@ -77,15 +76,14 @@
 
             @media screen and (max-width: $sm-size) {
                 display: flex;
-                font-size: 12px;
                 align-items: center;
                 line-height: 1;
             }
 
             >*:not(:last-child) {
-                padding-left: 12px;
+                padding-left: 0.75rem;
                 border-left: 2px solid #C8C8C8;
-                margin-left: 12px;
+                margin-left: 0.75rem;
             }
 
             >span {
@@ -96,17 +94,13 @@
 
         .title {
             font-weight: 600;
-            font-size: 16px;
+            font-size: 1rem;
             color: $dark;
 
-            line-height: 24px;
-
-            @media screen and (max-width: $sm-size) {
-                font-size: 12px;
-            }
+            line-height: 1.5rem;
 
             &:not(:last-child) {
-                margin-bottom: 12px;
+                margin-bottom: 0.75rem;
             }
         }
 
@@ -119,23 +113,19 @@
         }
 
         .achievement-description {
-            margin-top: 12px;
+            margin-top: 0.75rem;
             font-weight: normal;
-            font-size: 16px;
+            font-size: 1rem;
             line-height: 30px;
             color: $grey;
             margin-bottom: 0;
-
-            @media screen and (max-width: $sm-size) {
-                font-size: 12px;
-            }
         }
     }
 }
 
 .languages-list {
     .tselect {
-        min-width: 116px;
+        min-width: 11rem;
     }
 }
 
@@ -143,7 +133,7 @@
     display: flex;
     align-items: center;
     color: $grey;
-    font-size: 12px;
+    font-size: 0.75rem;
     transition: 0.3s all;
     @extend .clickable;
 
@@ -152,17 +142,17 @@
     }
 
     i {
-        font-size: 16px;
+        font-size: 1rem;
         margin-left: 4px;
     }
 }
 
 .delete-move-actions {
-    border-radius: 16px;
+    border-radius: 1rem;
     display: flex;
     color: $grey;
     background: $fixed-elements;
-    padding: 8px 12px;
+    padding: 8px 0.75rem;
     width: 80px;
     height: 40px;
     display: flex;
@@ -188,7 +178,7 @@
 
 .achievement-item {
     &:not(:last-child) {
-        padding: 0 24px;
+        padding: 0 1.5rem;
         border-bottom: 2px solid #C8C8C8;
     }
 
@@ -214,7 +204,7 @@
     .achievement-title {
         display: flex;
         align-items: baseline;
-        font-size: 16px;
+        font-size: 1rem;
 
         cursor: pointer;
     }
@@ -234,10 +224,10 @@
         }
 
         @media screen and(max-width: $sm-size) {
-            margin-bottom: 12px;
+            margin-bottom: 0.75rem;
 
             >.open-achievements {
-                margin-bottom: -12px;
+                margin-bottom: -0.75rem;
             }
         }
     }
@@ -250,7 +240,7 @@
     align-items: center;
     flex-wrap: wrap;
     margin: 0;
-    padding: 16px 0;
+    padding: 1rem 0;
 
 
     li {
@@ -264,11 +254,11 @@
             height: 2px;
             background-color: #EEE;
             left: 0;
-            right: 116px;
+            right: 11rem;
 
             @media screen and (max-width: $sm-size) {
-                left: 16px;
-                right: 16px;
+                left: 1rem;
+                right: 1rem;
                 width: calc(100% - 32px);
             }
         }
@@ -291,7 +281,7 @@
             }
 
             @media screen and (max-width: $sm-size) {
-                font-size: 12px;
+                font-size: 0.75rem;
             }
         }
 
@@ -300,9 +290,9 @@
     li:not(.edit) {
         &:not(.detailed) {
             &:not(:last-child) {
-                padding-left: 16px;
+                padding-left: 1rem;
                 border-left: 2px solid #C8C8C8;
-                margin-left: 16px;
+                margin-left: 1rem;
             }
         }
     }

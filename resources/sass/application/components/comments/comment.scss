@@ -11,7 +11,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 16px 24px;
+        padding: 1rem 1.5rem;
 
         .pagedetail {
             margin-right: 12px;
@@ -44,7 +44,7 @@
     }
 
     .comment-body {
-        padding: 16px 24px;
+        padding: 16px 1.5rem;
         width: 100%;
         unicode-bidi: -moz-plaintext;
         unicode-bidi: plaintext;
@@ -55,6 +55,6 @@
 
 .comment-item {
     &:not(:last-child) {
-        margin-bottom: 24px;
+        margin-bottom: 1.5rem;
     }
 }

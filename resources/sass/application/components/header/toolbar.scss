@@ -43,7 +43,7 @@
             direction: ltr;
             -webkit-font-smoothing: antialiased;
             vertical-align: middle;
-            font-size: 24px;
+            font-size: 1.5rem;
             color: $grey;
 
             &.invite-link {
@@ -62,7 +62,7 @@
     a.active {
         .navheader-icon {
             font-family: "Material Icons";
-            font-size: 24px;
+            font-size: 1.5rem;
             color: $icon-hover;
         }
 
@@ -80,7 +80,7 @@
         content: " ";
         height: 2px;
         background: $icon-hover;
-        width: 24px;
+        width: 1.5rem;
         position: absolute;
         left: 12px;
         right: 12px;
@@ -90,7 +90,7 @@
 
     a.active::after {
         color: $icon-hover;
-        width: 24px;
+        width: 1.5rem;
         transform: scaleX(1) translateY(8px);
     }
 }

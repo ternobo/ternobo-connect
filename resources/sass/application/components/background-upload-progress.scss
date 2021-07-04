@@ -1,7 +1,7 @@
 .background-upload-progress {
     position: fixed;
     @extend .card;
-    padding: 20px 16px;
+    padding: 1.25rem 1rem;
     right: 40px;
     bottom: 40px;
     width: 300px;
@@ -13,7 +13,7 @@
 
     .progress {
         width: 100%;
-        margin-left: 12px;
+        margin-left: 0.75rem;
 
     }
 }

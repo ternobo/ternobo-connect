@@ -8,20 +8,20 @@
     right: 0;
     display: flex;
     justify-content: center;
-    height: 24px;
-    top: 24px;
+    height: 1.5rem;
+    top: 1.5rem;
     align-items: center;
 
     @media screen and (max-width: $sm-size) {
         font-size: 14px;
-        top: 24px;
+        top: 1.5rem;
 
     }
 }
 
 
 .modal-body {
-    padding: 32px;
+    padding: 2rem;
 
     @media screen and (max-width: $sm-size) {
         padding: 20px;
@@ -101,4 +101,11 @@
 
     padding: 16px;
     padding-bottom: 12px;
+}
+
+.modal-content {
+    border-radius: 0;
+    padding: 0;
+    border: none;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
 }

@@ -15,7 +15,7 @@
 }
 
 .settings-item {
-    padding: 24px 32px;
+    padding: 24px 2rem;
     color: $grey;
     cursor: pointer;
     -webkit-user-select: none;
@@ -73,7 +73,7 @@
 }
 
 .settings-card-body {
-    padding: 4px 32px;
+    padding: 4px 2rem;
 }
 
 .setting-action {
@@ -117,8 +117,8 @@
 
 .setting-btn {
     padding: 2px;
-    width: 32px;
-    height: 32px;
+    width: 2rem;
+    height: 2rem;
     display: flex !important;
     justify-content: center;
     align-items: center;
@@ -157,7 +157,7 @@
 
         @media screen and (min-width: $sm-size) {
             &:first-child {
-                margin-left: 24px;
+                margin-left: 1.5rem;
             }
         }
     }
