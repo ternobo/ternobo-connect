@@ -112,7 +112,7 @@
                 left: 0;
 
                 @if $direction==ltr {
-                    left: calc(100% - 10px) #{"/* rtl:ignore */"};
+                    right: calc(100% - 10px) #{"/* rtl:ignore */"};
                     transition: 0.5s all;
                 }
             }
@@ -127,7 +127,7 @@
                     font-size: 16px;
 
                     @if $direction==ltr {
-                        left: 16px;
+                        right: 16px;
                     }
                 }
 
