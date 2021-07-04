@@ -21,6 +21,12 @@
         display: flex;
         flex-direction: column;
 
+        &:not(.active):not(.invite-link) {
+            .navheader-icon {
+                opacity: 0.5;
+            }
+        }
+
         .navheader-text {
             margin-top: -3px;
             white-space: nowrap;
@@ -48,7 +54,16 @@
 
             &.invite-link {
                 transform: rotate(-15deg);
-                color: $action;
+
+                &.hasInvite {
+                    color: $action;
+                    opacity: 1 !important;
+
+                    &:hover {
+                        color: $action-hover;
+                    }
+                }
+
             }
         }
     }
@@ -77,7 +92,7 @@
 
     a::after {
         transition: all 0.3s;
-        content: " ";
+        // content: " ";
         height: 2px;
         background: $icon-hover;
         width: 1.5rem;

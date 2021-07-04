@@ -8,6 +8,9 @@
     height: 72px;
     z-index: 1040;
     transition: 0.3s all;
+    background: rgba(255, 255, 255, 0.85);
+    -webkit-backdrop-filter: blur(90px);
+    backdrop-filter: blur(90px);
 
     .searchfield {
         margin-right: 1.5rem;
@@ -20,6 +23,7 @@
     }
 
     @media screen and (max-width: $sm-size) {
+        padding: 12px;
 
         .beta-badge {
             display: none;
@@ -115,9 +119,7 @@
         justify-content: space-between;
         align-items: center;
         height: 100%;
-        max-width: 1580px;
-        background: $body-bg;
-        border-bottom: 2px solid $icons;
+        max-width: $breakpoint;
         transition: 0.3s all;
         width: 100%;
     }
@@ -136,7 +138,7 @@
 .usermenu {
     position: fixed;
     display: none;
-    top: 70px;
+    top: 64px;
     min-width: 300px;
     max-width: 300px;
     z-index: 1000;
@@ -222,6 +224,11 @@
         user-select: none;
         display: flex;
         align-items: center;
+        padding: 12px;
+
+        &.active {
+            background: rgba($color: $gray-200, $alpha: 0.85);
+        }
 
         @if $direction==ltr {
             flex-direction: row-reverse;
@@ -232,13 +239,14 @@
     .user-username {
         line-height: 1;
         font-weight: 600;
-        color: $grey;
-        margin: 0 16px;
+        color: $dark;
+        margin: 0 12px;
+        line-height: 32px;
 
         display: flex;
         align-items: center;
-        padding-top: 4px;
-        height: 1.5rem;
+        height: 32px;
+        font-family: 'Open Sans';
 
         @if $direction==ltr {
             margin-left: 0;

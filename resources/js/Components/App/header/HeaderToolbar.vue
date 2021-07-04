@@ -11,7 +11,7 @@
 				<i class="navheader-icon" :class="{ unread: $store.state.shared.notifications_count > 0 && $store.state.url != '/notifications' }">{{ $store.state.url === "/notifications" ? "notifications" : "notifications_none" }}</i>
 			</wire-link>
 			<wire-link :class="{ active: $store.state.url === '/invite' }" href="/invite">
-				<i class="navheader-icon invite-link">{{ $store.state.url === "/invite" ? "confirmation_number" : "confirmation_number" }}</i>
+				<i class="navheader-icon invite-link" :class="{ hasInvite: $store.state.shared.invites_count > 0 }">{{ $store.state.url === "/invite" ? "confirmation_number" : "confirmation_number" }}</i>
 			</wire-link>
 			<wire-link :class="{ active: $store.state.url === '/bookmarks' }" href="/bookmarks">
 				<i class="navheader-icon">{{ $store.state.url === "/bookmarks" ? "bookmark" : "bookmark_border" }} </i>
@@ -25,9 +25,9 @@
 		</div>
 
 		<div ref="usermenushow" v-if="$store.state.user != null" class="usertoolbar" @mouseenter="showUserMenu" @mouseleave="menuVisible = false">
-			<div class="usertoolbar-container">
+			<div class="usertoolbar-container" :class="{ active: menuVisible }">
 				<span dir="ltr" class="user-username">{{ $store.state.user.username }} <i v-if="$store.state.user.is_verified === 1" class="verificationcheck">check_circle</i> </span>
-				<img v-bind:src="$store.state.user.profile" class="profile-xxsm" />
+				<img v-bind:src="$store.state.user.profile" class="profile-xxxsm" />
 			</div>
 			<transition name="fade" mode="out-in">
 				<user-menu :style="usermenuStyle" v-show="menuVisible"></user-menu>

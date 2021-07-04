@@ -14,7 +14,9 @@
   background-color: $input-bg;
   background-clip: padding-box;
   border: $input-border-width solid $input-border-color;
-  appearance: none; // Fix appearance for date inputs in Safari
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none; // Fix appearance for date inputs in Safari
 
   // Note: This has no effect on <select>s in some browsers, due to the limited stylability of `<select>`s in CSS.
   @include border-radius($input-border-radius, 0);
@@ -36,9 +38,12 @@
     background-color: $input-focus-bg;
     border-color: $input-focus-border-color;
     outline: 0;
+
     @if $enable-shadows {
       @include box-shadow($input-box-shadow, $input-focus-box-shadow);
-    } @else {
+    }
+
+    @else {
       // Avoid using mixin so we can pass custom focus shadow properly
       box-shadow: $input-focus-box-shadow;
     }
@@ -49,12 +54,32 @@
   // TODO: we can remove this workaround once https://bugs.webkit.org/show_bug.cgi?id=198959 is resolved
   &::-webkit-date-and-time-value {
     // Multiply line-height by 1em if it has no unit
-    height: if(unit($input-line-height) == "", $input-line-height * 1em, $input-line-height);
+    height: if(unit($input-line-height)=="", $input-line-height * 1em, $input-line-height);
   }
 
   // Placeholder
+  &::-webkit-input-placeholder {
+    color: #C8C8C8;
+    // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
+    opacity: 1;
+  }
+  &::-moz-placeholder {
+    color: #C8C8C8;
+    // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
+    opacity: 1;
+  }
+  &:-ms-input-placeholder {
+    color: #C8C8C8;
+    // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
+    opacity: 1;
+  }
+  &::-ms-input-placeholder {
+    color: #C8C8C8;
+    // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
+    opacity: 1;
+  }
   &::placeholder {
-    color: $input-placeholder-color;
+    color: #C8C8C8;
     // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
     opacity: 1;
   }
@@ -76,7 +101,8 @@
   &::file-selector-button {
     padding: $input-padding-y $input-padding-x;
     margin: (-$input-padding-y) (-$input-padding-x);
-    margin-inline-end: $input-padding-x;
+    -webkit-margin-end: $input-padding-x;
+            margin-inline-end: $input-padding-x;
     color: $form-file-button-color;
     @include gradient-bg($form-file-button-bg);
     pointer-events: none;
@@ -95,7 +121,8 @@
   &::-webkit-file-upload-button {
     padding: $input-padding-y $input-padding-x;
     margin: (-$input-padding-y) (-$input-padding-x);
-    margin-inline-end: $input-padding-x;
+    -webkit-margin-end: $input-padding-x;
+            margin-inline-end: $input-padding-x;
     color: $form-file-button-color;
     @include gradient-bg($form-file-button-bg);
     pointer-events: none;
@@ -151,13 +178,15 @@
   &::file-selector-button {
     padding: $input-padding-y-sm $input-padding-x-sm;
     margin: (-$input-padding-y-sm) (-$input-padding-x-sm);
-    margin-inline-end: $input-padding-x-sm;
+    -webkit-margin-end: $input-padding-x-sm;
+            margin-inline-end: $input-padding-x-sm;
   }
 
   &::-webkit-file-upload-button {
     padding: $input-padding-y-sm $input-padding-x-sm;
     margin: (-$input-padding-y-sm) (-$input-padding-x-sm);
-    margin-inline-end: $input-padding-x-sm;
+    -webkit-margin-end: $input-padding-x-sm;
+            margin-inline-end: $input-padding-x-sm;
   }
 }
 
@@ -170,13 +199,15 @@
   &::file-selector-button {
     padding: $input-padding-y-lg $input-padding-x-lg;
     margin: (-$input-padding-y-lg) (-$input-padding-x-lg);
-    margin-inline-end: $input-padding-x-lg;
+    -webkit-margin-end: $input-padding-x-lg;
+            margin-inline-end: $input-padding-x-lg;
   }
 
   &::-webkit-file-upload-button {
     padding: $input-padding-y-lg $input-padding-x-lg;
     margin: (-$input-padding-y-lg) (-$input-padding-x-lg);
-    margin-inline-end: $input-padding-x-lg;
+    -webkit-margin-end: $input-padding-x-lg;
+            margin-inline-end: $input-padding-x-lg;
   }
 }
 
@@ -196,6 +227,7 @@ textarea {
     min-height: $input-height-lg;
   }
 }
+
 // stylelint-enable selector-no-qualifying-type
 
 .form-control-color {
@@ -208,12 +240,12 @@ textarea {
   }
 
   &::-moz-color-swatch {
-    height: if(unit($input-line-height) == "", $input-line-height * 1em, $input-line-height);
+    height: if(unit($input-line-height)=="", $input-line-height * 1em, $input-line-height);
     @include border-radius($input-border-radius);
   }
 
   &::-webkit-color-swatch {
-    height: if(unit($input-line-height) == "", $input-line-height * 1em, $input-line-height);
+    height: if(unit($input-line-height)=="", $input-line-height * 1em, $input-line-height);
     @include border-radius($input-border-radius);
   }
 }

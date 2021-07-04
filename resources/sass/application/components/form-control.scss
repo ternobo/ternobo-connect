@@ -74,7 +74,7 @@ input {
 }
 
 .form-control::placeholder {
-    color: $grey;
+    color: $icons;
     opacity: 1;
 }
 
@@ -173,5 +173,17 @@ input[type=text] {
 
     &:focus {
         background: $body-bg;
+    }
+}
+
+.text-input-grey {
+    @extend .form-control;
+    border: $gray-200;
+    background: $gray-200;
+    color: $grey;
+    text-align: start;
+
+    &:focus {
+        background: $gray-200;
     }
 }

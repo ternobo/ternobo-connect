@@ -1,13 +1,13 @@
 <template>
 	<b-modal v-model="showModal" @show="onShow" hide-footer :title="__.get('settings.change-phone-number')" body-class="modal-signup" size="md" :centered="true">
-		<div class="d-flex ephone-input-group py-0 justify-content-between align-items-center">
+		<div class="d-flex ephone-input-group py-0 justify-content-between align-items-end">
 			<div class="d-flex me-4 flex-column">
 				<tselect :items="country_codes" @change="phone = countryCode.code" class="mb-3" valueOption="id" labelOption="country" v-model="countryCode">
 					<template v-slot:icon>
 						<span v-html="countryIcon"></span>
 					</template>
 					<template v-slot:itemIcon="{ icon }">
-						<span v-html="getCountryIcon(icon)"></span>
+						<span class="ms-2" v-html="getCountryIcon(icon)"></span>
 					</template>
 				</tselect>
 				<input type="email" class="form-control mx-0 mt-3 text-input" dir="ltr" :readonly="verification_step" @keypress.enter="sendVcode()" v-model="phone" placeholder="+989123456789" />

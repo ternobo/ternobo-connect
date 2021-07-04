@@ -1,12 +1,14 @@
 <template>
-	<div id="app" class="container">
+	<div>
 		<AppHeader></AppHeader>
-		<div :class="{ 'has-bnav': !$root.isDesktop }">
-			<transition mode="out-in" name="fade">
-				<slot></slot>
-			</transition>
+		<div id="app" class="container">
+			<div :class="{ 'has-bnav': !$root.isDesktop }">
+				<transition mode="out-in" name="fade">
+					<slot></slot>
+				</transition>
+			</div>
+			<bottom-navigator v-if="!$root.isDesktop"></bottom-navigator>
 		</div>
-		<bottom-navigator v-if="!$root.isDesktop"></bottom-navigator>
 	</div>
 </template>
 

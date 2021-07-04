@@ -1,6 +1,6 @@
 <template>
 	<div class="auto-complete-container input-group-icon">
-		<input :type="type" v-bind="{ ...$attrs, ...$props }" autocomplete="off" ref="input" @focus="focus = true" @blur="focus = false" v-model="val" @input="onInput" class="form-control" />
+		<input :type="type" v-bind="{ ...$attrs, ...$props }" autocomplete="off" ref="input" @focus="focus = true" @blur="focus = false" v-model="val" @input="onInput" class="text-input-grey" />
 		<i class="material-icons clickable" @click="iconClick">{{ icon }}</i>
 		<i class="material-icons clickable delete-icon" @click="val = ''" v-if="val.length > 0 && !focus">close</i>
 		<ul v-if="suggestions.length > 0" :style="{ top: `${top}px`, left: `${left}px`, width: `${width}px`, 'padding-top': `${paddingTop}px` }">

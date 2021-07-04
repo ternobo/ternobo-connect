@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Comment;
+use App\Models\InviteLink;
 use App\Models\Notification;
 use App\Models\Page;
 use App\Models\Post;
@@ -101,7 +102,12 @@ class AppServiceProvider extends ServiceProvider
                         // }
                         return [];
                     },
-
+                    'invites_count' => function () {
+                        if (Auth::check()) {
+                            return InviteLink::query()->where("user_id", Auth::user()->id)->where("valid", true)->count();
+                        }
+                        return 0;
+                    },
                     'profile_steps' => function () {
                         if (Auth::check()) {
                             return Auth::user()->getProfileSteps();

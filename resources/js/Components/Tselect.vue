@@ -29,7 +29,7 @@
 				</div>
 				<div class="tselect_new-item" v-if="showNewItem">
 					<div class="d-flex w-100 px-1">
-						<input v-model="newItemInput" type="text" class="add-category-field form-control bg-transparent font-12 px-2" />
+						<input v-model="newItemInput" type="text" class="add-category-field form-control bg-transparent px-2" />
 						<button :disabled="!(newItemInput != null && newItemInput.length > 0)" @click="newItem" :style="{ width: '20px' }" class="btn add-btn d-flex justify-content-center align-items-center">
 							<i class="material-icons font-14">add</i>
 						</button>

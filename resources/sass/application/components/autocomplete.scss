@@ -78,12 +78,11 @@
     }
 
     >input {
-        border-radius: 16px;
+        border-radius: 12px;
         font-size: 14px;
-        height: 2.75rem;
+        height: 2.5rem;
         padding: 8px 16px;
         border-color: transparent;
-        box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.03);
 
 
         @if $direction==rtl {
@@ -100,35 +99,36 @@
 
         @media screen and(max-width: $sm-size) {
             width: 0;
-            transition: 0.3s all;
+            transition: 0.5s all;
             align-self: flex-end;
             background: transparent;
             box-shadow: unset;
             height: 36px;
             border-radius: 12px;
             font-size: 10px;
-
-            @if $direction==rtl {
-                align-self: flex-end;
-            }
-
-            @else {
-                align-self: flex-start;
-            }
+            align-self: flex-end;
 
             +i:not(.delete-icon) {
                 left: 0;
+
+                @if $direction==ltr {
+                    left: calc(100% - 10px) #{"/* rtl:ignore */"};
+                    transition: 0.5s all;
+                }
             }
 
 
             &:focus,
             &:not(:placeholder-shown) {
-                background-color: $white;
                 width: 100%;
-                box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.03);
+
 
                 +i {
                     font-size: 16px;
+
+                    @if $direction==ltr {
+                        right: 16px;
+                    }
                 }
 
                 +i:not(.delete-icon) {

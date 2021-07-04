@@ -434,7 +434,7 @@
 
 body {
     @if($direction==rtl) {
-        font-family: Vazir, sans-serif;
+        font-family: Vazir, 'Open Sans', sans-serif;
     }
 
     @else {

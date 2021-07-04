@@ -11,7 +11,7 @@
 				</div>
 			</div>
 			<div>
-				<div class="content font-12" :class="{ 'text-superlight text-center': text == null || text.length < 1 }" v-if="!edit">
+				<div class="content" :class="{ 'text-superlight text-center': text == null || text.length < 1 }" v-if="!edit">
 					{{ textToShow != null && textToShow.length > 0 ? textToShow : __.get("messages.no-data") }}
 					<br />
 					<div class="show-more-text--clickable" v-if="showMore" @click="showFullText = !showFullText">{{ showFullText ? __.get("application.show-less") : __.get("application.show-more") }}</div>
