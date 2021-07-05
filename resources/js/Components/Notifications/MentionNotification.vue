@@ -3,7 +3,7 @@
 		<div class="notification-header">
 			<div class="notification-title">
 				<wire-link :href="notifications[0].sender.slug" class="profiles clickable">
-					<lazy-image :src="notifications[0].sender.profile" class="profile-xxsm" img-class="profile-xxsm" />
+					<lazy-image :src="notifications[0].sender.profile" class="profile-xsm" img-class="profile-xsm" />
 				</wire-link>
 				<div class="notification-text">
 					<wire-link class="title clickable" :href="notifications[0].sender.slug">

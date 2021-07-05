@@ -2,8 +2,8 @@
 	<div class="post-notification">
 		<div class="notification-header">
 			<div class="notification-title">
-				<wire-link :href="notifications[0].sender.slug" class="profiles clickable">
-					<lazy-image :src="notifications[0].sender.profile" class="profile-xxsm" img-class="profile-xxsm" />
+				<wire-link :href="notifications[0].sender.slug" class="profile-xsm clickable">
+					<lazy-image :src="notifications[0].sender.profile" class="profile-xsm" img-class="profile-xsm" />
 				</wire-link>
 				<div class="notification-text">
 					<div class="title">
@@ -32,5 +32,3 @@ export default {
 	},
 };
 </script>
-
-<style></style>
