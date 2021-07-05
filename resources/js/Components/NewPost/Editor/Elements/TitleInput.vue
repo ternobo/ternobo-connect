@@ -1,19 +1,40 @@
 <template>
-	<div class="title-input">
-		<input type="text" maxlength="112" class="form-control shadow-0" v-model="text" />
+	<div class="contenteditable-input title-input">
+		<div contenteditable @focus="onFocus" v-max-contenteditable="112" @keypress.enter.prevent @keydown.enter.prevent @input="input" ref="input" class="w-100 shadow-0">{{ text }}</div>
 	</div>
 </template>
 
 <script>
+import TextareaParser from "../TextareaParser";
 export default {
 	props: ["content"],
 	created() {
 		this.text = this.content;
 	},
+	mounted() {
+		this.$nextTick(() => {
+			twemoji.parse(this.$refs.input);
+		});
+	},
 	data() {
 		return {
 			text: "",
 		};
+	},
+	methods: {
+		input(e) {
+			twemoji.parse(this.$refs.input);
+			this.text = TextareaParser.escapeHTML(TextareaParser.replaceEmojiWithAltAttribute(this.$refs.input.innerHTML));
+		},
+		onFocus() {
+			this.$emit("focus", this);
+		},
+		insertEmoji(emoji) {
+			this.$refs.input.innerHTML += emoji;
+			this.$nextTick(() => {
+				this.input();
+			});
+		},
 	},
 	watch: {
 		text(newValue) {

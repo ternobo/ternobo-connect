@@ -1,6 +1,6 @@
 <template>
 	<mentionable class="textarea-content w-100">
-		<div ref="editable" class="editor--text-input" contenteditable @keydown="onKeyDown" dir="auto" @paste="onPaste" @input="input" @apply="addTag"></div>
+		<div ref="editable" class="editor--text-input" contenteditable @keydown="onKeyDown" dir="auto" @focus="onFocus" @blur="$emit('blur', this)" @paste="onPaste" @input="input" @apply="addTag"></div>
 		<div ref="editableHighlight" class="editor--text-input highlight" dir="auto" :placeholder="__.get('content/posts.enter-your-text')"></div>
 	</mentionable>
 </template>
@@ -11,6 +11,13 @@ import TextareaParser from "../TextareaParser";
 import Mentionable from "../../../Mentionable";
 export default {
 	methods: {
+		onFocus() {
+			this.$emit("focus", this);
+		},
+		insertEmoji(emoji) {
+			this.$refs.editable.append(emoji);
+			this.input();
+		},
 		updateHighlight() {
 			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
 			content = TextareaParser.unescapeHtml(content);
@@ -111,8 +118,12 @@ export default {
 	},
 	mounted() {
 		document.execCommand("defaultParagraphSeparator", false, "p");
-
+		this.$refs.editable.innerHTML = this.content;
 		this.updateHighlight();
+
+		this.$nextTick(() => {
+			twemoji.parse(this.$refs.input);
+		});
 
 		this.$nextTick(() => {
 			this.$refs.editable.focus();

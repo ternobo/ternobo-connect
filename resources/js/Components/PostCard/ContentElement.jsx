@@ -6,12 +6,10 @@ export default {
         let tag = "div";
         let classes = "";
         let content = "";
-        let text = document.createElement("p");
         switch (contentType) {
             case "title":
                 tag = "h2";
-                text.innerHTML = twemoji.parse(this.content.content)
-                content = (text.innerText);
+                content = this.content.content;
                 break;
             case "text":
                 if (this.content.content != null) {

@@ -7,7 +7,7 @@
 						<i class="material-icons-outlined hand-hover">unfold_more</i>
 						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 					</div>
-					<component :is="components[element.type]" :ref="`${element.type}`" :content.sync="editorItems[index].content" :key="'item_type_' + element.id" :max="1200" />
+					<component :is="components[element.type]" :ref="`${element.type}`" @focus="onFocus" :content.sync="editorItems[index].content" :key="'item_type_' + element.id" :max="1200" />
 				</div>
 			</draggable>
 			<div class="d-flex editor-actions" v-if="availableOptions.length > 0" :class="{ 'align-items-center': editorItems.length < 1 }">
@@ -17,9 +17,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="d-flex align-items-center justify-content-between" v-if="hasText">
+		<div class="d-flex align-items-center justify-content-between" v-if="hasText || hasTitle">
 			<emoji-picker @pick="appendEmoji" />
-			<div class="my-3 character-counter">
+			<div class="my-3 character-counter" v-if="hasText">
 				<span class="counter tex-dark">{{ leftCharacter }}</span>
 				<div class="progress me-1 mb-0" style="width: 100px; height: 5px">
 					<div class="progress-bar" role="progressbar" :style="{ width: textProgress }" aria-valuemin="0" aria-valuemax="100"></div>
@@ -55,10 +55,12 @@ export default {
 		getData() {
 			return this.editorItems;
 		},
+		onFocus(node) {
+			this.lastFocused = node;
+		},
 		appendEmoji(emoji) {
-			if (this.$refs.text && this.$refs.text.length > 0) {
-				this.$refs.text[0].$refs.editable.append(emoji);
-				this.$refs.text[0].input();
+			if (this.lastFocused) {
+				this.lastFocused.insertEmoji(emoji);
 			}
 		},
 		deleteElem(index) {
@@ -94,6 +96,9 @@ export default {
 	},
 	computed: {
 		...mapState(["user"]),
+		hasTitle() {
+			return this.editorItems.filter((item) => item.type == "title").length > 0;
+		},
 		hasText() {
 			return this.editorItems.filter((item) => item.type == "text").length > 0;
 		},
@@ -130,6 +135,7 @@ export default {
 		return {
 			editorItems: [],
 			drag: false,
+			lastFocused: null,
 			components: {
 				text: TextInput,
 				title: TitleInput,
