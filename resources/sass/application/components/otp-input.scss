@@ -1,12 +1,11 @@
 .otp-input {
-    margin: 0 -6px;
-
-
+    >div:not(:last-child) {
+        margin-right: 12px;
+    }
 }
 
 .otp-input-single {
     max-width: 16px;
-    margin: 0 6px;
 
     .input {
         padding: 8px 0;

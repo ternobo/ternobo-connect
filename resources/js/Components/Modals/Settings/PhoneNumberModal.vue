@@ -21,8 +21,24 @@
 				<div class="input-group d-flex align-items-center flex-column justify-content-center mt-4">
 					<label class="w-100" v-html="__.get('register.enter-verification-code')"></label>
 					<div class="d-flex align-items-center">
-						<otp-input input-class="w-100" class="text-center" @completed="verifyCode" v-model="code" :numInputs="6" />
-						<i class="material-icons-outlined" :class="{ 'text-danger': invalidCode }">verified_user</i>
+						<div class="d-flex flex-column">
+							<div class="d-flex align-items-end">
+								<div><otp-input input-class="w-100" class="text-center" @completed="verifyCode" v-model="code" :numInputs="6" /></div>
+								<i class="material-icons-outlined ms-2" :class="{ 'text-danger': invalidCode }">verified_user</i>
+							</div>
+							<div class="mt-32px" style="width: 160px">
+								<span
+									class="clickable d-flex justify-content-between align-items-center font-14"
+									:class="{
+										'disabled text-muted': countdown > 0,
+										'text-action': !(countdown > 0),
+									}"
+									@click="sendVcode"
+								>
+									<span>{{ __.get("settings.resend") }}</span> <span class="text-dark">{{ countdown > 0 ? "00:" + countdown : "" }}</span>
+								</span>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="d-flex justify-content-end">
@@ -43,6 +59,7 @@ import CountryCodesEn from "../../../Libs/CountryCodes-en";
 import { AsYouType } from "libphonenumber-js";
 import parsePhoneNumber from "libphonenumber-js";
 import { v4 as uuidv4 } from "uuid";
+import CountDownMixin from "../../../Mixins/CountDownMixin";
 export default {
 	methods: {
 		getCountryIcon(icon) {
@@ -63,6 +80,7 @@ export default {
 		},
 
 		sendVcode() {
+			this.countDownTimer();
 			this.loading = true;
 			var data = new FormData();
 			data.append("phone", this.phone);
@@ -191,7 +209,7 @@ export default {
 		LoadingSpinner,
 		OtpInput,
 	},
-	mixins: [ModalMixin],
+	mixins: [ModalMixin, CountDownMixin],
 	name: "PhoneNumberModal",
 };
 </script>

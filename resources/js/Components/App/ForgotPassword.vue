@@ -13,7 +13,7 @@
 				<div class="d-flex align-items-center">
 					<otp-input input-class="w-100" class="text-center" @completed="checkCode" v-model="resetCode" :numInputs="6" />
 				</div>
-				<div class="mt-32px ps-3" style="width: 160px">
+				<div class="mt-32px" style="width: 160px">
 					<span
 						class="clickable d-flex justify-content-between align-items-center font-14"
 						:class="{
