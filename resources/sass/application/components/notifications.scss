@@ -46,12 +46,12 @@
         justify-content: space-between;
         align-items: flex-start;
 
-        .profile-xxsm {
+        .profile-xsm {
             margin-bottom: 0;
+        }
 
-            img {
-                border: 4px solid $body-bg;
-            }
+        img.profile-xsm {
+            border: 4px solid $white;
         }
 
         >.notification-title {
@@ -62,7 +62,7 @@
                 margin-left: 12px;
                 display: flex;
 
-                >.profile-xxsm:not(:first-child) {
+                >.profile-xsm:not(:first-child) {
                     margin-right: -20px;
                 }
             }
