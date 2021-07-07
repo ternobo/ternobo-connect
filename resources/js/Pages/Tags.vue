@@ -14,11 +14,11 @@
 				<no-content> {{ __.get("messages.no-content-with-tag") }} </no-content>
 			</div>
 			<div v-if="postsArray.length > 0" class="posts" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="5">
-				<div class="row">
-					<div class="col-md-6" v-for="(post, index) in postsArray" :key="'post_item_' + index">
-						<PostCard :post="post"></PostCard>
+				<masonry v-if="!loadingPage" :cols="2" :gutter="32">
+					<div v-for="(post, index) in postsArray" class="py-3" :key="post.id + '_index_' + index">
+						<PostCard class="h-100 m-0" :post="post"></PostCard>
 					</div>
-				</div>
+				</masonry>
 				<div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
 					<loading-spinner class="image__spinner" />
 				</div>
