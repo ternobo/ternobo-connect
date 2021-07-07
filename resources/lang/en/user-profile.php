@@ -83,7 +83,7 @@ return [
     'currently-working-project' => "I am currently working on this project",
     'project-url' => "Project URL",
 
-    'award' => "Awards|Award",
+    'award' => "Award|Awards",
     'award-title' => "Title",
     'issuer' => "Issuer",
 

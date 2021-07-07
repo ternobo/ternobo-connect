@@ -153,12 +153,16 @@ export default {
 							this.deletedSlides = [];
 							this.toast(__.get("messages.save-success"), "check", "text-success");
 						} else {
-							this.$emit("posted", response.data.post);
 							this.content = [{ id: uuidv4(), content: [], icon: "more_horiz", active: true }];
 							this.category = undefined;
 							this.canDonate = false;
 							this.deletedSlides = [];
-							this.toast(__.get("messages.published-success"), "check", "text-success");
+							if (draft) {
+								this.toast(__.get("messages.drafted-success"), "check", "text-success");
+							} else {
+								this.toast(__.get("messages.published-success"), "check", "text-success");
+								this.$emit("posted", response.data.post);
+							}
 						}
 					} else {
 						this.handleError(response.data.errors);

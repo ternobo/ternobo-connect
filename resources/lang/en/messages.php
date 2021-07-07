@@ -14,6 +14,7 @@ return [
     'on-exit-confirm' => "Leave site? Changes you made may not be saved",
     'save-success' => "Saved successfully",
     'published-success' => "Published successfully",
+    'drafted-success' => "Drafted successfully",
     'done-job-message' => "Action was successful",
     'save-error' => "There is an error saving the information",
     'no-tip' => "We can't find any tip record",
