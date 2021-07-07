@@ -6,7 +6,7 @@
 export default {
 	computed: {
 		imageUrl() {
-			return typeof this.content == "object" ? URL.createObjectURL(this.content) : `/${this.content}`;
+			return typeof this.content == "object" ? URL.createObjectURL(this.content) : `${this.content}`;
 		},
 	},
 	props: {
