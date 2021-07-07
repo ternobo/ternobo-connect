@@ -53,7 +53,7 @@ class FixTags extends Command
             }
 
             $post->tags = $tags;
-            $tags->save();
+            $post->save();
         }
         return 0;
     }
