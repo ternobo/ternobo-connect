@@ -1,6 +1,6 @@
 <template>
 	<mentionable class="textarea-content w-100">
-		<div ref="editable" class="editor--text-input" contenteditable @keydown="onKeyDown" dir="auto" @focus="onFocus" @blur="$emit('blur', this)" @paste="onPaste" @input="input" @apply="addTag"></div>
+		<div ref="editable" class="editor--text-input" contenteditable @keydown="onKeyDown" dir="auto" @focus="onFocus" @blur="onBlur" @paste="onPaste" @input="input" @apply="addTag"></div>
 		<div ref="editableHighlight" class="editor--text-input highlight" dir="auto" :placeholder="__.get('content/posts.enter-your-text')"></div>
 	</mentionable>
 </template>
@@ -11,12 +11,66 @@ import TextareaParser from "../TextareaParser";
 import Mentionable from "../../../Mentionable";
 export default {
 	methods: {
+		saveCaretPosition() {
+			return () => {
+				this.setCaretPosition(this.$refs.editable, this.getCaretPosition());
+			};
+		},
+
+		getCaretPosition(context) {
+			const element = context || this.$refs.editable;
+			var caretOffset = 0;
+			var doc = element.ownerDocument || element.document;
+			var win = doc.defaultView || doc.parentWindow;
+			var sel;
+			if (typeof win.getSelection != "undefined") {
+				sel = win.getSelection();
+				if (sel.rangeCount > 0) {
+					var range = win.getSelection().getRangeAt(0);
+					var preCaretRange = range.cloneRange();
+					preCaretRange.selectNodeContents(element);
+					preCaretRange.setEnd(range.endContainer, range.endOffset);
+					caretOffset = preCaretRange.toString().length;
+				}
+			} else if ((sel = doc.selection) && sel.type != "Control") {
+				var textRange = sel.createRange();
+				var preCaretTextRange = doc.body.createTextRange();
+				preCaretTextRange.moveToElementText(element);
+				preCaretTextRange.setEndPoint("EndToEnd", textRange);
+				caretOffset = preCaretTextRange.text.length;
+			}
+			return caretOffset;
+		},
+
+		setCaretPosition(elem, caretPos) {
+			if (elem != null) {
+				if (elem.createTextRange) {
+					var range = elem.createTextRange();
+					range.move("character", caretPos);
+					range.select();
+				} else {
+					if (elem.selectionStart) {
+						elem.focus();
+						elem.setSelectionRange(caretPos, caretPos);
+					} else elem.focus();
+				}
+			}
+		},
+
 		onFocus() {
+			this.restore();
 			this.$emit("focus", this);
 		},
+		onBlur() {
+			this.$emit("blur", this);
+			this.restore = this.saveCaretPosition(this.$refs.editable);
+		},
 		insertEmoji(emoji) {
-			this.$refs.editable.append(emoji);
+			this.$refs.editable.focus();
+			const range = window.getSelection().getRangeAt(0);
+			range.insertNode(document.createTextNode(emoji));
 			this.input();
+			this.setCaretPosition(this.$refs.editable, this.getCaretPosition() + 1);
 		},
 		updateHighlight() {
 			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
@@ -90,6 +144,7 @@ export default {
 			this.$nextTick(() => {
 				twemoji.parse(this.$refs.editableHighlight);
 				twemoji.parse(this.$refs.editable);
+				this.restore();
 				this.fixDirection();
 			});
 		},
@@ -106,6 +161,7 @@ export default {
 	data() {
 		return {
 			tags: [],
+			restore: () => {},
 		};
 	},
 	props: {

@@ -1,4 +1,3 @@
-import TextareaParser from "../Components/NewPost/Editor/TextareaParser";
 
 export default {
     bind: function (el, binding, vnode) {
