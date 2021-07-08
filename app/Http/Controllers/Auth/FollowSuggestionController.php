@@ -24,11 +24,14 @@ class FollowSuggestionController extends Controller
 
     public function get()
     {
+        $user = Auth::user();
+        $user->load("invitedBy");
+        $invitedBy = $user->invitedBy;
         $followings = Following::query()->where("page_id", Ternobo::currentPage()->id)->count();
-        $suggestions = Page::query()->with(['user'])->where('pages.id', "!=", Auth::user()->personalPage->id)
-            ->leftJoin("follow_suggestions", "pages.id", "=", "follow_suggestions.page_id")
-            ->select(['pages.*', "follow_suggestions.created_at as score"])
-            ->orderByRaw("score DESC")
+        $invitedByPageID = $user->invitedBy->personalPage->id;
+        $suggestions = Page::query()->with(['user'])
+            ->where('id', "!=", $user->personalPage->id)
+            ->orderByRaw("id=$invitedBy->id DESC, slug='soroosh' DESC, id IN (select page_id from follow_suggestions) DESC, id IN (select following from followings where page_id=$invitedByPageID) DESC")
             ->paginate(24);
         return response()->json(['result' => true, 'pages' => $suggestions, "followings" => $followings]);
     }
