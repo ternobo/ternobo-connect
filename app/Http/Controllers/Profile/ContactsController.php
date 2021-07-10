@@ -83,8 +83,11 @@ class ContactsController extends Controller
 
         if ($page->slug != $request->contacts['slug']) {
             $page->slug = $request->contacts['slug'];
-            $page->user->username = $request->contacts['slug'];
+            $user = Auth::user();
+            $user->username = $request->contacts['slug'];
+            $user->save();
             $slug = $request->contacts['slug'];
+
             $redirectTo = "/$slug";
         }
 
