@@ -4,13 +4,17 @@
 			<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xsm me-3 mb-0" imgClass="profile-xsm" :src="$store.state.user.profile" />
 			<div class="material-input-group-btn">
 				<MaterialTextAreaEmoji v-model="text" input-class="w-100" maxlength="1000" class="material--xsm w-100" :placeholder="__.get('content/comments.comment-ph')" name="text"></MaterialTextAreaEmoji>
-				<loading-button @click.native="submit" :disabled="!showSubmit" :loading="loading" class="btn">{{ __.get("application.send") }}</loading-button>
+				<div class="end-content">
+					<emoji-picker />
+					<loading-button @click.native="submit" :disabled="!showSubmit" :loading="loading" class="btn">{{ __.get("application.send") }}</loading-button>
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import EmojiPicker from "../EmojiPicker/EmojiPicker.vue";
 import MaterialTextAreaEmoji from "../inputs/MaterialTextAreaEmoji.vue";
 export default {
 	props: {
@@ -64,6 +68,7 @@ export default {
 	name: "NewComment",
 	components: {
 		MaterialTextAreaEmoji,
+		EmojiPicker,
 	},
 };
 </script>

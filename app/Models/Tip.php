@@ -17,6 +17,10 @@ class Tip extends Model
         'anonymous',
     ];
 
+    protected $hidden = [
+        'phone_number',
+    ];
+
     protected $casts = ['meta' => 'array'];
 
     public function user()

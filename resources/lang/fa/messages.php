@@ -20,7 +20,7 @@ return [
     'done-job-message' => "عملیات موفقیت آمیز بود",
     'save-error' => "خطا در ثبت اطلاعات",
     'no-tip' => "هیچ حمایتی ثبت نشده",
-    'donation-amount-not-enough' => "مبلغ دلخواه کافی نیست",
+    'tip-amount-not-enough' => "مبلغ دلخواه کافی نیست",
     'delete-post-confirm' => "آیا از حذف این محتوا اطمینان دارید؟",
     'invalid-password' => "رمزعبور فعلی نامعتبر است",
     'confirm-password-error' => "رمزعبور و تاییدیه آن برابر نیست",

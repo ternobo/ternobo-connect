@@ -408,6 +408,16 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
 }
 
 @for $i from 1 through 90 {
+  .my-#{$i}px {
+    margin-top: #{$i}px !important;
+    margin-bottom: #{$i}px !important;
+  }
+
+  .mx-#{$i}px {
+    margin-left: #{$i}px !important;
+    margin-right: #{$i}px !important;
+  }
+
   .mt-#{$i}px {
     margin-top: #{$i}px !important;
   }

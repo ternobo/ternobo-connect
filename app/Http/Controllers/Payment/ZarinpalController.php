@@ -10,7 +10,6 @@ use App\Models\Post;
 use App\Models\Tip;
 use App\Models\Transaction;
 use App\Models\UserOption;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Shetabit\Multipay\Exceptions\InvalidPaymentException;
@@ -22,6 +21,8 @@ class ZarinpalController extends Controller
     public function tipPost(IRTipPostRequest $request)
     {
         $post = Post::query()->findOrFail($request->post_id);
+
+        $phone = $request->phone;
 
         $gateways = UserOption::getOption("payment_gateways", [
             'paypal' => [
@@ -42,23 +43,28 @@ class ZarinpalController extends Controller
             $invoice = new Invoice();
             $amount = (int) $request->amount;
             $invoice->amount($amount);
-            try {
-                return Payment::config(['callbackUrl' => url('/zarinpal/callback'), 'merchantId' => $merchantId, "description" => "حمایت از محتوای " . $post->page->name])
-                    ->purchase($invoice, function ($driver, $transactionId) use ($amount, $post, $anonymous, $merchantId) {
-                        $transaction = new Transaction();
+            // try {
+            return Payment::config(['callbackUrl' => url('/zarinpal/callback'), 'merchantId' => $merchantId, "description" => "حمایت از محتوای " . $post->page->name])
+                ->purchase($invoice, function ($driver, $transactionId) use ($amount, $post, $anonymous, $merchantId, $phone) {
+                    $transaction = new Transaction();
+                    if (Auth::check()) {
                         $transaction->user_id = Auth::user()->id;
-                        $transaction->transaction_id = $transactionId;
-                        $transaction->amount = $amount;
-                        $transaction->meta = [
-                            'post_id' => $post->id,
-                            'anonymous' => (int) $anonymous == 1,
-                            'merchant_id' => $merchantId,
-                        ];
-                        $transaction->save();
-                    })->pay()->render();
-            } catch (Exception $ex) {
-                return view("invalidPayment");
-            }
+                        $transaction->phone_number = Auth::user()->phone;
+                    } else {
+                        $transaction->phone_number = $phone;
+                    }
+                    $transaction->transaction_id = $transactionId;
+                    $transaction->amount = $amount;
+                    $transaction->meta = [
+                        'post_id' => $post->id,
+                        'anonymous' => (int) $anonymous == 1,
+                        'merchant_id' => $merchantId,
+                    ];
+                    $transaction->save();
+                })->pay()->render();
+            // } catch (Exception $ex) {
+            //     return view("invalidPayment");
+            // }
         }
         return view("invalidPayment");
     }
@@ -68,7 +74,6 @@ class ZarinpalController extends Controller
         $transaction_id = $request->Authority;
         $status = $request->Status;
         $transaction = Transaction::query()->where('transaction_id', $transaction_id)->firstOrFail();
-
         $merchantId = $transaction->meta['merchant_id'];
         if ($status == "OK") {
             try {
@@ -82,6 +87,7 @@ class ZarinpalController extends Controller
                     'post_id' => $transaction->meta['post_id'],
                     'amount' => $transaction->amount,
                     'user_id' => $transaction->user_id,
+                    'phone_number' => $transaction->phone_number,
                     "anonymous" => $transaction->meta['anonymous'],
                     'meta' => [
                         'ip' => $request->ip(),
@@ -90,7 +96,7 @@ class ZarinpalController extends Controller
                     ],
                 ]);
 
-                Notification::sendNotification("donation", $transaction->meta['post_id'], $post->page_id, $tip->id);
+                Notification::sendNotification("donation", $transaction->meta['post_id'], $post->page_id, $tip->id, null, Auth::guest());
                 event(new DonateEvent($tip));
                 // Show Payment Done
                 return view("payment-done");

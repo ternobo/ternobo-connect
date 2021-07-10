@@ -62,4 +62,5 @@ return [
     'deactivate' => "Deactivate",
     'done' => "Done",
     'close' => "Close",
+    'guest-user' => "Guest User",
 ];

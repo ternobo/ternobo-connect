@@ -2,9 +2,11 @@
 	<div class="post-notification">
 		<div class="notification-header">
 			<div class="notification-title">
-				<wire-link :href="notifications[0].sender.slug" class="profiles profile-xsm clickable">
-					<lazy-image :src="notifications[0].sender.profile" class="profile-xsm" img-class="profile-xsm" />
-				</wire-link>
+				<div class="profiles">
+					<wire-link :href="notifications[0].sender.slug" class="profiles profile-xsm clickable">
+						<lazy-image :src="notifications[0].sender.profile" class="profile-xsm" img-class="profile-xsm" />
+					</wire-link>
+				</div>
 				<div class="notification-text">
 					<wire-link class="title clickable" :href="notifications[0].sender.slug">
 						<span>{{ notifications[0].sender.name }}</span>

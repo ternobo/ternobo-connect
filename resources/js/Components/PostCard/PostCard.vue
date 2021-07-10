@@ -27,17 +27,19 @@
 		<component v-if="post_data != null && post_data != undefined" :post="post_data" :has-comment="hasComment" v-bind:is="componentType"></component>
 
 		<div class="post-footer" v-if="!isEmbed">
-			<div class="actions" v-if="$store.state.user">
+			<div class="actions">
 				<div>
 					<div class="clickale text-muted clickable hover-dark" v-if="post_data.page.has_donate && post_data.can_tip" @click="showTips = true">
 						<i class="material-icons-outlined">savings</i>
 						{{ __.choice("tips.tip", 1) }}
 					</div>
 				</div>
-				<div class="buttons">
-					<i class="material-icons bookmark-icon clickable hover-dark" :class="{ active: bookmarked }" @click="bookmark">{{ bookmarked ? "bookmark" : "bookmark_border" }}</i>
-					<i :class="{ 'material-icons-outlined': !openComment, 'material-icons active': openComment }" v-if="hasComment" v-on:click="openComment = !openComment">comment</i>
-					<i class="material-icons like" v-if="!checkUser(post_data.page.user_id)" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
+				<div>
+					<div class="buttons" v-if="$store.state.user">
+						<i class="material-icons bookmark-icon clickable hover-dark" :class="{ active: bookmarked }" @click="bookmark">{{ bookmarked ? "bookmark" : "bookmark_border" }}</i>
+						<i :class="{ 'material-icons-outlined': !openComment, 'material-icons active': openComment }" v-if="hasComment" v-on:click="openComment = !openComment">comment</i>
+						<i class="material-icons like" v-if="!checkUser(post_data.page.user_id)" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
+					</div>
 				</div>
 			</div>
 			<div class="d-flex post-likes-text text-muted clickable" v-if="post_data.mutual_likes != null && post_data.mutual_likes.length > 0">

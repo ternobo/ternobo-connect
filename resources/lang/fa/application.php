@@ -61,4 +61,6 @@ return [
     'deactivate' => "غیرفعال کردن",
     'done' => "تمام",
     'close' => "بستن",
+    'guest-user' => "کاربر مهمان",
+
 ];

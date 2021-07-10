@@ -1,6 +1,6 @@
 .currency-selector {
     background: $body-bg;
-    width: 177px;
+    min-width: 235px;
     height: 52px;
     display: flex;
     align-items: center;
@@ -11,8 +11,6 @@
     -ms-user-select: none;
     user-select: none;
 
-    margin-bottom: 12px;
-
     font-weight: 600;
     font-size: 12px;
     line-height: 19px;
@@ -20,7 +18,7 @@
     text-align: right;
     color: #757575;
 
-    padding: 12px;
+    padding: 0.875rem 1.5rem;
 
     cursor: not-allowed;
 }
@@ -140,13 +138,14 @@
 .donate-payanonymouse {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
+    white-space: nowrap;
 }
 
 .donate-amount-badge {
     width: auto;
     height: 48px;
-    padding: 12px;
-    border-radius: 20px;
+    padding: 14px 24px;
+    border-radius: 12px;
     background: $body-bg;
     cursor: pointer;
     -webkit-user-select: none;
@@ -160,8 +159,8 @@
     }
 
     &.active {
-        background: $light-success;
-        color: $green;
+        background: $blue-100;
+        color: $blue-300;
 
     }
 }
@@ -177,3 +176,34 @@
         height: 16px;
     }
 }
+
+
+.tip-modal-header {
+    background: url("/images/tip_modal_header_bg.png");
+    position: relative;
+    width: calc(100% + 3rem);
+    height: 112px;
+    margin: -1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+    }
+
+    img.profile-md {
+        border: 5px solid #fff;
+        box-shadow: 0px 6px 32px rgba(5, 65, 15, 0.36);
+    }
+}
+
+.tip-modal--title {
+    margin-bottom: 32px;
+    font-size: 1.125rem;
+    text-align: center;
+}
+
+.tip-amount-input-group {}
