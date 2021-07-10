@@ -31,7 +31,7 @@
 						<img src="/images/zarinpal-pay-logo.png" alt="زرین‌پال" width="73" />
 					</div>
 				</div>
-				<div class="d-flex">
+				<div class="d-flex justify-content-center">
 					<div class="donate-amount-badge" :class="{ active: amount == 100000 }" @click="amount = 100000">100,000 {{ __.get("currencies.IRR") }}</div>
 					<div class="donate-amount-badge" :class="{ active: amount == 50000 }" @click="amount = 50000">50,000 {{ __.get("currencies.IRR") }}</div>
 					<div class="donate-amount-badge" :class="{ active: amount == 20000 }" @click="amount = 20000">20,000 {{ __.get("currencies.IRR") }}</div>
