@@ -14,8 +14,10 @@ class FixTips extends Migration
     {
         $tips = Tip::all();
         foreach ($tips as $tip) {
-            $tip->phone_number = $tip->user->phone;
-            $tip->save();
+            if ($tip->user) {
+                $tip->phone_number = $tip->user->phone;
+                $tip->save();
+            }
         }
     }
 
