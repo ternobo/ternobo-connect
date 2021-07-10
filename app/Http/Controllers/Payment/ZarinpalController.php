@@ -43,28 +43,28 @@ class ZarinpalController extends Controller
             $invoice = new Invoice();
             $amount = (int) $request->amount;
             $invoice->amount($amount);
-            // try {
-            return Payment::config(['callbackUrl' => url('/zarinpal/callback'), 'merchantId' => $merchantId, "description" => "حمایت از محتوای " . $post->page->name])
-                ->purchase($invoice, function ($driver, $transactionId) use ($amount, $post, $anonymous, $merchantId, $phone) {
-                    $transaction = new Transaction();
-                    if (Auth::check()) {
-                        $transaction->user_id = Auth::user()->id;
-                        $transaction->phone_number = Auth::user()->phone;
-                    } else {
-                        $transaction->phone_number = $phone;
-                    }
-                    $transaction->transaction_id = $transactionId;
-                    $transaction->amount = $amount;
-                    $transaction->meta = [
-                        'post_id' => $post->id,
-                        'anonymous' => (int) $anonymous == 1,
-                        'merchant_id' => $merchantId,
-                    ];
-                    $transaction->save();
-                })->pay()->render();
-            // } catch (Exception $ex) {
-            //     return view("invalidPayment");
-            // }
+            try {
+                return Payment::config(['callbackUrl' => url('/zarinpal/callback'), 'merchantId' => $merchantId, "description" => "حمایت از محتوای " . $post->page->name])
+                    ->purchase($invoice, function ($driver, $transactionId) use ($amount, $post, $anonymous, $merchantId, $phone) {
+                        $transaction = new Transaction();
+                        if (Auth::check()) {
+                            $transaction->user_id = Auth::user()->id;
+                            $transaction->phone_number = Auth::user()->phone;
+                        } else {
+                            $transaction->phone_number = $phone;
+                        }
+                        $transaction->transaction_id = $transactionId;
+                        $transaction->amount = $amount;
+                        $transaction->meta = [
+                            'post_id' => $post->id,
+                            'anonymous' => (int) $anonymous == 1,
+                            'merchant_id' => $merchantId,
+                        ];
+                        $transaction->save();
+                    })->pay()->render();
+            } catch (Exception $ex) {
+                return view("invalidPayment");
+            }
         }
         return view("invalidPayment");
     }
