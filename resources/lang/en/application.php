@@ -63,4 +63,6 @@ return [
     'done' => "Done",
     'close' => "Close",
     'guest-user' => "Guest User",
+    'and' => "and",
+    "comma" => ",",
 ];

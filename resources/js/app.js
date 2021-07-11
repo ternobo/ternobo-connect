@@ -15,10 +15,9 @@ import Application from "./Application.vue";
 import Vuex from "vuex";
 import VueMasonry from 'vue-masonry-css';
 import Lang from 'lang.js';
-
+import InfiniteError from "./Components/InfiniteError";
 
 Vue.use(VueMasonry);
-Vue.use(InfiniteLoading, { /* options */ });
 
 Vue.prototype.window = window;
 
@@ -42,6 +41,14 @@ Vue.prototype.$axios = axios;
 
 axios.get(`/translations.js?version=${Date.now()}`).then((response) => {
     eval(response.data);
+
+
+    Vue.use(InfiniteLoading, {
+        slots: {
+            noMore: '',
+            error: InfiniteError, // you also can pass a Vue component as a slot
+        },
+    });
 
     Vue.prototype.__ = new Lang();
     Vue.prototype.__.setMessages(window.trans);

@@ -5,7 +5,7 @@
 		<transition-group name="flip-list">
 			<donation-item v-for="donation in donations" :key="`post_donation_item_${donation.id}`" :tip="donation" />
 		</transition-group>
-		<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>
+		<infinite-loading v-if="next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>
 	</div>
 </template>
 
@@ -24,7 +24,7 @@ export default {
 		};
 	},
 	methods: {
-		loadMore() {
+		loadMore($state) {
 			if (this.next_page_url != null && !this.loading_next_page) {
 				this.loading_next_page = true;
 				axios
@@ -32,14 +32,19 @@ export default {
 					.then((response) => {
 						this.donations = this.donations.concat(response.data.data);
 						this.next_page_url = response.data.links.next;
+						$state.loaded();
 					})
 					.catch((err) => {
 						console.log(err);
 						this.loadMore();
 						this.toast(__.get("messages.error-in-get-data"));
+						$state.error();
 					})
 					.then(() => {
 						this.loading_next_page = false;
+						if (this.next_page_url == null) {
+							$state.complete();
+						}
 					});
 			}
 		},

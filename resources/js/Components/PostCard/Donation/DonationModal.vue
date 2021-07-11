@@ -13,7 +13,7 @@
 					<div style="margin-right: 24px">
 						<div class="currency-selector">
 							<div>
-								<img src="/images/iran-flag.png" alt="iran" width="24" class="me-2" />
+								<img src="/images/iran-flag.png" alt="iran" width="24" style="margin-right: 12px" />
 								<span>{{ __.get("currencies.IRR-n") }}</span>
 							</div>
 						</div>
@@ -24,8 +24,8 @@
 					</div>
 				</div>
 				<div dir="ltr">
-					<div class="d-flex mt-3 mb-4 justify-content-start w-100 payment-way">
-						<span class="me-2 font-12">{{ __.get("tips.gateway") }} </span>
+					<div class="d-flex mt-3 mb-4 align-items-center justify-content-start w-100 payment-way">
+						<span class="font-16 me-2">{{ __.get("tips.gateway") }} </span>
 						<img src="/images/zarinpal-pay-logo.png" alt="زرین‌پال" width="73" />
 					</div>
 				</div>
@@ -39,10 +39,10 @@
 				<div class="d-flex align-items-center" dir="ltr">
 					<tselect :items="country_codes" class="tselect-lg" @change="phone = countryCode.code" style="margin-right: 24px" valueOption="id" labelOption="country" v-model="countryCode">
 						<template v-slot:icon>
-							<span v-html="countryIcon"></span>
+							<span v-html="countryIcon" style="margin-right: 4px"></span>
 						</template>
 						<template v-slot:itemIcon="{ icon }">
-							<span v-html="getCountryIcon(icon)"></span>
+							<span v-html="getCountryIcon(icon)" style="margin-right: 4px"></span>
 						</template>
 					</tselect>
 					<input dir="ltr" class="form-control text-input" v-model="phone" />

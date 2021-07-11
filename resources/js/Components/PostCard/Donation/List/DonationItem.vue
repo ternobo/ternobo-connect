@@ -5,7 +5,7 @@
 			<strong class="user-name">{{ name }}</strong>
 		</div>
 		<div class="donation-amount" :class="{ received: !isByMe }">
-			<span>{{ formatNumber(amount, "0,0") }}</span> <span>{{ __.get("currencies.IRT") }}</span>
+			<span>{{ formatNumber(amount, "0,0") }}</span> <span>{{ __.get("currencies.IRR") }}</span>
 		</div>
 	</div>
 </template>

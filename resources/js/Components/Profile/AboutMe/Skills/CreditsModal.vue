@@ -39,25 +39,25 @@ export default {
 		...mapState(["user"]),
 	},
 	methods: {
-		loadMore() {
-			if (!this.loadingMore && this.next_page_url !== null) {
-				this.loadingMore = true;
-				axios
-					.get(this.next_page_url)
-					.then((response) => {
-						const data = response.data.credits;
-						if (data) {
-							this.credits = this.credits.concat(data.data);
-							this.next_page_url = data.next_page_url;
-						}
-					})
-					.catch((error) => {
-						this.next_page_url = options.url;
-					})
-					.then(() => {
-						this.loadingMore = false;
-					});
-			}
+		loadMore($state) {
+			axios
+				.get(this.next_page_url)
+				.then((response) => {
+					const data = response.data.credits;
+					if (data) {
+						this.credits = this.credits.concat(data.data);
+						this.next_page_url = data.next_page_url;
+						$state.loaded();
+					}
+				})
+				.catch((error) => {
+					$state.error();
+				})
+				.then(() => {
+					if (this.next_page_url == null) {
+						$state.complete();
+					}
+				});
 		},
 		onShown() {
 			this.loading = true;
