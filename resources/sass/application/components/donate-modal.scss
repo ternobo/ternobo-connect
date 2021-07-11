@@ -137,11 +137,11 @@
     -ms-user-select: none;
     user-select: none;
     white-space: nowrap;
-    direction: ltr #{"/* rtl: ignore */"};
+    direction: ltr #{"/* rtl:ignore */"};
 
     font-weight: 600;
     line-height: 1.5;
-
+    width: calc(40% - 1.5rem);
 
     &:not(:last-child) {
         margin-left: 1.5rem;
