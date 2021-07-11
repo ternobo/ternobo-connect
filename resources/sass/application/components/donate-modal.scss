@@ -137,7 +137,11 @@
     -ms-user-select: none;
     user-select: none;
     white-space: nowrap;
-    direction: ltr #{"/* rtl:ignore */"};
+
+    @if $direction==rtl {
+        direction: ltr #{"/* rtl:ignore */"};
+    }
+
 
     font-weight: 600;
     line-height: 1.5;
