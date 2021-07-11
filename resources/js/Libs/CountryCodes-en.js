@@ -1,15 +1,5 @@
 export default [
     {
-        "country": "United Kigdom (+44)",
-        "code": "+44",
-        "icon": "🇬🇧"
-    },
-    {
-        "country": "United States (+1)",
-        "code": "+1",
-        "icon": "🇺🇸"
-    },
-    {
         "country": "Algeria (+213)",
         "code": "+213",
         "icon": "🇩🇿"
@@ -67,7 +57,7 @@ export default [
     {
         "country": "Bahamas (+1242)",
         "code": "+1242",
-        "icon": "🇦🇳"
+        "icon": "🇧🇸"
     },
     {
         "country": "Bahrain (+973)",
@@ -979,6 +969,16 @@ export default [
         "country": "United Arab Emirates (+971)",
         "code": "+971",
         "icon": "🇦🇪"
+    },
+    {
+        "country": "United Kigdom (+44)",
+        "code": "+44",
+        "icon": "🇬🇧"
+    },
+    {
+        "country": "United States (+1)",
+        "code": "+1",
+        "icon": "🇺🇸"
     },
     {
         "country": "Uruguay (+598)",

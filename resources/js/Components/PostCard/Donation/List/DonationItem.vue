@@ -14,13 +14,22 @@
 export default {
 	computed: {
 		name() {
-			return this.tip.anonymous ? "ناشناس" : this.tip.user.name;
+			if (!this.tip.guest) {
+				return this.tip.anonymous ? __.get("tips.anonymous") : this.tip.user.name;
+			}
+			return __.get("application.guest-user");
 		},
 		profile() {
-			return this.tip.anonymous ? "/img/man-profile.png" : this.tip.user.profile;
+			if (!this.tip.guest) {
+				return this.tip.anonymous ? "/img/man-profile.png" : this.tip.user.profile;
+			}
+			return "/img/man-profile.png";
 		},
 		isByMe() {
-			return this.tip.user_id === this.$store.state.user.id;
+			if (this.$store.state.user) {
+				return this.tip.user_id === this.$store.state.user.id;
+			}
+			return false;
 		},
 		amount() {
 			return this.tip.amount;

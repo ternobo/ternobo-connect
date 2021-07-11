@@ -13,19 +13,19 @@
 					<div style="margin-right: 24px">
 						<div class="currency-selector">
 							<div>
-								<img src="/images/iran-flag.png" alt="iran" width="24" />
-								<span class="ms-2">{{ __.get("currencies.IRR-n") }}</span>
+								<img src="/images/iran-flag.png" alt="iran" width="24" class="me-2" />
+								<span>{{ __.get("currencies.IRR-n") }}</span>
 							</div>
 						</div>
 					</div>
 					<div class="position-relative">
-						<label v-if="amount.length > 0 && payAmount < 1000 && !focus" style="top: -24px" class="position-absolute text-danger font-12">{{ __.get("messages.tip-amount-not-enough") }}</label>
-						<input v-numericOnly v-model="amount" @focus="focus = true" @blur="focus = false" class="form-control text-input donate-amount-input" :placeholder="__.get('tips.enter-amount')" />
+						<label v-if="amount.length > 0 && payAmount < min && !focus" style="top: -24px" class="position-absolute text-danger font-12">{{ __.get("messages.tip-amount-not-enough") }}</label>
+						<input v-numericOnly v-model="amount" @focus="focus = true" @blur="focus = false" class="form-control text-input donate-amount-input" :placeholder="amountEnterPlaceholder" />
 					</div>
 				</div>
 				<div dir="ltr">
 					<div class="d-flex mt-3 mb-4 justify-content-start w-100 payment-way">
-						<span class="me-2">{{ __.get("tips.gateway") }} </span>
+						<span class="me-2 font-12">{{ __.get("tips.gateway") }} </span>
 						<img src="/images/zarinpal-pay-logo.png" alt="زرین‌پال" width="73" />
 					</div>
 				</div>
@@ -51,10 +51,10 @@
 			</div>
 			<div class="donate-modal-body">
 				<div class="d-flex align-items-center w-100">
-					<div class="donate-payanonymouse me-3">
-						<checkbox v-model="anonymous" class="text-superlight m-0 d-flex light">{{ __.get("tips.support-anonymously") }}</checkbox>
+					<div class="donate-payanonymouse me-4">
+						<checkbox v-model="anonymous" class="text-superlight m-0 d-flex light font-demibold">{{ __.get("tips.support-anonymously") }}</checkbox>
 					</div>
-					<loading-button :loading="loading" @click.native="pay" :disabled="payAmount < 1000 || loading || (user == null && !validPhone)" class="btn btn-primary w-100">{{ __.get("tips.pay") }}</loading-button>
+					<loading-button :loading="loading" @click.native="pay" :disabled="payAmount < min || loading || (user == null && !validPhone)" class="btn btn-primary w-100">{{ __.get("tips.pay") }}</loading-button>
 				</div>
 			</div>
 		</div>
@@ -92,6 +92,8 @@ export default {
 			focus: false,
 
 			loading: false,
+
+			min: 2000,
 		};
 	},
 	components: { VueNumeric, DonationsList, Checkbox },
@@ -100,6 +102,9 @@ export default {
 		...mapState(["user"]),
 		payAmount() {
 			return !isNaN(parseInt(this.amount)) ? parseInt(this.amount) : 0;
+		},
+		amountEnterPlaceholder() {
+			return this.formatNumber(this.min, "0,0") + " IRT";
 		},
 	},
 	props: ["post", "post_data", "showDonate"],

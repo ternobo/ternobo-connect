@@ -16,7 +16,7 @@
     line-height: 19px;
     /* identical to box height */
     text-align: right;
-    color: #757575;
+    color: $text-color;
 
     padding: 0.875rem 1.5rem;
 
@@ -34,11 +34,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 2rem;
+    padding: 0.5rem 3rem;
 
-    &:first-child {
-        padding-top: 1.5rem;
-    }
 
     .donation-user {
         display: flex;
@@ -70,24 +67,12 @@
 
     .donation-amount {
         font-weight: 600;
-        font-size: 14px;
-        line-height: 25px;
+        font-size: 16px;
         color: $action;
-        line-height: 1;
-        @extend .badge-blue;
 
         &.received {
-            color: $success;
-            font-weight: 600;
             font-size: 16px;
-            line-height: 25px;
-            padding: 8px 12px;
-            height: 2rem;
-            @extend .badge-success;
-        }
-
-        span {
-            height: 12px;
+            color: $success;
         }
 
         >*:last-child {
@@ -125,7 +110,8 @@
         width: 100%;
         border-top: 2px solid #EEEEEE;
         overflow: auto;
-        margin-top: 1.5rem;
+        margin-top: 2rem;
+        padding-top: 12px;
 
         &.cant-donate {
             margin-top: 0;
@@ -137,14 +123,11 @@
 }
 
 .donate-payanonymouse {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
     white-space: nowrap;
 }
 
 .donate-amount-badge {
     width: auto;
-    height: 48px;
     padding: 14px 24px;
     border-radius: 12px;
     background: $body-bg;
@@ -155,6 +138,10 @@
     user-select: none;
     white-space: nowrap;
     direction: ltr #{"/* rtl: ignore */"};
+
+    font-weight: 600;
+    line-height: 1.5;
+
 
     &:not(:last-child) {
         margin-left: 1.5rem;

@@ -30,7 +30,7 @@ export default {
 				axios
 					.post(this.next_page_url)
 					.then((response) => {
-						this.donations = response.data.data;
+						this.donations = this.donations.concat(response.data.data);
 						this.next_page_url = response.data.links.next;
 					})
 					.catch((err) => {

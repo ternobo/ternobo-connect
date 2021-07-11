@@ -4,10 +4,10 @@ $md-checkbox-border-color-disabled: $border-color;
 $md-checkbox-checked-color-disabled: $icons;
 
 $md-checkbox-margin: 0.75rem 0;
-$md-checkbox-size: 0.75rem;
+$md-checkbox-size: 1rem;
 $md-checkbox-padding: .25em;
-$md-checkbox-border-width: 3px;
-$md-checkbox-border-radius: 0.125em;
+$md-checkbox-border-width: 2px;
+$md-checkbox-border-radius: 0.25rem;
 $md-checkmark-width: 0.125em;
 $md-checkbox-label-padding: .75em;
 
@@ -15,7 +15,7 @@ $md-checkbox-label-padding: .75em;
     position: relative;
     margin: $md-checkbox-margin;
     text-align: right;
-    height: 0.75rem;
+    height: 1rem;
 
     &.md-checkbox-inline {
         display: inline-block;

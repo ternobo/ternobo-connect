@@ -16,12 +16,14 @@ class DonationResource extends JsonResource
      */
     public function toArray($request)
     {
+        $user = Auth::check() ? Auth::user()->id : '-1';
         return [
             "id" => $this->id,
             "post_id" => $this->post_id,
+            "guest" => $this->user_id == null,
             "amount" => $this->amount,
             "anonymous" => $this->anonymous,
-            "user_id" => $this->when(!$this->anonymous || $this->user_id == Auth::user()->id || $request->is("/donations"), $this->user_id),
+            "user_id" => $this->when(!$this->anonymous || $this->user_id == $user || $request->is("/donations"), $this->user_id),
             "user" => $this->when(!$this->anonymous || $request->is("/donations"), $this->user),
             "meta" => $this->when(!$this->anonymous || $request->is("/donations"), $this->meta),
             "donate_by_me" => Auth::check() ? $this->user_id == Auth::user()->id : false,
