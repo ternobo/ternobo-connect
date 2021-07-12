@@ -25,10 +25,67 @@ export default {
 				});
 			}
 		},
+		focus() {
+			if (!this.focus) {
+				this.restore = this.saveCaretPosition(this.$refs.input);
+			}
+		},
 	},
 	methods: {
-		onInput(e) {
-			let text = TextareaParser.replaceEmojiWithAltAttribute(e.target.innerHTML);
+		saveCaretPosition() {
+			return () => {
+				this.setCaretPosition(this.$refs.input, this.getCaretPosition());
+			};
+		},
+
+		getCaretPosition(context) {
+			const element = context || this.$refs.input;
+			var caretOffset = 0;
+			var doc = element.ownerDocument || element.document;
+			var win = doc.defaultView || doc.parentWindow;
+			var sel;
+			if (typeof win.getSelection != "undefined") {
+				sel = win.getSelection();
+				if (sel.rangeCount > 0) {
+					var range = win.getSelection().getRangeAt(0);
+					var preCaretRange = range.cloneRange();
+					preCaretRange.selectNodeContents(element);
+					preCaretRange.setEnd(range.endContainer, range.endOffset);
+					caretOffset = preCaretRange.toString().length;
+				}
+			} else if ((sel = doc.selection) && sel.type != "Control") {
+				var textRange = sel.createRange();
+				var preCaretTextRange = doc.body.createTextRange();
+				preCaretTextRange.moveToElementText(element);
+				preCaretTextRange.setEndPoint("EndToEnd", textRange);
+				caretOffset = preCaretTextRange.text.length;
+			}
+			return caretOffset;
+		},
+
+		setCaretPosition(elem, caretPos) {
+			if (elem != null) {
+				if (elem.createTextRange) {
+					var range = elem.createTextRange();
+					range.move("character", caretPos);
+					range.select();
+				} else {
+					if (elem.selectionStart) {
+						elem.focus();
+						elem.setSelectionRange(caretPos, caretPos);
+					} else elem.focus();
+				}
+			}
+		},
+		insertEmoji(emoji) {
+			this.$refs.input.focus();
+			const range = window.getSelection().getRangeAt(0);
+			range.insertNode(document.createTextNode(emoji));
+			this.onInput();
+			this.setCaretPosition(this.$refs.input, this.getCaretPosition() + 1);
+		},
+		onInput() {
+			let text = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.input.innerHTML);
 			text = TextareaParser.escapeHTML(TextareaParser.unescapeHtml(text));
 			this.val = text;
 			this.$emit("input", text);
@@ -41,6 +98,7 @@ export default {
 		return {
 			val: "",
 			focus: false,
+			restore: () => {},
 		};
 	},
 	props: {

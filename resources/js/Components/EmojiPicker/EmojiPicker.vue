@@ -1,7 +1,7 @@
 <template>
 	<div class="emoji-container" :class="{ active: visible }">
 		<i class="material-icons-outlined font-32" @click="toggle">sentiment_very_satisfied</i>
-		<portal to="destination">
+		<portal to="destination" :disabled="!portal">
 			<transition name="fade">
 				<div class="emoji-picker" :style="pickerStyle" v-if="visible">
 					<div class="search-emoji">
@@ -17,7 +17,7 @@
 						</span>
 					</div>
 					<div class="emoji-list" ref="emojiScrollable">
-						<span class="emoji-item" @click="$emit('pick', emoji.unicode)" v-for="emoji in emojis" :key="`emoji_item_${emojiKey(emoji)}`">
+						<span class="emoji-item" @click="selectEmoji(emoji.unicode)" v-for="emoji in emojis" :key="`emoji_item_${emojiKey(emoji)}`">
 							<figure v-lazyemoji class="mb-0">
 								<img class="image__item emoji" :data-url="parseEmoji(emoji)" :alt="emoji.unicode" />
 							</figure>
@@ -34,6 +34,11 @@ import emojisLib from "./emojis";
 import { v4 as uuidv4 } from "uuid";
 
 export default {
+	props: {
+		portal: {
+			default: false,
+		},
+	},
 	watch: {
 		selectedTab() {
 			this.$refs["emojiScrollable"].scrollTo(0, 0);
@@ -65,6 +70,10 @@ export default {
 		},
 	},
 	methods: {
+		selectEmoji(unicode) {
+			this.$emit("pick", unicode);
+			this.visible = false;
+		},
 		parseEmoji(emoji) {
 			return twemoji.base + twemoji.size + "/" + twemoji.grabTheRightIcon(emoji.unicode) + ".png";
 		},
@@ -76,14 +85,14 @@ export default {
 		},
 		toggle(e) {
 			let el = e.target;
-
-			var rect = el.getBoundingClientRect(),
-				scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-				scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
 			this.visible = !this.visible;
+			if (this.portal) {
+				var rect = el.getBoundingClientRect(),
+					scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+					scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-			this.pickerStyle = { top: `${rect.top + scrollTop + el.offsetHeight}px`, left: `${rect.left + scrollLeft}px` };
+				this.pickerStyle = { top: `${rect.top + scrollTop + el.offsetHeight}px`, left: `${rect.left + scrollLeft}px` };
+			}
 		},
 		hide() {
 			this.visible = false;
