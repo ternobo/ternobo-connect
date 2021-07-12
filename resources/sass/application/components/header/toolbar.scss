@@ -23,7 +23,7 @@
 
         &:not(.active):not(.invite-link) {
             .navheader-icon {
-                opacity: 0.5;
+                color: rgba($color: $grey, $alpha: 0.5);
             }
         }
 

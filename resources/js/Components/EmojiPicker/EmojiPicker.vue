@@ -1,29 +1,31 @@
 <template>
-	<div class="emoji-container" :class="{ active: visible }" v-click-outside="hide">
+	<div class="emoji-container" :class="{ active: visible }">
 		<i class="material-icons-outlined font-32" @click="toggle">sentiment_very_satisfied</i>
-		<transition name="fade">
-			<div class="emoji-picker" v-if="visible">
-				<div class="search-emoji">
-					<div class="input-group-icon">
-						<input type="text" v-model="search" class="form-control" />
-						<i class="material-icons-outlined text-muted">search</i>
+		<portal to="destination">
+			<transition name="fade">
+				<div class="emoji-picker" :style="pickerStyle" v-if="visible">
+					<div class="search-emoji">
+						<div class="input-group-icon">
+							<input type="text" v-model="search" class="form-control" />
+							<i class="material-icons-outlined text-muted">search</i>
+						</div>
+					</div>
+
+					<div class="emoji-tabs">
+						<span class="emoji-tab" :class="{ active: selectedTab.group == tab.group }" v-for="tab in emojiTable" :key="`emoji_group_tab_${tab.group}`" @click="selectedTab = tab">
+							<i class="material-icons-outlined">{{ tab.icon }}</i>
+						</span>
+					</div>
+					<div class="emoji-list" ref="emojiScrollable">
+						<span class="emoji-item" @click="$emit('pick', emoji.unicode)" v-for="emoji in emojis" :key="`emoji_item_${emojiKey(emoji)}`">
+							<figure v-lazyemoji class="mb-0">
+								<img class="image__item emoji" :data-url="parseEmoji(emoji)" :alt="emoji.unicode" />
+							</figure>
+						</span>
 					</div>
 				</div>
-
-				<div class="emoji-tabs">
-					<span class="emoji-tab" :class="{ active: selectedTab.group == tab.group }" v-for="tab in emojiTable" :key="`emoji_group_tab_${tab.group}`" @click="selectedTab = tab">
-						<i class="material-icons-outlined">{{ tab.icon }}</i>
-					</span>
-				</div>
-				<div class="emoji-list" ref="emojiScrollable">
-					<span class="emoji-item" @click="$emit('pick', emoji.unicode)" v-for="emoji in emojis" :key="`emoji_item_${emojiKey(emoji)}`">
-						<figure v-lazyemoji class="mb-0">
-							<img class="image__item emoji" :data-url="parseEmoji(emoji)" :alt="emoji.unicode" />
-						</figure>
-					</span>
-				</div>
-			</div>
-		</transition>
+			</transition>
+		</portal>
 	</div>
 </template>
 
@@ -43,6 +45,8 @@ export default {
 			visible: false,
 			search: "",
 			selectedTab: emojisLib[0],
+
+			pickerStyle: {},
 		};
 	},
 	computed: {
@@ -70,8 +74,16 @@ export default {
 		insert(emoji) {
 			this.$emit("emoji", emoji);
 		},
-		toggle() {
+		toggle(e) {
+			let el = e.target;
+
+			var rect = el.getBoundingClientRect(),
+				scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+				scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
 			this.visible = !this.visible;
+
+			this.pickerStyle = { top: `${rect.top + scrollTop + el.offsetHeight}px`, left: `${rect.left + scrollLeft}px` };
 		},
 		hide() {
 			this.visible = false;

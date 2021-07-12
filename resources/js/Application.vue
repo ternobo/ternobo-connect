@@ -11,6 +11,8 @@
 			</div>
 		</transition>
 
+		<portal-target name="destination"></portal-target>
+
 		<transition name="fade">
 			<upload-widget v-if="uploading" :error="error" @reload="onReload" @cancel="uploading = false" :progress="uploadProgress" />
 		</transition>

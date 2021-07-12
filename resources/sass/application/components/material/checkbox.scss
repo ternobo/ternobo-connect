@@ -63,7 +63,7 @@ $md-checkbox-label-padding: .75em;
         input[type="radio"] {
             &:checked {
                 +label:before {
-                    background: $grey;
+                    background: $md-checkbox-checked-color;
                     border: 2px solid #E0E0E0;
                 }
             }
