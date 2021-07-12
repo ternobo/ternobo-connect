@@ -4,6 +4,7 @@ return [
     'support-content' => "حمایت از این محتوا",
     'gateway' => "درگاه:",
     'support-anonymously' => "حمایت به صورت ناشناس",
+    'anonymous' => "ناشناس",
     'tipping' => "حمایت مالی",
     'date' => "تاریخ",
     'details' => "جزئیات",

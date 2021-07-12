@@ -36,7 +36,7 @@
 
 
 .modal-dialog {
-    .btn {
+    .btn:not(.add-action-btn) {
         padding: 0.875rem 2.5rem;
     }
 }
@@ -50,7 +50,6 @@
         color: $action;
         background: $blue-light-hover;
     }
-
 }
 
 .follow-btn:hover {

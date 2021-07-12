@@ -1,6 +1,6 @@
 <template>
 	<b-modal v-model="showModal" hide-footer :title="__.get('content/posts.tip-this-post')" body-class="donation-modal pb-0" header-class="tip-modal-header" size="md" :centered="true">
-		<template #modal-header="{ close }" v-if="showDonate">
+		<template #modal-header="{ close }">
 			<button type="button" @click="close" aria-label="Close" class="close">close</button>
 			<lazy-image :src="post_data.page.profile" class="profile-md mb-0" imgClass="profile-md" />
 		</template>

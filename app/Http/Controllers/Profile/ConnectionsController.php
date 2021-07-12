@@ -209,7 +209,7 @@ class ConnectionsController extends Controller
                 $query->where("connection_id", Auth::user()->id)->where("user_id", $user_id);
             })
             ->firstOrFail();
-        // dd($followRow);
+
         $result = $followRow->delete();
         return response()->json(array("result" => $result, "user_id" => $user_id));
     }

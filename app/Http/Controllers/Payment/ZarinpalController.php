@@ -9,6 +9,7 @@ use App\Models\Notification;
 use App\Models\Post;
 use App\Models\Tip;
 use App\Models\Transaction;
+use App\Models\User;
 use App\Models\UserOption;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +24,8 @@ class ZarinpalController extends Controller
         $post = Post::query()->findOrFail($request->post_id);
 
         $phone = $request->phone;
+
+        $user = User::query()->where("phone", $phone)->first();
 
         $gateways = UserOption::getOption("payment_gateways", [
             'paypal' => [
@@ -45,13 +48,14 @@ class ZarinpalController extends Controller
             $invoice->amount($amount);
             try {
                 return Payment::config(['callbackUrl' => url('/zarinpal/callback'), 'merchantId' => $merchantId, "description" => "حمایت از محتوای " . $post->page->name])
-                    ->purchase($invoice, function ($driver, $transactionId) use ($amount, $post, $anonymous, $merchantId, $phone) {
+                    ->purchase($invoice, function ($driver, $transactionId) use ($amount, $post, $anonymous, $merchantId, $phone, $user) {
                         $transaction = new Transaction();
-                        if (Auth::check()) {
-                            $transaction->user_id = Auth::user()->id;
-                            $transaction->phone_number = Auth::user()->phone;
+                        if ($user) {
+                            $transaction->user_id = $user->id;
+                            $transaction->phone_number = $user->phone;
                         } else {
                             $transaction->phone_number = $phone;
+                            $transaction->guest = true;
                         }
                         $transaction->transaction_id = $transactionId;
                         $transaction->amount = $amount;
