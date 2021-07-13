@@ -15,10 +15,7 @@
 						<div class="mb-4">
 							<label class="inputlabel font-12 font-demibold">{{ __.get("settings.confirm-password") }}</label>
 							<div class="d-flex flex-column align-items-end">
-								<div class="input-group-icon w-100">
-									<input :type="showpassword ? 'text' : 'password'" v-model="password_repeat" class="text-input-light text-input--md" />
-									<i class="material-icons-outlined clickable text-muted" @click="showpassword = !showpassword">visibility{{ showpassword ? "_off" : "" }}</i>
-								</div>
+								<password-input v-model="password_repeat" class="w-100" inputClass="text-input-light text-input--md"></password-input>
 							</div>
 						</div>
 					</div>
@@ -41,6 +38,7 @@
 <script>
 import PasswordMeter from "../PasswordMeter.vue";
 import { passwordStrength } from "../../Libs/PasswordSrength.js";
+import PasswordInput from "../inputs/PasswordInput.vue";
 
 export default {
 	data() {
@@ -51,7 +49,7 @@ export default {
 			loading: false,
 		};
 	},
-	components: { PasswordMeter },
+	components: { PasswordMeter, PasswordInput },
 	computed: {
 		goodPassword() {
 			return passwordStrength(this.password).id >= 2 && this.password.length >= 8;

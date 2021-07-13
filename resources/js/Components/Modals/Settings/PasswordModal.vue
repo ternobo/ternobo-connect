@@ -7,7 +7,7 @@
 				<material-text-field class="w-50 mx-1 text-right" input-class="w-100" v-model="password" type="password" name="password" :placeholder="__.get('application.password')" />
 				<password-meter class="mb-4 mt-3 w-50" :password="password"></password-meter>
 
-				<material-text-field class="w-50 mx-1 text-right" input-class="w-100" v-model="password_repeat" type="password" name="password" :placeholder="__.get('settings.confirm-password')" />
+				<material-password-input class="w-50 mx-1 text-right" input-class="w-100" v-model="password_repeat" type="password" name="password" :placeholder="__.get('settings.confirm-password')" />
 			</div>
 			<div class="mt-5">
 				<p class="font-18">{{ __.get("application.security-tips") }}</p>
@@ -27,6 +27,7 @@ import LoadingButton from "../../buttons/LoadingButton.vue";
 import LoadingSpinner from "../../LoadingSpinner.vue";
 import PasswordMeter from "../../PasswordMeter.vue";
 import { passwordStrength } from "../../../Libs/PasswordSrength.js";
+import MaterialPasswordInput from "../../inputs/MaterialPasswordInput.vue";
 
 export default {
 	methods: {
@@ -89,6 +90,7 @@ export default {
 		LoadingButton,
 		LoadingSpinner,
 		PasswordMeter,
+		MaterialPasswordInput,
 	},
 	mixins: [ModalMixin],
 	name: "PasswordModal",
