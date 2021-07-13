@@ -4,7 +4,9 @@
 			<div class="d-flex w-100 flex-column" style="align-items: center">
 				<material-text-field class="w-50 mx-1 text-right mb-4" input-class="w-100" v-model="current_password" type="password" name="current_password" :placeholder="__.get('settings.current-password')" />
 
-				<material-text-field class="w-50 mx-1 text-right mb-4" input-class="w-100" v-model="password" type="password" name="password" :placeholder="__.get('application.password')" />
+				<material-text-field class="w-50 mx-1 text-right" input-class="w-100" v-model="password" type="password" name="password" :placeholder="__.get('application.password')" />
+				<password-meter class="mb-4 mt-3 w-50" :password="password"></password-meter>
+
 				<material-text-field class="w-50 mx-1 text-right" input-class="w-100" v-model="password_repeat" type="password" name="password" :placeholder="__.get('settings.confirm-password')" />
 			</div>
 			<div class="mt-5">
@@ -23,35 +25,47 @@
 import ModalMixin from "../../../Mixins/Modal";
 import LoadingButton from "../../buttons/LoadingButton.vue";
 import LoadingSpinner from "../../LoadingSpinner.vue";
+import PasswordMeter from "../../PasswordMeter.vue";
+import { passwordStrength } from "../../../Libs/PasswordSrength.js";
+
 export default {
 	methods: {
 		savePassword() {
 			var data = new FormData();
-			if (this.password === this.password_repeat) {
-				data.append("currentpassword", this.current_password);
-				data.append("password", this.password);
-				var config = {
-					method: "post",
-					url: this.$APP_URL + "/auth/change-password",
-					data: data,
-				};
+			if (this.goodPassword) {
+				if (this.password === this.password_repeat) {
+					data.append("currentpassword", this.current_password);
+					data.append("password", this.password);
+					var config = {
+						method: "post",
+						url: this.$APP_URL + "/auth/change-password",
+						data: data,
+					};
 
-				axios(config)
-					.then((response) => {
-						if (response.data.result) {
+					axios(config)
+						.then((response) => {
+							if (response.data.result) {
+								this.loading = false;
+								this.$emit("update:show", false);
+								window.location = this.$APP_URL;
+							} else {
+								this.toast(__.get("messages.invalid-password"));
+							}
+						})
+						.catch((error) => {
 							this.loading = false;
-							this.$emit("update:show", false);
-							window.location = this.$APP_URL;
-						} else {
-							this.toast(__.get("messages.invalid-password"));
-						}
-					})
-					.catch((error) => {
-						this.loading = false;
-					});
+						});
+				} else {
+					this.toast(__.get("messages.confirm-password-error"));
+				}
 			} else {
-				this.toast(__.get("messages.password-not-confirm-match"));
+				this.toast(__.get("messages.weak-password"));
 			}
+		},
+	},
+	computed: {
+		goodPassword() {
+			return passwordStrength(this.password).id >= 2 && this.password.length >= 8;
 		},
 	},
 	props: {
@@ -74,6 +88,7 @@ export default {
 	components: {
 		LoadingButton,
 		LoadingSpinner,
+		PasswordMeter,
 	},
 	mixins: [ModalMixin],
 	name: "PasswordModal",

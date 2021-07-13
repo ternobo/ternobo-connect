@@ -64,4 +64,12 @@ return [
     'guest-user' => "کاربر مهمان",
     'and' => "و",
     "comma" => "،",
+
+    "password-strength" => [
+        'too-weak' => "کوتاه",
+        "weak" => "ضعیف",
+        'medium' => "متوسط",
+        "strong" => "خوب",
+        "very-strong" => "خیلی خوب",
+    ],
 ];

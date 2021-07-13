@@ -10,6 +10,7 @@
 						<div class="mb-4">
 							<label class="inputlabel font-12 font-demibold">{{ __.get("application.password") }}</label>
 							<input type="password" v-model="password" class="text-input-light text-input--md" />
+							<password-meter class="mt-3" :password="password" />
 						</div>
 						<div class="mb-4">
 							<label class="inputlabel font-12 font-demibold">{{ __.get("settings.confirm-password") }}</label>
@@ -38,6 +39,9 @@
 </template>
 
 <script>
+import PasswordMeter from "../PasswordMeter.vue";
+import { passwordStrength } from "../../Libs/PasswordSrength.js";
+
 export default {
 	data() {
 		return {
@@ -47,35 +51,45 @@ export default {
 			loading: false,
 		};
 	},
+	components: { PasswordMeter },
+	computed: {
+		goodPassword() {
+			return passwordStrength(this.password).id >= 2 && this.password.length >= 8;
+		},
+	},
 	methods: {
 		savePassword() {
 			var data = new FormData();
-			if (this.password === this.password_repeat) {
-				this.loading = true;
+			if (this.goodPassword) {
+				if (this.password === this.password_repeat) {
+					this.loading = true;
 
-				data.append("password", this.password);
-				var config = {
-					method: "post",
-					url: "/auth/setpassword",
-					data: data,
-				};
+					data.append("password", this.password);
+					var config = {
+						method: "post",
+						url: "/auth/setpassword",
+						data: data,
+					};
 
-				axios(config)
-					.then((response) => {
-						if (response.data.result) {
-							this.$emit("next");
-							updateCsrf();
-						} else {
-							const errors = response.data.errors;
-							this.handleError(errors);
-						}
-						$this.loading = false;
-					})
-					.catch((error) => {
-						this.loading = false;
-					});
+					axios(config)
+						.then((response) => {
+							if (response.data.result) {
+								this.$emit("next");
+								updateCsrf();
+							} else {
+								const errors = response.data.errors;
+								this.handleError(errors);
+							}
+							$this.loading = false;
+						})
+						.catch((error) => {
+							this.loading = false;
+						});
+				} else {
+					this.toast(__.get("register.password-not-confirm-match"));
+				}
 			} else {
-				this.toast(__.get("register.password-not-confirm-match"));
+				this.toast(__.get("messages.weak-password"));
 			}
 		},
 	},

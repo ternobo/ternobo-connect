@@ -67,6 +67,10 @@
             .material-input-group-btn {
                 width: calc(100% - 58px);
 
+                .input {
+                    padding-left: 112px;
+                }
+
                 .emoji-container>i {
                     font-size: 1.25rem;
                 }

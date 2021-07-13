@@ -74,3 +74,11 @@
 }
 
 @import "./quill.scss";
+
+.bg-progress-weak {
+    background: $orange;
+}
+
+.bg-progress-medium {
+    background: $yellow-800;
+}

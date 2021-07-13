@@ -65,4 +65,12 @@ return [
     'guest-user' => "Guest User",
     'and' => "and",
     "comma" => ",",
+
+    "password-strength" => [
+        'too-weak' => "Too Short",
+        "weak" => "Weak",
+        'medium' => "Medium",
+        "strong" => "Good",
+        "very-strong" => "Very Strong",
+    ],
 ];

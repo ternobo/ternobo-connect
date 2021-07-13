@@ -83,6 +83,8 @@ export default {
 			range.insertNode(document.createTextNode(emoji));
 			this.onInput();
 			this.setCaretPosition(this.$refs.input, this.getCaretPosition() + 1);
+			this.saveCaretPosition();
+			console.log(this.getCaretPosition() + 1);
 		},
 		onInput() {
 			let text = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.input.innerHTML);
@@ -91,6 +93,7 @@ export default {
 			this.$emit("input", text);
 			this.$nextTick(() => {
 				twemoji.parse(this.$refs.input);
+				this.restore();
 			});
 		},
 	},
