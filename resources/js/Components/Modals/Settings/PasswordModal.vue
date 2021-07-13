@@ -1,13 +1,13 @@
 <template>
-	<b-modal v-model="showModal" hide-footer :title="__.get('settings.change-password')" body-class="modal-signup" size="md" :centered="true">
+	<b-modal v-model="showModal" hide-footer :title="__.get('settings.change-password')" body-class="modal-signup" size="sm" :centered="true">
 		<div class="d-flex flex-column align-items-center">
 			<div class="d-flex w-100 flex-column" style="align-items: center">
-				<material-text-field class="w-50 mx-1 text-right mb-4" input-class="w-100" v-model="current_password" type="password" name="current_password" :placeholder="__.get('settings.current-password')" />
+				<material-text-field class="w-100 mx-1 text-right mb-4" input-class="w-100" v-model="current_password" type="password" name="current_password" :placeholder="__.get('settings.current-password')" />
 
-				<material-text-field class="w-50 mx-1 text-right" input-class="w-100" v-model="password" type="password" name="password" :placeholder="__.get('application.password')" />
-				<password-meter class="mb-4 mt-3 w-50" :password="password"></password-meter>
+				<material-text-field class="w-100 mx-1 text-right" input-class="w-100" v-model="password" type="password" name="password" :placeholder="__.get('application.password')" />
+				<password-meter class="mb-4 mt-3 w-100" :password="password"></password-meter>
 
-				<material-password-input class="w-50 mx-1 text-right" input-class="w-100" v-model="password_repeat" type="password" name="password" :placeholder="__.get('settings.confirm-password')" />
+				<material-password-input class="w-100 mx-1 text-right" input-class="w-100" v-model="password_repeat" type="password" name="password" :placeholder="__.get('settings.confirm-password')" />
 			</div>
 			<div class="mt-5">
 				<p class="font-18">{{ __.get("application.security-tips") }}</p>
@@ -16,7 +16,7 @@
 					<li>{{ __.get("register.password-tip-2") }}</li>
 				</ul>
 			</div>
-			<LoadingButton :loading="loading" class="btn btn-dark mx-auto mt-4 signup-save-btn" @click.native="savePassword">{{ __.get("application.confirm") }}</LoadingButton>
+			<LoadingButton :loading="loading" class="btn btn-dark mx-auto mt-4 w-100 signup-save-btn" @click.native="savePassword">{{ __.get("application.confirm") }}</LoadingButton>
 		</div>
 	</b-modal>
 </template>
