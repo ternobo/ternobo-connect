@@ -5,7 +5,7 @@
 				<material-text-field class="w-100 mx-1 text-right mb-4" input-class="w-100" v-model="current_password" type="password" name="current_password" :placeholder="__.get('settings.current-password')" />
 
 				<material-text-field class="w-100 mx-1 text-right" input-class="w-100" v-model="password" type="password" name="password" :placeholder="__.get('application.password')" />
-				<password-meter class="mb-4 mt-3 w-100" :password="password"></password-meter>
+				<password-meter class="mb-4 mt-3 w-100" :good.sync="goodPassword" :password="password"></password-meter>
 
 				<material-password-input class="w-100 mx-1 text-right" input-class="w-100" v-model="password_repeat" type="password" name="password" :placeholder="__.get('settings.confirm-password')" />
 			</div>
@@ -26,7 +26,6 @@ import ModalMixin from "../../../Mixins/Modal";
 import LoadingButton from "../../buttons/LoadingButton.vue";
 import LoadingSpinner from "../../LoadingSpinner.vue";
 import PasswordMeter from "../../PasswordMeter.vue";
-import { passwordStrength } from "../../../Libs/PasswordSrength.js";
 import MaterialPasswordInput from "../../inputs/MaterialPasswordInput.vue";
 
 export default {
@@ -64,11 +63,6 @@ export default {
 			}
 		},
 	},
-	computed: {
-		goodPassword() {
-			return passwordStrength(this.password).id >= 2 && this.password.length >= 8;
-		},
-	},
 	props: {
 		value: {
 			default: null,
@@ -84,6 +78,7 @@ export default {
 			current_password: null,
 			password: null,
 			password_repeat: null,
+			goodPassword: false,
 		};
 	},
 	components: {

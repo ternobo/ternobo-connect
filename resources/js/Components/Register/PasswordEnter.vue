@@ -10,7 +10,7 @@
 						<div class="mb-4">
 							<label class="inputlabel font-12 font-demibold">{{ __.get("application.password") }}</label>
 							<input type="password" v-model="password" class="text-input-light text-input--md" />
-							<password-meter class="mt-3" :password="password" />
+							<password-meter class="mt-3" :good.sync="goodPassword" :password="password" />
 						</div>
 						<div class="mb-4">
 							<label class="inputlabel font-12 font-demibold">{{ __.get("settings.confirm-password") }}</label>
@@ -37,7 +37,6 @@
 
 <script>
 import PasswordMeter from "../PasswordMeter.vue";
-import { passwordStrength } from "../../Libs/PasswordSrength.js";
 import PasswordInput from "../inputs/PasswordInput.vue";
 
 export default {
@@ -47,14 +46,11 @@ export default {
 			password: "",
 			password_repeat: "",
 			loading: false,
+
+			goodPassword: false,
 		};
 	},
 	components: { PasswordMeter, PasswordInput },
-	computed: {
-		goodPassword() {
-			return passwordStrength(this.password).id >= 2 && this.password.length >= 8;
-		},
-	},
 	methods: {
 		savePassword() {
 			var data = new FormData();
