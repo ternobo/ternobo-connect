@@ -69,8 +69,8 @@ return [
         "short" => "کوتاه",
         'too-weak' => "بسیار ضعیف",
         "weak" => "ضعیف",
-        'medium' => "متوسط",
-        "strong" => "خوب",
-        "very-strong" => "خیلی خوب",
+        'good' => "خوب",
+        "strong" => "خیلی خوب",
+        "very-strong" => "قوی",
     ],
 ];

@@ -22,6 +22,9 @@ class BlockedPage extends Model
     {
         $page = Page::findOrFail($id);
         $page->unfollow();
+        if ($page->isBlockedByMe()) {
+            return null;
+        }
         return BlockedPage::create([
             'user_id' => Auth::user()->id,
             'page_id' => $id,

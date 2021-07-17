@@ -1,7 +1,7 @@
 <template>
 	<div class="d-flex" :class="{ 'flex-column': vertical }">
 		<!-- <ConnectionButton @connected="onConnected" @disconnected="onDisconnect" :class="{'splitor-l': (!vertical && connected && followed),'splitor-b': (vertical && connected && followed)}" :style="btnStyle" :user="userId"></ConnectionButton> -->
-		<FollowButton @followed="onFollowed" :class="btnClass" @unfollowed="onUnfollowed" :style="btnStyle" :page="pageId"></FollowButton>
+		<FollowButton ref="button" @followed="onFollowed" :class="btnClass" @unfollowed="onUnfollowed" :style="btnStyle" :page="pageId"></FollowButton>
 	</div>
 </template>
 
@@ -10,6 +10,12 @@ import ConnectionButton from "./ConnectionButton";
 import FollowButton from "./FollowButton";
 export default {
 	methods: {
+		setLoading() {
+			this.$refs.button.loading = true;
+		},
+		offLoading() {
+			this.$refs.button.loading = false;
+		},
 		onFollowed() {
 			this.followed = true;
 			this.$emit("followed");
