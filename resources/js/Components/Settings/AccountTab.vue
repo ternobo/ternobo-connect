@@ -39,7 +39,7 @@
 
 					<div class="d-flex align-items-center">
 						<div class="content">
-							<span class="badge-bg-container">{{ phone }}</span>
+							<span class="badge-bg-container" dir="ltr">{{ phone }}</span>
 						</div>
 						<i class="btn setting-btn material-icons-outlined ms-3" @click="showPhoneModal = true">edit</i>
 					</div>
