@@ -67,7 +67,8 @@ return [
     "comma" => ",",
 
     "password-strength" => [
-        'too-weak' => "Too Short",
+        "short" => "Too Short",
+        'too-weak' => "Too Week",
         "weak" => "Weak",
         'medium' => "Medium",
         "strong" => "Good",
