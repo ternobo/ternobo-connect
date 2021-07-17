@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AuthRequest;
 use App\Models\Connection;
 use App\Models\Following;
 use App\Models\Notification;
@@ -16,6 +15,11 @@ use Ternobo\TernoboWire\TernoboWire;
 
 class ConnectionsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['follow', 'unfollow']);
+    }
 
     public function index(Request $request)
     {
@@ -148,7 +152,7 @@ class ConnectionsController extends Controller
         return response()->json(['result' => true, "connections" => $followers]);
     }
 
-    public function follow($page_id, AuthRequest $request)
+    public function follow($page_id, Request $request)
     {
         $page = Page::findOrFail($page_id);
         if ($page->isBlockedByMe()) {
@@ -161,7 +165,7 @@ class ConnectionsController extends Controller
         return response()->json(array("result" => $result, "connection" => $followRow->id));
     }
 
-    public function unfollow($page_id, AuthRequest $request)
+    public function unfollow($page_id, Request $request)
     {
         $page = Page::findOrFail($page_id);
         $followRow = Following::query()->where("page_id", Ternobo::currentPage()->id)
@@ -173,7 +177,7 @@ class ConnectionsController extends Controller
         return response()->json(array("result" => $result, "user_id" => $followRow->following));
     }
 
-    public function connectionRequest($user_id, AuthRequest $request)
+    public function connectionRequest($user_id, Request $request)
     {
         $connection = Connection::query()->where("user_id", Auth::user()->id)->where("connection_id", Auth::user()->id)->first();
         $connectionExist = ($connection instanceof Connection);
@@ -187,7 +191,7 @@ class ConnectionsController extends Controller
         return response()->json(array("result" => $followRow->save(), "connection" => $followRow->id));
     }
 
-    public function acceptRequest(AuthRequest $request)
+    public function acceptRequest(Request $request)
     {
         $connection_id = $request->connection_id;
         $followRow = Connection::where("user_id", Auth::user()->id)->where("id", $connection_id)->firstOrFail();
@@ -195,7 +199,7 @@ class ConnectionsController extends Controller
         return response()->json(array("result" => $followRow->save()));
     }
 
-    public function removeConnectionRequest(AuthRequest $request)
+    public function removeConnectionRequest(Request $request)
     {
         $connection_id = $request->connection_id;
         $followRow = Connection::where("user_id", Auth::user()->id)->where("id", $connection_id)->firstOrFail();

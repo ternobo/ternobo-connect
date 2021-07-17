@@ -19,4 +19,9 @@ Route::prefix("/settings")->group(function () {
     Route::post("/verify-email", "Auth\SettingsController@verifyNewEmail");
     /** Settings End */
 
+    /**
+     * Blocked Pages
+     */
+    Route::get("/blocked-pages", "BlockController@blockPages");
+
 });

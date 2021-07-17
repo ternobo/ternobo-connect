@@ -22,7 +22,7 @@
 								<span class="shortbio"> {{ connection.following.short_bio }} </span>
 							</div>
 						</wire-link>
-						<follow-button :page="connection.following.id"></follow-button>
+						<connetion-buttons :pageId="connection.following.id" :blocked="connection.following.blocked"></connetion-buttons>
 					</div>
 					<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMoreConnection"></infinite-loading>
 				</div>
@@ -48,7 +48,7 @@
 								<span class="shortbio"> {{ connection.follower.short_bio }} </span>
 							</div>
 						</wire-link>
-						<follow-button :page="connection.follower.id"></follow-button>
+						<connetion-buttons :pageId="connection.follower.id" :blocked="connection.follower.blocked"></connetion-buttons>
 					</div>
 					<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMoreConnection"></infinite-loading>
 				</div>
@@ -77,6 +77,7 @@ import LoadingSpinner from "../LoadingSpinner.vue";
 import FollowButton from "../buttons/FollowButton.vue";
 import { mapState } from "vuex";
 import PagesListLoading from "../Skeletons/PagesListLoading.vue";
+import ConnetionButtons from "../buttons/ConnetionButtons.vue";
 export default {
 	mixins: [ModalMixin],
 	name: "ConnetionsModal",
@@ -205,6 +206,7 @@ export default {
 		LoadingSpinner,
 		FollowButton,
 		PagesListLoading,
+		ConnetionButtons,
 	},
 };
 </script>

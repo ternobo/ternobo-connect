@@ -17,7 +17,7 @@
 						<span class="shortbio"> {{ page.short_bio }} </span>
 					</div>
 				</wire-link>
-				<follow-button :page="page.id"></follow-button>
+				<connetion-buttons :pageId="page.id" :blocked="page.blocked"></connetion-buttons>
 			</div>
 		</div>
 	</b-modal>
@@ -25,6 +25,7 @@
 
 <script>
 import ModalMixin from "../../Mixins/Modal";
+import ConnetionButtons from "../buttons/ConnetionButtons.vue";
 import FollowButton from "../buttons/FollowButton.vue";
 import LazyImage from "../LazyImage.vue";
 import LoadingSpinner from "../LoadingSpinner.vue";
@@ -67,7 +68,7 @@ export default {
 				.then(() => (this.loading = false));
 		},
 	},
-	components: { LazyImage, FollowButton, LoadingSpinner, PagesListLoading },
+	components: { LazyImage, FollowButton, LoadingSpinner, PagesListLoading, ConnetionButtons },
 
 	mixins: [ModalMixin],
 	name: "MutualFriendsModal",

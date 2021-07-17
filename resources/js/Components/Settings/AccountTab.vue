@@ -8,6 +8,7 @@
 		<DeactiveModal :show.sync="showDeactiveModal"></DeactiveModal>
 		<TwoFAModal :status.sync="two_factor_verification" :phone="phone" :email="email" :show.sync="showTwoFAModal"></TwoFAModal>
 		<SessionsModal :show.sync="showActiveSessions"></SessionsModal>
+		<blocked-pages-modal :show.sync="showBlockedModal"></blocked-pages-modal>
 		<h2 class="font-18 font-demibold mb-4">{{ __.get("settings.login-and-security") }}</h2>
 		<div class="card mb-2">
 			<div class="settings-card-body">
@@ -88,6 +89,16 @@
 						<i class="btn setting-btn material-icons-outlined ms-3" @click="showTwoFAModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 					</div>
 				</div>
+				<div class="setting-action">
+					<div class="name">
+						<i class="material-icons-outlined me-2">block</i>
+						<span>{{ __.get("settings.blocked-users") }}</span>
+					</div>
+
+					<div class="d-flex align-items-center">
+						<i class="btn setting-btn material-icons-outlined ms-3" @click="showBlockedModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+					</div>
+				</div>
 			</div>
 		</div>
 		<h2 class="font-18 font-demibold my-4 pt-3">{{ __.get("settings.information-security") }}</h2>
@@ -129,6 +140,7 @@
 </template>
 
 <script>
+import BlockedPagesModal from "../Modals/Settings/BlockedPagesModal.vue";
 export default {
 	created() {
 		axios.post("/settings/get-info").then((response) => {
@@ -163,6 +175,7 @@ export default {
 			showLangModal: false,
 			showDeactiveModal: false,
 			showTwoFAModal: false,
+			showBlockedModal: false,
 
 			active_sessions: 0,
 			two_factor_verification: false,
@@ -185,6 +198,7 @@ export default {
 		TwoFAModal: () => import("./TwoFA/TwoFAModal"),
 
 		SessionsModal: () => import("../Modals/Settings/Sessions/SessionsModal"),
+		BlockedPagesModal,
 	},
 };
 </script>
