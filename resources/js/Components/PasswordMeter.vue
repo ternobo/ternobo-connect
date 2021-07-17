@@ -27,7 +27,7 @@ export default {
 				this.status = "short";
 				this.$emit("update:good", false);
 			} else if (progress < 30) {
-				varient = "danger";
+				varient = "progress-tooweak";
 				this.status = "too-weak";
 				this.$emit("update:good", false);
 			} else if (30 <= progress && progress < 50) {
@@ -36,14 +36,14 @@ export default {
 				this.$emit("update:good", false);
 			} else if (50 <= progress && progress < 70) {
 				varient = "progress-medium";
-				this.status = "medium";
+				this.status = "good";
 				this.$emit("update:good", true);
 			} else if (70 <= progress && progress < 90) {
-				varient = "success";
+				varient = "progress-good";
 				this.status = "strong";
 				this.$emit("update:good", true);
 			} else if (90 <= progress && progress <= 100) {
-				varient = "success";
+				varient = "progress-strong";
 				this.status = "very-strong";
 				this.$emit("update:good", true);
 			}

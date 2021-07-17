@@ -70,8 +70,8 @@ return [
         "short" => "Too Short",
         'too-weak' => "Too Week",
         "weak" => "Weak",
-        'medium' => "Medium",
-        "strong" => "Good",
+        'good' => "Good",
+        "strong" => "Strong",
         "very-strong" => "Very Strong",
     ],
 ];
