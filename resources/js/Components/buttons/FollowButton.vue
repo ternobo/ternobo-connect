@@ -41,7 +41,6 @@ export default {
 	},
 	methods: {
 		follow() {
-			const $this = this;
 			this.loading = true;
 			if (!this.followed) {
 				var config = {

@@ -16,21 +16,6 @@ class Page extends Model
 
     protected $dates = ['deleted_at'];
 
-    public function education()
-    {
-        return $this->hasMany("App\Models\Experience", "user_id", "user_id");
-    }
-
-    public function expreciences()
-    {
-        return $this->hasMany("App\Models\Experience", "user_id", "user_id");
-    }
-
-    public function achievements()
-    {
-        return $this->hasMany("App\Models\Achievement", "page_id");
-    }
-
     public function contactData()
     {
         return $this->hasOne("App\Models\ContactData", "page_id");
@@ -50,6 +35,7 @@ class Page extends Model
     {
         return $this->hasMany(Following::class, "following");
     }
+
     public function followings()
     {
         return $this->hasMany(Following::class, "page_id");
@@ -73,76 +59,54 @@ class Page extends Model
         return $this->belongsTo("App\Models\User", "user_id");
     }
 
+    /**
+     * Page Skills
+     */
     public function skills()
     {
         return $this->hasMany(Skill::class, "user_id", "user_id")
             ->with("credits");
     }
 
+    /**
+     * Page Posts
+     */
     public function posts()
     {
         return $this->hasMany("App\Models\Post", "page_id");
     }
 
-    /**
-     * Return Personal Page of user
-     * @param integer $user_id
-     * @return \App\Page
-     */
-    public static function getPersonalPage($user_id)
+    public function follow()
     {
-        $page = Page::where("user_id", $user_id)->where("type", "personal")->first();
-        return $page;
+        $followRow = Following::query()->where("page_id", Ternobo::currentPage()->id)->where("following", $page_id)->firstOrNew();
+        $followRow->following = $page_id;
+        $followRow->page_id = Ternobo::currentPage()->id;
+        return $followRow->save();
     }
 
-    public function getContacts()
+    public function unfollow()
     {
-        $contacts = Contact::query()->where("contacts.page_id", $this->id)->join("contact_options", "contacts.option_id", "=", "contact_options.id")->get();
-        foreach ($contacts as $contact) {
-            if (!$this->startsWith($contact->url, $contact->starts_with)) {
-                $contact->url = $contact->starts_with . $contact->url;
-            }
+        $page_id = $this->id;
+        $followRow = Following::query()->where("page_id", Ternobo::currentPage()->id)
+            ->where(function ($query) use ($page_id) {
+                $query->where("following", $page_id);
+            })->first();
+
+        if ($followRow instanceof Following) {
+            Notification::query()->where("connected_to", $followRow->id)->delete();
+            return $followRow->delete();
         }
-        return $contacts;
+        return false;
     }
 
-    /**
-     * list of available website options
-     * @return array()
-     */
-    public static function websiteOptions()
+    public function isBlockedByMe()
     {
-        $websiteoptions = WebsiteOption::all();
-        return $websiteoptions;
+        return BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $this->id)->exists();
     }
 
-    /**
-     * get website value base on option id
-     * @param integer $id
-     * @return string
-     */
-    public function getWebsiteValue($id)
+    public function isBlocked($user)
     {
-        $website = Website::query()->where("page_id", $this->id)->where("option_id", $id)->get();
-        if ($website instanceof Website) {
-            return $website->url;
-        }
-        return null;
-    }
-
-    /**
-     * Get list of all websites
-     * @return array
-     */
-    public function getWebsites()
-    {
-        $websites = Website::query()->where("page_id", $this->id)->join("website_options", "websites.option_id", "=", "website_options.id")->get();
-        foreach ($websites as $website) {
-            if (!$this->startsWith($website->url, "http://")) {
-                $website->url = "http://" . $website->url;
-            }
-        }
-        return $websites;
+        return BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $user)->exists();
     }
 
     // override the toArray function (called by toJson)
@@ -151,32 +115,18 @@ class Page extends Model
         // get the original array to be displayed
         $data = parent::toArray();
 
-        $gateways = UserOption::getOption("payment_gateways", [
-            'paypal' => [
-                'email' => '',
-                'enabled' => false,
-            ],
-            'zarinpal' => [
-                'merchant_id' => '',
-                'enabled' => false,
-            ],
-        ], $data['user_id']);
+        $gateways = UserOption::getOption("payment_gateways", UserOption::$defaultPaymentOption, $data['user_id']);
 
         $data['has_donate'] = $gateways['zarinpal']['enabled'];
+        $data['blocked'] = Auth::check() ? BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $data['id'])->exists() : false;
 
-        $user = User::query()->where("id", $data['user_id'])->first();
-        if ($user instanceof User) {
-            $data['is_verified'] = $user->is_verified;
+        $data['contact_data'] = isset($data['contact_data']) && !$data['blocked'] ? json_decode($data['contact_data']['data']) : null;
+        $data['about_data'] = isset($data['about_data']) && !$data['blocked'] ? json_decode($data['about_data']['data']) : null;
+        if ($data['blocked']) {
+            $data['skills'] = null;
+            $data['about'] = null;
+
         }
-
-        if (isset($data['contact_data'])) {
-            $data['contact_data'] = json_decode($data['contact_data']['data']);
-        }
-
-        if (isset($data['about_data'])) {
-            $data['about_data'] = json_decode($data['about_data']['data']);
-        }
-
         return $data;
     }
 
@@ -191,49 +141,6 @@ class Page extends Model
         $this->touch();
 
         return $action->save();
-    }
-
-    /**
-     * Get Articles Query Builder
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function getArticles($category = null)
-    {
-        $posts = Post::query()
-            ->join("users", "posts.user_id", "=", "users.id")
-            ->where("posts.type", "article")
-            ->where("posts.page_id", $this->id)
-            ->leftJoin("categories", "categories.id", "=", "posts.category_id")
-            ->select(array("posts.*", "categories.name as category_name", "users.name as user_name", "users.short_bio as short_bio", "users.profile as profile"))
-            ->latest();
-        if ($category !== null) {
-            $posts = $posts->where("posts.category_id", $category);
-        }
-        return $posts;
-    }
-
-    public function getPosts($category = null)
-    {
-        $posts = Post::query()
-            ->join("users", "posts.user_id", "=", "users.id")
-            ->where("posts.type", "post")
-            ->where("posts.page_id", $this->id)
-            ->leftJoin("categories", "categories.id", "=", "posts.category_id")
-            ->select(array("posts.*", "categories.name as category_name", "users.name as user_name", "users.short_bio as short_bio", "users.profile as profile"))
-            ->latest();
-        if ($category !== null) {
-            $posts = $posts->where("posts.category_id", $category);
-        }
-        return $posts;
-    }
-
-    public function getCategories()
-    {
-        $categories = Category::query()->where("page_id", $this->id)
-            ->orderBy("sort_place")
-            ->get();
-        return $categories;
     }
 
     /**
@@ -260,123 +167,8 @@ class Page extends Model
         return $actions->paginate($page);
     }
 
-    public function parseAction($action)
-    {
-        $post = Post::query()
-            ->join("users", "posts.user_id", "=", "users.id")
-            ->where("posts.id", $action->post_id)
-            ->leftJoin("categories", "categories.id", "=", "posts.category_id")
-            ->select(array("posts.*", "categories.name as category_name", "users.name as user_name", "users.short_bio as short_bio", "users.profile as profile"))
-            ->first();
-        if ($post instanceof Post) {
-            if (Auth::check()) {
-                if (($post->show === "private" && !Auth::user()->isAcceptedConnection($post->user_id))) {
-                    return null;
-                }
-            } else {
-                if ($post->show === "private") {
-                    return null;
-                }
-            }
-        }
-        $view = "";
-        if ($post instanceof Post) {
-            switch ($action->action) {
-                case "like":
-                    $action_text = $this->name . " این محتوا را پسندید";
-                    $view = view("layouts.post-card", array("action_text" => $action_text, "post" => $post))->render();
-                    break;
-                case "post":
-                    $view = view("layouts.post-card", array("post" => $post))->render();
-                    break;
-                case "comment":
-                    $action_text = $this->name . " برای این محتوا نظر گذاشت";
-                    $comment = Comment::find($action->connected_to);
-                    //    dd($action->connetecd_to);
-                    $view = view("layouts.post-card", array("action_text" => $action_text, "the_comment" => $comment, "post" => $post))->render();
-                    break;
-                case "share":
-                    $action_text = $this->name . " این محتوا را بازنشر کرد";
-                    $view = view("layouts.post-card", array("action_text" => $action_text, "post" => $post))->render();
-                    break;
-            }
-            return $view;
-        }
-    }
-
     public function mutualFriends()
     {
-
-        // $userA = Auth::user()->id;
-        // $usertB = $this->user_id;
-        // $mutuals = array();
-        // $users = array();
-        // $connections = DB::select("SELECT" .
-        //     "       *  " .
-        //     "   FROM  " .
-        //     "       (  " .
-        //     "       SELECT  " .
-        //     "           *  " .
-        //     "       FROM  " .
-        //     "           connections  " .
-        //     "       WHERE  " .
-        //     "           connections.user_id = $userA OR connections.connection_id = $userA  " .
-        //     "   ) AS UserAConnetions " .
-        //     "   INNER JOIN(  " .
-        //     "       SELECT  " .
-        //     "           *  " .
-        //     "       FROM  " .
-        //     "           connections  " .
-        //     "       WHERE  " .
-        //     "           connections.user_id = $usertB OR connections.connection_id = $usertB  " .
-        //     "   ) AS UserBConnetions  " .
-        //     "   ON  " .
-        //     "       (  " .
-        //     "           UserBConnetions.user_id = UserAConnetions.user_id OR UserAConnetions.connection_id = UserBConnetions.connection OR UserBConnetions.user_id = UserAConnetions.connection OR UserAConnetions.user_id = UserBConnetions.connection  " .
-        //     "      )  "
-        //     . " INNER JOIN users on (UserBConnetions.user_id = users.id or UserBConnetions.connection_id = users.id)"
-        //     . "where users.id != $this->user_id and users.id != $userA and users.id != $usertB"
-        // );
-        // foreach ($connections as $connection) {
-        //     if (!in_array($connection->username, array_column($mutuals, "username"))) {
-        //         if (Auth::user()->isAcceptedConnection($connection->id)) {
-
-        //             unset($connection->token);
-        //             unset($connection->accepted);
-        //             unset($connection->api_token);
-        //             unset($connection->created_at);
-        //             unset($connection->deleted_at);
-        //             unset($connection->email);
-        //             unset($connection->phone);
-        //             unset($connection->pushe_id);
-        //             unset($connection->remember_token);
-        //             unset($connection->phone_verified_at);
-        //             unset($connection->nationalcard);
-        //             unset($connection->nationalcode);
-        //             unset($connection->connection);
-        //             unset($connection->password);
-
-        //             unset($connection->two_factor);
-        //             unset($connection->active);
-        //             unset($connection->is_verified);
-        //             unset($connection->id);
-        //             unset($connection->two_factor_type);
-        //             unset($connection->email_verified_at);
-        //             unset($connection->two_factor_secret);
-        //             unset($connection->two_factor_recovery_codes);
-        //             unset($connection->updated_at);
-
-        //             // $connection->user = User::query()->find($connection->user_id);
-        //             unset($connection->user_id);
-
-        //             $mutuals[] = $connection;
-        //         }
-        //     }
-        // }
-        // dd(Page::query()->where("id", $this->id)->whereHas("followers", function ($query) {
-        //     $query->whereIn("following", Auth::user()->followings()->select(['following']))
-        //         ->where("following", "!=", Auth::user()->id);
-        // })->with(['followers'])->get()->toArray());
         return Auth::check() ? Page::query()->whereIn("id", Ternobo::currentPage()->followings()->select("following"))
             ->whereIn("id", $this->followers()->select("page_id"))
             ->where("id", "!=", Ternobo::currentPage()->id)
@@ -410,12 +202,6 @@ class Page extends Model
             return "$first";
         }
         return "";
-    }
-
-    private function startsWith($string, $startString)
-    {
-        $len = strlen($startString);
-        return (substr($string, 0, $len) === $startString);
     }
 
     public static function getSuggestions()
@@ -472,8 +258,6 @@ class Page extends Model
         if ($ignore != null) {
             $query = $query->where("id", '!=', $ignore);
         }
-
-        // dd($query->toSql());
 
         return !($query->where("slug", $slug)->first() instanceof Page);
     }

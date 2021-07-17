@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\HasPage;
+use App\Scopes\BlockedPageContentScope;
 use App\Scopes\PostDraftScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -212,5 +213,6 @@ class Post extends Model
     protected static function booted()
     {
         static::addGlobalScope(new PostDraftScope);
+        static::addGlobalScope(new BlockedPageContentScope);
     }
 }

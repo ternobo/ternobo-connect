@@ -27,7 +27,7 @@ Route::post('/ternobo-actions/update', "AutoUpdateController@update");
 Route::get("/report-reasons", "ReportController@getReportOptions");
 Route::get("/translations.js", "IndexController@translations");
 require base_path("routes/sitemap_routes.php");
-
+require base_path("routes/action_routes.php");
 /**
  * File Access Start
  */
@@ -269,7 +269,6 @@ Route::group(['auth'], function () {
     // Connected Device Actions
 
     Route::get("/invite", "InviteLinksController@index");
-
 });
 //End Auth
 

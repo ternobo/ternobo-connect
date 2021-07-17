@@ -306,7 +306,7 @@ class User extends Authenticatable implements Messageable
      */
     public function isFollowing($id)
     {
-        $page = Page::getPersonalPage($id);
+        $page = Page::where("user_id", $id)->where("type", "personal")->first();
         $connection = Following::where("page_id", $this->id)->where("following", $page->id);
         return $connection->first();
     }
@@ -316,8 +316,7 @@ class User extends Authenticatable implements Messageable
      */
     public function isConnected($id)
     {
-        $connection = Connection::query()->whereRaw("(user_id = '$this->id' AND connection_id = '$id') OR (user_id = '$id' AND connection_id = '$this->id')")->first();
-        return $connection;
+        return Connection::query()->whereRaw("(user_id = '$this->id' AND connection_id = '$id') OR (user_id = '$id' AND connection_id = '$this->id')")->first();
     }
     /**
      * Check if a connection is accepted by user
@@ -589,6 +588,9 @@ class User extends Authenticatable implements Messageable
     {
         $array = parent::toArray();
         $array['personal_page_id'] = $this->personalPage->id;
+        if (Auth::check()) {
+            $data['blocked'] = BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $array['personal_page_id'])->exists();
+        }
         if (!ActiveSession::isAdmin()) {
             unset($array['is_admin']);
         }
