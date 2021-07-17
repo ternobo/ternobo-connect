@@ -56,4 +56,6 @@ return [
 
     'deactivate-account' => "Deactivate Account",
     'website-lang' => "Language",
+
+    "blocked-users" => "Blocked Users",
 ];
