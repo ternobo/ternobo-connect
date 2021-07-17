@@ -66,7 +66,8 @@ return [
     "comma" => "،",
 
     "password-strength" => [
-        'too-weak' => "کوتاه",
+        "short" => "کوتاه",
+        'too-weak' => "بسیار ضعیف",
         "weak" => "ضعیف",
         'medium' => "متوسط",
         "strong" => "خوب",
