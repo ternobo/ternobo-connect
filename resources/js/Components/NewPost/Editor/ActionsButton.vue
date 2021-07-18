@@ -16,11 +16,11 @@
 				<div class="text-type-list">
 					<div class="editor-list-item">
 						<strong>{{ __.get("content/posts.media") }}</strong>
-						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('media') }" @click="emitAcion('media')">image</i>
+						<i class="material-icons-outlined" :class="{ disabled: hasMedia }" @click="emitMediaAction('image')">image</i>
 					</div>
 					<div class="editor-list-item">
-						<strong class="opacity-0">رسانه</strong>
-						<i class="material-icons-outlined disabled">play_circle_outline</i>
+						<strong class="opacity-0">{{ __.get("content/posts.media") }}</strong>
+						<i class="material-icons-outlined" :class="{ disabled: hasMedia }" @click="emitMediaAction('video')">play_circle_outline</i>
 					</div>
 					<div class="editor-list-item">
 						<strong class="opacity-0">صدا</strong>
@@ -53,12 +53,21 @@ export default {
 			}
 			return style;
 		},
+		hasMedia() {
+			return !this.activeOptions.includes("video") || !this.activeOptions.includes("image");
+		},
 	},
 	methods: {
-		emitAcion(type) {
-			if (this.activeOptions.includes(type)) {
+		emitMediaAction(type) {
+			if (!this.hasMedia) {
 				this.showList = false;
 				this.$emit("select", type);
+			}
+		},
+		emitAcion(type, meta = {}) {
+			if (this.activeOptions.includes(type)) {
+				this.showList = false;
+				this.$emit("select", type, meta);
 			}
 		},
 		toggleList(e) {

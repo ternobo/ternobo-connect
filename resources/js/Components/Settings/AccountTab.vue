@@ -44,18 +44,6 @@
 						<i class="btn setting-btn material-icons-outlined ms-3" @click="showPhoneModal = true">edit</i>
 					</div>
 				</div>
-				<!-- <div class="setting-action">
-					<div class="name">
-						<i class="material-icons-outlined me-2">email</i>
-						<span>پست الکترونیک</span>
-					</div>
-					<div class="d-flex align-items-center">
-						<div class="content">
-							<span class="badge-bg-container">{{ Boolean(email) ? email : "ایمیلی ثبت نشده" }}</span>
-						</div>
-						<i class="btn setting-btn material-icons-outlined ms-3" @click="showEmailModal = true">edit</i>
-					</div>
-				</div> -->
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined me-2">vpn_key</i>

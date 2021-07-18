@@ -138,6 +138,18 @@
     transition: all 0.4s ease-in-out;
 }
 
+.btn-rounded-outline {
+    background: transparent;
+    color: $text-color;
+    border-radius: 1rem;
+    border: 2px solid $gray-400;
+
+    &:hover {
+        border-color: $dark;
+        color: $dark;
+    }
+}
+
 .loading-button.loading {
     border-color: transparent;
 }

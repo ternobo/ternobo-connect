@@ -112,7 +112,7 @@ export default {
 				for (let sort = 0; sort < item.content.length; sort++) {
 					let slide = item.content[sort];
 					if (slide.content != "" && slide.content != null) {
-						if (slide.type == "media" && typeof slide.content != "object") {
+						if ((slide.type == "picture" || slide.type == "video") && typeof slide.content != "object") {
 							formData.append(`slides[${index}][${slide.type}_notChange][content]`, slide.content);
 							formData.append(`slides[${index}][${slide.type}_notChange][sort]`, sort);
 							continue;

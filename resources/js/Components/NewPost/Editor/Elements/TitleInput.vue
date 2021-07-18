@@ -7,7 +7,7 @@
 <script>
 import TextareaParser from "../TextareaParser";
 export default {
-	props: ["content"],
+	props: ["content", "meta"],
 	created() {
 		this.text = this.content;
 	},
