@@ -13,12 +13,12 @@
 				</li>
 			</ul>
 			<div class="w-100 text-center" v-else-if="skills.length < 1">
-				<span class="font-16 text-superlight">هیچ مهارتی ثبت نشده</span>
+				<span class="font-16 text-superlight">{{ __.get("messages.no-skill") }}</span>
 			</div>
 			<draggable group="skills" ref="draggable" tag="ul" v-bind="dragOptions" v-model="skills" class="skills-list" :disabled="!edit" handle=".hand-hover">
 				<Skill @deleted="onDelete(index)" v-model="skills[index]" :user="page.user" :edit="edit" v-for="(skill, index) in skillsToShow" :key="'skill_' + skill.id" />
 			</draggable>
-			<div class="show-all-skills" @click="showMore = !showMore" v-if="skills != null && skills.length > 5 && !edit">{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}</div>
+			<div class="show-all-skills" @click="showMore = !showMore" v-if="skills != null && skills.length > 5 && !edit">{{ showMore ? __.get("application.show-less") : __.get("application.show-more") }}</div>
 		</div>
 	</div>
 </template>
