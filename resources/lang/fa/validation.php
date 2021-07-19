@@ -116,8 +116,10 @@ return [
     "month_not_selected" => "ماه انتخاب نشده",
     'start_year_not_selected' => "سال شروع انتخاب نشده",
     "password_code" => "کد بازیابی رمزعبور اشتباه است",
+    'invalid_duration' => "حداکثر :attribute زمان :max است",
 
     'attributes' => [
+        'video' => "ویدیو",
         'address' => 'نشانی',
         'age' => 'سن',
         'area' => 'منطقه',
