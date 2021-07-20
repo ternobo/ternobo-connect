@@ -7,9 +7,9 @@
 		<div class="action-container" v-else>
 			<span class="title text-center">
 				<i class="material-icons-outlined">{{ type == "image" ? "image" : "play_circle" }}</i>
-				{{ __.get(`editor.${type == "image" ? "picture" : "video"}`) }}
+				{{ __.get(`editor.${type == "image" ? "image" : "video"}`) }}
 			</span>
-			<div v-html="__.get(`editor.media-upload-description`)"></div>
+			<div v-html="type == 'image' ? __.get(`editor.image-size`) : __.get(`editor.video-format`)"></div>
 			<button class="btn btn-rounded-outline w-100" @click="selectMedia"><i class="material-icons-outlined">cloud_upload</i> {{ __.get("application.upload") }}</button>
 		</div>
 	</div>

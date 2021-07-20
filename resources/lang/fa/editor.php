@@ -1,6 +1,7 @@
 <?php
 return [
-    "picture" => "تصویر",
-    "video" => "ویدیو",
-    "media-upload-description" => "این قالب چندرسانه‌ای است <br> ابعاد پیشنهادی ۱۴۰۰ × ۱۴۰۰",
+    'video' => "ویدئو",
+    'image' => "تصویر",
+    'video-format' => "فرمت مجاز: MP4",
+    'image-size' => "اندازه پیشنهادی: 1400x1400",
 ];

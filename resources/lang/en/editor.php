@@ -1,6 +1,7 @@
 <?php
 return [
-    "picture" => "Picture",
+    "Image" => "Image",
     "video" => "Video",
-    "media-upload-description" => "Media Container <br> Recommended dimensions 1400 x 1400",
+    'video-format' => "Authorized Format: MP4",
+    'image-size' => "Suggested Size: 1400x1400",
 ];
