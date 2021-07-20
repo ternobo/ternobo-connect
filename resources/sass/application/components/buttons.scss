@@ -172,6 +172,19 @@
     background-color: #223;
 }
 
+
+.btn-block {
+    background: #b8b1b1;
+    color: #191919;
+    font-size: 14px;
+    font-weight: 600;
+    width: 164px;
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
+}
+
 @-webkit-keyframes one-two {
     0% {
         left: 20%;

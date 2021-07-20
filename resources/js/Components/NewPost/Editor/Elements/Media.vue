@@ -25,13 +25,38 @@ export default {
 		},
 	},
 	methods: {
+		checkDuration(file) {
+			let video = document.createElement("video");
+			video.preload = "metadata";
+			video.src = window.URL.createObjectURL(file);
+			video.onloadedmetadata = () => {
+				URL.revokeObjectURL(video.src);
+				var duration = video.duration;
+				console.log(duration);
+				if (duration <= 20 * 60) {
+					this.$emit("update:content", file);
+				} else {
+					this.toast(__.get("validation.invalid_duration", { attribute: __.get("validation.attributes.video"), max: 20 }));
+				}
+			};
+		},
 		selectMedia() {
 			let fileChooser = document.createElement("input");
 			fileChooser.type = "file";
+			if (this.type == "video") {
+				fileChooser.accept = `video/mp4, video/mkv`;
+			} else {
+				fileChooser.accept = `${this.type}/*`;
+			}
+
 			fileChooser.onchange = (e) => {
 				let file = e.target.files[0];
 				if (file.type.startsWith(this.type) && !file.type.includes("svg+xml")) {
-					this.$emit("update:content", file);
+					if (this.type == "video") {
+						this.checkDuration(file);
+					} else {
+						this.$emit("update:content", file);
+					}
 				} else {
 					this.toast(__.get("messages.invalid-mime"));
 				}

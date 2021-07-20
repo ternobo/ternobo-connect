@@ -46,7 +46,7 @@ export default {
 
                 let videoSource = this.content.content.startsWith("http") ? this.content.content : `/${this.content.content}`
 
-                content = (<VideoPlayer src={videoSource} controls class={'w-100'}></VideoPlayer>);
+                content = (<VideoPlayer poster={`${videoSource}/thumbnail`} src={videoSource} controls class={'w-100'}></VideoPlayer>);
                 break;
         }
 

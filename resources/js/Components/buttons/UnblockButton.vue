@@ -29,17 +29,3 @@ export default {
 	props: ["page"],
 };
 </script>
-
-<style lang="scss" scoped>
-@import "../../../sass/application/_variables.scss";
-.btn-block {
-	background: #f5f5f5;
-	color: #191919;
-	font-size: 14px;
-	font-weight: 600;
-	width: 164px;
-	@media screen and (max-width: $sm-size) {
-		width: 100%;
-	}
-}
-</style>
