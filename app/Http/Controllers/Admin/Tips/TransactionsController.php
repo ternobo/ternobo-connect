@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Tips\Transactions;
+namespace App\Http\Controllers\Admin\Tips;
 
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;

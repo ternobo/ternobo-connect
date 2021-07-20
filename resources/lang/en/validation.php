@@ -114,7 +114,7 @@ return [
     "month_not_selected" => "Month is not selected",
     'start_year_not_selected' => "Start Date Not Selected",
     "password_code" => "Reset Password code is invalid",
-    'invalid_duration' => "maximum :attribute duration is :max",
+    'invalid_duration' => "maximum :attribute duration is :max minutes.",
 
     'attributes' => [
         'video' => "Video",

@@ -1,5 +1,5 @@
 import TextareaParser from "../NewPost/Editor/TextareaParser";
-
+import VideoPlayer from "../VideoPlayer/VideoPlayer";
 export default {
     render: function (h) {
         let contentType = this.content.type;
@@ -32,13 +32,21 @@ export default {
 
                 }
                 break;
-            case "media":
+            case "image":
                 tag = "div";
                 classes = "slider-media-image";
 
                 let source = this.content.content.startsWith("http") ? this.content.content : `/${this.content.content}`
 
-                content = this.content.content.endsWith("mp4") ? (<video src={source} controls class={'w-100'}></video>) : (<lazy-image style={{ minHeight: '100px' }} class={['mb-0']} src={source} />);
+                content = (<lazy-image style={{ minHeight: '100px' }} class={['mb-0']} src={source} />);
+                break;
+            case "video":
+                tag = "div";
+                classes = ["slider-media-image", "mb-0"];
+
+                let videoSource = this.content.content.startsWith("http") ? this.content.content : `/${this.content.content}`
+
+                content = (<VideoPlayer src={videoSource} controls class={'w-100'}></VideoPlayer>);
                 break;
         }
 
@@ -46,6 +54,7 @@ export default {
             class: classes
         }, [content]);
     },
+    components: { VideoPlayer },
     data() {
         return {
             text: "",

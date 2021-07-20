@@ -106,15 +106,24 @@ class PostController extends Controller
                             'type' => 'title',
                         ]);
                         break;
-
-                    case "media":
+                    case "image":
                         $media = $content->store("medias");
                         PostContent::query()->create([
                             'slide_id' => $slide->id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
                             'content' => SocialMediaTools::uploadPostImage($media, 90),
-                            'type' => 'media',
+                            'type' => 'image',
+                        ]);
+                        break;
+                    case "video":
+                        $media = $content->store("videos");
+                        PostContent::query()->create([
+                            'slide_id' => $slide->id,
+                            'page_id' => $user->personalPage->id,
+                            'sort' => $sort,
+                            'content' => $media,
+                            'type' => 'video',
                         ]);
                         break;
                 }
@@ -418,7 +427,7 @@ class PostController extends Controller
                         }
                         break;
 
-                    case "media":
+                    case "image":
                         array_push($items, "media");
                         $media = $content->store("medias");
                         if ($postContent == null) {
@@ -436,8 +445,35 @@ class PostController extends Controller
                             ]);
                         }
                         break;
-                    case "media_notChange":
+                    case "video":
+                        array_push($items, "video");
+                        $media = $content->store("video");
+                        if ($postContent == null) {
+                            PostContent::query()->create([
+                                'slide_id' => $slide->id,
+                                'page_id' => $user->personalPage->id,
+                                'sort' => $sort,
+                                'content' => $media,
+                                'type' => 'media',
+                            ]);
+                        } else {
+                            $postContent->update([
+                                'sort' => $sort,
+                                'content' => $media,
+                            ]);
+                        }
+                        break;
+
+                    case "image_notChange":
                         array_push($items, "media");
+                        if ($postContent != null) {
+                            $postContent->update([
+                                'sort' => $sort,
+                            ]);
+                            break;
+                        }
+                    case "video_notChange":
+                        array_push($items, "video");
                         if ($postContent != null) {
                             $postContent->update([
                                 'sort' => $sort,

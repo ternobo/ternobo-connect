@@ -35,15 +35,25 @@ class DownloadsController extends Controller
         return abort(404);
     }
 
-    public function nationalCards($image)
+    public function video($video)
     {
-        if (Storage::exists("nationalcards/$image")) {
-            $response = (Storage::download("nationalcards/$image"));
+        if (Storage::exists("videos/$video")) {
+            $response = (Storage::download("videos/$video"));
             ob_end_clean();
             return $response;
         }
         return abort(404);
     }
+
+    // public function nationalCards($image)
+    // {
+    //     if (Storage::exists("nationalcards/$image")) {
+    //         $response = (Storage::download("nationalcards/$image"));
+    //         ob_end_clean();
+    //         return $response;
+    //     }
+    //     return abort(404);
+    // }
 
     public function voices($file)
     {

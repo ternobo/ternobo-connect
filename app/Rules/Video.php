@@ -3,10 +3,12 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+use Ternobo\FFMpegPHP\Movie;
 
 class Video implements Rule
 {
     private $max = 1200;
+
     /**
      * Determine if the validation rule passes.
      *
@@ -16,7 +18,11 @@ class Video implements Rule
      */
     public function passes($attribute, $value)
     {
-        $ffprobe = FFMpeg\FFProbe::create();
+        $ffmpeg = new Movie($value->path());
+        if ($ffmpeg->getDuration() > 20 * 60) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -26,6 +32,6 @@ class Video implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return __("validation.invalid_duration", ['attribute' => __("validation.attributes.video"), "max" => 20]);
     }
 }
