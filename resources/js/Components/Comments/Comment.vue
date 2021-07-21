@@ -8,6 +8,7 @@
 				<i class="material-icons">reply</i> {{ __.get("content/comments.reply-to") }} <strong class="font-demibold">{{ comment.replyto.page.name }}</strong>
 			</span>
 		</div>
+
 		<div class="comment" v-if="!deleted">
 			<div class="comment-header">
 				<wire-link :href="'/' + comment.page.slug" class="d-flex align-items-center">
@@ -90,7 +91,7 @@
 				<div class="replies" v-if="replyTo === undefined">
 					<comment v-on:replied="submit" :reply-to="comment.id" v-for="reply in replies" v-on:deleted="commentDelete" :comment="reply" :key="reply.id"></comment>
 					<div class="w-100 d-flex p-2 justify-content-center align-items-center" v-if="repliesLoading">
-						<loading-spinner></loading-spinner>
+						<comments-loading></comments-loading>
 					</div>
 				</div>
 				<div class="w-100 d-flex align-items-center justify-content-center p-2">
@@ -107,6 +108,8 @@ import LoadingSpinner from "../LoadingSpinner";
 
 import ReportModal from "../Modals/ReportModal.vue";
 import LikesModal from "../Modals/LikesModal.vue";
+import CommentSkeleton from "../Skeletons/CommentSkeleton.vue";
+import CommentsLoading from "../Skeletons/CommentsLoading.vue";
 
 export default {
 	mounted() {
@@ -221,6 +224,8 @@ export default {
 		LoadingSpinner,
 		ReportModal,
 		LikesModal,
+		CommentSkeleton,
+		CommentsLoading,
 	},
 	props: {
 		replyTo: {

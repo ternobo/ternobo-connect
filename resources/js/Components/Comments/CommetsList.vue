@@ -3,13 +3,14 @@
 		<new-comment :post="post" @submit="submit"></new-comment>
 		<comment v-for="comment in comments" v-on:deleted="commentDelete" :comment="comment" :key="'comment_' + comment.id"></comment>
 		<div class="d-flex w-100 justify-content-center align-items-center py-3" v-if="commentsLoading">
-			<LoadingSpinner></LoadingSpinner>
+			<comments-loading></comments-loading>
 		</div>
 	</div>
 </template>
 
 <script>
 import LoadingSpinner from "../LoadingSpinner";
+import CommentsLoading from "../Skeletons/CommentsLoading.vue";
 import Comment from "./Comment";
 import NewComment from "./NewComment";
 export default {
@@ -79,6 +80,7 @@ export default {
 		LoadingSpinner,
 		Comment,
 		NewComment,
+		CommentsLoading,
 	},
 };
 </script>

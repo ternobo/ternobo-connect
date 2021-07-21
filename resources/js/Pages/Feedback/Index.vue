@@ -50,13 +50,13 @@
 						<a class="font-16">{{ __.get("feedbacks.scheduled") }}</a>
 					</li>
 					<li @click="status = 'done'" :class="{ 'is-active': status === 'done' }">
-						<a class="font-16">>{{ __.get("feedbacks.done") }}</a>
+						<a class="font-16">{{ __.get("feedbacks.done") }}</a>
 					</li>
 
 					<li class="position-absolute end-0" @click="status = 'my-feedbacks'" :class="{ 'is-active': status === 'my-feedbacks' }">
-						<a class="active font-16"
-							><i class="material-icons me-2">{{ status === "my-feedbacks" ? "flag" : "outlined_flag" }}</i> {{ __.get("feedbacks.my-suggestions") }}</a
-						>
+						<a class="active font-16">
+							<i class="material-icons me-2">{{ status === "my-feedbacks" ? "flag" : "outlined_flag" }}</i> {{ __.get("feedbacks.my-suggestions") }}
+						</a>
 					</li>
 				</ul>
 			</div>
