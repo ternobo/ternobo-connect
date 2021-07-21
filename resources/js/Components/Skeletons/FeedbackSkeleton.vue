@@ -1,7 +1,10 @@
 <template>
 	<div class="post-box">
 		<div class="post-body">
-			<skeleton style="width: 50%" height="24px" :color="skeletonOptions.profileColor" class="mb-4" :count="1"></skeleton>
+			<div class="mb-4 d-flex justify-content-between align-items-center">
+				<skeleton style="width: 50%" height="24px" :color="skeletonOptions.profileColor" :count="1"></skeleton>
+				<skeleton height="24px" width="100px" :color="skeletonOptions.profileColor"></skeleton>
+			</div>
 			<skeleton style="width: 100%" :count="10"></skeleton>
 		</div>
 		<div class="post-header align-items-center">
@@ -10,9 +13,6 @@
 				<div class="d-flex justify-content-center flex-column">
 					<skeleton height="24px" width="80px" :color="skeletonOptions.profileColor"></skeleton>
 				</div>
-			</div>
-			<div class="actions position-relative">
-				<skeleton height="24px" width="100px" :color="skeletonOptions.profileColor"></skeleton>
 			</div>
 		</div>
 	</div>
