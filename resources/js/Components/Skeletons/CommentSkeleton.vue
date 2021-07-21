@@ -12,7 +12,7 @@
 			</div>
 		</div>
 		<div class="comment-body" ref="body">
-			<skeleton :count="5"></skeleton>
+			<skeleton :count="3"></skeleton>
 		</div>
 	</div>
 </template>
