@@ -12,7 +12,7 @@ return [
         'defaults' => [
             'title' => "Ternobo", // set false to total remove
             'titleBefore' => false, // Put defaults.title before page title, like 'It's Over 9000! - Dashboard'
-            'description' => '', // set false to total remove
+            'description' => 'Ternobo is a social network for sharing your experiences, information, and interests freely. A place to learn, be aware, and build a better world.            ', // set false to total remove
             'separator' => ' | ',
             'keywords' => ["ternobo", 'social media'],
             'canonical' => null, // Set null for using Url::current(), set false to total remove
@@ -38,7 +38,7 @@ return [
          */
         'defaults' => [
             'title' => "Ternobo", // set false to total remove
-            'description' => '', // set false to total remove
+            'description' => 'Ternobo is a social network for sharing your experiences, information, and interests freely. A place to learn, be aware, and build a better world.            ', // set false to total remove
             'url' => null, // Set null for using Url::current(), set false to total remove
             'type' => "Social Media",
             'site_name' => "Ternobo",
@@ -60,7 +60,7 @@ return [
          */
         'defaults' => [
             'title' => "Ternobo", // set false to total remove
-            'description' => '', // set false to total remove
+            'description' => 'Ternobo is a social network for sharing your experiences, information, and interests freely. A place to learn, be aware, and build a better world.            ', // set false to total remove
             'url' => null, // Set null for using Url::current(), set false to total remove
             'type' => 'WebPage',
             'images' => [],
