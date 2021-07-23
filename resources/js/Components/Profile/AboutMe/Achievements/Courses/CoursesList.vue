@@ -13,7 +13,7 @@
 			</li>
 		</ul>
 		<draggable group="courses" ref="draggable" tag="ul" v-bind="dragOptions" v-model="courses" class="achievement-list" :disabled="!edit" handle=".hand-hover">
-			<courseItem :detailed="open" :class="{ 'edit w-100': edit }" @deleted="onDelete(index)" v-model="courses[index]" :edit="edit" v-for="(course, index) in courses" :page="page" :key="'course_' + course.id" />
+			<courseItem :detailed="open" :class="{ 'edit w-100': edit }" ref="courses" @deleted="onDelete(index)" v-model="courses[index]" :edit="edit" v-for="(course, index) in courses" :page="page" :key="'course_' + course.id" />
 		</draggable>
 	</div>
 </template>
@@ -37,6 +37,9 @@ export default {
 				name: null,
 				code: null,
 				skill: null,
+			});
+			this.$nextTick(() => {
+				this.$refs.courses[this.courses.length - 1].$el.scrollIntoView({ block: "end", inline: "start" });
 			});
 		},
 		getData() {

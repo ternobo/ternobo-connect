@@ -13,7 +13,7 @@
 			</li>
 		</ul>
 		<draggable group="inventions" ref="draggable" tag="ul" v-bind="dragOptions" v-model="inventions" class="achievement-list" :disabled="!edit" handle=".hand-hover">
-			<InventionItem :detailed="open" :class="{ 'edit w-100': edit }" @deleted="onDelete(index)" v-model="inventions[index]" :edit="edit" v-for="(invention, index) in inventions" :page="page" :key="'invention_' + invention.id" />
+			<InventionItem :detailed="open" :class="{ 'edit w-100': edit }" ref="inventions" @deleted="onDelete(index)" v-model="inventions[index]" :edit="edit" v-for="(invention, index) in inventions" :page="page" :key="'invention_' + invention.id" />
 		</draggable>
 	</div>
 </template>
@@ -35,6 +35,9 @@ export default {
 		addInvention() {
 			this.inventions.push({
 				id: "invention_" + _.uniqueId(),
+			});
+			this.$nextTick(() => {
+				this.$refs.inventions[this.inventions.length - 1].$el.scrollIntoView({ block: "end", inline: "start" });
 			});
 		},
 		getData() {
