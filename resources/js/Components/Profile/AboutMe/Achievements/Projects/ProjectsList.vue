@@ -36,7 +36,7 @@ export default {
 				id: "project_" + _.uniqueId(),
 			});
 			this.$nextTick(() => {
-				this.$refs.projects[this.projects.length - 1].$el.scrollIntoView({ block: "end", inline: "start" });
+				this.scrollToElement(this.$refs.projects[this.projects.length - 1].$el, 180);
 			});
 		},
 		getData() {

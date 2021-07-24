@@ -37,7 +37,7 @@ export default {
 				id: id,
 			});
 			this.$nextTick(() => {
-				this.$refs.awards[this.awards.length - 1].$el.scrollIntoView({ block: "end", inline: "start" });
+				this.scrollToElement(this.$refs.awards[this.awards.length - 1].$el, 120);
 			});
 		},
 		getData() {

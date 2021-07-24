@@ -16,6 +16,7 @@ import Vuex from "vuex";
 import VueMasonry from 'vue-masonry-css';
 import Lang from 'lang.js';
 import InfiniteError from "./Components/InfiniteError";
+import { scrollToElement } from "./Libs/WindowUtils";
 
 Vue.use(VueMasonry);
 
@@ -38,6 +39,7 @@ Vue.use(infiniteScroll);
 
 Vue.prototype.$APP_URL = window.APP_URL;
 Vue.prototype.$axios = axios;
+Vue.prototype.scrollToElement = scrollToElement;
 
 axios.get(`/translations.js?version=${Date.now()}`).then((response) => {
     eval(response.data);

@@ -39,7 +39,7 @@ export default {
 				skill: null,
 			});
 			this.$nextTick(() => {
-				this.$refs.courses[this.courses.length - 1].$el.scrollIntoView({ block: "end", inline: "start" });
+				this.scrollToElement(this.$refs.courses[this.courses.length - 1].$el, 180);
 			});
 		},
 		getData() {
