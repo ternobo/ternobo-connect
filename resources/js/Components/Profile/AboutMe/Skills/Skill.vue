@@ -25,7 +25,7 @@
 						<span class="credits-text" v-if="skillVal.credit_text != null && credits_count >= 1">
 							<wire-link v-if="skillVal.credit_text.first" :href="userURL(skillVal.credit_text.first)">
 								<strong>{{ skillVal.credit_text.first.name }}</strong>
-								{{ credits_count > 2 ? "،" : "" }}
+								{{ credits_count > 2 ? __.get("application.comma") : "" }}
 							</wire-link>
 
 							<span v-if="credits_count == 2">و</span>

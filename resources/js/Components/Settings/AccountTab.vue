@@ -8,6 +8,7 @@
 		<DeactiveModal :show.sync="showDeactiveModal"></DeactiveModal>
 		<TwoFAModal :status.sync="two_factor_verification" :phone="phone" :email="email" :show.sync="showTwoFAModal"></TwoFAModal>
 		<SessionsModal :show.sync="showActiveSessions"></SessionsModal>
+		<blocked-pages-modal :show.sync="showBlockedModal"></blocked-pages-modal>
 		<h2 class="font-18 font-demibold mb-4">{{ __.get("settings.login-and-security") }}</h2>
 		<div class="card mb-2">
 			<div class="settings-card-body">
@@ -38,23 +39,11 @@
 
 					<div class="d-flex align-items-center">
 						<div class="content">
-							<span class="badge-bg-container">{{ phone }}</span>
+							<span class="badge-bg-container" dir="ltr">{{ phone }}</span>
 						</div>
 						<i class="btn setting-btn material-icons-outlined ms-3" @click="showPhoneModal = true">edit</i>
 					</div>
 				</div>
-				<!-- <div class="setting-action">
-					<div class="name">
-						<i class="material-icons-outlined me-2">email</i>
-						<span>پست الکترونیک</span>
-					</div>
-					<div class="d-flex align-items-center">
-						<div class="content">
-							<span class="badge-bg-container">{{ Boolean(email) ? email : "ایمیلی ثبت نشده" }}</span>
-						</div>
-						<i class="btn setting-btn material-icons-outlined ms-3" @click="showEmailModal = true">edit</i>
-					</div>
-				</div> -->
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined me-2">vpn_key</i>
@@ -86,6 +75,16 @@
 							<span class="font-16 h-auto" style="padding: 12px" :class="{ 'badge-danger': !two_factor_verification, 'badge-success': two_factor_verification }">{{ two_factor_verification ? __.get("application.active") : __.get("application.inactive") }}</span>
 						</div>
 						<i class="btn setting-btn material-icons-outlined ms-3" @click="showTwoFAModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+					</div>
+				</div>
+				<div class="setting-action">
+					<div class="name">
+						<i class="material-icons-outlined me-2">block</i>
+						<span>{{ __.get("settings.blocked-users") }}</span>
+					</div>
+
+					<div class="d-flex align-items-center">
+						<i class="btn setting-btn material-icons-outlined ms-3" @click="showBlockedModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 					</div>
 				</div>
 			</div>
@@ -129,6 +128,7 @@
 </template>
 
 <script>
+import BlockedPagesModal from "../Modals/Settings/BlockedPagesModal.vue";
 export default {
 	created() {
 		axios.post("/settings/get-info").then((response) => {
@@ -163,6 +163,7 @@ export default {
 			showLangModal: false,
 			showDeactiveModal: false,
 			showTwoFAModal: false,
+			showBlockedModal: false,
 
 			active_sessions: 0,
 			two_factor_verification: false,
@@ -185,6 +186,7 @@ export default {
 		TwoFAModal: () => import("./TwoFA/TwoFAModal"),
 
 		SessionsModal: () => import("../Modals/Settings/Sessions/SessionsModal"),
+		BlockedPagesModal,
 	},
 };
 </script>

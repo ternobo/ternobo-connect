@@ -17,7 +17,7 @@
 						<span class="shortbio"> {{ credit.user.short_bio }} </span>
 					</div>
 				</wire-link>
-				<follow-button v-if="credit.user.username != user.username" :page="credit.user.id"></follow-button>
+				<connetion-buttons :pageId="credit.user.personal_page_id" :blocked="connection.user.blocked"></connetion-buttons>
 			</div>
 			<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>
 		</div>
@@ -39,25 +39,25 @@ export default {
 		...mapState(["user"]),
 	},
 	methods: {
-		loadMore() {
-			if (!this.loadingMore && this.next_page_url !== null) {
-				this.loadingMore = true;
-				axios
-					.get(this.next_page_url)
-					.then((response) => {
-						const data = response.data.credits;
-						if (data) {
-							this.credits = this.credits.concat(data.data);
-							this.next_page_url = data.next_page_url;
-						}
-					})
-					.catch((error) => {
-						this.next_page_url = options.url;
-					})
-					.then(() => {
-						this.loadingMore = false;
-					});
-			}
+		loadMore($state) {
+			axios
+				.get(this.next_page_url)
+				.then((response) => {
+					const data = response.data.credits;
+					if (data) {
+						this.credits = this.credits.concat(data.data);
+						this.next_page_url = data.next_page_url;
+						$state.loaded();
+					}
+				})
+				.catch((error) => {
+					$state.error();
+				})
+				.then(() => {
+					if (this.next_page_url == null) {
+						$state.complete();
+					}
+				});
 		},
 		onShown() {
 			this.loading = true;

@@ -26,7 +26,22 @@
 						<i class="material-icons-outlined">group</i> <span>{{ __.get("user-profile.connections") }}</span>
 					</div>
 					<i class="btn profile-header-btn-edit material-icons-outlined" :class="{ disabled: profileEdit }" v-if="canEdit" @click="doEdit">edit</i>
-					<i class="material-icons-outlined report-icon" v-else-if="Boolean($store.state.user)" @click="showReport = true">report</i>
+					<div v-else-if="Boolean($store.state.user)">
+						<i class="material-icons-outlined report-icon" v-if="page.blocked" @click="showReport = true">report</i>
+						<dropdown-menu size="lg" variant="link" v-else toggle-class="text-decoration-none" no-caret>
+							<template v-slot:button>
+								<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
+							</template>
+							<dropdown-item @click="blockUser">
+								<i class="material-icons text-dark">block</i>
+								<strong>{{ __.get("user-profile.block") }}</strong>
+							</dropdown-item>
+							<dropdown-item @click="showReport = true">
+								<i class="material-icons text-dark">report</i>
+								<strong>{{ __.get("user-profile.report") }}</strong>
+							</dropdown-item>
+						</dropdown-menu>
+					</div>
 				</div>
 				<div class="invite_badge" v-if="$root.isDesktop">
 					<wire-link :href="`/${invited_by.username}`" class="invite_profile clickable" v-if="invited_by != null">
@@ -68,7 +83,8 @@
 					</span>
 				</div>
 			</div>
-			<connetion-buttons v-if="!canEdit" btnClass="w-100" :class="{ 'w-100': !$root.isDesktop }" :pageId="page.id" />
+			<connetion-buttons ref="connectionbtn" v-if="!canEdit && !page.blocked" btnClass="w-100" :class="{ 'w-100': !$root.isDesktop }" :pageId="page.id" />
+			<unblock-button @unblocked="$store.state.ternoboWireApp.reload()" :page="page.id" v-else-if="!canEdit"></unblock-button>
 		</div>
 	</div>
 </template>
@@ -83,9 +99,25 @@ import UserInfoModal from "../Modals/UserInfoModal.vue";
 import ConnetionButtons from "../buttons/ConnetionButtons.vue";
 import ConnetionsModal from "../Modals/ConnetionsModal.vue";
 import { mapState } from "vuex";
+import UnblockButton from "../buttons/UnblockButton.vue";
 
 export default {
 	methods: {
+		blockUser() {
+			this.$refs.connectionbtn.setLoading();
+			axios
+				.post(`/block/${this.page.id}`)
+				.then(() => {
+					this.$store.state.ternoboWireApp.reload();
+				})
+				.catch((err) => {
+					console.log(err);
+					this.toast(__.get("messages.connection-error"));
+				})
+				.then(() => {
+					this.$refs.connectionbtn.offLoading();
+				});
+		},
 		doEdit() {
 			if (!this.profileEdit) {
 				this.edit = true;
@@ -157,6 +189,8 @@ export default {
 			shortBio: null,
 			gender: null,
 
+			blocked: false,
+
 			showReport: false,
 			mutuals: null,
 			showFriends: false,
@@ -171,6 +205,7 @@ export default {
 		MutualFriendsModal,
 		ConnetionButtons,
 		ConnetionsModal,
+		UnblockButton,
 	},
 	props: {
 		canEdit: {

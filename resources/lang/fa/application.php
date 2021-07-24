@@ -61,4 +61,16 @@ return [
     'deactivate' => "غیرفعال کردن",
     'done' => "تمام",
     'close' => "بستن",
+    'guest-user' => "کاربر مهمان",
+    'and' => "و",
+    "comma" => "،",
+
+    "password-strength" => [
+        "short" => "کوتاه",
+        'too-weak' => "بسیار ضعیف",
+        "weak" => "ضعیف",
+        'good' => "خوب",
+        "strong" => "خیلی خوب",
+        "very-strong" => "قوی",
+    ],
 ];

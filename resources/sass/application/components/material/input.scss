@@ -147,19 +147,25 @@
         }
     }
 
-    .btn {
+    .end-content {
         position: absolute;
         left: 0;
         bottom: 0;
-        color: $dark;
         height: 2.75rem;
-        font-size: 14px;
-        border: none;
-        background: transparent;
+        display: flex;
+        align-items: center;
 
-        &:disabled {
-            color: $icons;
+        .btn {
+            font-size: 14px;
+            border: none;
+            background: transparent;
+            color: $dark;
+
+            &:disabled {
+                color: $icons;
+            }
         }
+
     }
 
 }

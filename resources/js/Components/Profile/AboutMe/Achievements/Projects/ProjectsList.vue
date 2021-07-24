@@ -13,7 +13,7 @@
 			</li>
 		</ul>
 		<draggable group="projects" ref="draggable" tag="ul" v-bind="dragOptions" v-model="projects" class="achievement-list" :disabled="!edit" handle=".hand-hover">
-			<ProjectItem :detailed="open" :class="{ 'edit w-100': edit }" @deleted="onDelete(index)" v-model="projects[index]" :edit="edit" v-for="(project, index) in projects" :page="page" :key="'project_' + project.id" />
+			<ProjectItem :detailed="open" :class="{ 'edit w-100': edit }" ref="projects" @deleted="onDelete(index)" v-model="projects[index]" :edit="edit" v-for="(project, index) in projects" :page="page" :key="'project_' + project.id" />
 		</draggable>
 	</div>
 </template>
@@ -34,6 +34,9 @@ export default {
 		addProject() {
 			this.projects.push({
 				id: "project_" + _.uniqueId(),
+			});
+			this.$nextTick(() => {
+				this.scrollToElement(this.$refs.projects[this.projects.length - 1].$el, 180);
 			});
 		},
 		getData() {

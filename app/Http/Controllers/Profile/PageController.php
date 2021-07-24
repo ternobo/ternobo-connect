@@ -29,10 +29,10 @@ class PageController extends Controller
             ->with("aboutData")
             ->with("contactData")
             ->with("categories")
-            ->with("education")
-            ->with("expreciences")
+        // ->with("education")
+        // ->with("expreciences")
+        // ->with("achievements")
             ->with("skills")
-            ->with("achievements")
             ->where("slug", $page)
             ->firstOrFail();
 

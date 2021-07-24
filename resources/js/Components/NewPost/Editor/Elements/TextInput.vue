@@ -165,6 +165,9 @@ export default {
 		};
 	},
 	props: {
+		meta: {
+			default: null,
+		},
 		content: {
 			default: "",
 		},

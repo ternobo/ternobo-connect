@@ -67,60 +67,50 @@ class Notification extends Model
      * @param type $to
      * @param type $connected_to
      */
-    public static function sendNotification($action, $notifiable_id, $to, $connected_to, $from = null)
+    public static function sendNotification($action, $notifiable_id, $to, $connected_to, $from = null, $guest = false)
     {
-        if ($from === null) {
+        $from_id = null;
+        if ($from === null && !$guest) {
             $from = Auth::user()->personalPage;
+            $from_id = $from->id;
         }
         $type = "";
         $user = Page::find($to)->user;
         if ($user instanceof User) {
-            $thename = $from->name;
-            $username = $from->username;
             switch ($action) {
                 case "like":
                     $type = "post";
                     $notifiable_type = Post::class;
-                    $title = $thename . " " . "محتوای شما را پسندید";
                     $url = url("/posts/$notifiable_id");
                     break;
                 case "follow":
                     $type = "page";
                     $notifiable_type = Page::class;
-                    $title = $thename . " " . "شما را دنبال می‌کند";
                     $url = url("/$username");
                     break;
                 case "comment":
                     $type = "post";
                     $notifiable_type = Post::class;
-                    $title = $thename . " " . "برای محتوای شما نظر گذاشت";
                     $url = url("/posts/$notifiable_id");
                     break;
                 case "like_comment":
                     $type = "comment";
                     $notifiable_type = Comment::class;
-                    $title = $thename . " " . "دیدگاه شما پسندید";
                     $url = url("/posts/$notifiable_id");
                     break;
                 case "reply":
                     $type = "comment";
                     $notifiable_type = Comment::class;
-                    $title = $thename . " " . "به نظر شما پاسخ داد";
                     $url = url("/posts/$notifiable_id");
                     break;
                 case "skill_credit":
                     $type = "skill";
                     $notifiable_type = Skill::class;
-                    $skill = Skill::query()->find($notifiable_id);
-                    if ($skill instanceof Skill) {
-                        $title = $thename . " " . "مهارت $skill->name شما را تایید کرد.";
-                    }
                     break;
                 case "mention":
                     $type = "post";
                     $notifiable_type = Post::class;
                     $url = url("/posts/$notifiable_id");
-                    $title = $thename . " " . "در یک محتوا از شما نام برده";
                     break;
                 case "donation":
                     $type = "post";
@@ -128,12 +118,13 @@ class Notification extends Model
                     $url = url("/posts/$notifiable_id");
                     break;
             }
-            if ($to != $from->id) {
+            if ($to != $from_id || $guest) {
                 $notification = new Notification();
-                $notification->from = $from->id;
+                $notification->from = $from_id;
                 $notification->to = $to;
 
                 $notification->action = $action;
+                $notification->guest = $guest;
 
                 $notification->notifiable_id = $notifiable_id;
                 $notification->notifiable_type = $notifiable_type;
@@ -142,34 +133,6 @@ class Notification extends Model
                 $notification->save();
 
                 broadcast(new NotificationEvent($notification))->toOthers();
-
-                // if ($user->pushe_ids !== null) {
-                //     Curl::to(APIURls::PUSHEURL)
-                //         ->withHeader("authorization: Token " . env("PUSHE_TOKEN"))
-                //         ->withContentType('application/json')
-                //         ->withData(array(
-                //             'app_ids' => ['com.ternobo.connect'],
-                //             "filters" => array(
-                //                 "pushe_id" => $user->pushe_ids,
-                //             ),
-                //             "data" => array(
-                //                 "icon" => "https://ternobo.com/apple-touch-icon.png",
-                //                 "notif_icon" => "apps",
-                //                 "sound_url" => "https://ternobo.com/blank.mp3",
-                //                 "show_app" => true,
-                //                 "title" => "ترنوبو",
-                //                 "content" => $title,
-                //                 "wake_screen" => true,
-                //                 "action" => array(
-                //                     "action_type" => "U",
-                //                     "action_data" => "https://ternobo.com/notifications",
-                //                 ),
-                //             ),
-                //             "time_to_live" => 604800,
-                //         ))
-                //         ->asJson(true)
-                //         ->post();
-                // }
             }
         }
     }

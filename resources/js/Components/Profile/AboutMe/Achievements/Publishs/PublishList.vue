@@ -13,7 +13,7 @@
 			</li>
 		</ul>
 		<draggable group="publishs" ref="draggable" tag="ul" v-bind="dragOptions" v-model="publishs" class="achievement-list" :disabled="!edit" handle=".hand-hover">
-			<PublishItem :detailed="open" :class="{ 'edit w-100': edit }" @deleted="onDelete(index)" v-model="publishs[index]" :edit="edit" v-for="(publish, index) in publishs" :page="page" :key="'publish_' + publish.id" />
+			<PublishItem :detailed="open" :class="{ 'edit w-100': edit }" ref="publishs" @deleted="onDelete(index)" v-model="publishs[index]" :edit="edit" v-for="(publish, index) in publishs" :page="page" :key="'publish_' + publish.id" />
 		</draggable>
 	</div>
 </template>
@@ -34,6 +34,9 @@ export default {
 		addPublish() {
 			this.publishs.push({
 				id: "publish_" + _.uniqueId(),
+			});
+			this.$nextTick(() => {
+				this.scrollToElement(this.$refs.publishs[this.publishs.length - 1].$el, 180);
 			});
 		},
 		getData() {

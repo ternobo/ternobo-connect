@@ -13,7 +13,7 @@
 			</li>
 		</ul>
 		<draggable group="tests" ref="draggable" tag="ul" v-bind="dragOptions" v-model="tests" class="achievement-list" :disabled="!edit" handle=".hand-hover">
-			<TestItem :detailed="open" :class="{ 'edit w-100': edit }" @deleted="onDelete(index)" v-model="tests[index]" :edit="edit" v-for="(test, index) in tests" :page="page" :key="'test_' + test.id" />
+			<TestItem :detailed="open" :class="{ 'edit w-100': edit }" ref="tests" @deleted="onDelete(index)" v-model="tests[index]" :edit="edit" v-for="(test, index) in tests" :page="page" :key="'test_' + test.id" />
 		</draggable>
 	</div>
 </template>
@@ -35,6 +35,9 @@ export default {
 		addTest() {
 			this.tests.push({
 				id: "test_" + _.uniqueId(),
+			});
+			this.$nextTick(() => {
+				this.scrollToElement(this.$refs.tests[this.tests.length - 1].$el, 180);
 			});
 		},
 		getData() {

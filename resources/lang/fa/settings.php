@@ -55,4 +55,6 @@ return [
 
     'deactivate-account' => "غیرفعال کردن حساب",
     'website-lang' => "زبان نمایش",
+
+    "blocked-users" => "کاربران مسدود شده",
 ];

@@ -1,20 +1,5 @@
 export default [
     {
-        "country": "Somalia (+252)",
-        "code": "+252",
-        "icon": "🇸🇴"
-    },
-    {
-        "country": "UK (+44)",
-        "code": "+44",
-        "icon": "🇬🇧"
-    },
-    {
-        "country": "Canada (+1)",
-        "code": "+1",
-        "icon": "🇨🇦"
-    },
-    {
         "country": "Algeria (+213)",
         "code": "+213",
         "icon": "🇩🇿"
@@ -72,7 +57,7 @@ export default [
     {
         "country": "Bahamas (+1242)",
         "code": "+1242",
-        "icon": "🇦🇳"
+        "icon": "🇧🇸"
     },
     {
         "country": "Bahrain (+973)",
@@ -455,6 +440,11 @@ export default [
         "icon": "🇮🇪"
     },
     {
+        "country": "Israel (+972)",
+        "code": "+972",
+        "icon": "🇮🇱"
+    },
+    {
         "country": "Italy (+39)",
         "code": "+39",
         "icon": "🇮🇹"
@@ -799,6 +789,7 @@ export default [
         "code": "+378",
         "icon": "🇸🇲"
     },
+
     {
         "country": "Sao Tome & Principe (+239)",
         "code": "+239",
@@ -848,6 +839,11 @@ export default [
         "country": "Solomon Islands (+677)",
         "code": "+677",
         "icon": "🇸🇧"
+    },
+    {
+        "country": "Somalia (+252)",
+        "code": "+252",
+        "icon": "🇸🇴"
     },
     {
         "country": "South Africa (+27)",
@@ -975,6 +971,16 @@ export default [
         "icon": "🇦🇪"
     },
     {
+        "country": "United Kigdom (+44)",
+        "code": "+44",
+        "icon": "🇬🇧"
+    },
+    {
+        "country": "United States (+1)",
+        "code": "+1",
+        "icon": "🇺🇸"
+    },
+    {
         "country": "Uruguay (+598)",
         "code": "+598",
         "icon": "🇺🇾"
@@ -1019,13 +1025,6 @@ export default [
         "code": "+260",
         "icon": "🇿🇲"
     },
-
-    {
-        "country": "Occupied land (+972)",
-        "code": "+972",
-        "icon": "🇮🇱"
-    },
-
     {
         "country": "Zimbabwe (+263)",
         "code": "+263",

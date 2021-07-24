@@ -21,6 +21,17 @@ class UserOption extends Model
 
     use HasFactory;
 
+    public static $defaultPaymentOption = [
+        'paypal' => [
+            'email' => '',
+            'enabled' => false,
+        ],
+        'zarinpal' => [
+            'merchant_id' => '',
+            'enabled' => false,
+        ],
+    ];
+
     public static function getOption($key, $default = null, $user = null)
     {
         if ($user == null) {

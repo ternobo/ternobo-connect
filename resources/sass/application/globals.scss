@@ -677,23 +677,23 @@ pre {
 }
 
 ::-webkit-input-placeholder {
-    color: $icons;
+    color: rgba($color: $icons, $alpha: 0.5);
 }
 
 ::-moz-placeholder {
-    color: $icons;
+    color: rgba($color: $icons, $alpha: 0.5);
 }
 
 :-ms-input-placeholder {
-    color: $icons;
+    color: rgba($color: $icons, $alpha: 0.5);
 }
 
 ::-ms-input-placeholder {
-    color: $icons;
+    color: rgba($color: $icons, $alpha: 0.5);
 }
 
 ::placeholder {
-    color: $icons;
+    color: rgba($color: $icons, $alpha: 0.5);
 }
 
 .form-control:disabled,
@@ -1093,29 +1093,29 @@ a:focus {
     }
 }
 
-
 .form-control::-webkit-input-placeholder {
-    color: $icons;
+    color: $grey;
+    opacity: 0.5;
 }
 
 .form-control::-moz-placeholder {
-    color: $icons;
-}
-
-.form-control::-ms-input-placeholder {
-    color: $icons;
-}
-
-.form-control::-ms-input-placeholder {
-    color: $icons;
+    color: $grey;
+    opacity: 0.5;
 }
 
 .form-control:-ms-input-placeholder {
-    color: $icons;
+    color: $grey;
+    opacity: 0.5;
+}
+
+.form-control::-ms-input-placeholder {
+    color: $grey;
+    opacity: 0.5;
 }
 
 .form-control::placeholder {
-    color: $icons;
+    color: $grey;
+    opacity: 0.5;
 }
 
 .base-layout {

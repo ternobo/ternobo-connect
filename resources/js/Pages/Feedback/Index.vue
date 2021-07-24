@@ -50,17 +50,17 @@
 						<a class="font-16">{{ __.get("feedbacks.scheduled") }}</a>
 					</li>
 					<li @click="status = 'done'" :class="{ 'is-active': status === 'done' }">
-						<a class="font-16">>{{ __.get("feedbacks.done") }}</a>
+						<a class="font-16">{{ __.get("feedbacks.done") }}</a>
 					</li>
 
 					<li class="position-absolute end-0" @click="status = 'my-feedbacks'" :class="{ 'is-active': status === 'my-feedbacks' }">
-						<a class="active font-16"
-							><i class="material-icons me-2">{{ status === "my-feedbacks" ? "flag" : "outlined_flag" }}</i> {{ __.get("feedbacks.my-suggestions") }}</a
-						>
+						<a class="active font-16">
+							<i class="material-icons me-2">{{ status === "my-feedbacks" ? "flag" : "outlined_flag" }}</i> {{ __.get("feedbacks.my-suggestions") }}
+						</a>
 					</li>
 				</ul>
 			</div>
-			<div class="row mt-2" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="12">
+			<div class="row mt-2" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingMore" infinite-scroll-distance="12">
 				<div class="w-100">
 					<div class="item-filters">
 						<div class="filter-item" :class="{ active: filter == 'mostnew' }" @click="filter = 'mostnew'"><i class="material-icons-outlined">new_releases</i> {{ __.get("feedbacks.newest") }}</div>
@@ -70,10 +70,11 @@
 				<div class="w-100">
 					<FeedbackCard class="mb-3" v-for="feedback in feedbacksArray" :key="feedback.id" :feedback="feedback"></FeedbackCard>
 
-					<div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
+					<div class="w-100 d-flex justify-content-center py-3" v-if="loadingMore">
 						<loading-spinner class="image__spinner" />
 					</div>
-					<div v-if="next_page_url === null && !loadingPage && feedbacksArray.length > 4">
+					<feedbacks-loading v-if="loadingPage" />
+					<div v-if="next_page_url === null && !loadingMore && feedbacksArray.length > 4">
 						<no-content> هیچ بازخورد‌ دیگری ندارد </no-content>
 					</div>
 				</div>
@@ -94,6 +95,7 @@
 import AppLayout from "../../Layouts/AppLayout";
 import FeedbackCard from "../../Components/Feedback/FeedbackCard";
 import NoContent from "../../Components/NoContent";
+import FeedbacksLoading from "../../Components/Skeletons/FeedbacksLoading.vue";
 
 export default {
 	watch: {
@@ -206,8 +208,8 @@ export default {
 				});
 		},
 		loadMore() {
-			if (!this.loadingPage && this.next_page_url !== null) {
-				this.loadingPage = true;
+			if (!this.loadingMore && this.next_page_url !== null) {
+				this.loadingMore = true;
 				let url = this.next_page_url;
 				this.$store.state.ternoboWireApp
 					.getData(url, false)
@@ -223,7 +225,7 @@ export default {
 						console.log(error);
 					})
 					.then(() => {
-						this.loadingPage = false;
+						this.loadingMore = false;
 					});
 			}
 		},
@@ -266,6 +268,7 @@ export default {
 			page: 1,
 			next_page_url: undefined,
 			loadingPage: false,
+			loadingMore: false,
 			status: "voting",
 
 			filter: "mostnew",
@@ -285,6 +288,7 @@ export default {
 	components: {
 		FeedbackCard,
 		NoContent,
+		FeedbacksLoading,
 	},
 };
 </script>

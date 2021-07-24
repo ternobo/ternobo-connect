@@ -22,7 +22,7 @@
 								<span class="shortbio"> {{ connection.following.short_bio }} </span>
 							</div>
 						</wire-link>
-						<follow-button :page="connection.following.id"></follow-button>
+						<connetion-buttons :pageId="connection.following.id" :blocked="connection.following.blocked"></connetion-buttons>
 					</div>
 					<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMoreConnection"></infinite-loading>
 				</div>
@@ -48,7 +48,7 @@
 								<span class="shortbio"> {{ connection.follower.short_bio }} </span>
 							</div>
 						</wire-link>
-						<follow-button :page="connection.follower.id"></follow-button>
+						<connetion-buttons :pageId="connection.follower.id" :blocked="connection.follower.blocked"></connetion-buttons>
 					</div>
 					<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMoreConnection"></infinite-loading>
 				</div>
@@ -77,6 +77,7 @@ import LoadingSpinner from "../LoadingSpinner.vue";
 import FollowButton from "../buttons/FollowButton.vue";
 import { mapState } from "vuex";
 import PagesListLoading from "../Skeletons/PagesListLoading.vue";
+import ConnetionButtons from "../buttons/ConnetionButtons.vue";
 export default {
 	mixins: [ModalMixin],
 	name: "ConnetionsModal",
@@ -89,7 +90,7 @@ export default {
 					.post(`/${this.page.slug}/${this.current_tab}`, { q: value })
 					.then((response) => {
 						this.connections = response.data.connections.data;
-						this.connections = response.data.connections.data;
+						this.next_page_url = response.data.connections.next_page_url;
 					})
 					.catch((err) => {
 						console.log(err);
@@ -119,7 +120,6 @@ export default {
 				.post(`/${this.page.slug}/${this.current_tab}`)
 				.then((response) => {
 					this.connections = response.data.connections.data;
-					this.connections = response.data.connections.data;
 					this.next_page_url = response.data.connections.next_page_url;
 				})
 				.catch((err) => {
@@ -144,7 +144,7 @@ export default {
 					.post(`/${this.page.slug}/${this.current_tab}`)
 					.then((response) => {
 						this.connections = response.data.connections.data;
-						this.connections = response.data.connections.data;
+						this.next_page_url = response.data.connections.next_page_url;
 					})
 					.catch((err) => {
 						console.log(err);
@@ -156,26 +156,27 @@ export default {
 					});
 			}
 		},
-		loadMoreConnection() {
-			if (this.next_page_url !== null && !this.loadingMoreConnection) {
-				this.loadingMoreConnection = true;
-				axios
-					.post(this.next_page_url)
-					.then((response) => {
-						const data = response.connections;
-						if (data) {
-							this.connections = this.connections.concat(data.data);
-							this.next_page_url = data.next_page_url;
-						}
-					})
-					.catch((error) => {
-						console.error(error);
-						this.toast(__.get("messages.error-in-get-data"));
-					})
-					.then(() => {
-						this.loadingMoreConnection = false;
-					});
-			}
+		loadMoreConnection($state) {
+			axios
+				.post(this.next_page_url)
+				.then((response) => {
+					const data = response.data.connections;
+					if (data) {
+						this.connections = this.connections.concat(data.data);
+						this.next_page_url = data.next_page_url;
+						$state.loaded();
+					}
+				})
+				.catch((error) => {
+					console.error(error);
+					this.toast(__.get("messages.error-in-get-data"));
+					$state.error();
+				})
+				.then(() => {
+					if (this.next_page_url == null) {
+						$state.complete();
+					}
+				});
 		},
 	},
 
@@ -205,6 +206,7 @@ export default {
 		LoadingSpinner,
 		FollowButton,
 		PagesListLoading,
+		ConnetionButtons,
 	},
 };
 </script>

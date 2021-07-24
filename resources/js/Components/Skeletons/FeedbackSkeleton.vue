@@ -1,19 +1,37 @@
 <template>
-	<div class="post-box">
-		<div class="post-header align-items-center pt-0">
-			<div class="publisher">
-				<skeleton class="profile-sm" :color="skeletonOptions.profileColor" width="48px" height="48px" circle></skeleton>
-				<div class="d-flex justify-content-center flex-column">
-					<skeleton height="24px" width="80px" :color="skeletonOptions.profileColor"></skeleton>
+	<div class="feedback-card">
+		<div class="card-body">
+			<div class="feedback-actions">
+				<div class="feedback-votes">
+					<skeleton></skeleton>
 				</div>
+				<skeleton :classes="['feedback-vote-button']"></skeleton>
+				<skeleton :classes="['feedback-vote-button']"></skeleton>
 			</div>
-			<div class="actions position-relative">
-				<skeleton height="24px" width="100px" :color="skeletonOptions.profileColor"></skeleton>
+
+			<div class="feedback-content">
+				<skeleton class="feedback-title" :color="this.skeletonOptions.profileColor" height="2.5rem" width="10rem"></skeleton>
+				<p class="feedback-description-text">
+					<skeleton :classes="['mb-2']" :count="3"></skeleton>
+				</p>
+			</div>
+			<div class="feedback-label-container">
+				<skeleton width="8rem" height="2rem"></skeleton>
 			</div>
 		</div>
-		<div class="post-body">
-			<skeleton style="width: 50%" height="24px" :color="skeletonOptions.profileColor" class="mb-4" :count="1"></skeleton>
-			<skeleton style="width: 100%" height="300px" :count="1"></skeleton>
+		<div class="card-footer">
+			<div class="feedback-publisher-info">
+				<div class="publisher-name">
+					<skeleton :circle="true" class="profile-xxsm me-3" />
+					<div class="d-flex flex-column">
+						<div class="d-flex align-items-center">
+							<skeleton width="120px"></skeleton>
+						</div>
+						<skeleton class="mt-2" width="140px"></skeleton>
+					</div>
+				</div>
+				<skeleton :classes="['feedback-vote-button']"></skeleton>
+			</div>
 		</div>
 	</div>
 </template>

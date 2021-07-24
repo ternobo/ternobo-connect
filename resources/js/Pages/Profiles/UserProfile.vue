@@ -3,7 +3,8 @@
 		<mobile-categories v-if="!$root.isDesktop" :categories="page.categories" :show.sync="showMobileCategory"></mobile-categories>
 		<div class="content-container-profile" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
 			<ProfileHeader ref="ProfileHeader" :page="page" :can-edit="canEdit"></ProfileHeader>
-			<tabs :compact="true" :disabled="edit" class="profile-tabs" @selected="tabChange" :state-tab="true">
+			<page-blocked v-if="page.blocked" :fname="page.user.first_name" />
+			<tabs :compact="true" :disabled="edit" class="profile-tabs" @selected="tabChange" :state-tab="true" v-else>
 				<template slot="custom-item">
 					<div class="d-flex align-items-center" v-if="canEdit && showEdit">
 						<div class="me-3 rounded-circle clickable" v-if="edit">
@@ -105,6 +106,7 @@ import AppLayout from "../../Layouts/AppLayout.vue";
 import ContactTab from "../../Components/Profile/Contact/ContactTab";
 import AboutTab from "../../Components/Profile/AboutMe/AboutMeTab";
 import PostsLoading from "../../Components/Skeletons/PostsLoading.vue";
+import PageBlocked from "../../Components/Profile/PageBlocked.vue";
 export default {
 	watch: {
 		filters() {
@@ -153,8 +155,8 @@ export default {
 
 		if (this.current_tab == "activities") {
 			this.showEdit = false;
-			const params = new URLSearchParams(window.location.search)
-			if(params.get("filters")){
+			const params = new URLSearchParams(window.location.search);
+			if (params.get("filters")) {
 				this.filters = JSON.parse(params.get("filters"));
 			}
 			axios
@@ -468,6 +470,7 @@ export default {
 		VerifyModal,
 		DraftCard,
 		PostsLoading,
+		PageBlocked,
 	},
 	layout: AppLayout,
 };

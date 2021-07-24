@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Video;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -49,7 +50,8 @@ class PostRequest extends FormRequest
     {
         return [
             "slides" => ['required', 'array', 'min:1', "max:12"],
-            "slides.*.media.content" => ["mimes:jpeg,png,jpg,gif"],
+            "slides.*.image.content" => ["mimes:jpeg,png,jpg,gif"],
+            "slides.*.video.content" => ["mimes:mp4,mkv,m4v", new Video(), "max:200000"],
             "deletedSlides" => ["json"],
             "draft" => [Rule::in(['1', '0'])],
             "canDonate" => [Rule::in(['1', '0'])],

@@ -1,6 +1,6 @@
 .currency-selector {
     background: $body-bg;
-    width: 177px;
+    min-width: 235px;
     height: 52px;
     display: flex;
     align-items: center;
@@ -11,16 +11,14 @@
     -ms-user-select: none;
     user-select: none;
 
-    margin-bottom: 12px;
-
     font-weight: 600;
     font-size: 12px;
     line-height: 19px;
     /* identical to box height */
     text-align: right;
-    color: #757575;
+    color: $text-color;
 
-    padding: 12px;
+    padding: 0.875rem 1.5rem;
 
     cursor: not-allowed;
 }
@@ -31,16 +29,18 @@
     align-items: flex-start;
 }
 
+.donations-list:not(.cant-donate) {
+    .donation-list-item {
+        padding: 0.5rem 3rem;
+    }
+}
+
 
 .donation-list-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 2rem;
 
-    &:first-child {
-        padding-top: 1.5rem;
-    }
 
     .donation-user {
         display: flex;
@@ -72,24 +72,12 @@
 
     .donation-amount {
         font-weight: 600;
-        font-size: 14px;
-        line-height: 25px;
+        font-size: 16px;
         color: $action;
-        line-height: 1;
-        @extend .badge-blue;
 
         &.received {
-            color: $success;
-            font-weight: 600;
             font-size: 16px;
-            line-height: 25px;
-            padding: 8px 12px;
-            height: 2rem;
-            @extend .badge-success;
-        }
-
-        span {
-            height: 12px;
+            color: $success;
         }
 
         >*:last-child {
@@ -123,10 +111,12 @@
     .donations-list {
         @extend .nice-scroll;
         max-height: 164px;
+        min-height: 116px;
         width: 100%;
         border-top: 2px solid #EEEEEE;
         overflow: auto;
-        margin-top: 1.5rem;
+        margin-top: 2rem;
+        padding-top: 12px;
 
         &.cant-donate {
             margin-top: 0;
@@ -138,15 +128,13 @@
 }
 
 .donate-payanonymouse {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    white-space: nowrap;
 }
 
 .donate-amount-badge {
     width: auto;
-    height: 48px;
-    padding: 12px;
-    border-radius: 20px;
+    padding: 14px 24px;
+    border-radius: 12px;
     background: $body-bg;
     cursor: pointer;
     -webkit-user-select: none;
@@ -155,13 +143,22 @@
     user-select: none;
     white-space: nowrap;
 
+    @if $direction==rtl {
+        direction: ltr #{"/* rtl:ignore */"};
+    }
+
+
+    font-weight: 600;
+    line-height: 1.5;
+    width: calc(40% - 1.5rem);
+
     &:not(:last-child) {
         margin-left: 1.5rem;
     }
 
     &.active {
-        background: $light-success;
-        color: $green;
+        background: $blue-100;
+        color: $blue-300;
 
     }
 }
@@ -177,3 +174,38 @@
         height: 16px;
     }
 }
+
+
+.tip-modal-header {
+    background: url("/images/tip_modal_header_bg.png");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 112px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+    }
+
+    img.profile-md {
+        border: 5px solid #fff;
+        box-shadow: 0px 6px 32px rgba(5, 65, 15, 0.36);
+    }
+
+    &::after {
+        display: none;
+    }
+}
+
+.tip-modal--title {
+    margin-bottom: 32px;
+    font-size: 1.125rem;
+    text-align: center;
+}
+
+.tip-amount-input-group {}

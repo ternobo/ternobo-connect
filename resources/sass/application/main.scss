@@ -15,7 +15,6 @@ $direction: ltr;
 @import "./components/card.scss";
 
 
-@import "./components/header/header";
 @import "./components/input-group-icon";
 @import "./layout-system";
 
@@ -151,3 +150,5 @@ $direction: ltr;
 @import "./components/embed";
 
 @import "./pages/login-page.scss";
+@import "./components/password-strength.scss";
+@import "./components/blocked-user.scss";

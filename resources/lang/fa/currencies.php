@@ -1,21 +1,21 @@
 <?php
 return [
-    'AUD' => "A$", //Australian Dollar
-    'BRL' => "R$", //Brazilian Real
-    'CAD' => "CA$", //Canadian Dollar
-    'CNY' => "¥", //Chinese Yuan
-    'CZK' => "Kč", //Czech Koruna
-    'DKK' => "kr", //Danish krone
-    'EUR' => "€", //Euro
-    'HKD' => "HK$", //Hong Kong Dollar
-    'HUF' => "ft", //Hungarian Forint
-    'JPY' => "¥", //Japanese Yen
-    'IRR' => "تومان", //Iranian Toman
-    'MYR' => "RM", //Malaysian Ringgit
-    'MXN' => "Mex$", //Mexican Peso
-    'TWD' => "NT$", //New Taiwan Dollar
-    'NZD' => "NZ$", //New Zealand Dollar
-    'NOK' => "kr", //Norwegian Krone
+    'AUD' => "AUD", //Australian Dollar
+    'BRL' => "BRL", //Brazilian Real
+    'CAD' => "CAD", //Canadian Dollar
+    'CNY' => "CNY", //Chinese Yuan
+    'CZK' => "CZK", //Czech Koruna
+    'DKK' => "DKK", //Danish krone
+    'EUR' => "EUR", //Euro
+    'HKD' => "HKD", //Hong Kong Dollar
+    'HUF' => "HUF", //Hungarian Forint
+    'JPY' => "JPY", //Japanese Yen
+    'IRR' => "IRT", //Iranian Toman
+    'MYR' => "MYR", //Malaysian Ringgit
+    'MXN' => "MXN", //Mexican Peso
+    'TWD' => "TWD", //New Taiwan Dollar
+    'NZD' => "NZD", //New Zealand Dollar
+    'NOK' => "NOK", //Norwegian Krone
     
     'currency-name' => "نام ارز:",
     'AUD-n' => "دلار استرالیا",

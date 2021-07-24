@@ -52,7 +52,7 @@ return [
     "too-many-attempts" => "Too Many Attempts!",
     'reset-sms-success-message' => "The password recovery code has been sent to you",
     'user-not-found' => "No users found with this information!",
-
+    "weak-password" => "Password is Weak!",
     "http-title" => [
         "404" => "404: Not Found",
         "503" => "503: Service Unavailable",

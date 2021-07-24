@@ -43,7 +43,7 @@ class DontaionsController extends Controller
 
     public function getPostDonations($post_id, Request $request)
     {
-        $tips = Tip::query()->whereHas("user")->where("post_id", $post_id)->paginate(20);
+        $tips = Tip::query()->where("post_id", $post_id)->orderBy("amount", "DESC")->paginate(20);
         return new DonationCollection($tips);
     }
 

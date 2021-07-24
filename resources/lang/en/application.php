@@ -62,4 +62,16 @@ return [
     'deactivate' => "Deactivate",
     'done' => "Done",
     'close' => "Close",
+    'guest-user' => "Guest User",
+    'and' => "and",
+    "comma" => ",",
+
+    "password-strength" => [
+        "short" => "Too Short",
+        'too-weak' => "Too Week",
+        "weak" => "Weak",
+        'good' => "Good",
+        "strong" => "Strong",
+        "very-strong" => "Very Strong",
+    ],
 ];

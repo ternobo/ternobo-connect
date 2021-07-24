@@ -7,7 +7,7 @@
 <script>
 import TextareaParser from "../TextareaParser";
 export default {
-	props: ["content"],
+	props: ["content", "meta"],
 	created() {
 		this.text = this.content;
 	},
@@ -22,9 +22,9 @@ export default {
 		};
 	},
 	methods: {
-		input(e) {
+		input() {
 			twemoji.parse(this.$refs.input);
-			this.text = TextareaParser.escapeHTML(TextareaParser.replaceEmojiWithAltAttribute(this.$refs.input.innerHTML));
+			this.$emit("update:content", TextareaParser.escapeHTML(TextareaParser.replaceEmojiWithAltAttribute(this.$refs.input.innerHTML)));
 		},
 		onFocus() {
 			this.$emit("focus", this);
@@ -34,11 +34,6 @@ export default {
 			this.$nextTick(() => {
 				this.input();
 			});
-		},
-	},
-	watch: {
-		text(newValue) {
-			this.$emit("update:content", newValue);
 		},
 	},
 };

@@ -122,4 +122,11 @@ return [
     "skill_credit_my_verb" => "Endorsed This Skill",
 
     "tag" => "Tag|Tags",
+
+    "blocked-title" => ":fname blocked",
+    "blocked-description" => "You can unblock him/her anytime from his/her profile.",
+    'block' => "Block",
+    'unblock' => "Unblock",
+    'blocked-accounts' => "Blocked Accounts",
+    "report" => "Report",
 ];

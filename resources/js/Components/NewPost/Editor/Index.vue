@@ -2,16 +2,16 @@
 	<div class="content-editor--container">
 		<div class="elements">
 			<draggable class="list-group" v-model="editorItems" v-if="editorItems.length > 0" handle=".hand-hover" tag="div" v-bind="dragOptions" @start="drag = true" @end="drag = false">
-				<div class="editor-item" :class="{ 'image-item': element.type == 'media' }" v-for="(element, index) in editorItems" :key="'item_type_' + element.type">
+				<div class="editor-item" :class="{ 'image-item': element.type == 'image' || element.type == 'video' }" v-for="(element, index) in editorItems" :key="'item_type_' + element.type">
 					<div class="delete-move-actions">
 						<i class="material-icons-outlined hand-hover">unfold_more</i>
 						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 					</div>
-					<component :is="components[element.type]" :ref="`${element.type}`" @focus="onFocus" :content.sync="editorItems[index].content" :key="'item_type_' + element.id" :max="1200" />
+					<component :is="components[element.type]" :ref="`${element.type}`" :type="element.type" @focus="onFocus" :meta="editorItems[index].meta" :content.sync="editorItems[index].content" :key="'item_type_' + element.id" :max="1200" />
 				</div>
 			</draggable>
 			<div class="d-flex editor-actions" v-if="availableOptions.length > 0" :class="{ 'align-items-center': editorItems.length < 1 }">
-				<actions-button @select="addElement($event)" :active-options="availableOptions" />
+				<actions-button @select="addElement" :active-options="availableOptions" />
 				<div class="placeholder-element clickable" v-if="editorItems.length < 1" @click="addElement('text')">
 					<span class="text-superlight font-14">{{ __.get("content/posts.post-ph", { fname: user.first_name }) }}</span>
 				</div>
@@ -67,29 +67,23 @@ export default {
 			this.editorItems.splice(index, 1);
 			this.$emit("itemRemoved");
 		},
-		addElement(type) {
+		addElement(type, meta) {
 			switch (type) {
 				case "text":
-					this.editorItems.push({ id: uuidv4(), type: "text", content: "" });
+					this.editorItems.push({ id: uuidv4(), type: "text", content: "", meta: {} });
 					this.$emit("itemAdd");
 					break;
 				case "title":
-					this.editorItems.push({ id: uuidv4(), type: "title", content: "" });
+					this.editorItems.push({ id: uuidv4(), type: "title", content: "", meta: {} });
 					this.$emit("itemAdd");
 					break;
-				case "media":
-					let fileChooser = document.createElement("input");
-					fileChooser.type = "file";
-					fileChooser.onchange = (e) => {
-						let file = e.target.files[0];
-						if (file.type.startsWith("image") && !file.type.includes("svg+xml")) {
-							this.editorItems.push({ id: uuidv4(), type: "media", content: file });
-							this.$emit("itemAdd");
-						} else {
-							this.toast(__.get("messages.invalid-mime"));
-						}
-					};
-					fileChooser.click();
+				case "image":
+					this.editorItems.push({ id: uuidv4(), type: "image", content: null, meta: meta });
+					this.$emit("itemAdd");
+					break;
+				case "video":
+					this.editorItems.push({ id: uuidv4(), type: "video", content: null, meta: meta });
+					this.$emit("itemAdd");
 					break;
 			}
 		},
@@ -119,7 +113,7 @@ export default {
 		},
 		availableOptions() {
 			let addedOptions = this.editorItems.map((item) => item.type);
-			return ["text", "title", "media"].filter((item) => !addedOptions.includes(item));
+			return ["text", "title", "video", "image"].filter((item) => !addedOptions.includes(item));
 		},
 		dragOptions() {
 			return {
@@ -139,7 +133,8 @@ export default {
 			components: {
 				text: TextInput,
 				title: TitleInput,
-				media: Media,
+				video: Media,
+				image: Media,
 			},
 		};
 	},

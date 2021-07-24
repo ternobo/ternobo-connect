@@ -3,11 +3,17 @@
 		<div class="notification-header">
 			<div class="notification-title">
 				<div class="profiles">
-					<wire-link class="profile-xsm clickable" :href="notifications[0].sender.slug"><lazy-image :src="notifications[0].sender.profile" class="profile-xsm" img-class="profile-xsm" /></wire-link>
+					<wire-link v-if="notifications[0].sender" class="profile-xsm clickable" :href="notifications[0].sender.slug">
+						<lazy-image :src="notifications[0].sender.profile" class="profile-xsm" img-class="profile-xsm" />
+					</wire-link>
+					<div v-else>
+						<lazy-image src="/images/man-profile.png" class="profile-xsm" img-class="profile-xsm" />
+					</div>
 				</div>
 				<div class="notification-text">
 					<div class="title">
-						<wire-link class="clickable" :href="notifications[0].sender.slug">{{ notifications[0].sender.name }}</wire-link>
+						<wire-link v-if="notifications[0].sender" class="clickable" :href="notifications[0].sender.slug">{{ notifications[0].sender.name }}</wire-link>
+						<span v-else>{{ __.get("application.guest-user") }}</span>
 						<span class="font-weight-normal date-text">{{ createdAt }}</span>
 					</div>
 					<div class="action">{{ __.choice("notifications.donated-your-post", notifications.length) }}</div>

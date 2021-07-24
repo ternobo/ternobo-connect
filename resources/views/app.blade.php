@@ -24,6 +24,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     <meta name="mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="/css/video-player.css">
     <script>
         var APP_URL = "{{ url('/') }}";
         window.lang = document.documentElement.lang;
@@ -33,7 +34,6 @@
             .then(response => {
                 country = response.country;
             });
-
     </script>
     {{-- <script id="translationScript" async defer src="/translations.js?version={{ time() }}"></script> --}}
 </head>

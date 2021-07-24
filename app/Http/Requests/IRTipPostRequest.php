@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PhoneNumber;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
@@ -14,7 +15,7 @@ class IRTipPostRequest extends BaseRequest
      */
     public function authorize()
     {
-        return Auth::check();
+        return true;
     }
 
     /**
@@ -28,6 +29,7 @@ class IRTipPostRequest extends BaseRequest
             "post_id" => ['required', Rule::exists("posts", "id")],
             "amount" => ['required', "numeric", "min:1000"],
             "anonymous" => ['required', 'boolean'],
+            'phone' => ['nullable', new PhoneNumber()],
         ];
     }
 }

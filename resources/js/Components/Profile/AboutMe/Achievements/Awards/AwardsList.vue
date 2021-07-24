@@ -13,7 +13,7 @@
 			</li>
 		</ul>
 		<draggable group="awards" ref="draggable" tag="ul" v-bind="dragOptions" v-model="awards" class="achievement-list" :disabled="!edit" handle=".hand-hover">
-			<AwardItem :detailed="open" :class="{ 'edit w-100': edit }" @deleted="onDelete(index)" v-model="awards[index]" :edit="edit" v-for="(award, index) in awards" :page="page" :key="'award_' + award.id" />
+			<AwardItem :detailed="open" :class="{ 'edit w-100': edit }" ref="awards" @deleted="onDelete(index)" v-model="awards[index]" :edit="edit" v-for="(award, index) in awards" :page="page" :key="'award_' + award.id" />
 		</draggable>
 	</div>
 </template>
@@ -32,8 +32,12 @@ export default {
 			}
 		},
 		addAward() {
+			let id = "award_" + _.uniqueId();
 			this.awards.push({
-				id: "award_" + _.uniqueId(),
+				id: id,
+			});
+			this.$nextTick(() => {
+				this.scrollToElement(this.$refs.awards[this.awards.length - 1].$el, 120);
 			});
 		},
 		getData() {

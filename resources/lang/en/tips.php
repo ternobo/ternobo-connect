@@ -4,6 +4,7 @@ return [
     'support-content' => "Support This Content",
     'gateway' => "Gateway:",
     'support-anonymously' => "Support Anonymously",
+    'anonymous' => "Anonymous",
     'tipping' => "Tip",
     'date' => "Date",
     'details' => "Details",
@@ -25,5 +26,6 @@ return [
     'activate' => "Activate",
     'active-gateway' => "Active Gateway",
     'pay' => "Pay",
-    "enter-amount" => "Enter Amount (min: 1,000 Toman)",
+    "enter-amount" => "Enter Amount (Min: 1,000 Toman)",
+    'guest-user-tip-des' => "If you do not activate \"Support Anonymously\", your name will be displayed as \"Guest user\" until the time of registration with this phone number.",
 ];

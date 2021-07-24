@@ -34,6 +34,13 @@
 
 }
 
+
+.modal-dialog {
+    .btn:not(.add-action-btn) {
+        padding: .782rem 2.5rem;
+    }
+}
+
 .btn-action-light {
     background: #E7F3FF;
     border-radius: 0.75rem;
@@ -43,7 +50,6 @@
         color: $action;
         background: $blue-light-hover;
     }
-
 }
 
 .follow-btn:hover {
@@ -132,6 +138,18 @@
     transition: all 0.4s ease-in-out;
 }
 
+.btn-rounded-outline {
+    background: transparent;
+    color: $text-color;
+    border-radius: 1rem;
+    border: 2px solid $gray-400;
+
+    &:hover {
+        border-color: $dark;
+        color: $dark;
+    }
+}
+
 .loading-button.loading {
     border-color: transparent;
 }
@@ -152,6 +170,19 @@
     animation: loading 2s infinite;
     opacity: 1;
     background-color: #223;
+}
+
+
+.btn-block {
+    background: #b8b1b1;
+    color: #191919;
+    font-size: 14px;
+    font-weight: 600;
+    width: 164px;
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
 }
 
 @-webkit-keyframes one-two {

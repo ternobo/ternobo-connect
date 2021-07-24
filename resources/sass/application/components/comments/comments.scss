@@ -62,10 +62,18 @@
             display: flex;
             width: 100%;
             align-items: flex-start;
-            padding: 16px 0;
+            padding: 1rem 0;
 
             .material-input-group-btn {
                 width: calc(100% - 58px);
+
+                .input {
+                    padding-left: 112px;
+                }
+
+                .emoji-container>i {
+                    font-size: 1.25rem;
+                }
             }
         }
     }

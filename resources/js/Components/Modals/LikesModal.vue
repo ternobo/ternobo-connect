@@ -66,29 +66,30 @@ export default {
 		};
 	},
 	methods: {
-		loadMore() {
-			if (!this.loadingMore && this.next_page_url !== null) {
-				const options = {
-					method: "POST",
-					url: this.next_page_url,
-					data: this.typeBasedData,
-				};
-				this.loadingMore = true;
-				axios(options)
-					.then((response) => {
-						const data = response.data.likes;
-						if (data) {
-							this.likes = this.likes.concat(data.data);
-							this.next_page_url = data.next_page_url;
-						}
-					})
-					.catch((error) => {
-						this.next_page_url = options.url;
-					})
-					.then(() => {
-						this.loadingMore = false;
-					});
-			}
+		loadMore($state) {
+			const options = {
+				method: "POST",
+				url: this.next_page_url,
+				data: this.typeBasedData,
+			};
+			axios(options)
+				.then((response) => {
+					const data = response.data.likes;
+					if (data) {
+						this.likes = this.likes.concat(data.data);
+						this.next_page_url = data.next_page_url;
+						$state.loaded();
+					}
+				})
+				.catch((error) => {
+					this.next_page_url = options.url;
+					$state.error();
+				})
+				.then(() => {
+					if (this.next_page_url == null) {
+						$state.complete();
+					}
+				});
 		},
 		onShown() {
 			this.likes = true;

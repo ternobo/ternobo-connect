@@ -27,7 +27,7 @@ Route::post('/ternobo-actions/update', "AutoUpdateController@update");
 Route::get("/report-reasons", "ReportController@getReportOptions");
 Route::get("/translations.js", "IndexController@translations");
 require base_path("routes/sitemap_routes.php");
-
+require base_path("routes/action_routes.php");
 /**
  * File Access Start
  */
@@ -250,9 +250,6 @@ Route::group(['auth'], function () {
     Route::post("/feedback-replies/{id}/pin", "Feedback\RepliesCotnroller@pinnReply");
     // End IdeaComments
 
-    Route::get('/zarinpal/pay', "Payment\ZarinpalController@tipPost");
-    Route::get('/zarinpal/callback', "Payment\ZarinpalController@callback");
-
     // Donations Start
     Route::get("/tips", "Donation\DontaionsController@index");
     Route::post("/tips", "Donation\DontaionsController@getDonations");
@@ -272,7 +269,6 @@ Route::group(['auth'], function () {
     // Connected Device Actions
 
     Route::get("/invite", "InviteLinksController@index");
-
 });
 //End Auth
 
@@ -284,6 +280,9 @@ Route::post("/contact/social-option/{page_id}", "Profile\ContactsController@getS
 
 Route::post("/contacts/", "Profile\ContactsController@saveData");
 Route::post("/contacts/{page}", "Profile\ContactsController@getContactData");
+
+//Tips
+require base_path("routes/tip_routes.php");
 
 // Pages
 Route::prefix('/{page:slug}')->group(function () {

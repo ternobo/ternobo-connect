@@ -16,6 +16,11 @@ use Ternobo\TernoboWire\TernoboWire;
 class ConnectionsController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['follow', 'unfollow']);
+    }
+
     public function index(Request $request)
     {
         SEOTools::setTitle(__("seo.my-connections"));
@@ -147,17 +152,20 @@ class ConnectionsController extends Controller
         return response()->json(['result' => true, "connections" => $followers]);
     }
 
-    public function follow($page_id)
+    public function follow($page_id, Request $request)
     {
         $page = Page::findOrFail($page_id);
+        if ($page->isBlockedByMe()) {
+            return abort(404);
+        }
         $followRow = Following::query()->where("page_id", Ternobo::currentPage()->id)->where("following", $page_id)->firstOrNew();
         $followRow->following = $page_id;
-        $followRow->page_id = Auth::user()->id;
+        $followRow->page_id = Ternobo::currentPage()->id;
         $result = $followRow->save();
         return response()->json(array("result" => $result, "connection" => $followRow->id));
     }
 
-    public function unfollow($page_id)
+    public function unfollow($page_id, Request $request)
     {
         $page = Page::findOrFail($page_id);
         $followRow = Following::query()->where("page_id", Ternobo::currentPage()->id)
@@ -169,7 +177,7 @@ class ConnectionsController extends Controller
         return response()->json(array("result" => $result, "user_id" => $followRow->following));
     }
 
-    public function connectionRequest($user_id)
+    public function connectionRequest($user_id, Request $request)
     {
         $connection = Connection::query()->where("user_id", Auth::user()->id)->where("connection_id", Auth::user()->id)->first();
         $connectionExist = ($connection instanceof Connection);
@@ -209,7 +217,7 @@ class ConnectionsController extends Controller
                 $query->where("connection_id", Auth::user()->id)->where("user_id", $user_id);
             })
             ->firstOrFail();
-        // dd($followRow);
+
         $result = $followRow->delete();
         return response()->json(array("result" => $result, "user_id" => $user_id));
     }
