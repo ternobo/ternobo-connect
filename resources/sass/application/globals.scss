@@ -478,9 +478,18 @@ img {
 
 .userinfo-card {
     @extend .card;
+    padding-bottom: 1.5rem;
+
+    small {
+        font-size: 12px;
+    }
 
     .card-img-top {
-        margin-bottom: 0.75rem;
+        margin-bottom: 1rem;
+
+        img {
+            height: 88px;
+        }
     }
 
     .userinfo-card-body {
@@ -488,7 +497,7 @@ img {
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
-        padding: 0 1rem;
+        padding: 0 1.5rem;
 
         .profile-content {
             display: flex;

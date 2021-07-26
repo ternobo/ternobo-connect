@@ -1,5 +1,5 @@
 <template>
-	<div class="sidebar-end">
+	<div class="col-md-3">
 		<slot></slot>
 	</div>
 </template>

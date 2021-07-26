@@ -1,5 +1,5 @@
 <template>
-	<LoadingButton v-if="$store.state.user !== null && user.personal_page_id != page_id" :loading="loading" class="btn follow-btn" :class="{ 'btn-followed-connected': followed }" @click.native="follow">{{ text }}</LoadingButton>
+	<LoadingButton v-if="$store.state.user !== null && user.personal_page_id != page_id" :loading="loading" class="btn follow-btn" :class="{ 'btn-followed-connected': followed }" @click.native="follow">{{ followed ? unfollowText : followText }}</LoadingButton>
 </template>
 
 <script>
@@ -13,10 +13,7 @@ export default {
 			this.page_id = page;
 			if (this.$store.state.shared.followings.includes(String(page))) {
 				this.followed = true;
-				this.text = this.__.get("application.following");
 				this.$emit("followed");
-			} else {
-				this.text = this.__.get("application.follow");
 			}
 		}
 	},
@@ -24,12 +21,17 @@ export default {
 		return {
 			loading: false,
 			followed: false,
-			text: "دنبال کردن",
 
 			page_id: -1,
 		};
 	},
 	props: {
+		followText: {
+			default: __.get("application.follow"),
+		},
+		unfollowText: {
+			default: __.get("application.following"),
+		},
 		page: {
 			type: Number,
 			default: undefined,
@@ -53,7 +55,6 @@ export default {
 						if (response.data.result) {
 							this.loading = false;
 							this.$store.commit("addFollower", String(this.page_id));
-							this.text = this.__.get("application.following");
 							this.followed = true;
 							this.$emit("followed");
 						} else {
@@ -75,7 +76,6 @@ export default {
 					.then((response) => {
 						if (response.data.result) {
 							this.loading = false;
-							this.text = this.__.get("application.follow");
 							this.followed = false;
 							this.$emit("unfollowed");
 							this.$store.commit("unfollow", this.$store.state.shared.followings.indexOf(String(this.page_id)));

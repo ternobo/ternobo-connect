@@ -1,5 +1,5 @@
 <template>
-	<div class="userinfo-card sticky-aside pb-3" v-if="$store.state.user != null">
+	<div class="userinfo-card sticky-aside" v-if="$store.state.user != null">
 		<lazy-image style="min-height: 66px" :loadingColor="skeletonOptions.coverColor" class="card-img-top page-cover" :src="$store.state.user.cover" />
 		<div class="userinfo-card-body">
 			<wire-link :href="'/' + $store.state.user.username" class="profile-content">

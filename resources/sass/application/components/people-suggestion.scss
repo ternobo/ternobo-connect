@@ -2,10 +2,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 0;
+    padding: 16px 18px;
     flex-wrap: nowrap;
 
-    figure.profile-sm {
+    figure.profile-xsm {
         margin-bottom: 0;
         margin-left: 12px;
     }
@@ -22,23 +22,23 @@
         .person-name {
             font-weight: 600;
             font-size: 14px;
-            line-height: 22px;
+            line-height: 24px;
             color: $dark;
         }
 
         .person-short-bio {
             font-weight: normal;
             font-size: 12px;
-            line-height: 18px;
+            line-height: 20px;
             color: $grey;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 130px;
+            max-width: 104px;
         }
     }
 }
 
 .people-suggestion-card-body {
-    padding: 12px 24px !important;
+    padding: 12px !important;
 }

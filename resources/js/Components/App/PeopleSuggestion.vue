@@ -1,13 +1,13 @@
 <template>
 	<div class="people-sugestion">
 		<wire-link class="suggestion-info-link" :href="'/' + page.slug">
-			<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-sm" img-class="profile-sm" :src="page.profile" />
+			<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xsm" img-class="profile-xsm" :src="page.profile" />
 			<div class="suggestion-info">
 				<strong class="person-name">{{ page.name }} <i v-if="page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 				<small class="person-short-bio">{{ page.short_bio }}</small>
 			</div>
 		</wire-link>
-		<ConnetionButtons :vertical="true" style="margin-left: 4px; width: 80px" btn-style="padding: 7px" class="follow-buttons actions" :page-id="page.id" :user-id="page.user_id"></ConnetionButtons>
+		<FollowButton followText="+" unfollowText="-" class="followsuggest-btn p-1" :page="page.id"></FollowButton>
 	</div>
 </template>
 
@@ -28,5 +28,20 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.followsuggest-btn {
+	min-height: 24px !important;
+	min-width: 24px !important;
+	width: 24px !important;
+	height: 24px;
+	padding: 0 !important;
+	margin: 0;
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+	> span {
+		font-size: 16px;
+		font-weight: 600;
+	}
+}
 </style>
