@@ -48,6 +48,8 @@ export default {
 		font-size: 16px;
 		font-weight: 600;
 		font-family: "Open Sans";
+		display: flex;
+		align-items: center;
 	}
 }
 </style>
