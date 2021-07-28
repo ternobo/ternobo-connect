@@ -1,5 +1,9 @@
 <template>
-	<LoadingButton v-if="$store.state.user !== null && user.personal_page_id != page_id" :loading="loading" class="btn follow-btn" :class="{ 'btn-followed-connected': followed }" @click.native="follow">{{ followed ? unfollowText : followText }}</LoadingButton>
+	<LoadingButton v-if="$store.state.user !== null && user.personal_page_id != page_id" :loading="loading" class="btn follow-btn" :class="{ 'btn-followed-connected': followed }" @click.native="follow">
+		<slot v-bind:followed="followed">
+			{{ followed ? unfollowText : followText }}
+		</slot>
+	</LoadingButton>
 </template>
 
 <script>
