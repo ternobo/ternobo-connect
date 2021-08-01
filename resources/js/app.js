@@ -17,6 +17,11 @@ import VueMasonry from 'vue-masonry-css';
 import Lang from 'lang.js';
 import InfiniteError from "./Components/InfiniteError";
 import { scrollToElement } from "./Libs/WindowUtils";
+import { compile, convert } from 'html-to-text';
+
+window.htmlCompile = compile;
+window.htmlConvert = convert;
+
 
 Vue.use(VueMasonry);
 
@@ -40,6 +45,9 @@ Vue.use(infiniteScroll);
 Vue.prototype.$APP_URL = window.APP_URL;
 Vue.prototype.$axios = axios;
 Vue.prototype.scrollToElement = scrollToElement;
+
+var twitter = require('twitter-text')
+window.twitter = twitter;
 
 axios.get(`/translations.js?version=${Date.now()}`).then((response) => {
     eval(response.data);

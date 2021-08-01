@@ -1,18 +1,18 @@
 <template>
 	<div class="content-editor--container">
 		<div class="elements">
-			<draggable class="list-group" v-model="editorItems" v-if="editorItems.length > 0" handle=".hand-hover" tag="div" v-bind="dragOptions" @start="drag = true" @end="drag = false">
-				<div class="editor-item" :class="{ 'image-item': element.type == 'image' || element.type == 'video' }" v-for="(element, index) in editorItems" :key="'item_type_' + element.type">
+			<draggable class="list-group" v-model="blocks" v-if="blocks.length > 0" handle=".hand-hover" tag="div" v-bind="dragOptions" @start="drag = true" @end="drag = false">
+				<div class="editor-item" :class="{ 'image-item': element.type == 'image' || element.type == 'video' }" v-for="(element, index) in blocks" :key="'item_type_' + element.type">
 					<div class="delete-move-actions">
 						<i class="material-icons-outlined hand-hover">unfold_more</i>
 						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 					</div>
-					<component :is="components[element.type]" :ref="`${element.type}`" :type="element.type" @focus="onFocus" :meta="editorItems[index].meta" :content.sync="editorItems[index].content" :key="'item_type_' + element.id" :max="1200" />
+					<component :is="components[element.type]" :ref="`${element.type}`" :type="element.type" @focus="onFocus" :meta="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" :max="1200" />
 				</div>
 			</draggable>
-			<div class="d-flex editor-actions" v-if="availableOptions.length > 0" :class="{ 'align-items-center': editorItems.length < 1 }">
+			<div class="d-flex editor-actions" v-if="availableOptions.length > 0" :class="{ 'align-items-center': blocks.length < 1 }">
 				<actions-button @select="addElement" :active-options="availableOptions" />
-				<div class="placeholder-element clickable" v-if="editorItems.length < 1" @click="addElement('text')">
+				<div class="placeholder-element clickable" v-if="blocks.length < 1" @click="addElement('text')">
 					<span class="text-superlight font-14">{{ __.get("content/posts.post-ph", { fname: user.first_name }) }}</span>
 				</div>
 			</div>
@@ -31,7 +31,7 @@
 
 <script>
 import ActionsButton from "./ActionsButton.vue";
-import TextInput from "./Elements/TextInput.vue";
+import Paragraph from "./Elements/Paragraph.vue";
 import TitleInput from "./Elements/TitleInput.vue";
 import Media from "./Elements/Media";
 import uuidv4 from "uuid";
@@ -41,19 +41,19 @@ import TextareaParser from "./TextareaParser";
 
 export default {
 	watch: {
-		editorItems: {
+		blocks: {
 			deep: true,
 			handler(newValue) {
 				this.$emit("update:content", newValue);
 			},
 		},
 		content() {
-			this.editorItems = this.content;
+			this.blocks = this.content;
 		},
 	},
 	methods: {
 		getData() {
-			return this.editorItems;
+			return this.blocks;
 		},
 		onFocus(node) {
 			this.lastFocused = node;
@@ -64,25 +64,25 @@ export default {
 			}
 		},
 		deleteElem(index) {
-			this.editorItems.splice(index, 1);
+			this.blocks.splice(index, 1);
 			this.$emit("itemRemoved");
 		},
 		addElement(type, meta) {
 			switch (type) {
 				case "text":
-					this.editorItems.push({ id: uuidv4(), type: "text", content: "", meta: {} });
+					this.blocks.push({ id: uuidv4(), type: "text", content: "", meta: {} });
 					this.$emit("itemAdd");
 					break;
 				case "title":
-					this.editorItems.push({ id: uuidv4(), type: "title", content: "", meta: {} });
+					this.blocks.push({ id: uuidv4(), type: "title", content: "", meta: {} });
 					this.$emit("itemAdd");
 					break;
 				case "image":
-					this.editorItems.push({ id: uuidv4(), type: "image", content: null, meta: meta });
+					this.blocks.push({ id: uuidv4(), type: "image", content: null, meta: meta });
 					this.$emit("itemAdd");
 					break;
 				case "video":
-					this.editorItems.push({ id: uuidv4(), type: "video", content: null, meta: meta });
+					this.blocks.push({ id: uuidv4(), type: "video", content: null, meta: meta });
 					this.$emit("itemAdd");
 					break;
 			}
@@ -91,14 +91,14 @@ export default {
 	computed: {
 		...mapState(["user"]),
 		hasTitle() {
-			return this.editorItems.filter((item) => item.type == "title").length > 0;
+			return this.blocks.filter((item) => item.type == "title").length > 0;
 		},
 		hasText() {
-			return this.editorItems.filter((item) => item.type == "text").length > 0;
+			return this.blocks.filter((item) => item.type == "text").length > 0;
 		},
 		textItem() {
 			if (this.hasText) {
-				return this.editorItems.filter((item) => item.type == "text")[0];
+				return this.blocks.filter((item) => item.type == "text")[0];
 			} else {
 				return { content: "" };
 			}
@@ -112,8 +112,12 @@ export default {
 			return 1200 - content.length;
 		},
 		availableOptions() {
-			let addedOptions = this.editorItems.map((item) => item.type);
-			return ["text", "title", "video", "image"].filter((item) => !addedOptions.includes(item));
+			let addedOptions = this.blocks.map((item) => item.type);
+			return ["text", "title", "video", "image"].filter((item) => {
+				if (item == "text") {
+				}
+				return !addedOptions.includes(item);
+			});
 		},
 		dragOptions() {
 			return {
@@ -127,11 +131,11 @@ export default {
 	components: { ActionsButton, EmojiPicker },
 	data() {
 		return {
-			editorItems: [],
+			blocks: [],
 			drag: false,
 			lastFocused: null,
 			components: {
-				text: TextInput,
+				text: Paragraph,
 				title: TitleInput,
 				video: Media,
 				image: Media,
@@ -139,7 +143,7 @@ export default {
 		};
 	},
 	mounted() {
-		this.editorItems = this.content;
+		this.blocks = this.content;
 	},
 	props: {
 		content: {

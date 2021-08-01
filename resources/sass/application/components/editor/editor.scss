@@ -1,3 +1,40 @@
+.editorBox {
+    display: none;
+    border-radius: 8px;
+    z-index: 9999;
+    background: $white;
+    box-shadow: 0 0 1rem 0px rgba(0, 0, 0, 0.1);
+
+    button {
+        background: none;
+        outline: none;
+        padding: 8px;
+        color: $gray-500;
+        border: none;
+
+        &:last-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        &:first-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        &:hover {
+            background: $gray-100;
+            cursor: pointer;
+        }
+
+        &:active {
+            background: $gray-100;
+            color: $action;
+            cursor: pointer;
+        }
+    }
+}
+
 .content-editor--container {
     display: flex;
     flex-direction: column;
@@ -224,6 +261,66 @@
     }
 
     &::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
         -webkit-text-fill-color: $text-color;
         text-fill-color: $text-color;
     }

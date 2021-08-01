@@ -89,8 +89,17 @@ TernoboApp.install = function (Vue, options) {
                     })
                 })
 
-                const spanned = `<pre class='post-content--text'>${content}</pre>`
-                return spanned;
+                let parsedContent = new DOMParser().parseFromString(content, "text/html").body;
+
+                if (content.endsWith("...")) {
+                    if (parsedContent.lastChild instanceof Text) {
+                        parsedContent.lastChild.appendData("...")
+                    } else if (parsedContent.lastChild instanceof HTMLElement) {
+                        parsedContent.lastChild?.append("...");
+                    }
+
+                }
+                return `<pre class='post-content--text'>${parsedContent.innerHTML}</pre>`;
             }
         },
         computed: {
