@@ -1,5 +1,8 @@
 {
     "private": true,
+    "repositories": {
+        "private":""
+    },
     "scripts": {
         "development": "mix",
         "watch": "mix watch",

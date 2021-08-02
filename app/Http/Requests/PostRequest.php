@@ -97,8 +97,8 @@ class PostRequest extends FormRequest
         return [
             "slides" => ['required', 'array', 'min:1', "max:12"],
             "deletedSlides" => ["json"],
-            "draft" => ["boolean"],
-            "canDonate" => ["boolean"],
+            "draft" => [Rule::in(['1', '0'])],
+            "canDonate" => [Rule::in(['1', '0'])],
         ];
     }
 }
