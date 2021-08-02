@@ -49,7 +49,7 @@ import { mapState } from "vuex";
 import LoadingSpinner from "../LoadingSpinner.vue";
 import CategorySelect from "../CategorySelect/CategorySelect.vue";
 import CategorySelectModal from "../CategorySelect/CategorySelectModal.vue";
-
+import { serialize } from "../../Libs/ObjectToFormdata";
 export default {
 	props: {
 		post: {
@@ -120,9 +120,6 @@ export default {
 			data.slides = data.slides.map((item) => {
 				for (let sort = 0; sort < item.content.length; sort++) {
 					item.content[sort].sort = sort;
-					if (item.content[sort].content instanceof File) {
-						item.content[sort].content = this.toBase64(item.content[sort].content);
-					}
 				}
 				return item;
 			});
@@ -140,10 +137,12 @@ export default {
 
 			let url = this.post != null ? `/posts/${this.post.id}` : "/posts";
 
+			console.log(data);
+
 			let requestConfig = {
 				method: "post",
 				url: url,
-				data: data,
+				data: serialize(data),
 			};
 
 			this.$root.application
