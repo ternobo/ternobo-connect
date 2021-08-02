@@ -350,8 +350,8 @@ class PostController extends Controller
                 return abort(400);
             }
 
-            $slide = isset($slide_input['id']) && PostSlide::findOrFail($slide_input['id']) != null ?
-                PostSlide::findOrFail($slide_input['id']) :
+            $slide = isset($slide_input['id']) && PostSlide::find($slide_input['id']) != null ?
+                PostSlide::find($slide_input['id']) :
                 PostSlide::query()->create([
                     'page_id' => $user->personalPage->id,
                     'post_id' => $post->id,
@@ -361,13 +361,14 @@ class PostController extends Controller
 
             $availableOptions = ['text', 'media', 'title'];
             $items = [];
-            foreach ($slide_input as $type => $content) {
+            foreach ($slide_input['content'] as $rawContent) {
+                $sort = (int) $rawContent['sort'];
+                $content = $rawContent['content'];
+                $type =  $rawContent['type'];
+
                 if ($type == "id") {
                     continue;
                 }
-
-                $sort = (int) $content['sort'];
-                $content = $content['content'];
                 $typeSql = $type;
                 if ($type == "media_notChange") {
                     $typeSql = "media";
