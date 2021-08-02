@@ -2,12 +2,12 @@
 	<div class="content-editor--container">
 		<div class="elements">
 			<draggable class="list-group" v-model="blocks" v-if="blocks.length > 0" handle=".hand-hover" tag="div" v-bind="dragOptions" @start="drag = true" @end="drag = false">
-				<div class="editor-item" :class="{ 'image-item': element.type == 'image' || element.type == 'video' }" v-for="(element, index) in blocks" :key="'item_type_' + element.type">
+				<div class="editor-item" :class="{ 'image-item': element.type == 'image' || element.type == 'video' }" v-for="(element, index) in blocks" :key="`item_type_${element.id}_${element.type}`">
 					<div class="delete-move-actions">
 						<i class="material-icons-outlined hand-hover">unfold_more</i>
 						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 					</div>
-					<component :is="components[element.type]" :ref="`${element.type}`" :type="element.type" @focus="onFocus" :meta="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" :max="1200" />
+					<component :is="components[element.type]" :ref="`${element.type}`" @addParagraph="addParagraph" :type="element.type" @focus="onFocus" :meta="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" :max="1200" />
 				</div>
 			</draggable>
 			<div class="d-flex editor-actions" v-if="availableOptions.length > 0" :class="{ 'align-items-center': blocks.length < 1 }">
@@ -37,6 +37,7 @@ import Media from "./Elements/Media";
 import uuidv4 from "uuid";
 import EmojiPicker from "../../EmojiPicker/EmojiPicker.vue";
 import { mapState } from "vuex";
+import TwitterText from "twitter-text";
 import TextareaParser from "./TextareaParser";
 
 export default {
@@ -52,6 +53,9 @@ export default {
 		},
 	},
 	methods: {
+		addParagraph() {
+			this.addElement("text", null);
+		},
 		getData() {
 			return this.blocks;
 		},
@@ -96,25 +100,32 @@ export default {
 		hasText() {
 			return this.blocks.filter((item) => item.type == "text").length > 0;
 		},
-		textItem() {
+		textItems() {
 			if (this.hasText) {
-				return this.blocks.filter((item) => item.type == "text")[0];
+				return this.blocks.filter((item) => item.type == "text");
 			} else {
-				return { content: "" };
+				return [{ content: "" }];
 			}
 		},
 		textProgress() {
-			let content = TextareaParser.escapeHTML(this.textItem.content);
-			return (content.length / 1200) * 100 + "%";
+			let characterCount = 0;
+			this.textItems.forEach((item) => {
+				characterCount += TwitterText.parseTweet(TextareaParser.unescapeHtml(item.content)).weightedLength;
+			});
+			return (characterCount / 1200) * 100 + "%";
 		},
 		leftCharacter() {
-			let content = TextareaParser.escapeHTML(this.textItem.content);
-			return 1200 - content.length;
+			let characterCount = 0;
+			this.textItems.forEach((item) => {
+				characterCount += TwitterText.parseTweet(TextareaParser.unescapeHtml(item.content)).weightedLength;
+			});
+			return 1200 - characterCount;
 		},
 		availableOptions() {
 			let addedOptions = this.blocks.map((item) => item.type);
 			return ["text", "title", "video", "image"].filter((item) => {
 				if (item == "text") {
+					return this.leftCharacter > 0;
 				}
 				return !addedOptions.includes(item);
 			});

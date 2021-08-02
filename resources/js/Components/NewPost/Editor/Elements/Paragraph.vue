@@ -1,6 +1,6 @@
 <template>
 	<mentionable class="textarea-content w-100">
-		<div ref="editable" class="editor--text-input" contenteditable @keydown="onKeyDown" dir="auto" @focus="$emit('focus', this)" @paste="onPaste" @input="input" @apply="addTag"></div>
+		<div ref="editable" class="editor--text-input" contenteditable @keydown="onKeyDown" @keydown.enter="addParagraph" dir="auto" @focus="$emit('focus', this)" @paste="onPaste" @input="input" @apply="addTag"></div>
 		<div ref="editableHighlight" class="editor--text-input highlight" dir="auto" :placeholder="__.get('content/posts.enter-your-text')"></div>
 	</mentionable>
 </template>
@@ -14,6 +14,10 @@ export default {
 		this.editor.doDestory();
 	},
 	methods: {
+		addParagraph(e) {
+			e.preventDefault();
+			this.$emit("addParagraph");
+		},
 		insertEmoji(emoji) {
 			document.execCommand("insertHTML", false, twemoji.parse(emoji));
 			this.input();

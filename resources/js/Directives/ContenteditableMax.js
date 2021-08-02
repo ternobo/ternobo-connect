@@ -1,3 +1,5 @@
+import TwitterText from "twitter-text";
+import TextareaParser from "../Components/NewPost/Editor/TextareaParser";
 
 export default {
     bind: function (el, binding, vnode) {
@@ -16,7 +18,7 @@ export default {
                 },
             };
 
-            let len = e.target.innerText.length;
+            let len = TwitterText.parseTweet(TextareaParser.unescapeHtml(TextareaParser.replaceEmojiWithAltAttribute(e.target.innerHTML))).weightedLength;
             let hasSelection = false;
             let selection = window.getSelection();
             let isSpecial = utils.isSpecial(e);

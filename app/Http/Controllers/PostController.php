@@ -53,7 +53,6 @@ class PostController extends Controller
         $mentions = [];
 
         $draft = $request->draft == '1';
-
         $post = Post::query()->create([
             'type' => $draft ? 'draft_post' : 'post',
             'user_id' => $user->id,
@@ -71,9 +70,10 @@ class PostController extends Controller
                 'page_id' => $user->personalPage->id,
                 'post_id' => $post->id,
             ]);
-            foreach ($slide_input as $type => $content) {
-                $sort = (int) $content['sort'];
-                $content = $content['content'];
+            foreach ($slide_input['content'] as $rawContent) {
+                $sort = (int) $rawContent['sort'];
+                $content = $rawContent['content'];
+                $type =  $rawContent['type'];
                 switch ($type) {
                     case "text":
                         // Process
@@ -192,7 +192,6 @@ class PostController extends Controller
             if ($request->has("comment_id")) {
                 $report->reportable_id = $request->comment_id;
                 $report->reportable_type = Comment::class;
-
             } else {
                 $report->reportable_id = $request->post_id;
                 $report->reportable_type = Post::class;
@@ -352,11 +351,11 @@ class PostController extends Controller
             }
 
             $slide = isset($slide_input['id']) && PostSlide::findOrFail($slide_input['id']) != null ?
-            PostSlide::findOrFail($slide_input['id']) :
-            PostSlide::query()->create([
-                'page_id' => $user->personalPage->id,
-                'post_id' => $post->id,
-            ]);
+                PostSlide::findOrFail($slide_input['id']) :
+                PostSlide::query()->create([
+                    'page_id' => $user->personalPage->id,
+                    'post_id' => $post->id,
+                ]);
 
             $added_elements = [];
 
@@ -514,5 +513,4 @@ class PostController extends Controller
             return abort(404);
         }
     }
-
 }

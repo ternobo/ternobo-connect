@@ -87,6 +87,14 @@ export default {
 				this.toast(__.get("messages.duplicated-category"));
 			}
 		},
+		toBase64(file) {
+			return new Promise((resolve, reject) => {
+				const reader = new FileReader();
+				reader.readAsDataURL(file);
+				reader.onload = () => resolve(reader.result);
+				reader.onerror = (error) => reject(error);
+			});
+		},
 		shown() {
 			window.onbeforeunload = function (e) {
 				var message = "در صورت خروج اطلاعات از بین‌می‌رود!",
@@ -100,48 +108,42 @@ export default {
 				return message;
 			};
 		},
-		submitPost(draft = false) {
+		async submitPost(draft = false) {
 			if (draft) {
 				this.loadingDraft = true;
 			} else {
 				this.loading = true;
 			}
-			let data = this.content;
-			let formData = new FormData();
-			data.forEach((item, index) => {
+			let data = {
+				slides: this.content,
+			};
+			data.slides = data.slides.map((item) => {
 				for (let sort = 0; sort < item.content.length; sort++) {
-					let slide = item.content[sort];
-					if (slide.content != "" && slide.content != null) {
-						if ((slide.type == "picture" || slide.type == "video") && typeof slide.content != "object") {
-							formData.append(`slides[${index}][${slide.type}_notChange][content]`, slide.content);
-							formData.append(`slides[${index}][${slide.type}_notChange][sort]`, sort);
-							continue;
-						}
-						formData.append(`slides[${index}][${slide.type}][content]`, slide.content);
-						formData.append(`slides[${index}][${slide.type}][sort]`, sort);
+					item.content[sort].sort = sort;
+					if (item.content[sort].content instanceof File) {
+						item.content[sort].content = this.toBase64(item.content[sort].content);
 					}
 				}
-				if (this.post && !isUUID.v4(item.id)) {
-					formData.append(`slides[${index}][id]`, item.id);
-				}
+				return item;
 			});
 			if (this.category) {
-				formData.append("category", this.category.name);
+				data.category = his.category.name;
 			}
 
 			if (this.post) {
-				formData.append("deletedSlides", JSON.stringify(this.deletedSlides));
-				formData.append("_method", "PUT");
+				data.deletedSlides = JSON.stringify(this.deletedSlides);
+				data._method = "PUT";
 			}
 
-			formData.append("draft", draft ? "1" : "0");
-			formData.append("canDonate", this.canDonate ? "1" : "0");
+			data.draft = this.draft;
+			data.canDonate = this.canDonate;
+
 			let url = this.post != null ? `/posts/${this.post.id}` : "/posts";
 
 			let requestConfig = {
 				method: "post",
 				url: url,
-				data: formData,
+				data: data,
 			};
 
 			this.$root.application

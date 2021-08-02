@@ -8,7 +8,8 @@ export default {
             .replace(/&lt;/g, '<')
             .replace(/&gt;/g, '>')
             .replace(/&quot;/g, '"')
-            .replace(/&#039;/g, "'");
+            .replace(/&#039;/g, "'")
+            .replace(/&nbsp;/g, " ")
     },
     escapeHTML(text) {
         const divEscapedHtml = document.createElement('div');
