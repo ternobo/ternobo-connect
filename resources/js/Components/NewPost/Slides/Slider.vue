@@ -91,9 +91,11 @@ export default {
 					let items = item.content;
 					for (let i = 0; i < items.length; i++) {
 						let elem = items[i];
-						if (elem.type == "media") {
+						if (elem.type == "image") {
 							item.icon = "image";
 							break;
+						} else if (elem.type == "video") {
+							item.icon = "play_circle";
 						} else {
 							item.icon = "text_fields";
 						}
