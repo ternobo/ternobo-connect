@@ -30,14 +30,15 @@ export default {
 			this.$emit("focus", this);
 		},
 		insertEmoji(emoji) {
-			this.$refs.input.innerHTML += emoji;
-			this.$nextTick(() => {
-				this.input();
-			});
+			document.execCommand("insertHTML", false, twemoji.parse(emoji));
+			this.input();
 		},
 	},
 };
 </script>
 
 <style>
+.title-input {
+	font-weight: 600 !important;
+}
 </style>
