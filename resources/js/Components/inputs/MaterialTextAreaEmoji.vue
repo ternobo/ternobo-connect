@@ -77,14 +77,11 @@ export default {
 				}
 			}
 		},
+
 		insertEmoji(emoji) {
 			this.$refs.input.focus();
-			const range = window.getSelection().getRangeAt(0);
-			range.insertNode(document.createTextNode(emoji));
+			window.execCommand("insertHTML", false, twemoji.parse(emoji));
 			this.onInput();
-			this.setCaretPosition(this.$refs.input, this.getCaretPosition() + 1);
-			this.saveCaretPosition();
-			console.log(this.getCaretPosition() + 1);
 		},
 		onInput() {
 			let text = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.input.innerHTML);
