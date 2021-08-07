@@ -440,8 +440,8 @@ window.twemoji = (function (
                 // recycle the match string replacing the emoji
                 // with its image counter part
                 ret = '<img '.concat(
-                    'class="', options.className, '" ',
                     'draggable="false" ',
+                    'class="', options.className, '" ',
                     // needs to preserve user original intent
                     // when variants should be copied and pasted too
                     'alt="',

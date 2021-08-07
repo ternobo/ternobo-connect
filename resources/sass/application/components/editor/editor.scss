@@ -12,6 +12,11 @@
         color: $gray-500;
         border: none;
 
+        &.active {
+            color: $dark;
+
+        }
+
         &:last-child {
             border-top-left-radius: 8px;
             border-bottom-left-radius: 8px;
@@ -42,8 +47,17 @@
     background-color: $white;
 
     .elements {
+        flex: 1 1 auto;
+
+        .list-group {
+            width: calc(100% + 116px);
+            margin-right: -116px;
+        }
+
+
+
         .placeholder-element {
-            margin-right: 16px;
+            margin-right: 57px;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -51,15 +65,31 @@
         }
     }
 
+    .editor-actions {
+        width: calc(100% + 90px);
+        margin-right: -90px;
+
+        .add-action-btn {
+            background: $white;
+            color: $grey;
+        }
+    }
+
     .editor-actions:not(:first-child) {
         margin-top: 0;
         margin-bottom: 1.5rem;
+
     }
 
     .editor-item {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         padding: 0 16px;
+
+        .editor-block-container {
+            margin-right: 44px;
+            width: 100%;
+        }
 
         &:not(:first-child) {
             margin-top: 1.5rem;
@@ -111,9 +141,20 @@
         }
 
         >.delete-move-actions {
-            background: transparent;
-            margin-bottom: 8px;
-            margin-right: -16px;
+            background: $white;
+            color: $gray-500;
+            border-radius: 12px;
+            padding: 6px;
+            height: auto;
+            width: auto;
+
+            >* {
+                margin: 0 1px;
+            }
+
+            i {
+                font-size: 20px;
+            }
         }
     }
 
@@ -152,10 +193,8 @@
 .editors-actions-list {
     position: absolute;
     z-index: 999;
-    background: $dark;
-    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.051);
-    padding: 16px 1.5rem;
-    padding-bottom: 1.5rem;
+    background: $gray-100;
+    padding: 0.75;
 }
 
 .add-action-btn {
@@ -189,38 +228,50 @@
 
 .text-type-list {
     display: flex;
-    gap: 26px;
+    flex-direction: column;
+    width: 212px;
+    padding: 12px;
 
     &:not(:first-child) {
-        margin-top: 1.5rem;
+        margin-top: 0.5rem;
+        padding-top: 0;
     }
+
+
+    >.list-title {
+        margin-bottom: 4px;
+        color: $grey;
+        font-size: 12px;
+    }
+
 
     >.editor-list-item {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        align-items: center;
+        padding: 8px 10px;
 
+        &:hover {
+            background: $gray-200;
+            cursor: pointer;
+        }
 
         strong {
-            color: $white;
-            margin-bottom: 12px;
+            color: $grey;
+            margin-right: 12px;
+            font-size: 12px;
         }
 
         i {
-            background: #424242;
-            color: $white;
-            height: 40px;
-            width: 40px;
+            background: $gray-300;
+            color: $gray-600;
+            height: 28px;
+            width: 28px;
             font-size: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
             transition: 0.3s all;
-            border: 3px solid transparent;
-
-            &:not(.disabled):hover {
-                border: 3px solid #757575;
-            }
 
             &.disabled {
                 opacity: 0.4;
@@ -1009,6 +1060,228 @@
         text-fill-color: $text-color;
     }
 
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
+    &::-moz-selection,
+    *::-moz-selection {
+        -webkit-text-fill-color: $text-color;
+        text-fill-color: $text-color;
+    }
+
     &::-moz-selection, *::-moz-selection {
         -webkit-text-fill-color: $text-color;
         text-fill-color: $text-color;
@@ -1021,14 +1294,10 @@
     }
 }
 
-[placeholder]:empty::before {
+[placeholder]:not(:focus):empty:before {
     content: attr(placeholder);
     color: $grey;
     cursor: text;
-}
-
-[placeholder]:empty:focus::before {
-    content: "";
 }
 
 /** Tag Selector **/

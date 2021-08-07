@@ -1,34 +1,33 @@
 <template>
 	<div class="position-relative" v-click-outside="hideList">
-		<button class="btn btn-action-light rounded-circle add-action-btn" :class="{ active: showList }" @click="toggleList"><i class="material-icons font-20">add</i></button>
+		<button class="btn rounded-circle add-action-btn" :class="{ active: showList }" @click="toggleList"><i class="material-icons font-20">add</i></button>
 		<transition name="fade">
 			<div class="editors-actions-list" :style="editorsActionListStyle" v-if="showList">
 				<div class="text-type-list">
-					<div class="editor-list-item">
+					<strong class="list-title">
+						{{ __.get("editor.base") }}
+					</strong>
+					<div class="editor-list-item" @click="emitAcion('title')">
+						<i class="material-icons" :class="{ disabled: !activeOptions.includes('title') }">title</i>
 						<strong>{{ __.get("content/posts.heading") }}</strong>
-						<i class="material-icons" :class="{ disabled: !activeOptions.includes('title') }" @click="emitAcion('title')">title</i>
 					</div>
-					<div class="editor-list-item">
+					<div class="editor-list-item" @click="emitAcion('text')">
+						<i class="material-icons" :class="{ disabled: !activeOptions.includes('text') }">text_fields</i>
 						<strong>{{ __.get("content/posts.text") }}</strong>
-						<i class="material-icons" :class="{ disabled: !activeOptions.includes('text') }" @click="emitAcion('text')">text_fields</i>
 					</div>
 				</div>
+
 				<div class="text-type-list">
-					<div class="editor-list-item">
-						<strong>{{ __.get("content/posts.media") }}</strong>
-						<i class="material-icons-outlined" :class="{ disabled: hasMedia }" @click="emitMediaAction('image')">image</i>
+					<strong class="list-title">
+						{{ __.get("editor.media") }}
+					</strong>
+					<div class="editor-list-item" @click="emitMediaAction('image')">
+						<i class="material-icons-outlined" :class="{ disabled: hasMedia }">image</i>
+						<strong>{{ __.get("editor.image") }}</strong>
 					</div>
-					<div class="editor-list-item">
-						<strong class="opacity-0">{{ __.get("content/posts.media") }}</strong>
-						<i class="material-icons-outlined" :class="{ disabled: hasMedia }" @click="emitMediaAction('video')">play_circle_outline</i>
-					</div>
-					<div class="editor-list-item">
-						<strong class="opacity-0">صدا</strong>
-						<i class="material-icons-outlined disabled">audiotrack</i>
-					</div>
-					<div class="editor-list-item">
-						<strong class="opacity-0">رسانه</strong>
-						<i class="material-icons-outlined disabled">mic_none</i>
+					<div class="editor-list-item" @click="emitMediaAction('video')">
+						<i class="material-icons-outlined" :class="{ disabled: hasMedia }">play_circle_outline</i>
+						<strong>{{ __.get("editor.video") }}</strong>
 					</div>
 				</div>
 			</div>
@@ -47,9 +46,9 @@ export default {
 				top: 0,
 			};
 			if (this.shared.direction == "rtl") {
-				style.left = "-302px";
+				style.left = "-272px";
 			} else {
-				style.right = "-302px";
+				style.right = "-272px";
 			}
 			return style;
 		},

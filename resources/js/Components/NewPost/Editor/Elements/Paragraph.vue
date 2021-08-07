@@ -18,8 +18,8 @@ export default {
 			e.preventDefault();
 			this.$emit("addParagraph");
 		},
-		onFocus(){
-			this.$emit('focus', this)
+		onFocus() {
+			this.$emit("focus", this);
 		},
 		insertEmoji(emoji) {
 			document.execCommand("insertHTML", false, twemoji.parse(emoji));
@@ -85,6 +85,7 @@ export default {
 			if (selection) {
 				hasSelection = !!selection.toString();
 			}
+
 			if (isSpecial || isNavigational) {
 				return true;
 			} else if (len >= this.max && !hasSelection) {
@@ -138,6 +139,9 @@ export default {
 				bold: {
 					text: "format_bold",
 					class: "material-icons",
+					onActive: ()=>{
+						return document. queryCommandState("bold");
+					},
 					action: () => {
 						document.execCommand("bold", null, "");
 					},
@@ -145,6 +149,9 @@ export default {
 				italic: {
 					text: "format_italic",
 					class: "material-icons",
+					onActive: ()=>{
+						return document. queryCommandState("italic");
+					},
 					action: () => {
 						document.execCommand("italic", null, "");
 					},
@@ -152,6 +159,9 @@ export default {
 				strikeThrough: {
 					text: "strikethrough_s",
 					class: "material-icons",
+					onActive: ()=>{
+						return document. queryCommandState("strikeThrough");
+					},
 					action: () => {
 						document.execCommand("strikeThrough", null, "");
 					},
@@ -159,6 +169,9 @@ export default {
 				superscript: {
 					text: "superscript",
 					class: "material-icons",
+					onActive: ()=>{
+						return document. queryCommandState("superscript");
+					},
 					action: () => {
 						document.execCommand("superscript", null, "");
 					},

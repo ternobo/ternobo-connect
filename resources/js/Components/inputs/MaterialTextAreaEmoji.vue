@@ -80,7 +80,7 @@ export default {
 
 		insertEmoji(emoji) {
 			this.$refs.input.focus();
-			window.execCommand("insertHTML", false, twemoji.parse(emoji));
+			window.document.execCommand("insertHTML", false, twemoji.parse(emoji));
 			this.onInput();
 		},
 		onInput() {

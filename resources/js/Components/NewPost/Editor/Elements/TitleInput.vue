@@ -1,6 +1,6 @@
 <template>
 	<div class="contenteditable-input title-input">
-		<div contenteditable @focus="onFocus" v-max-contenteditable="112" @keypress.enter.prevent @keydown.enter.prevent @input="input" ref="input" class="w-100 shadow-0">{{ text }}</div>
+		<div contenteditable @focus="onFocus" dir="auto" v-max-contenteditable="112" @keypress.enter.prevent @keydown.enter.prevent @input="input" ref="input" class="w-100 shadow-0">{{ text }}</div>
 	</div>
 </template>
 

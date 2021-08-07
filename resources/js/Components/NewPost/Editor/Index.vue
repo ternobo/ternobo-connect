@@ -4,10 +4,12 @@
 			<draggable class="list-group" v-model="blocks" v-if="blocks.length > 0" handle=".hand-hover" tag="div" v-bind="dragOptions" @start="drag = true" @end="drag = false">
 				<div class="editor-item" :class="{ 'image-item': element.type == 'image' || element.type == 'video' }" v-for="(element, index) in blocks" :key="`item_type_${element.id}_${element.type}`">
 					<div class="delete-move-actions">
-						<i class="material-icons-outlined hand-hover">unfold_more</i>
 						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
+						<i class="material-icons-outlined hand-hover">drag_indicator</i>
 					</div>
-					<component :is="components[element.type]" :ref="`${element.type}`" @addParagraph="addParagraph" :type="element.type" @focus="onFocus" :meta="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" :max="1200" />
+					<div class="editor-block-container">
+						<component :is="components[element.type]" :ref="`${element.type}`" @addParagraph="addParagraph" :type="element.type" @focus="onFocus" :meta="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" :max="leftCharacter" />
+					</div>
 				</div>
 			</draggable>
 			<div class="d-flex editor-actions" v-if="availableOptions.length > 0" :class="{ 'align-items-center': blocks.length < 1 }">
@@ -17,9 +19,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="d-flex align-items-center justify-content-between" v-if="hasText || hasTitle">
+		<div class="d-flex align-items-center justify-content-between">
 			<emoji-picker @pick="appendEmoji" />
-			<div class="my-3 character-counter" v-if="hasText">
+			<div class="my-3 character-counter">
 				<span class="counter tex-dark">{{ leftCharacter }}</span>
 				<div class="progress me-1 mb-0" style="width: 100px; height: 5px">
 					<div class="progress-bar" role="progressbar" :style="{ width: textProgress }" aria-valuemin="0" aria-valuemax="100"></div>

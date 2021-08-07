@@ -8,8 +8,26 @@
     }
 
     .modal-dialog {
-        max-width: 552px;
+        max-width: 710px;
         padding: 0;
+    }
+
+    .modal-content {
+        padding-right: 80px;
+
+        button.close {
+            transform: translateX(76px)
+        }
+
+        &::before {
+            position: absolute;
+            content: " ";
+            background: #F5F5F5;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 80px;
+        }
     }
 }
 
