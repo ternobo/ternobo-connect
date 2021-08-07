@@ -28,7 +28,7 @@
 					<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
 					<div class="d-flex justify-content-center align-items-center mt-3 mb-2">
 						<loading-button :loading="loadingDraft" class="btn btn-transparent font-14" :disabled="!checkContent" @click.native="submitPost(true)">{{ __.get("content/posts.draft") }}</loading-button>
-						<loading-button :loading="loading" class="btn btn-primary font-14" :class="{ 'text-muted': !checkContent }" :disabled="!checkContent" @click.native="submitPost(false)"> {{ post ? __.get("application.save") : __.get("content/posts.publish") }} </loading-button>
+						<loading-button :loading="loading" class="btn btn-primary font-14 w-100" :class="{ 'text-muted': !checkContent }" :disabled="!checkContent" @click.native="submitPost(false)"> {{ post ? __.get("application.save") : __.get("content/posts.publish") }} </loading-button>
 					</div>
 				</div>
 			</div>

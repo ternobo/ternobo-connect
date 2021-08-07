@@ -5,7 +5,7 @@ export default {
     bind: function (el, binding, vnode) {
         let max = parseInt(binding.value);
 
-        document.body.addEventListener("keydown", (e) => {
+        el.addEventListener("keydown", (e) => {
             let utils = {
                 special: [8, 16, 17, 18, 46],
                 navigational: [38, 37, 39, 40],
@@ -41,7 +41,7 @@ export default {
             let len = e.target.innerText.length + text.length;
 
             if (len > max) {
-                text = text.substr(0, max - this.$refs.editable.innerText.length);
+                text = text.substr(0, max - e.target.innerText.length);
             }
 
             // insert text manually

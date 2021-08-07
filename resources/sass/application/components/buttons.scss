@@ -88,9 +88,12 @@
     background: rgba(255, 255, 255, 0.2);
 }
 
-.btn-transparent:active {
-    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2) inset;
-    // color: #FFF;
+.btn-transparent:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-transparent:disabled {
+    color: $grey;
 }
 
 .btn:focus,

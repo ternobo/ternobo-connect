@@ -8,7 +8,7 @@
 						<i class="material-icons-outlined hand-hover">drag_indicator</i>
 					</div>
 					<div class="editor-block-container">
-						<component :is="components[element.type]" :ref="`${element.type}`" @addParagraph="addParagraph" :type="element.type" @focus="onFocus" :meta="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" :max="leftCharacter" />
+						<component :is="components[element.type]" :ref="`${element.type}`" @addParagraph="addParagraph(index + 1)" :type="element.type" @focus="onFocus" :meta="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" :max="leftCharacter" />
 					</div>
 				</div>
 			</draggable>
@@ -55,8 +55,9 @@ export default {
 		},
 	},
 	methods: {
-		addParagraph() {
-			this.addElement("text", null);
+		addParagraph(index) {
+			this.blocks.splice(index, 0, { id: uuidv4(), type: "text", content: "", meta: {} });
+			this.$emit("itemAdd");
 		},
 		getData() {
 			return this.blocks;
