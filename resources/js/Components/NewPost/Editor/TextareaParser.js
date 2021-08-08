@@ -1,6 +1,12 @@
 export default {
     replaceEmojiWithAltAttribute(text) {
-        return text.replace(/<img draggable="false" class="emoji".*?alt="(.*?)"[^>]+>/g, '$1');
+        return text.replaceAll(/<img draggable="false" class="emoji".*?alt="(.*?)"[^>]+>/g, '$1');
+    },
+
+    //<span class="mention-item" contenteditable="false" data-mention="soheila.nariman">@الوند اعتماد</span>
+    replaceTextEditorMentions(text) {
+        return text.replaceAll(/<span class="mention-item" contenteditable="false" data-mention="(.*?)" \b[^>]*>([\s\S]*?)<\/span>/g, "@$1")
+            .replaceAll(/<span class="text-action tag-item" contenteditable="false" data-mention="(.*?)" \b[^>]*>([\s\S]*?)<\/span>/g, "#$1");
     },
     unescapeHtml(text) {
         return text

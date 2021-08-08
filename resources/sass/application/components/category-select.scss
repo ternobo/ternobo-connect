@@ -30,9 +30,20 @@
     }
 }
 
-@if($direction==ltr) {
-    .category-select-modal {
-        flex-direction: row;
+.category-select-modal {
+    .modal-dialog {
+        max-width: 710px;
+        padding: 0;
+    }
+
+    .modal-header {
+        @if($direction==ltr) {
+            flex-direction: row;
+        }
+
+        &::after {
+            display: none;
+        }
     }
 }
 

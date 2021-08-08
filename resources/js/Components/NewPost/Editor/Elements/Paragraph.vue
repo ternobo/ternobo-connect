@@ -1,7 +1,6 @@
 <template>
-	<mentionable class="textarea-content w-100">
-		<div ref="editable" class="editor--text-input" contenteditable @keydown="onKeyDown" @keydown.enter="addParagraph" dir="auto" @focus="onFocus" @paste="onPaste" @input="input" @apply="addTag"></div>
-		<div ref="editableHighlight" class="editor--text-input highlight" dir="auto" :placeholder="__.get('content/posts.enter-your-text')"></div>
+	<mentionable :max-tags="3" class="textarea-content w-100" @click="focus">
+		<div ref="editable" class="editor--text-input" :placeholder="__.get('content/posts.enter-your-text')" contenteditable @keydown.delete="onBackspace" @blur="onBlur" @keydown="onKeyDown" @keydown.enter="addParagraph" @focus="onFocus" @paste="onPaste" @input="input"></div>
 	</mentionable>
 </template>
 
@@ -9,43 +8,55 @@
 import TextareaParser from "../TextareaParser";
 import Mentionable from "../../../Mentionable";
 import ParagraphEditor from "ternobo-paragraph-editor/lib/TernoboEditor";
+import ContentEditable from "../../../../Mixins/ContentEditable";
 export default {
+	mixins: [ContentEditable],
 	destroyed() {
 		this.editor.doDestory();
+	},
+	provide: {
+		replaceMention(key, value) {
+			const classes = key == "@" ? "mention-item" : "text-action tag-item";
+			const element = document.createElement("span");
+			element.className = classes;
+			element.innerHTML = key + value;
+			element.contentEditable = false;
+			return element;
+		},
 	},
 	methods: {
 		addParagraph(e) {
 			e.preventDefault();
 			this.$emit("addParagraph");
 		},
+		onBackspace() {
+			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
+			content = TextareaParser.unescapeHtml(content);
+
+			if (content < 1) {
+				this.$emit("delete");
+			}
+		},
 		onFocus() {
 			this.$emit("focus", this);
+			this.$refs.editable.dir = "auto";
+		},
+		onBlur() {
+			if (this.updateContent().trim().length < 1) {
+				this.$refs.editable.removeAttribute("dir");
+			} else {
+				this.$refs.editable.dir = "auto";
+			}
 		},
 		insertEmoji(emoji) {
 			document.execCommand("insertHTML", false, twemoji.parse(emoji));
 			this.input();
 		},
-		updateHighlight() {
+		updateContent() {
 			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
-			content = TextareaParser.unescapeHtml(content);
-			let htext = content.replace(/\B@(\w+)/gu, "<span class='mention-item'>@$1</span>");
-
-			let tags = htext.match(/\B#(\S+)/gu)?.slice(0, 3);
-
-			if (tags) {
-				tags.forEach((tag) => {
-					htext = htext.replace(tag, function (item) {
-						return `<span class='text-action'>${item}</span>`;
-					});
-				});
-			}
-			this.$refs.editableHighlight.innerHTML = htext;
+			content = TextareaParser.replaceTextEditorMentions(TextareaParser.unescapeHtml(content));
+			this.$emit("update:content", content);
 			return content;
-		},
-		addTag(value, key) {
-			if (key == "#" && this.tags.length < 3) {
-				this.tags.push(value.key);
-			}
 		},
 		onPaste(e) {
 			e.preventDefault();
@@ -58,7 +69,7 @@ export default {
 
 			document.execCommand("insertHTML", false, text);
 
-			this.updateHighlight();
+			this.updateContent();
 
 			this.fixDirection();
 		},
@@ -94,10 +105,8 @@ export default {
 			}
 		},
 		input(e) {
-			let content = this.updateHighlight();
-			this.$emit("update:content", content);
+			this.updateContent();
 			this.$nextTick(() => {
-				twemoji.parse(this.$refs.editableHighlight);
 				twemoji.parse(this.$refs.editable);
 				this.fixDirection();
 			});
@@ -107,9 +116,9 @@ export default {
 			this.$refs.editable.children.forEach((item) => {
 				item.dir = "auto";
 			});
-			this.$refs.editableHighlight.children.forEach((item) => {
-				item.dir = "auto";
-			});
+		},
+		focus() {
+			this.$refs.editable.focus();
 		},
 	},
 	data() {
@@ -132,7 +141,7 @@ export default {
 	mounted() {
 		document.execCommand("defaultParagraphSeparator", false, "p");
 		this.$refs.editable.innerHTML = this.content;
-		this.updateHighlight();
+		this.updateContent();
 
 		this.editor = new ParagraphEditor(this.$refs.editable, {
 			toolbar: {
@@ -179,8 +188,42 @@ export default {
 				underline: {
 					text: "format_underlined",
 					class: "material-icons",
+					onActive: () => {
+						return document.queryCommandState("underline");
+					},
 					action: () => {
 						document.execCommand("underline", null, "");
+					},
+				},
+
+				align_left: {
+					text: "format_align_left",
+					class: "material-icons",
+					onActive: () => {
+						return document.queryCommandState("justifyLeft");
+					},
+					action: () => {
+						document.execCommand("justifyLeft", null, "");
+					},
+				},
+				align_center: {
+					text: "format_align_center",
+					class: "material-icons",
+					onActive: () => {
+						return document.queryCommandState("justifyCenter");
+					},
+					action: () => {
+						document.execCommand("justifyCenter", null, "");
+					},
+				},
+				align_right: {
+					text: "format_align_right",
+					class: "material-icons",
+					onActive: () => {
+						return document.queryCommandState("justifyRight");
+					},
+					action: () => {
+						document.execCommand("justifyRight", null, "");
 					},
 				},
 			},

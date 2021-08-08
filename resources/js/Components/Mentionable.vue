@@ -1,7 +1,6 @@
 <template>
 	<div>
 		<slot></slot>
-
 		<div class="tribute-container" v-if="searchKey != null" :style="caretPosition">
 			<ul>
 				<li v-for="item in items" :key="getKey(item.key)" @mousedown="selectItem(item)">
@@ -20,12 +19,17 @@ export default {
 			this.setup();
 		});
 	},
-
+	inject: ["replaceMention"],
 	methods: {
 		setup() {
 			let element = this.$el.querySelector(this.element);
 			if (element != null) {
 				element.addEventListener("input", this.onInput);
+				element.addEventListener("keypress", (e) => {
+					if (e.keyCode == 32 && this.searchKey == "#" && this.tags.length < this.maxTags) {
+						this.selectItem({ key: this.lastSearchText, value: this.lastSearchText, name: this.lastSearchText });
+					}
+				});
 			} else {
 				throw Error("Invalid Element");
 			}
@@ -35,11 +39,12 @@ export default {
 			return `item_${item}_${uuidv4()}`;
 		},
 		selectItem(item) {
-			const value = this.searchKey + String(item.value);
+			const value = this.replaceMention(this.searchKey, String(item.name));
+			value.dataset.mention = String(item.value);
 			const range = window.getSelection().getRangeAt(0);
 			range.setStart(range.startContainer, range.startOffset - this.searchKey.length - (this.lastSearchText ? this.lastSearchText.length : 0));
 			range.deleteContents();
-			range.insertNode(document.createTextNode(value));
+			range.insertNode(value);
 			range.setStart(range.endContainer, range.endOffset);
 
 			let event = new Event("input");
@@ -49,17 +54,19 @@ export default {
 			this.closeMenu();
 		},
 		openMenu(key, searchText) {
-			if (key == "@") {
-				axios.post("/slugsearch", { q: searchText }).then((response) => {
-					let data = response.data;
-					this.items = data.pages;
-				});
-			} else if (key == "#") {
-				axios.get(this.$APP_URL + "/gettags?term=" + searchText + "&q=" + searchText).then((response) => {
-					let data = response.data;
-					this.items = data.results;
-				});
-			}
+			this.lastTimeOut = setTimeout(() => {
+				if (key == "@") {
+					axios.post("/slugsearch", { q: searchText }).then((response) => {
+						let data = response.data;
+						this.items = data.pages;
+					});
+				} else if (key == "#") {
+					axios.get(this.$APP_URL + "/gettags?term=" + searchText + "&q=" + searchText).then((response) => {
+						let data = response.data;
+						this.items = data.results;
+					});
+				}
+			}, 250);
 
 			this.updateCarretPosition();
 		},
@@ -110,6 +117,8 @@ export default {
 				}
 				if (searchText != null) {
 					this.updateCarretPosition();
+					clearTimeout(this.lastTimeOut);
+
 					this.openMenu(key, searchText);
 					this.searchKey = key;
 					this.searchText = searchText;
@@ -159,9 +168,17 @@ export default {
 			caretPosition: {},
 
 			items: [],
+
+			lastTimeOut: null,
 		};
 	},
 	props: {
+		tags: {
+			default: () => [],
+		},
+		maxTags: {
+			default: 3,
+		},
 		searchUrl: {
 			type: Object,
 			default: () => {

@@ -15,8 +15,10 @@
     .modal-content {
         padding-right: 80px;
 
-        button.close {
-            transform: translateX(76px)
+        @if($direction==rtl) {
+            button.close {
+                transform: translateX(76px)
+            }
         }
 
         &::before {
@@ -32,7 +34,7 @@
 }
 
 .new-post {
-    .profile-sm {
+    figure.profile-xxsm {
         margin-left: 0.75rem;
     }
 
@@ -83,7 +85,7 @@
         font-size: 0.75rem;
         justify-content: space-between;
 
-        padding: 0.625rem 0.75rem;
+        padding: .75rem 1rem;
     }
 
     .selections {

@@ -7,7 +7,7 @@
 				<div class="new-post position-relative">
 					<div class="selections">
 						<div class="d-flex align-items-center">
-							<lazy-image :src="user.profile" class="profile-sm mb-0" img-class="profile-sm" loading="lazy" />
+							<lazy-image :src="user.profile" class="profile-xxsm mb-0" img-class="profile-xxsm" loading="lazy" />
 							<strong class="user-profile-name">{{ username }}</strong>
 						</div>
 						<div class="categoryandtype">
@@ -183,12 +183,7 @@ export default {
 		},
 	},
 	watch: {
-		text(newValue) {
-			if (newValue) {
-				this.txtlen = (newValue.length / 2500) * 100 + "%";
-				this.leftCharacter = 2500 - newValue.length;
-			}
-		},
+		text(newValue) {},
 		canDonate(newValue) {
 			if (newValue && this.show) {
 				this.loadingCanDonate = true;
@@ -261,7 +256,15 @@ export default {
 		username() {
 			return Boolean(this.user) && Boolean(this.user.name) && this.user.name.length > 40 ? this.user.name.substr(0, 40) : this.user.name;
 		},
-
+		tags() {
+			return this.content
+				.flatMap((item) => {
+					return item.content.filter((item) => item.type == "text" && item.content.match(/\B#(\S+)/gu)?.length > 0);
+				})
+				.flatMap((item) => {
+					return item.content.match(/\B#(\S+)/gu);
+				});
+		},
 		checkContent() {
 			return (
 				this.content.filter((item) => {

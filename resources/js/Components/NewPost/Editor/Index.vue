@@ -4,11 +4,11 @@
 			<draggable class="list-group" v-model="blocks" v-if="blocks.length > 0" handle=".hand-hover" tag="div" v-bind="dragOptions" @start="drag = true" @end="drag = false">
 				<div class="editor-item" :class="{ 'image-item': element.type == 'image' || element.type == 'video' }" v-for="(element, index) in blocks" :key="`item_type_${element.id}_${element.type}`">
 					<div class="delete-move-actions">
-						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 						<i class="material-icons-outlined hand-hover">drag_indicator</i>
+						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 					</div>
 					<div class="editor-block-container">
-						<component :is="components[element.type]" :ref="`${element.type}`" @addParagraph="addParagraph(index + 1)" :type="element.type" @focus="onFocus" :meta="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" :max="leftCharacter" />
+						<component :is="components[element.type]" ref="blocks" @delete="deleteElem(index, true)" @addParagraph="addParagraph(index + 1)" :type="element.type" @focus="onFocus" :meta="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" :max="leftCharacter" />
 					</div>
 				</div>
 			</draggable>
@@ -54,6 +54,7 @@ export default {
 			this.blocks = this.content;
 		},
 	},
+	provide: {},
 	methods: {
 		addParagraph(index) {
 			this.blocks.splice(index, 0, { id: uuidv4(), type: "text", content: "", meta: {} });
@@ -70,8 +71,14 @@ export default {
 				this.lastFocused.insertEmoji(emoji);
 			}
 		},
-		deleteElem(index) {
+		deleteElem(index, focus = false) {
 			this.blocks.splice(index, 1);
+			if (focus) {
+				const item = this.blocks[index - 1];
+				if (item?.type == "text") {
+					this.$refs.blocks[index - 1]?.focus();
+				}
+			}
 			this.$emit("itemRemoved");
 		},
 		addElement(type, meta) {
