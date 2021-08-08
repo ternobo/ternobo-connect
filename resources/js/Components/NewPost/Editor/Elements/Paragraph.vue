@@ -195,37 +195,6 @@ export default {
 						document.execCommand("underline", null, "");
 					},
 				},
-
-				align_left: {
-					text: "format_align_left",
-					class: "material-icons",
-					onActive: () => {
-						return document.queryCommandState("justifyLeft");
-					},
-					action: () => {
-						document.execCommand("justifyLeft", null, "");
-					},
-				},
-				align_center: {
-					text: "format_align_center",
-					class: "material-icons",
-					onActive: () => {
-						return document.queryCommandState("justifyCenter");
-					},
-					action: () => {
-						document.execCommand("justifyCenter", null, "");
-					},
-				},
-				align_right: {
-					text: "format_align_right",
-					class: "material-icons",
-					onActive: () => {
-						return document.queryCommandState("justifyRight");
-					},
-					action: () => {
-						document.execCommand("justifyRight", null, "");
-					},
-				},
 			},
 		});
 
