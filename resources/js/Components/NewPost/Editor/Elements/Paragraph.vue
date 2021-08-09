@@ -9,6 +9,7 @@ import TextareaParser from "../TextareaParser";
 import Mentionable from "../../../Mentionable";
 import ParagraphEditor from "ternobo-paragraph-editor/lib/TernoboEditor";
 import ContentEditable from "../../../../Mixins/ContentEditable";
+import { mapState } from "vuex";
 export default {
 	mixins: [ContentEditable],
 	destroyed() {
@@ -125,6 +126,8 @@ export default {
 		return {
 			tags: [],
 			editor: null,
+
+			showList: false,
 		};
 	},
 	props: {
@@ -137,6 +140,9 @@ export default {
 		max: {
 			default: 1200,
 		},
+	},
+	computed: {
+		...mapState(["shared"]),
 	},
 	mounted() {
 		document.execCommand("defaultParagraphSeparator", false, "p");

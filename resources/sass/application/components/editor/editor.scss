@@ -297,7 +297,7 @@
 
 [placeholder]:not(:focus):empty:before {
     content: attr(placeholder);
-    color: $grey;
+    color: $gray-400;
     cursor: text;
 }
 
@@ -348,6 +348,14 @@
         unicode-bidi: -moz-plaintext;
         unicode-bidi: plaintext;
         text-align: start;
+
+        &:empty {
+            text-align: right;
+        }
+
+        &::before {
+            color: $gray-400;
+        }
 
         &:focus~.title-input {
             border-color: $dark;
