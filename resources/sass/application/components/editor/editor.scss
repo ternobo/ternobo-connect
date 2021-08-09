@@ -290,6 +290,16 @@
 
     padding: 0;
 
+    code {
+        direction: ltr #{"/* rtl:ignore */"};
+        background: $gray-100;
+        color: $grey;
+        border-radius: 4px;
+        font-size: 14px;
+        padding: 4px;
+        font-family: 'JetBrains Mono', monospace;
+    }
+
     * {
         text-align: start;
     }

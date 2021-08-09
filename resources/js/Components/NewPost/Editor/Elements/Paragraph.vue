@@ -8,6 +8,8 @@
 import TextareaParser from "../TextareaParser";
 import Mentionable from "../../../Mentionable";
 import ParagraphEditor from "ternobo-paragraph-editor/lib/TernoboEditor";
+import createElement, { render as renderToBody } from "ternobo-paragraph-editor/lib/JSX";
+
 import ContentEditable from "../../../../Mixins/ContentEditable";
 import { mapState } from "vuex";
 export default {
@@ -158,7 +160,7 @@ export default {
 						return document.queryCommandState("bold");
 					},
 					action: () => {
-						document.execCommand("bold", null, "");
+						document.execCommand("bold", false, "");
 					},
 				},
 				italic: {
@@ -168,7 +170,7 @@ export default {
 						return document.queryCommandState("italic");
 					},
 					action: () => {
-						document.execCommand("italic", null, "");
+						document.execCommand("italic", false, "");
 					},
 				},
 				strikeThrough: {
@@ -178,17 +180,7 @@ export default {
 						return document.queryCommandState("strikeThrough");
 					},
 					action: () => {
-						document.execCommand("strikeThrough", null, "");
-					},
-				},
-				superscript: {
-					text: "superscript",
-					class: "material-icons",
-					onActive: () => {
-						return document.queryCommandState("superscript");
-					},
-					action: () => {
-						document.execCommand("superscript", null, "");
+						document.execCommand("strikeThrough", false, "");
 					},
 				},
 				underline: {
@@ -198,7 +190,53 @@ export default {
 						return document.queryCommandState("underline");
 					},
 					action: () => {
-						document.execCommand("underline", null, "");
+						document.execCommand("underline", false, "");
+					},
+				},
+
+				link: {
+					text: "link",
+					class: "material-icons",
+					onActive: () => {
+						return document.queryCommandState("link");
+					},
+					action: () => {
+						let createLink = (link) => {
+							document.execCommand("createLink", false, link);
+						};
+					},
+				},
+				code: {
+					text: "code",
+					class: "material-icons",
+					onActive: () => {
+						var sel = window.getSelection();
+						var range = sel.getRangeAt(0).cloneRange();
+						return range.commonAncestorContainer.parentElement.tagName.toLowerCase() == "code";
+					},
+					action: () => {
+						var sel = window.getSelection();
+						if (sel.rangeCount) {
+							var range = sel.getRangeAt(0).cloneRange();
+							if (range.commonAncestorContainer.parentElement.tagName.toLowerCase() == "code") {
+								document.execCommand("removeFormat", false, null);
+							} else {
+								range.surroundContents(document.createElement("code"));
+								sel.removeAllRanges();
+								sel.addRange(range);
+							}
+						}
+					},
+				},
+
+				superscript: {
+					text: "superscript",
+					class: "material-icons",
+					onActive: () => {
+						return document.queryCommandState("superscript");
+					},
+					action: () => {
+						document.execCommand("superscript", null, "");
 					},
 				},
 			},
