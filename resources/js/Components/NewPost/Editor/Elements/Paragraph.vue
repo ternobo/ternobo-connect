@@ -1,6 +1,6 @@
 <template>
 	<mentionable :max-tags="3" class="textarea-content w-100" @click="focus">
-		<div ref="editable" class="editor--text-input" :placeholder="__.get('content/posts.enter-your-text')" contenteditable @keydown.delete="onBackspace" @blur="onBlur" @keydown="onKeyDown" @keydown.enter="addParagraph" @focus="onFocus" @paste="onPaste" @input="input"></div>
+		<div ref="editable" class="editor--text-input" :placeholder="isDefault ? __.get('content/posts.post-ph', { fname: $store.state.user.first_name }) : __.get('content/posts.enter-your-text')" contenteditable @keydown.delete="onBackspace" @blur="onBlur" @keydown="onKeyDown" @keydown.enter="addParagraph" @focus="onFocus" @paste="onPaste" @input="input"></div>
 	</mentionable>
 </template>
 
@@ -8,7 +8,6 @@
 import TextareaParser from "../TextareaParser";
 import Mentionable from "../../../Mentionable";
 import ParagraphEditor from "ternobo-paragraph-editor/lib/TernoboEditor";
-import createElement, { render as renderToBody } from "ternobo-paragraph-editor/lib/JSX";
 
 import ContentEditable from "../../../../Mixins/ContentEditable";
 import { mapState } from "vuex";
@@ -133,6 +132,9 @@ export default {
 		};
 	},
 	props: {
+		isDefault: {
+			default: false,
+		},
 		meta: {
 			default: null,
 		},
@@ -198,12 +200,20 @@ export default {
 					text: "link",
 					class: "material-icons",
 					onActive: () => {
-						return document.queryCommandState("link");
+						var sel = window.getSelection();
+						var range = sel.getRangeAt(0).cloneRange();
+						return range.commonAncestorContainer.parentElement.tagName.toLowerCase() == "a";
 					},
-					action: () => {
-						let createLink = (link) => {
-							document.execCommand("createLink", false, link);
-						};
+					action: (e) => {
+						var sel = window.getSelection();
+						if (sel.rangeCount) {
+							var range = sel.getRangeAt(0).cloneRange();
+							if (range.commonAncestorContainer.parentElement.tagName.toLowerCase() == "a") {
+								document.execCommand("unlink", false, null);
+							} else {
+								e.editor.selectionToLink("subdirectory_arrow_left", "Enter Link", document.body);
+							}
+						}
 					},
 				},
 				code: {

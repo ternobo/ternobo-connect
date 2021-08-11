@@ -290,6 +290,10 @@
 
     padding: 0;
 
+    a {
+        color: $action;
+    }
+
     code {
         direction: ltr #{"/* rtl:ignore */"};
         background: $gray-100;
@@ -305,7 +309,44 @@
     }
 }
 
-[placeholder]:not(:focus):empty:before {
+.ternoboeditor--link-input {
+    z-index: 99999;
+
+    background-color: $white;
+    padding: 8px;
+
+    .controls {
+        position: relative;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+        background: $gray-100;
+        direction: ltr #{"/* rtl:ignore */"};
+
+    }
+
+    button {
+        padding: 4px !important;
+    }
+
+    input {
+        width: 100%;
+        border: none;
+        padding: 8px 12px;
+        background-color: transparent;
+        outline: none;
+
+        &:focus {
+            border: none;
+            outline: none;
+        }
+    }
+
+
+}
+
+div[placeholder]:not(:focus):empty:before {
     content: attr(placeholder);
     color: $gray-400;
     cursor: text;

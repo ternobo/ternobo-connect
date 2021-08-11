@@ -8,7 +8,7 @@
 						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 					</div>
 					<div class="editor-block-container">
-						<component :is="components[element.type]" ref="blocks" @delete="deleteElem(index, true)" @addParagraph="addParagraph(index + 1)" :type="element.type" @focus="onFocus" :meta="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" :max="leftCharacter" />
+						<component :is="components[element.type]" ref="blocks" :isDefault="element.default" @delete="deleteElem(index, true)" @addParagraph="addParagraph(index + 1)" :type="element.type" @focus="onFocus" :meta="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" :max="leftCharacter" />
 					</div>
 				</div>
 			</draggable>
@@ -152,7 +152,7 @@ export default {
 	components: { ActionsButton, EmojiPicker },
 	data() {
 		return {
-			blocks: [],
+			blocks: [{ id: uuidv4(), type: "text", content: "", meta: {}, default: true }],
 			drag: false,
 			lastFocused: null,
 			components: {

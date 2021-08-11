@@ -2,7 +2,7 @@
 	<div>
 		<category-select-modal :categories.sync="categories" @hide="onCategoryClose" :selectedCategory.sync="category" :show.sync="showCategoryModal"></category-select-modal>
 
-		<b-modal v-if="user != null" v-model="showModal" @hide="hide" @show="shown" no-close-on-esc hide-footer no-stacking modal-class="new-post-modal" size="new-post" :title="__.get('content/posts.create-new-post')" :centered="true">
+		<b-modal ignore-enforce-focus-selector=".ternoboeditor--link-input" v-if="user != null" v-model="showModal" @hide="hide" @show="shown" no-close-on-esc hide-footer no-stacking modal-class="new-post-modal" size="new-post" :title="__.get('content/posts.create-new-post')" :centered="true">
 			<div action="/posts" data-ajax method="POST" data-reload="1" enctype="multipart/form-data" class="w-100">
 				<div class="new-post position-relative">
 					<div class="selections">
@@ -283,7 +283,7 @@ export default {
 			showCategoryModal: false,
 
 			deletedSlides: [],
-			content: [{ id: uuidv4(), content: [], icon: "more_horiz", active: true }],
+			content: [{ id: uuidv4(), content: [{ id: uuidv4(), type: "text", content: "", meta: {}, default: true }], icon: "more_horiz", active: true }],
 
 			canDonate: false,
 			loadingCanDonate: false,
