@@ -72,16 +72,6 @@ TernoboApp.install = function (Vue, options) {
         methods: {
             convertHashTags: function (content, tags = []) {
                 content = content.replace(/\B@(\w+)/gu, "<wire-link href='/$1' class='mention-item'>@$1</wire-link>")
-                    .replace(
-                        /(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/gi,
-                        function (match, space, url) {
-                            var hyperlink = url;
-                            if (!hyperlink.match("^https?://")) {
-                                hyperlink = "http://" + hyperlink;
-                            }
-                            return " " + '<a target="' + url + '" href="' + hyperlink + '">' + url + "</a>";
-                        }
-                    );
 
                 tags?.forEach((item) => {
                     content = content.replace(`#${item}`, function (tag) {
