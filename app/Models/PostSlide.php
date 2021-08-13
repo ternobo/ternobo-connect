@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PostSlide extends Model
 {
@@ -15,7 +14,6 @@ class PostSlide extends Model
     ];
 
     use HasFactory;
-    use SoftDeletes;
 
     public function post()
     {
@@ -24,12 +22,18 @@ class PostSlide extends Model
 
     public function content()
     {
-        return $this->hasMany(PostContent::class, "slide_id")->orderBy("sort", "asc");
+        return $this->hasMany(SlideBlock::class, "slide_id")->orderBy("sort", "asc");
+    }
+
+    protected static function booted()
+    {
+        static::deleting(function ($slide) {
+            $slide->content()->delete();
+        });
     }
 
     public function page()
     {
         return $this->belongsTo(Page::class, "page_id");
     }
-
 }

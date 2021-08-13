@@ -26,6 +26,8 @@ class Post extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $guarded = ['id', "page_id"];
+
     protected $casts = [
         'tags' => 'array',
         "medias" => 'array',
@@ -89,11 +91,6 @@ class Post extends Model
     public function slides()
     {
         return $this->hasMany(PostSlide::class, "post_id");
-    }
-
-    public function content()
-    {
-        return $this->hasManyThrough(PostContent::class, PostSlide::class, "post_id", "slide_id");
     }
 
     public function share()

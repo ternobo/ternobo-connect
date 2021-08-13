@@ -65,6 +65,7 @@ return [
     'guest-user' => "Guest User",
     'and' => "and",
     "comma" => ",",
+    'warning' => "Warning",
 
     "password-strength" => [
         "short" => "Too Short",

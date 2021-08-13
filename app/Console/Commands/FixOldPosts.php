@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Post;
-use App\Models\PostContent;
+use App\Models\SlideBlock;
 use App\Models\PostSlide;
 use Illuminate\Console\Command;
 
@@ -58,7 +58,7 @@ class FixOldPosts extends Command
             }
 
             if ($text != null && strlen($text) > 0) {
-                $content = PostContent::create([
+                $content = SlideBlock::create([
                     "page_id" => $post->page_id,
                     "slide_id" => $slide->id,
                     "content" => $text . "\n\n\n" . $tagsHTML,
@@ -68,7 +68,7 @@ class FixOldPosts extends Command
                 $sort++;
             }
             if ($media != null && strlen($media) > 0) {
-                $content = PostContent::create([
+                $content = SlideBlock::create([
                     "page_id" => $post->page_id,
                     "slide_id" => $slide->id,
                     "content" => $media,

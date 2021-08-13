@@ -13,7 +13,7 @@ use App\Models\Like;
 use App\Models\Notification;
 use App\Models\Page;
 use App\Models\Post;
-use App\Models\PostContent;
+use App\Models\SlideBlock;
 use App\Models\PostSlide;
 use App\Models\Report;
 use App\Models\Tag;
@@ -70,7 +70,7 @@ class PostController extends Controller
                 'page_id' => $user->personalPage->id,
                 'post_id' => $post->id,
             ]);
-            foreach ($slide_input['content'] as $rawContent) {
+            foreach ($slide_input['blocks'] as $rawContent) {
                 $sort = (int) $rawContent['sort'];
                 $content = $rawContent['content'];
                 $type =  $rawContent['type'];
@@ -82,7 +82,7 @@ class PostController extends Controller
 
                         $slideTags = array_slice(SocialMediaTools::getHashtags($text), 0, 3);
 
-                        PostContent::query()->create([
+                        SlideBlock::query()->create([
                             'slide_id' => $slide->id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
@@ -98,7 +98,7 @@ class PostController extends Controller
                         break;
 
                     case "title":
-                        PostContent::query()->create([
+                        SlideBlock::query()->create([
                             'slide_id' => $slide->id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
@@ -108,7 +108,7 @@ class PostController extends Controller
                         break;
                     case "image":
                         $media = $content->store("medias");
-                        PostContent::query()->create([
+                        SlideBlock::query()->create([
                             'slide_id' => $slide->id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
@@ -118,7 +118,7 @@ class PostController extends Controller
                         break;
                     case "video":
                         $media = $content->store("videos");
-                        PostContent::query()->create([
+                        SlideBlock::query()->create([
                             'slide_id' => $slide->id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
@@ -342,26 +342,19 @@ class PostController extends Controller
         $tags = [];
 
         foreach ($slides as $slide_input) {
-            try {
-                if (!(count($slide_input) > 0)) {
-                    continue;
-                }
-            } catch (\Throwable $th) {
-                return abort(400);
+            if (!(count($slide_input) > 0)) {
+                continue;
             }
 
-            $slide = isset($slide_input['id']) && PostSlide::find($slide_input['id']) != null ?
-                PostSlide::find($slide_input['id']) :
-                PostSlide::query()->create([
-                    'page_id' => $user->personalPage->id,
-                    'post_id' => $post->id,
-                ]);
-
+            $slide = PostSlide::query()->firstOrCreate([
+                'id' => $slide_input['id']
+            ], [
+                'page_id' => $user->personalPage->id,
+                'post_id' => $post->id
+            ]);
             $added_elements = [];
-
-            $availableOptions = ['text', 'media', 'title'];
             $items = [];
-            foreach ($slide_input['content'] as $rawContent) {
+            foreach ($slide_input['blocks'] as $rawContent) {
                 $sort = (int) $rawContent['sort'];
                 $content = $rawContent['content'];
                 $type =  $rawContent['type'];
@@ -377,7 +370,7 @@ class PostController extends Controller
                 if (in_array($type, $added_elements)) {
                     throw new HttpResponseException(response()->json(['result' => false, 'errors' => ["duplicated element - $type"]], 422));
                 }
-                $postContent = PostContent::query()->where("type", $typeSql)->where("slide_id", $slide->id)->first();
+                $slideBlock = SlideBlock::query()->where("type", $typeSql)->where("slide_id", $slide->id)->first();
 
                 switch ($type) {
                     case "text":
@@ -389,8 +382,8 @@ class PostController extends Controller
 
                         $slideTags = array_slice(SocialMediaTools::getHashtags($text), 0, 3);
 
-                        if ($postContent == null) {
-                            PostContent::query()->create([
+                        if ($slideBlock == null) {
+                            SlideBlock::query()->create([
                                 'slide_id' => $slide->id,
                                 'page_id' => $user->personalPage->id,
                                 'sort' => $sort,
@@ -398,7 +391,7 @@ class PostController extends Controller
                                 'type' => 'text',
                             ]);
                         } else {
-                            $postContent->update([
+                            $slideBlock->update([
                                 'sort' => $sort,
                                 'content' => $text,
                             ]);
@@ -411,8 +404,8 @@ class PostController extends Controller
 
                     case "title":
                         array_push($items, "title");
-                        if ($postContent == null) {
-                            PostContent::query()->create([
+                        if ($slideBlock == null) {
+                            SlideBlock::query()->create([
                                 'slide_id' => $slide->id,
                                 'page_id' => $user->personalPage->id,
                                 'sort' => $sort,
@@ -420,7 +413,7 @@ class PostController extends Controller
                                 'type' => 'title',
                             ]);
                         } else {
-                            $postContent->update([
+                            $slideBlock->update([
                                 'sort' => $sort,
                                 'content' => $content,
                             ]);
@@ -430,8 +423,8 @@ class PostController extends Controller
                     case "image":
                         array_push($items, "media");
                         $media = $content->store("medias");
-                        if ($postContent == null) {
-                            PostContent::query()->create([
+                        if ($slideBlock == null) {
+                            SlideBlock::query()->create([
                                 'slide_id' => $slide->id,
                                 'page_id' => $user->personalPage->id,
                                 'sort' => $sort,
@@ -439,7 +432,7 @@ class PostController extends Controller
                                 'type' => 'media',
                             ]);
                         } else {
-                            $postContent->update([
+                            $slideBlock->update([
                                 'sort' => $sort,
                                 'content' => SocialMediaTools::uploadPostImage($media, 90),
                             ]);
@@ -448,8 +441,8 @@ class PostController extends Controller
                     case "video":
                         array_push($items, "video");
                         $media = $content->store("video");
-                        if ($postContent == null) {
-                            PostContent::query()->create([
+                        if ($slideBlock == null) {
+                            SlideBlock::query()->create([
                                 'slide_id' => $slide->id,
                                 'page_id' => $user->personalPage->id,
                                 'sort' => $sort,
@@ -457,7 +450,7 @@ class PostController extends Controller
                                 'type' => 'media',
                             ]);
                         } else {
-                            $postContent->update([
+                            $slideBlock->update([
                                 'sort' => $sort,
                                 'content' => $media,
                             ]);
@@ -466,24 +459,23 @@ class PostController extends Controller
 
                     case "image_notChange":
                         array_push($items, "media");
-                        if ($postContent != null) {
-                            $postContent->update([
+                        if ($slideBlock != null) {
+                            $slideBlock->update([
                                 'sort' => $sort,
                             ]);
                             break;
                         }
                     case "video_notChange":
                         array_push($items, "video");
-                        if ($postContent != null) {
-                            $postContent->update([
+                        if ($slideBlock != null) {
+                            $slideBlock->update([
                                 'sort' => $sort,
                             ]);
                             break;
                         }
                 }
             }
-            $deletedItems = array_diff($availableOptions, $items);
-            PostContent::query()->whereIn("type", $deletedItems)->where("slide_id", $slide->id)->delete();
+            SlideBlock::query()->whereIn("type", $deletedItems)->where("slide_id", $slide->id)->delete();
         }
 
         $post->tags = $tags;

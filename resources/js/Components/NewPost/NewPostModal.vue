@@ -119,9 +119,9 @@ export default {
 			};
 			data.slides = data.slides.map((item) => {
 				for (let sort = 0; sort < item.content.length; sort++) {
-					item.content[sort].sort = sort;
+					item.content[sort] = { type: item.content[sort].type, id: item.content[sort].id, sort: sort, content: item.content[sort].content };
 				}
-				return item;
+				return { id: item.id, blocks: item.content };
 			});
 			if (this.category) {
 				data.category = his.category.name;
@@ -136,8 +136,6 @@ export default {
 			data.canDonate = this.canDonate;
 
 			let url = this.post != null ? `/posts/${this.post.id}` : "/posts";
-
-			console.log(data);
 
 			let requestConfig = {
 				method: "post",

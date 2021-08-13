@@ -81,13 +81,24 @@ TernoboApp.install = function (Vue, options) {
 
                 let parsedContent = new DOMParser().parseFromString(content, "text/html").body;
 
+                const links = parsedContent.querySelectorAll("a");
+
+                links.forEach((item) => {
+                    let link = item.getAttribute("href");
+                    item.setAttribute("target", "_blank");
+                    if (!link.startsWith(window.location.origin)) {
+                        let redirectURL = new URL(`${window.location.origin}/redirect`);
+                        redirectURL.searchParams.append("to", link)
+                        item.setAttribute("href", redirectURL.toString());
+                    }
+                })
+
                 if (content.endsWith("...")) {
                     if (parsedContent.lastChild instanceof Text) {
                         parsedContent.lastChild.appendData("...")
                     } else if (parsedContent.lastChild instanceof HTMLElement) {
                         parsedContent.lastChild?.append("...");
                     }
-
                 }
                 return `<pre class='post-content--text'>${parsedContent.innerHTML}</pre>`;
             }

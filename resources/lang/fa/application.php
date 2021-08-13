@@ -64,6 +64,7 @@ return [
     'guest-user' => "کاربر مهمان",
     'and' => "و",
     "comma" => "،",
+    'warning' => "اخطار",
 
     "password-strength" => [
         "short" => "کوتاه",

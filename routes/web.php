@@ -18,6 +18,7 @@ use Ternobo\TernoboWire\TernoboWire;
 | contains the "web" middleware group. Now create something great!
 |
  */
+
 Passport::routes();
 TernoboWire::routes();
 Broadcast::routes();
@@ -42,6 +43,8 @@ Route::get("/set-language", "IndexController@setLanguage");
 Route::any("/search", "Content\SearchController@search");
 
 Route::get("/register", "Auth\RegisterController@index");
+
+Route::get("/redirect", "RedirectController@redirect");
 
 /**
  * Auth Start
@@ -74,7 +77,6 @@ Route::group(['auth'], function () {
         Route::post("reset", "Auth\TwoFAController@resetRecovery");
 
         Route::post("deactive", "Auth\TwoFAController@deactive");
-
     });
 
     // Follow Suggestion Page
@@ -190,7 +192,6 @@ Route::group(['auth'], function () {
         Route::resource("categories", "Profile\CategoryController");
 
         Route::post('save-resume', "PageController@saveResume");
-
     });
     /**
      * End Pages API
@@ -217,7 +218,6 @@ Route::group(['auth'], function () {
         Route::post("/conversations/create/{id}", "Chats\ChatController@createConversation");
 
         Route::post("/send-message", "Chats\ChatController@sendMessage");
-
     });
 
     Route::post("/share/{post_id}", "PostController@sharePost");
@@ -263,7 +263,7 @@ Route::group(['auth'], function () {
 
     //Conneted Accounts Actions
     // Google Start
-    require (base_path('routes/oauth_applicatons.php'));
+    require(base_path('routes/oauth_applicatons.php'));
     // Google End
 
     // Connected Device Actions
@@ -295,5 +295,4 @@ Route::prefix('/{page:slug}')->group(function () {
 
     Route::post("/followings", "Profile\ConnectionsController@followings");
     Route::post("/followers", "Profile\ConnectionsController@followers");
-
 });
