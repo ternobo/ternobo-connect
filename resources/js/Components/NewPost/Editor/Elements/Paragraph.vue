@@ -28,8 +28,10 @@ export default {
 	},
 	methods: {
 		addParagraph(e) {
-			e.preventDefault();
-			this.$emit("addParagraph");
+			if (!e.shiftKey) {
+				e.preventDefault();
+				this.$emit("addParagraph");
+			}
 		},
 		onBackspace() {
 			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
@@ -208,10 +210,12 @@ export default {
 						var sel = window.getSelection();
 						if (sel.rangeCount) {
 							var range = sel.getRangeAt(0).cloneRange();
-							if (range.commonAncestorContainer.parentElement.tagName.toLowerCase() == "a") {
+							let element = range.commonAncestorContainer.parentElement;
+							if (element.tagName.toLowerCase() == "a") {
 								document.execCommand("unlink", false, null);
+								e.editor.selectionToLink("subdirectory_arrow_left", "Enter Link", element.href);
 							} else {
-								e.editor.selectionToLink("subdirectory_arrow_left", "Enter Link", document.body);
+								e.editor.selectionToLink("subdirectory_arrow_left", "Enter Link");
 							}
 						}
 					},
@@ -253,11 +257,10 @@ export default {
 		});
 
 		this.$nextTick(() => {
-			twemoji.parse(this.$refs.editable);
-		});
-
-		this.$nextTick(() => {
-			this.$refs.editable.focus();
+			if (this.$refs.editable) {
+				twemoji.parse(this.$refs.editable);
+				this.$refs.editable.focus();
+			}
 		});
 	},
 	components: { Mentionable },

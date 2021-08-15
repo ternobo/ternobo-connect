@@ -290,9 +290,10 @@ window.twemoji = (function (
      * @return  Array same list with new discovered nodes, if any
      */
     function grabAllTextNodes(node, allText) {
+        if (!node) { return allText; }
         var
-            childNodes = node.childNodes,
-            length = childNodes.length,
+            childNodes = node?.childNodes,
+            length = childNodes?.length,
             subnode,
             nodeType;
         while (length--) {
