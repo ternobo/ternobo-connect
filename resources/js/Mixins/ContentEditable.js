@@ -48,10 +48,16 @@ export default {
             }
         },
     },
-
+    destroyed() {
+        this.mounted = false;
+    },
+    mounted() {
+        this.mounted = true;
+    },
     data() {
         return {
             restore: () => { },
+            mounted: false,
         }
     }
 }

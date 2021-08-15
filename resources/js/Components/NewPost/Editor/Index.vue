@@ -67,8 +67,13 @@ export default {
 			this.lastFocused = node;
 		},
 		appendEmoji(emoji) {
-			if (this.lastFocused) {
+			if (this.lastFocused?.mounted) {
 				this.lastFocused.insertEmoji(emoji);
+			} else {
+				this.blocks.push({ id: uuidv4(), type: "text", content: "", meta: {} });
+				this.$nextTick(() => {
+					setTimeout(() => this.$refs.blocks[this.blocks.length - 1].insertEmoji(emoji), 100);
+				});
 			}
 		},
 		deleteElem(index, focus = false) {
@@ -152,7 +157,7 @@ export default {
 	components: { ActionsButton, EmojiPicker },
 	data() {
 		return {
-			blocks: [{ id: uuidv4(), type: "text", content: "", meta: {}, default: true }],
+			blocks: [],
 			drag: false,
 			lastFocused: null,
 			components: {
