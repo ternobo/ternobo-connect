@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 /**
@@ -91,6 +92,25 @@ class Post extends Model
     public function slides()
     {
         return $this->hasMany(PostSlide::class, "post_id");
+    }
+
+    public function blocks()
+    {
+        return $this->hasManyThrough(SlideBlock::class, PostSlide::class, "post_id", "slide_id");
+    }
+
+    public function deleteBlocks($deleteFile = false)
+    {
+        $blocks = $this->blocks;
+        $this->blocks()->delete();
+
+        if ($deleteFile) {
+            foreach ($blocks as $block) {
+                if ($block->type == "video" || $block->type == "image") {
+                    Storage::delete($block->content);
+                }
+            }
+        }
     }
 
     public function share()

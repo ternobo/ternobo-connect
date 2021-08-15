@@ -19,6 +19,7 @@ use App\Models\Report;
 use App\Models\Tag;
 use App\SocialMediaTools;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -312,7 +313,7 @@ class PostController extends Controller
      * @param \App\Models\Post $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Post $post, PostRequest $request)
+    public function update(PostRequest $request, Post $post)
     {
         $slides = $request->slides;
         $user = Auth::user();
@@ -333,149 +334,78 @@ class PostController extends Controller
             'can_tip' => $request->canDonate,
         ]);
 
-        if ($request->filled("deletedSlides")) {
-            $deletedSlides = json_decode($request->deletedSlides);
-            PostSlide::query()->whereIn("id", $deletedSlides)->delete();
-        }
-
-        $mentions = null;
+        $mentions = [];
         $tags = [];
+
+        $post->deleteBlocks();
+        $post->slides()->delete();
 
         foreach ($slides as $slide_input) {
             if (!(count($slide_input) > 0)) {
                 continue;
             }
-
-            $slide = PostSlide::query()->firstOrCreate([
-                'id' => $slide_input['id']
-            ], [
+            $slide = PostSlide::query()->create([
                 'page_id' => $user->personalPage->id,
-                'post_id' => $post->id
+                'post_id' => $post->id,
             ]);
-            $added_elements = [];
-            $items = [];
             foreach ($slide_input['blocks'] as $rawContent) {
                 $sort = (int) $rawContent['sort'];
                 $content = $rawContent['content'];
                 $type =  $rawContent['type'];
-
-                if ($type == "id") {
-                    continue;
-                }
-                $typeSql = $type;
-                if ($type == "media_notChange") {
-                    $typeSql = "media";
-                }
-
-                if (in_array($type, $added_elements)) {
-                    throw new HttpResponseException(response()->json(['result' => false, 'errors' => ["duplicated element - $type"]], 422));
-                }
-                $slideBlock = SlideBlock::query()->where("type", $typeSql)->where("slide_id", $slide->id)->first();
-
                 switch ($type) {
                     case "text":
-                        array_push($items, "text");
-
                         // Process
                         $text = SocialMediaTools::safeHTML($content);
-                        $mentions = SocialMediaTools::getMentions($text);
+                        $text_mentions = SocialMediaTools::getMentions($text);
 
                         $slideTags = array_slice(SocialMediaTools::getHashtags($text), 0, 3);
 
-                        if ($slideBlock == null) {
-                            SlideBlock::query()->create([
-                                'slide_id' => $slide->id,
-                                'page_id' => $user->personalPage->id,
-                                'sort' => $sort,
-                                'content' => $text,
-                                'type' => 'text',
-                            ]);
-                        } else {
-                            $slideBlock->update([
-                                'sort' => $sort,
-                                'content' => $text,
-                            ]);
-                        }
+                        SlideBlock::query()->create([
+                            'slide_id' => $slide->id,
+                            'page_id' => $user->personalPage->id,
+                            'sort' => $sort,
+                            'content' => $text,
+                            'type' => 'text',
+                        ]);
 
                         if (count($tags) < 3) {
                             $tags = array_merge($slideTags, $tags);
                         }
+                        $mentions = array_merge($text_mentions, $mentions);
+
                         break;
 
                     case "title":
-                        array_push($items, "title");
-                        if ($slideBlock == null) {
-                            SlideBlock::query()->create([
-                                'slide_id' => $slide->id,
-                                'page_id' => $user->personalPage->id,
-                                'sort' => $sort,
-                                'content' => $content,
-                                'type' => 'title',
-                            ]);
-                        } else {
-                            $slideBlock->update([
-                                'sort' => $sort,
-                                'content' => $content,
-                            ]);
-                        }
+                        SlideBlock::query()->create([
+                            'slide_id' => $slide->id,
+                            'page_id' => $user->personalPage->id,
+                            'sort' => $sort,
+                            'content' => $content,
+                            'type' => 'title',
+                        ]);
                         break;
-
                     case "image":
-                        array_push($items, "media");
-                        $media = $content->store("medias");
-                        if ($slideBlock == null) {
-                            SlideBlock::query()->create([
-                                'slide_id' => $slide->id,
-                                'page_id' => $user->personalPage->id,
-                                'sort' => $sort,
-                                'content' => SocialMediaTools::uploadPostImage($media, 90),
-                                'type' => 'media',
-                            ]);
-                        } else {
-                            $slideBlock->update([
-                                'sort' => $sort,
-                                'content' => SocialMediaTools::uploadPostImage($media, 90),
-                            ]);
-                        }
+                        $media = $content instanceof UploadedFile ? $content->store("medias") : $content;
+                        SlideBlock::query()->create([
+                            'slide_id' => $slide->id,
+                            'page_id' => $user->personalPage->id,
+                            'sort' => $sort,
+                            'content' => SocialMediaTools::uploadPostImage($media, 90),
+                            'type' => 'image',
+                        ]);
                         break;
                     case "video":
-                        array_push($items, "video");
-                        $media = $content->store("video");
-                        if ($slideBlock == null) {
-                            SlideBlock::query()->create([
-                                'slide_id' => $slide->id,
-                                'page_id' => $user->personalPage->id,
-                                'sort' => $sort,
-                                'content' => $media,
-                                'type' => 'media',
-                            ]);
-                        } else {
-                            $slideBlock->update([
-                                'sort' => $sort,
-                                'content' => $media,
-                            ]);
-                        }
+                        $media = $content instanceof UploadedFile ? $content->store("videos") : $content;
+                        SlideBlock::query()->create([
+                            'slide_id' => $slide->id,
+                            'page_id' => $user->personalPage->id,
+                            'sort' => $sort,
+                            'content' => $media,
+                            'type' => 'video',
+                        ]);
                         break;
-
-                    case "image_notChange":
-                        array_push($items, "media");
-                        if ($slideBlock != null) {
-                            $slideBlock->update([
-                                'sort' => $sort,
-                            ]);
-                            break;
-                        }
-                    case "video_notChange":
-                        array_push($items, "video");
-                        if ($slideBlock != null) {
-                            $slideBlock->update([
-                                'sort' => $sort,
-                            ]);
-                            break;
-                        }
                 }
             }
-            SlideBlock::query()->whereIn("type", $deletedItems)->where("slide_id", $slide->id)->delete();
         }
 
         $post->tags = $tags;
