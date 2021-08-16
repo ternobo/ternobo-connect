@@ -281,7 +281,7 @@ export default {
 			showCategoryModal: false,
 
 			deletedSlides: [],
-			content: [{ id: uuidv4(), content: [{ id: uuidv4(), type: "text", content: "", meta: {}, default: true }], icon: "more_horiz", active: true }],
+			content: [{ id: uuidv4(), content: [], icon: "more_horiz", active: true }],
 
 			canDonate: false,
 			loadingCanDonate: false,
