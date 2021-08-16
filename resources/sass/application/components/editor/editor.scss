@@ -90,6 +90,7 @@
         .editor-block-container {
             margin-right: 12px;
             width: 100%;
+            max-width: calc(100% - 3.25rem);
             border-right: 3px solid transparent;
             padding-right: 2rem;
             transition: 0.3s border;

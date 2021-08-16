@@ -23,3 +23,13 @@
         cursor: grabbing;
     }
 }
+
+.CodeMirror-hscrollbar,
+.CodeMirror-vscrollbar {
+    @extend .nice-scroll;
+
+    .CodeMirror-scrollbar-filler {
+        height: 6px !important;
+        width: 6px !important;
+    }
+}

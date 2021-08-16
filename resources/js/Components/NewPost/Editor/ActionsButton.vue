@@ -4,9 +4,6 @@
 		<transition name="fade">
 			<div class="editors-actions-list" :style="editorsActionListStyle" v-if="showList">
 				<div class="text-type-list">
-					<strong class="list-title">
-						{{ __.get("editor.base") }}
-					</strong>
 					<div class="editor-list-item" @click="emitAcion('title')">
 						<i class="material-icons" :class="{ disabled: !activeOptions.includes('title') }">title</i>
 						<strong>{{ __.get("content/posts.heading") }}</strong>
@@ -18,9 +15,6 @@
 				</div>
 
 				<div class="text-type-list">
-					<strong class="list-title">
-						{{ __.get("editor.media") }}
-					</strong>
 					<div class="editor-list-item" @click="emitMediaAction('image')">
 						<i class="material-icons-outlined" :class="{ disabled: hasMedia }">image</i>
 						<strong>{{ __.get("editor.image") }}</strong>
@@ -28,6 +22,13 @@
 					<div class="editor-list-item" @click="emitMediaAction('video')">
 						<i class="material-icons-outlined" :class="{ disabled: hasMedia }">play_circle_outline</i>
 						<strong>{{ __.get("editor.video") }}</strong>
+					</div>
+
+					<div class="text-type-list">
+						<div class="editor-list-item" @click="emitMediaAction('code')">
+							<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('code') }">code</i>
+							<strong>{{ __.get("editor.code") }}</strong>
+						</div>
 					</div>
 				</div>
 			</div>

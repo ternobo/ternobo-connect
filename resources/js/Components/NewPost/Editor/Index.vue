@@ -41,7 +41,7 @@ import EmojiPicker from "../../EmojiPicker/EmojiPicker.vue";
 import { mapState } from "vuex";
 import TwitterText from "twitter-text";
 import TextareaParser from "./TextareaParser";
-
+import Code from "./Elements/Code.vue";
 export default {
 	watch: {
 		blocks: {
@@ -104,6 +104,11 @@ export default {
 					this.blocks.push({ id: uuidv4(), type: "video", content: null, meta: meta });
 					this.$emit("itemAdd");
 					break;
+
+				case "code":
+					this.blocks.push({ id: uuidv4(), type: "code", content: "", meta: {} });
+					this.$emit("itemAdd");
+					break;
 			}
 		},
 	},
@@ -138,7 +143,7 @@ export default {
 		},
 		availableOptions() {
 			let addedOptions = this.blocks.map((item) => item.type);
-			return ["text", "title", "video", "image"].filter((item) => {
+			return ["text", "title", "video", "image", "code"].filter((item) => {
 				if (item == "text") {
 					return this.leftCharacter > 0;
 				}
@@ -165,6 +170,7 @@ export default {
 				title: TitleInput,
 				video: Media,
 				image: Media,
+				code: Code,
 			},
 		};
 	},
