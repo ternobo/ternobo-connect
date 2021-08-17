@@ -36,8 +36,3 @@ export default {
 	},
 };
 </script>
-
-<style lang="scss">
-@import "codemirror/lib/codemirror.css";
-@import "codemirror/theme/moxer.css";
-</style>
