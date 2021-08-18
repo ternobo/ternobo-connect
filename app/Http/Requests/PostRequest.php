@@ -23,53 +23,6 @@ class PostRequest extends FormRequest
         return Auth::check();
     }
 
-    // private $invalidMedia = false;
-    // private $errors = [];
-
-
-    // public function passedValidation()
-    // {
-
-    //     if ($this->validator->validated()) {
-    //         $request = $this->request;
-    //         $imageRule =  ["mimes:jpeg,png,jpg,gif"];
-    //         $videoRule =  ["mimes:mp4,mkv,m4v", new Video(), "max:200000"];
-
-    //         $slides = $request->slides;
-    //         $validated = true;
-
-    //         foreach ($slides as $slide) {
-    //             $content = $slide->content;
-
-    //             foreach ($content as $block) {
-
-    //                 if ($block->type == 'video') {
-    //                     $validator = FacadesValidator::make(['vidoe', $block->content], [
-    //                         'video' => $videoRule,
-    //                     ]);
-    //                     if ($validator->failed()) {
-    //                         $this->errors = array_merge($this->errors, $validator->errors());
-    //                         $this->invalidMedia = true;
-    //                     }
-    //                 } elseif ($block->type == 'image') {
-    //                     $validator = FacadesValidator::make(['image', $block->content], [
-    //                         'image' => $imageRule,
-    //                     ]);
-    //                     if ($validator->failed()) {
-    //                         $this->errors = array_merge($this->errors, $validator->errors());
-    //                         $this->invalidMedia = true;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //         if(count($this->errors) > 0){
-    //             $yh
-    //         }
-    //     }
-    // }
-
-
-
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json(['result' => false, 'errors' => $validator->errors()]));
@@ -86,6 +39,7 @@ class PostRequest extends FormRequest
         return [
             "slides" => ['required', 'array', 'min:1', "max:12"],
             "slides.*.blocks" => [new ContentBlock()],
+            "slides.*.blocks.*.type" => [Rule::in(['text', 'title', 'code', 'vidoe', 'image'])],
             "deletedSlides" => ["json"],
             "draft" => [Rule::in(['1', '0'])],
             "canDonate" => [Rule::in(['1', '0'])],

@@ -24,7 +24,11 @@ mix.babelConfig({ presets: ['@vue/babel-preset-jsx'] })
 mix.js('resources/js/app.js', 'public/js').vue({
     extractStyles: "public/css/components.css"
 });
+
+mix.sass("resources/sass/application/code.scss", "public/css");
+
 mix.sass("resources/sass/application/app.scss", "public/css");
 mix.sass("resources/sass/application/main.scss", "public/css");
-mix.extract(['vue', 'axios']);
+
+mix.extract(['vue', 'axios', "monaco-editor", "vuex", "bootstrap-vue", "laravel-echo"]);
 mix.version();

@@ -48,10 +48,6 @@ class PostController extends Controller
                 "type" => "post",
             ])->id;
         }
-        $mentions = null;
-        $tags = [];
-
-        $mentions = [];
 
         $draft = $request->draft == '1';
         $post = Post::query()->create([
@@ -63,81 +59,19 @@ class PostController extends Controller
             "category_id" => $category,
             'can_tip' => $request->canDonate,
         ]);
-        foreach ($slides as $slide_input) {
-            if (!(count($slide_input) > 0)) {
-                continue;
-            }
-            $slide = PostSlide::query()->create([
-                'page_id' => $user->personalPage->id,
-                'post_id' => $post->id,
-            ]);
-            foreach ($slide_input['blocks'] as $rawContent) {
-                $sort = (int) $rawContent['sort'];
-                $content = $rawContent['content'];
-                $type =  $rawContent['type'];
-                switch ($type) {
-                    case "text":
-                        // Process
-                        $text = SocialMediaTools::safeHTML($content);
-                        $text_mentions = SocialMediaTools::getMentions($text);
 
-                        $slideTags = array_slice(SocialMediaTools::getHashtags($text), 0, 3);
+        $tagsAndMentions = $post->setContent($slides, $user);
 
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide->id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => $text,
-                            'type' => 'text',
-                        ]);
-
-                        if (count($tags) < 3) {
-                            $tags = array_merge($slideTags, $tags);
-                        }
-                        $mentions = array_merge($text_mentions, $mentions);
-
-                        break;
-
-                    case "title":
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide->id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => $content,
-                            'type' => 'title',
-                        ]);
-                        break;
-                    case "image":
-                        $media = $content->store("medias");
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide->id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => SocialMediaTools::uploadPostImage($media, 90),
-                            'type' => 'image',
-                        ]);
-                        break;
-                    case "video":
-                        $media = $content->store("videos");
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide->id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => $media,
-                            'type' => 'video',
-                        ]);
-                        break;
-                }
-            }
+        if (!$draft) {
+            SocialMediaTools::callMentions($tagsAndMentions['mentions'], $post->id);
         }
-        SocialMediaTools::callMentions($mentions, $post->id);
-        $post->tags = $tags;
+        $post->tags = $tagsAndMentions["tags"];
         $post->save();
         $user->personalPage->addAction("post", $post->id);
 
         $post->load(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
 
-        Tag::addTag($tags);
+        Tag::addTag($tagsAndMentions["tags"]);
 
         return response()->json(array("result" => true, "post" => $post));
     }
@@ -340,78 +274,10 @@ class PostController extends Controller
         $post->deleteBlocks();
         $post->slides()->delete();
 
-        foreach ($slides as $slide_input) {
-            if (!(count($slide_input) > 0)) {
-                continue;
-            }
-            $slide = PostSlide::query()->create([
-                'page_id' => $user->personalPage->id,
-                'post_id' => $post->id,
-            ]);
-            foreach ($slide_input['blocks'] as $rawContent) {
-                $sort = (int) $rawContent['sort'];
-                $content = $rawContent['content'];
-                $type =  $rawContent['type'];
-                switch ($type) {
-                    case "text":
-                        // Process
-                        $text = SocialMediaTools::safeHTML($content);
-                        $text_mentions = SocialMediaTools::getMentions($text);
-
-                        $slideTags = array_slice(SocialMediaTools::getHashtags($text), 0, 3);
-
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide->id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => $text,
-                            'type' => 'text',
-                        ]);
-
-                        if (count($tags) < 3) {
-                            $tags = array_merge($slideTags, $tags);
-                        }
-                        $mentions = array_merge($text_mentions, $mentions);
-
-                        break;
-
-                    case "title":
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide->id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => $content,
-                            'type' => 'title',
-                        ]);
-                        break;
-                    case "image":
-                        $media = $content instanceof UploadedFile ? $content->store("medias") : $content;
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide->id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => SocialMediaTools::uploadPostImage($media, 90),
-                            'type' => 'image',
-                        ]);
-                        break;
-                    case "video":
-                        $media = $content instanceof UploadedFile ? $content->store("videos") : $content;
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide->id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => $media,
-                            'type' => 'video',
-                        ]);
-                        break;
-                }
-            }
-        }
+        $tags = $post->setContent($slides, $user)['tags'];
 
         $post->tags = $tags;
         $post->save();
-
-        $post->load(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
 
         return response()->json(array("result" => true, "post" => $post));
     }

@@ -5,9 +5,11 @@ namespace App\Models;
 use App\HasPage;
 use App\Scopes\BlockedPageContentScope;
 use App\Scopes\PostDraftScope;
+use App\SocialMediaTools;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
@@ -186,7 +188,7 @@ class Post extends Model
         $this->comments()->delete();
         $this->actions()->delete();
         $this->slides()->delete();
-        $this->content()->delete();
+        $this->blocks()->delete();
         return parent::delete();
     }
 
@@ -208,6 +210,95 @@ class Post extends Model
         return $this->hasMany("App\Models\Like", "post_id")
             ->with("page")
             ->latest();
+    }
+
+
+    public function setContent($slides, $user, $fileOnly = false)
+    {
+
+        $mentions = [];
+        $tags = [];
+
+        foreach ($slides as $slide) {
+
+            if (count($slide) < 0) {
+                continue;
+            }
+
+            $slide_id = PostSlide::query()->create([
+                'page_id' => $user->personalPage->id,
+                'post_id' => $this->id,
+            ])->id;
+            foreach ($slide['blocks'] as $rawContent) {
+                $sort = (int) $rawContent['sort'];
+                $content = $rawContent['content'];
+                $type =  $rawContent['type'];
+                switch ($type) {
+                    case "text":
+                        // Process
+                        $text = SocialMediaTools::safeHTML($content);
+                        $text_mentions = SocialMediaTools::getMentions($text);
+
+                        $slideTags = array_slice(SocialMediaTools::getHashtags($text), 0, 3);
+
+                        SlideBlock::query()->create([
+                            'slide_id' => $slide_id,
+                            'page_id' => $user->personalPage->id,
+                            'sort' => $sort,
+                            'content' => $text,
+                            'type' => 'text',
+                        ]);
+
+                        if (count($tags) < 3) {
+                            $tags = array_merge($slideTags, $tags);
+                        }
+                        $mentions = array_merge($text_mentions, $mentions);
+
+                        break;
+
+                    case "title":
+                        SlideBlock::query()->create([
+                            'slide_id' => $slide_id,
+                            'page_id' => $user->personalPage->id,
+                            'sort' => $sort,
+                            'content' => $content,
+                            'type' => 'title',
+                        ]);
+                        break;
+                    case "image":
+                        $media = $content instanceof UploadedFile | $fileOnly ? $content->store("medias") : $content;
+                        SlideBlock::query()->create([
+                            'slide_id' => $slide_id,
+                            'page_id' => $user->personalPage->id,
+                            'sort' => $sort,
+                            'content' => SocialMediaTools::uploadPostImage($media, 90),
+                            'type' => 'image',
+                        ]);
+                        break;
+                    case "video":
+                        $media = $content instanceof UploadedFile | $fileOnly ? $content->store("videos") : $content;
+                        SlideBlock::query()->create([
+                            'slide_id' => $slide_id,
+                            'page_id' => $user->personalPage->id,
+                            'sort' => $sort,
+                            'content' => $media,
+                            'type' => 'video',
+                        ]);
+                        break;
+
+                    case "code":
+                        SlideBlock::query()->create([
+                            'slide_id' => $slide_id,
+                            'page_id' => $user->personalPage->id,
+                            'sort' => $sort,
+                            'content' => json_encode(['language' => $content['language'], "code" => $content['code']]),
+                            'type' => 'code',
+                        ]);
+                        break;
+                }
+            }
+        }
+        return ['mentions' => $mentions, 'tags' => $tags];
     }
 
     public static function withDrafts()

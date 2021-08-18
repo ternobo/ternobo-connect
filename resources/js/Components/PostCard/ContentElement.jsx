@@ -1,5 +1,6 @@
 import TextareaParser from "../NewPost/Editor/TextareaParser";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
+import CodeBlock from "./SliderCard/Elements/Code.vue";
 export default {
     render: function (h) {
         let contentType = this.content.type;
@@ -48,13 +49,18 @@ export default {
 
                 content = (<VideoPlayer poster={`${videoSource}/thumbnail`} src={videoSource} controls class={'w-100'}></VideoPlayer>);
                 break;
+            case "code":
+                tag = "div";
+
+                content = (<CodeBlock content={JSON.parse(this.content.content)}></CodeBlock>);
+                break;
         }
 
         return h(tag, {
             class: classes
         }, [content]);
     },
-    components: { VideoPlayer },
+    components: { VideoPlayer, CodeBlock },
     data() {
         return {
             text: "",

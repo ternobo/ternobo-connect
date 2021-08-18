@@ -22,6 +22,7 @@ class ContentBlock implements Rule
         $rules = [
             "video" => [new VideoRule()],
             "image" => [new ImageRule()],
+            "code" => [new CodeBlockRule()],
             "text" => ["max:1200"],
             "title" => ["max:150"]
         ];

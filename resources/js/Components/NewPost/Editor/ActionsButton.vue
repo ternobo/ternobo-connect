@@ -23,13 +23,12 @@
 						<i class="material-icons-outlined" :class="{ disabled: hasMedia }">play_circle_outline</i>
 						<strong>{{ __.get("editor.video") }}</strong>
 					</div>
-
-					<!-- <div class="text-type-list">
-						<div class="editor-list-item" @click="emitMediaAction('code')">
-							<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('code') }">code</i>
-							<strong>{{ __.get("editor.code") }}</strong>
-						</div>
-					</div> -->
+				</div>
+				<div class="text-type-list">
+					<div class="editor-list-item" @click="emitMediaAction('code')">
+						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('code') }">code</i>
+						<strong>{{ __.get("editor.code") }}</strong>
+					</div>
 				</div>
 			</div>
 		</transition>

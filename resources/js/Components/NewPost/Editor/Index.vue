@@ -106,7 +106,15 @@ export default {
 					break;
 
 				case "code":
-					this.blocks.push({ id: uuidv4(), type: "code", content: "", meta: {} });
+					this.blocks.push({
+						id: uuidv4(),
+						type: "code",
+						content: {
+							code: "public class Main{\n \tpublic static void main(String args[]){\n\t} \n}",
+							language: "java",
+						},
+						meta: {},
+					});
 					this.$emit("itemAdd");
 					break;
 			}
