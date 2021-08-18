@@ -3,6 +3,7 @@
 use App\Models\SlideBlock;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class ReplaceContentToPostSlides extends Migration
@@ -14,10 +15,10 @@ class ReplaceContentToPostSlides extends Migration
      */
     public function up()
     {
-        $slides = SlideBlock::all();
+        $slides = DB::select("select * from post_contents");
         foreach ($slides as $slide) {
-            $slide->content = $slide->text != null ? $slide->text : $slide->media;
-            $slide->save();
+            $content = $slide["text"] != null ? $slide["text"] : $slide['media'];
+            DB::update("update post_contents set content = ? where id = ?", [$content, $slide['id']]);
         }
     }
 

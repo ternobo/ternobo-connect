@@ -13,14 +13,14 @@ class FixOldMedia extends Migration
      */
     public function up()
     {
-        $contents = PostContent::all();
+        $contents = DB::select("select * from post_contents");
         foreach ($contents as $content) {
-            if ($content->type == 'media' && !Str::endsWith($content->content, ".mp4")) {
-                $content->type = "image";
-                $content->save();
-            } elseif ($content->type == 'media' && Str::endsWith($content->content, ".mp4")) {
-                $content->type = "video";
-                $content->save();
+            if ($content['type'] == 'media' && !Str::endsWith($content['content'], ".mp4")) {
+                $type = "image";
+                DB::update("update post_contents set type = ? where id = ?", [$type, $content['id']]);
+            } elseif ($content['type'] == 'media' && Str::endsWith($content['content'], ".mp4")) {
+                $type = "video";
+                DB::update("update post_contents set type = ? where id = ?", [$type, $content['id']]);
             }
         }
     }

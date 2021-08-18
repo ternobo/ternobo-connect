@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+
 use App\Models\Category;
 use App\Models\Page;
 use App\Models\Post;
@@ -14,17 +15,18 @@ class PostFactory extends Factory
 {
     protected $model = Post::class;
 
-/**
- * Define the model's default state.
- *
- * @return array
- */
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
     public function definition()
     {
         $faker = $this->faker;
 
         $page = Page::where("id", "!=", 1)->get()->random();
-        $type = "post";
+        $slides = $faker->random_int(1, 12);
+
         $medias = [$faker->imageUrl()];
         // dd($page->id);
         $tags = [$faker->word, $faker->word, $faker->word];
