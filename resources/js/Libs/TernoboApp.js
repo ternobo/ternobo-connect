@@ -177,8 +177,6 @@ TernoboApp.install = function (Vue, options) {
 
     })
 
-    Vue.component('date-picker', () => import(/* webpackChunkName: "vue-persian-datetime-picker" */ "vue-persian-datetime-picker"));
-
     Vue.component('draggable', () => import(/* webpackChunkName: "draggable" */  "vuedraggable"));
 
     require("./TimeDate").default(Vue);

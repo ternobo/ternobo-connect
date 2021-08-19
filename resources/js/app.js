@@ -17,10 +17,6 @@ import VueMasonry from 'vue-masonry-css';
 import Lang from 'lang.js';
 import InfiniteError from "./Components/InfiniteError";
 import { scrollToElement } from "./Libs/WindowUtils";
-import { compile, convert } from 'html-to-text';
-
-window.htmlCompile = compile;
-window.htmlConvert = convert;
 
 
 Vue.use(VueMasonry);
