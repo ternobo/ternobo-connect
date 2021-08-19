@@ -9,8 +9,7 @@ export default {
             .replaceAll(/<span class="text-action tag-item" contenteditable="false" data-mention="(.*?)" \b[^>]*>([\s\S]*?)<\/span>/g, "#$1");
     },
     unescapeHtml(text) {
-        return text
-            .replace(/&amp;/g, '&')
+        return text?.replace(/&amp;/g, '&')
             .replace(/&lt;/g, '<')
             .replace(/&gt;/g, '>')
             .replace(/&quot;/g, '"')

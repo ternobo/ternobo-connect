@@ -1,6 +1,6 @@
 <template>
 	<mentionable :max-tags="3" class="textarea-content w-100" @click="focus">
-		<div ref="editable" class="editor--text-input" :placeholder="isDefault ? __.get('content/posts.post-ph', { fname: $store.state.user.first_name }) : __.get('content/posts.enter-your-text')" contenteditable @keydown.delete="onBackspace" @blur="onBlur" @keydown="onKeyDown" @keydown.enter="addParagraph" @focus="onFocus" @paste="onPaste" @input="input"></div>
+		<div ref="editable" class="editor--text-input" :placeholder="__.get('content/posts.enter-your-text')" contenteditable @blur="onBlur" @keydown="onKeyDown" @keydown.enter="addParagraph" @focus="onFocus" @paste="onPaste" @input="input"></div>
 	</mentionable>
 </template>
 
@@ -33,11 +33,12 @@ export default {
 				this.$emit("addParagraph");
 			}
 		},
-		onBackspace() {
+		onBackspace(e) {
 			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
 			content = TextareaParser.unescapeHtml(content);
 
 			if (content < 1) {
+				e.preventDefault();
 				this.$emit("delete");
 			}
 		},
@@ -46,7 +47,7 @@ export default {
 			this.$refs.editable.dir = "auto";
 		},
 		onBlur() {
-			if (this.updateContent().trim().length < 1) {
+			if (this.updateContent(false).trim().length < 1) {
 				this.$refs.editable.removeAttribute("dir");
 			} else {
 				this.$refs.editable.dir = "auto";
@@ -56,10 +57,10 @@ export default {
 			document.execCommand("insertHTML", false, twemoji.parse(emoji));
 			this.input();
 		},
-		updateContent() {
+		updateContent(emit = true) {
 			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
 			content = TextareaParser.replaceTextEditorMentions(TextareaParser.unescapeHtml(content));
-			this.$emit("update:content", content);
+			if (emit) this.$emit("update:content", content);
 			return content;
 		},
 		onPaste(e) {
@@ -81,10 +82,14 @@ export default {
 		onKeyDown(e) {
 			let utils = {
 				special: [8, 16, 17, 18, 46],
+				delete: [8, 46],
 				navigational: [38, 37, 39, 40],
 				isSpecial(event) {
 					let result = this.special.includes(event.keyCode) || (event.ctrlKey && [90, 83, 65].includes(event.keyCode));
 					return result;
+				},
+				isDelete(event) {
+					return this.delete.includes(event.keyCode);
 				},
 				isNavigational(e) {
 					return this.navigational.includes(e.keyCode);
@@ -101,7 +106,9 @@ export default {
 				hasSelection = !!selection.toString();
 			}
 
-			if (isSpecial || isNavigational) {
+			if (utils.isDelete(e)) {
+				this.onBackspace(e);
+			} else if (isSpecial || isNavigational) {
 				return true;
 			} else if (len >= this.max && !hasSelection) {
 				e.preventDefault();
@@ -134,12 +141,6 @@ export default {
 		};
 	},
 	props: {
-		isDefault: {
-			default: false,
-		},
-		meta: {
-			default: null,
-		},
 		content: {
 			default: "",
 		},
@@ -152,7 +153,7 @@ export default {
 	},
 	mounted() {
 		document.execCommand("defaultParagraphSeparator", false, "p");
-		this.$refs.editable.innerHTML = this.content;
+		this.$refs.editable.innerHTML = this.content != null ? this.content : "";
 		this.updateContent();
 
 		this.editor = new ParagraphEditor(this.$refs.editable, {
