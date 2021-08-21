@@ -17,9 +17,10 @@ class FixOldMediaUrls extends Migration
     {
         $blocks = DB::select("select id, content from slide_blocks where type='image' or type = 'video'");
         foreach ($blocks as $block) {
-            if (Str::startsWith($block['content'], "https://" . env("APP_URL") . "/")) {
+            dd($block->id);
+            if (Str::startsWith($block->content, "https://" . env("APP_URL") . "/")) {
                 $newURL = Str::replace("https://" . env("APP_URL") . "/", "", $block['content']);
-                DB::update("update slide_blocks set content = $newURL where id = " . $block['id']);
+                DB::update("update slide_blocks set content = $newURL where id = " . $block->id);
             }
         }
     }
