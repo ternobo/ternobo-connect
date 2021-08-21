@@ -279,7 +279,7 @@ class PostController extends Controller
         $post->tags = $tags;
         $post->save();
 
-        return response()->json(array("result" => true, "post" => $post));
+        return response()->json(array("result" => true, "post" => $post->fresh()));
     }
 
     public function publishPost($post)
