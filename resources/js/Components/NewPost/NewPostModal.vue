@@ -124,7 +124,7 @@ export default {
 				return { id: item.id, blocks: item.content };
 			});
 			if (this.category) {
-				data.category = his.category.name;
+				data.category = this.category.name;
 			}
 
 			if (this.post) {

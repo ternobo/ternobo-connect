@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Rules;
+namespace App\Rules\Content;
 
-use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Contracts\Validation\Rule as RuleInterface;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
-class ContentBlock implements Rule
+class ContentBlock implements RuleInterface
 {
 
     private $errors = [];
@@ -23,9 +24,20 @@ class ContentBlock implements Rule
             "video" => [new VideoRule()],
             "image" => [new ImageRule()],
             "code" => [new CodeBlockRule()],
+            "bulletedList" => [new BulletedListRule()],
+            "orderedList" => [new OrderedListRule()],
             "text" => ["max:1200"],
             "title" => ["max:150"]
         ];
+        $typeValidator = validator(["blocks" => $blocks], [
+            "blocks.*.type" => [Rule::in(array_keys($rules))]
+        ]);
+
+        if ($typeValidator->fails()) {
+            $this->errors = $typeValidator->errors()->messages();
+            return false;
+        }
+
         foreach ($blocks as $block) {
             $validator = Validator::make($block, [
                 'content' => $rules[$block['type']]
