@@ -28,9 +28,9 @@ class DownloadsController extends Controller
     public function media($image)
     {
         if (Storage::exists("media/$image")) {
-            $response = (Storage::download("media/$image"));
-            ob_end_clean();
-            return $response;
+            return response()->file(Storage::path("media/$image"), [
+                "Content-Type" => Storage::mimeType("media/$image"),
+            ]);
         }
         return abort(404);
     }
@@ -38,9 +38,9 @@ class DownloadsController extends Controller
     public function video($video)
     {
         if (Storage::exists("videos/$video")) {
-            $response = (Storage::download("videos/$video"));
-            ob_end_clean();
-            return $response;
+            return response()->file(Storage::path("videos/$video"), [
+                "Content-Type" => Storage::mimeType("videos/$video"),
+            ]);
         }
         return abort(404);
     }
