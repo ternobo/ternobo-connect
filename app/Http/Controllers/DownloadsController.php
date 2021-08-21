@@ -27,8 +27,8 @@ class DownloadsController extends Controller
 
     public function media($image)
     {
-        if (Storage::exists("medias/$image")) {
-            $response = (Storage::download("medias/$image"));
+        if (Storage::exists("media/$image")) {
+            $response = (Storage::download("media/$image"));
             ob_end_clean();
             return $response;
         }

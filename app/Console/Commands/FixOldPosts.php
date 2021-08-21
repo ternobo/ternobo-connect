@@ -43,7 +43,7 @@ class FixOldPosts extends Command
         $posts = Post::query()->where("type", "post")->get();
         foreach ($posts as $post) {
             $text = $post->text;
-            $media = $post->medias != null ? $post->medias[0] : null;
+            $media = $post->media != null ? $post->media[0] : null;
             $slide = PostSlide::create([
                 "page_id" => $post->page_id,
                 "post_id" => $post->id,

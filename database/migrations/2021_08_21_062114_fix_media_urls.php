@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class FixOldMediaUrls extends Migration
+class FixMediaUrls extends Migration
 {
     /**
      * Run the migrations.
@@ -15,13 +15,16 @@ class FixOldMediaUrls extends Migration
      */
     public function up()
     {
-        $blocks = DB::select("select id, content from slide_blocks where type='image' or type = 'video'");
+        $blocks = DB::select("select id, content from slide_blocks where type='image'");
         foreach ($blocks as $block) {
-            if (Str::startsWith($block->content, "https://" . env("APP_URL") . "/")) {
-                $newURL = Str::replace("https://" . env("APP_URL") . "/", "", $block['content']);
+            if (Str::startsWith($block->content, "medias")) {
+                $newURL = Str::replace("medias", "media", $block->content);
                 DB::update("update slide_blocks set content = ? where id = ?", [$newURL, $block->id]);
             }
         }
+        Schema::table("posts", function (Blueprint $table) {
+            $table->renameColumn("medias", "media");
+        });
     }
 
     /**

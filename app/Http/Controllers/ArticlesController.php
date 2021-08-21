@@ -74,10 +74,10 @@ class ArticlesController extends Controller
                 $text = \App\Models\Post::scriptStripper($request->text);
                 $dom = new Dom();
                 $dom->setOptions((new Options())
-                        ->setPreserveLineBreaks(true)
-                        ->setWhitespaceTextNode(true)
-                        ->setRemoveScripts(true)
-                        ->setRemoveStyles(true));
+                    ->setPreserveLineBreaks(true)
+                    ->setWhitespaceTextNode(true)
+                    ->setRemoveScripts(true)
+                    ->setRemoveStyles(true));
                 $dom->loadStr($text);
                 $images = $dom->find("img");
 
@@ -87,16 +87,16 @@ class ArticlesController extends Controller
                         $contents = file_get_contents($url);
                         $name = time() . Auth::user()->id . substr($url, strrpos($url, '/') + 1);
 
-                        Storage::put("medias/" . $name, $contents);
-                        $image->setAttribute("src", url("/medias/$name"));
+                        Storage::put("media/" . $name, $contents);
+                        $image->setAttribute("src", url("/media/$name"));
                         $image->setAttribute("srcset", "");
                     } elseif (Str::startsWith($url, "data:image")) {
                         list($type, $data) = explode(';', $data);
                         list(, $data) = explode(',', $data);
                         // $name = time() . uniqid() . Auth::user()->id;
 
-                        // Storage::put("medias/" . $name, $data);
-                        // $image->setAttribute("src", url("/medias/$name"));
+                        // Storage::put("media/" . $name, $data);
+                        // $image->setAttribute("src", url("/media/$name"));
                         // $image->setAttribute("srcset", "");
                     }
                 }
@@ -119,11 +119,11 @@ class ArticlesController extends Controller
                 $post->tags = json_encode(json_decode($request->tags));
                 $post->type = "article";
                 $post->show = "public";
-                $medias = array();
+                $media = array();
                 if ($request->file("media") !== null) {
-                    $medias = array(url($request->file("media")->store("medias")));
+                    $media = array(url($request->file("media")->store("media")));
                 }
-                $post->medias = json_encode($medias);
+                $post->media = json_encode($media);
                 $result = $post->save();
                 $link = url("/" . Auth::user()->username . "/" . $post->id);
                 if ($post->slug !== null) {
@@ -244,10 +244,10 @@ class ArticlesController extends Controller
                     $text = \App\Models\Post::scriptStripper($request->text);
                     $dom = new Dom();
                     $dom->setOptions((new Options())
-                            ->setPreserveLineBreaks(true)
-                            ->setWhitespaceTextNode(true)
-                            ->setRemoveScripts(true)
-                            ->setRemoveStyles(true));
+                        ->setPreserveLineBreaks(true)
+                        ->setWhitespaceTextNode(true)
+                        ->setRemoveScripts(true)
+                        ->setRemoveStyles(true));
                     $dom->loadStr($text);
                     $images = $dom->find("img");
                     foreach ($images as $image) {
@@ -256,8 +256,8 @@ class ArticlesController extends Controller
                             $contents = file_get_contents($url);
                             $name = time() . Auth::user()->id . substr($url, strrpos($url, '/') + 1);
 
-                            Storage::put("medias/" . $name, $contents);
-                            $image->setAttribute("src", url("/medias/$name"));
+                            Storage::put("media/" . $name, $contents);
+                            $image->setAttribute("src", url("/media/$name"));
                             $image->setAttribute("srcset", "");
                         } elseif (Str::startsWith($url, "data:image")) {
                             list($type, $data) = explode(';', $url);
@@ -266,8 +266,8 @@ class ArticlesController extends Controller
 
                             $name = time() . uniqid() . Auth::user()->id . ".$type";
 
-                            Storage::put("medias/" . $name, base64_decode($data));
-                            $image->setAttribute("src", url("/medias/$name"));
+                            Storage::put("media/" . $name, base64_decode($data));
+                            $image->setAttribute("src", url("/media/$name"));
                             $image->setAttribute("srcset", "");
                         }
                     }
@@ -287,11 +287,11 @@ class ArticlesController extends Controller
                     }
                     $article->tags = json_encode(json_decode($request->tags));
                     $article->show = "public";
-                    $medias = [];
+                    $media = [];
 
                     if ($request->file("media") != null) {
-                        $medias = array(url($request->file("media")->store("medias")));
-                        $article->medias = json_encode($medias);
+                        $media = array(url($request->file("media")->store("media")));
+                        $article->media = json_encode($media);
                     }
                     $user = Auth::user();
                     $user->touch();
@@ -311,12 +311,12 @@ class ArticlesController extends Controller
         }
     }
 
-/**
- * Remove the specified resource from storage.
- *
- * @param \App\Models\Post $article
- * @return \Illuminate\Http\Response
- */
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \App\Models\Post $article
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Post $article)
     {
         if (Auth::check()) {
@@ -329,5 +329,4 @@ class ArticlesController extends Controller
             return redirect("/");
         }
     }
-
 }

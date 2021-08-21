@@ -54,7 +54,7 @@ class PostController extends Controller
             'type' => $draft ? 'draft_post' : 'post',
             'user_id' => $user->id,
             'page_id' => $user->personalPage->id,
-            'medias' => [],
+            'media' => [],
             'show' => "public",
             "category_id" => $category,
             'can_tip' => $request->canDonate,

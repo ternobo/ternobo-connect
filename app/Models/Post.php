@@ -33,7 +33,7 @@ class Post extends Model
 
     protected $casts = [
         'tags' => 'array',
-        "medias" => 'array',
+        "media" => 'array',
         "can_tip" => "boolean",
     ];
 
@@ -44,7 +44,7 @@ class Post extends Model
         'tags',
         'type',
         'category_id',
-        'medias',
+        'media',
         "show",
         "can_tip",
     ];
@@ -266,7 +266,7 @@ class Post extends Model
                         ]);
                         break;
                     case "image":
-                        $media = $content instanceof UploadedFile | $fileOnly ? $content->store("medias") : $content;
+                        $media = $content instanceof UploadedFile | $fileOnly ? $content->store("media") : $content;
                         SlideBlock::query()->create([
                             'slide_id' => $slide_id,
                             'page_id' => $user->personalPage->id,
