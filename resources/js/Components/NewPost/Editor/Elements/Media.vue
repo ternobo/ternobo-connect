@@ -21,7 +21,7 @@ export default {
 	components: { VideoPlayer },
 	computed: {
 		contentUrl() {
-			return typeof this.content == "object" ? URL.createObjectURL(this.content) : `${this.content}`;
+			return typeof this.content == "object" ? URL.createObjectURL(this.content) : `/${this.content}`;
 		},
 	},
 	methods: {
