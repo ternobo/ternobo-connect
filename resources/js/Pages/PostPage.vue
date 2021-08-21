@@ -5,7 +5,7 @@
 		</sidebar-right>
 		<div class="content-container">
 			<div class="card p-0">
-				<post-card class="shadow-0" style="margin-bottom: 0 !important" :post="post" :has-comment="false"></post-card>
+				<post-card class="shadow-0" style="margin-bottom: 0 !important" :post="post" @deleted="onDelete" :has-comment="false"></post-card>
 				<div class="comments px-3 pb-3 m-0" style="max-height: max-content" v-if="$store.state.user">
 					<new-comment :post="post.id" @submit="submitComment"></new-comment>
 					<comment v-for="comment in comments" v-on:deleted="commentDelete" :comment="comment" :key="'comment_' + comment.id"></comment>
@@ -44,6 +44,9 @@ export default {
 				this.comments.splice(index, 1);
 				this.loadMore();
 			}
+		},
+		onDelete() {
+			this.$store.state.ternoboWireApp.visit("/feed");
 		},
 		loadMoreComment() {
 			if (this.next_page_url !== null && !this.commentsLoading) {

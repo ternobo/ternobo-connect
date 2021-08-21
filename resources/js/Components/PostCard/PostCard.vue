@@ -51,6 +51,7 @@
 					</span>
 				</wire-link>
 				<div v-if="post_data.mutual_likes.length > 1">
+					<span v-if="post_data.mutual_likes.length == 2">{{ __.get("content/posts.and") }}</span>
 					<wire-link v-if="post_data.mutual_likes[1]" :href="'/' + post_data.mutual_likes[0].page.slug" class="text-dark">
 						<strong class="text-light">{{ post_data.mutual_likes[1].page.name }}</strong>
 					</wire-link>
@@ -114,6 +115,7 @@ export default {
 				if (value) {
 					this.deleted = true;
 					axios.delete("/posts/" + this.post_data.id);
+					this.$emit("deleted");
 				}
 			});
 		},
