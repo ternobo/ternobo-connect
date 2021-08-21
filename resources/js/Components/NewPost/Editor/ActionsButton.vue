@@ -25,10 +25,18 @@
 					</div>
 				</div>
 				<div class="text-type-list">
-					<!-- <div class="editor-list-item" @click="emitMediaAction('code')">
+					<div class="editor-list-item" @click="emitMediaAction('code')">
 						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('code') }">code</i>
 						<strong>{{ __.get("editor.code") }}</strong>
-					</div> -->
+					</div>
+					<div class="editor-list-item" @click="emitMediaAction('bulletedList')">
+						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('bulletedList') }">format_list_bulleted</i>
+						<strong>{{ __.get("editor.bulleted-list") }}</strong>
+					</div>
+					<div class="editor-list-item" @click="emitMediaAction('orderedList')">
+						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('orderedList') }">format_list_numbered</i>
+						<strong>{{ __.get("editor.ordered-list") }}</strong>
+					</div>
 				</div>
 			</div>
 		</transition>

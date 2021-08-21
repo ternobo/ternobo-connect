@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<component :is="tag">
 		<slot></slot>
 		<div class="tribute-container" v-if="searchKey != null" :style="caretPosition">
 			<ul>
@@ -8,7 +8,7 @@
 				</li>
 			</ul>
 		</div>
-	</div>
+	</component>
 </template>
 
 <script>
@@ -173,6 +173,9 @@ export default {
 		};
 	},
 	props: {
+		tag: {
+			default: "div",
+		},
 		tags: {
 			default: () => [],
 		},
