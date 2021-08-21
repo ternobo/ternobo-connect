@@ -266,12 +266,12 @@ class Post extends Model
                         ]);
                         break;
                     case "image":
-                        $media = $content instanceof UploadedFile | $fileOnly ? $content->store("media") : $content;
+                        $media = $content instanceof UploadedFile | $fileOnly ?  SocialMediaTools::uploadPostImage($content->store("media"), 90) : $content;
                         SlideBlock::query()->create([
                             'slide_id' => $slide_id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
-                            'content' => SocialMediaTools::uploadPostImage($media, 90),
+                            'content' => $media,
                             'type' => 'image',
                         ]);
                         break;
