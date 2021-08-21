@@ -42,6 +42,9 @@ import { mapState } from "vuex";
 import TwitterText from "twitter-text";
 import TextareaParser from "./TextareaParser";
 import Code from "./Elements/Code.vue";
+import BulletedList from "./Elements/Lists/BulletedList.vue";
+import OrderedList from "./Elements/Lists/OrderedList.vue";
+
 export default {
 	watch: {
 		blocks: {
@@ -87,25 +90,8 @@ export default {
 			this.$emit("itemRemoved");
 		},
 		addElement(type, meta) {
-			switch (type) {
-				case "text":
-					this.blocks.push({ id: uuidv4(), type: "text", content: "", meta: {} });
-					this.$emit("itemAdd");
-					break;
-				case "title":
-					this.blocks.push({ id: uuidv4(), type: "title", content: "", meta: {} });
-					this.$emit("itemAdd");
-					break;
-				case "image":
-					this.blocks.push({ id: uuidv4(), type: "image", content: null, meta: meta });
-					this.$emit("itemAdd");
-					break;
-				case "video":
-					this.blocks.push({ id: uuidv4(), type: "video", content: null, meta: meta });
-					this.$emit("itemAdd");
-					break;
-
-				case "code":
+			if (this.availableOptions.includes(type)) {
+				if (type == "code") {
 					this.blocks.push({
 						id: uuidv4(),
 						type: "code",
@@ -116,7 +102,9 @@ export default {
 						meta: {},
 					});
 					this.$emit("itemAdd");
-					break;
+				} else {
+					this.blocks.push({ id: uuidv4(), type: type, content: null, meta: {} });
+				}
 			}
 		},
 	},
@@ -151,7 +139,7 @@ export default {
 		},
 		availableOptions() {
 			let addedOptions = this.blocks.map((item) => item.type);
-			return ["text", "title", "video", "image", "code"].filter((item) => {
+			return ["text", "title", "video", "image", "code", "bulletedList", "orderedList"].filter((item) => {
 				if (item == "text") {
 					return this.leftCharacter > 0;
 				}
@@ -179,6 +167,8 @@ export default {
 				video: Media,
 				image: Media,
 				code: Code,
+				bulletedList: BulletedList,
+				orderedList: OrderedList,
 			},
 		};
 	},

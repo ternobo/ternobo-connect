@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Rules;
+namespace App\Rules\Content;
 
 use Ternobo\FFMpegPHP\Movie;
 use Illuminate\Support\Str;

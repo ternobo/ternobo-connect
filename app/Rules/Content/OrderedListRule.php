@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Rules;
+namespace App\Rules\Content;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class CodeBlockRule implements Rule
+class OrderedListRule implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,7 +25,7 @@ class CodeBlockRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        return is_array($value) && array_keys($value) == ['code', 'language'];
+        //
     }
 
     /**
@@ -35,6 +35,6 @@ class CodeBlockRule implements Rule
      */
     public function message()
     {
-        return 'Invalid Code Block';
+        return 'The validation error message.';
     }
 }

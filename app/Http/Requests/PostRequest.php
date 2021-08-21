@@ -2,8 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\ContentBlock;
-use App\Rules\Video;
+use App\Rules\Content\ContentBlock;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
