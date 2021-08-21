@@ -269,7 +269,7 @@ TernoboApp.install = function (Vue, options) {
             },
             handleError(errors, type = null) {
                 Object.keys(errors).forEach((item) => {
-                    let msg = errors[item][0];
+                    let msg = errors[item].flat()[0];
                     if (type != null && type != undefined) {
                         msg = msg.replaceAll('{{ type }}', type);
                     }
