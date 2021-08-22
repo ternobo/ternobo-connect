@@ -44,6 +44,7 @@ import TextareaParser from "./TextareaParser";
 import Code from "./Elements/Code.vue";
 import BulletedList from "./Elements/Lists/BulletedList.vue";
 import OrderedList from "./Elements/Lists/OrderedList.vue";
+import Quote from "./Elements/Quote.vue";
 
 export default {
 	watch: {
@@ -139,7 +140,7 @@ export default {
 		},
 		availableOptions() {
 			let addedOptions = this.blocks.map((item) => item.type);
-			return ["text", "title", "video", "image", "code", "bulletedList", "orderedList"].filter((item) => {
+			return ["text", "title", "video", "image", "code", "bulletedList", "orderedList", "quote"].filter((item) => {
 				if (item == "text") {
 					return this.leftCharacter > 0;
 				}
@@ -169,6 +170,7 @@ export default {
 				code: Code,
 				bulletedList: BulletedList,
 				orderedList: OrderedList,
+				quote: Quote,
 			},
 		};
 	},

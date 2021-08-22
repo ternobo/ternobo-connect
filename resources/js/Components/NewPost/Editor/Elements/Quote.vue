@@ -1,0 +1,228 @@
+<template>
+	<mentionable :max-tags="3" v-bind="$attrs" class="quote-editor textarea-content w-100" @click="focus">
+		<i class="material-icons-outlined text-grey me-2">format_quote</i>
+		<div ref="editable" class="editor--text-input" :placeholder="__.get('content/posts.enter-your-text')" contenteditable @blur="onBlur" @focus="onFocus" @paste="onPaste" @input="input"></div>
+	</mentionable>
+</template>
+
+<script>
+import TextareaParser from "../TextareaParser";
+import Mentionable from "../../../Mentionable";
+import ParagraphEditor from "ternobo-paragraph-editor/lib/TernoboEditor";
+
+import ContentEditable from "../../../../Mixins/ContentEditable";
+import { mapState } from "vuex";
+export default {
+	mixins: [ContentEditable],
+	destroyed() {
+		this.editor.doDestory();
+	},
+	provide: {
+		replaceMention(key, value) {
+			const classes = key == "@" ? "mention-item" : "text-action tag-item";
+			const element = document.createElement("span");
+			element.className = classes;
+			element.innerHTML = key + value;
+			element.contentEditable = false;
+			return element;
+		},
+	},
+	methods: {
+		onBackspace(e) {
+			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
+			content = TextareaParser.unescapeHtml(content);
+
+			if (content < 1) {
+				e.preventDefault();
+				this.$emit("delete");
+			}
+		},
+		onFocus() {
+			this.$emit("focus", this);
+			this.$refs.editable.dir = "auto";
+		},
+		onBlur() {
+			if (this.updateContent(false).trim().length < 1) {
+				this.$refs.editable.removeAttribute("dir");
+			} else {
+				this.$refs.editable.dir = "auto";
+			}
+		},
+		insertEmoji(emoji) {
+			document.execCommand("insertHTML", false, twemoji.parse(emoji));
+			this.input();
+		},
+		updateContent(emit = true) {
+			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
+			content = TextareaParser.replaceTextEditorMentions(TextareaParser.unescapeHtml(content));
+			if (emit) this.$emit("update:content", content);
+			return content;
+		},
+		onPaste(e) {
+			e.preventDefault();
+			var text = (e.originalEvent || e).clipboardData.getData("text/plain");
+			let len = this.$refs.editable.innerText.length + text.length;
+
+			if (len > this.max) {
+				text = text.substr(0, this.max - this.$refs.editable.innerText.length);
+			}
+
+			document.execCommand("insertHTML", false, text);
+
+			this.updateContent();
+
+			this.fixDirection();
+		},
+		input(e) {
+			this.updateContent();
+			this.$nextTick(() => {
+				twemoji.parse(this.$refs.editable);
+				this.fixDirection();
+			});
+		},
+		fixDirection() {
+			HTMLCollection.prototype.forEach = Array.prototype.forEach;
+			this.$refs.editable.children.forEach((item) => {
+				item.dir = "auto";
+			});
+		},
+		focus() {
+			this.$refs.editable.focus();
+		},
+	},
+	data() {
+		return {
+			tags: [],
+			editor: null,
+
+			showList: false,
+		};
+	},
+	props: {
+		content: {
+			default: "",
+		},
+	},
+	computed: {
+		...mapState(["shared"]),
+	},
+	mounted() {
+		document.execCommand("defaultParagraphSeparator", false, "p");
+		this.$refs.editable.innerHTML = this.content != null ? this.content : "";
+		this.updateContent();
+
+		this.editor = new ParagraphEditor(this.$refs.editable, {
+			toolbar: {
+				italic: {
+					text: "format_italic",
+					class: "material-icons",
+					onActive: () => {
+						return document.queryCommandState("italic");
+					},
+					action: () => {
+						document.execCommand("italic", false, "");
+					},
+				},
+				strikeThrough: {
+					text: "strikethrough_s",
+					class: "material-icons",
+					onActive: () => {
+						return document.queryCommandState("strikeThrough");
+					},
+					action: () => {
+						document.execCommand("strikeThrough", false, "");
+					},
+				},
+				underline: {
+					text: "format_underlined",
+					class: "material-icons",
+					onActive: () => {
+						return document.queryCommandState("underline");
+					},
+					action: () => {
+						document.execCommand("underline", false, "");
+					},
+				},
+
+				link: {
+					text: "link",
+					class: "material-icons",
+					onActive: () => {
+						var sel = window.getSelection();
+						var range = sel.getRangeAt(0).cloneRange();
+						return range.commonAncestorContainer.parentElement.tagName.toLowerCase() == "a";
+					},
+					action: (e) => {
+						var sel = window.getSelection();
+						if (sel.rangeCount) {
+							var range = sel.getRangeAt(0).cloneRange();
+							let element = range.commonAncestorContainer.parentElement;
+							if (element.tagName.toLowerCase() == "a") {
+								document.execCommand("unlink", false, null);
+								e.editor.selectionToLink("subdirectory_arrow_left", "Enter Link", element.href);
+							} else {
+								e.editor.selectionToLink("subdirectory_arrow_left", "Enter Link");
+							}
+						}
+					},
+				},
+				code: {
+					text: "code",
+					class: "material-icons",
+					onActive: () => {
+						var sel = window.getSelection();
+						var range = sel.getRangeAt(0).cloneRange();
+						return range.commonAncestorContainer.parentElement.tagName.toLowerCase() == "code";
+					},
+					action: () => {
+						var sel = window.getSelection();
+						if (sel.rangeCount) {
+							var range = sel.getRangeAt(0).cloneRange();
+							if (range.commonAncestorContainer.parentElement.tagName.toLowerCase() == "code") {
+								document.execCommand("removeFormat", false, null);
+							} else {
+								range.surroundContents(document.createElement("code"));
+								sel.removeAllRanges();
+								sel.addRange(range);
+							}
+						}
+					},
+				},
+
+				superscript: {
+					text: "superscript",
+					class: "material-icons",
+					onActive: () => {
+						return document.queryCommandState("superscript");
+					},
+					action: () => {
+						document.execCommand("superscript", null, "");
+					},
+				},
+			},
+		});
+
+		this.$nextTick(() => {
+			if (this.$refs.editable) {
+				twemoji.parse(this.$refs.editable);
+				this.$refs.editable.focus();
+			}
+		});
+	},
+	components: { Mentionable },
+};
+</script>
+
+<style lang="scss">
+.quote-editor {
+	display: flex;
+	align-items: flex-start;
+	.editor--text-input {
+		color: #191919;
+		font-weight: bold;
+		p {
+			margin: 0;
+		}
+	}
+}
+</style>
