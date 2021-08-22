@@ -72,7 +72,7 @@ export default {
 				text = text.substr(0, this.max - this.$refs.editable.innerText.length);
 			}
 
-			document.execCommand("insertHTML", false, text);
+			document.execCommand("insertText", false, text);
 
 			this.updateContent();
 
