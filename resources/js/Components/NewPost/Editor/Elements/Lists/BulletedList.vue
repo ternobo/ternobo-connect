@@ -12,7 +12,10 @@ export default {
 		list: {
 			deep: true,
 			handler() {
-				this.$emit("update:content", this.list);
+				this.$emit(
+					"update:content",
+					this.list.map((item) => item.text)
+				);
 			},
 		},
 	},
@@ -49,7 +52,11 @@ export default {
 		},
 	},
 	mounted() {
-		this.list = Boolean(this.content) ? this.content : [{ id: 0, text: "" }];
+		this.list = Boolean(this.content)
+			? this.content.map((text) => {
+					return { id: uuidv4(), text: text };
+			  })
+			: [{ id: 0, text: "" }];
 	},
 	data() {
 		return {

@@ -118,6 +118,11 @@ return [
     "password_code" => "کد بازیابی رمزعبور اشتباه است",
     'invalid_duration' => "زمان حداکثر :attribute :max دقیقه است",
 
+    "blocks" => [
+        'bullted-list' => "بلوک لیست گلوله‌ای نامعتبر است",
+        'ordered-list' => "بلوک لیست شماره‌ای نامعتبر است",
+    ],
+
     'attributes' => [
         'video' => "ویدیو",
         'address' => 'نشانی',

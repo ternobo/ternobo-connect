@@ -116,6 +116,11 @@ return [
     "password_code" => "Reset Password code is invalid",
     'invalid_duration' => "maximum :attribute duration is :max minutes.",
 
+    "blocks" => [
+        'bullted-list' => "Invalid bulleted list block",
+        'ordered-list' => "Invalid ordered list block",
+    ],
+
     'attributes' => [
         'video' => "Video",
         'address' => 'Adress',

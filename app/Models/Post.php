@@ -234,6 +234,7 @@ class Post extends Model
                 $content = $rawContent['content'];
                 $type =  $rawContent['type'];
                 switch ($type) {
+                    case "quote":
                     case "text":
                         // Process
                         $text = SocialMediaTools::safeHTML($content);
@@ -246,7 +247,7 @@ class Post extends Model
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
                             'content' => $text,
-                            'type' => 'text',
+                            'type' => $type,
                         ]);
 
                         if (count($tags) < 3) {
@@ -254,6 +255,17 @@ class Post extends Model
                         }
                         $mentions = array_merge($text_mentions, $mentions);
 
+                        break;
+
+                    case "orderedList":
+                    case "bulletedList":
+                        SlideBlock::query()->create([
+                            'slide_id' => $slide_id,
+                            'page_id' => $user->personalPage->id,
+                            'sort' => $sort,
+                            'content' => json_encode($content),
+                            'type' => $type,
+                        ]);
                         break;
 
                     case "title":
