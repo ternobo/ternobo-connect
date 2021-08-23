@@ -38,7 +38,7 @@
 						<strong>{{ __.get("editor.ordered-list") }}</strong>
 					</div>
 					<div class="editor-list-item" @click="emitAcion('quote')">
-						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('quote') }">format_list_numbered</i>
+						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('quote') }">format_quote</i>
 						<strong>{{ __.get("editor.quote") }}</strong>
 					</div>
 				</div>

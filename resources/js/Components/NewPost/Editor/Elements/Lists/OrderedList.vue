@@ -68,7 +68,7 @@ export default {
 
 <style lang="scss" scoped>
 .ordered-list-editor {
-	list-style: disc;
+	list-style: number;
 	margin-bottom: 0;
 }
 </style>
