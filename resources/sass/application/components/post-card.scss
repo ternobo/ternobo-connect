@@ -475,6 +475,14 @@
 }
 
 .slider-content {
+    ul {
+        list-style: disc;
+    }
+
+    ol {
+        list-style: num;
+    }
+
     h2 {
         unicode-bidi: -moz-plaintext;
         unicode-bidi: plaintext;
