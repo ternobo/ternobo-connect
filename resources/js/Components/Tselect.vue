@@ -1,21 +1,26 @@
 <template>
 	<div class="tselect" tabindex="0" :class="{ disabled: disabled, active: showItems }" :dir="direction" @blur="hideDropdown" @focus="openDropdown" v-click-outside="close">
 		<div class="tselect_title" :class="{ active: showItems }" ref="titleSection" @click="toggleDropdown">
-			<div class="title-text">
-				<span v-if="!selectedItem"> <slot></slot><span v-if="required" class="text-action">*</span> </span>
-				<span v-else>
-					<slot name="icon" v-bind:icon="selectedItem.icon">
-						<i class="material-icons verical-middle" v-if="selectedItem.hasOwnProperty('icon')">{{ selectedItem.icon }}</i>
-					</slot>
-					<span> {{ getItemLabel(selectedItem) }} </span>
-				</span>
+			<div class="title-text" :class="{ 'w-100': search }">
+				<div v-if="search" class="w-100">
+					<input type="text" v-model="searchInput" :placeholder="!selectedItem ? placeholder : getItemLabel(selectedItem)" @focus="openDropdown" class="form-control border-0 font-12 text-grey px-0 bg-transparent" />
+				</div>
+				<div v-else>
+					<span v-if="!selectedItem"> <slot></slot><span v-if="required" class="text-action">*</span> </span>
+					<span v-else>
+						<slot name="icon" v-bind:icon="selectedItem.icon">
+							<i class="material-icons verical-middle" v-if="selectedItem.hasOwnProperty('icon')">{{ selectedItem.icon }}</i>
+						</slot>
+						<span> {{ getItemLabel(selectedItem) }} </span>
+					</span>
+				</div>
 			</div>
 			<i class="material-icons tselect_arrow">keyboard_arrow_down</i>
 		</div>
 		<transition name="slide">
 			<div class="tselect-items" :style="{ width: dropdownWidth }" ref="itemsElement" v-if="showItems">
-				<div class="items" v-if="items && items.length > 0">
-					<div class="tselect_item" v-for="item in items" :class="{ active: isChecked(item) }" :key="getItemValue(item)" @click="selectItem(item)">
+				<div class="items" v-if="items && listItems.length > 0">
+					<div class="tselect_item" v-for="item in listItems" :class="{ active: isChecked(item) }" :key="getItemValue(item)" @click="selectItem(item)">
 						<label class="tselect_item--text">
 							<slot name="itemIcon" v-bind:icon="item.icon">
 								<i class="material-icons verical-middle" v-if="item.hasOwnProperty('icon')">{{ item.icon }}</i>
@@ -49,6 +54,11 @@ export default {
 		value(newValue) {
 			this.selectedItem = newValue;
 		},
+		showItems() {
+			if (!this.showItems) {
+				this.searchInput = "";
+			}
+		},
 	},
 	directives: {
 		"click-outside": {
@@ -73,7 +83,22 @@ export default {
 			},
 		},
 	},
+	computed: {
+		listItems() {
+			return this.searchInput.length > 0 ? this.items.filter((item) => item.includes(this.searchInput)) : this.items;
+		},
+	},
 	props: {
+		placeholder: {
+			type: String,
+			default: "search",
+			required: false,
+		},
+		search: {
+			type: Boolean,
+			default: false,
+			required: false,
+		},
 		required: {
 			type: Boolean,
 			default: false,
@@ -131,6 +156,8 @@ export default {
 			newItemInput: undefined,
 			selectedItem: undefined,
 			isOpening: false,
+
+			searchInput: "",
 
 			focus: false,
 		};
