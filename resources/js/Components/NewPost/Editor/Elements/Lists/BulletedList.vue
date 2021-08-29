@@ -43,11 +43,13 @@ export default {
 			this.list.push({ id: uuidv4(), text: "" });
 		},
 		deleteItem(index) {
-			this.list.splice(index, 1);
 			if (index != 0) {
+				this.list.splice(index, 1);
 				this.$nextTick(() => {
 					this.$refs["list-item"][index - 1].focus();
 				});
+			} else {
+				this.$emit("delete");
 			}
 		},
 	},

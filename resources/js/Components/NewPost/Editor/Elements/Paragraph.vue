@@ -116,6 +116,11 @@ export default {
 			}
 		},
 		input(e) {
+			if (this.updateContent(false) == "- ") {
+				this.$emit("update:type", "bulletedList");
+			} else if (this.updateContent(false) == "1 - ") {
+				this.$emit("update:type", "orderedList");
+			}
 			this.updateContent();
 			this.$nextTick(() => {
 				twemoji.parse(this.$refs.editable);
@@ -129,7 +134,21 @@ export default {
 			});
 		},
 		focus() {
-			this.$refs.editable.focus();
+			const el = this.$refs.editable;
+			el.focus();
+			if (typeof window.getSelection != "undefined" && typeof document.createRange != "undefined") {
+				var range = document.createRange();
+				range.selectNodeContents(el);
+				range.collapse(false);
+				var sel = window.getSelection();
+				sel.removeAllRanges();
+				sel.addRange(range);
+			} else if (typeof document.body.createTextRange != "undefined") {
+				var textRange = document.body.createTextRange();
+				textRange.moveToElementText(el);
+				textRange.collapse(false);
+				textRange.select();
+			}
 		},
 	},
 	data() {
