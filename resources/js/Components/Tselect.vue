@@ -3,7 +3,7 @@
 		<div class="tselect_title" :class="{ active: showItems }" ref="titleSection" @click="toggleDropdown">
 			<div class="title-text" :class="{ 'w-100': search }">
 				<div v-if="search" class="w-100">
-					<input type="text" v-model="searchInput" :placeholder="!selectedItem ? placeholder : getItemLabel(selectedItem)" @focus="openDropdown" class="form-control border-0 font-12 text-grey px-0 bg-transparent" />
+					<input type="text" v-model="searchInput" @keydown="handelArrow" :placeholder="!selectedItem ? placeholder : getItemLabel(selectedItem)" @focus="openDropdown" class="form-control border-0 font-12 text-grey px-0 bg-transparent" />
 				</div>
 				<div v-else>
 					<span v-if="!selectedItem"> <slot></slot><span v-if="required" class="text-action">*</span> </span>
@@ -20,7 +20,7 @@
 		<transition name="slide">
 			<div class="tselect-items" :style="{ width: dropdownWidth }" ref="itemsElement" v-if="showItems">
 				<div class="items" v-if="items && listItems.length > 0">
-					<div class="tselect_item" v-for="item in listItems" :class="{ active: isChecked(item) }" :key="getItemValue(item)" @click="selectItem(item)">
+					<div class="tselect_item" ref="tselect_item" @keydown="handelArrow" tabindex="0" v-for="item in listItems" :class="{ active: isChecked(item) }" :key="getItemValue(item)" @keydown.enter="selectItem(item)" @click="selectItem(item)">
 						<label class="tselect_item--text">
 							<slot name="itemIcon" v-bind:icon="item.icon">
 								<i class="material-icons verical-middle" v-if="item.hasOwnProperty('icon')">{{ item.icon }}</i>
@@ -160,10 +160,29 @@ export default {
 			searchInput: "",
 
 			focus: false,
+
+			focusIndex: 0,
 		};
 	},
 	name: "Tselect",
 	methods: {
+		handelArrow(e) {
+			console.log(e.key);
+			if (e.key == "ArrowUp") {
+				e.preventDefault();
+				if (this.$refs["tselect_item"].length > 0 && this.focusIndex > 0) {
+					this.focusIndex--;
+					this.$refs["tselect_item"][this.focusIndex].focus();
+				}
+			} else if (e.key == "ArrowDown") {
+				e.preventDefault();
+				if (this.$refs["tselect_item"].length > this.focusIndex) {
+					this.$refs["tselect_item"][this.focusIndex].focus();
+					this.focusIndex++;
+				}
+			}
+		},
+		prevFocus(e) {},
 		close() {
 			this.showItems = false;
 			this.$refs.titleSection.classList.remove("active");
@@ -201,6 +220,7 @@ export default {
 			if (!this.disabled) {
 				this.showItems = false;
 			}
+			this.focusIndex = 0;
 			this.focus = false;
 		},
 		openDropdown() {
@@ -210,6 +230,7 @@ export default {
 				this.showItems = true;
 				const width = this.$refs.titleSection.offsetWidth;
 				this.dropdownWidth = width + "px";
+				this.focusIndex = 0;
 				setTimeout(() => {
 					this.$nextTick(() => {
 						this.isOpening = false;
@@ -223,6 +244,7 @@ export default {
 					const width = this.$refs.titleSection.offsetWidth;
 					this.showItems = !this.showItems;
 					this.dropdownWidth = width + "px";
+					this.focusIndex = 0;
 				}
 			}
 		},
