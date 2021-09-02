@@ -118,7 +118,7 @@ export default {
 		input(e) {
 			if (this.updateContent(false) == "- ") {
 				this.$emit("update:type", "bulletedList");
-			} else if (this.updateContent(false) == "1 - ") {
+			} else if (this.updateContent(false) == "1- ") {
 				this.$emit("update:type", "orderedList");
 			}
 			this.updateContent();

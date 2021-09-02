@@ -1,6 +1,6 @@
 <template>
 	<ul class="ordered-list-editor">
-		<paragraph v-for="(item, index) in list" :dir="computedList[index].direction" ref="list-item" :key="`ordered_list_${item.id}`" tag="li" @delete="deleteItem(index)" @addParagraph="onEnter" :content.sync="list[index].text"></paragraph>
+		<paragraph v-for="(item, index) in list" :dir="computedList[index].direction" ref="list-item" :key="`ordered_list_${item.id}`" tag="li" @delete="deleteItem(index)" @addParagraph="onEnter(index)" :content.sync="list[index].text"></paragraph>
 	</ul>
 </template>
 
@@ -39,8 +39,12 @@ export default {
 			el.remove();
 			return direction;
 		},
-		onEnter() {
-			this.list.push({ id: uuidv4(), text: "" });
+		onEnter(index) {
+			if (this.list[index].text.length > 0) {
+				this.list.splice(index + 1, 0, { id: uuidv4(), text: "" });
+			} else {
+				this.$emit("addParagraph");
+			}
 		},
 		deleteItem(index) {
 			if (index != 0) {
@@ -55,7 +59,7 @@ export default {
 	},
 	mounted() {
 		this.list = Boolean(this.content)
-			? this.content.map((text) => {
+			? this.content?.map((text) => {
 					return { id: uuidv4(), text: text };
 			  })
 			: [{ id: 0, text: "" }];
