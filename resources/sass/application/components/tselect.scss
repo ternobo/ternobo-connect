@@ -121,6 +121,7 @@
         padding: 8px 12px;
 
         &:hover,
+        &:focus,
         &.active {
             background: rgb(224, 224, 224);
         }
