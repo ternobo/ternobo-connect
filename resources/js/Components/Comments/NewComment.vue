@@ -1,14 +1,12 @@
 <template>
 	<div class="sendcomment clearfix" v-if="$store.state.user != null">
-		<div class="input-container">
-			<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xsm me-3 mb-0" imgClass="profile-xsm" :src="$store.state.user.profile" />
-			<div class="material-input-group-btn">
-				<MaterialTextAreaEmoji ref="input" v-model="text" input-class="w-100" maxlength="1000" class="material--xsm w-100" :placeholder="__.get('content/comments.comment-ph')" name="text"></MaterialTextAreaEmoji>
-				<div class="end-content">
-					<emoji-picker @pick="$refs.input.insertEmoji($event)" :portal="true" />
-					<loading-button @click.native="submit" :disabled="!showSubmit" :loading="loading" class="btn">{{ __.get("application.send") }}</loading-button>
-				</div>
+		<MaterialTextAreaEmoji ref="input" v-model="text" input-class="w-100" maxlength="1000" class="material--xsm w-100" :placeholder="__.get('content/comments.comment-ph')" name="text"></MaterialTextAreaEmoji>
+		<div class="d-flex w-100 mt-3 align-items-center justify-content-between">
+			<div class="d-flex align-items-center">
+				<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xxxsm me-3 mb-0" imgClass="profile-xxxsm" :src="$store.state.user.profile" />
+				<emoji-picker iconSize="20" @pick="$refs.input.insertEmoji($event)" :portal="true" />
 			</div>
+			<loading-button @click.native="submit" :disabled="!showSubmit" :loading="loading" class="btn btn-transparent cta-text">{{ __.get("application.send") }}</loading-button>
 		</div>
 	</div>
 </template>

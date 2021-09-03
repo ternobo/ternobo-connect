@@ -1,6 +1,6 @@
 <template>
 	<div class="emoji-container" :class="{ active: visible }">
-		<i class="material-icons-outlined font-32" @click="toggle">sentiment_very_satisfied</i>
+		<i class="material-icons-outlined" :class="[`font-${iconSize}`]" @click="toggle">sentiment_very_satisfied</i>
 		<portal to="destination" :disabled="!portal">
 			<transition name="fade">
 				<div class="emoji-picker" :style="pickerStyle" v-if="visible">
@@ -35,6 +35,9 @@ import { v4 as uuidv4 } from "uuid";
 
 export default {
 	props: {
+		iconSize: {
+			default: "32",
+		},
 		portal: {
 			default: false,
 		},

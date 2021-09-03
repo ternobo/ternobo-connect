@@ -5,17 +5,17 @@
 
 		<div class="reply-to-container" v-if="replyTo != undefined && comment.replyto.page">
 			<span>
-				<i class="material-icons">reply</i> {{ __.get("content/comments.reply-to") }} <strong class="font-demibold">{{ comment.replyto.page.name }}</strong>
+				{{ __.get("content/comments.reply-to") }} <strong class="text-grey-600 font-demibold">{{ comment.replyto.page.name }}</strong>
 			</span>
 		</div>
 
-		<div class="comment" v-if="!deleted">
+		<div class="comment">
 			<div class="comment-header">
 				<wire-link :href="'/' + comment.page.slug" class="d-flex align-items-center">
 					<img :src="comment.page.profile" class="profile-xsm" />
 					<div class="pagedetail">
 						<span class="name">
-							<strong> {{ comment.page.name }} <i v-if="comment.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+							{{ comment.page.name }}
 						</span>
 						<small class="short-bio" v-if="comment.page.short_bio">
 							{{ comment.page.short_bio }}
@@ -53,35 +53,25 @@
 					</div>
 				</div>
 			</div>
-			<div class="comment-body" ref="body">
-				{{ comment.text }}
-			</div>
-		</div>
-
-		<div class="w-100 d-flex align-content-center justify-content-between pt-2">
-			<div>
-				<div @click="showLikes = true" class="d-flex post-likes-text text-muted clickable" v-if="comment.mutual_likes != null && comment.mutual_likes.length > 0">
-					<span class="me-1">{{ __.get("content/posts.liked-text") }}</span>
-					<wire-link v-if="comment.mutual_likes[0]" :href="'/' + comment.mutual_likes[0].page.slug" class="text-dark">
-						<strong class="text-light">{{ comment.mutual_likes[0].page.name }}</strong>
-					</wire-link>
-					<div v-if="comment.mutual_likes.length > 1">
-						<span class="ms-1">{{ __.get("contnet/posts.and") }}</span>
-						<wire-link v-if="comment.mutual_likes[1]" :href="'/' + comment.mutual_likes[0].page.slug" class="text-dark">
-							<strong class="text-light">{{ comment.mutual_likes[1].page.name }}</strong>
-						</wire-link>
+			<div class="comment-body">{{ comment.text }}</div>
+			<div class="comment-footer">
+				<div>
+					<div @click="showLikes = true" class="likes clickable" v-if="comment.mutual_likes != null && comment.mutual_likes.length > 0">
+						<span class="me-1">{{ __.get("content/posts.liked-text") }} </span>
+						<wire-link v-if="comment.mutual_likes[0]" :href="'/' + comment.mutual_likes[0].page.slug" class="profile-text">{{ comment.mutual_likes[0].page.name }} </wire-link>
+						<span v-if="comment.mutual_likes.length > 1">
+							<span>{{ __.get("content/posts.and") }} </span>
+							<wire-link v-if="comment.mutual_likes[1]" :href="'/' + comment.mutual_likes[0].page.slug" class="profile-text">{{ comment.mutual_likes[1].page.name }} </wire-link>
+						</span>
+						<span class="mx-1" v-if="comment.mutual_likes.length > 2"> {{ __.get("content/posts.and") }} ... </span>
 					</div>
-					<span class="mx-1" v-if="comment.mutual_likes.length > 2"> {{ __.get("contnet/posts.and") }} ... </span>
 				</div>
-			</div>
-			<div class="actions">
-				<small class="clickable me-1" @click="loadReplies(false)" v-if="replies_count > 0 && replyTo == undefined">
-					<strong :class="{ 'text-muted': !showReplies, 'text-dark': showReplies }"> {{ replies_count }} {{ __.choice("application.comment", replies_count) }} </strong>
-				</small>
-				<i @click="loadReplies" :class="{ 'material-icons-outlined': !showReplies || !showNewComment, 'material-icons text-dark': showReplies && showNewComment }" class="hover-dark clickable"> insert_comment </i>
-				<i @click="likeComment" v-if="!checkUser(comment.page.user_id)" class="hover-dark clickable material-icons" :class="{ 'text-danger': liked }">
-					{{ liked ? "favorite" : "favorite_border" }}
-				</i>
+				<div class="actions">
+					<span class="replies-text clickable" @click="loadReplies">{{ replies_count }} {{ __.choice("application.comment", replies_count) }}</span>
+					<i @click="likeComment" v-if="!checkUser(comment.page.user_id)" class="hover-dark clickable material-icons" :class="{ 'text-danger': liked }">
+						{{ liked ? "favorite" : "favorite_border" }}
+					</i>
+				</div>
 			</div>
 		</div>
 
@@ -151,29 +141,22 @@ export default {
 			}
 			axios.post(this.$APP_URL + "/comments/" + this.comment.id + "/like");
 		},
-		loadReplies(newComment = true) {
-			if (this.showReplies && !this.showNewComment && newComment) {
-				this.showNewComment = newComment;
-			} else {
-				this.showNewComment = newComment;
-				this.showReplies = !this.showReplies;
-			}
-
-			if (this.showReplies) {
-				this.repliesLoading = true;
-				axios
-					.post(this.$APP_URL + "/comments/" + this.comment.id + "/replies")
-					.then((response) => {
-						const data = response.data;
-						if (data.result) {
-							this.next_page_url = data.data.next_page_url;
-							this.replies = data.data.data;
-						}
-						this.repliesLoading = false;
-					})
-					.catch((error) => console.log(error))
-					.then(() => (this.repliesLoading = false));
-			}
+		loadReplies() {
+			this.showNewComment = true;
+			this.repliesLoading = true;
+			this.showReplies = !this.showReplies;
+			axios
+				.post(this.$APP_URL + "/comments/" + this.comment.id + "/replies")
+				.then((response) => {
+					const data = response.data;
+					if (data.result) {
+						this.next_page_url = data.data.next_page_url;
+						this.replies = data.data.data;
+					}
+					this.repliesLoading = false;
+				})
+				.catch((error) => console.log(error))
+				.then(() => (this.repliesLoading = false));
 		},
 		deleteComment() {
 			this.deleted = true;

@@ -80,6 +80,17 @@ $gray-500: #757575 !default;
 $gray-600: #424242 !default;
 $black: #191919 !default;
 
+$gray-theme: (
+    '50':$gray-50,
+    '100':$gray-100,
+    '200':$gray-200,
+    '300':$gray-300,
+    '400':$gray-400,
+    '500':$gray-500,
+    '600':$gray-600,
+);
+
+
 // Base colors definitions
 $blue: #0898DF !default;
 $red: #F44336 !default;
