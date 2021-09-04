@@ -548,7 +548,6 @@ class User extends Authenticatable implements Messageable
                 if ($prevGroup != "unset" && isset($groups[$prevGroup]) && !$groups[$index]["updated_at"]->isSameDay($groups[$prevGroup]["updated_at"])) {
                     $index++;
                 }
-
             } else {
                 $notification = $notification->toArray();
                 $group = $this->createNotificationGroup($notification['notifiable_id']);
@@ -597,22 +596,6 @@ class User extends Authenticatable implements Messageable
         return $array;
     }
 
-    public function forceDelete()
-    {
-        $this->activeSessions()->forceDelete();
-        $this->aboutData()->forceDelete();
-        $this->likes()->forceDelete();
-        $this->commets()->forceDelete();
-        $this->followers()->forceDelete();
-        $this->followings()->forceDelete();
-        $this->actions()->forceDelete();
-        $this->posts()->forceDelete();
-        $this->skills()->forceDelete();
-        $this->pages()->forceDelete();
-        $this->bookmarks()->forceDelete();
-        return parent::forceDelete();
-    }
-
     public function makePage()
     {
         $page = new Page();
@@ -651,5 +634,4 @@ class User extends Authenticatable implements Messageable
         }
         return parent::save();
     }
-
 }

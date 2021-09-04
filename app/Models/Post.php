@@ -181,17 +181,6 @@ class Post extends Model
         return $comments;
     }
 
-    public function delete()
-    {
-        $this->notifications()->delete();
-        $this->bookmarks()->delete();
-        $this->comments()->delete();
-        $this->actions()->delete();
-        $this->slides()->delete();
-        $this->blocks()->delete();
-        return parent::delete();
-    }
-
     public function mutualLikes()
     {
         if (Auth::check()) {
