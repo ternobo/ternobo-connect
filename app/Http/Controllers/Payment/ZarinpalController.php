@@ -25,7 +25,7 @@ class ZarinpalController extends Controller
 
         $phone = $request->phone;
 
-        $user = User::query()->where("phone", $phone)->first();
+        $user = Auth::check() ? Auth::user() : User::query()->where("phone", $phone)->first();
 
         $gateways = UserOption::getOption("payment_gateways", [
             'paypal' => [
@@ -106,7 +106,6 @@ class ZarinpalController extends Controller
                 return view("payment-done");
             } catch (InvalidPaymentException $exception) {
                 return view("payment-error");
-
             }
         } else {
             $transaction->success = false;

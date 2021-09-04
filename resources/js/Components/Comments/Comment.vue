@@ -53,7 +53,10 @@
 					</div>
 				</div>
 			</div>
-			<div class="comment-body">{{ comment.text }}</div>
+			<div class="comment-body" dir="auto">
+				<span class="donate-badge" v-if="comment.tip_amount != null"> <i class="material-icons-outlined">savings</i> IRT {{ formatNumber(comment.tip_amount, "0,0") }}</span>
+				<span dir="auto">{{ comment.text }}</span>
+			</div>
 			<div class="comment-footer">
 				<div>
 					<div @click="showLikes = true" class="likes clickable" v-if="comment.mutual_likes != null && comment.mutual_likes.length > 0">
@@ -67,7 +70,7 @@
 					</div>
 				</div>
 				<div class="actions">
-					<span class="replies-text clickable" @click="loadReplies">{{ replies_count }} {{ __.choice("application.comment", replies_count) }}</span>
+					<span class="replies-text clickable" @click="loadReplies">{{ replies_count > 0 ? replies_count : "" }} {{ __.choice("content/comments.reply", replies_count) }}</span>
 					<i @click="likeComment" v-if="!checkUser(comment.page.user_id)" class="hover-dark clickable material-icons" :class="{ 'text-danger': liked }">
 						{{ liked ? "favorite" : "favorite_border" }}
 					</i>

@@ -18,7 +18,6 @@ class CommentController extends Controller
         $comments = Comment::query()
             ->with("mutualLikes")
             ->with("page")
-
             ->withCount("replies")
             ->whereNull("reply_to")
             ->where("post_id", $post)
