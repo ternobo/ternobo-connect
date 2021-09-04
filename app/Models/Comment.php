@@ -101,7 +101,6 @@ class Comment extends Model
     }
 
     /**
-     * Get the comment replies
      * @param integer $action
      * @return type
      */
@@ -189,5 +188,4 @@ class Comment extends Model
         $this->replies()->delete();
         return parent::delete();
     }
-
 }
