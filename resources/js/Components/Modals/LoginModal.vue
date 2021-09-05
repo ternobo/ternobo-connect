@@ -1,30 +1,27 @@
 <template>
 	<div>
 		<ResetPasswordModal :show.sync="resetpass" @back="(resetpass = false), (showModal = true)"></ResetPasswordModal>
-		<b-modal @hide="onHide" v-model="showModal" hide-footer hide-header no-stacking :centered="true">
-			<div class="d-flex flex-column w-100 aling-items-center">
-				<h5 class="mt-0 font-16 text-center mb-4 w-25" style="border-bottom: 1px solid #000019; width: fit-content; align-self: center; margin-top: 20px; padding-bottom: 10px; padding-left: 0; padding-right: 0">ورود</h5>
-			</div>
-			<div v-if="loginStep" @keydown.enter="login" class="signup-login d-flex flex-column align-items-center justify-content-center clearfix" ref="loginForm" method="POST" action="javascript:;">
-				<div class="w-100">
-					<material-text-field type="text" class="material--sm w-100 bg-transparent mb-2" input-class="w-100" name="username" v-model="username" placeholder="تلفن، شناسه" />
+		<b-modal @hide="onHide" v-model="showModal" hide-footer :title="__.get('application.login')" no-stacking :centered="true">
+			<div v-if="loginStep">
+				<div class="d-flex flex-column">
+					<input type="text" v-model="username" class="form-control mb-4 text-input" :placeholder="__.get('application.username')" />
+					<input type="text" v-model="password" class="form-control text-input" :placeholder="__.get('application.password')" />
 				</div>
-				<div class="w-100" style="margin-top: 12px">
-					<material-text-field type="password" class="material--sm w-100 bg-transparent" input-class="w-100" name="password" v-model="password" placeholder="رمزعبور" />
-					<a class="text-primary float-left font-11 clickable" style="margin-top: 3px" @click="resetpass = true">فراموشی رمزعبور</a>
+				<div class="mt-5">
+					<loading-button @click.native="login" :loading="loading" class="btn btn-primary w-100">{{ __.get("application.login") }}</loading-button>
 				</div>
-				<loading-button @click.native="login" :loading="loading" class="btn btn-dark mt-2" type="button"> ورود </loading-button>
 			</div>
-			<div v-else-if="VerifyStep" @keydown.enter="verifyCode" class="signup-login d-flex flex-column align-items-center justify-content-center clearfix" ref="loginForm" method="POST" action="javascript:;">
-				<p class="mb-3">{{ verifyText }}</p>
-				<div class="text-left mb-3">
-					<otp-input input-class="w-100" class="material--sm mb-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" v-if="!recovery" />
-					<small class="text-muted clickable" @click="recovery = true" v-if="!recovery">استفاده از کد بازیابی</small>
+			<div v-else>
+				<div class="d-flex flex-column align-items-center">
+					<otp-input input-class="w-100" class="material--sm mb-4 text-center" @completed="verifyCode" v-model="code" :numInputs="6" v-if="!recovery" />
+					<small class="text-muted clickable" @click="recovery = true" v-if="!recovery">{{ __.get("landing.use_recovery_code") }}</small>
 
-					<input class="form-control" placeholder="کد بازیابی را وارد کنید" v-model="code" maxlength="8" v-if="recovery" />
-					<small class="text-muted clickable" @click="recovery = false" v-if="recovery">استفاده از کد تایید</small>
+					<input class="form-control mb-4 text-input" :placeholder="__.get('landing.enter_recover_code')" v-model="code" maxlength="8" v-if="recovery" />
+					<small class="text-muted clickable" @click="recovery = false" v-if="recovery">{{ __.get("landing.use_auth_code") }}</small>
 				</div>
-				<loading-button :loading="loading" class="btn btn-dark" @click.native="verifyCode">تایید</loading-button>
+				<div class="mt-5">
+					<loading-button @click.native="verifyCode" :loading="loading" class="btn btn-primary w-100">{{ __.get("application.login") }}</loading-button>
+				</div>
 			</div>
 		</b-modal>
 	</div>
@@ -43,7 +40,7 @@ export default {
 			resetpass: false,
 			loading: false,
 			loginStep: true,
-			VerifyStep: false,
+			verifyStep: false,
 
 			recovery: false,
 
@@ -75,17 +72,19 @@ export default {
 					.post("/auth/verify-tfa", data)
 					.then((response) => {
 						if (response.data.result) {
-							window.location = "/feed";
+							window.location.reload();
 						} else {
 							this.toast(__.get("messages.invalid-code"));
 						}
-						this.loading = false;
 					})
-					.catch((err) => (this.loading = true));
+					.catch((error) => {
+						console.log(error);
+						this.toast(__.get("messages.connection-error"));
+					})
+					.then(() => (this.loading = false));
 			}
 		},
 		login() {
-			const $this = this;
 			if (this.username !== undefined && this.username !== "" && this.password !== undefined && this.password !== "") {
 				this.loading = true;
 				var data = new FormData();
@@ -101,7 +100,7 @@ export default {
 				axios(config)
 					.then((response) => {
 						if (response.data.result) {
-							window.location = "/feed";
+							window.location.reload();
 						} else if (response.data.two_factor) {
 							$this.loginStep = false;
 							$this.VerifyStep = true;
@@ -114,13 +113,12 @@ export default {
 							const errors = response.data.errors;
 							this.handleError(errors);
 						}
-						$this.loading = false;
 					})
 					.catch((error) => {
 						console.log(error);
-						this.loading = false;
 						this.toast(__.get("messages.connection-error"));
-					});
+					})
+					.then(() => (this.loading = false));
 			}
 		},
 	},

@@ -19,10 +19,10 @@
 									<label class="mb-12px font-12">{{ __.get("landing.auth_app_text") }}</label>
 									<div class="text-start d-flex flex-column align-items-center">
 										<otp-input input-class="w-100" class="material--sm mb-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" v-if="!recovery" />
-										<small class="text-muted clickable" @click="recovery = true" v-if="!recovery"></small>
+										<small class="text-muted clickable" @click="recovery = true" v-if="!recovery">{{ __.get("landing.user_recovery_code") }}</small>
 
 										<input class="form-control" :placeholder="__.get('landing.enter_recover_code')" v-model="code" maxlength="8" v-if="recovery" />
-										<small class="text-muted clickable" @click="recovery = false" v-if="recovery">{{ __.get("landing.user_recovery_code") }}</small>
+										<small class="text-muted clickable" @click="recovery = false" v-if="recovery">{{ __.get("landing.use_auth_code") }}</small>
 									</div>
 									<div class="login-button-container">
 										<loading-button :loading="loading" class="btn btn-primary" @click.native="verifyCode">{{ __.get("application.login") }}</loading-button>
