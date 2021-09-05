@@ -26,13 +26,13 @@
             }
 
             .short-bio {
-                font-size: 0.75rem;
+                font-size: 0.625rem;
                 color: $grey;
             }
         }
 
         .comment-time {
-            margin-left: 0.5rem;
+            margin-left: 0.75rem;
             color: $grey;
             font-size: 0.625rem;
         }
@@ -41,21 +41,28 @@
     .comment-body {
         padding: 0.25rem;
         width: 100%;
-        unicode-bidi: -moz-plaintext;
-        unicode-bidi: plaintext;
+        line-height: 24px;
         text-align: start;
         flex: 1 1 auto;
         color: $text-color;
         font-size: 0.875rem;
 
-        >.donate-badge {
+        .donate-badge {
+            width: -webkit-max-content;
+            width: -moz-max-content;
+            width: max-content;
+            height: 24px;
+
             background: $white;
             color: $green;
             padding: 0.25rem;
             font-size: 10px;
             font-weight: bold;
+            letter-spacing: 0.75px;
+            border-radius: 4px;
 
             >i {
+                margin-left: 4px;
                 color: $green;
                 font-size: 16px;
             }

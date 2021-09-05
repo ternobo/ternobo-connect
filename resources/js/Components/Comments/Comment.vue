@@ -12,7 +12,7 @@
 		<div class="comment">
 			<div class="comment-header">
 				<wire-link :href="'/' + comment.page.slug" class="d-flex align-items-center">
-					<img :src="comment.page.profile" class="profile-xsm" />
+					<img :src="comment.page.profile" class="profile-xxsm" />
 					<div class="pagedetail">
 						<span class="name">
 							{{ comment.page.name }}
@@ -27,7 +27,7 @@
 					<div>
 						<dropdown-menu size="lg" variant="white" toggle-class="text-decoration-none" no-caret>
 							<template v-slot:button class="p-0">
-								<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
+								<i class="material-icons openmenu clickale text-muted hover-dark font-20">more_horiz</i>
 							</template>
 							<dropdown-item v-if="!checkUser(comment.page.user_id)">
 								<div class="d-flex align-items-center" @click="showReport = true">
@@ -54,7 +54,9 @@
 				</div>
 			</div>
 			<div class="comment-body" dir="auto">
-				<span class="donate-badge" v-if="comment.tip_amount != null"> <i class="material-icons-outlined">savings</i> IRT {{ formatNumber(comment.tip_amount, "0,0") }}</span>
+				<span
+					><span class="donate-badge" v-if="comment.tip_amount != null"> <i class="material-icons-outlined">savings</i> IRT {{ formatNumber(comment.tip_amount, "0,0") }}</span></span
+				>
 				<span dir="auto">{{ comment.text }}</span>
 			</div>
 			<div class="comment-footer">
@@ -70,8 +72,8 @@
 					</div>
 				</div>
 				<div class="actions">
-					<span class="replies-text clickable" @click="loadReplies">{{ replies_count > 0 ? replies_count : "" }} {{ __.choice("content/comments.reply", replies_count) }}</span>
-					<i @click="likeComment" v-if="!checkUser(comment.page.user_id)" class="hover-dark clickable material-icons" :class="{ 'text-danger': liked }">
+					<span class="replies-text clickable" @click="loadReplies">{{ replies_count > 0 ? replies_count : "" }} {{ __.choice("content/comments.reply", replies_count == 0 ? 1 : replies_count) }}</span>
+					<i @click="likeComment" v-if="!checkUser(comment.page.user_id)" class="hover-dark clickable material-icons font-20 ms-12px" :class="{ 'text-danger': liked }">
 						{{ liked ? "favorite" : "favorite_border" }}
 					</i>
 				</div>
@@ -88,7 +90,7 @@
 					</div>
 				</div>
 				<div class="w-100 d-flex align-items-center justify-content-center p-2">
-					<loading-button v-if="next_page_url !== null" @click.native="loadMore" class="btn btn-outline-dark" :loading="loadingMore">{{ __.get("application.load-more") }}</loading-button>
+					<loading-button v-if="next_page_url !== null" @click.native="loadMore" class="btn btn-transparent font-12" :loading="loadingMore">{{ __.get("application.load-more") }}</loading-button>
 				</div>
 			</div>
 		</transition>
@@ -107,7 +109,7 @@ import CommentsLoading from "../Skeletons/CommentsLoading.vue";
 export default {
 	mounted() {
 		this.liked = this.comment.is_liked;
-		this.replies_count = this.comment.replies_count;
+		this.replies_count = this.comment.replies_count ? this.comment.replies_count : 0;
 		twemoji.parse(this.$refs.body);
 	},
 	data() {
