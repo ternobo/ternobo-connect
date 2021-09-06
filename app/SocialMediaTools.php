@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 use App\Models\Notification;
@@ -20,6 +21,13 @@ class SocialMediaTools
 
     public static $imageRatio = 4 / 3;
 
+    /**
+     * return list of mention 
+     * 
+     * @param $text - text
+     * 
+     * @return array
+     */
     public static function getHashtags($text)
     {
         $hashtags = array();
@@ -28,6 +36,13 @@ class SocialMediaTools
         return $matches[1];
     }
 
+    /**
+     * return list of mention 
+     * 
+     * @param $text text
+     * 
+     * @return array
+     */
     public static function getMentions($text)
     {
         $hashtags = array();
@@ -36,6 +51,11 @@ class SocialMediaTools
         return $matches[1];
     }
 
+    /**
+     * Repalce urls with <a> tag
+     * 
+     * @param string $text
+     */
     public static function replaceUrls($text)
     {
         // The Regular Expression filter
@@ -48,24 +68,46 @@ class SocialMediaTools
         }, $text));
     }
 
+    /**
+     * Remove script, style and whitespace text nodes from html content -- Prevent XSS
+     * 
+     * @param $content html
+     * 
+     * @return string
+     */
     public static function safeHTML($content)
     {
         $dom = new Dom();
         $dom->setOptions((new Options())
-                ->setRemoveSmartyScripts(true)
-                ->setPreserveLineBreaks(true)
-                ->setWhitespaceTextNode(true)
-                ->setRemoveScripts(true)
-                ->setRemoveStyles(true));
+            ->setRemoveSmartyScripts(true)
+            ->setPreserveLineBreaks(true)
+            ->setWhitespaceTextNode(true)
+            ->setRemoveScripts(true)
+            ->setRemoveStyles(true));
         $dom->loadStr($content);
         return $dom->outerHtml;
     }
 
+    /**
+     * replace mentions with with <a> tag
+     * 
+     * @param $text
+     * 
+     * @return string
+     */
     public static function replaceMentions($text)
     {
         return preg_replace('/\B@(\w+)/u', "<a href=" . url("/$1") . ">$0</a>", $text);
     }
 
+    /**
+     * replace hashtags with with <a> tag
+     * 
+     * @param $text
+     * @param $limit maximum number of hashtags to replace
+     * 
+     * @return string
+     */
     public static function replacHashtags($text, $limit)
     {
         return preg_replace_callback('/\B#(\w+)/u', function ($matches) {
@@ -73,6 +115,14 @@ class SocialMediaTools
         }, $text, $limit);
     }
 
+    /**
+     * Resize and optimize image for web
+     * 
+     * @param $media image path
+     * @param $quality
+     * 
+     * @return string new image path
+     */
     public static function uploadPostImage($media, $quality = 70)
     {
         $path = "storage/app/$media";
@@ -92,17 +142,39 @@ class SocialMediaTools
             $constraint->upsize();
             $constraint->aspectRatio();
         });
-
     }
 
-    public static function callMentions($mentions, $post_id)
+    /**
+     * Call Mentions inside text
+     * 
+     * @param array $mentions
+     * @param int $mentionable_id
+     * @param string $type - post or comment
+     * @param int $post_id
+     */
+    public static function callMentions($mentions, $mentionable_id, $type = "post", $post_id = 0)
     {
-        foreach ($mentions as $mention) {
-            $page = Page::query()->where("slug", $mention)->first();
-            if ($page instanceof Page) {
-                Notification::sendNotification("mention", $post_id, $page->id, $post_id);
+        $sendCommentNotification = function () use ($mentionable_id, $post_id, $mentions) {
+            foreach ($mentions as $mention) {
+                $page = Page::query()->where("slug", $mention)->first();
+                if ($page instanceof Page) {
+                    Notification::sendNotification("mention_comment", $mentionable_id, $page->id, $post_id);
+                }
             }
+        };
+
+        $sendPostNotification = function () use ($mentionable_id, $mentions) {
+            foreach ($mentions as $mention) {
+                $page = Page::query()->where("slug", $mention)->first();
+                if ($page instanceof Page) {
+                    Notification::sendNotification("mention", $mentionable_id, $page->id, $mentionable_id);
+                }
+            }
+        };
+        if ($type == "post") {
+            $sendPostNotification();
+        } else {
+            $sendCommentNotification();
         }
     }
-
 }

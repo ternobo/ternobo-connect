@@ -61,11 +61,9 @@ class Comment extends Model
      */
 
     protected $with = ["page"];
-
-    public function getUser()
-    {
-        return Page::find($this->page_id);
-    }
+    protected $casts = [
+        "tags" => "array"
+    ];
 
     public function mutualLikes()
     {
