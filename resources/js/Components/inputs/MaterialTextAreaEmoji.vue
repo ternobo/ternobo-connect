@@ -85,7 +85,7 @@ export default {
 		},
 		onInput() {
 			let text = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.input.innerHTML);
-			text = TextareaParser.escapeHTML(TextareaParser.unescapeHtml(text));
+			text = TextareaParser.replaceTextEditorMentions(TextareaParser.unescapeHtml(text));
 			this.val = text;
 			this.$emit("input", text);
 			this.$nextTick(() => {

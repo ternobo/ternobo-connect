@@ -1,6 +1,8 @@
 <template>
 	<div class="sendcomment clearfix" v-if="$store.state.user != null">
-		<MaterialTextAreaEmoji ref="input" v-model="text" input-class="w-100" maxlength="1000" class="material--xsm w-100" :placeholder="__.get('content/comments.comment-ph')" name="text"></MaterialTextAreaEmoji>
+		<mentionable :disabledTop="true" class="w-100">
+			<MaterialTextAreaEmoji ref="input" v-model="text" input-class="w-100" maxlength="1000" class="material--xsm w-100" :placeholder="__.get('content/comments.comment-ph')" name="text"></MaterialTextAreaEmoji>
+		</mentionable>
 		<div class="d-flex w-100 mt-3 align-items-center justify-content-between">
 			<div class="d-flex align-items-center">
 				<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xxxsm me-3 mb-0" imgClass="profile-xxxsm" :src="$store.state.user.profile" />
@@ -14,6 +16,7 @@
 <script>
 import EmojiPicker from "../EmojiPicker/EmojiPicker.vue";
 import MaterialTextAreaEmoji from "../inputs/MaterialTextAreaEmoji.vue";
+import Mentionable from "../Mentionable.vue";
 export default {
 	props: {
 		post: {
@@ -24,6 +27,16 @@ export default {
 		replyTo: {
 			default: undefined,
 			required: false,
+		},
+	},
+	provide: {
+		replaceMention(key, value) {
+			const classes = key == "@" ? "mention-item" : "text-action tag-item";
+			const element = document.createElement("span");
+			element.className = classes;
+			element.innerHTML = key + value;
+			element.contentEditable = false;
+			return element;
 		},
 	},
 	data() {
@@ -67,6 +80,7 @@ export default {
 	components: {
 		MaterialTextAreaEmoji,
 		EmojiPicker,
+		Mentionable,
 	},
 };
 </script>
