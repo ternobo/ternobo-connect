@@ -54,7 +54,7 @@ require base_path("routes/auth_routes.php");
  * Auth End
  */
 
-Route::group(['auth'], function () {
+Route::middleware([Authenticate::class])->group(function () {
     /**
      * Private Files
      */
@@ -91,7 +91,7 @@ Route::group(['auth'], function () {
     Route::post("/tags/{tag}/follow", "Content\TagsController@toggleFollowTag");
     //Follow Actions End
 
-    Route::middleware([FollowMiddlware::class, Authenticate::class])->group(function () {
+    Route::middleware([FollowMiddlware::class])->group(function () {
         Route::get('/feed', 'Content\FeedController@index')->name('home');
 
         Route::post("/can-donate", "Donation\DontaionsController@canEnableDonate");
@@ -126,15 +126,11 @@ Route::group(['auth'], function () {
         // Route::post("/connect/{user_id}", "Profile\ConnectionsController@connectionRequest");
         // Route::post("/disconnect/{user_id}", "Profile\ConnectionsController@disconnect");
 
-        // Follows
-        Route::get("/followings", "Profile\ConnectionsController@followings");
-        Route::get("/followers", "Profile\ConnectionsController@followers");
-        //end Connections
-
         //Start Page Edit
         Route::prefix('/save')->group(function () {
             Route::post("/resume", "Profile\ProfileController@saveAboutMe");
         });
+
         Route::prefix("/usersave")->group(function () {
             Route::post("/profile", "Profile\PageController@saveProfile");
             Route::post("/bio", "Profile\PageController@saveBio");
