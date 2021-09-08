@@ -70,10 +70,10 @@
 </template>
 
 <script>
-import Button from "../../../vendor/laravel/jetstream/stubs/inertia/resources/js/Jetstream/Button.vue";
 import ForgotPassword from "../Components/App/ForgotPassword.vue";
 import LoginHeader from "../Components/App/LoginHeader.vue";
 import OtpInput from "../Components/OtpInput/OtpInput.vue";
+import App from "../Layouts/App.vue";
 export default {
 	data() {
 		return {
@@ -91,6 +91,7 @@ export default {
 			code: null,
 		};
 	},
+	layout: App,
 	methods: {
 		verifyCode() {
 			if (this.code != null) {
@@ -176,6 +177,6 @@ export default {
 		];
 		this.image = images[imageIndex];
 	},
-	components: { LoginHeader, Button, ForgotPassword, OtpInput },
+	components: { LoginHeader, ForgotPassword, OtpInput },
 };
 </script>
