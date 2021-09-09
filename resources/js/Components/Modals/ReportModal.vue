@@ -105,6 +105,7 @@ export default {
 					if (response.data.result) {
 						this.toast(__.get("messages.done-job-message"), "check", "text-success");
 						this.$emit("update:show", false);
+						this.$emit("reported");
 					} else {
 						this.handleError(response.data.errors);
 					}

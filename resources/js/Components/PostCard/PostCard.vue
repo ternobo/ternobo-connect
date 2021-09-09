@@ -20,7 +20,7 @@
 			<div class="actions position-relative">
 				<wire-link :href="`/${post_data.page.slug}/activities?filters={&quot;category&quot;: &quot;${this.post_data.category_id}&quot;}`" class="category-item" v-if="this.post_data.category != null">{{ this.post_data.category.name }}</wire-link>
 				<div>
-					<post-menu :post="post" v-if="!isEmbed" @embed="showEmbed = true" @edit="edit = true" @deleted="doDelete"></post-menu>
+					<post-menu :post="post" v-if="!isEmbed" @reported="deleted = true" @embed="showEmbed = true" @edit="edit = true" @deleted="doDelete"></post-menu>
 				</div>
 			</div>
 		</div>
