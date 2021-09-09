@@ -5,6 +5,7 @@ namespace App\Models;
 use App\HasPage;
 use App\Scopes\BlockedPageContentScope;
 use App\Scopes\PostDraftScope;
+use App\Scopes\ReportedPostScope;
 use App\SocialMediaTools;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -99,6 +100,11 @@ class Post extends Model
     public function blocks()
     {
         return $this->hasManyThrough(SlideBlock::class, PostSlide::class, "post_id", "slide_id");
+    }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class, "reportable_id")->where("reportable_type", Post::class);
     }
 
     public function deleteBlocks($deleteFile = false)
@@ -323,5 +329,6 @@ class Post extends Model
     {
         static::addGlobalScope(new PostDraftScope);
         static::addGlobalScope(new BlockedPageContentScope);
+        static::addGlobalScope(new ReportedPostScope);
     }
 }

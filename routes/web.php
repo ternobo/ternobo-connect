@@ -3,6 +3,7 @@
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\FollowMiddlware;
 use App\Http\Middleware\WebAdminMiddleware;
+use App\Models\Post;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Passport;
