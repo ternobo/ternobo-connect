@@ -104,9 +104,9 @@ class Page extends Model
         return BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $this->id)->exists();
     }
 
-    public function isBlocked($user)
+    public function isBlockedMe()
     {
-        return BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $user)->exists();
+        return BlockedPage::query()->where("user_id", $this->user_id)->where("page_id", Ternobo::currentPage()->id)->exists();
     }
 
     // override the toArray function (called by toJson)
@@ -125,7 +125,6 @@ class Page extends Model
         if ($data['blocked']) {
             $data['skills'] = null;
             $data['about'] = null;
-
         }
         return $data;
     }
@@ -261,5 +260,4 @@ class Page extends Model
 
         return !($query->where("slug", $slug)->first() instanceof Page);
     }
-
 }

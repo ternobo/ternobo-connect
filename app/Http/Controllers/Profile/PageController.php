@@ -29,9 +29,6 @@ class PageController extends Controller
             ->with("aboutData")
             ->with("contactData")
             ->with("categories")
-        // ->with("education")
-        // ->with("expreciences")
-        // ->with("achievements")
             ->with("skills")
             ->where("slug", $page)
             ->firstOrFail();
@@ -68,6 +65,10 @@ class PageController extends Controller
 
     public function handlePersonalProfile(Page $page, $location = "home", Request $request, $category = null)
     {
+        if (Auth::check() && $page->isBlocked()) {
+            return abort(404);
+        }
+
         SEOTools::setTitle($page->name);
         $page->load("user.invitedBy");
         if ($page->about !== null && $page->about !== "") {
@@ -455,5 +456,4 @@ class PageController extends Controller
             'mutuals' => $data,
         ]);
     }
-
 }
