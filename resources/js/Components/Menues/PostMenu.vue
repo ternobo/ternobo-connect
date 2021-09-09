@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<report-modal :show.sync="showReport" :post-id="post.id"></report-modal>
+		<report-modal @reported="$emit('reported')" :show.sync="showReport" :post-id="post.id"></report-modal>
 		<div v-if="$root.isDesktop">
 			<confirm-modal title="دنبال نکردن" @confirm="unfollow" :show.sync="showConfirm"> آیا دنبال نکردن {{ post.page.name }} تایید می‌کنید. </confirm-modal>
 			<dropdown-menu size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
