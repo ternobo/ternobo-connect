@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\LikeEvent;
 use App\HTMLMinifier;
+use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\FollowMiddlware;
 use App\Http\Requests\PostRequest;
 use App\Models\Action;
