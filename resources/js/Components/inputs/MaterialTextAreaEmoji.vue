@@ -79,7 +79,6 @@ export default {
 		},
 
 		insertEmoji(emoji) {
-			this.$refs.input.focus();
 			window.document.execCommand("insertHTML", false, twemoji.parse(emoji));
 			this.onInput();
 		},
