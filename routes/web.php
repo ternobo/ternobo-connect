@@ -202,7 +202,6 @@ Route::middleware([Authenticate::class])->group(function () {
     Route::post("/posts/{post:id}/embed", "PostController@getEmbed");
 
     Route::post("/posts/{id}/publish", "PostController@publishPost");
-    Route::resource("/posts", "PostController")->only(['store', 'update', 'destroy', "show"]);
 
     //Chats
     Route::prefix("chats")->group(function () {
@@ -268,6 +267,9 @@ Route::middleware([Authenticate::class])->group(function () {
     Route::get("/invite", "InviteLinksController@index");
 });
 //End Auth
+
+
+Route::resource("/posts", "PostController")->only(['store', 'update', 'destroy', "show"]);
 
 Route::get("/tags/{name}", "Content\TagsController@index");
 

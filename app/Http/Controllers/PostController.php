@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\LikeEvent;
 use App\HTMLMinifier;
+use App\Http\Middleware\FollowMiddlware;
 use App\Http\Requests\PostRequest;
 use App\Models\Action;
 use App\Models\Category;
@@ -28,6 +29,13 @@ use Ternobo\TernoboWire\TernoboWire;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware([FollowMiddlware::class, Authenticate::class])->except([
+            "show"
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.
