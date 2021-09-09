@@ -1,7 +1,7 @@
 <template>
 	<mentionable :max-tags="3" v-bind="$attrs" class="quote-editor textarea-content w-100" @click="focus">
 		<i class="material-icons-outlined text-grey me-2">format_quote</i>
-		<div ref="editable" class="editor--text-input" :placeholder="__.get('content/posts.enter-your-text')" contenteditable @blur="onBlur" @focus="onFocus" @paste="onPaste" @input="input"></div>
+		<div ref="editable" class="editor--text-input" @keydown.enter="onEnter" :placeholder="__.get('content/posts.enter-your-text')" contenteditable @blur="onBlur" @focus="onFocus" @paste="onPaste" @input="input"></div>
 	</mentionable>
 </template>
 
@@ -28,6 +28,12 @@ export default {
 		},
 	},
 	methods: {
+		onEnter(e) {
+			if (!e.shiftKey) {
+				e.preventDefault();
+				this.$emit("addParagraph");
+			}
+		},
 		onBackspace(e) {
 			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
 			content = TextareaParser.unescapeHtml(content);
