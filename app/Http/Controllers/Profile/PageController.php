@@ -65,8 +65,9 @@ class PageController extends Controller
 
     public function handlePersonalProfile(Page $page, $location = "home", Request $request, $category = null)
     {
+
         if (Auth::check() && $page->isBlockedMe()) {
-            return abort(404);
+            return TernoboWire::render("NotAvailable", [], false, 404);
         }
 
         SEOTools::setTitle($page->name);
