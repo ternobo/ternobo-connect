@@ -23,6 +23,9 @@
 					</div>
 				</wire-link>
 				<div class="d-flex align-items-center">
+					<span>
+					<span class="donate-badge" v-if="comment.tip_amount != null"> <i class="material-icons-outlined">savings</i> IRT {{ formatNumber(comment.tip_amount, "0,0") }}</span>
+				</span>
 					<span class="comment-time">{{ comment_time }}</span>
 					<div>
 						<dropdown-menu size="lg" variant="white" toggle-class="text-decoration-none" no-caret>
@@ -54,9 +57,7 @@
 				</div>
 			</div>
 			<div class="comment-body" dir="auto">
-				<span>
-					<span class="donate-badge" v-if="comment.tip_amount != null"> <i class="material-icons-outlined">savings</i> IRT {{ formatNumber(comment.tip_amount, "0,0") }}</span>
-				</span>
+				
 				<span dir="auto">
 					<social-content :text="comment.text" :tags="comment.tags" />
 				</span>
