@@ -66,6 +66,7 @@ return [
     'and' => "and",
     "comma" => ",",
     'warning' => "Warning",
+    "profile-not-available" => "This profile is not available.",
 
     "password-strength" => [
         "short" => "Too Short",

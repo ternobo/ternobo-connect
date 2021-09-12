@@ -114,8 +114,8 @@
     &.active {
         label {
             top: 0;
-            padding: 0 4px;
-            margin: 0 8px;
+            padding: 0 0.25rem;
+            margin: 0 0.5rem;
             font-size: 10px;
             transform: translateY(-50%);
         }
@@ -126,7 +126,7 @@
     }
 
     label {
-        margin: 0 12px;
+        margin: 0 1rem;
     }
 }
 

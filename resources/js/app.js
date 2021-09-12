@@ -110,12 +110,13 @@ axios.get(`/translations.js?version=${Date.now()}`).then((response) => {
                 if (seen_request.length > 0) {
                     axios.post("/seenPost", {
                         posts: seen_request
-                    }).then(() => {
-                        Vue.prototype.seen_request = [];
-                    })
+                    }).then(res => { })
+                        .then(() => {
+                            Vue.prototype.seen_request = [];
+                        })
                 }
             }, 3000);
-            ;
+
             window.Echo.connector.socket.on("connection", () => {
                 Echo.connector.socket.emit("clientInfo", { user_id: user.id, name: user.username });
             })

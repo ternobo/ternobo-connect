@@ -316,6 +316,7 @@
             position: relative;
             padding: 1rem 1.5rem;
             padding-bottom: 0;
+            font-size: 0.875rem;
 
             &::before {
                 content: " ";
@@ -470,11 +471,16 @@
     justify-content: flex-start !important;
 }
 
-.post-likes-text {
-    font-size: 0.875rem;
-}
 
 .slider-content {
+    ul {
+        list-style: disc;
+    }
+
+    ol {
+        list-style: num;
+    }
+
     h2 {
         unicode-bidi: -moz-plaintext;
         unicode-bidi: plaintext;

@@ -20,7 +20,7 @@
 			<div class="actions position-relative">
 				<wire-link :href="`/${post_data.page.slug}/activities?filters={&quot;category&quot;: &quot;${this.post_data.category_id}&quot;}`" class="category-item" v-if="this.post_data.category != null">{{ this.post_data.category.name }}</wire-link>
 				<div>
-					<post-menu :post="post" v-if="!isEmbed" @embed="showEmbed = true" @edit="edit = true" @deleted="doDelete"></post-menu>
+					<post-menu :post="post" v-if="!isEmbed" @reported="deleted = true" @embed="showEmbed = true" @edit="edit = true" @deleted="doDelete"></post-menu>
 				</div>
 			</div>
 		</div>
@@ -37,7 +37,7 @@
 				<div>
 					<div class="buttons" v-if="$store.state.user">
 						<i class="material-icons bookmark-icon clickable hover-dark" :class="{ active: bookmarked }" @click="bookmark">{{ bookmarked ? "bookmark" : "bookmark_border" }}</i>
-						<i :class="{ 'material-icons-outlined': !openComment, 'material-icons active': openComment }" v-if="hasComment" v-on:click="openComment = !openComment">comment</i>
+						<a :href="`/posts/${post_data.id}`" target="_blank"><i class="material-icons-outlined" v-if="hasComment">comment</i></a>
 						<i class="material-icons like" v-if="!checkUser(post_data.page.user_id)" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
 					</div>
 				</div>
@@ -59,17 +59,10 @@
 				<span class="mx-1" v-if="post_data.mutual_likes.length > 2"> {{ __.get("content/posts.and") }} ... </span>
 			</div>
 		</div>
-
-		<transition name="slide">
-			<div v-if="openComment">
-				<CommentsList :post="post_data.id"></CommentsList>
-			</div>
-		</transition>
 	</div>
 </template>
 
 <script>
-import CommentsList from "../Comments/CommetsList";
 import EmbedCodeModal from "../Modals/EmbedCodeModal";
 
 import PostMenu from "../Menues/PostMenu.vue";
@@ -90,7 +83,6 @@ export default {
 	},
 
 	components: {
-		CommentsList: CommentsList,
 		EmbedCodeModal: EmbedCodeModal,
 		PostMenu,
 		NewPostModal,

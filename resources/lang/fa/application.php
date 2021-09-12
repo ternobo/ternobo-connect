@@ -34,7 +34,7 @@ return [
     'post' => "محتوا|محتواها",
     'like' => "پسند|پسندها",
     "user" => "کاربر|کاربران",
-    'comment' => "دیدگاه|دیدگاه‌ها",
+    'comment' => "دیدگاه",
     'create-acoount' => "ایجاد حساب",
     'login' => "ورود",
     'signup' => "ثبت نام",
@@ -65,6 +65,7 @@ return [
     'and' => "و",
     "comma" => "،",
     'warning' => "اخطار",
+    "profile-not-available" => "این پروفایل در دسترس نیست",
 
     "password-strength" => [
         "short" => "کوتاه",

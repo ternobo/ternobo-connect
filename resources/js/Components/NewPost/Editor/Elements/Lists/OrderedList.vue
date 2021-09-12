@@ -1,9 +1,7 @@
 <template>
-	<ol class="ordered-list-editor">
-		<li v-for="(item, index) in list" ref="list-item" :key="`ordered_list_${item.id}`">
-			<paragraph :key="`ordered_list_paragraph_${item.id}`" @delete="deleteItem(index)" @addParagraph="onEnter" :content.sync="list[index].text"></paragraph>
-		</li>
-	</ol>
+	<ul class="ordered-list-editor">
+		<paragraph v-for="(item, index) in list" :dir="computedList[index].direction" ref="list-item" :key="`ordered_list_${item.id}`" tag="li" @delete="deleteItem(index)" @addParagraph="onEnter(index)" :content.sync="list[index].text"></paragraph>
+	</ul>
 </template>
 
 <script>
@@ -14,25 +12,58 @@ export default {
 		list: {
 			deep: true,
 			handler() {
-				this.$emit("update:content", this.list);
+				this.$emit(
+					"update:content",
+					this.list.map((item) => item.text)
+				);
 			},
 		},
 	},
+	computed: {
+		computedList() {
+			return this.list.map((item) => {
+				item.direction = this.getDirection(item.text);
+				return item;
+			});
+		},
+	},
+	props: ["content"],
 	components: { Paragraph },
 	methods: {
-		onEnter() {
-			this.list.push({ id: uuidv4(), text: "" });
+		getDirection(text) {
+			let el = document.createElement("span");
+			el.dir = "auto";
+			el.innerHTML = text;
+			document.body.append(el);
+			let direction = window.getComputedStyle(el).direction;
+			el.remove();
+			return direction;
+		},
+		onEnter(index) {
+			if (this.list[index].text.length > 0) {
+				this.list.splice(index + 1, 0, { id: uuidv4(), text: "" });
+			} else {
+				this.$emit("addParagraph");
+			}
 		},
 		deleteItem(index) {
-			this.list.splice(index, 1);
 			if (index != 0) {
+				this.list.splice(index, 1);
 				this.$nextTick(() => {
-					this.$refs["list-item"][index - 1].querySelector(".editor--text-input").focus();
+					this.$refs["list-item"][index - 1].focus();
 				});
+			} else {
+				this.$emit("delete");
 			}
 		},
 	},
-
+	mounted() {
+		this.list = Boolean(this.content)
+			? this.content?.map((text) => {
+					return { id: uuidv4(), text: text };
+			  })
+			: [{ id: 0, text: "" }];
+	},
 	data() {
 		return {
 			list: [{ id: 0, text: "" }],
@@ -43,7 +74,7 @@ export default {
 
 <style lang="scss" scoped>
 .ordered-list-editor {
-	list-style: num;
+	list-style: number;
 	margin-bottom: 0;
 }
 </style>

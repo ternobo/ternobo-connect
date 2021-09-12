@@ -7,12 +7,18 @@ use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Notification;
 use App\Models\Post;
+use App\SocialMediaTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
 
+    /**
+     * List of comments 
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function index($post, Request $request)
     {
         $comments = Comment::query()
@@ -41,7 +47,11 @@ class CommentController extends Controller
         $comment = new Comment();
         $comment->page_id = Auth::user()->getPage()->id;
         $recomment = null;
-        $text = $request->text;
+
+        $text = SocialMediaTools::safeHTML($request->text);
+        $tags = SocialMediaTools::getHashtags($text);
+
+        // Sent parent_id of comment if comment is replied to another
         if ($request->has("reply_to") && $request->reply_to !== null) {
             $recomment = Comment::query()->where("id", $request->reply_to)->firstOrFail();
             $comment->reply_to = $request->reply_to;
@@ -51,16 +61,28 @@ class CommentController extends Controller
                 $comment->parent_id = $recomment->parent_id;
             }
         }
+
+
         $comment->post_id = $post->id;
         $comment->text = $text;
+        $comment->tags = $tags;
         $comment->save();
+
+        // Call mentions
+        $mentions = SocialMediaTools::callMentions(SocialMediaTools::getMentions($text), $comment->id, "comment", $post->id);
+
+        // Add Action to activity timeline
         Auth::user()->getPage()->addAction("comment", $post->id, $comment->id);
+
+        // Send Comment Notification
         Notification::sendNotification("comment", $post->id, $post->page_id, $comment->id);
 
+        // Check if comment is replied to another to notify the user
         if ($request->has("reply_to") && $request->reply_to !== null) {
             Notification::sendNotification("reply", $comment->reply_to, $recomment->page->id, $comment->id);
         }
 
+        // Load Page and replyto.page to comment model
         $comment->load("page");
         $comment->load("replyto.page");
 
@@ -110,5 +132,4 @@ class CommentController extends Controller
         $action = Action::query()->where("connected_to", $comment->id)->first();
         return response()->json(array("result" => $comment->delete() && $action->delete()));
     }
-
 }

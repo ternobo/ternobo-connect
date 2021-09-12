@@ -26,6 +26,7 @@ class ContentBlock implements RuleInterface
             "code" => [new CodeBlockRule()],
             "bulletedList" => [new BulletedListRule()],
             "orderedList" => [new OrderedListRule()],
+            "quote" => ["max:1200"],
             "text" => ["max:1200"],
             "title" => ["max:150"]
         ];
@@ -33,7 +34,9 @@ class ContentBlock implements RuleInterface
             "blocks.*.type" => [Rule::in(array_keys($rules))]
         ]);
 
+
         if ($typeValidator->fails()) {
+
             $this->errors = $typeValidator->errors()->messages();
             return false;
         }
@@ -47,6 +50,7 @@ class ContentBlock implements RuleInterface
                 $this->errors = array_merge($this->errors, $validator->messages()->toArray());
             }
         }
+
         return count($this->errors) < 1;
     }
 

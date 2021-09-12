@@ -82,6 +82,23 @@
         background: transparent;
         color: $fixed-elements;
     }
+
+    &.cta-text {
+        padding: 0;
+        color: $action;
+
+        &:hover {
+            color: $action-hover;
+        }
+
+        &:disabled {
+            border-color: transparent;
+            background: transparent;
+            color: $grey;
+
+        }
+    }
+
 }
 
 .btn-transparent:hover {

@@ -25,10 +25,9 @@ class PostFactory extends Factory
         $faker = $this->faker;
 
         $page = Page::where("id", "!=", 1)->get()->random();
-        $slides = $faker->random_int(1, 12);
 
         $medias = [$faker->imageUrl()];
-        // dd($page->id);
+
         $tags = [$faker->word, $faker->word, $faker->word];
         foreach ($tags as $tag) {
             if (Tag::where("name", $tag)->first() instanceof Tag) {
@@ -54,10 +53,10 @@ class PostFactory extends Factory
             "page_id" => $page->id,
             "user_id" => $page->user_id,
             "text" => $faker->paragraph,
-            "medias" => $medias,
-            "tags" => $tags,
+            "media" => [],
+            // "tags" => $tags,
             "category_id" => $category->id,
-            "type" => $type,
+            "type" => "post",
             "title" => $title,
             "show" => "public",
             "created_at" => $faker->dateTimeThisYear(),

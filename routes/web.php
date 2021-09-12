@@ -3,6 +3,7 @@
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\FollowMiddlware;
 use App\Http\Middleware\WebAdminMiddleware;
+use App\Models\Post;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Passport;
@@ -54,7 +55,7 @@ require base_path("routes/auth_routes.php");
  * Auth End
  */
 
-Route::group(['auth'], function () {
+Route::middleware([Authenticate::class])->group(function () {
     /**
      * Private Files
      */
@@ -91,7 +92,7 @@ Route::group(['auth'], function () {
     Route::post("/tags/{tag}/follow", "Content\TagsController@toggleFollowTag");
     //Follow Actions End
 
-    Route::middleware([FollowMiddlware::class, Authenticate::class])->group(function () {
+    Route::middleware([FollowMiddlware::class])->group(function () {
         Route::get('/feed', 'Content\FeedController@index')->name('home');
 
         Route::post("/can-donate", "Donation\DontaionsController@canEnableDonate");
@@ -126,15 +127,11 @@ Route::group(['auth'], function () {
         // Route::post("/connect/{user_id}", "Profile\ConnectionsController@connectionRequest");
         // Route::post("/disconnect/{user_id}", "Profile\ConnectionsController@disconnect");
 
-        // Follows
-        Route::get("/followings", "Profile\ConnectionsController@followings");
-        Route::get("/followers", "Profile\ConnectionsController@followers");
-        //end Connections
-
         //Start Page Edit
         Route::prefix('/save')->group(function () {
             Route::post("/resume", "Profile\ProfileController@saveAboutMe");
         });
+
         Route::prefix("/usersave")->group(function () {
             Route::post("/profile", "Profile\PageController@saveProfile");
             Route::post("/bio", "Profile\PageController@saveBio");
@@ -205,7 +202,6 @@ Route::group(['auth'], function () {
     Route::post("/posts/{post:id}/embed", "PostController@getEmbed");
 
     Route::post("/posts/{id}/publish", "PostController@publishPost");
-    Route::resource("/posts", "PostController")->only(['store', 'update', 'destroy', "show"]);
 
     //Chats
     Route::prefix("chats")->group(function () {
@@ -271,6 +267,9 @@ Route::group(['auth'], function () {
     Route::get("/invite", "InviteLinksController@index");
 });
 //End Auth
+
+
+Route::resource("/posts", "PostController")->only(['store', 'update', 'destroy', "show"]);
 
 Route::get("/tags/{name}", "Content\TagsController@index");
 

@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<component :is="tag">
 		<slot></slot>
 		<div class="tribute-container" v-if="searchKey != null" :style="caretPosition">
 			<ul>
@@ -8,7 +8,7 @@
 				</li>
 			</ul>
 		</div>
-	</div>
+	</component>
 </template>
 
 <script>
@@ -148,7 +148,7 @@ export default {
 			this.caretPosition = {
 				position: "absolute",
 				left: `${rect.left - inputRect.left}px`,
-				top: `${rect.top - inputRect.top + this.getLineHeight(this.input)}px`,
+				top: this.disabledTop ? "" : `${rect.top - inputRect.top + this.getLineHeight(this.input)}px`,
 				height: `auto`,
 			};
 		},
@@ -173,6 +173,12 @@ export default {
 		};
 	},
 	props: {
+		disabledTop: {
+			default: false,
+		},
+		tag: {
+			default: "div",
+		},
 		tags: {
 			default: () => [],
 		},

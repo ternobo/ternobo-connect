@@ -15,9 +15,7 @@ class BulletedListRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        //    validator($value,[
-        //        ''
-        //    ])
+        return is_array($value) && !is_multi_array($value) && is_string_array($value);
     }
 
     /**
@@ -27,6 +25,6 @@ class BulletedListRule implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return __("validation.blocks.bulleted-list");
     }
 }

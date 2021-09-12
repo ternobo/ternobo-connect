@@ -113,7 +113,6 @@
 
         // Run countdown function
         countdown();
-
     </script>
 </body>
 

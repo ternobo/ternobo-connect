@@ -9,3 +9,10 @@
 .font-bolder {
     font-weight: bolder;
 }
+
+@each $scale,
+$color in $gray-theme {
+    .text-grey-#{$scale} {
+        color: $color;
+    }
+}

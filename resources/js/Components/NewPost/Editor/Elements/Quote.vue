@@ -1,6 +1,7 @@
 <template>
-	<mentionable :max-tags="3" v-bind="$attrs" class="textarea-content w-100" @click="focus">
-		<div ref="editable" class="editor--text-input" :placeholder="__.get('content/posts.enter-your-text')" contenteditable @blur="onBlur" @keydown="onKeyDown" @keydown.enter="addParagraph" @focus="onFocus" @paste="onPaste" @input="input"></div>
+	<mentionable :max-tags="3" v-bind="$attrs" class="quote-editor textarea-content w-100" @click="focus">
+		<i class="material-icons-outlined text-grey me-2">format_quote</i>
+		<div ref="editable" class="editor--text-input" @keydown.enter="onEnter" :placeholder="__.get('content/posts.enter-your-text')" contenteditable @blur="onBlur" @focus="onFocus" @paste="onPaste" @input="input"></div>
 	</mentionable>
 </template>
 
@@ -27,7 +28,7 @@ export default {
 		},
 	},
 	methods: {
-		addParagraph(e) {
+		onEnter(e) {
 			if (!e.shiftKey) {
 				e.preventDefault();
 				this.$emit("addParagraph");
@@ -78,49 +79,7 @@ export default {
 
 			this.fixDirection();
 		},
-
-		onKeyDown(e) {
-			let utils = {
-				special: [8, 16, 17, 18, 46],
-				delete: [8, 46],
-				navigational: [38, 37, 39, 40],
-				isSpecial(event) {
-					let result = this.special.includes(event.keyCode) || (event.ctrlKey && [90, 83, 65].includes(event.keyCode));
-					return result;
-				},
-				isDelete(event) {
-					return this.delete.includes(event.keyCode);
-				},
-				isNavigational(e) {
-					return this.navigational.includes(e.keyCode);
-				},
-			};
-
-			let len = e.target.innerText.length;
-			let hasSelection = false;
-			let selection = window.getSelection();
-			let isSpecial = utils.isSpecial(e);
-			let isNavigational = utils.isNavigational(e);
-
-			if (selection) {
-				hasSelection = !!selection.toString();
-			}
-
-			if (utils.isDelete(e)) {
-				this.onBackspace(e);
-			} else if (isSpecial || isNavigational) {
-				return true;
-			} else if (len >= this.max && !hasSelection) {
-				e.preventDefault();
-				return false;
-			}
-		},
 		input(e) {
-			if (this.updateContent(false) == "- ") {
-				this.$emit("update:type", "bulletedList");
-			} else if (this.updateContent(false) == "1- ") {
-				this.$emit("update:type", "orderedList");
-			}
 			this.updateContent();
 			this.$nextTick(() => {
 				twemoji.parse(this.$refs.editable);
@@ -134,21 +93,7 @@ export default {
 			});
 		},
 		focus() {
-			const el = this.$refs.editable;
-			el.focus();
-			if (typeof window.getSelection != "undefined" && typeof document.createRange != "undefined") {
-				var range = document.createRange();
-				range.selectNodeContents(el);
-				range.collapse(false);
-				var sel = window.getSelection();
-				sel.removeAllRanges();
-				sel.addRange(range);
-			} else if (typeof document.body.createTextRange != "undefined") {
-				var textRange = document.body.createTextRange();
-				textRange.moveToElementText(el);
-				textRange.collapse(false);
-				textRange.select();
-			}
+			this.$refs.editable.focus();
 		},
 	},
 	data() {
@@ -163,9 +108,6 @@ export default {
 		content: {
 			default: "",
 		},
-		max: {
-			default: 1200,
-		},
 	},
 	computed: {
 		...mapState(["shared"]),
@@ -177,16 +119,6 @@ export default {
 
 		this.editor = new ParagraphEditor(this.$refs.editable, {
 			toolbar: {
-				bold: {
-					text: "format_bold",
-					class: "material-icons",
-					onActive: () => {
-						return document.queryCommandState("bold");
-					},
-					action: () => {
-						document.execCommand("bold", false, "");
-					},
-				},
 				italic: {
 					text: "format_italic",
 					class: "material-icons",
@@ -287,5 +219,16 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.quote-editor {
+	display: flex;
+	align-items: flex-start;
+	.editor--text-input {
+		color: #191919;
+		font-weight: bold;
+		p {
+			margin: 0;
+		}
+	}
+}
 </style>

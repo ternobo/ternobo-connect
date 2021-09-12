@@ -60,14 +60,15 @@ class Notification extends Model
     }
 
     /**
-     *
+     * Send Nofication 
+     * 
      * @param type $action
      * @param type $type
      * @param type $notifiable_id
      * @param type $to
-     * @param type $connected_to
+     * @param type $connected_to - for example comment_id is connected to Post notification.
      */
-    public static function sendNotification($action, $notifiable_id, $to, $connected_to, $from = null, $guest = false)
+    public static function sendNotification($action, $notifiable_id, $to, $connected_to, $from = null, $guest = false, $meta = [])
     {
         $from_id = null;
         if ($from === null && !$guest) {
@@ -79,41 +80,38 @@ class Notification extends Model
         if ($user instanceof User) {
             switch ($action) {
                 case "like":
-                    $type = "post";
                     $notifiable_type = Post::class;
                     $url = url("/posts/$notifiable_id");
                     break;
                 case "follow":
-                    $type = "page";
                     $notifiable_type = Page::class;
+                    $username = Page::find($notifiable_id);
                     $url = url("/$username");
                     break;
                 case "comment":
-                    $type = "post";
                     $notifiable_type = Post::class;
                     $url = url("/posts/$notifiable_id");
                     break;
                 case "like_comment":
-                    $type = "comment";
                     $notifiable_type = Comment::class;
                     $url = url("/posts/$notifiable_id");
                     break;
                 case "reply":
-                    $type = "comment";
                     $notifiable_type = Comment::class;
                     $url = url("/posts/$notifiable_id");
                     break;
                 case "skill_credit":
-                    $type = "skill";
                     $notifiable_type = Skill::class;
                     break;
                 case "mention":
-                    $type = "post";
                     $notifiable_type = Post::class;
                     $url = url("/posts/$notifiable_id");
                     break;
+                case "mention_comment":
+                    $notifiable_type = Comment::class;
+                    $url = url("/posts/$connected_to?comment=$notifiable_id");
+                    break;
                 case "donation":
-                    $type = "post";
                     $notifiable_type = Post::class;
                     $url = url("/posts/$notifiable_id");
                     break;
@@ -129,7 +127,6 @@ class Notification extends Model
                 $notification->notifiable_id = $notifiable_id;
                 $notification->notifiable_type = $notifiable_type;
                 $notification->connected_to = $connected_to;
-
                 $notification->save();
 
                 broadcast(new NotificationEvent($notification))->toOthers();
@@ -180,5 +177,4 @@ class Notification extends Model
         broadcast(new NotificationEvent($notification))->toOthers();
         return $notification;
     }
-
 }

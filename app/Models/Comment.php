@@ -6,6 +6,7 @@ use App\HasPage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 
 /**
  *
@@ -58,10 +59,11 @@ class Comment extends Model
      * Sender Page
      * @return Page
      */
-    public function getUser()
-    {
-        return Page::find($this->page_id);
-    }
+
+    protected $with = ["page"];
+    protected $casts = [
+        "tags" => "array"
+    ];
 
     public function mutualLikes()
     {
@@ -101,7 +103,6 @@ class Comment extends Model
     }
 
     /**
-     * Get the comment replies
      * @param integer $action
      * @return type
      */
@@ -118,6 +119,7 @@ class Comment extends Model
         // get the original array to be displayed
         $data = parent::toArray();
         $data['is_liked'] = false;
+        $data['tip_amount'] = DB::selectOne("SELECT SUM(`amount`) as amount FROM `tips` where user_id= ? ", [$data['page']["user_id"]])->amount;
         if (Auth::check()) {
             if ($this->likes != null) {
                 $data['liked_by'] = $this->getLikedBy();
@@ -185,9 +187,6 @@ class Comment extends Model
     public function delete()
     {
         $this->notification()->delete();
-        $this->likes()->delete();
-        $this->replies()->delete();
         return parent::delete();
     }
-
 }

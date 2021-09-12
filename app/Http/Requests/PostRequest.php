@@ -38,7 +38,6 @@ class PostRequest extends FormRequest
         return [
             "slides" => ['required', 'array', 'min:1', "max:12"],
             "slides.*.blocks" => [new ContentBlock()],
-            "slides.*.blocks.*.type" => [Rule::in(['text', 'title', 'code', 'vidoe', 'image'])],
             "deletedSlides" => ["json"],
             "draft" => [Rule::in(['1', '0'])],
             "canDonate" => [Rule::in(['1', '0'])],

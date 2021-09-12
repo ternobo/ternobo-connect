@@ -1,21 +1,26 @@
 <template>
 	<div class="tselect" tabindex="0" :class="{ disabled: disabled, active: showItems }" :dir="direction" @blur="hideDropdown" @focus="openDropdown" v-click-outside="close">
 		<div class="tselect_title" :class="{ active: showItems }" ref="titleSection" @click="toggleDropdown">
-			<div class="title-text">
-				<span v-if="!selectedItem"> <slot></slot><span v-if="required" class="text-action">*</span> </span>
-				<span v-else>
-					<slot name="icon" v-bind:icon="selectedItem.icon">
-						<i class="material-icons verical-middle" v-if="selectedItem.hasOwnProperty('icon')">{{ selectedItem.icon }}</i>
-					</slot>
-					<span> {{ getItemLabel(selectedItem) }} </span>
-				</span>
+			<div class="title-text" :class="{ 'w-100': search }">
+				<div v-if="search" class="w-100">
+					<input type="text" v-model="searchInput" @keydown="handelArrow" :placeholder="!selectedItem ? placeholder : getItemLabel(selectedItem)" @focus="openDropdown" class="form-control border-0 font-12 text-grey px-0 bg-transparent" />
+				</div>
+				<div v-else>
+					<span v-if="!selectedItem"> <slot></slot><span v-if="required" class="text-action">*</span> </span>
+					<span v-else>
+						<slot name="icon" v-bind:icon="selectedItem.icon">
+							<i class="material-icons verical-middle" v-if="selectedItem.hasOwnProperty('icon')">{{ selectedItem.icon }}</i>
+						</slot>
+						<span> {{ getItemLabel(selectedItem) }} </span>
+					</span>
+				</div>
 			</div>
 			<i class="material-icons tselect_arrow">keyboard_arrow_down</i>
 		</div>
 		<transition name="slide">
 			<div class="tselect-items" :style="{ width: dropdownWidth }" ref="itemsElement" v-if="showItems">
-				<div class="items" v-if="items && items.length > 0">
-					<div class="tselect_item" v-for="item in items" :class="{ active: isChecked(item) }" :key="getItemValue(item)" @click="selectItem(item)">
+				<div class="items" v-if="items && listItems.length > 0">
+					<div class="tselect_item" ref="tselect_item" @keydown="handelArrow" tabindex="0" v-for="item in listItems" :class="{ active: isChecked(item) }" :key="getItemValue(item)" @keydown.enter="selectItem(item)" @click="selectItem(item)">
 						<label class="tselect_item--text">
 							<slot name="itemIcon" v-bind:icon="item.icon">
 								<i class="material-icons verical-middle" v-if="item.hasOwnProperty('icon')">{{ item.icon }}</i>
@@ -49,6 +54,11 @@ export default {
 		value(newValue) {
 			this.selectedItem = newValue;
 		},
+		showItems() {
+			if (!this.showItems) {
+				this.searchInput = "";
+			}
+		},
 	},
 	directives: {
 		"click-outside": {
@@ -73,7 +83,22 @@ export default {
 			},
 		},
 	},
+	computed: {
+		listItems() {
+			return this.searchInput.length > 0 ? this.items.filter((item) => item.includes(this.searchInput)) : this.items;
+		},
+	},
 	props: {
+		placeholder: {
+			type: String,
+			default: "search",
+			required: false,
+		},
+		search: {
+			type: Boolean,
+			default: false,
+			required: false,
+		},
 		required: {
 			type: Boolean,
 			default: false,
@@ -132,11 +157,32 @@ export default {
 			selectedItem: undefined,
 			isOpening: false,
 
+			searchInput: "",
+
 			focus: false,
+
+			focusIndex: 0,
 		};
 	},
 	name: "Tselect",
 	methods: {
+		handelArrow(e) {
+			console.log(e.key);
+			if (e.key == "ArrowUp") {
+				e.preventDefault();
+				if (this.$refs["tselect_item"].length > 0 && this.focusIndex > 0) {
+					this.focusIndex--;
+					this.$refs["tselect_item"][this.focusIndex].focus();
+				}
+			} else if (e.key == "ArrowDown") {
+				e.preventDefault();
+				if (this.$refs["tselect_item"].length > this.focusIndex) {
+					this.$refs["tselect_item"][this.focusIndex].focus();
+					this.focusIndex++;
+				}
+			}
+		},
+		prevFocus(e) {},
 		close() {
 			this.showItems = false;
 			this.$refs.titleSection.classList.remove("active");
@@ -174,6 +220,7 @@ export default {
 			if (!this.disabled) {
 				this.showItems = false;
 			}
+			this.focusIndex = 0;
 			this.focus = false;
 		},
 		openDropdown() {
@@ -183,6 +230,7 @@ export default {
 				this.showItems = true;
 				const width = this.$refs.titleSection.offsetWidth;
 				this.dropdownWidth = width + "px";
+				this.focusIndex = 0;
 				setTimeout(() => {
 					this.$nextTick(() => {
 						this.isOpening = false;
@@ -196,6 +244,7 @@ export default {
 					const width = this.$refs.titleSection.offsetWidth;
 					this.showItems = !this.showItems;
 					this.dropdownWidth = width + "px";
+					this.focusIndex = 0;
 				}
 			}
 		},

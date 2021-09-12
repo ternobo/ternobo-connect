@@ -79,13 +79,12 @@ export default {
 		},
 
 		insertEmoji(emoji) {
-			this.$refs.input.focus();
 			window.document.execCommand("insertHTML", false, twemoji.parse(emoji));
 			this.onInput();
 		},
 		onInput() {
 			let text = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.input.innerHTML);
-			text = TextareaParser.escapeHTML(TextareaParser.unescapeHtml(text));
+			text = TextareaParser.replaceTextEditorMentions(TextareaParser.unescapeHtml(text));
 			this.val = text;
 			this.$emit("input", text);
 			this.$nextTick(() => {

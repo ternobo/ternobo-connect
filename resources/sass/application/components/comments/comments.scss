@@ -10,21 +10,21 @@
     border-radius: 1px solid $sub-heading;
 
     >.sendcomment {
-        margin: 8px 0;
+        margin: 2rem 0;
     }
 
     .replies {
-        border-right: 2px solid $grey;
-        padding-right: 16px;
+        border-right: 2px solid $gray-400;
+        padding-right: 1.25rem;
     }
 
     .reply-to-container {
-        margin-bottom: 8px;
-        font-size: 12px;
+        margin-bottom: 0.75rem;
+        font-size: 0.75rem;
 
         i {
-            color: $icons;
-            margin-left: 4px;
+            color: $gray-400;
+            margin-left: 0.25rem;
         }
 
         color: $grey;

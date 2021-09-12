@@ -25,13 +25,6 @@ class PostSlide extends Model
         return $this->hasMany(SlideBlock::class, "slide_id")->orderBy("sort", "asc");
     }
 
-    protected static function booted()
-    {
-        static::deleting(function ($slide) {
-            $slide->content()->delete();
-        });
-    }
-
     public function page()
     {
         return $this->belongsTo(Page::class, "page_id");

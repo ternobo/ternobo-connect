@@ -12,6 +12,7 @@ export default {
                 tag = "h2";
                 content = this.content.content;
                 break;
+            case "quote":
             case "text":
                 if (this.content.content != null) {
                     tag = "div";
@@ -51,8 +52,22 @@ export default {
                 break;
             case "code":
                 tag = "div";
-
                 content = (<CodeBlock content={JSON.parse(this.content.content)}></CodeBlock>);
+                break;
+
+            case "bulletedList":
+            case "orderedList":
+                const ListTag = this.content.type == "orderedList" ? "ol" : "ul";
+
+                const items = JSON.parse(this.content.content);
+
+                let li_list = [];
+
+                items.forEach((item) => {
+                    li_list.push(<li>{item}</li>)
+                });
+
+                content = <ListTag>{li_list}</ListTag>;
                 break;
         }
 

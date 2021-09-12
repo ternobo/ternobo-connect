@@ -6,7 +6,8 @@ return [
     'forgot_password' => "Forgot password?",
     'forgot_password_title' => "Forgot Password",
     "new_password" => "New Password",
-    "user_recovery_code" => "Use recovery code",
+    "use_recovery_code" => "Use recovery code",
+    "use_auth_code" => "Use Authenticator code",
     "auth_app_text" => "Enter 2 factor authentication code",
     "enter_recover_code" => "Enter recover code",
 ];

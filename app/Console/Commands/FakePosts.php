@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Post;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 
 class FakePosts extends Command
 {
@@ -40,9 +41,11 @@ class FakePosts extends Command
     {
         $numbers = $this->argument("nums");
         $posts = Post::factory()->count($numbers)->make();
+        var_dump($posts);
         foreach ($posts as $post) {
             $post->save();
         }
+        // Artisan::call("fix:old_posts");
         return 0;
     }
 }

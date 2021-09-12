@@ -5,6 +5,7 @@ namespace App\Models;
 use App\HasPage;
 use App\Scopes\BlockedPageContentScope;
 use App\Scopes\PostDraftScope;
+use App\Scopes\ReportedPostScope;
 use App\SocialMediaTools;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -101,6 +102,11 @@ class Post extends Model
         return $this->hasManyThrough(SlideBlock::class, PostSlide::class, "post_id", "slide_id");
     }
 
+    public function reports()
+    {
+        return $this->hasMany(Report::class, "reportable_id")->where("reportable_type", Post::class);
+    }
+
     public function deleteBlocks($deleteFile = false)
     {
         $blocks = $this->blocks;
@@ -181,17 +187,6 @@ class Post extends Model
         return $comments;
     }
 
-    public function delete()
-    {
-        $this->notifications()->delete();
-        $this->bookmarks()->delete();
-        $this->comments()->delete();
-        $this->actions()->delete();
-        $this->slides()->delete();
-        $this->blocks()->delete();
-        return parent::delete();
-    }
-
     public function mutualLikes()
     {
         if (Auth::check()) {
@@ -234,6 +229,7 @@ class Post extends Model
                 $content = $rawContent['content'];
                 $type =  $rawContent['type'];
                 switch ($type) {
+                    case "quote":
                     case "text":
                         // Process
                         $text = SocialMediaTools::safeHTML($content);
@@ -246,7 +242,7 @@ class Post extends Model
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
                             'content' => $text,
-                            'type' => 'text',
+                            'type' => $type,
                         ]);
 
                         if (count($tags) < 3) {
@@ -254,6 +250,17 @@ class Post extends Model
                         }
                         $mentions = array_merge($text_mentions, $mentions);
 
+                        break;
+
+                    case "orderedList":
+                    case "bulletedList":
+                        SlideBlock::query()->create([
+                            'slide_id' => $slide_id,
+                            'page_id' => $user->personalPage->id,
+                            'sort' => $sort,
+                            'content' => json_encode($content),
+                            'type' => $type,
+                        ]);
                         break;
 
                     case "title":
@@ -322,5 +329,6 @@ class Post extends Model
     {
         static::addGlobalScope(new PostDraftScope);
         static::addGlobalScope(new BlockedPageContentScope);
+        static::addGlobalScope(new ReportedPostScope);
     }
 }
