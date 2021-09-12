@@ -14,6 +14,34 @@
         align-items: center;
         margin-bottom: 1rem;
 
+
+
+        .donate-badge {
+            width: -webkit-max-content;
+            width: -moz-max-content;
+            width: max-content;
+            height: 24px;
+
+            box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.03);
+            border-radius: 4px;
+
+            margin-left: 1rem;
+
+            background: $white;
+            color: $green;
+            padding: 0.25rem;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 0.75px;
+            border-radius: 4px;
+
+            >i {
+                margin-left: 4px;
+                color: $green;
+                font-size: 16px;
+            }
+        }
+
         .pagedetail {
             margin-right: 1rem;
             display: flex;
@@ -46,27 +74,6 @@
         flex: 1 1 auto;
         color: $text-color;
         font-size: 0.875rem;
-
-        .donate-badge {
-            width: -webkit-max-content;
-            width: -moz-max-content;
-            width: max-content;
-            height: 24px;
-
-            background: $white;
-            color: $green;
-            padding: 0.25rem;
-            font-size: 10px;
-            font-weight: bold;
-            letter-spacing: 0.75px;
-            border-radius: 4px;
-
-            >i {
-                margin-left: 4px;
-                color: $green;
-                font-size: 16px;
-            }
-        }
     }
 
     .comment-footer {
