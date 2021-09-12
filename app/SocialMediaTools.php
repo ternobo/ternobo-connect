@@ -45,8 +45,7 @@ class SocialMediaTools
      */
     public static function getMentions($text)
     {
-        $hashtags = array();
-        $matches = array();
+        $matches = [];
         preg_match_all('/@(\w+)/', $text, $matches);
         return $matches[1];
     }

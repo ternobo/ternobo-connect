@@ -8,7 +8,7 @@
 				<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xxxsm me-3 mb-0" imgClass="profile-xxxsm" :src="$store.state.user.profile" />
 				<emoji-picker iconSize="20" @pick="$refs.input.insertEmoji($event)" :portal="true" />
 			</div>
-			<loading-button @click.native="submit" :disabled="!showSubmit" :loading="loading" class="btn btn-transparent cta-text">{{ __.get("application.send") }}</loading-button>
+			<loading-button @click.native="submit" :disabled="!showSubmit" :loading="loading" class="btn btn-transparent cta-text font-14">{{ __.get("content/comments.post") }}</loading-button>
 		</div>
 	</div>
 </template>

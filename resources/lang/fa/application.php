@@ -65,6 +65,7 @@ return [
     'and' => "و",
     "comma" => "،",
     'warning' => "اخطار",
+    "profile-not-available" => "این پروفایل در دسترس نیست",
 
     "password-strength" => [
         "short" => "کوتاه",
