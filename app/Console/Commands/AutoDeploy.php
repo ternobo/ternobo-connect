@@ -18,7 +18,7 @@ class AutoDeploy extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'git Pull and run deploy command';
 
     /**
      * Create a new command instance.
@@ -37,8 +37,7 @@ class AutoDeploy extends Command
      */
     public function handle()
     {
-        exec("git fetch");
-        exec("git pull");
-        exec("npm run production");
+
+        exec(base_path("deploy.sh"));
     }
 }

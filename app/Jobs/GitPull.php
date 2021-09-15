@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Artisan;
 
 class GitPull implements ShouldQueue
 {
@@ -18,7 +19,8 @@ class GitPull implements ShouldQueue
      */
     public function handle()
     {
-        $path = base_path();
-        exec("cd $path && git pull && php artisan migrate && nvm use 12 && npm run production &");
+        Artisan::command("git:deploy", function () {
+            // ....
+        });
     }
 }

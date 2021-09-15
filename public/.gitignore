@@ -1,0 +1,7 @@
+fonts/vendor/monaco-editor
+css.worker.js
+editor.worker.js
+html.worker.js
+json.worker.js
+ts.worker.js
+*.LICENSE.txt
