@@ -27,7 +27,7 @@
 			<TestsList :value="this.achievements.tests" ref="tests" :edit="edit" :page="page"></TestsList>
 
 			<div class="w-100 text-center" v-if="this.achievements.langs < 1 && this.achievements.projects < 1 && this.achievements.publishs < 1 && this.achievements.awards < 1 && this.achievements.courses < 1 && this.achievements.inventions < 1 && this.achievements.tests < 1">
-				<span class="font-16 text-superlight">هیچ دستاوردی ثبت نشده</span>
+				<span class="font-16 text-superlight">{{ __.get("messages.no-achievement") }}</span>
 			</div>
 		</div>
 	</div>
