@@ -15,7 +15,7 @@ export default {
 		if (this.$store.state.user !== null) {
 			let page = this.page;
 			this.page_id = page;
-			if (this.$store.state.shared.followings.includes(String(page))) {
+			if (this.$store.state.shared.followings.includes(page)) {
 				this.followed = true;
 				this.$emit("followed");
 			}
@@ -58,7 +58,7 @@ export default {
 					.then((response) => {
 						if (response.data.result) {
 							this.loading = false;
-							this.$store.commit("addFollower", String(this.page_id));
+							this.$store.commit("addFollower", parseInt(this.page_id));
 							this.followed = true;
 							this.$emit("followed");
 						} else {
@@ -82,7 +82,7 @@ export default {
 							this.loading = false;
 							this.followed = false;
 							this.$emit("unfollowed");
-							this.$store.commit("unfollow", this.$store.state.shared.followings.indexOf(String(this.page_id)));
+							this.$store.commit("unfollow", this.$store.state.shared.followings.indexOf(this.page_id));
 						} else {
 							const errors = response.data.errors;
 							Object.keys(errors).forEach((item, index) => {
