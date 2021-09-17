@@ -1043,7 +1043,13 @@ a:focus {
     padding: 1.5rem;
 
     figure.profile-sm {
-        margin: -2px 0 -2px 1rem;
+        @if($direction==rtl) {
+            margin: -2px 0 -2px 1rem;
+        }
+
+        @else {
+            margin: -2px 1rem -2px 0;
+        }
     }
 }
 

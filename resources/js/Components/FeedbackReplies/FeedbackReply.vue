@@ -224,7 +224,6 @@ export default {
 	components: {
 		NewFeedbackReply,
 		LoadingSpinner,
-		NewFeedbackReply,
 	},
 	props: {
 		replyTo: {
@@ -240,12 +239,3 @@ export default {
 	name: "FeedbackReply",
 };
 </script>
-
-<style lang="scss" scoped>
-.comment {
-	.pagedetail {
-		display: flex;
-		flex-direction: column;
-	}
-}
-</style>
