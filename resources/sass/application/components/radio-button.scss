@@ -3,14 +3,14 @@
     display: flex;
     align-items: center;
     position: relative;
-    margin: 0 0 10px;
+    margin-bottom: 10px;
     font-size: 16px;
     line-height: 1.5rem;
 
     &__input {
         position: absolute;
         top: 4px;
-        right: 0;
+        #{$start}: 0;
         width: 100%;
         height: 20px;
         opacity: 0;
@@ -28,7 +28,7 @@
             content: '';
             position: absolute;
             top: 4px;
-            right: 0;
+            #{$start}: 0;
             width: 16px;
             height: 16px;
             background-color: transparent;
@@ -42,7 +42,7 @@
             content: '';
             position: absolute;
             top: 8px;
-            right: 4px;
+            #{$start}: 4px;
             width: 8px;
             height: 8px;
             background-color: $primary;
@@ -54,7 +54,7 @@
     }
 
     // Checked
-    &__input:checked + &__label {
+    &__input:checked+&__label {
         &:before {
             border-color: $primary;
         }
@@ -65,6 +65,7 @@
     }
 
 }
-.radio:not(:last-child){
-    margin-left: 10px;
+
+.radio:not(:last-child) {
+    margin-#{$end}: 10px;
 }

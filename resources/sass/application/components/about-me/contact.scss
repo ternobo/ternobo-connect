@@ -8,14 +8,14 @@
     }
 
     .no-contact-container {
-        text-align: right;
+        text-align: $start;
     }
 
     .rounded-add-btn {
-        margin-right: 16px;
+        margin-#{$start}: 16px;
 
         &:first-child {
-            margin-right: 12px;
+            margin-#{$start}: 12px;
         }
     }
 
@@ -24,7 +24,7 @@
         flex-direction: column;
 
         @if $direction==rtl {
-            text-align: left;
+            text-align: -#{$end};
         }
 
         line-height: 19px;
@@ -112,11 +112,11 @@
 
             img {
                 @if $direction==rtl {
-                    margin-right: 12px;
+                    margin-#{$start}: 12px;
                 }
 
                 @else {
-                    margin-left: 12px;
+                    margin-#{$end}: 12px;
                 }
             }
         }

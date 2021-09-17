@@ -6,10 +6,10 @@
  .container-xl,
  .container-xxl {
      width: 100%;
-     padding-right: 1.5rem;
-     padding-left: 1.5rem;
-     margin-right: auto;
-     margin-left: auto;
+     padding-#{$start}: 1.5rem;
+     padding-#{$end}: 1.5rem;
+     margin-#{$start}: auto;
+     margin-#{$end}: auto;
  }
 
  @media (min-width: 576px) {
@@ -68,8 +68,8 @@
      display: flex;
      flex-wrap: wrap;
      margin-top: calc(var(--bs-gutter-y) * -1);
-     margin-right: calc(var(--bs-gutter-x) / -2);
-     margin-left: calc(var(--bs-gutter-x) / -2);
+     margin-#{$start}: calc(var(--bs-gutter-x) / -2);
+     margin-#{$end}: calc(var(--bs-gutter-x) / -2);
  }
 
  .row>* {
@@ -77,8 +77,8 @@
      flex-shrink: 0;
      width: 100%;
      max-width: 100%;
-     padding-right: calc(var(--bs-gutter-x) / 2);
-     padding-left: calc(var(--bs-gutter-x) / 2);
+     padding-#{$start}: calc(var(--bs-gutter-x) / 2);
+     padding-#{$end}: calc(var(--bs-gutter-x) / 2);
      margin-top: var(--bs-gutter-y);
  }
 
@@ -187,47 +187,47 @@
  }
 
  .offset-1 {
-     margin-left: 8.333333%;
+     margin-#{$end}: 8.333333%;
  }
 
  .offset-2 {
-     margin-left: 16.666667%;
+     margin-#{$end}: 16.666667%;
  }
 
  .offset-3 {
-     margin-left: 25%;
+     margin-#{$end}: 25%;
  }
 
  .offset-4 {
-     margin-left: 33.333333%;
+     margin-#{$end}: 33.333333%;
  }
 
  .offset-5 {
-     margin-left: 41.666667%;
+     margin-#{$end}: 41.666667%;
  }
 
  .offset-6 {
-     margin-left: 50%;
+     margin-#{$end}: 50%;
  }
 
  .offset-7 {
-     margin-left: 58.333333%;
+     margin-#{$end}: 58.333333%;
  }
 
  .offset-8 {
-     margin-left: 66.666667%;
+     margin-#{$end}: 66.666667%;
  }
 
  .offset-9 {
-     margin-left: 75%;
+     margin-#{$end}: 75%;
  }
 
  .offset-10 {
-     margin-left: 83.333333%;
+     margin-#{$end}: 83.333333%;
  }
 
  .offset-11 {
-     margin-left: 91.666667%;
+     margin-#{$end}: 91.666667%;
  }
 
  .g-0,
@@ -396,51 +396,51 @@
      }
 
      .offset-sm-0 {
-         margin-left: 0;
+         margin-#{$end}: 0;
      }
 
      .offset-sm-1 {
-         margin-left: 8.333333%;
+         margin-#{$end}: 8.333333%;
      }
 
      .offset-sm-2 {
-         margin-left: 16.666667%;
+         margin-#{$end}: 16.666667%;
      }
 
      .offset-sm-3 {
-         margin-left: 25%;
+         margin-#{$end}: 25%;
      }
 
      .offset-sm-4 {
-         margin-left: 33.333333%;
+         margin-#{$end}: 33.333333%;
      }
 
      .offset-sm-5 {
-         margin-left: 41.666667%;
+         margin-#{$end}: 41.666667%;
      }
 
      .offset-sm-6 {
-         margin-left: 50%;
+         margin-#{$end}: 50%;
      }
 
      .offset-sm-7 {
-         margin-left: 58.333333%;
+         margin-#{$end}: 58.333333%;
      }
 
      .offset-sm-8 {
-         margin-left: 66.666667%;
+         margin-#{$end}: 66.666667%;
      }
 
      .offset-sm-9 {
-         margin-left: 75%;
+         margin-#{$end}: 75%;
      }
 
      .offset-sm-10 {
-         margin-left: 83.333333%;
+         margin-#{$end}: 83.333333%;
      }
 
      .offset-sm-11 {
-         margin-left: 91.666667%;
+         margin-#{$end}: 91.666667%;
      }
 
      .g-sm-0,
@@ -610,51 +610,51 @@
      }
 
      .offset-md-0 {
-         margin-left: 0;
+         margin-#{$end}: 0;
      }
 
      .offset-md-1 {
-         margin-left: 8.333333%;
+         margin-#{$end}: 8.333333%;
      }
 
      .offset-md-2 {
-         margin-left: 16.666667%;
+         margin-#{$end}: 16.666667%;
      }
 
      .offset-md-3 {
-         margin-left: 25%;
+         margin-#{$end}: 25%;
      }
 
      .offset-md-4 {
-         margin-left: 33.333333%;
+         margin-#{$end}: 33.333333%;
      }
 
      .offset-md-5 {
-         margin-left: 41.666667%;
+         margin-#{$end}: 41.666667%;
      }
 
      .offset-md-6 {
-         margin-left: 50%;
+         margin-#{$end}: 50%;
      }
 
      .offset-md-7 {
-         margin-left: 58.333333%;
+         margin-#{$end}: 58.333333%;
      }
 
      .offset-md-8 {
-         margin-left: 66.666667%;
+         margin-#{$end}: 66.666667%;
      }
 
      .offset-md-9 {
-         margin-left: 75%;
+         margin-#{$end}: 75%;
      }
 
      .offset-md-10 {
-         margin-left: 83.333333%;
+         margin-#{$end}: 83.333333%;
      }
 
      .offset-md-11 {
-         margin-left: 91.666667%;
+         margin-#{$end}: 91.666667%;
      }
 
      .g-md-0,
@@ -824,51 +824,51 @@
      }
 
      .offset-lg-0 {
-         margin-left: 0;
+         margin-#{$end}: 0;
      }
 
      .offset-lg-1 {
-         margin-left: 8.333333%;
+         margin-#{$end}: 8.333333%;
      }
 
      .offset-lg-2 {
-         margin-left: 16.666667%;
+         margin-#{$end}: 16.666667%;
      }
 
      .offset-lg-3 {
-         margin-left: 25%;
+         margin-#{$end}: 25%;
      }
 
      .offset-lg-4 {
-         margin-left: 33.333333%;
+         margin-#{$end}: 33.333333%;
      }
 
      .offset-lg-5 {
-         margin-left: 41.666667%;
+         margin-#{$end}: 41.666667%;
      }
 
      .offset-lg-6 {
-         margin-left: 50%;
+         margin-#{$end}: 50%;
      }
 
      .offset-lg-7 {
-         margin-left: 58.333333%;
+         margin-#{$end}: 58.333333%;
      }
 
      .offset-lg-8 {
-         margin-left: 66.666667%;
+         margin-#{$end}: 66.666667%;
      }
 
      .offset-lg-9 {
-         margin-left: 75%;
+         margin-#{$end}: 75%;
      }
 
      .offset-lg-10 {
-         margin-left: 83.333333%;
+         margin-#{$end}: 83.333333%;
      }
 
      .offset-lg-11 {
-         margin-left: 91.666667%;
+         margin-#{$end}: 91.666667%;
      }
 
      .g-lg-0,
@@ -1038,51 +1038,51 @@
      }
 
      .offset-xl-0 {
-         margin-left: 0;
+         margin-#{$end}: 0;
      }
 
      .offset-xl-1 {
-         margin-left: 8.333333%;
+         margin-#{$end}: 8.333333%;
      }
 
      .offset-xl-2 {
-         margin-left: 16.666667%;
+         margin-#{$end}: 16.666667%;
      }
 
      .offset-xl-3 {
-         margin-left: 25%;
+         margin-#{$end}: 25%;
      }
 
      .offset-xl-4 {
-         margin-left: 33.333333%;
+         margin-#{$end}: 33.333333%;
      }
 
      .offset-xl-5 {
-         margin-left: 41.666667%;
+         margin-#{$end}: 41.666667%;
      }
 
      .offset-xl-6 {
-         margin-left: 50%;
+         margin-#{$end}: 50%;
      }
 
      .offset-xl-7 {
-         margin-left: 58.333333%;
+         margin-#{$end}: 58.333333%;
      }
 
      .offset-xl-8 {
-         margin-left: 66.666667%;
+         margin-#{$end}: 66.666667%;
      }
 
      .offset-xl-9 {
-         margin-left: 75%;
+         margin-#{$end}: 75%;
      }
 
      .offset-xl-10 {
-         margin-left: 83.333333%;
+         margin-#{$end}: 83.333333%;
      }
 
      .offset-xl-11 {
-         margin-left: 91.666667%;
+         margin-#{$end}: 91.666667%;
      }
 
      .g-xl-0,
@@ -1252,51 +1252,51 @@
      }
 
      .offset-xxl-0 {
-         margin-left: 0;
+         margin-#{$end}: 0;
      }
 
      .offset-xxl-1 {
-         margin-left: 8.333333%;
+         margin-#{$end}: 8.333333%;
      }
 
      .offset-xxl-2 {
-         margin-left: 16.666667%;
+         margin-#{$end}: 16.666667%;
      }
 
      .offset-xxl-3 {
-         margin-left: 25%;
+         margin-#{$end}: 25%;
      }
 
      .offset-xxl-4 {
-         margin-left: 33.333333%;
+         margin-#{$end}: 33.333333%;
      }
 
      .offset-xxl-5 {
-         margin-left: 41.666667%;
+         margin-#{$end}: 41.666667%;
      }
 
      .offset-xxl-6 {
-         margin-left: 50%;
+         margin-#{$end}: 50%;
      }
 
      .offset-xxl-7 {
-         margin-left: 58.333333%;
+         margin-#{$end}: 58.333333%;
      }
 
      .offset-xxl-8 {
-         margin-left: 66.666667%;
+         margin-#{$end}: 66.666667%;
      }
 
      .offset-xxl-9 {
-         margin-left: 75%;
+         margin-#{$end}: 75%;
      }
 
      .offset-xxl-10 {
-         margin-left: 83.333333%;
+         margin-#{$end}: 83.333333%;
      }
 
      .offset-xxl-11 {
-         margin-left: 91.666667%;
+         margin-#{$end}: 91.666667%;
      }
 
      .g-xxl-0,
@@ -1806,38 +1806,38 @@
      }
 
      .mx-sm-0 {
-         margin-right: 0 !important;
-         margin-left: 0 !important;
+         margin-#{$start}: 0 !important;
+         margin-#{$end}: 0 !important;
      }
 
      .mx-sm-1 {
-         margin-right: 0.25rem !important;
-         margin-left: 0.25rem !important;
+         margin-#{$start}: 0.25rem !important;
+         margin-#{$end}: 0.25rem !important;
      }
 
      .mx-sm-2 {
-         margin-right: 0.5rem !important;
-         margin-left: 0.5rem !important;
+         margin-#{$start}: 0.5rem !important;
+         margin-#{$end}: 0.5rem !important;
      }
 
      .mx-sm-3 {
-         margin-right: 1rem !important;
-         margin-left: 1rem !important;
+         margin-#{$start}: 1rem !important;
+         margin-#{$end}: 1rem !important;
      }
 
      .mx-sm-4 {
-         margin-right: 1.5rem !important;
-         margin-left: 1.5rem !important;
+         margin-#{$start}: 1.5rem !important;
+         margin-#{$end}: 1.5rem !important;
      }
 
      .mx-sm-5 {
-         margin-right: 3rem !important;
-         margin-left: 3rem !important;
+         margin-#{$start}: 3rem !important;
+         margin-#{$end}: 3rem !important;
      }
 
      .mx-sm-auto {
-         margin-right: auto !important;
-         margin-left: auto !important;
+         margin-#{$start}: auto !important;
+         margin-#{$end}: auto !important;
      }
 
      .my-sm-0 {
@@ -1904,31 +1904,31 @@
      }
 
      .mr-sm-0 {
-         margin-right: 0 !important;
+         margin-#{$start}: 0 !important;
      }
 
      .mr-sm-1 {
-         margin-right: 0.25rem !important;
+         margin-#{$start}: 0.25rem !important;
      }
 
      .mr-sm-2 {
-         margin-right: 0.5rem !important;
+         margin-#{$start}: 0.5rem !important;
      }
 
      .mr-sm-3 {
-         margin-right: 1rem !important;
+         margin-#{$start}: 1rem !important;
      }
 
      .mr-sm-4 {
-         margin-right: 1.5rem !important;
+         margin-#{$start}: 1.5rem !important;
      }
 
      .mr-sm-5 {
-         margin-right: 3rem !important;
+         margin-#{$start}: 3rem !important;
      }
 
      .mr-sm-auto {
-         margin-right: auto !important;
+         margin-#{$start}: auto !important;
      }
 
      .mb-sm-0 {
@@ -1960,31 +1960,31 @@
      }
 
      .ml-sm-0 {
-         margin-left: 0 !important;
+         margin-#{$end}: 0 !important;
      }
 
      .ml-sm-1 {
-         margin-left: 0.25rem !important;
+         margin-#{$end}: 0.25rem !important;
      }
 
      .ml-sm-2 {
-         margin-left: 0.5rem !important;
+         margin-#{$end}: 0.5rem !important;
      }
 
      .ml-sm-3 {
-         margin-left: 1rem !important;
+         margin-#{$end}: 1rem !important;
      }
 
      .ml-sm-4 {
-         margin-left: 1.5rem !important;
+         margin-#{$end}: 1.5rem !important;
      }
 
      .ml-sm-5 {
-         margin-left: 3rem !important;
+         margin-#{$end}: 3rem !important;
      }
 
      .ml-sm-auto {
-         margin-left: auto !important;
+         margin-#{$end}: auto !important;
      }
 
      .p-sm-0 {
@@ -2012,33 +2012,33 @@
      }
 
      .px-sm-0 {
-         padding-right: 0 !important;
-         padding-left: 0 !important;
+         padding-#{$start}: 0 !important;
+         padding-#{$end}: 0 !important;
      }
 
      .px-sm-1 {
-         padding-right: 0.25rem !important;
-         padding-left: 0.25rem !important;
+         padding-#{$start}: 0.25rem !important;
+         padding-#{$end}: 0.25rem !important;
      }
 
      .px-sm-2 {
-         padding-right: 0.5rem !important;
-         padding-left: 0.5rem !important;
+         padding-#{$start}: 0.5rem !important;
+         padding-#{$end}: 0.5rem !important;
      }
 
      .px-sm-3 {
-         padding-right: 1rem !important;
-         padding-left: 1rem !important;
+         padding-#{$start}: 1rem !important;
+         padding-#{$end}: 1rem !important;
      }
 
      .px-sm-4 {
-         padding-right: 1.5rem !important;
-         padding-left: 1.5rem !important;
+         padding-#{$start}: 1.5rem !important;
+         padding-#{$end}: 1.5rem !important;
      }
 
      .px-sm-5 {
-         padding-right: 3rem !important;
-         padding-left: 3rem !important;
+         padding-#{$start}: 3rem !important;
+         padding-#{$end}: 3rem !important;
      }
 
      .py-sm-0 {
@@ -2096,27 +2096,27 @@
      }
 
      .pr-sm-0 {
-         padding-right: 0 !important;
+         padding-#{$start}: 0 !important;
      }
 
      .pr-sm-1 {
-         padding-right: 0.25rem !important;
+         padding-#{$start}: 0.25rem !important;
      }
 
      .pr-sm-2 {
-         padding-right: 0.5rem !important;
+         padding-#{$start}: 0.5rem !important;
      }
 
      .pr-sm-3 {
-         padding-right: 1rem !important;
+         padding-#{$start}: 1rem !important;
      }
 
      .pr-sm-4 {
-         padding-right: 1.5rem !important;
+         padding-#{$start}: 1.5rem !important;
      }
 
      .pr-sm-5 {
-         padding-right: 3rem !important;
+         padding-#{$start}: 3rem !important;
      }
 
      .pb-sm-0 {
@@ -2144,27 +2144,27 @@
      }
 
      .pl-sm-0 {
-         padding-left: 0 !important;
+         padding-#{$end}: 0 !important;
      }
 
      .pl-sm-1 {
-         padding-left: 0.25rem !important;
+         padding-#{$end}: 0.25rem !important;
      }
 
      .pl-sm-2 {
-         padding-left: 0.5rem !important;
+         padding-#{$end}: 0.5rem !important;
      }
 
      .pl-sm-3 {
-         padding-left: 1rem !important;
+         padding-#{$end}: 1rem !important;
      }
 
      .pl-sm-4 {
-         padding-left: 1.5rem !important;
+         padding-#{$end}: 1.5rem !important;
      }
 
      .pl-sm-5 {
-         padding-left: 3rem !important;
+         padding-#{$end}: 3rem !important;
      }
  }
 
@@ -2406,38 +2406,38 @@
      }
 
      .mx-md-0 {
-         margin-right: 0 !important;
-         margin-left: 0 !important;
+         margin-#{$start}: 0 !important;
+         margin-#{$end}: 0 !important;
      }
 
      .mx-md-1 {
-         margin-right: 0.25rem !important;
-         margin-left: 0.25rem !important;
+         margin-#{$start}: 0.25rem !important;
+         margin-#{$end}: 0.25rem !important;
      }
 
      .mx-md-2 {
-         margin-right: 0.5rem !important;
-         margin-left: 0.5rem !important;
+         margin-#{$start}: 0.5rem !important;
+         margin-#{$end}: 0.5rem !important;
      }
 
      .mx-md-3 {
-         margin-right: 1rem !important;
-         margin-left: 1rem !important;
+         margin-#{$start}: 1rem !important;
+         margin-#{$end}: 1rem !important;
      }
 
      .mx-md-4 {
-         margin-right: 1.5rem !important;
-         margin-left: 1.5rem !important;
+         margin-#{$start}: 1.5rem !important;
+         margin-#{$end}: 1.5rem !important;
      }
 
      .mx-md-5 {
-         margin-right: 3rem !important;
-         margin-left: 3rem !important;
+         margin-#{$start}: 3rem !important;
+         margin-#{$end}: 3rem !important;
      }
 
      .mx-md-auto {
-         margin-right: auto !important;
-         margin-left: auto !important;
+         margin-#{$start}: auto !important;
+         margin-#{$end}: auto !important;
      }
 
      .my-md-0 {
@@ -2504,31 +2504,31 @@
      }
 
      .mr-md-0 {
-         margin-right: 0 !important;
+         margin-#{$start}: 0 !important;
      }
 
      .mr-md-1 {
-         margin-right: 0.25rem !important;
+         margin-#{$start}: 0.25rem !important;
      }
 
      .mr-md-2 {
-         margin-right: 0.5rem !important;
+         margin-#{$start}: 0.5rem !important;
      }
 
      .mr-md-3 {
-         margin-right: 1rem !important;
+         margin-#{$start}: 1rem !important;
      }
 
      .mr-md-4 {
-         margin-right: 1.5rem !important;
+         margin-#{$start}: 1.5rem !important;
      }
 
      .mr-md-5 {
-         margin-right: 3rem !important;
+         margin-#{$start}: 3rem !important;
      }
 
      .mr-md-auto {
-         margin-right: auto !important;
+         margin-#{$start}: auto !important;
      }
 
      .mb-md-0 {
@@ -2560,31 +2560,31 @@
      }
 
      .ml-md-0 {
-         margin-left: 0 !important;
+         margin-#{$end}: 0 !important;
      }
 
      .ml-md-1 {
-         margin-left: 0.25rem !important;
+         margin-#{$end}: 0.25rem !important;
      }
 
      .ml-md-2 {
-         margin-left: 0.5rem !important;
+         margin-#{$end}: 0.5rem !important;
      }
 
      .ml-md-3 {
-         margin-left: 1rem !important;
+         margin-#{$end}: 1rem !important;
      }
 
      .ml-md-4 {
-         margin-left: 1.5rem !important;
+         margin-#{$end}: 1.5rem !important;
      }
 
      .ml-md-5 {
-         margin-left: 3rem !important;
+         margin-#{$end}: 3rem !important;
      }
 
      .ml-md-auto {
-         margin-left: auto !important;
+         margin-#{$end}: auto !important;
      }
 
      .p-md-0 {
@@ -2612,33 +2612,33 @@
      }
 
      .px-md-0 {
-         padding-right: 0 !important;
-         padding-left: 0 !important;
+         padding-#{$start}: 0 !important;
+         padding-#{$end}: 0 !important;
      }
 
      .px-md-1 {
-         padding-right: 0.25rem !important;
-         padding-left: 0.25rem !important;
+         padding-#{$start}: 0.25rem !important;
+         padding-#{$end}: 0.25rem !important;
      }
 
      .px-md-2 {
-         padding-right: 0.5rem !important;
-         padding-left: 0.5rem !important;
+         padding-#{$start}: 0.5rem !important;
+         padding-#{$end}: 0.5rem !important;
      }
 
      .px-md-3 {
-         padding-right: 1rem !important;
-         padding-left: 1rem !important;
+         padding-#{$start}: 1rem !important;
+         padding-#{$end}: 1rem !important;
      }
 
      .px-md-4 {
-         padding-right: 1.5rem !important;
-         padding-left: 1.5rem !important;
+         padding-#{$start}: 1.5rem !important;
+         padding-#{$end}: 1.5rem !important;
      }
 
      .px-md-5 {
-         padding-right: 3rem !important;
-         padding-left: 3rem !important;
+         padding-#{$start}: 3rem !important;
+         padding-#{$end}: 3rem !important;
      }
 
      .py-md-0 {
@@ -2696,27 +2696,27 @@
      }
 
      .pr-md-0 {
-         padding-right: 0 !important;
+         padding-#{$start}: 0 !important;
      }
 
      .pr-md-1 {
-         padding-right: 0.25rem !important;
+         padding-#{$start}: 0.25rem !important;
      }
 
      .pr-md-2 {
-         padding-right: 0.5rem !important;
+         padding-#{$start}: 0.5rem !important;
      }
 
      .pr-md-3 {
-         padding-right: 1rem !important;
+         padding-#{$start}: 1rem !important;
      }
 
      .pr-md-4 {
-         padding-right: 1.5rem !important;
+         padding-#{$start}: 1.5rem !important;
      }
 
      .pr-md-5 {
-         padding-right: 3rem !important;
+         padding-#{$start}: 3rem !important;
      }
 
      .pb-md-0 {
@@ -2744,27 +2744,27 @@
      }
 
      .pl-md-0 {
-         padding-left: 0 !important;
+         padding-#{$end}: 0 !important;
      }
 
      .pl-md-1 {
-         padding-left: 0.25rem !important;
+         padding-#{$end}: 0.25rem !important;
      }
 
      .pl-md-2 {
-         padding-left: 0.5rem !important;
+         padding-#{$end}: 0.5rem !important;
      }
 
      .pl-md-3 {
-         padding-left: 1rem !important;
+         padding-#{$end}: 1rem !important;
      }
 
      .pl-md-4 {
-         padding-left: 1.5rem !important;
+         padding-#{$end}: 1.5rem !important;
      }
 
      .pl-md-5 {
-         padding-left: 3rem !important;
+         padding-#{$end}: 3rem !important;
      }
  }
 
@@ -3006,38 +3006,38 @@
      }
 
      .mx-lg-0 {
-         margin-right: 0 !important;
-         margin-left: 0 !important;
+         margin-#{$start}: 0 !important;
+         margin-#{$end}: 0 !important;
      }
 
      .mx-lg-1 {
-         margin-right: 0.25rem !important;
-         margin-left: 0.25rem !important;
+         margin-#{$start}: 0.25rem !important;
+         margin-#{$end}: 0.25rem !important;
      }
 
      .mx-lg-2 {
-         margin-right: 0.5rem !important;
-         margin-left: 0.5rem !important;
+         margin-#{$start}: 0.5rem !important;
+         margin-#{$end}: 0.5rem !important;
      }
 
      .mx-lg-3 {
-         margin-right: 1rem !important;
-         margin-left: 1rem !important;
+         margin-#{$start}: 1rem !important;
+         margin-#{$end}: 1rem !important;
      }
 
      .mx-lg-4 {
-         margin-right: 1.5rem !important;
-         margin-left: 1.5rem !important;
+         margin-#{$start}: 1.5rem !important;
+         margin-#{$end}: 1.5rem !important;
      }
 
      .mx-lg-5 {
-         margin-right: 3rem !important;
-         margin-left: 3rem !important;
+         margin-#{$start}: 3rem !important;
+         margin-#{$end}: 3rem !important;
      }
 
      .mx-lg-auto {
-         margin-right: auto !important;
-         margin-left: auto !important;
+         margin-#{$start}: auto !important;
+         margin-#{$end}: auto !important;
      }
 
      .my-lg-0 {
@@ -3104,31 +3104,31 @@
      }
 
      .mr-lg-0 {
-         margin-right: 0 !important;
+         margin-#{$start}: 0 !important;
      }
 
      .mr-lg-1 {
-         margin-right: 0.25rem !important;
+         margin-#{$start}: 0.25rem !important;
      }
 
      .mr-lg-2 {
-         margin-right: 0.5rem !important;
+         margin-#{$start}: 0.5rem !important;
      }
 
      .mr-lg-3 {
-         margin-right: 1rem !important;
+         margin-#{$start}: 1rem !important;
      }
 
      .mr-lg-4 {
-         margin-right: 1.5rem !important;
+         margin-#{$start}: 1.5rem !important;
      }
 
      .mr-lg-5 {
-         margin-right: 3rem !important;
+         margin-#{$start}: 3rem !important;
      }
 
      .mr-lg-auto {
-         margin-right: auto !important;
+         margin-#{$start}: auto !important;
      }
 
      .mb-lg-0 {
@@ -3160,31 +3160,31 @@
      }
 
      .ml-lg-0 {
-         margin-left: 0 !important;
+         margin-#{$end}: 0 !important;
      }
 
      .ml-lg-1 {
-         margin-left: 0.25rem !important;
+         margin-#{$end}: 0.25rem !important;
      }
 
      .ml-lg-2 {
-         margin-left: 0.5rem !important;
+         margin-#{$end}: 0.5rem !important;
      }
 
      .ml-lg-3 {
-         margin-left: 1rem !important;
+         margin-#{$end}: 1rem !important;
      }
 
      .ml-lg-4 {
-         margin-left: 1.5rem !important;
+         margin-#{$end}: 1.5rem !important;
      }
 
      .ml-lg-5 {
-         margin-left: 3rem !important;
+         margin-#{$end}: 3rem !important;
      }
 
      .ml-lg-auto {
-         margin-left: auto !important;
+         margin-#{$end}: auto !important;
      }
 
      .p-lg-0 {
@@ -3212,33 +3212,33 @@
      }
 
      .px-lg-0 {
-         padding-right: 0 !important;
-         padding-left: 0 !important;
+         padding-#{$start}: 0 !important;
+         padding-#{$end}: 0 !important;
      }
 
      .px-lg-1 {
-         padding-right: 0.25rem !important;
-         padding-left: 0.25rem !important;
+         padding-#{$start}: 0.25rem !important;
+         padding-#{$end}: 0.25rem !important;
      }
 
      .px-lg-2 {
-         padding-right: 0.5rem !important;
-         padding-left: 0.5rem !important;
+         padding-#{$start}: 0.5rem !important;
+         padding-#{$end}: 0.5rem !important;
      }
 
      .px-lg-3 {
-         padding-right: 1rem !important;
-         padding-left: 1rem !important;
+         padding-#{$start}: 1rem !important;
+         padding-#{$end}: 1rem !important;
      }
 
      .px-lg-4 {
-         padding-right: 1.5rem !important;
-         padding-left: 1.5rem !important;
+         padding-#{$start}: 1.5rem !important;
+         padding-#{$end}: 1.5rem !important;
      }
 
      .px-lg-5 {
-         padding-right: 3rem !important;
-         padding-left: 3rem !important;
+         padding-#{$start}: 3rem !important;
+         padding-#{$end}: 3rem !important;
      }
 
      .py-lg-0 {
@@ -3296,27 +3296,27 @@
      }
 
      .pr-lg-0 {
-         padding-right: 0 !important;
+         padding-#{$start}: 0 !important;
      }
 
      .pr-lg-1 {
-         padding-right: 0.25rem !important;
+         padding-#{$start}: 0.25rem !important;
      }
 
      .pr-lg-2 {
-         padding-right: 0.5rem !important;
+         padding-#{$start}: 0.5rem !important;
      }
 
      .pr-lg-3 {
-         padding-right: 1rem !important;
+         padding-#{$start}: 1rem !important;
      }
 
      .pr-lg-4 {
-         padding-right: 1.5rem !important;
+         padding-#{$start}: 1.5rem !important;
      }
 
      .pr-lg-5 {
-         padding-right: 3rem !important;
+         padding-#{$start}: 3rem !important;
      }
 
      .pb-lg-0 {
@@ -3344,27 +3344,27 @@
      }
 
      .pl-lg-0 {
-         padding-left: 0 !important;
+         padding-#{$end}: 0 !important;
      }
 
      .pl-lg-1 {
-         padding-left: 0.25rem !important;
+         padding-#{$end}: 0.25rem !important;
      }
 
      .pl-lg-2 {
-         padding-left: 0.5rem !important;
+         padding-#{$end}: 0.5rem !important;
      }
 
      .pl-lg-3 {
-         padding-left: 1rem !important;
+         padding-#{$end}: 1rem !important;
      }
 
      .pl-lg-4 {
-         padding-left: 1.5rem !important;
+         padding-#{$end}: 1.5rem !important;
      }
 
      .pl-lg-5 {
-         padding-left: 3rem !important;
+         padding-#{$end}: 3rem !important;
      }
  }
 
@@ -3606,38 +3606,38 @@
      }
 
      .mx-xl-0 {
-         margin-right: 0 !important;
-         margin-left: 0 !important;
+         margin-#{$start}: 0 !important;
+         margin-#{$end}: 0 !important;
      }
 
      .mx-xl-1 {
-         margin-right: 0.25rem !important;
-         margin-left: 0.25rem !important;
+         margin-#{$start}: 0.25rem !important;
+         margin-#{$end}: 0.25rem !important;
      }
 
      .mx-xl-2 {
-         margin-right: 0.5rem !important;
-         margin-left: 0.5rem !important;
+         margin-#{$start}: 0.5rem !important;
+         margin-#{$end}: 0.5rem !important;
      }
 
      .mx-xl-3 {
-         margin-right: 1rem !important;
-         margin-left: 1rem !important;
+         margin-#{$start}: 1rem !important;
+         margin-#{$end}: 1rem !important;
      }
 
      .mx-xl-4 {
-         margin-right: 1.5rem !important;
-         margin-left: 1.5rem !important;
+         margin-#{$start}: 1.5rem !important;
+         margin-#{$end}: 1.5rem !important;
      }
 
      .mx-xl-5 {
-         margin-right: 3rem !important;
-         margin-left: 3rem !important;
+         margin-#{$start}: 3rem !important;
+         margin-#{$end}: 3rem !important;
      }
 
      .mx-xl-auto {
-         margin-right: auto !important;
-         margin-left: auto !important;
+         margin-#{$start}: auto !important;
+         margin-#{$end}: auto !important;
      }
 
      .my-xl-0 {
@@ -3704,31 +3704,31 @@
      }
 
      .mr-xl-0 {
-         margin-right: 0 !important;
+         margin-#{$start}: 0 !important;
      }
 
      .mr-xl-1 {
-         margin-right: 0.25rem !important;
+         margin-#{$start}: 0.25rem !important;
      }
 
      .mr-xl-2 {
-         margin-right: 0.5rem !important;
+         margin-#{$start}: 0.5rem !important;
      }
 
      .mr-xl-3 {
-         margin-right: 1rem !important;
+         margin-#{$start}: 1rem !important;
      }
 
      .mr-xl-4 {
-         margin-right: 1.5rem !important;
+         margin-#{$start}: 1.5rem !important;
      }
 
      .mr-xl-5 {
-         margin-right: 3rem !important;
+         margin-#{$start}: 3rem !important;
      }
 
      .mr-xl-auto {
-         margin-right: auto !important;
+         margin-#{$start}: auto !important;
      }
 
      .mb-xl-0 {
@@ -3760,31 +3760,31 @@
      }
 
      .ml-xl-0 {
-         margin-left: 0 !important;
+         margin-#{$end}: 0 !important;
      }
 
      .ml-xl-1 {
-         margin-left: 0.25rem !important;
+         margin-#{$end}: 0.25rem !important;
      }
 
      .ml-xl-2 {
-         margin-left: 0.5rem !important;
+         margin-#{$end}: 0.5rem !important;
      }
 
      .ml-xl-3 {
-         margin-left: 1rem !important;
+         margin-#{$end}: 1rem !important;
      }
 
      .ml-xl-4 {
-         margin-left: 1.5rem !important;
+         margin-#{$end}: 1.5rem !important;
      }
 
      .ml-xl-5 {
-         margin-left: 3rem !important;
+         margin-#{$end}: 3rem !important;
      }
 
      .ml-xl-auto {
-         margin-left: auto !important;
+         margin-#{$end}: auto !important;
      }
 
      .p-xl-0 {
@@ -3812,33 +3812,33 @@
      }
 
      .px-xl-0 {
-         padding-right: 0 !important;
-         padding-left: 0 !important;
+         padding-#{$start}: 0 !important;
+         padding-#{$end}: 0 !important;
      }
 
      .px-xl-1 {
-         padding-right: 0.25rem !important;
-         padding-left: 0.25rem !important;
+         padding-#{$start}: 0.25rem !important;
+         padding-#{$end}: 0.25rem !important;
      }
 
      .px-xl-2 {
-         padding-right: 0.5rem !important;
-         padding-left: 0.5rem !important;
+         padding-#{$start}: 0.5rem !important;
+         padding-#{$end}: 0.5rem !important;
      }
 
      .px-xl-3 {
-         padding-right: 1rem !important;
-         padding-left: 1rem !important;
+         padding-#{$start}: 1rem !important;
+         padding-#{$end}: 1rem !important;
      }
 
      .px-xl-4 {
-         padding-right: 1.5rem !important;
-         padding-left: 1.5rem !important;
+         padding-#{$start}: 1.5rem !important;
+         padding-#{$end}: 1.5rem !important;
      }
 
      .px-xl-5 {
-         padding-right: 3rem !important;
-         padding-left: 3rem !important;
+         padding-#{$start}: 3rem !important;
+         padding-#{$end}: 3rem !important;
      }
 
      .py-xl-0 {
@@ -3896,27 +3896,27 @@
      }
 
      .pr-xl-0 {
-         padding-right: 0 !important;
+         padding-#{$start}: 0 !important;
      }
 
      .pr-xl-1 {
-         padding-right: 0.25rem !important;
+         padding-#{$start}: 0.25rem !important;
      }
 
      .pr-xl-2 {
-         padding-right: 0.5rem !important;
+         padding-#{$start}: 0.5rem !important;
      }
 
      .pr-xl-3 {
-         padding-right: 1rem !important;
+         padding-#{$start}: 1rem !important;
      }
 
      .pr-xl-4 {
-         padding-right: 1.5rem !important;
+         padding-#{$start}: 1.5rem !important;
      }
 
      .pr-xl-5 {
-         padding-right: 3rem !important;
+         padding-#{$start}: 3rem !important;
      }
 
      .pb-xl-0 {
@@ -3944,27 +3944,27 @@
      }
 
      .pl-xl-0 {
-         padding-left: 0 !important;
+         padding-#{$end}: 0 !important;
      }
 
      .pl-xl-1 {
-         padding-left: 0.25rem !important;
+         padding-#{$end}: 0.25rem !important;
      }
 
      .pl-xl-2 {
-         padding-left: 0.5rem !important;
+         padding-#{$end}: 0.5rem !important;
      }
 
      .pl-xl-3 {
-         padding-left: 1rem !important;
+         padding-#{$end}: 1rem !important;
      }
 
      .pl-xl-4 {
-         padding-left: 1.5rem !important;
+         padding-#{$end}: 1.5rem !important;
      }
 
      .pl-xl-5 {
-         padding-left: 3rem !important;
+         padding-#{$end}: 3rem !important;
      }
  }
 
@@ -4206,38 +4206,38 @@
      }
 
      .mx-xxl-0 {
-         margin-right: 0 !important;
-         margin-left: 0 !important;
+         margin-#{$start}: 0 !important;
+         margin-#{$end}: 0 !important;
      }
 
      .mx-xxl-1 {
-         margin-right: 0.25rem !important;
-         margin-left: 0.25rem !important;
+         margin-#{$start}: 0.25rem !important;
+         margin-#{$end}: 0.25rem !important;
      }
 
      .mx-xxl-2 {
-         margin-right: 0.5rem !important;
-         margin-left: 0.5rem !important;
+         margin-#{$start}: 0.5rem !important;
+         margin-#{$end}: 0.5rem !important;
      }
 
      .mx-xxl-3 {
-         margin-right: 1rem !important;
-         margin-left: 1rem !important;
+         margin-#{$start}: 1rem !important;
+         margin-#{$end}: 1rem !important;
      }
 
      .mx-xxl-4 {
-         margin-right: 1.5rem !important;
-         margin-left: 1.5rem !important;
+         margin-#{$start}: 1.5rem !important;
+         margin-#{$end}: 1.5rem !important;
      }
 
      .mx-xxl-5 {
-         margin-right: 3rem !important;
-         margin-left: 3rem !important;
+         margin-#{$start}: 3rem !important;
+         margin-#{$end}: 3rem !important;
      }
 
      .mx-xxl-auto {
-         margin-right: auto !important;
-         margin-left: auto !important;
+         margin-#{$start}: auto !important;
+         margin-#{$end}: auto !important;
      }
 
      .my-xxl-0 {
@@ -4304,31 +4304,31 @@
      }
 
      .mr-xxl-0 {
-         margin-right: 0 !important;
+         margin-#{$start}: 0 !important;
      }
 
      .mr-xxl-1 {
-         margin-right: 0.25rem !important;
+         margin-#{$start}: 0.25rem !important;
      }
 
      .mr-xxl-2 {
-         margin-right: 0.5rem !important;
+         margin-#{$start}: 0.5rem !important;
      }
 
      .mr-xxl-3 {
-         margin-right: 1rem !important;
+         margin-#{$start}: 1rem !important;
      }
 
      .mr-xxl-4 {
-         margin-right: 1.5rem !important;
+         margin-#{$start}: 1.5rem !important;
      }
 
      .mr-xxl-5 {
-         margin-right: 3rem !important;
+         margin-#{$start}: 3rem !important;
      }
 
      .mr-xxl-auto {
-         margin-right: auto !important;
+         margin-#{$start}: auto !important;
      }
 
      .mb-xxl-0 {
@@ -4360,31 +4360,31 @@
      }
 
      .ml-xxl-0 {
-         margin-left: 0 !important;
+         margin-#{$end}: 0 !important;
      }
 
      .ml-xxl-1 {
-         margin-left: 0.25rem !important;
+         margin-#{$end}: 0.25rem !important;
      }
 
      .ml-xxl-2 {
-         margin-left: 0.5rem !important;
+         margin-#{$end}: 0.5rem !important;
      }
 
      .ml-xxl-3 {
-         margin-left: 1rem !important;
+         margin-#{$end}: 1rem !important;
      }
 
      .ml-xxl-4 {
-         margin-left: 1.5rem !important;
+         margin-#{$end}: 1.5rem !important;
      }
 
      .ml-xxl-5 {
-         margin-left: 3rem !important;
+         margin-#{$end}: 3rem !important;
      }
 
      .ml-xxl-auto {
-         margin-left: auto !important;
+         margin-#{$end}: auto !important;
      }
 
      .p-xxl-0 {
@@ -4412,33 +4412,33 @@
      }
 
      .px-xxl-0 {
-         padding-right: 0 !important;
-         padding-left: 0 !important;
+         padding-#{$start}: 0 !important;
+         padding-#{$end}: 0 !important;
      }
 
      .px-xxl-1 {
-         padding-right: 0.25rem !important;
-         padding-left: 0.25rem !important;
+         padding-#{$start}: 0.25rem !important;
+         padding-#{$end}: 0.25rem !important;
      }
 
      .px-xxl-2 {
-         padding-right: 0.5rem !important;
-         padding-left: 0.5rem !important;
+         padding-#{$start}: 0.5rem !important;
+         padding-#{$end}: 0.5rem !important;
      }
 
      .px-xxl-3 {
-         padding-right: 1rem !important;
-         padding-left: 1rem !important;
+         padding-#{$start}: 1rem !important;
+         padding-#{$end}: 1rem !important;
      }
 
      .px-xxl-4 {
-         padding-right: 1.5rem !important;
-         padding-left: 1.5rem !important;
+         padding-#{$start}: 1.5rem !important;
+         padding-#{$end}: 1.5rem !important;
      }
 
      .px-xxl-5 {
-         padding-right: 3rem !important;
-         padding-left: 3rem !important;
+         padding-#{$start}: 3rem !important;
+         padding-#{$end}: 3rem !important;
      }
 
      .py-xxl-0 {
@@ -4496,27 +4496,27 @@
      }
 
      .pr-xxl-0 {
-         padding-right: 0 !important;
+         padding-#{$start}: 0 !important;
      }
 
      .pr-xxl-1 {
-         padding-right: 0.25rem !important;
+         padding-#{$start}: 0.25rem !important;
      }
 
      .pr-xxl-2 {
-         padding-right: 0.5rem !important;
+         padding-#{$start}: 0.5rem !important;
      }
 
      .pr-xxl-3 {
-         padding-right: 1rem !important;
+         padding-#{$start}: 1rem !important;
      }
 
      .pr-xxl-4 {
-         padding-right: 1.5rem !important;
+         padding-#{$start}: 1.5rem !important;
      }
 
      .pr-xxl-5 {
-         padding-right: 3rem !important;
+         padding-#{$start}: 3rem !important;
      }
 
      .pb-xxl-0 {
@@ -4544,27 +4544,27 @@
      }
 
      .pl-xxl-0 {
-         padding-left: 0 !important;
+         padding-#{$end}: 0 !important;
      }
 
      .pl-xxl-1 {
-         padding-left: 0.25rem !important;
+         padding-#{$end}: 0.25rem !important;
      }
 
      .pl-xxl-2 {
-         padding-left: 0.5rem !important;
+         padding-#{$end}: 0.5rem !important;
      }
 
      .pl-xxl-3 {
-         padding-left: 1rem !important;
+         padding-#{$end}: 1rem !important;
      }
 
      .pl-xxl-4 {
-         padding-left: 1.5rem !important;
+         padding-#{$end}: 1.5rem !important;
      }
 
      .pl-xxl-5 {
-         padding-left: 3rem !important;
+         padding-#{$end}: 3rem !important;
      }
  }
 
@@ -4629,7 +4629,7 @@
              flex: 75%;
          }
 
-         .content-container-right {
+         .content-container-#{$start} {
              max-width: 75%;
              flex: 75%;
          }

@@ -3,8 +3,8 @@
     min-height: 320px;
     overflow: auto;
     padding: 0 8px;
-    margin-left: -12px;
-    padding-left: 12px;
+    margin-#{$end}: -12px;
+    padding-#{$end}: 12px;
     @extend .nice-scroll;
 
     .like-item {
@@ -49,11 +49,11 @@
     overflow: auto;
     padding: 24px 8px;
     margin: 0 -8px;
-    margin-left: -12px;
-    padding-left: 12px;
+    margin-#{$end}: -12px;
+    padding-#{$end}: 12px;
 
     figure.profile-standard {
-        margin-left: 1.5rem;
+        margin-#{$end}: 1.5rem;
     }
 
     .connection-item {

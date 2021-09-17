@@ -81,9 +81,9 @@
             }
 
             >*:not(:last-child) {
-                padding-left: 0.75rem;
-                border-left: 2px solid #C8C8C8;
-                margin-left: 0.75rem;
+                padding-#{$end}: 0.75rem;
+                border-#{$end}: 2px solid #C8C8C8;
+                margin-#{$end}: 0.75rem;
             }
 
             >span {
@@ -143,7 +143,7 @@
 
     i {
         font-size: 1rem;
-        margin-left: 4px;
+        margin-#{$end}: 4px;
     }
 }
 
@@ -253,12 +253,12 @@
             bottom: 0;
             height: 2px;
             background-color: #EEE;
-            left: 0;
-            right: 11rem;
+            #{$end}: 0;
+            #{$start}: 11rem;
 
             @media screen and (max-width: $sm-size) {
-                left: 1rem;
-                right: 1rem;
+                #{$end}: 1rem;
+                #{$start}: 1rem;
                 width: calc(100% - 32px);
             }
         }
@@ -290,17 +290,17 @@
     li:not(.edit) {
         &:not(.detailed) {
             &:not(:last-child) {
-                padding-left: 1rem;
-                border-left: 2px solid #C8C8C8;
-                margin-left: 1rem;
+                padding-#{$end}: 1rem;
+                border-#{$end}: 2px solid #C8C8C8;
+                margin-#{$end}: 1rem;
             }
         }
     }
 
     li.edit {
-        padding-left: 0;
-        margin-left: 0;
-        border-left: none;
+        padding-#{$end}: 0;
+        margin-#{$end}: 0;
+        border-#{$end}: none;
     }
 
     li.detailed {

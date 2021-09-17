@@ -151,13 +151,13 @@
         color: $dark;
 
         i {
-            margin-left: 8px;
+            margin-#{$end}: 8px;
             font-size: 16px;
         }
 
         @media screen and (min-width: $sm-size) {
             &:first-child {
-                margin-left: 1.5rem;
+                margin-#{$end}: 1.5rem;
             }
         }
     }

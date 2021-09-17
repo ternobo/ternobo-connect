@@ -4,8 +4,8 @@
     line-height: 1;
     width: 100%;
     text-align: center;
-    left: 0;
-    right: 0;
+    #{$end}: 0;
+    #{$start}: 0;
     display: flex;
     justify-content: center;
     height: 1.5rem;

@@ -138,7 +138,7 @@
 
 .add-btn {
     border: 2px solid $icons;
-    border-right: none;
+    border-#{$start}: none;
     background: #E0E0E0;
     color: #757575;
     max-height: 37px;
@@ -177,9 +177,9 @@
 .loading-button.loading::before {
     position: absolute;
     top: 50%;
-    left: 50%;
+    #{$end}: 50%;
     margin-top: -4px;
-    margin-left: -4px;
+    margin-#{$end}: -4px;
     content: '';
     height: 8px;
     width: 8px;
@@ -207,7 +207,7 @@
 
 @-webkit-keyframes one-two {
     0% {
-        left: 20%;
+        #{$end}: 20%;
         top: 50%;
     }
 
@@ -224,7 +224,7 @@
     }
 
     50% {
-        left: 70%;
+        #{$end}: 70%;
         top: 50%;
     }
 
@@ -241,14 +241,14 @@
     }
 
     100% {
-        left: 20%;
+        #{$end}: 20%;
         top: 50%;
     }
 }
 
 @keyframes one-two {
     0% {
-        left: 20%;
+        #{$end}: 20%;
         top: 50%;
     }
 
@@ -265,7 +265,7 @@
     }
 
     50% {
-        left: 70%;
+        #{$end}: 70%;
         top: 50%;
     }
 
@@ -282,36 +282,36 @@
     }
 
     100% {
-        left: 20%;
+        #{$end}: 20%;
         top: 50%;
     }
 }
 
 @-webkit-keyframes loading {
     0% {
-        left: 20%;
+        #{$end}: 20%;
     }
 
     50% {
-        left: 80%;
+        #{$end}: 80%;
     }
 
     100% {
-        left: 20%;
+        #{$end}: 20%;
     }
 }
 
 @keyframes loading {
     0% {
-        left: 20%;
+        #{$end}: 20%;
     }
 
     50% {
-        left: 80%;
+        #{$end}: 80%;
     }
 
     100% {
-        left: 20%;
+        #{$end}: 20%;
     }
 }
 
@@ -319,8 +319,8 @@
 .splitor-b::after {
     content: " ";
     bottom: 0px;
-    right: 0.625rem;
-    left: 0.625rem;
+    #{$start}: 0.625rem;
+    #{$end}: 0.625rem;
     width: calc(100% - 1.25rem);
     height: 1px;
     position: absolute;
@@ -330,7 +330,7 @@
 
 .splitor-l::after {
     content: " ";
-    left: 0;
+    #{$end}: 0;
     width: 1px;
     height: 20px;
     position: absolute;
@@ -359,7 +359,7 @@
 
     i {
         @media screen and(min-width: $sm-size) {
-            margin-left: map-get($spacings, 2);
+            margin-#{$end}: map-get($spacings, 2);
         }
     }
 }
@@ -392,14 +392,14 @@
     .edit-icons {
         position: absolute;
         top: 1.5rem;
-        left: 1.5rem;
+        #{$end}: 1.5rem;
         padding-top: 5px;
         display: flex;
         flex-direction: column;
 
         @media screen and (max-width: $sm-size) {
             top: 8px;
-            left: 12px;
+            #{$end}: 12px;
         }
     }
 }

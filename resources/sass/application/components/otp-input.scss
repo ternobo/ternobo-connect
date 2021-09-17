@@ -1,6 +1,6 @@
 .otp-input {
     >div:not(:last-child) {
-        margin-right: 12px;
+        margin-#{$start}: 12px;
     }
 }
 

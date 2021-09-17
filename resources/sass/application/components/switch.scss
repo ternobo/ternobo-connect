@@ -35,8 +35,8 @@
         height: 10px;
         position: absolute;
         top: 1px;
-        right: 2px;
-        transition: right 0.25s;
+        #{$start}: 2px;
+        transition: $start 0.25s;
     }
 
     .toggle:hover &:before {
@@ -47,7 +47,7 @@
         border-color: $action;
 
         &:before {
-            right: 16px;
+            #{$start}: 16px;
             background: $action;
 
         }
@@ -60,7 +60,7 @@
 }
 
 .toggle-label {
-    margin-right: 5px;
+    margin-#{$start}: 5px;
     position: relative;
     top: 2px;
 }

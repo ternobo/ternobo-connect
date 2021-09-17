@@ -1,6 +1,5 @@
 // Body
 $body-bg: #F5F5F5;
-
 $border-widths: 2px;
 
 $spacing: 1rem;
@@ -17,6 +16,12 @@ $spacings: (1: $spacing / 4,
     8: $spacing * 3.25,
     9: $spacing * 4,
 ) !default;
+
+
+$modal-small: 300px !default;
+$modal-medium: 500px !default;
+$modal-large: 582px !default;
+$modal-content: 710px;
 
 $breakpoint: 1188px;
 
@@ -80,8 +85,7 @@ $gray-500: #757575 !default;
 $gray-600: #424242 !default;
 $black: #191919 !default;
 
-$gray-theme: (
-    '50':$gray-50,
+$gray-theme: ('50':$gray-50,
     '100':$gray-100,
     '200':$gray-200,
     '300':$gray-300,

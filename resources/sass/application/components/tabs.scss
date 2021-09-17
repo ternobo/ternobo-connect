@@ -44,12 +44,12 @@
             font-size: 14px;
 
             &:not(:last-child) {
-                margin-left: 40px;
+                margin-#{$end}: 40px;
             }
 
             @media screen and (max-width: $sm-size) {
                 &:not(:last-child) {
-                    margin-left: 16px;
+                    margin-#{$end}: 16px;
                 }
 
                 font-size: 12px;
@@ -66,20 +66,20 @@
             }
         }
 
-        &.is-left {
-            padding-right: 0.75em;
+        &.is-#{$end} {
+            padding-#{$start}: 0.75em;
         }
 
         &.is-center {
             flex: none;
             justify-content: center;
-            padding-left: 0.75em;
-            padding-right: 0.75em;
+            padding-#{$end}: 0.75em;
+            padding-#{$start}: 0.75em;
         }
 
-        &.is-right {
+        &.is-#{$start} {
             justify-content: flex-end;
-            padding-left: 0.75em;
+            padding-#{$end}: 0.75em;
         }
     }
 
@@ -91,11 +91,11 @@
 
     .icon {
         &:first-child {
-            margin-right: 0.5em;
+            margin-#{$start}: 0.5em;
         }
 
         &:last-child {
-            margin-left: 0.5em;
+            margin-#{$end}: 0.5em;
         }
     }
 
@@ -103,7 +103,7 @@
         justify-content: center;
     }
 
-    &.is-right ul {
+    &.is-#{$start} ul {
         justify-content: flex-end;
     }
 
@@ -145,15 +145,19 @@
 
         li {
             +li {
-                margin-left: -1px;
+                margin-#{$end}: -1px;
             }
 
             &:first-child a {
-                border-radius: 3px 0 0 3px;
+                border-radius: 0;
+                border-top-#{$end}-radius: 3px;
+                border-bottom-#{$end}-radius: 3px;
             }
 
             &:last-child a {
-                border-radius: 0 3px 3px 0;
+                border-radius: 0;
+                border-top-#{$start}-radius: 3px;
+                border-bottom-#{$start}-radius: 3px;
             }
 
             &.is-active a {

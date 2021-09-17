@@ -16,7 +16,7 @@
     .donate-type {
         color: $dark-blue;
         transform: rotate(180deg);
-        margin-left: 16px;
+        margin-#{$end}: 16px;
     }
 
     .donate-type.received {
@@ -25,7 +25,7 @@
     }
 
     .tip-profile {
-        margin-left: 16px;
+        margin-#{$end}: 16px;
     }
 
     .doantion-time {
@@ -77,7 +77,7 @@
         }
 
         >*:first-child {
-            margin-left: 4px;
+            margin-#{$end}: 4px;
         }
     }
 
@@ -155,7 +155,7 @@
             }
 
             >*:first-child {
-                margin-left: 4px;
+                margin-#{$end}: 4px;
             }
         }
     }
@@ -163,7 +163,7 @@
     .donate-type {
         color: $dark-blue;
         transform: rotate(180deg);
-        margin-left: 16px;
+        margin-#{$end}: 16px;
     }
 
     .donate-type.received {

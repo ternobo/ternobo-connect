@@ -54,8 +54,8 @@ h5 {
 }
 
 .full-width {
-    margin-left: calc(-100vw / 2 + 500px / 2);
-    margin-right: calc(-100vw / 2 + 500px / 2);
+    margin-#{$end}: calc(-100vw / 2 + 500px / 2);
+    margin-#{$start}: calc(-100vw / 2 + 500px / 2);
 }
 
 .btn {
@@ -186,8 +186,8 @@ h5 {
     }
 
     .mobileOfpost {
-        margin-left: 1rem !important;
-        margin-right: 1rem !important;
+        margin-#{$end}: 1rem !important;
+        margin-#{$start}: 1rem !important;
     }
 
     .svg2 {
@@ -200,7 +200,7 @@ h5 {
 
     .aiImages {
         width: 150% !important;
-        margin-right: -2rem;
+        margin-#{$start}: -2rem;
     }
 
     .sptitle {
@@ -228,7 +228,7 @@ h5 {
 }
 
 .slick-prev:before {
-    content: 'keyboard_arrow_left' !important;
+    content: 'keyboard_arrow_-#{$end}' !important;
     font-family: "Material Icons" !important;
     font-size: 30px;
 }
@@ -241,11 +241,11 @@ h5 {
 }
 
 .slick-next {
-    right: -25px !important;
-    left: unset !important;
+    #{$start}: -25px !important;
+    #{$end}: unset !important;
 }
 
 .slick-prev {
-    left: -25px !important;
-    right: unset !important;
+    #{$end}: -25px !important;
+    #{$start}: unset !important;
 }

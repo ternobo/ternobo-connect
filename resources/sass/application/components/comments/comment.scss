@@ -25,7 +25,7 @@
             box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.03);
             border-radius: 4px;
 
-            margin-left: 1rem;
+            margin-#{$end}: 1rem;
 
             background: $white;
             color: $green;
@@ -36,14 +36,14 @@
             border-radius: 4px;
 
             >i {
-                margin-left: 4px;
+                margin-#{$end}: 4px;
                 color: $green;
                 font-size: 16px;
             }
         }
 
         .pagedetail {
-            margin-right: 1rem;
+            margin-#{$start}: 1rem;
             display: flex;
             flex-direction: column;
 
@@ -60,7 +60,7 @@
         }
 
         .comment-time {
-            margin-left: 0.75rem;
+            margin-#{$end}: 0.75rem;
             color: $grey;
             font-size: 0.625rem;
         }
@@ -102,7 +102,7 @@
 
         >.like-btn {
             color: $dark;
-            margin-right: 16px;
+            margin-#{$start}: 16px;
         }
     }
 

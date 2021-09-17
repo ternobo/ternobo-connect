@@ -79,7 +79,7 @@
         .profile-image {
             width: 2.75rem;
             height: 2.75rem;
-            margin-left: 16px;
+            margin-#{$end}: 16px;
             margin-bottom: 0;
 
             img {
@@ -196,7 +196,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: 12px;
+        margin-#{$end}: 12px;
     }
 
     .file-detail {
@@ -208,7 +208,7 @@
             align-items: center;
 
             strong {
-                margin-left: 12px;
+                margin-#{$end}: 12px;
             }
         }
     }
@@ -264,8 +264,8 @@
 
         .progress-bg {
             position: absolute;
-            left: 0;
-            right: 0;
+            #{$end}: 0;
+            #{$start}: 0;
             background: #CDEAF9;
             width: 100%;
             height: 5px;
@@ -283,7 +283,7 @@
                 content: " ";
                 position: absolute;
                 background: $action;
-                right: 0;
+                #{$start}: 0;
                 border-radius: 3px;
                 width: 4px;
                 height: 8px;
@@ -363,7 +363,7 @@
 
         .message-time,
         .message-loading {
-            margin-right: 12px;
+            margin-#{$start}: 12px;
         }
 
         strong {
@@ -375,7 +375,7 @@
 
         figure.profile-xsm {
             margin-bottom: 0;
-            margin-left: 12px;
+            margin-#{$end}: 12px;
         }
 
         .voice-message {
@@ -398,11 +398,11 @@
         &.send-error {
             .reload-btn {
                 color: $action;
-                margin-right: -32px;
+                margin-#{$start}: -32px;
                 max-height: 2.75rem;
                 display: flex;
                 align-items: center;
-                margin-left: 8px;
+                margin-#{$end}: 8px;
                 cursor: pointer;
             }
 
@@ -432,15 +432,15 @@
 
             figure.profile-xsm {
                 margin-bottom: 0;
-                margin-right: 12px;
-                margin-left: 0;
+                margin-#{$start}: 12px;
+                margin-#{$end}: 0;
 
                 .reload-btn {
-                    margin-left: -32px;
+                    margin-#{$end}: -32px;
                     max-height: 2.75rem;
                     display: flex;
                     align-items: center;
-                    margin-right: 8px;
+                    margin-#{$start}: 8px;
                     cursor: pointer;
                 }
             }
@@ -451,8 +451,8 @@
 
             .message-time,
             .message-loading {
-                margin-left: 12px;
-                margin-right: 0;
+                margin-#{$end}: 12px;
+                margin-#{$start}: 0;
             }
 
         }
@@ -482,7 +482,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-left: 12px;
+            margin-#{$end}: 12px;
         }
     }
 
@@ -591,12 +591,12 @@
 
     .contactinfo {
         display: flex;
-        margin-left: 40px;
+        margin-#{$end}: 40px;
     }
 
     figure.profile {
         margin-bottom: 0;
-        margin-left: 12px;
+        margin-#{$end}: 12px;
     }
 
     .profile,
@@ -618,7 +618,7 @@
     .subtitle {
         font-size: 10px;
         line-height: 15px;
-        text-align: right;
+        text-align: $start;
         color: $grey;
     }
 
@@ -676,7 +676,7 @@
         padding: 16px 12px;
 
         .filter {
-            margin-left: 12px;
+            margin-#{$end}: 12px;
             background: $body-bg;
             padding: 4px 8px;
             border-radius: 10px;
@@ -699,6 +699,6 @@
 
 .link-item {
     direction: ltr;
-    text-align: left;
-    padding-left: 16px;
+    text-align: -#{$end};
+    padding-#{$end}: 16px;
 }

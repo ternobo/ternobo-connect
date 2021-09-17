@@ -39,9 +39,9 @@
     }
 
     .items {
-        padding-right: 0;
+        padding-#{$start}: 0;
         min-width: 130px;
-        left: 0;
+        #{$end}: 0;
         transition: 0.3s all;
         background: $body-bg;
         padding-top: 40px;

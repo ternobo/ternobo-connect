@@ -22,11 +22,11 @@
 
         img {
             width: 1.5rem;
-            margin-left: 8px;
+            margin-#{$end}: 8px;
 
             @media screen and (max-width: $sm-size) {
                 width: 16px;
-                margin-left: 4px;
+                margin-#{$end}: 4px;
             }
         }
     }
@@ -51,7 +51,7 @@
             i {
                 color: $icons;
                 cursor: not-allowed;
-                margin-right: 8px;
+                margin-#{$start}: 8px;
             }
         }
 
@@ -85,11 +85,11 @@
 
             i {
                 @if $direction==rtl {
-                    margin-right: 8px;
+                    margin-#{$start}: 8px;
                 }
 
                 @else {
-                    margin-left: 8px;
+                    margin-#{$end}: 8px;
                 }
 
                 color: $grey;
@@ -100,7 +100,7 @@
 
                 @media screen and (max-width: $sm-size) {
                     font-size: 14px;
-                    margin-right: 4px;
+                    margin-#{$start}: 4px;
                 }
             }
         }

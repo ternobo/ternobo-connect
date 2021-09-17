@@ -98,8 +98,8 @@ input {
     }
 
     .form-control:not(:last-child) {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
+        border-top-#{$start}-radius: 0;
+        border-bottom-#{$start}-radius: 0;
     }
 }
 

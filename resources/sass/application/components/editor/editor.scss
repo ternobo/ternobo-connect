@@ -18,13 +18,13 @@
         }
 
         &:last-child {
-            border-top-left-radius: 8px;
-            border-bottom-left-radius: 8px;
+            border-top-#{$end}-radius: 8px;
+            border-bottom-#{$end}-radius: 8px;
         }
 
         &:first-child {
-            border-top-right-radius: 8px;
-            border-bottom-right-radius: 8px;
+            border-top-#{$start}-radius: 8px;
+            border-bottom-#{$start}-radius: 8px;
         }
 
         &:hover {
@@ -51,13 +51,13 @@
 
         .list-group {
             width: calc(100% + 116px);
-            margin-right: -116px;
+            margin-#{$start}: -116px;
         }
 
 
 
         .placeholder-element {
-            margin-right: 57px;
+            margin-#{$start}: 57px;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -67,7 +67,7 @@
 
     .editor-actions {
         width: calc(100% + 88px);
-        margin-right: -88px;
+        margin-#{$start}: -88px;
 
         .add-action-btn {
             background: $white;
@@ -88,16 +88,16 @@
         align-items: flex-start;
 
         .editor-block-container {
-            margin-right: 12px;
+            margin-#{$start}: 12px;
             width: 100%;
             max-width: calc(100% - 3.25rem);
-            border-right: 3px solid transparent;
-            padding-right: 2rem;
+            border-#{$start}: 3px solid transparent;
+            padding-#{$start}: 2rem;
             transition: 0.3s border;
 
             &:hover,
             &:focus-within {
-                border-right-color: $gray-400;
+                border-#{$start}-color: $gray-400;
             }
 
         }
@@ -114,8 +114,8 @@
             position: relative;
 
             .editor-block-container {
-                margin-right: 8px;
-                padding-right: 0;
+                margin-#{$start}: 8px;
+                padding-#{$start}: 0;
             }
 
             img,
@@ -259,7 +259,7 @@
 
         strong {
             color: $grey;
-            margin-right: 12px;
+            margin-#{$start}: 12px;
             font-size: 12px;
         }
 
@@ -402,7 +402,7 @@ div[placeholder]:not(:focus):empty:before {
         text-align: start;
 
         &:empty {
-            text-align: right;
+            text-align: $start;
         }
 
         &::before {

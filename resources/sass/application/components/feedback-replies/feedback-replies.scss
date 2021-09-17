@@ -32,8 +32,8 @@
     }
 
     .replies {
-        border-right: 2px solid $grey;
-        padding-right: 16px;
+        border-#{$start}: 2px solid $grey;
+        padding-#{$start}: 16px;
     }
 
     .reply-to-container {
@@ -41,7 +41,7 @@
 
         i {
             color: $icons;
-            margin-left: 4px;
+            margin-#{$end}: 4px;
         }
 
         color: $grey;
@@ -56,8 +56,8 @@
     }
 
     .replies {
-        border-right: 2px solid $grey;
-        padding-right: 16px;
+        border-#{$start}: 2px solid $grey;
+        padding-#{$start}: 16px;
     }
 
     >.sendfeedback {

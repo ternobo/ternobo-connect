@@ -46,7 +46,7 @@
 }
 
 .about-me--picture--mobile {
-    margin-left: 10px;
+    margin-#{$end}: 10px;
 }
 
 .about-me--title {
@@ -69,7 +69,7 @@
         color: $sub-heading;
 
         &:not(:last-child) {
-            margin-left: 3px;
+            margin-#{$end}: 3px;
         }
     }
 

@@ -12,7 +12,7 @@
         cursor: pointer;
 
         i {
-            margin-left: 1rem;
+            margin-#{$end}: 1rem;
         }
 
         &:hover {
@@ -43,7 +43,7 @@
     .category-item {
         padding: 2px 8px;
         background: $fixed-elements;
-        margin-left: 12px;
+        margin-#{$end}: 12px;
         color: $grey;
         margin-bottom: 0 !important;
         font-size: 14px;
@@ -64,7 +64,7 @@
 
         i {
             font-size: 20px;
-            margin-left: 3px;
+            margin-#{$end}: 3px;
         }
     }
 
@@ -73,7 +73,7 @@
         justify-content: space-between;
         align-items: flex-start;
         padding: 1rem 1.25rem;
-        padding-left: 1rem;
+        padding-#{$end}: 1rem;
         position: relative;
     }
 
@@ -104,7 +104,7 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                margin-right: 0.75rem;
+                margin-#{$start}: 0.75rem;
             }
 
             img {
@@ -230,7 +230,7 @@
                     background: $fixed-elements;
                     color: $grey;
                     cursor: pointer;
-                    margin-left: 8px;
+                    margin-#{$end}: 8px;
                     padding: 4px 16px;
                     transition: 0.3s all;
                     font-size: 14px;
@@ -240,7 +240,7 @@
                         font-size: 12px;
                         vertical-align: baseline;
                         height: 20px;
-                        margin-left: 4px;
+                        margin-#{$end}: 4px;
                     }
 
                 }
@@ -299,8 +299,8 @@
             }
 
             @media screen and (max-width: $sm-size) {
-                padding-left: 12px;
-                padding-right: 12px;
+                padding-#{$end}: 12px;
+                padding-#{$start}: 12px;
             }
 
             @media screen and (max-width: $sm-size) {
@@ -321,8 +321,8 @@
             &::before {
                 content: " ";
                 position: absolute;
-                left: 1.5rem;
-                right: 1.5rem;
+                #{$end}: 1.5rem;
+                #{$start}: 1.5rem;
                 top: 0;
                 height: 2px;
                 background: $fixed-elements;
@@ -401,7 +401,7 @@
             background: $fixed-elements;
             color: $grey;
             cursor: pointer;
-            margin-left: 0.5rem;
+            margin-#{$end}: 0.5rem;
             padding: 0.25rem 1rem;
             transition: 0.3s all;
             font-size: 0.875rem;
@@ -442,8 +442,8 @@
         position: absolute;
         content: " ";
         width: calc(100% - 3rem);
-        left: 1.5rem;
-        right: 1.5rem;
+        #{$end}: 1.5rem;
+        #{$start}: 1.5rem;
         bottom: 0;
         height: 2px;
         background: $icons;
@@ -454,7 +454,7 @@
     font-size: 20px;
     font-weight: 600;
     margin-top: 1rem;
-    margin-right: -8px;
+    margin-#{$start}: -8px;
 
 }
 
@@ -542,11 +542,11 @@
 
         &:not(:nth-last-child(2)) {
             @if($direction=='rtl') {
-                margin-right: 0.5rem;
+                margin-#{$start}: 0.5rem;
             }
 
             @else {
-                margin-left: 0.5rem;
+                margin-#{$end}: 0.5rem;
             }
         }
 

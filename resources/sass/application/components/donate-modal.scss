@@ -15,7 +15,7 @@
     font-size: 12px;
     line-height: 19px;
     /* identical to box height */
-    text-align: right;
+    text-align: $start;
     color: $text-color;
 
     padding: 0.875rem 1.5rem;
@@ -58,7 +58,7 @@
         }
 
         .user-profile {
-            margin-left: 16px;
+            margin-#{$end}: 16px;
         }
 
         .user-name {
@@ -82,7 +82,7 @@
 
         >*:last-child {
             font-weight: normal;
-            margin-right: 4px;
+            margin-#{$start}: 4px;
         }
 
     }
@@ -153,7 +153,7 @@
     width: calc(40% - 1.5rem);
 
     &:not(:last-child) {
-        margin-left: 1.5rem;
+        margin-#{$end}: 1.5rem;
     }
 
     &.active {
@@ -189,7 +189,7 @@
     button {
         position: absolute;
         top: 2rem;
-        right: 2rem;
+        #{$start}: 2rem;
     }
 
     img.profile-md {

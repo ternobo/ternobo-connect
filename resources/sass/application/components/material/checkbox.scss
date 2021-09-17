@@ -14,7 +14,7 @@ $md-checkbox-label-padding: .75em;
 .md-checkbox {
     position: relative;
     margin: $md-checkbox-margin;
-    text-align: right;
+    text-align: $start;
     height: 1rem;
 
     &.md-checkbox-inline {
@@ -27,20 +27,20 @@ $md-checkbox-label-padding: .75em;
         line-height: $md-checkbox-size;
         vertical-align: top;
         clear: both;
-        padding-right: 1px;
+        padding-#{$start}: 1px;
         color: $grey;
         font-size: 0.875rem;
         margin-bottom: 0;
 
         &:not(:empty) {
-            padding-right: $md-checkbox-label-padding;
+            padding-#{$start}: $md-checkbox-label-padding;
         }
 
         &:before,
         &:after {
             content: "";
             position: absolute;
-            right: 0;
+            #{$start}: 0;
             top: 0;
         }
 
@@ -77,7 +77,7 @@ $md-checkbox-label-padding: .75em;
         width: $md-checkbox-size;
         margin: 0;
         display: block;
-        float: right;
+        float: $start;
         font-size: inherit;
 
 

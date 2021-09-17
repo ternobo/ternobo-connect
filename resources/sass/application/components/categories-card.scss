@@ -169,8 +169,8 @@
 
 .categories-list-mobile {
     max-height: 380px;
-    border-right: 2px solid #C8C8C8;
-    padding-right: 1.75rem;
+    border-#{$start}: 2px solid #C8C8C8;
+    padding-#{$start}: 1.75rem;
     max-width: 100%;
     overflow: auto;
 
@@ -192,7 +192,7 @@
         .close-icon {
             color: $grey;
             position: absolute;
-            right: -20px;
+            #{$start}: -20px;
         }
 
         i {

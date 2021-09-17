@@ -4,13 +4,13 @@
 
     .icon-end {
         position: absolute;
-        left: 4px;
+        #{$end}: 4px;
     }
 
     label {
         position: absolute;
         font-size: 14px;
-        right: 0;
+        #{$start}: 0;
         top: 50%;
         transform: translateY(-50%);
         background-color: white;
@@ -18,7 +18,7 @@
         padding: 0;
         margin: 0 16px;
         transition: .1s ease-out;
-        transform-origin: right top;
+        transform-origin: $start top;
         pointer-events: none;
         white-space: nowrap;
     }
@@ -143,13 +143,13 @@
         height: 100%;
 
         .input {
-            padding-left: 90px;
+            padding-#{$end}: 90px;
         }
     }
 
     .end-content {
         position: absolute;
-        left: 0;
+        #{$end}: 0;
         bottom: 0;
         height: 2.75rem;
         display: flex;

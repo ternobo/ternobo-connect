@@ -70,7 +70,7 @@
 
     ul {
         list-style: none;
-        padding-right: 0;
+        padding-#{$start}: 0;
 
         li::before {
             content: " ";
@@ -79,7 +79,7 @@
             display: inline-block;
             width: 8px;
             height: 8px;
-            margin-left: 8px;
+            margin-#{$end}: 8px;
             border-radius: 50%;
 
         }

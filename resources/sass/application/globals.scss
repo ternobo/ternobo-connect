@@ -61,7 +61,7 @@ button:focus {
 }
 
 body {
-    direction: rtl;
+    direction: $direction;
     margin: 0;
     padding: 0;
     background-color: $background;
@@ -125,7 +125,7 @@ body {
         justify-content: center;
         position: absolute;
         top: 0;
-        right: 0;
+        #{$start}: 0;
         height: 14px;
         width: 14px;
         background-color: transparent;
@@ -387,8 +387,8 @@ img {
     &::after {
         content: " ";
         position: absolute;
-        left: 1.5rem;
-        right: 1.5rem;
+        #{$end}: 1.5rem;
+        #{$start}: 1.5rem;
         bottom: 0;
         height: 2px;
         background: $fixed-elements;
@@ -453,7 +453,7 @@ img {
 
     i {
         font-size: 1.25rem;
-        margin-left: 0.25rem;
+        margin-#{$end}: 0.25rem;
 
         &:not(.disabled) {
             color: $grey;
@@ -472,7 +472,7 @@ img {
 .verificationcheck {
     @extend .material-icons;
     color: $action;
-    margin-left: 1px;
+    margin-#{$end}: 1px;
     @extend .font-14;
 }
 
@@ -749,9 +749,9 @@ pre {
     padding: 0.5rem 0.75rem;
 
     .icon {
-        border-right: 1px solid;
-        padding-right: 5px;
-        margin-right: 5px;
+        border-#{$start}: 1px solid;
+        padding-#{$start}: 5px;
+        margin-#{$start}: 5px;
     }
 }
 
@@ -1019,7 +1019,7 @@ a:focus {
 }
 
 .vue-switcher--unchecked div:after {
-    left: 18px !important;
+    #{$end}: 18px !important;
 }
 
 .vue-switcher-theme--default.vue-switcher-color--default.vue-switcher--unchecked div:after {
@@ -1030,8 +1030,8 @@ a:focus {
     content: '' !important;
     height: 12px !important;
     width: 12px !important;
-    left: 100%;
-    margin-left: -14px !important;
+    #{$end}: 100%;
+    margin-#{$end}: -14px !important;
     cursor: pointer !important;
     top: 1px !important;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1) !important;
@@ -1137,7 +1137,7 @@ a:focus {
 }
 
 #usermenu-show {
-    padding-right: map-get($spacings, 1);
+    padding-#{$start}: map-get($spacings, 1);
 }
 
 #usermenu-show:hover {

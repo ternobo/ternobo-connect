@@ -22,8 +22,8 @@
                 content: " ";
                 position: absolute;
                 width: calc(100% - 48px);
-                left: 1.5rem;
-                right: 1.5rem;
+                #{$end}: 1.5rem;
+                #{$start}: 1.5rem;
                 bottom: 0;
                 height: 2px;
                 background-color: #E0E0E0;
@@ -54,17 +54,17 @@
         }
 
         &:not(:last-child) {
-            padding-left: 16px;
-            border-left: 2px solid #C8C8C8;
-            margin-left: 16px;
+            padding-#{$end}: 16px;
+            border-#{$end}: 2px solid #C8C8C8;
+            margin-#{$end}: 16px;
         }
 
     }
 
     li.edit {
-        padding-left: 0;
-        margin-left: 0;
-        border-left: none;
+        padding-#{$end}: 0;
+        margin-#{$end}: 0;
+        border-#{$end}: none;
     }
 
     li.detailed {

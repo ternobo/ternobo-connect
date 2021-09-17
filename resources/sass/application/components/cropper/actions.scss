@@ -16,7 +16,7 @@
         border: none;
         height: 100%;
         padding: 0.25rem 2rem;
-        border-left: 1px solid #C8C8C8;
+        border-#{$end}: 1px solid #C8C8C8;
     }
 
     button:hover {
@@ -40,7 +40,7 @@
     justify-content: center;;
 }
 
-.topleftactions {
+.top-#{$end}actions {
     display: flex;
     gap: 5px;
     width: 100%;

@@ -36,7 +36,7 @@ div.page-cover {
 
     >i {
         @media screen and(max-width: $sm-size) {
-            margin-left: 0;
+            margin-#{$end}: 0;
         }
     }
 
@@ -51,8 +51,8 @@ div.page-cover {
 
 .card-img-top {
     max-width: 1920px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-top-#{$end}-radius: 0;
+    border-top-#{$start}-radius: 0;
 }
 
 .pageinfo-card {
@@ -66,7 +66,7 @@ div.page-cover {
 
     .btn-edit {
         position: absolute;
-        right: 16px;
+        #{$start}: 16px;
         top: 14px;
         height: 1.5rem;
         width: 1.5rem;
@@ -149,10 +149,10 @@ div.page-cover {
 
             .profile-box {
                 margin-bottom: 1.5rem;
-                margin-right: -8px;
+                margin-#{$start}: -8px;
 
                 @media screen and (max-width: $sm-size) {
-                    margin-right: -4px;
+                    margin-#{$start}: -4px;
 
                     margin-bottom: 12px;
                     max-height: 96px;
@@ -176,7 +176,7 @@ div.page-cover {
 
         .connection-actions {
             color: $grey;
-            margin-left: 1.5rem;
+            margin-#{$end}: 1.5rem;
             line-height: 20px;
             transition: 0.3s all;
 
@@ -228,10 +228,10 @@ div.page-cover {
     flex-direction: row;
 
     .invite_profile {
-        margin-left: 16px;
+        margin-#{$end}: 16px;
 
         @media screen and (max-width: $sm-size) {
-            margin-left: 12px;
+            margin-#{$end}: 12px;
 
         }
     }
@@ -286,7 +286,7 @@ div.page-cover {
 
     >.edit-icons {
         position: absolute;
-        right: 8px;
+        #{$start}: 8px;
         bottom: 8px;
         display: flex;
         flex-direction: column;
@@ -399,7 +399,7 @@ div.page-cover {
 
     .slug-logo {
         max-width: 1.5rem;
-        margin-left: 8px;
+        margin-#{$end}: 8px;
 
         @media screen and (max-width: $sm-size) {
             max-width: 16px;
@@ -436,7 +436,7 @@ div.page-cover {
     font-weight: 600;
 
     i {
-        margin-left: 8px;
+        margin-#{$end}: 8px;
     }
 }
 
@@ -452,12 +452,12 @@ div.page-cover {
 }
 
 .mutual-friends-container {
-    padding-right: 12px;
+    padding-#{$start}: 12px;
 }
 
 .profile-photos {
     img {
-        margin-right: -15px;
+        margin-#{$start}: -15px;
         width: 2rem;
         min-width: 2rem;
         height: 2rem;
