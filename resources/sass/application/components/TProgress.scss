@@ -4,7 +4,7 @@
 }
 
 #tprogress .bar {
-  background: $action;
+  background: $blue-cta;
   position: fixed;
   z-index: 1050;
   top: 0;
@@ -20,7 +20,7 @@
   #{$start}: 0px;
   width: 100px;
   height: 100%;
-  box-shadow: 0 0 10px $action, 0 0 5px $action;
+  box-shadow: 0 0 10px $blue-cta, 0 0 5px $blue-cta;
   opacity: 1.0;
   transform: rotate(3deg) translate(0px, -4px);
 }

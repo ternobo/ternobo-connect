@@ -30,7 +30,7 @@
 
 .dropdown-menu {
     position: absolute;
-    background: $fixed-elements;
+    background: $gray-200;
     padding: 0;
     border: none;
     box-shadow: $card-shadow;
@@ -69,7 +69,7 @@
 
         &:focus,
         &:hover {
-            background-color: $fixed-elements;
+            background-color: $gray-200;
         }
     }
 }

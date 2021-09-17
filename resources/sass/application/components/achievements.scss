@@ -105,10 +105,10 @@
         }
 
         a.title {
-            color: $action;
+            color: $blue-cta;
 
             &:hover {
-                color: $action-hover;
+                color: $blue-hover;
             }
         }
 
@@ -117,7 +117,7 @@
             font-weight: normal;
             font-size: 1rem;
             line-height: 30px;
-            color: $grey;
+            color: $gray-500;
             margin-bottom: 0;
         }
     }
@@ -132,7 +132,7 @@
 .show-more-container {
     display: flex;
     align-items: center;
-    color: $grey;
+    color: $gray-500;
     font-size: 0.75rem;
     transition: 0.3s all;
     @extend .clickable;
@@ -150,8 +150,8 @@
 .delete-move-actions {
     border-radius: 1rem;
     display: flex;
-    color: $grey;
-    background: $fixed-elements;
+    color: $gray-500;
+    background: $gray-200;
     padding: 8px 0.75rem;
     width: 80px;
     height: 40px;
@@ -265,7 +265,7 @@
 
         .achievement-name {
             font-weight: 600;
-            color: $grey;
+            color: $gray-500;
 
             strong {
                 font-weight: 600;
@@ -273,10 +273,10 @@
 
             a {
                 font-weight: 600;
-                color: $action;
+                color: $blue-cta;
 
                 &:hover {
-                    color: $action-hover;
+                    color: $blue-hover;
                 }
             }
 

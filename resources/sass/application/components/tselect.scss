@@ -14,27 +14,27 @@
     .title-text {
         font-size: 12px;
         font-weight: 600;
-        color: $grey;
+        color: $gray-500;
         margin-#{$end}: 8px;
 
         input::-webkit-input-placeholder {
-            color: $grey;
+            color: $gray-500;
         }
 
         input::-moz-placeholder {
-            color: $grey;
+            color: $gray-500;
         }
 
         input:-ms-input-placeholder {
-            color: $grey;
+            color: $gray-500;
         }
 
         input::-ms-input-placeholder {
-            color: $grey;
+            color: $gray-500;
         }
 
         input::placeholder {
-            color: $grey;
+            color: $gray-500;
         }
 
     }
@@ -53,8 +53,8 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background: $fixed-elements;
-        color: $sub-heading;
+        background: $gray-200;
+        color: $gray-500;
         border-radius: 0;
         padding: 12px 16px;
         height: 2.75rem;
@@ -78,19 +78,19 @@
 
         span,
         i {
-            color: $grey;
+            color: $gray-500;
             transition: 0.3s all;
         }
 
         i {
-            color: $grey;
+            color: $gray-500;
         }
     }
 
     .tselect-items {
         position: absolute;
-        background: $fixed-elements;
-        color: $sub-heading;
+        background: $gray-200;
+        color: $gray-500;
         border-radius: 0;
         z-index: 99999;
 
@@ -127,7 +127,7 @@
         }
 
         .tselect_item--text {
-            color: $sub-heading;
+            color: $gray-500;
             margin: 0;
             cursor: pointer;
             font-size: 12px;

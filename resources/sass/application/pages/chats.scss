@@ -46,7 +46,7 @@
         @extend .nice-scroll;
 
         .unread-badge {
-            background: $action;
+            background: $blue-cta;
             padding: map-get($spacings, 1);
             padding-top: 7px;
             border-radius: 4px;
@@ -100,7 +100,7 @@
         .last-message {
             font-size: 14px;
             line-height: 21px;
-            color: $grey;
+            color: $gray-500;
         }
 
     }
@@ -108,7 +108,7 @@
     .update-time {
         font-size: 12px;
         line-height: 18px;
-        color: $grey;
+        color: $gray-500;
     }
 
     &:hover,
@@ -142,7 +142,7 @@
             }
 
             small {
-                color: $grey;
+                color: $gray-500;
             }
         }
 
@@ -168,7 +168,7 @@
         }
 
         >.conversation-footer {
-            color: $grey;
+            color: $gray-500;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -192,7 +192,7 @@
         min-height: 48px;
         width: 48px;
         height: 48px;
-        background: $fixed-elements;
+        background: $gray-200;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -244,12 +244,12 @@
     gap: 5px;
 
     >i {
-        color: $action;
+        color: $blue-cta;
     }
 
     >span {
         font-size: 12px;
-        color: $action;
+        color: $blue-cta;
     }
 
     .progress {
@@ -272,7 +272,7 @@
         }
 
         .progress-fill {
-            background: $action;
+            background: $blue-cta;
             position: relative;
             transition: 0.3s all;
             display: flex;
@@ -282,7 +282,7 @@
             &::after {
                 content: " ";
                 position: absolute;
-                background: $action;
+                background: $blue-cta;
                 #{$start}: 0;
                 border-radius: 3px;
                 width: 4px;
@@ -298,7 +298,7 @@
 
         >span {
             font-size: 12px;
-            color: $grey;
+            color: $gray-500;
         }
 
         .progress {
@@ -335,7 +335,7 @@
         color: $dark;
     }
 
-    color: $grey;
+    color: $gray-500;
 }
 
 
@@ -397,7 +397,7 @@
 
         &.send-error {
             .reload-btn {
-                color: $action;
+                color: $blue-cta;
                 margin-#{$start}: -32px;
                 max-height: 2.75rem;
                 display: flex;
@@ -424,7 +424,7 @@
         justify-content: flex-end;
 
         .voice-message {
-            background: $fixed-elements;
+            background: $gray-200;
         }
 
         .message-container {
@@ -474,7 +474,7 @@
 
         .file-icon {
             background: #E7F3FF;
-            color: $action;
+            color: $blue-cta;
             border-radius: 14px;
             height: 40px;
             width: 40px;
@@ -512,7 +512,7 @@
 
 .received {
     .media-message {
-        background: $fixed-elements;
+        background: $gray-200;
     }
 }
 
@@ -575,7 +575,7 @@
 .search-part {
     padding: 12px;
     background: $body-bg;
-    color: $grey;
+    color: $gray-500;
     width: 100%;
     font-weight: 600;
     font-size: 12px;
@@ -586,7 +586,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: $fixed-elements;
+    background: $gray-200;
     padding: 8px 12px;
 
     .contactinfo {
@@ -619,11 +619,11 @@
         font-size: 10px;
         line-height: 15px;
         text-align: $start;
-        color: $grey;
+        color: $gray-500;
     }
 
     i.showprofile {
-        color: $grey;
+        color: $gray-500;
     }
 
 
@@ -680,14 +680,14 @@
             background: $body-bg;
             padding: 4px 8px;
             border-radius: 10px;
-            color: $grey;
+            color: $gray-500;
 
             &.active {
                 color: $dark;
             }
 
             i {
-                color: $grey;
+                color: $gray-500;
             }
         }
     }

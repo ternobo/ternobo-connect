@@ -6,7 +6,7 @@
 .toggle-switch {
     display: inline-block;
     background: transparent;
-    border: 2px solid $grey;
+    border: 2px solid $gray-500;
     border-radius: 16px;
     width: 2rem;
     height: 16px;
@@ -15,10 +15,10 @@
     transition: all 0.25s;
 
     &.disabled {
-        border-color: $icons;
+        border-color: $light;
 
         &::before {
-            background: $icons;
+            background: $light;
         }
     }
 
@@ -29,7 +29,7 @@
 
     &:before {
         display: block;
-        background: $grey;
+        background: $gray-500;
         border-radius: 50%;
         width: 10px;
         height: 10px;
@@ -40,15 +40,15 @@
     }
 
     .toggle:hover &:before {
-        border-color: $action;
+        border-color: $blue-cta;
     }
 
     .toggle-checkbox:checked+& {
-        border-color: $action;
+        border-color: $blue-cta;
 
         &:before {
             #{$start}: 16px;
-            background: $action;
+            background: $blue-cta;
 
         }
     }

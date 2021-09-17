@@ -13,7 +13,7 @@
         border: none;
 
         &.active {
-            color: $action;
+            color: $blue-cta;
 
         }
 
@@ -34,7 +34,7 @@
 
         &:active {
             background: $gray-100;
-            color: $action;
+            color: $blue-cta;
             cursor: pointer;
         }
     }
@@ -71,7 +71,7 @@
 
         .add-action-btn {
             background: $white;
-            color: $grey;
+            color: $gray-500;
         }
     }
 
@@ -172,7 +172,7 @@
             flex-direction: column;
             align-items: center;
             margin: -12px 0px;
-            color: $grey;
+            color: $gray-500;
 
             >* {
                 margin: 12px 0px;
@@ -241,7 +241,7 @@
 
     >.list-title {
         margin-bottom: 4px;
-        color: $grey;
+        color: $gray-500;
         font-size: 12px;
     }
 
@@ -258,7 +258,7 @@
         }
 
         strong {
-            color: $grey;
+            color: $gray-500;
             margin-#{$start}: 12px;
             font-size: 12px;
         }
@@ -292,13 +292,13 @@
     padding: 0;
 
     a {
-        color: $action;
+        color: $blue-cta;
     }
 
     code {
         direction: ltr #{"/* rtl:ignore */"};
         background: $gray-100;
-        color: $grey;
+        color: $gray-500;
         border-radius: 4px;
         font-size: 14px;
         padding: 4px;

@@ -1,7 +1,7 @@
 $md-checkbox-checked-color: $dark;
-$md-checkbox-border-color: $border-color;
-$md-checkbox-border-color-disabled: $border-color;
-$md-checkbox-checked-color-disabled: $icons;
+$md-checkbox-border-color: $gray-300;
+$md-checkbox-border-color-disabled: $gray-300;
+$md-checkbox-checked-color-disabled: $light;
 
 $md-checkbox-margin: 0.75rem 0;
 $md-checkbox-size: 1rem;
@@ -28,7 +28,7 @@ $md-checkbox-label-padding: .75em;
         vertical-align: top;
         clear: both;
         padding-#{$start}: 1px;
-        color: $grey;
+        color: $gray-500;
         font-size: 0.875rem;
         margin-bottom: 0;
 

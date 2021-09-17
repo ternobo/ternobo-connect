@@ -21,7 +21,7 @@
 }
 
 .bg-dede {
-    background: $border-color
+    background: $gray-300
 }
 
 .notifications-group {
@@ -93,7 +93,7 @@
                 }
 
                 .action {
-                    color: $grey;
+                    color: $gray-500;
                     font-size: 14px;
 
                     @media screen and (max-width: $sm-size) {

@@ -1,0 +1,123 @@
+.btn {
+    padding: 0.625rem 1.5rem;
+    outline: none;
+    border: none;
+    border-radius: 2px solid transparent;
+    min-height: 44px;
+    color: $text-color;
+    transition: 0.3s all;
+    max-height: 44px;
+
+    &.btn-lg {
+        padding: 0.875rem 1.5rem;
+        max-height: 52px;
+    }
+
+    &.btn-sm {
+        padding: 0.25rem 1.5rem;
+        max-height: 24px;
+
+    }
+
+    &.btn-primary {
+        background: $primary;
+        color: $text-on-primary;
+
+        &:hover {
+            background: $gray-dark;
+        }
+
+        &:disabled {
+            color: $gray;
+            background: $gray-light;
+            opacity: 1;
+        }
+
+        &.icon-button {
+            background-color: $gray-light;
+            color: $gray-dark;
+
+            &:disabled {
+                opacity: 0.5;
+            }
+        }
+
+    }
+
+    &.btn-secondary {
+        background: $blue-light;
+        color: $blue-cta;
+
+        &:hover {
+            background: $blue-light-hover;
+        }
+    }
+
+    &.btn-outlined {
+        border-color: $gray-medium-dark;
+        color: $gray-dark;
+        background: transparent;
+
+        &:hover {
+            border-color: $black;
+            color: $black;
+        }
+
+    }
+
+    &.btn-subtle {
+        border-color: $gray-light-medium;
+        color: $gray-medium-dark;
+        background: transparent;
+
+        &:hover {
+            border-color: $gray;
+            color: $black;
+        }
+
+        &:disabled {
+            border-color: $gray-light-medium;
+            color: $gray-light-medium;
+            opacity: 0.5;
+        }
+
+    }
+
+    &.btn-delete {
+        color: $red;
+        background: $red-light;
+
+        &:hover {
+            background: $red-light-hover;
+        }
+
+    }
+
+    &.btn-text {
+        padding: 0;
+        color: $gray-light-medium;
+
+        &:hover {
+            color: $black;
+        }
+    }
+
+    &.btn-text-cta {
+        color: $blue-cta;
+        padding: 0;
+
+        &:hover {
+            color: $blue-hover;
+        }
+    }
+
+
+    &:disabled {
+        opacity: 0.5;
+    }
+
+    &.icon-button {
+        padding: 0.25rem;
+    }
+
+}

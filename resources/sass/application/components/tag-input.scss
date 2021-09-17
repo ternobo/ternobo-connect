@@ -1,6 +1,6 @@
 .tag-input {
     position: relative;
-    border: 2px solid $icons;
+    border: 2px solid $light;
     transition: 0.3s all;
 
     &:focus-within {
@@ -58,7 +58,7 @@
         top: 50%;
         transform: translateY(-50%);
         background-color: white;
-        color: $icons;
+        color: $light;
         padding: 0 0.3rem;
         transition: .1s ease-out;
         transform-origin: $start top;

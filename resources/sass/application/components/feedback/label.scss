@@ -10,16 +10,16 @@
 
     &.scheduled {
         background-color: $yellow-light-hover;
-        color: $yellow-dark-hover;
+        color: $yellow-dark;
     }
 
     &.closed {
-        background-color: $light-error;
-        color: $error;
+        background-color: $red-light;
+        color: $red;
     }
 
     &.done {
-        background-color: $light-green;
+        background-color: $green-light;
         color: $success;
     }
 

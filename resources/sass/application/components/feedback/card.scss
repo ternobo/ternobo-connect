@@ -17,7 +17,7 @@
             #{$end}: 1.5rem;
             width: calc(100% - 48px);
             height: 2px;
-            background-color: $fixed-elements;
+            background-color: $gray-200;
         }
 
         @media screen and (max-width: $sm-size) {
@@ -168,7 +168,7 @@
         }
 
         &.active {
-            background-color: $fixed-elements;
+            background-color: $gray-200;
             color: $dark;
         }
     }
@@ -217,7 +217,7 @@
         }
 
         .publish_time {
-            color: $grey;
+            color: $gray-500;
         }
 
         .publisher-name {
@@ -234,7 +234,7 @@
             }
 
             span {
-                color: $grey;
+                color: $gray-500;
 
                 @media screen and (max-width: $sm-size) {
                     font-size: 10px;
@@ -264,7 +264,7 @@
             }
 
             .feedback-votes {
-                background: $fixed-elements;
+                background: $gray-200;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -368,8 +368,8 @@
 
 .feedback-flag-button {
     @extend .feedback-vote-button;
-    border: 2px solid $fixed-elements;
-    color: $grey;
+    border: 2px solid $gray-200;
+    color: $gray-500;
 }
 
 /**
@@ -395,7 +395,7 @@
 
     ul {
         li {
-            color: $sub-heading;
+            color: $gray-500;
             cursor: pointer;
             font-size: 14px;
             display: flex;
@@ -407,7 +407,7 @@
         }
 
         li.active {
-            background: $fixed-elements;
+            background: $gray-200;
 
         }
     }
@@ -418,7 +418,7 @@
 }
 
 .btn-action {
-    background: $action;
+    background: $blue-cta;
     color: $white;
 
     &:hover {
@@ -432,15 +432,15 @@
 }
 
 .voted {
-    background: $fixed-elements;
-    color: $grey;
-    border-color: $fixed-elements;
+    background: $gray-200;
+    color: $gray-500;
+    border-color: $gray-200;
     color: $dark;
     cursor: pointer;
 
     &:hover {
-        background: $icons;
-        border-color: $icons;
+        background: $light;
+        border-color: $light;
 
         color: $dark;
     }

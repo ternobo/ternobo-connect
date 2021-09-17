@@ -1,13 +1,13 @@
 .pinned-badge {
-    background-color: rgba($color: $action, $alpha: 0.2);
-    color: $grey;
+    background-color: rgba($color: $blue-cta, $alpha: 0.2);
+    color: $gray-500;
     font-size: 12px;
     border-radius: 14px;
     padding: 4px 8px;
 
     i {
         font-size: 18px;
-        color: $action;
+        color: $blue-cta;
         transform: rotate(-45deg);
     }
 
@@ -25,14 +25,14 @@
 
 
 .feedback-replies {
-    border-radius: 1px solid $sub-heading;
+    border-radius: 1px solid $gray-500;
 
     >.sendfeedback {
         margin: 8px 0;
     }
 
     .replies {
-        border-#{$start}: 2px solid $grey;
+        border-#{$start}: 2px solid $gray-500;
         padding-#{$start}: 16px;
     }
 
@@ -40,11 +40,11 @@
         margin-bottom: 8px;
 
         i {
-            color: $icons;
+            color: $light;
             margin-#{$end}: 4px;
         }
 
-        color: $grey;
+        color: $gray-500;
     }
 }
 
@@ -56,7 +56,7 @@
     }
 
     .replies {
-        border-#{$start}: 2px solid $grey;
+        border-#{$start}: 2px solid $gray-500;
         padding-#{$start}: 16px;
     }
 

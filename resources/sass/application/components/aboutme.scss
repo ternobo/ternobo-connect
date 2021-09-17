@@ -63,10 +63,10 @@
     align-items: center;
     flex-wrap: wrap;
     font-size: 14px;
-    color: $icons;
+    color: $light;
 
     .degree {
-        color: $sub-heading;
+        color: $gray-500;
 
         &:not(:last-child) {
             margin-#{$end}: 3px;

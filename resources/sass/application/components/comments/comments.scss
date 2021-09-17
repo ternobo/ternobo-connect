@@ -7,7 +7,7 @@
 
 
 .comment-replies {
-    border-radius: 1px solid $sub-heading;
+    border-radius: 1px solid $gray-500;
 
     >.sendcomment {
         margin: 2rem 0;
@@ -27,7 +27,7 @@
             margin-#{$end}: 0.25rem;
         }
 
-        color: $grey;
+        color: $gray-500;
     }
 }
 

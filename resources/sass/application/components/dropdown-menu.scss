@@ -47,7 +47,7 @@
 
 .dropdown-item:hover,
 .dropdown-item:focus {
-    background-color: $border-color;
+    background-color: $gray-300;
     color: $text-color;
 }
 
@@ -62,7 +62,7 @@
 
 
     .vs__search::-webkit-input-placeholder {
-        background: $fixed-elements;
+        background: $gray-200;
         border: none;
         border-radius: 0;
         color: $light;
@@ -70,7 +70,7 @@
     }
 
     .vs__search::-moz-placeholder {
-        background: $fixed-elements;
+        background: $gray-200;
         border: none;
         border-radius: 0;
         color: $light;
@@ -78,7 +78,7 @@
     }
 
     .vs__search:-ms-input-placeholder {
-        background: $fixed-elements;
+        background: $gray-200;
         border: none;
         border-radius: 0;
         color: $light;
@@ -86,7 +86,7 @@
     }
 
     .vs__search::-ms-input-placeholder {
-        background: $fixed-elements;
+        background: $gray-200;
         border: none;
         border-radius: 0;
         color: $light;
@@ -99,28 +99,28 @@
     }
 
     .vs__search::-webkit-input-placeholder {
-        background: $fixed-elements;
+        background: $gray-200;
         border: none;
         border-radius: 0;
         color: $light;
     }
 
     .vs__search::-moz-placeholder {
-        background: $fixed-elements;
+        background: $gray-200;
         border: none;
         border-radius: 0;
         color: $light;
     }
 
     .vs__search:-ms-input-placeholder {
-        background: $fixed-elements;
+        background: $gray-200;
         border: none;
         border-radius: 0;
         color: $light;
     }
 
     .vs__search::-ms-input-placeholder {
-        background: $fixed-elements;
+        background: $gray-200;
         border: none;
         border-radius: 0;
         color: $light;
@@ -129,7 +129,7 @@
     .vs__search::placeholder,
     .vs__dropdown-toggle,
     .vs__dropdown-menu {
-        background: $fixed-elements;
+        background: $gray-200;
         border: none;
         border-radius: 0;
         color: $light;
@@ -153,12 +153,12 @@
     }
 
     .vs__dropdown-option {
-        background: $fixed-elements;
+        background: $gray-200;
         width: 100%;
         color: $light;
 
         &.vs__dropdown-option--highlight {
-            background: $border-color;
+            background: $gray-300;
             color: $dark;
         }
     }

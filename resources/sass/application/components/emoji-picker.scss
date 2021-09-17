@@ -13,7 +13,7 @@
     >i {
         cursor: pointer;
         transition: 0.3s all;
-        color: $grey;
+        color: $gray-500;
 
         &:hover {
             color: $dark;
@@ -51,7 +51,7 @@
             align-items: center;
             width: 100%;
             padding: 8px;
-            color: $icons;
+            color: $light;
             border-bottom: 2px solid transparent;
             cursor: pointer;
             transition: 0.3s all;

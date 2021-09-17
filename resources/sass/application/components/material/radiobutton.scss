@@ -1,7 +1,7 @@
 $md-radio-checked-color: $dark;
-$md-radio-border-color: $border-color;
-$md-radio-border-color-disabled: $border-color;
-$md-radio-checked-color-disabled: $icons;
+$md-radio-border-color: $gray-300;
+$md-radio-border-color-disabled: $gray-300;
+$md-radio-checked-color-disabled: $light;
 
 $md-radio-margin: 1em 0;
 $md-radio-size: 1em;
@@ -27,7 +27,7 @@ $md-radio-label-padding: .75em;
         vertical-align: top;
         clear: both;
         padding-#{$start}: 1px;
-        color: $grey;
+        color: $gray-500;
         font-size: 14px;
         margin-bottom: 0;
 
@@ -60,7 +60,7 @@ $md-radio-label-padding: .75em;
         input[type="radio"] {
             &:checked {
                 +label:before {
-                    background: $grey;
+                    background: $gray-500;
                     border: 3px solid #E0E0E0;
                 }
             }

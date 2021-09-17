@@ -6,7 +6,7 @@
 
     p,
     span {
-        color: $fixed-elements;
+        color: $gray-200;
     }
 }
 
@@ -69,7 +69,7 @@ h5 {
 
 .btn-grey:hover,
 .btn-grey:active {
-    background: $action;
+    background: $blue-cta;
     color: #FFF;
 }
 
@@ -94,11 +94,11 @@ h5 {
 .section-1 {
     div {
         span:first-child {
-            color: $action;
+            color: $blue-cta;
         }
 
         span:nth-child(2) {
-            color: $grey;
+            color: $gray-500;
         }
     }
 }
@@ -109,7 +109,7 @@ h5 {
 
 .section-2 {
     span:first-child {
-        color: $action;
+        color: $blue-cta;
     }
 
     .sims {
@@ -126,7 +126,7 @@ h5 {
         background: #2A2A2A;
 
         span:first-of-type {
-            color: $action;
+            color: $blue-cta;
             @extend .font-24;
 
         }

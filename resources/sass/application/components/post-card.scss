@@ -1,14 +1,14 @@
 @import "../variables";
 
 .post-menu {
-    background-color: $fixed-elements;
+    background-color: $gray-200;
     margin: 0;
     padding: 0;
     font-size: 1rem;
 
     li {
         padding: 1rem 1.5rem;
-        color: $sub-heading;
+        color: $gray-500;
         cursor: pointer;
 
         i {
@@ -42,9 +42,9 @@
 
     .category-item {
         padding: 2px 8px;
-        background: $fixed-elements;
+        background: $gray-200;
         margin-#{$end}: 12px;
-        color: $grey;
+        color: $gray-500;
         margin-bottom: 0 !important;
         font-size: 14px;
         cursor: pointer;
@@ -89,7 +89,7 @@
 
             .publisher--shortbio {
                 font-size: 0.75rem;
-                color: $grey;
+                color: $gray-500;
             }
         }
 
@@ -172,7 +172,7 @@
             }
 
             a {
-                color: $action;
+                color: $blue-cta;
             }
         }
 
@@ -227,8 +227,8 @@
 
             .tags {
                 .tag-item {
-                    background: $fixed-elements;
-                    color: $grey;
+                    background: $gray-200;
+                    color: $gray-500;
                     cursor: pointer;
                     margin-#{$end}: 8px;
                     padding: 4px 16px;
@@ -246,8 +246,8 @@
                 }
 
                 .tag-item:hover {
-                    background: $border-color;
-                    color: $grey;
+                    background: $gray-300;
+                    color: $gray-500;
                 }
             }
 
@@ -325,7 +325,7 @@
                 #{$start}: 1.5rem;
                 top: 0;
                 height: 2px;
-                background: $fixed-elements;
+                background: $gray-200;
 
                 @media screen and (max-width: $sm-size) {
                     width: calc(100% - 3rem);
@@ -353,7 +353,7 @@
 
 
                     &:not(.disabled) {
-                        color: $grey;
+                        color: $gray-500;
 
                         &.active,
                         &:hover {
@@ -398,8 +398,8 @@
 
     .tags {
         .tag-item {
-            background: $fixed-elements;
-            color: $grey;
+            background: $gray-200;
+            color: $gray-500;
             cursor: pointer;
             margin-#{$end}: 0.5rem;
             padding: 0.25rem 1rem;
@@ -414,8 +414,8 @@
         }
 
         .tag-item:hover {
-            background: $border-color;
-            color: $grey;
+            background: $gray-300;
+            color: $gray-500;
         }
     }
 
@@ -446,7 +446,7 @@
         #{$start}: 1.5rem;
         bottom: 0;
         height: 2px;
-        background: $icons;
+        background: $light;
     }
 }
 
@@ -495,10 +495,10 @@
         text-align: start;
 
         a {
-            color: $action;
+            color: $blue-cta;
 
             &:hover {
-                color: $action-hover;
+                color: $blue-hover;
             }
         }
     }
@@ -595,6 +595,6 @@
     }
 
     >a {
-        color: $action;
+        color: $blue-cta;
     }
 }

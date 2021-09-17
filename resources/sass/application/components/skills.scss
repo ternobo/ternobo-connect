@@ -63,7 +63,7 @@
                 flex-direction: column;
                 padding-#{$end}: 20px;
                 margin-#{$end}: 20px;
-                border-#{$end}: 2px solid $icons;
+                border-#{$end}: 2px solid $light;
                 cursor: pointer;
 
                 @media screen and (max-width: $sm-size) {
@@ -75,10 +75,10 @@
 
                 &.disabled {
                     i {
-                        color: $grey;
+                        color: $gray-500;
 
                         &:hover {
-                            color: $grey;
+                            color: $gray-500;
                         }
                     }
                 }
@@ -119,7 +119,7 @@
                 border-radius: 16px;
                 display: flex;
                 flex-direction: row;
-                color: $grey;
+                color: $gray-500;
                 background: $body-bg;
                 margin-#{$end}: 1.5rem;
                 padding: 8px 8px;
@@ -164,7 +164,7 @@
 
 .show-all-skills {
     font-size: 16px;
-    color: $icons;
+    color: $light;
     @extend .clickable;
     margin-top: 2rem;
 
@@ -178,7 +178,7 @@
     align-items: center;
     margin: 0 -12px;
     margin-top: 8px;
-    color: $grey;
+    color: $gray-500;
     font-weight: normal;
 
     .credits-text {
@@ -190,7 +190,7 @@
     }
 
     a {
-        color: $grey;
+        color: $gray-500;
 
     }
 
@@ -217,7 +217,7 @@
         }
 
         i {
-            color: $grey;
+            color: $gray-500;
             font-size: 20px;
             margin-#{$end}: 4px;
             vertical-align: middle;
@@ -237,7 +237,7 @@
                 #{$end}: 0;
                 width: 2px;
                 height: 20px;
-                background: $icons;
+                background: $light;
             }
         }
     }

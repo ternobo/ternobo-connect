@@ -28,11 +28,11 @@
 
 
         &.hasInvite {
-            color: $action;
+            color: $blue-cta;
             opacity: 1 !important;
 
             &:hover {
-                color: $action-hover;
+                color: $blue-hover;
             }
         }
     }
@@ -52,18 +52,18 @@
         -webkit-font-smoothing: antialiased;
         vertical-align: middle;
         font-size: 20px;
-        color: $grey;
+        color: $gray-500;
 
 
         &.invite-link {
             transform: rotate(-15deg);
 
             &.hasInvite {
-                color: $action;
+                color: $blue-cta;
                 opacity: 1 !important;
 
                 &:hover {
-                    color: $action-hover;
+                    color: $blue-hover;
                 }
             }
 
@@ -73,7 +73,7 @@
 
     a:hover {
         .navheader-icon {
-            color: $icon-hover;
+            color: $black;
         }
     }
 
@@ -82,7 +82,7 @@
         .navheader-icon {
             font-family: "Material Icons";
             font-size: 1.5rem;
-            color: $icon-hover;
+            color: $black;
 
             img {
                 border: 2px solid $dark;
@@ -90,7 +90,7 @@
 
             &.invite-link {
                 transform: rotate(-15deg);
-                color: $action;
+                color: $blue-cta;
             }
         }
 
@@ -113,7 +113,7 @@
             transform: scale(1);
             height: auto;
             width: auto;
-            color: $icon-hover;
+            color: $black;
         }
     }
 

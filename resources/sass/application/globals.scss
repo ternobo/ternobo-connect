@@ -64,7 +64,7 @@ body {
     direction: $direction;
     margin: 0;
     padding: 0;
-    background-color: $background;
+    background-color: $gray-100;
     text-align: start;
     font-size: 1rem;
     color: $text-color;
@@ -129,7 +129,7 @@ body {
         height: 14px;
         width: 14px;
         background-color: transparent;
-        border: 2px solid $grey;
+        border: 2px solid $gray-500;
         border-radius: 50%;
     }
 
@@ -157,7 +157,7 @@ body {
     .b-sidebar-item {
         padding: 14px 16px !important;
         font-size: 0.86rem;
-        color: $sub-heading;
+        color: $gray-500;
     }
 
     .b-sidebar-item:hover {
@@ -300,15 +300,15 @@ img {
 }
 
 .text-muted {
-    color: $grey !important;
+    color: $gray-500 !important;
 }
 
 .text-superlight {
-    color: $icons !important;
+    color: $light !important;
 }
 
 .text-grey {
-    color: $grey;
+    color: $gray-500;
 }
 
 .text-light {
@@ -342,7 +342,7 @@ img {
 }
 
 .text-action {
-    color: $action !important;
+    color: $blue-cta !important;
 }
 
 .slide-enter-active {
@@ -375,7 +375,7 @@ img {
     .close {
         font-size: 1.5rem;
         @extend .material-icons;
-        color: $grey;
+        color: $gray-500;
 
         &:hover {
             color: $dark;
@@ -391,7 +391,7 @@ img {
         #{$start}: 1.5rem;
         bottom: 0;
         height: 2px;
-        background: $fixed-elements;
+        background: $gray-200;
 
     }
 }
@@ -404,7 +404,7 @@ img {
 
     &:hover {
         opacity: 1;
-        color: $grey;
+        color: $gray-500;
     }
 }
 
@@ -428,7 +428,7 @@ img {
 
 .new-post--placeholder {
     font-size: 0.875rem;
-    color: $grey;
+    color: $gray-500;
 }
 
 .new-post--action {
@@ -436,7 +436,7 @@ img {
     align-items: center;
     line-height: 1;
     font-size: 0.875rem;
-    color: $grey;
+    color: $gray-500;
     display: flex;
     border-radius: 12px;
     transition: 0.3s all;
@@ -447,7 +447,7 @@ img {
 
         &:not(.disabled):hover {
             background: #EEE;
-            color: $grey;
+            color: $gray-500;
         }
     }
 
@@ -456,7 +456,7 @@ img {
         margin-#{$end}: 0.25rem;
 
         &:not(.disabled) {
-            color: $grey;
+            color: $gray-500;
         }
 
     }
@@ -471,7 +471,7 @@ img {
 
 .verificationcheck {
     @extend .material-icons;
-    color: $action;
+    color: $blue-cta;
     margin-#{$end}: 1px;
     @extend .font-14;
 }
@@ -521,10 +521,10 @@ img {
         }
 
         .copyprofile-icon {
-            color: $grey;
+            color: $gray-500;
             font-size: 20px;
             border-radius: 6px;
-            background-color: $fixed-elements;
+            background-color: $gray-200;
             cursor: pointer;
 
             &:hover {
@@ -686,23 +686,23 @@ pre {
 }
 
 ::-webkit-input-placeholder {
-    color: rgba($color: $icons, $alpha: 0.5);
+    color: rgba($color: $light, $alpha: 0.5);
 }
 
 ::-moz-placeholder {
-    color: rgba($color: $icons, $alpha: 0.5);
+    color: rgba($color: $light, $alpha: 0.5);
 }
 
 :-ms-input-placeholder {
-    color: rgba($color: $icons, $alpha: 0.5);
+    color: rgba($color: $light, $alpha: 0.5);
 }
 
 ::-ms-input-placeholder {
-    color: rgba($color: $icons, $alpha: 0.5);
+    color: rgba($color: $light, $alpha: 0.5);
 }
 
 ::placeholder {
-    color: rgba($color: $icons, $alpha: 0.5);
+    color: rgba($color: $light, $alpha: 0.5);
 }
 
 .form-control:disabled,
@@ -758,7 +758,7 @@ pre {
 .splitor-line {
     height: 100%;
     width: 2px;
-    background: $icons;
+    background: $light;
     min-height: 10px;
 }
 
@@ -787,7 +787,7 @@ pre {
     font-size: 0.875rem;
     font-weight: 600;
     color: $text-color;
-    background: $fixed-elements;
+    background: $gray-200;
     display: flex;
     justify-content: center;
     border-radius: 8px;
@@ -808,7 +808,7 @@ pre {
 
 .disabled {
     cursor: not-allowed !important;
-    color: $icons;
+    color: $light;
 }
 
 a:focus {
@@ -821,7 +821,7 @@ a:focus {
 
 
 .hover-dropdown:hover {
-    background: $fixed-elements;
+    background: $gray-200;
 }
 
 .person-name {
@@ -832,7 +832,7 @@ a:focus {
 .badge-success {
     @extend .badge-light;
     border-radius: 8px;
-    background-color: $light-success;
+    background-color: $green-light;
     color: $success;
     white-space: nowrap;
     width: auto;
@@ -851,8 +851,8 @@ a:focus {
 .badge-danger {
     @extend .badge-light;
     border-radius: 8px;
-    background-color: $light-error;
-    color: $error;
+    background-color: $red-light;
+    color: $red;
     white-space: nowrap;
     width: auto;
     padding: 0.25rem 0.75rem;
@@ -870,8 +870,8 @@ a:focus {
 .badge-blue {
     @extend .badge-light;
     border-radius: 8px;
-    background-color: $light-blue;
-    color: $action;
+    background-color: $blue-light;
+    color: $blue-cta;
     white-space: nowrap;
     width: auto;
     padding: 0.25rem 0.75rem;
@@ -979,13 +979,13 @@ a:focus {
         .btn-ok {
             background: rgba(231, 243, 255, 0.7);
             border: none;
-            color: $action;
+            color: $blue-cta;
         }
 
         .btn-cancel {
             background: transparent;
             border: none;
-            color: $icons;
+            color: $light;
         }
     }
 }
@@ -1023,7 +1023,7 @@ a:focus {
 }
 
 .vue-switcher-theme--default.vue-switcher-color--default.vue-switcher--unchecked div:after {
-    background-color: $sub-heading !important;
+    background-color: $gray-500 !important;
 }
 
 .vue-switcher div:after {
@@ -1035,7 +1035,7 @@ a:focus {
     cursor: pointer !important;
     top: 1px !important;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1) !important;
-    background-color: $sub-heading;
+    background-color: $gray-500;
 }
 
 
@@ -1109,27 +1109,27 @@ a:focus {
 }
 
 .form-control::-webkit-input-placeholder {
-    color: $grey;
+    color: $gray-500;
     opacity: 0.5;
 }
 
 .form-control::-moz-placeholder {
-    color: $grey;
+    color: $gray-500;
     opacity: 0.5;
 }
 
 .form-control:-ms-input-placeholder {
-    color: $grey;
+    color: $gray-500;
     opacity: 0.5;
 }
 
 .form-control::-ms-input-placeholder {
-    color: $grey;
+    color: $gray-500;
     opacity: 0.5;
 }
 
 .form-control::placeholder {
-    color: $grey;
+    color: $gray-500;
     opacity: 0.5;
 }
 
@@ -1161,7 +1161,7 @@ a:focus {
     user-select: none;
     cursor: pointer;
     color: $white;
-    background: $action;
+    background: $blue-cta;
 }
 
 .popover.open {

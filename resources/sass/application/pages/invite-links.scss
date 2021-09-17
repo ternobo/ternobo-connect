@@ -32,13 +32,13 @@
 
         .invite-icon {
             font-size: 40px;
-            color: $action;
+            color: $blue-cta;
             transform: rotate(-15deg);
         }
 
         &.disabled {
             .invite-icon {
-                color: $icons;
+                color: $light;
             }
         }
 
@@ -74,7 +74,7 @@
 
         li::before {
             content: " ";
-            background: $icons;
+            background: $light;
             font-size: 1.5rem;
             display: inline-block;
             width: 8px;

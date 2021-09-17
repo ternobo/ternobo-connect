@@ -14,7 +14,7 @@
     >i,
     .actions {
         z-index: 1000;
-        color: $grey;
+        color: $gray-500;
         position: absolute;
         #{$end}: 16px;
         top: 0;
@@ -36,7 +36,7 @@
     @extend .input-group-icon;
 
     .form-control {
-        background: $fixed-elements;
+        background: $gray-200;
         border-radius: 16px;
         border: none;
     }

@@ -35,7 +35,7 @@ input {
     background-color: $white;
     background-image: none;
     background-clip: padding-box;
-    border: 2px solid $border-color;
+    border: 2px solid $gray-300;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 
     @media screen and (max-width:$sm-size) {
@@ -54,32 +54,32 @@ input {
 }
 
 .form-control::-webkit-input-placeholder {
-    color: $grey;
+    color: $gray-500;
     opacity: 1;
 }
 
 .form-control::-moz-placeholder {
-    color: $grey;
+    color: $gray-500;
     opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
-    color: $grey;
+    color: $gray-500;
     opacity: 1;
 }
 
 .form-control::-ms-input-placeholder {
-    color: $grey;
+    color: $gray-500;
     opacity: 1;
 }
 
 .form-control::placeholder {
-    color: $icons;
+    color: $light;
     opacity: 1;
 }
 
 .form-control:disabled {
-    background-color: $grey;
+    background-color: $gray-500;
     opacity: 1;
 }
 
@@ -168,7 +168,7 @@ input[type=text] {
     @extend .form-control;
     border: $body-bg;
     background: $body-bg;
-    color: $grey;
+    color: $gray-500;
     text-align: start;
 
     &:focus {
@@ -180,7 +180,7 @@ input[type=text] {
     @extend .form-control;
     border: $gray-200;
     background: $gray-200;
-    color: $grey;
+    color: $gray-500;
     text-align: start;
 
     &:focus {
@@ -199,14 +199,14 @@ input[type=text] {
 
         overflow: auto;
         white-space: nowrap;
-        scrollbar-color: $icons $fixed-elements;
+        scrollbar-color: $light $gray-200;
         scrollbar-width: none;
         scroll-behavior: smooth;
 
         &::-webkit-scrollbar {
             cursor: pointer;
             width: 4px;
-            background: $fixed-elements;
+            background: $gray-200;
 
             max-height: 0;
         }
@@ -215,7 +215,7 @@ input[type=text] {
             cursor: -webkit-grab;
             cursor: grab;
             width: 4px;
-            background-color: $icons;
+            background-color: $light;
         }
 
         &::-webkit-scrollbar-thumb:active {

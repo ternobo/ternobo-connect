@@ -11,13 +11,13 @@
 }
 
 .btn-danger {
-    background: $light-error;
+    background: $red-light;
     color: $red;
 
     &:hover {
-        background: $light-error-darker;
+        background: $red;
         color: $red;
-        border-color: $light-error-darker;
+        border-color: $red;
     }
 }
 
@@ -27,7 +27,7 @@
 
     &:disabled {
         background: #E0E0E0;
-        color: $grey;
+        color: $gray-500;
         border-color: #E0E0E0;
         opacity: 0.5;
     }
@@ -44,10 +44,10 @@
 .btn-action-light {
     background: #E7F3FF;
     border-radius: 0.75rem;
-    color: $action;
+    color: $blue-cta;
 
     &:not(:disabled):hover {
-        color: $action;
+        color: $blue-cta;
         background: $blue-light-hover;
     }
 }
@@ -71,7 +71,7 @@
 .btn-transparent,
 .button-transparent {
     background: transparent;
-    color: $grey;
+    color: $gray-500;
 
     &:hover {
         color: $dark;
@@ -80,21 +80,21 @@
     &:disabled {
         border-color: transparent;
         background: transparent;
-        color: $fixed-elements;
+        color: $gray-200;
     }
 
     &.cta-text {
         padding: 0;
-        color: $action;
+        color: $blue-cta;
 
         &:hover {
-            color: $action-hover;
+            color: $blue-hover;
         }
 
         &:disabled {
             border-color: transparent;
             background: transparent;
-            color: $grey;
+            color: $gray-500;
 
         }
     }
@@ -110,7 +110,7 @@
 }
 
 .btn-transparent:disabled {
-    color: $grey;
+    color: $gray-500;
 }
 
 .btn:focus,
@@ -137,7 +137,7 @@
 }
 
 .add-btn {
-    border: 2px solid $icons;
+    border: 2px solid $light;
     border-#{$start}: none;
     background: #E0E0E0;
     color: #757575;
@@ -341,7 +341,7 @@
 
 .show-more-text--clickable {
     font-size: 0.875rem;
-    color: $icons;
+    color: $light;
     font-weight: 600;
     @extend .clickable;
     margin-top: map-get($spacings, 2);
@@ -349,7 +349,7 @@
 
 .btn-edit {
     border-radius: 1rem;
-    border: 2px solid $icons;
+    border: 2px solid $light;
     color: #757575;
     transition: 0.3s all;
     display: flex;
@@ -433,25 +433,25 @@
 .btn-light-action {
     color: rgb(8, 152, 223);
     background: rgba(231, 242, 255, 1);
-    color: $action;
+    color: $blue-cta;
 }
 
 .add-btn-light-grey {
-    background: $fixed-elements;
-    border-color: $fixed-elements;
+    background: $gray-200;
+    border-color: $gray-200;
 
     color: $text-color;
 
     &:disabled {
         cursor: not-allowed;
-        background: $fixed-elements;
-        border-color: $fixed-elements;
-        color: $icons;
+        background: $gray-200;
+        border-color: $gray-200;
+        color: $light;
     }
 }
 
 .btn-suprelight {
-    color: $grey;
+    color: $gray-500;
     background: #F5F5F5;
 
     &:disabled {
@@ -470,12 +470,12 @@
 .btn-grey-10 {
     background: $body-bg;
     color: $light;
-    border: 2px solid $icons;
+    border: 2px solid $light;
     transition: 0.3s all;
 }
 
 .btn-grey-10:hover {
-    background: $icons;
+    background: $light;
     color: $text-color;
 }
 
