@@ -30,7 +30,7 @@
 
     .doantion-time {
         color: $gray-500;
-        font-size: 16px;
+        font-size: $text-sm;
     }
 
 
@@ -58,7 +58,7 @@
         line-height: 1;
         height: 36px;
         padding: 8px 16px;
-        font-size: 14px;
+        font-size: $text-xsm;
 
         strong {
             font-weight: 600;
@@ -136,7 +136,7 @@
             line-height: 1;
             height: 36px;
             padding: 8px 16px;
-            font-size: 14px;
+            font-size: $text-xsm;
 
             strong {
                 font-weight: 600;

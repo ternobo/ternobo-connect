@@ -46,7 +46,7 @@
         margin-#{$end}: 12px;
         color: $gray-500;
         margin-bottom: 0 !important;
-        font-size: 14px;
+        font-size: $text-xsm;
         cursor: pointer;
         -webkit-user-select: none;
         -moz-user-select: none;
@@ -59,11 +59,11 @@
 
         @media screen and (max-width: $sm-size) {
             max-width: 84px;
-            font-size: 10px;
+            font-size: $text-xxxsm;
         }
 
         i {
-            font-size: 20px;
+            font-size: $text-lg;
             margin-#{$end}: 3px;
         }
     }
@@ -233,11 +233,11 @@
                     margin-#{$end}: 8px;
                     padding: 4px 16px;
                     transition: 0.3s all;
-                    font-size: 14px;
+                    font-size: $text-xsm;
 
                     @media screen and (max-width: $sm-size) {
                         padding: 2px 12px;
-                        font-size: 12px;
+                        font-size: $text-xxsm;
                         vertical-align: baseline;
                         height: 20px;
                         margin-#{$end}: 4px;
@@ -257,10 +257,10 @@
                 transition: 0.3s all;
 
                 @media screen and (max-width: $sm-size) {
-                    font-size: 12px;
+                    font-size: $text-xxsm;
 
                     i {
-                        font-size: 16px;
+                        font-size: $text-sm;
                     }
                 }
 
@@ -307,7 +307,7 @@
                 padding-top: 12px;
 
                 i {
-                    font-size: 20px;
+                    font-size: $text-lg;
                 }
             }
         }
@@ -451,7 +451,7 @@
 }
 
 .article-title {
-    font-size: 20px;
+    font-size: $text-lg;
     font-weight: 600;
     margin-top: 1rem;
     margin-#{$start}: -8px;
@@ -464,7 +464,7 @@
 
 .post-time {
     display: flex;
-    font-size: 10px;
+    font-size: $text-xxxsm;
     color: #C8C8C8;
     flex-direction: row !important;
     margin: 0 !important;
@@ -523,7 +523,7 @@
     i {
         background: #F5F5F5;
         border-radius: 4px;
-        font-size: 16px;
+        font-size: $text-sm;
     }
 
     i:first-child {

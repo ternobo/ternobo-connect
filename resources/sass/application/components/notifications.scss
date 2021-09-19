@@ -27,7 +27,7 @@
 .notifications-group {
     >h3 {
         font-weight: 600;
-        font-size: 18px;
+        font-size: $text-md;
         line-height: 28px;
         color: $dark;
         margin-bottom: 0;
@@ -69,11 +69,11 @@
 
             .date-text {
                 margin-#{$start}: 12px;
-                font-size: 12px;
+                font-size: $text-xxsm;
                 color: $text-color;
 
                 @media screen and (max-width: $sm-size) {
-                    font-size: 10px;
+                    font-size: $text-xxxsm;
                 }
             }
 
@@ -84,20 +84,20 @@
                     display: flex;
                     align-items: center;
                     color: $dark;
-                    font-size: 16px;
+                    font-size: $text-sm;
                     margin-bottom: 4px;
 
                     @media screen and (max-width: $sm-size) {
-                        font-size: 14px;
+                        font-size: $text-xsm;
                     }
                 }
 
                 .action {
                     color: $gray-500;
-                    font-size: 14px;
+                    font-size: $text-xsm;
 
                     @media screen and (max-width: $sm-size) {
-                        font-size: 12px;
+                        font-size: $text-xxsm;
                     }
                 }
 
@@ -122,7 +122,7 @@
             margin-bottom: 0;
             padding: 16px 1.5rem;
             background-color: $body-bg;
-            font-size: 14px;
+            font-size: $text-xsm;
         }
 
         @for $i from 1 through 6 {
@@ -139,7 +139,7 @@
 
             @for $i from 1 through 6 {
                 h#{$i} {
-                    font-size: 16px;
+                    font-size: $text-sm;
                     line-height: 1.5;
                 }
             }
@@ -168,21 +168,21 @@
 
         .title {
             font-weight: 600;
-            font-size: 16px;
+            font-size: $text-sm;
             margin-#{$end}: 8px;
 
             @media screen and (max-width:$sm-size) {
                 margin-#{$end}: 4px;
-                font-size: 14px;
+                font-size: $text-xsm;
             }
         }
 
         .time {
-            font-size: 12px;
+            font-size: $text-xxsm;
             color: $text-color;
 
             @media screen and (max-width:$sm-size) {
-                font-size: 10px;
+                font-size: $text-xxxsm;
             }
         }
 

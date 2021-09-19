@@ -53,7 +53,7 @@
 @media screen and (max-width: $sm-size) {
     .modal-header .close {
         z-index: 99;
-        font-size: 20px;
+        font-size: $text-lg;
     }
 }
 

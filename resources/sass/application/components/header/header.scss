@@ -85,7 +85,7 @@
     .list-item {
         padding: 12px 0;
         color: $light;
-        font-size: 12px;
+        font-size: $text-xxsm;
 
         i {
             color: $light;
@@ -161,12 +161,12 @@
 
         .user-name {
             font-weight: 600;
-            font-size: 16px;
+            font-size: $text-sm;
             color: $dark;
         }
 
         .user-short-bio {
-            font-size: 14px;
+            font-size: $text-xsm;
             margin-top: 8px;
             color: $gray-500;
         }
@@ -203,7 +203,7 @@
     align-items: center;
     justify-content: center;
     margin-#{$start}: 1.5rem;
-    font-size: 12px;
+    font-size: $text-xxsm;
 }
 
 .usertoolbar:hover .usermenu {

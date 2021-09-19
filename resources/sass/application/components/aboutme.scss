@@ -54,7 +54,7 @@
     color: $text-color;
 
     @media screen and (max-width:$sm-size) {
-        font-size: 12px;
+        font-size: $text-xxsm;
     }
 }
 
@@ -62,7 +62,7 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    font-size: 14px;
+    font-size: $text-xsm;
     color: $light;
 
     .degree {
@@ -74,6 +74,6 @@
     }
 
     @media screen and (max-width:$sm-size) {
-        font-size: 10px;
+        font-size: $text-xxxsm;
     }
 }

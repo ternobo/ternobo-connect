@@ -2,10 +2,13 @@
 $body-bg: #F5F5F5;
 $border-widths: 2px;
 
+// -----------------------------------------------
 $spacing: 1rem;
 $root-size: 16px;
 $root-size-mobile:12px;
+// -----------------------------------------------
 
+// --------------- Spacings ----------------
 $spacings: (1: $spacing / 4,
     2: $spacing / 2,
     3: $spacing * 0.75,
@@ -17,6 +20,8 @@ $spacings: (1: $spacing / 4,
     9: $spacing * 4,
 ) !default;
 
+
+// ------------------ Modal Sizes ------------------
 $modal-small: 300px !default;
 $modal-medium: 500px !default;
 $modal-large: 582px !default;
@@ -55,6 +60,15 @@ $gray-light:#EEEEEE;
 $gray-bg:#F5F5F5;
 
 
+// Shadows
+$main-card-shdow: 0px 5px 40px rgba(0, 0, 0, 0.03);
+$bg-shadow:0px 10px 40px rgba(0, 0, 0, 0.1);
+$bg-hover-shadow:0px 10px 40px rgba(0, 0, 0, 0.2);
+$notification-shadow:0px 20px 20px rgba(0, 0, 0, 0.15);
+$overlay-menu-shadow:0px 5px 20px rgba(0, 0, 0, 0.051);
+$chat-card-shadow: 0px -5px 40px rgba(0, 0, 0, 0.05);
+$navigation-shadow: 0px -5px 40px rgba(0, 0, 0, 0.05);
+
 // Text Colors
 $text-color:$gray-600;
 $text-on-primary: $gray-0;
@@ -85,7 +99,7 @@ $green:#4CBF7B;
 $green-light-hover:#C7FEDC;
 $green-light:#E5FAED;
 
-// Yello Varients
+// Yellow Varients
 $yellow-dark:#9C902B;
 $yellow-saturated:#C2AA52;
 $yellow: #FEFCEA;
@@ -105,6 +119,23 @@ $warning: $yellow !default;
 $danger: $red !default;
 $light: $gray-400 !default;
 $dark: $black !default;
+
+
+// ---------------- Typography ----------------
+
+// Heading
+$heading-1: 2rem;
+$heading-2:1.5rem;
+$heading-3:1.25rem;
+
+// Text
+$text-lg:1.25rem;
+$text-md:1.125rem;
+$text-sm:1rem;
+$text-xsm:0.875rem;
+$text-xxsm:0.75rem;
+$text-xxxsm:0.0.625rem;
+// --------------------------------------------
 
 $theme-colors: ('primary': $primary,
     'secondary': $secondary,

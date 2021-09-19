@@ -17,7 +17,7 @@
 
     .slug-info {
         @media screen and (max-width: $sm-size) {
-            font-size: 10px;
+            font-size: $text-xxxsm;
         }
 
         img {
@@ -99,7 +99,7 @@
                 }
 
                 @media screen and (max-width: $sm-size) {
-                    font-size: 14px;
+                    font-size: $text-xsm;
                     margin-#{$start}: 4px;
                 }
             }
@@ -110,7 +110,7 @@
         }
 
         @media screen and (max-width: $sm-size) {
-            font-size: 10px;
+            font-size: $text-xxxsm;
         }
 
     }

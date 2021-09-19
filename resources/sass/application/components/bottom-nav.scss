@@ -51,7 +51,7 @@
         direction: ltr;
         -webkit-font-smoothing: antialiased;
         vertical-align: middle;
-        font-size: 20px;
+        font-size: $text-lg;
         color: $gray-500;
 
 
@@ -109,7 +109,7 @@
 
 
         .navheader-text {
-            font-size: 14px;
+            font-size: $text-xsm;
             transform: scale(1);
             height: auto;
             width: auto;

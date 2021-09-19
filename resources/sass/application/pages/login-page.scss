@@ -3,7 +3,7 @@
     flex-direction: column;
 
     .btn {
-        font-size: 14px;
+        font-size: $text-xsm;
         font-weight: 600;
     }
 
@@ -107,7 +107,7 @@
     .login-header-menu {
         display: flex;
         margin: 0 -16px;
-        font-size: 14px;
+        font-size: $text-xsm;
 
         .dropdown-menu {
             margin-top: 12px;
@@ -117,7 +117,7 @@
 
         >a {
             color: $text-color;
-            font-size: 14px;
+            font-size: $text-xsm;
             font-weight: 600;
             transition: 0.3s all;
         }

@@ -28,7 +28,7 @@ div.page-cover {
     padding: 2px;
     height: 28px;
     width: 28px;
-    font-size: 18px;
+    font-size: $text-md;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -116,34 +116,34 @@ div.page-cover {
             }
 
             strong.name {
-                font-size: 20px;
+                font-size: $text-lg;
                 line-height: 1.5;
 
                 @media screen and (max-width: $sm-size) {
                     font-weight: 600;
-                    font-size: 14px;
+                    font-size: $text-xsm;
                 }
             }
 
             .location {
-                font-size: 16px;
+                font-size: $text-sm;
                 color: $gray-500;
 
                 @media screen and (max-width: $sm-size) {
-                    font-size: 12px;
+                    font-size: $text-xxsm;
 
                     i {
-                        font-size: 16px;
+                        font-size: $text-sm;
                     }
                 }
             }
 
             .short_bio {
-                font-size: 16px;
+                font-size: $text-sm;
                 color: $gray-500;
 
                 @media screen and (max-width: $sm-size) {
-                    font-size: 12px;
+                    font-size: $text-xxsm;
                 }
             }
 
@@ -242,10 +242,10 @@ div.page-cover {
         justify-content: center;
 
         .invite_date {
-            font-size: 12px;
+            font-size: $text-xxsm;
 
             @media screen and (max-width: $sm-size) {
-                font-size: 12px;
+                font-size: $text-xxsm;
             }
 
             color: $gray-500;
@@ -256,7 +256,7 @@ div.page-cover {
         }
 
         .invited_by {
-            font-size: 14px;
+            font-size: $text-xsm;
 
             a {
                 font-weight: 600;
@@ -268,7 +268,7 @@ div.page-cover {
             }
 
             @media screen and (max-width: $sm-size) {
-                font-size: 12px;
+                font-size: $text-xxsm;
             }
         }
     }
@@ -374,7 +374,7 @@ div.page-cover {
         border-radius: 8px;
 
         @media screen and (max-width: $sm-size) {
-            font-size: 10px;
+            font-size: $text-xxxsm;
             font-weight: 600;
         }
     }
@@ -391,7 +391,7 @@ div.page-cover {
 }
 
 .slug-name {
-    font-size: 14px;
+    font-size: $text-xsm;
 
     @media screen and (max-width: $sm-size) {
         max-width: 16px;
@@ -424,14 +424,14 @@ div.page-cover {
 
     .slug-url {
         @media screen and (max-width: $sm-size) {
-            font-size: 10px;
+            font-size: $text-xxxsm;
             line-height: 1.5;
         }
     }
 }
 
 .contact--title {
-    font-size: 16px;
+    font-size: $text-sm;
     margin-bottom: 1.5rem;
     font-weight: 600;
 
@@ -442,7 +442,7 @@ div.page-cover {
 
 @media screen and (max-width: $sm-size) {
     .contact--title {
-        font-size: 14px;
+        font-size: $text-xsm;
     }
 }
 

@@ -154,7 +154,7 @@
             }
 
             i {
-                font-size: 20px;
+                font-size: $text-lg;
             }
         }
     }
@@ -242,7 +242,7 @@
     >.list-title {
         margin-bottom: 4px;
         color: $gray-500;
-        font-size: 12px;
+        font-size: $text-xxsm;
     }
 
 
@@ -260,7 +260,7 @@
         strong {
             color: $gray-500;
             margin-#{$start}: 12px;
-            font-size: 12px;
+            font-size: $text-xxsm;
         }
 
         i {
@@ -268,7 +268,7 @@
             color: $gray-600;
             height: 28px;
             width: 28px;
-            font-size: 20px;
+            font-size: $text-lg;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -300,7 +300,7 @@
         background: $gray-100;
         color: $gray-500;
         border-radius: 4px;
-        font-size: 14px;
+        font-size: $text-xsm;
         padding: 4px;
         font-family: 'JetBrains Mono', monospace;
     }

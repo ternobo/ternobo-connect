@@ -28,7 +28,7 @@ $md-radio-label-padding: .75em;
         clear: both;
         padding-#{$start}: 1px;
         color: $gray-500;
-        font-size: 14px;
+        font-size: $text-xsm;
         margin-bottom: 0;
 
         &:not(:empty) {

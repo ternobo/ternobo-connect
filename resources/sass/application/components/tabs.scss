@@ -41,7 +41,7 @@
             display: block;
             width: 100%;
             cursor: pointer;
-            font-size: 14px;
+            font-size: $text-xsm;
 
             &:not(:last-child) {
                 margin-#{$end}: 40px;
@@ -52,7 +52,7 @@
                     margin-#{$end}: 16px;
                 }
 
-                font-size: 12px;
+                font-size: $text-xxsm;
             }
 
             &.is-active a {

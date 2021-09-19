@@ -1,12 +1,12 @@
 .pinned-badge {
     background-color: rgba($color: $blue-cta, $alpha: 0.2);
     color: $gray-500;
-    font-size: 12px;
+    font-size: $text-xxsm;
     border-radius: 14px;
     padding: 4px 8px;
 
     i {
-        font-size: 18px;
+        font-size: $text-md;
         color: $blue-cta;
         transform: rotate(-45deg);
     }

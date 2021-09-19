@@ -47,10 +47,10 @@
         .skill-name {
             display: flex;
             align-items: center;
-            font-size: 16px;
+            font-size: $text-sm;
 
             @media screen and (max-width:$sm-size) {
-                font-size: 12px;
+                font-size: $text-xxsm;
             }
 
             font-weight: 600;
@@ -67,7 +67,7 @@
                 cursor: pointer;
 
                 @media screen and (max-width: $sm-size) {
-                    font-size: 12px;
+                    font-size: $text-xxsm;
                     padding-#{$end}: 14px;
                     margin-#{$end}: 12px;
                 }
@@ -138,7 +138,7 @@
                     max-height: 28px;
 
                     i {
-                        font-size: 20px;
+                        font-size: $text-lg;
                     }
                 }
 
@@ -163,13 +163,13 @@
 }
 
 .show-all-skills {
-    font-size: 16px;
+    font-size: $text-sm;
     color: $light;
     @extend .clickable;
     margin-top: 2rem;
 
     @media screen and (max-width:$sm-size) {
-        font-size: 12px;
+        font-size: $text-xxsm;
     }
 }
 
@@ -182,10 +182,10 @@
     font-weight: normal;
 
     .credits-text {
-        font-size: 14px;
+        font-size: $text-xsm;
 
         @media screen and (max-width: $sm-size) {
-            font-size: 10px;
+            font-size: $text-xxxsm;
         }
     }
 
@@ -218,7 +218,7 @@
 
         i {
             color: $gray-500;
-            font-size: 20px;
+            font-size: $text-lg;
             margin-#{$end}: 4px;
             vertical-align: middle;
         }

@@ -42,13 +42,13 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
-            font-size: 14px;
+            font-size: $text-xsm;
             cursor: pointer;
 
             >i {
                 color: $light;
                 margin-#{$end}: map-get($spacings, 2);
-                font-size: 16px;
+                font-size: $text-sm;
             }
 
             &:hover {
@@ -65,7 +65,7 @@
 
     @media screen and(max-width: $sm-size) {
         i {
-            font-size: 20px;
+            font-size: $text-lg;
         }
     }
 
@@ -73,13 +73,13 @@
         position: absolute;
         #{$start}: 16px #{"/* rtl:ignore */"};
         #{$end}: auto #{"/* rtl:ignore */"};
-        font-size: 12px;
+        font-size: $text-xxsm;
         color: $gray-400;
     }
 
     >input {
         border-radius: 12px;
-        font-size: 14px;
+        font-size: $text-xsm;
         height: 2.5rem;
         padding: 8px 16px;
         border-color: transparent;
@@ -105,7 +105,7 @@
             box-shadow: unset;
             height: 36px;
             border-radius: 12px;
-            font-size: 10px;
+            font-size: $text-xxxsm;
             align-self: flex-end;
 
             +i:not(.delete-icon) {
@@ -124,7 +124,7 @@
 
 
                 +i {
-                    font-size: 16px;
+                    font-size: $text-sm;
 
                     @if $direction==ltr {
                         #{$start}: 16px;
@@ -149,7 +149,7 @@
             color: $gray-500;
 
             @media screen and(max-width: $sm-size) {
-                font-size: 10px;
+                font-size: $text-xxxsm;
             }
         }
 
@@ -157,7 +157,7 @@
             color: $gray-500;
 
             @media screen and(max-width: $sm-size) {
-                font-size: 10px;
+                font-size: $text-xxxsm;
             }
         }
 
@@ -165,7 +165,7 @@
             color: $gray-500;
 
             @media screen and(max-width: $sm-size) {
-                font-size: 10px;
+                font-size: $text-xxxsm;
             }
         }
 
@@ -173,7 +173,7 @@
             color: $gray-500;
 
             @media screen and(max-width: $sm-size) {
-                font-size: 10px;
+                font-size: $text-xxxsm;
             }
         }
 
@@ -181,7 +181,7 @@
             color: $gray-500;
 
             @media screen and(max-width: $sm-size) {
-                font-size: 10px;
+                font-size: $text-xxxsm;
             }
         }
     }

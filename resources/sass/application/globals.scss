@@ -440,7 +440,7 @@ img {
     display: flex;
     border-radius: 12px;
     transition: 0.3s all;
-    font-size: 14px;
+    font-size: $text-xsm;
 
     @media screen and(min-width: $sm-size) {
         padding: 4px 16px;
@@ -481,7 +481,7 @@ img {
     padding-bottom: 1.5rem;
 
     small {
-        font-size: 12px;
+        font-size: $text-xxsm;
     }
 
     .card-img-top {
@@ -522,7 +522,7 @@ img {
 
         .copyprofile-icon {
             color: $gray-500;
-            font-size: 20px;
+            font-size: $text-lg;
             border-radius: 6px;
             background-color: $gray-200;
             cursor: pointer;
@@ -843,7 +843,7 @@ a:focus {
         align-items: center;
         display: flex;
         padding: 6px 8px;
-        font-size: 10px;
+        font-size: $text-xxxsm;
         height: 1.5rem;
     }
 }
@@ -862,7 +862,7 @@ a:focus {
         align-items: center;
         display: flex;
         padding: 6px 8px;
-        font-size: 10px;
+        font-size: $text-xxxsm;
         height: 1.5rem;
     }
 }
@@ -882,7 +882,7 @@ a:focus {
         align-items: center;
         display: flex;
         padding: 6px 8px;
-        font-size: 10px;
+        font-size: $text-xxxsm;
         height: 1.5rem;
     }
 }
@@ -944,7 +944,7 @@ a:focus {
 
 .vs__clear>i {
     color: #757575;
-    font-size: 20px;
+    font-size: $text-lg;
 }
 
 .card-icon {
@@ -1069,7 +1069,7 @@ a:focus {
     }
 
     .vs__open-indicator i {
-        font-size: 16px;
+        font-size: $text-sm;
     }
 
     .datepicker-list .vs__actions {
@@ -1077,7 +1077,7 @@ a:focus {
     }
 
     .editItem {
-        font-size: 12px;
+        font-size: $text-xxsm;
 
         .input {
             width: 100% !important;

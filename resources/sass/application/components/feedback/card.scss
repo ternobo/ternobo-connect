@@ -37,7 +37,7 @@
         .feedback-pin-details {
             display: flex;
             align-items: center;
-            font-size: 12px;
+            font-size: $text-xxsm;
         }
     }
 }
@@ -48,7 +48,7 @@
     .how-to-improve-header {
         display: flex;
         justify-content: space-between;
-        font-size: 16px;
+        font-size: $text-sm;
         align-items: center;
 
         strong {
@@ -60,7 +60,7 @@
             align-items: unset;
 
             strong {
-                font-size: 12px;
+                font-size: $text-xxsm;
                 margin-bottom: 12px;
             }
 
@@ -69,10 +69,10 @@
             }
 
             .feedback-button {
-                font-size: 12px;
+                font-size: $text-xxsm;
 
                 i {
-                    font-size: 16px;
+                    font-size: $text-sm;
                 }
             }
         }
@@ -106,7 +106,7 @@
 
         width: 120px;
         font-weight: 600;
-        font-size: 14px;
+        font-size: $text-xsm;
 
         .progress {
             width: 100%;
@@ -115,7 +115,7 @@
         @media screen and (max-width: $sm-size) {
             width: 83px;
             font-weight: 600;
-            font-size: 10px;
+            font-size: $text-xxxsm;
 
             .progress {
                 width: 60px;
@@ -147,10 +147,10 @@
         max-width: -moz-max-content;
         max-width: max-content;
 
-        font-size: 14px;
+        font-size: $text-xsm;
 
         @media screen and (max-width: $sm-size) {
-            font-size: 12px;
+            font-size: $text-xxsm;
             padding: map-get($spacings, 1);
             margin-bottom: 0;
         }
@@ -158,10 +158,10 @@
         font-weight: 600;
 
         i {
-            font-size: 20px;
+            font-size: $text-lg;
 
             @media screen and (max-width: $sm-size) {
-                font-size: 16px;
+                font-size: $text-sm;
             }
 
             margin-#{$end}: 4px;
@@ -187,7 +187,7 @@
 
         @media screen and(max-width: $sm-size) {
             top: 12px;
-            font-size: 12px;
+            font-size: $text-xxsm;
         }
     }
 
@@ -195,10 +195,10 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        font-size: 14px;
+        font-size: $text-xsm;
 
         @media screen and (max-width: $sm-size) {
-            font-size: 12px;
+            font-size: $text-xxsm;
             flex-wrap: wrap;
             justify-content: flex-end;
         }
@@ -211,7 +211,7 @@
                 margin-top: -20px;
 
                 i {
-                    font-size: 12px;
+                    font-size: $text-xxsm;
                 }
             }
         }
@@ -237,7 +237,7 @@
                 color: $gray-500;
 
                 @media screen and (max-width: $sm-size) {
-                    font-size: 10px;
+                    font-size: $text-xxxsm;
                 }
             }
 
@@ -281,7 +281,7 @@
                 @media screen and(max-width: $sm-size) {
                     width: 2rem;
                     height: 2rem;
-                    font-size: 10px;
+                    font-size: $text-xxxsm;
                 }
             }
 
@@ -304,7 +304,7 @@
 
         @media screen and(max-width: $sm-size) {
             i {
-                font-size: 20px;
+                font-size: $text-lg;
             }
         }
 
@@ -320,13 +320,13 @@
 
             .feedback-title {
                 color: $dark;
-                font-size: 18px;
+                font-size: $text-md;
                 font-weight: 600;
                 margin-bottom: 1.5rem;
                 max-width: calc(100% - 124px);
 
                 @media screen and(max-width: $sm-size) {
-                    font-size: 12px;
+                    font-size: $text-xxsm;
                     margin-bottom: 8px;
                 }
 
@@ -334,11 +334,11 @@
             }
 
             .feedback-description-text {
-                font-size: 16px;
+                font-size: $text-sm;
                 color: $text-color;
 
                 @media screen and(max-width: $sm-size) {
-                    font-size: 12px;
+                    font-size: $text-xxsm;
                 }
             }
         }
@@ -388,7 +388,7 @@
         list-style: none;
         display: flex;
         gap: 20px;
-        font-size: 18px;
+        font-size: $text-md;
         margin: 0;
         padding: 0;
     }
@@ -397,7 +397,7 @@
         li {
             color: $gray-500;
             cursor: pointer;
-            font-size: 14px;
+            font-size: $text-xsm;
             display: flex;
             align-items: center;
             padding: 5px 10px;

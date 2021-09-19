@@ -24,7 +24,7 @@
             margin-#{$end}: 12px;
 
             .short-bio {
-                font-size: 12px;
+                font-size: $text-xxsm;
                 color: $gray-500;
             }
         }
@@ -32,7 +32,7 @@
         .feedback-reply-time {
             margin-#{$end}: 8px;
             color: $text-color;
-            font-size: 12px;
+            font-size: $text-xxsm;
             line-height: 18px;
         }
 

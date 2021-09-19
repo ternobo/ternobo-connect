@@ -14,12 +14,12 @@
 }
 
 .article-time {
-    font-size: 14px;
+    font-size: $text-xsm;
     color: $light;
 }
 
 .article-text {
-    font-size: 16px;
+    font-size: $text-sm;
     color: $dark;
     margin-top: 28px;
     padding-bottom: 40px;

@@ -21,14 +21,14 @@
 
         .person-name {
             font-weight: 600;
-            font-size: 14px;
+            font-size: $text-xsm;
             line-height: 24px;
             color: $dark;
         }
 
         .person-short-bio {
             font-weight: normal;
-            font-size: 12px;
+            font-size: $text-xxsm;
             line-height: 20px;
             color: $gray-500;
             white-space: nowrap;

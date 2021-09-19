@@ -9,7 +9,7 @@
 
     label {
         position: absolute;
-        font-size: 14px;
+        font-size: $text-xsm;
         #{$start}: 0;
         top: 50%;
         transform: translateY(-50%);
@@ -24,7 +24,7 @@
     }
 
     .input {
-        font-size: 16px;
+        font-size: $text-sm;
         outline: none;
         border: 2px solid #C8C8C8;
         border-radius: 0;
@@ -44,7 +44,7 @@
         top: 0;
         padding: 0 4px;
         margin: 0 8px;
-        font-size: 10px;
+        font-size: $text-xxxsm;
         transform: translateY(-50%);
     }
 
@@ -52,7 +52,7 @@
         top: 0;
         padding: 0 4px;
         margin: 0 8px;
-        font-size: 10px;
+        font-size: $text-xxxsm;
         transform: translateY(-50%);
     }
 }
@@ -116,7 +116,7 @@
             top: 0;
             padding: 0 0.25rem;
             margin: 0 0.5rem;
-            font-size: 10px;
+            font-size: $text-xxxsm;
             transform: translateY(-50%);
         }
     }
@@ -156,7 +156,7 @@
         align-items: center;
 
         .btn {
-            font-size: 14px;
+            font-size: $text-xsm;
             border: none;
             background: transparent;
             color: $dark;

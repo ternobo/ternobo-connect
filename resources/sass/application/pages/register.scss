@@ -90,7 +90,7 @@
 
         @media screen and(max-width:$sm-size) {
             font-weight: 600;
-            font-size: 12px;
+            font-size: $text-xxsm;
         }
     }
 }

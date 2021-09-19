@@ -30,7 +30,7 @@
             background: $white;
             color: $green;
             padding: 0.25rem;
-            font-size: 10px;
+            font-size: $text-xxxsm;
             font-weight: bold;
             letter-spacing: 0.75px;
             border-radius: 4px;
@@ -38,7 +38,7 @@
             >i {
                 margin-#{$end}: 4px;
                 color: $green;
-                font-size: 16px;
+                font-size: $text-sm;
             }
         }
 

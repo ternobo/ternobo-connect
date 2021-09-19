@@ -71,7 +71,7 @@
             color: $dark;
             display: flex;
             font-weight: normal;
-            font-size: 14px;
+            font-size: $text-xsm;
 
 
             @media screen and (max-width: $sm-size) {
@@ -168,7 +168,7 @@
         max-height: 28px;
 
         i {
-            font-size: 20px;
+            font-size: $text-lg;
         }
     }
 

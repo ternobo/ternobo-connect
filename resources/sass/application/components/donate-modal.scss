@@ -12,7 +12,7 @@
     user-select: none;
 
     font-weight: 600;
-    font-size: 12px;
+    font-size: $text-xxsm;
     line-height: 19px;
     /* identical to box height */
     text-align: $start;
@@ -63,7 +63,7 @@
 
         .user-name {
             font-weight: 600;
-            font-size: 14px;
+            font-size: $text-xsm;
             line-height: 22px;
 
             color: $dark;
@@ -72,11 +72,11 @@
 
     .donation-amount {
         font-weight: 600;
-        font-size: 16px;
+        font-size: $text-sm;
         color: $blue-cta;
 
         &.received {
-            font-size: 16px;
+            font-size: $text-sm;
             color: $success;
         }
 

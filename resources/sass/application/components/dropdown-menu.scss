@@ -6,11 +6,11 @@
     display: block !important;
     border-radius: 0;
     padding: 0;
-    font-size: 14px;
+    font-size: $text-xsm;
 
     .vs__dropdown-menu {
         background: #E0E0E0;
-        font-size: 14px;
+        font-size: $text-xsm;
     }
 
     .vs__no-options {

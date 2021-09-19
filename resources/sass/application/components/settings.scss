@@ -89,7 +89,7 @@
     .name {
         font-weight: 600;
         color: $dark;
-        font-size: 16px;
+        font-size: $text-sm;
 
         @media screen and (max-width: $sm-size) {
             font-size: 12px !important;
@@ -152,7 +152,7 @@
 
         i {
             margin-#{$end}: 8px;
-            font-size: 16px;
+            font-size: $text-sm;
         }
 
         @media screen and (min-width: $sm-size) {

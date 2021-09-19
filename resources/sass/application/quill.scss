@@ -682,7 +682,7 @@
       color: #444;
       display: inline-block;
       float:$end;
-      font-size: 14px;
+      font-size: $text-xsm;
       font-weight: 500;
       height: 1.5rem;
       position: relative;
@@ -916,11 +916,11 @@
           }
   
           &[data-value=small]::before {
-            font-size: 10px;
+            font-size: $text-xxxsm;
           }
   
           &[data-value=large]::before {
-            font-size: 18px;
+            font-size: $text-md;
           }
   
           &[data-value=huge]::before {

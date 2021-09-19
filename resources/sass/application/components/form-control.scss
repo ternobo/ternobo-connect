@@ -29,7 +29,7 @@ input {
     display: block;
     width: 100%;
     padding: 16px;
-    font-size: 16px;
+    font-size: $text-sm;
     line-height: 1.6;
     color: $dark;
     background-color: $white;
@@ -39,7 +39,7 @@ input {
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 
     @media screen and (max-width:$sm-size) {
-        font-size: 12px;
+        font-size: $text-xxsm;
     }
 }
 
@@ -136,23 +136,23 @@ input[type=text] {
 @media screen and (max-width:$sm-size) {
 
     ::-webkit-input-placeholder {
-        font-size: 12px;
+        font-size: $text-xxsm;
     }
 
     ::-moz-placeholder {
-        font-size: 12px;
+        font-size: $text-xxsm;
     }
 
     :-ms-input-placeholder {
-        font-size: 12px;
+        font-size: $text-xxsm;
     }
 
     ::-ms-input-placeholder {
-        font-size: 12px;
+        font-size: $text-xxsm;
     }
 
     ::placeholder {
-        font-size: 12px;
+        font-size: $text-xxsm;
     }
 
     .searchfield {

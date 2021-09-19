@@ -14,7 +14,7 @@
         word-break: break-word;
 
         @media screen and (max-width: $sm-size) {
-            font-size: 12px;
+            font-size: $text-xxsm;
         }
     }
 
@@ -42,7 +42,7 @@
             max-height: 56px;
 
             i {
-                font-size: 20px;
+                font-size: $text-lg;
             }
         }
     }
@@ -52,7 +52,7 @@
         width: 100%;
 
         @media screen and (max-width:$sm-size) {
-            font-size: 12px;
+            font-size: $text-xxsm;
             padding-bottom: 16px;
 
             &:not(:last-child) {
@@ -68,6 +68,6 @@
     @extend .text-action;
 
     @media screen and (max-width: $sm-size) {
-        font-size: 12px;
+        font-size: $text-xxsm;
     }
 }
