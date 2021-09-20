@@ -3,18 +3,24 @@
 namespace App\Models;
 
 use App\HasPage;
+use App\ImageTools;
 use App\Scopes\BlockedPageContentScope;
 use App\Scopes\PostDraftScope;
 use App\Scopes\ReportedPostScope;
 use App\SocialMediaTools;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 /**
  * @property mixed|string slug
@@ -57,25 +63,22 @@ class Post extends Model
         return preg_replace('#<script(.*?)>(.*?)</script>#is', '', $input);
     }
 
-    /**
-     * The User which Post this
-     * @var \App\User
-     */
+    public static function withDrafts()
+    {
+        return static::withoutGlobalScope(PostDraftScope::class);
+    }
 
     /**
-     * get reshared post
-     * @var \App\Post
+     * The "booted" method of the model.
+     *
+     * @return void
      */
-
-    /**
-     * Get related Page
-     * @var \App\Page
-     */
-
-    /**
-     * Post Category
-     * @var \App\Category
-     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new PostDraftScope);
+        static::addGlobalScope(new BlockedPageContentScope);
+        static::addGlobalScope(new ReportedPostScope);
+    }
 
     public function user()
     {
@@ -97,11 +100,6 @@ class Post extends Model
         return $this->hasMany(PostSlide::class, "post_id");
     }
 
-    public function blocks()
-    {
-        return $this->hasManyThrough(SlideBlock::class, PostSlide::class, "post_id", "slide_id");
-    }
-
     public function reports()
     {
         return $this->hasMany(Report::class, "reportable_id")->where("reportable_type", Post::class);
@@ -121,7 +119,12 @@ class Post extends Model
         }
     }
 
-    public function share()
+    public function blocks(): HasManyThrough
+    {
+        return $this->hasManyThrough(SlideBlock::class, PostSlide::class, "post_id", "slide_id");
+    }
+
+    public function share(): BelongsTo
     {
         $data = $this->belongsTo("App\Models\Post", "post_id")->with("page")
             ->withCount("likes")
@@ -132,32 +135,27 @@ class Post extends Model
         return $data;
     }
 
-    public function page()
+    public function page(): BelongsTo
     {
         return $this->belongsTo("App\Models\Page", "page_id");
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo("App\Models\Category");
     }
 
-    public function actions()
+    public function actions(): HasMany
     {
         return $this->hasMany(Action::class, "post_id");
     }
 
-    public function bookmarks()
+    public function bookmarks(): BelongsToMany
     {
         return $this->belongsToMany('App\Models\User', 'bookmarks', 'post_id', 'user_id');
     }
 
-    public function is_bookmarked()
-    {
-        return $this->bookmarks->contains(Auth::user());
-    }
-
-    public function toArray()
+    public function toArray(): array
     {
         // get the original array to be displayed
         $data = parent::toArray();
@@ -177,14 +175,13 @@ class Post extends Model
         return $data;
     }
 
-    public function getComments($limit = 10)
+    public function getComments($limit = 10): LengthAwarePaginator
     {
-        $comments = Comment::query()->whereNull("reply_to")->whereHas("page", function ($query) {
+        return Comment::query()->whereNull("reply_to")->whereHas("page", function ($query) {
             $query->whereHas("user", function ($query) {
                 $query->where("active", true);
             });
         })->where("post_id", $this->id)->latest()->paginate($limit);
-        return $comments;
     }
 
     public function mutualLikes()
@@ -200,22 +197,20 @@ class Post extends Model
         return $this->hasMany("App\Models\Like", "post_id")->where("id", "-1");
     }
 
-    public function likes()
+    public function likes(): HasMany
     {
         return $this->hasMany("App\Models\Like", "post_id")
             ->with("page")
             ->latest();
     }
 
-
-    public function setContent($slides, $user, $fileOnly = false)
+    public function setContent($slides, $user, $fileOnly = false): array
     {
-
+        DB::beginTransaction();
         $mentions = [];
         $tags = [];
 
         foreach ($slides as $slide) {
-
             if (count($slide) < 0) {
                 continue;
             }
@@ -225,9 +220,10 @@ class Post extends Model
                 'post_id' => $this->id,
             ])->id;
             foreach ($slide['blocks'] as $rawContent) {
-                $sort = (int) $rawContent['sort'];
+                $sort = (int)$rawContent['sort'];
                 $content = $rawContent['content'];
-                $type =  $rawContent['type'];
+                $type = $rawContent['type'];
+                $meta = $rawContent['meta'] ?? [];
                 switch ($type) {
                     case "quote":
                     case "text":
@@ -243,6 +239,7 @@ class Post extends Model
                             'sort' => $sort,
                             'content' => $text,
                             'type' => $type,
+                            "meta" => $meta,
                         ]);
 
                         if (count($tags) < 3) {
@@ -260,6 +257,7 @@ class Post extends Model
                             'sort' => $sort,
                             'content' => json_encode($content),
                             'type' => $type,
+                            "meta" => $meta,
                         ]);
                         break;
 
@@ -270,16 +268,23 @@ class Post extends Model
                             'sort' => $sort,
                             'content' => $content,
                             'type' => 'title',
+                            "meta" => $meta,
                         ]);
                         break;
                     case "image":
-                        $media = $content instanceof UploadedFile | $fileOnly ?  SocialMediaTools::uploadPostImage($content->store("media"), 90) : $content;
+                        $media = $content instanceof UploadedFile | $fileOnly ? SocialMediaTools::uploadPostImage($content->store("media"), 90) : $content;
+
+                        if (isset($meta['rotate'])) {
+                            ImageTools::rotateImage($media, $meta['rotate']);
+                        }
+
                         SlideBlock::query()->create([
                             'slide_id' => $slide_id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
                             'content' => $media,
                             'type' => 'image',
+                            'meta' => $meta
                         ]);
                         break;
                     case "video":
@@ -290,6 +295,7 @@ class Post extends Model
                             'sort' => $sort,
                             'content' => $media,
                             'type' => 'video',
+                            "meta" => $meta,
                         ]);
                         break;
 
@@ -300,17 +306,14 @@ class Post extends Model
                             'sort' => $sort,
                             'content' => json_encode(['language' => $content['language'], "code" => $content['code']]),
                             'type' => 'code',
+                            "meta" => $meta,
                         ]);
                         break;
                 }
             }
         }
+        DB::commit();
         return ['mentions' => $mentions, 'tags' => $tags];
-    }
-
-    public static function withDrafts()
-    {
-        return static::withoutGlobalScope(PostDraftScope::class);
     }
 
     public function publish()
@@ -318,17 +321,5 @@ class Post extends Model
         return $this->update([
             "type" => substr($this->type, 6),
         ]);
-    }
-
-    /**
-     * The "booted" method of the model.
-     *
-     * @return void
-     */
-    protected static function booted()
-    {
-        static::addGlobalScope(new PostDraftScope);
-        static::addGlobalScope(new BlockedPageContentScope);
-        static::addGlobalScope(new ReportedPostScope);
     }
 }

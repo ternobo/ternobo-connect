@@ -72,7 +72,8 @@
         "taylornetwork/laravel-username-generator": "^2.4",
         "tedivm/jshrink": "^1.3",
         "vonage/client": "^2.4",
-        "soroosh/ffmpeg-php": "@dev"
+        "soroosh/ffmpeg-php": "@dev",
+      "ext-json": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",
