@@ -1,5 +1,3 @@
-@import "../variables";
-
 .post-menu {
     background-color: $gray-200;
     margin: 0;
@@ -22,7 +20,8 @@
 }
 
 .posts {
-    @extend .row;
+    display: flex;
+    flex-direction: column;
     @extend .mx-0;
     @extend .mb-3;
 }

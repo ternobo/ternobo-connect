@@ -21,4 +21,5 @@ return [
     'liked-text' => "Liked By",
     'enter-your-text' => "Enter text",
     "tip-this-post" => "Tip this post",
+    "image-detail" => "Picture Detail",
 ];

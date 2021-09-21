@@ -14,6 +14,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        background-color: transparent;
     }
 
 
@@ -42,9 +43,19 @@
     height: -moz-max-content;
     height: max-content;
     border-radius: 0;
+    flex-direction: column;
+    z-index: 999;
+    max-width: 300px;
+
+    li {
+        display: flex;
+        width: 100%;
+    }
 
     .dropdown-item {
         padding: 12px 16px;
+
+        width: 100%;
 
         i {
             margin-#{$end}: 8px;

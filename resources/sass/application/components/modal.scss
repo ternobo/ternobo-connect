@@ -68,32 +68,6 @@
     }
 }
 
-.modal.fade.slide-up {
-
-    .modal-dialog {
-        display: flex;
-        align-items: flex-end;
-        padding-bottom: 0;
-        margin-bottom: 0;
-        width: 100%;
-        height: 100%;
-    }
-
-    &:not(.show) .modal-dialog {
-        transition: transform 0.3s ease-out;
-        transform: translateY(3000px);
-        padding-bottom: 0;
-        margin-bottom: 0;
-        display: flex;
-        align-items: flex-end;
-    }
-
-    &.show {
-        display: flex !important;
-        align-items: flex-end;
-        justify-content: center;
-    }
-}
 
 .modal-menu-header {
     &::after {

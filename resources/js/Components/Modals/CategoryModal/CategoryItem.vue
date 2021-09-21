@@ -11,7 +11,7 @@
 		<div class="edit-actions">
 			<div v-if="edit && !loading" class="save-edit-action-icons">
 				<i class="material-icons text-superlight hover-dark clickable" @click="(edit = false), (name = category.name)">close</i>
-				<i class="btn btn-edit material-icons-outlined font-16 p-0" @click="updateName" style="width: 24px; height: 24px; display: flex; align-items: center">check</i>
+				<button class="btn btn-outlined btn-icon btn-rounded" @click="updateName"><i class="material-icons-outlined font-16">check</i></button>
 			</div>
 			<loading-spinner height="24" width="24" v-else-if="loading"></loading-spinner>
 			<i class="material-icons-outlined category-edit-action-icon clickable" v-else @click="edit = true">edit</i>

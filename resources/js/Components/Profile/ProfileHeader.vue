@@ -25,7 +25,7 @@
 					<div class="connection-actions clickable" @click="showConnections = true">
 						<i class="material-icons-outlined">group</i> <span>{{ __.get("user-profile.connections") }}</span>
 					</div>
-					<i class="btn profile-header-btn-edit material-icons-outlined" :class="{ disabled: profileEdit }" v-if="canEdit" @click="doEdit">edit</i>
+					<button class="btn p-0 btn-text btn-icon" :class="{ disabled: profileEdit }" v-if="canEdit" @click="doEdit"><i class="material-icons-outlined">edit</i></button>
 					<div v-else-if="Boolean($store.state.user)">
 						<i class="material-icons-outlined report-icon" v-if="page.blocked" @click="showReport = true">report</i>
 						<dropdown-menu size="lg" variant="link" v-else toggle-class="text-decoration-none" no-caret>

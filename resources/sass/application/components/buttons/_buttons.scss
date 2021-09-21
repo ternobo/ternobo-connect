@@ -1,23 +1,16 @@
 .btn {
     padding: 0.625rem 1.5rem;
     outline: none;
-    border: none;
-    border-radius: 2px solid transparent;
+    border: 2px solid transparent;
     min-height: 44px;
     color: $text-color;
     transition: 0.3s all;
     max-height: 44px;
-
-    &.btn-lg {
-        padding: 0.875rem 1.5rem;
-        max-height: 52px;
-    }
-
-    &.btn-sm {
-        padding: 0.25rem 1.5rem;
-        max-height: 24px;
-
-    }
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $text-xsm;
 
     &.btn-primary {
         background: $primary;
@@ -33,7 +26,7 @@
             opacity: 1;
         }
 
-        &.icon-button {
+        &.btn-icon {
             background-color: $gray-light;
             color: $gray-dark;
 
@@ -96,6 +89,7 @@
     &.btn-text {
         padding: 0;
         color: $gray-light-medium;
+        background-color: transparent;
 
         &:hover {
             color: $black;
@@ -116,8 +110,36 @@
         opacity: 0.5;
     }
 
-    &.icon-button {
+    &.btn-icon {
         padding: 0.25rem;
+        max-height: 32px;
+        min-height: 32px;
+        min-width: 32px;
+        max-width: 32px;
+        font-weight: normal;
+    }
+
+    &.btn-rounded {
+        border-radius: 12px;
+    }
+
+
+    &.btn-lg {
+        padding: 0.875rem 1.5rem;
+        max-height: 52px;
+
+        &.btn-rounded {
+            border-radius: 16px;
+        }
+    }
+
+    &.btn-sm {
+        padding: 0.25rem 1.5rem;
+        max-height: 24px;
+
+        .btn-rounded {
+            border-radius: 10px;
+        }
     }
 
 }

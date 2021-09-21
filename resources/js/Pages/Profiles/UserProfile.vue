@@ -7,15 +7,17 @@
 			<tabs :compact="true" :disabled="edit" class="profile-tabs" @selected="tabChange" :state-tab="true" v-else>
 				<template slot="custom-item">
 					<div class="d-flex align-items-center" v-if="canEdit && showEdit">
-						<div class="me-3 rounded-circle clickable" v-if="edit">
-							<i class="material-icons text-muted hover-dark" v-if="edit" @click="cancelEdit">close</i>
+						<div class="me-3" v-if="edit">
+							<button class="btn btn-text">
+								<i class="material-icons text-muted" v-if="edit" @click="cancelEdit">close</i>
+							</button>
 						</div>
-						<button class="btn d-flex align-items-center justify-content-center btn-edit" @click="doEdit">
-							<span v-if="!edit && $root.isDesktop"
-								><i class="material-icons-outlined">edit</i> <span style="font-weight: 600"> {{ __.get("application.edit") }}</span></span
-							>
+						<button class="btn btn-subtle btn-rounded" @click="doEdit">
+							<span v-if="!edit && $root.isDesktop">
+								<i class="material-icons-outlined">edit</i>
+								<span style="font-weight: 600"> {{ __.get("application.edit") }}</span>
+							</span>
 							<i v-if="!edit && !$root.isDesktop" class="material-icons-outlined">edit</i>
-
 							<div class="d-flex align-items-center justify-content-center" v-if="edit">
 								{{ $root.isDesktop ? __.get("application.save") : "" }}
 								<i class="material-icons-outlined" v-if="!$root.isDesktop">save</i>
@@ -24,7 +26,7 @@
 						</button>
 					</div>
 					<div class="d-flex algin-items-center" v-else-if="current_tab == 'activities' && canEdit">
-						<button class="btn btn-edit" @click="draft = !draft">
+						<button class="btn btn-subtle btn-rounded" @click="draft = !draft">
 							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-if="!draft">
 								<i class="material-icons-outlined" :class="{ 'me-1': $root.isDesktop }">save</i><span style="font-weight: 600" v-if="$root.isDesktop"> {{ __.get("content/posts.draft") }} </span>
 							</div>

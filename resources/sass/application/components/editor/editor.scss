@@ -160,12 +160,20 @@
     }
 
     .media-item {
+        position: relative;
         background: $gray-50;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         padding: 3.25rem 1rem;
+
+
+        .edit-icon {
+            position: absolute;
+            top: 2rem;
+            #{$start}: 2rem;
+        }
 
         .action-container {
             display: flex;

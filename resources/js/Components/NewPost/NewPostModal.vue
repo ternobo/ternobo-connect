@@ -1,7 +1,6 @@
 <template>
 	<div>
 		<category-select-modal :categories.sync="categories" @hide="onCategoryClose" :selectedCategory.sync="category" :show.sync="showCategoryModal"></category-select-modal>
-
 		<b-modal ignore-enforce-focus-selector=".ternoboeditor--link-input" v-if="user != null" v-model="showModal" @hide="hide" @show="shown" no-close-on-esc hide-footer no-stacking modal-class="new-post-modal" size="new-post" :title="__.get('content/posts.create-new-post')" :centered="true">
 			<div action="/posts" data-ajax method="POST" data-reload="1" enctype="multipart/form-data" class="w-100">
 				<div class="new-post position-relative">
@@ -50,6 +49,7 @@ import LoadingSpinner from "../LoadingSpinner.vue";
 import CategorySelect from "../CategorySelect/CategorySelect.vue";
 import CategorySelectModal from "../CategorySelect/CategorySelectModal.vue";
 import { serialize } from "../../Libs/ObjectToFormdata";
+import EditImageModal from "./EditImageModal.vue";
 export default {
 	props: {
 		post: {
@@ -295,6 +295,7 @@ export default {
 		LoadingSpinner,
 		CategorySelect,
 		CategorySelectModal,
+		EditImageModal,
 	},
 	mixins: [ModalMixin],
 	name: "NewPostModal",

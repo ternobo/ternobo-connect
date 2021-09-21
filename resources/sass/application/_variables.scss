@@ -1,6 +1,7 @@
 // Body
 $body-bg: #F5F5F5;
 $border-widths: 2px;
+$white: #FFF;
 
 // -----------------------------------------------
 $spacing: 1rem;
@@ -9,7 +10,8 @@ $root-size-mobile:12px;
 // -----------------------------------------------
 
 // --------------- Spacings ----------------
-$spacings: (1: $spacing / 4,
+$spacings: (0:0,
+    1: $spacing / 4,
     2: $spacing / 2,
     3: $spacing * 0.75,
     4: $spacing,
@@ -19,6 +21,11 @@ $spacings: (1: $spacing / 4,
     8: $spacing * 3.25,
     9: $spacing * 4,
 ) !default;
+$positons: (top:t,
+    $end:e,
+    bottom:b,
+    $start:s,
+);
 
 
 // ------------------ Modal Sizes ------------------
@@ -114,7 +121,7 @@ $red-light:#FEECEA;
 $primary: $black !default;
 $secondary: $blue-cta !default;
 $success: $green !default;
-$info: $blue-light-hover !default;
+$info: $blue-dark !default;
 $warning: $yellow !default;
 $danger: $red !default;
 $light: $gray-400 !default;
@@ -135,6 +142,7 @@ $text-sm:1rem;
 $text-xsm:0.875rem;
 $text-xxsm:0.75rem;
 $text-xxxsm:0.625rem;
+
 // --------------------------------------------
 
 $theme-colors: ('primary': $primary,

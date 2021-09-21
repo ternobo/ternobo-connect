@@ -7,7 +7,7 @@
 				<small class="person-short-bio">{{ page.short_bio }}</small>
 			</div>
 		</wire-link>
-		<FollowButton class="followsuggest-btn p-1" :page="page.id">
+		<FollowButton class="btn-icon" :page="page.id">
 			<template v-slot:default="{ followed }">
 				<i class="material-icons font-16" v-if="followed">remove</i>
 				<i class="material-icons font-16" v-else>add</i>

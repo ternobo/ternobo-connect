@@ -1,5 +1,7 @@
 <template>
 	<div class="media-item" :class="{ 'p-0': content != null }">
+		<edit-image-modal :show.sync="showImageEdit" :image="contentUrl" v-model="editResult"></edit-image-modal>
+		<button class="btn icon-button btn-primary edit-icon"><i class="material-icons">create</i></button>
 		<div v-if="content != null" class="w-100">
 			<lazy-image v-if="type == 'image'" class="mb-0" style="min-height: 150px" :src="contentUrl" />
 			<video-player v-else :src="contentUrl" class="mb-0 w-100"></video-player>
@@ -17,11 +19,25 @@
 
 <script>
 import VideoPlayer from "../../../VideoPlayer/VideoPlayer.vue";
+import EditImageModal from "../../EditImageModal.vue";
 export default {
-	components: { VideoPlayer },
+	data() {
+		return {
+			showImageEdit: false,
+
+			editResult: {
+				rotate: 0,
+				alt: "",
+			},
+		};
+	},
+	components: {
+		VideoPlayer,
+		EditImageModal,
+	},
 	computed: {
 		contentUrl() {
-			return typeof this.content == "object" ? URL.createObjectURL(this.content) : `/${this.content}`;
+			return typeof this.content == "object" && this.content != null ? URL.createObjectURL(this.content) : `/${this.content}`;
 		},
 	},
 	methods: {

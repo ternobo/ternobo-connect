@@ -1,0 +1,57 @@
+@each $name,
+$space in $spacings {
+
+    @each $postion-name,
+    $postion in $positons {
+        .m#{$postion}-#{$name} {
+            margin-#{$postion-name}: $space !important;
+        }
+
+        .p#{$postion}-#{$name} {
+            padding-#{$postion-name}: $space !important;
+        }
+
+        .p-#{$name} {
+            padding: $space !important;
+        }
+
+        .m-#{$name} {
+            margin: $space !important;
+        }
+    }
+
+    .mx-#{$name} {
+        margin-left: $space;
+        margin-right: $space;
+    }
+
+    .px-#{$name} {
+        padding-left: $space;
+        padding-right: $space;
+    }
+
+    .my-#{$name} {
+        margin-top: $space;
+        margin-bottom: $space;
+    }
+
+    .py-#{$name} {
+        padding-top: $space;
+        padding-bottom: $space;
+    }
+
+}
+
+.rounded-circle {
+    border-radius: 50%;
+}
+
+@for $index from 0 to 101 {
+    .w-#{$index} {
+        width: $index * 1%;
+    }
+
+    .h-#{$index} {
+        height: $index * 1%;
+    }
+}

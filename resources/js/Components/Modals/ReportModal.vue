@@ -38,7 +38,7 @@
 			</div>
 			<div class="d-flex pt-3 justify-content-between" v-else-if="reportFor != null">
 				<div class="align-self-start">
-					<button class="btn btn-edit" @click="moreInfo = true">{{ __.get("content/report.description-report") }}</button>
+					<button class="btn btn-outlined btn-rounded" @click="moreInfo = true">{{ __.get("content/report.description-report") }}</button>
 				</div>
 				<div class="d-flex">
 					<button class="btn text-muted btn-transparent" @click="reportFor = null">{{ __.get("application.back") }}</button>

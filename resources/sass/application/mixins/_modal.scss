@@ -1,0 +1,41 @@
+@mixin modal-dialog {
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background: $white;
+
+    >* {
+        padding: 1.25rem;
+    }
+
+    >.modal-body {
+        flex: 1 1 auto;
+    }
+
+    >.modal-header {
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+
+        >.modal-title {
+            font-weight: $heading-weight;
+            font-size: $heading4-size;
+        }
+
+        .close {
+            position: absolute;
+            #{$start}: 1.25rem;
+            padding: 0.25rem;
+            @extend .btn;
+            @extend .btn-text;
+            color: $primary-light;
+
+            .feather {
+                height: 24px;
+                width: 24px;
+            }
+        }
+    }
+}

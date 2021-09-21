@@ -22,4 +22,5 @@ return [
     'enter-your-text' => "متن خو را وارد کنید",
     'save' => "ذخیره",
     "tip-this-post" => "حمایت از این محتوا",
+    "image-detail" => "جزئیات تصویر",
 ];
