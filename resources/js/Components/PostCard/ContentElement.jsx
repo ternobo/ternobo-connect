@@ -1,5 +1,5 @@
 import TextareaParser from "../NewPost/Editor/TextareaParser";
-import VideoPlayer from "../VideoPlayer/VideoPlayer";
+import VideoPlayer from "./SliderCard/Elements/PostVideoPlayer.vue";
 import CodeBlock from "./SliderCard/Elements/Code.vue";
 export default {
     render: function (h) {
@@ -113,7 +113,7 @@ export default {
             required: true
         },
         tags: {
-            required: true,
+            required: false,
             default: [],
         }
     }
