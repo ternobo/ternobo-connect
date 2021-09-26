@@ -25,7 +25,6 @@ export default {
 
 			const observer = new IntersectionObserver(
 				(entry) => {
-					console.log(entry.intersectionRatio);
 					if (entry.intersectionRatio != 1 && !video.paused) {
 						video.pause();
 						this.isPaused = true;
