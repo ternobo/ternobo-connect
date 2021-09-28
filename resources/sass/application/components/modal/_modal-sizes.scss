@@ -1,0 +1,8 @@
+@each $name,
+$size in $modal-sizes {
+    &.modal-#{$name} {
+        .modal-content {
+            max-width: $size;
+        }
+    }
+}

@@ -29,17 +29,17 @@ $positons: (top:t,
 
 
 // ------------------ Modal Sizes ------------------
-$modal-small: 300px !default;
-$modal-medium: 500px !default;
-$modal-large: 582px !default;
-$modal-content: 710px;
+$modal-small: 320px !default;
+$modal-medium: 582px !default;
+$modal-large: 710px !default;
+
+$modal-sizes: ("sm":$modal-small,
+    "md":$modal-medium,
+    "lg":$modal-large,
+);
 
 $breakpoint: 1188px;
 
-// Typography
-$font-family-sans-serif: 'dana, PT Sans, serif';
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
 
 // Shadows  
 $card-shadow: 0 1rem 40px rgba(0, 0, 0, 0.02);
@@ -129,6 +129,8 @@ $dark: $black !default;
 
 
 // ---------------- Typography ----------------
+
+$headings-font-weight: 600;
 
 // Heading
 $heading-1: 2rem;

@@ -1,6 +1,7 @@
 @import "./variables";
 @import "./utils";
 @import "./globals.scss";
+@import "./mixins/global";
 
 @import "./pages/login-page.scss";
 @import "./pages/invite-links.scss";

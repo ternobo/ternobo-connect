@@ -1,40 +1,75 @@
 @mixin modal-dialog {
-    max-width: 500px;
     width: 100%;
+    height: 100%;
+    margin: auto;
     display: flex;
-    flex-direction: column;
-    background: $white;
+    align-items: center;
+    justify-content: center;
 
-    >* {
-        padding: 1.25rem;
-    }
-
-    >.modal-body {
-        flex: 1 1 auto;
-    }
-
-    >.modal-header {
+    .modal-content {
         display: flex;
-        position: relative;
-        align-items: center;
-        justify-content: center;
+        flex-direction: column;
+        background: $white;
+        max-height: 760px;
+        overflow: auto;
+        @include nice-scroll;
 
-        >.modal-title {
-            font-weight: $heading-weight;
-            font-size: $heading4-size;
+        >* {
+            padding: 1.25rem;
         }
 
-        .close {
-            position: absolute;
-            #{$start}: 1.25rem;
-            padding: 0.25rem;
-            @extend .btn;
-            @extend .btn-text;
-            color: $primary-light;
+        >.modal-body {
+            flex: 1 1 auto;
+        }
 
-            .feather {
-                height: 24px;
-                width: 24px;
+        >.modal-footer {
+            position: -webkit-sticky;
+            position: sticky;
+            bottom: 0;
+            z-index: 99;
+            background: $white;
+        }
+
+        >.modal-header {
+            display: flex;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            background: $white;
+
+            &::after {
+                content: " ";
+                position: absolute;
+                #{$end}: 1.5rem;
+                #{$start}: 1.5rem;
+                bottom: 0;
+                height: 2px;
+                background: $gray-200;
+
+            }
+
+            >.modal-title {
+                font-weight: $headings-font-weight;
+                font-size: $heading-2;
+                margin: 0;
+            }
+
+            .close {
+                font-family: "Material Icons";
+                position: absolute;
+                right: 1.25rem;
+                padding: 0.25rem;
+                @extend .btn;
+                @extend .btn-text;
+                color: $gray-medium-dark;
+
+                i {
+                    font-size: 1.5rem;
+                }
             }
         }
     }

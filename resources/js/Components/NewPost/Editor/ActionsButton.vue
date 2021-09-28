@@ -1,6 +1,6 @@
 <template>
 	<div class="position-relative" v-click-outside="hideList">
-		<button class="btn rounded-circle add-action-btn" :class="{ active: showList }" @click="toggleList"><i class="material-icons font-20">add</i></button>
+		<button class="btn rounded-circle add-action-btn btn-icon" :class="{ active: showList }" @click="toggleList"><i class="material-icons font-20">add</i></button>
 		<transition name="fade">
 			<div class="editors-actions-list" :style="editorsActionListStyle" v-if="showList">
 				<div class="text-type-list">
@@ -57,11 +57,6 @@ export default {
 			let style = {
 				top: 0,
 			};
-			if (this.shared.direction == "rtl") {
-				style.left = "-272px";
-			} else {
-				style.right = "-272px";
-			}
 			return style;
 		},
 		hasMedia() {

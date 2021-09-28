@@ -50,8 +50,8 @@
         flex: 1 1 auto;
 
         .list-group {
-            width: calc(100% + 116px);
-            margin-#{$start}: -116px;
+            width: calc(100% + 104px);
+            margin-#{$start}: -104px;
         }
 
 
@@ -66,8 +66,8 @@
     }
 
     .editor-actions {
-        width: calc(100% + 88px);
-        margin-#{$start}: -88px;
+        width: calc(100% + 77px);
+        margin-#{$start}: -77px;
 
         .add-action-btn {
             background: $white;
@@ -204,6 +204,8 @@
     z-index: 999;
     background: $gray-100;
     padding: 0.75;
+
+    #{$start}: 0;
 }
 
 .add-action-btn {

@@ -307,12 +307,6 @@ img {
     display: flex;
 }
 
-.modal-backdrop {
-    background-color: $dark;
-    opacity: 0.4;
-}
-
-
 .profileimage {
     width: 64px;
     height: 64px;
@@ -346,46 +340,6 @@ img {
 .slide-leave-to {
     overflow: hidden;
     max-height: 0;
-}
-
-.modal-header {
-    border: none;
-    padding: 1.5rem;
-
-    .close {
-        font-size: 1.5rem;
-        @extend .material-icons;
-        color: $gray-500;
-
-        &:hover {
-            color: $dark;
-        }
-
-        opacity: 1;
-    }
-
-    &::after {
-        content: " ";
-        position: absolute;
-        #{$end}: 1.5rem;
-        #{$start}: 1.5rem;
-        bottom: 0;
-        height: 2px;
-        background: $gray-200;
-
-    }
-}
-
-.modal-header .close {
-    padding: 0;
-    margin: 0;
-    height: 1.5rem;
-    transition: 0.3s all;
-
-    &:hover {
-        opacity: 1;
-        color: $gray-500;
-    }
 }
 
 .b-sidebar-backdrop {
