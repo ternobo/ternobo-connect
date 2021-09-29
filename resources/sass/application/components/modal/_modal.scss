@@ -23,15 +23,16 @@
 }
 
 .modal {
+    display: none;
     position: fixed;
     height: 100%;
     width: 100%;
     top: 0;
-    bottom: 0;
     left: 0;
-    right: 0;
     z-index: 99999;
     transition: 0.3s all;
+    overflow: auto;
+    @include nice-scroll;
 
     &.fade {
         .modal-dialog {
@@ -41,6 +42,8 @@
     }
 
     &.show {
+        display: block;
+
         .modal-dialog {
             transform: translate(0, 0);
             opacity: 1;
@@ -51,6 +54,7 @@
         transition: 0.5s all;
         @include modal-dialog;
         @import "./modal-sizes";
+        transform: none;
 
         .modal-content {
             position: relative;

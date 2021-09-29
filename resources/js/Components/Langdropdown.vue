@@ -2,24 +2,32 @@
 	<div class="tselect lang-select" :dir="direction" v-click-outside="close">
 		<div class="tselect_title rounded-0" ref="titleSection" @click="openDropdown">
 			<div class="title-text w-100">
-				<slot name="selected" v-bind:item="selectedItem"> </slot>
+				<div class="d-flex align-items-center">
+					<img :src="value.icon" class="ms-2" style="width: 24px; height: 24px" />
+					<span>{{ value.label }}</span>
+				</div>
 			</div>
 			<i class="material-icons tselect_arrow">keyboard_arrow_down</i>
 		</div>
 		<transition name="slide">
 			<div class="tselect-items" ref="itemsElement" v-if="showItems">
 				<div class="items">
-					<language-link :lang="item.value" class="tselect_item w-100" v-for="item in items" :class="{ disabled: item.disabled, 'hover-dropdown': !item.disabled }" :key="item[valueOption]" @click="selectItem(item)">
-						<slot name="item" v-bind:item="item">
-							<label class="tselect_item--text">
-								<i class="material-icons verical-middle" v-if="item.hasOwnProperty('icon')">{{ item.icon }}</i>
-								{{ item[labelOption] }}
-							</label>
-							<div class="tdc-radio">
-								<input type="radio" class="tdc-radio_input" :checked="isChecked(item)" />
-								<span class="tdc-radio_checkmark"></span>
-							</div>
-						</slot>
+					<language-link class="tselect_item w-100" lang="en">
+						<div class="d-flex justify-content-between align-items-center w-100">
+							<span class="font-14">
+								<span>English</span>
+								<span class="text-light">US</span>
+							</span>
+							<img src="/emoji/72x72/1f1fa-1f1f8.png" style="width: 24px; height: 24px" />
+						</div>
+					</language-link>
+					<language-link class="tselect_item w-100" lang="fa">
+						<div class="d-flex justify-content-between align-items-center w-100">
+							<span class="font-14">
+								<span>فارسی</span>
+							</span>
+							<img src="/images/iran-flag.png" style="width: 24px; height: 24px" />
+						</div>
 					</language-link>
 				</div>
 			</div>
@@ -61,72 +69,24 @@ export default {
 		},
 	},
 	props: {
-		newItemPlaceholder: {
-			type: String,
-			default: "New Item",
-			required: false,
-		},
-		value: {
-			type: Object,
-			default: undefined,
-			required: false,
-		},
-		items: {
-			type: Array,
-			default: undefined,
-			required: true,
-		},
-		valueOption: {
-			type: String,
-			default: "value",
-			required: false,
-		},
-		labelOption: {
-			type: String,
-			default: "name",
-			required: false,
-		},
-		showNewItem: {
-			type: Boolean,
-			default: true,
-			required: false,
-		},
 		direction: {
 			type: String,
 			default: "ltr",
+			required: false,
+		},
+		value: {
 			required: false,
 		},
 	},
 	data() {
 		return {
 			showItems: false,
-			dropdownWidth: "0px",
-			newItemInput: undefined,
-			selectedItem: undefined,
 		};
 	},
 	methods: {
 		close(event) {
 			this.showItems = false;
 			this.$refs.titleSection.classList.remove("active");
-		},
-		isChecked(item) {
-			if (this.selectedItem !== undefined) {
-				return this.selectedItem[this.valueOption] === item[this.valueOption];
-			}
-			return false;
-		},
-		selectItem(item) {
-			if (!item.disabled) {
-				this.selectedItem = item;
-				this.$emit("input", item);
-				this.showItems = false;
-				this.$refs.titleSection.classList.remove("active");
-			}
-		},
-		newItem() {
-			this.$emit("new-item", this.newItemInput);
-			this.newItemInput = undefined;
 		},
 		openDropdown() {
 			this.$refs.titleSection.classList.toggle("active");

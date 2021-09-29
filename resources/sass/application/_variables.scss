@@ -27,6 +27,10 @@ $positons: (top:t,
     $start:s,
 );
 
+$position-types:(absolute, relative, fixed, sticky);
+
+$font-family-base: "Vazir, 'Open Sans'";
+
 
 // ------------------ Modal Sizes ------------------
 $modal-small: 320px !default;

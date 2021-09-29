@@ -275,7 +275,7 @@ class Post extends Model
                         $media = $content instanceof UploadedFile | $fileOnly ? SocialMediaTools::uploadPostImage($content->store("media"), 90) : $content;
 
                         if (isset($meta['rotate'])) {
-                            ImageTools::rotateImage($media, $meta['rotate']);
+                            ImageTools::rotateImage(Storage::path($media), $meta['rotate']);
                         }
 
                         SlideBlock::query()->create([

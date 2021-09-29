@@ -40,7 +40,7 @@ export default {
 
                 let source = this.content.content.startsWith("http") ? this.content.content : `/${this.content.content}`
 
-                content = (<lazy-image style={{ minHeight: '100px' }} class={['mb-0']} src={source} />);
+                content = (<image-viewer spoiler={this.content.meta?.spoiler} src={source} />);
                 break;
             case "video":
                 tag = "div";
@@ -75,7 +75,11 @@ export default {
             class: classes
         }, [content]);
     },
-    components: { VideoPlayer, CodeBlock },
+    components: {
+        VideoPlayer,
+        CodeBlock,
+        "image-viewer": () => import("./SliderCard/Elements/ImageViewer.vue"),
+    },
     data() {
         return {
             text: "",

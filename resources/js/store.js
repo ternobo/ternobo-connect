@@ -16,6 +16,8 @@ export default store({
         reportReasons: [],
 
         profileEdit: false,
+
+        showImageEdit: false,
     },
     actions: {
         loadReportReasons({ commit }) {
@@ -67,6 +69,13 @@ export default store({
         }
     },
     mutations: {
+        showImageEditModal(state) {
+            state.showImageEdit = true;
+        },
+        hideImageEditModal(state) {
+            state.showImageEdit = false;
+        },
+
         setReportReasons(state, payload) {
             state.reportReasons = payload;
         },

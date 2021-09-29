@@ -22,4 +22,7 @@ return [
     'enter-your-text' => "Enter text",
     "tip-this-post" => "Tip this post",
     "image-detail" => "Picture Detail",
+    'spoiler-alert' => "Spoiler Alert",
+    'rotate' => "Rotate",
+    'alt-text' => "Alternative Text",
 ];

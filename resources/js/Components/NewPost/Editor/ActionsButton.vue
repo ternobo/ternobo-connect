@@ -57,6 +57,11 @@ export default {
 			let style = {
 				top: 0,
 			};
+			if (this.shared.direction == "rtl") {
+				style.left = "-272px";
+			} else {
+				style.right = "-272px";
+			}
 			return style;
 		},
 		hasMedia() {

@@ -32,5 +32,4 @@ class ImageTools
         $img->crop($height, $width, $x, $y);
         $img->save();
     }
-
 }

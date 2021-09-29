@@ -1,31 +1,49 @@
 <template>
 	<div class="media-item" :class="{ 'p-0': content != null }">
 		<edit-image-modal :show.sync="showImageEdit" :image="contentUrl" v-model="editResult"></edit-image-modal>
-		<button class="btn icon-button btn-primary edit-icon"><i class="material-icons">create</i></button>
-		<div v-if="content != null" class="w-100">
-			<lazy-image v-if="type == 'image'" class="mb-0" style="min-height: 150px" :src="contentUrl" />
+
+		<!--- Show Media End !-->
+		<div v-if="content != null" class="w-100" style="overflow: hidden">
+			<lazy-image v-if="type == 'image'" class="mb-0" style="min-height: 150px" :style="{ transform: `rotate(${editResult.rotate}deg)` }" :src="contentUrl" />
 			<video-player v-else :src="contentUrl" class="mb-0 w-100"></video-player>
 		</div>
+		<!--- Show Media End !-->
+
+		<!--- Select Media !-->
 		<div class="action-container" v-else>
 			<span class="title text-center">
 				<i class="material-icons-outlined">{{ type == "image" ? "image" : "play_circle" }}</i>
 				{{ __.get(`editor.${type == "image" ? "image" : "video"}`) }}
 			</span>
 			<div v-html="type == 'image' ? __.get(`editor.image-size`) : __.get(`editor.video-format`)"></div>
-			<button class="btn btn-rounded-outline w-100" @click="selectMedia"><i class="material-icons-outlined">cloud_upload</i> {{ __.get("application.upload") }}</button>
+			<button class="btn btn-outlined btn-rounded w-100" @click="selectMedia"><i class="material-icons-outlined">cloud_upload</i> {{ __.get("application.upload") }}</button>
 		</div>
+		<!--- Select Media End !-->
+
+		<!--- Media Settings !-->
+		<button class="btn btn-rounded btn-primary btn-white btn-icon edit-image-icon" v-if="type == 'image' && content != null" @click="showImageEdit = true">
+			<i class="material-icons-outlined">create</i>
+		</button>
+		<div class="spoiler-alert-check clickable" @click="isSpoiler = !isSpoiler" v-if="content != null">
+			<checkbox v-model="isSpoiler" />
+			<span>{{ __.get("content/posts.spoiler-alert") }}</span>
+		</div>
+		<!--- Media Settings !-->
 	</div>
 </template>
 
 <script>
+import Checkbox from "../../../inputs/Checkbox.vue";
 import VideoPlayer from "../../../VideoPlayer/VideoPlayer.vue";
 import EditImageModal from "../../EditImageModal.vue";
 export default {
 	data() {
 		return {
 			showImageEdit: false,
-
+			isSpoiler: false,
 			editResult: {
+				height: null,
+				width: null,
 				rotate: 0,
 				alt: "",
 			},
@@ -34,10 +52,19 @@ export default {
 	components: {
 		VideoPlayer,
 		EditImageModal,
+		Checkbox,
 	},
 	computed: {
 		contentUrl() {
 			return typeof this.content == "object" && this.content != null ? URL.createObjectURL(this.content) : `/${this.content}`;
+		},
+	},
+	watch: {
+		isSpoiler() {
+			this.$emit("update:meta", { spoiler: this.isSpoiler, rotate: this.editResult.rotate, alt: this.editResult.alt });
+		},
+		editResult() {
+			this.$emit("update:meta", { spoiler: this.isSpoiler, rotate: this.editResult.rotate, alt: this.editResult.alt });
 		},
 	},
 	methods: {
