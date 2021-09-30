@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="/ternobo-socials/style.css">
     <link rel="stylesheet" href="/ternobo-telegram/style.css">
     <link rel="stylesheet" href="/ternoboicons/style.css">
-    <link rel="stylesheet" href="{{ mix('/css/code.css') }}">
 
     {!! SEO::generate() !!}
 
