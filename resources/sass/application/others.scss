@@ -26,21 +26,6 @@
     position: absolute;
 }
 
-.tribute-container {
-    @extend .nice-scroll;
-    max-width: -webkit-max-content;
-    max-width: -moz-max-content;
-    max-width: max-content;
-    white-space: nowrap;
-
-    li {
-        font-size: $text-xxxsm;
-        font-weight: 600;
-        color: $text-color;
-        padding: 10px 12px !important;
-    }
-}
-
 .mention-item {
     color: $blue-cta;
     padding: 0;

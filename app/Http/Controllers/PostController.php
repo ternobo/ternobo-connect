@@ -183,7 +183,7 @@ class PostController extends Controller
         $tags = Tag::query()->where("name", "like", "$term%")->paginate(10);
         $formatted_tags = [];
         foreach ($tags as $tag) {
-            $formatted_tags[] = ['key' => $tag->name, 'value' => $tag->name, 'name' => $tag->name];
+            $formatted_tags[] = ['key' => $tag->name, 'value' => $tag->name, 'name' => "#" . $tag->name];
         }
         return response()->json(array("results" => $formatted_tags));
     }

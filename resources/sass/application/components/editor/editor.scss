@@ -381,38 +381,6 @@ div[placeholder]:not(:focus):empty:before {
 }
 
 /** Tag Selector **/
-.tribute-container {
-    height: auto;
-    max-height: 300px;
-    max-width: 500px;
-    overflow: auto;
-    display: block;
-    z-index: 999999;
-}
-
-.tribute-container ul {
-    margin: 0;
-    margin-top: 2px;
-    padding: 0;
-    list-style: none;
-    background: #efefef;
-}
-
-.tribute-container li {
-    padding: 5px 5px;
-    cursor: pointer;
-    font-weight: bold;
-
-    &:hover {
-        background: #ddd;
-    }
-}
-
-.tribute-container .menu-highlighted {
-    font-weight: bold;
-}
-
-/** Tag Selector **/
 
 .title-input {
     width: 100%;
