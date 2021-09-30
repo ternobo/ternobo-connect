@@ -13,6 +13,7 @@ return [
     'publish' => "Publish",
     'draft' => "Draft",
     'copy-post-link' => "Copy Post Link",
+    "copy-post-link-slide" => "Copy This Slide",
     'embed-text' => "Get Embed Code",
     'embed-des' => "Put the embed code on your website.",
     'like-post' => "Like",

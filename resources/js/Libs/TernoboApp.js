@@ -68,42 +68,23 @@ TernoboApp.install = function (Vue, options) {
 
     Vue.component('social-content', () => import("./SocialContent"));
 
-    Vue.directive('numericOnly', {
-        bind(el) {
-            el.addEventListener('keydown', (e) => {
-                var code = (e.which) ? e.which : e.keyCode;
-                if (code > 31 && (code < 48 || code > 57) && !(code <= 105 && code >= 96)) {
-                    e.preventDefault();
-                }
-            })
-        }
-    })
+    Vue.directive('numericOnly', import("../Directives/NumericOnly"))
 
     Vue.directive("max-contenteditable", ContenteditableMax)
 
-    Vue.directive('click-outside', {
-        inserted: function (el, binding, vnode) {
-            el.clickOutsideEvent = function (event) {
-                // here I check that click was outside the el and his children
-                if (!(el == event.target || el.contains(event.target))) {
-                    // and if it did, call method provided in attribute value
-                    vnode.context[binding.expression](event);
-                }
-            };
-            document.body.addEventListener('click', el.clickOutsideEvent)
-        },
-        unbind: function (el) {
-            document.body.removeEventListener('click', el.clickOutsideEvent)
-        },
-    });
+    Vue.directive('click-outside', import("../Directives/ClickOutside"));
 
     Vue.directive('sortable', function (el, binding) {
         binding = binding || {}
-        var sortable = new Sortable(el, binding.value)
+        new Sortable(el, binding.value)
     });
 
     Vue.prototype.reverse = function (array) {
         return array.slice().reverse()
+    };
+
+    Vue.prototype.copyText = function (text) {
+        return window.navigator.clipboard.writeText(text);
     };
 
     Vue.directive('reached', {

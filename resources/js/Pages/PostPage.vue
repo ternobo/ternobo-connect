@@ -5,7 +5,7 @@
 		</sidebar-right>
 		<div class="content-container">
 			<div class="card p-0">
-				<post-card class="shadow-0" style="margin-bottom: 0 !important" :post="post" @deleted="onDelete" :has-comment="false"></post-card>
+				<post-card class="shadow-0" style="margin-bottom: 0 !important" :post="post" @deleted="onDelete" :slide="slide" :has-comment="false"></post-card>
 				<div class="comments px-4 py-3 m-0" style="max-height: max-content" v-if="$store.state.user">
 					<new-comment :post="post.id" @submit="submitComment"></new-comment>
 					<comment v-for="comment in comments" v-on:deleted="commentDelete" :comment="comment" :key="'comment_' + comment.id"></comment>
@@ -95,6 +95,8 @@ export default {
 			commentsLoading: true,
 			comments: undefined,
 			next_page_url: null,
+
+			slide: 0,
 		};
 	},
 	mounted() {
@@ -110,6 +112,11 @@ export default {
 				this.commentsLoading = false;
 			})
 			.catch((error) => console.log(error));
+
+		const slide = new URLSearchParams(window.location.search).get("slide");
+		if (slide != null && !isNaN(parseInt(slide))) {
+			this.slide = parseInt(slide);
+		}
 	},
 	name: "Article",
 	props: {
