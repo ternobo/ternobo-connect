@@ -16,7 +16,7 @@
 				{{ __.get(`editor.${type == "image" ? "image" : "video"}`) }}
 			</span>
 			<div v-html="type == 'image' ? __.get(`editor.image-size`) : __.get(`editor.video-format`)"></div>
-			<button class="btn btn-outlined btn-rounded w-100" @click="selectMedia"><i class="material-icons-outlined">cloud_upload</i> {{ __.get("application.upload") }}</button>
+			<button class="btn btn-outlined btn-rounded w-100" @click="selectMedia"><i class="material-icons-outlined me-2">cloud_upload</i> {{ __.get("application.upload") }}</button>
 		</div>
 		<!--- Select Media End !-->
 
