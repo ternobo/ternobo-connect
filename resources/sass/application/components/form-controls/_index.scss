@@ -4,10 +4,6 @@ input:not([type=range]) {
 
 input {
     margin: 0;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-}
-
-@import "./text-input";
+    font-family: $font-family-base;
+}@import "./text-input";
 @import "./content-editable-input";

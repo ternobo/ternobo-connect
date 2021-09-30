@@ -12,7 +12,7 @@
 		<transition name="slide">
 			<div class="tselect-items" ref="itemsElement" v-if="showItems">
 				<div class="items">
-					<language-link class="tselect_item w-100" lang="en">
+					<language-link class="tselect_item" lang="en">
 						<div class="d-flex justify-content-between align-items-center w-100">
 							<span class="font-14">
 								<span>English</span>
@@ -21,7 +21,7 @@
 							<img src="/emoji/72x72/1f1fa-1f1f8.png" style="width: 24px; height: 24px" />
 						</div>
 					</language-link>
-					<language-link class="tselect_item w-100" lang="fa">
+					<language-link class="tselect_item" lang="fa">
 						<div class="d-flex justify-content-between align-items-center w-100">
 							<span class="font-14">
 								<span>فارسی</span>

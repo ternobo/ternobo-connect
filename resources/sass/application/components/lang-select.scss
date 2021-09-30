@@ -13,6 +13,7 @@
     }
 
     .tselect_item {
+        width: auto;
         padding: 1rem;
     }
 
@@ -23,9 +24,9 @@
     .tselect_title {
         background: $white;
         color: $text-color;
-        width: 100%;
+        width: auto;
         font-weight: 600;
         padding: 1rem;
-        height: 52px;
+        height: auto;
     }
 }

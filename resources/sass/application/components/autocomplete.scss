@@ -78,12 +78,7 @@
     }
 
     >input {
-        border-radius: 12px;
-        font-size: $text-xsm;
-        height: 2.5rem;
-        padding: 8px 16px;
-        border-color: transparent;
-
+        width: auto;
 
         @if $direction==rtl {
             padding-#{$end}: 44px !important;
