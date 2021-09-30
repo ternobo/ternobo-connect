@@ -16,7 +16,7 @@
 								<span v-html="getCountryIcon(icon)"></span>
 							</template>
 						</tselect>
-						<input dir="ltr" class="text-input-light text-input--md" :readonly="verification_step" v-model="phone" />
+						<input dir="ltr" class="form-control fill-light text-input--md" :readonly="verification_step" v-model="phone" />
 					</div>
 					<div class="d-flex flex-column align-items-center mt-4" v-if="verification_step">
 						<div class="d-flex align-items-center">

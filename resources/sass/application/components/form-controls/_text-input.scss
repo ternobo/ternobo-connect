@@ -1,0 +1,116 @@
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.875rem 1rem;
+    font-size: $text-sm;
+    line-height: 1.6;
+    color: $dark;
+    background-color: $white;
+    background-image: none;
+    background-clip: padding-box;
+    border: 2px solid $gray;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+    @media screen and (max-width:$sm-size) {
+        font-size: $text-xxsm;
+    }
+
+    &::-ms-expand {
+        background-color: transparent;
+        border: 0;
+    }
+
+    &:focus {
+        border-color: $dark !important;
+        box-shadow: none;
+    }
+
+    &::-webkit-input-placeholder {
+        color: $gray-medium-dark;
+        opacity: 1;
+    }
+
+    &::-moz-placeholder {
+        color: $gray-medium-dark;
+        opacity: 1;
+    }
+
+    &:-ms-input-placeholder {
+        color: $gray-medium-dark;
+        opacity: 1;
+    }
+
+    &::-ms-input-placeholder {
+        color: $gray-medium-dark;
+        opacity: 1;
+    }
+
+    &::placeholder {
+        color: $gray-medium-dark;
+        opacity: 1;
+    }
+
+    &:disabled {
+        &::-webkit-input-placeholder {
+            color: $gray;
+        }
+
+        &::-moz-placeholder {
+            color: $gray;
+        }
+
+        &:-ms-input-placeholder {
+            color: $gray;
+        }
+
+        &::-ms-input-placeholder {
+            color: $gray;
+        }
+
+        &::placeholder {
+            color: $gray;
+        }
+
+        color: $gray;
+        opacity: 0.4;
+    }
+
+
+    &.fill {
+        background: $gray-light;
+        border: none;
+
+        &::-webkit-input-placeholder {
+            color: $gray-medium-dark;
+        }
+
+        &::-moz-placeholder {
+            color: $gray-medium-dark;
+        }
+
+        &:-ms-input-placeholder {
+            color: $gray-medium-dark;
+        }
+
+        &::-ms-input-placeholder {
+            color: $gray-medium-dark;
+        }
+
+        &::placeholder {
+            color: $gray-medium-dark;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+        }
+
+        &-light {
+            background: $gray-bg;
+        }
+    }
+
+    &.error {
+        border: 2px solid $red;
+    }
+
+}

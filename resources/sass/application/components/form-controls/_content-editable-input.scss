@@ -1,0 +1,36 @@
+.contenteditable-input {
+    @extend .form-control;
+
+    div[contenteditable] {
+        &:focus~.contenteditable-input {
+            border-color: $dark !important;
+            box-shadow: none;
+        }
+
+        overflow: auto;
+        white-space: nowrap;
+        scrollbar-color: $light $gray-200;
+        scrollbar-width: none;
+        scroll-behavior: smooth;
+
+        &::-webkit-scrollbar {
+            cursor: pointer;
+            width: 4px;
+            background: $gray-200;
+
+            max-height: 0;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            cursor: -webkit-grab;
+            cursor: grab;
+            width: 4px;
+            background-color: $light;
+        }
+
+        &::-webkit-scrollbar-thumb:active {
+            cursor: -webkit-grabbing;
+            cursor: grabbing;
+        }
+    }
+}

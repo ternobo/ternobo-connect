@@ -9,13 +9,13 @@
 					<div>
 						<div class="mb-4">
 							<label class="inputlabel font-12 font-demibold">{{ __.get("application.password") }}</label>
-							<input type="password" v-model="password" class="text-input-light text-input--md" />
+							<input type="password" v-model="password" class="form-control fill-light text-input--md" />
 							<password-meter class="mt-3" :good.sync="goodPassword" :password="password" />
 						</div>
 						<div class="mb-4">
 							<label class="inputlabel font-12 font-demibold">{{ __.get("settings.confirm-password") }}</label>
 							<div class="d-flex flex-column align-items-end">
-								<password-input v-model="password_repeat" class="w-100" inputClass="text-input-light text-input--md"></password-input>
+								<password-input v-model="password_repeat" class="w-100" inputClass="form-control fill-light text-input--md"></password-input>
 							</div>
 						</div>
 					</div>

@@ -9,15 +9,15 @@
 					<div>
 						<div class="mb-4">
 							<label class="inputlabel font-12 font-demibold">{{ __.get("validation.attributes.first-name") }}</label>
-							<input type="text" v-model="first_name" class="text-input-light text-input--md" />
+							<input type="text" v-model="first_name" class="form-control fill-light text-input--md" />
 						</div>
 						<div class="mb-4">
 							<label class="inputlabel font-12 font-demibold">{{ __.get("validation.attributes.last-name") }}</label>
-							<input type="text" v-model="last_name" class="text-input-light text-input--md" />
+							<input type="text" v-model="last_name" class="form-control fill-light text-input--md" />
 						</div>
 						<div class="mb-5">
 							<label class="inputlabel font-12 font-demibold">{{ __.get("application.username") }}</label>
-							<input type="text" v-model="username" class="text-input-light text-input--md" />
+							<input type="text" v-model="username" class="form-control fill-light text-input--md" />
 						</div>
 						<tselect
 							class="tselect-lg"

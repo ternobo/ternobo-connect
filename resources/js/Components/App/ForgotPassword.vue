@@ -7,7 +7,7 @@
 		<div>
 			<div v-if="step == 0">
 				<label class="mb-12px font-12 font-demibold">{{ __.get("application.username") }} <span class="text-superlight"> / </span>{{ __.get("validation.attributes.phone_number") }}</label>
-				<input type="text" class="text-input-light text-input--md" v-model="input" />
+				<input type="text" class="form-control fill-light text-input--md" v-model="input" />
 			</div>
 			<div class="d-flex flex-column align-items-center" v-else-if="step == 1">
 				<div class="d-flex align-items-center">
@@ -29,12 +29,12 @@
 			<div v-else-if="step == 2">
 				<div>
 					<label class="mb-12px font-12 font-demibold">{{ __.get("application.password") }}</label>
-					<input type="password" class="text-input-light text-input--md" v-model="password" />
+					<input type="password" class="form-control fill-light text-input--md" v-model="password" />
 				</div>
 				<div class="mt-3">
 					<label class="mb-12px font-12 font-demibold">{{ __.get("settings.confirm-password") }}</label>
 					<div class="input-group-icon w-100">
-						<input :type="showpassword ? 'text' : 'password'" v-model="password1" class="text-input-light text-input--md" />
+						<input :type="showpassword ? 'text' : 'password'" v-model="password1" class="form-control fill-light text-input--md" />
 						<i class="material-icons-outlined clickable text-muted" @click="showpassword = !showpassword">visibility{{ showpassword ? "_off" : "" }}</i>
 					</div>
 				</div>

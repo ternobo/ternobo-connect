@@ -32,13 +32,13 @@
 									<div>
 										<div>
 											<label class="inputlabel font-12 font-demibold">{{ __.get("application.username") }} <span class="text-superlight"> / </span>{{ __.get("validation.attributes.phone_number") }}</label>
-											<input type="text" v-model="username" class="text-input-light text-input--md" />
+											<input type="text" v-model="username" class="form-control fill-light text-input--md" />
 										</div>
 										<div class="mt-3">
 											<label class="inputlabel font-12 font-demibold">{{ __.get("application.password") }}</label>
 											<div class="d-flex flex-column align-items-end">
 												<div class="input-group-icon w-100">
-													<input :type="showpassword ? 'text' : 'password'" v-model="password" class="text-input-light text-input--md" />
+													<input :type="showpassword ? 'text' : 'password'" v-model="password" class="form-control fill-light text-input--md" />
 													<i class="material-icons-outlined clickable text-muted" @click="showpassword = !showpassword">visibility{{ showpassword ? "_off" : "" }}</i>
 												</div>
 												<small class="clickable hover-dark font-12 mt-12px" @click="forgotpassword = true">{{ __.get("landing.forgot_password") }}</small>
