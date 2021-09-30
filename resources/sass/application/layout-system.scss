@@ -4611,6 +4611,7 @@
      max-width: $breakpoint;
      margin: auto;
      min-height: calc(100vh - 80px);
+     width: auto;
 
      @media screen and (min-width: 991px) {
          .content-container-settings {
