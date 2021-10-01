@@ -7,11 +7,7 @@ export default {
                 window.navigator.clipboard.writeText(binding.value).then(() => vnode.context.toast(__.get("messages.copied"), 'check', 'text-success'));
                 setTimeout(() => timeout = null, 5000);
             }
-
-
         })
-
-
     }
 }
 
