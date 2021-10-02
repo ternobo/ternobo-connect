@@ -58,6 +58,11 @@
     }
 }
 
+.searchfield {
+
+    flex: 1 1 auto;
+}
+
 .search-field {
     max-width: 250px;
     display: flex;
@@ -96,11 +101,11 @@
             width: 0;
             transition: 0.5s all;
             align-self: flex-end;
-            background: transparent;
+            background: transparent !important;
             box-shadow: unset;
-            height: 36px;
+            height: 2rem;
             border-radius: 12px;
-            font-size: $text-xxxsm;
+            font-size: $text-xsm;
             align-self: flex-end;
 
             +i:not(.delete-icon) {
@@ -115,8 +120,8 @@
 
             &:focus,
             &:not(:placeholder-shown) {
-                width: 100%;
-
+                width: calc(100% - 75px);
+                background: $gray-light !important;
 
                 +i {
                     font-size: $text-sm;
@@ -140,43 +145,48 @@
             color: $dark;
         }
 
+
         &::-webkit-input-placeholder {
             color: $gray-500;
 
             @media screen and(max-width: $sm-size) {
-                font-size: $text-xxxsm;
+                font-size: $text-xsm;
             }
         }
+
 
         &::-moz-placeholder {
             color: $gray-500;
 
             @media screen and(max-width: $sm-size) {
-                font-size: $text-xxxsm;
+                font-size: $text-xsm;
             }
         }
+
 
         &:-ms-input-placeholder {
             color: $gray-500;
 
             @media screen and(max-width: $sm-size) {
-                font-size: $text-xxxsm;
+                font-size: $text-xsm;
             }
         }
+
 
         &::-ms-input-placeholder {
             color: $gray-500;
 
             @media screen and(max-width: $sm-size) {
-                font-size: $text-xxxsm;
+                font-size: $text-xsm;
             }
         }
+
 
         &::placeholder {
             color: $gray-500;
 
             @media screen and(max-width: $sm-size) {
-                font-size: $text-xxxsm;
+                font-size: $text-xsm;
             }
         }
     }
