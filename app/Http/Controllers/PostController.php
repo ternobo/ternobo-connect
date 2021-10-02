@@ -177,10 +177,12 @@ class PostController extends Controller
     public function getTags(Request $request)
     {
         $term = trim($request->q);
+        $tags = Tag::query();
         if (empty($term)) {
-            return response()->json(["results" => []]);
+            $tags = $tags->latest()->paginate(10);
+        } else {
+            $tags = $tags->where("name", "like", "$term%")->paginate(10);
         }
-        $tags = Tag::query()->where("name", "like", "$term%")->paginate(10);
         $formatted_tags = [];
         foreach ($tags as $tag) {
             $formatted_tags[] = ['key' => $tag->name, 'value' => $tag->name, 'name' => "#" . $tag->name];
