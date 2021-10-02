@@ -11,7 +11,7 @@
 					<i class="material-icons text-dark">link</i>
 					<strong>{{ __.get("content/posts.copy-post-link") }}</strong>
 				</dropdown-item>
-				<dropdown-item @click="$emit('copySlide')">
+				<dropdown-item v-if="post.slides.length > 1" @click="$emit('copySlide')">
 					<i class="material-icons text-dark">link</i>
 					<strong>{{ __.get("content/posts.copy-post-link-slide") }}</strong>
 				</dropdown-item>
