@@ -29,3 +29,7 @@ $color in $theme-colors {
         color: $color;
     }
 }
+
+.text-nowrap {
+    white-space: nowrap;
+}
