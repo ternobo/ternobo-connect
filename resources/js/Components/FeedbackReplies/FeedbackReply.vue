@@ -86,7 +86,7 @@
 		</div>
 		<transition name="slide">
 			<div class="feedback-reply-replies" v-if="showReplies">
-				<new-feedback-reply class="mb-3" @submit="submit" :feedback="feedbackReply.feedback_id" :reply-to="feedbackReply.id"></new-feedback-reply>
+				<new-feedback-reply class="mb-4" @submit="submit" :feedback="feedbackReply.feedback_id" :reply-to="feedbackReply.id"></new-feedback-reply>
 				<div class="replies" v-if="replyTo === undefined">
 					<feedback-reply v-on:replied="submit" :reply-to="feedbackReply.id" v-for="reply in replies" v-on:deleted="feedbackReplyDelete" :feedback-reply="reply" :key="reply.id"></feedback-reply>
 					<div class="w-100 d-flex p-2 justify-content-center align-items-center" v-if="repliesLoading">

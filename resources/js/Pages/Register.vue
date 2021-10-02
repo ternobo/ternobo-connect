@@ -12,7 +12,7 @@
 				<span class="beta-badge">Beta</span>
 			</div>
 			<div class="login-header-menu">
-				<dropdown-menu class="me-3 pe-0" :disabled="step > 0" variant="white">
+				<dropdown-menu class="me-4 pe-0" :disabled="step > 0" variant="white">
 					<template #button="{ active }">
 						<i class="material-icons transition" v-if="step < 1" :class="{ 'rotate-180': active }">keyboard_arrow_down</i>
 						<span class="d-flex flex-row ms-1" v-if="appDirection == 'ltr'"> <img src="/emoji/72x72/1f1fa-1f1f8.png" width="24" /></span>
@@ -44,11 +44,11 @@
 						<div class="login-form w-100">
 							<div class="login-card card w-100">
 								<div class="card-body">
-									<div class="d-flex align-items-center mb-5">
+									<div class="d-flex align-items-center mb-7">
 										<label class="font-weight-bold mb-0 font-20 text-dark">{{ __.get("register.profile-image") }}</label>
 									</div>
 									<div class="d-flex align-items-center justify-content-center">
-										<profile-image @updated="updateProfile" ref="profileelem" :canChange="true" :showIcons="false" size="profile-lg" class="mb-0 mt-0 me-32px" :src="profile"></profile-image>
+										<profile-image @updated="updateProfile" ref="profileelem" :canChange="true" :showIcons="false" size="profile-lg" class="mb-0 mt-0 me-42px" :src="profile"></profile-image>
 										<button class="btn upload-profile-btn" @click="$refs['profileelem'].openFileSelect()">
 											<i class="material-icons-outlined text-dark me-2">cloud_upload</i>
 											{{ __.get("application.upload") }}

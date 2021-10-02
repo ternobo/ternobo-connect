@@ -7,7 +7,7 @@
 			<tabs :compact="true" :disabled="edit" class="profile-tabs" @selected="tabChange" :state-tab="true" v-else>
 				<template slot="custom-item">
 					<div class="d-flex align-items-center" v-if="canEdit && showEdit">
-						<div class="me-3" v-if="edit">
+						<div class="me-4" v-if="edit">
 							<button class="btn btn-text">
 								<i class="material-icons text-muted" v-if="edit" @click="cancelEdit">close</i>
 							</button>
@@ -50,7 +50,7 @@
 						<div class="posts-container-profile">
 							<div v-if="draft">
 								<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
-									<draft-card class="mb-3" v-for="action in actionsList" :post="action" :key="action.id"></draft-card>
+									<draft-card class="mb-4" v-for="action in actionsList" :post="action" :key="action.id"></draft-card>
 								</div>
 								<posts-loading v-if="loadingActions" :count="3" />
 								<div class="w-100 d-flex justify-content-center py-3" v-else-if="loadingMore">

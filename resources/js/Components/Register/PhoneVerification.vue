@@ -3,12 +3,12 @@
 		<div class="login-form w-100">
 			<div class="login-card card w-100">
 				<div class="card-body">
-					<div class="d-flex align-items-center mb-5">
+					<div class="d-flex align-items-center mb-7">
 						<i class="material-icons-outlined clickable me-12px text-grey" :class="{ 'rotate-180': appDirection == 'rtl' }" v-if="verification_step" @click="verification_step = false">arrow_back</i>
 						<label class="font-weight-bold mb-0 font-20 text-dark">{{ title }}</label>
 					</div>
 					<div>
-						<tselect :items="country_codes" @change="phone = countryCode.code" class="mb-3" valueOption="id" labelOption="country" v-model="countryCode">
+						<tselect :items="country_codes" @change="phone = countryCode.code" class="mb-4" valueOption="id" labelOption="country" v-model="countryCode">
 							<template v-slot:icon>
 								<span v-html="countryIcon"></span>
 							</template>
@@ -16,13 +16,13 @@
 								<span v-html="getCountryIcon(icon)"></span>
 							</template>
 						</tselect>
-						<input dir="ltr" class="form-control fill-light text-input--md" :readonly="verification_step" v-model="phone" />
+						<input dir="ltr" class="form-control fill-light lg-input" :readonly="verification_step" v-model="phone" />
 					</div>
 					<div class="d-flex flex-column align-items-center mt-4" v-if="verification_step">
 						<div class="d-flex align-items-center">
 							<otp-input input-class="w-100" class="mx-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" />
 						</div>
-						<div class="mt-32px" style="width: 160px">
+						<div class="mt-42px" style="width: 160px">
 							<span
 								class="clickable d-flex justify-content-between align-items-center font-14"
 								:class="{

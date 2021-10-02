@@ -23,7 +23,7 @@
 
 				<tselect
 					style="width: 171px"
-					class="tselect-filter tselect-lg ms-3"
+					class="tselect-filter tselect-lg ms-4"
 					:dir="appDirection"
 					:items="[
 						{ name: __.get('tips.newest'), value: 'desc' },

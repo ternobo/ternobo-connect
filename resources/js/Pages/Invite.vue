@@ -28,7 +28,7 @@
 							<li v-html="__.get('invite-links.answer-2')"></li>
 						</ul>
 
-						<div class="mt-3">
+						<div class="mt-4">
 							<strong class="font-16">{{ __.get("invite-links.attention") }}</strong>
 							<ul>
 								<li v-html="__.get('invite-links.answer-3')"></li>

@@ -1,7 +1,7 @@
 <template>
 	<div class="login-content">
 		<div class="about-ternobo">
-			<h1 class="font-weight-bold mb-32px font-20">{{ __.get("landing.welcome") }}</h1>
+			<h1 class="font-weight-bold mb-42px font-20">{{ __.get("landing.welcome") }}</h1>
 			<p class="line-height-32px" :style="{ marginBottom: '40px' }">
 				{{ __.get("landing.about-ternobo") }}
 			</p>
@@ -23,7 +23,7 @@
 					</div>
 				</div>
 			</div>
-			<img src="/images/register-illustration.svg" class="mt-5" width="450" v-if="!$root.isDesktop" />
+			<img src="/images/register-illustration.svg" class="mt-7" width="450" v-if="!$root.isDesktop" />
 		</div>
 	</div>
 </template>

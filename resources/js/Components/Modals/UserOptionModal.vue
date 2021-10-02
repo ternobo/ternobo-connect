@@ -6,7 +6,7 @@
 				<div class="useroptions-header">
 					<wire-link @click="$emit('update:show', false)" :href="'/' + $store.state.user.username" class="d-flex aling-items-center">
 						<img class="profile-sm" :src="$store.state.user.profile" />
-						<span class="ms-3 d-flex flex-column justify-content-center">
+						<span class="ms-4 d-flex flex-column justify-content-center">
 							<strong class="text-black"
 								>{{ $store.state.user.name }}
 								<i v-if="$store.state.user.is_verified === 1" class="position-relative verificationcheck">check_circle</i>

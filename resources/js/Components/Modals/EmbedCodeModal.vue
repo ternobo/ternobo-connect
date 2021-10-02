@@ -2,7 +2,7 @@
 	<b-modal v-model="showModal" hide-footer :title="__.get('content/posts.embed-text')" size="lg">
 		<div class="embed-container">
 			<textarea class="form-control" ref="textarea" readonly style="resize: none; direction: ltr" :value="optimizedCode"></textarea>
-			<div class="d-flex justify-content-between align-items-center mb-5">
+			<div class="d-flex justify-content-between align-items-center mb-7">
 				<span class="font-demibold text-grey">{{ __.get("content/posts.embed-des") }}</span>
 
 				<button class="btn category-badge px-2 py-1" @click="copy"><i class="material-icons-outlined font-20">file_copy</i> {{ __.get("application.copy") }}</button>

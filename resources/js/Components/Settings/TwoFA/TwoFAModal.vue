@@ -9,11 +9,11 @@
 			</p>
 
 			<div class="px-4">
-				<div class="w-100 d-flex justify-content-between align-items-center mb-3">
+				<div class="w-100 d-flex justify-content-between align-items-center mb-4">
 					<span class="font-14">{{ __.get("settings.click-to-copy") }}</span>
 
 					<div class="d-flex align-items-center">
-						<i class="material-icons-outlined text-muted hover-dark me-3 clickable" @click="downloadCodes">get_app</i>
+						<i class="material-icons-outlined text-muted hover-dark me-4 clickable" @click="downloadCodes">get_app</i>
 						<i class="material-icons-outlined text-muted hover-dark clickable" :class="{ rotateAnimation: resetLoading }" @click="resetCodes">loop</i>
 					</div>
 				</div>
@@ -30,7 +30,7 @@
 				{{ __.get("settings.ts-des-11") }}
 			</p>
 
-			<button class="btn btn-transparent p-0 hover-danger mt-3" @click="deactivate"><i class="material-icons-outlined">power_settings_new</i> {{ __.get("application.deactivate") }}</button>
+			<button class="btn btn-transparent p-0 hover-danger mt-4" @click="deactivate"><i class="material-icons-outlined">power_settings_new</i> {{ __.get("application.deactivate") }}</button>
 		</div>
 		<div class="d-flex flex-column align-items-end" v-else>
 			<p>

@@ -3,9 +3,9 @@
 		<mentionable :disabledTop="true" class="w-100">
 			<MaterialTextAreaEmoji ref="input" v-model="text" input-class="w-100" maxlength="1000" class="material--xsm w-100" :placeholder="__.get('content/comments.comment-ph')" name="text"></MaterialTextAreaEmoji>
 		</mentionable>
-		<div class="d-flex w-100 mt-3 align-items-center justify-content-between">
+		<div class="d-flex w-100 mt-4 align-items-center justify-content-between">
 			<div class="d-flex align-items-center">
-				<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xxxsm me-3 mb-0" imgClass="profile-xxxsm" :src="$store.state.user.profile" />
+				<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xxxsm me-4 mb-0" imgClass="profile-xxxsm" :src="$store.state.user.profile" />
 				<emoji-picker iconSize="20" @pick="$refs.input.insertEmoji($event)" :portal="true" />
 			</div>
 			<loading-button @click.native="submit" :disabled="!showSubmit" :loading="loading" class="btn btn-transparent cta-text font-14">{{ __.get("content/comments.post") }}</loading-button>

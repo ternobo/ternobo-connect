@@ -18,7 +18,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="d-flex justify-content-center align-items-center mt-3 mb-2">
+		<div class="d-flex justify-content-center align-items-center mt-4 mb-2">
 			<button class="btn btn-transparent font-14" @click="cancel">{{ __.get("application.cancel") }}</button>
 			<button class="btn btn-primary font-14 w-100" @click="save">{{ __.get("application.save") }}</button>
 		</div>

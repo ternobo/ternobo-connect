@@ -2,7 +2,7 @@
     display: block;
     width: 100%;
     padding: 0.75rem 1rem;
-    font-size: $text-sm;
+    font-size: $text-xsm;
     line-height: 1;
     color: $dark;
     background-color: $white;
@@ -105,9 +105,19 @@
         }
 
         &-light {
+            border: none;
             background: $gray-bg;
         }
     }
+
+    &.sm-input {
+        padding: 0.625rem 1rem;
+    }
+
+    &.lg-input {
+        padding: 0.625rem 1rem;
+    }
+
 
     &.error {
         border: 2px solid $red;

@@ -4,7 +4,7 @@
 			<user-card></user-card>
 		</sidebar-right>
 		<div class="content-container">
-			<new-post-card @posted="postAdded" class="mb-3"></new-post-card>
+			<new-post-card @posted="postAdded" class="mb-4"></new-post-card>
 			<transition-group name="flip-list" tag="div" class="posts" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="5">
 				<PostCard v-for="post in postsArray" :key="'post_item_' + uuidV4(post)" :post="post"></PostCard>
 			</transition-group>

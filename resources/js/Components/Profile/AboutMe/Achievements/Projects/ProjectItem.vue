@@ -38,18 +38,18 @@
 				</div>
 				<div>
 					<strong>{{ __.get("user-profile.start-date") }} <span class="text-action">*</span></strong>
-					<DatePicker class="mt-3" v-model="val.startDate" :max="{ year: yearNow }"></DatePicker>
+					<DatePicker class="mt-4" v-model="val.startDate" :max="{ year: yearNow }"></DatePicker>
 				</div>
 				<div>
 					<strong>{{ __.get("user-profile.end-date") }} <span class="text-action">*</span></strong>
-					<DatePicker class="mt-3" :disabled="val.noEndDate" v-model="val.endDate" :noYearPlaceholder="__.get('validation.start_date_not_selected')" :minYear="val.startDate ? val.startDate.year : 1357" :max="{ year: year }"></DatePicker>
+					<DatePicker class="mt-4" :disabled="val.noEndDate" v-model="val.endDate" :noYearPlaceholder="__.get('validation.start_date_not_selected')" :minYear="val.startDate ? val.startDate.year : 1357" :max="{ year: year }"></DatePicker>
 					<Checkbox class="mb-0" v-model="val.noEndDate"> {{ __.get("user-profile.currently-working-project") }} </Checkbox>
 				</div>
 				<div class="col-md-6" v-if="showMore">
 					<MaterialTextField v-model="val.link" maxlength="52" class="material--sm" :placeholder="__.get('user-profile.project-url')"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
-					<div class="d-flex align-items-center justify-content-between mb-3">
+					<div class="d-flex align-items-center justify-content-between mb-4">
 						<strong>{{ __.get("application.description") }}</strong>
 						<div class="character-counter">
 							<span class="counter tex-dark">{{ leftCharacter }}</span>

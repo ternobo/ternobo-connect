@@ -37,13 +37,13 @@
 				</div>
 				<div v-if="showMore">
 					<strong>{{ __.get("user-profile.issue-date") }}</strong>
-					<DatePicker class="mt-3" v-model="val.date" maxlength="52" :max="{ year: year, month: month }"></DatePicker>
+					<DatePicker class="mt-4" v-model="val.date" maxlength="52" :max="{ year: year, month: month }"></DatePicker>
 				</div>
 				<div class="d-flex align-items-end" v-if="showMore">
 					<MaterialTextField v-model="val.from" maxlength="52" class="material--sm" :placeholder="__.get('user-profile.issuer')"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
-					<div class="d-flex align-items-center justify-content-between mb-3">
+					<div class="d-flex align-items-center justify-content-between mb-4">
 						<strong>{{ __.get("application.description") }}</strong>
 						<div class="character-counter">
 							<span class="counter tex-dark">{{ leftCharacter }}</span>

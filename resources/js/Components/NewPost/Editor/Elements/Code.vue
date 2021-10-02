@@ -1,6 +1,6 @@
  <template>
 	<div class="code-block">
-		<tselect class="mb-3" :search="true" placeholder="Search For Language" direction="ltr" v-model="language" :items="languages"></tselect>
+		<tselect class="mb-4" :search="true" placeholder="Search For Language" direction="ltr" v-model="language" :items="languages"></tselect>
 		<div class="code-block--textarea" dir="ltr">
 			<div ref="textarea" style="height: 450px"></div>
 		</div>

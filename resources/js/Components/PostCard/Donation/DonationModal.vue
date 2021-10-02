@@ -8,7 +8,7 @@
 			<h2 class="tip-modal--title">
 				{{ __.get("content/posts.tip-this-post") }}
 			</h2>
-			<div class="tip-amount-input-group" :class="{ 'mb-52px': user != null }">
+			<div class="tip-amount-input-group" :class="{ 'mb-72px': user != null }">
 				<div class="d-flex align-items-center" dir="ltr">
 					<div style="margin-right: 24px">
 						<div class="currency-selector">
@@ -24,7 +24,7 @@
 					</div>
 				</div>
 				<div dir="ltr">
-					<div class="d-flex mt-3 mb-4 align-items-center justify-content-start w-100 payment-way">
+					<div class="d-flex mt-4 mb-4 align-items-center justify-content-start w-100 payment-way">
 						<span class="font-16 me-2">{{ __.get("tips.gateway") }} </span>
 						<img src="/images/zarinpal-pay-logo.png" alt="زرین‌پال" width="73" />
 					</div>

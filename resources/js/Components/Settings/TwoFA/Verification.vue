@@ -5,7 +5,7 @@
 			<div class="d-flex align-items-center">
 				<otp-input input-class="w-100" class="text-center" @completed="$emit('action', code)" v-model="code" :numInputs="6" />
 			</div>
-			<div class="mt-3" style="width: 160px" v-if="type == 'phone'">
+			<div class="mt-4" style="width: 160px" v-if="type == 'phone'">
 				<span
 					class="clickable d-flex justify-content-between align-items-center font-14"
 					:class="{

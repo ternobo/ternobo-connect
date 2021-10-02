@@ -18,7 +18,7 @@
 						</div>
 					</div>
 					<div class="row pt-3" v-else>
-						<div class="col-md-6 mb-3" v-for="i in 4" :key="`post_loading_skeleton_${i}`">
+						<div class="col-md-6 mb-4" v-for="i in 4" :key="`post_loading_skeleton_${i}`">
 							<div class="card">
 								<div class="card-body">
 									<page-skeleton></page-skeleton>
@@ -35,7 +35,7 @@
 					</masonry>
 
 					<div class="row pt-3" v-else>
-						<div class="col-md-6 mb-3" v-for="i in 4" :key="`post_loading_skeleton_${i}`">
+						<div class="col-md-6 mb-4" v-for="i in 4" :key="`post_loading_skeleton_${i}`">
 							<post-skeleton></post-skeleton>
 						</div>
 					</div>

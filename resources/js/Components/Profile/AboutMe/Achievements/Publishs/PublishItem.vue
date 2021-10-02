@@ -42,13 +42,13 @@
 				</div>
 				<div>
 					<strong>{{ __.get("user-profile.publication-date") }} <span class="text-action">*</span></strong>
-					<DatePicker class="mt-3" v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
+					<DatePicker class="mt-4" v-model="val.date" :max="{ year: year, month: month }"></DatePicker>
 				</div>
 				<div class="col-md-6 d-flex align-items-end" v-if="showMore">
 					<MaterialTextField v-model="val.link" maxlength="52" class="material--sm" :placeholder="__.get('user-profile.publication-url')"></MaterialTextField>
 				</div>
 				<div class="col-md-12" v-if="showMore">
-					<div class="d-flex align-items-center justify-content-between mb-3">
+					<div class="d-flex align-items-center justify-content-between mb-4">
 						<strong>{{ __.get("application.description") }}</strong>
 						<div class="character-counter">
 							<span class="counter tex-dark">{{ leftCharacter }}</span>

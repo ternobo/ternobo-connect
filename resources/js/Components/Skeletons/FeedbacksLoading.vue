@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<feedback-skeleton v-for="i in 5" class="mb-3" :key="`feedback_loading_${i}`"></feedback-skeleton>
+		<feedback-skeleton v-for="i in 5" class="mb-4" :key="`feedback_loading_${i}`"></feedback-skeleton>
 	</div>
 </template>
 

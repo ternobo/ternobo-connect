@@ -15,6 +15,10 @@ a {
     font-weight: bolder;
 }
 
+.font-weight-bold {
+    font-weight: 700;
+}
+
 @each $scale,
 $color in $gray-theme {
     .text-grey-#{$scale} {
@@ -32,4 +36,12 @@ $color in $theme-colors {
 
 .text-nowrap {
     white-space: nowrap;
+}
+
+.text-end {
+    text-align: $end;
+}
+
+.text-start {
+    text-align: $start;
 }

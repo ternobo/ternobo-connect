@@ -1,30 +1,3 @@
-.btn-danger {
-    background: $red-light;
-    color: $red;
-
-    &:hover {
-        background: $red;
-        color: $red;
-        border-color: $red;
-    }
-}
-
-.btn-action-light {
-    background: #E7F3FF;
-    border-radius: 0.75rem;
-    color: $blue-cta;
-
-    &:not(:disabled):hover {
-        color: $blue-cta;
-        background: $blue-light-hover;
-    }
-}
-
-.connect-btn:hover {
-    background: #CCF4DC;
-    color: rgb(0, 200, 83);
-}
-
 .btn-transparent,
 .button-transparent {
     background: transparent;
