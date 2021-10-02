@@ -20,6 +20,7 @@ class SocialMediaTools
     public static $imageMinHeight = 112;
     public static $imageRatio = 4 / 3;
 
+
     private static $allowedHtmlTags = [
         "b",
         "i",
@@ -29,7 +30,8 @@ class SocialMediaTools
         "code",
         "br",
         "sup",
-        "text"
+        "text",
+        "span"
     ];
 
     /**
@@ -70,11 +72,6 @@ class SocialMediaTools
      */
     public static function safeHTML(string $content): string
     {
-
-        $sanitizer = Sanitizer::create([
-            'extensions' => ['basic', "code"],
-        ]);
-        $content = $sanitizer->sanitize($content);
         $dom = new Dom();
         $dom->setOptions((new Options())
             ->setRemoveSmartyScripts(true)
@@ -83,8 +80,16 @@ class SocialMediaTools
             ->setRemoveScripts(true)
             ->setRemoveStyles(true)
             ->setRemoveDoubleSpace(true));
-        $dom->loadStr($content);
-        return $dom->outerHtml;
+        $dom->loadStr("<div id='contentNode'>$content</div>");
+
+        $content = ($dom->find("#contentNode > *"));
+        // dd($content);
+        foreach ($content as $element) {
+            if (!in_array($element->getTag()->name(), static::$allowedHtmlTags)) {
+                $element->remove();
+            }
+        }
+        return $dom->innerHTML;
     }
 
     /**
