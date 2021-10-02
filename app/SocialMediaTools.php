@@ -83,7 +83,7 @@ class SocialMediaTools
         $dom->loadStr("<div id='contentNode'>$content</div>");
 
         $content = ($dom->find("#contentNode > *"));
-        // dd($content);
+
         foreach ($content as $element) {
             if (!in_array($element->getTag()->name(), static::$allowedHtmlTags)) {
                 $element->remove();
