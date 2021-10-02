@@ -52,6 +52,7 @@ export default {
                 break;
             case "code":
                 tag = "div";
+                classes = ['mb-3'];
                 content = (<CodeBlock content={JSON.parse(this.content.content)}></CodeBlock>);
                 break;
 
