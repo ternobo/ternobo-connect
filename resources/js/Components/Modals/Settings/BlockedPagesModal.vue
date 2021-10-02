@@ -8,6 +8,11 @@
 				<span class="text-muted">{{ __.get("messages.connection-error") }}</span>
 			</div>
 		</div>
+		<div style="min-height: 200px" class="d-flex align-items-center justify-content-center loading" v-else-if="pages.length < 1">
+			<div class="d-flex flex-column justify-center align-items-center w-100 err">
+				<span class="text-muted">{{ __.get("messages.no-block-user") }}</span>
+			</div>
+		</div>
 		<div class="likes-list" v-else v-infinite-scroll="loadMore" :infinite-scroll-distance="10">
 			<transition-group name="flip-list">
 				<div v-for="(page, index) in pages" :key="'like_' + page.id" class="like-item">

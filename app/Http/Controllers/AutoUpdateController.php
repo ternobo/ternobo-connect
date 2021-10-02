@@ -9,9 +9,10 @@ class AutoUpdateController extends Controller
 {
     public function update(Request $request)
     {
-        if ($request->secret == env("GIT_SECRET")) {
-            GitPull::dispatch()->delay(now()->addSecond(20));
+        if ($request->has("secret") && $request->secret == env("GIT_SECRET")) {
+            GitPull::dispatch()->delay(now()->addSecond(10));
+            return response()->json(['msg' => 'Started'], 200);
         }
-        return response()->json(['msg' => 'wrong secret', "data" => $request->secret], 401);
+        return response()->json(['msg' => 'wrong secret'], 401);
     }
 }
