@@ -24,8 +24,7 @@ return [
     'save' => "ذخیره",
     "tip-this-post" => "حمایت از این محتوا",
     "image-detail" => "جزئیات تصویر",
-    'spoiler-alert' => "اخطار لو رفتن",
+    'spoiler-alert' => "خطر لو رفتن",
     'rotate' => "چرخاندن",
     'alt-text' => "متن جایگزین",
-
 ];
