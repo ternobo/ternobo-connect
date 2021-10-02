@@ -237,7 +237,7 @@ class Post extends Model
                             'slide_id' => $slide_id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
-                            'content' => $text,
+                            'content' => SocialMediaTools::replaceMentions($text, $text_mentions),
                             'type' => $type,
                             "meta" => $meta,
                         ]);

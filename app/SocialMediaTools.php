@@ -4,20 +4,33 @@ namespace App;
 
 use App\Models\Notification;
 use App\Models\Page;
+use HtmlSanitizer\Sanitizer;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image as ImageFacades;
 use Intervention\Image\Image;
 use PHPHtmlParser\Dom;
 use PHPHtmlParser\Options;
+use Twitter\Text\Parser;
 
 class SocialMediaTools
 {
 
     public static $imageMaxWidth = 1440;
     public static $imageMinHeight = 112;
-
     public static $imageRatio = 4 / 3;
+
+    private static $allowedHtmlTags = [
+        "b",
+        "i",
+        "strike",
+        "u",
+        "a",
+        "code",
+        "br",
+        "sup",
+        "text"
+    ];
 
     /**
      * return list of mention
@@ -57,13 +70,19 @@ class SocialMediaTools
      */
     public static function safeHTML(string $content): string
     {
+
+        $sanitizer = Sanitizer::create([
+            'extensions' => ['basic', "code"],
+        ]);
+        $content = $sanitizer->sanitize($content);
         $dom = new Dom();
         $dom->setOptions((new Options())
             ->setRemoveSmartyScripts(true)
             ->setPreserveLineBreaks(true)
             ->setWhitespaceTextNode(true)
             ->setRemoveScripts(true)
-            ->setRemoveStyles(true));
+            ->setRemoveStyles(true)
+            ->setRemoveDoubleSpace(true));
         $dom->loadStr($content);
         return $dom->outerHtml;
     }
@@ -75,9 +94,15 @@ class SocialMediaTools
      *
      * @return string
      */
-    public static function replaceMentions($text): string
+    public static function replaceMentions($text, $mentions): string
     {
-        return preg_replace('/\B@(\w+)/u', "<a href=" . url("/$1") . ">$0</a>", $text);
+        foreach ($mentions as $mention) {
+            $page = Page::query()->where("slug", $mention)->first();
+            if ($page instanceof Page) {
+                $text = str_replace("@$mention", "<wire-link href='$mention' class='text-mention'>" . $page->name . "</wire-link>", $text);
+            }
+        }
+        return $text;
     }
 
     /**
