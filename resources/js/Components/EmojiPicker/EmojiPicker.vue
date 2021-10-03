@@ -15,7 +15,7 @@
 					<div class="emoji-list-container">
 						<div class="search-emoji">
 							<div class="input-group-icon border-button-group">
-								<input type="text" :placeholder="__.get('application.search')" v-model="search" class="form-control border-bottom-input" />
+								<input type="text" :placeholder="__.get('application.search')" v-model="search" class="form-control border-bottom-input pb-3" />
 								<i class="material-icons-outlined text-muted">search</i>
 							</div>
 						</div>

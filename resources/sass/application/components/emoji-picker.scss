@@ -28,8 +28,8 @@
 }
 
 .emoji-picker {
-    width: 350px;
-    height: 350px;
+    width: 308px;
+    height: 294px;
     display: flex;
     flex-direction: column;
     border: 2px solid $gray;
@@ -70,6 +70,8 @@
         flex-direction: column;
         margin: 1rem 0;
         padding: 0 1rem;
+        margin-bottom: 0;
+        padding-#{$end}: 0.5rem;
         @include nice-scroll;
 
         .emoji-tab {
@@ -114,13 +116,15 @@
         overflow: auto;
         display: flex;
         flex-wrap: wrap;
-        padding: 8px;
+        padding: 0.5rem;
+        padding-top: 0.25rem;
+
 
         .emoji-item {
-            width: 10.5%;
-            padding: 8px;
-            cursor: pointer;
             box-sizing: content-box;
+            cursor: pointer;
+            padding: 4px;
+            width: 21px;
 
             figure {
                 height: -webkit-max-content;
