@@ -8,7 +8,7 @@
 
 .input-group-icon {
     .form-control {
-        padding-#{$end}: 2.75rem;
+        padding-left: 2.75rem;
     }
 
     >i,
@@ -16,7 +16,7 @@
         z-index: 1000;
         color: $gray-500;
         position: absolute;
-        #{$end}: 16px;
+        left: 16px;
         top: 0;
         bottom: 0;
         vertical-align: middle;
@@ -30,6 +30,15 @@
     >i:hover {
         color: $dark;
     }
+
+    &.border-button-group {
+
+        >i,
+        .actions {
+            left: 0;
+        }
+    }
+
 }
 
 .search-input-rounded {

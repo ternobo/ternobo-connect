@@ -127,4 +127,9 @@
         border-radius: 12px;
     }
 
+    &.border-bottom-input {
+        border: none;
+        border-bottom: 2px solid $gray;
+    }
+
 }

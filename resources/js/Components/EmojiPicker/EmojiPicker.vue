@@ -5,7 +5,7 @@
 			<div class="emoji-picker" :style="pickerStyle" v-if="visible">
 				<div class="emoji-picker-select">
 					<div class="emoji-tabs">
-						<span class="emoji-tab" v-if="hasRecentEmoji" :class="{ active: selectedTab.group == 'recent' }" @click="selectedTab = { group: 'recent' }">
+						<span class="emoji-tab recent-emojies" :class="{ active: selectedTab.group == 'recent' }" @click="selectedTab = { group: 'recent' }">
 							<i class="material-icons-outlined">schedule</i>
 						</span>
 						<span class="emoji-tab" :class="{ active: selectedTab.group == tab.group }" v-for="tab in emojiTable" :key="`emoji_group_tab_${tab.group}`" @click="selectedTab = tab">
@@ -14,8 +14,8 @@
 					</div>
 					<div class="emoji-list-container">
 						<div class="search-emoji">
-							<div class="input-group-icon">
-								<input type="text" :placeholder="__.get('application.search')" v-model="search" class="form-control" />
+							<div class="input-group-icon border-button-group">
+								<input type="text" :placeholder="__.get('application.search')" v-model="search" class="form-control border-bottom-input" />
 								<i class="material-icons-outlined text-muted">search</i>
 							</div>
 						</div>
@@ -52,28 +52,15 @@ export default {
 				this.$refs["emojiScrollable"].scrollTo(0, 0);
 			}
 		},
-		visible(value) {
-			const recentEmojies = this.getRecentEmojies();
-			if (recentEmojies.length > 0) {
-				this.hasRecentEmoji = true;
-				if (value) {
-					this.selectedTab = { group: "recent" };
-				}
-			} else {
-				this.hasRecentEmoji = false;
-			}
-		},
 	},
 	data() {
 		return {
 			emojiTable: emojisLib,
 			visible: false,
 			search: "",
-			selectedTab: emojisLib[0],
+			selectedTab: { group: "recent" },
 
 			pickerStyle: {},
-
-			hasRecentEmoji: false,
 		};
 	},
 	computed: {
@@ -94,7 +81,7 @@ export default {
 	methods: {
 		getRecentEmojies() {
 			const emojisJSON = window.localStorage.getItem("recentEmojis");
-			return JSON.parse(emojisJSON != null ? emojisJSON : []);
+			return emojisJSON != null ? JSON.parse(emojisJSON) : emojisLib[0].emojiList;
 		},
 		selectEmoji(emoji) {
 			let recentEmojies = window.localStorage.getItem("recentEmojis");
