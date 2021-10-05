@@ -17,7 +17,5 @@ class BlockedListTest extends TestCase
         $user = User::find(1);
         $this->actingAs($user);
         $this->assertAuthenticated();
-        $response = $this->get('/settings/blocked-pages');
-        $response->assertStatus(200);
     }
 }
