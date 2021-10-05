@@ -53,6 +53,16 @@ class PollService extends ServiceAccess
     }
 
     /**
+     * 
+     */
+    public function deletePoll($id)
+    {
+        $response = $this->createRequest()->delete($id);
+        abort_unless($response->ok(), 404);
+        return $response->json();
+    }
+
+    /**
      * Create Poll
      * 
      * @param PollModel $model model to presist
