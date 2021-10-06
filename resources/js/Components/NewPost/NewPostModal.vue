@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<category-select-modal :categories.sync="categories" @hide="onCategoryClose" :selectedCategory.sync="category" :show.sync="showCategoryModal"></category-select-modal>
-		<b-modal ignore-enforce-focus-selector=".ternoboeditor--link-input" v-if="user != null" v-model="showModal" @hide="hide" @show="shown" no-close-on-esc hide-footer :hide-backdrop="showCategoryModal || showImageEdit" :modal-class="['new-post-modal', { 'opacity-0': showCategoryModal || showImageEdit }]" size="lg modal-new-post" :title="__.get('content/posts.create-new-post')" :centered="true">
+		<b-modal ignore-enforce-focus-selector=".ternoboeditor--link-input" v-if="user != null" v-model="showModal" @hide="hide" @show="shown" no-close-on-esc hide-footer :hide-backdrop="showCategoryModal || !showNewPostModal" :modal-class="['new-post-modal', { 'opacity-0': showCategoryModal || !showNewPostModal }]" size="lg modal-new-post" :title="__.get('content/posts.create-new-post')" :centered="true">
 			<div action="/posts" data-ajax method="POST" data-reload="1" enctype="multipart/form-data" class="w-100">
 				<div class="new-post position-relative">
 					<div class="selections">
@@ -255,7 +255,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapState(["user", "shared", "showImageEdit"]),
+		...mapState(["user", "shared", "showNewPostModal"]),
 		username() {
 			return Boolean(this.user) && Boolean(this.user.name) && this.user.name.length > 40 ? this.user.name.substr(0, 40) : this.user.name;
 		},

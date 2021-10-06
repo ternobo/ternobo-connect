@@ -13,5 +13,12 @@ return [
     "base" => "Base",
     "media" => "Media",
 
-    "poll"=>"Poll",
+    "poll" => "Poll",
+    "poll-setup-title" => "Setup your poll",
+    "poll-setup-button" => "Setup",
+    "poll-modal-title" => "Create a poll",
+    "poll-modal-question" => "Your Question",
+    "poll-modal-question-ph" => "Enter your Question",
+    "poll-modal-options" => "Options",
+    "poll-duration" => "Poll duration"
 ];

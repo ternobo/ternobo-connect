@@ -51,10 +51,8 @@
 
         .list-group {
             width: calc(100% + 104px);
-            margin-#{$start}: -104px;
+            margin-#{$start}: -116px;
         }
-
-
 
         .placeholder-element {
             margin-#{$start}: 57px;
@@ -409,3 +407,5 @@ div[placeholder]:not(:focus):empty:before {
         }
     }
 }
+
+@import "./blocks/poll-block";

@@ -57,7 +57,7 @@ export default {
 		},
 	},
 	mounted() {
-		if (this.slide && this.slide < this.post.slides.length) {
+		if (this.slide != null && this.slide < this.post.slides.length) {
 			this.active = this.slide;
 		}
 		let options = {

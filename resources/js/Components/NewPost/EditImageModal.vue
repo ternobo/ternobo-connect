@@ -1,5 +1,5 @@
 <template>
-	<b-modal v-model="showModal" hide-footer @show="showImageEditModal" @hide="hideImageEditModal" :title="__.choice('content/posts.image-detail', 2)" size="lg" modal-class="new-post-modal" :centered="true">
+	<b-modal v-model="showModal" hide-footer @show="hideNewPostModal" @hide="showNewPostModal" :title="__.choice('content/posts.image-detail', 2)" size="lg" modal-class="new-post-modal" :centered="true">
 		<template #modal-header-close> arrow_back </template>
 		<div class="editimage-modal-content" ref="container">
 			<div class="image-container">
@@ -32,7 +32,7 @@ export default {
 	mixins: [ModalMixin],
 	props: ["value", "image"],
 	methods: {
-		...mapMutations(["showImageEditModal", "hideImageEditModal"]),
+		...mapMutations(["showNewPostModal", "hideNewPostModal"]),
 
 		cancel() {
 			this.$emit("update:show", false);

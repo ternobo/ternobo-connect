@@ -41,6 +41,10 @@
 						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('quote') }">format_quote</i>
 						<strong>{{ __.get("editor.quote") }}</strong>
 					</div>
+					<div class="editor-list-item" @click="emitAcion('poll')">
+						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('poll') }">poll</i>
+						<strong>{{ __.get("editor.poll") }}</strong>
+					</div>
 				</div>
 			</div>
 		</transition>

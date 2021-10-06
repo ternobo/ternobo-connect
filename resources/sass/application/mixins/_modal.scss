@@ -12,11 +12,12 @@
         background: $white;
 
         >* {
-            padding: 1.25rem;
+            padding: 2rem;
         }
 
         >.modal-body {
             flex: 1 1 auto;
+            padding-top: 1.5rem;
         }
 
         >.modal-footer {
@@ -51,6 +52,14 @@
                 margin: 0;
             }
 
+            @if($direction==ltr) {
+                .back-modal {
+                    .close {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+
             .close {
                 font-family: "Material Icons";
                 position: absolute;
@@ -59,9 +68,13 @@
                 @extend .btn;
                 @extend .btn-text;
                 color: $gray-medium-dark;
+                font-size: 1.5rem;
+                font-weight: normal;
 
-                i {
-                    font-size: 1.5rem;
+                @if($direction==ltr) {
+                    .arrowback {
+                        transform: rotate(180deg);
+                    }
                 }
             }
         }

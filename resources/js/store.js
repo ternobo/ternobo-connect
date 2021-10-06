@@ -17,7 +17,7 @@ export default store({
 
         profileEdit: false,
 
-        showImageEdit: false,
+        showNewPostModal: true,
     },
     actions: {
         loadReportReasons({ commit }) {
@@ -69,11 +69,11 @@ export default store({
         }
     },
     mutations: {
-        showImageEditModal(state) {
-            state.showImageEdit = true;
+        hideNewPostModal(state) {
+            state.showNewPostModal = false;
         },
-        hideImageEditModal(state) {
-            state.showImageEdit = false;
+        showNewPostModal(state) {
+            state.showNewPostModal = true;
         },
 
         setReportReasons(state, payload) {
