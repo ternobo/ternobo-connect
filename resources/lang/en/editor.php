@@ -12,4 +12,6 @@ return [
 
     "base" => "Base",
     "media" => "Media",
+
+    "poll"=>"Poll",
 ];

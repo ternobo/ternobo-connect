@@ -24,7 +24,7 @@ class PollController extends Controller
      */
     public function show($id)
     {
-        $this->service->findById($id);
+        return response()->json(['data' => $this->service->findById($id), "result" => true]);
     }
 
     /**
@@ -35,6 +35,10 @@ class PollController extends Controller
      */
     public function destroy($id)
     {
-        $this->service->deletePoll($id);
+        $poll = $this->service->findById($id);
+        if (Auth::user()->id == $poll->user_id) {
+            return response()->json($this->service->deletePoll($id));
+        }
+        return abort(404);
     }
 }

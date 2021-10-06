@@ -19,7 +19,7 @@ class PollService extends ServiceAccess
      */
     public function getServiceName(): string
     {
-        return "api/v1/polls";
+        return "poll-service/api/v1/polls";
     }
 
     /**

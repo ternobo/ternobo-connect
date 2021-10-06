@@ -179,6 +179,12 @@ Route::middleware([Authenticate::class])->group(function () {
         Route::post("/reportpost", "PostController@report");
 
         Route::post("tags/delete", "Profile\PageController@removeTags");
+
+
+        /**
+         * Polls
+         */
+        Route::resource("polls", "Poll\PollController")->only(["show", "destroy"]);
     });
 
     /**
