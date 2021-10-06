@@ -9,6 +9,7 @@
     background-image: none;
     background-clip: padding-box;
     border: 2px solid $gray;
+    line-height: 1.5rem;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 
     @media screen and (max-width:$sm-size) {
@@ -115,7 +116,7 @@
     }
 
     &.lg-input {
-        padding: 0.625rem 1rem;
+        padding: 0.875rem 1rem;
     }
 
 

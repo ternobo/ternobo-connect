@@ -33,7 +33,7 @@
 							{{ __.get("application.gender") }}
 						</tselect>
 
-						<div class="mt-72px">
+						<div class="mt-10">
 							<checkbox v-model="agree" v-if="appDirection == 'rtl'">با <span class="clickable text-action" @click="$emit('showlaws')">دستورالعمل ترنوبو</span> موافقم</checkbox>
 							<checkbox v-model="agree" v-else>I agree with <span class="clickable text-action" @click="$emit('showlaws')">Ternobo's Community Guidlines</span></checkbox>
 						</div>

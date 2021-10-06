@@ -8,7 +8,7 @@
 			<h2 class="tip-modal--title">
 				{{ __.get("content/posts.tip-this-post") }}
 			</h2>
-			<div class="tip-amount-input-group" :class="{ 'mb-72px': user != null }">
+			<div class="tip-amount-input-group" :class="{ 'mb-10': user != null }">
 				<div class="d-flex align-items-center" dir="ltr">
 					<div style="margin-right: 24px">
 						<div class="currency-selector">

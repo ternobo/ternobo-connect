@@ -19,10 +19,10 @@
 						<span class="d-flex flex-row ms-1" v-else> <img src="/images/iran-flag.png" width="24" /></span>
 					</template>
 					<dropdonw-item>
-						<language-link lang="en" class="d-flex flex-row"> <img src="/emoji/72x72/1f1fa-1f1f8.png" width="24" /> <span class="ms-12px"> English</span> </language-link>
+						<language-link lang="en" class="d-flex flex-row"> <img src="/emoji/72x72/1f1fa-1f1f8.png" width="24" /> <span class="ms-3"> English</span> </language-link>
 					</dropdonw-item>
 					<dropdonw-item>
-						<language-link lang="fa" class="d-flex flex-row"> <img src="/images/iran-flag.png" width="24" /> <span class="ms-12px"> فارسی</span> </language-link>
+						<language-link lang="fa" class="d-flex flex-row"> <img src="/images/iran-flag.png" width="24" /> <span class="ms-3"> فارسی</span> </language-link>
 					</dropdonw-item>
 				</dropdown-menu>
 			</div>
@@ -48,7 +48,7 @@
 										<label class="font-weight-bold mb-0 font-20 text-dark">{{ __.get("register.profile-image") }}</label>
 									</div>
 									<div class="d-flex align-items-center justify-content-center">
-										<profile-image @updated="updateProfile" ref="profileelem" :canChange="true" :showIcons="false" size="profile-lg" class="mb-0 mt-0 me-42px" :src="profile"></profile-image>
+										<profile-image @updated="updateProfile" ref="profileelem" :canChange="true" :showIcons="false" size="profile-lg" class="mb-0 mt-0 me-3" :src="profile"></profile-image>
 										<button class="btn upload-profile-btn" @click="$refs['profileelem'].openFileSelect()">
 											<i class="material-icons-outlined text-dark me-2">cloud_upload</i>
 											{{ __.get("application.upload") }}

@@ -19,7 +19,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="mt-72px">
+					<div class="mt-10">
 						<p class="font-18">{{ __.get("application.security-tips") }}</p>
 						<ul style="list-style: none" class="font-14 p-0">
 							<li>{{ __.get("register.password-tip-1") }}</li>

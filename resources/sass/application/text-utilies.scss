@@ -1,6 +1,9 @@
 a {
     text-decoration: none;
+}
 
+label {
+    display: inline-block;
 }
 
 .font-demibold {
@@ -44,4 +47,10 @@ $color in $theme-colors {
 
 .text-start {
     text-align: $start;
+}
+
+@for $i from 1 through 50 {
+    .line-height-#{$i}px {
+        line-height: $i * 1px;
+    }
 }

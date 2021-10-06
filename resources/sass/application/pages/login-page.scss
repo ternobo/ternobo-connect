@@ -1,6 +1,7 @@
 .login-page {
     display: flex;
     flex-direction: column;
+    padding: 0 1.5rem;
 
     .btn {
         font-size: $text-xsm;
@@ -64,6 +65,7 @@
         .login-card {
             max-width: 480px;
             box-shadow: 0px 20px 250px rgba(0, 0, 0, 0.07);
+            z-index: 1;
 
             .card-body {
                 padding: 40px 62px;

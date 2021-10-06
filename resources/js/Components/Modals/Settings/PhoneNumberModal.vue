@@ -26,7 +26,7 @@
 								<div><otp-input input-class="w-100" class="text-center" @completed="verifyCode" v-model="code" :numInputs="6" /></div>
 								<i class="material-icons-outlined ms-2" :class="{ 'text-danger': invalidCode }">verified_user</i>
 							</div>
-							<div class="mt-42px" style="width: 160px">
+							<div class="mt-3" style="width: 160px">
 								<span
 									class="clickable d-flex justify-content-between align-items-center font-14"
 									:class="{

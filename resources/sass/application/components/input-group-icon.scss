@@ -40,6 +40,15 @@
         }
     }
 
+    &.password-input {
+
+        >i,
+        .actions {
+            #{$end}: 16px;
+            #{$start}: unset;
+        }
+    }
+
 }
 
 .search-input-rounded {
