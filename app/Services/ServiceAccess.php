@@ -33,7 +33,7 @@ abstract class ServiceAccess
     {
         $this->isAuthrequired = true;
         $this->authtype = self::$SIMPLEAUTH;
-        $this->applicationPassword = env("SERVICE_ACCESS_PASS", "123456789");
+        $this->applicationPassword = env("SERVICE_ACCESS_TOKEN", "123456789");
     }
 
     /**
@@ -63,6 +63,10 @@ abstract class ServiceAccess
             $headers['user'] = Base64::encode(json_encode(Auth::user()));
         }
 
-        return Http::withBasicAuth("ternobo", $this->applicationPassword)->retry(2)->baseUrl($this->getEndpoint() . "/" . $this->getServiceName());
+        $userId = Auth::check() ? Auth::user()->id : 0;
+
+        return Http::withHeaders(["Authorization" => "Token " . $this->applicationPassword, "userId" => $userId])
+            ->retry(2)
+            ->baseUrl($this->getEndpoint() . "/" . $this->getServiceName());
     }
 }

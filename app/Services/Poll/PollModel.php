@@ -17,6 +17,7 @@ class PollModel implements JsonSerializable
     public $createdAt;
     public $updatedAt;
     public $expiredAt;
+    public $votes;
 
     public function __construct($userId = null, $question = null, $options = null, $expiredAt = null)
     {
@@ -35,7 +36,7 @@ class PollModel implements JsonSerializable
     public function toArray()
     {
         $data = get_object_vars($this);
-        unset($data['id']);
+        if (!isset($data['id'])) unset($data['id']);
         return $data;
     }
 }

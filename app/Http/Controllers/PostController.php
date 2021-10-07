@@ -19,6 +19,7 @@ use App\Models\SlideBlock;
 use App\Models\PostSlide;
 use App\Models\Report;
 use App\Models\Tag;
+use App\Services\Poll\PollService;
 use App\SocialMediaTools;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -44,7 +45,7 @@ class PostController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostRequest $request)
+    public function store(PostRequest $request, PollService $pollService)
     {
         $slides = $request->slides;
         $user = Auth::user();
@@ -69,7 +70,7 @@ class PostController extends Controller
             'can_tip' => $request->canDonate,
         ]);
 
-        $tagsAndMentions = $post->setContent($slides, $user);
+        $tagsAndMentions = $post->setContent($slides, $user, false, $pollService);
 
         if (!$draft) {
             SocialMediaTools::callMentions($tagsAndMentions['mentions'], $post->id);
@@ -258,7 +259,7 @@ class PostController extends Controller
      * @param \App\Models\Post $post
      * @return \Illuminate\Http\Response
      */
-    public function update(PostRequest $request, Post $post)
+    public function update(PostRequest $request, Post $post, PollService $pollService)
     {
         $slides = $request->slides;
         $user = Auth::user();
@@ -285,7 +286,7 @@ class PostController extends Controller
         $post->deleteBlocks();
         $post->slides()->delete();
 
-        $tags = $post->setContent($slides, $user)['tags'];
+        $tags = $post->setContent($slides, $user, false, $pollService)['tags'];
 
         $post->tags = $tags;
         $post->save();

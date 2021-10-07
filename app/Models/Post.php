@@ -7,6 +7,8 @@ use App\ImageTools;
 use App\Scopes\BlockedPageContentScope;
 use App\Scopes\PostDraftScope;
 use App\Scopes\ReportedPostScope;
+use App\Services\Poll\PollModel;
+use App\Services\Poll\PollService;
 use App\SocialMediaTools;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -204,7 +206,7 @@ class Post extends Model
             ->latest();
     }
 
-    public function setContent($slides, $user, $fileOnly = false): array
+    public function setContent($slides, $user, $fileOnly = false, PollService $pollService): array
     {
         DB::beginTransaction();
         $mentions = [];
@@ -306,6 +308,25 @@ class Post extends Model
                             'sort' => $sort,
                             'content' => json_encode(['language' => $content['language'], "code" => $content['code']]),
                             'type' => 'code',
+                            "meta" => $meta,
+                        ]);
+                        break;
+                    case "poll":
+                        $poll = null;
+                        if (isset($meta['poll_id'])) {
+                            $poll = $pollService->findById($meta['poll_id']);
+                        } else {
+                            $poll = $pollService->createPoll(
+                                PollModel::fromArray($content)
+                            );
+                        }
+
+                        SlideBlock::query()->create([
+                            'slide_id' => $slide_id,
+                            'page_id' => $user->personalPage->id,
+                            'sort' => $sort,
+                            'content' => json_encode($poll),
+                            'type' => 'poll',
                             "meta" => $meta,
                         ]);
                         break;

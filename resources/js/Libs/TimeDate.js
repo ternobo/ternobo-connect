@@ -48,6 +48,14 @@ export default function (Vue) {
         return window.lang == "fa" ? moment.from(time, "en").locale("fa").format(format) : moment(time).format(format);
     }
 
+    Vue.prototype.getFormatedDate = function () {
+        return window.lang == "fa" ? moment().locale("fa").format("YYYY/MM/DD HH:m") : moment().format("YYYY-MM-DD HH:m");
+    }
+
+    Vue.prototype.getFormatedDateTime = function () {
+        return window.lang == "fa" ? moment().locale("fa").format("YYYY/MM/DD HH:m") : moment().format("YYYY-MM-DD HH:m");
+    }
+
     Vue.prototype.getDateObject = (date) => {
         if (window.lang == "fa") {
             date = moment(date).locale("fa");

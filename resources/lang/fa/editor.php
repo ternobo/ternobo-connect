@@ -20,5 +20,6 @@ return [
     "poll-modal-question" => "پرسش شما",
     "poll-modal-question-ph" => "پرسش خود را وارد کنید",
     "poll-modal-options" => "گزینه‌ها",
-    "poll-duration" => "مدت زمان نظرسنجی"
+    "poll-duration" => "تاریخ پایان نظرسنجی",
+    "poll-duration-ph" => "انتخاب تاریخ"
 ];

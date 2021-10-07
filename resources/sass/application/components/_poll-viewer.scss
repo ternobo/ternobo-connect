@@ -1,0 +1,64 @@
+.poll-viewer {
+    .poll-options--list {
+        list-style: none;
+        padding: 0;
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+
+        li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+
+            .btn--poll-option {
+                position: relative;
+                border: 2px solid #C8C8C8;
+                background: transparent;
+                border-radius: 12px;
+                width: 100%;
+                overflow: hidden;
+
+                .poll-option--progress {
+                    height: 100%;
+                    position: absolute;
+                    #{$start}: 0;
+                    background: $gray-light-medium;
+                }
+
+                .poll-option-text {
+                    z-index: 1;
+                }
+
+                &.active {
+                    background: $gray-light;
+                    border-color: $dark;
+                }
+
+                &.voted {
+                    background: $dark;
+                    color: $warning;
+                    border: none;
+
+                    .poll-option--progress {
+                        background: $gray-dark;
+                    }
+                }
+
+                &:hover {
+                    border-color: $dark;
+                }
+            }
+
+            .poll-option--index {
+                margin-#{$end}: 1rem;
+            }
+        }
+    }
+
+    .poll-cations-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+}

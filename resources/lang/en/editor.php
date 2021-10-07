@@ -20,5 +20,6 @@ return [
     "poll-modal-question" => "Your Question",
     "poll-modal-question-ph" => "Enter your Question",
     "poll-modal-options" => "Options",
-    "poll-duration" => "Poll duration"
+    "poll-duration" => "Poll End Date",
+    "poll-duration-ph" => "Select Poll End Date"
 ];

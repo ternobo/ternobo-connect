@@ -14,6 +14,7 @@ class PollController extends Controller
     public function __construct(PollService $service)
     {
         $this->service = $service;
+        $this->middleware("auth")->only(["destroy", "vote"]);
     }
 
     /**
@@ -26,6 +27,19 @@ class PollController extends Controller
     {
         return response()->json(['data' => $this->service->findById($id), "result" => true]);
     }
+
+    public function vote($pollId, $optionId)
+    {
+        return response()->json($this->service->vote($optionId, $pollId));
+    }
+
+    public function options($pollId)
+    {
+        return response()->json($this->service->getPollOptions($pollId));
+    }
+
+
+
 
     /**
      * Remove the specified resource from storage.

@@ -28,7 +28,8 @@ class ContentBlock implements RuleInterface
             "orderedList" => [new OrderedListRule()],
             "quote" => ["max:1200"],
             "text" => ["max:1200"],
-            "title" => ["max:150"]
+            "title" => ["max:150"],
+            "poll" => [],
         ];
         $typeValidator = validator(["blocks" => $blocks], [
             "blocks.*.type" => [Rule::in(array_keys($rules))]

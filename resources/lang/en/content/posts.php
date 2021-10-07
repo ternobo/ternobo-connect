@@ -26,4 +26,7 @@ return [
     'spoiler-alert' => "Spoiler Alert",
     'rotate' => "Rotate",
     'alt-text' => "Alternative Text",
+
+    'votes' => "Votes",
+    "poll-loading-error" => "Error While Loading Poll",
 ];

@@ -49,6 +49,10 @@ $color in $theme-colors {
     text-align: $start;
 }
 
+.text-center {
+    text-align: center;
+}
+
 @for $i from 1 through 50 {
     .line-height-#{$i}px {
         line-height: $i * 1px;

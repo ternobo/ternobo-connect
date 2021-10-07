@@ -4,6 +4,7 @@ namespace App\Services\Poll;
 
 use App\Services\Poll\PollModel;
 use App\Services\ServiceAccess;
+use Illuminate\Support\Facades\Auth;
 
 class PollService extends ServiceAccess
 {
@@ -41,12 +42,12 @@ class PollService extends ServiceAccess
      * 
      * @return PollModel
      */
-    public function findById($id)
+    public function findById($id, $throwError = true)
     {
         $response = $this->createRequest()->get($id);
         abort_unless($response->ok(), 503);
         $object = $response->json();
-        if (!$object['status']) {
+        if (!$object['status'] && $throwError) {
             abort(404);
         }
         return PollModel::fromArray($object['result']);
@@ -71,7 +72,12 @@ class PollService extends ServiceAccess
      */
     public function createPoll(PollModel $model): PollModel
     {
-        $response = $this->createRequest()->withBody(json_encode($model->toArray()), "application/json")->post("/");
+        $model->userId = Auth::user()->id;
+        $poll = $model->toArray();
+        for ($i = 0; $i < count($poll["options"]); $i++) {
+            unset($poll["options"][$i]['id']);
+        }
+        $response = $this->createRequest()->withBody(json_encode($poll), "application/json")->post("/");
         abort_unless($response->ok(), 503);
         $object = $response->json();
         if (!$object['status']) {

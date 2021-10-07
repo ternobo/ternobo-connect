@@ -67,7 +67,7 @@
 @import "./embed";
 @import "./password-strength.scss";
 @import "./blocked-user.scss";
-@import "./buttons/buttons";
+@import "./buttons/index";
 @import "./modal/index";
 @import "./editimage-modal";
 @import "./post-card/index";
@@ -75,3 +75,4 @@
 @import "./mentionable-menu";
 @import "./tooltip/index";
 @import "./progressbar";
+@import "./poll-viewer";

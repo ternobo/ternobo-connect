@@ -69,6 +69,10 @@ export default {
 
                 content = <ListTag>{li_list}</ListTag>;
                 break;
+            case "poll":
+                tag = "div";
+                content = (<poll-viewer pollId={JSON.parse(this.content.content).id}></poll-viewer>);
+                break;
         }
 
         return h(tag, {
@@ -79,6 +83,7 @@ export default {
         VideoPlayer,
         CodeBlock,
         "image-viewer": () => import("./SliderCard/Elements/ImageViewer.vue"),
+        "poll-viewer": () => import("./SliderCard/Elements/PollViewer.vue")
     },
     data() {
         return {
