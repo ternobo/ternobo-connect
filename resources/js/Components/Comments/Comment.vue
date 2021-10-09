@@ -24,8 +24,8 @@
 				</wire-link>
 				<div class="d-flex align-items-center">
 					<span>
-					<span class="donate-badge" v-if="comment.tip_amount != null"> <i class="material-icons-outlined">savings</i> IRT {{ formatNumber(comment.tip_amount, "0,0") }}</span>
-				</span>
+						<span class="donate-badge" v-if="comment.tip_amount != null"> <i class="material-icons-outlined">savings</i> IRT {{ formatNumber(comment.tip_amount, "0,0") }}</span>
+					</span>
 					<span class="comment-time">{{ comment_time }}</span>
 					<div>
 						<dropdown-menu size="lg" variant="white" toggle-class="text-decoration-none" no-caret>
@@ -57,7 +57,6 @@
 				</div>
 			</div>
 			<div class="comment-body" dir="auto">
-				
 				<span dir="auto">
 					<social-content :text="comment.text" :tags="comment.tags" />
 				</span>
@@ -76,7 +75,7 @@
 				</div>
 				<div class="actions">
 					<span class="replies-text clickable" @click="loadReplies">{{ replies_count > 0 ? replies_count : "" }} {{ __.choice("content/comments.reply", replies_count == 0 ? 1 : replies_count) }}</span>
-					<i @click="likeComment" v-if="!checkUser(comment.page.user_id)" class="hover-dark clickable material-icons font-20 ms-12px" :class="{ 'text-danger': liked }">
+					<i @click="likeComment" v-if="!checkUser(comment.page.user_id)" class="hover-dark clickable material-icons font-20 ms-3" :class="{ 'text-danger': liked }">
 						{{ liked ? "favorite" : "favorite_border" }}
 					</i>
 				</div>

@@ -22,7 +22,7 @@
 								<input type="text" class="form-control text-input" :placeholder="__.get('feedbacks.share-feedback')" max="150" maxlength="150" v-model="feedbackTitle" />
 							</div>
 							<div class="pb-2 pt-4 d-flex flex-column">
-								<div class="d-flex justify-content-between mb-3">
+								<div class="d-flex justify-content-between mb-4">
 									<strong class="font-demibold"
 										>{{ __.get("feedbacks.feedback-describe") }} <span class="text-superlight">{{ __.get("feedbacks.optional") }}</span></strong
 									>
@@ -68,7 +68,7 @@
 					</div>
 				</div>
 				<div class="w-100">
-					<FeedbackCard class="mb-3" v-for="feedback in feedbacksArray" :key="feedback.id" :feedback="feedback"></FeedbackCard>
+					<FeedbackCard class="mb-4" v-for="feedback in feedbacksArray" :key="feedback.id" :feedback="feedback"></FeedbackCard>
 
 					<div class="w-100 d-flex justify-content-center py-3" v-if="loadingMore">
 						<loading-spinner class="image__spinner" />
@@ -81,7 +81,7 @@
 			</div>
 		</div>
 		<sidebar-left v-if="pages.length > 0">
-			<div class="card mb-3">
+			<div class="card mb-4">
 				<div class="people-suggestion-card-body card-body">
 					<people-suggestion v-for="page in pages" :page="page" :key="page.id"></people-suggestion>
 				</div>

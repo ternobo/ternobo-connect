@@ -5,13 +5,13 @@
 				<MaterialTextField class="w-100" input-class="w-100" :value="firstName" v-model="firstName" :required="true" :placeholder="__.get('application.first-name')"></MaterialTextField>
 			</div>
 			<div class="col-md-6">
-				<MaterialTextField class="w-100 mt-md-0 mt-3" input-class="w-100" :value="lastName" v-model="lastName" :required="true" :placeholder="__.get('application.last-name')"></MaterialTextField>
+				<MaterialTextField class="w-100 mt-md-0 mt-4" input-class="w-100" :value="lastName" v-model="lastName" :required="true" :placeholder="__.get('application.last-name')"></MaterialTextField>
 			</div>
-			<div class="col-md-8 d-flex flex-column mt-3">
+			<div class="col-md-8 d-flex flex-column mt-4">
 				<MaterialTextField class="w-100" input-class="w-100" :value="shortBio" v-model="shortBio" :placeholder="__.get('user-profile.title')"></MaterialTextField>
 				<small class="font-12 mt-2">{{ __.get("user-profile.user-title-des") }}</small>
 			</div>
-			<div class="col-md-4 mt-3">
+			<div class="col-md-4 mt-4">
 				<tselect
 					class="tselect-lg"
 					labelOption="label"
@@ -26,10 +26,10 @@
 					{{ __.get("application.gender") }}
 				</tselect>
 			</div>
-			<div class="col-md-4 mt-3">
+			<div class="col-md-4 mt-4">
 				<MaterialTextField class="w-100" input-class="w-100" :value="location" v-model="location" :placeholder="__.get('user-profile.location')"></MaterialTextField>
 			</div>
-			<div class="col-md-12 d-flex justify-content-end align-items-center mt-3">
+			<div class="col-md-12 d-flex justify-content-end align-items-center mt-4">
 				<loading-button class="btn btn-dark px-4" :loading="loading" @click.native="save">{{ __.get("application.save") }}</loading-button>
 			</div>
 		</div>

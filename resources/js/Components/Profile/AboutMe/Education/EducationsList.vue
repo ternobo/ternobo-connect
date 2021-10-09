@@ -3,7 +3,7 @@
 		<div class="card-body">
 			<div class="d-flex mb-2 aling-items-center justify-content-between">
 				<h2 class="about-me--card-title">تحصیلات</h2>
-				<button class="rounded-add-btn btn-light-action" v-if="edit" @click="addEducaction">
+				<button class="btn btn-icon btn-rounded btn-secondary" v-if="edit" @click="addEducaction">
 					<i class="material-icons">add</i>
 				</button>
 			</div>

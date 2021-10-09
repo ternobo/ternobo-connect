@@ -27,7 +27,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        if ($this->app->environment('local')) {
+            $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
+            $this->app->register(TelescopeServiceProvider::class);
+        }
     }
 
     /**
@@ -117,17 +120,16 @@ class AppServiceProvider extends ServiceProvider
                     "currentPage" => function () {
                         if (Auth::check()) {
                             return Cookie::get('ternobo_current_page_id') !== null ?
-                            Page::query()
+                                Page::query()
                                 ->with("categories")
                                 ->with("skills")
                                 ->find(json_decode(Cookie::get('ternobo_current_page_id'))) :
-                            Auth::user()->personalPage()
+                                Auth::user()->personalPage()
                                 ->with("categories")
                                 ->with("skills")
                                 ->first();
                         }
                         return null;
-
                     },
                     "followings" => function () {
                         if (Auth::check()) {

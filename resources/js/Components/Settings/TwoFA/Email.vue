@@ -1,6 +1,6 @@
 <template>
 	<div class="d-flex flex-column">
-		<div class="mb-3">
+		<div class="mb-4">
 			<div class="d-flex justify-content-between align-content-center">
 				<strong> یک کد تایید برای شما ارسال شد </strong>
 
@@ -15,7 +15,7 @@
 				</div>
 			</div>
 
-			<div class="mt-3">
+			<div class="mt-4">
 				<span
 					class="clickable font-14"
 					:class="{

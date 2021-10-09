@@ -5,11 +5,11 @@
 				<material-text-field class="w-100 mx-1 text-right mb-4" input-class="w-100" v-model="current_password" type="password" name="current_password" :placeholder="__.get('settings.current-password')" />
 
 				<material-text-field class="w-100 mx-1 text-right" input-class="w-100" v-model="password" type="password" name="password" :placeholder="__.get('application.password')" />
-				<password-meter class="mb-4 mt-3 w-100" :good.sync="goodPassword" :password="password"></password-meter>
+				<password-meter class="mb-4 mt-4 w-100" :good.sync="goodPassword" :password="password"></password-meter>
 
 				<material-password-input class="w-100 mx-1 text-right" input-class="w-100" v-model="password_repeat" type="password" name="password" :placeholder="__.get('settings.confirm-password')" />
 			</div>
-			<div class="mt-5">
+			<div class="mt-7">
 				<p class="font-18">{{ __.get("application.security-tips") }}</p>
 				<ul style="list-style: none" class="font-14 p-0">
 					<li>{{ __.get("register.password-tip-1") }}</li>

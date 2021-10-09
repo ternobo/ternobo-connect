@@ -1,10 +1,14 @@
 <template>
 	<component :is="tag">
 		<slot></slot>
-		<div class="tribute-container" v-if="searchKey != null" :style="caretPosition">
+		<div class="mention-menu-container" v-if="searchKey != null" :style="caretPosition">
 			<ul>
-				<li v-for="item in items" :key="getKey(item.key)" @mousedown="selectItem(item)">
-					{{ item.name }}
+				<li v-for="item in items" :key="getKey(item.key)" :class="{ hashtag: searchKey == '#' }" @mousedown="selectItem(item)">
+					<lazy-image class="profile-xxsm ms-4" imgClass="profile-xxsm" :src="item.profile" v-if="item.profile" />
+					<div class="d-flex flex-column">
+						<span class="name">{{ item.name }}</span>
+						<span class="text-gray-medium-dark font-10" v-if="item.short_bio">{{ item.short_bio }}</span>
+					</div>
 				</li>
 			</ul>
 		</div>
@@ -147,7 +151,6 @@ export default {
 			const inputRect = this.input.getBoundingClientRect();
 			this.caretPosition = {
 				position: "absolute",
-				left: `${rect.left - inputRect.left}px`,
 				top: this.disabledTop ? "" : `${rect.top - inputRect.top + this.getLineHeight(this.input)}px`,
 				height: `auto`,
 			};

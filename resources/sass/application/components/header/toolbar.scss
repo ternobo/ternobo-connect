@@ -9,12 +9,12 @@
 
     a {
         position: relative;
-        float: right;
-        color: $icons;
+        float: $start;
+        color: $light;
         text-align: center;
         padding: 0 12px;
         text-decoration: none;
-        font-size: 18px;
+        font-size: $text-md;
         line-height: 25px;
         border-radius: 4px;
         margin: 0.25rem;
@@ -23,7 +23,7 @@
 
         &:not(.active):not(.invite-link) {
             .navheader-icon {
-                color: rgba($color: $grey, $alpha: 0.5);
+                color: rgba($color: $gray-500, $alpha: 0.5);
             }
         }
 
@@ -50,17 +50,17 @@
             -webkit-font-smoothing: antialiased;
             vertical-align: middle;
             font-size: 1.5rem;
-            color: $grey;
+            color: $gray-500;
 
             &.invite-link {
                 transform: rotate(-15deg);
 
                 &.hasInvite {
-                    color: $action;
+                    color: $blue-cta;
                     opacity: 1 !important;
 
                     &:hover {
-                        color: $action-hover;
+                        color: $blue-hover;
                     }
                 }
 
@@ -70,7 +70,7 @@
 
     a:hover {
         .navheader-icon {
-            color: $icon-hover;
+            color: $black;
         }
     }
 
@@ -78,15 +78,15 @@
         .navheader-icon {
             font-family: "Material Icons";
             font-size: 1.5rem;
-            color: $icon-hover;
+            color: $black;
         }
 
         .navheader-text {
-            font-size: 14px;
+            font-size: $text-xsm;
             transform: scale(1);
             height: auto;
             width: auto;
-            color: $icon-hover;
+            color: $black;
         }
     }
 
@@ -94,17 +94,17 @@
         transition: all 0.3s;
         // content: " ";
         height: 2px;
-        background: $icon-hover;
+        background: $black;
         width: 1.5rem;
         position: absolute;
-        left: 12px;
-        right: 12px;
+        #{$end}: 12px;
+        #{$start}: 12px;
         bottom: 0;
         transform: scaleX(0) translateY(8px);
     }
 
     a.active::after {
-        color: $icon-hover;
+        color: $black;
         width: 1.5rem;
         transform: scaleX(1) translateY(8px);
     }

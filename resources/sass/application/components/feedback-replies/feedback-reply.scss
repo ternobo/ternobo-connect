@@ -18,21 +18,21 @@
         padding: 16px 1.5rem;
 
         .pagedetail {
-            margin-right: 12px;
+            margin-#{$start}: 12px;
             display: flex;
             flex-direction: column;
-            margin-left: 12px;
+            margin-#{$end}: 12px;
 
             .short-bio {
-                font-size: 12px;
-                color: $grey;
+                font-size: $text-xxsm;
+                color: $gray-500;
             }
         }
 
         .feedback-reply-time {
-            margin-left: 8px;
+            margin-#{$end}: 8px;
             color: $text-color;
-            font-size: 12px;
+            font-size: $text-xxsm;
             line-height: 18px;
         }
 
@@ -40,8 +40,8 @@
             content: " ";
             position: absolute;
             width: calc(100% - 40px);
-            left: 20px;
-            right: 20px;
+            #{$end}: 20px;
+            #{$start}: 20px;
             bottom: 0;
             height: 2px;
             background: #e0e0e0;

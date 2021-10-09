@@ -13,7 +13,7 @@
 					<div class="invite-links">
 						<div class="invite" :class="{ disabled: !inviteLink.valid }" v-for="inviteLink in inviteLinks" :key="`invite_link_${inviteLink.id}`">
 							<i class="material-icons-outlined invite-icon" v-if="inviteLink.valid || inviteLink.used_by == null">confirmation_number</i>
-							<input class="text-input-light border-0 py-2" :class="{ 'text-muted': !inviteLink.valid }" v-if="inviteLink.valid || inviteLink.used_by == null" type="text" readonly :value="`${$APP_URL}/register?code=${inviteLink.code}`" />
+							<input class="form-control fill-light border-0 py-2" :class="{ 'text-muted': !inviteLink.valid }" v-if="inviteLink.valid || inviteLink.used_by == null" type="text" readonly :value="`${$APP_URL}/register?code=${inviteLink.code}`" />
 							<wire-link :href="inviteLink.used_by.username" v-else class="used_by_user_info">
 								<lazy-image :src="inviteLink.used_by.profile" class="profile-xxsm" imgClass="profile-xxsm" circle></lazy-image>
 								<span>{{ inviteLink.used_by.name }}</span>
@@ -28,7 +28,7 @@
 							<li v-html="__.get('invite-links.answer-2')"></li>
 						</ul>
 
-						<div class="mt-3">
+						<div class="mt-4">
 							<strong class="font-16">{{ __.get("invite-links.attention") }}</strong>
 							<ul>
 								<li v-html="__.get('invite-links.answer-3')"></li>

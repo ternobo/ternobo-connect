@@ -2,7 +2,7 @@
 	<div class="d-flex flex-column">
 		<div v-if="!verification">
 			<div class="d-flex flex-column align-items-center">
-				<div class="mb-3">
+				<div class="mb-4">
 					<img :src="qr" style="max-width: 130px" v-if="qr != null" />
 					<skeleton :height="'130px'" :width="'130px'" v-else></skeleton>
 				</div>

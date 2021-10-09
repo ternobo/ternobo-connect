@@ -1,7 +1,7 @@
 <template>
 	<b-modal v-if="$store.state.user != null" v-model="showModal" hide-footer hide-header size="md" :centered="true">
 		<div>
-			<div class="w-100 pr-2 mb-3 mt-2 d-flex align-items-center dir-ltr text-right text-action" dir="ltr">
+			<div class="w-100 pr-2 mb-4 mt-2 d-flex align-items-center dir-ltr text-right text-action" dir="ltr">
 				<i class="material-icons-outlined clickale p-1 text-grey font-18" @click="editLink = !editLink">{{ editLink ? "check" : "edit" }}</i>
 				<span class="dir-ltr">Ternobo.com/{{ $store.state.user.username }}/</span>
 				<input type="text" id="slug-input" v-no-space class="w-100 py-1 text-action dir-ltr text-left" v-model="slug" :class="{ 'border-0': !editLink }" name="slug" :readonly="!editLink" />

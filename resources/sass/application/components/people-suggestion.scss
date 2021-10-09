@@ -7,7 +7,7 @@
 
     figure.profile-xsm {
         margin-bottom: 0;
-        margin-left: 12px;
+        margin-#{$end}: 12px;
     }
 
     .suggestion-info-link {
@@ -21,16 +21,16 @@
 
         .person-name {
             font-weight: 600;
-            font-size: 14px;
+            font-size: $text-xsm;
             line-height: 24px;
             color: $dark;
         }
 
         .person-short-bio {
             font-weight: normal;
-            font-size: 12px;
+            font-size: $text-xxsm;
             line-height: 20px;
-            color: $grey;
+            color: $gray-500;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;

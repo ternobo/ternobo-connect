@@ -19,11 +19,11 @@
 		</div>
 		<div class="login-content flex-column">
 			<div class="text-center my-4">
-				<h2 class="font-18 mb-3">{{ __.get("follow-suggestion.suggestions-title") }}</h2>
+				<h2 class="font-18 mb-4">{{ __.get("follow-suggestion.suggestions-title") }}</h2>
 				<p class="text-center" v-html="__.get('follow-suggestion.subtitle')"></p>
 			</div>
 			<pageinfocards-skeleton :count="12" v-if="loading_data"></pageinfocards-skeleton>
-			<div class="row justify-content-center mt-12px" v-else>
+			<div class="row justify-content-center mt-3" v-else>
 				<div class="col-md-3 py-2" v-for="page in pages" :key="`page_id_${page.id}`">
 					<page-info-card @followed="followings++" @unfollowed="followings--" :page="page" />
 				</div>

@@ -3,21 +3,21 @@
 		<div class="login-form w-100">
 			<div class="login-card card w-100">
 				<div class="card-body">
-					<div class="d-flex align-items-center mb-5">
+					<div class="d-flex align-items-center mb-7">
 						<label class="font-weight-bold mb-0 font-20 text-dark">{{ __.get("application.further-information") }}</label>
 					</div>
 					<div>
 						<div class="mb-4">
 							<label class="inputlabel font-12 font-demibold">{{ __.get("validation.attributes.first-name") }}</label>
-							<input type="text" v-model="first_name" class="text-input-light text-input--md" />
+							<input type="text" v-model="first_name" class="form-control fill-light lg-input" />
 						</div>
 						<div class="mb-4">
 							<label class="inputlabel font-12 font-demibold">{{ __.get("validation.attributes.last-name") }}</label>
-							<input type="text" v-model="last_name" class="text-input-light text-input--md" />
+							<input type="text" v-model="last_name" class="form-control fill-light lg-input" />
 						</div>
-						<div class="mb-5">
+						<div class="mb-7">
 							<label class="inputlabel font-12 font-demibold">{{ __.get("application.username") }}</label>
-							<input type="text" v-model="username" class="text-input-light text-input--md" />
+							<input type="text" v-model="username" class="form-control fill-light lg-input" />
 						</div>
 						<tselect
 							class="tselect-lg"
@@ -33,7 +33,7 @@
 							{{ __.get("application.gender") }}
 						</tselect>
 
-						<div class="mt-52px">
+						<div class="mt-10">
 							<checkbox v-model="agree" v-if="appDirection == 'rtl'">با <span class="clickable text-action" @click="$emit('showlaws')">دستورالعمل ترنوبو</span> موافقم</checkbox>
 							<checkbox v-model="agree" v-else>I agree with <span class="clickable text-action" @click="$emit('showlaws')">Ternobo's Community Guidlines</span></checkbox>
 						</div>

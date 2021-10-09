@@ -13,7 +13,7 @@
     >i {
         cursor: pointer;
         transition: 0.3s all;
-        color: $grey;
+        color: $gray-500;
 
         &:hover {
             color: $dark;
@@ -28,30 +28,59 @@
 }
 
 .emoji-picker {
-    width: 350px;
-    height: 350px;
-    padding: 8px;
+    width: 308px;
+    height: 294px;
     display: flex;
     flex-direction: column;
-    box-shadow: $card-shadow;
+    border: 2px solid $gray;
     background: $white;
     position: absolute;
     z-index: 9999;
+    #{$start}: 42px;
+    top: 0px;
+    box-shadow: $notification-shadow;
 
     .search-emoji {
         padding: 8px;
     }
 
+    .emoji-picker-select {
+        display: flex;
+        flex-direction: row;
+        max-height: 100%;
+
+        .emoji-list-container {
+            display: flex;
+            flex-direction: column;
+
+
+            width: calc(100% - 50px);
+        }
+
+        .emoji-tabs {
+            width: -webkit-max-content;
+            width: -moz-max-content;
+            width: max-content;
+        }
+    }
+
     .emoji-tabs {
         display: flex;
-        align-items: center;
+        overflow: auto;
+        flex-direction: column;
+        margin: 1rem 0;
+        padding: 0 1rem;
+        margin-bottom: 0;
+        padding-#{$end}: 0.5rem;
+        @include nice-scroll;
 
         .emoji-tab {
             display: flex;
             align-items: center;
-            width: 100%;
-            padding: 8px;
-            color: $icons;
+            justify-content: center;
+            width: auto;
+            padding: 3px;
+            color: $light;
             border-bottom: 2px solid transparent;
             cursor: pointer;
             transition: 0.3s all;
@@ -61,8 +90,22 @@
             }
 
             &.active {
-                color: $dark;
-                border-bottom: 2px solid $dark;
+                color: $gray-dark;
+            }
+
+            &.recent-emojies {
+                border-bottom: 2px solid $gray;
+                padding-bottom: 0.75rem;
+                margin-bottom: 0.75rem;
+
+                &.active,
+                &:hover {
+                    border-color: $black;
+                }
+            }
+
+            i {
+                font-size: 20px;
             }
         }
     }
@@ -73,12 +116,22 @@
         overflow: auto;
         display: flex;
         flex-wrap: wrap;
-        padding: 8px;
+        padding: 0.5rem;
+        padding-top: 0.25rem;
+
 
         .emoji-item {
-            width: 14%;
-            padding: 8px;
+            box-sizing: content-box;
             cursor: pointer;
+            padding: 4px;
+            width: 21px;
+
+            figure {
+                height: -webkit-max-content;
+                height: -moz-max-content;
+                height: max-content;
+                display: flex;
+            }
 
             .emoji {
                 width: 100%;

@@ -22,7 +22,7 @@
 		<div class="card-footer">
 			<div class="feedback-publisher-info">
 				<div class="publisher-name">
-					<skeleton :circle="true" class="profile-xxsm me-3" />
+					<skeleton :circle="true" class="profile-xxsm me-4" />
 					<div class="d-flex flex-column">
 						<div class="d-flex align-items-center">
 							<skeleton width="120px"></skeleton>

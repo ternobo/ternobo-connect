@@ -26,46 +26,9 @@
     position: absolute;
 }
 
-.tribute-container {
-    @extend .nice-scroll;
-    max-width: -webkit-max-content;
-    max-width: -moz-max-content;
-    max-width: max-content;
-    white-space: nowrap;
-
-    li {
-        font-size: 10px;
-        font-weight: 600;
-        color: $text-color;
-        padding: 10px 12px !important;
-    }
-}
-
 .mention-item {
-    color: $action;
+    color: $blue-cta;
     padding: 0;
-}
-
-.postslide-enter-active {
-    transition-duration: 0.8s;
-    transition-timing-function: linear;
-}
-
-.postslide-leave-active {
-    transition-duration: 0.8s;
-    transition-timing-function: linear;
-}
-
-.postslide-enter-to,
-.postslide-leave {
-    max-height: 1000px;
-    will-change: max-height;
-}
-
-.postslide-enter,
-.postslide-leave-to {
-    // overflow: hidden;
-    max-height: 40px;
 }
 
 

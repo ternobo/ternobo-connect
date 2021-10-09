@@ -10,11 +10,11 @@
         color: $text-color;
         width: 100%;
         font-weight: 600;
-        padding: 16px 0;
     }
 
     .tselect_item {
-        padding: 8px 16px;
+        width: auto;
+        padding: 1rem;
     }
 
     .tselect_item:hover {
@@ -22,17 +22,11 @@
     }
 
     .tselect_title {
-
         background: $white;
         color: $text-color;
-        width: 100%;
+        width: auto;
         font-weight: 600;
-        padding: 16px;
-        height: 52px;
-        padding-right: 20px;
-    }
-
-    .title-text {
-        margin-left: 4px;
+        padding: 1rem;
+        height: auto;
     }
 }

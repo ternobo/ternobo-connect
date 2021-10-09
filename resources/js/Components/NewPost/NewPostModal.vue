@@ -1,8 +1,7 @@
 <template>
 	<div>
 		<category-select-modal :categories.sync="categories" @hide="onCategoryClose" :selectedCategory.sync="category" :show.sync="showCategoryModal"></category-select-modal>
-
-		<b-modal ignore-enforce-focus-selector=".ternoboeditor--link-input" v-if="user != null" v-model="showModal" @hide="hide" @show="shown" no-close-on-esc hide-footer no-stacking modal-class="new-post-modal" size="new-post" :title="__.get('content/posts.create-new-post')" :centered="true">
+		<b-modal ignore-enforce-focus-selector=".ternoboeditor--link-input" v-if="user != null" v-model="showModal" @hide="hide" @show="shown" no-close-on-esc hide-footer :hide-backdrop="showCategoryModal || !showNewPostModal" :modal-class="['new-post-modal', { 'opacity-0': showCategoryModal || !showNewPostModal }]" size="lg modal-new-post" :title="__.get('content/posts.create-new-post')" :centered="true">
 			<div action="/posts" data-ajax method="POST" data-reload="1" enctype="multipart/form-data" class="w-100">
 				<div class="new-post position-relative">
 					<div class="selections">
@@ -26,10 +25,8 @@
 						</div>
 					</div>
 					<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
-					<div class="d-flex justify-content-center align-items-center mt-3 mb-2">
-						<loading-button :loading="loadingDraft" class="btn btn-transparent font-14" :disabled="!checkContent" @click.native="submitPost(true)">{{ __.get("content/posts.draft") }}</loading-button>
-						<loading-button :loading="loading" class="btn btn-primary font-14 w-100" :class="{ 'text-muted': !checkContent }" :disabled="!checkContent" @click.native="submitPost(false)"> {{ post ? __.get("application.save") : __.get("content/posts.publish") }} </loading-button>
-					</div>
+
+					<modal-footer-buttons @ok="submitPost(false)" @cancel="submitPost(true)" class="mt-8" :cancelLoading="loadingDraft" :okLoading="loading" :okText="post ? __.get('application.save') : __.get('content/posts.publish')" :cancelText="__.get('content/posts.draft')" :cancelDisable="!checkContent" cancelClass="btn-text" :okDisabled="!checkContent" okClass="btn-primary"></modal-footer-buttons>
 				</div>
 			</div>
 		</b-modal>
@@ -50,6 +47,8 @@ import LoadingSpinner from "../LoadingSpinner.vue";
 import CategorySelect from "../CategorySelect/CategorySelect.vue";
 import CategorySelectModal from "../CategorySelect/CategorySelectModal.vue";
 import { serialize } from "../../Libs/ObjectToFormdata";
+import EditImageModal from "./EditImageModal.vue";
+import ModalFooterButtons from "../Modals/ModalFooterButtons.vue";
 export default {
 	props: {
 		post: {
@@ -119,7 +118,13 @@ export default {
 			};
 			data.slides = data.slides.map((item) => {
 				for (let sort = 0; sort < item.content.length; sort++) {
-					item.content[sort] = { type: item.content[sort].type, id: item.content[sort].id, sort: sort, content: item.content[sort].content };
+					item.content[sort] = {
+						type: item.content[sort].type,
+						id: item.content[sort].id,
+						sort: sort,
+						content: item.content[sort].content,
+						meta: item.content[sort].meta,
+					};
 				}
 				return { id: item.id, blocks: item.content };
 			});
@@ -181,7 +186,6 @@ export default {
 		},
 	},
 	watch: {
-		text(newValue) {},
 		canDonate(newValue) {
 			if (newValue && this.show) {
 				this.loadingCanDonate = true;
@@ -250,7 +254,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapState(["user", "shared"]),
+		...mapState(["user", "shared", "showNewPostModal"]),
 		username() {
 			return Boolean(this.user) && Boolean(this.user.name) && this.user.name.length > 40 ? this.user.name.substr(0, 40) : this.user.name;
 		},
@@ -295,6 +299,8 @@ export default {
 		LoadingSpinner,
 		CategorySelect,
 		CategorySelectModal,
+		EditImageModal,
+		ModalFooterButtons,
 	},
 	mixins: [ModalMixin],
 	name: "NewPostModal",

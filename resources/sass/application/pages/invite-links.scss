@@ -32,13 +32,13 @@
 
         .invite-icon {
             font-size: 40px;
-            color: $action;
+            color: $blue-cta;
             transform: rotate(-15deg);
         }
 
         &.disabled {
             .invite-icon {
-                color: $icons;
+                color: $light;
             }
         }
 
@@ -51,7 +51,7 @@
         align-items: center;
 
         span {
-            font-size: 12px;
+            font-size: $text-xxsm;
             font-weight: 600;
             color: $dark;
         }
@@ -65,21 +65,21 @@
 }
 
 .invite-description {
-    font-size: 14px;
+    font-size: $text-xsm;
     line-height: 2;
 
     ul {
         list-style: none;
-        padding-right: 0;
+        padding-#{$start}: 0;
 
         li::before {
             content: " ";
-            background: $icons;
+            background: $light;
             font-size: 1.5rem;
             display: inline-block;
             width: 8px;
             height: 8px;
-            margin-left: 8px;
+            margin-#{$end}: 8px;
             border-radius: 50%;
 
         }

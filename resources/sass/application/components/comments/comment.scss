@@ -25,25 +25,25 @@
             box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.03);
             border-radius: 4px;
 
-            margin-left: 1rem;
+            margin-#{$end}: 1rem;
 
             background: $white;
             color: $green;
             padding: 0.25rem;
-            font-size: 10px;
+            font-size: $text-xxxsm;
             font-weight: bold;
             letter-spacing: 0.75px;
             border-radius: 4px;
 
             >i {
-                margin-left: 4px;
+                margin-#{$end}: 4px;
                 color: $green;
-                font-size: 16px;
+                font-size: $text-sm;
             }
         }
 
         .pagedetail {
-            margin-right: 1rem;
+            margin-#{$start}: 1rem;
             display: flex;
             flex-direction: column;
 
@@ -55,13 +55,13 @@
 
             .short-bio {
                 font-size: 0.625rem;
-                color: $grey;
+                color: $gray-500;
             }
         }
 
         .comment-time {
-            margin-left: 0.75rem;
-            color: $grey;
+            margin-#{$end}: 0.75rem;
+            color: $gray-500;
             font-size: 0.625rem;
         }
     }
@@ -80,12 +80,12 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        color: $grey;
+        color: $gray-500;
         margin-top: 16px;
 
         .likes {
             font-size: 0.75rem;
-            color: $grey;
+            color: $gray-500;
             white-space: nowrap;
 
             .profile-text {
@@ -95,14 +95,14 @@
         }
 
         .replies-text {
-            color: $grey;
+            color: $gray-500;
             font-weight: 600;
             font-size: 0.75rem;
         }
 
         >.like-btn {
             color: $dark;
-            margin-right: 16px;
+            margin-#{$start}: 16px;
         }
     }
 

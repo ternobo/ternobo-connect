@@ -14,7 +14,7 @@
         word-break: break-word;
 
         @media screen and (max-width: $sm-size) {
-            font-size: 12px;
+            font-size: $text-xxsm;
         }
     }
 
@@ -26,10 +26,10 @@
         border-radius: 2rem;
         display: flex;
         flex-direction: column;
-        color: $icons;
+        color: $light;
         background: $body-bg;
         padding: 2px;
-        margin-left: 1.5rem;
+        margin-#{$end}: 1.5rem;
         padding: 8px;
         width: 2.75rem;
         height: 78px;
@@ -42,7 +42,7 @@
             max-height: 56px;
 
             i {
-                font-size: 20px;
+                font-size: $text-lg;
             }
         }
 
@@ -53,7 +53,7 @@
         width: 100%;
 
         @media screen and (max-width: $sm-size) {
-            font-size: 12px;
+            font-size: $text-xxsm;
         }
     }
 }

@@ -7,15 +7,15 @@
 
 
 .comment-replies {
-    border-radius: 1px solid $sub-heading;
+    border-radius: 1px solid $gray-500;
 
     >.sendcomment {
         margin: 2rem 0;
     }
 
     .replies {
-        border-right: 2px solid $gray-400;
-        padding-right: 1.25rem;
+        border-#{$start}: 2px solid $gray-400;
+        padding-#{$start}: 1.25rem;
     }
 
     .reply-to-container {
@@ -24,10 +24,10 @@
 
         i {
             color: $gray-400;
-            margin-left: 0.25rem;
+            margin-#{$end}: 0.25rem;
         }
 
-        color: $grey;
+        color: $gray-500;
     }
 }
 
@@ -68,7 +68,7 @@
                 width: calc(100% - 58px);
 
                 .input {
-                    padding-left: 112px;
+                    padding-#{$end}: 112px;
                 }
 
                 .emoji-container>i {

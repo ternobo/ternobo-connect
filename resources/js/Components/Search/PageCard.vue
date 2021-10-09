@@ -1,6 +1,6 @@
 <template>
 	<div class="user">
-		<div class="card mb-3">
+		<div class="card mb-4">
 			<div class="card-body py-2">
 				<div class="people-sugestion border-0 d-flex justify-content-between align-items-center bg-white">
 					<wire-link class="d-flex h-100 align-items-center w-100" :href="'/' + page.slug">

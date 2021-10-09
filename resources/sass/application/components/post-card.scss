@@ -1,18 +1,16 @@
-@import "../variables";
-
 .post-menu {
-    background-color: $fixed-elements;
+    background-color: $gray-200;
     margin: 0;
     padding: 0;
     font-size: 1rem;
 
     li {
         padding: 1rem 1.5rem;
-        color: $sub-heading;
+        color: $gray-500;
         cursor: pointer;
 
         i {
-            margin-left: 1rem;
+            margin-#{$end}: 1rem;
         }
 
         &:hover {
@@ -22,7 +20,8 @@
 }
 
 .posts {
-    @extend .row;
+    display: flex;
+    flex-direction: column;
     @extend .mx-0;
     @extend .mb-3;
 }
@@ -42,11 +41,11 @@
 
     .category-item {
         padding: 2px 8px;
-        background: $fixed-elements;
-        margin-left: 12px;
-        color: $grey;
+        background: $gray-200;
+        margin-#{$end}: 12px;
+        color: $gray-500;
         margin-bottom: 0 !important;
-        font-size: 14px;
+        font-size: $text-xsm;
         cursor: pointer;
         -webkit-user-select: none;
         -moz-user-select: none;
@@ -59,12 +58,12 @@
 
         @media screen and (max-width: $sm-size) {
             max-width: 84px;
-            font-size: 10px;
+            font-size: $text-xxxsm;
         }
 
         i {
-            font-size: 20px;
-            margin-left: 3px;
+            font-size: $text-lg;
+            margin-#{$end}: 3px;
         }
     }
 
@@ -73,7 +72,7 @@
         justify-content: space-between;
         align-items: flex-start;
         padding: 1rem 1.25rem;
-        padding-left: 1rem;
+        padding-#{$end}: 1rem;
         position: relative;
     }
 
@@ -89,7 +88,7 @@
 
             .publisher--shortbio {
                 font-size: 0.75rem;
-                color: $grey;
+                color: $gray-500;
             }
         }
 
@@ -104,7 +103,7 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                margin-right: 0.75rem;
+                margin-#{$start}: 0.75rem;
             }
 
             img {
@@ -172,7 +171,7 @@
             }
 
             a {
-                color: $action;
+                color: $blue-cta;
             }
         }
 
@@ -227,27 +226,27 @@
 
             .tags {
                 .tag-item {
-                    background: $fixed-elements;
-                    color: $grey;
+                    background: $gray-200;
+                    color: $gray-500;
                     cursor: pointer;
-                    margin-left: 8px;
+                    margin-#{$end}: 8px;
                     padding: 4px 16px;
                     transition: 0.3s all;
-                    font-size: 14px;
+                    font-size: $text-xsm;
 
                     @media screen and (max-width: $sm-size) {
                         padding: 2px 12px;
-                        font-size: 12px;
+                        font-size: $text-xxsm;
                         vertical-align: baseline;
                         height: 20px;
-                        margin-left: 4px;
+                        margin-#{$end}: 4px;
                     }
 
                 }
 
                 .tag-item:hover {
-                    background: $border-color;
-                    color: $grey;
+                    background: $gray-300;
+                    color: $gray-500;
                 }
             }
 
@@ -257,10 +256,10 @@
                 transition: 0.3s all;
 
                 @media screen and (max-width: $sm-size) {
-                    font-size: 12px;
+                    font-size: $text-xxsm;
 
                     i {
-                        font-size: 16px;
+                        font-size: $text-sm;
                     }
                 }
 
@@ -299,15 +298,15 @@
             }
 
             @media screen and (max-width: $sm-size) {
-                padding-left: 12px;
-                padding-right: 12px;
+                padding-#{$end}: 12px;
+                padding-#{$start}: 12px;
             }
 
             @media screen and (max-width: $sm-size) {
                 padding-top: 12px;
 
                 i {
-                    font-size: 20px;
+                    font-size: $text-lg;
                 }
             }
         }
@@ -321,11 +320,11 @@
             &::before {
                 content: " ";
                 position: absolute;
-                left: 1.5rem;
-                right: 1.5rem;
+                #{$end}: 1.5rem;
+                #{$start}: 1.5rem;
                 top: 0;
                 height: 2px;
-                background: $fixed-elements;
+                background: $gray-200;
 
                 @media screen and (max-width: $sm-size) {
                     width: calc(100% - 3rem);
@@ -353,7 +352,7 @@
 
 
                     &:not(.disabled) {
-                        color: $grey;
+                        color: $gray-500;
 
                         &.active,
                         &:hover {
@@ -398,10 +397,10 @@
 
     .tags {
         .tag-item {
-            background: $fixed-elements;
-            color: $grey;
+            background: $gray-200;
+            color: $gray-500;
             cursor: pointer;
-            margin-left: 0.5rem;
+            margin-#{$end}: 0.5rem;
             padding: 0.25rem 1rem;
             transition: 0.3s all;
             font-size: 0.875rem;
@@ -414,8 +413,8 @@
         }
 
         .tag-item:hover {
-            background: $border-color;
-            color: $grey;
+            background: $gray-300;
+            color: $gray-500;
         }
     }
 
@@ -442,19 +441,19 @@
         position: absolute;
         content: " ";
         width: calc(100% - 3rem);
-        left: 1.5rem;
-        right: 1.5rem;
+        #{$end}: 1.5rem;
+        #{$start}: 1.5rem;
         bottom: 0;
         height: 2px;
-        background: $icons;
+        background: $light;
     }
 }
 
 .article-title {
-    font-size: 20px;
+    font-size: $text-lg;
     font-weight: 600;
     margin-top: 1rem;
-    margin-right: -8px;
+    margin-#{$start}: -8px;
 
 }
 
@@ -464,7 +463,7 @@
 
 .post-time {
     display: flex;
-    font-size: 10px;
+    font-size: $text-xxxsm;
     color: #C8C8C8;
     flex-direction: row !important;
     margin: 0 !important;
@@ -495,10 +494,10 @@
         text-align: start;
 
         a {
-            color: $action;
+            color: $blue-cta;
 
             &:hover {
-                color: $action-hover;
+                color: $blue-hover;
             }
         }
     }
@@ -523,7 +522,7 @@
     i {
         background: #F5F5F5;
         border-radius: 4px;
-        font-size: 16px;
+        font-size: $text-sm;
     }
 
     i:first-child {
@@ -542,11 +541,11 @@
 
         &:not(:nth-last-child(2)) {
             @if($direction=='rtl') {
-                margin-right: 0.5rem;
+                margin-#{$start}: 0.5rem;
             }
 
             @else {
-                margin-left: 0.5rem;
+                margin-#{$end}: 0.5rem;
             }
         }
 
@@ -578,10 +577,6 @@
         margin-bottom: 0.75rem
     }
 
-    &:last-child {
-        margin-bottom: -1.75rem;
-    }
-
 }
 
 .post-content--text {
@@ -595,6 +590,6 @@
     }
 
     >a {
-        color: $action;
+        color: $blue-cta;
     }
 }

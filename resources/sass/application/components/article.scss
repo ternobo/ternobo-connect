@@ -1,7 +1,7 @@
 .article-title {
     font-size: 1.5rem;
     font-weight: 600;
-    margin-right: 0 !important;
+    margin-#{$start}: 0 !important;
 }
 
 .article-title-section {
@@ -14,18 +14,18 @@
 }
 
 .article-time {
-    font-size: 14px;
-    color: $icons;
+    font-size: $text-xsm;
+    color: $light;
 }
 
 .article-text {
-    font-size: 16px;
+    font-size: $text-sm;
     color: $dark;
     margin-top: 28px;
     padding-bottom: 40px;
 
     a {
-        color: $action;
+        color: $blue-cta;
     }
 
     a:hover {

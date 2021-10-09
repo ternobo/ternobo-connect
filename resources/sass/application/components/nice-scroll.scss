@@ -1,12 +1,12 @@
 .nice-scroll {
-    scrollbar-color: $icons $fixed-elements;
+    scrollbar-color: $light $gray-200;
     scrollbar-width: thin;
     scroll-behavior: smooth;
 
     &::-webkit-scrollbar {
         cursor: pointer;
         width: 6px;
-        background: $fixed-elements;
+        background: $gray-200;
 
         max-height: 6px;
     }
@@ -15,7 +15,7 @@
         cursor: -webkit-grab;
         cursor: grab;
         width: 6px;
-        background-color: $icons;
+        background-color: $light;
     }
 
     &::-webkit-scrollbar-thumb:active {

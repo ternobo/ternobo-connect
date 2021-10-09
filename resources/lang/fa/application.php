@@ -58,6 +58,7 @@ return [
     'discord' => "Discord",
     'trello' => "Trello",
     'submit' => "ثبت",
+    "submited" => "ثبت شده",
     'deactivate' => "غیرفعال کردن",
     'done' => "تمام",
     'close' => "بستن",

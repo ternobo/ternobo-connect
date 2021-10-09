@@ -15,7 +15,7 @@
 				<span class="category-item" v-if="this.post.category != null"><i class="material-icons-outlined">layers</i>{{ this.post.category.name }}</span>
 			</div>
 		</div>
-		<component class="mb-3" :post="post" :has-comment="hasComment" v-bind:is="componentType"></component>
+		<component class="mb-4" :post="post" :has-comment="hasComment" v-bind:is="componentType"></component>
 		<div class="post-footer px-3">
 			<i class="material-icons hover-danger font-32" @click="doDelete">delete_outline</i>
 

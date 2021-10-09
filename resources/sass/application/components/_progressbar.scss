@@ -1,0 +1,13 @@
+.progress {
+    position: relative;
+    background: $gray-light;
+    border-radius: 0;
+
+    [role="progressbar"] {
+        position: absolute;
+        background: $dark;
+        height: 100%;
+        left: 0;
+        transition: 0.3s all;
+    }
+}

@@ -5,8 +5,8 @@
     width: 100%;
     position: fixed;
     height: 50px;
-    left: 0;
-    right: 0;
+    #{$end}: 0;
+    #{$start}: 0;
     bottom: 0;
     z-index: 999;
     background: $body-bg;
@@ -28,11 +28,11 @@
 
 
         &.hasInvite {
-            color: $action;
+            color: $blue-cta;
             opacity: 1 !important;
 
             &:hover {
-                color: $action-hover;
+                color: $blue-hover;
             }
         }
     }
@@ -51,19 +51,19 @@
         direction: ltr;
         -webkit-font-smoothing: antialiased;
         vertical-align: middle;
-        font-size: 20px;
-        color: $grey;
+        font-size: $text-lg;
+        color: $gray-500;
 
 
         &.invite-link {
             transform: rotate(-15deg);
 
             &.hasInvite {
-                color: $action;
+                color: $blue-cta;
                 opacity: 1 !important;
 
                 &:hover {
-                    color: $action-hover;
+                    color: $blue-hover;
                 }
             }
 
@@ -73,7 +73,7 @@
 
     a:hover {
         .navheader-icon {
-            color: $icon-hover;
+            color: $black;
         }
     }
 
@@ -82,7 +82,7 @@
         .navheader-icon {
             font-family: "Material Icons";
             font-size: 1.5rem;
-            color: $icon-hover;
+            color: $black;
 
             img {
                 border: 2px solid $dark;
@@ -90,7 +90,7 @@
 
             &.invite-link {
                 transform: rotate(-15deg);
-                color: $action;
+                color: $blue-cta;
             }
         }
 
@@ -100,8 +100,8 @@
             width: 100%;
             height: 2px;
             background: #191919;
-            left: 0;
-            right: 0;
+            #{$end}: 0;
+            #{$start}: 0;
             bottom: -5px;
         }
 
@@ -109,11 +109,11 @@
 
 
         .navheader-text {
-            font-size: 14px;
+            font-size: $text-xsm;
             transform: scale(1);
             height: auto;
             width: auto;
-            color: $icon-hover;
+            color: $black;
         }
     }
 

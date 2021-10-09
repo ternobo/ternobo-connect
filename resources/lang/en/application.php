@@ -59,6 +59,7 @@ return [
     'discord' => "Discord",
     'trello' => "Trello",
     'submit' => "Submit",
+    "submited" => "submited",
     'deactivate' => "Deactivate",
     'done' => "Done",
     'close' => "Close",

@@ -4,11 +4,11 @@
 }
 
 #tprogress .bar {
-  background: $action;
+  background: $blue-cta;
   position: fixed;
   z-index: 1050;
   top: 0;
-  left: 0;
+  #{$end}: 0;
   width: 100%;
   height: 4px;
 }
@@ -17,10 +17,10 @@
 #tprogress .peg {
   display: block;
   position: absolute;
-  right: 0px;
+  #{$start}: 0px;
   width: 100px;
   height: 100%;
-  box-shadow: 0 0 10px $action, 0 0 5px $action;
+  box-shadow: 0 0 10px $blue-cta, 0 0 5px $blue-cta;
   opacity: 1.0;
   transform: rotate(3deg) translate(0px, -4px);
 }
@@ -31,7 +31,7 @@
   position: fixed;
   z-index: 1031;
   top: 15px;
-  right: 15px;
+  #{$start}: 15px;
 }
 
 #tprogress .spinner-icon {
@@ -40,7 +40,7 @@
   box-sizing: border-box;
   border: solid 2px transparent;
   border-top-color: $dark;
-  border-left-color: $dark;
+  border-#{$end}-color: $dark;
   border-radius: 50%;
   -webkit-animation: tprogress-spinner 400ms linear infinite;
   animation: tprogress-spinner 400ms linear infinite;

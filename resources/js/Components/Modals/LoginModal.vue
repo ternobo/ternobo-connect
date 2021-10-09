@@ -7,7 +7,7 @@
 					<input type="text" v-model="username" class="form-control mb-4 text-input" :placeholder="__.get('application.username')" />
 					<input type="text" v-model="password" class="form-control text-input" :placeholder="__.get('application.password')" />
 				</div>
-				<div class="mt-5">
+				<div class="mt-7">
 					<loading-button @click.native="login" :loading="loading" class="btn btn-primary w-100">{{ __.get("application.login") }}</loading-button>
 				</div>
 			</div>
@@ -19,7 +19,7 @@
 					<input class="form-control mb-4 text-input" :placeholder="__.get('landing.enter_recover_code')" v-model="code" maxlength="8" v-if="recovery" />
 					<small class="text-muted clickable" @click="recovery = false" v-if="recovery">{{ __.get("landing.use_auth_code") }}</small>
 				</div>
-				<div class="mt-5">
+				<div class="mt-7">
 					<loading-button @click.native="verifyCode" :loading="loading" class="btn btn-primary w-100">{{ __.get("application.login") }}</loading-button>
 				</div>
 			</div>

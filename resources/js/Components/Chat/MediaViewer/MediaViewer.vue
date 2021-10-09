@@ -21,10 +21,10 @@
 			<media-item v-for="item in media" :key="'media_item_id_' + item.id" :media="item"></media-item>
 		</div>
 		<div class="document-list" v-else-if="type == 'document' && media.length > 0">
-			<document-item class="mb-3" v-for="item in media" :key="'document_item_id_' + item.id" :document="item"></document-item>
+			<document-item class="mb-4" v-for="item in media" :key="'document_item_id_' + item.id" :document="item"></document-item>
 		</div>
 		<div class="document-list" v-else-if="type == 'link' && media.length > 0">
-			<link-item class="mb-3" v-for="item in media" :key="'link_item_id_' + item.id" :link="item"></link-item>
+			<link-item class="mb-4" v-for="item in media" :key="'link_item_id_' + item.id" :link="item"></link-item>
 		</div>
 		<div class="media-list loading" v-else>
 			<div class="d-flex align-items-center justify-content-center flex-column w-100 h-100">

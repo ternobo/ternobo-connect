@@ -1,6 +1,5 @@
 div.page-cover {
     height: auto;
-
     margin: 0 -32px;
     width: calc(100% + 64px);
 
@@ -15,6 +14,7 @@ div.page-cover {
         min-height: 200px;
         -o-object-fit: cover;
         object-fit: cover;
+        width: 100%;
 
         @media screen and (max-width: $sm-size) {
             min-height: 84px;
@@ -28,7 +28,7 @@ div.page-cover {
     padding: 2px;
     height: 28px;
     width: 28px;
-    font-size: 18px;
+    font-size: $text-md;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -36,7 +36,7 @@ div.page-cover {
 
     >i {
         @media screen and(max-width: $sm-size) {
-            margin-left: 0;
+            margin-#{$end}: 0;
         }
     }
 
@@ -51,8 +51,8 @@ div.page-cover {
 
 .card-img-top {
     max-width: 1920px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-top-#{$end}-radius: 0;
+    border-top-#{$start}-radius: 0;
 }
 
 .pageinfo-card {
@@ -66,7 +66,7 @@ div.page-cover {
 
     .btn-edit {
         position: absolute;
-        right: 16px;
+        #{$start}: 16px;
         top: 14px;
         height: 1.5rem;
         width: 1.5rem;
@@ -116,43 +116,43 @@ div.page-cover {
             }
 
             strong.name {
-                font-size: 20px;
+                font-size: $text-lg;
                 line-height: 1.5;
 
                 @media screen and (max-width: $sm-size) {
                     font-weight: 600;
-                    font-size: 14px;
+                    font-size: $text-xsm;
                 }
             }
 
             .location {
-                font-size: 16px;
-                color: $grey;
+                font-size: $text-sm;
+                color: $gray-500;
 
                 @media screen and (max-width: $sm-size) {
-                    font-size: 12px;
+                    font-size: $text-xxsm;
 
                     i {
-                        font-size: 16px;
+                        font-size: $text-sm;
                     }
                 }
             }
 
             .short_bio {
-                font-size: 16px;
-                color: $grey;
+                font-size: $text-sm;
+                color: $gray-500;
 
                 @media screen and (max-width: $sm-size) {
-                    font-size: 12px;
+                    font-size: $text-xxsm;
                 }
             }
 
             .profile-box {
                 margin-bottom: 1.5rem;
-                margin-right: -8px;
+                margin-#{$start}: -8px;
 
                 @media screen and (max-width: $sm-size) {
-                    margin-right: -4px;
+                    margin-#{$start}: -4px;
 
                     margin-bottom: 12px;
                     max-height: 96px;
@@ -175,8 +175,8 @@ div.page-cover {
         }
 
         .connection-actions {
-            color: $grey;
-            margin-left: 1.5rem;
+            color: $gray-500;
+            margin-#{$end}: 1.5rem;
             line-height: 20px;
             transition: 0.3s all;
 
@@ -228,10 +228,10 @@ div.page-cover {
     flex-direction: row;
 
     .invite_profile {
-        margin-left: 16px;
+        margin-#{$end}: 16px;
 
         @media screen and (max-width: $sm-size) {
-            margin-left: 12px;
+            margin-#{$end}: 12px;
 
         }
     }
@@ -242,13 +242,13 @@ div.page-cover {
         justify-content: center;
 
         .invite_date {
-            font-size: 12px;
+            font-size: $text-xxsm;
 
             @media screen and (max-width: $sm-size) {
-                font-size: 12px;
+                font-size: $text-xxsm;
             }
 
-            color: $grey;
+            color: $gray-500;
 
             &.bold {
                 font-weight: 600;
@@ -256,7 +256,7 @@ div.page-cover {
         }
 
         .invited_by {
-            font-size: 14px;
+            font-size: $text-xsm;
 
             a {
                 font-weight: 600;
@@ -268,7 +268,7 @@ div.page-cover {
             }
 
             @media screen and (max-width: $sm-size) {
-                font-size: 12px;
+                font-size: $text-xxsm;
             }
         }
     }
@@ -286,7 +286,7 @@ div.page-cover {
 
     >.edit-icons {
         position: absolute;
-        right: 8px;
+        #{$start}: 8px;
         bottom: 8px;
         display: flex;
         flex-direction: column;
@@ -366,7 +366,7 @@ div.page-cover {
         background: #FFF;
         box-shadow: $card-shadow;
         padding: 4px 8px;
-        color: $grey;
+        color: $gray-500;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -374,7 +374,7 @@ div.page-cover {
         border-radius: 8px;
 
         @media screen and (max-width: $sm-size) {
-            font-size: 10px;
+            font-size: $text-xxxsm;
             font-weight: 600;
         }
     }
@@ -391,7 +391,7 @@ div.page-cover {
 }
 
 .slug-name {
-    font-size: 14px;
+    font-size: $text-xsm;
 
     @media screen and (max-width: $sm-size) {
         max-width: 16px;
@@ -399,7 +399,7 @@ div.page-cover {
 
     .slug-logo {
         max-width: 1.5rem;
-        margin-left: 8px;
+        margin-#{$end}: 8px;
 
         @media screen and (max-width: $sm-size) {
             max-width: 16px;
@@ -408,7 +408,7 @@ div.page-cover {
 }
 
 .report-icon {
-    color: $grey;
+    color: $gray-500;
     cursor: pointer;
 
     &:hover {
@@ -424,25 +424,25 @@ div.page-cover {
 
     .slug-url {
         @media screen and (max-width: $sm-size) {
-            font-size: 10px;
+            font-size: $text-xxxsm;
             line-height: 1.5;
         }
     }
 }
 
 .contact--title {
-    font-size: 16px;
+    font-size: $text-sm;
     margin-bottom: 1.5rem;
     font-weight: 600;
 
     i {
-        margin-left: 8px;
+        margin-#{$end}: 8px;
     }
 }
 
 @media screen and (max-width: $sm-size) {
     .contact--title {
-        font-size: 14px;
+        font-size: $text-xsm;
     }
 }
 
@@ -452,12 +452,12 @@ div.page-cover {
 }
 
 .mutual-friends-container {
-    padding-right: 12px;
+    padding-#{$start}: 12px;
 }
 
 .profile-photos {
     img {
-        margin-right: -15px;
+        margin-#{$start}: -15px;
         width: 2rem;
         min-width: 2rem;
         height: 2rem;

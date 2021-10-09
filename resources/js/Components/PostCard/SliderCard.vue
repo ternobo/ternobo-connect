@@ -42,6 +42,7 @@ export default {
 					behavior: "smooth",
 				});
 			});
+			this.$emit("update:slide", this.active);
 		},
 		showFullText() {
 			if (!this.showFullText) {
@@ -56,6 +57,9 @@ export default {
 		},
 	},
 	mounted() {
+		if (this.slide != null && this.slide < this.post.slides.length) {
+			this.active = this.slide;
+		}
 		let options = {
 			root: null,
 			threshold: 1.0,
@@ -72,6 +76,11 @@ export default {
 	components: { Content, Slide },
 	name: "SliderCard",
 	props: {
+		slide: {
+			type: Number,
+			default: 0,
+			required: false,
+		},
 		hasComment: {
 			type: Boolean,
 			default: true,

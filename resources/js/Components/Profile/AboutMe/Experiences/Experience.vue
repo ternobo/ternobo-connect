@@ -5,7 +5,7 @@
 			<i class="material-icons-outlined hover-danger" @click="$emit('deleted')">delete</i>
 		</div>
 		<div class="detail">
-			<div class="d-flex align-items-center flex-column me-3" v-if="edit || $root.isDesktop">
+			<div class="d-flex align-items-center flex-column me-4" v-if="edit || $root.isDesktop">
 				<lazy-image src="/images/company-profile.png" class="about-me--picture mb-2" v-if="$root.isDesktop" img-class="about-me--picture" />
 				<button class="btn font-12 me-1 follow-btn" @click="showMore = !showMore" v-if="edit && $root.isDesktop">
 					{{ showMore ? "نمایش کمتر" : "نمایش بیشتر" }}

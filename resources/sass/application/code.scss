@@ -33,7 +33,7 @@
 /* GUTTER */
 
 .CodeMirror-gutters {
-    border-right: 1px solid #ddd;
+    border-#{$start}: 1px solid #ddd;
     background-color: #f7f7f7;
     white-space: nowrap;
 }
@@ -43,7 +43,7 @@
 .CodeMirror-linenumber {
     padding: 0 3px 0 5px;
     min-width: 20px;
-    text-align: right;
+    text-align: $start;
     color: #999;
     white-space: nowrap;
 }
@@ -59,15 +59,15 @@
 /* CURSOR */
 
 .CodeMirror-cursor {
-    border-left: 1px solid black;
-    border-right: none;
+    border-#{$end}: 1px solid black;
+    border-#{$start}: none;
     width: 0;
 }
 
 /* Shown when moving in bi-directional text */
 
 .CodeMirror div.CodeMirror-secondarycursor {
-    border-left: 1px solid silver;
+    border-#{$end}: 1px solid silver;
 }
 
 .cm-fat-cursor {
@@ -127,15 +127,15 @@
 
 .CodeMirror-rulers {
     position: absolute;
-    left: 0;
-    right: 0;
+    #{$end}: 0;
+    #{$start}: 0;
     top: -50px;
     bottom: 0;
     overflow: hidden;
 }
 
 .CodeMirror-ruler {
-    border-left: 1px solid #ccc;
+    border-#{$end}: 1px solid #ccc;
     top: 0;
     bottom: 0;
     position: absolute;
@@ -301,7 +301,7 @@ div.CodeMirror span {
     /* 50px is the magic margin used to hide the element's real scrollbars */
     /* See overflow: hidden in .CodeMirror */
     margin-bottom: -50px;
-    margin-right: -50px;
+    margin-#{$start}: -50px;
     padding-bottom: 50px;
     height: 100%;
     outline: none;
@@ -312,7 +312,7 @@ div.CodeMirror span {
 
 .CodeMirror-sizer {
     position: relative;
-    border-right: 50px solid transparent;
+    border-#{$start}: 50px solid transparent;
 }
 
 /* The fake, visible scrollbars. Used to force redraw during scrolling
@@ -330,7 +330,7 @@ div.CodeMirror span {
 }
 
 .CodeMirror-vscrollbar {
-    right: 0;
+    #{$start}: 0;
     top: 0;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -338,24 +338,24 @@ div.CodeMirror span {
 
 .CodeMirror-hscrollbar {
     bottom: 0;
-    left: 0;
+    #{$end}: 0;
     overflow-y: hidden;
     overflow-x: scroll;
 }
 
 .CodeMirror-scrollbar-filler {
-    right: 0;
+    #{$start}: 0;
     bottom: 0;
 }
 
 .CodeMirror-gutter-filler {
-    left: 0;
+    #{$end}: 0;
     bottom: 0;
 }
 
 .CodeMirror-gutters {
     position: absolute;
-    left: 0;
+    #{$end}: 0;
     top: 0;
     min-height: 100%;
     z-index: 3;
@@ -443,8 +443,8 @@ div.CodeMirror span {
 
 .CodeMirror-linebackground {
     position: absolute;
-    left: 0;
-    right: 0;
+    #{$end}: 0;
+    #{$start}: 0;
     top: 0;
     bottom: 0;
     z-index: 0;
@@ -575,7 +575,7 @@ div {
 /* Used to force a border model for a node */
 
 .cm-force-border {
-    padding-right: .1px;
+    padding-#{$start}: .1px;
 }
 
 @media print {
@@ -616,7 +616,7 @@ span.CodeMirror-selectedtext {
     }
 
     .CodeMirror-cursor {
-        border-left: 1px solid #FFCC00;
+        border-#{$end}: 1px solid #FFCC00;
     }
 
     div.CodeMirror-selected {

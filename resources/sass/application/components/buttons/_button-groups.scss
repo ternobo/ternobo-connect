@@ -1,0 +1,14 @@
+.modal-footer-button-group {
+    display: flex;
+    align-items: center;
+
+    .btn {
+        padding: 0.875rem 1rem;
+        min-height: 3.25rem;
+        line-height: 1.5rem;
+    }
+
+    .btn-ok {
+        width: 100%;
+    }
+}

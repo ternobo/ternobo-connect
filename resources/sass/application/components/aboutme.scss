@@ -46,7 +46,7 @@
 }
 
 .about-me--picture--mobile {
-    margin-left: 10px;
+    margin-#{$end}: 10px;
 }
 
 .about-me--title {
@@ -54,7 +54,7 @@
     color: $text-color;
 
     @media screen and (max-width:$sm-size) {
-        font-size: 12px;
+        font-size: $text-xxsm;
     }
 }
 
@@ -62,18 +62,18 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    font-size: 14px;
-    color: $icons;
+    font-size: $text-xsm;
+    color: $light;
 
     .degree {
-        color: $sub-heading;
+        color: $gray-500;
 
         &:not(:last-child) {
-            margin-left: 3px;
+            margin-#{$end}: 3px;
         }
     }
 
     @media screen and (max-width:$sm-size) {
-        font-size: 10px;
+        font-size: $text-xxxsm;
     }
 }

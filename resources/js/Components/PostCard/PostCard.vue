@@ -20,11 +20,12 @@
 			<div class="actions position-relative">
 				<wire-link :href="`/${post_data.page.slug}/activities?filters={&quot;category&quot;: &quot;${this.post_data.category_id}&quot;}`" class="category-item" v-if="this.post_data.category != null">{{ this.post_data.category.name }}</wire-link>
 				<div>
-					<post-menu :post="post" v-if="!isEmbed" @reported="deleted = true" @embed="showEmbed = true" @edit="edit = true" @deleted="doDelete"></post-menu>
+					<post-menu :post="post" v-if="!isEmbed" @copySlide="copySlide" @reported="deleted = true" @embed="showEmbed = true" @edit="edit = true" @deleted="doDelete"></post-menu>
 				</div>
 			</div>
 		</div>
-		<component v-if="post_data != null && post_data != undefined" :post="post_data" :has-comment="hasComment" v-bind:is="componentType"></component>
+
+		<component v-if="post_data != null && post_data != undefined" :slide.sync="slide" :post="post_data" :has-comment="hasComment" v-bind:is="componentType"></component>
 
 		<div class="post-footer" v-if="!isEmbed">
 			<div class="actions">
@@ -89,6 +90,9 @@ export default {
 		DonationModal,
 	},
 	methods: {
+		copySlide() {
+			this.copyText(this.$APP_URL + "/posts/" + this.post_data.id + "?slide=" + this.slide).then(() => this.toast(__.get("messages.copied"), "check", "text-success"));
+		},
 		like() {
 			if (this.liked) {
 				this.liked = false;
@@ -161,6 +165,11 @@ export default {
 	},
 	name: "PostCard",
 	props: {
+		slide: {
+			type: Number,
+			default: 0,
+			required: false,
+		},
 		hasComment: {
 			type: Boolean,
 			default: true,

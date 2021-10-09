@@ -1,5 +1,5 @@
 import TextareaParser from "../NewPost/Editor/TextareaParser";
-import VideoPlayer from "../VideoPlayer/VideoPlayer";
+import VideoPlayer from "./SliderCard/Elements/PostVideoPlayer.vue";
 import CodeBlock from "./SliderCard/Elements/Code.vue";
 export default {
     render: function (h) {
@@ -40,7 +40,7 @@ export default {
 
                 let source = this.content.content.startsWith("http") ? this.content.content : `/${this.content.content}`
 
-                content = (<lazy-image style={{ minHeight: '100px' }} class={['mb-0']} src={source} />);
+                content = (<image-viewer spoiler={this.content.meta?.spoiler} src={source} />);
                 break;
             case "video":
                 tag = "div";
@@ -69,13 +69,22 @@ export default {
 
                 content = <ListTag>{li_list}</ListTag>;
                 break;
+            case "poll":
+                tag = "div";
+                content = (<poll-viewer pollId={JSON.parse(this.content.content).id}></poll-viewer>);
+                break;
         }
 
         return h(tag, {
             class: classes
         }, [content]);
     },
-    components: { VideoPlayer, CodeBlock },
+    components: {
+        VideoPlayer,
+        CodeBlock,
+        "image-viewer": () => import("./SliderCard/Elements/ImageViewer.vue"),
+        "poll-viewer": () => import("./SliderCard/Elements/PollViewer.vue")
+    },
     data() {
         return {
             text: "",
@@ -113,7 +122,7 @@ export default {
             required: true
         },
         tags: {
-            required: true,
+            required: false,
             default: [],
         }
     }

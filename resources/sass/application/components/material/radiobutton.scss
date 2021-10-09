@@ -1,7 +1,7 @@
 $md-radio-checked-color: $dark;
-$md-radio-border-color: $border-color;
-$md-radio-border-color-disabled: $border-color;
-$md-radio-checked-color-disabled: $icons;
+$md-radio-border-color: $gray-300;
+$md-radio-border-color-disabled: $gray-300;
+$md-radio-checked-color-disabled: $light;
 
 $md-radio-margin: 1em 0;
 $md-radio-size: 1em;
@@ -14,7 +14,7 @@ $md-radio-label-padding: .75em;
 .md-radio {
     position: relative;
     margin: $md-radio-margin;
-    text-align: right;
+    text-align: $start;
 
     &.md-radio-inline {
         display: inline-block;
@@ -26,20 +26,20 @@ $md-radio-label-padding: .75em;
         line-height: $md-radio-size;
         vertical-align: top;
         clear: both;
-        padding-right: 1px;
-        color: $grey;
-        font-size: 14px;
+        padding-#{$start}: 1px;
+        color: $gray-500;
+        font-size: $text-xsm;
         margin-bottom: 0;
 
         &:not(:empty) {
-            padding-right: $md-radio-label-padding;
+            padding-#{$start}: $md-radio-label-padding;
         }
 
         &:before,
         &:after {
             content: "";
             position: absolute;
-            right: 0;
+            #{$start}: 0;
             top: 0;
         }
 
@@ -60,7 +60,7 @@ $md-radio-label-padding: .75em;
         input[type="radio"] {
             &:checked {
                 +label:before {
-                    background: $grey;
+                    background: $gray-500;
                     border: 3px solid #E0E0E0;
                 }
             }
@@ -73,7 +73,7 @@ $md-radio-label-padding: .75em;
         width: $md-radio-size;
         margin: 0;
         display: block;
-        float: right;
+        float: $start;
         font-size: inherit;
 
 
