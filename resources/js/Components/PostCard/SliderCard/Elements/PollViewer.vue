@@ -14,7 +14,10 @@
 					<span class="poll-option--index">{{ index + 1 }}.</span>
 					<button class="btn btn--poll-option" :class="{ active: option.id == selectedOption, voted: option.voted }" @click="selectOption(option.id)">
 						<span class="poll-option--progress" v-if="option.votesPercent" :style="{ width: `${option.votesPercent}%` }"></span>
-						<span class="poll-option-text">{{ option.text }}</span>
+						<span class="poll-option-text">
+							{{ option.text }}
+							<span v-if="option.votesPercent">({{ `${option.votesPercent}%` }})</span>
+						</span>
 					</button>
 				</li>
 			</ul>
@@ -35,7 +38,10 @@
 import PollSkeleton from "../../../Skeletons/PollSkeleton.vue";
 export default {
 	components: { PollSkeleton },
-	props: ["pollId"],
+	props: {
+		pollId: { default: 0 },
+		voteEnabled: { default: true },
+	},
 
 	mounted() {
 		this.loadPoll();

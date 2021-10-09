@@ -59,7 +59,7 @@ class SocialMediaTools
     public static function getMentions(string $text): array
     {
         $matches = [];
-        preg_match_all('/@(\w+)/', $text, $matches);
+        preg_match_all('/@((?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,30})/', $text, $matches);
         return $matches[1];
     }
 

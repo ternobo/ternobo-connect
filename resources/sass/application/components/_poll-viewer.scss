@@ -1,4 +1,6 @@
 .poll-viewer {
+    direction: $direction;
+
     .poll-options--list {
         list-style: none;
         padding: 0;

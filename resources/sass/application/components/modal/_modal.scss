@@ -31,7 +31,7 @@
     left: 0;
     z-index: 99999;
     transition: 0.3s all;
-    overflow: auto;
+    overflow: overlay;
     @include nice-scroll;
 
     &.fade {

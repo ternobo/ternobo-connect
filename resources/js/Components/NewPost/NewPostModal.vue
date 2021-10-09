@@ -25,10 +25,8 @@
 						</div>
 					</div>
 					<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
-					<div class="d-flex justify-content-center align-items-center mt-4 mb-2">
-						<loading-button :loading="loadingDraft" class="btn btn-transparent font-14" :disabled="!checkContent" @click.native="submitPost(true)">{{ __.get("content/posts.draft") }}</loading-button>
-						<loading-button :loading="loading" class="btn btn-primary font-14 w-100" :class="{ 'text-muted': !checkContent }" :disabled="!checkContent" @click.native="submitPost(false)"> {{ post ? __.get("application.save") : __.get("content/posts.publish") }} </loading-button>
-					</div>
+
+					<modal-footer-buttons @ok="submitPost(false)" @cancel="submitPost(true)" class="mt-8" :cancelLoading="loadingDraft" :okLoading="loading" :okText="post ? __.get('application.save') : __.get('content/posts.publish')" :cancelText="__.get('content/posts.draft')" :cancelDisable="!checkContent" cancelClass="btn-text" :okDisabled="!checkContent" okClass="btn-primary"></modal-footer-buttons>
 				</div>
 			</div>
 		</b-modal>
@@ -50,6 +48,7 @@ import CategorySelect from "../CategorySelect/CategorySelect.vue";
 import CategorySelectModal from "../CategorySelect/CategorySelectModal.vue";
 import { serialize } from "../../Libs/ObjectToFormdata";
 import EditImageModal from "./EditImageModal.vue";
+import ModalFooterButtons from "../Modals/ModalFooterButtons.vue";
 export default {
 	props: {
 		post: {
@@ -301,6 +300,7 @@ export default {
 		CategorySelect,
 		CategorySelectModal,
 		EditImageModal,
+		ModalFooterButtons,
 	},
 	mixins: [ModalMixin],
 	name: "NewPostModal",

@@ -27,16 +27,22 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use PHPHtmlParser\Dom;
 use Ternobo\TernoboWire\TernoboWire;
 
 class PostController extends Controller
 {
 
-    public function __construct()
+    private Dom $dom;
+    private PollService $pollService;
+
+    public function __construct(Dom $dom, PollService $pollService)
     {
         $this->middleware([FollowMiddlware::class, Authenticate::class])->except([
             "show"
         ]);
+        $this->dom = $dom;
+        $this->pollService = $pollService;
     }
 
     /**
@@ -45,7 +51,7 @@ class PostController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostRequest $request, PollService $pollService)
+    public function store(PostRequest $request)
     {
         $slides = $request->slides;
         $user = Auth::user();
@@ -70,7 +76,7 @@ class PostController extends Controller
             'can_tip' => $request->canDonate,
         ]);
 
-        $tagsAndMentions = $post->setContent($slides, $user, false, $pollService);
+        $tagsAndMentions = $post->setContent($slides, $user, false, $this->pollService, $this->dom);
 
         if (!$draft) {
             SocialMediaTools::callMentions($tagsAndMentions['mentions'], $post->id);
@@ -259,7 +265,7 @@ class PostController extends Controller
      * @param \App\Models\Post $post
      * @return \Illuminate\Http\Response
      */
-    public function update(PostRequest $request, Post $post, PollService $pollService)
+    public function update(PostRequest $request, Post $post)
     {
         $slides = $request->slides;
         $user = Auth::user();
@@ -286,7 +292,7 @@ class PostController extends Controller
         $post->deleteBlocks();
         $post->slides()->delete();
 
-        $tags = $post->setContent($slides, $user, false, $pollService)['tags'];
+        $tags = $post->setContent($slides, $user, false, $this->pollService, $this->dom)['tags'];
 
         $post->tags = $tags;
         $post->save();

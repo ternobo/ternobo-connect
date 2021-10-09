@@ -1,6 +1,6 @@
 @each $name,
 $size in $modal-sizes {
     &.modal-#{$name} {
-        max-width: $size;
+        max-width: calc(#{$size} + 2rem);
     }
 }

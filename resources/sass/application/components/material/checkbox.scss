@@ -53,6 +53,8 @@ $md-checkbox-label-padding: .75em;
             border-radius: $md-checkbox-border-radius;
             cursor: pointer;
             transition: all .3s;
+
+            box-sizing: border-box;
         }
     }
 

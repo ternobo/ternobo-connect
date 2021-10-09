@@ -11,6 +11,14 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+
+mix.options({
+    hmrOptions: {
+        host: '10.8.0.2',
+        port: 8080
+    }
+});
+
 mix.babelConfig({
     plugins: ['@babel/plugin-syntax-dynamic-import'],
 });

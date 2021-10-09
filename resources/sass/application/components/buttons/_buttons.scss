@@ -23,7 +23,7 @@
         }
 
         &:disabled {
-            color: $gray;
+            color: rgba($color: $gray-medium-dark, $alpha: 0.7);
             background: $gray-light;
             opacity: 1;
         }
@@ -90,7 +90,7 @@
 
     &.btn-text {
         padding: 0;
-        color: $gray-light-medium;
+        color: $gray-medium-dark;
         background-color: transparent;
 
         &:hover:not(:disabled) {
@@ -101,9 +101,15 @@
     &.btn-text-cta {
         color: $blue-cta;
         padding: 0;
+        background-color: transparent;
 
         &:hover:not(:disabled) {
             color: $blue-hover;
+        }
+
+        &:disabled {
+            color: rgba($color: $gray-medium-dark, $alpha: 0.7);
+
         }
     }
 
@@ -150,6 +156,10 @@
 
     &.btn-rounded {
         border-radius: 1rem;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
     }
 
 }

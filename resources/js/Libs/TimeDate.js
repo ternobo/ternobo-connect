@@ -45,15 +45,15 @@ export default function (Vue) {
     }
 
     Vue.prototype.formatTime = function (time, format) {
-        return window.lang == "fa" ? moment.from(time, "en").locale("fa").format(format) : moment(time).format(format);
+        return window.lang == "fa" ? moment.from(time, "en").locale("fa").format(format) : moment(time).locale("en").format(format);
     }
 
     Vue.prototype.getFormatedDate = function () {
-        return window.lang == "fa" ? moment().locale("fa").format("YYYY/MM/DD HH:m") : moment().format("YYYY-MM-DD HH:m");
+        return window.lang == "fa" ? moment().locale("fa").format("YYYY/MM/DD HH:m") : moment().locale("en").format("YYYY-MM-DD HH:m");
     }
 
     Vue.prototype.getFormatedDateTime = function () {
-        return window.lang == "fa" ? moment().locale("fa").format("YYYY/MM/DD HH:m") : moment().format("YYYY-MM-DD HH:m");
+        return window.lang == "fa" ? moment().locale("fa").format("YYYY/MM/DD HH:m") : moment().locale("en").format("YYYY-MM-DD HH:m");
     }
 
     Vue.prototype.getDateObject = (date) => {

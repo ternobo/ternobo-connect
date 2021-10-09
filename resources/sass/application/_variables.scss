@@ -147,6 +147,14 @@ $text-xsm:0.875rem;
 $text-xxsm:0.75rem;
 $text-xxxsm:0.625rem;
 
+$font-sizes: ("lg": $text-lg,
+    "md": $text-md,
+    "sm":$text-sm,
+    "xsm": $text-xsm,
+    "xxsm":$text-xxsm,
+    "xxxsm":$text-xxxsm);
+
+
 // --------------------------------------------
 
 $theme-colors: ('primary': $primary,

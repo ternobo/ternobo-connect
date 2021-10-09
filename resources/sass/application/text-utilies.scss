@@ -58,3 +58,10 @@ $color in $theme-colors {
         line-height: $i * 1px;
     }
 }
+
+@each $name,
+$size in $font-sizes {
+    .font-size-#{$name} {
+        font-size: $size;
+    }
+}

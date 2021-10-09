@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use PHPHtmlParser\Dom;
 
 /**
  * @property mixed|string slug
@@ -206,7 +207,7 @@ class Post extends Model
             ->latest();
     }
 
-    public function setContent($slides, $user, $fileOnly = false, PollService $pollService): array
+    public function setContent($slides, $user, $fileOnly = false, PollService $pollService, Dom $dom): array
     {
         DB::beginTransaction();
         $mentions = [];
