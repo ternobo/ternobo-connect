@@ -126,10 +126,8 @@
     background: transparent;
     border: 2px solid $light;
     border-radius: 12px;
-
     font-size: 20px !important;
-    ;
-
+    font-family: 'Material Icons Outlined';
 
     @media screen and (max-width: $sm-size) {
         font-size: 16px !important;

@@ -28,7 +28,7 @@
 								</div>
 							</div>
 						</div>
-						<i class="btn setting-btn material-icons-outlined ms-4" @click="showUsernameModal = true">edit</i>
+						<i class="setting-btn material-icons-outlined ms-4" @click="showUsernameModal = true">edit</i>
 					</div>
 				</div>
 				<div class="setting-action">
@@ -41,7 +41,7 @@
 						<div class="content">
 							<span class="badge-bg-container" dir="ltr">{{ phone }}</span>
 						</div>
-						<i class="btn setting-btn material-icons-outlined ms-4" @click="showPhoneModal = true">edit</i>
+						<i class="setting-btn material-icons-outlined ms-4" @click="showPhoneModal = true">edit</i>
 					</div>
 				</div>
 				<div class="setting-action">
@@ -50,7 +50,7 @@
 						<span>{{ __.get("application.password") }}</span>
 					</div>
 					<div class="d-flex align-items-center">
-						<i class="btn setting-btn material-icons-outlined ms-4" @click="showPasswordMdal = true">edit</i>
+						<i class="setting-btn material-icons-outlined ms-4" @click="showPasswordMdal = true">edit</i>
 					</div>
 				</div>
 				<div class="setting-action">
@@ -62,7 +62,7 @@
 						<div class="content">
 							<span class="badge-bg-container" v-if="Boolean(active_sessions)">{{ active_sessions }}</span>
 						</div>
-						<i class="btn setting-btn material-icons-outlined ms-4" @click="showActiveSessions = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+						<i class="setting-btn material-icons-outlined ms-4" @click="showActiveSessions = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 					</div>
 				</div>
 				<div class="setting-action">
@@ -74,7 +74,7 @@
 						<div class="content">
 							<span class="font-16 h-auto" style="padding: 12px" :class="{ 'badge-danger': !two_factor_verification, 'badge-success': two_factor_verification }">{{ two_factor_verification ? __.get("application.active") : __.get("application.inactive") }}</span>
 						</div>
-						<i class="btn setting-btn material-icons-outlined ms-4" @click="showTwoFAModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+						<i class="setting-btn material-icons-outlined ms-4" @click="showTwoFAModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 					</div>
 				</div>
 				<div class="setting-action">
@@ -84,7 +84,7 @@
 					</div>
 
 					<div class="d-flex align-items-center">
-						<i class="btn setting-btn material-icons-outlined ms-4" @click="showBlockedModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+						<i class="setting-btn material-icons-outlined ms-4" @click="showBlockedModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 					</div>
 				</div>
 			</div>
@@ -109,7 +109,7 @@
 								<img src="/emoji/72x72/1f1fa-1f1f8.png" style="width: 24px; height: 24px" />
 							</div>
 						</div>
-						<i class="btn setting-btn material-icons-outlined ms-4" @click="showLangModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+						<i class="setting-btn material-icons-outlined ms-4" @click="showLangModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 					</div>
 				</div>
 				<div class="setting-action">
@@ -119,7 +119,7 @@
 					</div>
 
 					<div class="d-flex align-items-center">
-						<i class="btn setting-btn material-icons-outlined ms-4" @click="showDeactiveModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+						<i class="setting-btn material-icons-outlined ms-4" @click="showDeactiveModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 					</div>
 				</div>
 			</div>

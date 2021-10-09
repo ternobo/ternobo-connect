@@ -7,8 +7,10 @@
 }
 
 .input-group-icon {
-    .form-control {
-        padding-left: 1.75rem;
+
+    .form-control,
+    .material-textfield>input {
+        padding-#{$end}: 1.75rem;
     }
 
     >i,
@@ -16,7 +18,7 @@
         z-index: 1000;
         color: $gray-500;
         position: absolute;
-        left: 16px;
+        #{$end}: 0.75rem;
         top: 0;
         bottom: 0;
         vertical-align: middle;

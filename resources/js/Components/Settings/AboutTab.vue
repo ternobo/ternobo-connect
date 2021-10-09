@@ -11,7 +11,7 @@
 						<i class="material-icons-outlined me-2">gavel</i>
 						<span>{{ __.get("application.comuunity-guidelines") }}</span>
 					</div>
-					<i class="btn setting-btn material-icons-outlined ms-4" @click="showLawsModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+					<i class="setting-btn material-icons-outlined ms-4" @click="showLawsModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 				</div>
 				<div class="setting-action">
 					<div class="name">
@@ -20,7 +20,7 @@
 						</i>
 						<span>{{ __.get("application.discord") }}</span>
 					</div>
-					<a class="btn setting-btn material-icons-outlined ms-4" href="https://discord.gg/unXsnGHsNj" target="_blank">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</a>
+					<a class="setting-btn material-icons-outlined ms-4" href="https://discord.gg/unXsnGHsNj" target="_blank">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</a>
 				</div>
 				<div class="setting-action">
 					<div class="name">
@@ -29,21 +29,21 @@
 						</i>
 						<span>{{ __.get("application.trello") }}</span>
 					</div>
-					<a class="btn setting-btn material-icons-outlined ms-4" href="https://trello.com/b/Vku6XmjN/ternobo" target="_blank">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</a>
+					<a class="setting-btn material-icons-outlined ms-4" href="https://trello.com/b/Vku6XmjN/ternobo" target="_blank">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</a>
 				</div>
 				<!-- <div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined me-2">privacy_tip</i>
 						<span>سیاست صیانت از حریم خصوصی</span>
 					</div>
-					<i class="btn setting-btn material-icons-outlined ms-4">keyboard_arrow_left</i>
+					<i class="setting-btn material-icons-outlined ms-4">keyboard_arrow_left</i>
 				</div>
 				<div class="setting-action">
 					<div class="name">
 						<i class="material-icons-outlined me-2">category</i>
 						<span>شرایط خدمات</span>
 					</div>
-					<i class="btn setting-btn material-icons-outlined ms-4">keyboard_arrow_left</i>
+					<i class="setting-btn material-icons-outlined ms-4">keyboard_arrow_left</i>
 				</div> -->
 			</div>
 		</div>
