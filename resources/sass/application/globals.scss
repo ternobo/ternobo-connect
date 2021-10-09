@@ -528,7 +528,14 @@ img {
 }
 
 .toast-leave-to {
-    transform: translateX(500px);
+    @if($direction==rtl) {
+        transform: translateX(500px);
+    }
+
+    @else {
+        transform: translateX(-500px);
+
+    }
 }
 
 figure {
