@@ -23,19 +23,20 @@ export default {
 				instance.elements.controls.classList.add("fistplay");
 			});
 
-			const observer = new IntersectionObserver(
-				(entry) => {
-					if (entry.intersectionRatio != 1 && !video.paused) {
-						video.pause();
-						this.isPaused = true;
-					} else if (this.isPaused) {
-						video.play();
-						this.isPaused = false;
-					}
-				},
-				{ threshold: 1 }
-			);
-			observer.observe(this.$el);
+			this.player.on("ready", () => {
+				const observer = new IntersectionObserver(
+					(entry) => {
+						console.log(entry);
+						if (!entry.isVisible && !this.player.media.paused) {
+							video.pause();
+						} else {
+							video.play();
+						}
+					},
+					{ threshold: 0.5 }
+				);
+				observer.observe(this.player.media);
+			});
 		});
 	},
 };
