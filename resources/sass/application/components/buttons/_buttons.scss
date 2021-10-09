@@ -1,0 +1,165 @@
+.btn {
+    padding: 0.625rem 1.5rem;
+    outline: none;
+    border: 2px solid transparent;
+    min-height: 44px;
+    color: $text-color;
+    transition: 0.3s all;
+    max-height: 44px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $text-xsm;
+    font-family: $font-family-base;
+    cursor: pointer;
+
+    &.btn-primary {
+        background: $primary;
+        color: $text-on-primary;
+
+        &:hover:not(:disabled) {
+            background: $gray-dark;
+        }
+
+        &:disabled {
+            color: rgba($color: $gray-medium-dark, $alpha: 0.7);
+            background: $gray-light;
+            opacity: 1;
+        }
+
+        &.btn-icon {
+            background-color: $gray-light;
+            color: $gray-dark;
+
+            &:disabled {
+                opacity: 0.5;
+            }
+        }
+
+    }
+
+    &.btn-secondary {
+        background: $blue-light;
+        color: $blue-cta;
+
+        &:hover:not(:disabled) {
+            background: $blue-light-hover;
+        }
+    }
+
+    &.btn-outlined {
+        border-color: $gray-medium-dark;
+        color: $gray-dark;
+        background: transparent;
+
+        &:hover:not(:disabled) {
+            border-color: $black;
+            color: $black;
+        }
+
+    }
+
+    &.btn-subtle {
+        border-color: $gray-light-medium;
+        color: $gray-medium-dark;
+        background: transparent;
+
+        &:hover:not(:disabled) {
+            border-color: $gray;
+            color: $black;
+        }
+
+        &:disabled {
+            border-color: $gray-light-medium;
+            color: $gray-light-medium;
+            opacity: 0.5;
+        }
+
+    }
+
+    &.btn-delete {
+        color: $red;
+        background: $red-light;
+
+        &:hover:not(:disabled) {
+            background: $red-light-hover;
+        }
+
+    }
+
+    &.btn-text {
+        padding: 0;
+        color: $gray-medium-dark;
+        background-color: transparent;
+
+        &:hover:not(:disabled) {
+            color: $black;
+        }
+    }
+
+    &.btn-text-cta {
+        color: $blue-cta;
+        padding: 0;
+        background-color: transparent;
+
+        &:hover:not(:disabled) {
+            color: $blue-hover;
+        }
+
+        &:disabled {
+            color: rgba($color: $gray-medium-dark, $alpha: 0.7);
+
+        }
+    }
+
+
+    &:disabled {
+        opacity: 0.5;
+    }
+
+    &.btn-icon {
+        padding: 0.25rem;
+        max-height: 32px;
+        min-height: 32px;
+        min-width: 32px;
+        max-width: 32px;
+        font-weight: normal;
+    }
+
+    &.btn-rounded {
+        border-radius: 12px;
+    }
+
+
+    &.btn-lg {
+        padding: 0.875rem 1.5rem;
+        max-height: 52px;
+
+        &.btn-rounded {
+            border-radius: 16px;
+        }
+    }
+
+    &.btn-sm {
+        padding: 0.25rem 1.5rem;
+        max-height: 24px;
+
+        .btn-rounded {
+            border-radius: 10px;
+        }
+    }
+
+    &.btn-white {
+        background-color: $white !important;
+    }
+
+    &.btn-rounded {
+        border-radius: 1rem;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+
+}

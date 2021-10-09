@@ -19,6 +19,7 @@ use App\Models\SlideBlock;
 use App\Models\PostSlide;
 use App\Models\Report;
 use App\Models\Tag;
+use App\Services\Poll\PollService;
 use App\SocialMediaTools;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -26,16 +27,22 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use PHPHtmlParser\Dom;
 use Ternobo\TernoboWire\TernoboWire;
 
 class PostController extends Controller
 {
 
-    public function __construct()
+    private Dom $dom;
+    private PollService $pollService;
+
+    public function __construct(Dom $dom, PollService $pollService)
     {
         $this->middleware([FollowMiddlware::class, Authenticate::class])->except([
             "show"
         ]);
+        $this->dom = $dom;
+        $this->pollService = $pollService;
     }
 
     /**
@@ -69,7 +76,7 @@ class PostController extends Controller
             'can_tip' => $request->canDonate,
         ]);
 
-        $tagsAndMentions = $post->setContent($slides, $user);
+        $tagsAndMentions = $post->setContent($slides, $user, false, $this->pollService, $this->dom);
 
         if (!$draft) {
             SocialMediaTools::callMentions($tagsAndMentions['mentions'], $post->id);
@@ -177,13 +184,15 @@ class PostController extends Controller
     public function getTags(Request $request)
     {
         $term = trim($request->q);
+        $tags = Tag::query();
         if (empty($term)) {
-            return response()->json(["results" => []]);
+            $tags = $tags->latest()->paginate(10);
+        } else {
+            $tags = $tags->where("name", "like", "$term%")->paginate(10);
         }
-        $tags = Tag::query()->where("name", "like", "$term%")->paginate(10);
         $formatted_tags = [];
         foreach ($tags as $tag) {
-            $formatted_tags[] = ['key' => $tag->name, 'value' => $tag->name, 'name' => $tag->name];
+            $formatted_tags[] = ['key' => $tag->name, 'value' => $tag->name, 'name' => "#" . $tag->name];
         }
         return response()->json(array("results" => $formatted_tags));
     }
@@ -283,7 +292,7 @@ class PostController extends Controller
         $post->deleteBlocks();
         $post->slides()->delete();
 
-        $tags = $post->setContent($slides, $user)['tags'];
+        $tags = $post->setContent($slides, $user, false, $this->pollService, $this->dom)['tags'];
 
         $post->tags = $tags;
         $post->save();

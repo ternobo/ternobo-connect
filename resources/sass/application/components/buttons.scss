@@ -1,77 +1,7 @@
-.follow-btn {
-    color: rgb(8, 152, 223);
-    background: rgba(231, 242, 255, 1);
-    border: none;
-    padding: map-get($spacings, 2);
-    font-weight: bold;
-    font-size: 0.75rem !important;
-    transition: 0.3s all;
-    min-width: 80px;
-    white-space: nowrap;
-}
-
-.btn-danger {
-    background: $light-error;
-    color: $red;
-
-    &:hover {
-        background: $light-error-darker;
-        color: $red;
-        border-color: $light-error-darker;
-    }
-}
-
-.btn {
-    padding: 0.5rem 1.5rem;
-    font-weight: 600;
-
-    &:disabled {
-        background: #E0E0E0;
-        color: $grey;
-        border-color: #E0E0E0;
-        opacity: 0.5;
-    }
-
-}
-
-
-.modal-dialog {
-    .btn:not(.add-action-btn) {
-        padding: .782rem 2.5rem;
-    }
-}
-
-.btn-action-light {
-    background: #E7F3FF;
-    border-radius: 0.75rem;
-    color: $action;
-
-    &:not(:disabled):hover {
-        color: $action;
-        background: $blue-light-hover;
-    }
-}
-
-.follow-btn:hover {
-    background: #CDEAF9;
-    color: rgb(8, 152, 223);
-}
-
-.connect-btn {
-    @extend .follow-btn;
-    color: rgb(0, 200, 83);
-    background: #E5FAED;
-}
-
-.connect-btn:hover {
-    background: #CCF4DC;
-    color: rgb(0, 200, 83);
-}
-
 .btn-transparent,
 .button-transparent {
     background: transparent;
-    color: $grey;
+    color: $gray-500;
 
     &:hover {
         color: $dark;
@@ -80,21 +10,21 @@
     &:disabled {
         border-color: transparent;
         background: transparent;
-        color: $fixed-elements;
+        color: $gray-200;
     }
 
     &.cta-text {
         padding: 0;
-        color: $action;
+        color: $blue-cta;
 
         &:hover {
-            color: $action-hover;
+            color: $blue-hover;
         }
 
         &:disabled {
             border-color: transparent;
             background: transparent;
-            color: $grey;
+            color: $gray-500;
 
         }
     }
@@ -110,7 +40,7 @@
 }
 
 .btn-transparent:disabled {
-    color: $grey;
+    color: $gray-500;
 }
 
 .btn:focus,
@@ -124,12 +54,6 @@
     color: #757575 !important;
 }
 
-.btn-connection-waiting {
-    @extend .follow-btn;
-    background: #FEFCEA;
-    color: #EFDC36;
-}
-
 .btn-connection-waiting:hover {
     background: #fffce4;
     color: #EFDC36;
@@ -137,8 +61,8 @@
 }
 
 .add-btn {
-    border: 2px solid $icons;
-    border-right: none;
+    border: 2px solid $light;
+    border-#{$start}: none;
     background: #E0E0E0;
     color: #757575;
     max-height: 37px;
@@ -158,18 +82,6 @@
     transition: all 0.4s ease-in-out;
 }
 
-.btn-rounded-outline {
-    background: transparent;
-    color: $text-color;
-    border-radius: 1rem;
-    border: 2px solid $gray-400;
-
-    &:hover {
-        border-color: $dark;
-        color: $dark;
-    }
-}
-
 .loading-button.loading {
     border-color: transparent;
 }
@@ -177,9 +89,9 @@
 .loading-button.loading::before {
     position: absolute;
     top: 50%;
-    left: 50%;
+    #{$end}: 50%;
     margin-top: -4px;
-    margin-left: -4px;
+    margin-#{$end}: -4px;
     content: '';
     height: 8px;
     width: 8px;
@@ -196,7 +108,7 @@
 .btn-block {
     background: #b8b1b1;
     color: #191919;
-    font-size: 14px;
+    font-size: $text-xsm;
     font-weight: 600;
     width: 164px;
 
@@ -207,7 +119,7 @@
 
 @-webkit-keyframes one-two {
     0% {
-        left: 20%;
+        #{$end}: 20%;
         top: 50%;
     }
 
@@ -224,7 +136,7 @@
     }
 
     50% {
-        left: 70%;
+        #{$end}: 70%;
         top: 50%;
     }
 
@@ -241,14 +153,14 @@
     }
 
     100% {
-        left: 20%;
+        #{$end}: 20%;
         top: 50%;
     }
 }
 
 @keyframes one-two {
     0% {
-        left: 20%;
+        #{$end}: 20%;
         top: 50%;
     }
 
@@ -265,7 +177,7 @@
     }
 
     50% {
-        left: 70%;
+        #{$end}: 70%;
         top: 50%;
     }
 
@@ -282,36 +194,36 @@
     }
 
     100% {
-        left: 20%;
+        #{$end}: 20%;
         top: 50%;
     }
 }
 
 @-webkit-keyframes loading {
     0% {
-        left: 20%;
+        #{$end}: 20%;
     }
 
     50% {
-        left: 80%;
+        #{$end}: 80%;
     }
 
     100% {
-        left: 20%;
+        #{$end}: 20%;
     }
 }
 
 @keyframes loading {
     0% {
-        left: 20%;
+        #{$end}: 20%;
     }
 
     50% {
-        left: 80%;
+        #{$end}: 80%;
     }
 
     100% {
-        left: 20%;
+        #{$end}: 20%;
     }
 }
 
@@ -319,8 +231,8 @@
 .splitor-b::after {
     content: " ";
     bottom: 0px;
-    right: 0.625rem;
-    left: 0.625rem;
+    #{$start}: 0.625rem;
+    #{$end}: 0.625rem;
     width: calc(100% - 1.25rem);
     height: 1px;
     position: absolute;
@@ -330,7 +242,7 @@
 
 .splitor-l::after {
     content: " ";
-    left: 0;
+    #{$end}: 0;
     width: 1px;
     height: 20px;
     position: absolute;
@@ -341,7 +253,7 @@
 
 .show-more-text--clickable {
     font-size: 0.875rem;
-    color: $icons;
+    color: $light;
     font-weight: 600;
     @extend .clickable;
     margin-top: map-get($spacings, 2);
@@ -349,7 +261,7 @@
 
 .btn-edit {
     border-radius: 1rem;
-    border: 2px solid $icons;
+    border: 2px solid $light;
     color: #757575;
     transition: 0.3s all;
     display: flex;
@@ -359,7 +271,7 @@
 
     i {
         @media screen and(min-width: $sm-size) {
-            margin-left: map-get($spacings, 2);
+            margin-#{$end}: map-get($spacings, 2);
         }
     }
 }
@@ -392,14 +304,14 @@
     .edit-icons {
         position: absolute;
         top: 1.5rem;
-        left: 1.5rem;
+        #{$end}: 1.5rem;
         padding-top: 5px;
         display: flex;
         flex-direction: column;
 
         @media screen and (max-width: $sm-size) {
             top: 8px;
-            left: 12px;
+            #{$end}: 12px;
         }
     }
 }
@@ -409,7 +321,6 @@
 }
 
 .rounded-add-btn {
-    @extend .btn;
     padding: 0.25rem !important;
     border-radius: 12px;
     min-width: unset;
@@ -424,7 +335,7 @@
         border-radius: 50%;
 
         i {
-            font-size: 16px;
+            font-size: $text-sm;
         }
     }
 }
@@ -433,25 +344,25 @@
 .btn-light-action {
     color: rgb(8, 152, 223);
     background: rgba(231, 242, 255, 1);
-    color: $action;
+    color: $blue-cta;
 }
 
 .add-btn-light-grey {
-    background: $fixed-elements;
-    border-color: $fixed-elements;
+    background: $gray-200;
+    border-color: $gray-200;
 
     color: $text-color;
 
     &:disabled {
         cursor: not-allowed;
-        background: $fixed-elements;
-        border-color: $fixed-elements;
-        color: $icons;
+        background: $gray-200;
+        border-color: $gray-200;
+        color: $light;
     }
 }
 
 .btn-suprelight {
-    color: $grey;
+    color: $gray-500;
     background: #F5F5F5;
 
     &:disabled {
@@ -460,22 +371,15 @@
     }
 }
 
-.btn {
-    @media screen and (max-width: $sm-size) {
-        font-size: 10px;
-    }
-}
-
-
 .btn-grey-10 {
     background: $body-bg;
     color: $light;
-    border: 2px solid $icons;
+    border: 2px solid $light;
     transition: 0.3s all;
 }
 
 .btn-grey-10:hover {
-    background: $icons;
+    background: $light;
     color: $text-color;
 }
 

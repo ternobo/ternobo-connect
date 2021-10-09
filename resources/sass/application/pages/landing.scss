@@ -6,7 +6,7 @@
 
     p,
     span {
-        color: $fixed-elements;
+        color: $gray-200;
     }
 }
 
@@ -54,8 +54,8 @@ h5 {
 }
 
 .full-width {
-    margin-left: calc(-100vw / 2 + 500px / 2);
-    margin-right: calc(-100vw / 2 + 500px / 2);
+    margin-#{$end}: calc(-100vw / 2 + 500px / 2);
+    margin-#{$start}: calc(-100vw / 2 + 500px / 2);
 }
 
 .btn {
@@ -69,7 +69,7 @@ h5 {
 
 .btn-grey:hover,
 .btn-grey:active {
-    background: $action;
+    background: $blue-cta;
     color: #FFF;
 }
 
@@ -94,11 +94,11 @@ h5 {
 .section-1 {
     div {
         span:first-child {
-            color: $action;
+            color: $blue-cta;
         }
 
         span:nth-child(2) {
-            color: $grey;
+            color: $gray-500;
         }
     }
 }
@@ -109,7 +109,7 @@ h5 {
 
 .section-2 {
     span:first-child {
-        color: $action;
+        color: $blue-cta;
     }
 
     .sims {
@@ -126,7 +126,7 @@ h5 {
         background: #2A2A2A;
 
         span:first-of-type {
-            color: $action;
+            color: $blue-cta;
             @extend .font-24;
 
         }
@@ -186,8 +186,8 @@ h5 {
     }
 
     .mobileOfpost {
-        margin-left: 1rem !important;
-        margin-right: 1rem !important;
+        margin-#{$end}: 1rem !important;
+        margin-#{$start}: 1rem !important;
     }
 
     .svg2 {
@@ -200,7 +200,7 @@ h5 {
 
     .aiImages {
         width: 150% !important;
-        margin-right: -2rem;
+        margin-#{$start}: -2rem;
     }
 
     .sptitle {
@@ -228,7 +228,7 @@ h5 {
 }
 
 .slick-prev:before {
-    content: 'keyboard_arrow_left' !important;
+    content: 'keyboard_arrow_-#{$end}' !important;
     font-family: "Material Icons" !important;
     font-size: 30px;
 }
@@ -241,11 +241,11 @@ h5 {
 }
 
 .slick-next {
-    right: -25px !important;
-    left: unset !important;
+    #{$start}: -25px !important;
+    #{$end}: unset !important;
 }
 
 .slick-prev {
-    left: -25px !important;
-    right: unset !important;
+    #{$end}: -25px !important;
+    #{$start}: unset !important;
 }

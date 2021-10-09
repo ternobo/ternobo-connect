@@ -1,13 +1,17 @@
 // Body
 $body-bg: #F5F5F5;
-
 $border-widths: 2px;
+$white: #FFF;
 
+// -----------------------------------------------
 $spacing: 1rem;
 $root-size: 16px;
 $root-size-mobile:12px;
+// -----------------------------------------------
 
-$spacings: (1: $spacing / 4,
+// --------------- Spacings ----------------
+$spacings: (0:0,
+    1: $spacing / 4,
     2: $spacing / 2,
     3: $spacing * 0.75,
     4: $spacing,
@@ -16,61 +20,36 @@ $spacings: (1: $spacing / 4,
     7: $spacing * 2.5,
     8: $spacing * 3.25,
     9: $spacing * 4,
+    10: $spacing * 4.5,
 ) !default;
+$positons: (top:t,
+    $end:e,
+    bottom:b,
+    $start:s,
+);
+
+$position-types:(absolute, relative, fixed, sticky);
+
+// ------------------ Modal Sizes ------------------
+$modal-small: 320px !default;
+$modal-medium: 582px !default;
+$modal-large: 710px !default;
+
+$modal-sizes: ("sm":$modal-small,
+    "md":$modal-medium,
+    "lg":$modal-large,
+);
 
 $breakpoint: 1188px;
 
-// Typography
-$font-family-sans-serif: 'dana, PT Sans, serif';
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
 
 // Shadows  
 $card-shadow: 0 1rem 40px rgba(0, 0, 0, 0.02);
 $control-shadow: 0 0 0.25rem 0 rgba(0, 0, 0, 0.25);
 $full-width-container: 1920px;
 
-
-// Colors
-$background: #F5F5F5;
-$box-on-bg: #FFF;
-$fixed-elements: #EEE;
-$icons: #C8C8C8;
-$sub-heading: #757575;
-$icon-hover: #191919;
-$text-color: #424242;
-$headings: #191919;
-
-// Colors
-$border-color: rgb(224, 224, 224);
-$primary: #191919;
-$action: #0898DF;
-$wating: #FFEB3B;
-$wating-bg: #E1F5FF;
-$red: #F44336;
-$success: #00C853;
-$white: #FFFF !default;
-$grey: #757575;
-$action-hover:#0373AB;
-$light-blue:rgba(231, 243, 255, 1);
-$dark-blue: #3670AA;
-$dark-green:#3B955D;
-$yellow-dark-hover:#9C902B;
-$yellow-light-hover:#FFFACD;
-$blue-light-hover:#CDEAF9;
-
-$dark: #191919;
-$light-green: #E1F5FF;
-$light: #757575;
-$light-warning: #FFFCE1;
-$dark-warning: #E4CF23;
-$light-success: #E5FAED;
-$light-error: #FEECEA;
-$light-error-darker:#FFD3CE;
-$error: #F44336;
-
 // Base grayscale colors definitions
-$white: #fff !default;
+$gray-0: #fff !default;
 $gray-50: #FBFBFB !default;
 $gray-100: #F5F5F5 !default;
 $gray-200: #EEEEEE !default;
@@ -80,8 +59,30 @@ $gray-500: #757575 !default;
 $gray-600: #424242 !default;
 $black: #191919 !default;
 
-$gray-theme: (
-    '50':$gray-50,
+
+// Gray Scale 
+$gray-dark: #424242;
+$gray-medium-dark: #757575;
+$gray:#C8C8C8;
+$gray-light-medium:#E0E0E0;
+$gray-light:#EEEEEE;
+$gray-bg:#F5F5F5;
+
+
+// Shadows
+$main-card-shdow: 0px 5px 40px rgba(0, 0, 0, 0.03);
+$bg-shadow:0px 10px 40px rgba(0, 0, 0, 0.1);
+$bg-hover-shadow:0px 10px 40px rgba(0, 0, 0, 0.2);
+$notification-shadow:0px 20px 20px rgba(0, 0, 0, 0.15);
+$overlay-menu-shadow:0px 5px 20px rgba(0, 0, 0, 0.051);
+$chat-card-shadow: 0px -5px 40px rgba(0, 0, 0, 0.05);
+$navigation-shadow: 0px -5px 40px rgba(0, 0, 0, 0.05);
+
+// Text Colors
+$text-color:$gray-600;
+$text-on-primary: $gray-0;
+
+$gray-theme: ('50':$gray-50,
     '100':$gray-100,
     '200':$gray-200,
     '300':$gray-300,
@@ -92,43 +93,69 @@ $gray-theme: (
 
 
 // Base colors definitions
-$blue: #0898DF !default;
-$red: #F44336 !default;
-
 $orange: #C58142 !default;
-$yellow: #ffc107 !default;
-
-$green: #28a745 !default;
-
 
 // Blue Varients
 $blue-dark: #3670AA;
-$blue-100: #E7F3FF;
-$blue-200: #CDEAF9;
-$blue-300: #0898DF;
-$blue-400: #0784C1;
+$blue-hover: #0784C1;
+$blue-cta: #0898DF;
+$blue-light-hover: #CDEAF9;
+$blue-light: #E7F3FF;
 
 // Green Varients
 $green-dark: #3B955D;
-$green-100: #E5FAED;
-$green-200: #C7FEDC;
-$green-300: #00C853;
+$green:#4CBF7B;
+$green-light-hover:#C7FEDC;
+$green-light:#E5FAED;
 
-$yellow-100: #FEFCEA;
-$yellow-200: #FFFACD;
-$yellow-500: #EFDC36;
-$yellow-800:#C2AA52;
-$yellow-900:#9C902B;
+// Yellow Varients
+$yellow-dark:#9C902B;
+$yellow-saturated:#C2AA52;
+$yellow: #FEFCEA;
+$yellow-light-hover: #FFFACD;
+
+// Red Varients
+$red: #F44336;
+$red-light-hover:#FFD3CE;
+$red-light:#FEECEA;
 
 // Theme color default definitions
-$primary: $dark !default;
-$secondary: $action !default;
-$success: $success !default;
-$info: $blue-300 !default;
-$warning: $dark-warning !default;
+$primary: $black !default;
+$secondary: $blue-cta !default;
+$success: $green !default;
+$info: $blue-dark !default;
+$warning: $yellow !default;
 $danger: $red !default;
-$light: #C8C8C8 !default;
+$light: $gray-400 !default;
 $dark: $black !default;
+
+
+// ---------------- Typography ----------------
+
+$headings-font-weight: 600;
+
+// Heading
+$heading-1: 2rem;
+$heading-2:1.5rem;
+$heading-3:1.25rem;
+
+// Text
+$text-lg:1.25rem;
+$text-md:1.125rem;
+$text-sm:1rem;
+$text-xsm:0.875rem;
+$text-xxsm:0.75rem;
+$text-xxxsm:0.625rem;
+
+$font-sizes: ("lg": $text-lg,
+    "md": $text-md,
+    "sm":$text-sm,
+    "xsm": $text-xsm,
+    "xxsm":$text-xxsm,
+    "xxxsm":$text-xxxsm);
+
+
+// --------------------------------------------
 
 $theme-colors: ('primary': $primary,
     'secondary': $secondary,
@@ -137,6 +164,10 @@ $theme-colors: ('primary': $primary,
     'warning': $warning,
     'danger': $danger,
     'light': $light,
+    'gray-dark':$gray-dark,
+    'gray-medium-dark':$gray-medium-dark,
+    'gray-light-medium':$gray-light-medium,
+    'gray-light':$gray-light,
     'dark': $dark);
 
 $sm-size: 768px;

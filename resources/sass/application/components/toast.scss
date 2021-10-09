@@ -1,7 +1,7 @@
 .toast-container {
     position: fixed;
     bottom: 1.5rem;
-    right: 50px;
+    #{$start}: 50px;
     z-index: 9999;
 }
 
@@ -12,7 +12,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 14px;
+    font-size: $text-xsm;
     padding: 0;
     min-width: 250px;
     height: 60px;
@@ -20,8 +20,6 @@
     .msg {
         display: flex;
         font-family: Vazir, 'Open Sans', sans-serif;
-        ;
-        ;
         align-items: center;
         color: $white;
         padding: 20px 16px;
@@ -42,7 +40,7 @@
     &::before {
         content: " ";
         position: absolute;
-        right: 0;
+        #{$start}: 0;
         height: 100%;
         background-color: $dark;
         width: 100%;

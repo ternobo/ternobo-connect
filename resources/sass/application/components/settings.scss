@@ -16,7 +16,7 @@
 
 .settings-item {
     padding: 24px 2rem;
-    color: $grey;
+    color: $gray-500;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -89,7 +89,7 @@
     .name {
         font-weight: 600;
         color: $dark;
-        font-size: 16px;
+        font-size: $text-sm;
 
         @media screen and (max-width: $sm-size) {
             font-size: 12px !important;
@@ -111,7 +111,7 @@
     }
 
     &:not(:last-child) {
-        border-bottom: 2px solid $icons;
+        border-bottom: 2px solid $light;
     }
 }
 
@@ -124,7 +124,7 @@
     align-items: center;
     color: $light;
     background: transparent;
-    border: 2px solid $icons;
+    border: 2px solid $light;
     border-radius: 12px;
 
     font-size: 20px !important;
@@ -147,17 +147,17 @@
 
     button {
         width: 220px;
-        background: $background;
+        background: $gray-100;
         color: $dark;
 
         i {
-            margin-left: 8px;
-            font-size: 16px;
+            margin-#{$end}: 8px;
+            font-size: $text-sm;
         }
 
         @media screen and (min-width: $sm-size) {
             &:first-child {
-                margin-left: 1.5rem;
+                margin-#{$end}: 1.5rem;
             }
         }
     }

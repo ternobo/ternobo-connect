@@ -13,7 +13,7 @@
         white-space: wrap;
         position: absolute;
         top: 0;
-        left: 0;
+        #{$end}: 0;
     }
     div.readonly {
         z-index: -99;

@@ -16,6 +16,8 @@ export default store({
         reportReasons: [],
 
         profileEdit: false,
+
+        showNewPostModal: true,
     },
     actions: {
         loadReportReasons({ commit }) {
@@ -67,6 +69,13 @@ export default store({
         }
     },
     mutations: {
+        hideNewPostModal(state) {
+            state.showNewPostModal = false;
+        },
+        showNewPostModal(state) {
+            state.showNewPostModal = true;
+        },
+
         setReportReasons(state, payload) {
             state.reportReasons = payload;
         },

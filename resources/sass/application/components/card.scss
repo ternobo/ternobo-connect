@@ -1,5 +1,5 @@
 .card {
-    background: $box-on-bg;
+    background: $white;
 
     .card-body {
         padding: 1.5rem;
@@ -8,17 +8,17 @@
     .card-footer {
         position: relative;
         padding: 1rem 1.5rem;
-        background-color: $box-on-bg;
+        background-color: $white;
         border: none;
 
         &::after {
             content: " ";
             position: absolute;
             top: 0;
-            left: 1.5rem;
+            #{$end}: 1.5rem;
             width: calc(100% - 3rem);
             height: 2px;
-            background-color: $fixed-elements;
+            background-color: $gray-200;
         }
 
     }

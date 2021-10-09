@@ -46,14 +46,14 @@
         @extend .nice-scroll;
 
         .unread-badge {
-            background: $action;
+            background: $blue-cta;
             padding: map-get($spacings, 1);
             padding-top: 7px;
             border-radius: 4px;
             color: $white;
             height: 20px;
             width: 20px;
-            font-size: 10px;
+            font-size: $text-xxxsm;
             line-height: 1;
             display: flex;
             justify-content: center;
@@ -79,7 +79,7 @@
         .profile-image {
             width: 2.75rem;
             height: 2.75rem;
-            margin-left: 16px;
+            margin-#{$end}: 16px;
             margin-bottom: 0;
 
             img {
@@ -92,23 +92,23 @@
         .profile-name {
             color: $dark;
             font-weight: 600;
-            font-size: 14px;
+            font-size: $text-xsm;
             line-height: 22px;
             margin-bottom: 4px;
         }
 
         .last-message {
-            font-size: 14px;
+            font-size: $text-xsm;
             line-height: 21px;
-            color: $grey;
+            color: $gray-500;
         }
 
     }
 
     .update-time {
-        font-size: 12px;
+        font-size: $text-xxsm;
         line-height: 18px;
-        color: $grey;
+        color: $gray-500;
     }
 
     &:hover,
@@ -142,7 +142,7 @@
             }
 
             small {
-                color: $grey;
+                color: $gray-500;
             }
         }
 
@@ -168,7 +168,7 @@
         }
 
         >.conversation-footer {
-            color: $grey;
+            color: $gray-500;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -192,11 +192,11 @@
         min-height: 48px;
         width: 48px;
         height: 48px;
-        background: $fixed-elements;
+        background: $gray-200;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: 12px;
+        margin-#{$end}: 12px;
     }
 
     .file-detail {
@@ -208,7 +208,7 @@
             align-items: center;
 
             strong {
-                margin-left: 12px;
+                margin-#{$end}: 12px;
             }
         }
     }
@@ -226,7 +226,7 @@
 
 .recording-timer {
     font-weight: 600;
-    font-size: 14px;
+    font-size: $text-xsm;
     line-height: 1;
     display: flex;
     align-items: center;
@@ -244,12 +244,12 @@
     gap: 5px;
 
     >i {
-        color: $action;
+        color: $blue-cta;
     }
 
     >span {
-        font-size: 12px;
-        color: $action;
+        font-size: $text-xxsm;
+        color: $blue-cta;
     }
 
     .progress {
@@ -264,15 +264,15 @@
 
         .progress-bg {
             position: absolute;
-            left: 0;
-            right: 0;
+            #{$end}: 0;
+            #{$start}: 0;
             background: #CDEAF9;
             width: 100%;
             height: 5px;
         }
 
         .progress-fill {
-            background: $action;
+            background: $blue-cta;
             position: relative;
             transition: 0.3s all;
             display: flex;
@@ -282,8 +282,8 @@
             &::after {
                 content: " ";
                 position: absolute;
-                background: $action;
-                right: 0;
+                background: $blue-cta;
+                #{$start}: 0;
                 border-radius: 3px;
                 width: 4px;
                 height: 8px;
@@ -297,8 +297,8 @@
         }
 
         >span {
-            font-size: 12px;
-            color: $grey;
+            font-size: $text-xxsm;
+            color: $gray-500;
         }
 
         .progress {
@@ -335,7 +335,7 @@
         color: $dark;
     }
 
-    color: $grey;
+    color: $gray-500;
 }
 
 
@@ -363,7 +363,7 @@
 
         .message-time,
         .message-loading {
-            margin-right: 12px;
+            margin-#{$start}: 12px;
         }
 
         strong {
@@ -375,7 +375,7 @@
 
         figure.profile-xsm {
             margin-bottom: 0;
-            margin-left: 12px;
+            margin-#{$end}: 12px;
         }
 
         .voice-message {
@@ -397,12 +397,12 @@
 
         &.send-error {
             .reload-btn {
-                color: $action;
-                margin-right: -32px;
+                color: $blue-cta;
+                margin-#{$start}: -32px;
                 max-height: 2.75rem;
                 display: flex;
                 align-items: center;
-                margin-left: 8px;
+                margin-#{$end}: 8px;
                 cursor: pointer;
             }
 
@@ -424,7 +424,7 @@
         justify-content: flex-end;
 
         .voice-message {
-            background: $fixed-elements;
+            background: $gray-200;
         }
 
         .message-container {
@@ -432,15 +432,15 @@
 
             figure.profile-xsm {
                 margin-bottom: 0;
-                margin-right: 12px;
-                margin-left: 0;
+                margin-#{$start}: 12px;
+                margin-#{$end}: 0;
 
                 .reload-btn {
-                    margin-left: -32px;
+                    margin-#{$end}: -32px;
                     max-height: 2.75rem;
                     display: flex;
                     align-items: center;
-                    margin-right: 8px;
+                    margin-#{$start}: 8px;
                     cursor: pointer;
                 }
             }
@@ -451,8 +451,8 @@
 
             .message-time,
             .message-loading {
-                margin-left: 12px;
-                margin-right: 0;
+                margin-#{$end}: 12px;
+                margin-#{$start}: 0;
             }
 
         }
@@ -474,7 +474,7 @@
 
         .file-icon {
             background: #E7F3FF;
-            color: $action;
+            color: $blue-cta;
             border-radius: 14px;
             height: 40px;
             width: 40px;
@@ -482,7 +482,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-left: 12px;
+            margin-#{$end}: 12px;
         }
     }
 
@@ -512,7 +512,7 @@
 
 .received {
     .media-message {
-        background: $fixed-elements;
+        background: $gray-200;
     }
 }
 
@@ -575,10 +575,10 @@
 .search-part {
     padding: 12px;
     background: $body-bg;
-    color: $grey;
+    color: $gray-500;
     width: 100%;
     font-weight: 600;
-    font-size: 12px;
+    font-size: $text-xxsm;
     line-height: 19px;
 }
 
@@ -586,17 +586,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: $fixed-elements;
+    background: $gray-200;
     padding: 8px 12px;
 
     .contactinfo {
         display: flex;
-        margin-left: 40px;
+        margin-#{$end}: 40px;
     }
 
     figure.profile {
         margin-bottom: 0;
-        margin-left: 12px;
+        margin-#{$end}: 12px;
     }
 
     .profile,
@@ -611,19 +611,19 @@
     strong {
         color: $text-color;
         font-weight: 600;
-        font-size: 12px;
+        font-size: $text-xxsm;
         line-height: 19px;
     }
 
     .subtitle {
-        font-size: 10px;
+        font-size: $text-xxxsm;
         line-height: 15px;
-        text-align: right;
-        color: $grey;
+        text-align: $start;
+        color: $gray-500;
     }
 
     i.showprofile {
-        color: $grey;
+        color: $gray-500;
     }
 
 
@@ -676,18 +676,18 @@
         padding: 16px 12px;
 
         .filter {
-            margin-left: 12px;
+            margin-#{$end}: 12px;
             background: $body-bg;
             padding: 4px 8px;
             border-radius: 10px;
-            color: $grey;
+            color: $gray-500;
 
             &.active {
                 color: $dark;
             }
 
             i {
-                color: $grey;
+                color: $gray-500;
             }
         }
     }
@@ -699,6 +699,6 @@
 
 .link-item {
     direction: ltr;
-    text-align: left;
-    padding-left: 16px;
+    text-align: -#{$end};
+    padding-#{$end}: 16px;
 }

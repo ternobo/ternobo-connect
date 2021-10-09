@@ -181,6 +181,9 @@ Route::middleware([Authenticate::class])->group(function () {
         Route::post("tags/delete", "Profile\PageController@removeTags");
     });
 
+
+    require base_path("routes/poll_routes.php");
+
     /**
      * Pages API
      */

@@ -11,6 +11,14 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+
+mix.options({
+    hmrOptions: {
+        host: '10.8.0.2',
+        port: 8080
+    }
+});
+
 mix.babelConfig({
     plugins: ['@babel/plugin-syntax-dynamic-import'],
 });
@@ -25,10 +33,8 @@ mix.js('resources/js/app.js', 'public/js').vue({
     extractStyles: "public/css/components.css"
 });
 
-mix.sass("resources/sass/application/code.scss", "public/css");
-
 mix.sass("resources/sass/application/app.scss", "public/css");
-mix.sass("resources/sass/application/main.scss", "public/css");
+mix.sass("resources/sass/application/app.ltr.scss", "public/css");
 
 mix.extract(['vue', 'axios', "monaco-editor", "vuex", "bootstrap-vue", "laravel-echo"]);
 mix.version();

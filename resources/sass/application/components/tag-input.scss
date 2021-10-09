@@ -1,6 +1,6 @@
 .tag-input {
     position: relative;
-    border: 2px solid $icons;
+    border: 2px solid $light;
     transition: 0.3s all;
 
     &:focus-within {
@@ -54,14 +54,14 @@
     label {
         position: absolute;
         font-size: 1rem;
-        right: 0;
+        #{$start}: 0;
         top: 50%;
         transform: translateY(-50%);
         background-color: white;
-        color: $icons;
+        color: $light;
         padding: 0 0.3rem;
         transition: .1s ease-out;
-        transform-origin: right top;
+        transform-origin: $start top;
         pointer-events: none;
         white-space: nowrap;
         margin: 0 0.25rem;
@@ -74,7 +74,7 @@
         border-radius: 0;
         color: $text-color;
         transition: 0.1s ease-out;
-        font-size: 14px;
+        font-size: $text-xsm;
         padding: 0.5rem 0.35rem;
     }
 

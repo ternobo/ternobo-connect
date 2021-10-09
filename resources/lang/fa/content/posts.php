@@ -13,6 +13,7 @@ return [
     'publish' => "انتشار",
     'draft' => "پیش‌نویس",
     'copy-post-link' => "رونوشت پیوند این محتوا",
+    "copy-post-link-slide" => "رونوشت پیوند این اسلاید",
     'embed-text' => "دریافت کد امبد",
     'embed-des' => "رونوشت کد امبد را در وبسایت خود قرار دهید.",
     'like-post' => "پسندیدن",
@@ -22,4 +23,11 @@ return [
     'enter-your-text' => "متن خو را وارد کنید",
     'save' => "ذخیره",
     "tip-this-post" => "حمایت از این محتوا",
+    "image-detail" => "جزئیات تصویر",
+    'spoiler-alert' => "خطر لو رفتن",
+    'rotate' => "چرخاندن",
+    'alt-text' => "متن جایگزین",
+
+    'votes' => "رای",
+    "poll-loading-error" => "خطا در دریافت اطلاعات",
 ];

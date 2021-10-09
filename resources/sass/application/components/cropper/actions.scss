@@ -10,13 +10,13 @@
 .cropperactions {
     button {
         color: #707070;
-        font-size: 16px;
+        font-size: $text-sm;
         background: #F8F8F8;
         outline: none;
         border: none;
         height: 100%;
         padding: 0.25rem 2rem;
-        border-left: 1px solid #C8C8C8;
+        border-#{$end}: 1px solid #C8C8C8;
     }
 
     button:hover {
@@ -28,7 +28,7 @@
     background: #F8F8F8;
     border-radius: 50% !important;
     padding: 0.3rem;
-    font-size: 16px;
+    font-size: $text-sm;
     box-shadow: 0 0 0.4rem 0 rgba(0, 0, 0, 0.2);
     cursor: pointer;
     outline: none;
@@ -40,7 +40,7 @@
     justify-content: center;;
 }
 
-.topleftactions {
+.top-#{$end}actions {
     display: flex;
     gap: 5px;
     width: 100%;

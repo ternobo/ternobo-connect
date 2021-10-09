@@ -9,11 +9,16 @@ class SlideBlock extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        "meta" => "array"
+    ];
+
     protected $fillable = [
         "page_id",
         "slide_id",
         "content",
         "type",
         "sort",
+        "meta"
     ];
 }

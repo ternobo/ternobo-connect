@@ -278,12 +278,14 @@ class PageController extends Controller
             ->orderByRaw("followings.created_at DESC")
             ->select(['pages.*'])
             ->get();
-        // dd($suggestions->toArray());
+            
         foreach ($suggestions as $value) {
             $result = array();
             $result["key"] = $value->slug;
             $result["value"] = $value->slug;
             $result["name"] = $value->name;
+            $result["short_bio"] = $value->short_bio;
+            $result["profile"] = $value->profile;
 
             $results[] = $result;
         }

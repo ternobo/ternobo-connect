@@ -12,10 +12,10 @@
     user-select: none;
 
     font-weight: 600;
-    font-size: 12px;
+    font-size: $text-xxsm;
     line-height: 19px;
     /* identical to box height */
-    text-align: right;
+    text-align: $start;
     color: $text-color;
 
     padding: 0.875rem 1.5rem;
@@ -58,12 +58,12 @@
         }
 
         .user-profile {
-            margin-left: 16px;
+            margin-#{$end}: 16px;
         }
 
         .user-name {
             font-weight: 600;
-            font-size: 14px;
+            font-size: $text-xsm;
             line-height: 22px;
 
             color: $dark;
@@ -72,17 +72,17 @@
 
     .donation-amount {
         font-weight: 600;
-        font-size: 16px;
-        color: $action;
+        font-size: $text-sm;
+        color: $blue-cta;
 
         &.received {
-            font-size: 16px;
+            font-size: $text-sm;
             color: $success;
         }
 
         >*:last-child {
             font-weight: normal;
-            margin-right: 4px;
+            margin-#{$start}: 4px;
         }
 
     }
@@ -153,12 +153,12 @@
     width: calc(40% - 1.5rem);
 
     &:not(:last-child) {
-        margin-left: 1.5rem;
+        margin-#{$end}: 1.5rem;
     }
 
     &.active {
-        background: $blue-100;
-        color: $blue-300;
+        background: $blue-light;
+        color: $blue-light-hover;
 
     }
 }
@@ -189,7 +189,7 @@
     button {
         position: absolute;
         top: 2rem;
-        right: 2rem;
+        #{$start}: 2rem;
     }
 
     img.profile-md {

@@ -1,0 +1,86 @@
+@mixin modal-dialog {
+    width: 100%;
+    min-height: calc(100% - 3.5rem);
+    margin: 1.75rem auto;
+    display: flex;
+    align-items: center;
+
+    .back-modal .close {
+        @if($direction==ltr) {
+            left: 1.25rem;
+        }
+
+        @else {
+            transform: rotate(180deg);
+        }
+    }
+
+
+    .modal-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        background: $white;
+
+        >* {
+            padding: 2rem;
+        }
+
+        >.modal-body {
+            flex: 1 1 auto;
+        }
+
+        >.modal-footer {
+            position: -webkit-sticky;
+            position: sticky;
+            bottom: 0;
+            z-index: 99;
+            background: $white;
+            display: flex;
+        }
+
+        >.modal-header {
+            display: flex;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+            background: $white;
+
+            &::after {
+                content: " ";
+                position: absolute;
+                #{$end}: 1.5rem;
+                #{$start}: 1.5rem;
+                bottom: 0;
+                height: 2px;
+                background: $gray-200;
+
+            }
+
+            >.modal-title {
+                font-weight: $headings-font-weight;
+                font-size: $heading-2;
+                margin: 0;
+            }
+
+
+            .close {
+                font-family: "Material Icons";
+                position: absolute;
+                right: 1.25rem;
+                padding: 0.25rem;
+                @extend .btn;
+                @extend .btn-text;
+                color: $gray-medium-dark;
+                font-size: 1.5rem;
+                font-weight: normal;
+
+                @if($direction==ltr) {
+                    .arrowback {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+        }
+    }
+}

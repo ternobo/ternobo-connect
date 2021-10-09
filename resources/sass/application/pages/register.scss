@@ -35,7 +35,7 @@
     }
 
     .password-tips {
-        text-align: right;
+        text-align: $start;
         margin: auto;
         margin-top: 40px;
     }
@@ -65,7 +65,7 @@
     .upload-profile-btn {
         padding: 8px 20px;
         color: $text-color;
-        border: 2px solid $icons;
+        border: 2px solid $light;
         transition: 0.3s all;
         width: auto;
         border-radius: 16px;
@@ -90,7 +90,7 @@
 
         @media screen and(max-width:$sm-size) {
             font-weight: 600;
-            font-size: 12px;
+            font-size: $text-xxsm;
         }
     }
 }

@@ -2,10 +2,10 @@
 	<div class="about-me">
 		<div v-if="canShow()">
 			<Biography v-if="checkUser(this.page.user_id) || (about != null && about.length > 0)" v-model="about" :edit="edit"></Biography>
-			<!-- <ExperienceList v-if="showExperiences" ref="experiences" class="mt-3" :edit="edit"></ExperienceList>
-			<EducationsList v-if="showExperiences" ref="educations" class="mt-3" :edit="edit"></EducationsList> -->
-			<Skills v-if="showSkills" ref="skills" :edit="edit" :page="page" class="mt-3"></Skills>
-			<AchievementsCard v-if="showAchievements" ref="achievements" class="mt-3" :edit="edit" :page="page"></AchievementsCard>
+			<!-- <ExperienceList v-if="showExperiences" ref="experiences" class="mt-4" :edit="edit"></ExperienceList>
+			<EducationsList v-if="showExperiences" ref="educations" class="mt-4" :edit="edit"></EducationsList> -->
+			<Skills v-if="showSkills" ref="skills" :edit="edit" :page="page" class="mt-4"></Skills>
+			<AchievementsCard v-if="showAchievements" ref="achievements" class="mt-4" :edit="edit" :page="page"></AchievementsCard>
 		</div>
 		<div class="w-100 d-flex align-items-center py-5 justify-content-center" v-else>
 			<span class="text-center w-100 font-18 text-grey"> {{ __.get("messages.no-data") }}</span>

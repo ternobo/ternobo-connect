@@ -38,7 +38,7 @@
 					<tselect :dir="appDirection" :items="page.skills" maxlength="52" labelOption="name" valueOption="name" v-model="val.skill" style="min-width: 234px">{{ __.get("user-profile.associated-with") }}</tselect>
 				</div>
 				<div class="col-md-12" v-if="showMore">
-					<div class="d-flex align-items-center justify-content-between mb-3">
+					<div class="d-flex align-items-center justify-content-between mb-4">
 						<strong>{{ __.get("application.description") }}</strong>
 						<div class="character-counter">
 							<span class="counter tex-dark">{{ leftCharacter }}</span>

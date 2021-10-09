@@ -12,10 +12,10 @@
             width: 20%;
 
             .social-icon {
-                font-size: 16px;
+                font-size: $text-sm;
 
                 i {
-                    font-size: 16px;
+                    font-size: $text-sm;
                 }
             }
         }
@@ -25,7 +25,7 @@
         }
 
         a:hover {
-            background: $fixed-elements;
+            background: $gray-200;
         }
 
         .editItem {

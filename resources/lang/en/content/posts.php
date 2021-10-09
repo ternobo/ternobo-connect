@@ -13,6 +13,7 @@ return [
     'publish' => "Publish",
     'draft' => "Draft",
     'copy-post-link' => "Copy Post Link",
+    "copy-post-link-slide" => "Copy This Slide",
     'embed-text' => "Get Embed Code",
     'embed-des' => "Put the embed code on your website.",
     'like-post' => "Like",
@@ -21,4 +22,11 @@ return [
     'liked-text' => "Liked By",
     'enter-your-text' => "Enter text",
     "tip-this-post" => "Tip this post",
+    "image-detail" => "Picture Detail",
+    'spoiler-alert' => "Spoiler Alert",
+    'rotate' => "Rotate",
+    'alt-text' => "Alternative Text",
+
+    'votes' => "Votes",
+    "poll-loading-error" => "Error While Loading Poll",
 ];

@@ -1,7 +1,7 @@
 <template>
 	<div class="not-available">
 		<div class="card p-52px">
-			<h1 class="text-center font-20 font-bold mb-64px">{{ __.get("application.profile-not-available") }}</h1>
+			<h1 class="text-center font-20 font-bold mb-9">{{ __.get("application.profile-not-available") }}</h1>
 			<img src="/images/profile-not-available.svg" />
 		</div>
 	</div>

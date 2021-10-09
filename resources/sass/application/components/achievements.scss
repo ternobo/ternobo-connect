@@ -71,7 +71,7 @@
             color: $dark;
             display: flex;
             font-weight: normal;
-            font-size: 14px;
+            font-size: $text-xsm;
 
 
             @media screen and (max-width: $sm-size) {
@@ -81,9 +81,9 @@
             }
 
             >*:not(:last-child) {
-                padding-left: 0.75rem;
-                border-left: 2px solid #C8C8C8;
-                margin-left: 0.75rem;
+                padding-#{$end}: 0.75rem;
+                border-#{$end}: 2px solid #C8C8C8;
+                margin-#{$end}: 0.75rem;
             }
 
             >span {
@@ -105,10 +105,10 @@
         }
 
         a.title {
-            color: $action;
+            color: $blue-cta;
 
             &:hover {
-                color: $action-hover;
+                color: $blue-hover;
             }
         }
 
@@ -117,7 +117,7 @@
             font-weight: normal;
             font-size: 1rem;
             line-height: 30px;
-            color: $grey;
+            color: $gray-500;
             margin-bottom: 0;
         }
     }
@@ -132,7 +132,7 @@
 .show-more-container {
     display: flex;
     align-items: center;
-    color: $grey;
+    color: $gray-500;
     font-size: 0.75rem;
     transition: 0.3s all;
     @extend .clickable;
@@ -143,15 +143,15 @@
 
     i {
         font-size: 1rem;
-        margin-left: 4px;
+        margin-#{$end}: 4px;
     }
 }
 
 .delete-move-actions {
     border-radius: 1rem;
     display: flex;
-    color: $grey;
-    background: $fixed-elements;
+    color: $gray-500;
+    background: $gray-200;
     padding: 8px 0.75rem;
     width: 80px;
     height: 40px;
@@ -168,7 +168,7 @@
         max-height: 28px;
 
         i {
-            font-size: 20px;
+            font-size: $text-lg;
         }
     }
 
@@ -253,19 +253,19 @@
             bottom: 0;
             height: 2px;
             background-color: #EEE;
-            left: 0;
-            right: 11rem;
+            #{$end}: 0;
+            #{$start}: 11rem;
 
             @media screen and (max-width: $sm-size) {
-                left: 1rem;
-                right: 1rem;
+                #{$end}: 1rem;
+                #{$start}: 1rem;
                 width: calc(100% - 32px);
             }
         }
 
         .achievement-name {
             font-weight: 600;
-            color: $grey;
+            color: $gray-500;
 
             strong {
                 font-weight: 600;
@@ -273,10 +273,10 @@
 
             a {
                 font-weight: 600;
-                color: $action;
+                color: $blue-cta;
 
                 &:hover {
-                    color: $action-hover;
+                    color: $blue-hover;
                 }
             }
 
@@ -290,17 +290,17 @@
     li:not(.edit) {
         &:not(.detailed) {
             &:not(:last-child) {
-                padding-left: 1rem;
-                border-left: 2px solid #C8C8C8;
-                margin-left: 1rem;
+                padding-#{$end}: 1rem;
+                border-#{$end}: 2px solid #C8C8C8;
+                margin-#{$end}: 1rem;
             }
         }
     }
 
     li.edit {
-        padding-left: 0;
-        margin-left: 0;
-        border-left: none;
+        padding-#{$end}: 0;
+        margin-#{$end}: 0;
+        border-#{$end}: none;
     }
 
     li.detailed {

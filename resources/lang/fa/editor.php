@@ -12,4 +12,14 @@ return [
 
     "base" => "پایه",
     "media" => "رسانه",
+
+    "poll" => "نظرسنجی",
+    "poll-setup-title" => "راه‌اندازی نظرسنجی",
+    "poll-setup-button" => "راه‌اندازی",
+    "poll-modal-title" => "ایجاد نظرسنجی",
+    "poll-modal-question" => "پرسش شما",
+    "poll-modal-question-ph" => "پرسش خود را وارد کنید",
+    "poll-modal-options" => "گزینه‌ها",
+    "poll-duration" => "تاریخ پایان نظرسنجی",
+    "poll-duration-ph" => "انتخاب تاریخ"
 ];

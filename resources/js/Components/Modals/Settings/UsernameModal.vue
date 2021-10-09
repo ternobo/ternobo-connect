@@ -10,8 +10,8 @@
 				</div>
 				<loading-button :disabled="loading || !valid || notChanged" class="btn btn-primary signup-save-btn" @click.native="save" :loading="saveLoading">{{ __.get("application.save") }}</loading-button>
 			</div>
-			<div class="d-flex flex-column mt-3 pt-3">
-				<span class="font-demibold font-14 mb-3">{{ __.get("settings.our-suggestions") }}</span>
+			<div class="d-flex flex-column mt-4 pt-3">
+				<span class="font-demibold font-14 mb-4">{{ __.get("settings.our-suggestions") }}</span>
 				<div class="d-flex">
 					<span v-for="suggestion in suggestions" class="category-badge font-demibold py-2 px-3 text-dark font-14 clickable" style="border-radius: 15px; margin-left: 12px" :key="'username_suggestion_' + suggestion" @click="username = suggestion">{{ suggestion }}</span>
 				</div>

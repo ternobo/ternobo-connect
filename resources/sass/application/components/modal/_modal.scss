@@ -1,0 +1,66 @@
+.modal-open {
+    overflow: hidden;
+    padding-right: 15px !important;
+}
+
+
+.modal-backdrop {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: $dark;
+    transition: opacity .15s linear;
+    opacity: 0.4;
+
+    &.fade {
+        opacity: 0;
+    }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    transition: 0.3s all;
+    overflow: overlay;
+    @include nice-scroll;
+
+    &.fade {
+        .modal-dialog {
+            transform: translate(0, -25%);
+            opacity: 0;
+        }
+    }
+
+    &.show {
+        display: block;
+
+        .modal-dialog {
+            transform: translate(0, 0);
+            opacity: 1;
+        }
+    }
+
+    .modal-dialog {
+        transition: 0.5s all;
+        @include modal-dialog;
+        @import "./modal-sizes";
+        transform: none;
+
+        .modal-content {
+            position: relative;
+            width: 100%;
+        }
+
+    }
+
+}

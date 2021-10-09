@@ -1,6 +1,6 @@
 <template>
 	<div class="position-relative" v-click-outside="hideList">
-		<button class="btn rounded-circle add-action-btn" :class="{ active: showList }" @click="toggleList"><i class="material-icons font-20">add</i></button>
+		<button class="btn rounded-circle add-action-btn btn-icon" :class="{ active: showList }" @click="toggleList"><i class="material-icons font-20">add</i></button>
 		<transition name="fade">
 			<div class="editors-actions-list" :style="editorsActionListStyle" v-if="showList">
 				<div class="text-type-list">
@@ -40,6 +40,10 @@
 					<div class="editor-list-item" @click="emitAcion('quote')">
 						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('quote') }">format_quote</i>
 						<strong>{{ __.get("editor.quote") }}</strong>
+					</div>
+					<div class="editor-list-item" @click="emitAcion('poll')">
+						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('poll') }">poll</i>
+						<strong>{{ __.get("editor.poll") }}</strong>
 					</div>
 				</div>
 			</div>

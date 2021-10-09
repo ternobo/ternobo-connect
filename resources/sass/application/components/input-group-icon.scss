@@ -8,13 +8,13 @@
 
 .input-group-icon {
     .form-control {
-        padding-left: 2.75rem;
+        padding-left: 1.75rem;
     }
 
     >i,
     .actions {
         z-index: 1000;
-        color: $grey;
+        color: $gray-500;
         position: absolute;
         left: 16px;
         top: 0;
@@ -25,18 +25,37 @@
         max-width: 1.5rem;
         justify-content: center;
         transition: 0.3s all;
+        font-size: 20px;
     }
 
     >i:hover {
         color: $dark;
     }
+
+    &.border-button-group {
+
+        >i,
+        .actions {
+            left: 0;
+        }
+    }
+
+    &.password-input {
+
+        >i,
+        .actions {
+            #{$end}: 16px;
+            #{$start}: unset;
+        }
+    }
+
 }
 
 .search-input-rounded {
     @extend .input-group-icon;
 
     .form-control {
-        background: $fixed-elements;
+        background: $gray-200;
         border-radius: 16px;
         border: none;
     }

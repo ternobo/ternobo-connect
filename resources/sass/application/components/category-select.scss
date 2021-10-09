@@ -1,7 +1,7 @@
 .category-select {
     display: flex;
     align-items: center;
-    background: $fixed-elements;
+    background: $gray-200;
     color: $text-color;
     font-weight: 600;
     padding: 0.75rem 1rem;
@@ -26,7 +26,7 @@
     }
 
     i {
-        margin-left: 0.5rem
+        margin-#{$end}: 0.5rem
     }
 }
 

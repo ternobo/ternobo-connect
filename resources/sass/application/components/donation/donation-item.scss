@@ -14,23 +14,23 @@
     }
 
     .donate-type {
-        color: $dark-blue;
+        color: $blue-dark;
         transform: rotate(180deg);
-        margin-left: 16px;
+        margin-#{$end}: 16px;
     }
 
     .donate-type.received {
-        color: $dark-green;
+        color: $green-dark;
         transform: rotate(0deg);
     }
 
     .tip-profile {
-        margin-left: 16px;
+        margin-#{$end}: 16px;
     }
 
     .doantion-time {
-        color: $grey;
-        font-size: 16px;
+        color: $gray-500;
+        font-size: $text-sm;
     }
 
 
@@ -45,7 +45,7 @@
     }
 
     .tip-btn {
-        color: $grey;
+        color: $gray-500;
         background: #EEEEEE;
         padding: 8px 16px;
     }
@@ -58,7 +58,7 @@
         line-height: 1;
         height: 36px;
         padding: 8px 16px;
-        font-size: 14px;
+        font-size: $text-xsm;
 
         strong {
             font-weight: 600;
@@ -67,17 +67,17 @@
 
         span {
             font-weight: normal;
-            color: $dark-blue;
+            color: $blue-dark;
             height: 12px;
 
             &.received {
-                color: $dark-green;
+                color: $green-dark;
 
             }
         }
 
         >*:first-child {
-            margin-left: 4px;
+            margin-#{$end}: 4px;
         }
     }
 
@@ -111,7 +111,7 @@
 
         .donated_by {
             font-weight: 600;
-            color: $grey;
+            color: $gray-500;
         }
 
         >* {
@@ -136,7 +136,7 @@
             line-height: 1;
             height: 36px;
             padding: 8px 16px;
-            font-size: 14px;
+            font-size: $text-xsm;
 
             strong {
                 font-weight: 600;
@@ -145,29 +145,29 @@
 
             span {
                 font-weight: normal;
-                color: $dark-blue;
+                color: $blue-dark;
                 height: 12px;
 
                 &.received {
-                    color: $dark-green;
+                    color: $green-dark;
 
                 }
             }
 
             >*:first-child {
-                margin-left: 4px;
+                margin-#{$end}: 4px;
             }
         }
     }
 
     .donate-type {
-        color: $dark-blue;
+        color: $blue-dark;
         transform: rotate(180deg);
-        margin-left: 16px;
+        margin-#{$end}: 16px;
     }
 
     .donate-type.received {
-        color: $dark-green;
+        color: $green-dark;
         transform: rotate(0deg);
     }
 
@@ -183,7 +183,7 @@
 
     .tselect_item:hover,
     .tselect_item.active {
-        background: $fixed-elements;
+        background: $gray-200;
     }
 
     &.active {

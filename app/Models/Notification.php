@@ -62,11 +62,11 @@ class Notification extends Model
     /**
      * Send Nofication 
      * 
-     * @param type $action
-     * @param type $type
-     * @param type $notifiable_id
-     * @param type $to
-     * @param type $connected_to - for example comment_id is connected to Post notification.
+     * @param string $action
+     * @param int $type
+     * @param int $notifiable_id
+     * @param int $to
+     * @param int $connected_to - for example comment_id is connected to Post notification.
      */
     public static function sendNotification($action, $notifiable_id, $to, $connected_to, $from = null, $guest = false, $meta = [])
     {

@@ -133,23 +133,23 @@
         }
 
         a {
-            font-size: 16px;
+            font-size: $text-sm;
 
             @media screen and(max-width: $sm-size) {
-                font-size: 12px;
+                font-size: $text-xxsm;
 
             }
         }
     }
 
     .btn-edit {
-        font-size: 16px;
+        font-size: $text-sm;
 
         i {
             font-size: 24px;
 
             @media screen and(max-width: $sm-size) {
-                font-size: 16px;
+                font-size: $text-sm;
             }
         }
 

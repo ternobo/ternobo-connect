@@ -48,12 +48,12 @@
         padding: 6px;
         border-radius: 10px;
         margin: 2px;
-        color: $grey;
+        color: $gray-500;
         border: none;
     }
 
     .action-item.active {
-        background: $fixed-elements;
+        background: $gray-200;
         color: $dark;
 
     }
@@ -65,13 +65,13 @@
 
 
 .category-badge {
-    background: $fixed-elements;
-    color: $grey;
+    background: $gray-200;
+    color: $gray-500;
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
     padding: 2px 6px;
-    font-size: 14px;
+    font-size: $text-xsm;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -89,7 +89,7 @@
 }
 
 .categories {
-    color: $icons;
+    color: $light;
 
     .btn-edit {
         border-radius: 8px;
@@ -103,7 +103,7 @@
     }
 
     a {
-        color: $icons;
+        color: $light;
     }
 
     li.active {
@@ -125,7 +125,7 @@
 }
 
 .add-category-field {
-    border: 2px solid $icons;
+    border: 2px solid $light;
 }
 
 
@@ -133,10 +133,9 @@
     font-size: 1rem;
     font-weight: 600;
     color: $dark;
-    margin-bottom: 1.75rem;
 
     i {
-        color: $grey;
+        color: $gray-500;
     }
 }
 
@@ -169,14 +168,14 @@
 
 .categories-list-mobile {
     max-height: 380px;
-    border-right: 2px solid #C8C8C8;
-    padding-right: 1.75rem;
+    border-#{$start}: 2px solid #C8C8C8;
+    padding-#{$start}: 1.75rem;
     max-width: 100%;
     overflow: auto;
 
     li {
-        color: $grey;
-        font-size: 10px;
+        color: $gray-500;
+        font-size: $text-xxxsm;
         padding: map-get($spacings, 1);
         min-width: 50px;
         display: flex;
@@ -190,9 +189,9 @@
         }
 
         .close-icon {
-            color: $grey;
+            color: $gray-500;
             position: absolute;
-            right: -20px;
+            #{$start}: -20px;
         }
 
         i {

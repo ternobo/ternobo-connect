@@ -1,7 +1,7 @@
 <template>
 	<div class="card">
 		<div class="card-body">
-			<div class="about-me--card-title-container mb-3">
+			<div class="about-me--card-title-container mb-4">
 				<h2 class="about-me--card-title">{{ __.get("user-profile.biography") }}</h2>
 				<div class="character-counter" v-if="edit">
 					<span class="counter tex-dark">{{ leftCharacter }}</span>

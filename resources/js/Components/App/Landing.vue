@@ -12,7 +12,7 @@
 		</div>
 		<div class="section-2">
 			<div class="container">
-				<h2 class="text-action text-center mb-3 font-32 py-5">چـــــــرا تــــرنـــوبــــو؟</h2>
+				<h2 class="text-action text-center mb-4 font-32 py-5">چـــــــرا تــــرنـــوبــــو؟</h2>
 				<div class="row m-0 pt-5">
 					<div class="col-lg-4">
 						<div class="card bg-landing-grey mb-lg-3">
@@ -54,7 +54,7 @@
 			<div class="section-3 d-flex justify-content-center pb-5">
 				<div class="text-center flex-column d-flex align-items-center">
 					<h2 class="text-action pt-5 font-32 sptitle">نوشتن یا ارسال مقاله</h2>
-					<p class="pt-2 mt-3 font-16 spPr">بدون هیچ محدودیتی تمام نوشته&zwnj;های خود را در ترنوبو و به کمک ویرایشگر آنلاین متن ما ویرایش و منتشر کنید.</p>
+					<p class="pt-2 mt-4 font-16 spPr">بدون هیچ محدودیتی تمام نوشته&zwnj;های خود را در ترنوبو و به کمک ویرایشگر آنلاین متن ما ویرایش و منتشر کنید.</p>
 					<img src="/images/svg 2.svg" width="400" />
 					<h2 class="text-action font-32 tellTOusText sptitle">گفتگو با دیگران</h2>
 					<span class="pt-2 pb-5 font-16 spPr">ایمیل را کنار بگذارید! با استفاده از قابلیت ارسال پیام ترنوبو، تمامی پیام&zwnj;ها و مکالمات کاری و حرفه&zwnj;ای خودتان را بر بستر ترنوبو انجام دهید. برقراری ارتباط با وجود قابلیت چت آنلاین ترنوبو بیش از پیش آسان شده&zwnj;. بدون محدودیت و بر بستری امن می&zwnj;توانید با تمام دوستانتان به گفتگو بپردازید. </span>

@@ -1,5 +1,5 @@
 <template>
-	<div class="action bg-white px-0 mb-3" v-if="action.post !== null">
+	<div class="action bg-white px-0 mb-4" v-if="action.post !== null">
 		<post-card :post="action.post" />
 	</div>
 </template>

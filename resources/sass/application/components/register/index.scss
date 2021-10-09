@@ -1,7 +1,7 @@
 .register-step-title {
     color: $dark;
     font-weight: 600;
-    font-size: 18px;
+    font-size: $text-md;
     line-height: 28px;
     text-align: center;
     width: 288px;
@@ -11,7 +11,7 @@
     margin-bottom: 36px;
 
     @media screen and (max-width:$sm-size) {
-        font-size: 14px;
+        font-size: $text-xsm;
         min-width: 96px;
         width: -webkit-max-content;
         width: -moz-max-content;

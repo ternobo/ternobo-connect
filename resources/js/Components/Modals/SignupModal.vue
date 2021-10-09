@@ -34,9 +34,9 @@
 			<div class="text-center" v-if="personal_info_step">
 				<h5 class="mb-4" style="border-bottom: 2px solid #000019; width: fit-content; align-self: center; margin-top: 20px; margin: auto; padding-bottom: 10px; padding-left: 0; padding-right: 0">اطلاعات تکمیلی</h5>
 				<div>
-					<material-text-field input-class="w-100" class="mb-3" v-model="first_name" placeholder="نام" />
-					<material-text-field input-class="w-100" class="mb-3" v-model="last_name" placeholder="نام خانوادگی" />
-					<material-text-field input-class="w-100" class="mb-3" v-model="username" placeholder="نام کاربری" />
+					<material-text-field input-class="w-100" class="mb-4" v-model="first_name" placeholder="نام" />
+					<material-text-field input-class="w-100" class="mb-4" v-model="last_name" placeholder="نام خانوادگی" />
+					<material-text-field input-class="w-100" class="mb-4" v-model="username" placeholder="نام کاربری" />
 					<tselect
 						class="tselect-lg"
 						labelOption="label"
@@ -59,9 +59,9 @@
 				<h5 class="mb-4" style="border-bottom: 2px solid #000019; margin: auto; width: fit-content; display: flex; justify-content: center; margin-top: 20px; padding-bottom: 10px; padding-left: 0; padding-right: 0">رمزعبور</h5>
 				<div class="d-flex flex-column" style="align-items: center">
 					<material-text-field input-class="w-100" class="material--sm w-50 mx-1 text-right" v-model="password" type="password" placeholder="رمزعبور" />
-					<material-text-field input-class="w-100" class="material--sm w-50 mx-1 text-right mt-3" v-model="password_repeat" type="password" placeholder="تکرار رمزعبور" />
+					<material-text-field input-class="w-100" class="material--sm w-50 mx-1 text-right mt-4" v-model="password_repeat" type="password" placeholder="تکرار رمزعبور" />
 				</div>
-				<div class="text-right mt-5 mx-auto" style="max-width: 80%">
+				<div class="text-right mt-7 mx-auto" style="max-width: 80%">
 					<p class="font-18 pr-3">نکات امنیتی</p>
 					<ul style="list-style: none" class="font-14 pr-3">
 						<li>رمزعبور حداقل ۸ کاراکتر باشد</li>

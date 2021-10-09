@@ -1,3 +1,11 @@
+a {
+    text-decoration: none;
+}
+
+label {
+    display: inline-block;
+}
+
 .font-demibold {
     font-weight: 600;
 }
@@ -10,9 +18,50 @@
     font-weight: bolder;
 }
 
+.font-weight-bold {
+    font-weight: 700;
+}
+
 @each $scale,
 $color in $gray-theme {
     .text-grey-#{$scale} {
         color: $color;
+    }
+}
+
+
+@each $name,
+$color in $theme-colors {
+    .text-#{$name} {
+        color: $color;
+    }
+}
+
+.text-nowrap {
+    white-space: nowrap;
+}
+
+.text-end {
+    text-align: $end;
+}
+
+.text-start {
+    text-align: $start;
+}
+
+.text-center {
+    text-align: center;
+}
+
+@for $i from 1 through 50 {
+    .line-height-#{$i}px {
+        line-height: $i * 1px;
+    }
+}
+
+@each $name,
+$size in $font-sizes {
+    .font-size-#{$name} {
+        font-size: $size;
     }
 }

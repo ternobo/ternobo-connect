@@ -3,23 +3,23 @@
 		<div class="login-form w-100">
 			<div class="login-card card w-100">
 				<div class="card-body">
-					<div class="d-flex align-items-center mb-5">
+					<div class="d-flex align-items-center mb-7">
 						<label class="font-weight-bold mb-0 font-20 text-dark">{{ __.get("application.password") }}</label>
 					</div>
 					<div>
 						<div class="mb-4">
 							<label class="inputlabel font-12 font-demibold">{{ __.get("application.password") }}</label>
-							<input type="password" v-model="password" class="text-input-light text-input--md" />
-							<password-meter class="mt-3" :good.sync="goodPassword" :password="password" />
+							<input type="password" v-model="password" class="form-control fill-light lg-input" />
+							<password-meter class="mt-4" :good.sync="goodPassword" :password="password" />
 						</div>
 						<div class="mb-4">
 							<label class="inputlabel font-12 font-demibold">{{ __.get("settings.confirm-password") }}</label>
 							<div class="d-flex flex-column align-items-end">
-								<password-input v-model="password_repeat" class="w-100" inputClass="text-input-light text-input--md"></password-input>
+								<password-input v-model="password_repeat" class="w-100" inputClass="form-control fill-light lg-input"></password-input>
 							</div>
 						</div>
 					</div>
-					<div class="mt-52px">
+					<div class="mt-10">
 						<p class="font-18">{{ __.get("application.security-tips") }}</p>
 						<ul style="list-style: none" class="font-14 p-0">
 							<li>{{ __.get("register.password-tip-1") }}</li>

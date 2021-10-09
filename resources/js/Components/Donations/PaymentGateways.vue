@@ -7,7 +7,7 @@
 				</div>
 				<strong class="text-superlight font-14">{{ __.get("tips.merchant-id") }}</strong>
 				<div class="payment-input text-center" v-if="!loading">
-					<input type="text" class="form-control text-input--md" maxlength="36" v-model="merchant" spellcheck="false" v-if="!active" />
+					<input type="text" class="form-control lg-input" maxlength="36" v-model="merchant" spellcheck="false" v-if="!active" />
 					<span class="text-muted payment-code" v-else>{{ merchant }}</span>
 				</div>
 				<div class="payment-input text-center" v-else>

@@ -2,7 +2,7 @@
 	<b-modal v-model="showModal" @show="onShow" hide-footer :title="__.get('settings.change-phone-number')" body-class="modal-signup" size="md" :centered="true">
 		<div class="d-flex ephone-input-group py-0 justify-content-between align-items-end">
 			<div class="d-flex me-4 flex-column">
-				<tselect :items="country_codes" @change="phone = countryCode.code" class="mb-3" valueOption="id" labelOption="country" v-model="countryCode">
+				<tselect :items="country_codes" @change="phone = countryCode.code" class="mb-4" valueOption="id" labelOption="country" v-model="countryCode">
 					<template v-slot:icon>
 						<span v-html="countryIcon"></span>
 					</template>
@@ -10,7 +10,7 @@
 						<span class="ms-2" v-html="getCountryIcon(icon)"></span>
 					</template>
 				</tselect>
-				<input type="email" class="form-control mx-0 mt-3 text-input" dir="ltr" :readonly="verification_step" @keypress.enter="sendVcode()" v-model="phone" placeholder="+989123456789" />
+				<input type="email" class="form-control mx-0 mt-4 text-input" dir="ltr" :readonly="verification_step" @keypress.enter="sendVcode()" v-model="phone" placeholder="+989123456789" />
 			</div>
 			<LoadingButton class="btn signup-save-btn btn-primary" :disabled="verification_step || phone.length < 1 || notChanged" :loading="loading && !verification_step" @click.native="sendVcode()">ثبت</LoadingButton>
 		</div>
@@ -26,7 +26,7 @@
 								<div><otp-input input-class="w-100" class="text-center" @completed="verifyCode" v-model="code" :numInputs="6" /></div>
 								<i class="material-icons-outlined ms-2" :class="{ 'text-danger': invalidCode }">verified_user</i>
 							</div>
-							<div class="mt-32px" style="width: 160px">
+							<div class="mt-3" style="width: 160px">
 								<span
 									class="clickable d-flex justify-content-between align-items-center font-14"
 									:class="{

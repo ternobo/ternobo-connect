@@ -4,31 +4,44 @@ namespace App;
 
 use App\Models\Notification;
 use App\Models\Page;
+use HtmlSanitizer\Sanitizer;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image as ImageFacades;
 use Intervention\Image\Image;
 use PHPHtmlParser\Dom;
 use PHPHtmlParser\Options;
+use Twitter\Text\Parser;
 
 class SocialMediaTools
 {
 
     public static $imageMaxWidth = 1440;
-    public static $imageMaxHeight = 1920;
     public static $imageMinHeight = 112;
-    public static $imageMinWidth = 558;
-
     public static $imageRatio = 4 / 3;
 
+
+    private static $allowedHtmlTags = [
+        "b",
+        "i",
+        "strike",
+        "u",
+        "a",
+        "code",
+        "br",
+        "sup",
+        "text",
+        "span"
+    ];
+
     /**
-     * return list of mention 
-     * 
-     * @param $text - text
-     * 
+     * return list of mention
+     *
+     * @param $text string - text
+     *
      * @return array
      */
-    public static function getHashtags($text)
+    public static function getHashtags(string $text): array
     {
         $hashtags = array();
         $matches = array();
@@ -37,44 +50,27 @@ class SocialMediaTools
     }
 
     /**
-     * return list of mention 
-     * 
+     * return list of mention
+     *
      * @param $text text
-     * 
+     *
      * @return array
      */
-    public static function getMentions($text)
+    public static function getMentions(string $text): array
     {
         $matches = [];
-        preg_match_all('/@(\w+)/', $text, $matches);
+        preg_match_all('/@((?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,30})/', $text, $matches);
         return $matches[1];
     }
 
     /**
-     * Repalce urls with <a> tag
-     * 
-     * @param string $text
-     */
-    public static function replaceUrls($text)
-    {
-        // The Regular Expression filter
-        $reg_exUrl = "/(((https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)))/";
-
-        return (preg_replace_callback($reg_exUrl, function ($matches) {
-            foreach ($matches as $match) {
-                return "<a target='_blank' href='" . URLTools::toURL($match) . "'>$match</a>";
-            }
-        }, $text));
-    }
-
-    /**
      * Remove script, style and whitespace text nodes from html content -- Prevent XSS
-     * 
-     * @param $content html
-     * 
+     *
+     * @param $content string
+     *
      * @return string
      */
-    public static function safeHTML($content)
+    public static function safeHTML(string $content): string
     {
         $dom = new Dom();
         $dom->setOptions((new Options())
@@ -82,44 +78,44 @@ class SocialMediaTools
             ->setPreserveLineBreaks(true)
             ->setWhitespaceTextNode(true)
             ->setRemoveScripts(true)
-            ->setRemoveStyles(true));
-        $dom->loadStr($content);
-        return $dom->outerHtml;
+            ->setRemoveStyles(true)
+            ->setRemoveDoubleSpace(true));
+        $dom->loadStr("<div id='contentNode'>$content</div>");
+
+        $content = ($dom->find("#contentNode > *"));
+
+        foreach ($content as $element) {
+            if (!in_array($element->getTag()->name(), static::$allowedHtmlTags)) {
+                $element->remove();
+            }
+        }
+        return $dom->innerHTML;
     }
 
     /**
      * replace mentions with with <a> tag
-     * 
+     *
      * @param $text
-     * 
+     *
      * @return string
      */
-    public static function replaceMentions($text)
+    public static function replaceMentions($text, $mentions): string
     {
-        return preg_replace('/\B@(\w+)/u', "<a href=" . url("/$1") . ">$0</a>", $text);
-    }
-
-    /**
-     * replace hashtags with with <a> tag
-     * 
-     * @param $text
-     * @param $limit maximum number of hashtags to replace
-     * 
-     * @return string
-     */
-    public static function replacHashtags($text, $limit)
-    {
-        return preg_replace_callback('/\B#(\w+)/u', function ($matches) {
-            return "<a href='" . url("/tags/" . $matches[1]) . "'>#" . str_replace('ـ', ' ', str_replace('_', ' ', $matches[1])) . "</a>";
-        }, $text, $limit);
+        foreach ($mentions as $mention) {
+            $page = Page::query()->where("slug", $mention)->first();
+            if ($page instanceof Page) {
+                $text = str_replace("@$mention", "<wire-link href='$mention' class='text-mention'>" . $page->name . "</wire-link>", $text);
+            }
+        }
+        return $text;
     }
 
     /**
      * Resize and optimize image for web
-     * 
+     *
      * @param $media image path
      * @param $quality
-     * 
+     *
      * @return string new image path
      */
     public static function uploadPostImage($media, $quality = 70)
@@ -145,13 +141,13 @@ class SocialMediaTools
 
     /**
      * Call Mentions inside text
-     * 
+     *
      * @param array $mentions
      * @param int $mentionable_id
      * @param string $type - post or comment
      * @param int $post_id
      */
-    public static function callMentions($mentions, $mentionable_id, $type = "post", $post_id = 0)
+    public static function callMentions(array $mentions, int $mentionable_id, string $type = "post", int $post_id = 0)
     {
         $sendCommentNotification = function () use ($mentionable_id, $post_id, $mentions) {
             foreach ($mentions as $mention) {

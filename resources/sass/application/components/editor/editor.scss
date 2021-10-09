@@ -13,18 +13,18 @@
         border: none;
 
         &.active {
-            color: $action;
+            color: $blue-cta;
 
         }
 
         &:last-child {
-            border-top-left-radius: 8px;
-            border-bottom-left-radius: 8px;
+            border-top-#{$end}-radius: 8px;
+            border-bottom-#{$end}-radius: 8px;
         }
 
         &:first-child {
-            border-top-right-radius: 8px;
-            border-bottom-right-radius: 8px;
+            border-top-#{$start}-radius: 8px;
+            border-bottom-#{$start}-radius: 8px;
         }
 
         &:hover {
@@ -34,7 +34,7 @@
 
         &:active {
             background: $gray-100;
-            color: $action;
+            color: $blue-cta;
             cursor: pointer;
         }
     }
@@ -50,14 +50,12 @@
         flex: 1 1 auto;
 
         .list-group {
-            width: calc(100% + 116px);
-            margin-right: -116px;
+            width: calc(100% + 104px);
+            margin-#{$start}: -116px;
         }
 
-
-
         .placeholder-element {
-            margin-right: 57px;
+            margin-#{$start}: 57px;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -66,12 +64,12 @@
     }
 
     .editor-actions {
-        width: calc(100% + 88px);
-        margin-right: -88px;
+        width: calc(100% + 77px);
+        margin-#{$start}: -77px;
 
         .add-action-btn {
             background: $white;
-            color: $grey;
+            color: $gray-500;
         }
     }
 
@@ -88,16 +86,16 @@
         align-items: flex-start;
 
         .editor-block-container {
-            margin-right: 12px;
+            margin-#{$start}: 12px;
             width: 100%;
             max-width: calc(100% - 3.25rem);
-            border-right: 3px solid transparent;
-            padding-right: 2rem;
+            border-#{$start}: 3px solid transparent;
+            padding-#{$start}: 2rem;
             transition: 0.3s border;
 
             &:hover,
             &:focus-within {
-                border-right-color: $gray-400;
+                border-#{$start}-color: $gray-400;
             }
 
         }
@@ -114,8 +112,8 @@
             position: relative;
 
             .editor-block-container {
-                margin-right: 8px;
-                padding-right: 0;
+                margin-#{$start}: 8px;
+                padding-#{$start}: 0;
             }
 
             img,
@@ -154,12 +152,13 @@
             }
 
             i {
-                font-size: 20px;
+                font-size: $text-lg;
             }
         }
     }
 
     .media-item {
+        position: relative;
         background: $gray-50;
         display: flex;
         flex-direction: column;
@@ -167,12 +166,38 @@
         justify-content: center;
         padding: 3.25rem 1rem;
 
+
+        .edit-image-icon {
+            position: absolute;
+            top: 2rem;
+            #{$end}: 2rem;
+            z-index: 1;
+            box-shadow: $bg-hover-shadow;
+        }
+
+        .spoiler-alert-check {
+            padding: 0.25rem 0.5rem;
+            background: $white;
+            color: $gray-medium-dark;
+            border-radius: 8px;
+            z-index: 1;
+            position: absolute;
+            #{$start}: 2rem;
+            bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: $text-xsm;
+            height: 32px;
+            box-shadow: $bg-hover-shadow;
+        }
+
         .action-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             margin: -12px 0px;
-            color: $grey;
+            color: $gray-500;
 
             >* {
                 margin: 12px 0px;
@@ -195,7 +220,7 @@
     position: absolute;
     z-index: 999;
     background: $gray-100;
-    padding: 0.75;
+    padding: 0.75rem;
 }
 
 .add-action-btn {
@@ -241,8 +266,8 @@
 
     >.list-title {
         margin-bottom: 4px;
-        color: $grey;
-        font-size: 12px;
+        color: $gray-500;
+        font-size: $text-xxsm;
     }
 
 
@@ -258,9 +283,9 @@
         }
 
         strong {
-            color: $grey;
-            margin-right: 12px;
-            font-size: 12px;
+            color: $gray-500;
+            margin-#{$start}: 12px;
+            font-size: $text-xxsm;
         }
 
         i {
@@ -268,7 +293,7 @@
             color: $gray-600;
             height: 28px;
             width: 28px;
-            font-size: 20px;
+            font-size: $text-lg;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -292,15 +317,15 @@
     padding: 0;
 
     a {
-        color: $action;
+        color: $blue-cta;
     }
 
     code {
         direction: ltr #{"/* rtl:ignore */"};
         background: $gray-100;
-        color: $grey;
+        color: $gray-500;
         border-radius: 4px;
-        font-size: 14px;
+        font-size: $text-xsm;
         padding: 4px;
         font-family: 'JetBrains Mono', monospace;
     }
@@ -354,38 +379,6 @@ div[placeholder]:not(:focus):empty:before {
 }
 
 /** Tag Selector **/
-.tribute-container {
-    height: auto;
-    max-height: 300px;
-    max-width: 500px;
-    overflow: auto;
-    display: block;
-    z-index: 999999;
-}
-
-.tribute-container ul {
-    margin: 0;
-    margin-top: 2px;
-    padding: 0;
-    list-style: none;
-    background: #efefef;
-}
-
-.tribute-container li {
-    padding: 5px 5px;
-    cursor: pointer;
-    font-weight: bold;
-
-    &:hover {
-        background: #ddd;
-    }
-}
-
-.tribute-container .menu-highlighted {
-    font-weight: bold;
-}
-
-/** Tag Selector **/
 
 .title-input {
     width: 100%;
@@ -402,7 +395,7 @@ div[placeholder]:not(:focus):empty:before {
         text-align: start;
 
         &:empty {
-            text-align: right;
+            text-align: $start;
         }
 
         &::before {
@@ -414,3 +407,5 @@ div[placeholder]:not(:focus):empty:before {
         }
     }
 }
+
+@import "./blocks/poll-block";
