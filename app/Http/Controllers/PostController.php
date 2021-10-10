@@ -57,6 +57,7 @@ class PostController extends Controller
         $user = Auth::user();
         $user->load("personalPage");
         $category = null;
+
         if ($request->filled("category")) {
             $category = Category::query()->where("name", $request->category)->where("page_id", $user->personalPage->id)->firstOrCreate([
                 "name" => $request->category,
@@ -66,6 +67,7 @@ class PostController extends Controller
         }
 
         $draft = $request->draft == '1';
+
         $post = Post::query()->create([
             'type' => $draft ? 'draft_post' : 'post',
             'user_id' => $user->id,
@@ -262,12 +264,14 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Post $post
+     * @param $post
      * @return \Illuminate\Http\Response
      */
-    public function update(PostRequest $request, Post $post)
+    public function update(PostRequest $request, $post)
     {
+        $post = Post::withDrafts()->findOrFail($post);
         $slides = $request->slides;
+
         $user = Auth::user();
         $user->load("personalPage");
 
