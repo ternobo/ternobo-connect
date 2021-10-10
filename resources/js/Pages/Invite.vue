@@ -18,7 +18,7 @@
 								<lazy-image :src="inviteLink.used_by.profile" class="profile-xxsm" imgClass="profile-xxsm" circle></lazy-image>
 								<span>{{ inviteLink.used_by.name }}</span>
 							</wire-link>
-							<button class="btn btn-action-light p-1 rounded-0 w-100" :disabled="!inviteLink.valid" style="height: 32px; border-radius: 12px !important" v-clipboard="`${$APP_URL}/register?code=${inviteLink.code}`">{{ !inviteLink.valid ? __.get("invite-links.used") : __.get("invite-links.use") }}</button>
+							<button class="btn btn-secondary rounded-6 w-100" :disabled="!inviteLink.valid" v-clipboard="`${$APP_URL}/register?code=${inviteLink.code}`">{{ !inviteLink.valid ? __.get("invite-links.used") : __.get("invite-links.use") }}</button>
 						</div>
 					</div>
 					<div class="invite-description">
