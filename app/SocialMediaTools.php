@@ -86,7 +86,7 @@ class SocialMediaTools
 
         foreach ($content as $element) {
             if (!in_array($element->getTag()->name(), static::$allowedHtmlTags)) {
-                $element->remove();
+                $element->delete();
             }
         }
         return $dom->innerHTML;
