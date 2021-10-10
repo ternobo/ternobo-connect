@@ -65,3 +65,38 @@ $space in $spacings {
 .w-auto {
     width: auto;
 }
+
+.postion-absolute {
+    position: absolute;
+}
+
+.postion-fixed {
+    position: fixed;
+}
+
+.postion-relative {
+    position: relative;
+}
+
+.postion-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+}
+
+@for $i from 0 to 100 {
+    .end-#{$i} {
+        #{$end}: $i * 1%;
+    }
+
+    .start-#{$i} {
+        #{$start}: $i * 1%;
+    }
+
+    .top-#{$i} {
+        top: $i * 1%;
+    }
+
+    .bottom-#{$i} {
+        bottom: $i * 1%;
+    }
+}

@@ -1,6 +1,6 @@
 <template>
 	<base-layout :class="{ 'justify-content-center': pages.length < 1 }">
-		<div class="content-container-right">
+		<div class="col-md-8">
 			<div class="new-feedback-card">
 				<div class="card-body">
 					<div class="how-to-improve-header" style="min-height: 39px">
