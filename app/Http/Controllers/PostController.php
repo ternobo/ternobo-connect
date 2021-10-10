@@ -24,6 +24,7 @@ use App\SocialMediaTools;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -58,6 +59,8 @@ class PostController extends Controller
         $user->load("personalPage");
         $category = null;
 
+        DB::beginTransaction();
+
         if ($request->filled("category")) {
             $category = Category::query()->where("name", $request->category)->where("page_id", $user->personalPage->id)->firstOrCreate([
                 "name" => $request->category,
@@ -67,7 +70,6 @@ class PostController extends Controller
         }
 
         $draft = $request->draft == '1';
-
         $post = Post::query()->create([
             'type' => $draft ? 'draft_post' : 'post',
             'user_id' => $user->id,
@@ -278,6 +280,8 @@ class PostController extends Controller
         $draft = $request->draft == '1';
 
         $deletedSlides = [];
+
+        DB::beginTransaction();
 
         $category = $request->filled("category") ? Category::query()->firstOrCreate([
             'page_id' => $post->page_id,
