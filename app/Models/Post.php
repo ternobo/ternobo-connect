@@ -210,132 +210,135 @@ class Post extends Model
     public function setContent($slides, $user, $fileOnly = false, PollService $pollService, Dom $dom): array
     {
         DB::beginTransaction();
-        $mentions = [];
-        $tags = [];
+        try {
+            $mentions = [];
+            $tags = [];
+            foreach ($slides as $slide) {
+                if (count($slide) < 0) {
+                    continue;
+                }
 
-        foreach ($slides as $slide) {
-            if (count($slide) < 0) {
-                continue;
-            }
+                $slide_id = PostSlide::query()->create([
+                    'page_id' => $user->personalPage->id,
+                    'post_id' => $this->id,
+                ])->id;
+                foreach ($slide['blocks'] as $rawContent) {
+                    $sort = (int)$rawContent['sort'];
+                    $content = $rawContent['content'];
+                    $type = $rawContent['type'];
+                    $meta = $rawContent['meta'] ?? [];
+                    switch ($type) {
+                        case "quote":
+                        case "text":
+                            // Process
+                            $text = SocialMediaTools::safeHTML($content);
+                            $text_mentions = SocialMediaTools::getMentions($text);
 
-            $slide_id = PostSlide::query()->create([
-                'page_id' => $user->personalPage->id,
-                'post_id' => $this->id,
-            ])->id;
-            foreach ($slide['blocks'] as $rawContent) {
-                $sort = (int)$rawContent['sort'];
-                $content = $rawContent['content'];
-                $type = $rawContent['type'];
-                $meta = $rawContent['meta'] ?? [];
-                switch ($type) {
-                    case "quote":
-                    case "text":
-                        // Process
-                        $text = SocialMediaTools::safeHTML($content);
-                        $text_mentions = SocialMediaTools::getMentions($text);
+                            $slideTags = array_slice(SocialMediaTools::getHashtags($text), 0, 3);
 
-                        $slideTags = array_slice(SocialMediaTools::getHashtags($text), 0, 3);
+                            SlideBlock::query()->create([
+                                'slide_id' => $slide_id,
+                                'page_id' => $user->personalPage->id,
+                                'sort' => $sort,
+                                'content' => SocialMediaTools::replaceMentions($text, $text_mentions),
+                                'type' => $type,
+                                "meta" => $meta,
+                            ]);
 
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => SocialMediaTools::replaceMentions($text, $text_mentions),
-                            'type' => $type,
-                            "meta" => $meta,
-                        ]);
+                            if (count($tags) < 3) {
+                                $tags = array_merge($slideTags, $tags);
+                            }
+                            $mentions = array_merge($text_mentions, $mentions);
 
-                        if (count($tags) < 3) {
-                            $tags = array_merge($slideTags, $tags);
-                        }
-                        $mentions = array_merge($text_mentions, $mentions);
+                            break;
 
-                        break;
+                        case "orderedList":
+                        case "bulletedList":
+                            SlideBlock::query()->create([
+                                'slide_id' => $slide_id,
+                                'page_id' => $user->personalPage->id,
+                                'sort' => $sort,
+                                'content' => json_encode($content),
+                                'type' => $type,
+                                "meta" => $meta,
+                            ]);
+                            break;
 
-                    case "orderedList":
-                    case "bulletedList":
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => json_encode($content),
-                            'type' => $type,
-                            "meta" => $meta,
-                        ]);
-                        break;
+                        case "title":
+                            SlideBlock::query()->create([
+                                'slide_id' => $slide_id,
+                                'page_id' => $user->personalPage->id,
+                                'sort' => $sort,
+                                'content' => $content,
+                                'type' => 'title',
+                                "meta" => $meta,
+                            ]);
+                            break;
+                        case "image":
+                            $media = $content instanceof UploadedFile | $fileOnly ? SocialMediaTools::uploadPostImage($content->store("media"), 90) : $content;
 
-                    case "title":
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => $content,
-                            'type' => 'title',
-                            "meta" => $meta,
-                        ]);
-                        break;
-                    case "image":
-                        $media = $content instanceof UploadedFile | $fileOnly ? SocialMediaTools::uploadPostImage($content->store("media"), 90) : $content;
+                            if (isset($meta['rotate'])) {
+                                ImageTools::rotateImage(Storage::path($media), $meta['rotate']);
+                            }
 
-                        if (isset($meta['rotate'])) {
-                            ImageTools::rotateImage(Storage::path($media), $meta['rotate']);
-                        }
+                            SlideBlock::query()->create([
+                                'slide_id' => $slide_id,
+                                'page_id' => $user->personalPage->id,
+                                'sort' => $sort,
+                                'content' => $media,
+                                'type' => 'image',
+                                'meta' => $meta
+                            ]);
+                            break;
+                        case "video":
+                            $media = $content instanceof UploadedFile | $fileOnly ? $content->store("videos") : $content;
+                            SlideBlock::query()->create([
+                                'slide_id' => $slide_id,
+                                'page_id' => $user->personalPage->id,
+                                'sort' => $sort,
+                                'content' => $media,
+                                'type' => 'video',
+                                "meta" => $meta,
+                            ]);
+                            break;
 
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => $media,
-                            'type' => 'image',
-                            'meta' => $meta
-                        ]);
-                        break;
-                    case "video":
-                        $media = $content instanceof UploadedFile | $fileOnly ? $content->store("videos") : $content;
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => $media,
-                            'type' => 'video',
-                            "meta" => $meta,
-                        ]);
-                        break;
+                        case "code":
+                            SlideBlock::query()->create([
+                                'slide_id' => $slide_id,
+                                'page_id' => $user->personalPage->id,
+                                'sort' => $sort,
+                                'content' => json_encode(['language' => $content['language'], "code" => $content['code']]),
+                                'type' => 'code',
+                                "meta" => $meta,
+                            ]);
+                            break;
+                        case "poll":
+                            $poll = null;
+                            if (isset($meta['poll_id'])) {
+                                $poll = $pollService->findById($meta['poll_id']);
+                            } else {
+                                $poll = $pollService->createPoll(
+                                    PollModel::fromArray($content)
+                                );
+                            }
 
-                    case "code":
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => json_encode(['language' => $content['language'], "code" => $content['code']]),
-                            'type' => 'code',
-                            "meta" => $meta,
-                        ]);
-                        break;
-                    case "poll":
-                        $poll = null;
-                        if (isset($meta['poll_id'])) {
-                            $poll = $pollService->findById($meta['poll_id']);
-                        } else {
-                            $poll = $pollService->createPoll(
-                                PollModel::fromArray($content)
-                            );
-                        }
-
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => json_encode($poll),
-                            'type' => 'poll',
-                            "meta" => $meta,
-                        ]);
-                        break;
+                            SlideBlock::query()->create([
+                                'slide_id' => $slide_id,
+                                'page_id' => $user->personalPage->id,
+                                'sort' => $sort,
+                                'content' => json_encode($poll),
+                                'type' => 'poll',
+                                "meta" => $meta,
+                            ]);
+                            break;
+                    }
                 }
             }
+            DB::commit();
+            return ['mentions' => $mentions, 'tags' => $tags];
+        } catch (Exception $e) {
+            DB::rollBack();
         }
-        DB::commit();
-        return ['mentions' => $mentions, 'tags' => $tags];
     }
 
     public function publish()
