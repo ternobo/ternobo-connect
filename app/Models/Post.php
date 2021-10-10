@@ -209,7 +209,6 @@ class Post extends Model
 
     public function setContent($slides, $user, $fileOnly = false, PollService $pollService, Dom $dom): array
     {
-        DB::beginTransaction();
         try {
             $mentions = [];
             $tags = [];
