@@ -6,7 +6,7 @@
 				<div class="profile-image">
 					<lazy-image class="profile-md bg-white" imgClass="profile-md" :loadingColor="skeletonOptions.profileColor" :src="$store.state.user.profile" />
 				</div>
-				<strong class="text-gray-medium-dark font-10 text-letter-spacing-1 text-start" dir="ltr">@{{ this.$store.state.user.username }}</strong>
+				<strong class="text-gray-medium-dark font-12 text-start" dir="ltr">@{{ this.$store.state.user.username }}</strong>
 				<strong class="text-black">{{ this.$store.state.user.name }} <i v-if="$store.state.user.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 				<small class="text-muted">{{ this.$store.state.user.short_bio }}</small>
 			</wire-link>

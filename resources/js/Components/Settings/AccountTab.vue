@@ -9,8 +9,7 @@
 		<TwoFAModal :status.sync="two_factor_verification" :phone="phone" :email="email" :show.sync="showTwoFAModal"></TwoFAModal>
 		<SessionsModal :show.sync="showActiveSessions"></SessionsModal>
 		<blocked-pages-modal :show.sync="showBlockedModal"></blocked-pages-modal>
-		<h2 class="font-18 font-demibold mb-4">{{ __.get("settings.login-and-security") }}</h2>
-		<div class="card mb-2">
+		<div class="card mb-4">
 			<div class="settings-card-body">
 				<div class="setting-action">
 					<div class="name">
@@ -102,7 +101,6 @@
 				</div>
 			</div>
 		</div>
-		<h2 class="font-18 font-demibold my-4 pt-3">{{ __.get("settings.information-security") }}</h2>
 		<div class="card">
 			<div class="settings-card-body">
 				<div class="setting-action">

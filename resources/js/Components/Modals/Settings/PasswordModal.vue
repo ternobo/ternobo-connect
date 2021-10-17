@@ -1,5 +1,5 @@
 <template>
-	<b-modal v-model="showModal" hide-footer :title="__.get('settings.change-password')" body-class="modal-signup" size="sm" :centered="true">
+	<b-modal v-model="showModal" hide-footer :title="__.get('settings.change-password')" body-class="modal-signup" size="md" :centered="true">
 		<div class="d-flex flex-column align-items-center">
 			<div class="d-flex w-100 flex-column" style="align-items: center">
 				<material-text-field class="w-100 mx-1 text-right mb-4" input-class="w-100" v-model="current_password" type="password" name="current_password" :placeholder="__.get('settings.current-password')" />

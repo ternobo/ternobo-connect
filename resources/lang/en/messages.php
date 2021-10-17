@@ -32,7 +32,7 @@ return [
     'profile-delete-error' => "There is an error deleting the avatar",
     'invalid-mime' => "Invalid format",
     'no-content' => "We can't find any content record",
-    'no-bookmarks' => "You haven't bookmark any content",
+    'no-bookmarks' => "You haven't bookmarked any content",
     'no-more-bookmarks' => 'There is no more bookmarks',
     'no-more-content' => "There is no more content",
     'no-data' => "We can't find any submited data",

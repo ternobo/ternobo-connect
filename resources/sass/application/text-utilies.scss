@@ -39,6 +39,10 @@ $color in $theme-colors {
     .text-#{$name} {
         color: $color !important;
     }
+
+    .bg-#{$name} {
+        background-color: $color !important;
+    }
 }
 
 .text-nowrap {

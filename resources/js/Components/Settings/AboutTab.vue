@@ -2,8 +2,6 @@
 	<div>
 		<CookiesModal :show.sync="showCookiesModal"></CookiesModal>
 		<LawsModal :show.sync="showLawsModal"></LawsModal>
-
-		<h2 class="font-18 font-demibold mb-4">{{ __.get("settings.about-ternobo") }}</h2>
 		<div class="card">
 			<div class="settings-card-body">
 				<div class="setting-action">

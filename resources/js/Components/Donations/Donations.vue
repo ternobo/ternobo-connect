@@ -1,8 +1,6 @@
 <template>
 	<div v-infinite-scroll="loadMore" :infinite-scroll-disabled="loading_next_page" infinite-scroll-distance="5">
-		<div class="d-flex align-items-start justify-content-between donations-header">
-			<span>{{ __.choice("tips.tip", 2) }}</span>
-
+		<div class="d-flex align-items-start justify-content-end donations-header">
 			<div class="d-flex">
 				<tselect
 					style="width: 171px"
@@ -41,6 +39,13 @@
 		<div class="donations-list">
 			<div v-if="loading">
 				<donation-skeleton v-for="i in 5" :key="`item_${i}`"></donation-skeleton>
+			</div>
+			<div v-else-if="donations.length < 1" class="text-center py-4">
+				<div class="card">
+					<div class="card-body">
+						<span class="font-18 text-gray">{{ __.get("messages.no-tip") }}</span>
+					</div>
+				</div>
 			</div>
 			<div v-else>
 				<transition-group name="flip-list">

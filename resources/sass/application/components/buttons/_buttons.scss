@@ -46,6 +46,12 @@
         &:hover:not(:disabled) {
             background: $blue-light-hover;
         }
+
+        &:disabled {
+            color: rgba($color: $gray-medium-dark, $alpha: 0.7);
+            background: $gray-light;
+            opacity: 1;
+        }
     }
 
     &.btn-outlined {
