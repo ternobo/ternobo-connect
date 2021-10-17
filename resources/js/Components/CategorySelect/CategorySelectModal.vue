@@ -5,7 +5,7 @@
 			<div class="selections">
 				<div class="add-category-container w-100 mb-0">
 					<input type="text" @keypress.enter="addCategory" :placeholder="__.get('content/posts.create-category')" maxlength="52" v-model="input" class="form-control text-input" />
-					<add-btn :disabled="!(input != null && input.length > 0) || loading" @click="addCategory" class="add-btn-light-grey d-flex justify-content-center align-items-center">
+					<add-btn :disabled="!(input != null && input.length > 0) || loading" @click="addCategory">
 						<i v-if="!loading" class="material-icons">add</i>
 						<span style="height: 14px; width: 14px; border-width: 2px" v-if="loading" class="loadingspinner"></span>
 					</add-btn>

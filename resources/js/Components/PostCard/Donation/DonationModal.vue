@@ -14,11 +14,11 @@
 						<div class="currency-selector">
 							<div>
 								<img src="/images/iran-flag.png" alt="iran" width="24" style="margin-right: 12px" />
-								<span>{{ __.get("currencies.IRR-n") }}</span>
+								<span class="vertical-center">{{ __.get("currencies.IRR-n") }}</span>
 							</div>
 						</div>
 					</div>
-					<div class="position-relative">
+					<div class="position-relative w-100">
 						<label v-if="amount.length > 0 && payAmount < min && !focus" style="top: -24px" class="position-absolute text-danger font-12">{{ __.get("messages.tip-amount-not-enough") }}</label>
 						<input v-numericOnly v-model="amount" @focus="focus = true" @blur="focus = false" class="form-control text-input donate-amount-input" :placeholder="amountEnterPlaceholder" />
 					</div>

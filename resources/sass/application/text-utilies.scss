@@ -18,6 +18,10 @@ label {
     font-weight: bolder;
 }
 
+.vertical-middle {
+    vertical-align: middle;
+}
+
 .font-weight-bold {
     font-weight: 700;
 }
@@ -33,7 +37,7 @@ $color in $gray-theme {
 @each $name,
 $color in $theme-colors {
     .text-#{$name} {
-        color: $color;
+        color: $color !important;
     }
 }
 
@@ -50,7 +54,7 @@ $color in $theme-colors {
 }
 
 .text-center {
-    text-align: center;
+    text-align: center !important;
 }
 
 @for $i from 1 through 50 {
@@ -63,5 +67,18 @@ $color in $theme-colors {
 $size in $font-sizes {
     .font-size-#{$name} {
         font-size: $size;
+    }
+}
+
+@for $i from 1 through 36 {
+    .text-letter-spacing-#{$i} {
+        letter-spacing: $i * 1px;
+    }
+}
+
+
+@for $i from 1 through 100 {
+    .opacity-#{$i} {
+        opacity: $i * 1%;
     }
 }

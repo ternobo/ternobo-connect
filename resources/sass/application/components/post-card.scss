@@ -40,10 +40,9 @@
 .post-box {
 
     .category-item {
-        padding: 2px 8px;
+        padding: 0.25rem 0.5rem;
         background: $gray-200;
-        margin-#{$end}: 12px;
-        color: $gray-500;
+        margin-#{$end}: 0.75rem;
         margin-bottom: 0 !important;
         font-size: $text-xsm;
         cursor: pointer;
@@ -55,6 +54,9 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        font-weight: 600;
+        font-size: 0.75rem;
+        color: $gray-medium-dark;
 
         @media screen and (max-width: $sm-size) {
             max-width: 84px;

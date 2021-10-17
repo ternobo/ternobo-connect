@@ -785,16 +785,8 @@ a:focus {
     color: $red;
     white-space: nowrap;
     width: auto;
-    padding: 0.25rem 0.75rem;
-    line-height: 1.5rem;
-
-    @media screen and (max-width: $sm-size) {
-        align-items: center;
-        display: flex;
-        padding: 6px 8px;
-        font-size: $text-xxxsm;
-        height: 1.5rem;
-    }
+    padding: 0.5rem 0.75rem;
+    height: auto;
 }
 
 .badge-blue {
