@@ -15,7 +15,7 @@
 						<div class="d-flex align-items-center clickable mt-4" @click="doEdit">
 							<button class="btn btn-text border-gray-medium-dark rounded-4">
 								<i class="ternobo-icons-save" v-if="edit"></i>
-								<i class="ternobo-icons-edit"></i>
+								<i class="ternobo-icons-edit" v-else></i>
 								<span class="font-demibold ms-2">
 									{{ edit ? __.get("application.save") : __.get("application.edit") }}
 								</span>
