@@ -16,7 +16,7 @@
 			<img :src="image" id="nationalimage" style="width: 100%; max-height: 300px; object-fit: cover" />
 		</div>
 		<template #modal-footer>
-			<loading-button :loading="loading" @click.native="upload" :disabled="file == null || code == null || code.length < 1" class="btn btn-dark">ثبت</loading-button>
+			<loading-button :loading="loading" @click.native="upload" :disabled="file == null || code == null || code.length < 1" class="btn btn-primary">ثبت</loading-button>
 		</template>
 	</b-modal>
 </template>

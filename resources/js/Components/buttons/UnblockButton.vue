@@ -1,5 +1,5 @@
 <template>
-	<loading-button class="btn btn-block" :loading="loading" @click.native="unblockUser">{{ __.get("user-profile.unblock") }}</loading-button>
+	<loading-button class="btn" :loading="loading" @click.native="unblockUser">{{ __.get("user-profile.unblock") }}</loading-button>
 </template>
 
 <script>

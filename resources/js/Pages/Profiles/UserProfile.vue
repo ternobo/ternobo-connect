@@ -6,30 +6,27 @@
 			<page-blocked v-if="page.blocked" :fname="page.user.first_name" />
 			<tabs :compact="true" :disabled="edit" class="profile-tabs" @selected="tabChange" :state-tab="true" v-else>
 				<template slot="custom-item">
-					<div class="d-flex align-items-center" v-if="canEdit && showEdit">
-						<div class="me-4" v-if="edit">
-							<button class="btn btn-text mt-4">
+					<div class="d-flex align-items-center mt-4" v-if="canEdit && showEdit">
+						<div class="me-3" v-if="edit">
+							<button class="btn btn-text">
 								<i class="material-icons text-muted" v-if="edit" @click="cancelEdit">close</i>
 							</button>
 						</div>
-						<div class="d-flex align-items-center clickable mt-4" @click="doEdit">
-							<button class="btn btn-text border-gray-medium-dark rounded-4">
-								<i class="ternobo-icons-save" v-if="edit"></i>
-								<i class="ternobo-icons-edit" v-else></i>
-								<span class="font-demibold ms-2">
-									{{ edit ? __.get("application.save") : __.get("application.edit") }}
-								</span>
-							</button>
-						</div>
+						<loading-button :loading="loadingSave" class="btn btn-text border-gray-medium-dark rounded-4" @click="doEdit">
+							<i class="ternobo-icons-save" v-if="edit"></i>
+							<i class="ternobo-icons-edit" v-else></i>
+							<span class="font-demibold ms-2" v-if="$root.isDesktop">
+								{{ edit ? __.get("application.save") : __.get("application.edit") }}
+							</span>
+						</loading-button>
 					</div>
-					<div class="d-flex algin-items-center" v-else-if="current_tab == 'activities' && canEdit">
-						<button class="btn btn-subtle btn-rounded" @click="draft = !draft">
-							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-if="!draft">
-								<i class="material-icons-outlined" :class="{ 'me-1': $root.isDesktop }">save</i><span style="font-weight: 600" v-if="$root.isDesktop"> {{ __.get("content/posts.draft") }} </span>
-							</div>
-							<div :style="$root.isDesktop ? '' : 'height: 16px;display: flex;'" v-else>
-								<i class="material-icons-outlined" :class="{ 'me-1': $root.isDesktop }">article</i><span style="font-weight: 600" v-if="$root.isDesktop"> {{ __.get("user-profile.published") }} </span>
-							</div>
+					<div class="d-flex algin-items-center mt-4" v-else-if="current_tab == 'activities' && canEdit">
+						<button class="btn btn-text" @click="draft = !draft">
+							<i class="ternobo-icons-article" v-if="draft"></i>
+							<i class="ternobo-icons-edit" v-else></i>
+							<span class="font-demibold ms-2" v-if="$root.isDesktop">
+								{{ draft ? __.get("user-profile.published") : __.get("content/posts.draft") }}
+							</span>
 						</button>
 					</div>
 				</template>

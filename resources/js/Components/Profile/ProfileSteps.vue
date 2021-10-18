@@ -27,7 +27,7 @@
 							<span class="text-muted font-14" style="max-width: 200px">{{ steps.undone_steps[0].text }}</span>
 						</div>
 					</div>
-					<button class="btn btn-dark" @click="$emit('action', steps.undone_steps[0].action)">{{ steps.undone_steps[0].button }}</button>
+					<button class="btn btn-primary" @click="$emit('action', steps.undone_steps[0].action)">{{ steps.undone_steps[0].button }}</button>
 				</div>
 			</div>
 		</div>

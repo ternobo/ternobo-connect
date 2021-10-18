@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\ActiveSession;
 use App\Models\Following;
 use App\Ternobo;
 use Closure;
@@ -20,8 +21,9 @@ class FollowMiddlware
     public function handle(Request $request, Closure $next)
     {
         $user = Auth::user();
-        $followings = Following::query()->where("page_id", Ternobo::currentPage()->id)->get();
-        if (count($followings) >= 3) {
+        $followings = Following::query()->where("page_id", Ternobo::currentPage()->id)->count();
+
+        if ($followings >= 3) {
             return $next($request);
         }
         return redirect("/follow-people");

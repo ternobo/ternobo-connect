@@ -33,7 +33,7 @@
 				</div>
 				<div class="moreinfo-footer text-left">
 					<button class="btn text-muted btn-transparent" type="button" @click="(moreInfo = false), (description = null)">{{ __.get("application.cancel") }}</button>
-					<button class="btn btn-dark" id="moreinfo-close" @click="moreInfo = false">{{ __.get("application.add") }}</button>
+					<button class="btn btn-primary" id="moreinfo-close" @click="moreInfo = false">{{ __.get("application.add") }}</button>
 				</div>
 			</div>
 			<div class="d-flex pt-3 justify-content-between" v-else-if="reportFor != null">

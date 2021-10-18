@@ -16,7 +16,7 @@
 					<li>{{ __.get("register.password-tip-2") }}</li>
 				</ul>
 			</div>
-			<LoadingButton :loading="loading" class="btn btn-dark mx-auto mt-4 w-100 signup-save-btn" @click.native="savePassword">{{ __.get("application.confirm") }}</LoadingButton>
+			<LoadingButton :loading="loading" class="btn btn-primary mx-auto mt-4 w-100 signup-save-btn" @click.native="savePassword">{{ __.get("application.confirm") }}</LoadingButton>
 		</div>
 	</b-modal>
 </template>

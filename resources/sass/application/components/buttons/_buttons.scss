@@ -2,10 +2,10 @@
     padding: 0.625rem 1.5rem;
     outline: none;
     border: 2px solid transparent;
-    min-height: 44px;
+    min-height: 2.75rem;
     color: $text-color;
     transition: 0.3s all;
-    max-height: 44px;
+    max-height: 2.75rem;
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -28,7 +28,7 @@
             opacity: 1;
         }
 
-        &.btn-icon {
+        &.btn-icon:not(.btn-icon-primary-black) {
             background-color: $gray-light;
             color: $gray-dark;
 
@@ -166,6 +166,18 @@
         min-width: 32px;
         max-width: 32px;
         font-weight: normal;
+
+        &.btn-lg {
+            padding: 0.875rem;
+            max-height: 40px;
+            min-height: 40px;
+            min-width: 40px;
+            max-width: 40px;
+
+            &.btn-rounded {
+                border-radius: 12px;
+            }
+        }
 
         &.btn-md {
             max-height: 24px;

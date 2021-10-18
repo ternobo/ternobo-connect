@@ -5,10 +5,10 @@
 		</h2>
 		<ul class="poll-options--list">
 			<li>
-				<skeleton class="w-100" height="44px"></skeleton>
+				<skeleton class="w-100" height="2.75rem"></skeleton>
 			</li>
 			<li>
-				<skeleton class="w-100" height="44px"></skeleton>
+				<skeleton class="w-100" height="2.75rem"></skeleton>
 			</li>
 		</ul>
 	</div>

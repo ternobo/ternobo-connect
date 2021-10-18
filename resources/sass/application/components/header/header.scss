@@ -176,16 +176,17 @@
     .list-group-item:last-child {
         position: relative;
         border: 0;
+        margin-top: 2rem;
 
-        &::after {
+        &::before {
             content: " ";
             position: absolute;
             background: $gray-200;
             height: 2px;
-            width: calc(100% - 48px);
-            #{$end}: 1.5rem;
-            #{$start}: 1.5rem;
-            top: 0;
+            width: calc(100% - 1rem);
+            right: 0.5rem;
+            left: 0.5rem;
+            top: -1rem;
         }
     }
 
@@ -281,9 +282,10 @@
     flex-direction: column;
     padding-#{$start}: 0;
     margin-bottom: 0;
+    padding: 1rem;
 
     >.list-group-item {
-        padding: 16px 1.5rem;
+        padding: 1rem 1.5rem;
         border-color: #EEEEEE;
         border-width: 2px;
         cursor: pointer;
@@ -297,8 +299,15 @@
             color: $gray-500;
 
             i {
-                margin-#{$end}: 12px;
+                margin-#{$end}: 0.75rem;
             }
+        }
+
+        button {
+            min-height: unset;
+            height: -webkit-max-content;
+            height: -moz-max-content;
+            height: max-content;
         }
 
         &.hover-danger:hover {
@@ -306,7 +315,6 @@
             a,
             button {
                 color: $red;
-
             }
         }
     }

@@ -31,7 +31,7 @@ export default {
 			return this.text != null && this.text.length > 300;
 		},
 		textToShow() {
-			return this.showFullText || this.text.length < 300 ? this.text : this.text.split(" ").slice(0, 40).join(" ") + "...";
+			return this.showFullText || this.text?.length < 300 ? this.text : this.text.split(" ").slice(0, 40).join(" ") + "...";
 		},
 	},
 	watch: {
