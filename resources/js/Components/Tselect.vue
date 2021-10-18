@@ -206,6 +206,7 @@ export default {
 			return item;
 		},
 		selectItem(item) {
+			console.log("hi");
 			this.selectedItem = item;
 			this.$emit("input", item);
 			this.showItems = false;
@@ -217,11 +218,13 @@ export default {
 			this.newItemInput = undefined;
 		},
 		hideDropdown() {
-			if (!this.disabled) {
-				this.showItems = false;
-			}
-			this.focusIndex = 0;
-			this.focus = false;
+			setTimeout(() => {
+				if (!this.disabled) {
+					this.showItems = false;
+				}
+				this.focusIndex = 0;
+				this.focus = false;
+			}, 200);
 		},
 		openDropdown() {
 			this.focus = true;

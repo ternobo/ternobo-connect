@@ -5,7 +5,7 @@
 			<div class="d-flex align-items-center justify-content-center" style="margin-top: -70px">
 				<lazy-image img-class="profile-xxlg" class="profile-xxlg mb-0" :src="page.profile" />
 			</div>
-			<div class="userinfo-card card-body pt-4">
+			<div class="userinfo-card text-center card-body pt-4">
 				<span class="text-dark text-center">
 					{{ page.name }}
 					<i v-if="page.type === 'personal' && page.user.is_verified" class="verificationcheck">check_circle</i>

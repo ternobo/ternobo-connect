@@ -16,16 +16,29 @@
 				</span>
 				<small class="short_bio">{{ page.short_bio }}</small>
 				<small v-if="page.location != null && page.location.length > 0" class="location">
-					<i class="material-icons-outlined">location_on</i>
 					{{ page.location }}
 				</small>
+
+				<div class="invite_badge mt-5" v-if="$root.isDesktop">
+					<wire-link :href="`/${invited_by.username}`" class="invite_profile clickable" v-if="invited_by != null">
+						<lazy-image :src="invited_by.profile" class="profile-sm mb-0" imgClass="profile-sm" />
+					</wire-link>
+					<div class="invite_info">
+						<span class="invite_date" :class="{ bold: invited_by == null }">{{ __.get("user-profile.joined") }} {{ joinTime }}</span>
+						<span class="invited_by" v-if="invited_by != null">
+							{{ __.get("user-profile.nominated-by") }} <wire-link class="clickable" :href="`/${invited_by.username}`">{{ invited_by.name }}</wire-link>
+						</span>
+					</div>
+				</div>
 			</div>
 			<div class="d-flex flex-column align-items-end justify-content-between">
 				<div class="d-flex align-items-center" style="margin-left: -8px">
-					<div class="connection-actions clickable" @click="showConnections = true">
-						<i class="material-icons-outlined">group</i> <span>{{ __.get("user-profile.connections") }}</span>
-					</div>
-					<button class="btn p-0 btn-text btn-icon" :class="{ disabled: profileEdit }" v-if="canEdit" @click="doEdit"><i class="material-icons-outlined">edit</i></button>
+					<connetion-buttons ref="connectionbtn" v-if="!canEdit && !page.blocked" btnClass="w-100" :class="{ 'w-100': !$root.isDesktop }" :pageId="page.id" />
+					<unblock-button @unblocked="$store.state.ternoboWireApp.reload()" :page="page.id" v-else-if="!canEdit"></unblock-button>
+					<button class="ms-5 me-4 btn btn-text btn-icon btn-md" @click="showConnections = true">
+						<i class="material-icons-outlined">group</i>
+					</button>
+					<button class="btn btn-subtle btn-md rounded-4 btn-icon" :class="{ disabled: profileEdit }" v-if="canEdit" @click="doEdit"><i class="material-icons-outlined font-16">edit</i></button>
 					<div v-else-if="Boolean($store.state.user)">
 						<i class="material-icons-outlined report-icon" v-if="page.blocked" @click="showReport = true">report</i>
 						<dropdown-menu size="lg" variant="link" v-else toggle-class="text-decoration-none" no-caret>
@@ -43,22 +56,7 @@
 						</dropdown-menu>
 					</div>
 				</div>
-				<div class="invite_badge" v-if="$root.isDesktop">
-					<wire-link :href="`/${invited_by.username}`" class="invite_profile clickable" v-if="invited_by != null">
-						<lazy-image :src="invited_by.profile" class="profile-sm mb-0" imgClass="profile-sm" />
-					</wire-link>
-					<div class="invite_info">
-						<span class="invite_date" :class="{ bold: invited_by == null }">{{ __.get("user-profile.joined") }} {{ joinTime }}</span>
-						<span class="invited_by" v-if="invited_by != null">
-							{{ __.get("user-profile.nominated-by") }} <wire-link class="clickable" :href="`/${invited_by.username}`">{{ invited_by.name }}</wire-link>
-						</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="profile-header-actions" v-if="!canEdit || !$root.isDesktop">
-			<div>
-				<a class="d-flex align-items-center clickable" @click="showFriends = true" v-if="mutuals != null && mutuals.list.length > 0">
+				<div class="d-flex align-items-center clickable" @click="showFriends = true" v-if="mutuals != null && mutuals.list.length > 0">
 					<div class="d-flex ms-2">
 						<div class="profile-photos">
 							<img :src="mutuals.list[0].profile" />
@@ -70,21 +68,8 @@
 						<strong class="text-dark font-demibold">{{ mutuals.count }} {{ __.choice("user-profile.mutual-friends", mutuals.count) }}</strong>
 						<span class="text-grey ms-2 font-12">{{ mutuals.text }}</span>
 					</div>
-				</a>
-			</div>
-			<div class="invite_badge" v-if="!$root.isDesktop">
-				<div class="invite_profile" v-if="invited_by != null">
-					<lazy-image :loadingColor="skeletonOptions.profileColor" :src="invited_by.profile" :class="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" class="mb-0" :imgClass="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" />
-				</div>
-				<div class="invite_info">
-					<span class="invite_date" :class="{ bold: invited_by == null }">{{ __.get("user-profile.joined") }} {{ joinTime }}</span>
-					<span :href="`/${invited_by.username}`" class="invited_by" v-if="invited_by != null">
-						{{ __.get("user-profile.nominated-by") }} <wire-link class="clickable" :href="`/${invited_by.username}`" as="strong">{{ invited_by.name }}</wire-link>
-					</span>
 				</div>
 			</div>
-			<connetion-buttons ref="connectionbtn" v-if="!canEdit && !page.blocked" btnClass="w-100" :class="{ 'w-100': !$root.isDesktop }" :pageId="page.id" />
-			<unblock-button @unblocked="$store.state.ternoboWireApp.reload()" :page="page.id" v-else-if="!canEdit"></unblock-button>
 		</div>
 	</div>
 </template>

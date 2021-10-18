@@ -6,15 +6,17 @@
 		<donation-modal :post="post_data.id" :post_data="post_data" :show.sync="showTips" :showDonate="!checkUser(post_data.page.user_id) && post_data.can_tip"></donation-modal>
 		<div class="post-header pt-0">
 			<wire-link class="publisher" :href="'/' + post_data.page.slug">
-				<lazy-image class="profile-sm mb-0" img-class="profile-sm" :src="post_data.page.profile" />
+				<lazy-image class="profile-xsm mb-0" img-class="profile-xsm" :src="post_data.page.profile" />
 				<div>
-					<strong class="publisher--name"> {{ post_data.page.name }} <i v-if="post_data.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
-					<span class="publisher--shortbio">
-						{{ post_data.page.short_bio }}
-					</span>
-					<span class="publisher--shortbio font-10">
-						{{ post_time }}
-					</span>
+					<strong class="publisher--name line-height-24px"> {{ post_data.page.name }} <i v-if="post_data.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+					<div class="d-flex flex-row m-0 align-items-center">
+						<span class="text-gray-medium-dark font-10">
+							{{ post_data.page.short_bio }}
+						</span>
+						<span class="ms-2 text-gray-medium-dark opacity-70 font-10">
+							{{ post_time }}
+						</span>
+					</div>
 				</div>
 			</wire-link>
 			<div class="actions position-relative">

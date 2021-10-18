@@ -3,8 +3,12 @@
 		<div class="tselect_title rounded-0" ref="titleSection" @click="openDropdown">
 			<div class="title-text w-100">
 				<div class="d-flex align-items-center">
-					<img :src="value.icon" class="ms-2" style="width: 24px; height: 24px" />
-					<span>{{ value.label }}</span>
+					<div class="d-flex justify-content-between align-items-center w-100">
+						<span class="font-14">
+							<span>{{ value.label }}</span>
+						</span>
+						<img :src="value.icon" class="ms-2" style="width: 24px; height: 24px" />
+					</div>
 				</div>
 			</div>
 			<i class="material-icons tselect_arrow">keyboard_arrow_down</i>

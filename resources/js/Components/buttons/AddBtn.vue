@@ -1,5 +1,5 @@
 <template>
-	<button class="rounded-add-btn" @click="$emit('click', $event)"><slot></slot></button>
+	<button class="btn btn-primary btn-icon btn-rounded" @click="$emit('click', $event)"><slot></slot></button>
 </template>
 
 <script>

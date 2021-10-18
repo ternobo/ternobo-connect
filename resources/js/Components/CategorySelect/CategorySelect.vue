@@ -1,7 +1,7 @@
 <template>
 	<div class="category-select" @click="showModal = true">
 		<category-select-modal :categories.sync="categories" :selectedCategory.sync="selectedCategory" :show.sync="showModal"></category-select-modal>
-		<i class="material-icons-outlined">layers</i>
+		<i class="material-icons-outlined font-20">layers</i>
 		<span>{{ selectedCategory == null ? __.choice("content/posts.category", 2) : selectedCategory.name }}</span>
 	</div>
 </template>

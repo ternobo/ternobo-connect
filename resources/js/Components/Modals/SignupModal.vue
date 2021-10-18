@@ -3,14 +3,14 @@
 		<tabs v-if="verification_step || emailphone_step" @selected="(emailphone_step = true), (verification_step = false)">
 			<tab name="ایمیل" :selected="true">
 				<div class="input-group ephone-input-group d-flex align-items-center" @keydown.enter="sendVcode('email')">
-					<LoadingButton class="signup-save-btn btn btn-dark" :loading="loading" v-if="!verification_step" @click.native="sendVcode('email')">ثبت</LoadingButton>
+					<LoadingButton class="signup-save-btn btn btn-primary" :loading="loading" v-if="!verification_step" @click.native="sendVcode('email')">ثبت</LoadingButton>
 					<i class="material-icons-outlined text-superlight hover-danger" v-else @click="(emailphone_step = true), (verification_step = false)">edit</i>
 					<input dir="ltr" input-class="w-100" type="email" class="form-control mx-1 text-left" :readonly="verification_step" v-model="email" placeholder="example@ternobo.com" />
 				</div>
 			</tab>
 			<tab name="شماره همراه">
 				<div class="input-group ephone-input-group d-flex align-items-center" @keydown.enter="sendVcode('phone')">
-					<LoadingButton class="signup-save-btn btn btn-dark" :loading="loading" v-if="!verification_step" @click.native="sendVcode('phone')">ثبت</LoadingButton>
+					<LoadingButton class="signup-save-btn btn btn-primary" :loading="loading" v-if="!verification_step" @click.native="sendVcode('phone')">ثبت</LoadingButton>
 					<i class="material-icons-outlined text-superlight hover-danger" v-else @click="(emailphone_step = true), (verification_step = false)">edit</i>
 					<input dir="ltr" type="tel" class="form-control mx-1 text-left" :readonly="verification_step" v-model="phone_number" placeholder="09123456789" />
 				</div>
@@ -27,7 +27,7 @@
 						</div>
 					</div>
 				</div>
-				<LoadingButton :loading="loading" class="btn btn-dark mt-4" @click.native="verifyCode">بعدی</LoadingButton>
+				<LoadingButton :loading="loading" class="btn btn-primary mt-4" @click.native="verifyCode">بعدی</LoadingButton>
 			</div>
 		</transition>
 		<transition name="slide">
@@ -51,7 +51,7 @@
 						جنسیت
 					</tselect>
 				</div>
-				<LoadingButton :loading="loading" :disabled="!(first_name.length > 0 && last_name.length > 0 && username.length > 0 && gender != undefined)" class="btn btn-dark mx-auto mt-4 signup-save-btn" @click.native="savePersonal">بعدی</LoadingButton>
+				<LoadingButton :loading="loading" :disabled="!(first_name.length > 0 && last_name.length > 0 && username.length > 0 && gender != undefined)" class="btn btn-primary mx-auto mt-4 signup-save-btn" @click.native="savePersonal">بعدی</LoadingButton>
 			</div>
 		</transition>
 		<transition name="slide">
@@ -68,7 +68,7 @@
 						<li>بهتر است که از حروف کوچک، بزرگ و سمبل‌ها در رمزعبور خود استفاده کنید.</li>
 					</ul>
 				</div>
-				<LoadingButton :loading="loading" class="btn btn-dark mx-auto mt-4 signup-save-btn" :disabled="!(password.length > 0 && password.length)" @click.native="savePassword">بعدی</LoadingButton>
+				<LoadingButton :loading="loading" class="btn btn-primary mx-auto mt-4 signup-save-btn" :disabled="!(password.length > 0 && password.length)" @click.native="savePassword">بعدی</LoadingButton>
 			</div>
 		</transition>
 		<transition name="slide">
@@ -76,7 +76,7 @@
 				<ProfileImage @updated="updateProfile" :canChange="true" class="m-0" :src="$APP_URL + '/images/man-profile.png'"></ProfileImage>
 				<div class="d-flex mt-4 flex-column">
 					<span class="text-center">تصویر خود را وارد کنید</span>
-					<a href="/feed" class="btn btn-dark mx-auto mt-4 signup-save-btn" style="white-space: nowrap">رد شدن</a>
+					<a href="/feed" class="btn btn-primary mx-auto mt-4 signup-save-btn" style="white-space: nowrap">رد شدن</a>
 				</div>
 			</div>
 		</transition>

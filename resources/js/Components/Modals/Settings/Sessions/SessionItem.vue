@@ -1,13 +1,13 @@
 <template>
 	<div class="d-flex justify-content-between w-100 align-items-center">
 		<div class="d-flex align-items-center">
-			<i class="material-icons-outlined font-32 ml-4">
+			<i class="material-icons-outlined font-32 me-4">
 				{{ session.user_agent.isMobile ? "phone_android" : "computer" }}
 			</i>
 			<div class="d-flex flex-column">
 				<strong class="font-14">{{ session.user_agent.platform }}</strong>
 				<div class="text-muted font-12">
-					<span class="me-1" :class="{ 'text-success': session.isActive }">{{ session.isActive ? __.get("settings.current-session") : timeAgo(session.updated_at) }}</span>
+					<span class="me-2" :class="{ 'text-success': session.isActive }">{{ session.isActive ? __.get("settings.current-session") : timeAgo(session.updated_at) }}</span>
 					<span>{{ session.location }}</span>
 				</div>
 			</div>

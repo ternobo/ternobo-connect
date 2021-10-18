@@ -25,7 +25,7 @@
 										<small class="text-muted clickable" @click="recovery = false" v-if="recovery">{{ __.get("landing.use_auth_code") }}</small>
 									</div>
 									<div class="login-button-container">
-										<loading-button :loading="loading" class="btn btn-primary" @click.native="verifyCode">{{ __.get("application.login") }}</loading-button>
+										<loading-button :loading="loading" class="btn btn-lg btn-primary" @click.native="verifyCode">{{ __.get("application.login") }}</loading-button>
 									</div>
 								</div>
 								<div v-else>
@@ -42,7 +42,7 @@
 											</div>
 										</div>
 										<div class="login-button-container">
-											<loading-button :loading="loading" class="btn btn-primary" @click.native="login">{{ __.get("application.login") }}</loading-button>
+											<loading-button :loading="loading" class="btn btn-lg btn-primary" @click.native="login">{{ __.get("application.login") }}</loading-button>
 										</div>
 									</div>
 									<div class="d-flex">

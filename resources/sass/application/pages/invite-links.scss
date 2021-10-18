@@ -51,9 +51,12 @@
         align-items: center;
 
         span {
-            font-size: $text-xxsm;
+            font-size: $text-sm;
             font-weight: 600;
             color: $dark;
+            flex: 1 1 auto;
+            display: flex;
+            align-items: center;
         }
 
         figure {

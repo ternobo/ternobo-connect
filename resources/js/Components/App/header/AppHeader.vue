@@ -11,7 +11,7 @@
 				</wire-link>
 
 				<form method="get" action="/search" ref="searchfield" class="searchfield d-flex">
-					<auto-complete class="search-field w-100" inputClass="rounded sm-input" icon="search" v-model="searchVal" @suggestionclick="submitsearch" @search="submitsearch" required type="text" :suggestionPosition="17" name="q" :placeholder="__.get('application.searchq')" />
+					<auto-complete class="search-field w-100" inputClass="rounded xsm-input" icon="search" v-model="searchVal" @suggestionclick="submitsearch" @search="submitsearch" required type="text" :suggestionPosition="17" name="q" :placeholder="__.get('application.searchq')" />
 					<div class="beta-badge">
 						<span class="me-2 text-nowrap">v 0.1.5</span>
 						<img src="/images/beta.svg" width="36" class="verical-middle" />

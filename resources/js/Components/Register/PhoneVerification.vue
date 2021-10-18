@@ -8,12 +8,12 @@
 						<label class="font-weight-bold mb-0 font-20 text-dark">{{ title }}</label>
 					</div>
 					<div>
-						<tselect :items="country_codes" @change="phone = countryCode.code" class="mb-4" valueOption="id" labelOption="country" v-model="countryCode">
+						<tselect :items="country_codes" @change="phone = countryCode.code" class="mb-4 tselect-lg" valueOption="id" labelOption="country" v-model="countryCode">
 							<template v-slot:icon>
-								<span v-html="countryIcon"></span>
+								<span class="vertical-middle me-2" v-html="countryIcon"></span>
 							</template>
 							<template v-slot:itemIcon="{ icon }">
-								<span v-html="getCountryIcon(icon)"></span>
+								<span class="vertical-middle me-2" v-html="getCountryIcon(icon)"></span>
 							</template>
 						</tselect>
 						<input dir="ltr" class="form-control fill-light lg-input" :readonly="verification_step" v-model="phone" />
@@ -36,7 +36,7 @@
 						</div>
 					</div>
 					<div class="login-button-container w-100 h-auto">
-						<loading-button :loading="loading" class="btn btn-primary w-100" @click.native="next">{{ __.get("application.next") }}</loading-button>
+						<loading-button :loading="loading" class="btn btn-lg btn-primary w-100" @click.native="next">{{ __.get("application.next") }}</loading-button>
 					</div>
 				</div>
 			</div>

@@ -27,7 +27,7 @@
 						</ul>
 					</div>
 					<div class="login-button-container w-100 h-auto">
-						<loading-button :loading="loading" class="btn btn-primary w-100" @click.native="savePassword">{{ __.get("application.next") }}</loading-button>
+						<loading-button :loading="loading" class="btn btn-lg btn-primary w-100" @click.native="savePassword">{{ __.get("application.next") }}</loading-button>
 					</div>
 				</div>
 			</div>

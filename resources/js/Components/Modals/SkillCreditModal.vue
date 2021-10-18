@@ -47,7 +47,7 @@
 			</tselect>
 		</div>
 		<div class="w-100 d-flex mt-4 justify-content-center">
-			<loading-button :loading="loading" @click.native="onCredit" class="btn btn-dark">{{ __.get("application.confirm") }}</loading-button>
+			<loading-button :loading="loading" @click.native="onCredit" class="btn btn-primary">{{ __.get("application.confirm") }}</loading-button>
 		</div>
 	</b-modal>
 </template>

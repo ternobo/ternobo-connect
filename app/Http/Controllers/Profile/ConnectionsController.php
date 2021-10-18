@@ -110,7 +110,6 @@ class ConnectionsController extends Controller
         return response()->json([
             "connections" => $connections,
         ]);
-
     }
 
     public function followings($page, Request $request)
@@ -162,6 +161,9 @@ class ConnectionsController extends Controller
         $followRow->following = $page_id;
         $followRow->page_id = Ternobo::currentPage()->id;
         $result = $followRow->save();
+
+        Notification::sendNotification("follow", Auth::user()->id, $page->user_id, $followRow->id);
+
         return response()->json(array("result" => $result, "connection" => $followRow->id));
     }
 
@@ -221,5 +223,4 @@ class ConnectionsController extends Controller
         $result = $followRow->delete();
         return response()->json(array("result" => $result, "user_id" => $user_id));
     }
-
 }

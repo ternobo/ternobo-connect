@@ -30,7 +30,7 @@
 				<MaterialTextField class="w-100" input-class="w-100" :value="location" v-model="location" :placeholder="__.get('user-profile.location')"></MaterialTextField>
 			</div>
 			<div class="col-md-12 d-flex justify-content-end align-items-center mt-4">
-				<loading-button class="btn btn-dark px-4" :loading="loading" @click.native="save">{{ __.get("application.save") }}</loading-button>
+				<loading-button class="btn btn-primary px-4" :loading="loading" @click.native="save">{{ __.get("application.save") }}</loading-button>
 			</div>
 		</div>
 	</b-modal>

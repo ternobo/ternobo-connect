@@ -8,7 +8,7 @@
 						{{ this.$store.state.user.name }}
 						<i v-if="this.$store.state.user.is_verified === 1" class="verificationcheck">check_circle</i>
 					</strong>
-					<small class="user-short-bio">{{ this.$store.state.user.short_bio }}</small>
+					<small dir="ltr" class="user-short-bio">@{{ this.$store.state.user.username }}</small>
 				</span>
 			</wire-link>
 		</div>

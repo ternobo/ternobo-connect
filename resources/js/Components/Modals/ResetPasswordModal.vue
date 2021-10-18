@@ -11,14 +11,14 @@
 			<div class="w-100">
 				<input type="text" class="form-control bg-transparent mb-2" name="username" v-model="input" placeholder="تلفن، ایمیل یا شناسه" />
 			</div>
-			<loading-button @click.native="sendResetCode" :loading="loading" class="btn btn-dark mt-2 w-50" type="button"> ارسال کد بازیابی </loading-button>
+			<loading-button @click.native="sendResetCode" :loading="loading" class="btn btn-primary mt-2 w-50" type="button"> ارسال کد بازیابی </loading-button>
 		</div>
 		<div class="signup-login d-flex flex-column align-items-center justify-content-center clearfix" v-else>
 			<MaterialTextField v-model="resetCode" class="material--sm mb-4" placeholder="کد بازیابی"></MaterialTextField>
 			<MaterialTextField v-model="password" type="password" class="material--sm mb-4" placeholder="رمزعبور جدید"></MaterialTextField>
 			<MaterialTextField v-model="password1" type="password" class="material--sm mb-4" placeholder="تکرار رمزعبور جدید"></MaterialTextField>
 
-			<loading-button @click.native="changePassord" :loading="loading" class="btn btn-dark mt-2 w-50" type="button"> تغییر رمزعبور </loading-button>
+			<loading-button @click.native="changePassord" :loading="loading" class="btn btn-primary mt-2 w-50" type="button"> تغییر رمزعبور </loading-button>
 		</div>
 	</b-modal>
 </template>

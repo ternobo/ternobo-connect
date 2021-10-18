@@ -58,7 +58,7 @@ $space in $spacings {
 
 @for $i from 0 to 16 {
     .rounded-#{$i} {
-        border-radius: $i * 2px;
+        border-radius: $i * 2px !important;
     }
 }
 
