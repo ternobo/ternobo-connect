@@ -12,18 +12,15 @@
 								<i class="material-icons text-muted" v-if="edit" @click="cancelEdit">close</i>
 							</button>
 						</div>
-						<button class="btn btn-subtle btn-rounded" @click="doEdit">
-							<span v-if="!edit && $root.isDesktop">
-								<i class="material-icons-outlined">edit</i>
-								<span style="font-weight: 600"> {{ __.get("application.edit") }}</span>
-							</span>
-							<i v-if="!edit && !$root.isDesktop" class="material-icons-outlined">edit</i>
-							<div class="d-flex align-items-center justify-content-center" v-if="edit">
-								{{ $root.isDesktop ? __.get("application.save") : "" }}
-								<i class="material-icons-outlined" v-if="!$root.isDesktop">save</i>
-								<div style="height: 14px; width: 14px; border-width: 2px" v-if="loadingSave" class="ms-2 loadingspinner"></div>
-							</div>
-						</button>
+						<div class="d-flex align-items-center clickable mt-4" @click="doEdit">
+							<button class="btn btn-text border-gray-medium-dark rounded-4">
+								<i class="ternobo-icons-save" v-if="edit"></i>
+								<i class="ternobo-icons-edit"></i>
+								<span class="font-demibold ms-2">
+									{{ edit ? __.get("application.save") : __.get("application.edit") }}
+								</span>
+							</button>
+						</div>
 					</div>
 					<div class="d-flex algin-items-center" v-else-if="current_tab == 'activities' && canEdit">
 						<button class="btn btn-subtle btn-rounded" @click="draft = !draft">

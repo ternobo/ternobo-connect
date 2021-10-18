@@ -40,6 +40,10 @@ $color in $theme-colors {
         color: $color !important;
     }
 
+    border-#{$name} {
+        border-color: $color !important;
+    }
+
     .bg-#{$name} {
         background-color: $color !important;
     }
