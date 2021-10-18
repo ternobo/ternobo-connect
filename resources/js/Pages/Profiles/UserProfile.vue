@@ -8,7 +8,7 @@
 				<template slot="custom-item">
 					<div class="d-flex align-items-center" v-if="canEdit && showEdit">
 						<div class="me-4" v-if="edit">
-							<button class="btn btn-text">
+							<button class="btn btn-text mt-4">
 								<i class="material-icons text-muted" v-if="edit" @click="cancelEdit">close</i>
 							</button>
 						</div>
