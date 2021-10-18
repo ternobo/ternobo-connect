@@ -1,12 +1,12 @@
 <template>
 	<base-layout :class="{ 'justify-content-center': pages.length < 1 }">
-		<div class="content-container-right">
+		<div class="col-md-8">
 			<div class="new-feedback-card">
 				<div class="card-body">
 					<div class="how-to-improve-header" style="min-height: 39px">
 						<strong>{{ __.get("feedbacks.feedback-q") }}</strong>
 						<transition name="fade">
-							<button @click="showNewFeedback = true" v-if="!showNewFeedback" class="btn btn-action-light feedback-button">
+							<button @click="showNewFeedback = true" v-if="!showNewFeedback" class="btn btn-secondary feedback-button">
 								<i class="material-icons-outlined">emoji_objects</i>
 								{{ __.get("feedbacks.submit-feedback") }}
 							</button>
@@ -34,7 +34,7 @@
 								<textarea-autosize v-model="feedbackDescription" maxlength="2500" :min-height="230" class="form-control"></textarea-autosize>
 							</div>
 							<div class="d-flex align-items-center flex-row-reverse pt-3">
-								<loading-button :loading="loading" class="btn btn-action-light rounded-0" :clas="{ disabled: feedbackTitle.length < 3 }" :disabled="feedbackTitle.length < 3" @click.native="saveFeedback">{{ __.get("application.submit") }}</loading-button>
+								<loading-button :loading="loading" class="btn btn-secondary" :clas="{ disabled: feedbackTitle.length < 3 }" :disabled="feedbackTitle.length < 3" @click.native="saveFeedback">{{ __.get("application.submit") }}</loading-button>
 								<button class="btn btn-transparent text-grey" @click="showNewFeedback = false">{{ __.get("application.cancel") }}</button>
 							</div>
 						</div>

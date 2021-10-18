@@ -5,13 +5,13 @@
 				<div class="feedback-votes">
 					{{ votes }}
 				</div>
-				<loading-button v-b-tooltip.hover.ds700 key="vote_item" :title="__.get('feedbacks.vote')" :loading="loading" @click.native="voteIdea" v-if="feedback.status == 'voting' && !voted && !loading" class="btn btn-primary feedback-vote-button" :class="{ voted: voted }">
+				<loading-button v-b-tooltip.hover.ds700 key="vote_item" :title="__.get('feedbacks.vote')" :loading="loading" @click.native="voteIdea" v-if="feedback.status == 'voting' && !voted && !loading" class="btn btn-primary btn-icon-primary-black btn-icon btn-lg feedback-vote-button" :class="{ voted: voted }">
 					<i class="material-icons-outlined">{{ voted ? "highlight_off" : "arrow_circle_up" }}</i>
 				</loading-button>
-				<loading-button v-b-tooltip.hover.ds700 key="unvote_item" :title="__.get('feedbacks.remove-vote')" :loading="loading" @click.native="voteIdea" v-else-if="feedback.status == 'voting'" class="btn btn-primary feedback-vote-button" :class="{ voted: voted }">
+				<loading-button v-b-tooltip.hover.ds700 key="unvote_item" :title="__.get('feedbacks.remove-vote')" :loading="loading" @click.native="voteIdea" v-else-if="feedback.status == 'voting'" class="btn btn-primary btn-icon-primary-black btn-icon btn-lg feedback-vote-button" :class="{ voted: voted }">
 					<i class="material-icons-outlined">{{ voted ? "highlight_off" : "arrow_circle_up" }}</i>
 				</loading-button>
-				<loading-button @click.native="bookmark" :class="{ 'text-dark': bookmarked }" class="btn feedback-flag-button">
+				<loading-button @click.native="bookmark" :class="{ 'text-dark': bookmarked }" class="btn feedback-flag-button btn-icon btn-lg">
 					<i class="material-icons">
 						{{ bookmarked ? "flag" : "outlined_flag" }}
 					</i>

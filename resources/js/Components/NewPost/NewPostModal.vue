@@ -115,6 +115,7 @@ export default {
 			}
 			let data = {
 				slides: this.content,
+				draft: draft ? 1 : 0
 			};
 			data.slides = data.slides.map((item) => {
 				for (let sort = 0; sort < item.content.length; sort++) {
@@ -137,7 +138,6 @@ export default {
 				data._method = "PUT";
 			}
 
-			data.draft = this.draft;
 			data.canDonate = this.canDonate;
 
 			let url = this.post != null ? `/posts/${this.post.id}` : "/posts";

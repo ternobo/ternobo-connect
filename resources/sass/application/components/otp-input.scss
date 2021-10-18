@@ -1,5 +1,5 @@
 .otp-input {
-    >div:not(:last-child) {
+    >div:not(:first-child) {
         margin-#{$start}: 12px;
     }
 }

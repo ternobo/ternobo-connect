@@ -9,8 +9,7 @@
 		<TwoFAModal :status.sync="two_factor_verification" :phone="phone" :email="email" :show.sync="showTwoFAModal"></TwoFAModal>
 		<SessionsModal :show.sync="showActiveSessions"></SessionsModal>
 		<blocked-pages-modal :show.sync="showBlockedModal"></blocked-pages-modal>
-		<h2 class="font-18 font-demibold mb-4">{{ __.get("settings.login-and-security") }}</h2>
-		<div class="card mb-2">
+		<div class="card mb-4">
 			<div class="settings-card-body">
 				<div class="setting-action">
 					<div class="name">
@@ -22,13 +21,16 @@
 						<div class="content">
 							<div class="badge-bg-container clickable" v-clipboard="$APP_URL + '/' + $store.state.user.username">
 								<div class="me-2 d-flex align-items-center" style="direction: ltr">
+									<i class="material-icons-outlined me-2 text-gray-medium-dark">copy</i>
 									<span class="text-grey">
 										{{ $root.isDesktop ? `${websiteUrl}/` : "" }} <span class="text-dark">{{ $store.state.user.username }}</span>
 									</span>
 								</div>
 							</div>
 						</div>
-						<i class="btn setting-btn material-icons-outlined ms-4" @click="showUsernameModal = true">edit</i>
+						<button class="ms-4 btn setting-btn btn-subtle btn-icon btn-md" @click="showUsernameModal = true">
+							<i class="material-icons-outlined">edit</i>
+						</button>
 					</div>
 				</div>
 				<div class="setting-action">
@@ -41,7 +43,9 @@
 						<div class="content">
 							<span class="badge-bg-container" dir="ltr">{{ phone }}</span>
 						</div>
-						<i class="btn setting-btn material-icons-outlined ms-4" @click="showPhoneModal = true">edit</i>
+						<button class="ms-4 btn setting-btn btn-subtle btn-icon btn-md" @click="showPhoneModal = true">
+							<i class="material-icons-outlined">edit</i>
+						</button>
 					</div>
 				</div>
 				<div class="setting-action">
@@ -50,7 +54,9 @@
 						<span>{{ __.get("application.password") }}</span>
 					</div>
 					<div class="d-flex align-items-center">
-						<i class="btn setting-btn material-icons-outlined ms-4" @click="showPasswordMdal = true">edit</i>
+						<button class="ms-4 btn setting-btn btn-subtle btn-icon btn-md" @click="showPasswordMdal = true">
+							<i class="material-icons-outlined">edit</i>
+						</button>
 					</div>
 				</div>
 				<div class="setting-action">
@@ -62,7 +68,9 @@
 						<div class="content">
 							<span class="badge-bg-container" v-if="Boolean(active_sessions)">{{ active_sessions }}</span>
 						</div>
-						<i class="btn setting-btn material-icons-outlined ms-4" @click="showActiveSessions = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+						<button class="ms-4 btn setting-btn btn-subtle btn-icon btn-md" @click="showActiveSessions = true">
+							<i class="material-icons-outlined">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+						</button>
 					</div>
 				</div>
 				<div class="setting-action">
@@ -72,9 +80,11 @@
 					</div>
 					<div class="d-flex align-items-center">
 						<div class="content">
-							<span class="font-16 h-auto" style="padding: 12px" :class="{ 'badge-danger': !two_factor_verification, 'badge-success': two_factor_verification }">{{ two_factor_verification ? __.get("application.active") : __.get("application.inactive") }}</span>
+							<span :class="{ 'badge-danger': !two_factor_verification, 'badge-success': two_factor_verification }">{{ two_factor_verification ? __.get("application.active") : __.get("application.inactive") }}</span>
 						</div>
-						<i class="btn setting-btn material-icons-outlined ms-4" @click="showTwoFAModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+						<button class="ms-4 btn setting-btn btn-subtle btn-icon btn-md" @click="showTwoFAModal = true">
+							<i class="material-icons-outlined">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+						</button>
 					</div>
 				</div>
 				<div class="setting-action">
@@ -84,12 +94,13 @@
 					</div>
 
 					<div class="d-flex align-items-center">
-						<i class="btn setting-btn material-icons-outlined ms-4" @click="showBlockedModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+						<button class="ms-4 btn setting-btn btn-subtle btn-icon btn-md" @click="showBlockedModal = true">
+							<i class="material-icons-outlined">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+						</button>
 					</div>
 				</div>
 			</div>
 		</div>
-		<h2 class="font-18 font-demibold my-4 pt-3">{{ __.get("settings.information-security") }}</h2>
 		<div class="card">
 			<div class="settings-card-body">
 				<div class="setting-action">
@@ -105,11 +116,13 @@
 								<img src="/images/iran-flag.png" style="width: 24px" />
 							</div>
 							<div class="badge-bg-container d-flex justify-content-between w-100" v-else>
-								<span class="me-2">English (US)</span>
+								<span class="me-2">English <span class="text-gray-medium-dark">US</span></span>
 								<img src="/emoji/72x72/1f1fa-1f1f8.png" style="width: 24px; height: 24px" />
 							</div>
 						</div>
-						<i class="btn setting-btn material-icons-outlined ms-4" @click="showLangModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+						<button class="ms-4 btn setting-btn btn-subtle btn-icon btn-md" @click="showLangModal = true">
+							<i class="material-icons-outlined">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+						</button>
 					</div>
 				</div>
 				<div class="setting-action">
@@ -119,7 +132,9 @@
 					</div>
 
 					<div class="d-flex align-items-center">
-						<i class="btn setting-btn material-icons-outlined ms-4" @click="showDeactiveModal = true">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+						<button class="ms-4 btn setting-btn btn-subtle btn-icon btn-md" @click="showDeactiveModal = true">
+							<i class="material-icons-outlined">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+						</button>
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,6 @@
 <template>
 	<button class="loading-button" :class="{ loading: loading }" @click="$emit('click', $event)" :disabled="loading || disabled">
-		<span :class="{ 'opacity-0': loading }">
+		<span class="d-flex align-items-center justify-content-center" :class="{ 'opacity-0': loading }">
 			<slot> </slot>
 		</span>
 	</button>

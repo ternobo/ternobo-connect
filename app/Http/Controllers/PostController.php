@@ -24,6 +24,7 @@ use App\SocialMediaTools;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -57,6 +58,9 @@ class PostController extends Controller
         $user = Auth::user();
         $user->load("personalPage");
         $category = null;
+
+        DB::beginTransaction();
+
         if ($request->filled("category")) {
             $category = Category::query()->where("name", $request->category)->where("page_id", $user->personalPage->id)->firstOrCreate([
                 "name" => $request->category,
@@ -262,18 +266,22 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Post $post
+     * @param $post
      * @return \Illuminate\Http\Response
      */
-    public function update(PostRequest $request, Post $post)
+    public function update(PostRequest $request, $post)
     {
+        $post = Post::withDrafts()->findOrFail($post);
         $slides = $request->slides;
+
         $user = Auth::user();
         $user->load("personalPage");
 
         $draft = $request->draft == '1';
 
         $deletedSlides = [];
+
+        DB::beginTransaction();
 
         $category = $request->filled("category") ? Category::query()->firstOrCreate([
             'page_id' => $post->page_id,

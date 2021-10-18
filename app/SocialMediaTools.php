@@ -31,7 +31,8 @@ class SocialMediaTools
         "br",
         "sup",
         "text",
-        "span"
+        "span",
+        "p"
     ];
 
     /**
@@ -80,13 +81,13 @@ class SocialMediaTools
             ->setRemoveScripts(true)
             ->setRemoveStyles(true)
             ->setRemoveDoubleSpace(true));
-        $dom->loadStr("<div id='contentNode'>$content</div>");
+        $dom->loadStr("$content");
 
-        $content = ($dom->find("#contentNode > *"));
+        $content = ($dom->find("*"));
 
         foreach ($content as $element) {
             if (!in_array($element->getTag()->name(), static::$allowedHtmlTags)) {
-                $element->remove();
+                $element->delete();
             }
         }
         return $dom->innerHTML;

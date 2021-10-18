@@ -6,15 +6,17 @@
 		<donation-modal :post="post_data.id" :post_data="post_data" :show.sync="showTips" :showDonate="!checkUser(post_data.page.user_id) && post_data.can_tip"></donation-modal>
 		<div class="post-header pt-0">
 			<wire-link class="publisher" :href="'/' + post_data.page.slug">
-				<lazy-image class="profile-sm mb-0" img-class="profile-sm" :src="post_data.page.profile" />
+				<lazy-image class="profile-xsm mb-0" img-class="profile-xsm" :src="post_data.page.profile" />
 				<div>
-					<strong class="publisher--name"> {{ post_data.page.name }} <i v-if="post_data.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
-					<span class="publisher--shortbio">
-						{{ post_data.page.short_bio }}
-					</span>
-					<span class="publisher--shortbio font-10">
-						{{ post_time }}
-					</span>
+					<strong class="publisher--name line-height-24px"> {{ post_data.page.name }} <i v-if="post_data.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+					<div class="d-flex flex-row m-0 align-items-center">
+						<span class="text-gray-medium-dark font-10">
+							{{ post_data.page.short_bio }}
+						</span>
+						<span class="ms-2 text-gray-medium-dark opacity-70 font-10">
+							{{ post_time }}
+						</span>
+					</div>
 				</div>
 			</wire-link>
 			<div class="actions position-relative">
@@ -47,14 +49,14 @@
 				<span @click="showLikes = true" class="me-1">{{ __.get("content/posts.liked-text") }}</span>
 				<wire-link v-if="post_data.mutual_likes[0]" :href="'/' + post_data.mutual_likes[0].page.slug" class="text-dark me-1">
 					<span class="d-flex">
-						<strong class="text-light">{{ post_data.mutual_likes[0].page.name }}</strong>
-						<span class="text-light">{{ post_data.mutual_likes.length > 2 ? __.get("application.comma") : "" }} </span>
+						<strong class="text-gray-medium-dark">{{ post_data.mutual_likes[0].page.name }}</strong>
+						<span class="text-gray-medium-dark">{{ post_data.mutual_likes.length > 2 ? __.get("application.comma") : "" }} </span>
 					</span>
 				</wire-link>
 				<div v-if="post_data.mutual_likes.length > 1">
 					<span v-if="post_data.mutual_likes.length == 2">{{ __.get("content/posts.and") }}</span>
 					<wire-link v-if="post_data.mutual_likes[1]" :href="'/' + post_data.mutual_likes[0].page.slug" class="text-dark">
-						<strong class="text-light">{{ post_data.mutual_likes[1].page.name }}</strong>
+						<strong class="text-gray-medium-dark">{{ post_data.mutual_likes[1].page.name }}</strong>
 					</wire-link>
 				</div>
 				<span class="mx-1" v-if="post_data.mutual_likes.length > 2"> {{ __.get("content/posts.and") }} ... </span>

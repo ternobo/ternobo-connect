@@ -13,7 +13,7 @@
 			<div class="d-flex flex-column mt-4 pt-3">
 				<span class="font-demibold font-14 mb-4">{{ __.get("settings.our-suggestions") }}</span>
 				<div class="d-flex">
-					<span v-for="suggestion in suggestions" class="category-badge font-demibold py-2 px-3 text-dark font-14 clickable" style="border-radius: 15px; margin-left: 12px" :key="'username_suggestion_' + suggestion" @click="username = suggestion">{{ suggestion }}</span>
+					<span v-for="suggestion in suggestions" class="category-badge rounded-2 p-3 text-black clickable me-3" :key="'username_suggestion_' + suggestion" @click="username = suggestion">{{ suggestion }}</span>
 				</div>
 			</div>
 		</div>

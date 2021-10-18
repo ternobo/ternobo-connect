@@ -18,7 +18,7 @@
 						</div>
 
 						<div class="login-button-container h-auto">
-							<button class="btn btn-primary" @click="$emit('next')">{{ __.get("application.get-started") }}</button>
+							<button class="btn btn-lg btn-primary" @click="$emit('next')">{{ __.get("application.get-started") }}</button>
 						</div>
 					</div>
 				</div>

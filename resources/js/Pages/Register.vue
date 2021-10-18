@@ -48,14 +48,14 @@
 										<label class="font-weight-bold mb-0 font-20 text-dark">{{ __.get("register.profile-image") }}</label>
 									</div>
 									<div class="d-flex align-items-center justify-content-center">
-										<profile-image @updated="updateProfile" ref="profileelem" :canChange="true" :showIcons="false" size="profile-lg" class="mb-0 mt-0 me-3" :src="profile"></profile-image>
-										<button class="btn upload-profile-btn" @click="$refs['profileelem'].openFileSelect()">
+										<profile-image ref="profileelem" :canChange="true" :showIcons="false" size="profile-lg" class="mb-0 mt-0 me-6" :src="profile"></profile-image>
+										<button class="btn btn-outlined btn-lg btn-rounded" @click="$refs['profileelem'].openFileSelect()">
 											<i class="material-icons-outlined text-dark me-2">cloud_upload</i>
 											{{ __.get("application.upload") }}
 										</button>
 									</div>
 									<div class="login-button-container w-100 h-auto">
-										<loading-button class="btn btn-primary w-100" @click.native="goFollowings">{{ __.get("application.next") }}</loading-button>
+										<loading-button class="btn btn-lg btn-primary w-100" @click.native="goFollowings">{{ __.get("application.next") }}</loading-button>
 									</div>
 								</div>
 							</div>

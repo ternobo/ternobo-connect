@@ -53,11 +53,16 @@
     }
 
     .dropdown-item {
-        padding: 1rem;
+        padding: 0.5rem 1rem;
+        padding-#{$end}: 1.5rem;
         width: 100%;
+        min-height: 52px;
+        display: flex;
+        align-items: center;
+        font-size: 0.75rem;
 
         i {
-            margin-#{$end}: 0.5rem;
+            margin-#{$end}: 0.75rem;
         }
 
         &:focus,

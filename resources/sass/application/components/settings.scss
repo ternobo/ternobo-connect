@@ -1,10 +1,12 @@
-@media screen and (max-width: $sm-size) {
+.settings-card {
+    @media screen and (max-width: $sm-size) {
 
-    .settings-card {
         display: flex;
         flex-direction: row;
         margin-bottom: 16px;
     }
+
+    padding: 1rem;
 }
 
 .sticky-settings {
@@ -15,37 +17,33 @@
 }
 
 .settings-item {
-    padding: 24px 2rem;
-    color: $gray-500;
+    padding: 1rem;
+    color: $gray-dark;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     width: 100%;
-
-    @media screen and (max-width: $sm-size) {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 12px 16px;
-        font-size: 12px !important;
-    }
+    font-size: 1rem;
+    line-height: 2.125rem;
+    display: flex;
+    align-items: center;
 
     i {
-        @media screen and (max-width: $sm-size) {
-            font-size: 18px !important;
-        }
+        font-size: 1.5rem;
+        vertical-align: middle;
     }
 
     img {
+        vertical-align: middle;
+
         @media screen and (max-width: $sm-size) {
-            max-width: 18px !important;
+            max-width: 1.25rem !important;
         }
     }
 
     &.active {
-
         font-weight: 600;
         color: $dark;
     }
@@ -60,9 +58,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 10px 16px;
-    padding: 12px;
-    border-radius: 12px;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
     color: $dark;
     background-color: $body-bg;
 
@@ -90,6 +87,8 @@
         font-weight: 600;
         color: $dark;
         font-size: $text-sm;
+        display: flex;
+        align-items: center;
 
         @media screen and (max-width: $sm-size) {
             font-size: 12px !important;
@@ -111,7 +110,7 @@
     }
 
     &:not(:last-child) {
-        border-bottom: 2px solid $light;
+        border-bottom: 2px solid $gray-light-medium;
     }
 }
 
@@ -125,13 +124,9 @@
     color: $light;
     background: transparent;
     border: 2px solid $light;
-    border-radius: 12px;
+    border-radius: 8px;
 
-    font-size: 20px !important;
-    ;
-
-
-    @media screen and (max-width: $sm-size) {
+    i {
         font-size: 16px !important;
     }
 }
