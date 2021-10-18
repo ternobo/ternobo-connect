@@ -64,7 +64,7 @@
 }
 
 .search-field {
-    max-width: 250px;
+    max-width: 216px;
     display: flex;
     flex-direction: column;
 
@@ -76,8 +76,7 @@
 
     .delete-icon {
         position: absolute;
-        #{$start}: 16px #{"/* rtl:ignore */"};
-        #{$end}: auto #{"/* rtl:ignore */"};
+        right: 1rem;
         font-size: $text-xxsm;
         color: $gray-400;
     }

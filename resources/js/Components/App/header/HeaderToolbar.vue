@@ -24,10 +24,12 @@
 			</div>
 		</div>
 
-		<div ref="usermenushow" v-if="$store.state.user != null" class="usertoolbar ms-3" @mouseenter="showUserMenu" @mouseleave="menuVisible = false">
+		<div ref="usermenushow" v-if="$store.state.user != null" class="usertoolbar" @mouseenter="showUserMenu" @mouseleave="menuVisible = false">
 			<div class="usertoolbar-container" :class="{ active: menuVisible }">
 				<!-- <span dir="ltr" class="user-username">{{ $store.state.user.username }} <i v-if="$store.state.user.is_verified === 1" class="verificationcheck">check_circle</i> </span> -->
-				<img v-bind:src="$store.state.user.profile" class="profile-xxxsm" />
+				<div :class="{ active: $store.state.url === '/' + $store.state.user.username }" class="profile-image-container p-1">
+					<img v-bind:src="$store.state.user.profile" class="profile-xxxsm" />
+				</div>
 			</div>
 			<transition name="fade" mode="out-in">
 				<user-menu :style="usermenuStyle" v-show="menuVisible"></user-menu>

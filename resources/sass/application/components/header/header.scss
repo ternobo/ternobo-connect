@@ -231,6 +231,19 @@
             background: rgba($color: $gray-200, $alpha: 0.85);
         }
 
+        .profile-image-container {
+            transition: 0.3s all;
+        }
+
+        .profile-image-container.active {
+            border: 3px solid $dark;
+            box-sizing: content-box;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            transform: scale(0.75);
+        }
+
         @if $direction==ltr {
             flex-direction: row-reverse;
         }
