@@ -25,3 +25,4 @@ laravel-echo-server.json
 package-lock.json
 socket-server.json
 .idea
+.phpdoc
