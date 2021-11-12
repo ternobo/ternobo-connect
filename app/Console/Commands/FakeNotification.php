@@ -53,7 +53,7 @@ class FakeNotification extends Command
         for ($i = 0; $i < $numbers; $i++) {
             $user = User::query()->find($this->argument("user"));
 
-            $post = Post::query()->where("page_id", $user->personalPage->id)->get()->random();
+            $post = Post::withRelations()->where("page_id", $user->personalPage->id)->get()->random();
 
             $from = User::query()->where("id", "!=", $user->id)->with("personalPage")->get()->random()->personalPage;
             // print_r($from);
@@ -108,7 +108,6 @@ class FakeNotification extends Command
             $notification->created_at = Carbon::today()->subDays(rand(0, 30));
             $notification->timestamps = false;
             $notification->save();
-
         }
         return 0;
     }

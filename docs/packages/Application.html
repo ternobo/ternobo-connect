@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/search.js"></script>
+        <script defer src="js/searchIndex.js"></script>
+    </head>
+<body id="top">
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">Documentation</a></h1>
+    <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
+    <label class="phpdocumentor-header__menu-icon" for="menu-button">
+        <i class="fas fa-bars"></i>
+    </label>
+    <section data-search-form class="phpdocumentor-search">
+    <label>
+        <span class="visually-hidden">Search for</span>
+        <svg class="phpdocumentor-search__icon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <line x1="12.4892" y1="12.2727" x2="19.1559" y2="18.9393" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+    </label>
+</section>
+
+    <nav class="phpdocumentor-topnav">
+    <ul class="phpdocumentor-topnav__menu">
+        </ul>
+</nav>
+</header>
+
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label>
+<aside class="phpdocumentor-column -four phpdocumentor-sidebar">
+                    <section class="phpdocumentor-sidebar__category">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/htmlsanitizer.html">HtmlSanitizer</a></h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/htmlsanitizer-extension.html">Extension</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/app.html">App</a></h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/app-broadcasting.html">Broadcasting</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/app-console.html">Console</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/app-events.html">Events</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/app-exceptions.html">Exceptions</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/app-filemanager.html">FileManager</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/app-http.html">Http</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/app-jobs.html">Jobs</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/app-models.html">Models</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/app-providers.html">Providers</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/app-rules.html">Rules</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/app-scopes.html">Scopes</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/app-services.html">Services</a>
+                
+            </li>
+            </ul>
+
+                        </section>
+                <section class="phpdocumentor-sidebar__category">
+            <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace"><a href="packages/Application.html">Application</a></h4>
+
+                        </section>
+            
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="phpdocumentor-column -eight phpdocumentor-content">
+                    <ul class="phpdocumentor-breadcrumbs">
+    </ul>
+
+    <article class="phpdocumentor-element -package">
+        <h2 class="phpdocumentor-content__title">Application</h2>
+
+        
+
+<h3 id="interfaces_class_traits">
+    Interfaces, Classes and Traits
+    <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
+</h3>
+
+<dl class="phpdocumentor-table-of-contents">
+    
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/HtmlSanitizer-Extension-Basic-BasicExtension.html"><abbr title="\HtmlSanitizer\Extension\Basic\BasicExtension">BasicExtension</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Broadcasting-DonateChannel.html"><abbr title="\App\Broadcasting\DonateChannel">DonateChannel</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Broadcasting-LikeChannel.html"><abbr title="\App\Broadcasting\LikeChannel">LikeChannel</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Broadcasting-NotificationsChannel.html"><abbr title="\App\Broadcasting\NotificationsChannel">NotificationsChannel</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Broadcasting-UserChannel.html"><abbr title="\App\Broadcasting\UserChannel">UserChannel</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-CaseInsensitiveUriValidator.html"><abbr title="\App\CaseInsensitiveUriValidator">CaseInsensitiveUriValidator</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Commands-AcceptConnections.html"><abbr title="\App\Console\Commands\AcceptConnections">AcceptConnections</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Commands-AddReportOptions.html"><abbr title="\App\Console\Commands\AddReportOptions">AddReportOptions</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Commands-AutoDeploy.html"><abbr title="\App\Console\Commands\AutoDeploy">AutoDeploy</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Commands-CleanSearchSuggestions.html"><abbr title="\App\Console\Commands\CleanSearchSuggestions">CleanSearchSuggestions</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Commands-ExportTranslations.html"><abbr title="\App\Console\Commands\ExportTranslations">ExportTranslations</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Commands-FakeConnections.html"><abbr title="\App\Console\Commands\FakeConnections">FakeConnections</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Commands-FakeCredits.html"><abbr title="\App\Console\Commands\FakeCredits">FakeCredits</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Commands-FakeLike.html"><abbr title="\App\Console\Commands\FakeLike">FakeLike</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Commands-FakeNotification.html"><abbr title="\App\Console\Commands\FakeNotification">FakeNotification</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Commands-FakePosts.html"><abbr title="\App\Console\Commands\FakePosts">FakePosts</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Commands-FakeSuggestion.html"><abbr title="\App\Console\Commands\FakeSuggestion">FakeSuggestion</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Commands-FakeTip.html"><abbr title="\App\Console\Commands\FakeTip">FakeTip</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Commands-FakeUsers.html"><abbr title="\App\Console\Commands\FakeUsers">FakeUsers</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Commands-FixOldPosts.html"><abbr title="\App\Console\Commands\FixOldPosts">FixOldPosts</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Commands-FixPhonenumbers.html"><abbr title="\App\Console\Commands\FixPhonenumbers">FixPhonenumbers</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Commands-FixTags.html"><abbr title="\App\Console\Commands\FixTags">FixTags</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Commands-FollowAll.html"><abbr title="\App\Console\Commands\FollowAll">FollowAll</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Commands-GenerateInviteLink.html"><abbr title="\App\Console\Commands\GenerateInviteLink">GenerateInviteLink</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Console-Kernel.html"><abbr title="\App\Console\Kernel">Kernel</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Events-ChatEvent.html"><abbr title="\App\Events\ChatEvent">ChatEvent</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Events-DonateEvent.html"><abbr title="\App\Events\DonateEvent">DonateEvent</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Events-LikeEvent.html"><abbr title="\App\Events\LikeEvent">LikeEvent</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Events-NotificationEvent.html"><abbr title="\App\Events\NotificationEvent">NotificationEvent</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Events-ReloadSocialOptions.html"><abbr title="\App\Events\ReloadSocialOptions">ReloadSocialOptions</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Exceptions-Handler.html"><abbr title="\App\Exceptions\Handler">Handler</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-FileManager-MediaConverter.html"><abbr title="\App\FileManager\MediaConverter">MediaConverter</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-HTMLMinifier.html"><abbr title="\App\HTMLMinifier">HTMLMinifier</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Admin-AdminController.html"><abbr title="\App\Http\Controllers\Admin\AdminController">AdminController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Admin-CategoryController.html"><abbr title="\App\Http\Controllers\Admin\CategoryController">CategoryController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Admin-NotificationsController.html"><abbr title="\App\Http\Controllers\Admin\NotificationsController">NotificationsController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Admin-PostsController.html"><abbr title="\App\Http\Controllers\Admin\PostsController">PostsController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Admin-ProfileController.html"><abbr title="\App\Http\Controllers\Admin\ProfileController">ProfileController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Admin-ReportNotesController.html"><abbr title="\App\Http\Controllers\Admin\ReportNotesController">ReportNotesController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Admin-ReportsController.html"><abbr title="\App\Http\Controllers\Admin\ReportsController">ReportsController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Admin-SkillsController.html"><abbr title="\App\Http\Controllers\Admin\SkillsController">SkillsController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Admin-TagsController.html"><abbr title="\App\Http\Controllers\Admin\TagsController">TagsController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Admin-Tips-TransactionsController.html"><abbr title="\App\Http\Controllers\Admin\Tips\TransactionsController">TransactionsController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Admin-UsersController.html"><abbr title="\App\Http\Controllers\Admin\UsersController">UsersController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-ArticlesController.html"><abbr title="\App\Http\Controllers\ArticlesController">ArticlesController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Auth-FollowSuggestionController.html"><abbr title="\App\Http\Controllers\Auth\FollowSuggestionController">FollowSuggestionController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Auth-ForgotPasswordController.html"><abbr title="\App\Http\Controllers\Auth\ForgotPasswordController">ForgotPasswordController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Auth-LoginController.html"><abbr title="\App\Http\Controllers\Auth\LoginController">LoginController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Auth-RegisterController.html"><abbr title="\App\Http\Controllers\Auth\RegisterController">RegisterController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Auth-SessionsController.html"><abbr title="\App\Http\Controllers\Auth\SessionsController">SessionsController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Auth-SettingsController.html"><abbr title="\App\Http\Controllers\Auth\SettingsController">SettingsController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Auth-TwoFAController.html"><abbr title="\App\Http\Controllers\Auth\TwoFAController">TwoFAController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Auth-UsersController.html"><abbr title="\App\Http\Controllers\Auth\UsersController">UsersController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Auth-VerificationController.html"><abbr title="\App\Http\Controllers\Auth\VerificationController">VerificationController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-AutoUpdateController.html"><abbr title="\App\Http\Controllers\AutoUpdateController">AutoUpdateController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-BlockController.html"><abbr title="\App\Http\Controllers\BlockController">BlockController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Chats-ChatController.html"><abbr title="\App\Http\Controllers\Chats\ChatController">ChatController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-CommentController.html"><abbr title="\App\Http\Controllers\CommentController">CommentController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Content-BookmarksController.html"><abbr title="\App\Http\Controllers\Content\BookmarksController">BookmarksController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Content-FeedController.html"><abbr title="\App\Http\Controllers\Content\FeedController">FeedController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Content-SearchController.html"><abbr title="\App\Http\Controllers\Content\SearchController">SearchController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Content-TagsController.html"><abbr title="\App\Http\Controllers\Content\TagsController">TagsController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Controller.html"><abbr title="\App\Http\Controllers\Controller">Controller</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Donation-DontaionsController.html"><abbr title="\App\Http\Controllers\Donation\DontaionsController">DontaionsController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-DownloadsController.html"><abbr title="\App\Http\Controllers\DownloadsController">DownloadsController</abbr></a></dt>
+        <dd>Description of Downloads</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Feedback-FeedbacksController.html"><abbr title="\App\Http\Controllers\Feedback\FeedbacksController">FeedbacksController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Feedback-RepliesCotnroller.html"><abbr title="\App\Http\Controllers\Feedback\RepliesCotnroller">RepliesCotnroller</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-HelpCenter-HelpCenterController.html"><abbr title="\App\Http\Controllers\HelpCenter\HelpCenterController">HelpCenterController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-HomeController.html"><abbr title="\App\Http\Controllers\HomeController">HomeController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-IndexController.html"><abbr title="\App\Http\Controllers\IndexController">IndexController</abbr></a></dt>
+        <dd>Description of IndexController</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-InviteLinksController.html"><abbr title="\App\Http\Controllers\InviteLinksController">InviteLinksController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-NotificationController.html"><abbr title="\App\Http\Controllers\NotificationController">NotificationController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Payment-ZarinpalController.html"><abbr title="\App\Http\Controllers\Payment\ZarinpalController">ZarinpalController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Poll-PollController.html"><abbr title="\App\Http\Controllers\Poll\PollController">PollController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-PostController.html"><abbr title="\App\Http\Controllers\PostController">PostController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Profile-CategoryController.html"><abbr title="\App\Http\Controllers\Profile\CategoryController">CategoryController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Profile-ConnectionsController.html"><abbr title="\App\Http\Controllers\Profile\ConnectionsController">ConnectionsController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Profile-ContactsController.html"><abbr title="\App\Http\Controllers\Profile\ContactsController">ContactsController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Profile-PageController.html"><abbr title="\App\Http\Controllers\Profile\PageController">PageController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Profile-ProfileController.html"><abbr title="\App\Http\Controllers\Profile\ProfileController">ProfileController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-RedirectController.html"><abbr title="\App\Http\Controllers\RedirectController">RedirectController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-ReportController.html"><abbr title="\App\Http\Controllers\ReportController">ReportController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-SiteMapController.html"><abbr title="\App\Http\Controllers\SiteMapController">SiteMapController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Skills-SkillController.html"><abbr title="\App\Http\Controllers\Skills\SkillController">SkillController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Skills-SkillCreditController.html"><abbr title="\App\Http\Controllers\Skills\SkillCreditController">SkillCreditController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Socialite-DiscordController.html"><abbr title="\App\Http\Controllers\Socialite\DiscordController">DiscordController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Socialite-DribbbleController.html"><abbr title="\App\Http\Controllers\Socialite\DribbbleController">DribbbleController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Socialite-FacebookController.html"><abbr title="\App\Http\Controllers\Socialite\FacebookController">FacebookController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Socialite-GithubController.html"><abbr title="\App\Http\Controllers\Socialite\GithubController">GithubController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Socialite-GoogleController.html"><abbr title="\App\Http\Controllers\Socialite\GoogleController">GoogleController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Socialite-InstagramController.html"><abbr title="\App\Http\Controllers\Socialite\InstagramController">InstagramController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Socialite-MicrosoftController.html"><abbr title="\App\Http\Controllers\Socialite\MicrosoftController">MicrosoftController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Socialite-SpotifyController.html"><abbr title="\App\Http\Controllers\Socialite\SpotifyController">SpotifyController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Socialite-TelegramController.html"><abbr title="\App\Http\Controllers\Socialite\TelegramController">TelegramController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Socialite-TwitchController.html"><abbr title="\App\Http\Controllers\Socialite\TwitchController">TwitchController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Socialite-TwitterController.html"><abbr title="\App\Http\Controllers\Socialite\TwitterController">TwitterController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Socialite-YahooController.html"><abbr title="\App\Http\Controllers\Socialite\YahooController">YahooController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Socialite-YoutubeController.html"><abbr title="\App\Http\Controllers\Socialite\YoutubeController">YoutubeController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Uploads-MediaUploadController.html"><abbr title="\App\Http\Controllers\Uploads\MediaUploadController">MediaUploadController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Controllers-Uploads-VideoController.html"><abbr title="\App\Http\Controllers\Uploads\VideoController">VideoController</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Kernel.html"><abbr title="\App\Http\Kernel">Kernel</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Middleware-AdminAPIMiddleware.html"><abbr title="\App\Http\Middleware\AdminAPIMiddleware">AdminAPIMiddleware</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Middleware-Authenticate.html"><abbr title="\App\Http\Middleware\Authenticate">Authenticate</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Middleware-EncryptCookies.html"><abbr title="\App\Http\Middleware\EncryptCookies">EncryptCookies</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Middleware-FollowMiddlware.html"><abbr title="\App\Http\Middleware\FollowMiddlware">FollowMiddlware</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Middleware-InviteLinkMiddleware.html"><abbr title="\App\Http\Middleware\InviteLinkMiddleware">InviteLinkMiddleware</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Middleware-LastUserActivity.html"><abbr title="\App\Http\Middleware\LastUserActivity">LastUserActivity</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Middleware-LocaleMiddleware.html"><abbr title="\App\Http\Middleware\LocaleMiddleware">LocaleMiddleware</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Middleware-PreventRequestsDuringMaintenance.html"><abbr title="\App\Http\Middleware\PreventRequestsDuringMaintenance">PreventRequestsDuringMaintenance</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Middleware-RedirectIfAuthenticated.html"><abbr title="\App\Http\Middleware\RedirectIfAuthenticated">RedirectIfAuthenticated</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Middleware-TrimStrings.html"><abbr title="\App\Http\Middleware\TrimStrings">TrimStrings</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Middleware-TrustHosts.html"><abbr title="\App\Http\Middleware\TrustHosts">TrustHosts</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Middleware-TrustProxies.html"><abbr title="\App\Http\Middleware\TrustProxies">TrustProxies</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Middleware-VerifyCsrfToken.html"><abbr title="\App\Http\Middleware\VerifyCsrfToken">VerifyCsrfToken</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Middleware-WebAdminMiddleware.html"><abbr title="\App\Http\Middleware\WebAdminMiddleware">WebAdminMiddleware</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Requests-AddTagRequest.html"><abbr title="\App\Http\Requests\AddTagRequest">AddTagRequest</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Requests-AuthRequest.html"><abbr title="\App\Http\Requests\AuthRequest">AuthRequest</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Requests-BaseRequest.html"><abbr title="\App\Http\Requests\BaseRequest">BaseRequest</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Requests-ChangeFeedbackTypeRequest.html"><abbr title="\App\Http\Requests\ChangeFeedbackTypeRequest">ChangeFeedbackTypeRequest</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Requests-IRTipPostRequest.html"><abbr title="\App\Http\Requests\IRTipPostRequest">IRTipPostRequest</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Requests-NewUserRequest.html"><abbr title="\App\Http\Requests\NewUserRequest">NewUserRequest</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Requests-NotificationRequest.html"><abbr title="\App\Http\Requests\NotificationRequest">NotificationRequest</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Requests-PaymentGatewaysRequest.html"><abbr title="\App\Http\Requests\PaymentGatewaysRequest">PaymentGatewaysRequest</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Requests-PinFeedbackReplyRequest.html"><abbr title="\App\Http\Requests\PinFeedbackReplyRequest">PinFeedbackReplyRequest</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Requests-PostRequest.html"><abbr title="\App\Http\Requests\PostRequest">PostRequest</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Resources-BaseCollection.html"><abbr title="\App\Http\Resources\BaseCollection">BaseCollection</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Resources-DonationCollection.html"><abbr title="\App\Http\Resources\DonationCollection">DonationCollection</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Resources-DonationResource.html"><abbr title="\App\Http\Resources\DonationResource">DonationResource</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Resources-ReportsCollection.html"><abbr title="\App\Http\Resources\ReportsCollection">ReportsCollection</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Http-Resources-UserResource.html"><abbr title="\App\Http\Resources\UserResource">UserResource</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-ImageTools.html"><abbr title="\App\ImageTools">ImageTools</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Jobs-Backup.html"><abbr title="\App\Jobs\Backup">Backup</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Jobs-CleanDatabase.html"><abbr title="\App\Jobs\CleanDatabase">CleanDatabase</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Jobs-FreshPasswordResets.html"><abbr title="\App\Jobs\FreshPasswordResets">FreshPasswordResets</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Jobs-FreshVerifications.html"><abbr title="\App\Jobs\FreshVerifications">FreshVerifications</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Jobs-GitPull.html"><abbr title="\App\Jobs\GitPull">GitPull</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-AboutData.html"><abbr title="\App\Models\AboutData">AboutData</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Achievement.html"><abbr title="\App\Models\Achievement">Achievement</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Action.html"><abbr title="\App\Models\Action">Action</abbr></a></dt>
+        <dd>Action done by \App\Page</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-ActiveSession.html"><abbr title="\App\Models\ActiveSession">ActiveSession</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Admin.html"><abbr title="\App\Models\Admin">Admin</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-AdminNotifications.html"><abbr title="\App\Models\AdminNotifications">AdminNotifications</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-BlockedPage.html"><abbr title="\App\Models\BlockedPage">BlockedPage</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Bookmark.html"><abbr title="\App\Models\Bookmark">Bookmark</abbr></a></dt>
+        <dd>All models are connected to database so just functions are defined and variables variables are dynamic.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Category.html"><abbr title="\App\Models\Category">Category</abbr></a></dt>
+        <dd>All models are connected to database so just functions are defined and variables variables are dynamic.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Chat.html"><abbr title="\App\Models\Chat">Chat</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Comment.html"><abbr title="\App\Models\Comment">Comment</abbr></a></dt>
+        <dd>All models are connected to database so just functions are defined and variables variables are dynamic.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-ConnectedAccount.html"><abbr title="\App\Models\ConnectedAccount">ConnectedAccount</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Connection.html"><abbr title="\App\Models\Connection">Connection</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Contact.html"><abbr title="\App\Models\Contact">Contact</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-ContactData.html"><abbr title="\App\Models\ContactData">ContactData</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-ContactOption.html"><abbr title="\App\Models\ContactOption">ContactOption</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-ContentSeen.html"><abbr title="\App\Models\ContentSeen">ContentSeen</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Conversation.html"><abbr title="\App\Models\Conversation">Conversation</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Education.html"><abbr title="\App\Models\Education">Education</abbr></a></dt>
+        <dd>User Education</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Experience.html"><abbr title="\App\Models\Experience">Experience</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Feedback.html"><abbr title="\App\Models\Feedback">Feedback</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-FeedbackBookmark.html"><abbr title="\App\Models\FeedbackBookmark">FeedbackBookmark</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-FeedbackReply.html"><abbr title="\App\Models\FeedbackReply">FeedbackReply</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-FeedbackVote.html"><abbr title="\App\Models\FeedbackVote">FeedbackVote</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Following.html"><abbr title="\App\Models\Following">Following</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-FollowSuggestion.html"><abbr title="\App\Models\FollowSuggestion">FollowSuggestion</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-HasManyEmpty.html"><abbr title="\App\Models\HasManyEmpty">HasManyEmpty</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-HelpCategory.html"><abbr title="\App\Models\HelpCategory">HelpCategory</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-HelpPost.html"><abbr title="\App\Models\HelpPost">HelpPost</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Industry.html"><abbr title="\App\Models\Industry">Industry</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-InviteLink.html"><abbr title="\App\Models\InviteLink">InviteLink</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Like.html"><abbr title="\App\Models\Like">Like</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Mail.html"><abbr title="\App\Models\Mail">Mail</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Media.html"><abbr title="\App\Models\Media">Media</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Message.html"><abbr title="\App\Models\Message">Message</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Notification.html"><abbr title="\App\Models\Notification">Notification</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-NotificationSeen.html"><abbr title="\App\Models\NotificationSeen">NotificationSeen</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Option.html"><abbr title="\App\Models\Option">Option</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-PageSocial.html"><abbr title="\App\Models\PageSocial">PageSocial</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-PasswordReset.html"><abbr title="\App\Models\PasswordReset">PasswordReset</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Post.html"><abbr title="\App\Models\Post">Post</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-PostSlide.html"><abbr title="\App\Models\PostSlide">PostSlide</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-PostTags.html"><abbr title="\App\Models\PostTags">PostTags</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Report.html"><abbr title="\App\Models\Report">Report</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-ReportNote.html"><abbr title="\App\Models\ReportNote">ReportNote</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-ReportOption.html"><abbr title="\App\Models\ReportOption">ReportOption</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-SearchSuggestion.html"><abbr title="\App\Models\SearchSuggestion">SearchSuggestion</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Skill.html"><abbr title="\App\Models\Skill">Skill</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-SkillCredit.html"><abbr title="\App\Models\SkillCredit">SkillCredit</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-SlideBlock.html"><abbr title="\App\Models\SlideBlock">SlideBlock</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Social.html"><abbr title="\App\Models\Social">Social</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-SocialDriver.html"><abbr title="\App\Models\SocialDriver">SocialDriver</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Tag.html"><abbr title="\App\Models\Tag">Tag</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Tip.html"><abbr title="\App\Models\Tip">Tip</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Transaction.html"><abbr title="\App\Models\Transaction">Transaction</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-User.html"><abbr title="\App\Models\User">User</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-UserOption.html"><abbr title="\App\Models\UserOption">UserOption</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Verification.html"><abbr title="\App\Models\Verification">Verification</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-Website.html"><abbr title="\App\Models\Website">Website</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-WebsiteOption.html"><abbr title="\App\Models\WebsiteOption">WebsiteOption</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Models-WelcomeBackground.html"><abbr title="\App\Models\WelcomeBackground">WelcomeBackground</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Providers-AppServiceProvider.html"><abbr title="\App\Providers\AppServiceProvider">AppServiceProvider</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Providers-AuthServiceProvider.html"><abbr title="\App\Providers\AuthServiceProvider">AuthServiceProvider</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Providers-BroadcastServiceProvider.html"><abbr title="\App\Providers\BroadcastServiceProvider">BroadcastServiceProvider</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Providers-DependencyInjectionServiceProvider.html"><abbr title="\App\Providers\DependencyInjectionServiceProvider">DependencyInjectionServiceProvider</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Providers-EventServiceProvider.html"><abbr title="\App\Providers\EventServiceProvider">EventServiceProvider</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Providers-FortifyServiceProvider.html"><abbr title="\App\Providers\FortifyServiceProvider">FortifyServiceProvider</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Providers-HorizonServiceProvider.html"><abbr title="\App\Providers\HorizonServiceProvider">HorizonServiceProvider</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Providers-MicroserviceServiceProvider.html"><abbr title="\App\Providers\MicroserviceServiceProvider">MicroserviceServiceProvider</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Providers-RouteServiceProvider.html"><abbr title="\App\Providers\RouteServiceProvider">RouteServiceProvider</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Providers-TelescopeServiceProvider.html"><abbr title="\App\Providers\TelescopeServiceProvider">TelescopeServiceProvider</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Rules-Content-BulletedListRule.html"><abbr title="\App\Rules\Content\BulletedListRule">BulletedListRule</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Rules-Content-CodeBlockRule.html"><abbr title="\App\Rules\Content\CodeBlockRule">CodeBlockRule</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Rules-Content-ContentBlock.html"><abbr title="\App\Rules\Content\ContentBlock">ContentBlock</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Rules-Content-ImageRule.html"><abbr title="\App\Rules\Content\ImageRule">ImageRule</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Rules-Content-OrderedListRule.html"><abbr title="\App\Rules\Content\OrderedListRule">OrderedListRule</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Rules-Content-VideoRule.html"><abbr title="\App\Rules\Content\VideoRule">VideoRule</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Rules-DateObject.html"><abbr title="\App\Rules\DateObject">DateObject</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Rules-LevelObject.html"><abbr title="\App\Rules\LevelObject">LevelObject</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Rules-PhoneNumber.html"><abbr title="\App\Rules\PhoneNumber">PhoneNumber</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Rules-UsernameValidator.html"><abbr title="\App\Rules\UsernameValidator">UsernameValidator</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Rules-WebsiteURL.html"><abbr title="\App\Rules\WebsiteURL">WebsiteURL</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Scopes-ActivePageScope.html"><abbr title="\App\Scopes\ActivePageScope">ActivePageScope</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Scopes-ActiveUserScope.html"><abbr title="\App\Scopes\ActiveUserScope">ActiveUserScope</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Scopes-BlockedPageContentScope.html"><abbr title="\App\Scopes\BlockedPageContentScope">BlockedPageContentScope</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Scopes-FollowingUsersScope.html"><abbr title="\App\Scopes\FollowingUsersScope">FollowingUsersScope</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Scopes-PostDraftScope.html"><abbr title="\App\Scopes\PostDraftScope">PostDraftScope</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Scopes-ReportedPostScope.html"><abbr title="\App\Scopes\ReportedPostScope">ReportedPostScope</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Services-Poll-PollModel.html"><abbr title="\App\Services\Poll\PollModel">PollModel</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Services-Poll-PollService.html"><abbr title="\App\Services\Poll\PollService">PollService</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Services-ServiceAccess.html"><abbr title="\App\Services\ServiceAccess">ServiceAccess</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-SMS.html"><abbr title="\App\SMS">SMS</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-SocialMediaTools.html"><abbr title="\App\SocialMediaTools">SocialMediaTools</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Ternobo.html"><abbr title="\App\Ternobo">Ternobo</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-Tools.html"><abbr title="\App\Tools">Tools</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App-URLTools.html"><abbr title="\App\URLTools">URLTools</abbr></a></dt>
+        <dd></dd>
+    
+            <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/App-HasPage.html"><abbr title="\App\HasPage">HasPage</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/App-HasUser.html"><abbr title="\App\HasUser">HasUser</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/App-Services-FromArrayTrait.html"><abbr title="\App\Services\FromArrayTrait">FromArrayTrait</abbr></a></dt>
+        <dd></dd>
+    </dl>
+
+
+<h3 id="toc">
+    Table of Contents
+    <a href="#toc" class="headerlink"><i class="fas fa-link"></i></a>
+</h3>
+
+<dl class="phpdocumentor-table-of-contents">
+                        <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_is_multi_array">is_multi_array()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_is_string_array">is_string_array()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd></dd>
+
+    </dl>
+
+        
+
+            <section class="phpdocumentor-functions">
+        <h3 class="phpdocumentor-elements__header" id="functions">
+            Functions
+            <a href="packages/Application.html#functions" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_is_multi_array">
+        is_multi_array()
+        <a href="namespaces/default.html#function_is_multi_array" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="app/helpers.php"><a href="files/app-helpers.html"><abbr title="app/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">2</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">is_multi_array</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$a</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$a</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_is_string_array">
+        is_string_array()
+        <a href="namespaces/default.html#function_is_string_array" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="app/helpers.php"><a href="files/app-helpers.html"><abbr title="app/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">10</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">is_string_array</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$a</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$a</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+        
+    
+</article>
+            </section>
+
+    </article>
+                <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+            </div>
+        </div>
+        <a href="packages/Application.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+
+    <script>
+        cssVars({});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+</body>
+</html>

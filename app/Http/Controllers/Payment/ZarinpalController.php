@@ -21,7 +21,7 @@ class ZarinpalController extends Controller
 {
     public function tipPost(IRTipPostRequest $request)
     {
-        $post = Post::query()->findOrFail($request->post_id);
+        $post = Post::withRelations()->findOrFail($request->post_id);
 
         $phone = $request->phone;
 
@@ -85,7 +85,7 @@ class ZarinpalController extends Controller
                 $transaction->success = true;
                 $transaction->save();
 
-                $post = Post::query()->find($transaction->meta['post_id']);
+                $post = Post::withRelations()->find($transaction->meta['post_id']);
 
                 $tip = Tip::create([
                     'post_id' => $transaction->meta['post_id'],

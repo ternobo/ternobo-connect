@@ -150,7 +150,7 @@ class User extends Authenticatable implements Messageable
     public function getPosts()
     {
         $pages = Page::query()->where("user_id", $this->id)->where("type", "!=", "company")->get();
-        $posts = Post::query();
+        $posts = Post::withRelations();
         $i = 0;
         foreach ($pages as $page) {
             if ($i > 0) {

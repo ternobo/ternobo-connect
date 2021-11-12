@@ -70,7 +70,7 @@ class PostController extends Controller
         }
 
         $draft = $request->draft == '1';
-        $post = Post::query()->create([
+        $post = Post::withRelations()->create([
             'type' => $draft ? 'draft_post' : 'post',
             'user_id' => $user->id,
             'page_id' => $user->personalPage->id,
@@ -209,7 +209,7 @@ class PostController extends Controller
      */
     public function show(Request $request, $post_id)
     {
-        $post = Post::query()
+        $post = Post::withRelations()
             ->with("category")
             ->with("page");
 

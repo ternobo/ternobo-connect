@@ -56,7 +56,6 @@ class CategoryController extends Controller
                 return response()->json(array("result" => $result, "category" => $category));
             }
             return response()->json(array("result" => false));
-
         }
     }
 
@@ -94,7 +93,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         if ($category->page_id === Auth::user()->getPage()->id) {
-            $posts = Post::query()->where("category_id", $category->id)->get();
+            $posts = Post::withRelations()->where("category_id", $category->id)->get();
             foreach ($posts as $post) {
                 $post->category_id = null;
                 $post->save();
@@ -104,5 +103,4 @@ class CategoryController extends Controller
             return abort(404);
         }
     }
-
 }
