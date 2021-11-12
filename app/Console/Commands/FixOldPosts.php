@@ -40,7 +40,7 @@ class FixOldPosts extends Command
      */
     public function handle()
     {
-        $posts = Post::query()->where("type", "post")->get();
+        $posts = Post::withRelations()->where("type", "post")->get();
         foreach ($posts as $post) {
             $text = $post->text;
             $media = $post->media != null ? $post->media[0] : null;
@@ -79,7 +79,7 @@ class FixOldPosts extends Command
             $post->text = null;
             $post->save();
         }
-        Post::query()->where("type", "slide")->update(['type' => "post"]);
+        Post::withRelations()->where("type", "slide")->update(['type' => "post"]);
         return 0;
     }
 }

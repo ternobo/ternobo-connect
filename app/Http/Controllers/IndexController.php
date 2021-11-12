@@ -31,7 +31,7 @@ class IndexController extends Controller
 
     public function index()
     {
-        $articles = Post::query()->where("type", "article")->with("page")->latest()->limit(10)->get();
+        $articles = Post::withRelations()->where("type", "article")->with("page")->latest()->limit(10)->get();
         return TernoboWire::render("Welcome", ["articles" => $articles]);
     }
 
@@ -103,5 +103,4 @@ class IndexController extends Controller
             return response()->json(['result' => true]);
         }
     }
-
 }

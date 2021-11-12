@@ -26,7 +26,7 @@ class Tag extends Model
 
     private function posts_count()
     {
-        return Post::query()->whereJsonContains("tags", $this->name)->count();
+        return Post::withRelations()->whereJsonContains("tags", $this->name)->count();
     }
 
     public function toArray()

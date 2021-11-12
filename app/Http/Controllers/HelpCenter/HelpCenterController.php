@@ -26,8 +26,7 @@ class HelpCenterController extends Controller
 
     public function getPost($id)
     {
-        $post = HelpPost::query()->findOrFail($id);
+        $post = HelpPost::withRelations()->findOrFail($id);
         return response()->json(['result' => true, 'post' => $post]);
     }
-
 }

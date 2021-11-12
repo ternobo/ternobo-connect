@@ -58,7 +58,7 @@ class CleanSearchSuggestions extends Command
     {
         $search = $this->generateSearch(explode(" ", $searchQuery));
         $results = 0;
-        $results = Post::query()
+        $results = Post::withRelations()
             ->with(["page", "content" => function ($query) use ($search) {
                 $query->selectRaw("MATCH (`content`) AGAINST(? IN BOOLEAN MODE) as score", [$search])
                     ->orderBy("score");

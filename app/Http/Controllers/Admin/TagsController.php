@@ -46,7 +46,7 @@ class TagsController extends Controller
         }
         $tags = $request->tags;
         foreach ($tags as $tag) {
-            $posts = Post::query()->whereJsonContains("tags", $tag)
+            $posts = Post::withRelations()->whereJsonContains("tags", $tag)
                 ->get();
             foreach ($posts as $post) {
                 $postTags = $post->tags;
@@ -57,7 +57,6 @@ class TagsController extends Controller
                 }
                 $post->tags = json_encode(array_values($postTags));
                 $post->save();
-
             }
             Tag::query()->where('name', $tag)->delete();
         }
@@ -65,5 +64,4 @@ class TagsController extends Controller
             "result" => true,
         ]);
     }
-
 }

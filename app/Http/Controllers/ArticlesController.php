@@ -145,7 +145,7 @@ class ArticlesController extends Controller
      */
     public function show(Page $page, $article)
     {
-        $article = Post::query()
+        $article = Post::withRelations()
             ->with("page")
             ->with("category")
             ->where("id", $article)->orWhere("slug", $article);
@@ -187,7 +187,7 @@ class ArticlesController extends Controller
     public function edit($article)
     {
         if (Auth::check()) {
-            $article = Post::query()
+            $article = Post::withRelations()
                 ->with("category")
                 ->findOrFail($article);
             if ($article->type === "article" && $article->user_id === Auth::user()->id) {

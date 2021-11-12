@@ -43,7 +43,7 @@ class SearchController extends Controller
         $results = array();
 
         if ($request->has("type") && $request->type === "content") {
-            $posts = Post::query()
+            $posts = Post::withRelations()
                 ->with(["page", "content" => function ($query) use ($search) {
                     $query->selectRaw("MATCH (`content`) AGAINST(? IN BOOLEAN MODE) as score", [$search])
                         ->orderBy("score");
@@ -115,5 +115,4 @@ class SearchController extends Controller
         }
         return abort(404);
     }
-
 }
