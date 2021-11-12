@@ -41,7 +41,7 @@
 					<div class="buttons" v-if="$store.state.user">
 						<i class="material-icons bookmark-icon clickable hover-dark" :class="{ active: bookmarked }" @click="bookmark">{{ bookmarked ? "bookmark" : "bookmark_border" }}</i>
 						<a :href="`/posts/${post_data.id}`" target="_blank"><i class="material-icons-outlined" v-if="hasComment">comment</i></a>
-						<i class="material-icons like" v-if="!checkUser(post_data.page.user_id)" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
+						<i class="material-icons hover-danger" v-if="!checkUser(post_data.page.user_id)" @click="like" :class="{ 'text-danger': liked }">{{ liked ? "favorite" : "favorite_border" }}</i>
 					</div>
 				</div>
 			</div>

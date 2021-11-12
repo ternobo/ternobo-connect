@@ -21,7 +21,7 @@ class TagsController extends Controller
         SEOTools::setCanonical(url("/tags/" . $name));
         SEOMeta::addKeyword([$name]);
 
-        $posts = Post::query()
+        $posts = Post::withRelations()
             ->distinct("posts.id")
             ->whereJsonContains('tags', $name)
             ->paginate(10);
@@ -43,5 +43,4 @@ class TagsController extends Controller
         ]);
         return response()->json(['result' => true, 'follow' => true, "following" => $following]);
     }
-
 }

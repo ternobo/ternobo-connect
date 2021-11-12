@@ -38,7 +38,7 @@ class CleanDatabase implements ShouldQueue
      */
     public function handle()
     {
-        Post::query()->whereDoesntHave("page")->orWhereDoesntHave("user")->delete();
+        Post::withRelations()->whereDoesntHave("page")->orWhereDoesntHave("user")->delete();
         Comment::query()->whereDoesntHave("page")->orWhereDoesntHave("user")->delete();
         ActiveSession::query()->whereDoesntHave("user")->delete();
         Feedback::query()->whereDoesntHave("user")->delete();

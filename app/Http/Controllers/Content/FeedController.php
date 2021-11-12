@@ -25,7 +25,7 @@ class FeedController extends Controller
             $page = $request->page;
         }
         $pages = Page::getSuggestions();
-        $posts = Post::query()
+        $posts = Post::withRelations()
             ->leftJoin("content_seens", function ($join) {
                 $join->on("posts.id", "=", "content_seens.post_id")->where("content_seens.user_id", Auth::user()->id);
             })
@@ -33,7 +33,7 @@ class FeedController extends Controller
             ->where(function ($query) {
                 $query->whereRaw("(posts.page_id IN (select following from followings WHERE page_id = '" . Ternobo::currentPage()->id . "' ) or `posts`.`user_id` = '" . Auth::user()->id . "')")
                     ->orWhereJsonContains("posts.tags", Following::query()->where("type", "tag")
-                            ->orWhere("page_id", Ternobo::currentPage()->id)->pluck("following"));
+                        ->orWhere("page_id", Ternobo::currentPage()->id)->pluck("following"));
             })
             ->whereHas("page.user", function ($query) {
                 $query->where("active", true);

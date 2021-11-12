@@ -59,7 +59,13 @@ class Post extends Model
         "can_tip",
     ];
 
-    protected $with = ["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"];
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function withRelations(): \Illuminate\Database\Eloquent\Builder
+    {
+        return self::with(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
+    }
 
     public static function scriptStripper($input)
     {

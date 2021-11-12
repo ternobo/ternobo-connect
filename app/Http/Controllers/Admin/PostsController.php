@@ -14,7 +14,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::query()
+        $posts = Post::withRelations()
             ->latest()
             ->with(['page', 'slides', 'category', 'slides.content'])
             ->paginate();

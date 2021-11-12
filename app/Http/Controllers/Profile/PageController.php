@@ -125,7 +125,7 @@ class PageController extends Controller
 
     public function getTags(Page $page, Request $request)
     {
-        $posts = Post::query()->where("page_id", $page->id);
+        $posts = Post::withRelations()->where("page_id", $page->id);
 
         if ($request->filled("category")) {
             $posts = $posts->where("category_id", $request->category);
@@ -156,7 +156,7 @@ class PageController extends Controller
     {
         $tags = $request->tags;
         foreach ($tags as $tag) {
-            $posts = Post::query()->where("page_id", Auth::user()->personalPage->id)
+            $posts = Post::withRelations()->where("page_id", Auth::user()->personalPage->id)
                 ->whereJsonContains("tags", $tag)
                 ->get();
             foreach ($posts as $post) {
@@ -278,7 +278,7 @@ class PageController extends Controller
             ->orderByRaw("followings.created_at DESC")
             ->select(['pages.*'])
             ->get();
-            
+
         foreach ($suggestions as $value) {
             $result = array();
             $result["key"] = $value->slug;

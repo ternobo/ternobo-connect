@@ -38,8 +38,10 @@ export default {
 
 <style scoped>
 small {
+	display: block;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	width: 100%;
 }
 </style>
