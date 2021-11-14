@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Middleware\InviteLinkMiddleware;
 use App\Models\ActiveSession;
 use App\Models\InviteLink;
+use App\Models\Otp;
 use App\Models\User;
 use App\Rules\UsernameValidator;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
@@ -58,37 +60,42 @@ class RegisterController extends Controller
             "lastname" => ["required"],
             'username' => ['required', "min:3", new UsernameValidator()],
             "gender" => ["required", Rule::in(["1", "2"])],
+            "verificationToken" => ['required', 'exists:otps,verification_token']
         ], [], ['gender' => __("validation.attributes.sex")]);
+
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
-            $user = new User();
-            $user->first_name = $request->firstname;
-            $user->last_name = $request->lastname;
+            DB::beginTransaction();
+            try {
+                $user = new User();
+                $user->first_name = $request->firstname;
+                $user->last_name = $request->lastname;
 
-            if (session()->has("phone")) {
-                $user->phone = session()->pull("phone");
-            } elseif (session()->has("email")) {
-                $user->email = session()->pull("email");
-            } else {
-                return abort(400);
+                $otp = Otp::query()->where("verification_token", $request->verificationToken)->where("is_verified", true)->first();
+                $user->phone = $otp->identifier;
+
+                $user->username = strtolower($request->username);
+                $user->phone_verified_at = time();
+                $user->gender = $request->gender;
+                $user->cover = url("/img/cover.jpg");
+                $user->short_bio = "";
+                if ("$user->gender" === "1") {
+                    $user->profile = url("/img/woman-profile.png");
+                } else {
+                    $user->profile = url("/img/man-profile.png");
+                }
+                $user->generateToken();
+                $otp->delete();
+
+                session()->put("passwd", "toSet");
+                session()->put("theUser", array("user" => $user));
+                DB::commit();
+                return response()->json(["result" => true]);
+            } catch (\Throwable $th) {
+                DB::rollBack();
+                throw $th;
             }
-
-            $user->username = strtolower($request->username);
-            $user->phone_verified_at = time();
-            $user->gender = $request->gender;
-            $user->cover = url("/img/cover.jpg");
-            $user->short_bio = "";
-            if ("$user->gender" === "1") {
-                $user->profile = url("/img/woman-profile.png");
-            } else {
-                $user->profile = url("/img/man-profile.png");
-            }
-            $user->generateToken();
-
-            session()->put("passwd", "toSet");
-            session()->put("theUser", array("user" => $user));
-            return response()->json(array("result" => true));
         }
     }
 

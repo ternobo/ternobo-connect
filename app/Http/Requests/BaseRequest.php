@@ -22,16 +22,15 @@ class BaseRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json(['result' => false, 'errors' => $validator->errors(), 200]));
+        throw new HttpResponseException(response()->json(['result' => false, 'errors' => $validator->errors()], 422));
     }
 
-    /**
+    /*
      * Get the validation rules that apply to the request.
      *
      * @return array
      */
     public function rules()
     {
-
     }
 }

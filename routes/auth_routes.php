@@ -12,12 +12,11 @@ Route::prefix("/auth")->group(function () {
     Route::post('login', 'Auth\LoginController@login');
     Route::post('verify-tfa', 'Auth\LoginController@twoFactorVerify');
 
-    Route::middleware(InviteLinkMiddleware::class)->group(function () {
-        Route::post('verification', 'Auth\VerificationController@sendVcode');
-        Route::post('verifycode', 'Auth\VerificationController@verifyCode');
-        Route::post("signup", "Auth\RegisterController@signupUser");
-        Route::post("setpassword", "Auth\RegisterController@savePassword");
-    });
+
+    Route::post('verification', 'Auth\VerificationController@sendVerificationCode');
+    Route::post('verifycode', 'Auth\VerificationController@verifyCode');
+    Route::post("signup", "Auth\RegisterController@signupUser");
+    Route::post("setpassword", "Auth\RegisterController@savePassword");
 
     Route::post('logout', 'Auth\LoginController@logout');
 

@@ -21,7 +21,7 @@ class FollowMiddlware
     public function handle(Request $request, Closure $next)
     {
         $user = Auth::user();
-        if (Ternobo::currentPage() != null) {
+        if (Ternobo::currentPage()->visible) {
             $followings = Following::query()->where("page_id", Ternobo::currentPage()->id)->count();
 
             if ($followings >= 3) {

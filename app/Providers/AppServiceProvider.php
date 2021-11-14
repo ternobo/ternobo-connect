@@ -47,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
                     'app' => [
                         'name' => Config::get('app.name'),
                     ],
+                    "fullAccess" => Auth::check() ? Auth::user()->personalPage->visible : false,
                     'direction' => App::getLocale() == "fa" ? 'rtl' : 'ltr',
                     "locale" => App::getLocale(),
                     "SEO" => SEOTools::generate(),

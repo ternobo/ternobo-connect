@@ -57,6 +57,14 @@ return [
 
     "mobile-maintenance" => "Ternobo is not currently available on mobile devices. You can use Ternobo through the web desktop version.",
 
+    "sms" => [
+        "sms_saved" => "Verification Code Saved",
+        "sms_sended" => "Verification code sent"
+    ],
+    "invalid-otp" => "Verification code is invalid.",
+    "expired-otp" => "Verification code is expired",
+    "success-otp" => "Phone number verified",
+
     "http-title" => [
         "404" => "404: Not Found",
         "503" => "503: Service Unavailable",

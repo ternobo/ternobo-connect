@@ -1,5 +1,5 @@
 <template>
-	<div class="position-relative card" v-if="$store.state.user != null">
+	<div class="position-relative card" v-if="$store.state.user != null && $store.shared.fullAccess">
 		<new-post-modal @posted="onPosted" :show.sync="showPostModal"></new-post-modal>
 		<div class="new-post-body">
 			<div class="text d-flex align-items-center">

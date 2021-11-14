@@ -298,6 +298,10 @@
         button {
             color: $gray-500;
 
+            &.disabled {
+                opacity: 0.5;
+            }
+
             i {
                 margin-#{$end}: 0.75rem;
             }

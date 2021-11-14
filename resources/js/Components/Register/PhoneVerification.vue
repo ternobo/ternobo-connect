@@ -170,6 +170,7 @@ export default {
 			this.loading = true;
 			var data = new FormData();
 			data.append("code", this.code);
+			data.append("phone", this.phone);
 
 			var config = {
 				method: "post",
@@ -180,6 +181,7 @@ export default {
 			axios(config)
 				.then((response) => {
 					if (response.data.result) {
+						this.$emit("verificationToken", response.data.data.token);
 						this.$emit("next");
 					} else {
 						this.toast(__.get("messages.invalid-code"), "error", "text-danger");
