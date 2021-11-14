@@ -82,7 +82,6 @@ class UsernameValidator implements Rule
         }
 
         if (!preg_match("/^[a-zA-Z0-9]+([a-zA-Z0-9](_|-| )[a-zA-Z0-9])*[a-zA-Z0-9]+$/", $username)) {
-            // dd($username);
             return false;
         }
 

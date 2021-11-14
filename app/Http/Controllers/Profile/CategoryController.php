@@ -27,7 +27,7 @@ class CategoryController extends Controller
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
-            $category = Category::query()->where("id", $category)->where("page_id", Auth::user()->getPage()->id)->firstOrFail();
+            $category = Category::query()->where("id", $category)->where("page_id", Auth::user()->personalPage->id)->firstOrFail();
             $category->sort_place = $request->order;
             return response()->json(array("result" => $category->save()));
         }
@@ -74,7 +74,7 @@ class CategoryController extends Controller
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
-            if ($category->page_id === Auth::user()->getPage()->id) {
+            if ($category->page_id === Auth::user()->personalPage->id) {
                 $category->name = $request->value;
                 $result = $category->save();
                 return response()->json(array("result" => $result, "category" => $category));
@@ -92,7 +92,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        if ($category->page_id === Auth::user()->getPage()->id) {
+        if ($category->page_id === Auth::user()->personalPage->id) {
             $posts = Post::withRelations()->where("category_id", $category->id)->get();
             foreach ($posts as $post) {
                 $post->category_id = null;

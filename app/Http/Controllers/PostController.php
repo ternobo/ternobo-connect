@@ -6,6 +6,7 @@ use App\Events\LikeEvent;
 use App\HTMLMinifier;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\FollowMiddlware;
+use App\Http\Middleware\FullAccessUserMiddleware;
 use App\Http\Requests\PostRequest;
 use App\Models\Action;
 use App\Models\Category;
@@ -42,6 +43,7 @@ class PostController extends Controller
         $this->middleware([FollowMiddlware::class, Authenticate::class])->except([
             "show"
         ]);
+        $this->middleware([FullAccessUserMiddleware::class])->only(["store", "update", "destroy"]);
         $this->dom = $dom;
         $this->pollService = $pollService;
     }
