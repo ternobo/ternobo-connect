@@ -46,7 +46,7 @@
 										</div>
 									</div>
 									<div class="d-flex justify-content-center">
-										<a href="/register" class="text-gray-medium-dark">
+										<a href="/register" class="text-gray-medium-dark font-demibold font-16 hover-dark">
 											{{ __.get("landing.register") }}
 										</a>
 									</div>
