@@ -77,6 +77,12 @@
     }
 
 
+    &.transparent {
+        background: transparent;
+        border: none;
+    }
+
+
     &.fill {
         background: $gray-light;
         border: none;
