@@ -7,6 +7,11 @@ use App\Models\Tag;
 
 class DataExtractionService
 {
+    public function getAllPosts()
+    {
+        return Post::all();
+    }
+
     public function getPostsByHashtag(string $tag)
     {
         return Post::withRelations()->whereJsonContains("tags", $tag)->get();
@@ -14,6 +19,6 @@ class DataExtractionService
 
     public function getAllTags()
     {
-        $tags = Tag::all();
+        return Tag::all();
     }
 }

@@ -54,7 +54,7 @@ class PostFactory extends Factory
             "user_id" => $page->user_id,
             "text" => $faker->paragraph,
             "media" => [],
-            // "tags" => $tags,
+            "tags" => $tags,
             "category_id" => $category->id,
             "type" => "post",
             "title" => $title,
