@@ -182,9 +182,6 @@ class PageController extends Controller
         if ($request->filled("category")) {
             $actions = Action::query()->where("page_id", $page->id)
                 ->with("post")
-                ->with("post.page")
-
-                ->with("post.category")
                 ->where("action", "post")
                 ->whereHas("post", function ($query) use ($request) {
                     $category = $request->category;
@@ -203,8 +200,6 @@ class PageController extends Controller
         } elseif ($request->filled("tag")) {
             $actions = Action::query()->where("page_id", $page->id)
                 ->with("post")
-                ->with("post.page")
-                ->with("post.category")
                 ->where("action", "post")
                 ->whereHas("post", function ($query) use ($request) {
                     $query->whereJsonContains("tags", $request->tag);

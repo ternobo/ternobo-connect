@@ -46,12 +46,11 @@ class Action extends Model
 
     public function post()
     {
-        return $this->belongsTo("App\Models\Post", "post_id");
+        return $this->belongsTo(Post::class, "post_id")->with(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
     }
 
     public function comment()
     {
         return $this->belongsTo("App\Models\Comment", "connected_to");
     }
-
 }
