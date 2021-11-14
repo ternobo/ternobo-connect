@@ -45,6 +45,7 @@ class Post extends Model
         'tags' => 'array',
         "media" => 'array',
         "can_tip" => "boolean",
+        "visible" => "boolean"
     ];
 
     protected $fillable = [

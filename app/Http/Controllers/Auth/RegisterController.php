@@ -7,6 +7,7 @@ use App\Http\Middleware\InviteLinkMiddleware;
 use App\Models\ActiveSession;
 use App\Models\InviteLink;
 use App\Models\User;
+use App\Rules\UsernameValidator;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Ternobo\TernoboWire\TernoboWire;
 
 class RegisterController extends Controller
@@ -37,59 +39,29 @@ class RegisterController extends Controller
      * @var string
      */
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware(InviteLinkMiddleware::class);
-    }
-
     public function index(Request $request)
     {
-        $code = $request->code;
-        session()->put("invite_code", $code);
-        $invite = InviteLink::query()->with(['user'])->where("code", $code)->whereNull('used_by')->where("valid", "1")->firstOrFail();
-        SEOTools::setDescription(__("register.welcome"));
-        return TernoboWire::render("Register", ['user' => $invite->user]);
+        if ($request->filled("code")) {
+            $code = $request->code;
+            session()->put("invite_code", $code);
+            $invite = InviteLink::query()->with(['user'])->where("code", $code)->whereNull('used_by')->where("valid", "1")->firstOrFail();
+            SEOTools::setDescription(__("register.welcome"));
+            return TernoboWire::render("Register", ['user' => $invite->user]);
+        }
+        return TernoboWire::render("Register");
     }
 
     public function signupUser(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            "firstname" => "required",
-            "lastname" => "required",
-            'username' => 'required|min:3|unique:users,username|regex:/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/',
-            "gender" => "required",
+            "firstname" => ["required"],
+            "lastname" => ["required"],
+            'username' => ['required', "min:3", new UsernameValidator()],
+            "gender" => ["required", Rule::in(["1", "2"])],
         ], [], ['gender' => __("validation.attributes.sex")]);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
-            if (User::query()->where("username", strtolower($request->username))->first() instanceof User) {
-                return response()->json(array("result" => false, "errors" => array("username" => "نام کاربری تکراری است")));
-            }
-            $invalid = array("help", "admin", "ternobo", "changelog", "feedback", "dashboard", "report", "sitemap", "sitemap.xml", "");
-
-            $route_name = Route::getRoutes()->get();
-            foreach ($route_name as $route) {
-                if (in_array("GET", $route->methods)) {
-                    if (!Str::containsAll($route->uri, ["{page}"])) {
-                        if ($route->uri !== "/") {
-                            $pos = strpos($route->uri, "/");
-                            if ($pos !== false) {
-                                $invalid[] = Str::substr($route->uri, $pos + 1);
-                            }
-                            $invalid[] = $route->uri;
-                        }
-                    }
-                }
-            }
-
-            if (in_array(strtolower($request->username), $invalid)) {
-                return response()->json(array("result" => false, "errors" => array("username" => "نام کاربری نامعتبر است")));
-            }
             $user = new User();
             $user->first_name = $request->firstname;
             $user->last_name = $request->lastname;
@@ -98,6 +70,8 @@ class RegisterController extends Controller
                 $user->phone = session()->pull("phone");
             } elseif (session()->has("email")) {
                 $user->email = session()->pull("email");
+            } else {
+                return abort(400);
             }
 
             $user->username = strtolower($request->username);
@@ -123,24 +97,31 @@ class RegisterController extends Controller
         if (session()->has("passwd")) {
             $user = session()->get("theUser")['user'];
             $user->password = Hash::make($request->password);
-            $invite = InviteLink::query()->where("code", session("invite_code"))->first();
-            $user->invited_by = $invite->user_id;
             $user->save();
 
-            InviteLink::createLink($user->id);
-            InviteLink::createLink($user->id);
-
-            $page = $user->makePage()->save();
+            $invite = InviteLink::query()->where("code", session("invite_code"))->first();
 
             ActiveSession::addSession($user->id);
             Auth::login($user, true);
+            $page = $user->makePage();
 
-            $invite->valid = false;
-            $invite->used_by = $user->id;
-            $invite->save();
-            return response()->json(array("result" => true));
+            if ($invite instanceof InviteLink) {
+                $user->invited_by = $invite->user_id;
+                $user->save();
+                InviteLink::createLink($user->id);
+                InviteLink::createLink($user->id);
+                $invite->valid = false;
+                $invite->used_by = $user->id;
+                $invite->save();
+            } else {
+                $page->visible = false;
+            }
+            $page->save();
+
+
+
+            return response()->json(["result" => true]);
         }
         return abort(400);
     }
-
 }

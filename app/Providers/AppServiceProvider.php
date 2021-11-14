@@ -82,7 +82,7 @@ class AppServiceProvider extends ServiceProvider
                         return false;
                     },
                     'notifications_count' => function () {
-                        if (Auth::check()) {
+                        if (Auth::check() && Auth::user()->personalPage != null) {
                             return Notification::query()
                                 ->where("created_at", ">=", Carbon::now()->subMonth())
                                 ->whereHasMorph("notifiable", [Post::class, Skill::class, Comment::class, Page::class])
@@ -106,24 +106,25 @@ class AppServiceProvider extends ServiceProvider
                         return [];
                     },
                     'invites_count' => function () {
-                        if (Auth::check()) {
+                        if (Auth::check() && Auth::user()->personalPage != null) {
                             return InviteLink::query()->where("user_id", Auth::user()->id)->where("valid", true)->count();
                         }
                         return 0;
                     },
                     'profile_steps' => function () {
-                        if (Auth::check()) {
+                        if (Auth::check() && Auth::user()->personalPage != null) {
                             return Auth::user()->getProfileSteps();
                         }
                         return [];
                     },
                     "currentPage" => function () {
-                        if (Auth::check()) {
+                        if (Auth::check() && Auth::user()->personalPage != null) {
                             return Cookie::get('ternobo_current_page_id') !== null ?
                                 Page::query()
                                 ->with("categories")
                                 ->with("skills")
-                                ->find(json_decode(Cookie::get('ternobo_current_page_id'))) :
+                                ->find(json_decode(Cookie::get('ternobo_current_page_id')))
+                                :
                                 Auth::user()->personalPage()
                                 ->with("categories")
                                 ->with("skills")
@@ -132,7 +133,7 @@ class AppServiceProvider extends ServiceProvider
                         return null;
                     },
                     "followings" => function () {
-                        if (Auth::check()) {
+                        if (Auth::check() && Auth::user()->personalPage != null) {
                             $followings = Auth::user()->followings;
                             $output = [];
                             foreach ($followings as $following) {

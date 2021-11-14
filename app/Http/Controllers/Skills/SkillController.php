@@ -40,7 +40,7 @@ class SkillController extends Controller
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
-            $skill = Skill::query()->where("id", $skill)->where("user_id", Auth::user()->getPage()->id)->firstOrFail();
+            $skill = Skill::query()->where("id", $skill)->where("user_id", Auth::user()->personalPage->id)->firstOrFail();
             $skill->sort_place = $request->order;
             return response()->json(array("result" => $skill->save()));
         }
@@ -103,5 +103,4 @@ class SkillController extends Controller
         }
         return abort(403);
     }
-
 }

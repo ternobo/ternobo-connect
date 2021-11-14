@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\FollowMiddlware;
+use App\Http\Middleware\FullAccessUserMiddleware;
 use App\Http\Middleware\WebAdminMiddleware;
 use App\Models\Post;
 use Illuminate\Support\Facades\Broadcast;
@@ -43,9 +44,6 @@ require base_path("routes/file_access.php");
 Route::get("/", "IndexController@index")->name("welcome")->middleware("guest");
 Route::get("/set-language", "IndexController@setLanguage");
 Route::any("/search", "Content\SearchController@search");
-
-Route::get("/register", "Auth\RegisterController@index");
-
 Route::get("/redirect", "RedirectController@redirect");
 
 /**
@@ -82,40 +80,41 @@ Route::middleware([Authenticate::class])->group(function () {
     });
 
     // Follow Suggestion Page
-    Route::get("/follow-people", "Auth\FollowSuggestionController@index");
-    Route::post("/follow-people/get", "Auth\FollowSuggestionController@get");
+    Route::get("/follow-people", "Auth\FollowSuggestionController@index")->middleware(FullAccessUserMiddleware::class);
+    Route::post("/follow-people/get", "Auth\FollowSuggestionController@get")->middleware(FullAccessUserMiddleware::class);;
 
-    Route::post("/setprofile", "Profile\ProfileController@setProfile")->name("profile-setup");
+    // Profile
+    Route::post("/setprofile", "Profile\ProfileController@setProfile")->name("profile-setup")->middleware(FullAccessUserMiddleware::class);
 
     // Follow Actions Start
-    Route::post("/follow/{page_id}", "Profile\ConnectionsController@follow")->name("follow");
-    Route::post("/unfollow/{page_id}", "Profile\ConnectionsController@unfollow");
-    Route::post("/tags/{tag}/follow", "Content\TagsController@toggleFollowTag");
+    Route::post("/follow/{page_id}", "Profile\ConnectionsController@follow")->name("follow")->middleware(FullAccessUserMiddleware::class);
+    Route::post("/unfollow/{page_id}", "Profile\ConnectionsController@unfollow")->middleware(FullAccessUserMiddleware::class);
+    Route::post("/tags/{tag}/follow", "Content\TagsController@toggleFollowTag")->middleware(FullAccessUserMiddleware::class);
     //Follow Actions End
 
     Route::middleware([FollowMiddlware::class])->group(function () {
         Route::get('/feed', 'Content\FeedController@index')->name('home');
 
-        Route::post("/can-donate", "Donation\DontaionsController@canEnableDonate");
+        Route::post("/can-donate", "Donation\DontaionsController@canEnableDonate")->middleware(FullAccessUserMiddleware::class);
 
         // Seen Post
         Route::post("/seenPost", "PostController@seenPost");
 
-        Route::get("/bookmarks", "Content\BookmarksController@bookmarks");
+        Route::get("/bookmarks", "Content\BookmarksController@bookmarks")->middleware(FullAccessUserMiddleware::class);
 
         // Request Verifiation
-        Route::post("/verificationRequest", "Auth\UsersController@verificationRequest");
+        Route::post("/verificationRequest", "Auth\UsersController@verificationRequest")->middleware(FullAccessUserMiddleware::class);
 
-        Route::post("/mutual-friends", "Profile\PageController@getMutualFriends");
+        Route::post("/mutual-friends", "Profile\PageController@getMutualFriends")->middleware(FullAccessUserMiddleware::class);
 
-        Route::post("/slugsearch", "Profile\PageController@search");
+        Route::post("/slugsearch", "Profile\PageController@search")->middleware(FullAccessUserMiddleware::class);
 
-        Route::get("/gettags", "PostController@getTags");
+        Route::get("/gettags", "PostController@getTags")->middleware(FullAccessUserMiddleware::class);
 
-        Route::post("/setcover", "Profile\ProfileController@setCover")->name("profile-cover");
+        Route::post("/setcover", "Profile\ProfileController@setCover")->name("profile-cover")->middleware(FullAccessUserMiddleware::class);
 
-        Route::post("/delete-profile", "Profile\ProfileController@deleteProfileImage")->name("profile-delete");
-        Route::post("/delete-cover", "Profile\ProfileController@deleteCoverImage")->name("profile-delete");
+        Route::post("/delete-profile", "Profile\ProfileController@deleteProfileImage")->name("profile-delete")->middleware(FullAccessUserMiddleware::class);
+        Route::post("/delete-cover", "Profile\ProfileController@deleteCoverImage")->name("profile-delete")->middleware(FullAccessUserMiddleware::class);
 
         Route::post("/like/{post_id}", "PostController@likePost");
         Route::post("/comments/{comment_id}/like", "CommentController@likeComment");
@@ -129,11 +128,11 @@ Route::middleware([Authenticate::class])->group(function () {
         // Route::post("/disconnect/{user_id}", "Profile\ConnectionsController@disconnect");
 
         //Start Page Edit
-        Route::prefix('/save')->group(function () {
+        Route::prefix('/save')->middleware(FullAccessUserMiddleware::class)->group(function () {
             Route::post("/resume", "Profile\ProfileController@saveAboutMe");
         });
 
-        Route::prefix("/usersave")->group(function () {
+        Route::prefix("/usersave")->middleware(FullAccessUserMiddleware::class)->group(function () {
             Route::post("/profile", "Profile\PageController@saveProfile");
             Route::post("/bio", "Profile\PageController@saveBio");
             Route::post("/shortbio", "Profile\PageController@saveShortBio");
@@ -141,9 +140,9 @@ Route::middleware([Authenticate::class])->group(function () {
         });
         // End Page Edit
 
-        Route::prefix("/media")->group(function () {
-            Route::post("/get", "Chats\ChatController@getMedia");
-        });
+        // Route::prefix("/media")->group(function () {
+        //     Route::post("/get", "Chats\ChatController@getMedia");
+        // });
 
         // Start Comments
         Route::any("/comments/{comment:id}/replies", "CommentController@replies");
@@ -166,19 +165,19 @@ Route::middleware([Authenticate::class])->group(function () {
         Route::delete("/sessions/{id}", "Auth\SessionsController@delete");
         //Settings End
 
-        Route::post("/skills/search", "Skills\SkillController@search");
+        Route::post("/skills/search", "Skills\SkillController@search")->middleware(FullAccessUserMiddleware::class);;
         Route::post("/skills/can-credit", "Skills\SkillCreditController@checkCredit");
         Route::resource("skills.credit", "Skills\SkillCreditController");
         Route::resource("/skills/credit", "Skills\SkillCreditController");
-        Route::post("/skills/sort/{id}", "Skills\SkillController@sort");
+        Route::post("/skills/sort/{id}", "Skills\SkillController@sort")->middleware(FullAccessUserMiddleware::class);;
 
-        Route::post("/bookmark/{post_id}", "Content\BookmarksController@bookmarkPost");
+        Route::post("/bookmark/{post_id}", "Content\BookmarksController@bookmarkPost")->middleware(FullAccessUserMiddleware::class);;
 
         require base_path("routes/settings_routes.php");
 
         Route::post("/reportpost", "PostController@report");
 
-        Route::post("tags/delete", "Profile\PageController@removeTags");
+        Route::post("tags/delete", "Profile\PageController@removeTags")->middleware(FullAccessUserMiddleware::class);;
     });
 
 
@@ -201,11 +200,11 @@ Route::middleware([Authenticate::class])->group(function () {
     /**
      * Embed
      */
-    Route::get("/embed-posts/{id}", "PostController@embedPost");
+    Route::get("/embed-posts/{id}", "PostController@embedPost")->middleware(FullAccessUserMiddleware::class);;
 
-    Route::post("/posts/{post:id}/embed", "PostController@getEmbed");
+    Route::post("/posts/{post:id}/embed", "PostController@getEmbed")->middleware(FullAccessUserMiddleware::class);;
 
-    Route::post("/posts/{id}/publish", "PostController@publishPost");
+    Route::post("/posts/{id}/publish", "PostController@publishPost")->middleware(FullAccessUserMiddleware::class);;
 
     //Chats
     Route::prefix("chats")->group(function () {
@@ -220,14 +219,12 @@ Route::middleware([Authenticate::class])->group(function () {
         Route::post("/send-message", "Chats\ChatController@sendMessage");
     });
 
-    Route::post("/share/{post_id}", "PostController@sharePost");
+    Route::post("/categories/sort/{id}", "Profile\CategoryController@sort")->middleware(FullAccessUserMiddleware::class);;
 
-    Route::post("/categories/sort/{id}", "Profile\CategoryController@sort");
-
-    Route::resource("categories", "Profile\CategoryController");
+    Route::resource("categories", "Profile\CategoryController")->middleware(FullAccessUserMiddleware::class);;
 
     // Notifications
-    Route::get('/notifications', 'NotificationController@index')->name('notifications');
+    Route::get('/notifications', 'NotificationController@index')->name('notifications')->middleware(FullAccessUserMiddleware::class);;
 
     // Start Idea Comments
 
@@ -251,10 +248,10 @@ Route::middleware([Authenticate::class])->group(function () {
     // End IdeaComments
 
     // Donations Start
-    Route::get("/tips", "Donation\DontaionsController@index");
-    Route::post("/tips", "Donation\DontaionsController@getDonations");
-    Route::post("/tips/settings", "Donation\DontaionsController@settings");
-    Route::put("/tips/settings", "Donation\DontaionsController@setPaymentGateways");
+    Route::get("/tips", "Donation\DontaionsController@index")->middleware(FullAccessUserMiddleware::class);
+    Route::post("/tips", "Donation\DontaionsController@getDonations")->middleware(FullAccessUserMiddleware::class);
+    Route::post("/tips/settings", "Donation\DontaionsController@settings")->middleware(FullAccessUserMiddleware::class);
+    Route::put("/tips/settings", "Donation\DontaionsController@setPaymentGateways")->middleware(FullAccessUserMiddleware::class);
 
     // Get Donations list in Donate to post modal
     Route::post("/posts/{post}/tips", "Donation\DontaionsController@getPostDonations");
@@ -268,7 +265,7 @@ Route::middleware([Authenticate::class])->group(function () {
 
     // Connected Device Actions
 
-    Route::get("/invite", "InviteLinksController@index");
+    Route::get("/invite", "InviteLinksController@index")->middleware(FullAccessUserMiddleware::class);
 });
 //End Auth
 
@@ -281,7 +278,7 @@ Route::post("/contact/contact-option", "Profile\ContactsController@getContactOpt
 Route::post("/contact/website-option", "Profile\ContactsController@getWebsiteOptions");
 Route::post("/contact/social-option/{page_id}", "Profile\ContactsController@getSocialOptions");
 
-Route::post("/contacts/", "Profile\ContactsController@saveData");
+Route::post("/contacts/", "Profile\ContactsController@saveData")->middleware(FullAccessUserMiddleware::class);;
 Route::post("/contacts/{page}", "Profile\ContactsController@getContactData");
 
 //Tips
