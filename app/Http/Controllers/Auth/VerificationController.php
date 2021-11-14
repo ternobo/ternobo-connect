@@ -4,12 +4,17 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VerificationRequest;
+use App\Models\ActiveSession;
+use App\Models\InviteLink;
 use App\Models\Mail;
+use App\Models\User;
 use App\Models\Verification;
 use App\Rules\PhoneNumber;
 use App\Services\OtpService;
 use App\SMS;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -30,6 +35,36 @@ class VerificationController extends Controller
 
     public function verifyCode(Request $request)
     {
-        return response()->json($this->service->validate($request->phone, $request->code));
+        $verificationResult = $this->service->validate($request->phone, $request->code);
+
+        if ($verificationResult['result']) {
+            $invite = InviteLink::query()->where("code", session("invite_code"))->first();
+            $user = User::query()->where("phone", $request->phone)->first();
+            if ($invite instanceof InviteLink && $user instanceof User) {
+                DB::beginTransaction();
+                try {
+                    $page = $user->personalPage;
+                    $page->visible = true;
+                    $page->save();
+
+                    $invite->valid = false;
+                    $invite->used_by = $user->id;
+                    $invite->save();
+
+                    ActiveSession::addSession($user->id);
+                    Auth::login($user, true);
+
+                    $verificationResult['data']['login'] = true;
+                    DB::commit();
+                } catch (\Throwable $th) {
+                    DB::rollBack();
+                    throw $th;
+                }
+            } elseif ($user instanceof User) {
+                return response()->json($this->generateResponse(false, null, ['phone' => __("validation.unique", ["attribute" => __("validation.attributes.phone")])]));
+            }
+        }
+
+        return response()->json($verificationResult);
     }
 }

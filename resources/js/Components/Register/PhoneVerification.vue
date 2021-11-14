@@ -181,8 +181,12 @@ export default {
 			axios(config)
 				.then((response) => {
 					if (response.data.result) {
-						this.$emit("verificationToken", response.data.data.token);
-						this.$emit("next");
+						if (response.data.data.login) {
+							window.location = "/feed";
+						} else {
+							this.$emit("verificationToken", response.data.data.token);
+							this.$emit("next");
+						}
 					} else {
 						this.toast(__.get("messages.invalid-code"), "error", "text-danger");
 					}

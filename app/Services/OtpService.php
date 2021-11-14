@@ -180,7 +180,7 @@ class OtpService extends RestfulService
 
         switch ($respose->otpStatus) {
             case "VERIFIED":
-                $return['status'] = true;
+                $return['result'] = true;
                 $return['message'] = "";
                 $return['data'] = ["token" => $otp->verification_token];
                 $otp->valid = false;

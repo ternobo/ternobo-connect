@@ -2,9 +2,10 @@
 
 namespace App\Services\Content;
 
-use App\Models\Following;
-use App\Models\Page;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
+use App\Models\Page;
+use App\Models\Following;
 
 class ContentService
 {
@@ -34,7 +35,7 @@ class ContentService
                 ->whereHas("page.user", function ($query) {
                     $query->where("active", true);
                 })
-                ->orderByRaw("posts.user_id = '" . Auth::user()->id . "' AND seen_at IS NULL DESC ,seen_at IS NULL DESC ,posts.created_at DESC ,seen_at DESC")
+                ->orderByRaw("posts.user_id = '" . $user->id . "' AND seen_at IS NULL DESC ,seen_at IS NULL DESC ,posts.created_at DESC ,seen_at DESC")
                 ->distinct("posts.id")
                 ->paginate(20);
         } else {

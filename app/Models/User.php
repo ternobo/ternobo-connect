@@ -574,7 +574,7 @@ class User extends Authenticatable implements Messageable
         $array = parent::toArray();
         if (isset($this->personalPage)) {
             $array['personal_page_id'] = $this->personalPage->id;
-            $data['blocked'] = BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $array['personal_page_id'])->exists();
+            $data['blocked'] = Auth::check() ? BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $array['personal_page_id'])->exists() : false;
         }
         if (!ActiveSession::isAdmin()) {
             unset($array['is_admin']);
