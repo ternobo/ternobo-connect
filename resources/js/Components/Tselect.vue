@@ -3,7 +3,7 @@
 		<div class="tselect_title" :class="{ active: showItems }" ref="titleSection" @click="toggleDropdown">
 			<div class="title-text" :class="{ 'w-100': search }">
 				<div v-if="search" class="w-100">
-					<input type="text" v-model="searchInput" @keydown="handelArrow" :placeholder="!selectedItem ? placeholder : getItemLabel(selectedItem)" @focus="openDropdown" class="form-control border-0 font-12 text-grey px-0 bg-transparent" />
+					<input type="text" v-model="searchInput" @keydown="handelArrow" :placeholder="!selectedItem ? placeholder : getItemLabel(selectedItem)" @focus="openDropdown" class="form-control transparent p-0" />
 				</div>
 				<div v-else>
 					<span v-if="!selectedItem"> <slot></slot><span v-if="required" class="text-action">*</span> </span>

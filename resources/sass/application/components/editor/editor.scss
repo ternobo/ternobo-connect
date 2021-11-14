@@ -50,8 +50,13 @@
         flex: 1 1 auto;
 
         .list-group {
-            width: calc(100% + 104px);
-            margin-#{$start}: -116px;
+            width: calc(100% + 165px);
+            margin-#{$start}: -132px;
+        }
+
+        .code-blocks {
+            padding-top: 8px;
+            background: #1e1e1e;
         }
 
         .placeholder-element {
