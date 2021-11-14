@@ -1,0 +1,21 @@
+.mobile-maintenance-page {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    max-height: 100vh;
+    min-height: 100vh;
+    padding: 40px;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+
+    span {
+        color: $dark;
+    }
+
+    img {
+        max-height: 238px;
+    }
+
+}

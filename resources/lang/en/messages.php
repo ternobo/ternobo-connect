@@ -55,6 +55,8 @@ return [
     "weak-password" => "Password is Weak!",
     "no-block-user" => "You haven't blocked any user",
 
+    "mobile-maintenance" => "Ternobo is not currently available on mobile devices. You can use Ternobo through the web desktop version.",
+
     "http-title" => [
         "404" => "404: Not Found",
         "503" => "503: Service Unavailable",

@@ -1,22 +1,27 @@
 <template>
 	<div>
-		<transition name="fade">
-			<WireApp v-bind="$props"></WireApp>
-		</transition>
-		<transition name="toast" mode="out-in">
-			<div class="toast-container" v-if="toasts.length > 0">
-				<transition-group name="toast" mode="out-in">
-					<toast v-for="(toast, index) in toasts" :key="toast.id" @timeout="toasts.splice(index, 1)" v-bind="toast"></toast>
-				</transition-group>
-			</div>
-		</transition>
+		<div v-if="$root.isMobile">
+			<mobile-maintenance />
+		</div>
+		<div v-else>
+			<transition name="fade">
+				<WireApp v-bind="$props"></WireApp>
+			</transition>
+			<transition name="toast" mode="out-in">
+				<div class="toast-container" v-if="toasts.length > 0">
+					<transition-group name="toast" mode="out-in">
+						<toast v-for="(toast, index) in toasts" :key="toast.id" @timeout="toasts.splice(index, 1)" v-bind="toast"></toast>
+					</transition-group>
+				</div>
+			</transition>
 
-		<portal-target name="destination"></portal-target>
+			<portal-target name="destination"></portal-target>
 
-		<transition name="fade">
-			<upload-widget v-if="uploading" :error="error" @reload="onReload" @cancel="uploading = false" :progress="uploadProgress" />
-		</transition>
-		<!-- <widget-container v-if="this.url != '/' && this.url != '/chats' && this.user != null && $root.isDesktop"></widget-container> -->
+			<transition name="fade">
+				<upload-widget v-if="uploading" :error="error" @reload="onReload" @cancel="uploading = false" :progress="uploadProgress" />
+			</transition>
+			<!-- <widget-container v-if="this.url != '/' && this.url != '/chats' && this.user != null && $root.isDesktop"></widget-container> -->
+		</div>
 	</div>
 </template>
 
@@ -29,6 +34,7 @@ import WidgetContainer from "./Components/ChatWidget/WidgetContainer.vue";
 import { mapState } from "vuex";
 import EmojiPicker from "./Components/EmojiPicker/EmojiPicker.vue";
 import UploadWidget from "./Components/UploadWidget/UploadWidget.vue";
+import MobileMaintenance from "./Components/MobileMaintenance.vue";
 export default {
 	methods: {
 		backgroundUpload(config) {
@@ -96,6 +102,7 @@ export default {
 		WidgetContainer,
 		EmojiPicker,
 		UploadWidget,
+		MobileMaintenance,
 	},
 };
 </script>
