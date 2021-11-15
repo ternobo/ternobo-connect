@@ -5,8 +5,8 @@
     z-index: 999999;
     position: absolute;
     box-shadow: $notification-shadow;
-    min-height: 200px;
     width: 180px;
+
 
     &.profile-peeking-position-start {
         #{$start}: -192px;
@@ -35,6 +35,20 @@
 
         div.profile-peeking-cover {
             overflow: hidden;
+            position: relative;
+
+            &::after {
+                content: " ";
+                width: 100%;
+                -webkit-backdrop-filter: blur(6px);
+                backdrop-filter: blur(6px);
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+            }
 
             img {
                 min-height: 80px;
@@ -43,8 +57,7 @@
                 -o-object-position: center;
                 object-position: center;
                 width: 100%;
-                -webkit-filter: blur(8px);
-                filter: blur(8px);
+
             }
         }
 
