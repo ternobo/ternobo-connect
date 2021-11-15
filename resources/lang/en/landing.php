@@ -1,7 +1,7 @@
 <?php
 return [
     'welcome' => "Welcome To Ternobo",
-    "register" => "Signup",
+    "register" => "Create New Account",
     'about-ternobo' => "Ternobo is a social network for sharing your experiences, information, and interests freely. A place to learn, be aware, and build a better world.",
     'signup-description' => "Currently, registration in Ternobo is possible only with the invitation link.",
     'forgot_password' => "Forgot password?",
