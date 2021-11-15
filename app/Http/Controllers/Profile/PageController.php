@@ -31,14 +31,10 @@ class PageController extends Controller
             ->with("categories")
             ->with("skills")
             ->where("slug", $page)
+            ->where("visible", true)
             ->firstOrFail();
-
         if ($page->user->active) {
-            if ($page->type === "company") {
-                return view("company-profile", array("page" => $page));
-            } else {
-                return $this->handlePersonalProfile($page, $location, $request);
-            }
+            return $this->handlePersonalProfile($page, $location, $request);
         }
         return abort(404);
     }
@@ -92,7 +88,7 @@ class PageController extends Controller
             $pages = Following::where("followings.page_id", $page->id)
                 ->join("pages", "pages.id", "=", "followings.following")
                 ->where("pages.id", "!=", $page->id)
-                ->where("pages.id", "!=", Auth::user()->getPage()->id)
+                ->where("pages.id", "!=", Auth::user()->personalPage->id)
                 ->get();
             $pages = count($pages) > 3 ? $pages->random(3) : $pages;
         }
@@ -182,9 +178,6 @@ class PageController extends Controller
         if ($request->filled("category")) {
             $actions = Action::query()->where("page_id", $page->id)
                 ->with("post")
-                ->with("post.page")
-
-                ->with("post.category")
                 ->where("action", "post")
                 ->whereHas("post", function ($query) use ($request) {
                     $category = $request->category;
@@ -203,8 +196,6 @@ class PageController extends Controller
         } elseif ($request->filled("tag")) {
             $actions = Action::query()->where("page_id", $page->id)
                 ->with("post")
-                ->with("post.page")
-                ->with("post.category")
                 ->where("action", "post")
                 ->whereHas("post", function ($query) use ($request) {
                     $query->whereJsonContains("tags", $request->tag);
@@ -301,7 +292,7 @@ class PageController extends Controller
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
             $options = $request->input("option");
-            $page = Auth::user()->getPage();
+            $page = Auth::user()->personalPage;
             $result = true;
             foreach ($options as $option) {
                 $option = (object) $option;
@@ -321,7 +312,7 @@ class PageController extends Controller
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
             $options = $request->input("option");
-            $page = Auth::user()->getPage();
+            $page = Auth::user()->personalPage;
             $result = true;
             Contact::where("page_id", $page->id)->delete();
             foreach ($options as $option) {
@@ -351,7 +342,7 @@ class PageController extends Controller
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
-            $page = Auth::user()->getPage();
+            $page = Auth::user()->personalPage;
             $page->name = $request->firstname . " " . $request->lastname;
             if ($request->has("location")) {
                 $page->location = $request->location;
@@ -382,7 +373,7 @@ class PageController extends Controller
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
-            $page = Auth::user()->getPage();
+            $page = Auth::user()->personalPage;
             $page->about = $request->value;
             return response()->json(array("result" => $page->save()));
         }
@@ -396,7 +387,7 @@ class PageController extends Controller
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
-            $page = Auth::user()->getPage();
+            $page = Auth::user()->personalPage;
             $page->short_bio = $request->value;
             $user = Auth::user();
             $user->short_bio = $request->value;
@@ -412,7 +403,7 @@ class PageController extends Controller
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()));
         } else {
-            $page = Auth::user()->getPage();
+            $page = Auth::user()->personalPage;
             $page->slug = $request->value;
             $user = Auth::user();
             $user->username = $request->value;

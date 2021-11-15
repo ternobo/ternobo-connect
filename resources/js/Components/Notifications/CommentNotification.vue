@@ -8,10 +8,10 @@
 					</wire-link>
 				</div>
 				<div class="notification-text">
-					<div class="title">
+					<profile-peeking position="bottom" class="title clickable" :page="notifications[0].sender">
 						<span>{{ notifications[0].sender.name }}</span>
 						<span class="font-weight-normal date-text">{{ createdAt }}</span>
-					</div>
+					</profile-peeking>
 					<div class="action">{{ __.get("notifications.commented-your-post") }}</div>
 				</div>
 			</div>

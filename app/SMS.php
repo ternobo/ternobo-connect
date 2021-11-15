@@ -256,7 +256,6 @@ class SMS
                 'apikey' => env("SMS_API_TOKEN"),
             ])->asJson()
                 ->post();
-
         }
 
         if (isset($respose->otpId)) {
@@ -397,8 +396,7 @@ class SMS
             'System' => 'php_rest_v_2_0',
         );
 
-        $result = Curl::to($this->APIURL . $this->getApiTokenUrl())->
-            withContentType('application/json')->withData($postData)->asJson(true)->post();
+        $result = Curl::to($this->APIURL . $this->getApiTokenUrl())->withContentType('application/json')->withData($postData)->asJson(true)->post();
         $result = (object) $result;
         $resp = false;
         $IsSuccessful = '';
@@ -426,9 +424,7 @@ class SMS
     private function _execute($postData, $url, $token)
     {
         $result = Curl::to($url)
-            ->withHeader('x-sms-ir-secure-token: ' . $token)->
-            withContentType('application/json')->withData($postData)->asJson(true)->post();
+            ->withHeader('x-sms-ir-secure-token: ' . $token)->withContentType('application/json')->withData($postData)->asJson(true)->post();
         return $result;
     }
-
 }

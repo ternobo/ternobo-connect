@@ -11,9 +11,12 @@
 					</div>
 				</div>
 				<div class="notification-text">
-					<div class="title">
-						<wire-link v-if="notifications[0].sender" class="clickable" :href="notifications[0].sender.slug">{{ notifications[0].sender.name }}</wire-link>
-						<span v-else>{{ __.get("application.guest-user") }}</span>
+					<profile-peeking position="bottom" class="title clickable" v-if="notifications[0].sender" :page="notifications[0].sender">
+						<span>{{ notifications[0].sender.name }}</span>
+						<span class="font-weight-normal date-text">{{ createdAt }}</span>
+					</profile-peeking>
+					<div class="title" v-else>
+						<span>{{ __.get("application.guest-user") }}</span>
 						<span class="font-weight-normal date-text">{{ createdAt }}</span>
 					</div>
 					<div class="action">{{ __.choice("notifications.donated-your-post", notifications.length) }}</div>

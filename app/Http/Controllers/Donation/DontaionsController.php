@@ -7,6 +7,7 @@ use App\Http\Requests\PaymentGatewaysRequest;
 use App\Http\Resources\DonationCollection;
 use App\Models\Tip;
 use App\Models\UserOption;
+use App\Services\MonitizationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Ternobo\TernoboWire\TernoboWire;
@@ -14,9 +15,10 @@ use Ternobo\TernoboWire\TernoboWire;
 class DontaionsController extends Controller
 {
 
-    public function index()
+    public function index(MonitizationService $service)
     {
-        return TernoboWire::render("Donation/Index");
+        $serviceStatus = $service->getMonitizationStatus(Auth::user());
+        return $serviceStatus['status'] ? TernoboWire::render("Donation/Index") : TernoboWire::render("Donation/MonitizationRequest", ['status' => $serviceStatus]);
     }
 
     public function getDonations(Request $request)
@@ -38,6 +40,7 @@ class DontaionsController extends Controller
             $tips = $tips->whereRaw("post_id in (select id from posts where page_id = ?)", [$page_id]);
             $tips = $tips->where("user_id", "!=", Auth::user()->id);
         }
+
         return new DonationCollection($tips->paginate(20));
     }
 
@@ -88,5 +91,4 @@ class DontaionsController extends Controller
         ];
         return response()->json(['result' => true, 'option' => UserOption::setOption("payment_gateways", $value)]);
     }
-
 }

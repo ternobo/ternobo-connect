@@ -31,13 +31,13 @@
 		<div class="login-content" v-else>
 			<div class="register-steps">
 				<div class="invite-step" v-if="step == 1">
-					<phone-verification @next="step = 2" />
+					<phone-verification @next="step = 2" @verificationToken="setVerificationToken" />
 				</div>
 				<div class="invite-step" v-else-if="step == 2">
-					<further-information @showlaws="showlaws = true" @next="onPersonalSave" />
+					<further-information :verificationToken="verificationToken" @showlaws="showlaws = true" @next="onPersonalSave" />
 				</div>
 				<div class="invite-step" v-else-if="step == 3">
-					<password-enter @next="step = 4" />
+					<password-enter @next="step = 4" :verificationToken="verificationToken" />
 				</div>
 				<div class="invite-step" v-else-if="step == 4">
 					<div class="login-form">
@@ -62,6 +62,9 @@
 						</div>
 					</div>
 				</div>
+				<div class="invite-step" v-else-if="step == 5">
+					<visitor-user-message />
+				</div>
 			</div>
 		</div>
 	</div>
@@ -78,6 +81,7 @@ import FirstImpression from "../Components/Register/FirstImpression.vue";
 import FurtherInformation from "../Components/Register/FurtherInformation.vue";
 import PasswordEnter from "../Components/Register/PasswordEnter.vue";
 import PhoneVerification from "../Components/Register/PhoneVerification.vue";
+import VisitorUserMessage from "../Components/Register/VisitorUserMessage.vue";
 export default {
 	components: {
 		OtpInput,
@@ -90,6 +94,7 @@ export default {
 		FurtherInformation,
 		PasswordEnter,
 		LawsModal,
+		VisitorUserMessage,
 	},
 	computed: {
 		disabled() {
@@ -119,9 +124,22 @@ export default {
 				this.profile = "/images/woman-profile.png";
 			}
 		},
-		goFollowings() {
-			window.location = "/follow-people";
+		setVerificationToken(token) {
+			this.verificationToken = token;
 		},
+		goToLastStep() {
+			if (this.visitorRegister) {
+				this.step++;
+			} else {
+				window.location = "/feed";
+			}
+		},
+	},
+	mounted() {
+		if (this.user == null) {
+			this.visitorRegister = true;
+			this.step = 1;
+		}
 	},
 	data() {
 		return {
@@ -129,6 +147,9 @@ export default {
 			profile: "/images/man-profile.png",
 			loading: false,
 			showlaws: false,
+
+			visitorRegister: false,
+			verificationToken: null,
 		};
 	},
 	props: ["user"],

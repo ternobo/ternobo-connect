@@ -45,7 +45,7 @@ class CommentController extends Controller
     {
         $post = Post::findOrFail($post);
         $comment = new Comment();
-        $comment->page_id = Auth::user()->getPage()->id;
+        $comment->page_id = Auth::user()->personalPage->id;
         $recomment = null;
 
         $text = SocialMediaTools::safeHTML($request->text);
@@ -72,7 +72,7 @@ class CommentController extends Controller
         $mentions = SocialMediaTools::callMentions(SocialMediaTools::getMentions($text), $comment->id, "comment", $post->id);
 
         // Add Action to activity timeline
-        Auth::user()->getPage()->addAction("comment", $post->id, $comment->id);
+        Auth::user()->personalPage->addAction("comment", $post->id, $comment->id);
 
         // Send Comment Notification
         Notification::sendNotification("comment", $post->id, $post->page_id, $comment->id);
@@ -103,7 +103,7 @@ class CommentController extends Controller
     public function likeComment($comment_id)
     {
         $post = Comment::findOrFail($comment_id);
-        $page = Auth::user()->getPage();
+        $page = Auth::user()->personalPage;
         $like = Like::query()->where("page_id", $page->id)->where("comment_id", $comment_id)->first();
         $result = false;
         $is_like = true;
@@ -128,7 +128,7 @@ class CommentController extends Controller
      */
     public function destroy($post, $id)
     {
-        $comment = Comment::where("page_id", Auth::user()->getPage()->id)->where("id", $id)->firstOrFail();
+        $comment = Comment::where("page_id", Auth::user()->personalPage->id)->where("id", $id)->firstOrFail();
         $action = Action::query()->where("connected_to", $comment->id)->first();
         return response()->json(array("result" => $comment->delete() && $action->delete()));
     }

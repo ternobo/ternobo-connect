@@ -85,6 +85,7 @@ class User extends Authenticatable implements Messageable
     protected $casts = [
         'email_verified_at' => 'datetime',
         "is_admin" => "boolean",
+        "two_factor" => "boolean"
     ];
 
     /**
@@ -139,12 +140,6 @@ class User extends Authenticatable implements Messageable
             $token .= $codeAlphabet[mt_rand(0, strlen($codeAlphabet) - 1)];
         }
         return $token;
-    }
-
-    public function getPages()
-    {
-        $pages = Page::where("user_id", $this->id)->where("type", "company")->get();
-        return $pages;
     }
 
     public function getPosts()
@@ -251,7 +246,7 @@ class User extends Authenticatable implements Messageable
                     }
                     break;
                 case "biography":
-                    if (Auth::user()->getPage()->about === null || Auth::user()->getPage()->about === "") {
+                    if (Auth::user()->personalPage->about === null || Auth::user()->personalPage->about === "") {
                         $data["done"] = false;
                         $steps[$step] = $data;
                         $undone_steps[] = $steps[$step];
@@ -344,19 +339,11 @@ class User extends Authenticatable implements Messageable
     }
 
     /**
-     * Get user personal page (deprecated)
-     */
-    public function getPage()
-    {
-        return Page::where("user_id", $this->id)->where("type", "personal")->first();
-    }
-
-    /**
      * Check if a post is liked by user.
      */
     public function isPostLiked($id)
     {
-        $page = $this->getPage();
+        $page = $this->personalPage;
         return (Like::query()->where("post_id", $id)->where("page_id", $page->id)->first() instanceof Like);
     }
 
@@ -365,7 +352,7 @@ class User extends Authenticatable implements Messageable
      */
     public function isCommentLiked($id)
     {
-        $page = $this->getPage();
+        $page = $this->personalPage;
         return (Like::query()->where("comment_id", $id)->where("page_id", $page->id)->first() instanceof Like);
     }
 
@@ -471,7 +458,7 @@ class User extends Authenticatable implements Messageable
      */
     public function hasUnreadNotification()
     {
-        $notification = Notification::query()->where("page_id", $this->getPage()->id)->where("seen", false)->get();
+        $notification = Notification::query()->where("page_id", $this->personalPage->id)->where("seen", false)->get();
         return (count($notification) > 0);
     }
 
@@ -586,9 +573,9 @@ class User extends Authenticatable implements Messageable
     public function toArray()
     {
         $array = parent::toArray();
-        $array['personal_page_id'] = $this->personalPage->id;
-        if (Auth::check()) {
-            $data['blocked'] = BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $array['personal_page_id'])->exists();
+        if (isset($this->personalPage)) {
+            $array['personal_page_id'] = $this->personalPage->id;
+            $data['blocked'] = Auth::check() ? BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $array['personal_page_id'])->exists() : false;
         }
         if (!ActiveSession::isAdmin()) {
             unset($array['is_admin']);

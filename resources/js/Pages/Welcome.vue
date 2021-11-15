@@ -45,11 +45,10 @@
 											<loading-button :loading="loading" class="btn btn-lg btn-primary" @click.native="login">{{ __.get("application.login") }}</loading-button>
 										</div>
 									</div>
-									<div class="d-flex">
-										<img src="/images/invite_icon.svg" width="40" />
-										<div class="ms-4 font-14">
-											{{ __.get("landing.signup-description") }}
-										</div>
+									<div class="d-flex justify-content-center">
+										<a href="/register" class="text-gray-medium-dark font-demibold font-16 hover-dark">
+											{{ __.get("landing.register") }}
+										</a>
 									</div>
 								</div>
 							</div>

@@ -1,0 +1,65 @@
+.monitization-request-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3.25rem;
+
+    .monitization-container {
+        max-width: 849px;
+
+        .monitization-title {
+            >h1 {
+                text-align: left;
+            }
+
+            margin-bottom: 2rem;
+        }
+
+        .monitization-card-header {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            border-bottom: 2px solid $gray-light-medium;
+            padding-bottom: 1.5rem;
+
+            .monitization-progress {
+                display: flex;
+                align-items: center;
+                height: 48px;
+                width: 100%;
+                margin-#{$end}: 1rem;
+
+                .progress {
+                    width: 100%;
+                    margin-#{$start}: 1rem;
+                }
+            }
+        }
+
+        .monitization-criteria {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+
+            &:not(:last-child) {
+                margin-bottom: 1.5rem;
+            }
+
+            .text {
+                font-weight: 600;
+                color: $dark;
+                font-size: 1rem;
+            }
+
+            .action {
+                max-width: -webkit-max-content;
+                max-width: -moz-max-content;
+                max-width: max-content;
+            }
+        }
+
+    }
+
+
+}

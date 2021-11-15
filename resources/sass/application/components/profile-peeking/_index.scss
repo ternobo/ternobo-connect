@@ -1,0 +1,40 @@
+.profile-peeking {
+    position: relative;
+
+    .profile-info-link {
+        display: flex;
+        align-items: center;
+        max-width: calc(100% - 32px);
+
+        .page-info {
+            display: flex;
+            flex-direction: column;
+            padding-#{$end}: 0.75rem;
+            max-width: calc(100% - 42px);
+
+            .person-name {
+                font-weight: 600;
+                font-size: $text-xsm;
+                line-height: 24px;
+                color: $dark;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                max-width: 100%;
+            }
+
+            .person-short-bio {
+                font-weight: normal;
+                font-size: $text-xxsm;
+                line-height: 20px;
+                color: $gray-500;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 104px;
+            }
+        }
+    }
+
+    @import "./float";
+}

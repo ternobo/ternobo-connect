@@ -11,7 +11,7 @@
 
 		<div class="comment">
 			<div class="comment-header">
-				<wire-link :href="'/' + comment.page.slug" class="d-flex align-items-center">
+				<profile-peeking position="bottom" class="d-flex align-items-center" :page="comment.page">
 					<img :src="comment.page.profile" class="profile-xxsm" />
 					<div class="pagedetail">
 						<span class="name">
@@ -21,7 +21,7 @@
 							{{ comment.page.short_bio }}
 						</small>
 					</div>
-				</wire-link>
+				</profile-peeking>
 				<div class="d-flex align-items-center">
 					<span>
 						<span class="donate-badge" v-if="comment.tip_amount != null"> <i class="material-icons-outlined">savings</i> IRT {{ formatNumber(comment.tip_amount, "0,0") }}</span>
@@ -88,7 +88,7 @@
 				<div class="replies" v-if="replyTo === undefined">
 					<comment v-on:replied="submit" :reply-to="comment.id" v-for="reply in replies" v-on:deleted="commentDelete" :comment="reply" :key="reply.id"></comment>
 					<div class="w-100 d-flex p-2 justify-content-center align-items-center" v-if="repliesLoading">
-						<comments-loading></comments-loading>
+						<CommentsLoading></CommentsLoading>
 					</div>
 				</div>
 				<div class="w-100 d-flex align-items-center justify-content-center p-2" v-if="next_page_url !== null">
@@ -107,6 +107,7 @@ import ReportModal from "../Modals/ReportModal.vue";
 import LikesModal from "../Modals/LikesModal.vue";
 import CommentSkeleton from "../Skeletons/CommentSkeleton.vue";
 import CommentsLoading from "../Skeletons/CommentsLoading.vue";
+import ProfilePeeking from "../App/ProfilePeeking/ProfilePeeking.vue";
 
 export default {
 	mounted() {
@@ -216,6 +217,7 @@ export default {
 		LikesModal,
 		CommentSkeleton,
 		CommentsLoading,
+		ProfilePeeking,
 	},
 	props: {
 		replyTo: {

@@ -9,6 +9,9 @@ module.exports = {
         filename: '[name].js',
         chunkFilename: 'js/[name].js?id=[chunkhash]',
     },
+    watchOptions: {
+        ignored: /node_modules/
+    },
     devServer: {
         port: 8080,
         historyApiFallback: true,

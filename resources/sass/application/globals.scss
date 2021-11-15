@@ -414,9 +414,16 @@ img {
 
     .card-img-top {
         margin-bottom: 1rem;
+        overflow: hidden;
 
         img {
-            height: 88px;
+            min-height: 116px;
+            -o-object-fit: fill;
+            object-fit: fill;
+            -o-object-position: center;
+            object-position: center;
+            -webkit-filter: blur(8px);
+            filter: blur(8px);
         }
     }
 
@@ -1082,10 +1089,18 @@ a:focus {
     border-radius: 0;
 }
 
-.page-cover-info-card img {
-    min-height: 90px;
-    -o-object-fit: cover;
-    object-fit: cover;
+.page-cover-info-card {
+    overflow: hidden;
+
+    img {
+        min-height: 116px;
+        -o-object-fit: fill;
+        object-fit: fill;
+        -o-object-position: center;
+        object-position: center;
+        -webkit-filter: blur(8px);
+        filter: blur(8px);
+    }
 }
 
 .dialog-layout-modal-body {

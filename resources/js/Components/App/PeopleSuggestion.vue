@@ -1,12 +1,6 @@
 <template>
 	<div class="people-sugestion">
-		<wire-link class="suggestion-info-link" :href="'/' + page.slug">
-			<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xsm" img-class="profile-xsm" :src="page.profile" />
-			<div class="suggestion-info">
-				<strong class="person-name">{{ page.name }} <i v-if="page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
-				<small class="person-short-bio">{{ page.short_bio }}</small>
-			</div>
-		</wire-link>
+		<profile-peeking :page="page" />
 		<FollowButton class="btn-icon btn-md" :page="page.id">
 			<template v-slot:default="{ followed }">
 				<i class="material-icons font-16" v-if="followed">remove</i>
@@ -18,6 +12,7 @@
 
 <script>
 import FollowButton from "../buttons/FollowButton";
+import ProfilePeeking from "./ProfilePeeking/ProfilePeeking.vue";
 export default {
 	props: {
 		page: {
@@ -28,6 +23,7 @@ export default {
 	},
 	components: {
 		FollowButton,
+		ProfilePeeking,
 	},
 	name: "PeopleSuggestion",
 };

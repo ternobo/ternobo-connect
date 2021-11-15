@@ -41,7 +41,7 @@ class ProfileController extends Controller
                 });
                 $image->save();
                 $user = $request->user();
-                $page = $user->getPage();
+                $page = $user->personalPage;
                 $user->profile = url($file);
                 $page->profile = url($file);
                 $user->save();
@@ -51,7 +51,6 @@ class ProfileController extends Controller
             return response()->json(array("result" => true, "errors" => $sizesValidator->errors()));
         }
         return response()->json(array("result" => true, "errors" => $requestValidator->errors()));
-
     }
 
     public function setCover(Request $request)
@@ -154,7 +153,6 @@ class ProfileController extends Controller
                     $theSkill->save();
                 }
             }
-
         }
 
         /**
@@ -330,5 +328,4 @@ class ProfileController extends Controller
                 break;
         }
     }
-
 }

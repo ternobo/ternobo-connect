@@ -1,19 +1,19 @@
 <template>
 	<div class="toolbar">
 		<div class="header-menu" v-if="$store.state.user != null">
-			<a :class="{ active: $store.state.url === '/feed' }" href="/feed" @click="onHomeClick">
+			<a :class="{ active: $store.state.url === '/feed' }" v-if="$store.state.shared.fullAccess" href="/feed" @click="onHomeClick">
 				<i class="navheader-icon">home</i>
 			</a>
 			<!-- <wire-link :class="{ active: $store.state.url === '/chats' }" href="/chats">
 				<i class="navheader-icon" :class="{ unread: $store.state.shared.unread_messages_count > 0 && $store.state.url != '/chats' }">textsms</i>
 			</wire-link> -->
-			<wire-link :class="{ active: $store.state.url === '/notifications' }" href="/notifications">
+			<wire-link :class="{ active: $store.state.url === '/notifications' }" v-if="$store.state.shared.fullAccess" href="/notifications">
 				<i class="navheader-icon" :class="{ unread: $store.state.shared.notifications_count > 0 && $store.state.url != '/notifications' }">{{ $store.state.url === "/notifications" ? "notifications" : "notifications_none" }}</i>
 			</wire-link>
-			<wire-link :class="{ active: $store.state.url === '/invite' }" href="/invite">
+			<wire-link :class="{ active: $store.state.url === '/invite' }" v-if="$store.state.shared.fullAccess" href="/invite">
 				<i class="navheader-icon invite-link" :class="{ hasInvite: $store.state.shared.invites_count > 0 }">{{ $store.state.url === "/invite" ? "confirmation_number" : "confirmation_number" }}</i>
 			</wire-link>
-			<wire-link :class="{ active: $store.state.url === '/bookmarks' }" href="/bookmarks">
+			<wire-link :class="{ active: $store.state.url === '/bookmarks' }" v-if="$store.state.shared.fullAccess" href="/bookmarks">
 				<i class="navheader-icon">{{ $store.state.url === "/bookmarks" ? "bookmark" : "bookmark_border" }} </i>
 			</wire-link>
 		</div>

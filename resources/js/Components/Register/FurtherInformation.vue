@@ -62,6 +62,7 @@ export default {
 			gender: undefined,
 		};
 	},
+	props: ["verificationToken"],
 	computed: {
 		disabled() {
 			return !(this.agree && Boolean(this.first_name) && Boolean(this.last_name) && Boolean(this.gender) && Boolean(this.username));
@@ -75,6 +76,7 @@ export default {
 			data.append("lastname", this.last_name);
 			data.append("gender", this.gender.code);
 			data.append("username", this.username);
+			data.append("verificationToken", this.verificationToken);
 
 			var config = {
 				method: "post",

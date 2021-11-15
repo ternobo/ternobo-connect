@@ -1,5 +1,5 @@
 <template>
-	<LoadingButton v-if="$store.state.user !== null && user.personal_page_id != page_id" :loading="loading" class="btn btn-secondary" :class="{ 'btn-followed-connected': followed }" @click.native="follow">
+	<LoadingButton v-if="canShowFollow" :loading="loading" class="btn btn-secondary" :class="{ 'btn-followed-connected': followed }" @click.native="follow">
 		<slot v-bind:followed="followed">
 			{{ followed ? unfollowText : followText }}
 		</slot>
@@ -43,7 +43,10 @@ export default {
 		},
 	},
 	computed: {
-		...mapState(["user"]),
+		...mapState(["user", "shared"]),
+		canShowFollow() {
+			return this.user !== null && this.user.personal_page_id != this.page_id && this.shared.fullAccess;
+		},
 	},
 	methods: {
 		follow() {

@@ -105,8 +105,8 @@ class ArticlesController extends Controller
 
                 if ($request->category !== null) {
                     $category = Category::query()->where("name", $request->category)
-                        ->where("page_id", Auth::user()->getPage()->id)
-                        ->firstOrCreate(["name" => $request->category, "page_id" => Auth::user()->getPage()->id]);
+                        ->where("page_id", Auth::user()->personalPage->id)
+                        ->firstOrCreate(["name" => $request->category, "page_id" => Auth::user()->personalPage->id]);
                     $post->category_id = $category->id;
                 }
 
@@ -168,7 +168,7 @@ class ArticlesController extends Controller
             SEOTools::opengraph()->addProperty('article:author', $article->user->name);
             SEOTools::jsonLd()->addImage($article->getMedia());
 
-            $articles = Post::where("type", "article")->where("page_id", $article->user->getPage()->id)->get();
+            $articles = Post::where("type", "article")->where("page_id", $article->user->personalPage->id)->get();
 
             $comments = $article->getComments();
 
@@ -281,8 +281,8 @@ class ArticlesController extends Controller
 
                     if ($request->filled("category")) {
                         $category = Category::query()->where("name", $request->category)
-                            ->where("page_id", Auth::user()->getPage()->id)
-                            ->firstOrCreate(["name" => $request->category, "page_id" => Auth::user()->getPage()->id]);
+                            ->where("page_id", Auth::user()->personalPage->id)
+                            ->firstOrCreate(["name" => $request->category, "page_id" => Auth::user()->personalPage->id]);
                         $article->category_id = $category->id;
                     }
                     $article->tags = json_encode(json_decode($request->tags));

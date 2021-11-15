@@ -41,11 +41,9 @@ class FakePosts extends Command
     {
         $numbers = $this->argument("nums");
         $posts = Post::factory()->count($numbers)->make();
-        var_dump($posts);
         foreach ($posts as $post) {
             $post->save();
         }
-        // Artisan::call("fix:old_posts");
         return 0;
     }
 }

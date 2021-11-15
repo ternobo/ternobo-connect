@@ -99,22 +99,6 @@
             align-items: center;
             justify-content: space-between;
         }
-
-        .publisher {
-            div {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                margin-#{$start}: 0.75rem;
-            }
-
-            img {
-                width: 64px;
-                height: 64px;
-                border-radius: 50%;
-            }
-
-        }
     }
 
     .post-body {

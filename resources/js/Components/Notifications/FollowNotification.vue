@@ -8,8 +8,8 @@
 				</div>
 				<div class="notification-text">
 					<div class="title">
-						<wire-link class="clickable" :href="notifications[0].sender.slug">{{ notifications[0].sender.name }}</wire-link>
-						<wire-link class="clickable" :href="notifications[1].sender.slug" v-if="notifications[1]">، {{ notifications[1].sender.name }}</wire-link>
+						<profile-peeking position="bottom" :page="notifications[0].sender">{{ notifications[0].sender.name }}</profile-peeking>
+						<profile-peeking position="bottom" :page="notifications[1].sender">{{ notifications[1].sender.name }}</profile-peeking>
 						<span v-if="notifications.length > 2">{{ __.get("application.more-people", { number: notifications.length - 2 }) }}</span>
 						<span class="font-weight-normal date-text">{{ createdAt }}</span>
 					</div>
