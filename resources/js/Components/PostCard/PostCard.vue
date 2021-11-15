@@ -5,9 +5,9 @@
 		<likes-modal :item="post_data.id" :show.sync="showLikes"></likes-modal>
 		<donation-modal :post="post_data.id" :post_data="post_data" :show.sync="showTips" :showDonate="!checkUser(post_data.page.user_id) && post_data.can_tip"></donation-modal>
 		<div class="post-header pt-0">
-			<wire-link class="publisher" :href="'/' + post_data.page.slug">
+			<profile-peeking class="publisher" position="bottom" :page="post_data.page">
 				<lazy-image class="profile-xsm mb-0" img-class="profile-xsm" :src="post_data.page.profile" />
-				<div>
+				<div class="ms-3">
 					<strong class="publisher--name line-height-24px"> {{ post_data.page.name }} <i v-if="post_data.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 					<div class="d-flex flex-row m-0 align-items-center">
 						<span class="text-gray-medium-dark font-10">
@@ -18,7 +18,7 @@
 						</span>
 					</div>
 				</div>
-			</wire-link>
+			</profile-peeking>
 			<div class="actions position-relative">
 				<wire-link :href="`/${post_data.page.slug}/activities?filters={&quot;category&quot;: &quot;${this.post_data.category_id}&quot;}`" class="category-item" v-if="this.post_data.category != null">{{ this.post_data.category.name }}</wire-link>
 				<div>
@@ -71,6 +71,7 @@ import EmbedCodeModal from "../Modals/EmbedCodeModal";
 import PostMenu from "../Menues/PostMenu.vue";
 import NewPostModal from "../NewPost/NewPostModal";
 import DonationModal from "./Donation/DonationModal.vue";
+import ProfilePeeking from "../App/ProfilePeeking/ProfilePeeking.vue";
 
 export default {
 	computed: {
@@ -90,6 +91,7 @@ export default {
 		PostMenu,
 		NewPostModal,
 		DonationModal,
+		ProfilePeeking,
 	},
 	methods: {
 		copySlide() {
