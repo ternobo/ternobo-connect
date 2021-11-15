@@ -10,7 +10,8 @@
 					<i class="material-icons-outlined">savings</i>
 					<b-progress animated variant="secondary" :value="status.percent"></b-progress>
 				</div>
-				<loading-button class="btn btn-primary text-nowrap" @click="sendMonitizationRequest" :loading="loading" :disabled="!status.status">{{ __.get("monitization.send-request") }}</loading-button>
+				<loading-button class="btn btn-primary text-nowrap" v-if="monitizationStatus == null || monitizationStatus == 'rejected'" @click="sendMonitizationRequest" :loading="loading" :disabled="!status.status">{{ __.get("monitization.send-request") }}</loading-button>
+				<span class="btn disabled bg-warning text-warning-dark text-nowrap" v-else>{{ __.get("monitization.pending") }}</span>
 			</div>
 			<div class="card-body">
 				<div class="monitization-criteria" v-for="criteria in status.items" :key="criteria.id">
@@ -31,9 +32,27 @@
 <script>
 export default {
 	props: ["status"],
+	data() {
+		return {
+			loading: false,
 
+			monitizationStatus: null,
+		};
+	},
+	mounted() {
+		this.monitizationStatus = this.status.last_request?.status;
+	},
 	methods: {
-		sendMonitizationRequest() {},
+		sendMonitizationRequest() {
+			this.loading = true;
+			axios
+				.post("/monitization/request")
+				.then(() => {
+					this.monitizationStatus = "pending";
+				})
+				.catch((err) => console.log(err))
+				.then(() => (this.loading = false));
+		},
 	},
 };
 </script>

@@ -53,9 +53,15 @@ class MonitizationService extends RestfulService
 
         return [
             "status" => $sharedPostsStatus['status'] && $visitorLikesStatus['status'] && $userLkesStatus['status'] && $twofactorauthStatus['status'],
+            "last_request" => $this->getLastMonitizationRequest($user),
             "items" => $items,
             "percent" => $percent
         ];
+    }
+
+    public function getLastMonitizationRequest(User $user)
+    {
+        return MonitizationRequest::query()->where("user_id", $user->id)->latest()->first();
     }
 
     public function checkSharedPosts($personalPageId)
