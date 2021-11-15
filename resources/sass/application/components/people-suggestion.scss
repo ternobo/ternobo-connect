@@ -6,7 +6,7 @@
     flex-wrap: nowrap;
 
     .profile-peeking {
-        width: 100%;
+        width: calc(100% - 25px);
     }
 
     figure.profile-xsm {

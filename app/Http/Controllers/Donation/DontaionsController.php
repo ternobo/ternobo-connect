@@ -50,7 +50,7 @@ class DontaionsController extends Controller
         return new DonationCollection($tips);
     }
 
-    public function canEnableDonate()
+    public function canEnableDonate(MonitizationService $service)
     {
         $gateways = UserOption::getOption("payment_gateways", [
             'paypal' => [
@@ -63,7 +63,7 @@ class DontaionsController extends Controller
             ],
         ]);
 
-        return response()->json(['result' => $gateways['zarinpal']['enabled']]);
+        return response()->json(['result' => $gateways['zarinpal']['enabled'] && $service->getMonitizationStatus(Auth::user())['status']]);
     }
 
     public function settings()
