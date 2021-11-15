@@ -62,9 +62,10 @@ class MonitizationService extends RestfulService
     {
         $sharedPosts = Post::query()->where("page_id", $personalPageId)->count();
         return  [
+            "id" => "monitization.min-posts",
             'status' => $sharedPosts >= config("monitization.min-posts"),
             "text" => __("monitization.shared-posts"),
-            "indicator" => "$sharedPosts/" . config("monitization.min-posts"),
+            "indicator" => "$sharedPosts/" . "<span class='text-gray'>" . config("monitization.min-posts") . "</span>",
         ];
     }
 
@@ -79,9 +80,10 @@ class MonitizationService extends RestfulService
             })
             ->count();
         return [
+            "id" => "monitization.min-user-likes",
             'status' => $likes >= config("monitization.min-user-likes"),
             "text" => __("monitization.signed-up-user-likes"),
-            "indicator" => "$likes/" . config("monitization.min-user-likes"),
+            "indicator" => "$likes/" . "<span class='text-gray'>" . config("monitization.min-user-likes") . "</span>",
         ];
     }
 
@@ -96,9 +98,10 @@ class MonitizationService extends RestfulService
             })
             ->count();
         return [
+            "id" => "monitization.min-visitor-likes",
             'status' => $likes >= config("monitization.min-visitor-likes"),
             "text" => __("monitization.visitor-likes"),
-            "indicator" => "$likes/" . config("monitization.min-visitor-likes"),
+            "indicator" => "$likes/" . "<span class='text-gray'>" . config("monitization.min-visitor-likes") . "</span>",
         ];
     }
 
@@ -106,6 +109,7 @@ class MonitizationService extends RestfulService
     {
         $status = config("monitization.2fa-required") ? $user->two_factor : true;
         return [
+            "id" => "monitization.2fa-required",
             'status' => $status,
             "text" => __("monitization.visitor-likes"),
             'indicator' => $status ? null : "href=/settings"
