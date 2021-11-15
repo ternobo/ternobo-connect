@@ -1,9 +1,10 @@
 .profile-peeking {
     position: relative;
+
     .profile-info-link {
         display: flex;
         align-items: center;
-        max-width: calc(100% - 32px);
+        max-width: calc(100% - 16px);
 
         .page-info {
             display: flex;
