@@ -20,7 +20,7 @@ TimeAgo.addLocale(fa);
 import MaterialTextField from "../Components/inputs/MaterialTextField";
 import MaterialTextArea from "../Components/inputs/MaterialTextArea";
 import ContenteditableMax from "../Directives/ContenteditableMax";
-
+import ClickOutside from "../Directives/ClickOutside";
 import PersianDate from 'persian-date';
 
 import Skeleton from "../Components/Skeleton/Skeleton.vue";
@@ -72,7 +72,7 @@ TernoboApp.install = function (Vue, options) {
 
     Vue.directive("max-contenteditable", ContenteditableMax)
 
-    Vue.directive('click-outside', import("../Directives/ClickOutside"));
+    Vue.directive('click-outside', ClickOutside);
 
     Vue.directive('sortable', function (el, binding) {
         binding = binding || {}

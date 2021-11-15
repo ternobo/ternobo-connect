@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\AutoUpdateController;
-use App\Http\Middleware\Authenticate;
-use App\Http\Middleware\FollowMiddlware;
-use App\Http\Middleware\FullAccessUserMiddleware;
-use App\Http\Middleware\WebAdminMiddleware;
-use App\Models\Post;
-use Illuminate\Support\Facades\Broadcast;
-use Illuminate\Support\Facades\Route;
-use Laravel\Passport\Passport;
 use Ternobo\TernoboWire\TernoboWire;
+use Laravel\Passport\Passport;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Broadcast;
+use App\Models\Post;
+use App\Http\Middleware\WebAdminMiddleware;
+use App\Http\Middleware\FullAccessUserMiddleware;
+use App\Http\Middleware\FollowMiddlware;
+use App\Http\Middleware\Authenticate;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\AutoUpdateController;
 
 /*
 |--------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 		<div class="post-header pt-0">
 			<wire-link class="publisher" :href="'/' + post.page.slug">
 				<lazy-image class="profile-sm mb-0" img-class="profile-sm" :src="post.page.profile" />
-				<div>
+				<div class="ms-3">
 					<strong class="publisher--name"> {{ post.page.name }} <i v-if="post.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 					<span class="publisher--shortbio">
 						{{ post.page.short_bio }}

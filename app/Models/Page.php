@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Facade\MonitizationService;
 use App\HasUser;
 use App\Ternobo;
 use Illuminate\Database\Eloquent\Model;
@@ -117,7 +118,7 @@ class Page extends Model
 
         $gateways = UserOption::getOption("payment_gateways", UserOption::$defaultPaymentOption, $data['user_id']);
 
-        $data['has_donate'] = $gateways['zarinpal']['enabled'];
+        $data['has_donate'] = $gateways['zarinpal']['enabled'] && MonitizationService::getMonitizationStatus(User::find($data['user_id']))['status'];
         $data['blocked'] = Auth::check() ? BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $data['id'])->exists() : false;
 
         $data['contact_data'] = isset($data['contact_data']) && !$data['blocked'] ? json_decode($data['contact_data']['data']) : null;

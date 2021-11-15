@@ -21,7 +21,8 @@
 				<div class="px-3 pb-3 d-flex flex-column">
 					<strong class="text-gray-medium-dark font-demibold font-10">@{{ page.slug }}</strong>
 					<strong class="person-name font-12 font-demibold">{{ page.name }}</strong>
-					<small class="person-short-bio font-12">{{ page.short_bio }}</small>
+					<small class="person-short-bio text-gray-medium-dark font-12">{{ page.short_bio }}</small>
+					<small class="person-short-bio font-demibold text-gray-medium-dark font-10 mt-3">{{ page.location }}</small>
 				</div>
 			</div>
 		</transition>

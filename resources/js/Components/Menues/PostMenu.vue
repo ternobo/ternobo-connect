@@ -21,7 +21,7 @@
 						<strong> {{ __.get("application.edit") }} </strong>
 					</div>
 				</dropdown-item>
-				<dropdown-item @click.native="$emit('embed')">
+				<!-- <dropdown-item @click.native="$emit('embed')">
 					<div class="d-flex align-items-center">
 						<i class="material-icons text-dark">code</i>
 						<div>
@@ -31,7 +31,7 @@
 							<small class="text-muted"> {{ __.get("content/posts.embed-des") }} </small>
 						</div>
 					</div>
-				</dropdown-item>
+				</dropdown-item> -->
 				<dropdown-item v-if="!checkUser(post.page.user_id)" @click="showReport = true">
 					<div class="d-flex align-items-center">
 						<i class="material-icons-outlined text-dark">report</i>
