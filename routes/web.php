@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AutoUpdateController;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\FollowMiddlware;
 use App\Http\Middleware\FullAccessUserMiddleware;
@@ -26,9 +27,9 @@ TernoboWire::routes();
 Broadcast::routes();
 Route::get("/refresh-csrf", "Controller@getCsrf");
 
-Route::post('/ternobo-actions/update', "AutoUpdateController@update");
+Route::get('/ternobo-actions/update', [AutoUpdateController::class, "update"]);
 
-Route::get("/report-reasons", "ReportController@getReportOptions");
+Route::get("/report-reasons", [ReportController::class, "getReportOptions"]);
 Route::get("/translations.js", "IndexController@translations");
 require base_path("routes/sitemap_routes.php");
 require base_path("routes/action_routes.php");

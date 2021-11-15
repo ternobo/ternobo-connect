@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel
         $schedule->job(new CleanDatabase())->yearly();
         $schedule->job(new FreshPasswordResets())->daily();
         $schedule->job(new FreshVerifications())->everyFourHours();
-        $schedule->job(new GitPull())->daily();
+        $schedule->job(new GitPull())->twiceDaily();
     }
 
     /**

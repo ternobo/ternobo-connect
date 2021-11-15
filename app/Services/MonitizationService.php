@@ -1,0 +1,114 @@
+<?php
+
+namespace App\Services;
+
+use App\Models\Like;
+use App\Models\MonitizationRequest;
+use App\Models\Page;
+use App\Models\Post;
+use App\Models\User;
+
+/**
+ * Monitization conditions
+ * 
+ * - Share posts: 2
+ * - Get likes by Signed up users: 6
+ * - Enable two-step authentication
+ * - Get likes by Visitor users: 250
+ * 
+ */
+class MonitizationService extends RestfulService
+{
+
+    public function sendMonitizationRequest(User $user)
+    {
+        return $this->getMonitizationStatus($user) ? MonitizationRequest::create([
+            "user_id" => $user->id
+        ]) : null;
+    }
+
+    public function getMonitizationStatus(User $user)
+    {
+        $personalPageId = $user->personalPage->id;
+        $sharedPostsStatus = $this->checkSharedPosts($personalPageId);
+        $visitorLikesStatus = $this->checkVisitorUsersLikes($personalPageId);
+        $userLkesStatus = $this->checkSignupUsersLikes($personalPageId);
+        $twofactorauthStatus = $this->check2FAEnabled($user);
+
+        $items = [
+            $sharedPostsStatus,
+            $visitorLikesStatus,
+            $userLkesStatus,
+            $twofactorauthStatus
+        ];
+
+        $numberOfTrue = 0;
+        foreach ($items as $item) {
+            if ($item['status']) {
+                $numberOfTrue++;
+            }
+        }
+
+        $percent = ($numberOfTrue / count($items)) * 100;
+
+        return [
+            "status" => $sharedPostsStatus['status'] && $visitorLikesStatus['status'] && $userLkesStatus['status'] && $twofactorauthStatus['status'],
+            "items" => $items,
+            "percent" => $percent
+        ];
+    }
+
+    public function checkSharedPosts($personalPageId)
+    {
+        $sharedPosts = Post::query()->where("page_id", $personalPageId)->count();
+        return  [
+            'status' => $sharedPosts >= config("monitization.min-posts"),
+            "text" => __("monitization.shared-posts"),
+            "indicator" => "$sharedPosts/" . config("monitization.min-posts"),
+        ];
+    }
+
+    public function checkSignupUsersLikes($personalPageId)
+    {
+        $likes = Like::query()
+            ->whereHas("post", function ($query) use ($personalPageId) {
+                return $query->where("id", $personalPageId);
+            })
+            ->whereHas("page", function ($query) use ($personalPageId) {
+                return $query->where("visible", true);
+            })
+            ->count();
+        return [
+            'status' => $likes >= config("monitization.min-user-likes"),
+            "text" => __("monitization.signed-up-user-likes"),
+            "indicator" => "$likes/" . config("monitization.min-user-likes"),
+        ];
+    }
+
+    public function checkVisitorUsersLikes($personalPageId)
+    {
+        $likes = Like::query()
+            ->whereHas("post", function ($query) use ($personalPageId) {
+                return $query->where("id", $personalPageId);
+            })
+            ->whereHas("page", function ($query) use ($personalPageId) {
+                return $query->where("visible", false);
+            })
+            ->count();
+        return [
+            'status' => $likes >= config("monitization.min-visitor-likes"),
+            "text" => __("monitization.visitor-likes"),
+            "indicator" => "$likes/" . config("monitization.min-visitor-likes"),
+        ];
+    }
+
+    public function check2FAEnabled(User $user)
+    {
+        $status = config("monitization.2fa-required") ? $user->two_factor : true;
+        return [
+            'status' => $status,
+            "text" => __("monitization.visitor-likes"),
+            'indicator' => $status ? null : "href=/settings"
+        ];
+    }
+}

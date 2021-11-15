@@ -13,11 +13,17 @@ class Like extends Model
      * Page that like the post
      * @var \App\Page
      */
-
     public function page()
     {
-        return $this->belongsTo("App\Models\Page");
+        return $this->belongsTo(Page::class);
     }
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
+
+
 
     public function notification()
     {
@@ -29,5 +35,4 @@ class Like extends Model
         $this->notification()->delete();
         return parent::delete();
     }
-
 }
