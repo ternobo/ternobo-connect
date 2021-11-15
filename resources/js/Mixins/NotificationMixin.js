@@ -1,7 +1,9 @@
 import PostViewer from "../Components/Notifications/PostViewer";
+import ProfilePeeking from "../Components/App/ProfilePeeking/ProfilePeeking.vue";
+
 const NotificationMixin = {
     components: {
-        PostViewer
+        PostViewer, ProfilePeeking,
     },
     props: {
         notificationGroup: {

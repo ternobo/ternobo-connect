@@ -19,8 +19,6 @@ class GitPull implements ShouldQueue
      */
     public function handle()
     {
-        Artisan::command("git:deploy", function () {
-            // ....
-        });
+        exec(base_path("deploy.sh"));
     }
 }

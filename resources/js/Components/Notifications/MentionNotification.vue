@@ -6,10 +6,10 @@
 					<lazy-image :src="notifications[0].sender.profile" class="profile-xsm" img-class="profile-xsm" />
 				</wire-link>
 				<div class="notification-text">
-					<wire-link class="title clickable" :href="notifications[0].sender.slug">
+					<profile-peeking position="bottom" class="title clickable" :page="notifications[0].sender">
 						<span>{{ notifications[0].sender.name }}</span>
 						<span class="font-weight-normal date-text">{{ createdAt }}</span>
-					</wire-link>
+					</profile-peeking>
 					<div class="action">{{ __.get("notifications.mentioned-you-post") }}</div>
 				</div>
 			</div>

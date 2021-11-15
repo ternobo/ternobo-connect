@@ -1,0 +1,61 @@
+.profile-peeking-float {
+    background: $white;
+    display: flex;
+    flex-direction: column;
+    z-index: 999999;
+    position: absolute;
+    box-shadow: $notification-shadow;
+    min-height: 200px;
+    width: 180px;
+
+    &.profile-peeking-position-start {
+        #{$start}: -192px;
+        top: 0;
+    }
+
+    &.profile-peeking-position-end {
+        #{$end}: -192px;
+        top: 0;
+    }
+
+    &.profile-peeking-position-bottom {
+        top: 50px;
+    }
+
+    figure {
+        margin: 0;
+    }
+
+
+    .header-section {
+
+        .badges {
+            float: $end;
+        }
+
+        div.profile-peeking-cover {
+            overflow: hidden;
+
+            img {
+                min-height: 80px;
+                -o-object-fit: fill;
+                object-fit: fill;
+                -o-object-position: center;
+                object-position: center;
+                width: 100%;
+                -webkit-filter: blur(8px);
+                filter: blur(8px);
+            }
+        }
+
+        .profile-standard {
+            margin-#{$start}: 0.5rem;
+            margin-top: -24px;
+
+            >img {
+                border: 4px solid $white;
+            }
+        }
+    }
+
+}

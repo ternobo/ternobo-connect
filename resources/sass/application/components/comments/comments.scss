@@ -1,10 +1,6 @@
 .comments {
-    max-height: 700px;
-    overflow: auto;
     margin-bottom: -16px;
-    @extend .nice-scroll;
 }
-
 
 .comment-replies {
     border-radius: 1px solid $gray-500;
