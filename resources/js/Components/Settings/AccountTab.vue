@@ -152,6 +152,8 @@ export default {
 			this.two_factor_verification = response.data.two_factor_verification;
 			this.active_sessions = response.data.connected_devices;
 		});
+		var search = new URLSearchParams(window.location.search);
+		this[search.get("modal")] = true;
 	},
 	methods: {
 		reload() {

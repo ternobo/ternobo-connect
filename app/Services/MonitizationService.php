@@ -118,7 +118,7 @@ class MonitizationService extends RestfulService
             "id" => "monitization.2fa-required",
             'status' => $status,
             "text" => __("monitization.2fa"),
-            'indicator' => $status ? null : "href=/settings"
+            'indicator' => $status ? null : "href=/settings?modal=showTwoFAModal"
         ];
     }
 }

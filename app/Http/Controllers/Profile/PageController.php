@@ -326,7 +326,7 @@ class PageController extends Controller
 
     public function getDrafts($page, Request $request)
     {
-        $drafts = Post::withDrafts()->where(function ($query) {
+        $drafts = Post::withDrafts()->with(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"])->where(function ($query) {
             $query->where('type', '=', "draft_post")->orWhere('type', '=', "draft_article");
         })->where("page_id", Auth::user()->personalPage->id)->paginate();
         return response()->json(['result' => true, 'drafts' => $drafts]);
