@@ -5,6 +5,10 @@
     padding: 16px 18px;
     flex-wrap: nowrap;
 
+    .profile-peeking {
+        width: 100%;
+    }
+
     figure.profile-xsm {
         margin-bottom: 0;
         margin-#{$end}: 12px;
