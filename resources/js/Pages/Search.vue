@@ -9,7 +9,7 @@
 						<div class="col-md-6 pb-3" v-for="(page, index) in data" :key="page.id + '_index_' + index">
 							<div class="card">
 								<div class="card-body">
-									<people-suggestion class="p-0" :page="page"></people-suggestion>
+									<profile-peeking position="bottom" class="w-100 d-block p-0" :page="page"></profile-peeking>
 								</div>
 							</div>
 						</div>
@@ -58,6 +58,7 @@ import PostCard from "../Components/PostCard/PostCard";
 import PeopleSuggestion from "../Components/App/PeopleSuggestion.vue";
 import PostSkeleton from "../Components/Skeletons/PostSkeleton.vue";
 import PageSkeleton from "../Components/Skeletons/PageSkeleton.vue";
+import ProfilePeeking from "../Components/App/ProfilePeeking/ProfilePeeking.vue";
 export default {
 	created() {
 		this.data = this.results.data;
@@ -161,6 +162,7 @@ export default {
 		PostCard,
 		PostSkeleton,
 		PageSkeleton,
+		ProfilePeeking,
 	},
 	name: "Search",
 	layout: AppLayout,

@@ -10,7 +10,7 @@ module.exports = {
         chunkFilename: 'js/[name].js?id=[chunkhash]',
     },
     watchOptions: {
-        ignored: /node_modules/
+        ignored: ["/node_modules/", "/public"]
     },
     devServer: {
         port: 8080,
