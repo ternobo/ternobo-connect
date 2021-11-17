@@ -16,7 +16,7 @@ abstract class ServiceAccess
 
 
     /**
-     * Access Types - only rest implemented yet.
+     * Access Types - only HTTP-REST implemented yet.
      */
     public $AccessTypes = [
         "rest" => 'HTTP_REST',

@@ -274,7 +274,10 @@ Route::middleware([Authenticate::class])->group(function () {
 
 Route::resource("/posts", "PostController")->only(['store', 'update', 'destroy', "show"]);
 
+// Tags
 Route::get("/tags/{name}", "Content\TagsController@index");
+require base_path("routes/community_tags.php");
+
 
 Route::post("/contact/contact-option", "Profile\ContactsController@getContactOptions");
 Route::post("/contact/website-option", "Profile\ContactsController@getWebsiteOptions");
