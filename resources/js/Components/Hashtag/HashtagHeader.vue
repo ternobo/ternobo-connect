@@ -3,7 +3,7 @@
 		<div class="tag-card">
 			<div class="d-flex align-items-center">
 				<strong class="tag" ref="tagelem">#{{ tag }}</strong>
-				<small>{{ posts.total }} {{ __.choice("application.post", posts.total) }}</small>
+				<small>{{ totalPosts }} {{ __.choice("application.post", totalPosts) }}</small>
 			</div>
 			<loading-button class="btn follow-btn" @click.native="follow" :class="{ 'btn-followed-connected': isFollowed }" :loading="loading">{{ __.get("application.follow") }}</loading-button>
 		</div>
