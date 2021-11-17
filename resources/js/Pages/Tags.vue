@@ -1,14 +1,6 @@
 <template>
 	<base-layout>
-		<div class="tag-page-header">
-			<div class="tag-card">
-				<div class="d-flex align-content-center">
-					<strong class="tag" ref="tagelem">#{{ tag }}</strong>
-					<small>{{ posts.total }} {{ __.choice("application.post", posts.total) }}</small>
-				</div>
-				<loading-button class="btn follow-btn" @click.native="follow" :class="{ 'btn-followed-connected': isFollowed }" :loading="loading">{{ __.get("application.follow") }}</loading-button>
-			</div>
-		</div>
+		<component :is="headerComponnet" :community="community" :tag="tag" :totalPosts="posts.total" />
 		<div class="w-100">
 			<div v-if="postsArray.length < 1">
 				<no-content> {{ __.get("messages.no-content-with-tag") }} </no-content>
@@ -81,6 +73,11 @@ export default {
 			this.postsArray = this.posts.data;
 		},
 	},
+	created() {
+		if (this.community != null) {
+			this.headerComponnet = () => import("../Components/Hashtag/CommunityTagHeader.vue");
+		}
+	},
 	mounted() {
 		this.postsArray = this.posts.data;
 		this.page = this.posts.current_page;
@@ -98,9 +95,11 @@ export default {
 			loadingPage: false,
 			loading: false,
 			isFollowed: false,
+
+			headerComponnet: () => import("../Components/Hashtag/HashtagHeader.vue"),
 		};
 	},
-	props: ["posts", "tag", "followed"],
+	props: ["posts", "tag", "followed", "community"],
 	components: {
 		AppFooter,
 		NoContent,

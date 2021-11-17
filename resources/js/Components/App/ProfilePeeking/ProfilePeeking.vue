@@ -2,7 +2,7 @@
 	<wire-link class="profile-peeking" :href="'/' + page.slug" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
 		<slot>
 			<div class="profile-info-link">
-				<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xsm" img-class="profile-xsm" :src="page.profile" />
+				<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xsm profile-image" img-class="profile-xsm" :src="page.profile" />
 				<div class="page-info">
 					<strong class="person-name">{{ page.name }} <i v-if="page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 					<small class="person-short-bio">{{ page.short_bio }}</small>

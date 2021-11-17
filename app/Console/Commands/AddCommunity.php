@@ -13,7 +13,7 @@ class AddCommunity extends Command
      *
      * @var string
      */
-    protected $signature = 'add:community {tag} {name} {icon} {cover}';
+    protected $signature = 'add:community {tag} {icon} {cover}';
 
     /**
      * The console command description.
@@ -45,7 +45,6 @@ class AddCommunity extends Command
     {
         $this->service->addCommunityTag(
             $this->argument("tag"),
-            $this->argument("name"),
             $this->argument("icon"),
             $this->argument("cover")
         );

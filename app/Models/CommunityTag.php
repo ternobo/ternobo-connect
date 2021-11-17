@@ -22,7 +22,7 @@ class CommunityTag extends Model
         'tag_id'
     ];
 
-    private function tag()
+    public function tag()
     {
         return $this->belongsTo(Tag::class);
     }

@@ -67,6 +67,7 @@ return [
     "comma" => "،",
     'warning' => "اخطار",
     "profile-not-available" => "این پروفایل در دسترس نیست",
+    "top-active-users" => "فعال‌ترین کاربران",
 
     "password-strength" => [
         "short" => "کوتاه",

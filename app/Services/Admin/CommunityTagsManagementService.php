@@ -19,11 +19,11 @@ class CommunityTagsManagementService extends CommunityTagService
      * 
      * @return App\Models\CommunityTag
      */
-    public function addCommunityTag(string $tag, string $name, string $cover, string $icon): CommunityTag
+    public function addCommunityTag(string $tag, string $cover, string $icon): CommunityTag
     {
 
         return CommunityTag::query()->create([
-            'name' => $name,
+            'name' => "#$tag",
             'tag_id' => Tag::query()->firstOrCreate(['name' => $tag])->id,
             'icon' => $icon,
             'cover' => $cover
