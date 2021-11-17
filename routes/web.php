@@ -11,6 +11,8 @@ use App\Http\Middleware\FollowMiddlware;
 use App\Http\Middleware\Authenticate;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AutoUpdateController;
+use App\Http\Controllers\Content\CommunityTagController;
+use App\Services\Content\CommunityTagService;
 
 /*
 |--------------------------------------------------------------------------
@@ -275,6 +277,7 @@ Route::middleware([Authenticate::class])->group(function () {
 Route::resource("/posts", "PostController")->only(['store', 'update', 'destroy', "show"]);
 
 Route::get("/tags/{name}", "Content\TagsController@index");
+Route::get("/top-user-tag/{name}", [CommunityTagController::class, "getHashtagTopUsers"]);
 
 Route::post("/contact/contact-option", "Profile\ContactsController@getContactOptions");
 Route::post("/contact/website-option", "Profile\ContactsController@getWebsiteOptions");
