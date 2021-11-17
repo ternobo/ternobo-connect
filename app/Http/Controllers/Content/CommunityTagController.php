@@ -17,6 +17,6 @@ class CommunityTagController extends Controller
 
     public function getHashtagTopUsers($tag)
     {
-        return $this->service->getHashtagTopUsers($tag);
+        return $this->generateResponse(true, $this->service->getHashtagTopUsers($tag));
     }
 }

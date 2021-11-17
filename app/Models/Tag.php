@@ -29,9 +29,15 @@ class Tag extends Model
         return $list;
     }
 
+    public function community()
+    {
+        return $this->hasOne(CommunityTag::class);
+    }
+
+
     private function posts_count()
     {
-        return Post::withRelations()->whereJsonContains("tags", $this->name)->count();
+        return Post::query()->whereJsonContains("tags", $this->name)->count();
     }
 
     public function toArray()
