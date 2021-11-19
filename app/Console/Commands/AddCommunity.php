@@ -45,8 +45,8 @@ class AddCommunity extends Command
     {
         $this->service->addCommunityTag(
             $this->argument("tag"),
+            $this->argument("cover"),
             $this->argument("icon"),
-            $this->argument("cover")
         );
         return Command::SUCCESS;
     }

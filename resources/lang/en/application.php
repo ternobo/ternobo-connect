@@ -69,6 +69,7 @@ return [
     'warning' => "Warning",
     "profile-not-available" => "This profile is not available.",
     "top-active-users" => "Top Active Users",
+    "related-hashtags" => "Related Hashtags",
 
     "password-strength" => [
         "short" => "Too Short",
