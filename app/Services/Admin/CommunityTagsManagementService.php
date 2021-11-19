@@ -6,6 +6,7 @@ use App\Models\CommunityCategory;
 use Illuminate\Support\Str;
 use App\Services\Content\CommunityTagService;
 use App\Models\CommunityTag;
+use App\Models\CommunityTranslation;
 use App\Models\Tag;
 
 class CommunityTagsManagementService extends CommunityTagService
@@ -32,6 +33,15 @@ class CommunityTagsManagementService extends CommunityTagService
         ]);
     }
 
+
+    public function addCommunityTagTranslation(string $tag, string $translation, string $locale)
+    {
+        return CommunityTranslation::query()->firstOrCreate([
+            'tag' => $tag,
+            'translation' => $translation,
+            'locale' => $locale,
+        ]);
+    }
 
     /**
      * 

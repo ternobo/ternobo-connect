@@ -31,9 +31,9 @@ class CreateCommunityTagRequest extends BaseRequest
             "cover" => ['required', "mimes:png,jpg"],
 
             // Category
-            "community.name" => ['required'],
-            "community.icon" => ['required', 'mimes:png,jpg'],
-            "community.sort" => ['required', 'numeric']
+            "category.name" => ['required'],
+            "category.icon" => ['required', 'mimes:png,jpg'],
+            "category.sort" => ['required', 'numeric']
         ];
     }
 }

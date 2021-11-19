@@ -42,6 +42,8 @@ Route::middleware(["auth:api", AdminAPIMiddleware::class])->prefix("/admin")->gr
     Route::apiResource('transactions', TransactionsController::class)->only(['index', 'show']);
 
     Route::apiResource("communities", "Management\CommunityController");
+
+    Route::post("communities/add-translation", "Management\CommunityController@addTranslation");
 });
 
 
