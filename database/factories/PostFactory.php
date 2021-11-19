@@ -28,15 +28,11 @@ class PostFactory extends Factory
 
         $medias = [$faker->imageUrl()];
 
-        $tags = [$faker->word, $faker->word, $faker->word];
-        foreach ($tags as $tag) {
-            if (Tag::where("name", $tag)->first() instanceof Tag) {
-                continue;
-            }
-            $tt = new Tag();
-            $tt->name = $tag;
-            $tt->save();
-        }
+
+        $availableTags = Tag::all()->random(3)->pluck("name");
+
+        $tags = $faker->randomElements($availableTags, 3, false);
+
         $category_name = $faker->word;
         $category = null;
         if ((Category::where("name", $category)->first() instanceof Category)) {

@@ -56,7 +56,7 @@ require base_path("routes/auth_routes.php");
  * Auth End
  */
 
-Route::middleware([Authenticate::class])->group(function () {
+Route::middleware(["auth.web"])->group(function () {
     /**
      * Private Files
      */
@@ -278,6 +278,9 @@ Route::resource("/posts", "PostController")->only(['store', 'update', 'destroy',
 Route::get("/tags/{name}", "Content\TagsController@index");
 require base_path("routes/community_tags.php");
 
+Route::middleware([WebAdminMiddleware::class])->prefix("management")->group(function () {
+    require base_path("routes/management_rotues.php");
+});
 
 Route::post("/contact/contact-option", "Profile\ContactsController@getContactOptions");
 Route::post("/contact/website-option", "Profile\ContactsController@getWebsiteOptions");

@@ -68,6 +68,7 @@ return [
     'warning' => "اخطار",
     "profile-not-available" => "این پروفایل در دسترس نیست",
     "top-active-users" => "فعال‌ترین کاربران",
+    "related-hashtags" => "هشتگ‌های مرتبط",
 
     "password-strength" => [
         "short" => "کوتاه",

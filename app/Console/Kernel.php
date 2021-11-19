@@ -28,8 +28,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('backup:clean')->monthly();
-        $schedule->command('backup:run --only-to-disk=ftp')->weekly();
+        $schedule->command('backup:clean')->daily();
+        $schedule->command('backup:run --only-to-disk=s3')->daily();
         $schedule->job(new CleanDatabase())->yearly();
         $schedule->job(new FreshPasswordResets())->daily();
         $schedule->job(new FreshVerifications())->everyFourHours();
