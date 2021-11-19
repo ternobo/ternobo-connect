@@ -24,11 +24,11 @@ class CommunityTagsManagementService extends CommunityTagService
     {
 
         return CommunityTag::query()->create([
-            'name' => "#$tag",
+            'name' => "$tag",
             'tag_id' => Tag::query()->firstOrCreate(['name' => $tag])->id,
             'icon' => $icon,
             'cover' => $cover,
-            'community_category_id' => CommunityCategory::query()->where("name", $category)->id
+            'community_category_id' => CommunityCategory::query()->where("name", $category)->first()->id
         ]);
     }
 
@@ -63,6 +63,6 @@ class CommunityTagsManagementService extends CommunityTagService
      */
     public function getCommunityTags()
     {
-        return CommunityTag::query()->paginate(10);
+        return CommunityTag::query()->with("category")->paginate(10);
     }
 }

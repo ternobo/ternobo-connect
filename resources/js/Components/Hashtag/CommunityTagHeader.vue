@@ -5,7 +5,7 @@
 			<div class="d-flex align-items-center">
 				<strong class="tag">
 					<img :src="community.icon" width="24" class="me-3" />
-					{{ community.name }}
+					#{{ community.name }}
 				</strong>
 				<small>{{ totalPosts }} {{ __.choice("application.post", totalPosts) }}</small>
 			</div>

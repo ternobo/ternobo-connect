@@ -23,7 +23,7 @@ class CreateCommunityCategoriesTable extends Migration
 
 
         Schema::table('community_tags', function (Blueprint $table) {
-            $table->foreignIdFor(CommunityCategory::class)->nullable();
+            $table->foreignIdFor(CommunityCategory::class)->after("cover")->nullable();
             $table->foreign("community_category_id")->references("id")->on("community_categories")->onDelete("CASCADE")->onUpdate("CASCADE");
         });
     }

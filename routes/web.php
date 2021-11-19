@@ -56,7 +56,7 @@ require base_path("routes/auth_routes.php");
  * Auth End
  */
 
-Route::middleware([Authenticate::class])->group(function () {
+Route::middleware(["auth.web"])->group(function () {
     /**
      * Private Files
      */
