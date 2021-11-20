@@ -17,11 +17,11 @@ class CommunityTagsManagementService extends CommunityTagService
      * @param string $tag - tag name (it will create a tag if it's not exits)
      * @param string $cover - community page cover (url)
      * @param string $icon - community tag icon (url)
-     * @param string $category - community category
+     * @param $category - community category
      * 
      * @return App\Models\CommunityTag
      */
-    public function addCommunityTag(string $tag, string $cover, string $icon, string $category): CommunityTag
+    public function addCommunityTag(string $tag, string $cover, string $icon, $category_id): CommunityTag
     {
 
         return CommunityTag::query()->create([
@@ -29,7 +29,7 @@ class CommunityTagsManagementService extends CommunityTagService
             'tag_id' => Tag::query()->firstOrCreate(['name' => $tag])->id,
             'icon' => $icon,
             'cover' => $cover,
-            'community_category_id' => CommunityCategory::query()->where("name", $category)->first()->id
+            'community_category_id' => $category_id
         ]);
     }
 

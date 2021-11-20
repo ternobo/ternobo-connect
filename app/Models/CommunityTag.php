@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class CommunityTag extends Model
 {
@@ -22,6 +23,15 @@ class CommunityTag extends Model
         'tag_id'
     ];
 
+
+    public function toArray()
+    {
+        $data = parent::toArray();
+        $locale = App::getLocale();
+        $translation = CommunityTranslation::query()->where("tag", $data['name'])->where("locale", $locale)->first();
+        $data['name'] = $translation instanceof CommunityTranslation ? $translation->translation : $data['name'];
+        return $data;
+    }
 
     public function category()
     {

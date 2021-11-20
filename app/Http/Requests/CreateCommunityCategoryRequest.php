@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class CreateCommunityTagRequest extends BaseRequest
+class CreateCommunityCategoryRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +25,9 @@ class CreateCommunityTagRequest extends BaseRequest
     public function rules()
     {
         return [
-            // Community Tag
-            "tag" => ['required', "unique:community_tags,name"],
-            "icon" => ['required', "mimes:png,jpg"],
-            "cover" => ['required', "mimes:png,jpg"],
-
-            // Category
-            "category_id" => ['required', "exits:community_categories,id"],
+            "name" => ['required'],
+            "icon" => ['required', 'mimes:png,jpg'],
+            "sort" => ['required', 'numeric']
         ];
     }
 }
