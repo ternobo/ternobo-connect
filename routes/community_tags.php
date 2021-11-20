@@ -8,3 +8,5 @@ Route::get("/community/{name}/related-tags", [CommunityTagController::class, "ge
 
 Route::get("/interests", [CommunityTagController::class, "interestsPages"]);
 Route::post("/interests/set", [CommunityTagController::class, "setInterests"]);
+
+Route::post("/interests/skip", [CommunityTagController::class, "skipInterestPage"]);

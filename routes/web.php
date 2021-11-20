@@ -11,6 +11,7 @@ use App\Http\Middleware\FollowMiddlware;
 use App\Http\Middleware\Authenticate;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AutoUpdateController;
+use App\Http\Middleware\CommunityTagSelectMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,7 +95,7 @@ Route::middleware(["auth.web"])->group(function () {
     Route::post("/tags/{tag}/follow", "Content\TagsController@toggleFollowTag")->middleware(FullAccessUserMiddleware::class);
     //Follow Actions End
 
-    Route::middleware([FollowMiddlware::class])->group(function () {
+    Route::middleware([FollowMiddlware::class, CommunityTagSelectMiddleware::class])->group(function () {
         Route::get('/feed', 'Content\FeedController@index')->name('home');
 
         Route::post("/can-donate", "Donation\DontaionsController@canEnableDonate")->middleware(FullAccessUserMiddleware::class);
