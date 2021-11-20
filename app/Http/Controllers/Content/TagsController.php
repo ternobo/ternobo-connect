@@ -42,8 +42,6 @@ class TagsController extends Controller
         $followed = Following::tags()->where("page_id", Ternobo::currentPage()->id)->where("following", Tag::query()->where("name", $name)->first()->id)->exists();
 
         $community = $this->service->getCommunityByHashtag($name);
-        $locale = App::getLocale();
-        $community->name = CommunityTranslation::query()->where("tag", $community->name)->where("locale", $locale)->first()->translation;
 
         return TernoboWire::render('Tags', ["posts" => $posts, 'tag' => $name, "followed" => $followed, "community" => $community]);
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommunityManagement\AddTranslationRequest;
+use App\Http\Requests\CreateCommunityCategoryRequest;
 use App\Http\Requests\CreateCommunityTagRequest;
 use App\Http\Requests\UpdateCommunityTagRequest;
 use App\Models\CommunityCategory;
@@ -27,12 +28,16 @@ class CommunityController extends Controller
 
     public function store(CreateCommunityTagRequest $request)
     {
-        $communityCategory = CommunityCategory::query()->firstOrNew(['name' => $request->category['name']]);
-        $communityCategory->icon = $request->category['icon']->store("media");
-        $communityCategory->save();
-
-        $communityTag = $this->service->addCommunityTag($request->tag, $request->cover->store("media"), $request->icon->store("media"), $communityCategory->name);
+        $communityTag = $this->service->addCommunityTag($request->tag, $request->cover->store("media"), $request->icon->store("media"), $request->category_id);
         return $this->generateResponse($communityTag instanceof CommunityTag, $communityTag);
+    }
+
+    public function createCategory(CreateCommunityCategoryRequest $request)
+    {
+        $communityCategory = CommunityCategory::query()->firstOrNew(['name' => $request->name]);
+        $communityCategory->icon = $request->icon->store("media");
+        $communityCategory->save();
+        return $this->generateResponse($communityCategory instanceof CommunityTag, $communityCategory);
     }
 
     public function addTranslation(AddTranslationRequest $request)

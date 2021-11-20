@@ -43,6 +43,9 @@ Route::middleware(["auth:api", AdminAPIMiddleware::class])->prefix("/admin")->gr
 
     Route::apiResource("communities", "Management\CommunityController");
 
+    Route::post("communities/add-category", "Management\CommunityController@createCategory");
+
+
     Route::post("communities/add-translation", "Management\CommunityController@addTranslation");
 });
 

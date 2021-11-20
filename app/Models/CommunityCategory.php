@@ -13,4 +13,9 @@ class CommunityCategory extends Model
         'name',
         'icon'
     ];
+
+    public function tags()
+    {
+        return $this->hasMany(CommunityTag::class);
+    }
 }

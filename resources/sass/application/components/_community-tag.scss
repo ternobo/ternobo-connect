@@ -1,0 +1,19 @@
+.community-tag {
+    display: flex;
+    background: $white;
+    padding: 0.75rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: 0.3s all;
+
+    &.active {
+        background: $dark;
+        color: $white;
+    }
+
+    &:hover {
+        box-shadow: $bg-hover-shadow;
+    }
+}
