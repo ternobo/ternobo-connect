@@ -1,15 +1,15 @@
 <template>
 	<div class="community-tag-header">
-		<lazy-image :src="community.cover" class="community-cover" />
+		<lazy-image :src="`/${community.cover}`" class="community-cover" />
 		<div class="tag-card">
 			<div class="d-flex align-items-center">
 				<strong class="tag">
-					<img :src="community.icon" width="24" class="me-3" />
-					#{{ community.name }}
+					<img :src="`/${community.icon}`" width="24" class="me-3" />
+					{{ community.name }}
 				</strong>
 				<small>{{ totalPosts }} {{ __.choice("application.post", totalPosts) }}</small>
 			</div>
-			<loading-button class="btn follow-btn" @click.native="follow" :class="{ 'btn-followed-connected': isFollowed }" :loading="loading">{{ __.get("application.follow") }}</loading-button>
+			<loading-button class="btn" @click="follow" :class="{ 'btn-secondary': !isFollowed }" :loading="loading">{{ isFollowed ? __.get("application.following") : __.get("application.follow") }}</loading-button>
 		</div>
 
 		<!-- Top Users !-->

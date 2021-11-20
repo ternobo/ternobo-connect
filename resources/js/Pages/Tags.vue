@@ -1,6 +1,6 @@
 <template>
 	<base-layout>
-		<component :is="headerComponnet" :community="community" :tag="tag" :totalPosts="posts.total" />
+		<component :is="headerComponnet" :followed="followed" :community="community" :tag="tag" :totalPosts="posts.total" />
 		<div class="w-100">
 			<div v-if="postsArray.length < 1">
 				<no-content> {{ __.get("messages.no-content-with-tag") }} </no-content>
@@ -28,21 +28,6 @@ import LoadingButton from "../Components/buttons/LoadingButton.vue";
 
 export default {
 	methods: {
-		follow() {
-			this.loading = true;
-			axios
-				.post(`/tags/${this.tag}/follow`)
-				.then((response) => {
-					this.isFollowed = response.data.follow;
-				})
-				.catch((err) => {
-					console.log(err);
-					this.toast(__.get("messages.connection-error"));
-				})
-				.then(() => {
-					this.loading = false;
-				});
-		},
 		loadMore() {
 			if (!this.loadingPage && this.next_page_url !== null) {
 				let url = this.next_page_url;
@@ -82,7 +67,6 @@ export default {
 		this.postsArray = this.posts.data;
 		this.page = this.posts.current_page;
 		this.next_page_url = this.posts.next_page_url;
-		this.isFollowed = this.followed;
 		this.$nextTick(() => {
 			twemoji.parse(this.$refs.tagelem);
 		});
@@ -94,7 +78,6 @@ export default {
 			next_page_url: null,
 			loadingPage: false,
 			loading: false,
-			isFollowed: false,
 
 			headerComponnet: () => import("../Components/Hashtag/HashtagHeader.vue"),
 		};
