@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\UserOption;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,9 @@ class CommunityTagSelectMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        if (filter_var(UserOption::getOption("skip_interests", false), FILTER_VALIDATE_BOOLEAN)) {
+            return $next($request);
+        }
+        return redirect("/interests");
     }
 }

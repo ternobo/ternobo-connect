@@ -23,7 +23,7 @@ class CommunityTagController extends Controller
 
     public function interestsPages()
     {
-        if (UserOption::getOption("skip_interests", false)) {
+        if (filter_var(UserOption::getOption("skip_interests", false), FILTER_VALIDATE_BOOLEAN)) {
             return redirect("/feed");
         }
 
