@@ -1,6 +1,9 @@
 export default {
+    props: ['followed'],
+    mounted() {
+        this.isFollowed = this.followed;
+    },
     methods: {
-
         follow() {
             this.loading = true;
             axios
