@@ -3,11 +3,18 @@
 		<lazy-image :src="`/${community.cover}`" class="community-cover" />
 		<div class="tag-card">
 			<div class="d-flex align-items-center">
-				<strong class="tag">
-					<img :src="`/${community.icon}`" width="24" class="me-3" />
-					{{ community.name }}
-				</strong>
-				<small>{{ totalPosts }} {{ __.choice("application.post", totalPosts) }}</small>
+				<img :src="`/${community.icon}`" width="24" class="me-3" />
+				<div class="d-flex flex-column pe-2">
+					<strong class="tag">
+						{{ community.name }}
+					</strong>
+
+					<div>
+						<small class="tag-name" dir="auto">#{{ tag }}</small>
+						<span class="text-gray-medium-dark mx-1">.</span>
+						<small>{{ totalPosts }} {{ __.choice("application.post", totalPosts) }}</small>
+					</div>
+				</div>
 			</div>
 			<loading-button class="btn" @click="follow" :class="{ 'btn-secondary': !isFollowed }" :loading="loading">{{ isFollowed ? __.get("application.following") : __.get("application.follow") }}</loading-button>
 		</div>
