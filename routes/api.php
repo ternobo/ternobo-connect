@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post("/admin/login", [AdminController::class, "login"]);
 
-Route::middleware(["auth:api", AdminAPIMiddleware::class, 'cors'])->prefix("/admin")->group(function () {
+Route::middleware(["auth:api", AdminAPIMiddleware::class])->prefix("/admin")->group(function () {
     Route::post("/get-user", [AdminController::class, "getUser"]);
     Route::apiResources([
         'reports' => ReportsController::class,
