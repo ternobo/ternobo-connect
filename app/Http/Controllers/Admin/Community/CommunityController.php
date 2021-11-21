@@ -29,7 +29,12 @@ class CommunityController extends Controller
 
     public function store(CreateCommunityTagRequest $request)
     {
-        $communityTag = $this->service->addCommunityTag($request->tag, Uploader::resizeCover($request->cover->store("media")), Uploader::resizeIcon($request->icon->store("media")), $request->category_id);
+        $communityTag = $this->service->addCommunityTag(
+            $request->tag,
+            $request->filled("cover") ? Uploader::resizeCover($request->cover->store("media")) : null,
+            Uploader::resizeIcon($request->icon->store("media")),
+            $request->category_id
+        );
         return $this->generateResponse($communityTag instanceof CommunityTag, $communityTag);
     }
 
