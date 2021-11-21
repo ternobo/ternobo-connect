@@ -1,6 +1,16 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\Community\CommunityCategoriesController;
+use App\Http\Controllers\Admin\Community\CommunityController;
+use App\Http\Controllers\Admin\NotificationsController;
+use App\Http\Controllers\Admin\PostsController;
+use App\Http\Controllers\Admin\ReportNotesController;
+use App\Http\Controllers\Admin\ReportsController;
+use App\Http\Controllers\Admin\SkillsController;
+use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Admin\Tips\Transactions\TransactionsController;
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Middleware\AdminAPIMiddleware;
 use App\Http\Middleware\DataAccessMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -16,37 +26,36 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::post("/admin/login", "Admin\AdminController@login");
+Route::post("/admin/login", [AdminController::class, "login"]);
 
 Route::middleware(["auth:api", AdminAPIMiddleware::class])->prefix("/admin")->group(function () {
-    Route::post("/get-user", "Admin\AdminController@getUser");
+    Route::post("/get-user", [AdminController::class, "getUser"]);
     Route::apiResources([
-        'reports' => 'Admin\ReportsController',
-        'posts' => "Admin\PostsController",
+        'reports' => ReportsController::class,
+        'posts' => PostsController::class,
     ]);
 
-    Route::apiResource('users', "Admin\UsersController")->only(["store", 'update', "show", "index"]);
-    Route::delete("/users/delete", "Admin\UsersController@forceDestory");
-    Route::post("/users/deactive", "Admin\UsersController@deactiveMutiple");
-    Route::post("/users/active", "Admin\UsersController@activeMultiple");
+    Route::apiResource('users', UsersController::class)->only(["store", 'update', "show", "index"]);
+    Route::delete("/users/delete", [UsersController::class, "forceDestory"]);
+    Route::post("/users/deactive", [UsersController::class, "deactiveMutiple"]);
+    Route::post("/users/active", [UsersController::class, "activeMultiple"]);
 
-    Route::apiResource('notifications', "Admin\NotificationsController")->only(["store", "index"]);
+    Route::apiResource('notifications', NotificationsController::class)->only(["store", "index"]);
 
-    Route::apiResource("reports.notes", "Admin\ReportNotesController")->only("store", "destroy", "update");
+    Route::apiResource("reports.notes", ReportNotesController::class)->only("store", "destroy", "update");
 
-    Route::apiResource('tags', "Admin\TagsController")->only(["index", "store"]);
-    Route::delete("/tags/delete", "Admin\TagsController@destory");
-    Route::apiResource('skills', "Admin\SkillsController")->only(["index"]);
-    Route::delete("/skills/delete", "Admin\SkillsController@destory");
+    Route::apiResource('tags', TagsController::class)->only(["index", "store"]);
+    Route::delete("/tags/delete", [TagsController::class, 'destory']);
+    Route::apiResource('skills', SkillsController::class)->only(["index"]);
+    Route::delete("/skills/delete", [SkillsController::class, 'destory']);
 
     Route::apiResource('transactions', TransactionsController::class)->only(['index', 'show']);
 
-    Route::apiResource("communities", "Management\CommunityController");
+    Route::apiResource("communities/categories", CommunityCategoriesController::class);
+    Route::apiResource("communities", CommunityController::class);
 
-    Route::post("communities/add-category", "Management\CommunityController@createCategory");
-
-
-    Route::post("communities/add-translation", "Management\CommunityController@addTranslation");
+    Route::post("communities/add-translation", [CommunityController::class, "addTranslation"]);
+    Route::delete("communities/delete-translation", [CommunityController::class, "deleteTranslation"]);
 });
 
 

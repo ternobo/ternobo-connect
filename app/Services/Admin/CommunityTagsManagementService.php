@@ -43,6 +43,14 @@ class CommunityTagsManagementService extends CommunityTagService
         ]);
     }
 
+    public function deleteCommunityTagTranslation(string $tag, string $locale)
+    {
+        return CommunityTranslation::query()
+            ->where("tag", $tag)
+            ->where("locale", $locale)
+            ->delete();
+    }
+
     /**
      * 
      * @param string $name - community tag name
@@ -73,6 +81,6 @@ class CommunityTagsManagementService extends CommunityTagService
      */
     public function getCommunityTags()
     {
-        return CommunityTag::query()->with("category")->paginate(10);
+        return CommunityTag::query()->with(["category", 'transactions'])->paginate(10);
     }
 }
