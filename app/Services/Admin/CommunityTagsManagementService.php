@@ -81,6 +81,6 @@ class CommunityTagsManagementService extends CommunityTagService
      */
     public function getCommunityTags()
     {
-        return CommunityTag::query()->with(["category", 'transactions'])->paginate(10);
+        return CommunityTag::query()->with(["category", 'transactions'])->get();
     }
 }
