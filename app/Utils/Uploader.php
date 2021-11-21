@@ -20,7 +20,7 @@ class Uploader
         return "/$folder/$filename";
     }
 
-    public static function resizeIcon($file, $width = 24, $height = 24)
+    public static function resizeIcon($file, $width = 48, $height = 48)
     {
         $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
         $image->resize($width, $height);
