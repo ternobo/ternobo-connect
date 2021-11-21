@@ -20,7 +20,8 @@ class CommunityTag extends Model
         'name',
         'icon',
         'cover',
-        'tag_id'
+        'tag_id',
+        'community_category_id'
     ];
 
 
