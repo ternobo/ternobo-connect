@@ -21,14 +21,14 @@ class CommunityTagsManagementService extends CommunityTagService
      * 
      * @return App\Models\CommunityTag
      */
-    public function addCommunityTag(string $tag, string $cover, string $icon, $category_id): CommunityTag
+    public function addCommunityTag(string $tag, ?string $cover, string $icon, $category_id): CommunityTag
     {
 
         return CommunityTag::query()->create([
             'name' => "$tag",
             'tag_id' => Tag::query()->firstOrCreate(['name' => $tag])->id,
             'icon' => $icon,
-            'cover' => $cover,
+            'cover' => isset($cover) ? $cover : "images/cover.jpg",
             'community_category_id' => $category_id
         ]);
     }

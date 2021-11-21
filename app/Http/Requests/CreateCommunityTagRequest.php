@@ -28,7 +28,7 @@ class CreateCommunityTagRequest extends BaseRequest
             // Community Tag
             "tag" => ['required', "unique:community_tags,name"],
             "icon" => ['required', "mimes:png,jpg"],
-            "cover" => ["mimes:png,jpg", "nullable"],
+            "cover" => ["nullable", "mimes:png,jpg"],
 
             // Category
             "category_id" => ['required', "exists:community_categories,id"],
