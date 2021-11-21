@@ -38,6 +38,11 @@ class CommunityTag extends Model
         return $this->belongsTo(CommunityCategory::class);
     }
 
+    public function transactions()
+    {
+        return $this->hasMany(CommunityTranslation::class, 'tag', 'name');
+    }
+
     public function tag()
     {
         return $this->belongsTo(Tag::class);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Management;
+namespace App\Http\Controllers\Admin\Community;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommunityManagement\AddTranslationRequest;
@@ -32,15 +32,12 @@ class CommunityController extends Controller
         return $this->generateResponse($communityTag instanceof CommunityTag, $communityTag);
     }
 
-    public function createCategory(CreateCommunityCategoryRequest $request)
+    public function addTranslation(AddTranslationRequest $request)
     {
-        $communityCategory = CommunityCategory::query()->firstOrNew(['name' => $request->name]);
-        $communityCategory->icon = $request->icon->store("media");
-        $communityCategory->save();
-        return $this->generateResponse($communityCategory instanceof CommunityTag, $communityCategory);
+        return $this->generateResponse(true, $this->service->addCommunityTagTranslation($request->tag, $request->translation, $request->locale));
     }
 
-    public function addTranslation(AddTranslationRequest $request)
+    public function deleteTranslation(AddTranslationRequest $request)
     {
         return $this->generateResponse(true, $this->service->addCommunityTagTranslation($request->tag, $request->translation, $request->locale));
     }

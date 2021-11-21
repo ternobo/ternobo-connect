@@ -31,7 +31,7 @@ class CreateCommunityTagRequest extends BaseRequest
             "cover" => ['required', "mimes:png,jpg"],
 
             // Category
-            "category_id" => ['required', "exits:community_categories,id"],
+            "category_id" => ['required', "exists:community_categories,id"],
         ];
     }
 }
