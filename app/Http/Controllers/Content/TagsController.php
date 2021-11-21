@@ -13,6 +13,7 @@ use App\Ternobo;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Ternobo\TernoboWire\TernoboWire;
 
 class TagsController extends Controller
@@ -39,7 +40,7 @@ class TagsController extends Controller
             ->whereJsonContains('tags', $name)
             ->paginate(10);
 
-        $followed = Following::tags()->where("page_id", Ternobo::currentPage()->id)->where("following", Tag::query()->where("name", $name)->first()->id)->exists();
+        $followed = Auth::check() ? Following::tags()->where("page_id", Ternobo::currentPage()->id)->where("following", Tag::query()->where("name", $name)->first()->id)->exists() : false;
 
         $community = $this->service->getCommunityByHashtag($name);
 
