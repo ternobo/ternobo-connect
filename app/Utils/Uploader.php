@@ -19,4 +19,25 @@ class Uploader
         $image->save(Storage::path("$folder/" . $filename), 70, "jpg");
         return "/$folder/$filename";
     }
+
+    public static function resizeIcon($file, $width = 24, $height = 24)
+    {
+        $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
+        $image->resize($width, $height);
+        $image->save(null, 90, "png");
+        return $file;
+    }
+
+    public static function resizeCover($file)
+    {
+        $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
+        $image = $image->crop(1140, 336);
+        $image->resize(1140, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+
+        $image->save(null, 90, "jpg");
+        return $file;
+    }
 }

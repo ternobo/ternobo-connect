@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateCommunityTagRequest;
 use App\Models\CommunityCategory;
 use App\Models\CommunityTag;
 use App\Services\Admin\CommunityTagsManagementService;
+use App\Utils\Uploader;
 use Illuminate\Http\Request;
 
 class CommunityController extends Controller
@@ -28,7 +29,7 @@ class CommunityController extends Controller
 
     public function store(CreateCommunityTagRequest $request)
     {
-        $communityTag = $this->service->addCommunityTag($request->tag, $request->cover->store("media"), $request->icon->store("media"), $request->category_id);
+        $communityTag = $this->service->addCommunityTag($request->tag, Uploader::resizeCover($request->cover->store("media")), Uploader::resizeIcon($request->icon->store("media")), $request->category_id);
         return $this->generateResponse($communityTag instanceof CommunityTag, $communityTag);
     }
 

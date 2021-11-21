@@ -16,7 +16,7 @@ class CommunityCategoriesController extends Controller
      */
     public function index()
     {
-        return $this->generateResponse(true, CommunityCategory::query()->orderBy("sort", "DESC")->paginate(30));
+        return $this->generateResponse(true, CommunityCategory::query()->orderBy("sort", "DESC")->get());
     }
     /**
      * Store a newly created resource in storage.
