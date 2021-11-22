@@ -29,7 +29,7 @@ class CommunityTagController extends Controller
             return redirect("/feed");
         }
 
-        $communities = CommunityCategory::query()->with(['tags'])->orderBy("sort", "DESC")->get();
+        $communities = CommunityCategory::query()->with(['tags'])->orderBy("sort", "ASC")->get();
         return TernoboWire::render("InterestsSelect", ["communities" => $communities]);
     }
 
