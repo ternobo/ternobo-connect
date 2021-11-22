@@ -5,7 +5,7 @@
 				<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xsm profile-image" img-class="profile-xsm" :src="page.profile" />
 				<div class="page-info d-flex">
 					<strong class="person-name d-flex align-items-center">
-						<user-badges v-if="showBadges" :onlyOne="true" :badgeStatus="page.badge_status" />
+						<user-badges v-if="showBadges" class="me-1" :onlyOne="true" :badgeStatus="page.badge_status" />
 						<span> {{ page.name }}</span>
 					</strong>
 					<small class="person-short-bio">{{ page.short_bio }}</small>
