@@ -1,47 +1,35 @@
 <template>
-	<div class="login-page">
-		<div class="position-sticky" style="top: 0; z-index: 1000; background: #f5f5f5">
-			<div class="login-header">
-				<div class="logo-container">
-					<div href="/" class="logodesktop" v-if="$root.isDesktop">
-						<img :src="appDirection == 'rtl' ? '/images/farsi-logo.svg' : '/images/logo-en-dark.svg'" class="w-100" />
-					</div>
-					<div href="/" class="logo-sm" v-if="!$root.isDesktop">
-						<img src="/images/logo.svg" class="ms-2" />
-					</div>
-					<span class="beta-badge">Beta</span>
-				</div>
-				<div class="login-header-menu">
-					<loading-button :loading="loadingCancel" class="btn btn-text" @click.native="skip">{{ __.get("application.skip") }}</loading-button>
-					<loading-button :loading="loading" class="btn btn-primary" @click.native="next">{{ __.get("application.done") }}</loading-button>
+	<login-layout contentClass="flex-column">
+		<template #header>
+			<loading-button :loading="loadingCancel" class="btn btn-text" @click.native="skip">{{ __.get("application.skip") }}</loading-button>
+			<loading-button :loading="loading" class="btn btn-primary" @click.native="next">{{ __.get("application.done") }}</loading-button>
+		</template>
+		<div class="text-center mt-4 mb-8">
+			<h2 class="font-18 mb-4">{{ __.get("interest-page.title") }}</h2>
+			<p class="text-center" v-html="__.get('interest-page.subtitle')"></p>
+		</div>
+		<div class="community-group mb-8" v-for="community in communities" :key="`community_group_${community.id}`">
+			<h2 class="text-center d-flex align-items-center w-100 justify-content-center mb-5"><img :src="`/${community.icon}`" width="24" class="me-3" /> {{ community.name }}</h2>
+			<div class="d-flex justify-content-center align-items-center flex-wrap">
+				<div class="community-tag clickable" v-for="community_tag in community.tags" :class="{ active: selectedInterests.includes(community_tag.tag) }" @click="toggleSelect(community_tag.tag)" :key="`community_tag_${community_tag.id}`">
+					<img :src="`/${community_tag.icon}`" width="24" class="me-3" />
+					{{ community_tag.name }}
 				</div>
 			</div>
 		</div>
-		<div class="login-content flex-column">
-			<div class="text-center mt-4 mb-8">
-				<h2 class="font-18 mb-4">{{ __.get("interest-page.title") }}</h2>
-				<p class="text-center" v-html="__.get('interest-page.subtitle')"></p>
-			</div>
-			<div class="community-group mb-7" v-for="community in communities" :key="`community_group_${community.id}`">
-				<h2 class="text-center d-flex align-items-center w-100 justify-content-center mb-4"><img :src="`/${community.icon}`" width="24" class="me-3" /> {{ community.name }}</h2>
-				<div class="d-flex justify-content-center align-items-center flex-wrap">
-					<div class="community-tag clickable" v-for="community_tag in community.tags" :class="{ active: selectedInterests.includes(community_tag.tag) }" @click="toggleSelect(community_tag.tag)" :key="`community_tag_${community_tag.id}`">
-						<img :src="`/${community_tag.icon}`" width="24" class="me-3" />
-						{{ community_tag.name }}
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	</login-layout>
 </template>
 
 <script>
 import PageInfoCard from "../Components/Cards/PageInfoCard.vue";
 import LoadingSpinner from "../Components/LoadingSpinner.vue";
 import PageinfocardsSkeleton from "../Components/Skeletons/PageinfocardsSkeleton.vue";
+import App from "../Layouts/App.vue";
+import LoginLayout from "../Layouts/LoginLayout.vue";
 
 export default {
-	components: { PageInfoCard, LoadingSpinner, PageinfocardsSkeleton },
+	layout: App,
+	components: { PageInfoCard, LoadingSpinner, PageinfocardsSkeleton, LoginLayout },
 	props: {
 		communities: { default: [] },
 	},
