@@ -31,6 +31,7 @@ class CommunityTag extends Model
         $locale = App::getLocale();
         $translation = CommunityTranslation::query()->where("tag", $data['name'])->where("locale", $locale)->first();
         $data['name'] = $translation instanceof CommunityTranslation ? $translation->translation : $data['name'];
+        $data['tag'] = $this->tag->name;
         return $data;
     }
 
