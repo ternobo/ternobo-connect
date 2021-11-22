@@ -1,8 +1,8 @@
 <template>
 	<login-layout contentClass="flex-column">
 		<template #header>
-			<loading-button :loading="loadingCancel" class="btn btn-text" @click.native="skip">{{ __.get("application.skip") }}</loading-button>
-			<loading-button :loading="loading" class="btn btn-primary" @click.native="next">{{ __.get("application.done") }}</loading-button>
+			<loading-button :loading="loadingCancel" class="btn btn-text me-4" @click.native="skip">{{ __.get("application.skip") }}</loading-button>
+			<loading-button :loading="loading" class="btn btn-primary" style="width: 140px" :disabled="selectedInterests.length < 1" @click.native="next">{{ __.get("application.done") }}</loading-button>
 		</template>
 		<div class="text-center mt-4 mb-8">
 			<h2 class="font-18 mb-4">{{ __.get("interest-page.title") }}</h2>
