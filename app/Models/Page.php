@@ -16,6 +16,9 @@ class Page extends Model
     use HasUser;
 
     protected $dates = ['deleted_at'];
+    protected $casts = [
+        'visible' => "boolean",
+    ];
 
     public function contactData()
     {

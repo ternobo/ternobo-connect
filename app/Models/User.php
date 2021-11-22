@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Facade\UserBadgeService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -85,7 +86,8 @@ class User extends Authenticatable implements Messageable
     protected $casts = [
         'email_verified_at' => 'datetime',
         "is_admin" => "boolean",
-        "two_factor" => "boolean"
+        "two_factor" => "boolean",
+        "created_at" => "datetime"
     ];
 
     /**
@@ -577,6 +579,7 @@ class User extends Authenticatable implements Messageable
             $array['personal_page_id'] = $this->personalPage->id;
             $data['blocked'] = Auth::check() ? BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $array['personal_page_id'])->exists() : false;
         }
+        $array['badge_status'] = UserBadgeService::getUserBadge($array['id']);
         if (!ActiveSession::isAdmin()) {
             unset($array['is_admin']);
         }

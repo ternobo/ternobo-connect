@@ -19,6 +19,8 @@ class CommunityTagController extends Controller
     public function __construct(CommunityTagService $service)
     {
         $this->service = $service;
+
+        $this->middleware('auth')->only(['interestsPages', "setInterests", "skipInterestPage"]);
     }
 
     public function interestsPages()
