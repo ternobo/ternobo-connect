@@ -34,7 +34,7 @@
     align-items: center;
 
     .tag-name {
-        background: linear-gradient(332.91deg, #0094FF 22.26%, #C852FF 68.57%);
+        background: linear-gradient(135deg, #0094FF 22.26%, #C852FF 68.57%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         -webkit-user-select: none;
@@ -79,6 +79,7 @@
             flex-wrap: wrap;
             width: 100%;
             margin: 0 -0.5rem;
+            justify-content: center;
 
             >* {
                 max-width: 20%;

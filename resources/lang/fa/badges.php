@@ -1,7 +1,7 @@
 <?php
 return [
-    "ternobomate" => "Ternobo Mate",
-    "supporter" => "Supporter",
-    "newcommer" => "Newcomer",
-    'visitor' => "Visitor"
+    "ternobomate" => "هم‌ترنوبویی",
+    "supporter" => "حمایت‌کننده",
+    "newcommer" => "تازه‌وارد",
+    'visitor' => "بازدیدکننده"
 ];

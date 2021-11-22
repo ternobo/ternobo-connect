@@ -42,6 +42,16 @@ $space in $spacings {
 
 }
 
+.fade {
+    opacity: 0 !important;
+    transition: 0.1s all;
+}
+
+.show {
+    opacity: 1 !important;
+    transition: 0.1s all;
+}
+
 .rounded-circle {
     border-radius: 50%;
 }
