@@ -1,15 +1,17 @@
 <?php
 
-use App\Http\Controllers\AutoUpdateController;
-use App\Http\Middleware\Authenticate;
-use App\Http\Middleware\FollowMiddlware;
-use App\Http\Middleware\FullAccessUserMiddleware;
-use App\Http\Middleware\WebAdminMiddleware;
-use App\Models\Post;
-use Illuminate\Support\Facades\Broadcast;
-use Illuminate\Support\Facades\Route;
-use Laravel\Passport\Passport;
 use Ternobo\TernoboWire\TernoboWire;
+use Laravel\Passport\Passport;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Broadcast;
+use App\Models\Post;
+use App\Http\Middleware\WebAdminMiddleware;
+use App\Http\Middleware\FullAccessUserMiddleware;
+use App\Http\Middleware\FollowMiddlware;
+use App\Http\Middleware\Authenticate;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\AutoUpdateController;
+use App\Http\Middleware\CommunityTagSelectMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +57,7 @@ require base_path("routes/auth_routes.php");
  * Auth End
  */
 
-Route::middleware([Authenticate::class])->group(function () {
+Route::middleware(["auth.web"])->group(function () {
     /**
      * Private Files
      */
@@ -93,7 +95,7 @@ Route::middleware([Authenticate::class])->group(function () {
     Route::post("/tags/{tag}/follow", "Content\TagsController@toggleFollowTag")->middleware(FullAccessUserMiddleware::class);
     //Follow Actions End
 
-    Route::middleware([FollowMiddlware::class])->group(function () {
+    Route::middleware([FollowMiddlware::class, CommunityTagSelectMiddleware::class])->group(function () {
         Route::get('/feed', 'Content\FeedController@index')->name('home');
 
         Route::post("/can-donate", "Donation\DontaionsController@canEnableDonate")->middleware(FullAccessUserMiddleware::class);
@@ -273,7 +275,13 @@ Route::middleware([Authenticate::class])->group(function () {
 
 Route::resource("/posts", "PostController")->only(['store', 'update', 'destroy', "show"]);
 
+// Tags
 Route::get("/tags/{name}", "Content\TagsController@index");
+require base_path("routes/community_tags.php");
+
+Route::middleware([WebAdminMiddleware::class])->prefix("management")->group(function () {
+    require base_path("routes/management_rotues.php");
+});
 
 Route::post("/contact/contact-option", "Profile\ContactsController@getContactOptions");
 Route::post("/contact/website-option", "Profile\ContactsController@getWebsiteOptions");

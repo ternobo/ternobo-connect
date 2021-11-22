@@ -15,7 +15,7 @@
 		<div class="card-body p-0">
 			<div class="list-group list-group-flush">
 				<wire-link :href="shared.fullAccess ? '/tips' : null" :linkDisabled="!shared.fullAccess" :class="{ disabled: !shared.fullAccess }" as="a" class="list-group-item border-0 headermenu-item">
-					<a class="m-0"><i class="material-icons-outlined">savings</i> {{ __.choice("tips.tip", 2) }}</a>
+					<a class="m-0"><i class="material-icons-outlined">savings</i> {{ __.get("monitization.monitization") }}</a>
 				</wire-link>
 				<wire-link href="/settings" as="a" class="list-group-item border-0 headermenu-item">
 					<a class="m-0"><i class="material-icons-outlined">settings</i> {{ __.get("settings.settings") }} </a>

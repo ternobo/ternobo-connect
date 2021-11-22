@@ -1,68 +1,65 @@
 <template>
-	<div class="login-page">
-		<login-header></login-header>
-		<div class="login-content">
-			<div class="about-ternobo" v-if="$root.isDesktop">
-				<h1 class="font-weight-bold mb-7 font-20">{{ __.get("landing.welcome") }}</h1>
-				<p class="line-height-32px" :style="{ marginBottom: image.top }">
-					{{ __.get("landing.about-ternobo") }}
-				</p>
-				<img class="position-absolute" :src="image.url" :width="image.width" />
-			</div>
-			<div class="login-form">
-				<div class="login-form w-100">
-					<div class="login-card card w-100">
-						<div class="card-body">
-							<div v-if="!forgotpassword">
-								<label class="font-weight-bold font-20 mb-7 text-dark">{{ __.get("application.login") }}</label>
-								<div v-if="verifyStep">
-									<label class="mb-7 font-12">{{ __.get("landing.auth_app_text") }}</label>
-									<div class="text-start d-flex flex-column align-items-center">
-										<otp-input input-class="w-100" class="material--sm mb-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" v-if="!recovery" />
-										<small class="text-muted clickable" @click="recovery = true" v-if="!recovery">{{ __.get("landing.user_recovery_code") }}</small>
+	<login-layout>
+		<div class="about-ternobo" v-if="$root.isDesktop">
+			<h1 class="font-weight-bold mb-7 font-20">{{ __.get("landing.welcome") }}</h1>
+			<p class="line-height-32px" :style="{ marginBottom: image.top }">
+				{{ __.get("landing.about-ternobo") }}
+			</p>
+			<img class="position-absolute" :src="image.url" :width="image.width" />
+		</div>
+		<div class="login-form">
+			<div class="login-form w-100">
+				<div class="login-card card w-100">
+					<div class="card-body">
+						<div v-if="!forgotpassword">
+							<label class="font-weight-bold font-20 mb-7 text-dark">{{ __.get("application.login") }}</label>
+							<div v-if="verifyStep">
+								<label class="mb-7 font-12">{{ __.get("landing.auth_app_text") }}</label>
+								<div class="text-start d-flex flex-column align-items-center">
+									<otp-input input-class="w-100" class="material--sm mb-1 text-center" @completed="verifyCode" v-model="code" :numInputs="6" v-if="!recovery" />
+									<small class="text-muted clickable" @click="recovery = true" v-if="!recovery">{{ __.get("landing.user_recovery_code") }}</small>
 
-										<input class="form-control" :placeholder="__.get('landing.enter_recover_code')" v-model="code" maxlength="8" v-if="recovery" />
-										<small class="text-muted clickable" @click="recovery = false" v-if="recovery">{{ __.get("landing.use_auth_code") }}</small>
-									</div>
-									<div class="login-button-container">
-										<loading-button :loading="loading" class="btn btn-lg btn-primary" @click.native="verifyCode">{{ __.get("application.login") }}</loading-button>
-									</div>
+									<input class="form-control" :placeholder="__.get('landing.enter_recover_code')" v-model="code" maxlength="8" v-if="recovery" />
+									<small class="text-muted clickable" @click="recovery = false" v-if="recovery">{{ __.get("landing.use_auth_code") }}</small>
 								</div>
-								<div v-else>
-									<div>
-										<div>
-											<label class="inputlabel font-12 font-demibold">{{ __.get("application.username") }} <span class="text-superlight"> / </span>{{ __.get("validation.attributes.phone_number") }}</label>
-											<input type="text" v-model="username" class="form-control fill-light lg-input" />
-										</div>
-										<div class="mt-4">
-											<label class="inputlabel font-12 font-demibold">{{ __.get("application.password") }}</label>
-											<div class="d-flex flex-column align-items-end">
-												<password-input class="w-100" v-model="password"></password-input>
-												<small class="clickable hover-dark font-12 mt-3" @click="forgotpassword = true">{{ __.get("landing.forgot_password") }}</small>
-											</div>
-										</div>
-										<div class="login-button-container">
-											<loading-button :loading="loading" class="btn btn-lg btn-primary" @click.native="login">{{ __.get("application.login") }}</loading-button>
-										</div>
-									</div>
-									<div class="d-flex justify-content-center">
-										<a href="/register" class="text-gray-medium-dark font-demibold font-16 hover-dark">
-											{{ __.get("landing.register") }}
-										</a>
-									</div>
+								<div class="login-button-container">
+									<loading-button :loading="loading" class="btn btn-lg btn-primary" @click.native="verifyCode">{{ __.get("application.login") }}</loading-button>
 								</div>
 							</div>
-							<forgot-password v-else @back="forgotpassword = false" />
+							<div v-else>
+								<div>
+									<div>
+										<label class="inputlabel font-12 font-demibold">{{ __.get("application.username") }} <span class="text-superlight"> / </span>{{ __.get("validation.attributes.phone_number") }}</label>
+										<input type="text" v-model="username" class="form-control fill-light lg-input" />
+									</div>
+									<div class="mt-4">
+										<label class="inputlabel font-12 font-demibold">{{ __.get("application.password") }}</label>
+										<div class="d-flex flex-column align-items-end">
+											<password-input class="w-100" v-model="password"></password-input>
+											<small class="clickable hover-dark font-12 mt-3" @click="forgotpassword = true">{{ __.get("landing.forgot_password") }}</small>
+										</div>
+									</div>
+									<div class="login-button-container">
+										<loading-button :loading="loading" class="btn btn-lg btn-primary" @click.native="login">{{ __.get("application.login") }}</loading-button>
+									</div>
+								</div>
+								<div class="d-flex justify-content-center">
+									<a href="/register" class="text-gray-medium-dark font-demibold font-16 hover-dark">
+										{{ __.get("landing.register") }}
+									</a>
+								</div>
+							</div>
 						</div>
+						<forgot-password v-else @back="forgotpassword = false" />
 					</div>
 				</div>
-				<div class="copyright-text d-flex align-items-center justify-content-center" style="height: 20px">
-					<img :src="appDirection == 'rtl' ? '/images/farsi-logo.svg' : '/images/logo-en-dark.svg'" class="me-1" height="20" />
-					<span class="font-14" style="height: 13px; line-height: 1">© {{ lang == "fa" ? "۱۴۰۰" : "2021" }}</span>
-				</div>
+			</div>
+			<div class="copyright-text d-flex align-items-center justify-content-center" style="height: 20px">
+				<img :src="appDirection == 'rtl' ? '/images/farsi-logo.svg' : '/images/logo-en-dark.svg'" class="me-1" height="20" />
+				<span class="font-14" style="height: 13px; line-height: 1">© {{ lang == "fa" ? "۱۴۰۰" : "2021" }}</span>
 			</div>
 		</div>
-	</div>
+	</login-layout>
 </template>
 
 <script>
@@ -71,6 +68,7 @@ import LoginHeader from "../Components/App/LoginHeader.vue";
 import PasswordInput from "../Components/inputs/PasswordInput.vue";
 import OtpInput from "../Components/OtpInput/OtpInput.vue";
 import App from "../Layouts/App.vue";
+import LoginLayout from "../Layouts/LoginLayout.vue";
 export default {
 	data() {
 		return {
@@ -174,6 +172,6 @@ export default {
 		];
 		this.image = images[imageIndex];
 	},
-	components: { LoginHeader, ForgotPassword, OtpInput, PasswordInput },
+	components: { LoginHeader, ForgotPassword, OtpInput, PasswordInput, LoginLayout },
 };
 </script>

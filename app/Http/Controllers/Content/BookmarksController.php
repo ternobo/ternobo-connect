@@ -13,11 +13,8 @@ class BookmarksController extends Controller
 
     public function bookmarks()
     {
-        $bookmarks = Bookmark::with("post")
-            ->with("post.page")
-            ->with("post.likes")
-            ->with("post.mutualLikes")
-            ->with("post.category")
+        $bookmarks = Bookmark::query()
+            ->with("post")
             ->where("user_id", Auth::user()->id)->latest()->paginate(10);
         return TernoboWire::render("Bookmarks", array("posts" => $bookmarks));
     }

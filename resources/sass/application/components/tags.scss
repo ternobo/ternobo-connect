@@ -6,8 +6,8 @@
 
 .tag-card {
     @extend .card;
-    max-width: 412px;
-    width: 100%;
+    min-width: 412px;
+    max-width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -23,6 +23,70 @@
         font-size: $text-sm;
         color: $dark;
         font-weight: 600;
-        margin-#{$end}: 8px;
+        margin-#{$end}: 0.75rem;
     }
+}
+
+
+.community-tag-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .tag-name {
+        background: linear-gradient(332.91deg, #0094FF 22.26%, #C852FF 68.57%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        line-height: 20px;
+
+    }
+
+    .community-cover {
+        width: 100%;
+        min-height: 200px;
+
+        >img {
+            width: 100%;
+            max-height: 336px;
+            -o-object-fit: cover;
+            object-fit: cover;
+        }
+    }
+
+    .tag-card {
+        margin-top: -40px;
+        z-index: 1;
+
+        .tag {
+            display: flex;
+            align-items: center;
+            line-height: 1;
+        }
+    }
+
+
+    .top-active-users {
+        width: 100%;
+        margin: 3.25rem 0;
+
+
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            margin: 0 -0.5rem;
+
+            >* {
+                max-width: 20%;
+                flex: 20%;
+                padding: 0 0.5rem;
+            }
+        }
+
+    }
+
 }

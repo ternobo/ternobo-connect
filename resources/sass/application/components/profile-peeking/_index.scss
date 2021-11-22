@@ -6,6 +6,10 @@
         align-items: center;
         max-width: calc(100% - 32px);
 
+        .profile-image {
+            margin-#{$end}: 12px;
+        }
+
         .page-info {
             display: flex;
             flex-direction: column;
@@ -21,6 +25,13 @@
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 max-width: 100%;
+
+                span {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    max-width: 100%;
+                }
             }
 
             .person-short-bio {
@@ -31,7 +42,7 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                max-width: 104px;
+
             }
         }
     }

@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-use App\HasUser;
-use App\Ternobo;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
+use App\Ternobo;
+use App\HasUser;
+use App\Facade\UserBadgeService;
+use App\Facade\MonitizationService;
 
 class Page extends Model
 {
@@ -15,6 +17,9 @@ class Page extends Model
     use HasUser;
 
     protected $dates = ['deleted_at'];
+    protected $casts = [
+        'visible' => "boolean",
+    ];
 
     public function contactData()
     {
@@ -116,8 +121,8 @@ class Page extends Model
         $data = parent::toArray();
 
         $gateways = UserOption::getOption("payment_gateways", UserOption::$defaultPaymentOption, $data['user_id']);
-
-        $data['has_donate'] = $gateways['zarinpal']['enabled'];
+        $data['badge_status'] = UserBadgeService::getUserBadge($data['user_id']);
+        $data['has_donate'] = $gateways['zarinpal']['enabled'] && MonitizationService::getMonitizationStatus(User::find($data['user_id']))['status'];
         $data['blocked'] = Auth::check() ? BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $data['id'])->exists() : false;
 
         $data['contact_data'] = isset($data['contact_data']) && !$data['blocked'] ? json_decode($data['contact_data']['data']) : null;

@@ -8,7 +8,10 @@
 			<profile-peeking class="publisher" position="bottom" :page="post_data.page">
 				<lazy-image class="profile-xsm mb-0" img-class="profile-xsm" :src="post_data.page.profile" />
 				<div class="ms-3">
-					<strong class="publisher--name line-height-24px"> {{ post_data.page.name }} <i v-if="post_data.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+					<strong class="publisher--name line-height-24px">
+						<user-badges class="me-1" :onlyOne="true" :badgeStatus="post_data.page.badge_status" />
+						{{ post_data.page.name }}
+					</strong>
 					<div class="d-flex flex-row m-0 align-items-center">
 						<span class="text-gray-medium-dark font-10">
 							{{ post_data.page.short_bio }}

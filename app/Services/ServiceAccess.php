@@ -16,7 +16,7 @@ abstract class ServiceAccess
 
 
     /**
-     * Access Types - only rest implemented yet.
+     * Access Types - only HTTP-REST implemented yet.
      */
     public $AccessTypes = [
         "rest" => 'HTTP_REST',
@@ -59,11 +59,12 @@ abstract class ServiceAccess
         $headers = [
             "application" => "Ternobo",
         ];
+        $userId = null;
+
         if ($this->isAuthrequired) {
             $headers['user'] = Base64::encode(json_encode(Auth::user()));
+            $userId = Auth::check() ? Auth::user()->id : 0;
         }
-
-        $userId = Auth::check() ? Auth::user()->id : 0;
 
         return Http::withHeaders(["Authorization" => "Token " . $this->applicationPassword, "userId" => $userId])
             ->retry(2)
