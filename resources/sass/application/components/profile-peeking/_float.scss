@@ -7,7 +7,6 @@
     box-shadow: $notification-shadow;
     width: 180px;
 
-
     &.profile-peeking-position-start {
         #{$start}: -192px;
         top: 0;
@@ -28,9 +27,13 @@
 
 
     .header-section {
+        position: relative;
 
-        .badges {
-            float: $end;
+        .user-badge {
+            position: absolute;
+            #{$end}: 1rem;
+            bottom: 0.25rem;
+            gap: 8px;
         }
 
         div.profile-peeking-cover {

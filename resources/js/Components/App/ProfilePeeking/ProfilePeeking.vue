@@ -3,8 +3,11 @@
 		<slot>
 			<div class="profile-info-link">
 				<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xsm profile-image" img-class="profile-xsm" :src="page.profile" />
-				<div class="page-info">
-					<strong class="person-name">{{ page.name }} <i v-if="page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+				<div class="page-info d-flex">
+					<strong class="person-name d-flex align-items-center">
+						<user-badges v-if="showBadges" :onlyOne="true" :badgeStatus="page.badge_status" />
+						<span> {{ page.name }}</span>
+					</strong>
 					<small class="person-short-bio">{{ page.short_bio }}</small>
 				</div>
 			</div>
@@ -17,6 +20,8 @@
 						<lazy-image class="profile-peeking-cover" :src="page.cover" />
 					</div>
 					<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-standard" img-class="profile-standard" :src="page.profile" />
+
+					<user-badges :badgeStatus="page.badge_status" />
 				</div>
 				<div class="px-3 pb-3 d-flex flex-column">
 					<strong class="text-gray-medium-dark font-demibold font-10">@{{ page.slug }}</strong>
@@ -31,7 +36,7 @@
 
 <script>
 export default {
-	props: { page: { required: true }, position: { default: "start" } },
+	props: { page: { required: true }, position: { default: "start" }, showBadges: { default: false } },
 	data() {
 		return {
 			showFloat: false,

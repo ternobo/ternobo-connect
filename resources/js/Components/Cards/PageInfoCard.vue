@@ -8,7 +8,7 @@
 			<div class="userinfo-card text-center card-body pt-4">
 				<span class="text-dark text-center">
 					{{ page.name }}
-					<i v-if="page.type === 'personal' && page.user.is_verified" class="verificationcheck">check_circle</i>
+					<user-badges class="me-1" :onlyOne="true" :badgeStatus="page.badge_status" />
 				</span>
 				<small class="text-muted text-center mt-2 px-3">
 					{{ page.short_bio }}

@@ -13,7 +13,10 @@
 				<wire-link :href="'/' + page.slug" class="userinfo">
 					<lazy-image class="mb-0" :loadingColor="skeletonOptions.profileColor" :class="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" :imgClass="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" :src="page.profile"></lazy-image>
 					<div class="page-name d-flex flex-column">
-						<strong> {{ page.name }} <i v-if="page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+						<strong class="d-flex align-items-center">
+							<user-badges class="me-1" :onlyOne="true" :badgeStatus="page.badge_status" />
+							{{ page.name }}
+						</strong>
 						<span class="shortbio"> {{ page.short_bio }} </span>
 					</div>
 				</wire-link>

@@ -86,6 +86,8 @@
             .publisher--name {
                 font-size: 0.875rem;
                 font-weight: 600;
+                display: flex;
+                align-items: center;
             }
 
             .publisher--shortbio {

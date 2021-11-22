@@ -9,9 +9,9 @@
 			<div class="profile-info">
 				<ProfileImage ref="profileImage" :canChange="canEdit && !profileEdit" :class="{ disabled: profileEdit }" class="profile-xxlg" imgClass="profile-xxlg" :src="page.profile"></ProfileImage>
 				<span class="name d-flex align-items-center">
-					<strong class="name">
+					<strong class="name d-flex align-items-center">
 						{{ page.name }}
-						<i v-if="page.user.is_verified === 1" class="verificationcheck ms-1 font-20">check_circle</i>
+						<user-badges class="ms-2" :badgeStatus="page.badge_status" />
 					</strong>
 				</span>
 				<small class="short_bio">{{ page.short_bio }}</small>

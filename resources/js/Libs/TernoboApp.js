@@ -46,6 +46,7 @@ TernoboApp.install = function (Vue, options) {
     Vue.component("MaterialTextArea", MaterialTextArea);
 
     Vue.component("tabs", Tabs);
+    Vue.component("user-badges", () => import("../Components/UserBadge.vue"));
     Vue.component("tab", Tab);
     Vue.component("base-layout", BaseLayout);
     Vue.component("sidebar-left", LeftSidbar);
