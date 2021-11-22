@@ -16,7 +16,7 @@
 						<span class="text-gray-medium-dark font-10">
 							{{ post_data.page.short_bio }}
 						</span>
-						<span class="ms-2 text-gray-medium-dark opacity-70 font-10">
+						<span class="ms-2 text-gray-medium-dark font-10">
 							{{ post_time }}
 						</span>
 					</div>
