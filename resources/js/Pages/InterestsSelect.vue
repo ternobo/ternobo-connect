@@ -12,7 +12,7 @@
 					<span class="beta-badge">Beta</span>
 				</div>
 				<div class="login-header-menu">
-					<loading-button :loading="loading" class="btn btn-text" @click.native="skip">{{ __.get("application.skip") }}</loading-button>
+					<loading-button :loading="loadingCancel" class="btn btn-text" @click.native="skip">{{ __.get("application.skip") }}</loading-button>
 					<loading-button :loading="loading" class="btn btn-primary" @click.native="next">{{ __.get("application.done") }}</loading-button>
 				</div>
 			</div>
@@ -25,7 +25,7 @@
 			<div class="community-group mb-7" v-for="community in communities" :key="`community_group_${community.id}`">
 				<h2 class="text-center d-flex align-items-center w-100 justify-content-center mb-4"><img :src="`/${community.icon}`" width="24" class="me-3" /> {{ community.name }}</h2>
 				<div class="d-flex justify-content-center align-items-center flex-wrap">
-					<div class="community-tag clickable" v-for="community_tag in community.tags" :class="{ active: selectedInterests.includes(community_tag.name) }" @click="toggleSelect(community_tag.name)" :key="`community_tag_${community_tag.id}`">
+					<div class="community-tag clickable" v-for="community_tag in community.tags" :class="{ active: selectedInterests.includes(community_tag.tag) }" @click="toggleSelect(community_tag.tag)" :key="`community_tag_${community_tag.id}`">
 						<img :src="`/${community_tag.icon}`" width="24" class="me-3" />
 						{{ community_tag.name }}
 					</div>
@@ -66,7 +66,7 @@ export default {
 				.then(() => (this.loading = false));
 		},
 		skip() {
-			this.loading = true;
+			this.loadingCancel = true;
 			axios
 				.post("/interests/skip")
 				.then((response) => {
@@ -74,12 +74,13 @@ export default {
 					window.location = "/feed";
 				})
 				.catch((err) => console.log(err))
-				.then(() => (this.loading = false));
+				.then(() => (this.loadingCancel = false));
 		},
 	},
 	data() {
 		return {
 			loading: false,
+			loadingCancel: false,
 			pages: [],
 			followings: 0,
 			next_page_url: null,
