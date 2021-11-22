@@ -14,7 +14,10 @@
 					<wire-link :href="'/' + like.page.slug" class="userinfo">
 						<lazy-image class="mb-0" :class="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" :loadingColor="skeletonOptions.profileColor" :imgClass="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" :src="like.page.profile"></lazy-image>
 						<div class="page-name d-flex flex-column">
-							<strong> {{ like.page.name }} <i v-if="like.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+							<strong class="d-flex align-items-center">
+								<user-badges class="me-1" :onlyOne="true" :badgeStatus="page.badge_status" />
+								{{ like.page.name }}
+							</strong>
 							<span class="shortbio"> {{ like.page.short_bio }} </span>
 						</div>
 					</wire-link>

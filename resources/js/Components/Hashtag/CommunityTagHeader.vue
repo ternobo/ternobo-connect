@@ -33,7 +33,7 @@
 			<div class="flex-container" v-else>
 				<div v-for="page in topActiveUsers" :key="`skeleton_top_user_${page.id}`">
 					<div class="d-flex align-items-center card p-3">
-						<profile-peeking class="w-100" position="bottom" :page="page"></profile-peeking>
+						<profile-peeking :showBadges="true" class="w-100" position="bottom" :page="page"></profile-peeking>
 					</div>
 				</div>
 			</div>

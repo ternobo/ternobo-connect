@@ -119,6 +119,10 @@ div.page-cover {
                 font-size: $text-lg;
                 line-height: 1.5;
 
+                .user-badge {
+                    gap: 4px
+                }
+
                 @media screen and (max-width: $sm-size) {
                     font-weight: 600;
                     font-size: $text-xsm;

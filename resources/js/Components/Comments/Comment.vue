@@ -14,18 +14,13 @@
 				<profile-peeking position="bottom" class="d-flex align-items-center" :page="comment.page">
 					<img :src="comment.page.profile" class="profile-xxsm" />
 					<div class="pagedetail">
-						<span class="name">
-							{{ comment.page.name }}
-						</span>
+						<span class="name"> <user-badges class="me-1" :onlyOne="true" :showSupporter="comment.tip_amount != null" :badgeStatus="comment.page.badge_status" /> {{ comment.page.name }} </span>
 						<small class="short-bio" v-if="comment.page.short_bio">
 							{{ comment.page.short_bio }}
 						</small>
 					</div>
 				</profile-peeking>
 				<div class="d-flex align-items-center">
-					<span>
-						<span class="donate-badge" v-if="comment.tip_amount != null"> <i class="material-icons-outlined">savings</i> IRT {{ formatNumber(comment.tip_amount, "0,0") }}</span>
-					</span>
 					<span class="comment-time">{{ comment_time }}</span>
 					<div>
 						<dropdown-menu size="lg" variant="white" toggle-class="text-decoration-none" no-caret>
