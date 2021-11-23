@@ -13,13 +13,13 @@
 				<div class="notification-text">
 					<profile-peeking position="bottom" class="title clickable" v-if="notifications[0].sender" :page="notifications[0].sender">
 						<span>{{ notifications[0].sender.name }}</span>
-						<span class="font-weight-normal date-text">{{ createdAt }}</span>
+						<div class="ms-2 font-12 text-gray-medium-dark font-demibold">{{ __.choice("notifications.donated-your-post", notifications.length) }}</div>
 					</profile-peeking>
 					<div class="title" v-else>
 						<span>{{ __.get("application.guest-user") }}</span>
-						<span class="font-weight-normal date-text">{{ createdAt }}</span>
+						<div class="ms-2 font-12 text-gray-medium-dark font-demibold">{{ __.choice("notifications.donated-your-post", notifications.length) }}</div>
 					</div>
-					<div class="action">{{ __.choice("notifications.donated-your-post", notifications.length) }}</div>
+					<span class="font-12 text-gray-medium-dark font-demibold">{{ createdAt }}</span>
 				</div>
 			</div>
 			<i class="material-icons-outlined text-success">savings</i>

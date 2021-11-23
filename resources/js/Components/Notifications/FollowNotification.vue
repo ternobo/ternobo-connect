@@ -11,9 +11,9 @@
 						<profile-peeking position="bottom" :page="notifications[0].sender">{{ notifications[0].sender.name }}</profile-peeking>
 						<profile-peeking v-if="notifications[1]" position="bottom" :page="notifications[1].sender">{{ notifications[1].sender.name }}</profile-peeking>
 						<span v-if="notifications.length > 2">{{ __.get("application.more-people", { number: notifications.length - 2 }) }}</span>
-						<span class="font-weight-normal date-text">{{ createdAt }}</span>
+						<div class="ms-2 font-12 text-gray-medium-dark font-demibold">{{ __.choice("notifications.following-you", notifications.length) }}</div>
 					</div>
-					<div class="action">{{ __.choice("notifications.following-you", notifications.length) }}</div>
+					<span class="font-12 text-gray-medium-dark font-demibold">{{ createdAt }}</span>
 				</div>
 			</div>
 			<i class="material-icons text-action">group_add</i>
