@@ -68,6 +68,12 @@ class Post extends Model
         return self::with(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
     }
 
+    public function loadRelations()
+    {
+        return $this->load(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
+    }
+
+
     public static function scriptStripper($input)
     {
         return preg_replace('#<script(.*?)>(.*?)</script>#is', '', $input);

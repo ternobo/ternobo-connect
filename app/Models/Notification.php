@@ -56,6 +56,10 @@ class Notification extends Model
         if ($data['action'] == 'comment' || $data['action'] == 'reply') {
             $data['comment'] = $this->comment;
         }
+
+        $data["notifiable"] = $this->notifiable_type == Post::class ? $this->notifiable->loadRelations() : $this->notifiable;
+
+
         return $data;
     }
 

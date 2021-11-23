@@ -164,16 +164,28 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 16px;
+        margin-bottom: 1.5rem;
 
-        .title {
-            font-weight: 600;
-            font-size: $text-sm;
-            margin-#{$end}: 8px;
+        .notification-info {
+            display: flex;
+            align-items: center;
 
-            @media screen and (max-width:$sm-size) {
-                margin-#{$end}: 4px;
-                font-size: $text-xsm;
+            .icon {
+                margin-#{$end}: 1rem
+            }
+
+            .title {
+                font-size: 1rem;
+                color: $black;
+                line-height: 1.5rem;
+                font-weight: 600;
+            }
+
+            .subtitle {
+                font-size: 0.75rem;
+                color: $gray-medium-dark;
+                line-height: 20px;
+                font-weight: 600;
             }
         }
 
