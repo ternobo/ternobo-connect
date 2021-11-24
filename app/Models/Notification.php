@@ -14,6 +14,19 @@ class Notification extends Model
         'updated_at' => 'datetime',
     ];
 
+    protected $fillable = [
+        "from",
+        "to",
+        'title',
+        "text",
+        "notifiable_type",
+        "notifiable_id",
+        "pin",
+        "icon",
+        "meta"
+    ];
+
+
     public function sender()
     {
         return $this->belongsTo("App\Models\Page", "from");
