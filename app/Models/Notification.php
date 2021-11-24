@@ -14,6 +14,19 @@ class Notification extends Model
         'updated_at' => 'datetime',
     ];
 
+    protected $fillable = [
+        "from",
+        "to",
+        'title',
+        "text",
+        "notifiable_type",
+        "notifiable_id",
+        "pin",
+        "icon",
+        "meta"
+    ];
+
+
     public function sender()
     {
         return $this->belongsTo("App\Models\Page", "from");
@@ -56,6 +69,10 @@ class Notification extends Model
         if ($data['action'] == 'comment' || $data['action'] == 'reply') {
             $data['comment'] = $this->comment;
         }
+
+        $data["notifiable"] = $this->notifiable_type == Post::class ? $this->notifiable->loadRelations() : $this->notifiable;
+
+
         return $data;
     }
 

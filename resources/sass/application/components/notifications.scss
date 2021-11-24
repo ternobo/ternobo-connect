@@ -110,17 +110,43 @@
         @extend .text-muted;
     }
 
+    .post-content {
+        padding: 1.5rem;
+        word-wrap: break-word;
+
+
+        @for $i from 1 through 6 {
+            h#{$i} {
+                font-size: $text-sm;
+                line-height: 1.5;
+            }
+        }
+
+        .post-content--text:not(:last-child) {
+            margin-bottom: 16px;
+        }
+
+        .slider-media-image {
+            margin: 0;
+        }
+
+    }
+
     .notification-content {
         background: $white;
         display: flex;
         flex-direction: column;
-        margin-top: 16px;
+        margin-top: 1.5rem;
         box-shadow: $card-shadow;
+        padding: 1.5rem;
+
+        .post-viewer {
+            box-shadow: $bg-shadow;
+            margin-top: 1.5rem;
+        }
 
         .comment-text {
-            margin: 1.5rem;
-            margin-bottom: 0;
-            padding: 16px 1.5rem;
+            padding: 1.5rem;
             background-color: $body-bg;
             font-size: $text-xsm;
         }
@@ -130,28 +156,6 @@
                 unicode-bidi: -moz-plaintext;
                 unicode-bidi: plaintext;
             }
-        }
-
-        .post-content {
-            padding: 1.5rem;
-            word-wrap: break-word;
-
-
-            @for $i from 1 through 6 {
-                h#{$i} {
-                    font-size: $text-sm;
-                    line-height: 1.5;
-                }
-            }
-
-            .post-content--text:not(:last-child) {
-                margin-bottom: 16px;
-            }
-
-            .slider-media-image {
-                margin: 0;
-            }
-
         }
     }
 }
@@ -164,16 +168,28 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 16px;
+        margin-bottom: 1.5rem;
 
-        .title {
-            font-weight: 600;
-            font-size: $text-sm;
-            margin-#{$end}: 8px;
+        .notification-info {
+            display: flex;
+            align-items: center;
 
-            @media screen and (max-width:$sm-size) {
-                margin-#{$end}: 4px;
-                font-size: $text-xsm;
+            .icon {
+                margin-#{$end}: 1rem
+            }
+
+            .title {
+                font-size: 1rem;
+                color: $black;
+                line-height: 1.5rem;
+                font-weight: 600;
+            }
+
+            .subtitle {
+                font-size: 0.75rem;
+                color: $gray-medium-dark;
+                line-height: 20px;
+                font-weight: 600;
             }
         }
 

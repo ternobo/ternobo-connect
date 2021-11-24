@@ -10,16 +10,16 @@
 				<div class="notification-text">
 					<profile-peeking position="bottom" class="title clickable" :page="notifications[0].sender">
 						<span>{{ notifications[0].sender.name }}</span>
-						<span class="font-weight-normal date-text">{{ createdAt }}</span>
+						<div class="ms-2 font-12 text-gray-medium-dark font-demibold">{{ __.get("notifications.commented-your-post") }}</div>
 					</profile-peeking>
-					<div class="action">{{ __.get("notifications.commented-your-post") }}</div>
+					<span class="font-12 text-gray-medium-dark font-demibold">{{ createdAt }}</span>
 				</div>
 			</div>
 			<i class="material-icons-outlined notif-icon">comment</i>
 		</div>
 		<div class="notification-content">
 			<div class="comment-text">{{ notifications[0].comment.text }}</div>
-			<post-viewer :post="notificationGroup.notifiable"></post-viewer>
+			<post-viewer class="post-viewer" :post="notificationGroup.notifiable"></post-viewer>
 		</div>
 	</div>
 </template>
