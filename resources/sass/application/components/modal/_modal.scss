@@ -67,6 +67,8 @@
 
 .announcement-modal-header {
     justify-content: space-between !important;
+    align-items: flex-start !important;
+    padding-bottom: 0 !important;
 
     &::after {
         display: none;
