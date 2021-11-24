@@ -45,11 +45,10 @@ window.NoiseGate = NoiseGate;
  * allows your team to easily build robust real-time web applications.
  */
 import Echo from 'laravel-echo';
-window.io = require('socket.io-client');
 
 window.Echo = new Echo({
     broadcaster: 'socket.io',
     host: process.env.MIX_LARAVEL_ECHO_HOST,
-    forceTLS: true,
+    // forceTLS: true,
     csrfToken: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 });

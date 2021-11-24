@@ -1,5 +1,6 @@
 <?php
 
+use App\Broadcasting\AnnouncementChannel;
 use App\Broadcasting\DonateChannel;
 use App\Broadcasting\LikeChannel;
 use App\Broadcasting\NotificationsChannel;
@@ -17,9 +18,11 @@ use Ternobo\TernoboChat\TernoboChat;
 | used to check if an authenticated user can listen to the channel.
 |
  */
+
 Broadcast::channel('user.{id}', UserChannel::class);
-Broadcast::channel('notifications.{id}', NotificationsChannel::class);
+Broadcast::channel('notification.{id}', NotificationsChannel::class);
 Broadcast::channel('donate.post.{id}', DonateChannel::class);
 Broadcast::channel('likes.post.{id}', LikeChannel::class);
+Broadcast::channel('announcements', AnnouncementChannel::class);
 
 TernoboChat::broadcastChannels();
