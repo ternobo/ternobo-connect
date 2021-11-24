@@ -20,6 +20,9 @@
 			<transition name="fade">
 				<upload-widget v-if="uploading" :error="error" @reload="onReload" @cancel="uploading = false" :progress="uploadProgress" />
 			</transition>
+
+			<announcement-modal v-for="announcement in shared.announcements" :key="`announcement_key_id_${announcement.id}`" :show="true" :title="announcement.title" :text="announcement.text" :link="announcement.link" :link_text="announcement.link_text" :icon="announcement.icon" :has_confetti="true"></announcement-modal>
+
 			<!-- <widget-container v-if="this.url != '/' && this.url != '/chats' && this.user != null && $root.isDesktop"></widget-container> -->
 		</div>
 	</div>
@@ -35,6 +38,7 @@ import { mapState } from "vuex";
 import EmojiPicker from "./Components/EmojiPicker/EmojiPicker.vue";
 import UploadWidget from "./Components/UploadWidget/UploadWidget.vue";
 import MobileMaintenance from "./Components/MobileMaintenance.vue";
+import AnnouncementModal from "./Components/Announcement/AnnouncementModal.vue";
 export default {
 	methods: {
 		backgroundUpload(config) {
@@ -90,7 +94,7 @@ export default {
 		};
 	},
 	computed: {
-		...mapState(["url", "user"]),
+		...mapState(["url", "user", "shared"]),
 	},
 	created() {
 		this.$root.application = this;
@@ -103,6 +107,7 @@ export default {
 		EmojiPicker,
 		UploadWidget,
 		MobileMaintenance,
+		AnnouncementModal,
 	},
 };
 </script>

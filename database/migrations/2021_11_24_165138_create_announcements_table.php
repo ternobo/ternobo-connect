@@ -18,6 +18,8 @@ class CreateAnnouncementsTable extends Migration
             $table->id();
             $table->string("title");
             $table->text("text");
+            $table->string("link")->nullable();
+            $table->string("link_text")->nullable();
             $table->string("icon")->nullable();
             $table->foreignIdFor(User::class)->nullable();
             $table->boolean("has_confetti")->default(false);

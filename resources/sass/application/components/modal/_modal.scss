@@ -3,7 +3,6 @@
     padding-right: 15px !important;
 }
 
-
 .modal-backdrop {
     position: fixed;
     height: 100%;
@@ -63,4 +62,13 @@
 
     }
 
+}
+
+
+.announcement-modal-header {
+    justify-content: space-between !important;
+
+    &::after {
+        display: none;
+    }
 }
