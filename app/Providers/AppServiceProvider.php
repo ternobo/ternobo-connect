@@ -2,21 +2,23 @@
 
 namespace App\Providers;
 
-use App\Models\Comment;
-use App\Models\InviteLink;
-use App\Models\Notification;
-use App\Models\Page;
-use App\Models\Post;
-use App\Models\Skill;
-use App\Models\UserOption;
-use Artesaos\SEOTools\Facades\SEOTools;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\ServiceProvider;
 use Ternobo\TernoboWire\TernoboWire;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
+use Carbon\Carbon;
+use Artesaos\SEOTools\Facades\SEOTools;
+use App\Models\UserOption;
+use App\Models\Skill;
+use App\Models\Post;
+use App\Models\Page;
+use App\Models\Notification;
+use App\Models\InviteLink;
+use App\Models\Comment;
+use App\Models\Announcement;
+use Illuminate\Support\Facades\DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -51,6 +53,25 @@ class AppServiceProvider extends ServiceProvider
                     'direction' => App::getLocale() == "fa" ? 'rtl' : 'ltr',
                     "locale" => App::getLocale(),
                     "SEO" => SEOTools::generate(),
+                    "announcements" => function () {
+                        if (Auth::check()) {
+                            $announcements = Announcement::query()
+                                ->where(function ($query) {
+                                    return $query->where("user_id", Auth::user()->id)
+                                        ->orWhere("user_id", null);
+                                })
+                                ->whereRaw("not exists (select * from announcement_seen where user_id = ? and announcement_id = announcements.id)", [Auth::user()->id])
+                                ->limit(1)
+                                ->get();
+
+                            foreach ($announcements as $announcement) {
+                                DB::insert("insert into announcement_seen (user_id, announcement_id, created_at) values(?,?,?)", [Auth::user()->id, $announcement['id'], now()]);
+                            }
+
+                            return $announcements;
+                        }
+                        return [];
+                    },
                     "connectedPeople" => function () {
                         // if (Auth::check()) {
                         //     return Auth::user()->getConnectionsIds();
