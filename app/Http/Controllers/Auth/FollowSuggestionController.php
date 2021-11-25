@@ -19,6 +19,12 @@ class FollowSuggestionController extends Controller
 
     public function index()
     {
+        $followings = Following::query()->where("page_id", Ternobo::currentPage()->id)->count();
+
+        if ($followings > 3) {
+            return redirect("/feed");
+        }
+
         return TernoboWire::render("FollowingSuggestion", false);
     }
 

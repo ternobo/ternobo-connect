@@ -17,7 +17,6 @@ export default {
 			this.page_id = page;
 			if (this.$store.state.shared.followings.includes(page)) {
 				this.followed = true;
-				this.$emit("followed");
 			}
 		}
 	},
