@@ -73,6 +73,14 @@ export default {
 		UserProfilePicture,
 	},
 	layout: App,
+	computed: {
+		profile() {
+			if (this.userinfo.gender == "1") {
+				return "/images/woman-profile.png";
+			}
+			return "/images/man-profile.png";
+		},
+	},
 	methods: {
 		next(data) {
 			this.userinfo = {
@@ -92,12 +100,6 @@ export default {
 					.then(() => (this.loading = false));
 			} else {
 				this.step++;
-			}
-		},
-		onPersonalSave(gender) {
-			this.step = 3;
-			if (gender.code == "1") {
-				this.profile = "/images/woman-profile.png";
 			}
 		},
 		setVerificationToken(token) {
@@ -120,7 +122,6 @@ export default {
 	data() {
 		return {
 			step: 0,
-			profile: "/images/man-profile.png",
 			loading: false,
 			showlaws: false,
 

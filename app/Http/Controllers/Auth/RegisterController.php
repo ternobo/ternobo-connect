@@ -45,6 +45,15 @@ class RegisterController extends Controller
     public function createUser(CreateUserRequest $request)
     {
         DB::beginTransaction();
+
+        $womanprofile = "/images/woman-profile.png";
+        $manprofile = "/images/man-profile.png";
+
+        $profile = $request->filled("profile") ? Uploader::uplaodProfile(
+            $request->profile->store("profiles"),
+            (object)$request->sizes
+        ) : ($request->gender == '1' ? $womanprofile : $manprofile);
+
         try {
             $otp = Otp::query()->where("verification_token", $request->verification_token)->where("is_verified", true)->first();
             $user = new User(
@@ -53,7 +62,7 @@ class RegisterController extends Controller
                     [
                         "password" => Hash::make($request->password),
                         "phone" => $otp->identifier,
-                        "profile" => Uploader::uplaodProfile($request->profile->store("profiles"), (object)$request->sizes)
+                        "profile" => $profile
                     ]
                 )
             );
