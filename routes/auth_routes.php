@@ -15,8 +15,7 @@ Route::prefix("/auth")->group(function () {
 
     Route::post('verification', 'Auth\VerificationController@sendVerificationCode');
     Route::post('verifycode', 'Auth\VerificationController@verifyCode');
-    Route::post("signup", "Auth\RegisterController@signupUser");
-    Route::post("setpassword", "Auth\RegisterController@savePassword");
+    Route::post("signup", "Auth\RegisterController@createUser");
 
     Route::post('logout', 'Auth\LoginController@logout');
 

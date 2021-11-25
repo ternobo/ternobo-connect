@@ -6,4 +6,5 @@ return [
         "newcommer",
         'visitor'
     ],
+    "disk" => "local",
 ];

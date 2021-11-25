@@ -50,7 +50,7 @@ import LoginMenu from "../Components/App/LoginMenu.vue";
 export default {
 	props: {
 		contentClass: {
-			default: [],
+			default: () => [],
 		},
 	},
 	data() {

@@ -1,0 +1,56 @@
+.code-viewer {
+    max-height: 400px;
+    background: #1e1e1e
+}
+
+.code-block {
+    position: relative;
+
+    .fullscreen-icon {
+        color: #FFF;
+        position: absolute;
+        bottom: 1rem;
+        z-index: 9999;
+        background: #1e1e1e;
+        right: 1.25rem;
+        opacity: 0;
+        transition: 0.3s all;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &:hover {
+        .fullscreen-icon {
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
+
+}
+
+.code-block.fullscreen {
+    .code-block-header {
+        position: relative;
+        height: 97px;
+        padding: 32px;
+        display: flex;
+        justify-content: center;
+        background: #1e1e1e;
+
+        .close {
+            position: absolute;
+            #{$end}: 32px;
+
+            &:hover {
+                color: $white;
+            }
+        }
+    }
+
+    .code-viewer {
+        max-height: unset !important;
+        background: #1e1e1e
+    }
+}
