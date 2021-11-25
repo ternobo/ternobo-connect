@@ -185,7 +185,9 @@ export default {
 							window.location = "/feed";
 						} else {
 							this.$emit("verificationToken", response.data.data.token);
-							this.$emit("next");
+							this.$emit("next", {
+								verification_token: response.data.data.token,
+							});
 						}
 					} else {
 						this.toast(__.get("messages.invalid-code"), "error", "text-danger");

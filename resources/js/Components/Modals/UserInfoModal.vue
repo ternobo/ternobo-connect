@@ -7,6 +7,9 @@
 			<div class="col-md-6">
 				<MaterialTextField class="w-100 mt-md-0 mt-4" input-class="w-100" :value="lastName" v-model="lastName" :required="true" :placeholder="__.get('application.last-name')"></MaterialTextField>
 			</div>
+			<div class="col-md-12">
+				<MaterialTextField class="w-100 mt-4" input-class="w-100" :value="nickname" v-model="nickname" :placeholder="__.get('application.nickname')"></MaterialTextField>
+			</div>
 			<div class="col-md-8 d-flex flex-column mt-4">
 				<MaterialTextField class="w-100" input-class="w-100" :value="shortBio" v-model="shortBio" :placeholder="__.get('user-profile.title')"></MaterialTextField>
 				<small class="font-12 mt-2">{{ __.get("user-profile.user-title-des") }}</small>
@@ -58,6 +61,8 @@ export default {
 		this.lastName = this.user.last_name;
 		this.shortBio = this.user.short_bio;
 		this.location = this.pageLocation;
+		this.nickname = this.user.nickname;
+
 		this.gender = JSON.parse(this.user.gender);
 
 		if (typeof "gender" != "object") {
@@ -82,6 +87,7 @@ export default {
 			firstName: "",
 			lastName: "",
 			shortBio: "",
+			nickname: "",
 			gender: "",
 			location: "",
 			loading: false,
@@ -96,6 +102,7 @@ export default {
 					lastname: this.lastName,
 					short_bio: this.shortBio,
 					location: this.location,
+					nickname: this.nickname,
 					gender: this.gender.code,
 				})
 				.then((response) => {

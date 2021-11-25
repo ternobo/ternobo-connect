@@ -25,7 +25,7 @@ class CommunityTagController extends Controller
 
     public function interestsPages()
     {
-        if (filter_var(UserOption::getOption("skip_interests", false), FILTER_VALIDATE_BOOLEAN)) {
+        if (filter_var(UserOption::getOption("skip_interests", false), FILTER_VALIDATE_BOOLEAN) || !Ternobo::currentPage()->visible) {
             return redirect("/feed");
         }
 

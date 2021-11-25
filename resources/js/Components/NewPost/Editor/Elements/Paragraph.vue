@@ -24,7 +24,7 @@ export default {
       const classes = key == "@" ? "mention-item" : "text-action tag-item";
       const element = document.createElement("span");
       element.className = classes;
-      element.innerHTML = key + value;
+      element.innerHTML = value;
       element.contentEditable = false;
       return element;
     },

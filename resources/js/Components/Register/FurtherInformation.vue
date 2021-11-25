@@ -16,8 +16,8 @@
 							<input type="text" v-model="last_name" class="form-control fill-light lg-input" />
 						</div>
 						<div class="mb-7">
-							<label class="inputlabel font-12 font-demibold">{{ __.get("application.username") }}</label>
-							<input type="text" v-model="username" class="form-control fill-light lg-input" />
+							<label class="inputlabel font-12 font-demibold">{{ __.get("application.nickname") }}</label>
+							<input type="text" v-model="nickname" class="form-control fill-light lg-input" />
 						</div>
 						<tselect
 							class="tselect-lg"
@@ -56,7 +56,7 @@ export default {
 		return {
 			first_name: "",
 			last_name: "",
-			username: "",
+			nickname: "",
 			loading: false,
 			agree: false,
 			gender: undefined,
@@ -65,40 +65,18 @@ export default {
 	props: ["verificationToken"],
 	computed: {
 		disabled() {
-			return !(this.agree && Boolean(this.first_name) && Boolean(this.last_name) && Boolean(this.gender) && Boolean(this.username));
+			return !(this.agree && Boolean(this.first_name) && Boolean(this.last_name) && Boolean(this.gender));
 		},
 	},
 	methods: {
 		savePersonal() {
 			this.loading = true;
-			var data = new FormData();
-			data.append("firstname", this.first_name);
-			data.append("lastname", this.last_name);
-			data.append("gender", this.gender.code);
-			data.append("username", this.username);
-			data.append("verificationToken", this.verificationToken);
-
-			var config = {
-				method: "post",
-				url: "/auth/signup",
-				data: data,
-			};
-
-			axios(config)
-				.then((response) => {
-					if (response.data.result) {
-						this.$emit("next", this.gender);
-					} else {
-						const errors = response.data.errors;
-						this.handleError(errors);
-					}
-					this.loading = false;
-				})
-				.catch((error) => {
-					console.log(error);
-					this.loading = false;
-				})
-				.then(() => (this.loading = false));
+			this.$emit("next", {
+				first_name: this.first_name,
+				last_name: this.last_name,
+				nickname: this.nickname,
+				gender: this.gender["code"],
+			});
 		},
 	},
 };
