@@ -115,6 +115,7 @@ return [
     'start_year_not_selected' => "Start Date Not Selected",
     "password_code" => "Reset Password code is invalid",
     'invalid_duration' => "maximum :attribute duration is :max minutes.",
+    "duplicated_phone" => "This phone number has been registered",
 
     "blocks" => [
         'bullted-list' => "Invalid bulleted list block",
