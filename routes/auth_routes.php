@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Middleware\InviteLinkMiddleware;
+use App\Http\Middleware\RedirectIfTernoboUser;
 use Illuminate\Support\Facades\Route;
 
-Route::get("/register", "Auth\RegisterController@index")->middleware("guest");
+Route::get("/register", "Auth\RegisterController@index")->middleware(RedirectIfTernoboUser::class);
 Route::post("/rest-password", "Auth\ForgotPasswordController@resetPassword");
 Route::post("/updatepassword", "Auth\ForgotPasswordController@updatePassword");
 Route::post("/passowrd-reset-verification", "Auth\ForgotPasswordController@checkCode");
