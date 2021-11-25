@@ -20,14 +20,20 @@ window.CaretPos = require("./Libs/CaretPos");
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = require('axios');
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').content;
-window.axios.defaults.headers.common['Cache-Control'] = 'no-cache';
-window.axios.defaults.headers.common['Pragma'] = 'no-cache';
-window.axios.defaults.headers.common['Expires'] = '0';
+const axios = require('axios');
 
+const axiosInstance = axios.create({
+    headers: {
+        'X-Requested-With': "XMLHttpRequest",
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+        'Cache-Control': "no-cache",
+        'Pragma': "no-cache",
+        "Expires": "0"
+    }
+});
+
+window.axios = axiosInstance;
 
 window.updateCsrf = () => {
     axios.get("/refresh-csrf").then((response) => {

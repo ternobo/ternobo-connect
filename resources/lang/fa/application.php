@@ -70,6 +70,7 @@ return [
     "top-active-users" => "فعال‌ترین کاربران",
     "related-hashtags" => "هشتگ‌های مرتبط",
     "nickname" => "نام مستعار",
+    "continue" => "ادامه",
 
     "password-strength" => [
         "short" => "کوتاه",

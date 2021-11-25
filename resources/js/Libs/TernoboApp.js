@@ -22,7 +22,7 @@ import MaterialTextArea from "../Components/inputs/MaterialTextArea";
 import ContenteditableMax from "../Directives/ContenteditableMax";
 import ClickOutside from "../Directives/ClickOutside";
 import PersianDate from 'persian-date';
-
+import NumericOnly from "../Directives/NumericOnly";
 import Skeleton from "../Components/Skeleton/Skeleton.vue";
 
 window.PersianDate = PersianDate;
@@ -69,7 +69,7 @@ TernoboApp.install = function (Vue, options) {
 
     Vue.component('social-content', () => import("./SocialContent"));
 
-    Vue.directive('numericOnly', import("../Directives/NumericOnly"))
+    Vue.directive('numericOnly', NumericOnly);
 
     Vue.directive("max-contenteditable", ContenteditableMax)
 

@@ -9,7 +9,11 @@
 					<div>
 						<div class="mb-4">
 							<label class="inputlabel font-12 font-demibold">{{ __.get("application.username") }}</label>
-							<input type="text" v-model="username" class="form-control fill-light lg-input" />
+							<div class="input-group-icon">
+								<input type="text" v-model="username" class="form-control fill-light lg-input" />
+								<i class="material-icons me-2" v-if="!loadingUsernameCheck && username.length > 0" :class="{ 'text-danger': !validUsername, 'text-success': validUsername }">{{ validUsername ? "check_circle_outline" : "highlight_off" }}</i>
+								<loading-spinner v-else-if="username.length > 0" max="30" class="position-absolute input-group-icon-loading"></loading-spinner>
+							</div>
 						</div>
 						<div class="mb-4">
 							<label class="inputlabel font-12 font-demibold">{{ __.get("application.password") }}</label>
@@ -54,9 +58,28 @@ export default {
 			username: "",
 
 			goodPassword: false,
+
+			loadingUsernameCheck: false,
+			validUsername: false,
 		};
 	},
 	components: { PasswordMeter, PasswordInput },
+	watch: {
+		username() {
+			this.loadingUsernameCheck = true;
+			axios
+				.post("/validation/username", { value: this.username })
+				.then((response) => {
+					if (response.data.status) {
+						this.validUsername = true;
+					} else {
+						this.validUsername = false;
+					}
+				})
+				.catch((err) => console.log(err))
+				.then(() => (this.loadingUsernameCheck = false));
+		},
+	},
 	methods: {
 		savePassword() {
 			if (this.goodPassword) {
