@@ -45,6 +45,7 @@ class User extends Authenticatable implements Messageable
         'cover',
         'profile',
         'nationalcode',
+        "password",
         'is_verified',
         "is_admin",
     ];

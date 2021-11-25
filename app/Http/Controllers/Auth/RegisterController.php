@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\InviteLinkMiddleware;
+use App\Http\Requests\CreateUserRequest;
 use App\Models\ActiveSession;
 use App\Models\InviteLink;
 use App\Models\Otp;
 use App\Models\User;
 use App\Rules\UsernameValidator;
+use App\Utils\Uploader;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,19 +24,6 @@ use Ternobo\TernoboWire\TernoboWire;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-     */
-
-    // use RegistersUsers;
-
     /**
      * Where to redirect users after registration.
      *
@@ -53,82 +42,39 @@ class RegisterController extends Controller
         return TernoboWire::render("Register");
     }
 
-    public function signupUser(Request $request)
+    public function createUser(CreateUserRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            "firstname" => ["required"],
-            "lastname" => ["required"],
-            'username' => ['required', "min:3", new UsernameValidator()],
-            "gender" => ["required", Rule::in(["1", "2"])],
-            "verificationToken" => ['required', 'exists:otps,verification_token']
-        ], [], ['gender' => __("validation.attributes.sex")]);
+        $user = User::create(
+            array_merge(
+                $request->only(['firstname', 'lastname', "nickname", "username", "gender"]),
+                [
+                    "password" => Hash::make($request->password),
+                    "profile" => Uploader::uplaodProfile($request->profile, $request->sizes)
+                ]
+            )
+        );
 
-        if ($validator->fails()) {
-            return response()->json(array("result" => false, "errors" => $validator->errors()));
-        } else {
-            DB::beginTransaction();
-            try {
-                $user = new User();
-                $user->first_name = $request->firstname;
-                $user->last_name = $request->lastname;
+        ActiveSession::addSession($user->id);
+        $page = $user->makePage();
 
-                $otp = Otp::query()->where("verification_token", $request->verificationToken)->where("is_verified", true)->first();
-                $user->phone = $otp->identifier;
+        $invite = InviteLink::query()->where("code", session("invite_code"))->first();
 
-                $user->username = strtolower($request->username);
-                $user->phone_verified_at = time();
-                $user->gender = $request->gender;
-                $user->cover = url("/img/cover.jpg");
-                $user->short_bio = "";
-                if ("$user->gender" === "1") {
-                    $user->profile = url("/img/woman-profile.png");
-                } else {
-                    $user->profile = url("/img/man-profile.png");
-                }
-                $user->generateToken();
-                $otp->delete();
-
-                session()->put("passwd", "toSet");
-                session()->put("theUser", array("user" => $user));
-                DB::commit();
-                return response()->json(["result" => true]);
-            } catch (\Throwable $th) {
-                DB::rollBack();
-                throw $th;
-            }
-        }
-    }
-
-    public function savePassword(Request $request)
-    {
-        if (session()->has("passwd")) {
-            $user = session()->get("theUser")['user'];
-            $user->password = Hash::make($request->password);
+        if ($invite instanceof InviteLink) {
+            $user->invited_by = $invite->user_id;
             $user->save();
-
-            $invite = InviteLink::query()->where("code", session("invite_code"))->first();
-
-            ActiveSession::addSession($user->id);
-            Auth::login($user, true);
-            $page = $user->makePage();
-
-            if ($invite instanceof InviteLink) {
-                $user->invited_by = $invite->user_id;
-                $user->save();
-                InviteLink::createLink($user->id);
-                InviteLink::createLink($user->id);
-                $invite->valid = false;
-                $invite->used_by = $user->id;
-                $invite->save();
-            } else {
-                $page->visible = false;
-            }
-            $page->save();
-
-
-
-            return response()->json(["result" => true]);
+            InviteLink::createLink($user->id);
+            InviteLink::createLink($user->id);
+            $invite->valid = false;
+            $invite->used_by = $user->id;
+            $invite->save();
+        } else {
+            $page->visible = false;
         }
-        return abort(400);
+        $page->save();
+
+
+        Auth::login($user, true);
+
+        return $this->generateResponse(true, $user);
     }
 }
