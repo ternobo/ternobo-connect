@@ -1,7 +1,7 @@
 <template>
 	<div class="usermenu card" v-if="$store.state.user != null">
 		<div class="card-header">
-			<wire-link :href="'/' + this.$store.state.user.username" class="d-flex aling-items-center">
+			<wire-link :href="$store.state.shared.fullAccess ? '/' + this.$store.state.user.username : null" :linkDisabled="!$store.state.shared.fullAccess" class="d-flex aling-items-center">
 				<img class="profile-xsm" imgClass="profile-xsm" :src="this.$store.state.user.profile" />
 				<span class="userinfo">
 					<strong class="user-name">

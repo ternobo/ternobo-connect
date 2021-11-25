@@ -36,6 +36,7 @@ class FollowSuggestionController extends Controller
             $last_sort = ", id IN (select following from followings where page_id=$invitedByPageID) DESC";
         }
         $suggestions = Page::query()->with(['user'])
+            ->where("visible", true)
             ->where('id', "!=", $user->personalPage->id)
             ->orderByRaw("$first_sort slug='soroosh' DESC, id IN (select page_id from follow_suggestions) DESC $last_sort")
             ->paginate(24);
