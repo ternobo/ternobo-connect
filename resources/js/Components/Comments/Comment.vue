@@ -60,10 +60,10 @@
 				<div>
 					<div @click="showLikes = true" class="likes clickable" v-if="comment.mutual_likes != null && comment.mutual_likes.length > 0">
 						<span class="me-1">{{ __.get("content/posts.liked-text") }} </span>
-						<wire-link v-if="comment.mutual_likes[0]" :href="'/' + comment.mutual_likes[0].page.slug" class="profile-text">{{ comment.mutual_likes[0].page.name }} </wire-link>
+						<wire-link v-if="comment.mutual_likes[0]" :linkDisabled="page.visible" :href="'/' + comment.mutual_likes[0].page.slug" class="profile-text">{{ comment.mutual_likes[0].page.name }} </wire-link>
 						<span v-if="comment.mutual_likes.length > 1">
 							<span>{{ __.get("content/posts.and") }} </span>
-							<wire-link v-if="comment.mutual_likes[1]" :href="'/' + comment.mutual_likes[0].page.slug" class="profile-text">{{ comment.mutual_likes[1].page.name }} </wire-link>
+							<wire-link v-if="comment.mutual_likes[1]" :linkDisabled="page.visible" :href="'/' + comment.mutual_likes[0].page.slug" class="profile-text">{{ comment.mutual_likes[1].page.name }} </wire-link>
 						</span>
 						<span class="mx-1" v-if="comment.mutual_likes.length > 2"> {{ __.get("content/posts.and") }} ... </span>
 					</div>

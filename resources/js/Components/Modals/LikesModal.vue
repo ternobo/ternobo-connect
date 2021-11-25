@@ -11,7 +11,7 @@
 		<div class="likes-list" v-else v-infinite-scroll="loadMore" :infinite-scroll-distance="10">
 			<transition-group name="flip-list">
 				<div v-for="like in likes" :key="'like_' + like.id" class="like-item">
-					<wire-link :href="'/' + like.page.slug" class="userinfo">
+					<wire-link :href="'/' + like.page.slug" :linkDisabled="page.visible" class="userinfo">
 						<lazy-image class="mb-0" :class="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" :loadingColor="skeletonOptions.profileColor" :imgClass="{ 'profile-sm': $root.isDesktop, 'profile-md': !$root.isDesktop }" :src="like.page.profile"></lazy-image>
 						<div class="page-name d-flex flex-column">
 							<strong class="d-flex align-items-center">

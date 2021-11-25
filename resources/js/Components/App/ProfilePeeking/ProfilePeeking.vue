@@ -1,5 +1,5 @@
 <template>
-	<wire-link class="profile-peeking" :href="'/' + page.slug" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+	<wire-link class="profile-peeking" :href="page.visible ? '/' + page.slug : null" :linkDisabled="!page.visible" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
 		<slot>
 			<div class="profile-info-link">
 				<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xsm profile-image" img-class="profile-xsm" :src="page.profile" />
@@ -14,7 +14,7 @@
 		</slot>
 
 		<transition name="fade">
-			<div class="profile-peeking-float" :class="`profile-peeking-position-${position}`" v-if="showFloat">
+			<div class="profile-peeking-float" :class="`profile-peeking-position-${position}`" v-if="showFloat && page.visible">
 				<div class="header-section">
 					<div class="profile-peeking-cover">
 						<lazy-image class="profile-peeking-cover" :src="page.cover" />
