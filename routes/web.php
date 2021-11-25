@@ -27,6 +27,10 @@ use App\Http\Middleware\CommunityTagSelectMiddleware;
 Passport::routes();
 TernoboWire::routes();
 Broadcast::routes();
+
+require base_path("routes/validation_routes.php");
+
+
 Route::get("/refresh-csrf", "Controller@getCsrf");
 
 Route::get('/ternobo-actions/update', [AutoUpdateController::class, "update"]);

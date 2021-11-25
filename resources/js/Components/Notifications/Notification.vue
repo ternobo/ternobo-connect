@@ -3,11 +3,7 @@
 </template>
 
 <script>
-import CommentLikeNotification from "./ComentLikeNotification";
-import CommentNotification from "./CommentNotification";
 import DonateNotification from "./DonateNotification.vue";
-import FollowNotification from "./FollowNotification";
-import LikeNotification from "./LikeNotification";
 import MentionNotification from "./MentionNotification";
 import ReplyNotification from "./ReplyNotification";
 import SkillCreditNotificationVue from "./SkillCreditNotification.vue";
@@ -20,28 +16,30 @@ export default {
 	created() {
 		switch (this.notificationGroup.action) {
 			case "like_comment":
-				this.component = CommentLikeNotification;
+				this.component = () => import("./ComentLikeNotification");
 				break;
 			case "like":
-				this.component = LikeNotification;
+				this.component = () => import("./LikeNotification");
 				break;
 			case "follow":
-				this.component = FollowNotification;
+				this.component = () => import("./FollowNotification");
 				break;
 			case "comment":
-				this.component = CommentNotification;
+				this.component = () => import("./CommentNotification");
 				break;
 			case "reply":
-				this.component = ReplyNotification;
+				this.component = () => import("./ReplyNotification");
 				break;
 			case "skill_credit":
-				this.component = SkillCreditNotificationVue;
+				this.component = () => import("./SkillCreditNotification");
 				break;
 			case "mention":
-				this.component = MentionNotification;
+				this.component = () => import("./MentionNotification");
 				break;
 			case "donation":
-				this.component = DonateNotification;
+				this.component = () => import("./DonateNotification");
+			case "ternobo":
+				this.component = () => import("./TernoboNotification.vue");
 		}
 	},
 	name: "Notification",

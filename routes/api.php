@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\Announcement\AnnouncementController;
 use App\Http\Controllers\Admin\Community\CommunityCategoriesController;
 use App\Http\Controllers\Admin\Community\CommunityController;
 use App\Http\Controllers\Admin\NotificationsController;
@@ -56,6 +57,8 @@ Route::middleware(["auth:api", AdminAPIMiddleware::class])->prefix("/admin")->gr
 
     Route::post("communities/add-translation", [CommunityController::class, "addTranslation"]);
     Route::delete("communities/delete-translation", [CommunityController::class, "deleteTranslation"]);
+
+    Route::post("announcements/send", [AnnouncementController::class, 'sendAnnouncement']);
 });
 
 

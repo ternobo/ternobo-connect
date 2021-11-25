@@ -1,12 +1,13 @@
 <template>
-	<div class="ternobo-notification">
+	<div class="my-5 ternobo-notification">
 		<div class="notification-header">
-			<div>
-				<strong class="title">{{ notification.title }}</strong>
-				<span class="time">{{ createdAt }}</span>
+			<div class="notification-info">
+				<img :src="notification.icon" width="24" class="icon" />
+				<div class="d-flex flex-column">
+					<strong class="title" ref="title">{{ title }}</strong>
+					<span class="subtitle">{{ createdAt }}</span>
+				</div>
 			</div>
-
-			<img src="/public/images/logo.svg" width="24" />
 		</div>
 		<div class="notification-content">
 			{{ notification.text }}
@@ -18,9 +19,16 @@
 import NotificationMixin from "../../Mixins/NotificationMixin";
 export default {
 	mixins: [NotificationMixin],
+	mounted() {
+		twemoji.parse(this.$refs.title);
+	},
 	computed: {
 		notification() {
-			return notifications[0];
+			return this.notifications[0];
+		},
+		title() {
+			let $t = __.get(`notification-titles.${this.notification.title}`);
+			return $t != `notification-titles.${this.notification.title}` ? $t : this.notification.title;
 		},
 	},
 };

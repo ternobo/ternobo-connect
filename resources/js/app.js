@@ -17,7 +17,7 @@ import VueMasonry from 'vue-masonry-css';
 import Lang from 'lang.js';
 import InfiniteError from "./Components/InfiniteError";
 import { scrollToElement } from "./Libs/WindowUtils";
-
+import setupNotifications from "./NotifcationsHandler";
 
 Vue.use(VueMasonry);
 
@@ -96,14 +96,10 @@ axios.get(`/translations.js?version=${Date.now()}`).then((response) => {
         vue_app.$store.commit("updateUrl");
     });
 
-    let isSocketConnected = false;
-
+    setupNotifications(vue_app);
 
     document.addEventListener('ternobo:userloaded', event => {
-        let notification = new Audio("/sounds/notification1.mp3")
-
         let user = event.detail.user;
-
         if (user) {
             setInterval(() => {
                 const seen_request = Vue.prototype.seen_request;
@@ -116,60 +112,6 @@ axios.get(`/translations.js?version=${Date.now()}`).then((response) => {
                         })
                 }
             }, 3000);
-
-            window.Echo.connector.socket.on("connection", () => {
-                Echo.connector.socket.emit("clientInfo", { user_id: user.id, name: user.username });
-            })
-        }
-
-        if (user && !isSocketConnected) {
-            setInterval(() => {
-                const seen_request = Vue.prototype.seen_request;
-                if (seen_request.length > 0) {
-                    axios.post("/seenPost", {
-                        posts: seen_request
-                    }).then(() => {
-                        Vue.prototype.seen_request = [];
-                    })
-                }
-            }, 3000);
-            if (window.hasOwnProperty("Notification")) {
-                Notification.requestPermission();
-            }
-            const notificationChannel = window.Echo.private("notifications." + user.id);
-            notificationChannel.listen("NotificationEvent", function (data) {
-                let notificationEvent = new CustomEvent('notification:new', {
-                    bubbles: true,
-                    detail: {
-                        notification: data.message
-                    }
-                });
-                document.dispatchEvent(notificationEvent);
-                vue_app.$store.state.notifications_count += 1;
-            });
-
-            const chatChannel = window.Echo.private("ternobo-chat.user." + user.id);
-            chatChannel.listen("\\Ternobo\\TernoboChat\\Events\\MessageEvent", function (data) {
-                if (!data.muted) {
-                    if (vue_app.$store.state.url != "/chats") {
-                        vue_app.$store.commit("addUnreadMessage");
-                    }
-                    notification.play();
-                    if (window.hasOwnProperty("Notification") && Notification.permission == 'granted') {
-                        new Notification(data.message.sender.name, {
-                            body: data.message.sender.name + ": " + (data.message.text != null ? data.message.text : data.message.type),
-                            icon: window.location.origin + '/favicon-32x32.png'
-                        });
-                    }
-                }
-                let messageEvent = new CustomEvent('message:new', {
-                    bubbles: true,
-                    detail: {
-                        message: data.message
-                    }
-                });
-                document.dispatchEvent(messageEvent);
-            });
         }
     });
 

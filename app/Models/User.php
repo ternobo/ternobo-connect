@@ -38,6 +38,7 @@ class User extends Authenticatable implements Messageable
         'email',
         'first_name',
         'last_name',
+        "nickname",
         'gender',
         'short_bio',
         'username',
@@ -45,6 +46,7 @@ class User extends Authenticatable implements Messageable
         'cover',
         'profile',
         'nationalcode',
+        "password",
         'is_verified',
         "is_admin",
     ];

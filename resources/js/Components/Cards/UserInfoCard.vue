@@ -7,7 +7,7 @@
 					<lazy-image class="profile-md bg-white" imgClass="profile-md" :loadingColor="skeletonOptions.profileColor" :src="user.profile" />
 				</div>
 				<strong class="text-gray-medium-dark font-12 text-start" dir="ltr">@{{ user.username }}</strong>
-				<strong class="text-black">{{ user.name }} <i v-if="user.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+				<strong class="text-black d-flex align-items-center my-2"> <user-badge class="me-1" :badgeStatus="user.badge_status" :onlyOne="true" /> {{ user.name }}</strong>
 				<small class="text-muted">{{ user.short_bio }}</small>
 			</wire-link>
 			<i class="material-icons-outlined copyprofile-icon" v-b-tooltip.hover.ds700 v-if="shared.fullAccess" key="copyusername_item" :title="__.get('application.copy')" v-clipboard="profile_url">link</i>
@@ -17,7 +17,9 @@
 
 <script>
 import { mapState } from "vuex";
+import UserBadge from "../UserBadge.vue";
 export default {
+	components: { UserBadge },
 	name: "UserInfoCard",
 	computed: {
 		...mapState(["user", "shared"]),

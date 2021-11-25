@@ -1,11 +1,11 @@
 .tooltip {
     position: absolute;
-    z-index: 1070;
+    z-index: 999999;
     display: block;
     margin: 0;
     font-family: $font-family-base;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.6;
     text-align: right;
     text-align: start;
@@ -17,15 +17,16 @@
     word-spacing: normal;
     white-space: normal;
     line-break: auto;
-    font-size: .7875rem;
+    font-size: $text-xsm;
     word-wrap: break-word;
     opacity: 0;
     transition: 0.3s opacity;
-    padding: 0 .4rem;
+    padding: 0 !important;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.14);
 
     &.b-tooltip {
         display: block;
-        opacity: .9;
+        opacity: 1;
         outline: 0;
     }
 
@@ -44,38 +45,39 @@
         &:before {
             top: 0;
             border-width: .4rem .4rem 0;
-            border-top-color: #191919;
+            border-top-color: $white;
         }
     }
 
     .arrow {
         position: absolute;
         display: block;
-        width: .8rem;
-        height: .4rem;
-        bottom: 0;
+        z-index: 2;
+        bottom: -4px;
+        width: 1rem;
+        height: 1rem;
 
         &:before {
             position: absolute;
             content: "";
-            border-color: $black;
-            border-style: solid;
-            bottom: 4px;
-            height: 7px;
-            width: 7px;
+            background: $white;
+            bottom: 0;
+            height: 1rem;
+            width: 1rem;
             transform: rotate(45deg);
         }
     }
 
     .tooltip-inner {
         max-width: 200px;
-        padding: .25rem .5rem;
-        color: #fff;
+        padding: 0.5rem;
+        color: $black;
         text-align: center;
-        background-color: #191919;
-        border-radius: .25rem;
-        z-index: 1;
+        background-color: $white;
+        z-index: 3;
         position: relative;
+        font-family: "Open Sans", "Vazir";
+        border-radius: 4px;
     }
 
 }

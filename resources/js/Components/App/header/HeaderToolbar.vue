@@ -1,7 +1,7 @@
 <template>
 	<div class="toolbar">
 		<div class="header-menu" v-if="$store.state.user != null">
-			<a :class="{ active: $store.state.url === '/feed' }" v-if="$store.state.shared.fullAccess" href="/feed" @click="onHomeClick">
+			<a :class="{ active: $store.state.url === '/feed' }" href="/feed" @click="onHomeClick">
 				<i class="navheader-icon">home</i>
 			</a>
 			<!-- <wire-link :class="{ active: $store.state.url === '/chats' }" href="/chats">

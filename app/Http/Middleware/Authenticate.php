@@ -7,6 +7,7 @@ use Closure;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 
 class Authenticate extends Middleware
@@ -16,16 +17,22 @@ class Authenticate extends Middleware
     {
         if (ActiveSession::checkSession()) {
             return $next($request);
+        } elseif (Auth::check()) {
+            // StartSession
+            try {
+                Cookie::forget("ternobo_remembered_session_id");
+                Cookie::forget("ternobo_current_page_id");
+                Auth::logout();
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
         }
-        // StartSession
-        Cookie::forget("ternobo_remembered_session_id");
-        Cookie::forget("ternobo_current_page_id");
-        Auth::logout();
+
         if ($request->expectsJson()) {
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
-        $request->session()->invalidate();
-        return response()->redirectTo("/");
+
+        return Response::redirectTo("/");
     }
 
     /**

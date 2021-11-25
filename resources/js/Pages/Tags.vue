@@ -3,7 +3,7 @@
 		<component :is="headerComponnet" :followed="followed" :community="community" :tag="tag" :totalPosts="posts.total" />
 		<div class="w-100">
 			<div v-if="postsArray.length < 1">
-				<no-content> {{ __.get("messages.no-content-with-tag") }} </no-content>
+				<no-content class="mt-8"> {{ __.get("messages.no-content-with-tag") }} </no-content>
 			</div>
 			<div v-if="postsArray.length > 0" class="posts" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="5">
 				<masonry v-if="!loadingPage" :cols="2" :gutter="32">

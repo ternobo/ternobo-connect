@@ -21,36 +21,16 @@
 		<first-impression :user="user" v-if="step == 0" @next="step = 1" />
 		<div class="register-steps" v-else>
 			<div class="invite-step" v-if="step == 1">
-				<phone-verification @next="step = 2" @verificationToken="setVerificationToken" />
+				<phone-verification @next="next" @verificationToken="setVerificationToken" />
 			</div>
 			<div class="invite-step" v-else-if="step == 2">
-				<further-information :verificationToken="verificationToken" @showlaws="showlaws = true" @next="onPersonalSave" />
+				<password-enter @next="next" :verificationToken="verificationToken" />
 			</div>
 			<div class="invite-step" v-else-if="step == 3">
-				<password-enter @next="step = 4" :verificationToken="verificationToken" />
+				<further-information :verificationToken="verificationToken" @showlaws="showlaws = true" @next="next" />
 			</div>
 			<div class="invite-step" v-else-if="step == 4">
-				<div class="login-form">
-					<div class="login-form w-100">
-						<div class="login-card card w-100">
-							<div class="card-body">
-								<div class="d-flex align-items-center mb-7">
-									<label class="font-weight-bold mb-0 font-20 text-dark">{{ __.get("register.profile-image") }}</label>
-								</div>
-								<div class="d-flex align-items-center justify-content-center">
-									<profile-image ref="profileelem" :canChange="true" :showIcons="false" size="profile-lg" class="mb-0 mt-0 me-6" :src="profile"></profile-image>
-									<button class="btn btn-outlined btn-lg btn-rounded" @click="$refs['profileelem'].openFileSelect()">
-										<i class="material-icons-outlined text-dark me-2">cloud_upload</i>
-										{{ __.get("application.upload") }}
-									</button>
-								</div>
-								<div class="login-button-container w-100 h-auto">
-									<loading-button class="btn btn-lg btn-primary w-100" @click.native="goFollowings">{{ __.get("application.next") }}</loading-button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<user-profile-picture @next="next" :profile="profile" :loading="loading" />
 			</div>
 			<div class="invite-step" v-else-if="step == 5">
 				<visitor-user-message />
@@ -70,9 +50,12 @@ import FirstImpression from "../Components/Register/FirstImpression.vue";
 import FurtherInformation from "../Components/Register/FurtherInformation.vue";
 import PasswordEnter from "../Components/Register/PasswordEnter.vue";
 import PhoneVerification from "../Components/Register/PhoneVerification.vue";
+import UserProfilePicture from "../Components/Register/UserProfilePicture.vue";
 import VisitorUserMessage from "../Components/Register/VisitorUserMessage.vue";
 import App from "../Layouts/App.vue";
 import LoginLayout from "../Layouts/LoginLayout.vue";
+import { serialize } from "../Libs/ObjectToFormdata";
+
 export default {
 	components: {
 		OtpInput,
@@ -87,34 +70,36 @@ export default {
 		LawsModal,
 		VisitorUserMessage,
 		LoginLayout,
+		UserProfilePicture,
 	},
 	layout: App,
 	computed: {
-		disabled() {
-			let status = false;
-			switch (this.step) {
-				case 1:
-					if (this.verification_step) {
-						status = this.code.length < 6;
-					} else {
-						status = this.phone_number.length < 11;
-					}
-					break;
-				case 2:
-					status = !(this.first_name.length > 0 && this.last_name.length > 0 && this.username.length > 0 && this.gender != undefined);
-					break;
-				case 3:
-					status = !(this.password == this.password_repeat && this.password.length >= 8);
-					break;
+		profile() {
+			if (this.userinfo.gender == "1") {
+				return "/images/woman-profile.png";
 			}
-			return status;
+			return "/images/man-profile.png";
 		},
 	},
 	methods: {
-		onPersonalSave(gender) {
-			this.step = 3;
-			if (gender.code == "1") {
-				this.profile = "/images/woman-profile.png";
+		next(data) {
+			this.userinfo = {
+				...this.userinfo,
+				...data,
+			};
+			if (this.step == 4) {
+				this.loading = true;
+				axios
+					.post("/auth/signup", serialize(this.userinfo))
+					.then((response) => {
+						if (response.data.status) {
+							this.goToLastStep();
+						}
+					})
+					.catch((error) => console.log(err))
+					.then(() => (this.loading = false));
+			} else {
+				this.step++;
 			}
 		},
 		setVerificationToken(token) {
@@ -137,12 +122,13 @@ export default {
 	data() {
 		return {
 			step: 0,
-			profile: "/images/man-profile.png",
 			loading: false,
 			showlaws: false,
 
 			visitorRegister: false,
 			verificationToken: null,
+
+			userinfo: {},
 		};
 	},
 	props: ["user"],

@@ -1,7 +1,7 @@
 <template>
 	<div class="user-badge">
-		<img src="/public/badges/supporter.svg" v-b-tooltip.hover.ds700 :title="__.get(`badges.supporter`)" v-if="showSupporter" />
-		<img :src="badge.icon" v-b-tooltip.hover.ds700 :title="badge.name" v-for="badge in badges" :key="`user_badge_item_${badge.id}`" />
+		<img src="/public/badges/supporter.svg" v-b-tooltip.hover :title="__.get(`badges.supporter`)" v-if="showSupporter" />
+		<img :src="badge.icon" v-b-tooltip.hover :title="badge.name" v-for="badge in badges" :key="`user_badge_item_${badge.id}`" />
 	</div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
 			return this.onlyOne ? this.firstBadge : this.badgeStatusArray;
 		},
 		badgeStatusArray() {
-			return Object.keys(this.badgeStatus)
+			return Object.keys(this.badgeStatus != null ? this.badgeStatus : {})
 				.filter((item) => this.badgeStatus[item])
 				.map((item) => {
 					return {

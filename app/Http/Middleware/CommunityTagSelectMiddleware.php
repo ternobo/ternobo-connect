@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\UserOption;
+use App\Ternobo;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class CommunityTagSelectMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (filter_var(UserOption::getOption("skip_interests", false), FILTER_VALIDATE_BOOLEAN)) {
+        if (filter_var(UserOption::getOption("skip_interests", false), FILTER_VALIDATE_BOOLEAN) || !Ternobo::currentPage()->visible) {
             return $next($request);
         }
         return redirect("/interests");

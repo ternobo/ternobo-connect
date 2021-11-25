@@ -32,6 +32,10 @@ export default {
 			default: true,
 			required: false,
 		},
+		uploadOnCrop: {
+			type: Boolean,
+			default: true,
+		},
 		canChange: {
 			type: Boolean,
 			default: false,
@@ -92,28 +96,33 @@ export default {
 				}
 			}
 		},
-		upload(cordinates) {
-			this.loading = true;
-			const formData = new FormData();
-			formData.append("profile", this.file);
-			formData.append("sizes", JSON.stringify(cordinates));
-			formData.append("json", true);
-			axios
-				.post(this.$APP_URL + "/setprofile", formData)
-				.then((response) => {
-					const data = response.data;
-					if (data.result) {
-						this.$store.dispatch("loadUser");
-						if (data.url) {
-							this.picture = data.url;
+		upload(cordinates, canvas) {
+			if (this.uploadOnCrop) {
+				this.loading = true;
+				const formData = new FormData();
+				formData.append("profile", this.file);
+				formData.append("sizes", JSON.stringify(cordinates));
+				formData.append("json", true);
+				axios
+					.post(this.$APP_URL + "/setprofile", formData)
+					.then((response) => {
+						const data = response.data;
+						if (data.result) {
+							this.$store.dispatch("loadUser");
+							if (data.url) {
+								this.picture = data.url;
+							}
+							this.$emit("updated");
+						} else {
+							const errors = data.errors;
+							this.handleError(errors);
 						}
-						this.$emit("updated");
-					} else {
-						const errors = data.errors;
-						this.handleError(errors);
-					}
-				})
-				.then(() => (this.loading = false));
+					})
+					.then(() => (this.loading = false));
+			} else {
+				this.picture = canvas.toDataURL("image/jpeg", 1.0);
+				this.$emit("ready", { file: this.file, sizes: cordinates });
+			}
 		},
 	},
 	computed: {

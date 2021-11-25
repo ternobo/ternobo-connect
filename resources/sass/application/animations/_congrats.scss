@@ -1,0 +1,55 @@
+$colors: (#D2AE5C, #89590D, #E8C275);
+
+[class|="confetti"] {
+    position: absolute;
+}
+
+.confetti-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: transparent;
+    height: 100vh;
+    width: 100%;
+    background: rgba($color: $dark, $alpha: 0.4);
+    z-index: 9999;
+}
+
+.confetti-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+@for $i from 0 through 900 {
+    $w: random(16);
+    $l: random(100);
+
+    .confetti-#{$i} {
+        width: #{$w}px;
+        height: #{$w * 0.4}px;
+        background-color: nth($colors, random(3));
+        top: -10%;
+        left: unquote($l + "%");
+        opacity: random() + 0.5;
+        transform: rotate(#{random() * 360}deg);
+        -webkit-animation: drop-#{$i} unquote(4 + random() + "s") unquote(random(40) + "s") infinite;
+        animation: drop-#{$i} unquote(4 + random() + "s") unquote(random(40) + "s") infinite;
+    }
+
+    @-webkit-keyframes drop-#{$i} {
+        100% {
+            top: 110%;
+            left: unquote($l + "%");
+        }
+    }
+
+    @keyframes drop-#{$i} {
+        100% {
+            top: 110%;
+            left: unquote($l + "%");
+        }
+    }
+}

@@ -20,9 +20,21 @@ class Uploader
         return "/$folder/$filename";
     }
 
+    public static function uplaodProfile($file, $sizes, $width = 256): string
+    {
+        $image = Image::make(Storage::disk(config("ternobo.disk"))->getAdapter()->getPathPrefix() . $file);
+        $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->left), intval($sizes->top));
+        $image->resize($width, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $image->save(null, 90, "jpg");
+        return $file;
+    }
+
     public static function resizeIcon($file, $width = 48, $height = 48)
     {
-        $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
+        $image = Image::make(Storage::disk(config("ternobo.disk"))->getAdapter()->getPathPrefix() . $file);
         $image->resize($width, $height);
         $image->save(null, 90, "png");
         return $file;
@@ -30,7 +42,7 @@ class Uploader
 
     public static function resizeCover($file)
     {
-        $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
+        $image = Image::make(Storage::disk(config("ternobo.disk"))->getAdapter()->getPathPrefix() . $file);
         $image = $image->crop(1140, 336);
         $image->resize(1140, null, function ($constraint) {
             $constraint->aspectRatio();

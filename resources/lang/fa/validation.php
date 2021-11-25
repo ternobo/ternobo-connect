@@ -183,7 +183,7 @@ return [
         'national_code' => 'کد ملی',
         'password' => 'رمز عبور',
         'password-confirmation' => 'تکرار رمز عبور',
-        'phone' => 'شماره ثابت',
+        'phone' => 'شماره همراه',
         'phone_number' => 'شماره همراه',
         'province' => 'استان',
         'second' => 'ثانیه',

@@ -13,6 +13,14 @@
         padding-#{$end}: 1.75rem;
     }
 
+    .input-group-icon-loading {
+        height: 24px;
+        width: 24px;
+        #{$end}: 16px;
+        top: 24%;
+        border-width: 2px
+    }
+
     >i,
     .actions {
         z-index: 1000;

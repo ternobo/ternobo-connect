@@ -2,6 +2,7 @@
 
 namespace App\Services\User;
 
+use App\Models\Partner;
 use App\Models\Ternobomate;
 use App\Models\User;
 use App\Services\MonitizationService;
@@ -36,7 +37,7 @@ class UserBadgeService extends RestfulService
 
     private function monitizationCheck($user_id)
     {
-        return $this->monitizationService->getMonitizationStatus(User::query()->findOrFail($user_id))['status'];
+        return Partner::query()->where("user_id", $user_id)->exists();
     }
 
     private function checkNewCommer($user_id)
@@ -44,7 +45,7 @@ class UserBadgeService extends RestfulService
         $user = User::query()->findOrFail($user_id);
         $carbon = new Carbon();
         $now = $carbon->now();
-        return ($now->timestamp - $user->created_at->timestamp) < (3600 * 24 * 14);
+        return ($now->timestamp - $user->created_at->timestamp) < (3600 * 24 * 14) && $user->personalPage->visible;
     }
 
     private function checkTernoboMate($user_id)
