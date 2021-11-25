@@ -98,6 +98,17 @@ export default {
 	},
 	created() {
 		this.$root.application = this;
+		axios.interceptors.response.use(
+			(response) => response,
+			(error) => {
+				if (error.response.status == 422) {
+					console.log(error.response.data.errors);
+					this.handleError(error.response.data.errors);
+				}
+				return Promise.reject(error);
+			}
+		);
+		window.axios = axios;
 	},
 	props: ["dataToken", "resolveComponent"],
 	components: {

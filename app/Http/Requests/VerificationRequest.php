@@ -25,7 +25,7 @@ class VerificationRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone' => ['required_without:email', new PhoneNumber()],
+            'phone' => ['required_without:email', "max:16", new PhoneNumber()],
             'email' => ["email:rfc", "required_without:phone"]
         ];
     }
