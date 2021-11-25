@@ -71,6 +71,7 @@ return [
     "top-active-users" => "Top Active Users",
     "related-hashtags" => "Related Hashtags",
     "nickname" => "Nickname",
+    "continue" => "Continue",
 
     "password-strength" => [
         "short" => "Too Short",
