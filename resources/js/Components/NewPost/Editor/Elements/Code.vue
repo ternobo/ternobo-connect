@@ -34,6 +34,7 @@ export default {
 			setTimeout(() => {
 				this.editor = monaco.editor.create(this.$refs.textarea, {
 					value: code,
+					automaticLayout: true,
 					language: language,
 					theme: "vs-dark",
 				});

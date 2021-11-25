@@ -70,6 +70,7 @@ return [
     "profile-not-available" => "This profile is not available.",
     "top-active-users" => "Top Active Users",
     "related-hashtags" => "Related Hashtags",
+    "nickname" => "Nickname",
 
     "password-strength" => [
         "short" => "Too Short",

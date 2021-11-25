@@ -17,7 +17,7 @@ export default {
 			return this.onlyOne ? this.firstBadge : this.badgeStatusArray;
 		},
 		badgeStatusArray() {
-			return Object.keys(this.badgeStatus)
+			return Object.keys(this.badgeStatus != null ? this.badgeStatus : {})
 				.filter((item) => this.badgeStatus[item])
 				.map((item) => {
 					return {

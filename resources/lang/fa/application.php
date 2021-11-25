@@ -69,6 +69,7 @@ return [
     "profile-not-available" => "این پروفایل در دسترس نیست",
     "top-active-users" => "فعال‌ترین کاربران",
     "related-hashtags" => "هشتگ‌های مرتبط",
+    "nickname" => "نام مستعار",
 
     "password-strength" => [
         "short" => "کوتاه",

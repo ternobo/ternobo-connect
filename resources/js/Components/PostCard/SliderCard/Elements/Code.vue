@@ -1,6 +1,11 @@
  <template>
-	<div class="code-block" dir="ltr">
-		<div ref="code-viewer" :data-lang="content.language" style="height: 400px; background: #1e1e1e" class="py-2"></div>
+	<div class="code-block" :class="{ fullscreen: fullscreen }" dir="ltr">
+		<i class="material-icons fullscreen-icon" v-if="showFullscreenIcon && !fullscreen" @click="showFullscreen">fullscreen</i>
+		<div class="code-block-header" v-if="fullscreen">
+			<button class="btn close btn-text" @click="exitFullscreen"><i class="material-icons">close</i></button>
+			<strong class="text-white font-24">{{ __.get("editor.code") }}</strong>
+		</div>
+		<div ref="code-viewer" :data-lang="content.language" class="code-viewer py-2"></div>
 	</div>
 </template>
  
@@ -17,6 +22,26 @@ export default {
 			},
 		},
 	},
+	data() {
+		return {
+			fullscreen: false,
+			editor: false,
+
+			showFullscreenIcon: false,
+		};
+	},
+	methods: {
+		exitFullscreen() {
+			document.exitFullscreen();
+			this.fullscreen = false;
+		},
+		showFullscreen() {
+			this.fullscreen = true;
+			this.$el.requestFullscreen();
+			this.$refs["code-viewer"].style.height = `calc(100vh - 100px)`;
+			this.editor.layout();
+		},
+	},
 	destroyed() {
 		this.editor.dispose();
 	},
@@ -29,7 +54,28 @@ export default {
 			formatOnType: false,
 			folding: false,
 			minimap: { enabled: false },
+			automaticLayout: true,
 			scrollBeyondLastLine: false,
+		});
+
+		this.$nextTick(() => {
+			setTimeout(() => {
+				const height = this.editor.getModel().getLineCount() * 19 + 16;
+				this.$refs["code-viewer"].style.height = `${height}px`;
+				this.editor.layout();
+
+				if (height >= 320) {
+					this.showFullscreenIcon = true;
+					this.$el.addEventListener("fullscreenchange", () => {
+						if (document.fullscreenElement) {
+							console.log(`Element: ${document.fullscreenElement.id} entered fullscreen mode.`);
+						} else {
+							console.log("Leaving full-screen mode.");
+							this.fullscreen = false;
+						}
+					});
+				}
+			}, 200);
 		});
 	},
 };

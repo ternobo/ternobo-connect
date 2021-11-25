@@ -27,8 +27,8 @@ class CreateUserRequest extends BaseRequest
     public function rules()
     {
         return [
-            "firstname" => ["required", "min:2"],
-            "lastname" => ["required", "min:2"],
+            "first_name" => ["required", "min:2"],
+            "last_name" => ["required", "min:2"],
             "nickname" => ['nullable', "min:3", "max:30"],
             'username' => ['required', "min:3", new UsernameValidator()],
             "password" => ["required", "min:8"],
@@ -36,7 +36,7 @@ class CreateUserRequest extends BaseRequest
             "gender" => ["required", Rule::in(["1", "2"])],
             "profile" => ['nullable', "mimes:jpg,png,bmp"],
             "sizes" => ["nullable", new ImageCropRule()],
-            "verificationToken" => ['required', 'exists:otps,verification_token']
+            "verification_token" => ['required', 'exists:otps,verification_token']
         ];
     }
 }

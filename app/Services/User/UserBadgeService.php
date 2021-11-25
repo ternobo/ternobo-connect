@@ -45,7 +45,7 @@ class UserBadgeService extends RestfulService
         $user = User::query()->findOrFail($user_id);
         $carbon = new Carbon();
         $now = $carbon->now();
-        return ($now->timestamp - $user->created_at->timestamp) < (3600 * 24 * 14);
+        return ($now->timestamp - $user->created_at->timestamp) < (3600 * 24 * 14) && $user->personalPage->visible;
     }
 
     private function checkTernoboMate($user_id)

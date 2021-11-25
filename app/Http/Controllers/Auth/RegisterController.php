@@ -44,37 +44,46 @@ class RegisterController extends Controller
 
     public function createUser(CreateUserRequest $request)
     {
-        $user = User::create(
-            array_merge(
-                $request->only(['firstname', 'lastname', "nickname", "username", "gender"]),
-                [
-                    "password" => Hash::make($request->password),
-                    "profile" => Uploader::uplaodProfile($request->profile, $request->sizes)
-                ]
-            )
-        );
-
-        ActiveSession::addSession($user->id);
-        $page = $user->makePage();
-
-        $invite = InviteLink::query()->where("code", session("invite_code"))->first();
-
-        if ($invite instanceof InviteLink) {
-            $user->invited_by = $invite->user_id;
+        DB::beginTransaction();
+        try {
+            $otp = Otp::query()->where("verification_token", $request->verification_token)->where("is_verified", true)->first();
+            $user = new User(
+                array_merge(
+                    $request->only(['first_name', 'last_name', "nickname", "username", "gender"]),
+                    [
+                        "password" => Hash::make($request->password),
+                        "phone" => $otp->identifier,
+                        "profile" => Uploader::uplaodProfile($request->profile->store("profiles"), (object)$request->sizes)
+                    ]
+                )
+            );
+            $user->generateToken();
             $user->save();
-            InviteLink::createLink($user->id);
-            InviteLink::createLink($user->id);
-            $invite->valid = false;
-            $invite->used_by = $user->id;
-            $invite->save();
-        } else {
-            $page->visible = false;
+
+            ActiveSession::addSession($user->id);
+            $page = $user->makePage();
+
+            $invite = InviteLink::query()->where("code", session("invite_code"))->first();
+
+            if ($invite instanceof InviteLink) {
+                $user->invited_by = $invite->user_id;
+                $user->save();
+                InviteLink::createLink($user->id);
+                InviteLink::createLink($user->id);
+                $invite->valid = false;
+                $invite->used_by = $user->id;
+                $invite->save();
+            } else {
+                $page->visible = false;
+            }
+            $page->save();
+            DB::commit();
+
+            Auth::login($user, true);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
         }
-        $page->save();
-
-
-        Auth::login($user, true);
-
         return $this->generateResponse(true, $user);
     }
 }

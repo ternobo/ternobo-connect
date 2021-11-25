@@ -8,6 +8,10 @@
 					</div>
 					<div>
 						<div class="mb-4">
+							<label class="inputlabel font-12 font-demibold">{{ __.get("application.username") }}</label>
+							<input type="text" v-model="username" class="form-control fill-light lg-input" />
+						</div>
+						<div class="mb-4">
 							<label class="inputlabel font-12 font-demibold">{{ __.get("application.password") }}</label>
 							<input type="password" v-model="password" class="form-control fill-light lg-input" />
 							<password-meter class="mt-4" :good.sync="goodPassword" :password="password" />
@@ -47,38 +51,33 @@ export default {
 			password_repeat: "",
 			loading: false,
 
+			username: "",
+
 			goodPassword: false,
 		};
 	},
 	components: { PasswordMeter, PasswordInput },
 	methods: {
 		savePassword() {
-			var data = new FormData();
 			if (this.goodPassword) {
 				if (this.password === this.password_repeat) {
 					this.loading = true;
 
-					data.append("password", this.password);
-					var config = {
-						method: "post",
-						url: "/auth/setpassword",
-						data: data,
-					};
-
-					axios(config)
+					axios
+						.post("/validation/username", { value: this.username })
 						.then((response) => {
-							if (response.data.result) {
-								this.$emit("next");
-								updateCsrf();
+							if (response.data.status) {
+								this.$emit("next", {
+									username: this.username,
+									password: this.password,
+									password_confirmation: this.password_repeat,
+								});
 							} else {
-								const errors = response.data.errors;
-								this.handleError(errors);
+								this.handleError(response.data.message);
 							}
-							$this.loading = false;
 						})
-						.catch((error) => {
-							this.loading = false;
-						});
+						.catch((err) => console.log(err))
+						.then(() => (this.loading = false));
 				} else {
 					this.toast(__.get("register.password-not-confirm-match"));
 				}
