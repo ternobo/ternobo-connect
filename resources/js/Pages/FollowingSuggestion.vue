@@ -42,7 +42,6 @@ export default {
 					.post(this.next_page_url)
 					.then((response) => {
 						this.pages = this.pages.concat(response.data.pages.data);
-						this.followings = response.data.followings;
 						this.next_page_url = response.data.pages.next_page_url;
 					})
 					.catch((err) => {
