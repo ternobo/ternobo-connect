@@ -11,6 +11,7 @@
 				<span class="name d-flex align-items-center">
 					<strong class="name d-flex align-items-center">
 						{{ page.name }}
+						<span v-if="page.is_nickname" class="ms-1 font-weight-normal font-16 text-gray-medium-dark">({{ page.user.first_name + " " + page.user.last_name }})</span>
 						<user-badges class="ms-2" :badgeStatus="page.badge_status" />
 					</strong>
 				</span>

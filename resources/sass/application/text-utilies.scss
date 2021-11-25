@@ -26,6 +26,12 @@ label {
     font-weight: 700;
 }
 
+
+.font-weight-normal {
+    font-weight: normal;
+}
+
+
 @each $scale,
 $color in $gray-theme {
     .text-grey-#{$scale} {
