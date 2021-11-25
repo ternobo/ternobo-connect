@@ -25,8 +25,15 @@
             justify-content: center;
             align-items: center;
 
-            >* {
+            .login-card {
+                width: 480px;
 
+                .card-body {
+                    padding-bottom: 0 !important;
+                }
+            }
+
+            >* {
                 margin: 12px 0;
             }
         }

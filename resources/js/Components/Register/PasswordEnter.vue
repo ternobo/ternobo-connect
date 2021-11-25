@@ -12,7 +12,7 @@
 							<div class="input-group-icon">
 								<input type="text" v-model="username" class="form-control fill-light lg-input" />
 								<i class="material-icons me-2" v-if="!loadingUsernameCheck && username.length > 0" :class="{ 'text-danger': !validUsername, 'text-success': validUsername }">{{ validUsername ? "check_circle_outline" : "highlight_off" }}</i>
-								<loading-spinner style="height: 24px; width: 24px; left: 16px; top: 24%; border-width: 2px" v-else-if="username.length > 0" class="position-absolute"></loading-spinner>
+								<loading-spinner v-else-if="username.length > 0" max="30" class="position-absolute input-group-icon-loading"></loading-spinner>
 							</div>
 						</div>
 						<div class="mb-4">
