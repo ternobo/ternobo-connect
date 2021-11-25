@@ -16,6 +16,11 @@ class Controller extends BaseController
         return response()->json(['csrf' => csrf_token()]);
     }
 
+    public function generateResponseErrors($status, $data = null, $message = null, $code = 200)
+    {
+        return response()->json(["status" => $status, "data" => $data, "errors" => $message], $code);
+    }
+
     public function generateResponse($status, $data = null, $message = null, $code = 200)
     {
         return response()->json(["status" => $status, "data" => $data, "message" => $message], $code);
