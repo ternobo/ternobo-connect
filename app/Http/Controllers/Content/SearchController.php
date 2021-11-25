@@ -70,6 +70,7 @@ class SearchController extends Controller
                     $query->whereRaw("MATCH (pages.name,short_bio,about,slug,location) AGAINST(? IN BOOLEAN MODE) > 0", [$search]);
                     $query->orWhereRaw("skills.name like ?", ['%' . $request->q . '%']);
                 })
+                ->where("visible", true)
                 ->orderBy("score")
                 ->distinct("pages.id")
                 ->whereHas("user", function ($query) {

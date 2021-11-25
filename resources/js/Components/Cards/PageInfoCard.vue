@@ -1,6 +1,6 @@
 <template>
 	<div class="card h-100">
-		<wire-link :href="$APP_URL + '/' + page.slug" class="card-body p-0 d-flex flex-column">
+		<wire-link :href="$APP_URL + '/' + page.slug" :linkDisabled="page.visible" class="card-body p-0 d-flex flex-column">
 			<lazy-image class="card-img-top page-cover page-cover-info-card" style="min-height: 90px" :src="page.cover" />
 			<div class="d-flex align-items-center justify-content-center" style="margin-top: -70px">
 				<lazy-image img-class="profile-xxlg" class="profile-xxlg mb-0" :src="page.profile" />
