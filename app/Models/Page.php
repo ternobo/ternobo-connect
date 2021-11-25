@@ -127,9 +127,17 @@ class Page extends Model
 
         $data['contact_data'] = isset($data['contact_data']) && !$data['blocked'] ? json_decode($data['contact_data']['data']) : null;
         $data['about_data'] = isset($data['about_data']) && !$data['blocked'] ? json_decode($data['about_data']['data']) : null;
+
+
+
         if ($data['blocked']) {
             $data['skills'] = null;
             $data['about'] = null;
+        }
+        $data['is_nickname'] = false;
+        if (isset($this->user->nickname)) {
+            $data['name'] = isset($this->user->nickname) ? $this->user->nickname : $data['name'];
+            $data['is_nickname'] = true;
         }
         return $data;
     }

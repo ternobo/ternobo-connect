@@ -257,6 +257,8 @@
     font-weight: 600;
     @extend .clickable;
     margin-top: map-get($spacings, 2);
+    direction: $direction;
+    text-align: start;
 }
 
 .btn-edit {

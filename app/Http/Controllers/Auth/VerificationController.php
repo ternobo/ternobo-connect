@@ -12,6 +12,7 @@ use App\Models\Verification;
 use App\Rules\PhoneNumber;
 use App\Services\OtpService;
 use App\SMS;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -30,6 +31,17 @@ class VerificationController extends Controller
 
     public function sendVerificationCode(VerificationRequest $request)
     {
+        $signup = $request->input("signup", false);
+        $user = User::query()->where("phone", $request->phone)->whereRelation("personalPage", "visible", "=", true)->exists();
+
+        if ($signup && $user) {
+            return $this->generateResponseErrors(false, null, [
+                'phone' => [
+                    __("validation.unique", ["attribute" => __("validation.attributes.phone")])
+                ]
+            ], 422);
+        }
+
         return response()->json($this->service->sendOtp($request->phone));
     }
 
@@ -39,7 +51,7 @@ class VerificationController extends Controller
 
         if ($verificationResult['result']) {
             $invite = InviteLink::query()->where("code", session("invite_code"))->first();
-            $user = User::query()->where("phone", $request->phone)->first();
+            $user = User::query()->where("phone", $request->phone)->where("visible", false)->first();
             if ($invite instanceof InviteLink && $user instanceof User) {
                 DB::beginTransaction();
                 try {
@@ -51,6 +63,9 @@ class VerificationController extends Controller
                     $invite->used_by = $user->id;
                     $invite->save();
 
+                    $user->created_at = now();
+                    $user->save(['timestamps' => false]);
+
                     ActiveSession::addSession($user->id);
                     Auth::login($user, true);
 
@@ -61,7 +76,11 @@ class VerificationController extends Controller
                     throw $th;
                 }
             } elseif ($user instanceof User) {
-                return response()->json($this->generateResponse(false, null, ['phone' => __("validation.unique", ["attribute" => __("validation.attributes.phone")])]));
+                return $this->generateResponseErrors(false, null, [
+                    'phone' => [
+                        __("validation.unique", ["attribute" => __("validation.attributes.phone")])
+                    ]
+                ], 422);
             }
         }
 

@@ -9,6 +9,18 @@
         width: calc(100% - 25px);
     }
 
+    &.nofollow {
+
+        .profile-peeking {
+            width: 100%;
+
+            .profile-info-link {
+                max-width: 100%;
+            }
+        }
+
+    }
+
     figure.profile-xsm {
         margin-bottom: 0;
         margin-#{$end}: 12px;

@@ -26,6 +26,7 @@ class VerificationRequest extends FormRequest
     {
         return [
             'phone' => ['required_without:email', "max:16", new PhoneNumber()],
+            "signup" => ['boolean'],
             'email' => ["email:rfc", "required_without:phone"]
         ];
     }

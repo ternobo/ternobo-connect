@@ -29,7 +29,7 @@ class Uploader
             $constraint->upsize();
         });
         $image->save(null, 90, "jpg");
-        return $file;
+        return "/$file";
     }
 
     public static function resizeIcon($file, $width = 48, $height = 48)

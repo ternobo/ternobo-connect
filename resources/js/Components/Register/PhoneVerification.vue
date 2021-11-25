@@ -144,6 +144,7 @@ export default {
 			this.countDownTimer();
 			var data = new FormData();
 			data.append("phone", this.phone);
+			data.append("signup", 1);
 
 			var config = {
 				method: "post",

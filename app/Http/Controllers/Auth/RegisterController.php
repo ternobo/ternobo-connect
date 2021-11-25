@@ -9,6 +9,7 @@ use App\Models\ActiveSession;
 use App\Models\InviteLink;
 use App\Models\Otp;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use App\Rules\UsernameValidator;
 use App\Utils\Uploader;
 use Artesaos\SEOTools\Facades\SEOTools;
@@ -39,6 +40,7 @@ class RegisterController extends Controller
             SEOTools::setDescription(__("register.welcome"));
             return TernoboWire::render("Register", ['user' => $invite->user]);
         }
+
         return TernoboWire::render("Register");
     }
 
