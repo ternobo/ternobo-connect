@@ -21,7 +21,8 @@
     word-wrap: break-word;
     opacity: 0;
     transition: 0.3s opacity;
-    padding: 0 .4rem;
+    padding: 0 !important;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.14);
 
     &.b-tooltip {
         display: block;
@@ -51,30 +52,32 @@
     .arrow {
         position: absolute;
         display: block;
-        width: .8rem;
-        height: .4rem;
-        bottom: 0;
+        z-index: 2;
+        bottom: -4px;
+        width: 1rem;
+        height: 1rem;
 
         &:before {
             position: absolute;
             content: "";
-            border-color: $white;
-            border-style: solid;
-            bottom: 4px;
-            height: 7px;
-            width: 7px;
+            background: $white;
+            bottom: 0;
+            height: 1rem;
+            width: 1rem;
             transform: rotate(45deg);
         }
     }
 
     .tooltip-inner {
         max-width: 200px;
-        padding: 0.75rem;
+        padding: 0.5rem;
         color: $black;
         text-align: center;
-        background-color: $gray-light;
-        z-index: 1;
+        background-color: $white;
+        z-index: 3;
         position: relative;
+        font-family: "Open Sans", "Vazir";
+        border-radius: 4px;
     }
 
 }
