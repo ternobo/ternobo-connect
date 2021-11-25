@@ -19,8 +19,9 @@ class RedirectIfTernoboUser
      */
     public function handle(Request $request, Closure $next)
     {
-        $condition1 = $request->filled("code") && Auth::check() && !Auth::user()->visible;
+        $condition1 = $request->filled("code") && Auth::check() && Auth::user()->personalPage->visible;
         $condition2 = !$request->filled("code") && Auth::check();
+
         if ($condition1 || $condition2) {
             return redirect(RouteServiceProvider::HOME);
         }
