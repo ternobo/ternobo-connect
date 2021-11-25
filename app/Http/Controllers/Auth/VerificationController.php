@@ -51,7 +51,7 @@ class VerificationController extends Controller
 
         if ($verificationResult['result']) {
             $invite = InviteLink::query()->where("code", session("invite_code"))->first();
-            $user = User::query()->where("phone", $request->phone)->where("visible", false)->first();
+            $user = User::query()->where("phone", $request->phone)->whereRelation("personalPage", "visible", false)->first();
             if ($invite instanceof InviteLink && $user instanceof User) {
                 DB::beginTransaction();
                 try {
