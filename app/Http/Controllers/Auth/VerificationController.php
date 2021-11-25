@@ -31,6 +31,17 @@ class VerificationController extends Controller
 
     public function sendVerificationCode(VerificationRequest $request)
     {
+        $signup = $request->input("signup", false);
+        $user = User::query()->where("phone", $request->phone)->whereRelation("personalPage", "visible", "=", true)->exists();
+
+        if ($signup && $user) {
+            return $this->generateResponseErrors(false, null, [
+                'phone' => [
+                    __("validation.unique", ["attribute" => __("validation.attributes.phone")])
+                ]
+            ], 422);
+        }
+
         return response()->json($this->service->sendOtp($request->phone));
     }
 
@@ -40,7 +51,7 @@ class VerificationController extends Controller
 
         if ($verificationResult['result']) {
             $invite = InviteLink::query()->where("code", session("invite_code"))->first();
-            $user = User::query()->where("phone", $request->phone)->first();
+            $user = User::query()->where("phone", $request->phone)->where("visible", false)->first();
             if ($invite instanceof InviteLink && $user instanceof User) {
                 DB::beginTransaction();
                 try {
@@ -65,7 +76,11 @@ class VerificationController extends Controller
                     throw $th;
                 }
             } elseif ($user instanceof User) {
-                return response()->json($this->generateResponse(false, null, ['phone' => __("validation.unique", ["attribute" => __("validation.attributes.phone")])]), 422);
+                return $this->generateResponseErrors(false, null, [
+                    'phone' => [
+                        __("validation.unique", ["attribute" => __("validation.attributes.phone")])
+                    ]
+                ], 422);
             }
         }
 
