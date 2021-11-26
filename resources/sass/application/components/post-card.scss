@@ -152,6 +152,8 @@
                 -moz-user-select: none;
                 -ms-user-select: none;
                 user-select: none;
+                color: $gray-medium-dark;
+                font-weight: 600;
 
                 &.expanded {
                     height: 40px;
@@ -616,5 +618,11 @@
 
     >a {
         color: $blue-cta;
+    }
+}
+
+.text-mention {
+    img {
+        vertical-align: middle;
     }
 }
