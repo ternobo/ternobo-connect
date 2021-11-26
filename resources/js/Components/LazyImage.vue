@@ -27,6 +27,7 @@ export default {
 			this.loading = false;
 			if (this.$refs.imageItem) {
 				this.$refs.imageItem.style.opacity = 1;
+				this.$emit("loaded");
 			}
 		},
 	},

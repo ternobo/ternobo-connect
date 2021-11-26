@@ -30,7 +30,7 @@
 			</div>
 		</div>
 
-		<component v-if="post_data != null && post_data != undefined" :slide.sync="slide" :post="post_data" :has-comment="hasComment" v-bind:is="componentType"></component>
+		<component v-if="post_data != null && post_data != undefined" :slide.sync="slideShowing" :post="post_data" :has-comment="hasComment" v-bind:is="componentType"></component>
 
 		<div class="post-footer" v-if="!isEmbed">
 			<div class="actions">
@@ -96,9 +96,14 @@ export default {
 		DonationModal,
 		ProfilePeeking,
 	},
+	watch: {
+		slideShowing() {
+			this.$emit("update:slide", this.slideShowing);
+		},
+	},
 	methods: {
 		copySlide() {
-			this.copyText(this.$APP_URL + "/posts/" + this.post_data.id + "?slide=" + this.slide).then(() => this.toast(__.get("messages.copied"), "check", "text-success"));
+			this.copyText(this.$APP_URL + "/posts/" + this.post_data.id + "?slide=" + this.slideShowing).then(() => this.toast(__.get("messages.copied"), "check", "text-success"));
 		},
 		like() {
 			if (this.liked) {
@@ -148,6 +153,7 @@ export default {
 			} else if (this.post_data.type == "post") {
 				this.componentType = require("./SliderCard").default;
 			}
+			this.slide = this.slideShowing;
 		}
 	},
 	data() {
@@ -168,6 +174,7 @@ export default {
 			edit: false,
 
 			showMore: false,
+			slideShowing: 0,
 		};
 	},
 	name: "PostCard",

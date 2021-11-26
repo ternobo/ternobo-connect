@@ -1,7 +1,7 @@
 <template>
 	<div class="post-body">
 		<div class="slider-content" :class="{ expanded: showFullText }">
-			<Content v-for="content in post.slides[active].content" :content="content" :tags="post.tags" :key="`content_item_${content.id}`"></Content>
+			<Content @loaded="updateHeight" v-for="content in post.slides[active].content" :content="content" :tags="post.tags" :key="`content_item_${content.id}`"></Content>
 
 			<div class="showmore-container" :class="{ expanded: showFullText }" @click="showFullText = !showFullText" v-if="viewShowMore">{{ showFullText ? __.get("application.show-less") : __.get("application.show-more") }}</div>
 		</div>
@@ -27,6 +27,15 @@ export default {
 			if (this.active < this.post.slides.length) {
 				this.active++;
 			}
+		},
+		updateHeight() {
+			this.$nextTick(() => {
+				if (this.$el.getBoundingClientRect().height > 930) {
+					this.viewShowMore = true;
+				} else {
+					this.viewShowMore = false;
+				}
+			});
 		},
 	},
 	data() {
@@ -78,12 +87,13 @@ export default {
 		observer.observe(this.$el);
 
 		this.$nextTick(() => {
-			if (this.$el.getBoundingClientRect().height > 930) {
-				console.log(this.$el.getBoundingClientRect().height);
-				this.viewShowMore = true;
-			} else {
-				this.viewShowMore = false;
-			}
+			setTimeout(() => {
+				if (this.$el.getBoundingClientRect().height > 930) {
+					this.viewShowMore = true;
+				} else {
+					this.viewShowMore = false;
+				}
+			}, 200);
 		});
 	},
 	components: { Content, Slide },
