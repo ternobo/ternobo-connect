@@ -1,7 +1,9 @@
 <template>
 	<div class="post-body">
-		<div class="slider-content">
-			<Content v-for="content in post.slides[active].content" :content="content" :showFullText.sync="showFullText" :tags="post.tags" :key="`content_item_${content.id}`"></Content>
+		<div class="slider-content" :class="{ expanded: showFullText }">
+			<Content v-for="content in post.slides[active].content" :content="content" :tags="post.tags" :key="`content_item_${content.id}`"></Content>
+
+			<div class="showmore-container" :class="{ expanded: showFullText }" @click="showFullText = !showFullText" v-if="viewShowMore">{{ showFullText ? __.get("application.show-less") : __.get("application.show-more") }}</div>
 		</div>
 		<div dir="ltr" class="slider-arrows" v-if="post.slides.length > 1">
 			<i class="material-icons clickable" :class="{ disabled: active < 1 }" @click="goPrevSlide">keyboard_arrow_left</i>
@@ -31,6 +33,8 @@ export default {
 		return {
 			active: 0,
 			showFullText: false,
+
+			viewShowMore: false,
 		};
 	},
 	watch: {
@@ -72,6 +76,15 @@ export default {
 			}
 		}, options);
 		observer.observe(this.$el);
+
+		this.$nextTick(() => {
+			if (this.$el.getBoundingClientRect().height > 930) {
+				console.log(this.$el.getBoundingClientRect().height);
+				this.viewShowMore = true;
+			} else {
+				this.viewShowMore = false;
+			}
+		});
 	},
 	components: { Content, Slide },
 	name: "SliderCard",

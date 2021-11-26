@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\CommunityTag;
 use App\Models\Notification;
 use App\Models\Page;
 use HtmlSanitizer\Sanitizer;
@@ -16,8 +17,9 @@ use Twitter\Text\Parser;
 class SocialMediaTools
 {
 
-    public static $imageMaxWidth = 1440;
+    public static $imageMaxWidth = 1764;
     public static $imageMinHeight = 112;
+    public static $imageMaxHeight = 2232;
     public static $imageRatio = 4 / 3;
 
 
@@ -93,6 +95,20 @@ class SocialMediaTools
         return $dom->innerHTML;
     }
 
+    public static function replaceHashtags($text, $hashtags)
+    {
+        foreach ($hashtags as $hashtag) {
+            $tag = "#$hashtag";
+            $community = CommunityTag::query()->whereRelation("tag", "name", $hashtag)->first();
+            if ($community instanceof CommunityTag) {
+                $icon = $community->icon;
+                $tag = "#$hashtag <img src='/$icon' width='24'/>";
+            }
+            $text = str_replace("#$hashtag", " <wire-link href='/$hashtag' class='text-mention'>" . $tag . "</wire-link> ", $text);
+        }
+        return $text;
+    }
+
     /**
      * replace mentions with with <a> tag
      *
@@ -132,12 +148,27 @@ class SocialMediaTools
         return "$media";
     }
 
+    public static function getImageInfo($media)
+    {
+        $image = ImageFacades::make($media);
+        return [
+            'height' => $image->height(),
+            'width' => $image->width()
+        ];
+    }
+
     public static function fitPostImage(Image $image)
     {
-        return ImageFacades::make($image)->resize(static::$imageMaxWidth, null, function ($constraint) {
+
+        $image = ImageFacades::make($image)->resize(static::$imageMaxWidth, null, function ($constraint) {
             $constraint->upsize();
             $constraint->aspectRatio();
         });
+
+        if ($image->height() > static::$imageMaxHeight) {
+            $image = $image->crop(static::$imageMaxWidth, static::$imageMaxHeight);
+        }
+        return $image;
     }
 
     /**

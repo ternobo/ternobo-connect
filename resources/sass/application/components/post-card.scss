@@ -124,6 +124,37 @@
 
         .slider-content {
             flex: 1 1 auto;
+            max-height: 930px;
+            position: relative;
+
+            &.expanded {
+                max-height: unset;
+            }
+
+            .showmore-container {
+                position: absolute;
+                width: calc(100% + 3rem);
+                z-index: 1;
+                height: 90px;
+                background: linear-gradient(360deg, $white 33.4%, rgba(255, 255, 255, 0) 100%);
+                text-align: start;
+                bottom: 0;
+                display: flex;
+                align-items: flex-end;
+                margin: 0 -1.5rem;
+                padding: 0 1.5rem;
+                direction: $direction;
+                cursor: pointer;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+
+                &.expanded {
+                    height: 40px;
+                }
+            }
+
         }
 
         &:last-child {
@@ -555,7 +586,7 @@
     img {
         width: 100%;
         min-height: 112px;
-        max-height: 72.75rem;
+        max-height: 744px;
         -o-object-fit: cover;
         object-fit: cover;
         -o-object-position: center;
