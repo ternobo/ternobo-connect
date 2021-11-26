@@ -16,8 +16,9 @@ use Twitter\Text\Parser;
 class SocialMediaTools
 {
 
-    public static $imageMaxWidth = 1440;
+    public static $imageMaxWidth = 1764;
     public static $imageMinHeight = 112;
+    public static $imageMaxHeight = 2232;
     public static $imageRatio = 4 / 3;
 
 
@@ -134,10 +135,16 @@ class SocialMediaTools
 
     public static function fitPostImage(Image $image)
     {
-        return ImageFacades::make($image)->resize(static::$imageMaxWidth, null, function ($constraint) {
+
+        $image = ImageFacades::make($image)->resize(static::$imageMaxWidth, null, function ($constraint) {
             $constraint->upsize();
             $constraint->aspectRatio();
         });
+
+        if ($image->height() > static::$imageMaxHeight) {
+            $image = $image->crop(static::$imageMaxWidth, static::$imageMaxHeight);
+        }
+        return $image;
     }
 
     /**
