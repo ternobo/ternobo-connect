@@ -126,9 +126,12 @@
             flex: 1 1 auto;
             max-height: 930px;
             position: relative;
+            overflow: hidden;
 
             &.expanded {
                 max-height: unset;
+
+                padding-bottom: 16px;
             }
 
             .showmore-container {
@@ -152,6 +155,8 @@
 
                 &.expanded {
                     height: 40px;
+                    background: none;
+
                 }
             }
 
@@ -576,7 +581,7 @@
 }
 
 .slider-media-image {
-    margin: 0 -1.5rem;
+    margin: 0;
     will-change: auto;
 
     &:not(:first-child) {
