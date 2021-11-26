@@ -1,6 +1,6 @@
 <?php
 return [
-    "monitization" => "Monitization",
+    "monitization" => "Monetization",
     "shared-posts" => "Share posts",
     "visitor-likes" => "Get likes by Visitor users",
     "signed-up-user-likes" => "Get likes by Signed up users",
