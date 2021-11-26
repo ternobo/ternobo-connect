@@ -122,7 +122,7 @@ class Page extends Model
 
         $gateways = UserOption::getOption("payment_gateways", UserOption::$defaultPaymentOption, $data['user_id']);
         $data['badge_status'] = UserBadgeService::getUserBadge($data['user_id']);
-        $data['has_donate'] = $gateways['zarinpal']['enabled'] && MonitizationService::getMonitizationStatus(User::find($data['user_id']))['status'];
+        $data['has_donate'] = $gateways['zarinpal']['enabled'] && MonitizationService::canAccessMonitization(User::find($data['user_id']));
         $data['blocked'] = Auth::check() ? BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $data['id'])->exists() : false;
 
         $data['contact_data'] = isset($data['contact_data']) && !$data['blocked'] ? json_decode($data['contact_data']['data']) : null;

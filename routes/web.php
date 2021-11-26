@@ -255,13 +255,13 @@ Route::middleware(["auth.web"])->group(function () {
     // End IdeaComments
 
     // Donations Start
-    Route::get("/tips", "Donation\DontaionsController@index")->middleware(FullAccessUserMiddleware::class);
-    Route::post("/tips", "Donation\DontaionsController@getDonations")->middleware(FullAccessUserMiddleware::class);
-    Route::post("/tips/settings", "Donation\DontaionsController@settings")->middleware(FullAccessUserMiddleware::class);
-    Route::put("/tips/settings", "Donation\DontaionsController@setPaymentGateways")->middleware(FullAccessUserMiddleware::class);
+    Route::get("/monetization", "Donation\DontaionsController@index")->middleware(FullAccessUserMiddleware::class);
+    Route::post("/monetization", "Donation\DontaionsController@getDonations")->middleware(FullAccessUserMiddleware::class);
+    Route::post("/monetization/settings", "Donation\DontaionsController@settings")->middleware(FullAccessUserMiddleware::class);
+    Route::put("/monetization/settings", "Donation\DontaionsController@setPaymentGateways")->middleware(FullAccessUserMiddleware::class);
 
     // Get Donations list in Donate to post modal
-    Route::post("/posts/{post}/tips", "Donation\DontaionsController@getPostDonations");
+    Route::post("/posts/{post}/monetization", "Donation\DontaionsController@getPostDonations");
     //End
     // Donations End
 
@@ -294,7 +294,7 @@ Route::post("/contact/social-option/{page_id}", "Profile\ContactsController@getS
 Route::post("/contacts/", "Profile\ContactsController@saveData")->middleware(FullAccessUserMiddleware::class);;
 Route::post("/contacts/{page}", "Profile\ContactsController@getContactData");
 
-//Tips
+//monetization
 require base_path("routes/tip_routes.php");
 
 // Pages

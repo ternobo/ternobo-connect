@@ -64,7 +64,7 @@ class DontaionsController extends Controller
             ],
         ]);
 
-        return response()->json(['result' => $gateways['zarinpal']['enabled'] && $service->getMonitizationStatus(Auth::user())['status']]);
+        return response()->json(['result' => $gateways['zarinpal']['enabled'] && $service->canAccessMonitization(Auth::user())]);
     }
 
     public function settings()

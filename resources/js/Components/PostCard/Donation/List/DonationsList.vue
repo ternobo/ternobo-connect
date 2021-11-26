@@ -55,7 +55,7 @@ export default {
 		});
 		this.loading = true;
 		axios
-			.post(`/posts/${this.post}/tips`)
+			.post(`/posts/${this.post}/monetization`)
 			.then((response) => {
 				this.donations = response.data.data;
 				this.next_page_url = response.data.links.next;
