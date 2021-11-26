@@ -74,3 +74,10 @@
         display: none;
     }
 }
+
+
+.modal-header-noborder {
+    &::after {
+        display: none;
+    }
+}
