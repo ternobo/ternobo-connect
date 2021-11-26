@@ -39,13 +39,14 @@ import EmojiPicker from "./Components/EmojiPicker/EmojiPicker.vue";
 import UploadWidget from "./Components/UploadWidget/UploadWidget.vue";
 import MobileMaintenance from "./Components/MobileMaintenance.vue";
 import AnnouncementModal from "./Components/Announcement/AnnouncementModal.vue";
+import { default as axioslib } from "axios";
 export default {
 	methods: {
 		backgroundUpload(config) {
 			this.uploading = true;
 			this.error = false;
 			this.onReload = () => {};
-			const axiosInstance = axios.create({
+			const axiosInstance = axioslib.create({
 				"content-type:": "multipart/form-data",
 				onUploadProgress: (progressEvent) => {
 					let percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
@@ -102,8 +103,9 @@ export default {
 			(response) => response,
 			(error) => {
 				if (error.response.status == 422) {
-					console.log(error.response.data.errors);
 					this.handleError(error.response.data.errors);
+				} else {
+					this.toast(__.get("messages.connection-error"));
 				}
 				return Promise.reject(error);
 			}
