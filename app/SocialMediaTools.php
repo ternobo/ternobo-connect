@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\CommunityTag;
 use App\Models\Notification;
 use App\Models\Page;
 use HtmlSanitizer\Sanitizer;
@@ -92,6 +93,20 @@ class SocialMediaTools
             }
         }
         return $dom->innerHTML;
+    }
+
+    public static function replaceHashtags($text, $hashtags)
+    {
+        foreach ($hashtags as $hashtag) {
+            $tag = "#$hashtag";
+            $community = CommunityTag::query()->whereRelation("tag", "name", $hashtag)->first();
+            if ($community instanceof CommunityTag) {
+                $icon = $community->icon;
+                $tag = "#$hashtag <img src='/$icon' width='24'/>";
+            }
+            $text = str_replace("#$hashtag", " <wire-link href='/$hashtag' class='text-mention'>" . $tag . "</wire-link> ", $text);
+        }
+        return $text;
     }
 
     /**

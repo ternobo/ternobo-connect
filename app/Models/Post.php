@@ -239,6 +239,12 @@ class Post extends Model
                     $content = $rawContent['content'];
                     $type = $rawContent['type'];
                     $meta = $rawContent['meta'] ?? [];
+
+                    if (!isset($content)) {
+                        continue;
+                    }
+
+
                     switch ($type) {
                         case "quote":
                         case "text":
@@ -247,6 +253,12 @@ class Post extends Model
                             $text_mentions = SocialMediaTools::getMentions($text);
 
                             $slideTags = array_slice(SocialMediaTools::getHashtags($text), 0, 3);
+
+                            if (count($tags) < 3) {
+                                $tags = array_merge($slideTags, $tags);
+                                $text = SocialMediaTools::replaceHashtags($text, $tags);
+                            }
+                            $mentions = array_merge($text_mentions, $mentions);
 
                             SlideBlock::query()->create([
                                 'slide_id' => $slide_id,
@@ -257,10 +269,6 @@ class Post extends Model
                                 "meta" => $meta,
                             ]);
 
-                            if (count($tags) < 3) {
-                                $tags = array_merge($slideTags, $tags);
-                            }
-                            $mentions = array_merge($text_mentions, $mentions);
 
                             break;
 

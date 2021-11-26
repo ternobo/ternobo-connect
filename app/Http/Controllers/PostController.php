@@ -198,7 +198,7 @@ class PostController extends Controller
         }
         $formatted_tags = [];
         foreach ($tags as $tag) {
-            $formatted_tags[] = ['key' => $tag->name, 'value' => $tag->name, 'name' => "#" . $tag->name];
+            $formatted_tags[] = ['key' => "#" . $tag->name, 'value' => $tag->name, 'name' => "#" . $tag->name];
         }
         return response()->json(array("results" => $formatted_tags));
     }

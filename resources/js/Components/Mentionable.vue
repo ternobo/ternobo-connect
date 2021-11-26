@@ -43,7 +43,7 @@ export default {
 			return `item_${item}_${uuidv4()}`;
 		},
 		selectItem(item) {
-			const value = this.replaceMention(this.searchKey, String(item.name));
+			const value = this.replaceMention(this.searchKey, String(item.value));
 			value.dataset.mention = String(item.value);
 			const range = window.getSelection().getRangeAt(0);
 			range.setStart(range.startContainer, range.startOffset - this.searchKey.length - (this.lastSearchText ? this.lastSearchText.length : 0));
