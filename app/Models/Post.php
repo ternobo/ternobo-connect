@@ -293,6 +293,8 @@ class Post extends Model
                                 ImageTools::rotateImage(Storage::path($media), $meta['rotate']);
                             }
 
+                            $meta['info'] = SocialMediaTools::getImageInfo(Storage::path($media));
+
                             SlideBlock::query()->create([
                                 'slide_id' => $slide_id,
                                 'page_id' => $user->personalPage->id,

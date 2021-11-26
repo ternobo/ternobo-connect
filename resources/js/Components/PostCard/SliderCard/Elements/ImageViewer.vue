@@ -5,13 +5,18 @@
 				{{ __.get("content/posts.spoiler-alert") }}
 			</button>
 		</div>
-		<lazy-image style="min-height: 100px" class="mb-0" :src="src" />
+		<lazy-image :style="{ minHeight: `748px` }" class="mb-0" :src="src" />
 	</div>
 </template>
 
 <script>
 export default {
-	props: ["spoiler", "src"],
+	props: ["spoiler", "src", "info"],
+	computed: {
+		imageHeight() {
+			return this.info?.height != undefined ? (this.info?.height * width) / 748 : 120;
+		},
+	},
 	data() {
 		return {
 			showSpoiler: true,

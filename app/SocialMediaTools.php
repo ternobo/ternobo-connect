@@ -133,6 +133,15 @@ class SocialMediaTools
         return "$media";
     }
 
+    public static function getImageInfo($media)
+    {
+        $image = ImageFacades::make($media);
+        return [
+            'height' => $image->height(),
+            'width' => $image->width()
+        ];
+    }
+
     public static function fitPostImage(Image $image)
     {
 
