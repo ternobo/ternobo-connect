@@ -168,8 +168,6 @@ export default {
 					}
 				})
 				.catch((error) => {
-					console.error(error);
-					this.toast(__.get("messages.error-in-get-data"));
 					$state.error();
 				})
 				.then(() => {
