@@ -79,8 +79,7 @@ class RegisterController extends Controller
             if ($invite instanceof InviteLink) {
                 $user->invited_by = $invite->user_id;
                 $user->save();
-                InviteLink::createLink($user->id);
-                InviteLink::createLink($user->id);
+                $user->generateInviteLink();
                 $invite->valid = false;
                 $invite->used_by = $user->id;
                 $invite->save();
