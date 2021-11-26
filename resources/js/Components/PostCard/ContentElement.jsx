@@ -18,20 +18,11 @@ export default {
                     tag = "div";
                     classes += "post-content--text";
                     this.text = (TextareaParser.unescapeHtml(this.content.content));
-
-                    let action = "";
-
-                    if (this.text.length > 200 && !this.hideMore) {
-                        action = (<div class="show-more-text--clickable" onClick={this.toggleShowFullText}>{this.showFullText ? __.get("application.show-less") : __.get("application.show-more")}</div>);
-                    }
-
                     content = (
                         <div>
-                            <social-content text={this.textToShow} tags={this.tags}></social-content>
-                            {action}
+                            <social-content text={this.text} tags={this.tags}></social-content>
                         </div>
                     );
-
                 }
                 break;
             case "image":
@@ -40,7 +31,7 @@ export default {
 
                 let source = this.content.content.startsWith("http") ? this.content.content : `/${this.content.content}`
 
-                content = (<image-viewer spoiler={this.content.meta?.spoiler} src={source} />);
+                content = (<image-viewer spoiler={this.content.meta?.spoiler} info={this.content.meta?.info} src={source} />);
                 break;
             case "video":
                 tag = "div";
@@ -86,30 +77,8 @@ export default {
         "image-viewer": () => import("./SliderCard/Elements/ImageViewer.vue"),
         "poll-viewer": () => import("./SliderCard/Elements/PollViewer.vue")
     },
-    data() {
-        return {
-            text: "",
-        };
-    },
-    methods: {
-        toggleShowFullText() {
-            this.$emit("update:showFullText", !this.showFullText)
-        }
-    },
     mounted() {
         twemoji.parse(this.$el);
-    },
-    watch: {
-        textToShow() {
-            this.$nextTick(() => {
-                twemoji.parse(this.$el);
-            });
-        }
-    },
-    computed: {
-        textToShow() {
-            return this.showFullText || this.text.length < 200 ? this.text : this.text.substring(0, 200) + "...";
-        }
     },
     props: {
         showFullText: {

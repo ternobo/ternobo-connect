@@ -66,6 +66,7 @@ class VerificationController extends Controller
                     $user->created_at = now();
                     $user->invited_by = $invite->user_id;
                     $user->save(['timestamps' => false]);
+                    $user->generateInviteLink();
 
                     ActiveSession::addSession($user->id);
                     Auth::login($user, true);

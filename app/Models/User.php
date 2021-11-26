@@ -106,6 +106,12 @@ class User extends Authenticatable implements Messageable
         return $this->belongsTo(User::class, "invited_by");
     }
 
+    public function generateInviteLink()
+    {
+        InviteLink::createLink($this->id);
+        InviteLink::createLink($this->id);
+    }
+
     public function generateToken()
     {
         $token = "";
