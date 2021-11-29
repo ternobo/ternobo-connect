@@ -2,6 +2,7 @@
 
 namespace App\Services\Connection;
 
+use App\Models\Connection;
 use App\Models\Page;
 use App\Models\Following;
 
