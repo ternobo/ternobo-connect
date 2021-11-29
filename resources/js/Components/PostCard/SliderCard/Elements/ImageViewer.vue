@@ -5,7 +5,7 @@
 				{{ __.get("content/posts.spoiler-alert") }}
 			</button>
 		</div>
-		<lazy-image @loaded="onLoad" :style="{ minHeight: `${imageHeight}px` }" class="mb-0" :src="src" />
+		<lazy-image @loaded="onLoad" :style="{ height: `${imageHeight}px`, maxHeight: '744px' }" class="mb-0" :src="src" />
 	</div>
 </template>
 
@@ -14,8 +14,8 @@ export default {
 	props: ["spoiler", "src", "info"],
 	computed: {
 		imageHeight() {
-			const width = 558;
-			return this.info?.height != undefined ? (width / this.info?.width) * 768 : 120;
+			const width = 510;
+			return this.info?.height != undefined ? (width / this.info?.width) * this.info?.height : 120;
 		},
 	},
 	methods: {

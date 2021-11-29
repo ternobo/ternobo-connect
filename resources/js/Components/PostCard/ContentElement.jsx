@@ -30,8 +30,9 @@ export default {
                 classes = "slider-media-image";
 
                 let source = this.content.content.startsWith("http") ? this.content.content : `/${this.content.content}`
-
-                content = (<image-viewer onLoad={this.$emit.bind(this, 'loaded')} spoiler={this.content.meta?.spoiler} info={this.content.meta?.info} src={source} />);
+                let spoiler = this.content.meta?.spoiler;
+                spoiler = typeof (spoiler) == 'string' ? parseInt(spoiler) : spoiler;
+                content = (<image-viewer onLoad={this.$emit.bind(this, 'loaded')} spoiler={spoiler} info={this.content.meta?.info} src={source} />);
                 break;
             case "video":
                 tag = "div";
