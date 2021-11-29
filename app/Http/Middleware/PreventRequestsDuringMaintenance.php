@@ -12,6 +12,7 @@ class PreventRequestsDuringMaintenance extends Middleware
      * @var array
      */
     protected $except = [
-        "/ternobo-wire/*"
+        "/ternobo-wire/*",
+        "translations.js"
     ];
 }
