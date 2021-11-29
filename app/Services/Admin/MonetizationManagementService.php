@@ -3,14 +3,14 @@
 namespace App\Services;
 
 use App\Models\Like;
-use App\Models\MonitizationRequest;
+use App\Models\MonetizationRequest;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\User;
 use App\Services\Notification\NotificationService;
 
 /**
- * Monitization conditions
+ * Monetization conditions
  * 
  * - Share posts: 2
  * - Get likes by Signed up users: 6
@@ -19,7 +19,7 @@ use App\Services\Notification\NotificationService;
  * 
  * 
  */
-class MonitizationManagementService extends MonitizationService
+class MonetizationManagementService extends MonetizationService
 {
     private NotificationService $notificationService;
 
@@ -28,9 +28,9 @@ class MonitizationManagementService extends MonitizationService
         $this->notificationService = $notificationService;
     }
 
-    public function acceptMonitizationRequest($requestId, $text = null)
+    public function acceptMonetizationRequest($requestId, $text = null)
     {
-        $request = MonitizationRequest::query()->findOrFail($requestId);
+        $request = MonetizationRequest::query()->findOrFail($requestId);
         $request->status = "accepted";
 
         $this->notificationService->sendNotification("notification-titles.partnership.accepted", $text, "/badges/ternobopartner.svg", $request->user_id);
@@ -39,9 +39,9 @@ class MonitizationManagementService extends MonitizationService
         return $request;
     }
 
-    public function rejectMonitizationRequest($requestId, $text = null)
+    public function rejectMonetizationRequest($requestId, $text = null)
     {
-        $request = MonitizationRequest::query()->findOrFail($requestId);
+        $request = MonetizationRequest::query()->findOrFail($requestId);
         $request->status = "rejected";
 
         $this->notificationService->sendNotification("notification-titles.partnership.accepted", $text, "/images/logo.svg", $request->user_id);
@@ -52,11 +52,11 @@ class MonitizationManagementService extends MonitizationService
 
     public function getRequests()
     {
-        return  MonitizationRequest::query()->latest()->paginate(20);
+        return  MonetizationRequest::query()->latest()->paginate(20);
     }
 
     public function removeRequest($requestId)
     {
-        return MonitizationRequest::query()->findOrFail($requestId)->delete();
+        return MonetizationRequest::query()->findOrFail($requestId)->delete();
     }
 }
