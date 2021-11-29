@@ -5,7 +5,7 @@
 				{{ __.get("content/posts.spoiler-alert") }}
 			</button>
 		</div>
-		<lazy-image @loaded="onLoad" :style="{ height: `${imageHeight}px`, maxHeight: '744px' }" class="mb-0" :src="src" />
+		<lazy-image @loaded="onLoad" :style="{ minHeight: `${imageHeight}px`, maxHeight: '744px' }" class="mb-0" :src="src" />
 	</div>
 </template>
 
