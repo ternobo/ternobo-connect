@@ -60,7 +60,7 @@ class RegisterController extends Controller
             $otp = Otp::query()->where("verification_token", $request->verification_token)->where("is_verified", true)->first();
             $user = new User(
                 array_merge(
-                    $request->only(['first_name', 'last_name', "nickname", "username", "gender"]),
+                    $request->only(['first_name', 'last_name', "username", "gender"]),
                     [
                         "password" => Hash::make($request->password),
                         "phone" => $otp->identifier,
@@ -73,7 +73,7 @@ class RegisterController extends Controller
 
             ActiveSession::addSession($user->id);
             $page = $user->makePage();
-
+            $page = $request->input("nickname", null);
             $invite = InviteLink::query()->where("code", session("invite_code"))->first();
 
             if ($invite instanceof InviteLink) {
