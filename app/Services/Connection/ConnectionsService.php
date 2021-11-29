@@ -17,7 +17,7 @@ class ConnectionsService
         if ($page instanceof Page) {
             $connection = Following::where("page_id", $follower)->where("following", $page->id);
         }
-        return $connection->first();
+        return $connection->exists();
     }
 
     /**
@@ -25,7 +25,7 @@ class ConnectionsService
      */
     public function isConnected($id)
     {
-        return Connection::query()->whereRaw("(user_id = '$this->id' AND connection_id = '$id') OR (user_id = '$id' AND connection_id = '$this->id')")->first();
+        return Connection::query()->whereRaw("(user_id = '$this->id' AND connection_id = '$id') OR (user_id = '$id' AND connection_id = '$this->id')")->exists();
     }
     /**
      * Check if a connection is accepted by user

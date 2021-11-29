@@ -9,6 +9,12 @@ use App\Models\User;
 class SuggestionService
 {
 
+    private ConnectionsService $connectionsService;
+
+    public function __construct(ConnectionsService $connectionsService)
+    {
+        $this->connectionsService = $connectionsService;
+    }
 
     private function getSuggestionsForVisitor(User $user)
     {
@@ -47,7 +53,7 @@ class SuggestionService
         if ($user->personalPage->visible) {
             $result = [];
             foreach ($pages as $page) {
-                if (!(($user->isFollowing($page->user_id) instanceof Following) || ($user->isConnected($page->user_id) instanceof \App\Model\Connection))) {
+                if (!(($this->connectionsService->isFollowing($user->id, $page->user_id)) || ($this->connectionsService->isConnected($user->id, $page->user_id)))) {
                     $result[] = $page;
                 }
             }
