@@ -25,9 +25,9 @@ class ConnectionsService
     /**
      * check if user is connected to another user.
      */
-    public function isConnected($id)
+    public function isConnected($id, $another_id)
     {
-        return Connection::query()->whereRaw("(user_id = '$this->id' AND connection_id = '$id') OR (user_id = '$id' AND connection_id = '$this->id')")->exists();
+        return Connection::query()->whereRaw("(user_id = '$another_id' AND connection_id = '$id') OR (user_id = '$id' AND connection_id = '$another_id')")->exists();
     }
     /**
      * Check if a connection is accepted by user
