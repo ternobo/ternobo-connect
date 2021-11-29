@@ -5,7 +5,9 @@ namespace App\Services;
 use App\Models\Like;
 use App\Models\MonitizationRequest;
 use App\Models\Page;
+use App\Models\Partner;
 use App\Models\Post;
+use App\Models\Ternobomate;
 use App\Models\User;
 
 /**
@@ -25,6 +27,11 @@ class MonitizationService extends RestfulService
         return $this->getMonitizationStatus($user) ? MonitizationRequest::create([
             "user_id" => $user->id
         ]) : null;
+    }
+
+    public function canAccessMonitization($user_id)
+    {
+        return Partner::query()->where("user_id", $user_id)->exists() || Ternobomate::query()->where('user_id', $user_id)->exists();
     }
 
     public function getMonitizationStatus(User $user)

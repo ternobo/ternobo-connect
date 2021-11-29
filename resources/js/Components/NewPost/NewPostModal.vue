@@ -115,7 +115,7 @@ export default {
 			}
 			let data = {
 				slides: this.content,
-				draft: draft ? 1 : 0
+				draft: draft ? 1 : 0,
 			};
 			data.slides = data.slides.map((item) => {
 				for (let sort = 0; sort < item.content.length; sort++) {
@@ -209,7 +209,7 @@ export default {
 								.then((value) => {
 									this.$emit("update:show", true);
 									if (value) {
-										window.open("/tips?tab=settings");
+										window.open("/monetization?tab=settings");
 									}
 								});
 						}

@@ -1,5 +1,5 @@
 <template>
-	<b-modal v-model="showModal" hide-footer :title="__.get('tips.tip-details')" modal-class="new-post-modal" size="md" :centered="true">
+	<b-modal v-model="showModal" hide-footer :title="__.get('tips.tip-details')" header-class="modal-header-noborder" size="md" :centered="true">
 		<div class="new-post position-relative">
 			<div class="selections">
 				<div class="donation-modal-header">
@@ -22,7 +22,7 @@
 
 		<div class="donation-detail-content">
 			<div class="donation-detail-item">
-				<span class="text-grey font-16 font-demibold">{{ __.get("tips.currency-name") }}</span>
+				<span class="text-grey font-16 font-demibold">{{ __.get("currencies.currency-name") }}</span>
 				<span class="text-grey font-16 font-demibold">{{ __.get("currencies.IRR-n") }}</span>
 			</div>
 			<div class="donation-detail-item">

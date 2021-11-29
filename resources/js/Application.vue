@@ -102,9 +102,9 @@ export default {
 		axios.interceptors.response.use(
 			(response) => response,
 			(error) => {
-				if (error.response.status == 422) {
+				if (error.response && error.response.status == 422) {
 					this.handleError(error.response.data.errors);
-				} else {
+				} else if (error.response) {
 					this.toast(__.get("messages.connection-error"));
 				}
 				return Promise.reject(error);

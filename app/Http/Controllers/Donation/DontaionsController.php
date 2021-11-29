@@ -17,8 +17,9 @@ class DontaionsController extends Controller
 
     public function index(MonitizationService $service)
     {
+        $access = $service->canAccessMonitization(Auth::user());
         $serviceStatus = $service->getMonitizationStatus(Auth::user());
-        return $serviceStatus['status'] ? TernoboWire::render("Donation/Index") : TernoboWire::render("Donation/MonitizationRequest", ['status' => $serviceStatus]);
+        return $access ? TernoboWire::render("Donation/Index") : TernoboWire::render("Donation/MonitizationRequest", ['status' => $serviceStatus]);
     }
 
     public function getDonations(Request $request)
@@ -63,7 +64,7 @@ class DontaionsController extends Controller
             ],
         ]);
 
-        return response()->json(['result' => $gateways['zarinpal']['enabled'] && $service->getMonitizationStatus(Auth::user())['status']]);
+        return response()->json(['result' => $gateways['zarinpal']['enabled'] && $service->canAccessMonitization(Auth::user())]);
     }
 
     public function settings()

@@ -150,7 +150,7 @@
     text-align: center;
 
     @if $direction==rtl {
-        direction: ltr #{"/* rtl:ignore */"};
+        direction: ltr;
     }
 
 
@@ -164,7 +164,7 @@
 
     &.active {
         background: $blue-light;
-        color: $blue-light-hover;
+        color: $blue-hover;
 
     }
 }

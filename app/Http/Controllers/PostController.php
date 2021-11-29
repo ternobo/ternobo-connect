@@ -11,6 +11,7 @@ use App\Http\Requests\PostRequest;
 use App\Models\Action;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\CommunityTag;
 use App\Models\ContentSeen;
 use App\Models\Like;
 use App\Models\Notification;
@@ -198,7 +199,13 @@ class PostController extends Controller
         }
         $formatted_tags = [];
         foreach ($tags as $tag) {
-            $formatted_tags[] = ['key' => "#" . $tag->name, 'value' => $tag->name, 'name' => "#" . $tag->name];
+            $community = CommunityTag::query()->where("tag_id", $tag->id)->first();
+            $icon = null;
+            if ($community instanceof CommunityTag) {
+                $icon = $community->icon;
+            }
+
+            $formatted_tags[] = ['key' => "#" . $tag->name, "icon" => $icon, 'value' => $tag->name, 'name' => "#" . $tag->name];
         }
         return response()->json(array("results" => $formatted_tags));
     }

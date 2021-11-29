@@ -9,6 +9,7 @@ use App\Ternobo;
 use App\HasUser;
 use App\Facade\UserBadgeService;
 use App\Facade\MonitizationService;
+use Illuminate\Support\Facades\Request;
 
 class Page extends Model
 {
@@ -121,22 +122,22 @@ class Page extends Model
         $data = parent::toArray();
 
         $gateways = UserOption::getOption("payment_gateways", UserOption::$defaultPaymentOption, $data['user_id']);
-        $data['badge_status'] = UserBadgeService::getUserBadge($data['user_id']);
-        $data['has_donate'] = $gateways['zarinpal']['enabled'] && MonitizationService::getMonitizationStatus(User::find($data['user_id']))['status'];
-        $data['blocked'] = Auth::check() ? BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $data['id'])->exists() : false;
+        $data['has_donate'] = $gateways['zarinpal']['enabled'] && MonitizationService::canAccessMonitization($data['user_id']);
+        $data['badge_status'] = UserBadgeService::getUserBadge(isset($data['user']) ? $this->user : $data['user_id'], $this);
 
-        $data['contact_data'] = isset($data['contact_data']) && !$data['blocked'] ? json_decode($data['contact_data']['data']) : null;
-        $data['about_data'] = isset($data['about_data']) && !$data['blocked'] ? json_decode($data['about_data']['data']) : null;
-
-
-
-        if ($data['blocked']) {
-            $data['skills'] = null;
-            $data['about'] = null;
+        if (Request::route()->uri == '{page}/{location?}') {
+            $data['blocked'] = Auth::check() ? BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $data['id'])->exists() : false;
+            if ($data['blocked']) {
+                $data['skills'] = null;
+                $data['about'] = null;
+            }
+            $data['contact_data'] = isset($data['contact_data']) && !$data['blocked'] ? json_decode($data['contact_data']['data']) : null;
+            $data['about_data'] = isset($data['about_data']) && !$data['blocked'] ? json_decode($data['about_data']['data']) : null;
         }
+
         $data['is_nickname'] = false;
-        if (isset($this->user->nickname)) {
-            $data['name'] = isset($this->user->nickname) ? $this->user->nickname : $data['name'];
+        if (isset($data['nickname'])) {
+            $data['name'] = $data['nickname'];
             $data['is_nickname'] = true;
         }
         return $data;

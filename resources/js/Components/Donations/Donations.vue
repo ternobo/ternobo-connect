@@ -95,7 +95,7 @@ export default {
 		filter() {
 			this.loading = true;
 			axios
-				.post("/tips", { filter: this.filter })
+				.post("/monetization", { filter: this.filter })
 				.then((response) => {
 					this.donations = response.data.data;
 					this.next_page_url = response.data.links.next;
@@ -141,7 +141,7 @@ export default {
 			}
 		});
 		axios
-			.post("/tips", { filter: this.filter })
+			.post("/monetization", { filter: this.filter })
 			.then((response) => {
 				this.donations = response.data.data;
 				this.next_page_url = response.data.links.next;

@@ -5,7 +5,7 @@
 			<div v-if="loginStep">
 				<div class="d-flex flex-column">
 					<input type="text" v-model="username" class="form-control mb-4 text-input" :placeholder="__.get('application.username')" />
-					<input type="text" v-model="password" class="form-control text-input" :placeholder="__.get('application.password')" />
+					<input type="password" v-model="password" class="form-control text-input" :placeholder="__.get('application.password')" />
 				</div>
 				<div class="mt-7">
 					<loading-button @click.native="login" :loading="loading" class="btn btn-primary w-100">{{ __.get("application.login") }}</loading-button>

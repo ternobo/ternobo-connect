@@ -102,7 +102,7 @@ class SocialMediaTools
             $community = CommunityTag::query()->whereRelation("tag", "name", $hashtag)->first();
             if ($community instanceof CommunityTag) {
                 $icon = $community->icon;
-                $tag = "#$hashtag <img src='/$icon' width='24'/>";
+                $tag = "#$hashtag <img src='/$icon' width='20'/>";
             }
             $text = str_replace("#$hashtag", " <wire-link href='/$hashtag' class='text-mention'>" . $tag . "</wire-link> ", $text);
         }
