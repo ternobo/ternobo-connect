@@ -16,6 +16,7 @@ use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Ternobo\TernoboWire\TernoboWire;
@@ -61,7 +62,6 @@ class PageController extends Controller
 
     public function handlePersonalProfile(Page $page, $location = "home", Request $request, $category = null)
     {
-
         if (Auth::check() && $page->isBlockedMe()) {
             return TernoboWire::render("NotAvailable", [], false, 404);
         }
@@ -104,7 +104,6 @@ class PageController extends Controller
         if (!$hasActivity) {
             $location = "contact";
         }
-
         return TernoboWire::render(
             "Profiles/UserProfile",
             [

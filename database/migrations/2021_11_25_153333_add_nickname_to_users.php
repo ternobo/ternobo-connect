@@ -13,8 +13,8 @@ class AddNicknameToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string("nickname")->nullable()->after("last_name");
+        Schema::table('pages', function (Blueprint $table) {
+            $table->string("nickname")->nullable()->after("name");
         });
     }
 
@@ -25,7 +25,7 @@ class AddNicknameToUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('pages', function (Blueprint $table) {
             $table->dropColumn("nickname");
         });
     }

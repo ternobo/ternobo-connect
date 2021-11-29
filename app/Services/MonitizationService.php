@@ -29,9 +29,9 @@ class MonitizationService extends RestfulService
         ]) : null;
     }
 
-    public function canAccessMonitization(User $user)
+    public function canAccessMonitization($user_id)
     {
-        return Partner::query()->where("user_id", $user->id)->exists() || Ternobomate::query()->where('user_id', $user->id)->exists();
+        return Partner::query()->where("user_id", $user_id)->exists() || Ternobomate::query()->where('user_id', $user_id)->exists();
     }
 
     public function getMonitizationStatus(User $user)
