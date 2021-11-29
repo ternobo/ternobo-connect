@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Scopes;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -16,11 +17,6 @@ class ActivePageScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $builder->whereHas("page", function ($query) {
-            $query->whereHas("user", function ($query_s) {
-                $query_s->where("active", true);
-            });
-        });
+        $builder->whereRelation("page.user", "active", true);
     }
-
 }
