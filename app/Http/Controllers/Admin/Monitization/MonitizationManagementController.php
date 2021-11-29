@@ -1,28 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Monitization;
+namespace App\Http\Controllers\Admin\Monetization;
 
 use App\Http\Controllers\Controller;
-use App\Models\MonitizationRequest;
-use App\Services\MonitizationManagementService;
+use App\Models\MonetizationRequest;
+use App\Services\MonetizationManagementService;
 
-class MonitizationManagementController extends Controller
+class MonetizationManagementController extends Controller
 {
 
-    private MonitizationManagementService $service;
+    private MonetizationManagementService $service;
 
-    public function __construct(MonitizationManagementService $service)
+    public function __construct(MonetizationManagementService $service)
     {
         $this->service = $service;
     }
 
-    public function acceptMonitizationRequest(MonitizationRequest $request)
+    public function acceptMonetizationRequest(MonetizationRequest $request)
     {
-        $this->service->acceptMonitizationRequest($request->request_id, $request->text);
+        $this->service->acceptMonetizationRequest($request->request_id, $request->text);
     }
 
-    public function rejectMonitizationRequest(MonitizationRequest $request)
+    public function rejectMonetizationRequest(MonetizationRequest $request)
     {
-        $this->service->rejectMonitizationRequest($request->request_id, $request->text);
+        $this->service->rejectMonetizationRequest($request->request_id, $request->text);
     }
 }

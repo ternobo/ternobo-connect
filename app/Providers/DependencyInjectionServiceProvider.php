@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Services\MonitizationService;
+use App\Services\MonetizationService;
 use App\Services\Poll\PollService;
 use Illuminate\Support\ServiceProvider;
 use PHPHtmlParser\Dom;
@@ -29,8 +29,8 @@ class DependencyInjectionServiceProvider extends ServiceProvider
             return $dom;
         });
 
-        $this->app->bind(MonitizationService::class, function () {
-            return new MonitizationService();
+        $this->app->bind(MonetizationService::class, function () {
+            return new MonetizationService();
         });
     }
 
