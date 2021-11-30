@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Admin;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class ChangeFeedbackTypeRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check() && Auth::user()->is_admin;
+        return Auth::check() && Auth::user() instanceof Admin;
     }
 
     protected function failedValidation(Validator $validator)

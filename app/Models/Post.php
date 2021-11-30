@@ -10,6 +10,7 @@ use App\Scopes\ReportedPostScope;
 use App\Services\Poll\PollModel;
 use App\Services\Poll\PollService;
 use App\SocialMediaTools;
+use App\Ternobo;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -91,10 +92,11 @@ class Post extends Model
      */
     protected static function booted()
     {
-        static::addGlobalScope(new PostDraftScope);
-        static::addGlobalScope(new BlockedPageContentScope);
-
-        static::addGlobalScope(new ReportedPostScope);
+        if (!(Auth::user() instanceof Admin)) {
+            static::addGlobalScope(new PostDraftScope);
+            static::addGlobalScope(new BlockedPageContentScope);
+            static::addGlobalScope(new ReportedPostScope);
+        }
     }
 
     public function user()
@@ -178,7 +180,7 @@ class Post extends Model
         $data = parent::toArray();
         $data['is_liked'] = false;
         $data['is_bookmarked'] = false;
-        if (Auth::check()) {
+        if (Ternobo::isUserLogedIn()) {
             if ($this->likes != null) {
                 $current_page = json_decode(Cookie::get('ternobo_current_page')) !== null ? json_decode(Cookie::get('ternobo_current_page')) : Auth::user()->personalPage;
                 $page_ids = array_column($this->likes->toArray(), "page_id");

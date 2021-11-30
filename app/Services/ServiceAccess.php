@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Ternobo;
 use Http\Client\HttpClient;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Auth;
@@ -63,7 +64,7 @@ abstract class ServiceAccess
 
         if ($this->isAuthrequired) {
             $headers['user'] = Base64::encode(json_encode(Auth::user()));
-            $userId = Auth::check() ? Auth::user()->id : 0;
+            $userId = Ternobo::isUserLogedIn() ? Auth::user()->id : 0;
         }
 
         return Http::withHeaders(["Authorization" => "Token " . $this->applicationPassword, "userId" => $userId])

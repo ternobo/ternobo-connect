@@ -19,8 +19,6 @@ class ReportsController extends Controller
      */
     public function index()
     {
-        dd(Auth::user());
-
         $reports = Report::query()
             ->with(["reportable", "reportable.page", "adminNotes", "adminNotes.user"])
             ->with("reportedBy")
