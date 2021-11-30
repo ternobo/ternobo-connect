@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\HasUser;
+use App\Ternobo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,7 +27,7 @@ class ActiveSession extends Model
 
     public static function getActiveSessions()
     {
-        if (Auth::check()) {
+        if (Ternobo::isUserLogedIn()) {
             $sessions = ActiveSession::query()->where("user_id", Auth::user()->id)->get();
             return $sessions;
         }
@@ -35,7 +36,7 @@ class ActiveSession extends Model
 
     public static function getActiveSessionsCount()
     {
-        if (Auth::check()) {
+        if (Ternobo::isUserLogedIn()) {
             $sessions = ActiveSession::query()->where("user_id", Auth::user()->id)->count();
             return $sessions;
         }
@@ -98,7 +99,7 @@ class ActiveSession extends Model
 
     public static function removeSession()
     {
-        if (Auth::check()) {
+        if (Ternobo::isUserLogedIn()) {
             $cookie = Cookie::get('ternobo_remembered_session_id');
             if ($cookie != null) {
                 $session = ActiveSession::query()->where("id", $cookie)->first();
@@ -106,12 +107,11 @@ class ActiveSession extends Model
             }
             return false;
         }
-
     }
 
     public static function getCurrentSession()
     {
-        if (Auth::check()) {
+        if (Ternobo::isUserLogedIn()) {
             // dd(Request::userAgent());
             $cookie = Cookie::get('ternobo_remembered_session_id');
             if ($cookie != null) {
@@ -122,12 +122,11 @@ class ActiveSession extends Model
             }
             return null;
         }
-
     }
 
     public static function checkSession()
     {
-        if (Auth::check()) {
+        if (Ternobo::isUserLogedIn()) {
             $cookie = Cookie::get('ternobo_remembered_session_id');
             if ($cookie != null) {
                 $session = ActiveSession::query()->where("id", $cookie)->first();
@@ -145,7 +144,5 @@ class ActiveSession extends Model
             return false;
         }
         return false;
-
     }
-
 }

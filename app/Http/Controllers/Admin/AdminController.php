@@ -32,16 +32,23 @@ class AdminController extends Controller
         $username = $request->username;
         $password = $request->password;
 
-        $admin = User::query()->where("username", $username)->where("is_admin", true)->first();
-        if ($admin instanceof User && Hash::check($password, $admin->password)) {
+        $admin = Admin::query()->where("username", $username)->first();
+        if ($admin instanceof Admin && Hash::check($password, $admin->password)) {
             return response()->json(["result" => true, "api_key" => $admin->createToken('Admin Token')->accessToken]);
         }
         return response()->json(['result' => false]);
     }
 
+    public function logout()
+    {
+        Auth::logout();
+        return response()->json(['result' => true]);
+    }
+
+
+
     public function getUser()
     {
         return response()->json(['result' => true, "user" => Auth::user()]);
     }
-
 }

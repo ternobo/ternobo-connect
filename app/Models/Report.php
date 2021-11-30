@@ -26,8 +26,6 @@ class Report extends Model
 
     public function reportable()
     {
-        // dd(->toSql());
         return $this->morphTo("reportable", "reportable_type", "reportable_id");
     }
-
 }

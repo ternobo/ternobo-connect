@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Admin;
 
 class UpdateCommunityTagRequest extends BaseRequest
 {
@@ -15,7 +16,7 @@ class UpdateCommunityTagRequest extends BaseRequest
      */
     public function authorize()
     {
-        return Auth::check() && Auth::user()->is_admin;
+        return Auth::check()  && Auth::user() instanceof Admin;
     }
 
     /**

@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests\CommunityManagement;
 
-use App\Http\Requests\BaseRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Admin;
+use App\Http\Requests\BaseRequest;
 
 class AddTranslationRequest extends BaseRequest
 {
@@ -14,7 +15,7 @@ class AddTranslationRequest extends BaseRequest
      */
     public function authorize()
     {
-        return Auth::check() && Auth::user()->is_admin;
+        return Auth::check()  && Auth::user() instanceof Admin;
     }
 
     /**

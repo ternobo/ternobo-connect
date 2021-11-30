@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
+use App\Models\Admin;
 
 class NotificationRequest extends BaseRequest
 {
@@ -16,7 +17,7 @@ class NotificationRequest extends BaseRequest
      */
     public function authorize()
     {
-        return Auth::check() && Auth::user()->is_admin;
+        return Auth::check()  && Auth::user() instanceof Admin;
     }
 
     /**

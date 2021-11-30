@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Report;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -18,11 +20,10 @@ class ReportsController extends Controller
     public function index()
     {
         $reports = Report::query()
-            ->whereHas("reportable")
             ->with(["reportable", "reportable.page", "adminNotes", "adminNotes.user"])
             ->with("reportedBy")
             ->latest()
-            ->paginate();
+            ->get();
         return response()->json(['result' => true, 'data' => $reports]);
     }
 
