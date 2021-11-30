@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\Like;
-use App\Models\MonitizationRequest;
+use App\Models\MonetizationRequest;
 use App\Models\Page;
 use App\Models\Partner;
 use App\Models\Post;
@@ -11,7 +11,7 @@ use App\Models\Ternobomate;
 use App\Models\User;
 
 /**
- * Monitization conditions
+ * Monetization conditions
  * 
  * - Share posts: 2
  * - Get likes by Signed up users: 6
@@ -19,22 +19,22 @@ use App\Models\User;
  * - Get likes by Visitor users: 250
  * 
  */
-class MonitizationService extends RestfulService
+class MonetizationService extends RestfulService
 {
 
-    public function sendMonitizationRequest(User $user)
+    public function sendMonetizationRequest(User $user)
     {
-        return $this->getMonitizationStatus($user) ? MonitizationRequest::create([
+        return $this->getMonetizationStatus($user) ? MonetizationRequest::create([
             "user_id" => $user->id
         ]) : null;
     }
 
-    public function canAccessMonitization($user_id)
+    public function canAccessMonetization($user_id)
     {
         return Partner::query()->where("user_id", $user_id)->exists() || Ternobomate::query()->where('user_id', $user_id)->exists();
     }
 
-    public function getMonitizationStatus(User $user)
+    public function getMonetizationStatus(User $user)
     {
         $personalPageId = $user->personalPage->id;
         $sharedPostsStatus = $this->checkSharedPosts($personalPageId);
@@ -60,15 +60,15 @@ class MonitizationService extends RestfulService
 
         return [
             "status" => $sharedPostsStatus['status'] && $visitorLikesStatus['status'] && $userLkesStatus['status'] && $twofactorauthStatus['status'],
-            "last_request" => $this->getLastMonitizationRequest($user),
+            "last_request" => $this->getLastMonetizationRequest($user),
             "items" => $items,
             "percent" => $percent
         ];
     }
 
-    public function getLastMonitizationRequest(User $user)
+    public function getLastMonetizationRequest(User $user)
     {
-        return MonitizationRequest::query()->where("user_id", $user->id)->latest()->first();
+        return MonetizationRequest::query()->where("user_id", $user->id)->latest()->first();
     }
 
     public function checkSharedPosts($personalPageId)

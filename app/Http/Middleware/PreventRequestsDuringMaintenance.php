@@ -2,7 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use Closure;
 use Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance as Middleware;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cookie;
 
 class PreventRequestsDuringMaintenance extends Middleware
 {
@@ -12,6 +15,15 @@ class PreventRequestsDuringMaintenance extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        "/ternobo-wire/*",
+        "translations.js"
     ];
+
+    public function handle($request, Closure $next)
+    {
+        if (Cookie::get("website_locale") != null) {
+            App::setLocale(Cookie::get("website_locale"));
+        }
+        return parent::handle($request, $next);
+    }
 }

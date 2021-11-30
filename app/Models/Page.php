@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Ternobo;
 use App\HasUser;
 use App\Facade\UserBadgeService;
-use App\Facade\MonitizationService;
+use App\Facade\MonetizationService;
 use Illuminate\Support\Facades\Request;
 
 class Page extends Model
@@ -122,7 +122,7 @@ class Page extends Model
         $data = parent::toArray();
 
         $gateways = UserOption::getOption("payment_gateways", UserOption::$defaultPaymentOption, $data['user_id']);
-        $data['has_donate'] = $gateways['zarinpal']['enabled'] && MonitizationService::canAccessMonitization($data['user_id']);
+        $data['has_donate'] = $gateways['zarinpal']['enabled'] && MonetizationService::canAccessMonetization($data['user_id']);
         $data['badge_status'] = UserBadgeService::getUserBadge(isset($data['user']) ? $this->user : $data['user_id'], $this);
 
         if (Request::route()->uri == '{page}/{location?}') {

@@ -6,16 +6,16 @@ use App\Models\Page;
 use App\Models\Partner;
 use App\Models\Ternobomate;
 use App\Models\User;
-use App\Services\MonitizationService;
+use App\Services\MonetizationService;
 use App\Services\RestfulService;
 use Carbon\Carbon;
 
 class UserBadgeService extends RestfulService
 {
 
-    private MonitizationService $monitizationService;
+    private MonetizationService $monitizationService;
 
-    public function __construct(MonitizationService $monitizationService)
+    public function __construct(MonetizationService $monitizationService)
     {
         $this->monitizationService = $monitizationService;
     }
