@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Facade\UserBadgeService;
+use App\Ternobo;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -585,7 +586,7 @@ class User extends Authenticatable implements Messageable
         $array = parent::toArray();
         if (isset($this->personalPage)) {
             $array['personal_page_id'] = $this->personalPage->id;
-            $data['blocked'] = Auth::check() ? BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $array['personal_page_id'])->exists() : false;
+            $data['blocked'] = Ternobo::isUserLogedIn() ? BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $array['personal_page_id'])->exists() : false;
         }
         $array['badge_status'] = UserBadgeService::getUserBadge($array['id']);
         if (!ActiveSession::isAdmin()) {

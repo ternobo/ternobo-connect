@@ -18,11 +18,10 @@ class Authenticate extends Middleware
         if (ActiveSession::checkSession()) {
             return $next($request);
         } elseif (Auth::check()) {
-            // StartSession
             try {
-                Cookie::forget("ternobo_remembered_session_id");
-                Cookie::forget("ternobo_current_page_id");
-                Auth::logout();
+                // Cookie::forget("ternobo_remembered_session_id");
+                // Cookie::forget("ternobo_current_page_id");
+                // Auth::logout();
             } catch (\Throwable $th) {
                 //throw $th;
             }

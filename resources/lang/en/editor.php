@@ -8,7 +8,7 @@ return [
     "quote" => "Quote",
 
     'video-format' => "Authorized Format: MP4",
-    'image-size' => "Suggested Size: 1400x1400",
+    'image-size' => "Suggested Size: 1700x1700",
 
     "base" => "Base",
     "media" => "Media",

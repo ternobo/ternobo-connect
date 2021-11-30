@@ -126,7 +126,7 @@ class Page extends Model
         $data['badge_status'] = UserBadgeService::getUserBadge(isset($data['user']) ? $this->user : $data['user_id'], $this);
 
         if (Request::route()->uri == '{page}/{location?}') {
-            $data['blocked'] = Auth::check() ? BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $data['id'])->exists() : false;
+            $data['blocked'] = Ternobo::isUserLogedIn() ? BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $data['id'])->exists() : false;
             if ($data['blocked']) {
                 $data['skills'] = null;
                 $data['about'] = null;
@@ -169,7 +169,7 @@ class Page extends Model
             ->with("post.category")
             ->where("page_id", $this->id)->latest();
 
-        if (Auth::check()) {
+        if (Ternobo::isUserLogedIn()) {
             $actions = $actions->with("post.mutualLikes");
         }
 
@@ -182,7 +182,7 @@ class Page extends Model
 
     public function mutualFriends()
     {
-        return Auth::check() ? Page::query()->whereIn("id", Ternobo::currentPage()->followings()->select("following"))
+        return Ternobo::isUserLogedIn() ? Page::query()->whereIn("id", Ternobo::currentPage()->followings()->select("following"))
             ->whereIn("id", $this->followers()->select("page_id"))
             ->where("id", "!=", Ternobo::currentPage()->id)
             ->get() : [];

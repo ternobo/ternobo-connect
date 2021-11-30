@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\Skill;
 use App\Models\SkillCredit;
+use App\Ternobo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -58,7 +59,7 @@ class SkillCreditController extends Controller
         $skill = Skill::findOrFail($request->skill);
         $credit_nums = $skill->loadCount("credits");
         return response()->json([
-            "canCredit" => Auth::check() ? !Auth::user()->isCredit($request->skill) : false,
+            "canCredit" => Ternobo::isUserLogedIn() ? !Auth::user()->isCredit($request->skill) : false,
             'credits_count' => $credit_nums->credits_count,
         ]);
     }
@@ -79,5 +80,4 @@ class SkillCreditController extends Controller
         }
         return abort(403);
     }
-
 }
