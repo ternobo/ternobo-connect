@@ -2,12 +2,13 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\UsernameValidator;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use App\Rules\UsernameValidator;
+use App\Models\Admin;
 
 class NewUserRequest extends FormRequest
 {
@@ -18,7 +19,7 @@ class NewUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check() && Auth::user()->is_admin;
+        return Auth::check()  && Auth::user() instanceof Admin;
     }
 
     protected function failedValidation(Validator $validator)

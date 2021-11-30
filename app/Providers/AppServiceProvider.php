@@ -18,6 +18,7 @@ use App\Models\Notification;
 use App\Models\InviteLink;
 use App\Models\Comment;
 use App\Models\Announcement;
+use App\Ternobo;
 use Illuminate\Support\Facades\DB;
 
 class AppServiceProvider extends ServiceProvider
@@ -49,7 +50,7 @@ class AppServiceProvider extends ServiceProvider
                     'app' => [
                         'name' => Config::get('app.name'),
                     ],
-                    "fullAccess" => Auth::check() ? Auth::user()->personalPage->visible : false,
+                    "fullAccess" => Ternobo::isUserLogedIn() ? Auth::user()->personalPage->visible : false,
                     'direction' => App::getLocale() == "fa" ? 'rtl' : 'ltr',
                     "locale" => App::getLocale(),
                     "SEO" => SEOTools::generate(),
@@ -104,7 +105,7 @@ class AppServiceProvider extends ServiceProvider
                         return false;
                     },
                     'notifications_count' => function () {
-                        if (Auth::check() && Auth::user()->personalPage != null) {
+                        if (Ternobo::isUserLogedIn() && Auth::user()->personalPage != null) {
                             return Notification::query()
                                 ->where("created_at", ">=", Carbon::now()->subMonth())
                                 ->whereHasMorph("notifiable", [Post::class, Skill::class, Comment::class, Page::class])
@@ -128,19 +129,19 @@ class AppServiceProvider extends ServiceProvider
                         return [];
                     },
                     'invites_count' => function () {
-                        if (Auth::check() && Auth::user()->personalPage != null) {
+                        if (Ternobo::isUserLogedIn() && Auth::user()->personalPage != null) {
                             return InviteLink::query()->where("user_id", Auth::user()->id)->where("valid", true)->count();
                         }
                         return 0;
                     },
                     'profile_steps' => function () {
-                        if (Auth::check() && Auth::user()->personalPage != null) {
+                        if (Ternobo::isUserLogedIn() && Auth::user()->personalPage != null) {
                             return Auth::user()->getProfileSteps();
                         }
                         return [];
                     },
                     "currentPage" => function () {
-                        if (Auth::check() && Auth::user()->personalPage != null) {
+                        if (Ternobo::isUserLogedIn() && Auth::user()->personalPage != null) {
                             return Cookie::get('ternobo_current_page_id') !== null ?
                                 Page::query()
                                 ->with("categories")
@@ -155,7 +156,7 @@ class AppServiceProvider extends ServiceProvider
                         return null;
                     },
                     "followings" => function () {
-                        if (Auth::check() && Auth::user()->personalPage != null) {
+                        if (Ternobo::isUserLogedIn() && Auth::user()->personalPage != null) {
                             $followings = Auth::user()->followings;
                             $output = [];
                             foreach ($followings as $following) {

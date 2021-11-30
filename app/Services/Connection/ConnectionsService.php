@@ -2,7 +2,9 @@
 
 namespace App\Services\Connection;
 
+use App\Models\Connection;
 use App\Models\Page;
+use App\Models\Following;
 
 class ConnectionsService
 {
@@ -17,15 +19,15 @@ class ConnectionsService
         if ($page instanceof Page) {
             $connection = Following::where("page_id", $follower)->where("following", $page->id);
         }
-        return $connection->first();
+        return $connection->exists();
     }
 
     /**
      * check if user is connected to another user.
      */
-    public function isConnected($id)
+    public function isConnected($id, $another_id)
     {
-        return Connection::query()->whereRaw("(user_id = '$this->id' AND connection_id = '$id') OR (user_id = '$id' AND connection_id = '$this->id')")->first();
+        return Connection::query()->whereRaw("(user_id = '$another_id' AND connection_id = '$id') OR (user_id = '$id' AND connection_id = '$another_id')")->exists();
     }
     /**
      * Check if a connection is accepted by user

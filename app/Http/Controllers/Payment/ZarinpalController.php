@@ -11,6 +11,7 @@ use App\Models\Tip;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\UserOption;
+use App\Ternobo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Shetabit\Multipay\Exceptions\InvalidPaymentException;
@@ -25,7 +26,7 @@ class ZarinpalController extends Controller
 
         $phone = $request->phone;
 
-        $user = Auth::check() ? Auth::user() : User::query()->where("phone", $phone)->first();
+        $user = Ternobo::isUserLogedIn() ? Auth::user() : User::query()->where("phone", $phone)->first();
 
         $gateways = UserOption::getOption("payment_gateways", [
             'paypal' => [

@@ -29,8 +29,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post("/admin/login", [AdminController::class, "login"]);
 
-Route::middleware(["auth:api", AdminAPIMiddleware::class])->prefix("/admin")->group(function () {
+Route::middleware(["auth:admin-api"])->prefix("/admin")->group(function () {
     Route::post("/get-user", [AdminController::class, "getUser"]);
+    Route::post("/logout", [AdminController::class, "logout"]);
     Route::apiResources([
         'reports' => ReportsController::class,
         'posts' => PostsController::class,

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\User;
+use App\Ternobo;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +17,7 @@ class DonationResource extends JsonResource
      */
     public function toArray($request)
     {
-        $user = Auth::check() ? Auth::user()->id : '-1';
+        $user = Ternobo::isUserLogedIn() ? Auth::user()->id : '-1';
         return [
             "id" => $this->id,
             "post_id" => $this->post_id,
@@ -26,7 +27,7 @@ class DonationResource extends JsonResource
             "user_id" => $this->when(!$this->anonymous || $this->user_id == $user || $request->is("/donations"), $this->user_id),
             "user" => $this->when(!$this->anonymous || $request->is("/donations"), $this->user),
             "meta" => $this->when(!$this->anonymous || $request->is("/donations"), $this->meta),
-            "donate_by_me" => Auth::check() ? $this->user_id == Auth::user()->id : false,
+            "donate_by_me" => Ternobo::isUserLogedIn() ? $this->user_id == Auth::user()->id : false,
             'created_at' => $this->created_at,
         ];
     }
