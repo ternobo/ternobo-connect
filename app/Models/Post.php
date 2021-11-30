@@ -93,6 +93,7 @@ class Post extends Model
     {
         static::addGlobalScope(new PostDraftScope);
         static::addGlobalScope(new BlockedPageContentScope);
+
         static::addGlobalScope(new ReportedPostScope);
     }
 

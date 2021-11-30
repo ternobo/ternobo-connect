@@ -39,9 +39,16 @@ class AdminController extends Controller
         return response()->json(['result' => false]);
     }
 
+    public function logout()
+    {
+        Auth::logout();
+        return response()->json(['result' => true]);
+    }
+
+
+
     public function getUser()
     {
         return response()->json(['result' => true, "user" => Auth::user()]);
     }
-
 }

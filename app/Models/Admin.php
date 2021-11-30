@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Admin extends Model
+class Admin extends Authenticatable
 {
     protected $roles = [
         "Admin",
@@ -38,7 +39,7 @@ class Admin extends Model
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',"api_token","created_at","updated_at","token","phone_verified_at","followings","nationalcode","nationalcard","pushe_id"
+        'password', 'remember_token', "api_token", "created_at", "updated_at", "token", "phone_verified_at", "followings", "nationalcode", "nationalcard", "pushe_id"
     ];
 
     /**
@@ -72,6 +73,4 @@ class Admin extends Model
         }
         return $token;
     }
-
-
 }

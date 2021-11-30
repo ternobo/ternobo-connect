@@ -17,8 +17,6 @@ class ReportedPostScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $builder->whereDoesntHave("reports",function($query){
-            return $query->where("user_id",)
-        });
+        $builder->whereDoesntHave("reports");
     }
 }
