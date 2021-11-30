@@ -14,9 +14,10 @@ class Admin extends Authenticatable
 {
     protected $roles = [
         "Admin",
+        "CommunityManager",
         "UsersManager",
-        "HelpCenterManger",
-        "ContentManger"
+        "ContentWatcher",
+        "Announcer"
     ];
 
     use Notifiable;
