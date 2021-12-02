@@ -7,7 +7,6 @@ function sendNotification(title, body, icon) {
 }
 
 function showAnnouncement(data) {
-    console.log(data);
     let notificationEvent = new CustomEvent('announcement:new', {
         bubbles: true,
         detail: {
@@ -39,9 +38,7 @@ function setupNotifications(vue_app) {
             // Setup Notitication Channel
             const notificationChannel = window.Echo.private("notification." + user.id);
 
-            console.log(notificationChannel);
             notificationChannel.listen("NotificationEvent", function (data) {
-                console.log(data);
                 let notificationEvent = new CustomEvent('notification:new', {
                     bubbles: true,
                     detail: {
