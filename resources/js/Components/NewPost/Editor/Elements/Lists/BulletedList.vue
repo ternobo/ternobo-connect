@@ -12,10 +12,12 @@ export default {
 		list: {
 			deep: true,
 			handler() {
-				this.$emit(
-					"update:content",
-					this.list.map((item) => item.text)
-				);
+				if (this.list) {
+					this.$emit(
+						"update:content",
+						this.list?.map((item) => item.text)
+					);
+				}
 			},
 		},
 	},
@@ -56,13 +58,18 @@ export default {
 				this.$emit("delete");
 			}
 		},
+		setContent(content) {
+			return typeof content == "string"
+				? JSON.parse(content).map((text) => {
+						return { id: uuidv4(), text: text };
+				  })
+				: content.map((text) => {
+						return { id: uuidv4(), text: text };
+				  });
+		},
 	},
 	mounted() {
-		this.list = Boolean(this.content)
-			? this.content.map((text) => {
-					return { id: uuidv4(), text: text };
-			  })
-			: [{ id: 0, text: "" }];
+		this.list = Boolean(this.content) ? this.setContent(this.content) : [{ id: 0, text: "" }];
 	},
 	data() {
 		return {
