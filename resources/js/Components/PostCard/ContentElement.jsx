@@ -57,10 +57,12 @@ export default {
                 let li_list = [];
 
                 items.forEach((item) => {
-                    li_list.push(<li>{item}</li>)
+                    li_list.push(<li>
+                        <social-content text={item} tags={this.tags}></social-content>
+                    </li>)
                 });
 
-                content = <ListTag>{li_list}</ListTag>;
+                content = <ListTag dir="auto">{li_list}</ListTag>;
                 break;
             case "poll":
                 tag = "div";

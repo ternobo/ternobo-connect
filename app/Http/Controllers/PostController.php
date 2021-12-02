@@ -63,38 +63,43 @@ class PostController extends Controller
         $category = null;
 
         DB::beginTransaction();
+        try {
+            if ($request->filled("category")) {
+                $category = Category::query()->where("name", $request->category)->where("page_id", $user->personalPage->id)->firstOrCreate([
+                    "name" => $request->category,
+                    "page_id" => $user->personalPage->id,
+                    "type" => "post",
+                ])->id;
+            }
 
-        if ($request->filled("category")) {
-            $category = Category::query()->where("name", $request->category)->where("page_id", $user->personalPage->id)->firstOrCreate([
-                "name" => $request->category,
-                "page_id" => $user->personalPage->id,
-                "type" => "post",
-            ])->id;
+            $draft = $request->draft == '1';
+            $post = Post::withRelations()->create([
+                'type' => $draft ? 'draft_post' : 'post',
+                'user_id' => $user->id,
+                'page_id' => $user->personalPage->id,
+                'media' => [],
+                'show' => "public",
+                "category_id" => $category,
+                'can_tip' => $request->canDonate,
+            ]);
+
+            $tagsAndMentions = $post->setContent($slides, $user, false, $this->pollService, $this->dom);
+
+            if (!$draft) {
+                SocialMediaTools::callMentions($tagsAndMentions['mentions'], $post->id);
+            }
+            $post->tags = $tagsAndMentions["tags"];
+            $post->save();
+            $user->personalPage->addAction("post", $post->id);
+            $post->load(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
+            Tag::addTag($tagsAndMentions["tags"]);
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
         }
 
-        $draft = $request->draft == '1';
-        $post = Post::withRelations()->create([
-            'type' => $draft ? 'draft_post' : 'post',
-            'user_id' => $user->id,
-            'page_id' => $user->personalPage->id,
-            'media' => [],
-            'show' => "public",
-            "category_id" => $category,
-            'can_tip' => $request->canDonate,
-        ]);
-
-        $tagsAndMentions = $post->setContent($slides, $user, false, $this->pollService, $this->dom);
-
-        if (!$draft) {
-            SocialMediaTools::callMentions($tagsAndMentions['mentions'], $post->id);
-        }
-        $post->tags = $tagsAndMentions["tags"];
-        $post->save();
-        $user->personalPage->addAction("post", $post->id);
-
-        $post->load(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
-
-        Tag::addTag($tagsAndMentions["tags"]);
 
         return response()->json(array("result" => true, "post" => $post));
     }
