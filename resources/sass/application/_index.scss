@@ -3,6 +3,7 @@
 @import "./globals.scss";
 @import "./mixins/global";
 
+@import "./components/editor/blocks/markdown";
 @import "./pages/login-page.scss";
 @import "./pages/invite-links.scss";
 @import "./text-utilies.scss";
