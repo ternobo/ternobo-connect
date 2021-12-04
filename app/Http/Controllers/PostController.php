@@ -296,30 +296,35 @@ class PostController extends Controller
         $deletedSlides = [];
 
         DB::beginTransaction();
+        try {
+            $category = $request->filled("category") ? Category::query()->firstOrCreate([
+                'page_id' => $post->page_id,
+                'name' => $request->category,
+                'type' => "post",
+            ])->id : null;
+            $post->update([
+                'type' => $draft ? "draft_post" : "post",
+                'category_id' => $category,
+                'can_tip' => $request->canDonate,
+            ]);
 
-        $category = $request->filled("category") ? Category::query()->firstOrCreate([
-            'page_id' => $post->page_id,
-            'name' => $request->category,
-            'type' => "post",
-        ])->id : null;
-        $post->update([
-            'type' => $draft ? "draft_post" : "post",
-            'category_id' => $category,
-            'can_tip' => $request->canDonate,
-        ]);
+            $mentions = [];
+            $tags = [];
 
-        $mentions = [];
-        $tags = [];
+            $post->deleteBlocks();
+            $post->slides()->delete();
+            $tags = $post->setContent($slides, $user, false, $this->pollService, $this->dom)['tags'];
+            $post->tags = $tags;
+            $post->save();
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
+        $post->fresh();
+        $post->load(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
 
-        $post->deleteBlocks();
-        $post->slides()->delete();
-
-        $tags = $post->setContent($slides, $user, false, $this->pollService, $this->dom)['tags'];
-
-        $post->tags = $tags;
-        $post->save();
-
-        return response()->json(array("result" => true, "post" => $post->fresh()));
+        return response()->json(array("result" => true, "post" => $post));
     }
 
     public function publishPost($post)
