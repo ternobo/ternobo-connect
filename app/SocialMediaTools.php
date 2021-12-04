@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image as ImageFacades;
 use Intervention\Image\Image;
+use League\HTMLToMarkdown\HtmlConverter;
 use PHPHtmlParser\Dom;
 use PHPHtmlParser\Options;
 use Twitter\Text\Parser;
@@ -24,8 +25,6 @@ class SocialMediaTools
 
 
     private static $allowedHtmlTags = [
-        "b",
-        "i",
         "strike",
         "u",
         "a",
@@ -34,7 +33,10 @@ class SocialMediaTools
         "sup",
         "text",
         "span",
-        "p"
+        "p",
+        "spoiler",
+        "strong",
+        "em"
     ];
 
     /**
@@ -86,7 +88,6 @@ class SocialMediaTools
         $dom->loadStr("$content");
 
         $content = ($dom->find("*"));
-
         foreach ($content as $element) {
             if (!in_array($element->getTag()->name(), static::$allowedHtmlTags)) {
                 $element->delete();
@@ -102,9 +103,8 @@ class SocialMediaTools
             $community = CommunityTag::query()->whereRelation("tag", "name", $hashtag)->first();
             if ($community instanceof CommunityTag) {
                 $icon = $community->icon;
-                $tag = "#$hashtag <img src='/$icon' width='20'/>";
             }
-            $text = str_replace("#$hashtag", " <wire-link href='/$hashtag' class='text-mention'>" . $tag . "</wire-link> ", $text);
+            $text = str_replace("#$hashtag", "[hashtag=$hashtag [$icon] ]", $text);
         }
         return $text;
     }

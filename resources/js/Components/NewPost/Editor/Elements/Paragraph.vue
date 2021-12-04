@@ -1,319 +1,194 @@
 <template>
-  <mentionable :max-tags="3" class="textarea-content w-100" v-bind="$attrs" @click="focus">
-    <div ref="editable" :placeholder="__.get('content/posts.enter-your-text')" class="editor--text-input"
-         contenteditable @blur="onBlur" @focus="onFocus" @input="input" @keydown="onKeyDown"
-         @paste="onPaste" @keydown.enter="addParagraph"></div>
-  </mentionable>
+	<mentionable :max-tags="3" class="textarea-content w-100" v-bind="$attrs" @click="focus">
+		<div ref="editable" :placeholder="__.get('content/posts.enter-your-text')" class="editor--text-input" contenteditable @blur="onBlur" @focus="onFocus" @input="input" @keydown="onKeyDown" @paste="onPaste" @keydown.enter="addParagraph"></div>
+	</mentionable>
 </template>
 
 <script>
 import TextareaParser from "../TextareaParser";
 import Mentionable from "../../../Mentionable";
 import ParagraphEditor from "ternobo-paragraph-editor/lib/TernoboEditor";
-
+import ParagraphEditorOptions from "./ParagraphEditorOptions";
 import ContentEditable from "../../../../Mixins/ContentEditable";
-import {mapState} from "vuex";
+import { mapState } from "vuex";
 
 export default {
-  mixins: [ContentEditable],
-  destroyed() {
-    this.editor.doDestory();
-  },
-  provide: {
-    replaceMention(key, value) {
-      const classes = key == "@" ? "mention-item" : "text-action tag-item";
-      const element = document.createElement("span");
-      element.className = classes;
-      element.innerHTML = key + value;
-      element.contentEditable = false;
-      return element;
-    },
-  },
-  methods: {
-    addParagraph(e) {
-      if (!e.shiftKey) {
-        e.preventDefault();
-        this.$emit("addParagraph");
-      }
-    },
-    onBackspace(e) {
-      let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
-      content = TextareaParser.unescapeHtml(content);
+	mixins: [ContentEditable],
+	destroyed() {
+		this.editor.doDestory();
+	},
+	provide: {
+		replaceMention(key, value, item) {
+			const classes = key == "@" ? "mention-item" : "text-action tag-item";
+			const element = document.createElement("span");
+			element.className = classes;
+			if (key == "#") {
+				element.innerHTML = key + value;
+			} else {
+				element.innerHTML = item.name;
+			}
+			element.contentEditable = false;
+			return element;
+		},
+	},
+	methods: {
+		addParagraph(e) {
+			if (!e.shiftKey) {
+				e.preventDefault();
+				this.$emit("addParagraph");
+			}
+		},
+		onBackspace(e) {
+			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
+			content = TextareaParser.unescapeHtml(content);
 
-      if (content < 1) {
-        e.preventDefault();
-        this.$emit("delete");
-      }
-    },
-    onFocus() {
-      this.$emit("focus", this);
-      this.$refs.editable.dir = "auto";
-    },
-    onBlur() {
-      if (this.updateContent(false).trim().length < 1) {
-        this.$refs.editable.removeAttribute("dir");
-      } else {
-        this.$refs.editable.dir = "auto";
-      }
-    },
-    insertEmoji(emoji) {
-      document.execCommand("insertHTML", false, twemoji.parse(emoji));
-      this.input();
-    },
-    updateContent(emit = true) {
-      let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
-      content = TextareaParser.replaceTextEditorMentions(TextareaParser.unescapeHtml(content));
-      if (emit) this.$emit("update:content", content);
-      return content;
-    },
-    onPaste(e) {
-      e.preventDefault();
-      var text = (e.originalEvent || e).clipboardData.getData("text/plain");
-      let len = this.$refs.editable.innerText.length + text.length;
+			if (content.length == 0) {
+				e.preventDefault();
+				this.$emit("delete");
+			}
+		},
+		onFocus() {
+			this.$emit("focus", this);
+			this.$refs.editable.dir = "auto";
+		},
+		onBlur() {
+			if (this.updateContent(false).trim().length == 0) {
+				this.$refs.editable.removeAttribute("dir");
+			} else {
+				this.$refs.editable.dir = "auto";
+			}
+		},
+		insertEmoji(emoji) {
+			document.execCommand("insertHTML", false, twemoji.parse(emoji));
+			this.input();
+		},
+		updateContent(emit = true) {
+			let content = TextareaParser.replaceEmojiWithAltAttribute(this.$refs.editable.innerHTML);
+			content = TextareaParser.replaceTextEditorMentions(TextareaParser.unescapeHtml(content));
+			if (emit) this.$emit("update:content", content);
+			return content;
+		},
+		onPaste(e) {
+			e.preventDefault();
+			var text = (e.originalEvent || e).clipboardData.getData("text/plain");
+			let len = this.$refs.editable.innerText.length + text.length;
 
-      if (len > this.max) {
-        text = text.substr(0, this.max - this.$refs.editable.innerText.length);
-      }
+			if (len > this.max) {
+				text = text.substr(0, this.max - this.$refs.editable.innerText.length);
+			}
 
-      document.execCommand("insertText", false, text);
+			document.execCommand("insertText", false, text);
 
-      this.updateContent();
+			this.updateContent();
 
-      this.fixDirection();
-    },
+			this.fixDirection();
+		},
 
-    onKeyDown(e) {
-      let utils = {
-        special: [8, 16, 17, 18, 46],
-        delete: [8, 46],
-        navigational: [38, 37, 39, 40],
-        isSpecial(event) {
-          let result = this.special.includes(event.keyCode) || (event.ctrlKey && [90, 83, 65].includes(event.keyCode));
-          return result;
-        },
-        isDelete(event) {
-          return this.delete.includes(event.keyCode);
-        },
-        isNavigational(e) {
-          return this.navigational.includes(e.keyCode);
-        },
-      };
+		onKeyDown(e) {
+			let utils = {
+				special: [8, 16, 17, 18, 46],
+				delete: [8, 46],
+				navigational: [38, 37, 39, 40],
+				isSpecial(event) {
+					let result = this.special.includes(event.keyCode) || (event.ctrlKey && [90, 83, 65].includes(event.keyCode));
+					return result;
+				},
+				isDelete(event) {
+					return this.delete.includes(event.keyCode);
+				},
+				isNavigational(e) {
+					return this.navigational.includes(e.keyCode);
+				},
+			};
 
-      let len = e.target.innerText.length;
-      let hasSelection = false;
-      let selection = window.getSelection();
-      let isSpecial = utils.isSpecial(e);
-      let isNavigational = utils.isNavigational(e);
+			let len = e.target.innerText.length;
+			let hasSelection = false;
+			let selection = window.getSelection();
+			let isSpecial = utils.isSpecial(e);
+			let isNavigational = utils.isNavigational(e);
 
-      if (selection) {
-        hasSelection = !!selection.toString();
-      }
+			if (selection) {
+				hasSelection = !!selection.toString();
+			}
 
-      if (utils.isDelete(e)) {
-        this.onBackspace(e);
-      } else if (isSpecial || isNavigational) {
-        return true;
-      } else if (len >= this.max && !hasSelection) {
-        e.preventDefault();
-        return false;
-      }
-    },
-    input(e) {
-      if (this.updateContent(false) === "- ") {
-        this.$emit("update:type", "bulletedList");
-      } else if (this.updateContent(false) === "1- ") {
-        this.$emit("update:type", "orderedList");
-      }
-      this.updateContent();
-      this.$nextTick(() => {
-        twemoji.parse(this.$refs.editable);
-        this.fixDirection();
-      });
-    },
-    fixDirection() {
-      HTMLCollection.prototype.forEach = Array.prototype.forEach;
-      this.$refs.editable.children.forEach((item) => {
-        item.dir = "auto";
-      });
-    },
-    focus() {
-      const el = this.$refs.editable;
-      el.focus();
-      if (typeof window.getSelection != "undefined" && typeof document.createRange != "undefined") {
-        var range = document.createRange();
-        range.selectNodeContents(el);
-        range.collapse(false);
-        var sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-      } else if (typeof document.body.createTextRange != "undefined") {
-        var textRange = window.document.body.createTextRange();
-        textRange.moveToElementText(el);
-        textRange.collapse(false);
-        textRange.select();
-      }
-    },
-  },
-  data() {
-    return {
-      tags: [],
-      editor: null,
+			if (utils.isDelete(e)) {
+				this.onBackspace(e);
+			} else if (isSpecial || isNavigational) {
+				return true;
+			} else if (len >= this.max && !hasSelection) {
+				e.preventDefault();
+				return false;
+			}
+		},
+		input(e) {
+			if (this.updateContent(false) === "- ") {
+				this.$emit("update:type", "bulletedList");
+			} else if (this.updateContent(false) === "1- ") {
+				this.$emit("update:type", "orderedList");
+			}
+			this.updateContent();
+			this.$nextTick(() => {
+				twemoji.parse(this.$refs.editable);
+				this.fixDirection();
+			});
+		},
+		fixDirection() {
+			HTMLCollection.prototype.forEach = Array.prototype.forEach;
+			this.$refs.editable.children.forEach((item) => {
+				item.dir = "auto";
+			});
+		},
+		focus() {
+			const el = this.$refs.editable;
+			el.focus();
+			if (typeof window.getSelection != "undefined" && typeof document.createRange != "undefined") {
+				var range = document.createRange();
+				range.selectNodeContents(el);
+				range.collapse(false);
+				var sel = window.getSelection();
+				sel.removeAllRanges();
+				sel.addRange(range);
+			} else if (typeof document.body.createTextRange != "undefined") {
+				var textRange = window.document.body.createTextRange();
+				textRange.moveToElementText(el);
+				textRange.collapse(false);
+				textRange.select();
+			}
+		},
+	},
+	data() {
+		return {
+			tags: [],
+			editor: null,
 
-      showList: false,
-    };
-  },
-  props: {
-    content: {
-      default: "",
-    },
-    max: {
-      default: 1200,
-    },
-  },
-  computed: {
-    ...mapState(["shared"]),
-  },
-  mounted() {
-    document.execCommand("defaultParagraphSeparator", false, "p");
-    this.$refs.editable.innerHTML = this.content != null ? this.content : "";
-    this.updateContent();
+			showList: false,
+		};
+	},
+	props: {
+		content: {
+			default: "",
+		},
+		max: {
+			default: 1200,
+		},
+	},
+	computed: {
+		...mapState(["shared"]),
+	},
+	mounted() {
+		document.execCommand("defaultParagraphSeparator", false, "p");
+		this.$refs.editable.innerHTML = this.content != null ? this.content : "";
+		this.updateContent();
 
-    this.editor = new ParagraphEditor(this.$refs.editable, {
-      toolbar: {
-        bold: {
-          text: "format_bold",
-          class: "material-icons",
-          onActive: () => {
-            return document.queryCommandState("bold");
-          },
-          action: () => {
-            document.execCommand("bold", false, "");
-          },
-        },
-        italic: {
-          text: "format_italic",
-          class: "material-icons",
-          onActive: () => {
-            return document.queryCommandState("italic");
-          },
-          action: () => {
-            document.execCommand("italic", false, "");
-          },
-        },
-        strikeThrough: {
-          text: "strikethrough_s",
-          class: "material-icons",
-          onActive: () => {
-            return document.queryCommandState("strikeThrough");
-          },
-          action: () => {
-            document.execCommand("strikeThrough", false, "");
-          },
-        },
-        underline: {
-          text: "format_underlined",
-          class: "material-icons",
-          onActive: () => {
-            return document.queryCommandState("underline");
-          },
-          action: () => {
-            document.execCommand("underline", false, "");
-          },
-        },
+		this.editor = new ParagraphEditor(this.$refs.editable, ParagraphEditorOptions);
 
-        link: {
-          text: "link",
-          class: "material-icons",
-          onActive: () => {
-            var sel = window.getSelection();
-            var range = sel.getRangeAt(0).cloneRange();
-            return range.commonAncestorContainer.parentElement.tagName.toLowerCase() == "a";
-          },
-          action: (e) => {
-            var sel = window.getSelection();
-            if (sel.rangeCount) {
-              var range = sel.getRangeAt(0).cloneRange();
-              let element = range.commonAncestorContainer.parentElement;
-              if (element.tagName.toLowerCase() == "a") {
-                document.execCommand("unlink", false, null);
-                e.editor.selectionToLink("subdirectory_arrow_left", "Enter Link", element.href);
-              } else {
-                e.editor.selectionToLink("subdirectory_arrow_left", "Enter Link");
-              }
-            }
-          },
-        },
-        code: {
-          text: "code",
-          class: "material-icons",
-          onActive: () => {
-            var sel = window.getSelection();
-            var range = sel.getRangeAt(0).cloneRange();
-            return range.commonAncestorContainer.parentElement.tagName.toLowerCase() == "code";
-          },
-          action: () => {
-            var sel = window.getSelection();
-            if (sel.rangeCount) {
-              var range = sel.getRangeAt(0).cloneRange();
-              if (range.commonAncestorContainer.parentElement.tagName.toLowerCase() == "code") {
-                document.execCommand("removeFormat", false, null);
-              } else {
-                range.surroundContents(document.createElement("code"));
-                sel.removeAllRanges();
-                sel.addRange(range);
-              }
-            }
-          },
-        },
-
-        spoiler: {
-          text: "visibility",
-          class: "material-icons",
-          onActive: () => {
-            let sel = window.getSelection();
-            let range = sel.getRangeAt(0).cloneRange();
-            return range.commonAncestorContainer.parentElement.tagName.toLowerCase() === "span" && range.commonAncestorContainer.parentElement.className.includes("spoiler");
-          },
-          action: () => {
-            let sel = window.getSelection();
-            if (sel.rangeCount) {
-              let range = sel.getRangeAt(0).cloneRange();
-              if (range.commonAncestorContainer.parentElement.tagName.toLowerCase() === "span" && range.commonAncestorContainer.parentElement.className.includes("spoiler")) {
-                document.execCommand("removeFormat", false, null);
-              } else {
-                const spoilerElem = document.createElement("span");
-                spoilerElem.style.filter = "blur(1px)";
-                spoilerElem.classList.add("spoiler")
-                range.surroundContents(spoilerElem);
-                sel.removeAllRanges();
-                sel.addRange(range);
-              }
-            }
-          },
-        },
-        superscript: {
-          text: "superscript",
-          class: "material-icons",
-          onActive: () => {
-            return document.queryCommandState("superscript");
-          },
-          action: () => {
-            document.execCommand("superscript", null, "");
-          },
-        },
-      },
-    });
-
-    this.$nextTick(() => {
-      if (this.$refs.editable) {
-        twemoji.parse(this.$refs.editable);
-        this.$refs.editable.focus();
-      }
-    });
-  },
-  components: {Mentionable},
+		this.$nextTick(() => {
+			if (this.$refs.editable) {
+				twemoji.parse(this.$refs.editable);
+				this.$refs.editable.focus();
+			}
+		});
+	},
+	components: { Mentionable },
 };
 </script>
-
-<style>
-</style>
