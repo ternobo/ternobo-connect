@@ -316,6 +316,7 @@ class PostController extends Controller
             $tags = $post->setContent($slides, $user, false, $this->pollService, $this->dom)['tags'];
             $post->tags = $tags;
             $post->save();
+            Tag::addTag($tags);
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
