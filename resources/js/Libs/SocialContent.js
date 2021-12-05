@@ -6,10 +6,10 @@ export default {
             content = content.replace(/\B@(\w+)/gu, "<wire-link href='/$1' class='mention-item'>@$1</wire-link>")
 
             tags?.forEach((item) => {
-                content = content.replace(` #${item} `, function (tag) {
+                content = content.replace(`#${item}`, function (tag) {
                     return ` <wire-link href='/tags/${tag.replace('#', '')}' class='text-action'>${tag}</wire-link> `;
-                })
-            })
+                }).replace(new RegExp(`\\[hashtag=(${item}) \\[(.*)\\] \\]`), '<wire-link href="/tags/$1">#$1 <img src="/$2" style="vertical-align: middle" width="24"/></wire-link>');
+            });
 
             let parsedContent = new DOMParser().parseFromString(content, "text/html").body;
 
