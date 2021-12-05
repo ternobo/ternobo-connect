@@ -103,8 +103,8 @@ class SocialMediaTools
             $community = CommunityTag::query()->whereRelation("tag", "name", $hashtag)->first();
             if ($community instanceof CommunityTag) {
                 $icon = $community->icon;
+                $text = str_replace("#$hashtag", "[hashtag=$hashtag [$icon] ]", $text);
             }
-            $text = str_replace("#$hashtag", "[hashtag=$hashtag [$icon] ]", $text);
         }
         return $text;
     }
