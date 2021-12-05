@@ -54,6 +54,16 @@ export default {
 					top: y - 92,
 					behavior: "smooth",
 				});
+
+				this.$nextTick(() => {
+					setTimeout(() => {
+						if (this.$el.getBoundingClientRect().height > 930) {
+							this.viewShowMore = true;
+						} else {
+							this.viewShowMore = false;
+						}
+					}, 200);
+				});
 			});
 			this.$emit("update:slide", this.active);
 		},
@@ -85,7 +95,6 @@ export default {
 			}
 		}, options);
 		observer.observe(this.$el);
-
 		this.$nextTick(() => {
 			setTimeout(() => {
 				if (this.$el.getBoundingClientRect().height > 930) {

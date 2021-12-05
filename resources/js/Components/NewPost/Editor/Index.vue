@@ -146,7 +146,8 @@ export default {
 				characterCount += TwitterText.parseTweet(TextareaParser.unescapeHtml(item.content)).weightedLength;
 			});
 			this.listItems.forEach((item) => {
-				item.content?.forEach((listItem) => {
+				const content = typeof item.content == "string" ? JSON.parse(item.content) : item.content;
+				content?.forEach((listItem) => {
 					characterCount += TwitterText.parseTweet(TextareaParser.unescapeHtml(listItem)).weightedLength;
 				});
 			});
