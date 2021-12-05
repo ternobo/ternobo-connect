@@ -155,8 +155,7 @@ export default {
                         node.replaceWith(newNode);
                     } else {
                         const spoilerElem = document.createElement("spoiler");
-                        spoilerElem.style.filter = "blur(1px)";
-                        spoilerElem.classList.add("spoiler")
+                        spoilerElem.classList.add("spoiler-preview")
                         range.surroundContents(spoilerElem);
                         sel.removeAllRanges();
                         sel.addRange(range);

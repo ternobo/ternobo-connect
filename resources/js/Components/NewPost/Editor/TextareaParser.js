@@ -6,7 +6,8 @@ export default {
     //<span class="mention-item" contenteditable="false" data-mention="soheila.nariman">@الوند اعتماد</span>
     replaceTextEditorMentions(text) {
         return text.replaceAll(/<span class="mention-item" contenteditable="false" data-mention="(\S+)"(.*)>(.*)<\/span>/g, "@$1")
-            .replaceAll(/<span class="text-action tag-item" contenteditable="false" data-mention="(\S+)"(.*)>([\s\S]*?)<\/span>/g, "#$1");
+            .replaceAll(/<span class="text-action tag-item" contenteditable="false" data-mention="(\S+)"(.*)>([\s\S]*?)<\/span>/g, "#$1")
+            .replaceAll(/<spoiler (.*)>(.*)<\/spoiler>/g, "<spoiler>$2</spoiler>");
     },
     unescapeHtml(text) {
         return text?.replace(/&amp;/g, '&')

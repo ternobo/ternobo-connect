@@ -57,6 +57,7 @@ TernoboApp.install = function (Vue, options) {
 
     Vue.component("post-card", () => import("../Components/PostCard/PostCard"));
     Vue.component("people-suggestion", () => import("../Components/App/PeopleSuggestion"));
+    Vue.component("spoiler", () => import("../Components/Spoiler"));
     Vue.component("loading-button", LoadingButton);
     Vue.component("lazy-image", LazyImage);
     Vue.component("loading-spinner", LoadingSpinner);
