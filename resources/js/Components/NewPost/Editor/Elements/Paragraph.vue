@@ -177,7 +177,7 @@ export default {
 	},
 	mounted() {
 		document.execCommand("defaultParagraphSeparator", false, "p");
-		this.$refs.editable.innerHTML = this.content != null ? this.content : "";
+		this.$refs.editable.innerHTML = (this.content != null ? this.content : "").replace(new RegExp(`\\[hashtag=(\\S+) \\[(.*)\\] \\]`), '<span class="text-action tag-item" contenteditable="false" data-mention="$1" dir="auto">#$1</span>');
 		this.updateContent();
 
 		this.editor = new ParagraphEditor(this.$refs.editable, ParagraphEditorOptions);
@@ -186,6 +186,7 @@ export default {
 			if (this.$refs.editable) {
 				twemoji.parse(this.$refs.editable);
 				this.$refs.editable.focus();
+				this.$refs.editable.innerHTML = this.$refs.editable.innerHTML.replace(/#(\S+)/g, '<span class="text-action tag-item" contenteditable="false" data-mention="$1" dir="auto">#$1</span>');
 			}
 		});
 	},
