@@ -52,7 +52,7 @@ export default {
             case "orderedList":
                 const ListTag = this.content.type == "orderedList" ? "ol" : "ul";
 
-                const items = JSON.parse(this.content.content);
+                const items = this.content.content;
 
                 let li_list = [];
 
