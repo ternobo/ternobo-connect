@@ -144,13 +144,13 @@ export default {
             onActive: () => {
                 let sel = window.getSelection();
                 let range = sel.getRangeAt(0).cloneRange();
-                return range.commonAncestorContainer.parentElement.tagName.toLowerCase() === "span" && range.commonAncestorContainer.parentElement.className.includes("spoiler");
+                return range.commonAncestorContainer.parentElement.tagName.toLowerCase() == "spoiler";
             },
             action: () => {
                 let sel = window.getSelection();
                 if (sel.rangeCount) {
                     let range = sel.getRangeAt(0).cloneRange();
-                    if (range.commonAncestorContainer.parentElement.tagName.toLowerCase() === "span" && range.commonAncestorContainer.parentElement.className.includes("spoiler")) {
+                    if (range.commonAncestorContainer.parentElement.tagName.toLowerCase() == "spoiler") {
                         unsurroundedRange(range);
                         node.replaceWith(newNode);
                     } else {
