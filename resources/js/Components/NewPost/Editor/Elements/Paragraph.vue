@@ -186,7 +186,7 @@ export default {
 			if (this.$refs.editable) {
 				twemoji.parse(this.$refs.editable);
 				this.$refs.editable.focus();
-				this.$refs.editable.innerHTML = this.$refs.editable.innerHTML.replace(/#(\S+)/g, '<span class="text-action tag-item" contenteditable="false" data-mention="$1" dir="auto">#$1</span>');
+				this.$refs.editable.innerHTML = this.$refs.editable.innerHTML.replace(/#(\S+)/g, '<span class="text-action tag-item" contenteditable="false" data-mention="$1" dir="auto">#$1</span>').replace(/<spoiler>(.*)<\/spoiler>/g, "<spoiler class='spoiler-preview'>$1</spoiler>");
 			}
 		});
 	},
