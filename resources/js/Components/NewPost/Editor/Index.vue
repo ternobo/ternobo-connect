@@ -59,7 +59,6 @@ export default {
 			this.blocks = this.content;
 		},
 	},
-	provide: {},
 	methods: {
 		addParagraph(index) {
 			this.blocks.splice(index, 0, { id: uuidv4(), type: "text", content: "", meta: {} });
@@ -118,6 +117,10 @@ export default {
 		hasText() {
 			return this.blocks.filter((item) => item.type == "text").length > 0;
 		},
+		hasList() {
+			return this.blocks.filter((item) => ["bulletedList", "orderedList"].includes(item.type)).length > 0;
+		},
+		// ************* //
 		textItems() {
 			if (this.hasText) {
 				return this.blocks.filter((item) => item.type == "text");
@@ -125,19 +128,35 @@ export default {
 				return [{ content: "" }];
 			}
 		},
+		listItems() {
+			if (this.hasList) {
+				return this.blocks.filter((item) => ["bulletedList", "orderedList"].includes(item.type));
+			} else {
+				return [];
+			}
+		},
+		// ************* //
 		textProgress() {
+			let characterCount = this.charachersCount;
+			return (characterCount / 2200) * 100 + "%";
+		},
+		charachersCount() {
 			let characterCount = 0;
 			this.textItems.forEach((item) => {
 				characterCount += TwitterText.parseTweet(TextareaParser.unescapeHtml(item.content)).weightedLength;
 			});
-			return (characterCount / 1200) * 100 + "%";
+			this.listItems.forEach((item) => {
+				const content = typeof item.content == "string" ? JSON.parse(item.content) : item.content;
+				content?.forEach((listItem) => {
+					characterCount += TwitterText.parseTweet(TextareaParser.unescapeHtml(listItem)).weightedLength;
+				});
+			});
+
+			return characterCount;
 		},
 		leftCharacter() {
-			let characterCount = 0;
-			this.textItems.forEach((item) => {
-				characterCount += TwitterText.parseTweet(TextareaParser.unescapeHtml(item.content)).weightedLength;
-			});
-			return 1200 - characterCount;
+			let characterCount = this.charachersCount;
+			return 2200 - characterCount;
 		},
 		availableOptions() {
 			let addedOptions = this.blocks.map((item) => item.type);

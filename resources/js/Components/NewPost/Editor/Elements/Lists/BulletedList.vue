@@ -1,6 +1,6 @@
 <template>
 	<ul class="bulleted-list-editor">
-		<paragraph v-for="(item, index) in list" :dir="computedList[index].direction" ref="list-item" :key="`bulleted_list_${item.id}`" tag="li" @delete="deleteItem(index)" @addParagraph="onEnter(index)" :content.sync="list[index].text"></paragraph>
+		<paragraph v-for="(item, index) in list" :max="max" :dir="computedList[index].direction" ref="list-item" :key="`bulleted_list_${item.id}`" tag="li" @delete="deleteItem(index)" @addParagraph="onEnter(index)" :content.sync="list[index].text"></paragraph>
 	</ul>
 </template>
 
@@ -29,7 +29,7 @@ export default {
 			});
 		},
 	},
-	props: ["content"],
+	props: ["content", "max"],
 	components: { Paragraph },
 	methods: {
 		getDirection(text) {
