@@ -6,6 +6,10 @@
 
     position: relative;
 
+    &:not(.show) {
+        cursor: pointer;
+    }
+
     &::after {
         content: " ";
         position: absolute;
