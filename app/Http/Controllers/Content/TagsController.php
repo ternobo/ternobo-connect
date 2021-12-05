@@ -40,7 +40,9 @@ class TagsController extends Controller
             ->whereJsonContains('tags', $name)
             ->paginate(10);
 
-        $followed = Ternobo::isUserLogedIn() ? Following::tags()->where("page_id", Ternobo::currentPage()->id)->where("following", Tag::query()->where("name", $name)->first()->id)->exists() : false;
+        $followed = Ternobo::isUserLogedIn() ?
+            Following::tags()->where("page_id", Ternobo::currentPage()->id)
+            ->where("following", Tag::query()->where("name", $name)->first()->id)->exists() : false;
 
         $community = $this->service->getCommunityByHashtag($name);
 
