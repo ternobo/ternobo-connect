@@ -628,3 +628,13 @@
         vertical-align: middle;
     }
 }
+
+code {
+    direction: ltr;
+    background: $gray-bg;
+    color: $gray-medium-dark;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    padding: 0.25rem;
+    font-family: 'JetBrains Mono', monospace;
+}
