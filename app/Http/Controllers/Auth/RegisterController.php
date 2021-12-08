@@ -38,7 +38,7 @@ class RegisterController extends Controller
             session()->put("invite_code", $code);
             $invite = InviteLink::query()->with(['user'])->where("code", $code)->whereNull('used_by')->where("valid", "1")->firstOrFail();
             SEOTools::setDescription(__("register.welcome"));
-            return TernoboWire::render("Register", ['user' => $invite->user]);
+            return TernoboWire::render("Register", ['user' => $invite->user, "hasInvite" => $invite instanceof InviteLink]);
         }
 
         return TernoboWire::render("Register");
@@ -73,7 +73,7 @@ class RegisterController extends Controller
 
             ActiveSession::addSession($user->id);
             $page = $user->makePage();
-            $page = $request->input("nickname", null);
+            $page->nickname = $request->input("nickname", null);
             $invite = InviteLink::query()->where("code", session("invite_code"))->first();
 
             if ($invite instanceof InviteLink) {
