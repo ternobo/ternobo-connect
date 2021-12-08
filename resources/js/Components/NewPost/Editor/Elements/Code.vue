@@ -131,7 +131,8 @@ export default {
 		this.editor.dispose();
 	},
 	mounted() {
-		this.renderCodeEditor(this.content.language, this.content.code);
+		const content = typeof this.content == "string" ? JSON.parse(this.content) : this.content;
+		this.renderCodeEditor(content.language, content.code);
 	},
 };
 </script>
