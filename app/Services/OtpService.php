@@ -2,15 +2,16 @@
 
 namespace App\Services;
 
+use Ixudra\Curl\Facades\Curl;
 use Ipecompany\Smsirlaravel\Smsirlaravel;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Request;
+use GuzzleHttp\Exception\BadResponseException;
 use Carbon\Carbon;
+use App\Utils\StringUtils;
+use App\Services\RestfulService;
 use App\Models\User;
 use App\Models\Otp;
-use App\Services\RestfulService;
-use App\Utils\StringUtils;
-use GuzzleHttp\Exception\BadResponseException;
 
 class OtpService extends RestfulService
 {
