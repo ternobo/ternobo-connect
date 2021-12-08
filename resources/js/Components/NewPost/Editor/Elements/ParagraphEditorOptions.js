@@ -1,9 +1,14 @@
 
-function unsurroundedRange(range) {
-    const node = range.commonAncestorContainer.parentElement;
-    const node_content = node.innerText;
-    const newNode = document.createTextNode(node_content);
-    node.replaceWith(newNode);
+function unsurroundedRange(range, sel) {
+    const parent = range.commonAncestorContainer.parentElement;
+    var selectedTextNode = document.createTextNode(range.toString());
+    range.deleteContents();
+    range.insertNode(selectedTextNode);
+    range.selectNode(selectedTextNode);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    parent.replaceWith(parent, selectedTextNode);
+    range.selectNode(selectedTextNode);
 }
 function checkSurroundedElemeant() {
     var sel = window.getSelection();
@@ -17,6 +22,7 @@ function surroundNode(tag) {
     var range = sel.getRangeAt(0).cloneRange();
     const elem = document.createElement(tag);
     range.surroundContents(elem);
+    range.collapse();
     sel.removeAllRanges();
     sel.addRange(range);
 }
@@ -32,8 +38,9 @@ export default {
             action: () => {
                 var sel = window.getSelection();
                 var range = sel.getRangeAt(0).cloneRange();
+
                 if (checkSurroundedElemeant() == "strong") {
-                    unsurroundedRange(range);
+                    unsurroundedRange(range, sel);
                 } else {
                     surroundNode("strong");
                     range.collapse();
@@ -51,7 +58,7 @@ export default {
                 if (checkSurroundedElemeant() == "em") {
                     var sel = window.getSelection();
                     var range = sel.getRangeAt(0).cloneRange();
-                    unsurroundedRange(range);
+                    unsurroundedRange(range, sel);
                 } else {
                     surroundNode("em");
                 }
@@ -68,7 +75,7 @@ export default {
                 if (checkSurroundedElemeant() == "strike") {
                     var sel = window.getSelection();
                     var range = sel.getRangeAt(0).cloneRange();
-                    unsurroundedRange(range);
+                    unsurroundedRange(range, sel);
                 } else {
                     surroundNode("strike");
                 }
@@ -85,7 +92,7 @@ export default {
                 if (checkSurroundedElemeant() == "u") {
                     var sel = window.getSelection();
                     var range = sel.getRangeAt(0).cloneRange();
-                    unsurroundedRange(range);
+                    unsurroundedRange(range, sel);
                 } else {
                     surroundNode("u");
                 }
@@ -106,7 +113,7 @@ export default {
                     var range = sel.getRangeAt(0).cloneRange();
                     let element = range.commonAncestorContainer.parentElement;
                     if (element.tagName.toLowerCase() == "a") {
-                        unsurroundedRange(range);
+                        unsurroundedRange(range, sel);
                         e.editor.selectionToLink("subdirectory_arrow_left", "Enter Link", element.href);
                     } else {
                         e.editor.selectionToLink("subdirectory_arrow_left", "Enter Link");
@@ -127,8 +134,7 @@ export default {
                 if (sel.rangeCount) {
                     var range = sel.getRangeAt(0).cloneRange();
                     if (range.commonAncestorContainer.parentElement.tagName.toLowerCase() == "code") {
-                        unsurroundedRange(range);
-                        node.replaceWith(newNode);
+                        unsurroundedRange(range, sel);
                     } else {
                         range.surroundContents(document.createElement("code"));
                         sel.removeAllRanges();
@@ -151,8 +157,7 @@ export default {
                 if (sel.rangeCount) {
                     let range = sel.getRangeAt(0).cloneRange();
                     if (range.commonAncestorContainer.parentElement.tagName.toLowerCase() == "spoiler") {
-                        unsurroundedRange(range);
-                        node.replaceWith(newNode);
+                        unsurroundedRange(range, sel);
                     } else {
                         const spoilerElem = document.createElement("spoiler");
                         spoilerElem.classList.add("spoiler-preview")
@@ -174,7 +179,7 @@ export default {
                 if (checkSurroundedElemeant() == "sup") {
                     var sel = window.getSelection();
                     var range = sel.getRangeAt(0).cloneRange();
-                    unsurroundedRange(range);
+                    unsurroundedRange(range, sel);
                 } else {
                     surroundNode("sup");
                 }
