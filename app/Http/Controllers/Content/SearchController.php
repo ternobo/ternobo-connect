@@ -43,18 +43,16 @@ class SearchController extends Controller
         $results = array();
 
         if ($request->has("type") && $request->type === "content") {
-            $posts = Post::withRelations()
-                ->with(["page", "slides.content" => function ($query) use ($search) {
-                    $query->selectRaw("MATCH (`content`) AGAINST(? IN BOOLEAN MODE) as score", [$search])
-                        ->orderBy("score");
-                }, "mutualLikes", "category"])
+            $posts = Post::with(["page", "slides.content" => function ($query) use ($search) {
+                return $query->selectRaw("slide_blocks.*, MATCH (`content`) AGAINST(? IN BOOLEAN MODE) as score", [$search])
+                    ->orderBy("score", "DESC");
+            }, "mutualLikes", "category"])
                 ->selectRaw("MATCH (`title`, `text`) AGAINST(? IN BOOLEAN MODE) as score, posts.*", [$search])
                 ->whereRaw("MATCH (`title`, `text`) AGAINST(? IN BOOLEAN MODE) > 0", [$search])
                 ->orWhereHas("slides.content", function ($query) use ($search) {
-                    $query->whereRaw("MATCH (`content`) AGAINST(? IN BOOLEAN MODE) > 0", [$search]);
+                    return $query->whereRaw("MATCH (`content`) AGAINST(? IN BOOLEAN MODE) > 0", [$search]);
                 })
                 ->orWhereJsonContains("tags", $search)
-                ->orderBy("score")
                 ->distinct("posts.id");
 
             SEOTools::setTitle(__("seo.search-for", ['name' => $request->q]));
