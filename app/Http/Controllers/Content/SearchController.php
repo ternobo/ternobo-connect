@@ -50,7 +50,7 @@ class SearchController extends Controller
                 }, "mutualLikes", "category"])
                 ->selectRaw("MATCH (`title`, `text`) AGAINST(? IN BOOLEAN MODE) as score, posts.*", [$search])
                 ->whereRaw("MATCH (`title`, `text`) AGAINST(? IN BOOLEAN MODE) > 0", [$search])
-                ->orWhereHas("content", function ($query) use ($search) {
+                ->orWhereHas("slides.content", function ($query) use ($search) {
                     $query->whereRaw("MATCH (`content`) AGAINST(? IN BOOLEAN MODE) > 0", [$search]);
                 })
                 ->orWhereJsonContains("tags", $search)
