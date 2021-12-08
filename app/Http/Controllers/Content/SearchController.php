@@ -44,7 +44,7 @@ class SearchController extends Controller
 
         if ($request->has("type") && $request->type === "content") {
             $posts = Post::withRelations()
-                ->with(["page", "content" => function ($query) use ($search) {
+                ->with(["page", "slides.content" => function ($query) use ($search) {
                     $query->selectRaw("MATCH (`content`) AGAINST(? IN BOOLEAN MODE) as score", [$search])
                         ->orderBy("score");
                 }, "mutualLikes", "category"])
