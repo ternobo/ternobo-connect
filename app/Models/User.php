@@ -313,8 +313,8 @@ class User extends Authenticatable implements Messageable
     public function isFollowing($id)
     {
         $page = Page::where("user_id", $id)->where("type", "personal")->first();
-        $connection = Following::where("page_id", $this->id)->where("following", $page->id);
-        return $connection->first();
+        $connection = $page instanceof Page ? Following::where("page_id", $this->id)->where("following", $page->id)->first() : null;
+        return $connection;
     }
 
     /**
