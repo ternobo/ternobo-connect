@@ -181,12 +181,15 @@ export default {
 		this.updateContent();
 
 		this.editor = new ParagraphEditor(this.$refs.editable, ParagraphEditorOptions);
-
+		this.editor.addActionEventListener(() => {
+			window.setTimeout(this.updateContent.bind(this), 100);
+		});
 		this.$nextTick(() => {
 			if (this.$refs.editable) {
 				twemoji.parse(this.$refs.editable);
 				this.$refs.editable.focus();
 				this.$refs.editable.innerHTML = this.$refs.editable.innerHTML.replace(/#(\S+)/g, '<span class="text-action tag-item" contenteditable="false" data-mention="$1" dir="auto">#$1</span>').replace(/<spoiler>(.*)<\/spoiler>/g, "<spoiler class='spoiler-preview'>$1</spoiler>");
+				this.fixDirection();
 			}
 		});
 	},
