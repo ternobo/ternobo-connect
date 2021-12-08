@@ -115,7 +115,7 @@ export default {
 	},
 	mounted() {
 		if (this.user == null) {
-			this.visitorRegister = true;
+			this.visitorRegister = !this.hasInvite;
 			this.step = 1;
 		}
 	},
@@ -131,7 +131,7 @@ export default {
 			userinfo: {},
 		};
 	},
-	props: ["user"],
+	props: ["user", "hasInvite"],
 };
 </script>
 

@@ -19,6 +19,11 @@ class Report extends Model
         return $this->hasMany(ReportNote::class);
     }
 
+    public function reason()
+    {
+        return $this->belongsTo(ReportOption::class, "reason");
+    }
+
     public function reportedBy()
     {
         return $this->belongsTo(User::class, "user_id");

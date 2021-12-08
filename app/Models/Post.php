@@ -281,20 +281,22 @@ class Post extends Model
                             $text_mentions = SocialMediaTools::getMentions($text);
 
                             $slideTags = array_slice(SocialMediaTools::getHashtags($text), 0, 3);
+                            $text = SocialMediaTools::replaceHashtags($text, $slideTags);
 
-                            if (count($tags) < 3) {
-                                $tags = array_merge($slideTags, $tags);
-                                $text = SocialMediaTools::replaceHashtags($text, $tags);
-                            }
                             $mentions = array_merge($text_mentions, $mentions);
-
-                            return SocialMediaTools::replaceMentions($text, $text_mentions);
+                            return ["text" => SocialMediaTools::replaceMentions($text, $text_mentions), "tags" => $slideTags];
                         });
+
+                        $tags_block = $content->pluck("tags")->flatten()->toArray();
+                        if (count($tags) < 3) {
+                            $tags = array_slice(array_merge($tags, $tags_block), 0, 3);
+                        }
+
                         SlideBlock::query()->create([
                             'slide_id' => $slide_id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
-                            'content' => json_encode($content),
+                            'content' => json_encode($content->pluck("text")),
                             'type' => $type,
                             "meta" => $meta,
                         ]);
