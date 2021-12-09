@@ -83,5 +83,6 @@ export default {
 .ordered-list-editor {
 	list-style: number;
 	margin-bottom: 0;
+	padding: 0 24px;
 }
 </style>

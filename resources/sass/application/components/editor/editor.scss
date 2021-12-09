@@ -342,7 +342,7 @@
 
 .ternoboeditor--link-input {
     z-index: 99999;
-
+    position: fixed !important;
     background-color: $white;
     padding: 8px;
 
