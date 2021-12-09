@@ -78,7 +78,7 @@
         <div class="bounce2"></div>
         <div class="bounce3"></div>
     </div>
-    <form class="text-center mt-2" method="{{ $method }}" action="{{ $action }}">
+    <form class="text-center d-flex flex-column justify-content-center mt-2" method="{{ $method }}" action="{{ $action }}">
         <p class="text-center">درحال انتقال به درگاه پرداخت</p>
         <p class="text-center">
             <span id="countdown">5</span>
