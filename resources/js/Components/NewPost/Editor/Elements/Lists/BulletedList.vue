@@ -83,5 +83,6 @@ export default {
 .bulleted-list-editor {
 	list-style: disc;
 	margin-bottom: 0;
+	padding: 0 24px;
 }
 </style>
