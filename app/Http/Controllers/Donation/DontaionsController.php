@@ -64,7 +64,7 @@ class DontaionsController extends Controller
             ],
         ]);
 
-        return response()->json(['result' => $gateways['zarinpal']['enabled'] && $service->canAccessMonetization(Auth::user())]);
+        return response()->json(['result' => $gateways['zarinpal']['enabled'] && $service->canAccessMonetization(Auth::user()->id)]);
     }
 
     public function settings()
