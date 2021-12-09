@@ -332,6 +332,7 @@ class Post extends Model
                         break;
                     case "video":
                         $media = $content instanceof UploadedFile | $fileOnly ? $content->store("videos") : $content;
+
                         SlideBlock::query()->create([
                             'slide_id' => $slide_id,
                             'page_id' => $user->personalPage->id,
@@ -380,7 +381,7 @@ class Post extends Model
     public function publish()
     {
         return $this->update([
-            "type" => substr($this->type, 6),
+            "type" => "post",
         ]);
     }
 }
