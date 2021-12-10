@@ -38,6 +38,7 @@ export default {
 				break;
 			case "donation":
 				this.component = () => import("./DonateNotification");
+				break;
 			case "ternobo":
 				this.component = () => import("./TernoboNotification.vue");
 		}

@@ -125,7 +125,7 @@ class Page extends Model
         $data['has_donate'] = $gateways['zarinpal']['enabled'] && MonetizationService::canAccessMonetization($data['user_id']);
         $data['badge_status'] = UserBadgeService::getUserBadge(isset($data['user']) ? $this->user : $data['user_id'], $this);
 
-        if (Request::route()->uri == '{page}/{location?}') {
+        if (Request::route() != null && Request::route()->uri == '{page}/{location?}') {
             $data['blocked'] = Ternobo::isUserLogedIn() ? BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $data['id'])->exists() : false;
             if ($data['blocked']) {
                 $data['skills'] = null;
