@@ -21,7 +21,7 @@
 							<span class="shortbio"> {{ like.page.short_bio }} </span>
 						</div>
 					</wire-link>
-					<follow-button v-if="like.page.slug != user.username" :page="like.page.id"></follow-button>
+					<follow-button v-if="like.page.slug != user.username" :page="like.page"></follow-button>
 				</div>
 			</transition-group>
 			<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>

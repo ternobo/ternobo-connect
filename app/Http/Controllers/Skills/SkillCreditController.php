@@ -16,7 +16,7 @@ class SkillCreditController extends Controller
 
     public function index($skill)
     {
-        $credits = SkillCredit::query()->with('user')->where("skill_id", $skill)->paginate(20);
+        $credits = SkillCredit::query()->with(['user', "user.personalPage"])->where("skill_id", $skill)->paginate(20);
         return response()->json(['result' => true, "credits" => $credits]);
     }
 

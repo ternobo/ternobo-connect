@@ -34,7 +34,7 @@ class UserBadgeService extends RestfulService
     private function checkVisitor($user_id)
     {
         $page = $user_id instanceof Page ? $user_id : User::query()->findOrFail($user_id)->personalPage;
-        return !$page->visible;
+        return isset($page) ? !$page->visible : false;
     }
 
     private function monitizationCheck($user_id)

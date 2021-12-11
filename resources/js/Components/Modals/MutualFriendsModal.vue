@@ -20,7 +20,7 @@
 						<span class="shortbio"> {{ page.short_bio }} </span>
 					</div>
 				</wire-link>
-				<connetion-buttons :pageId="page.id" :blocked="page.blocked"></connetion-buttons>
+				<connetion-buttons :page="page" :blocked="page.blocked"></connetion-buttons>
 			</div>
 		</div>
 	</b-modal>

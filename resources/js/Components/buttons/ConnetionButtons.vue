@@ -1,8 +1,8 @@
 <template>
 	<div class="d-flex" :class="{ 'flex-column': vertical }">
 		<!-- <ConnectionButton @connected="onConnected" @disconnected="onDisconnect" :class="{'splitor-l': (!vertical && connected && followed),'splitor-b': (vertical && connected && followed)}" :style="btnStyle" :user="userId"></ConnectionButton> -->
-		<unblock-button :page="pageId" @unblocked="onunblock" v-if="blocked"></unblock-button>
-		<FollowButton v-else ref="button" @followed="onFollowed" :class="btnClass" @unfollowed="onUnfollowed" :style="btnStyle" :page="pageId"></FollowButton>
+		<unblock-button :page="page.id" @unblocked="onunblock" v-if="blocked"></unblock-button>
+		<FollowButton v-else ref="button" @followed="onFollowed" :class="btnClass" @unfollowed="onUnfollowed" :style="btnStyle" :page="page"></FollowButton>
 	</div>
 </template>
 
@@ -53,7 +53,7 @@ export default {
 			default: undefined,
 			// required: true,
 		},
-		pageId: {
+		page: {
 			default: undefined,
 			required: true,
 		},

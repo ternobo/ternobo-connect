@@ -15,7 +15,7 @@ export default {
             case "quote":
             case "text":
                 if (this.content.content != null) {
-                    tag = "div";
+                    tag = contentType == "quote" ? "blockquote" : "div";
                     classes += "post-content--text";
                     this.text = (TextareaParser.unescapeHtml(this.content.content));
                     content = (

@@ -34,7 +34,7 @@
 			</div>
 			<div class="d-flex flex-column align-items-end justify-content-between">
 				<div class="d-flex align-items-center" style="margin-left: -8px">
-					<connetion-buttons ref="connectionbtn" v-if="!canEdit && !page.blocked" btnClass="w-100" :class="{ 'w-100': !$root.isDesktop }" :pageId="page.id" />
+					<connetion-buttons ref="connectionbtn" v-if="!canEdit && !page.blocked" btnClass="w-100" :class="{ 'w-100': !$root.isDesktop }" :page="page" />
 					<unblock-button @unblocked="$store.state.ternoboWireApp.reload()" :page="page.id" v-else-if="!canEdit"></unblock-button>
 					<button class="ms-5 me-4 btn btn-text btn-icon btn-md" @click="showConnections = true">
 						<i class="material-icons-outlined">group</i>

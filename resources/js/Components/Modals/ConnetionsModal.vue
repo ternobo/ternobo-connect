@@ -22,7 +22,7 @@
 								<span class="shortbio"> {{ connection.following.short_bio }} </span>
 							</div>
 						</wire-link>
-						<connetion-buttons :pageId="connection.following.id" :blocked="connection.following.blocked"></connetion-buttons>
+						<connetion-buttons :page="connection.following" :blocked="connection.following.blocked"></connetion-buttons>
 					</div>
 					<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMoreConnection"></infinite-loading>
 				</div>
@@ -48,7 +48,7 @@
 								<span class="shortbio"> {{ connection.follower.short_bio }} </span>
 							</div>
 						</wire-link>
-						<connetion-buttons :pageId="connection.follower.id" :blocked="connection.follower.blocked"></connetion-buttons>
+						<connetion-buttons :page="connection.follower" :blocked="connection.follower.blocked"></connetion-buttons>
 					</div>
 					<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMoreConnection"></infinite-loading>
 				</div>

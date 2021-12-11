@@ -16,7 +16,7 @@
 			</div>
 		</wire-link>
 		<div class="pt-4 d-flex justify-content-center" style="padding-bottom: 32px; padding-left: 32px; padding-right: 32px">
-			<follow-button class="w-100" @followed="$emit('followed')" @unfollowed="$emit('unfollowed')" :page="page.id"></follow-button>
+			<follow-button class="w-100" @followed="$emit('followed')" @unfollowed="$emit('unfollowed')" :page="page"></follow-button>
 		</div>
 	</div>
 </template>
