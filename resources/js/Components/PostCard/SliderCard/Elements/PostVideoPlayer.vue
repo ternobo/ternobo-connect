@@ -14,6 +14,9 @@ export default {
 			isPaused: true,
 		};
 	},
+	destroyed() {
+		this.player.destroy();
+	},
 	mounted() {
 		const video = this.$refs.video;
 		this.player = new Plyr(video);
@@ -26,8 +29,7 @@ export default {
 			this.player.on("ready", () => {
 				const observer = new IntersectionObserver(
 					(entry) => {
-						console.log(entry);
-						if (!entry.isVisible && !this.player.media.paused) {
+						if (!entry.isVisible) {
 							video.pause();
 						} else {
 							video.play();
