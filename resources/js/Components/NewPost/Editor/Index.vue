@@ -161,7 +161,7 @@ export default {
 		availableOptions() {
 			let addedOptions = this.blocks.map((item) => item.type);
 			return ["text", "title", "video", "image", "code", "bulletedList", "orderedList", "quote", "poll"].filter((item) => {
-				if (item == "text") {
+				if (item == "text" || item == "quote" || item == "bulletedList" || item == "orderedList") {
 					return this.leftCharacter > 0;
 				}
 				return !addedOptions.includes(item);

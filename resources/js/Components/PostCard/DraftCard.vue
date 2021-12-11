@@ -1,21 +1,21 @@
 <template>
-	<div class="post-box" v-if="post !== undefined && post.page && !deleted">
-		<new-post-modal :post="post" :show.sync="edit"></new-post-modal>
+	<div class="post-box" v-if="post !== undefined && post_data.page && !deleted">
+		<new-post-modal :post.sync="post_data" :show.sync="edit"></new-post-modal>
 		<div class="post-header pt-0">
-			<wire-link class="publisher" :href="'/' + post.page.slug">
-				<lazy-image class="profile-sm mb-0" img-class="profile-sm" :src="post.page.profile" />
+			<wire-link class="publisher" :href="'/' + post_data.page.slug">
+				<lazy-image class="profile-sm mb-0" img-class="profile-sm" :src="post_data.page.profile" />
 				<div class="ms-3">
-					<strong class="publisher--name"> {{ post.page.name }} <i v-if="post.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+					<strong class="publisher--name"> {{ post_data.page.name }} <i v-if="post_data.page.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
 					<span class="publisher--shortbio">
-						{{ post.page.short_bio }}
+						{{ post_data.page.short_bio }}
 					</span>
 				</div>
 			</wire-link>
 			<div class="actions position-relative">
-				<span class="category-item" v-if="this.post.category != null"><i class="material-icons-outlined">layers</i>{{ this.post.category.name }}</span>
+				<span class="category-item" v-if="this.post_data.category != null"><i class="material-icons-outlined">layers</i>{{ this.post_data.category.name }}</span>
 			</div>
 		</div>
-		<component class="mb-4" :post="post" :has-comment="hasComment" v-bind:is="componentType"></component>
+		<component class="mb-4" :post="post_data" :has-comment="hasComment" v-bind:is="componentType"></component>
 		<div class="post-footer px-3">
 			<i class="material-icons hover-danger font-32" @click="doDelete">delete_outline</i>
 
@@ -33,20 +33,20 @@ import NewPostModal from "../NewPost/NewPostModal";
 export default {
 	computed: {
 		post_time: function () {
-			return this.timeAgo(this.post.created_at);
+			return this.timeAgo(this.post_data.created_at);
 		},
 		updated_at: function () {
-			if (this.post.updated_at !== null) {
-				return this.timeAgo(this.post.updated_at);
+			if (this.post_data.updated_at !== null) {
+				return this.timeAgo(this.post_data.updated_at);
 			}
 			return "";
 		},
 		componentType() {
-			this.liked = this.post.is_liked;
-			this.bookmarked = this.post.is_bookmarked;
-			if (this.post.type === "draft_article") {
+			this.liked = this.post_data.is_liked;
+			this.bookmarked = this.post_data.is_bookmarked;
+			if (this.post_data.type === "draft_article") {
 				return require("./ArticleCard").default;
-			} else if (this.post.type == "draft_post") {
+			} else if (this.post_data.type == "draft_post") {
 				return require("./SliderCard").default;
 			}
 			return null;
@@ -58,7 +58,7 @@ export default {
 		publish() {
 			this.loading = true;
 			axios
-				.post(`/posts/${this.post.id}/publish`)
+				.post(`/posts/${this.post_data.id}/publish`)
 				.then((response) => {
 					if (response.data.result) {
 						this.deleted = true;
@@ -75,12 +75,12 @@ export default {
 			}
 			this.$axios({
 				method: "post",
-				url: this.$APP_URL + "/like/" + this.post.id,
+				url: this.$APP_URL + "/like/" + this.post_data.id,
 			}).catch((error) => {});
 		},
 		doDelete() {
 			this.deleted = true;
-			axios.delete("/posts/" + this.post.id);
+			axios.delete("/posts/" + this.post_data.id);
 		},
 		bookmark() {
 			if (this.bookmarked) {
@@ -90,9 +90,12 @@ export default {
 			}
 			this.$axios({
 				method: "post",
-				url: this.$APP_URL + "/bookmark/" + this.post.id,
+				url: this.$APP_URL + "/bookmark/" + this.post_data.id,
 			}).catch((error) => {});
 		},
+	},
+	created() {
+		this.post_data = this.post;
 	},
 	data() {
 		return {
@@ -102,6 +105,7 @@ export default {
 			showEmbed: false,
 			showReshare: false,
 			showLikes: false,
+			post_data: {},
 
 			loading: false,
 
