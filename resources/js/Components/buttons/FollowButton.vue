@@ -13,7 +13,7 @@ import LoadingButton from "./LoadingButton";
 export default {
 	mounted() {
 		if (this.$store.state.user !== null) {
-			this.page_id = this.page.id;
+			this.page_id = this.page?.id;
 			if (this.$store.state.shared.followings.includes(this.page_id)) {
 				this.followed = true;
 			}
