@@ -79,8 +79,13 @@ export default {
 			}).catch((error) => {});
 		},
 		doDelete() {
-			this.deleted = true;
-			axios.delete("/posts/" + this.post_data.id);
+			this.confirmDialog(__.get("messages.delete-post-confirm")).then((value) => {
+				if (value) {
+					this.deleted = true;
+					axios.delete("/posts/" + this.post_data.id);
+					this.$emit("deleted");
+				}
+			});
 		},
 		bookmark() {
 			if (this.bookmarked) {

@@ -17,7 +17,7 @@
 						<span class="shortbio"> {{ credit.user.short_bio }} </span>
 					</div>
 				</wire-link>
-				<connetion-buttons :pageId="credit.user.personal_page_id" :blocked="credit.user.blocked"></connetion-buttons>
+				<follow-button :page="credit.user.personal_page"></follow-button>
 			</div>
 			<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>
 		</div>

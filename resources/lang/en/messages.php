@@ -55,6 +55,7 @@ return [
     "weak-password" => "Password is Weak!",
     "no-block-user" => "You haven't blocked any user",
 
+    "unfollow-user" => "Unfollow :name? You will no longer see their posts on your feed.",
     "mobile-maintenance" => "Ternobo is not currently available on mobile devices. You can use Ternobo through the web desktop version.",
 
     "sms" => [

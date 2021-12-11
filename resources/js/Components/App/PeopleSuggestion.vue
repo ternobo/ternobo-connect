@@ -1,7 +1,7 @@
 <template>
 	<div class="people-sugestion" :class="{ nofollow: !$store.state.shared.fullAccess }">
 		<profile-peeking :page="page" />
-		<FollowButton class="btn-icon btn-md" :page="page.id">
+		<FollowButton class="btn-icon btn-md" :page="page">
 			<template v-slot:default="{ followed }">
 				<i class="material-icons font-16" v-if="followed">remove</i>
 				<i class="material-icons font-16" v-else>add</i>
