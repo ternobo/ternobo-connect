@@ -2,7 +2,7 @@
 	<div class="code-block">
 		<tselect class="mb-4" :search="true" placeholder="Search For Language" direction="ltr" v-model="language" :items="languages"></tselect>
 		<div class="code-block--textarea" dir="ltr">
-			<div ref="textarea" style="height: 450px"></div>
+			<div ref="textarea" :style="{ height: height, maxHeight: '450px' }"></div>
 		</div>
 	</div>
 </template>
@@ -42,6 +42,12 @@ export default {
 					this.editor.onDidBlurEditorText(() => {
 						this.$emit("update:content", { code: this.editor.getValue(), language: this.language });
 					});
+
+					this.editor.onDidChangeModelContent(() => {
+						const height = this.editor.getModel().getLineCount() * 19 + 16;
+						this.height = `${height}px`;
+						this.editor.layout();
+					});
 				});
 			}, 700);
 		},
@@ -49,6 +55,7 @@ export default {
 	data() {
 		return {
 			language: "java",
+			height: "200px",
 			languages: [
 				"abap",
 				"apex",

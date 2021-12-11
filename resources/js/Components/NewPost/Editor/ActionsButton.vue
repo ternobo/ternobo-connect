@@ -12,6 +12,18 @@
 						<i class="material-icons" :class="{ disabled: !activeOptions.includes('text') }">text_fields</i>
 						<strong>{{ __.get("content/posts.text") }}</strong>
 					</div>
+					<div class="editor-list-item" @click="emitAcion('bulletedList')">
+						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('text') }">format_list_bulleted</i>
+						<strong>{{ __.get("editor.bulleted-list") }}</strong>
+					</div>
+					<div class="editor-list-item" @click="emitAcion('orderedList')">
+						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('text') }">format_list_numbered</i>
+						<strong>{{ __.get("editor.ordered-list") }}</strong>
+					</div>
+					<div class="editor-list-item" @click="emitAcion('quote')">
+						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('text') }">format_quote</i>
+						<strong>{{ __.get("editor.quote") }}</strong>
+					</div>
 				</div>
 
 				<div class="text-type-list">
@@ -28,18 +40,6 @@
 					<div class="editor-list-item" @click="emitAcion('code')">
 						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('code') }">code</i>
 						<strong>{{ __.get("editor.code") }}</strong>
-					</div>
-					<div class="editor-list-item" @click="emitAcion('bulletedList')">
-						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('bulletedList') }">format_list_bulleted</i>
-						<strong>{{ __.get("editor.bulleted-list") }}</strong>
-					</div>
-					<div class="editor-list-item" @click="emitAcion('orderedList')">
-						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('orderedList') }">format_list_numbered</i>
-						<strong>{{ __.get("editor.ordered-list") }}</strong>
-					</div>
-					<div class="editor-list-item" @click="emitAcion('quote')">
-						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('quote') }">format_quote</i>
-						<strong>{{ __.get("editor.quote") }}</strong>
 					</div>
 					<div class="editor-list-item" @click="emitAcion('poll')">
 						<i class="material-icons-outlined" :class="{ disabled: !activeOptions.includes('poll') }">poll</i>

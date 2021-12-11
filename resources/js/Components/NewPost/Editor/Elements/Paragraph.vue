@@ -1,6 +1,6 @@
 <template>
 	<mentionable :max-tags="3" class="textarea-content w-100" v-bind="$attrs" @click="focus">
-		<div ref="editable" :placeholder="__.get('content/posts.enter-your-text')" class="editor--text-input" contenteditable @blur="onBlur" @focus="onFocus" @input="input" @keydown="onKeyDown" @paste="onPaste" @keydown.enter="addParagraph"></div>
+		<div ref="editable" dir="auto" :placeholder="__.get('content/posts.enter-your-text')" class="editor--text-input" contenteditable @blur="onBlur" @focus="onFocus" @input="input" @keydown="onKeyDown" @paste="onPaste" @keydown.enter="addParagraph"></div>
 	</mentionable>
 </template>
 
@@ -120,17 +120,20 @@ export default {
 				return false;
 			}
 		},
-		input(e) {
+		input() {
 			if (this.updateContent(false) === "- ") {
+				this.$emit("update:content", [""]);
 				this.$emit("update:type", "bulletedList");
 			} else if (this.updateContent(false) === "1- ") {
+				this.$emit("update:content", [""]);
 				this.$emit("update:type", "orderedList");
+			} else {
+				this.updateContent();
+				this.$nextTick(() => {
+					twemoji.parse(this.$refs.editable);
+					this.fixDirection();
+				});
 			}
-			this.updateContent();
-			this.$nextTick(() => {
-				twemoji.parse(this.$refs.editable);
-				this.fixDirection();
-			});
 		},
 		fixDirection() {
 			HTMLCollection.prototype.forEach = Array.prototype.forEach;

@@ -26,7 +26,7 @@
 					</div>
 					<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
 
-					<modal-footer-buttons @ok="submitPost(false)" @cancel="submitPost(true)" class="mt-8" :cancelLoading="loadingDraft" :okLoading="loading" :okText="post ? __.get('application.save') : __.get('content/posts.publish')" :cancelText="__.get('content/posts.draft')" :cancelDisable="!checkContent" cancelClass="btn-text" :okDisabled="!checkContent" okClass="btn-primary"></modal-footer-buttons>
+					<modal-footer-buttons @ok="submitPost(shouldDraft)" @cancel="submitPost(!shouldDraft)" class="mt-8" :cancelLoading="loadingDraft" :okLoading="loading" :okText="post ? __.get('application.save') : __.get('content/posts.publish')" :cancelText="shouldDraft ? __.get('content/posts.publish') : __.get('content/posts.draft')" :cancelDisable="!checkContent" cancelClass="btn-text" :okDisabled="!checkContent" okClass="btn-primary"></modal-footer-buttons>
 				</div>
 			</div>
 		</b-modal>
@@ -255,6 +255,9 @@ export default {
 	},
 	computed: {
 		...mapState(["user", "shared", "showNewPostModal"]),
+		shouldDraft() {
+			return this.post?.type == "draft_post";
+		},
 		username() {
 			return Boolean(this.user) && Boolean(this.user.name) && this.user.name.length > 40 ? this.user.name.substr(0, 40) : this.user.name;
 		},
