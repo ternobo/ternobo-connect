@@ -121,7 +121,7 @@ Route::middleware(["auth.web"])->group(function () {
         Route::post("/setcover", "Profile\ProfileController@setCover")->name("profile-cover")->middleware(FullAccessUserMiddleware::class);
 
         Route::post("/delete-profile", "Profile\ProfileController@deleteProfileImage")->name("profile-delete")->middleware(FullAccessUserMiddleware::class);
-        Route::post("/delete-cover", "Profile\ProfileController@deleteCoverImage")->name("profile-delete")->middleware(FullAccessUserMiddleware::class);
+        Route::post("/delete-cover", "Profile\ProfileController@deleteCoverImage")->name("profile-cover")->middleware(FullAccessUserMiddleware::class);
 
         Route::post("/like/{post_id}", "PostController@likePost");
         Route::post("/comments/{comment_id}/like", "CommentController@likeComment");
