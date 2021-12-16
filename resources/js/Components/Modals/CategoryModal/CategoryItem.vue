@@ -57,7 +57,7 @@ export default {
 			if (this.edit) {
 				this.loading = true;
 				axios
-					.put(`/pages/categories/${this.category.id}`, {
+					.put(`/categories/${this.category.id}`, {
 						value: this.name,
 					})
 					.then((response) => {
