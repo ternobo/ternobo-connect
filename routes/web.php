@@ -196,7 +196,15 @@ Route::middleware(["auth.web"])->group(function () {
     Route::prefix("/pages")->group(function () {
         Route::post('info', "Profile\PageController@getPageInfo");
         Route::post('posts', "Profile\PageController@getPosts");
-        Route::resource("categories", "Profile\CategoryController");
+        Route::resource("categories", "Profile\CategoryController")->names([
+            "index" => "page-categories.index",
+            "create" => "page-categories.create",
+            "store" => "page-categories.store",
+            "show" => "page-categories.show",
+            "edit" => "page-categories.edit",
+            "update" => "page-categories.update",
+            "destroy" => "page-categories.destroy"
+        ]);
 
         Route::post('save-resume', "PageController@saveResume");
     });
