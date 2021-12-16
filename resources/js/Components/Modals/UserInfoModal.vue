@@ -63,7 +63,7 @@ export default {
 		this.location = this.pageLocation;
 		this.nickname = this.page.nickname;
 
-		this.gender = JSON.parse(this.user.gender);
+		this.gender = JSON.parse(this.page.user.gender);
 
 		if (typeof "gender" != "object") {
 			switch (this.gender) {
