@@ -102,7 +102,7 @@ export default {
 	mounted() {
 		this.liked = this.post.is_liked;
 		axios
-			.get(this.$APP_URL + "/posts/" + this.post.id + "/comments")
+			.get(this.$APP_URL + "/posts/" + this.post.id + "/comments?top=" + this.comment)
 			.then((response) => {
 				const data = response.data;
 				if (data.result) {
@@ -123,6 +123,9 @@ export default {
 		post: {
 			type: Object,
 			default: undefined,
+		},
+		comment: {
+			default: 0,
 		},
 		userposts: {
 			default: 0,
