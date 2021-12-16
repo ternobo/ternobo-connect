@@ -15,10 +15,10 @@
 			</div>
 			<i class="material-icons-outlined text-muted">comment</i>
 		</div>
-		<div class="notification-content">
+		<wire-link :href="`/posts/${notificationGroup.notifiable.post_id}?comment=${notifications[0].notifiable.id}`" class="notification-content">
 			<div class="comment-text">{{ notifications[0].comment.text }}</div>
 			<div class="post-content">{{ notificationGroup.notifiable.text }}</div>
-		</div>
+		</wire-link>
 	</div>
 </template>
 

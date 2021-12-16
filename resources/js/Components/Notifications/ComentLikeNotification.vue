@@ -18,7 +18,7 @@
 			<i class="material-icons text-danger">favorite</i>
 		</div>
 		<div class="notification-content">
-			<div class="col-md-12 py-2">{{ notifications[0].notifiable.text }}</div>
+			<wire-link :href="`/posts/${notificationGroup.notifiable.post_id}?comment=${notifications[0].comment.id}`" class="col-md-12 py-2">{{ notifications[0].notifiable.text }}</wire-link>
 		</div>
 	</div>
 </template>
