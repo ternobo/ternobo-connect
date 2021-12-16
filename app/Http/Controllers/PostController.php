@@ -234,7 +234,7 @@ class PostController extends Controller
         $post = $post->findOrFail($post_id);
 
         if (($post->type === "post" || $post->type === "share") && $post->user->active) {
-            return TernoboWire::render("PostPage", array("post" => $post));
+            return TernoboWire::render("PostPage", ["post" => $post, "comment" => $request->input("comment", 0)]);
         }
         return abort(404);
     }
