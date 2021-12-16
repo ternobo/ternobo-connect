@@ -53,7 +53,15 @@ Route::middleware(["auth:admin-api"])->prefix("/admin")->group(function () {
 
     Route::apiResource('transactions', TransactionsController::class)->only(['index', 'show']);
 
-    Route::apiResource("communities/categories", CommunityCategoriesController::class);
+    Route::apiResource("communities/categories", CommunityCategoriesController::class)->names([
+        "index" => "admin-categories.index",
+        "create" => "admin-categories.create",
+        "store" => "admin-categories.store",
+        "show" => "admin-categories.show",
+        "edit" => "admin-categories.edit",
+        "update" => "admin-categories.update",
+        "destroy" => "admin-categories.destroy"
+    ]);
     Route::apiResource("communities", CommunityController::class);
 
     Route::post("communities/add-translation", [CommunityController::class, "addTranslation"]);
