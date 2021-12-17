@@ -104,7 +104,7 @@ export default {
 			(error) => {
 				if (error.response && error.response.status == 422) {
 					this.handleError(error.response.data.errors);
-				} else if (error.response) {
+				} else if (error.response && error.response.status == 500) {
 					this.toast(__.get("messages.connection-error"));
 				}
 				return Promise.reject(error);
