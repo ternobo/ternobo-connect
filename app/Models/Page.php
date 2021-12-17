@@ -196,6 +196,7 @@ class Page extends Model
      */
     public function getMutualsText($connections = null)
     {
+        $and = __("application.and");
         if ($connections === null) {
             $connections = $this->mutualFriends();
         }
@@ -204,12 +205,12 @@ class Page extends Model
             $first = $connections[0]->name;
             $second = $connections[1]->name;
             $nums -= 2;
-            return "$first, $second و ...";
+            return "$first, $second $and ...";
         } elseif ($nums === 2) {
             $first = $connections[0]->name;
             $second = $connections[1]->name;
             $nums -= 2;
-            return " $first و $second";
+            return " $first $and $second";
         } elseif ($nums > 0) {
             $first = $connections[0]->name;
             return "$first";
