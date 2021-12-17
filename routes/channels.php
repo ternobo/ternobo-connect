@@ -23,6 +23,6 @@ Broadcast::channel('user.{id}', UserChannel::class);
 Broadcast::channel('notification.{id}', NotificationsChannel::class);
 Broadcast::channel('donate.post.{id}', DonateChannel::class);
 Broadcast::channel('likes.post.{id}', LikeChannel::class);
-Broadcast::public('announcements.{id}', AnnouncementChannel::class);
+Broadcast::channel('announcements', AnnouncementChannel::class);
 
 TernoboChat::broadcastChannels();
