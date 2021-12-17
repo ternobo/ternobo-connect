@@ -51,16 +51,15 @@ class TagsController extends Controller
 
     public function toggleFollowTag($tag)
     {
-        $following = Following::tags()->where("page_id", Ternobo::currentPage()->id)->where("following", $tag)->first();
-
-        if ($following != null) {
-            $following->delete();
+        $tag = Tag::query()->where("name", $tag)->firstOrFail()->id;
+        $following = Following::tags()->where("page_id", Ternobo::currentPage()->id)->where("following", $tag)->delete() > 0;
+        if ($following) {
             return response()->json(['result' => true, 'follow' => false]);
         }
 
         $following = Following::create([
             'page_id' => Ternobo::currentPage()->id,
-            'following' => Tag::query()->where("name", $tag)->first()->id,
+            'following' => $tag,
             'type' => "tag",
         ]);
         return response()->json(['result' => true, 'follow' => true, "following" => $following]);
