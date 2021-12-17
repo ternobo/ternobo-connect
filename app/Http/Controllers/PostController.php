@@ -207,7 +207,7 @@ class PostController extends Controller
             $community = CommunityTag::query()->where("tag_id", $tag->id)->first();
             $icon = null;
             if ($community instanceof CommunityTag) {
-                $icon = $community->icon;
+                $icon = url($community->icon);
             }
 
             $formatted_tags[] = ['key' => "#" . $tag->name, "icon" => $icon, 'value' => $tag->name, 'name' => "#" . $tag->name];
