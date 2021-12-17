@@ -638,3 +638,21 @@ code {
     padding: 0.25rem;
     font-family: 'JetBrains Mono', monospace;
 }
+
+blockquote {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0 2rem;
+    position: relative;
+    font-weight: 600;
+    color: $black;
+
+    &::after {
+        content: "format_quote";
+        @include material-icons-outlined;
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: $gray-medium-dark;
+    }
+}
