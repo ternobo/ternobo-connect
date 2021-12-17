@@ -7,15 +7,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AnnouncementChannel
 {
-    /**
-     * Create a new channel instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
 
     /**
      * Authenticate the user's access to the channel.
@@ -23,8 +14,8 @@ class AnnouncementChannel
      * @param  \App\Models\User  $user
      * @return array|bool
      */
-    public function join()
+    public function join(User $user)
     {
-        Auth::check();
+        return $user->id == Auth::user()->id;
     }
 }

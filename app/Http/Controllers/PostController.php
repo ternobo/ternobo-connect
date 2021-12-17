@@ -23,6 +23,8 @@ use App\Models\Report;
 use App\Models\Tag;
 use App\Services\Poll\PollService;
 use App\SocialMediaTools;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -207,7 +209,7 @@ class PostController extends Controller
             $community = CommunityTag::query()->where("tag_id", $tag->id)->first();
             $icon = null;
             if ($community instanceof CommunityTag) {
-                $icon = $community->icon;
+                $icon = url($community->icon);
             }
 
             $formatted_tags[] = ['key' => "#" . $tag->name, "icon" => $icon, 'value' => $tag->name, 'name' => "#" . $tag->name];
@@ -231,8 +233,19 @@ class PostController extends Controller
             $post = $post->with("mutualLikes");
         }
 
+
         $post = $post->findOrFail($post_id);
 
+        $page = $post->page;
+        SEOMeta::addKeyword(['محتوای ' . $page->name, $page->name, $page->user->first_name, $page->user->last_name]);
+        $textItem = collect($post->slides[0]->content)->filter(function ($item) {
+            return $item->type == "text";
+        })->first();
+        if ($textItem) {
+            SEOTools::setDescription($textItem->content);
+        } else {
+            SEOTools::setDescription("$page->name Shared Content");
+        }
         if (($post->type === "post" || $post->type === "share") && $post->user->active) {
             return TernoboWire::render("PostPage", ["post" => $post, "comment" => $request->input("comment", 0)]);
         }

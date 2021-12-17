@@ -51,8 +51,9 @@ class Following extends Model
     {
         $array = parent::toArray();
         $array['follower'] = $this->follower;
-        $array['following'] = $this->page;
+        if ($this->page) {
+            $array['following'] = $this->page;
+        }
         return $array;
     }
-
 }

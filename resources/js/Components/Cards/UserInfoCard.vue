@@ -4,7 +4,7 @@
 		<div class="userinfo-card-body">
 			<wire-link :href="shared.fullAccess ? pageUrl : null" :linkDisabled="!shared.fullAccess" class="profile-content">
 				<div class="profile-image">
-					<lazy-image class="profile-md bg-white" imgClass="profile-md" :loadingColor="skeletonOptions.profileColor" :src="user.profile" />
+					<lazy-image class="profile-lg bg-white" imgClass="profile-lg" :loadingColor="skeletonOptions.profileColor" :src="user.profile" />
 				</div>
 				<strong class="text-gray-medium-dark font-12 text-start" dir="ltr">@{{ user.username }}</strong>
 				<strong class="text-black d-flex align-items-center my-2"> <user-badge class="me-1" :badgeStatus="user.badge_status" :onlyOne="true" /> {{ user.name }}</strong>

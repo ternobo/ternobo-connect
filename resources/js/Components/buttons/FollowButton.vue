@@ -71,7 +71,7 @@ export default {
 						this.loading = false;
 					});
 			} else {
-				this.confirmDialog(__.get("messages.unfollow-user")).then((value) => {
+				this.confirmDialog(__.get("messages.unfollow-user", { name: this.page.name })).then((value) => {
 					if (value) {
 						var config = {
 							method: "post",

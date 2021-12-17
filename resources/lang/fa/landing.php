@@ -7,7 +7,7 @@ return [
     'forgot_password' => "رمز عبور را فراموش کرده‌اید؟",
     'forgot_password_title' => "فراموشی رمزعبور",
     "new_password" => "رمزعبور جدید",
-    "user_recovery_code" => "استفاده از کد بازیابی",
+    "use_recovery_code" => "استفاده از کد بازیابی",
     "auth_app_text" => "کد ورود دو مرحله را وارد کنید",
     "enter_recover_code" => "کد بازیابی را وارد کنید",
 
