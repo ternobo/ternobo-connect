@@ -5,7 +5,7 @@
 				<strong class="tag" ref="tagelem">#{{ tag }}</strong>
 				<small>{{ totalPosts }} {{ __.choice("application.post", totalPosts) }}</small>
 			</div>
-			<loading-button class="btn follow-btn" @click.native="follow" :class="{ 'btn-followed-connected': isFollowed }" :loading="loading">{{ __.get("application.follow") }}</loading-button>
+			<loading-button class="btn" @click="follow" :class="{ 'btn-secondary': !isFollowed }" :loading="loading">{{ isFollowed ? __.get("application.following") : __.get("application.follow") }}</loading-button>
 		</div>
 	</div>
 </template>
