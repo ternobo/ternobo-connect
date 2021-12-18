@@ -24,12 +24,16 @@ class Page extends Model
 
     public function contactData()
     {
-        return $this->hasOne("App\Models\ContactData", "page_id");
+        return $this->hasOne("App\Models\ContactData", "page_id")->withDefault(function () {
+            return new ContactData(["data" => []]);
+        });;
     }
 
     public function aboutData()
     {
-        return $this->hasOne("App\Models\AboutData", "page_id");
+        return $this->hasOne("App\Models\AboutData", "page_id")->withDefault(function () {
+            return new AboutData(["data" => []]);
+        });
     }
 
     public function page()
@@ -131,8 +135,8 @@ class Page extends Model
                 $data['skills'] = null;
                 $data['about'] = null;
             }
-            $data['contact_data'] = isset($data['contact_data']) && !$data['blocked'] ? json_decode($data['contact_data']['data']) : null;
-            $data['about_data'] = isset($data['about_data']) && !$data['blocked'] ? json_decode($data['about_data']['data']) : null;
+            $data['contact_data'] = isset($data['contact_data']) && !$data['blocked'] ? $data['contact_data']['data'] : null;
+            $data['about_data'] = isset($data['about_data']) && !$data['blocked'] ? $data['about_data']['data'] : null;
         }
 
         $data['is_nickname'] = false;

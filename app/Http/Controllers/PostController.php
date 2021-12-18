@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\LikeEvent;
+use App\Events\PostShareEvent;
 use App\HTMLMinifier;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\FollowMiddlware;
@@ -95,8 +96,8 @@ class PostController extends Controller
             $user->personalPage->addAction("post", $post->id);
             $post->load(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
             Tag::addTag($tagsAndMentions["tags"]);
-
             DB::commit();
+            event(new PostShareEvent($post));
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;

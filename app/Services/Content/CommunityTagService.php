@@ -19,7 +19,7 @@ class CommunityTagService extends ServiceAccess
 
     public  function getServiceName(): string
     {
-        return "ternobo-data/api/v1";
+        return "ternobo-data/api/v1/community-tags";
     }
 
     public function getRelatedTags(string $hashtag)
@@ -29,11 +29,25 @@ class CommunityTagService extends ServiceAccess
         return $response->json();
     }
 
+    public function processHashtag($hashtag)
+    {
+        $response = $this->createRequest()->withBody(["hashtags" => $hashtag, "delay" => 10], "application/json")->post("/process");
+        abort_unless($response->ok(), 503);
+        return $response->json();
+    }
+
     public function getCommunityByHashtag(string $hashtag)
     {
         return CommunityTag::query()->whereHas("tag", function ($query) use ($hashtag) {
             return $query->where("name", $hashtag);
         })->first();
+    }
+
+    public function addRelatedHashtags(array $hashtags)
+    {
+        $response = $this->createRequest()->withBody(json_encode(["hashtags" => $hashtags]), "application/json")->post("/");
+        abort_unless($response->ok(), 503);
+        return $response->json();
     }
 
     public function getHashtagTopUsers($tag)

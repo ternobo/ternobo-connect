@@ -11,6 +11,7 @@ use App\Models\Page;
 use App\Models\Post;
 use App\Models\Report;
 use App\Models\Website;
+use App\Services\ProfileService;
 use App\Ternobo;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\SEOTools;
@@ -23,6 +24,13 @@ use Ternobo\TernoboWire\TernoboWire;
 
 class PageController extends Controller
 {
+
+    private ProfileService $service;
+
+    public function __construct(ProfileService $service)
+    {
+        $this->service = $service;
+    }
 
     public function show($page, $location = "home", Request $request)
     {
@@ -66,14 +74,13 @@ class PageController extends Controller
             return TernoboWire::render("NotAvailable", [], false, 404);
         }
 
-        SEOTools::setTitle($page->name);
         $page->load("user.invitedBy");
+        SEOTools::setTitle($page->name);
         if ($page->about !== null && $page->about !== "") {
             SEOTools::setDescription($page->about);
         } else {
             SEOTools::setDescription("پروفایل کاربر $page->name در ترنوبو");
         }
-
         SEOTools::opengraph()->setUrl(url("/" . $page->slug));
         SEOTools::setCanonical(url("/" . $page->slug));
         SEOTools::opengraph()->addProperty('type', 'profile');
@@ -95,7 +102,7 @@ class PageController extends Controller
 
         $actions = $page->getActions(null, 5);
 
-        $hasAbout = ($page->aboutData != null && count((array) $page->aboutData) > 0) || ($page->about != null && $page->about != "") || count($page->user->skills) > 0;
+        $hasAbout = $this->service->checkAboutMeTab($page) || ($page->about != null && $page->about != "") || count($page->user->skills) > 0;
         $hasActivity = !($actions == null || count($actions) < 1);
 
         if (!$hasAbout) {
@@ -104,6 +111,7 @@ class PageController extends Controller
         if (!$hasActivity) {
             $location = "contact";
         }
+
         return TernoboWire::render(
             "Profiles/UserProfile",
             [
