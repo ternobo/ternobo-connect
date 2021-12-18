@@ -1,6 +1,6 @@
 <template>
 	<div class="profile-header-card">
-		<user-info-modal :user="page.user" :page-location="page.location" v-if="canEdit" :show.sync="edit"></user-info-modal>
+		<user-info-modal :page="page" :page-location="page.location" v-if="canEdit" :show.sync="edit"></user-info-modal>
 		<ProfileCover :canChange="canEdit && !profileEdit" :src="page.cover"></ProfileCover>
 		<report-page-modal :show.sync="showReport" :page-id="page.id"></report-page-modal>
 		<mutual-friends-modal :show.sync="showFriends" :page-id="page.id"></mutual-friends-modal>
@@ -34,7 +34,7 @@
 			</div>
 			<div class="d-flex flex-column align-items-end justify-content-between">
 				<div class="d-flex align-items-center" style="margin-left: -8px">
-					<connetion-buttons ref="connectionbtn" v-if="!canEdit && !page.blocked" btnClass="w-100" :class="{ 'w-100': !$root.isDesktop }" :pageId="page.id" />
+					<connetion-buttons ref="connectionbtn" v-if="!canEdit && !page.blocked" btnClass="w-100" :class="{ 'w-100': !$root.isDesktop }" :page="page" />
 					<unblock-button @unblocked="$store.state.ternoboWireApp.reload()" :page="page.id" v-else-if="!canEdit"></unblock-button>
 					<button class="ms-5 me-4 btn btn-text btn-icon btn-md" @click="showConnections = true">
 						<i class="material-icons-outlined">group</i>

@@ -75,23 +75,27 @@ export default {
 			if (this.canCredit) {
 				this.creditModal = true;
 			} else {
-				this.loading = true;
-				axios
-					.delete("/skills/credit/" + this.skillVal.id, {})
-					.then((response) => {
-						if (response.data.result) {
-							this.canCredit = true;
-							if (this.skillVal.credit_text) {
-								this.credits_count -= 1;
-							}
-						} else {
-							this.handleError(response.data.errors);
-						}
-					})
-					.catch((errors) => {
-						console.log(errors);
-					})
-					.then(() => (this.loading = false));
+				this.confirmDialog(__.get("messages.delete-endoser-confirm")).then((value) => {
+					if (value) {
+						this.loading = true;
+						axios
+							.delete("/skills/credit/" + this.skillVal.id, {})
+							.then((response) => {
+								if (response.data.result) {
+									this.canCredit = true;
+									if (this.skillVal.credit_text) {
+										this.credits_count -= 1;
+									}
+								} else {
+									this.handleError(response.data.errors);
+								}
+							})
+							.catch((errors) => {
+								console.log(errors);
+							})
+							.then(() => (this.loading = false));
+					}
+				});
 			}
 		},
 		doDelete() {

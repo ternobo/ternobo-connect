@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\PostShareEvent;
+use App\Listeners\PostShareListner;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,7 +20,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-
+        PostShareEvent::class => [
+            PostShareListner::class
+        ],
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
             'SocialiteProviders\Zoho\ZohoExtendSocialite@handle',
             'SocialiteProviders\Discord\DiscordExtendSocialite@handle',

@@ -24,12 +24,16 @@ class Page extends Model
 
     public function contactData()
     {
-        return $this->hasOne("App\Models\ContactData", "page_id");
+        return $this->hasOne("App\Models\ContactData", "page_id")->withDefault(function () {
+            return new ContactData(["data" => []]);
+        });;
     }
 
     public function aboutData()
     {
-        return $this->hasOne("App\Models\AboutData", "page_id");
+        return $this->hasOne("App\Models\AboutData", "page_id")->withDefault(function () {
+            return new AboutData(["data" => []]);
+        });
     }
 
     public function page()
@@ -125,14 +129,14 @@ class Page extends Model
         $data['has_donate'] = $gateways['zarinpal']['enabled'] && MonetizationService::canAccessMonetization($data['user_id']);
         $data['badge_status'] = UserBadgeService::getUserBadge(isset($data['user']) ? $this->user : $data['user_id'], $this);
 
-        if (Request::route()->uri == '{page}/{location?}') {
+        if (Request::route() != null && Request::route()->uri == '{page}/{location?}') {
             $data['blocked'] = Ternobo::isUserLogedIn() ? BlockedPage::query()->where("user_id", Auth::user()->id)->where("page_id", $data['id'])->exists() : false;
             if ($data['blocked']) {
                 $data['skills'] = null;
                 $data['about'] = null;
             }
-            $data['contact_data'] = isset($data['contact_data']) && !$data['blocked'] ? json_decode($data['contact_data']['data']) : null;
-            $data['about_data'] = isset($data['about_data']) && !$data['blocked'] ? json_decode($data['about_data']['data']) : null;
+            $data['contact_data'] = isset($data['contact_data']) && !$data['blocked'] ? $data['contact_data']['data'] : null;
+            $data['about_data'] = isset($data['about_data']) && !$data['blocked'] ? $data['about_data']['data'] : null;
         }
 
         $data['is_nickname'] = false;
@@ -196,6 +200,7 @@ class Page extends Model
      */
     public function getMutualsText($connections = null)
     {
+        $and = __("application.and");
         if ($connections === null) {
             $connections = $this->mutualFriends();
         }
@@ -204,12 +209,12 @@ class Page extends Model
             $first = $connections[0]->name;
             $second = $connections[1]->name;
             $nums -= 2;
-            return "$first, $second و ...";
+            return "$first, $second $and ...";
         } elseif ($nums === 2) {
             $first = $connections[0]->name;
             $second = $connections[1]->name;
             $nums -= 2;
-            return " $first و $second";
+            return " $first $and $second";
         } elseif ($nums > 0) {
             $first = $connections[0]->name;
             return "$first";

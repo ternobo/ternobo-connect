@@ -19,7 +19,7 @@
 		</div>
 		<div class="notification-content">
 			<div class="comment-text">{{ notifications[0].comment.text }}</div>
-			<post-viewer class="post-viewer" :post="notificationGroup.notifiable"></post-viewer>
+			<post-viewer class="post-viewer" :href="`/posts/${notificationGroup.notifiable.id}?comment=${notifications[0].comment.id}`" :post="notificationGroup.notifiable"></post-viewer>
 		</div>
 	</div>
 </template>

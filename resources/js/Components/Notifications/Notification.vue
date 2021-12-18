@@ -3,10 +3,6 @@
 </template>
 
 <script>
-import DonateNotification from "./DonateNotification.vue";
-import MentionNotification from "./MentionNotification";
-import ReplyNotification from "./ReplyNotification";
-import SkillCreditNotificationVue from "./SkillCreditNotification.vue";
 export default {
 	data() {
 		return {
@@ -38,6 +34,7 @@ export default {
 				break;
 			case "donation":
 				this.component = () => import("./DonateNotification");
+				break;
 			case "ternobo":
 				this.component = () => import("./TernoboNotification.vue");
 		}

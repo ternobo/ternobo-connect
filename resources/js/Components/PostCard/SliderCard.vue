@@ -1,5 +1,5 @@
 <template>
-	<div class="post-body">
+	<div class="post-body" tabindex="1" @mouseenter="focus" @keyup.left="goPrevSlide" @keyup.right="goNextSlide">
 		<div class="slider-content" :class="{ expanded: showFullText }">
 			<Content @loaded="updateHeight" v-for="content in post.slides[active].content" :content="content" :tags="post.tags" :key="`content_item_${content.id}`"></Content>
 
@@ -18,13 +18,16 @@ import Content from "./ContentElement";
 import Slide from "./SliderCard/Slide.vue";
 export default {
 	methods: {
+		focus() {
+			this.$el.focus();
+		},
 		goPrevSlide() {
 			if (this.active > 0) {
 				this.active--;
 			}
 		},
 		goNextSlide() {
-			if (this.active < this.post.slides.length) {
+			if (this.active < this.post.slides.length - 1) {
 				this.active++;
 			}
 		},

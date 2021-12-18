@@ -23,7 +23,7 @@
 							<span class="shortbio"> {{ page.short_bio }} </span>
 						</div>
 					</wire-link>
-					<connetion-buttons v-if="page.slug != user.username" :blocked.sync="pages[index].blocked" :pageId="page.id"></connetion-buttons>
+					<connetion-buttons v-if="page.slug != user.username" :blocked.sync="pages[index].blocked" :page="page"></connetion-buttons>
 				</div>
 			</transition-group>
 			<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>

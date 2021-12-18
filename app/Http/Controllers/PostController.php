@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\LikeEvent;
+use App\Events\PostShareEvent;
 use App\HTMLMinifier;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\FollowMiddlware;
@@ -23,6 +24,8 @@ use App\Models\Report;
 use App\Models\Tag;
 use App\Services\Poll\PollService;
 use App\SocialMediaTools;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -93,8 +96,8 @@ class PostController extends Controller
             $user->personalPage->addAction("post", $post->id);
             $post->load(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
             Tag::addTag($tagsAndMentions["tags"]);
-
             DB::commit();
+            event(new PostShareEvent($post));
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
@@ -207,7 +210,7 @@ class PostController extends Controller
             $community = CommunityTag::query()->where("tag_id", $tag->id)->first();
             $icon = null;
             if ($community instanceof CommunityTag) {
-                $icon = $community->icon;
+                $icon = url($community->icon);
             }
 
             $formatted_tags[] = ['key' => "#" . $tag->name, "icon" => $icon, 'value' => $tag->name, 'name' => "#" . $tag->name];
@@ -231,10 +234,21 @@ class PostController extends Controller
             $post = $post->with("mutualLikes");
         }
 
+
         $post = $post->findOrFail($post_id);
 
+        $page = $post->page;
+        SEOMeta::addKeyword(['محتوای ' . $page->name, $page->name, $page->user->first_name, $page->user->last_name]);
+        $textItem = collect($post->slides[0]->content)->filter(function ($item) {
+            return $item->type == "text";
+        })->first();
+        if ($textItem) {
+            SEOTools::setDescription($textItem->content);
+        } else {
+            SEOTools::setDescription("$page->name Shared Content");
+        }
         if (($post->type === "post" || $post->type === "share") && $post->user->active) {
-            return TernoboWire::render("PostPage", array("post" => $post));
+            return TernoboWire::render("PostPage", ["post" => $post, "comment" => $request->input("comment", 0)]);
         }
         return abort(404);
     }

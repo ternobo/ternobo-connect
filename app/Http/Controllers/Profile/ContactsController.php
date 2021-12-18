@@ -38,12 +38,14 @@ class ContactsController extends Controller
         $user_id = Page::findOrFail($page_id)->user_id;
         $options = SocialDriver::with(['account' => function ($query) use ($user_id) {
             $query->where("user_id", $user_id);
-        }])->get()->sortBy(function ($item) {
-            if ($item->account) {
-                return Carbon::createFromTimeString($item->account->created_at)->timestamp;
-            }
-            return 999;
-        }, SORT_REGULAR, true)->values()->all();
+        }])
+            ->where("active", true)
+            ->get()->sortBy(function ($item) {
+                if ($item->account) {
+                    return Carbon::createFromTimeString($item->account->created_at)->timestamp;
+                }
+                return 999;
+            }, SORT_REGULAR, true)->values()->all();
         return response()->json(['result' => true, "options" => $options]);
     }
 

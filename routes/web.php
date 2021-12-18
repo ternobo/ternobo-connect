@@ -121,7 +121,7 @@ Route::middleware(["auth.web"])->group(function () {
         Route::post("/setcover", "Profile\ProfileController@setCover")->name("profile-cover")->middleware(FullAccessUserMiddleware::class);
 
         Route::post("/delete-profile", "Profile\ProfileController@deleteProfileImage")->name("profile-delete")->middleware(FullAccessUserMiddleware::class);
-        Route::post("/delete-cover", "Profile\ProfileController@deleteCoverImage")->name("profile-delete")->middleware(FullAccessUserMiddleware::class);
+        Route::post("/delete-cover", "Profile\ProfileController@deleteCoverImage")->name("cover-delete")->middleware(FullAccessUserMiddleware::class);
 
         Route::post("/like/{post_id}", "PostController@likePost");
         Route::post("/comments/{comment_id}/like", "CommentController@likeComment");
@@ -196,8 +196,6 @@ Route::middleware(["auth.web"])->group(function () {
     Route::prefix("/pages")->group(function () {
         Route::post('info', "Profile\PageController@getPageInfo");
         Route::post('posts', "Profile\PageController@getPosts");
-        Route::resource("categories", "Profile\CategoryController");
-
         Route::post('save-resume', "PageController@saveResume");
     });
     /**
@@ -228,7 +226,7 @@ Route::middleware(["auth.web"])->group(function () {
 
     Route::post("/categories/sort/{id}", "Profile\CategoryController@sort")->middleware(FullAccessUserMiddleware::class);;
 
-    Route::resource("categories", "Profile\CategoryController")->middleware(FullAccessUserMiddleware::class);;
+    Route::resource("categories", "Profile\CategoryController")->middleware(FullAccessUserMiddleware::class);
 
     // Notifications
     Route::get('/notifications', 'NotificationController@index')->name('notifications')->middleware(FullAccessUserMiddleware::class);;

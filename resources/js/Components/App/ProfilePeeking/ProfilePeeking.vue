@@ -13,24 +13,22 @@
 			</div>
 		</slot>
 
-		<transition name="fade">
-			<div class="profile-peeking-float" :class="`profile-peeking-position-${position}`" v-if="showFloat && page.visible">
-				<div class="header-section">
-					<div class="profile-peeking-cover">
-						<lazy-image class="profile-peeking-cover" :src="page.cover" />
-					</div>
-					<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-standard" img-class="profile-standard" :src="page.profile" />
+		<div class="profile-peeking-float" :class="`profile-peeking-position-${position}`" v-if="showFloat && page.visible">
+			<div class="header-section">
+				<div class="profile-peeking-cover">
+					<lazy-image class="profile-peeking-cover" :src="page.cover" />
+				</div>
+				<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-standard" img-class="profile-standard" :src="page.profile" />
 
-					<user-badges :badgeStatus="page.badge_status" />
-				</div>
-				<div class="px-3 pb-3 d-flex flex-column">
-					<strong class="text-gray-medium-dark font-demibold font-10">@{{ page.slug }}</strong>
-					<strong class="person-name font-12 font-demibold">{{ page.name }}</strong>
-					<small class="person-short-bio text-gray-medium-dark font-12">{{ page.short_bio }}</small>
-					<small class="person-short-bio font-demibold text-gray-medium-dark font-10 mt-3">{{ page.location }}</small>
-				</div>
+				<user-badges :badgeStatus="page.badge_status" />
 			</div>
-		</transition>
+			<div class="px-3 pb-3 d-flex flex-column">
+				<strong class="text-gray-medium-dark font-demibold font-10">@{{ page.slug }}</strong>
+				<strong class="person-name font-12 font-demibold">{{ page.name }}</strong>
+				<small class="person-short-bio text-gray-medium-dark font-12">{{ page.short_bio }}</small>
+				<small class="person-short-bio font-demibold text-gray-medium-dark font-10 mt-3">{{ page.location }}</small>
+			</div>
+		</div>
 	</wire-link>
 </template>
 

@@ -27,7 +27,7 @@ class CommentController extends Controller
             ->withCount("replies")
             ->whereNull("reply_to")
             ->where("post_id", $post)
-            ->latest();
+            ->orderByRaw("id = ? DESC, created_at DESC", [$request->input("top", 0)]);
         if ($request->has("noload")) {
             $comments = $comments->where("id", "!=", $request->noload);
         }

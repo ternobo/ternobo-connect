@@ -162,13 +162,17 @@ export default {
 				.then(() => (this.repliesLoading = false));
 		},
 		deleteComment() {
-			this.deleted = true;
-			axios
-				.delete("/posts/" + this.comment.post_id + "/comments/" + this.comment.id)
-				.then((response) => {
-					this.$emit("deleted", this.comment);
-				})
-				.catch((error) => console.log(error));
+			this.confirmDialog(__.get("messages.delete-post-confirm")).then((value) => {
+				if (value) {
+					this.deleted = true;
+					axios
+						.delete("/posts/" + this.comment.post_id + "/comments/" + this.comment.id)
+						.then((response) => {
+							this.$emit("deleted", this.comment);
+						})
+						.catch((error) => console.log(error));
+				}
+			});
 		},
 		loadMore() {
 			if (this.next_page_url !== null && !this.loadingMore) {
