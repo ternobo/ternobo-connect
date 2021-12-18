@@ -332,6 +332,7 @@ class PostController extends Controller
             $post->save();
             Tag::addTag($tags);
             DB::commit();
+            event(new PostShareEvent($post));
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
