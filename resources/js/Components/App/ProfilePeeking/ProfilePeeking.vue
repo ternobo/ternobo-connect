@@ -38,14 +38,19 @@ export default {
 	data() {
 		return {
 			showFloat: false,
+
+			timeout: null,
 		};
 	},
 
 	methods: {
 		onMouseEnter(e) {
-			this.showFloat = true;
+			this.timeout = setTimeout(() => {
+				this.showFloat = true;
+			}, 500);
 		},
 		onMouseLeave(e) {
+			clearTimeout(this.timeout);
 			this.showFloat = false;
 		},
 	},
