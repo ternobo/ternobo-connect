@@ -52,14 +52,14 @@
 				<span @click="showLikes = true" class="me-1">{{ __.get("content/posts.liked-text") }}</span>
 				<wire-link v-if="post_data.mutual_likes[0]" :href="'/' + post_data.mutual_likes[0].page.slug" class="text-dark me-1">
 					<span class="d-flex">
-						<strong class="text-gray-medium-dark">{{ post_data.mutual_likes[0].page.name }}</strong>
+						<strong class="text-gray-medium-dark hover-dark">{{ post_data.mutual_likes[0].page.name }}</strong>
 						<span class="text-gray-medium-dark">{{ post_data.mutual_likes.length > 2 ? __.get("application.comma") : "" }} </span>
 					</span>
 				</wire-link>
 				<div v-if="post_data.mutual_likes.length > 1">
 					<span v-if="post_data.mutual_likes.length == 2">{{ __.get("content/posts.and") }}</span>
-					<wire-link v-if="post_data.mutual_likes[1]" :href="'/' + post_data.mutual_likes[0].page.slug" class="text-dark">
-						<strong class="text-gray-medium-dark">{{ post_data.mutual_likes[1].page.name }}</strong>
+					<wire-link v-if="post_data.mutual_likes[1]" :href="'/' + post_data.mutual_likes[0].page.slug" class="text-dark hover-dark">
+						<strong class="text-gray-medium-dark hover-dark">{{ post_data.mutual_likes[1].page.name }}</strong>
 					</wire-link>
 				</div>
 				<span class="mx-1" v-if="post_data.mutual_likes.length > 2"> {{ __.get("content/posts.and") }} ... </span>
