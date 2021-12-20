@@ -17,7 +17,7 @@
 					<span class="d-flex medium align-items-center clickale">
 						<wire-link :href="'/search?q=' + skillVal.name">{{ skillVal.name }}</wire-link>
 					</span>
-					<div class="skill-credits clickable" @click="creditsListModal = true">
+					<div class="skill-credits clickable">
 						<div class="credit-icon" v-if="$store.state.user != null && checkUser(user.id)">
 							<i class="material-icons">arrow_circle_up</i>
 							<span>{{ formatNumber(credits_count, "0a") }}</span>
@@ -28,11 +28,11 @@
 								{{ credits_count > 2 ? __.get("application.comma") : "" }}
 							</wire-link>
 
-							<span v-if="credits_count == 2">{{ __.get("application.and") }}</span>
+							<span v-if="credits_count == 2" @click="creditsListModal = true">{{ __.get("application.and") }}</span>
 							<wire-link v-if="skillVal.credit_text.second" class="hover-dark" :href="userURL(skillVal.credit_text.second)">
 								<strong>{{ skillVal.credit_text.second.name }}</strong>
 							</wire-link>
-							<span>{{ credits_count - 2 > 0 ? " " + __.get("application.more-people", { number: credits_count - 2 }) : "" }} {{ skillVal.credit_text.verb }}</span>
+							<span @click="creditsListModal = true">{{ credits_count - 2 > 0 ? " " + __.get("application.more-people", { number: credits_count - 2 }) : "" }} {{ skillVal.credit_text.verb }}</span>
 						</span>
 					</div>
 				</div>
