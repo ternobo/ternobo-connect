@@ -22,6 +22,7 @@
 					:items="[
 						{ label: __.get('application.female'), code: '1' },
 						{ label: __.get('application.male'), code: '2' },
+						{ label: __.get('application.other'), code: '3' },
 					]"
 					v-model="gender"
 					:dir="appDirection"
