@@ -36,7 +36,7 @@ export default {
 		},
 		link() {
 			if (this.social.account) {
-				return `${this.social.link}${this.social.account.meta.value}`;
+				return `${this.social.link ?? ""}${this.social.account.meta.value}`;
 			}
 			return ``;
 		},
