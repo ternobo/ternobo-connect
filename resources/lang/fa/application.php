@@ -47,6 +47,7 @@ return [
     'recover-code' => "کد بازیابی|کدهای بازیابی",
     'male' => "مرد",
     'female' => "زن",
+    'other' => "دیگر",
     'gender' => "جنسیت",
     'first-name' => "نام",
     'last-name' => "نام خانوادگی",

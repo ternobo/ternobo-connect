@@ -511,6 +511,7 @@ class User extends Authenticatable implements Messageable
     public function getNotifications()
     {
         $notificationsPaginator = Notification::query()
+            ->whereHas("sender")
             ->where(function ($query) {
                 $query->where("to", $this->personalPage->id)
                     ->orWhere("to", "-1");

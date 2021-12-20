@@ -9,5 +9,11 @@ class ContactData extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["data"];
+    protected $fillable = [
+        "data"
+    ];
+
+    protected $casts = [
+        "data" => "array"
+    ];
 }

@@ -70,7 +70,7 @@ class ContactsController extends Controller
 
         $contact = ContactData::query()->where("page_id", $page->id)->firstOrNew();
         $contact->page_id = $page->id;
-        $contact->data = json_encode($request->contacts);
+        $contact->data = $request->contacts;
 
         $socials = $request->contacts["socials"];
 
