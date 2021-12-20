@@ -50,6 +50,11 @@ export default {
 		};
 	},
 	watch: {
+		slide() {
+			if (this.slide != null && this.slide < this.post.slides.length) {
+				this.active = this.slide;
+			}
+		},
 		active() {
 			this.$nextTick(() => {
 				const y = this.$parent.$el.getBoundingClientRect().top + window.scrollY;
@@ -83,9 +88,6 @@ export default {
 		},
 	},
 	mounted() {
-		if (this.slide != null && this.slide < this.post.slides.length) {
-			this.active = this.slide;
-		}
 		let options = {
 			root: null,
 			threshold: 1.0,

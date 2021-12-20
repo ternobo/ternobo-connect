@@ -97,6 +97,9 @@ export default {
 		ProfilePeeking,
 	},
 	watch: {
+		slide() {
+			this.slideShowing = this.slide;
+		},
 		slideShowing() {
 			this.$emit("update:slide", this.slideShowing);
 		},
