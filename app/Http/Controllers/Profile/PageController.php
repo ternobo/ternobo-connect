@@ -92,12 +92,7 @@ class PageController extends Controller
 
         $pages = array();
         if (Auth::check()) {
-            $pages = Following::where("followings.page_id", $page->id)
-                ->join("pages", "pages.id", "=", "followings.following")
-                ->where("pages.id", "!=", $page->id)
-                ->where("pages.id", "!=", Auth::user()->personalPage->id)
-                ->get();
-            $pages = count($pages) > 3 ? $pages->random(3) : $pages;
+            $pages = $this->service->getRandomFollowing($page);
         }
 
         $actions = $page->getActions(null, 5);

@@ -54,6 +54,11 @@
             display: flex;
             align-items: center;
 
+
+            img.profile-xsm {
+                border: 3px solid $body-bg;
+            }
+
             >.profiles {
                 margin-#{$end}: 12px;
                 display: flex;
@@ -62,6 +67,7 @@
                     margin-#{$start}: -20px;
                 }
             }
+
 
             .date-text {
                 margin-#{$start}: 12px;
