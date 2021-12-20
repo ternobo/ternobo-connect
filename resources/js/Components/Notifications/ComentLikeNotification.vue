@@ -9,7 +9,7 @@
 				</div>
 				<div class="notification-text">
 					<profile-peeking position="bottom" class="title clickable" :page="notifications[0].sender">
-						<span>{{ notifications[0].sender.name }}</span>
+						<span class="hover-dark">{{ notifications[0].sender.name }}</span>
 						<div class="ms-2 font-12 text-gray-medium-dark font-demibold">{{ __.get("notifications.liked-your-comment") }}</div>
 					</profile-peeking>
 					<span class="ms-2 font-12 text-gray-medium-dark font-demibold">{{ createdAt }}</span>
