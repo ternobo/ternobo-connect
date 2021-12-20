@@ -23,13 +23,13 @@
 							<span>{{ formatNumber(credits_count, "0a") }}</span>
 						</div>
 						<span class="credits-text" v-if="skillVal.credit_text != null && credits_count >= 1">
-							<wire-link v-if="skillVal.credit_text.first" :href="userURL(skillVal.credit_text.first)">
+							<wire-link v-if="skillVal.credit_text.first" class="hover-dark" :href="userURL(skillVal.credit_text.first)">
 								<strong>{{ skillVal.credit_text.first.name }}</strong>
 								{{ credits_count > 2 ? __.get("application.comma") : "" }}
 							</wire-link>
 
-							<span v-if="credits_count == 2">و</span>
-							<wire-link v-if="skillVal.credit_text.second" :href="userURL(skillVal.credit_text.second)">
+							<span v-if="credits_count == 2">{{ __.get("application.and") }}</span>
+							<wire-link v-if="skillVal.credit_text.second" class="hover-dark" :href="userURL(skillVal.credit_text.second)">
 								<strong>{{ skillVal.credit_text.second.name }}</strong>
 							</wire-link>
 							<span>{{ credits_count - 2 > 0 ? " " + __.get("application.more-people", { number: credits_count - 2 }) : "" }} {{ skillVal.credit_text.verb }}</span>
