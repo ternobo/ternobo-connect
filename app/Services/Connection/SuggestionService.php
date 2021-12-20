@@ -5,6 +5,7 @@ namespace App\Services\Connection;
 use App\Models\Following;
 use App\Models\Page;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class SuggestionService
 {
@@ -16,38 +17,54 @@ class SuggestionService
         $this->connectionsService = $connectionsService;
     }
 
-    private function getSuggestionsForVisitor(User $user)
+    private function getSuggestionsForVisitor(Page $page)
     {
         return Page::query()
-            ->distinct("pages.id")
-            ->where("pages.user_id", "!=", $user->id)
-            ->get()->random(3);
+            ->where("id", "!=", $page->id)
+            ->whereRaw("`pages`.`id` NOT IN (SELECT `following` FROM `followings` WHERE `page_id` = ?)", $page->id)
+            ->orderByRaw("RAND()")
+            ->limit(3)
+            ->get();
     }
 
-    private function getSuggestionsForUser(User $user)
+    private function getSuggestionsForUser(Page $page)
     {
-        $pages = Following::query()
+
+        $randomFollowingIds = collect(DB::select("SELECT `following` FROM `followings` WHERE `page_id` = ? and `type` = 'user' ORDER BY RAND() LIMIT 3", [$page->id]))->pluck("following");
+        $randomFollowingIdsPlaceholders = implode(",", array_fill(0, count($randomFollowingIds), '?'));
+        $randomFollowersIds = collect(DB::select("SELECT `following` FROM `followings` WHERE `page_id` IN ($randomFollowingIdsPlaceholders) and `type` = 'user' ORDER BY RAND() LIMIT 3", $randomFollowingIds->toArray()))->pluck("following");
+        $pages = Page::query()
+            ->where("id", "!=", $page->id)
+            ->whereIn("id", $randomFollowersIds)
+            ->get();
+
+        if (count($pages) >= 3) {
+            return $pages;
+        }
+
+        return $this->getSuggestionsForVisitor($page);
+    }
+
+    public function getRandomFollowing($number = 3)
+    {
+        Following::query()
             ->distinct("pages.id")
             ->join("pages", "pages.id", "=", "followings.following")
             ->whereRaw("followings.page_id IN (SELECT following from followings where page_id='$user->id')")
             ->whereRaw("followings.following NOT IN (SELECT following from followings where page_id='$user->id')")
             ->where("pages.user_id", "!=", $user->id)
-            ->select(array("pages.*"))
-            ->get();
-
-        if (count($pages) > 3) {
-            return $pages->random(3);
-        }
-        return $this->getSuggestionsForVisitor($user);
+            ->select(["pages.*"])
+            ->get()
+            ->pluck("page");
     }
 
     public function getSuggestions(User $user)
     {
         $pages = [];
         if ($user->personalPage->visible) {
-            $pages = $this->getSuggestionsForUser($user);
+            $pages = $this->getSuggestionsForUser($user->personalPage);
         } else {
-            $pages = $this->getSuggestionsForVisitor($user);
+            $pages = $this->getSuggestionsForVisitor($user->personalPage);
         }
 
         if ($user->personalPage->visible) {
