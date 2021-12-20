@@ -53,14 +53,14 @@ class LoginController extends Controller
 
                 return response()->json(["two_factor" => true, 'type' => $user->two_factor_type]);
             } else {
-                Auth::login($user, true);
-                ActiveSession::addSession($user->id);
                 $user->active = true;
                 $user->save();
+                Auth::login($user, true);
+                ActiveSession::addSession($user->id);
+
 
                 return response()->json(["result" => true])->cookie("ternobo_current_page_id", $user->personalPage->id, 9999999);
             }
-
         }
         $exception = ValidationException::withMessages([
             "email" => [trans('validation.login')],
@@ -103,11 +103,9 @@ class LoginController extends Controller
                     return response()->json([
                         'result' => true,
                     ]);
-
                 }
             } else {
                 return response()->json(array("result" => false, "msg" => __("کد بازیابی نامعتبر است!")));
-
             }
         }
 
@@ -122,8 +120,8 @@ class LoginController extends Controller
             }
 
             $verification = $user->two_factor_type == "phone" ?
-            Verification::query()->where("code", $request->code)->where("phone", $user->phone)->first()
-            : Verification::query()->where("code", $request->code)->where("email", $user->email)->first();
+                Verification::query()->where("code", $request->code)->where("phone", $user->phone)->first()
+                : Verification::query()->where("code", $request->code)->where("email", $user->email)->first();
             if ($verification instanceof Verification) {
                 Auth::login($user, true);
                 ActiveSession::addSession($user->id);
@@ -150,7 +148,6 @@ class LoginController extends Controller
                 return response()->json(array("result" => false, "msg" => __("کد تایید نامعتبر است!")));
             }
         }
-
     }
 
     /**
@@ -162,5 +159,4 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
 }
