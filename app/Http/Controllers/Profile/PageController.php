@@ -357,7 +357,7 @@ class PageController extends Controller
             $user = Auth::user();
             $user->first_name = $request->firstname;
             $user->last_name = $request->lastname;
-            $user->nickname = $request->nickname;
+            $page->nickname = $request->nickname;
             $user->gender = $request->gender;
 
             if ($request->has("short_bio")) {

@@ -46,7 +46,7 @@ import MaterialTextArea from "../inputs/MaterialTextArea";
 
 export default {
 	props: {
-		user: {
+		page: {
 			type: Object,
 			default: undefined,
 			required: true,
@@ -57,11 +57,11 @@ export default {
 		},
 	},
 	created() {
-		this.firstName = this.user.first_name;
-		this.lastName = this.user.last_name;
-		this.shortBio = this.user.short_bio;
+		this.firstName = this.page.user.first_name;
+		this.lastName = this.page.user.last_name;
+		this.shortBio = this.page.user.short_bio;
 		this.location = this.pageLocation;
-		this.nickname = this.user.nickname;
+		this.nickname = this.page.nickname;
 
 		this.gender = JSON.parse(this.page.user.gender);
 
