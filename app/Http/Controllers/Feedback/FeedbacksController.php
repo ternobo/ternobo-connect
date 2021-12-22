@@ -9,6 +9,7 @@ use App\Models\FeedbackBookmark;
 use App\Models\FeedbackReply;
 use App\Models\FeedbackVote;
 use App\Models\Page;
+use App\Services\Connection\SuggestionService;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -19,8 +20,11 @@ use Ternobo\TernoboWire\TernoboWire;
 
 class FeedbacksController extends Controller
 {
-    public function __construct()
+    private SuggestionService $suggestionService;
+
+    public function __construct(SuggestionService $suggestionService)
     {
+        $this->suggestionService = $suggestionService;
         $this->middleware("auth");
     }
 
@@ -56,7 +60,7 @@ class FeedbacksController extends Controller
         } else {
             $feedbacks = Feedback::query()->with("votes")->with("user")->where("status", $status)->latest()->paginate(15);
         }
-        return TernoboWire::render("Feedback/Index", ["feedbacks" => $feedbacks, "pages" => Page::getSuggestions()]);
+        return TernoboWire::render("Feedback/Index", ["feedbacks" => $feedbacks, "pages" => $this->suggestionService->getSuggestions(Auth::user())]);
     }
 
     public function myFeedbacks(Request $request)
@@ -130,7 +134,6 @@ class FeedbacksController extends Controller
             }
             return response()->json(["result" => true, "bookmark" => false]);
         }
-
     }
 
     public function changeType(ChangeFeedbackTypeRequest $request)
@@ -177,7 +180,6 @@ class FeedbacksController extends Controller
         $feedback->description = $description;
         $result = $feedback->save();
         return response()->json(array("result" => $result, "feedback" => $feedback));
-
     }
 
     public function addReply(Feedback $feedback, Request $request)
@@ -206,7 +208,7 @@ class FeedbacksController extends Controller
     public function show(Feedback $feedback)
     {
         $replies = $feedback->replies()->paginate(10);
-        return TernoboWire::render("Feedback/FeedbackPage", ["feedback" => $feedback, "replies" => $replies, "pages" => Page::getSuggestions()]);
+        return TernoboWire::render("Feedback/FeedbackPage", ["feedback" => $feedback, "replies" => $replies, "pages" => $this->suggestionService->getSuggestions(Auth::user())]);
     }
 
     /**

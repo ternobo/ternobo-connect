@@ -1,12 +1,27 @@
 <template>
 	<div class="people-sugestion" :class="{ nofollow: !$store.state.shared.fullAccess }">
-		<profile-peeking :page="page" />
-		<FollowButton class="btn-icon btn-md" :page="page">
+		<profile-peeking :page="page" v-if="page.type == 'page'" />
+		<FollowButton class="btn-icon btn-md" :page="page" v-if="page.type == 'page'">
 			<template v-slot:default="{ followed }">
 				<i class="material-icons font-16" v-if="followed">remove</i>
 				<i class="material-icons font-16" v-else>add</i>
 			</template>
 		</FollowButton>
+
+		<!-- Community Tag Suggestion !-->
+		<wire-link :href="`/tags/${page.tag}`" class="community-tag-suggestion d-flex" v-if="page.type == 'tag'">
+			<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xsm profile-image" img-class="profile-xsm" :src="page.icon" />
+			<div class="flex-column d-flex">
+				<strong class="tag-name">
+					<span> {{ page.name }}</span>
+				</strong>
+				<small class="hashtag-name">#{{ page.tag }}</small>
+			</div>
+		</wire-link>
+		<loading-button class="btn btn-icon btn-md" @click="follow" :class="{ 'btn-secondary': !isFollowed }" v-if="page.type == 'tag'" :loading="loading">
+			<i class="material-icons font-16" v-if="isFollowed">remove</i>
+			<i class="material-icons font-16" v-else>add</i>
+		</loading-button>
 	</div>
 </template>
 
@@ -26,6 +41,29 @@ export default {
 		ProfilePeeking,
 	},
 	name: "PeopleSuggestion",
+	methods: {
+		follow() {
+			this.loading = true;
+			axios
+				.post(`/tags/${this.page.tag}/follow`)
+				.then((response) => {
+					this.isFollowed = response.data.follow;
+				})
+				.catch((err) => {
+					console.log(err);
+					this.toast(__.get("messages.connection-error"));
+				})
+				.then(() => {
+					this.loading = false;
+				});
+		},
+	},
+	data() {
+		return {
+			loading: false,
+			isFollowed: false,
+		};
+	},
 };
 </script>
 
