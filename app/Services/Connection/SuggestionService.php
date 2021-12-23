@@ -57,6 +57,13 @@ class SuggestionService
             ->reject(function ($item) {
                 $item['type'] == "tag" && !CommunityTag::query()->where("tag_id", $item['following']['id'])->exsits();
             })
+            ->map(function ($item) {
+                if ($item['type'] == "tag") {
+                    $item = CommunityTag::query()->where("tag_id", $item['following']['id'])->first();
+                    $item['following']['type'] = "tag";
+                }
+                return $item;
+            })
             ->pluck("following");
 
         if (count($suggestions) >= 3) {

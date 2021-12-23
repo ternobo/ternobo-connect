@@ -43,8 +43,8 @@ export default {
 	name: "PeopleSuggestion",
 	computed: {
 		type() {
-			if (this.page.type) {
-				return page.type;
+			if (this.page?.type) {
+				return this.page.type;
 			}
 			return "page";
 		},
