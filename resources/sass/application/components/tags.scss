@@ -27,6 +27,25 @@
     }
 }
 
+.community-tag-suggestion {
+    .tag-name {
+        font-size: 0.875rem;
+
+    }
+
+    .hashtag-name {
+        background: linear-gradient(135deg, #0094FF 22.26%, #C852FF 68.57%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        line-height: 20px;
+
+    }
+}
+
 
 .community-tag-header {
     display: flex;

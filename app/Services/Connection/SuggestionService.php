@@ -2,6 +2,7 @@
 
 namespace App\Services\Connection;
 
+use App\Models\CommunityTag;
 use App\Models\Following;
 use App\Models\Page;
 use App\Models\User;
@@ -19,45 +20,50 @@ class SuggestionService
 
     private function getSuggestionsForVisitor(Page $page)
     {
-        return Page::query()
+        $pages = Page::query()
             ->where("id", "!=", $page->id)
             ->whereRaw("`pages`.`id` NOT IN (SELECT `following` FROM `followings` WHERE `page_id` = ?)", $page->id)
             ->orderByRaw("RAND()")
             ->where("visible", true)
-            ->limit(3)
+            ->limit(2)
             ->get();
+
+        $communityTags = CommunityTag::query()
+            ->whereHas("tag", function ($query) use ($page) {
+                return $query->whereRaw("`tags`.`id` NOT IN (SELECT `following` FROM `followings` WHERE `page_id` = ? AND type = ?)", [$page->id, "tag"]);
+            })
+            ->orderByRaw("RAND()")
+            ->limit(1)
+            ->get();
+
+        return $pages->merge($communityTags)
+            ->map(function ($item) {
+                $item['type'] = $item instanceof Page ? "page" : "tag";
+                return $item;
+            })
+            ->shuffle();
     }
 
     private function getSuggestionsForUser(Page $page)
     {
+        $randomFollowingIds = collect(DB::select("SELECT `following` FROM `followings` WHERE `page_id` = ? ORDER BY RAND() LIMIT 3", [$page->id]))->pluck("following");
 
-        $randomFollowingIds = collect(DB::select("SELECT `following` FROM `followings` WHERE `page_id` = ? and `type` = 'user' ORDER BY RAND() LIMIT 3", [$page->id]))->pluck("following");
-        $randomFollowingIdsPlaceholders = implode(",", array_fill(0, count($randomFollowingIds), '?'));
-        $randomFollowersIds = collect(DB::select("SELECT `following` FROM `followings` WHERE `page_id` IN ($randomFollowingIdsPlaceholders) and `type` = 'user' ORDER BY RAND() LIMIT 3", $randomFollowingIds->toArray()))->pluck("following");
-        $pages = Page::query()
-            ->where("id", "!=", $page->id)
-            ->where("visible", true)
-            ->whereIn("id", $randomFollowersIds)
-            ->get();
+        $suggestions = collect(Following::query()
+            ->whereIn("page_id", $randomFollowingIds)
+            ->orderByRaw("RAND()")
+            ->limit(3)
+            ->get()
+            ->toArray())
+            ->reject(function ($item) {
+                $item['type'] == "tag" && !CommunityTag::query()->where("tag_id", $item['following']['id'])->exsits();
+            })
+            ->pluck("following");
 
-        if (count($pages) >= 3) {
-            return $pages;
+        if (count($suggestions) >= 3) {
+            return $suggestions;
         }
 
         return $this->getSuggestionsForVisitor($page);
-    }
-
-    public function getRandomFollowing($number = 3)
-    {
-        Following::query()
-            ->distinct("pages.id")
-            ->join("pages", "pages.id", "=", "followings.following")
-            ->whereRaw("followings.page_id IN (SELECT following from followings where page_id='$user->id')")
-            ->whereRaw("followings.following NOT IN (SELECT following from followings where page_id='$user->id')")
-            ->where("pages.user_id", "!=", $user->id)
-            ->select(["pages.*"])
-            ->get()
-            ->pluck("page");
     }
 
     public function getSuggestions(User $user)
@@ -67,16 +73,6 @@ class SuggestionService
             $pages = $this->getSuggestionsForUser($user->personalPage);
         } else {
             $pages = $this->getSuggestionsForVisitor($user->personalPage);
-        }
-
-        if ($user->personalPage->visible) {
-            $result = [];
-            foreach ($pages as $page) {
-                if (!(($this->connectionsService->isFollowing($user->id, $page->user_id)) || ($this->connectionsService->isConnected($user->id, $page->user_id)))) {
-                    $result[] = $page;
-                }
-            }
-            return $result;
         }
 
         return $pages;
