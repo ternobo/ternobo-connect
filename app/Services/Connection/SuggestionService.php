@@ -64,14 +64,16 @@ class SuggestionService
                 if ($item['type'] == "tag") {
                     $item = CommunityTag::query()->where("tag_id", $item['following']['id'])->first();
                     $item['following']['type'] = "tag";
+                } else {
+                    $item['following']['type'] = "page";
                 }
                 return $item;
             })
             ->pluck("following");
 
-        if (count($suggestions) >= 3) {
-            return $suggestions;
-        }
+        // if (count($suggestions) >= 3) {
+        //     return $suggestions;
+        // }
 
         return $this->getSuggestionsForVisitor($page);
     }
