@@ -92,13 +92,19 @@ class CommentController extends Controller
     public function replies($comment, Request $request)
     {
         $comments = Comment::query()
+            ->withCount("likes")
             ->with("mutualLikes")
             ->with("page")
             ->where("parent_id", $comment)
             ->with("replyto.page")
-            ->latest()
-            ->paginate(5);
-        return response()->json(array("result" => true, "data" => $comments));
+            ->orderBy("likes_count")
+            ->latest();
+        if ($request->filled("limit")) {
+            $comments = $comments->limit($request->limit)->get();
+        } else {
+            $comments = $comments->paginate(5);
+        }
+        return response()->json(["result" => true, "data" => $comments, "paginated" => !$request->filled("limit")]);
     }
     public function likeComment($comment_id)
     {

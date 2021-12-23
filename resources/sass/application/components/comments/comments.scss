@@ -4,9 +4,10 @@
 
 .comment-replies {
     border-radius: 1px solid $gray-500;
+    margin-top: 2rem;
 
     >.sendcomment {
-        margin: 2rem 0;
+        margin-bottom: 2rem;
     }
 
     .replies {

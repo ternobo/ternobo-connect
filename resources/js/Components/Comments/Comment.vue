@@ -69,7 +69,7 @@
 					</div>
 				</div>
 				<div class="actions">
-					<span class="replies-text clickable" @click="loadReplies">{{ replies_count > 0 ? replies_count : "" }} {{ __.choice("content/comments.reply", replies_count == 0 ? 1 : replies_count) }}</span>
+					<span class="replies-text clickable" @click="showRelies">{{ replies_count > 0 ? replies_count : "" }} {{ __.choice("content/comments.reply", replies_count == 0 ? 1 : replies_count) }}</span>
 					<i @click="likeComment" v-if="!checkUser(comment.page.user_id)" class="hover-dark clickable material-icons font-20 ms-3" :class="{ 'text-danger': liked }">
 						{{ liked ? "favorite" : "favorite_border" }}
 					</i>
@@ -109,6 +109,7 @@ export default {
 		this.liked = this.comment.is_liked;
 		this.replies_count = this.comment.replies_count ? this.comment.replies_count : 0;
 		twemoji.parse(this.$refs.body);
+		this.loadReplies(false, 1);
 	},
 	data() {
 		return {
@@ -144,17 +145,23 @@ export default {
 			}
 			axios.post(this.$APP_URL + "/comments/" + this.comment.id + "/like");
 		},
-		loadReplies() {
-			this.showNewComment = true;
+		showRelies() {
+			this.showReplies = false;
+			this.loadReplies();
+		},
+		loadReplies(showNewComment = true, limit = null) {
+			this.showNewComment = showNewComment;
 			this.repliesLoading = true;
 			this.showReplies = !this.showReplies;
 			axios
-				.post(this.$APP_URL + "/comments/" + this.comment.id + "/replies")
+				.post(this.$APP_URL + "/comments/" + this.comment.id + "/replies", { limit: limit })
 				.then((response) => {
 					const data = response.data;
-					if (data.result) {
+					if (data.result && data.paginated) {
 						this.next_page_url = data.data.next_page_url;
 						this.replies = data.data.data;
+					} else if (data.result) {
+						this.replies = data.data;
 					}
 					this.repliesLoading = false;
 				})
