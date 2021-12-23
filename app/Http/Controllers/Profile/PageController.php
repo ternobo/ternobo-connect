@@ -11,6 +11,7 @@ use App\Models\Page;
 use App\Models\Post;
 use App\Models\Report;
 use App\Models\Website;
+use App\Services\Connection\SuggestionService;
 use App\Services\ProfileService;
 use App\Ternobo;
 use Artesaos\SEOTools\Facades\SEOMeta;
@@ -26,10 +27,12 @@ class PageController extends Controller
 {
 
     private ProfileService $service;
+    private SuggestionService $suggestionService;
 
-    public function __construct(ProfileService $service)
+    public function __construct(ProfileService $service, SuggestionService $suggestionService)
     {
         $this->service = $service;
+        $this->suggestionService = $suggestionService;
     }
 
     public function show($page, $location = "home", Request $request)
@@ -92,7 +95,7 @@ class PageController extends Controller
 
         $pages = array();
         if (Auth::check()) {
-            $pages = $this->service->getRandomFollowing($page);
+            $pages = $this->suggestionService->getSuggestionsBaseOnPage($page);
         }
 
         $actions = $page->getActions(null, 5);
