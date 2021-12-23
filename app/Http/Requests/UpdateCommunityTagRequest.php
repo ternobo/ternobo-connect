@@ -26,12 +26,12 @@ class UpdateCommunityTagRequest extends BaseRequest
      */
     public function rules()
     {
-        dd(Request::all());
+        $id = ($this->route()->parameter("community"));
         return [
             // Community Tag
-            "tag" => ['required', "unique:community_tags,name"],
-            "icon" => ['required', "mimes:png,jpg"],
-            "cover" => ['required', "mimes:png,jpg"],
+            "tag" => ['required', "unique:community_tags,name,$id"],
+            "icon" => ['nullable', "mimes:png,jpg"],
+            "cover" => ['nullable', "mimes:png,jpg"],
         ];
     }
 }

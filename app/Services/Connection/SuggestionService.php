@@ -18,6 +18,8 @@ class SuggestionService
         $this->connectionsService = $connectionsService;
     }
 
+
+
     private function getSuggestionsForVisitor(Page $page)
     {
         $pages = Page::query()
@@ -42,6 +44,22 @@ class SuggestionService
                 return $item;
             })
             ->shuffle();
+    }
+
+
+    public function getSuggestionsBaseOnPage(Page $page)
+    {
+        $randomFollowingIds = collect(DB::select("SELECT `page_id` FROM `followings` WHERE `following` = ? ORDER BY RAND() LIMIT 3", [$page->id]))->pluck("page_id");
+        return collect(Page::query()
+            ->whereIn("id", $randomFollowingIds)
+            ->orderByRaw("RAND()")
+            ->limit(3)
+            ->get()
+            ->toArray())
+            ->map(function ($item) {
+                $item['type'] = "page";
+                return $item;
+            });
     }
 
     private function getSuggestionsForUser(Page $page)
@@ -71,9 +89,9 @@ class SuggestionService
             })
             ->pluck("following");
 
-        // if (count($suggestions) >= 3) {
-        //     return $suggestions;
-        // }
+        if (count($suggestions) >= 3) {
+            return $suggestions;
+        }
 
         return $this->getSuggestionsForVisitor($page);
     }
