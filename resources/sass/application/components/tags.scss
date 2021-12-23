@@ -30,7 +30,17 @@
 .community-tag-suggestion {
     .tag-name {
         font-size: 0.875rem;
+    }
 
+    .community-icon {
+        height: 44px;
+        width: 44px;
+        margin-#{$end}: 0.75rem;
+
+        >img {
+            height: 44px;
+            width: 44px;
+        }
     }
 
     .hashtag-name {

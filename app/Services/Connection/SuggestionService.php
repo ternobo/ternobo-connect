@@ -50,6 +50,9 @@ class SuggestionService
 
         $suggestions = collect(Following::query()
             ->whereIn("page_id", $randomFollowingIds)
+            ->whereHas("page", function ($query) use ($page) {
+                return $query->whereRaw("`pages`.`id` NOT IN (SELECT `following` FROM `followings` WHERE `page_id` = ?)", $page->id);
+            })
             ->orderByRaw("RAND()")
             ->limit(3)
             ->get()
@@ -61,14 +64,16 @@ class SuggestionService
                 if ($item['type'] == "tag") {
                     $item = CommunityTag::query()->where("tag_id", $item['following']['id'])->first();
                     $item['following']['type'] = "tag";
+                } else {
+                    $item['following']['type'] = "page";
                 }
                 return $item;
             })
             ->pluck("following");
 
-        if (count($suggestions) >= 3) {
-            return $suggestions;
-        }
+        // if (count($suggestions) >= 3) {
+        //     return $suggestions;
+        // }
 
         return $this->getSuggestionsForVisitor($page);
     }
