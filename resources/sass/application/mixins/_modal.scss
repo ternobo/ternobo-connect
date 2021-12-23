@@ -5,16 +5,13 @@
     display: flex;
     align-items: center;
 
-    .back-modal .close {
-        @if($direction==ltr) {
-            left: 1.25rem;
-        }
+    .back-modal {
+        padding-#{$start}: 3.75rem !important;
 
-        @else {
-            transform: rotate(180deg);
+        .close {
+            #{$start}: 1.25rem;
         }
     }
-
 
     .modal-content {
         position: relative;
@@ -43,26 +40,13 @@
             display: flex;
             position: relative;
             align-items: center;
-            justify-content: center;
             background: $white;
-
-            &::after {
-                content: " ";
-                position: absolute;
-                #{$end}: 1.5rem;
-                #{$start}: 1.5rem;
-                bottom: 0;
-                height: 2px;
-                background: $gray-200;
-
-            }
 
             >.modal-title {
                 font-weight: $headings-font-weight;
                 font-size: $heading-2;
                 margin: 0;
             }
-
 
             .close {
                 font-family: "Material Icons";

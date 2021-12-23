@@ -1,7 +1,7 @@
 <template>
 	<div class="people-sugestion" :class="{ nofollow: !$store.state.shared.fullAccess }">
-		<profile-peeking :page="page" v-if="page.type == 'page'" />
-		<FollowButton class="btn-icon btn-md" :page="page" v-if="page.type == 'page'">
+		<profile-peeking :page="page" v-if="type == 'page'" />
+		<FollowButton class="btn-icon btn-md" :page="page" v-if="type == 'page'">
 			<template v-slot:default="{ followed }">
 				<i class="material-icons font-16" v-if="followed">remove</i>
 				<i class="material-icons font-16" v-else>add</i>
@@ -9,7 +9,7 @@
 		</FollowButton>
 
 		<!-- Community Tag Suggestion !-->
-		<wire-link :href="`/tags/${page.tag}`" class="community-tag-suggestion d-flex" v-if="page.type == 'tag'">
+		<wire-link :href="`/tags/${page.tag}`" class="community-tag-suggestion d-flex" v-if="type == 'tag'">
 			<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xsm profile-image" img-class="profile-xsm" :src="page.icon" />
 			<div class="flex-column d-flex">
 				<strong class="tag-name">
@@ -18,7 +18,7 @@
 				<small class="hashtag-name">#{{ page.tag }}</small>
 			</div>
 		</wire-link>
-		<loading-button class="btn btn-icon btn-md" @click="follow" :class="{ 'btn-secondary': !isFollowed }" v-if="page.type == 'tag'" :loading="loading">
+		<loading-button class="btn btn-icon btn-md" @click="follow" :class="{ 'btn-secondary': !isFollowed }" v-if="type == 'tag'" :loading="loading">
 			<i class="material-icons font-16" v-if="isFollowed">remove</i>
 			<i class="material-icons font-16" v-else>add</i>
 		</loading-button>
@@ -41,6 +41,14 @@ export default {
 		ProfilePeeking,
 	},
 	name: "PeopleSuggestion",
+	computed: {
+		type() {
+			if (this.page.type) {
+				return page.type;
+			}
+			return "page";
+		},
+	},
 	methods: {
 		follow() {
 			this.loading = true;

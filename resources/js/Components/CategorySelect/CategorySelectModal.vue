@@ -1,5 +1,5 @@
 <template>
-	<b-modal v-model="showModal" hide-footer :title="__.choice('content/posts.category', 2)" modal-class="category-select-modal" :centered="true">
+	<b-modal v-model="showModal" hide-footer :title="__.choice('content/posts.category', 2)" modal-class="category-select-modal" header-class="back-modal" :centered="true">
 		<template #modal-header-close> arrow_back </template>
 		<div class="new-post">
 			<div class="selections">
