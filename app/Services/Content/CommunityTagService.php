@@ -50,6 +50,13 @@ class CommunityTagService extends ServiceAccess
         return $response->json();
     }
 
+    public function deleteRelatedHashtag(array $hashtags)
+    {
+        $response = $this->createRequest()->withBody(json_encode(["hashtags" => $hashtags]), "application/json")->delete("/");
+        abort_unless($response->ok(), 503);
+        return $response->json();
+    }
+
     public function getHashtagTopUsers($tag)
     {
         $data = DB::select("select COUNT(page_id) as post_count, page_id from posts where json_contains(`tags`,'\"$tag\"') and deleted_at is NULL group by page_id order by post_count DESC limit 5");

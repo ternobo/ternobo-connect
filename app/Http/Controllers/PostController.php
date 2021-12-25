@@ -9,6 +9,7 @@ use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\FollowMiddlware;
 use App\Http\Middleware\FullAccessUserMiddleware;
 use App\Http\Requests\PostRequest;
+use App\Jobs\PostDeleteProcess;
 use App\Models\Action;
 use App\Models\Category;
 use App\Models\Comment;
@@ -358,7 +359,11 @@ class PostController extends Controller
     {
         $post = Post::withDrafts()->findOrFail($post);
         if ($post->user_id === Auth::user()->id) {
-            return response()->json(array("result" => $post->delete()));
+            $result = $post->delete();
+            if ($result) {
+                PostDeleteProcess::dispatch($post);
+            }
+            return response()->json(array("result" => $result));
         } else {
             return abort(404);
         }
