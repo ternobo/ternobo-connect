@@ -45,6 +45,14 @@ class CommunityTagsManagementService extends CommunityTagService
         ]);
     }
 
+
+    public function getCommunityTagTranslations(string $tag)
+    {
+        return CommunityTranslation::query()
+            ->where("tag", $tag)
+            ->get();
+    }
+
     public function deleteCommunityTagTranslation(string $tag, string $locale)
     {
         return CommunityTranslation::query()

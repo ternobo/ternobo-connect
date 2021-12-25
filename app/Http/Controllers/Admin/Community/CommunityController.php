@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Community;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommunityManagement\AddTranslationRequest;
+use App\Http\Requests\CommunityManagement\TranslationRequest;
 use App\Http\Requests\CreateCommunityCategoryRequest;
 use App\Http\Requests\CreateCommunityTagRequest;
 use App\Http\Requests\UpdateCommunityTagRequest;
@@ -52,9 +53,14 @@ class CommunityController extends Controller
         return $this->generateResponse(true, $this->service->addCommunityTagTranslation($request->tag, $request->translation, $request->locale));
     }
 
-    public function deleteTranslation(AddTranslationRequest $request)
+    public function getTranslations($tag)
     {
-        return $this->generateResponse(true, $this->service->addCommunityTagTranslation($request->tag, $request->translation, $request->locale));
+        return $this->generateResponse(true, $this->service->getCommunityTagTranslations($tag));
+    }
+
+    public function deleteTranslation(TranslationRequest $request)
+    {
+        return $this->generateResponse(true, $this->service->deleteCommunityTagTranslation($request->tag, $request->locale));
     }
 
     public function update($id, UpdateCommunityTagRequest $request)
@@ -64,7 +70,6 @@ class CommunityController extends Controller
 
     public function destroy($id)
     {
-
         return $this->generateResponse(CommunityTag::query()->where("id", $id)->delete() > 0);
     }
 }
