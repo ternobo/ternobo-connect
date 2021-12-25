@@ -62,10 +62,11 @@ Route::middleware(["auth:admin-api"])->prefix("/admin")->group(function () {
         "update" => "admin-categories.update",
         "destroy" => "admin-categories.destroy"
     ]);
-    Route::apiResource("communities", CommunityController::class);
 
     Route::post("communities/add-translation", [CommunityController::class, "addTranslation"]);
     Route::delete("communities/delete-translation", [CommunityController::class, "deleteTranslation"]);
+    Route::get("communities/get-translations/{tag}", [CommunityController::class, "getTranslations"]);
+    Route::apiResource("communities", CommunityController::class);
 
     Route::post("announcements/send", [AnnouncementController::class, 'sendAnnouncement']);
 });
