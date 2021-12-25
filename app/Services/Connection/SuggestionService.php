@@ -52,6 +52,7 @@ class SuggestionService
         $randomFollowingIds = collect(DB::select("SELECT `page_id` FROM `followings` WHERE `following` = ? ORDER BY RAND() LIMIT 3", [$page->id]))->pluck("page_id");
         return collect(Page::query()
             ->whereIn("id", $randomFollowingIds)
+            ->where("id", "!=", $page->id)
             ->orderByRaw("RAND()")
             ->limit(3)
             ->get()
@@ -69,7 +70,7 @@ class SuggestionService
         $suggestions = collect(Following::query()
             ->whereIn("page_id", $randomFollowingIds)
             ->whereHas("page", function ($query) use ($page) {
-                return $query->whereRaw("`pages`.`id` NOT IN (SELECT `following` FROM `followings` WHERE `page_id` = ?)", $page->id);
+                return $query->whereRaw("`pages`.`id` NOT IN (SELECT `following` FROM `followings` WHERE `page_id` = ?)", $page->id)->where("id", "!=", $page->id);
             })
             ->orderByRaw("RAND()")
             ->limit(3)
