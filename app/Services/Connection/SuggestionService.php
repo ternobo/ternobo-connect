@@ -18,8 +18,6 @@ class SuggestionService
         $this->connectionsService = $connectionsService;
     }
 
-
-
     private function getSuggestionsForVisitor(Page $page)
     {
         $pages = Page::query()
