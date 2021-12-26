@@ -305,5 +305,6 @@ Route::prefix('/{page:slug}')->group(function () {
     Route::post("/tags", "Profile\PageController@getTags");
 
     Route::post("/followings", "Profile\ConnectionsController@followings");
+    Route::post("/followings/tags", "Profile\ConnectionsController@followingTags");
     Route::post("/followers", "Profile\ConnectionsController@followers");
 });

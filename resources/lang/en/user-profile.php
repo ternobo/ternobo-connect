@@ -4,7 +4,8 @@ return [
     'crop-profile-title' => "Crop Your Avatar",
     'crop-cover-title' => "Crop Your Cover",
 
-    'connections' => "Connections",
+    'network' => "Network",
+    "tags" => "Tags",
     'mutual-friends' => "Mutual Friend|Mutual Friends",
     'joined' => "Joined",
     'nominated-by' => "Nominated by",
