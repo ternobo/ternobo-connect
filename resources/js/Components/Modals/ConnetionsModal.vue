@@ -1,70 +1,75 @@
 <template>
-	<b-modal v-model="showModal" @show="onShow" hide-footer :title="__.get('user-profile.connections')" size="md" :centered="true">
-		<tabs @selected="tabSelect" tabsClass="connections-tab" :centered="false" :compact="true">
-			<tab :name="__.get('user-profile.followings')" id="followings" :selected="current_tab == 'followings'">
-				<pages-list-loading style="min-height: 200px" v-if="loading"></pages-list-loading>
-				<div style="min-height: 200px" class="d-flex align-items-center justify-content-center loading" v-else-if="error">
-					<div class="d-flex flex-column justify-center align-items-center w-100 err">
-						<i @click="onShow" class="hover-dark text-muted material-icons-outlined">refresh</i>
-						<br />
-						<span class="text-muted">{{ __.get("messages.connection-error") }}</span>
-					</div>
-				</div>
-				<div class="d-flex justify-content-center w-100 py-4" v-else-if="connections.length < 1">
-					<span class="font-16 text-superlight">{{ __.get("messages.following-not-found") }}</span>
-				</div>
-				<div class="connections-list" v-else>
-					<div v-for="connection in connections" :key="'connections_' + connection.id" class="connection-item">
-						<wire-link :href="'/' + connection.following.slug" class="userinfo">
-							<lazy-image class="mb-0 profile-standard" imgClass="profile-standard" :src="connection.following.profile"></lazy-image>
-							<div class="page-name d-flex flex-column">
-								<strong> {{ connection.following.name }} <i v-if="connection.following.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
-								<span class="shortbio"> {{ connection.following.short_bio }} </span>
-							</div>
-						</wire-link>
-						<connetion-buttons :page="connection.following" :blocked="connection.following.blocked"></connetion-buttons>
-					</div>
-					<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMoreConnection"></infinite-loading>
-				</div>
-			</tab>
-			<tab :name="__.get('user-profile.followers')" id="followers" :selected="current_tab == 'followers'">
-				<pages-list-loading style="min-height: 200px" v-if="loading"></pages-list-loading>
-				<div style="min-height: 200px" class="d-flex align-items-center justify-content-center loading" v-else-if="error">
-					<div class="d-flex flex-column justify-center align-items-center w-100 err">
-						<i @click="onShow" class="hover-dark text-muted material-icons-outlined">refresh</i>
-						<br />
-						<span class="text-muted">{{ __.get("messages.connection-error") }}</span>
-					</div>
-				</div>
-				<div class="d-flex justify-content-center w-100 py-4" v-else-if="connections.length < 1">
-					<span class="font-16 text-superlight">{{ __.get("messages.following-not-found") }}</span>
-				</div>
-				<div class="connections-list" v-else>
-					<div v-for="connection in connections" :key="'connections_' + connection.id" class="connection-item">
-						<wire-link :href="'/' + connection.follower.slug" class="userinfo">
-							<lazy-image class="mb-0 profile-standard" imgClass="profile-standard" :src="connection.follower.profile"></lazy-image>
-							<div class="page-name d-flex flex-column">
-								<strong> {{ connection.follower.name }} <i v-if="connection.follower.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
-								<span class="shortbio"> {{ connection.follower.short_bio }} </span>
-							</div>
-						</wire-link>
-						<connetion-buttons :page="connection.follower" :blocked="connection.follower.blocked"></connetion-buttons>
-					</div>
-					<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMoreConnection"></infinite-loading>
-				</div>
-			</tab>
-			<template slot="custom-item">
-				<div class="pt-2">
-					<MaterialTextField v-model="search" class="d-flex align-items-center material--transparent material--xsm" input-class="pl-4" :placeholder="__.get('application.search')">
-						<div class="icon-end">
-							<loading-spinner style="width: 20px; height: 20px" v-if="searchLoading"></loading-spinner>
-							<i v-else class="material-icons">search</i>
+	<div>
+		<followed-tags-modal :page="page" :show.sync="showTags" @hide="showModal = true"></followed-tags-modal>
+		<b-modal v-model="showModal" @show="onShow" no-stacking hide-footer :title="__.get('user-profile.network')" size="md" :centered="true">
+			<div class="input-group-icon mb-4">
+				<input class="form-control fill rounded xsm-input" v-model="search" :placeholder="__.get('application.search')" />
+				<i class="material-icons-outlined">search</i>
+			</div>
+			<tabs @selected="tabSelect" tabsClass="connections-tab" :centered="false" :compact="true">
+				<tab :name="__.get('user-profile.followers')" id="followers" :selected="current_tab == 'followers'">
+					<pages-list-loading style="min-height: 200px" v-if="loading"></pages-list-loading>
+					<div style="min-height: 200px" class="d-flex align-items-center justify-content-center loading" v-else-if="error">
+						<div class="d-flex flex-column justify-center align-items-center w-100 err">
+							<i @click="onShow" class="hover-dark text-muted material-icons-outlined">refresh</i>
+							<br />
+							<span class="text-muted">{{ __.get("messages.connection-error") }}</span>
 						</div>
-					</MaterialTextField>
-				</div>
-			</template>
-		</tabs>
-	</b-modal>
+					</div>
+					<div class="d-flex justify-content-center w-100 py-4" v-else-if="connections.length < 1">
+						<span class="font-16 text-superlight">{{ __.get("messages.following-not-found") }}</span>
+					</div>
+					<div class="connections-list" v-else>
+						<div v-for="connection in connections" :key="'connections_' + connection.id" class="connection-item">
+							<wire-link :href="'/' + connection.follower.slug" class="userinfo">
+								<lazy-image class="mb-0 profile-standard" imgClass="profile-standard" :src="connection.follower.profile"></lazy-image>
+								<div class="page-name d-flex flex-column">
+									<strong> {{ connection.follower.name }} <i v-if="connection.follower.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+									<span class="shortbio"> {{ connection.follower.short_bio }} </span>
+								</div>
+							</wire-link>
+							<connetion-buttons :page="connection.follower" :blocked="connection.follower.blocked"></connetion-buttons>
+						</div>
+						<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMoreConnection"></infinite-loading>
+					</div>
+				</tab>
+				<tab :name="__.get('user-profile.followings')" id="followings" :selected="current_tab == 'followings'">
+					<pages-list-loading style="min-height: 200px" v-if="loading"></pages-list-loading>
+					<div style="min-height: 200px" class="d-flex align-items-center justify-content-center loading" v-else-if="error">
+						<div class="d-flex flex-column justify-center align-items-center w-100 err">
+							<i @click="onShow" class="hover-dark text-muted material-icons-outlined">refresh</i>
+							<br />
+							<span class="text-muted">{{ __.get("messages.connection-error") }}</span>
+						</div>
+					</div>
+					<div class="d-flex justify-content-center w-100 py-4" v-else-if="connections.length < 1">
+						<span class="font-16 text-superlight">{{ __.get("messages.following-not-found") }}</span>
+					</div>
+					<div class="connections-list" v-else>
+						<div class="connection-item clickable" @click="showTags = true">
+							<div>
+								<i class="material-icons me-3">tag</i>
+								<strong class="font-16 text-dark font-demibold">{{ __.get("user-profile.tags") }}</strong>
+							</div>
+
+							<i class="material-icons text-gray hover-dark">chevron_right</i>
+						</div>
+						<div v-for="connection in connections" :key="'connections_' + connection.id" class="connection-item">
+							<wire-link :href="'/' + connection.following.slug" class="userinfo">
+								<lazy-image class="mb-0 profile-standard" imgClass="profile-standard" :src="connection.following.profile"></lazy-image>
+								<div class="page-name d-flex flex-column">
+									<strong> {{ connection.following.name }} <i v-if="connection.following.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+									<span class="shortbio"> {{ connection.following.short_bio }} </span>
+								</div>
+							</wire-link>
+							<connetion-buttons :page="connection.following" :blocked="connection.following.blocked"></connetion-buttons>
+						</div>
+						<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMoreConnection"></infinite-loading>
+					</div>
+				</tab>
+			</tabs>
+		</b-modal>
+	</div>
 </template>
 
 <script>
@@ -77,7 +82,7 @@ import LoadingSpinner from "../LoadingSpinner.vue";
 import FollowButton from "../buttons/FollowButton.vue";
 import { mapState } from "vuex";
 import PagesListLoading from "../Skeletons/PagesListLoading.vue";
-import ConnetionButtons from "../buttons/ConnetionButtons.vue";
+import FollowedTagsModal from "./FollowedTagsModal.vue";
 export default {
 	mixins: [ModalMixin],
 	name: "ConnetionsModal",
@@ -181,7 +186,7 @@ export default {
 	props: ["page"],
 	data() {
 		return {
-			current_tab: "followings",
+			current_tab: "followers",
 			total: 0,
 			error: false,
 			connections: [],
@@ -195,6 +200,7 @@ export default {
 			cancelToken: undefined,
 			searchLoading: false,
 			cancelSource: null,
+			showTags: false,
 		};
 	},
 	components: {
@@ -204,7 +210,7 @@ export default {
 		LoadingSpinner,
 		FollowButton,
 		PagesListLoading,
-		ConnetionButtons,
+		FollowedTagsModal,
 	},
 };
 </script>

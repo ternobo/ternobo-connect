@@ -21,3 +21,14 @@
         box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.12);
     }
 }
+
+.communityTag {
+    background: linear-gradient(135deg, #0094FF 22.26%, #C852FF 68.57%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    line-height: 20px;
+}
