@@ -141,9 +141,9 @@ class ConnectionsController extends Controller
         if ($request->filled("q")) {
             $followings = $followings->whereHas("tag", function ($query) use ($request) {
                 $query->where('name', 'like', "%$request->q%");
-            })->paginate(20)->appends("q", $request->q)->toArray();
+            })->paginate(5)->appends("q", $request->q)->toArray();
         } else {
-            $followings = $followings->paginate()->toArray();
+            $followings = $followings->paginate(5)->toArray();
         }
 
         if (Auth::guest() || $page->user_id != Auth::user()->id) {
