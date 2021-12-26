@@ -4,7 +4,8 @@ return [
     'crop-profile-title' => "برش تصویر پروفایل",
     'crop-cover-title' => "برش تصویر کاور",
 
-    'connections' => "شبکه",
+    'network' => "شبکه",
+    "tags" => "هشتگ‌ها",
     'mutual-friends' => "دوستان مشترک",
     'joined' => "ملحق شده در",
     'nominated-by' => "دعوت شده توسط",

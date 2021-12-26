@@ -21,6 +21,7 @@ class Following extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $with = ["page"];
     /**
      * return the following user
      *
@@ -30,6 +31,11 @@ class Following extends Model
     public function page()
     {
         return $this->belongsTo("App\Models\Page", "following")->with("user");
+    }
+
+    public function tag()
+    {
+        return $this->belongsTo("App\Models\Tag", "following");
     }
 
     public function follower()
@@ -50,10 +56,17 @@ class Following extends Model
     public function toArray()
     {
         $array = parent::toArray();
-        $array['follower'] = $this->follower;
-        if ($this->page) {
-            $array['following'] = $this->page;
+        $array['follower'] = $this->follower->toArray();
+        $array['following_id'] = $array['following'];
+
+        if (isset($array['page']) && $array['type'] == 'user') {
+            $array['following'] = $array['page'];
+            unset($array['page']);
+        } elseif (isset($array['tag']) && $array['type'] == 'tag') {
+            $array['following'] = $array['tag'];
+            unset($array['tag']);
         }
+
         return $array;
     }
 }

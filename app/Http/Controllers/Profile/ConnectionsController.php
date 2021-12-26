@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Models\CommunityTag;
 use App\Models\Connection;
 use App\Models\Following;
 use App\Models\Notification;
@@ -129,6 +130,40 @@ class ConnectionsController extends Controller
         } elseif ($page->user_id != Auth::user()->id) {
             unset($followings['total']);
         }
+        return response()->json(['result' => true, "connections" => $followings]);
+    }
+
+    public function followingTags($page, Request $request)
+    {
+        $page = Page::query()->where("slug", $page)->firstOrFail();
+        $followings = Following::tags()->where("page_id", $page->id)->with("tag");
+
+        if ($request->filled("q")) {
+            $followings = $followings->whereHas("tag", function ($query) use ($request) {
+                $query->where('name', 'like', "%$request->q%");
+            })->paginate(20)->appends("q", $request->q)->toArray();
+        } else {
+            $followings = $followings->paginate()->toArray();
+        }
+
+        if (Auth::guest() || $page->user_id != Auth::user()->id) {
+            unset($followings['total']);
+        }
+
+        $followings['data'] = collect($followings['data'])->map(function ($item) {
+            $item['following']['tag'] = $item['following']['name'];
+            $item['following']['is_community'] = false;
+            $community = CommunityTag::query()->where("tag_id", $item['following']['id'])->first();
+            if ($community instanceof CommunityTag) {
+                $community = $community->toArray();
+                $community['is_community'] = true;
+                $item['following'] = $community;
+            }
+            $item['following']['is_followed'] = Ternobo::currentPage() ? Following::tags()->where("page_id", Ternobo::currentPage()->id)->where("following", $item['following_id'])->exists() : false;
+
+            return $item;
+        });
+
         return response()->json(['result' => true, "connections" => $followings]);
     }
 

@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\CommunityManagement;
 
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Admin;
+use App\Http\Requests\BaseRequest;
 
-class UpdateCommunityTagRequest extends BaseRequest
+class TranslationRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,12 +25,9 @@ class UpdateCommunityTagRequest extends BaseRequest
      */
     public function rules()
     {
-        $id = ($this->route()->parameter("community"));
         return [
-            // Community Tag
-            "tag" => ['required', "unique:community_tags,name,$id"],
-            "icon" => ['nullable', "mimes:png,jpg"],
-            "cover" => ['nullable', "mimes:png,jpg"],
+            "locale" => ['required'],
+            "tag" => ["required", "exists:community_tags,name"]
         ];
     }
 }

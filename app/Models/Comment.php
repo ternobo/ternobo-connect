@@ -120,6 +120,9 @@ class Comment extends Model
         $data = parent::toArray();
         $data['is_liked'] = false;
         $data['tip_amount'] = DB::selectOne("SELECT SUM(`amount`) as amount FROM `tips` where user_id= ? and post_id= ?", [$data['page']["user_id"], $data["post_id"]])->amount;
+        if (isset($data["likes_count"])) {
+            unset($data["likes_count"]);
+        }
         if (Auth::check()) {
             if ($this->likes != null) {
                 $data['liked_by'] = $this->getLikedBy();

@@ -88,6 +88,14 @@
                     color: $dark;
                     font-size: $text-sm;
 
+                    a {
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        max-width: 140px;
+                    }
+
+
                     @media screen and (max-width: $sm-size) {
                         font-size: $text-xsm;
                     }

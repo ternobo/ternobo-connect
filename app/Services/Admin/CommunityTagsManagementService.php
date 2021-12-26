@@ -8,6 +8,8 @@ use App\Services\Content\CommunityTagService;
 use App\Models\CommunityTag;
 use App\Models\CommunityTranslation;
 use App\Models\Tag;
+use App\Utils\Uploader;
+use Illuminate\Support\Facades\Storage;
 
 class CommunityTagsManagementService extends CommunityTagService
 {
@@ -43,12 +45,36 @@ class CommunityTagsManagementService extends CommunityTagService
         ]);
     }
 
+
+    public function getCommunityTagTranslations(string $tag)
+    {
+        return CommunityTranslation::query()
+            ->where("tag", $tag)
+            ->get();
+    }
+
     public function deleteCommunityTagTranslation(string $tag, string $locale)
     {
         return CommunityTranslation::query()
             ->where("tag", $tag)
             ->where("locale", $locale)
             ->delete();
+    }
+
+    public function updateCommunityTag($id, array $data)
+    {
+        $community = CommunityTag::query()->where("id", $id)->first();
+        if (isset($data['icon'])) {
+            $data['icon'] =  Uploader::resizeIcon($data['icon']->store("media"));
+            unlink(Storage::path($community->icon));
+        }
+        if (isset($data['cover'])) {
+            $data['cover'] =  Uploader::resizeCover($data['cover']->store("media"));
+            if ($community->cover != "images/cover.jpg") {
+                unlink(Storage::path($community->cover));
+            }
+        }
+        return $community->update($data);
     }
 
     /**

@@ -48,6 +48,7 @@ return [
     'recover-code' => "Recover Codes|Recover Code",
     'male' => "Male",
     'female' => "Female",
+    'other' => "Other",
     'gender' => "Gender",
     'first-name' => "First Name",
     'last-name' => "Last Name",

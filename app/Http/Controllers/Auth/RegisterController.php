@@ -51,7 +51,7 @@ class RegisterController extends Controller
         $womanprofile = "/images/woman-profile.png";
         $manprofile = "/images/man-profile.png";
 
-        $profile = $request->filled("profile") ? Uploader::uplaodProfile(
+        $profile = $request->hasFile("profile") ? Uploader::uplaodProfile(
             $request->profile->store("profiles"),
             (object)$request->sizes
         ) : ($request->gender == '1' ? $womanprofile : $manprofile);
