@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<followed-tags-modal :page="page" :show.sync="showTags" @hide="showModal = true"></followed-tags-modal>
-		<b-modal v-model="showModal" @show="onShow" no-stacking hide-footer :title="__.get('user-profile.network')" size="md" :centered="true">
+		<b-modal v-model="showModal" @show="onShow" :modal-class="{ 'opacity-0': showTags }" hide-footer :title="__.get('user-profile.network')" size="md" :centered="true">
 			<div class="input-group-icon mb-4">
 				<input class="form-control fill rounded xsm-input" v-model="search" :placeholder="__.get('application.search')" />
 				<i class="material-icons-outlined">search</i>
