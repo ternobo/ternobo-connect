@@ -100,15 +100,24 @@ export default {
 				})
 				.then(() => (this.loading = false));
 		},
-		loadMoreConnection() {
-			axios.post(this.next_page_url, { q: this.search }).then((response) => {
-				if (response.data.result) {
-					this.connections = this.connections.concat(response.data.connections.data);
-					this.next_page_url = response.data.connections.next_page_url;
-				} else {
-					this.error = true;
-				}
-			});
+		loadMoreConnection($state) {
+			axios
+				.post(this.next_page_url, { q: this.search })
+				.then((response) => {
+					if (response.data.result) {
+						this.connections = this.connections.concat(response.data.connections.data);
+						this.next_page_url = response.data.connections.next_page_url;
+						$state.loaded();
+					} else {
+						this.error = true;
+						$state.complete();
+					}
+				})
+				.catch((err) => {
+					$state.error();
+					console.error(err);
+				})
+				.then(() => $state.complete());
 		},
 	},
 };

@@ -12,13 +12,18 @@
 				<connetion-buttons :page="connection.following" :blocked="connection.following.blocked"></connetion-buttons>
 			</slot>
 		</div>
-		<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="$emit('loadMore')"></infinite-loading>
+		<infinite-loading v-if="this.next_page_url != null" spinner="spiral" @infinite="loadMore"></infinite-loading>
 	</div>
 </template>
 
 <script>
 export default {
 	props: ["connections", "next_page_url"],
+	methods: {
+		loadMore($state) {
+			this.$emit("loadMore", $state);
+		},
+	},
 };
 </script>
 
