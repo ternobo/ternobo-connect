@@ -110,14 +110,13 @@ export default {
 						$state.loaded();
 					} else {
 						this.error = true;
-						$state.complete();
+						$state.error();
 					}
 				})
 				.catch((err) => {
 					$state.error();
 					console.error(err);
-				})
-				.then(() => $state.complete());
+				});
 		},
 	},
 };
