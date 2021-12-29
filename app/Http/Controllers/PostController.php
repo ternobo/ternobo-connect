@@ -237,7 +237,7 @@ class PostController extends Controller
 
 
         $post = $post->findOrFail($post_id);
-
+        SEOMeta::addMeta("robots", "noindex");
         $page = $post->page;
         SEOMeta::addKeyword(['محتوای ' . $page->name, $page->name, $page->user->first_name, $page->user->last_name]);
         $textItem = collect($post->slides[0]->content)->filter(function ($item) {
