@@ -62,7 +62,7 @@ export default {
 		return {
 			showFullText: false,
 
-			text: null,
+			text: "",
 			leftCharacter: 2500,
 			progress: 0,
 		};

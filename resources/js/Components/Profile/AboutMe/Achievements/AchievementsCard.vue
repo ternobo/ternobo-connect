@@ -18,15 +18,15 @@
 				></DropdownBtn>
 			</div>
 
-			<LanguagesList :value="this.achievements.langs" ref="langs" :edit="edit" :page="page"></LanguagesList>
-			<ProjectsList :value="this.achievements.projects" ref="projects" :edit="edit" :page="page"></ProjectsList>
-			<PublishList :value="this.achievements.publishs" ref="publishs" :edit="edit" :page="page"></PublishList>
-			<InventionsList :value="this.achievements.inventions" ref="inventions" :edit="edit" :page="page"></InventionsList>
-			<CoursesList :value="this.achievements.courses" ref="courses" :edit="edit" :page="page"></CoursesList>
-			<AwardsList :value="this.achievements.awards" ref="awards" :edit="edit" :page="page"></AwardsList>
-			<TestsList :value="this.achievements.tests" ref="tests" :edit="edit" :page="page"></TestsList>
+			<LanguagesList :value="this.achievements?.langs" ref="langs" :edit="edit" :page="page"></LanguagesList>
+			<ProjectsList :value="this.achievements?.projects" ref="projects" :edit="edit" :page="page"></ProjectsList>
+			<PublishList :value="this.achievements?.publishs" ref="publishs" :edit="edit" :page="page"></PublishList>
+			<InventionsList :value="this.achievements?.inventions" ref="inventions" :edit="edit" :page="page"></InventionsList>
+			<CoursesList :value="this.achievements?.courses" ref="courses" :edit="edit" :page="page"></CoursesList>
+			<AwardsList :value="this.achievements?.awards" ref="awards" :edit="edit" :page="page"></AwardsList>
+			<TestsList :value="this.achievements?.tests" ref="tests" :edit="edit" :page="page"></TestsList>
 
-			<div class="w-100 text-center" v-if="this.achievements.langs < 1 && this.achievements.projects < 1 && this.achievements.publishs < 1 && this.achievements.awards < 1 && this.achievements.courses < 1 && this.achievements.inventions < 1 && this.achievements.tests < 1">
+			<div class="w-100 text-center" v-if="this.achievements?.langs < 1 && this.achievements?.projects < 1 && this.achievements?.publishs < 1 && this.achievements?.awards < 1 && this.achievements?.courses < 1 && this.achievements?.inventions < 1 && this.achievements?.tests < 1">
 				<span class="font-16 text-superlight">{{ __.get("messages.no-achievement") }}</span>
 			</div>
 		</div>
@@ -68,37 +68,37 @@ export default {
 	methods: {
 		getData() {
 			return {
-				langs: this.$refs.langs.getData(),
-				projects: this.$refs.projects.getData(),
-				publishs: this.$refs.publishs.getData(),
-				inventions: this.$refs.inventions.getData(),
-				courses: this.$refs.courses.getData(),
-				awards: this.$refs.awards.getData(),
-				tests: this.$refs.tests.getData(),
+				langs: this.$refs.langs?.getData(),
+				projects: this.$refs.projects?.getData(),
+				publishs: this.$refs.publishs?.getData(),
+				inventions: this.$refs.inventions?.getData(),
+				courses: this.$refs.courses?.getData(),
+				awards: this.$refs.awards?.getData(),
+				tests: this.$refs.tests?.getData(),
 			};
 		},
 		addNew(item) {
 			switch (item) {
 				case 1:
-					this.$refs.langs.addLanguege();
+					this.$refs.langs?.addLanguege();
 					break;
 				case 2:
-					this.$refs.projects.addProject();
+					this.$refs.projects?.addProject();
 					break;
 				case 3:
-					this.$refs.publishs.addPublish();
+					this.$refs.publishs?.addPublish();
 					break;
 				case 4:
-					this.$refs.inventions.addInvention();
+					this.$refs.inventions?.addInvention();
 					break;
 				case 5:
-					this.$refs.courses.addCourse();
+					this.$refs.courses?.addCourse();
 					break;
 				case 6:
-					this.$refs.awards.addAward();
+					this.$refs.awards?.addAward();
 					break;
 				case 7:
-					this.$refs.tests.addTest();
+					this.$refs.tests?.addTest();
 					break;
 			}
 		},
