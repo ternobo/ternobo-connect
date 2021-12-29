@@ -92,7 +92,10 @@
                         text-overflow: ellipsis;
                         overflow: hidden;
                         white-space: nowrap;
-                        max-width: 140px;
+
+                        &:nth-child(3) {
+                            max-width: 140px;
+                        }
                     }
 
 
