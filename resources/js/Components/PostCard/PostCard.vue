@@ -58,7 +58,7 @@
 				</wire-link>
 				<div v-if="post_data.mutual_likes.length > 1">
 					<span v-if="post_data.mutual_likes.length == 2">{{ __.get("content/posts.and") }}</span>
-					<wire-link v-if="post_data.mutual_likes[1]" :href="'/' + post_data.mutual_likes[0].page.slug" class="text-dark hover-dark">
+					<wire-link v-if="post_data.mutual_likes[1]" :href="'/' + post_data.mutual_likes[1].page.slug" class="text-dark hover-dark">
 						<strong class="text-gray-medium-dark hover-dark">{{ post_data.mutual_likes[1].page.name }}</strong>
 					</wire-link>
 				</div>
