@@ -60,7 +60,7 @@ export default {
 		},
 	},
 	created() {
-		if (this.value != null) {
+		if (this.value) {
 			this.languages = this.value;
 		}
 	},
