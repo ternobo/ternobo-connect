@@ -294,7 +294,7 @@ class ProfileController extends Controller
 
         $aboutData = AboutData::query()->where("page_id", $page->id)->firstOrNew();
         $aboutData->page_id = $page->id;
-        $aboutData->data = json_encode($data);
+        $aboutData->data = $data;
         return response()->json(["result" => $aboutData->save()]);
 
         /**
