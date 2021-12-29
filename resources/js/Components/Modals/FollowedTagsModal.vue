@@ -11,7 +11,7 @@
 			<div class="d-flex justify-content-center w-100 py-4" v-else-if="connections.length < 1">
 				<span class="font-16 text-superlight">{{ __.get("messages.following-not-found") }}</span>
 			</div>
-			<connections-list v-else :connections="connections" :next_page_url="next_page_url" :loadMoreConnection="loadMoreConnection">
+			<connections-list v-else :connections="connections" :next_page_url="next_page_url" @loadMore="loadMoreConnection">
 				<template v-slot:default="{ connection }">
 					<wire-link :href="`/tags/${connection.following.tag}`" class="d-flex align-items-center">
 						<strong class="font-16" :class="{ communityTag: connection.following.is_community }"> #{{ connection.following.tag }} </strong>
@@ -100,7 +100,24 @@ export default {
 				})
 				.then(() => (this.loading = false));
 		},
-		loadMoreConnection() {},
+		loadMoreConnection($state) {
+			axios
+				.post(this.next_page_url, { q: this.search })
+				.then((response) => {
+					if (response.data.result) {
+						this.connections = this.connections.concat(response.data.connections.data);
+						this.next_page_url = response.data.connections.next_page_url;
+						$state.loaded();
+					} else {
+						this.error = true;
+						$state.error();
+					}
+				})
+				.catch((err) => {
+					$state.error();
+					console.error(err);
+				});
+		},
 	},
 };
 </script>

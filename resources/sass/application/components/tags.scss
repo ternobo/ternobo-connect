@@ -33,9 +33,12 @@
     }
 
     .community-icon {
-        height: 33px;
-        width: 33px;
+        height: 44px;
+        width: 44px;
         margin-#{$end}: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         >img {
             height: 33px;

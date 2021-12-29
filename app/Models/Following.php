@@ -56,9 +56,12 @@ class Following extends Model
     public function toArray()
     {
         $array = parent::toArray();
-        $array['follower'] = $this->follower->toArray();
-        $array['following_id'] = $array['following'];
-
+        if (isset($this->follower)) {
+            $array['follower'] = $this->follower->toArray();
+        }
+        if (isset($array['following'])) {
+            $array['following_id'] = $array['following'];
+        }
         if (isset($array['page']) && $array['type'] == 'user') {
             $array['following'] = $array['page'];
             unset($array['page']);
