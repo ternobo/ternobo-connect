@@ -40,18 +40,22 @@ export default {
 			showFloat: false,
 
 			timeout: null,
+			hideTimeout: null,
 		};
 	},
 
 	methods: {
 		onMouseEnter(e) {
+			clearTimeout(this.hideTimeout);
 			this.timeout = setTimeout(() => {
 				this.showFloat = true;
 			}, 500);
 		},
 		onMouseLeave(e) {
 			clearTimeout(this.timeout);
-			this.showFloat = false;
+			this.hideTimeout = setTimeout(() => {
+				this.showFloat = false;
+			}, 300);
 		},
 	},
 };
