@@ -36,6 +36,9 @@ export default {
 			required: true,
 		},
 	},
+	mounted() {
+		this.isFollowed = this.page.is_followed;
+	},
 	components: {
 		FollowButton,
 		ProfilePeeking,
