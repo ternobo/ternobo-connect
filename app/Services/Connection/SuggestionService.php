@@ -6,6 +6,8 @@ use App\Models\CommunityTag;
 use App\Models\Following;
 use App\Models\Page;
 use App\Models\User;
+use App\Ternobo;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class SuggestionService
@@ -48,17 +50,26 @@ class SuggestionService
     public function getSuggestionsBaseOnPage(Page $page)
     {
         $randomFollowingIds = collect(DB::select("SELECT `page_id` FROM `followings` WHERE `following` = ? ORDER BY RAND() LIMIT 3", [$page->id]))->pluck("page_id");
-        return collect(Page::query()
+        $communityTags = CommunityTag::query()
+            ->orderByRaw("RAND()")
+            ->limit(1)
+            ->get();
+
+        return Page::query()
             ->whereIn("id", $randomFollowingIds)
             ->where("id", "!=", $page->id)
             ->orderByRaw("RAND()")
             ->limit(3)
             ->get()
-            ->toArray())
+            ->merge($communityTags)
             ->map(function ($item) {
-                $item['type'] = "page";
+                $item['type'] = $item instanceof Page ? "page" : "tag";
+                if ($item['type'] && Auth::check()) {
+                    $item['is_followed'] = Ternobo::currentPage() ? Following::tags()->where("page_id", Ternobo::currentPage()->id)->where("following", $item['id'])->exists() : false;
+                }
                 return $item;
-            });
+            })
+            ->shuffle();
     }
 
     private function getSuggestionsForUser(Page $page)
