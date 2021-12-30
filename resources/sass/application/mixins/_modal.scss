@@ -53,7 +53,8 @@
             .close {
                 font-family: "Material Icons";
                 position: absolute;
-                right: 1.25rem;
+                #{$end}: 1.25rem;
+                top: 1.25rem;
                 padding: 0.25rem;
                 @extend .btn;
                 @extend .btn-text;
