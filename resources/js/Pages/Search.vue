@@ -9,7 +9,7 @@
 						<div class="col-md-6 pb-3" v-for="(page, index) in data" :key="page.id + '_index_' + index">
 							<div class="card">
 								<div class="card-body">
-									<profile-peeking position="bottom" class="w-100 d-block p-0" :page="page"></profile-peeking>
+									<profile-peeking :showBadges="true" position="bottom" class="w-100 d-block p-0" :page="page"></profile-peeking>
 								</div>
 							</div>
 						</div>
