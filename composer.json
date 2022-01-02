@@ -22,7 +22,7 @@
         }
     },
     "require": {
-        "php": "^7.3",
+        "php": "^8.0",
         "ext-json": "*",
         "artesaos/seotools": "^0.19.0",
         "bacon/bacon-qr-code": "^2.0",
