@@ -22,6 +22,3 @@ export default {
 	props: ["page"],
 };
 </script>
-
-<style>
-</style>

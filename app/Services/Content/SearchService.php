@@ -35,7 +35,7 @@ class SearchService extends RestfulService
     public function searchForPages($search)
     {
         $querySearch = $this->generateSearchQeury(explode(" ", $search));
-        return BaseResource::collection(Page::query()
+        return Page::query()
             ->leftJoin("skills", "skills.user_id", "pages.user_id")
             ->selectRaw("MATCH (pages.name,short_bio,about,slug,location) AGAINST(? IN BOOLEAN MODE) as score, pages.*", [$querySearch])
             ->where(function ($query) use ($search, $querySearch) {
@@ -45,37 +45,33 @@ class SearchService extends RestfulService
             ->where("visible", true)
             ->orderBy("score")
             ->distinct("pages.id")
-            ->paginate(20))
-            ->response()
-            ->getData();
+            ->paginate(20);
     }
 
     public function searchForContent($search)
     {
         $querySearch = $this->generateSearchQeury(explode(" ", $search));
-        return BaseResource::collection(Post::with(["page", "slides.content" => function ($query) use ($querySearch) {
+        return Post::with(["page", "slides.content" => function ($query) use ($querySearch) {
             return $query->selectRaw("slide_blocks.*, MATCH (`content`) AGAINST(? IN BOOLEAN MODE) as score", [$querySearch])
                 ->orderBy("score", "DESC");
         }, "mutualLikes", "category"])
             ->selectRaw("MATCH (`title`, `text`) AGAINST(? IN BOOLEAN MODE) as score, posts.*", [$querySearch])
-            ->whereRaw("MATCH (`title`, `text`) AGAINST(? IN BOOLEAN MODE) > 0", [$querySearch])
-            ->orWhereHas("slides.content", function ($query) use ($querySearch) {
-                return $query->whereRaw("MATCH (`content`) AGAINST(? IN BOOLEAN MODE) > 0", [$querySearch]);
+            ->where(function ($query) use ($search, $querySearch) {
+                return $query->whereRaw("MATCH (`title`, `text`) AGAINST(? IN BOOLEAN MODE) > 0", [$querySearch])
+                    ->orWhereHas("slides.content", function ($query) use ($querySearch) {
+                        return $query->whereRaw("MATCH (`content`) AGAINST(? IN BOOLEAN MODE) > 0", [$querySearch]);
+                    })
+                    ->orWhereJsonContains("tags", $search);
             })
-            ->orWhereJsonContains("tags", $search)
             ->distinct("posts.id")
-            ->paginate(20))
-            ->response()
-            ->getData();
+            ->paginate(20);
     }
 
     public function searchForTags($search)
     {
-        return TagSearchResource::collection(Tag::query()
+        return Tag::query()
             ->where("name", "LIKE", "%$search%")
-            ->paginate(20))
-            ->response()
-            ->getData();
+            ->paginate(20);
     }
 
     public function suggestForSearchAutoComplete($search)

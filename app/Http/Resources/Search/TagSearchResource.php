@@ -3,6 +3,8 @@
 namespace App\Http\Resources\Search;
 
 use App\Models\CommunityTag;
+use App\Models\Following;
+use App\Ternobo;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TagSearchResource extends JsonResource
@@ -20,6 +22,7 @@ class TagSearchResource extends JsonResource
             "id" => $this->id,
             "tag" => $this->name,
             "is_community_tag" => $community instanceof CommunityTag,
+            "is_followed" => Ternobo::currentPage() ? Following::tags()->where("page_id", Ternobo::currentPage()->id)->where("following", $this->id)->exists() : false,
             "community" => $community,
         ];
     }

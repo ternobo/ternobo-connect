@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Content\SearchRequest;
+use App\Http\Resources\BaseResource;
+use App\Http\Resources\Search\TagSearchResource;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\SearchSuggestion;
@@ -25,7 +27,7 @@ class SearchController extends Controller
         $this->suggestionService = $suggestionService;
     }
 
-    private function search(SearchRequest $request)
+    public function search(SearchRequest $request)
     {
         $invalid = ['*', ".*", "+", "@"];
         if (in_array($request->q, $invalid)) {
@@ -42,11 +44,11 @@ class SearchController extends Controller
         $searchType = $request->input("type", "user");
 
         if ($searchType == "content") {
-            $results = $this->service->searchForContent($search);
+            $results = BaseResource::collection($this->service->searchForContent($search)->appends(["q" => $search]))->response()->getData();
         } elseif ($searchType == "tags") {
-            $results = $this->service->searchForTags($search);
+            $results = TagSearchResource::collection($this->service->searchForTags($search)->appends(["q" => $search]))->response()->getData();
         } else {
-            $results = $this->service->searchForPages($search);
+            $results = BaseResource::collection($this->service->searchForPages($search)->appends(["q" => $search]))->response()->getData();
 
             // Seo for users Search
             foreach ($results->data as $user) {
@@ -60,7 +62,7 @@ class SearchController extends Controller
             SearchSuggestion::query()->firstOrCreate(array("name" => $search));
         }
 
-        return $results;
+        return $this->generateResponse(true, $results);
     }
 
     public function index(SearchRequest $request)
@@ -72,7 +74,6 @@ class SearchController extends Controller
             }
 
             return TernoboWire::render("Search", [
-                "results" => $this->search($request),
                 "search" => $request->q,
                 "content" => $request->input("type")
             ]);
