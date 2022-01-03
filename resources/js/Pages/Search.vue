@@ -89,7 +89,7 @@ export default {
 			if (this.total == 0 && !this.firstLoad) {
 				if (this.currentTab == "page") {
 					this.currentTab = "content";
-				} else if (this.current == "content") {
+				} else if (this.currentTab == "content") {
 					this.currentTab = "tags";
 					this.firstLoad = true;
 				}
