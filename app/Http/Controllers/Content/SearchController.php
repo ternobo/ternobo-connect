@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Content\SearchRequest;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\SearchSuggestion;
@@ -24,7 +25,7 @@ class SearchController extends Controller
         $this->suggestionService = $suggestionService;
     }
 
-    private function handleGetSearch(Request $request)
+    private function search(SearchRequest $request)
     {
         $invalid = ['*', ".*", "+", "@"];
         if (in_array($request->q, $invalid)) {
@@ -49,7 +50,7 @@ class SearchController extends Controller
 
             // Seo for users Search
             foreach ($results->data as $user) {
-                SEOTools::metatags()->addKeyword($user['name']);
+                SEOTools::metatags()->addKeyword($user->name);
                 SEOTools::addImages($user->profile);
             }
         }
@@ -62,7 +63,7 @@ class SearchController extends Controller
         return $results;
     }
 
-    public function search(Request $request)
+    public function index(SearchRequest $request)
     {
         if ($request->filled("q")) {
 
@@ -71,9 +72,9 @@ class SearchController extends Controller
             }
 
             return TernoboWire::render("Search", [
-                "results" => $this->handleGetSearch($request),
+                "results" => $this->search($request),
                 "search" => $request->q,
-                "content" => $request->input("type") == "content"
+                "content" => $request->input("type")
             ]);
         }
         return abort(404);
