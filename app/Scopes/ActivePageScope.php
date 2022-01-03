@@ -17,6 +17,6 @@ class ActivePageScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $builder->whereRelation("page.user", "active", true);
+        $builder->whereHas("page")->whereRelation("page.user", "active", true);
     }
 }

@@ -10,8 +10,8 @@
 					<img :src="shared.direction == 'rtl' ? '/images/logo-type-fa-mobile.svg' : '/images/logo-en-dark.svg'" height="24" />
 				</wire-link>
 
-				<form method="get" action="/search" ref="searchfield" class="searchfield d-flex">
-					<auto-complete class="search-field w-100" inputClass="rounded xsm-input" icon="search" v-model="searchVal" @suggestionclick="submitsearch" @search="submitsearch" required type="text" :suggestionPosition="17" name="q" :placeholder="__.get('application.searchq')" />
+				<form @submit="searchSubmit" method="get" action="javascript:;" ref="searchfield" class="searchfield d-flex">
+					<auto-complete class="search-field w-100" ref="searchInput" inputClass="rounded xsm-input" icon="search" v-model="searchVal" @suggestionclick="submitsearch" @search="submitsearch" required type="text" :suggestionPosition="17" name="q" :placeholder="__.get('application.searchq')" />
 					<div class="beta-badge">
 						<span class="me-2 text-nowrap">v 0.2.0</span>
 						<img src="/images/beta.svg" width="36" class="verical-middle" />
@@ -47,6 +47,10 @@ export default {
 		...mapState(["shared"]),
 	},
 	methods: {
+		searchSubmit() {
+			this.$store.state.ternoboWireApp.visit("/search?q=" + this.searchVal);
+			this.$refs.searchInput.focus = false;
+		},
 		submitsearch() {
 			if (this.searchVal.length > 0) this.$refs.searchfield.submit();
 		},

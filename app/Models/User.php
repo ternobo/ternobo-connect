@@ -18,15 +18,7 @@ use Ternobo\TernoboChat\Traits\CanChat;
 class User extends Authenticatable implements Messageable
 {
 
-    use CanChat;
-
-    use Notifiable;
-
-    use HasFactory;
-
-    use SoftDeletes;
-
-    use HasApiTokens;
+    use HasFactory, CanChat, HasApiTokens, Notifiable, SoftDeletes;
 
     protected $dates = ['deleted_at', 'created_at', 'updated_at'];
 
@@ -49,7 +41,6 @@ class User extends Authenticatable implements Messageable
         'nationalcode',
         "password",
         'is_verified',
-        "is_admin",
     ];
 
     /**

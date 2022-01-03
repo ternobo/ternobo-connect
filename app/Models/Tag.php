@@ -39,11 +39,4 @@ class Tag extends Model
     {
         return Post::query()->whereJsonContains("tags", $this->name)->count();
     }
-
-    public function toArray()
-    {
-        $data = parent::toArray();
-        $data['posts_count'] = $this->posts_count();
-        return $data;
-    }
 }
