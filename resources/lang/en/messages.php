@@ -47,7 +47,7 @@ return [
     'no-more-tip' => "There is no more tip",
     'no-notification' => "You don't have any notification",
     "no-more-result" => "There isn't more result",
-    'search-result-found' => "<b>:number</b> search results found for <b>:search</b>.",
+    'search-result-found' => "<b>:number</b> search result(s) found for <b>:search</b>.",
     "no-content-with-tag" => "No content has been published with this tag",
     "too-many-attempts" => "Too Many Attempts!",
     'reset-sms-success-message' => "The password recovery code has been sent to you",

@@ -50,7 +50,9 @@ require base_path("routes/file_access.php");
 
 Route::get("/", "IndexController@index")->name("welcome")->middleware("guest");
 Route::get("/set-language", "IndexController@setLanguage");
-Route::any("/search", "Content\SearchController@search");
+Route::any("/search", "Content\SearchController@index");
+Route::get("/search/get", "Content\SearchController@search");
+
 Route::get("/redirect", "RedirectController@redirect");
 
 /**

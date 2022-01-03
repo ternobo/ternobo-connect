@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
+require "api/v1/api_v1.php";
+
 Route::post("/admin/login", [AdminController::class, "login"]);
 
 Route::middleware(["auth:admin-api"])->prefix("/admin")->group(function () {
