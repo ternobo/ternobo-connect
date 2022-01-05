@@ -49,8 +49,12 @@ class SuggestionService
 
     public function getSuggestionsBaseOnPage(Page $page)
     {
-        $randomFollowingIds = collect(DB::select("SELECT `page_id` FROM `followings` WHERE `following` = ? and page_id != ? ORDER BY RAND() LIMIT 2", [$page->id, $page->id]))->pluck("page_id");
+        $randomFollowingIds = collect(DB::select("SELECT `page_id` FROM `followings` WHERE `following` = ? AND `type` = 'user' ORDER BY RAND() LIMIT 2", [$page->id]))->pluck("page_id");
+
+        $randomTagFollowingId = collect(DB::select("SELECT `page_id` FROM `followings` WHERE `following` = ? AND `type` = 'tag' ORDER BY RAND() LIMIT 2", [$page->id]))->pluck("page_id")->first();
+
         $communityTags = CommunityTag::query()
+            ->where("tag_id", $randomTagFollowingId)
             ->orderByRaw("RAND()")
             ->limit(1)
             ->get();
