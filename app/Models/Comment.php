@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\HasPage;
+use App\Ternobo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
@@ -148,7 +149,7 @@ class Comment extends Model
             $myConnection = Like::query()
                 ->join("pages", "likes.page_id", "=", "pages.id")
                 ->where("likes.comment_id", $this->id)
-                ->whereIn("pages.user_id", Auth::user()->getConnections())
+                ->whereIn("pages.id", Ternobo::currentPage()->followings->pluck("following"))
                 ->latest()
                 ->limit(2)
                 ->select(array("pages.name", "pages.user_id", "pages.slug", "likes.*"))

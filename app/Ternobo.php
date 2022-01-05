@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Page;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,7 @@ class Ternobo
     /**
      * @return App\Model\Page
      */
-    public static function currentPage()
+    public static function currentPage(): Page
     {
         return Auth::check() && Auth::user() instanceof User ? Auth::user()->personalPage : null;
     }
