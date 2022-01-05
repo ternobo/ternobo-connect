@@ -31,6 +31,6 @@ class ClearTagsJob implements ShouldQueue
      */
     public function handle()
     {
-        Tag::query()->whereDoesntHave("community")->whereDoesntHave("post")->delete();
+        Tag::query()->whereDoesntHave("community")->whereDoesntHave("posts")->delete();
     }
 }
