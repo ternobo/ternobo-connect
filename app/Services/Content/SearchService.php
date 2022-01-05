@@ -71,7 +71,9 @@ class SearchService extends RestfulService
     {
         return Tag::query()
             ->where("name", "LIKE", "%$search%")
-            ->whereHas("posts")
+            ->where(function ($query) {
+                return $query->whereHas("posts")->orWhereHas("community");
+            })
             ->paginate(20);
     }
 
