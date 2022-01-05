@@ -59,8 +59,14 @@ class CommunityTagService extends ServiceAccess
 
     public function getHashtagTopUsers($tag)
     {
-        $data = DB::select("select COUNT(page_id) as post_count, page_id from posts where json_contains(`tags`,'\"$tag\"') and deleted_at is NULL group by page_id order by post_count DESC limit 5");
-        $pages_id = array_column($data, "page_id");
+        // DB::select("SELECT COUNT(page_id) as `post_count`, `page_id` from `posts` where json_contains(`tags`,'\"$tag\"') and deleted_at is NULL group by page_id order by post_count DESC limit 5")
+        $pages_id = Post::query()
+            ->selectRaw("COUNT(`page_id`) as `post_count`, `page_id`")
+            ->whereRelation("tags", "name", "=", $tag)
+            ->groupBy("page_id")
+            ->orderBy("post_count")
+            ->get()
+            ->pluck("page_id");
         return Page::query()->whereIn("id", $pages_id)->get();
     }
 }
