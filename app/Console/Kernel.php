@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Jobs\CleanDatabase;
+use App\Jobs\ClearTagsJob;
 use App\Jobs\FreshPasswordResets;
 use App\Jobs\FreshVerifications;
 use App\Jobs\GitPull;
@@ -34,6 +35,7 @@ class Kernel extends ConsoleKernel
         $schedule->job(new FreshPasswordResets())->daily();
         $schedule->job(new FreshVerifications())->everyFourHours();
         $schedule->job(new GitPull())->twiceDaily();
+        $schedule->job(new ClearTagsJob())->everyThreeHours();
     }
 
     /**

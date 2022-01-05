@@ -10,7 +10,7 @@
 
 		<!-- Community Tag Suggestion !-->
 		<wire-link :href="`/tags/${page.tag}`" class="community-tag-suggestion d-flex" v-if="type == 'tag'">
-			<lazy-image :loadingColor="skeletonOptions.profileColor" class="community-icon" :src="page.icon" />
+			<lazy-image :loadingColor="skeletonOptions.profileColor" class="community-icon" :src="assetURL(page.icon)" />
 			<div class="flex-column d-flex">
 				<strong class="tag-name">
 					<span> {{ page.name }}</span>
