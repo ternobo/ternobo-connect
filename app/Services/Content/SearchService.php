@@ -74,7 +74,9 @@ class SearchService extends RestfulService
             ->where(function ($query) {
                 return $query->whereHas("posts")->orWhereHas("community");
             })
-            ->orWhereRelation("community", "name", "LIKE", "%$search%")
+            ->orWhereHas("community", function ($query) use ($search) {
+                return $query->whereRelation("transactions", "translation", "LIKE", "%$search%");
+            })
             ->paginate(20);
     }
 
