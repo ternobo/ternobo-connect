@@ -48,6 +48,11 @@ class Following extends Model
         return static::withoutGlobalScope(FollowingUsersScope::class)->where("type", "tag");
     }
 
+    public static function withTags()
+    {
+        return static::withoutGlobalScope(FollowingUsersScope::class);
+    }
+
     protected static function booted()
     {
         static::addGlobalScope(new FollowingUsersScope);

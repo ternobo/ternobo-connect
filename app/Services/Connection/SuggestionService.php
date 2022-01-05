@@ -54,10 +54,12 @@ class SuggestionService
         $randomTagFollowingId = collect(DB::select("SELECT `following` FROM `followings` WHERE `page_id` = ? AND `type` = 'tag' ORDER BY RAND() LIMIT 2", [$page->id]))->pluck("following")->first();
 
         $communityTags = CommunityTag::query()
+            ->with(["tag"])
             ->where("tag_id", $randomTagFollowingId)
             ->orderByRaw("RAND()")
             ->limit(1)
-            ->get();
+            ->get()
+            ->pluck("tag");
 
         return Page::query()
             ->whereIn("id", $randomFollowingIds)
@@ -68,8 +70,9 @@ class SuggestionService
             ->merge($communityTags)
             ->map(function ($item) {
                 $item['type'] = $item instanceof Page ? "page" : "tag";
-                if ($item['type'] && Auth::check()) {
-                    $item['is_followed'] = Ternobo::currentPage() ? Following::tags()->where("page_id", Ternobo::currentPage()->id)->where("following", $item['id'])->exists() : false;
+                if (Auth::check()) {
+                    $item['is_followed'] = Ternobo::currentPage() ?
+                        Following::withTags()->where("page_id", Ternobo::currentPage()->id)->where("following", $item['id'])->exists() : false;
                 }
                 return $item;
             })
