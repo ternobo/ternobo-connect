@@ -58,8 +58,7 @@ class SuggestionService
             ->where("tag_id", $randomTagFollowingId)
             ->orderByRaw("RAND()")
             ->limit(1)
-            ->get()
-            ->pluck("tag");
+            ->get();
 
         return Page::query()
             ->whereIn("id", $randomFollowingIds)
@@ -72,7 +71,7 @@ class SuggestionService
                 $item['type'] = $item instanceof Page ? "page" : "tag";
                 if (Auth::check()) {
                     $item['is_followed'] = Ternobo::currentPage() ?
-                        Following::withTags()->where("page_id", Ternobo::currentPage()->id)->where("following", $item['id'])->exists() : false;
+                        Following::withTags()->where("page_id", Ternobo::currentPage()->id)->where("following", $item['type'] == "tag" ? $item['tag_id'] : $item['id'])->exists() : false;
                 }
                 return $item;
             })
