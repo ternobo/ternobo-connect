@@ -35,11 +35,11 @@ class TagsController extends Controller
         SEOTools::setCanonical(url("/tags/" . $name));
         SEOMeta::addKeyword([$name]);
 
-        $posts = Post::withRelations()
-            ->distinct("posts.id")
-            ->whereJsonContains('tags', $name)
-            ->paginate(10);
         $tag =  Tag::query()->where("name", $name)->first();
+
+        $posts = $tag->posts()
+            ->with(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"])
+            ->paginate(10);
 
         $followed = false;
         if ($tag instanceof Tag) {

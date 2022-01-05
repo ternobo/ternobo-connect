@@ -50,7 +50,7 @@ class FixOldPosts extends Command
             ]);
             $sort = 0;
 
-            $tags = (array) $post->tags;
+            $tags = $post->tags->pluck("name");
             $tagsHTML = "";
             foreach ($tags as $tag) {
                 $tagtext = str_replace(" ", "_", $tag);

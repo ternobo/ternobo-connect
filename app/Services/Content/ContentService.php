@@ -29,7 +29,7 @@ class ContentService
                 ->select(array("posts.*", "content_seens.created_at as seen_at"))
                 ->where(function ($query) use ($page, $user) {
                     $query->whereRaw("(posts.page_id IN (select following from followings WHERE page_id = '" . $page->id . "' ) or `posts`.`user_id` = '" . $user->id . "')")
-                        ->orWhereJsonContains("posts.tags", Following::query()->where("type", "tag")
+                        ->orWhereRelation("tags", "name", "IN", Following::query()->where("type", "tag")
                             ->orWhere("page_id", $page->id)->pluck("following"));
                 })
                 ->whereHas("page.user", function ($query) {

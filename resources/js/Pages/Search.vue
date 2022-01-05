@@ -87,12 +87,14 @@ export default {
 			this.total = info.total;
 
 			if (this.total == 0 && !this.firstLoad) {
-				this.firstLoad = true;
 				if (this.currentTab == "page") {
 					this.currentTab = "content";
-				} else if (this.current == "content") {
-					this.currentTab = "pages";
+				} else if (this.currentTab == "content") {
+					this.currentTab = "tags";
+					this.firstLoad = true;
 				}
+			} else {
+				this.firstLoad = true;
 			}
 		},
 	},

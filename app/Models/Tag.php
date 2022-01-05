@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Tag extends Model
 {
@@ -16,17 +17,15 @@ class Tag extends Model
         "updated_at"
     ];
 
-    public static function addTag($tags)
+    public static function addTag($tags): Collection
     {
-        $list = [];
+        $list = collect([]);
         foreach ($tags as $tag) {
-            if (!Tag::query()->where("name", $tag)->exists()) {
-                array_push($tags, Tag::create([
-                    'name' => $tag,
-                ]));
-            }
+            $list->add(Tag::query()->firstOrCreate([
+                'name' => $tag,
+            ]));
         }
-        return $list;
+        return $list->pluck("id");
     }
 
     public function community()
@@ -34,9 +33,8 @@ class Tag extends Model
         return $this->hasOne(CommunityTag::class);
     }
 
-
-    private function posts_count()
+    public function posts()
     {
-        return Post::query()->whereJsonContains("tags", $this->name)->count();
+        return $this->belongsToMany(Post::class);
     }
 }
