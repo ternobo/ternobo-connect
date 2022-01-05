@@ -46,13 +46,13 @@ class FixTags extends Command
         }
         $posts = Post::all();
         foreach ($posts as $post) {
-            $tags = $post->tags;
+            $tags = $post->tags->pluck("name");
             if ($tags != null) {
                 for ($i = 0; $i < count($tags); $i++) {
                     $tags[$i] = str_replace(" ", "_", $tags[$i]);
                 }
             }
-            $post->tags = $tags;
+            $post->tags()->sync(Tag::addTag("name", $tags));
             $post->save();
         }
         return 0;

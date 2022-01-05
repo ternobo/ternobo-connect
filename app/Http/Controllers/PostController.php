@@ -92,11 +92,10 @@ class PostController extends Controller
             if (!$draft) {
                 SocialMediaTools::callMentions($tagsAndMentions['mentions'], $post->id);
             }
-            $post->tags = $tagsAndMentions["tags"];
+            $post->tags()->sync(Tag::addTag($tagsAndMentions["tags"]));
             $post->save();
             $user->personalPage->addAction("post", $post->id);
-            $post->load(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
-            Tag::addTag($tagsAndMentions["tags"]);
+            $post->load(["page", "tags", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);;
             DB::commit();
             event(new PostShareEvent($post));
         } catch (\Throwable $th) {
@@ -329,9 +328,8 @@ class PostController extends Controller
             $post->deleteBlocks();
             $post->slides()->delete();
             $tags = $post->setContent($slides, $user, false, $this->pollService, $this->dom)['tags'];
-            $post->tags = $tags;
+            $post->tags()->sync(Tag::addTag($tags));
             $post->save();
-            Tag::addTag($tags);
             DB::commit();
             event(new PostShareEvent($post));
         } catch (\Throwable $th) {
@@ -339,7 +337,7 @@ class PostController extends Controller
             throw $th;
         }
         $post->fresh();
-        $post->load(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
+        $post->load(["page", "tags", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
 
         return response()->json(array("result" => true, "post" => $post));
     }

@@ -68,7 +68,7 @@ class CleanSearchSuggestions extends Command
             ->orWhereHas("content", function ($query) use ($search) {
                 $query->whereRaw("MATCH (`content`) AGAINST(? IN BOOLEAN MODE) > 0", [$search]);
             })
-            ->orWhereJsonContains("tags", $search)
+            ->orWhereRelation("tags", "name", "=", $search)
             ->orderBy("score")
             ->distinct("posts.id")
             ->count();

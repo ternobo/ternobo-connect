@@ -61,7 +61,7 @@ class SearchService extends RestfulService
                     ->orWhereHas("slides.content", function ($query) use ($querySearch) {
                         return $query->whereRaw("MATCH (`content`) AGAINST(? IN BOOLEAN MODE) > 0", [$querySearch]);
                     })
-                    ->orWhereJsonContains("tags", $search);
+                    ->orWhereRelation("tags", "name", "=", $search);
             })
             ->distinct("posts.id")
             ->paginate(20);
@@ -71,6 +71,7 @@ class SearchService extends RestfulService
     {
         return Tag::query()
             ->where("name", "LIKE", "%$search%")
+            ->whereHas("posts")
             ->paginate(20);
     }
 

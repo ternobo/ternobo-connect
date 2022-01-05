@@ -14,7 +14,7 @@ class DataExtractionService
 
     public function getPostsByHashtag(string $tag)
     {
-        return Post::withRelations()->whereJsonContains("tags", $tag)->get();
+        return Post::withRelations()->whereRelation("tags", "name", "=", $tag)->get();
     }
 
     public function getAllTags()
