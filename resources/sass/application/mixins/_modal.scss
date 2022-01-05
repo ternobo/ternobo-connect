@@ -10,6 +10,7 @@
 
         .close {
             #{$start}: 1.25rem;
+            top: unset !important;
         }
     }
 

@@ -130,6 +130,9 @@ TernoboApp.install = function (Vue, options) {
         return text.startsWith("https://") || text.startsWith("http://") || text.startsWith("//") ? text : `http://${text}`;
     }
 
+    Vue.prototype.assetURL = (text) => {
+        return text.startsWith("https://") || text.startsWith("http://") || text.startsWith("/") ? text : `/${text}`;
+    }
 
     const setup = function (vm) {
         Vue.prototype.toast = function (msessage, icon = 'error_outline', iconClass = 'text-warning') {
