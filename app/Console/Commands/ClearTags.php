@@ -38,6 +38,7 @@ class ClearTags extends Command
      */
     public function handle()
     {
-        return ClearTagsJob::dispatch();
+        ClearTagsJob::dispatch();
+        return 0;
     }
 }
