@@ -32,7 +32,7 @@ class CommunityController extends Controller
     public function show($communityTag)
     {
         $communityTag = CommunityTag::query()->findOrFail($communityTag);
-        $post_count = Post::query()->whereJsonContains("tags", $communityTag->tag->name)->count();
+        $post_count = Post::query()->whereRelation("tags", "name", "=", $communityTag->tag->name)->count();
         return $this->generateResponse(true, ['community' => $communityTag, "postCount" => $post_count]);
     }
 

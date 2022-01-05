@@ -43,7 +43,6 @@ class Post extends Model
     protected $guarded = ['id', "page_id"];
 
     protected $casts = [
-        'tags' => 'array',
         "media" => 'array',
         "can_tip" => "boolean",
         "visible" => "boolean"
@@ -53,13 +52,14 @@ class Post extends Model
         'user_id',
         'page_id',
         'title',
-        'tags',
         'type',
         'category_id',
         'media',
         "show",
         "can_tip",
     ];
+
+    protected $with = ['tags'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Builder
@@ -180,6 +180,7 @@ class Post extends Model
         $data = parent::toArray();
         $data['is_liked'] = false;
         $data['is_bookmarked'] = false;
+        $data['tags'] = isset($data['tags']) ? collect($data['tags'])->pluck("name") : [];
         if (Ternobo::isUserLogedIn()) {
             if ($this->likes != null) {
                 $current_page = json_decode(Cookie::get('ternobo_current_page')) !== null ? json_decode(Cookie::get('ternobo_current_page')) : Auth::user()->personalPage;
@@ -376,6 +377,11 @@ class Post extends Model
             }
         }
         return ['mentions' => $mentions, 'tags' => $tags];
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 
     public function publish()

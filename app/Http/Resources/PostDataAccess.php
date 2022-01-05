@@ -17,7 +17,7 @@ class PostDataAccess extends JsonResource
         return [
             "id" => $this->id,
             "user_id" => $this->user_id,
-            "tags" => $this->tags
+            "tags" => $this->tags->pluck("name")
         ];
     }
 }

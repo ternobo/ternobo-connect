@@ -10,6 +10,7 @@ use App\Models\Following;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\Report;
+use App\Models\Tag;
 use App\Models\Website;
 use App\Services\Connection\SuggestionService;
 use App\Services\ProfileService;
@@ -137,7 +138,7 @@ class PageController extends Controller
         $tags = [];
 
         foreach ($posts as $post) {
-            $postTags = $post->tags;
+            $postTags = $post->tags->pluck("name");
             $postTags = $postTags == null ? [] : $postTags;
             $tags = array_merge($tags, $postTags);
         }
@@ -153,24 +154,12 @@ class PageController extends Controller
         ]);
     }
 
+    /**
+     * @deprecated
+     */
     public function removeTags(Request $request)
     {
-        $tags = $request->tags;
-        foreach ($tags as $tag) {
-            $posts = Post::withRelations()->where("page_id", Auth::user()->personalPage->id)
-                ->whereJsonContains("tags", $tag)
-                ->get();
-            foreach ($posts as $post) {
-                $postTags = $post->tags;
-
-                $index = array_search($tag, $postTags);
-                if (!is_bool($index)) {
-                    unset($postTags[$index]);
-                }
-                $post->tags = json_encode(array_values($postTags));
-                $post->save();
-            }
-        }
+        // TODO
         return response()->json([
             "result" => true,
         ]);
@@ -187,9 +176,6 @@ class PageController extends Controller
                 ->whereHas("post", function ($query) use ($request) {
                     $category = $request->category;
                     $query->where("category_id", $category);
-                    if ($request->filled("tag")) {
-                        $query->whereJsonContains("tags", $request->tag);
-                    }
                 })
                 ->latest();
 
@@ -202,9 +188,6 @@ class PageController extends Controller
             $actions = Action::query()->where("page_id", $page->id)
                 ->with("post")
                 ->where("action", "post")
-                ->whereHas("post", function ($query) use ($request) {
-                    $query->whereJsonContains("tags", $request->tag);
-                })
                 ->latest();
 
             if (Auth::check()) {

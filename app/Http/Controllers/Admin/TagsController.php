@@ -19,7 +19,7 @@ class TagsController extends Controller
      */
     public function index()
     {
-        $tags = Tag::query()->select(['name'])->paginate();
+        $tags = Tag::query()->withCount("posts")->select(['name'])->paginate();
         return response()->json(["result" => true, "tags" => $tags]);
     }
 
@@ -46,18 +46,6 @@ class TagsController extends Controller
         }
         $tags = $request->tags;
         foreach ($tags as $tag) {
-            $posts = Post::withRelations()->whereJsonContains("tags", $tag)
-                ->get();
-            foreach ($posts as $post) {
-                $postTags = $post->tags;
-
-                $index = array_search($tag, $postTags);
-                if (!is_bool($index)) {
-                    unset($postTags[$index]);
-                }
-                $post->tags = json_encode(array_values($postTags));
-                $post->save();
-            }
             Tag::query()->where('name', $tag)->delete();
         }
         return response()->json([
