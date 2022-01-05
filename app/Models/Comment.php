@@ -142,42 +142,46 @@ class Comment extends Model
      */
     public function getLikedBy()
     {
-        $myConnection = Like::query()
-            ->join("pages", "likes.page_id", "=", "pages.id")
-            ->where("likes.comment_id", $this->id)
-            ->whereIn("pages.user_id", Auth::user()->getConnections())
-            ->latest()
-            ->limit(2)
-            ->select(array("pages.name", "pages.user_id", "pages.slug", "likes.*"))
-            ->distinct("page_id")
-            ->get();
-        $users = array();
-        $ids = array();
         $response = "";
-        if (count($myConnection) > 0) {
-            foreach ($myConnection as $like) {
-                if (!in_array($like->slug, $ids)) {
-                    $ids[] = $like->slug;
-                    $user = new \stdClass();
-                    $user->id = $like->user_id;
-                    $user->name = $like->name;
-                    $user->slug = $like->slug;
-                    $users[] = $user;
+
+        if (isset($this->id) && is_numeric($this->id)) {
+            $myConnection = Like::query()
+                ->join("pages", "likes.page_id", "=", "pages.id")
+                ->where("likes.comment_id", $this->id)
+                ->whereIn("pages.user_id", Auth::user()->getConnections())
+                ->latest()
+                ->limit(2)
+                ->select(array("pages.name", "pages.user_id", "pages.slug", "likes.*"))
+                ->distinct("page_id")
+                ->get();
+
+            $users = array();
+            $ids = array();
+            if (count($myConnection) > 0) {
+                foreach ($myConnection as $like) {
+                    if (!in_array($like->slug, $ids)) {
+                        $ids[] = $like->slug;
+                        $user = new \stdClass();
+                        $user->id = $like->user_id;
+                        $user->name = $like->name;
+                        $user->slug = $like->slug;
+                        $users[] = $user;
+                    }
+                }
+                $response = "";
+            }
+
+            $all = count($users);
+            $index = 0;
+            foreach ($users as $user) {
+                $response .= "<a href='$user->slug' class='text-dark bold'>$user->name</a>";
+                if ($index + 1 < $all) {
+                    $response .= "، ";
                 }
             }
-            $response = "";
-        }
-
-        $all = count($users);
-        $index = 0;
-        foreach ($users as $user) {
-            $response .= "<a href='$user->slug' class='text-dark bold'>$user->name</a>";
-            if ($index + 1 < $all) {
-                $response .= "، ";
+            if (count($myConnection) > 2) {
+                $response .= "و ...";
             }
-        }
-        if (count($myConnection) > 2) {
-            $response .= "و ...";
         }
         return $response;
     }
