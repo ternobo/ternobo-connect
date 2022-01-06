@@ -1104,6 +1104,22 @@ a:focus {
 
 .page-cover-info-card {
     overflow: hidden;
+    position: relative;
+
+    &::after {
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+        background: rgba(25, 25, 25, .15);
+        bottom: 0;
+        content: " ";
+        height: 100%;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+
+    }
 
     img {
         min-height: 116px;
@@ -1111,8 +1127,6 @@ a:focus {
         object-fit: fill;
         -o-object-position: center;
         object-position: center;
-        -webkit-filter: blur(8px);
-        filter: blur(8px);
     }
 }
 
