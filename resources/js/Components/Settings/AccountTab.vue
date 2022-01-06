@@ -87,7 +87,7 @@
 						</button>
 					</div>
 				</div>
-				<div class="setting-action">
+				<div class="setting-action" v-if="shared.fullAccess">
 					<div class="name">
 						<i class="material-icons-outlined me-2">block</i>
 						<span>{{ __.get("settings.blocked-users") }}</span>
@@ -143,6 +143,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import BlockedPagesModal from "../Modals/Settings/BlockedPagesModal.vue";
 export default {
 	created() {
@@ -167,6 +168,7 @@ export default {
 		},
 	},
 	computed: {
+		...mapState(["shared"]),
 		websiteUrl() {
 			return window.location.origin.replace("https://", "").replace("http://", "");
 		},

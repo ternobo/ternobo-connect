@@ -3,7 +3,7 @@
 		<wire-link :href="$APP_URL + '/' + page.slug" :linkDisabled="!page.visible" class="card-body p-0 d-flex flex-column">
 			<lazy-image class="card-img-top page-cover page-cover-info-card" style="min-height: 90px" :src="page.cover" />
 			<div class="d-flex align-items-center justify-content-center" style="margin-top: -70px">
-				<lazy-image img-class="profile-xxlg" class="profile-xxlg mb-0" :src="page.profile" />
+				<lazy-image img-class="pageinfo-card-profile profile-xlg" class="profile-xlg mb-0" :src="page.profile" />
 			</div>
 			<div class="userinfo-card text-center card-body pt-4">
 				<span class="d-flex align-items-center justify-content-center text-dark text-center">
@@ -36,6 +36,11 @@ export default {
 };
 </script>
 
+<style>
+.pageinfo-card-profile {
+	border: 8px solid #fff;
+}
+</style>
 <style scoped>
 small {
 	display: block;

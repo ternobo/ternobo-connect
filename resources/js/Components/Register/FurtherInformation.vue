@@ -16,7 +16,7 @@
 							<input type="text" v-model="last_name" class="form-control fill-light lg-input" />
 						</div>
 						<div class="mb-7">
-							<label class="inputlabel font-12 font-demibold">{{ __.get("application.nickname") }}</label>
+							<label class="inputlabel font-12 font-demibold">{{ __.get("application.nickname") }} ({{ __.get("application.optional") }})</label>
 							<input type="text" v-model="nickname" class="form-control fill-light lg-input" />
 						</div>
 						<tselect
