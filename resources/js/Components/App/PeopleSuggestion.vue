@@ -18,7 +18,7 @@
 				<small class="hashtag-name">#{{ page.tag }}</small>
 			</div>
 		</wire-link>
-		<loading-button class="btn btn-icon btn-md" @click="follow" :class="{ 'btn-secondary': !isFollowed }" v-if="type == 'tag'" :loading="loading">
+		<loading-button class="btn btn-icon btn-md" v-if="shared.fullAccess && type == 'tag'" @click="follow" :class="{ 'btn-secondary': !isFollowed }" :loading="loading">
 			<i class="material-icons font-16" v-if="isFollowed">remove</i>
 			<i class="material-icons font-16" v-else>add</i>
 		</loading-button>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import FollowButton from "../buttons/FollowButton";
 import ProfilePeeking from "./ProfilePeeking/ProfilePeeking.vue";
 export default {
@@ -45,6 +46,7 @@ export default {
 	},
 	name: "PeopleSuggestion",
 	computed: {
+		...mapState(["shared"]),
 		type() {
 			if (this.page?.type) {
 				return this.page.type;
