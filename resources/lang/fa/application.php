@@ -72,6 +72,7 @@ return [
     "related-hashtags" => "هشتگ‌های مرتبط",
     "nickname" => "نام مستعار",
     "continue" => "ادامه",
+    "optional" => "اختیاری",
 
     "password-strength" => [
         "short" => "کوتاه",

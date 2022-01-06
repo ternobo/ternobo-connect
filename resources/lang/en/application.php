@@ -73,6 +73,7 @@ return [
     "related-hashtags" => "Related Hashtags",
     "nickname" => "Nickname",
     "continue" => "Continue",
+    "optional"=>"Optional",
 
     "password-strength" => [
         "short" => "Too Short",
