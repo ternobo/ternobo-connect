@@ -13,7 +13,7 @@
 			<wire-link :class="{ active: $store.state.url === '/invite' }" v-if="$store.state.shared.fullAccess" href="/invite">
 				<i class="navheader-icon invite-link" :class="{ hasInvite: $store.state.shared.invites_count > 0 }">{{ $store.state.url === "/invite" ? "confirmation_number" : "confirmation_number" }}</i>
 			</wire-link>
-			<wire-link :class="{ active: $store.state.url === '/bookmarks' }" v-if="$store.state.shared.fullAccess" href="/bookmarks">
+			<wire-link :class="{ active: $store.state.url === '/bookmarks' }" href="/bookmarks">
 				<i class="navheader-icon">{{ $store.state.url === "/bookmarks" ? "bookmark" : "bookmark_border" }} </i>
 			</wire-link>
 		</div>
