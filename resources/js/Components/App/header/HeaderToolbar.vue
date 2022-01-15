@@ -13,9 +13,6 @@
 			<wire-link :class="{ active: $store.state.url === '/invite' }" v-if="$store.state.shared.fullAccess" href="/invite">
 				<i class="navheader-icon invite-link" :class="{ hasInvite: $store.state.shared.invites_count > 0 }">{{ $store.state.url === "/invite" ? "confirmation_number" : "confirmation_number" }}</i>
 			</wire-link>
-			<wire-link :class="{ active: $store.state.url === '/bookmarks' }" href="/bookmarks">
-				<i class="navheader-icon">{{ $store.state.url === "/bookmarks" ? "bookmark" : "bookmark_border" }} </i>
-			</wire-link>
 		</div>
 		<div v-else>
 			<login-modal :show.sync="showLogin"></login-modal>
@@ -26,7 +23,6 @@
 
 		<div ref="usermenushow" v-if="$store.state.user != null" class="usertoolbar" @mouseenter="showUserMenu" @mouseleave="menuVisible = false">
 			<div class="usertoolbar-container" :class="{ active: menuVisible }">
-				<!-- <span dir="ltr" class="user-username">{{ $store.state.user.username }} <i v-if="$store.state.user.is_verified === 1" class="verificationcheck">check_circle</i> </span> -->
 				<div :class="{ active: $store.state.url === '/' + $store.state.user.username }" class="profile-image-container p-1">
 					<img v-bind:src="$store.state.user.profile" class="profile-xxxsm" />
 				</div>

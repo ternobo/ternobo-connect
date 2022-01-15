@@ -73,6 +73,7 @@ return [
     "nickname" => "نام مستعار",
     "continue" => "ادامه",
     "optional" => "اختیاری",
+    "bookmarks"=>"نشان‌ها",
 
     "password-strength" => [
         "short" => "کوتاه",
