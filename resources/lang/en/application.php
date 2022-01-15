@@ -74,6 +74,7 @@ return [
     "nickname" => "Nickname",
     "continue" => "Continue",
     "optional"=>"Optional",
+    "bookmarks"=>"Bookmarks",
 
     "password-strength" => [
         "short" => "Too Short",

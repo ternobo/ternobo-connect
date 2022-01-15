@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<div v-if="$root.isMobile">
-			<mobile-maintenance />
+			<mobile-maintenance />	
 		</div>
 		<div v-else>
-			<transition name="fade">
+		<transition name="fade">
 				<WireApp v-bind="$props"></WireApp>
 			</transition>
 			<transition name="toast" mode="out-in">
