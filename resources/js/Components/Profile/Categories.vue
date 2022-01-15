@@ -29,11 +29,6 @@ import CategoryItem from "./CategoryItem";
 import CategoriesModal from "../Modals/CategoryModal/CategoriesModal";
 
 export default {
-	computed: {
-		tagsToShow() {
-			return this.searchTag.length > 0 ? this.tags.filter((tag) => tag.startsWith(this.searchTag)) : this.tags.slice(0, 5 * this.tagPage);
-		},
-	},
 	watch: {
 		action(newVal) {
 			if (newVal != null) {
@@ -41,10 +36,6 @@ export default {
 				this.activeTag = null;
 				this.$emit("input", {
 					action: newVal,
-				});
-				let data = {};
-				axios.post("/" + this.slug + "/tags", data).then((response) => {
-					this.tags = response.data.tags;
 				});
 			}
 		},
@@ -55,23 +46,12 @@ export default {
 					category: newVal,
 					tag: this.activeTag,
 				});
-
-				let data = {
-					category: newVal,
-				};
-				axios.post("/" + this.slug + "/tags", data).then((response) => {
-					this.tags = response.data.tags;
-				});
 			}
 		},
 	},
 	methods: {
 		addCategory(category) {
 			this.list.push(category);
-		},
-		removeTag(tag) {
-			this.removedTags.push(tag);
-			this.tags.splice(this.tags.indexOf(tag), 1);
 		},
 		categorySelect(category) {
 			if (category == this.activeCategory) {
@@ -80,78 +60,11 @@ export default {
 			}
 			this.activeCategory = category;
 		},
-		saveTagRemove() {
-			axios
-				.post("/tags/delete", {
-					tags: this.removedTags,
-				})
-				.catch((err) => {
-					this.toast(__.get("messages.delete-error"));
-					let data = {};
-					if (this.activeCategory != null) {
-						data.category = this.activeCategory;
-					}
-					axios.post("/" + this.slug + "/tags", data).then((response) => {
-						this.tags = response.data.tags;
-					});
-				})
-				.then(() => {
-					this.removedTags = [];
-					this.tagsEdit = false;
-					this.action = "all";
-					this.activeCategory = null;
-					this.activeTag = null;
-				});
-		},
-		cancelRemove() {
-			this.tagsEdit = false;
-			this.removedTags = [];
-			let data = {};
-			if (this.activeCategory != null) {
-				data.category = this.activeCategory;
-			}
-			axios.post("/" + this.slug + "/tags", data).then((response) => {
-				this.tags = response.data.tags;
-			});
-		},
-		tagAction(tag) {
-			if (this.tagsEdit) {
-				return this.removeTag(tag);
-			}
-			if (tag == this.activeTag) {
-				this.activeTag = null;
-				let filter = {};
-				if (this.activeCategory != null) {
-					filter.category = this.activeCategory;
-				} else if (this.action != null) {
-					filter.action = this.action;
-				} else {
-					filter.action = "all";
-					this.action = "all";
-				}
-				this.$emit("input", filter);
-				return;
-			}
-			this.action = null;
-			this.activeTag = tag;
-
-			if (this.activeCategory != null) {
-				this.$emit("input", {
-					category: this.activeCategory,
-					tag: this.activeTag,
-				});
-			} else {
-				this.$emit("input", {
-					tag: this.activeTag,
-				});
-			}
-		},
 	},
 	created() {
 		this.list = this.categories;
 		if (typeof this.value == "object") {
 			this.activeCategory = this.value.category;
-			this.activeTag = this.value.activeTag;
 		} else {
 			this.action = this.value;
 		}
@@ -159,21 +72,10 @@ export default {
 	data() {
 		return {
 			edit: false,
-
-			tagsEdit: false,
 			list: [],
-
-			activeTag: null,
-
 			action: "all",
 			activeCategory: null,
-			tags: [],
-
-			removedTags: [],
-
 			searchTag: "",
-
-			tagPage: 1,
 		};
 	},
 	mounted() {
@@ -181,9 +83,6 @@ export default {
 		if (this.activeCategory != null) {
 			data.category = this.activeCategory;
 		}
-		axios.post("/" + this.slug + "/tags", data).then((response) => {
-			this.tags = response.data.tags;
-		});
 	},
 	components: {
 		CategoryItem,
