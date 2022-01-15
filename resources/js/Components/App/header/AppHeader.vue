@@ -12,7 +12,7 @@
 
 				<form @submit="searchSubmit" method="get" action="javascript:;" ref="searchfield" class="searchfield d-flex">
 					<auto-complete class="search-field w-100" ref="searchInput" inputClass="rounded xsm-input" icon="search" v-model="searchVal" @suggestionclick="submitsearch" @search="submitsearch" required type="text" :suggestionPosition="17" name="q" :placeholder="__.get('application.searchq')" />
-					<div class="d-flex align-items-center mx-3">
+					<div class="d-flex align-items-center ms-6 me-3">
 						<a :class="{ active: $store.state.url === '/explore' }" href="#" class="disabled">
 							<i class="material-icons-outlined">explore</i>
 						</a>
