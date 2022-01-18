@@ -24,7 +24,10 @@
 							<wire-link :href="'/' + connection.follower.slug" class="userinfo">
 								<lazy-image class="mb-0 profile-standard" imgClass="profile-standard" :src="connection.follower.profile"></lazy-image>
 								<div class="page-name d-flex flex-column">
-									<strong> {{ connection.follower.name }} <i v-if="connection.follower.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+									<div class="d-flex align-items-center">
+										<user-badges class="me-1" :onlyOne="true" :badgeStatus="connection.follower.badge_status" />
+										<strong> {{ connection.follower.name }} <i v-if="connection.follower.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+									</div>
 									<span class="shortbio"> {{ connection.follower.short_bio }} </span>
 								</div>
 							</wire-link>
@@ -58,7 +61,10 @@
 							<wire-link :href="'/' + connection.following.slug" class="userinfo">
 								<lazy-image class="mb-0 profile-standard" imgClass="profile-standard" :src="connection.following.profile"></lazy-image>
 								<div class="page-name d-flex flex-column">
-									<strong> {{ connection.following.name }} <i v-if="connection.following.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+									<div class="d-flex align-items-center">
+										<user-badges class="me-1" :onlyOne="true" :badgeStatus="connection.following.badge_status" />
+										<strong> {{ connection.following.name }} <i v-if="connection.following.is_verified === 1" class="verificationcheck">check_circle</i> </strong>
+									</div>
 									<span class="shortbio"> {{ connection.following.short_bio }} </span>
 								</div>
 							</wire-link>

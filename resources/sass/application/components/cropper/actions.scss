@@ -3,8 +3,14 @@
     position: absolute;
     background: #F8F8F8;
     padding: 0.25rem 0;
+    width: -webkit-max-content;
+    width: -moz-max-content;
     width: max-content;
     bottom: -22px;
+}
+
+.cropper {
+    max-height: 512px;
 }
 
 .cropperactions {
@@ -37,7 +43,8 @@
     width: 30px;
     display: flex;
     align-items: center;
-    justify-content: center;;
+    justify-content: center;
+    ;
 }
 
 .top-#{$end}actions {
