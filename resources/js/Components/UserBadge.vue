@@ -1,5 +1,5 @@
 <template>
-	<div class="user-badge">
+	<div class="user-badge" v-if="badges.length > 0">
 		<img src="/badges/supporter.svg" v-b-tooltip.hover :title="__.get(`badges.supporter`)" v-if="showSupporter" />
 		<img :src="badge.icon" v-b-tooltip.hover :title="badge.name" v-for="badge in badges" :key="`user_badge_item_${badge.id}`" />
 	</div>
