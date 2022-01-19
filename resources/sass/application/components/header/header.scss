@@ -294,6 +294,10 @@
             background: $body-bg;
         }
 
+        i {
+            color: $gray-dark;
+        }
+
         a,
         button {
             color: $gray-500;
@@ -314,10 +318,17 @@
             height: max-content;
         }
 
+        a,
+        button,
+        i {
+            transition: none;
+        }
+
         &.hover-danger:hover {
 
             a,
-            button {
+            button,
+            i {
                 color: $red;
             }
         }

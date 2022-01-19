@@ -14,23 +14,23 @@
 		</div>
 		<div class="card-body p-0">
 			<div class="list-group list-group-flush">
-				<wire-link href="/bookmarks" as="a" class="list-group-item border-0 headermenu-item">
-					<a class="m-0"><i class="text-gray-dark material-icons-outlined">bookmark_border</i> {{ __.get("application.bookmarks") }} </a>
+				<wire-link href="/bookmarks" as="a" class="list-group-item border-0">
+					<a class="m-0"><i class="material-icons-outlined">bookmark_border</i> {{ __.get("application.bookmarks") }} </a>
 				</wire-link>
-				<wire-link href="/monetization" v-if="shared.fullAccess" as="a" class="list-group-item border-0 headermenu-item">
-					<a class="m-0"><i class="text-gray-dark material-icons-outlined">savings</i> {{ __.get("monitization.monitization") }}</a>
+				<wire-link href="/monetization" v-if="shared.fullAccess" as="a" class="list-group-item border-0">
+					<a class="m-0"><i class="material-icons-outlined">savings</i> {{ __.get("monitization.monitization") }}</a>
 				</wire-link>
-				<wire-link href="/settings" as="a" class="list-group-item border-0 headermenu-item">
-					<a class="m-0"><i class="text-gray-dark material-icons-outlined">settings</i> {{ __.get("settings.settings") }} </a>
+				<wire-link href="/settings" as="a" class="list-group-item border-0">
+					<a class="m-0"><i class="material-icons-outlined">settings</i> {{ __.get("settings.settings") }} </a>
 				</wire-link>
-				<wire-link href="/feedbacks" as="a" class="list-group-item border-0 headermenu-item">
-					<a class="m-0"><i class="text-gray-dark material-icons-outlined">emoji_objects</i> {{ __.choice("feedbacks.feedback", 2) }} </a>
-				</wire-link>
-				<div class="list-group-item border-0 headermenu-item hover-danger" @click="logout">
+				<!-- <wire-link href="/feedbacks" as="a" class="list-group-item border-0">
+					<a class="m-0"><i class="material-icons-outlined">emoji_objects</i> {{ __.choice("feedbacks.feedback", 2) }} </a>
+				</wire-link> -->
+				<div class="list-group-item border-0 hover-danger" @click="logout">
 					<form action="/logout" method="POST" ref="logoutForm">
 						<button type="button" class="btn btn-text text-start bg-transparent m-0 p-0 border-0 text-grey">
-							<i class="material-icons text-gray-dark" v-if="appDirection == 'ltr'">logout</i>
-							<i class="text-gray-dark material-icons" style="transform: rotate(180deg)" v-else>logout</i>
+							<i class="material-icons" v-if="appDirection == 'ltr'">logout</i>
+							<i class="material-icons" style="transform: rotate(180deg)" v-else>logout</i>
 							<span class="font-normal">{{ __.get("application.signout") }}</span>
 						</button>
 					</form>

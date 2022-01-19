@@ -4,7 +4,7 @@
 			<loading-spinner></loading-spinner>
 		</div>
 		<CropperModal :title="__.get('user-profile.crop-cover-title')" v-if="canChange" :show.sync="crop" :aspect-ratio="25 / 7.8" :image="imageToCrop" @cropped="upload"></CropperModal>
-		<input type="file" class="d-none" ref="imageFile" @change="imageSelect" />
+		<input type="file" accept="image/jpeg, image/png" class="d-none" ref="imageFile" @change="imageSelect" />
 		<lazy-image :loadingColor="skeletonOptions.coverColor" :src="image" img-class="w-100" class="mb-0 page-cover" />
 		<transition name="fade">
 			<div class="edit-icons" v-if="canChange && (showIcons || !$root.isDesktop)">
