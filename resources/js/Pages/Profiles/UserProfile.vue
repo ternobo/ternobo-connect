@@ -78,7 +78,7 @@
 		</div>
 		<sidebar-left v-if="$root.isDesktop">
 			<div class="card" style="margin-bottom: 16px" v-if="pages.length > 0">
-				<div class="card-header pt-4 px-4 pb-0 font-14" v-html="__.get('user-profile.followed', { name: page.user.first_name })"></div>
+				<div class="card-header pt-4 px-4 pb-0 font-14" v-html="__.get('user-profile.followed', { name: canEdit ? __.get('tips.you') : page.user.first_name })"></div>
 				<div class="people-suggestion-card-body card-body">
 					<people-suggestion v-for="page in pages" :page="page" :key="page.id"></people-suggestion>
 				</div>
