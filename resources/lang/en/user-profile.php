@@ -118,6 +118,7 @@ return [
     'remove-website' => "Are your sure you want to delete :website?", /*:website - Your website*/
 
     "followed" => "<b>:name</b> follows",
+    "you-follow" => "<b>شما</b> دنبال می‌کنید",
 
     "skill_credit" => "Endorsed This Skill",
     "skill_credit_my_verb" => "Endorsed This Skill",
