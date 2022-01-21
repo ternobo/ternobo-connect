@@ -118,6 +118,7 @@ return [
     'remove-website' => "آیا از حذف وبسایت :website اطمینان دارید؟", /*:website - Your website*/
 
     "followed" => "<b>:name</b> دنبال می‌کند",
+    "you-follow" => "<b>You</b> follow",
 
     "skill_credit" => "این مهارت را تایید کرده است|این مهارت را تایید کرده‌اند",
     "skill_credit_my_verb" => "تایید کرده‌اید",
