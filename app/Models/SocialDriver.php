@@ -14,6 +14,7 @@ class SocialDriver extends Model
         'icon',
         'driver',
         "active",
+        "link"
     ];
 
     protected $hidden = [
@@ -24,5 +25,4 @@ class SocialDriver extends Model
     {
         return $this->hasOne(ConnectedAccount::class, "driver", "driver")->latest();
     }
-
 }
