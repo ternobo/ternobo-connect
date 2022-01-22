@@ -34,6 +34,8 @@ class EventServiceProvider extends ServiceProvider
             'SocialiteProviders\Twitter\TwitterExtendSocialite@handle',
             'SocialiteProviders\Yahoo\YahooExtendSocialite@handle',
             'SocialiteProviders\Spotify\SpotifyExtendSocialite@handle',
+            \SocialiteProviders\Reddit\RedditExtendSocialite::class . '@handle',
+
         ],
     ];
 
