@@ -90,7 +90,11 @@ return [
         'client_secret' => env('DRIBBBLE_CLIENT_SECRET'),
         'redirect' => env('DRIBBBLE_REDIRECT_URI'),
     ],
-
+    'reddit' => [
+        'client_id' => env('REDDIT_CLIENT_ID'),
+        'client_secret' => env('REDDIT_CLIENT_SECRET'),
+        'redirect' => env('REDDIT_REDIRECT_URI')
+    ],
     /**
      * End - Social Media OAuth2 Services
      */

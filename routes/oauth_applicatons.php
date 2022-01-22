@@ -41,4 +41,7 @@ Route::middleware(FullAccessUserMiddleware::class)->group(function () {
 
     Route::get("/connect/spotify/login", "Socialite\SpotifyController@login");
     Route::get("/connect/spotify/callback", "Socialite\SpotifyController@callback");
+
+    Route::get("/connect/reddit/login", "Socialite\RedditController@login");
+    Route::get("/connect/reddit/callback", "Socialite\RedditController@callback");
 });
