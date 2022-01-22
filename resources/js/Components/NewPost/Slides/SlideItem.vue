@@ -1,5 +1,10 @@
 <template>
-	<div class="slide-item"><slot></slot><i v-if="!hideDelete" class="delete-icon material-icons" @click="$emit('delete')">delete_outline</i></div>
+	<div class="slide-item">
+		<slot></slot>
+		<slot name="deleteIcon">
+			<i class="delete-icon material-icons" @click="$emit('delete')">delete_outline</i>
+		</slot>
+	</div>
 </template>
 
 <script>

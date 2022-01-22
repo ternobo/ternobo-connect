@@ -11,8 +11,14 @@
 			<div class="scrollable-list" @wheel="onWheel">
 				<div class="new-post-slider" :style="{ transform: `translateX(${transformBy}px)` }">
 					<draggable v-bind="dragOptions" draggable=".slide-item" class="drag-container" v-model="slides">
-						<slide-item v-for="(slide, index) in slides" :hideDelete="slides.length <= 1" :key="`slides_${slide.id}`" :class="{ active: slide.id == slides[activeIndex].id }" @delete="deleteItem(index)">
+						<slide-item v-for="(slide, index) in slides" :hideDelete="slides.length <= 1" :key="`slides_${slide.id}`" :class="{ active: slide.id == slides[activeIndex].id }">
 							<i @click="selectSlide(index)" class="material-icons-outlined">{{ slide.icon }}</i>
+							<template #deleteIcon>
+								<span class="delete-icon">
+									<i class="material-icons" @click="deleteItem(index)">delete_outline</i>
+									<span>{{ index }}</span>
+								</span>
+							</template>
 						</slide-item>
 					</draggable>
 					<div class="add-slide" @click="addSlide" v-if="slides.length < 12"><i class="material-icons">add</i></div>
