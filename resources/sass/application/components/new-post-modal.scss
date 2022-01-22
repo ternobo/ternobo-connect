@@ -315,7 +315,12 @@
 
                 >i:not(.delete-icon) {
                     color: $white;
+                }
 
+                .delete-icon {
+                    >span {
+                        color: $gray-dark;
+                    }
                 }
             }
 
@@ -323,25 +328,41 @@
                 position: absolute;
                 bottom: -12px;
                 background: white;
-                display: none;
                 box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.2);
                 border-radius: 8px;
                 color: $gray-500;
-
+                display: flex;
                 height: 1.5rem;
                 width: 1.5rem;
                 align-items: center;
                 justify-content: center;
-                font-size: $text-sm;
 
                 &:hover {
                     color: $danger;
                 }
+
+                >i {
+                    display: none;
+                    font-size: $text-sm;
+                }
+
+                >span {
+                    display: block;
+                    font-size: $text-xsm;
+                    font-weight: 600;
+                }
+
             }
 
             &:hover {
                 .delete-icon {
-                    display: flex;
+                    >i {
+                        display: flex;
+                    }
+
+                    >span {
+                        display: none;
+                    }
                 }
             }
 
