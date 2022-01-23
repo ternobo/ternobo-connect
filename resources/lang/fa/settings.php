@@ -54,7 +54,13 @@ return [
     "resend" => "ارسال مجدد",
 
     'deactivate-account' => "غیرفعال کردن حساب",
+    'autodeactivate' => "غیرفعال‌سازی خودکار",
+    "autodeactivate-desc" => "اگر در این مدت زمان آنلاین نشوید، حساب شما به طور خودکار غیرفعال می‌شود، تا زمانی که مجدد وارد ترنوبو شوید.",
+    'autodeactivate-month' => "بعد از :month ماه|بعد از :month ماه",
+    'autodeactivate-year' => "بعد از :year سال|بعد از :year سال",
+
     'website-lang' => "زبان نمایش",
 
     "blocked-users" => "کاربران مسدود شده",
+
 ];
