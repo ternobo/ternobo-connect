@@ -16,7 +16,7 @@
 							<template #deleteIcon>
 								<span class="delete-icon">
 									<i class="material-icons" @click="deleteItem(index)">delete_outline</i>
-									<span>{{ index }}</span>
+									<span>{{ index + 1 }}</span>
 								</span>
 							</template>
 						</slide-item>
