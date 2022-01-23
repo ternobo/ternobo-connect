@@ -36,7 +36,7 @@ class PageController extends Controller
         $this->suggestionService = $suggestionService;
     }
 
-    public function show($page, $location = "home", Request $request)
+    public function show($page, Request $request, $location = "home")
     {
         $page = Page::query()
             ->with("aboutData")
@@ -47,12 +47,12 @@ class PageController extends Controller
             ->where("visible", true)
             ->firstOrFail();
         if ($page->user->active) {
-            return $this->handlePersonalProfile($page, $location, $request);
+            return $this->handlePersonalProfile($page, $request, $location);
         }
         return abort(404);
     }
 
-    public function getCategory($page, $category, $location = "activities", Request $request)
+    public function getCategory($page, $category, Request $request, $location = "activities")
     {
         $page = Page::query()
             ->with("categories")
@@ -66,13 +66,13 @@ class PageController extends Controller
             if ($page->type === "company") {
                 return view("company-profile", array("page" => $page));
             } else {
-                return $this->handlePersonalProfile($page, $location, $request, $category);
+                return $this->handlePersonalProfile($page, $request, $location, $category);
             }
         }
         return abort(404);
     }
 
-    public function handlePersonalProfile(Page $page, $location = "home", Request $request, $category = null)
+    public function handlePersonalProfile(Page $page, Request $request, $location = "home", $category = null)
     {
         if (Auth::check() && $page->isBlockedMe()) {
             return TernoboWire::render("NotAvailable", [], false, 404);

@@ -9,6 +9,7 @@
 		<TwoFAModal :status.sync="two_factor_verification" :phone="phone" :email="email" :show.sync="showTwoFAModal"></TwoFAModal>
 		<SessionsModal :show.sync="showActiveSessions"></SessionsModal>
 		<blocked-pages-modal :show.sync="showBlockedModal"></blocked-pages-modal>
+		<auto-deactivation-modal v-model="self_deactivation" :show.sync="showAutodeactiveModal"></auto-deactivation-modal>
 		<div class="card mb-4">
 			<div class="settings-card-body">
 				<div class="setting-action">
@@ -137,6 +138,21 @@
 						</button>
 					</div>
 				</div>
+				<div class="setting-action">
+					<div class="name">
+						<i class="material-icons-outlined me-2">remove_circle_outline</i>
+						<span>{{ __.get("settings.autodeactivate") }}</span>
+					</div>
+
+					<div class="d-flex align-items-center">
+						<div class="content">
+							<span class="badge-bg-container"> {{ self_deactivation_text }}</span>
+						</div>
+						<button class="ms-4 btn setting-btn btn-subtle btn-icon btn-md" @click="showAutodeactiveModal = true">
+							<i class="material-icons-outlined">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -144,6 +160,7 @@
 
 <script>
 import { mapState } from "vuex";
+import AutoDeactivationModal from "../Modals/Settings/AutoDeactivationModal.vue";
 import BlockedPagesModal from "../Modals/Settings/BlockedPagesModal.vue";
 export default {
 	created() {
@@ -152,6 +169,7 @@ export default {
 			this.email = response.data.email;
 			this.two_factor_verification = response.data.two_factor_verification;
 			this.active_sessions = response.data.connected_devices;
+			this.self_deactivation = response.data.self_deactivation;
 		});
 		var search = new URLSearchParams(window.location.search);
 		this[search.get("modal")] = true;
@@ -169,6 +187,9 @@ export default {
 	},
 	computed: {
 		...mapState(["shared"]),
+		self_deactivation_text() {
+			return this.self_deactivation < 12 ? __.choice("settings.autodeactivate-month", this.self_deactivation, { month: this.self_deactivation }) : __.choice("settings.autodeactivate-year", parseInt(this.self_deactivation / 12), { year: parseInt(this.self_deactivation / 12) });
+		},
 		websiteUrl() {
 			return window.location.origin.replace("https://", "").replace("http://", "");
 		},
@@ -181,6 +202,7 @@ export default {
 			showPasswordMdal: false,
 			showLangModal: false,
 			showDeactiveModal: false,
+			showAutodeactiveModal: false,
 			showTwoFAModal: false,
 			showBlockedModal: false,
 
@@ -191,6 +213,7 @@ export default {
 
 			phone: null,
 			email: null,
+			self_deactivation: 12,
 		};
 	},
 	components: {
@@ -206,6 +229,7 @@ export default {
 
 		SessionsModal: () => import("../Modals/Settings/Sessions/SessionsModal"),
 		BlockedPagesModal,
+		AutoDeactivationModal,
 	},
 };
 </script>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\ActiveSession;
 use App\Models\Page;
+use App\Models\UserOption;
 use App\Models\Verification;
 use App\Rules\UsernameValidator;
 use App\SMS;
@@ -73,7 +74,6 @@ class SettingsController extends Controller
         array_push($suggestions, $generator);
 
         return ['list' => $suggestions];
-
     }
 
     public function verifyNewPhone(Request $request)
@@ -132,6 +132,7 @@ class SettingsController extends Controller
             'email' => $user->email,
             'phone' => $user->phone,
             'two_factor_verification' => $user->two_factor,
+            'self_deactivation' => intval(UserOption::getOption("autodeactivation", 12)),
             'connected_devices' => ActiveSession::getActiveSessionsCount(),
         ]);
     }
@@ -171,4 +172,16 @@ class SettingsController extends Controller
         return response()->json(array("result" => true));
     }
 
+    public function setAutodeactivationAccount(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            "value" => ["required", "numeric", "min:1", "max:12"],
+        ]);
+        if ($validator->fails()) {
+            return response()->json(array("result" => false, "errors" => $validator->errors()), 422);
+        }
+        UserOption::setOption("autodeactivation", $request->value);
+        return response()->json(array("result" => true));
+    }
 }

@@ -55,6 +55,11 @@ return [
     "resend" => "Resend",
 
     'deactivate-account' => "Deactivate Account",
+    'autodeactivate' => "Self-Deactivation",
+    "autodeactivate-desc" => "If you don’t come online atleast once within this period, your account will be deactivated until you log back in.",
+    'autodeactivate-month' => "After :month month|After :month months",
+    'autodeactivate-year' => "After :year year|After :year year",
+
     'website-lang' => "Language",
 
     "blocked-users" => "Blocked Users",

@@ -20,7 +20,7 @@ class User extends Authenticatable implements Messageable
 
     use HasFactory, CanChat, HasApiTokens, Notifiable, SoftDeletes;
 
-    protected $dates = ['deleted_at', 'created_at', 'updated_at'];
+    protected $dates = ['deleted_at', 'created_at', 'updated_at', "last_activity"];
 
     /**
      * The attributes that are mass assignable.
@@ -81,7 +81,8 @@ class User extends Authenticatable implements Messageable
         'email_verified_at' => 'datetime',
         "is_admin" => "boolean",
         "two_factor" => "boolean",
-        "created_at" => "datetime"
+        "created_at" => "datetime",
+        "last_activity" => "datetime"
     ];
 
     /**
@@ -194,6 +195,11 @@ class User extends Authenticatable implements Messageable
     public function activeSessions()
     {
         return $this->hasMany(ActiveSession::class);
+    }
+
+    public function options()
+    {
+        return $this->hasMany(UserOption::class);
     }
 
     public function transactions()

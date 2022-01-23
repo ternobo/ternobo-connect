@@ -12,6 +12,8 @@ use App\Http\Middleware\Authenticate;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AutoUpdateController;
 use App\Http\Middleware\CommunityTagSelectMiddleware;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------

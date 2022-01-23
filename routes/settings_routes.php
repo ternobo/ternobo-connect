@@ -24,4 +24,5 @@ Route::prefix("/settings")->group(function () {
      */
     Route::get("/blocked-pages", "BlockController@blockPages");
 
+    Route::post("/set-autodeactivation", "Auth\SettingsController@setAutodeactivationAccount");
 });
