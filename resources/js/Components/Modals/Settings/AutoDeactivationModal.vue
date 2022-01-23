@@ -52,7 +52,7 @@ export default {
 		},
 	},
 	mixins: [ModalMixin],
-	name: "DeactiveModal",
+	name: "SelfDeactivation",
 };
 </script>
 
