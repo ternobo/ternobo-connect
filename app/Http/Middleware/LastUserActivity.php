@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Jobs\LastActivityJob;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
@@ -21,8 +22,7 @@ class LastUserActivity
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            DB::delete("DELETE FROM `last_activities` where `user_id` = ?", [Auth::id()]);
-            DB::insert("INSERT INTO `last_activities`(`user_id`,`last_activity`) VALUES(?,?)", [Auth::id(), Carbon::now()->format("Y-m-d H:i:s")]);
+            LastActivityJob::dispatch(Auth::id());
         }
         return $next($request);
     }
