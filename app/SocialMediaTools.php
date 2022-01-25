@@ -85,7 +85,7 @@ class SocialMediaTools
             ->setRemoveScripts(true)
             ->setRemoveStyles(true)
             ->setRemoveDoubleSpace(true));
-        $dom->loadStr("$content");
+        $dom->loadStr($content);
 
         $content = ($dom->find("*"));
         foreach ($content as $element) {

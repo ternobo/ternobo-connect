@@ -1,8 +1,6 @@
 <template>
 	<div class="sendcomment clearfix" v-if="$store.state.user != null">
-		<mentionable :disabledTop="true" class="w-100">
-			<MaterialTextAreaEmoji ref="input" v-model="text" input-class="w-100" maxlength="1000" class="material--xsm w-100" :placeholder="__.get('content/comments.comment-ph')" name="text"></MaterialTextAreaEmoji>
-		</mentionable>
+		<paragraph class="form-control" ref="input" :placeholder="__.get('content/comments.comment-ph')" :content.sync="text"></paragraph>
 		<div class="d-flex w-100 mt-4 align-items-center justify-content-between">
 			<div class="d-flex align-items-center">
 				<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xxxsm me-4 mb-0" imgClass="profile-xxxsm" :src="$store.state.user.profile" />
@@ -17,6 +15,7 @@
 import EmojiPicker from "../EmojiPicker/EmojiPicker.vue";
 import MaterialTextAreaEmoji from "../inputs/MaterialTextAreaEmoji.vue";
 import Mentionable from "../Mentionable.vue";
+import Paragraph from "../NewPost/Editor/Elements/Paragraph.vue";
 export default {
 	props: {
 		post: {
@@ -65,7 +64,7 @@ export default {
 					.then((response) => {
 						if (response.data.result) {
 							this.text = "";
-
+							this.$refs.input.reset();
 							this.$emit("submit", response.data.comment);
 						} else {
 							this.handleError(response.data.errors);
@@ -81,6 +80,7 @@ export default {
 		MaterialTextAreaEmoji,
 		EmojiPicker,
 		Mentionable,
+		Paragraph,
 	},
 };
 </script>

@@ -21,7 +21,8 @@
         border: 0;
     }
 
-    &:focus {
+    &:focus,
+    &:focus-within {
         border-color: $dark !important;
         box-shadow: none;
     }

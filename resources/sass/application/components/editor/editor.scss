@@ -381,6 +381,7 @@ div[placeholder]:not(:focus):empty:before {
     content: attr(placeholder);
     color: $gray-400;
     cursor: text;
+    vertical-align: -webkit-baseline-middle;
 }
 
 /** Tag Selector **/
