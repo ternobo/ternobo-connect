@@ -2,15 +2,11 @@
 
 namespace Database\Factories;
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-
-use App\Models\Page;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 
-class SuggestionFactory extends Factory
+class CommunityCategoryFactory extends Factory
 {
-    protected $model = Post::class;
-
     /**
      * Define the model's default state.
      *
@@ -18,9 +14,10 @@ class SuggestionFactory extends Factory
      */
     public function definition()
     {
-        $page_id = Page::all()->random()->id;
+        $icon = $this->faker->imageUrl(44, 44);
         return [
-            "page_id" => $page_id,
+            "name" => $this->faker->name(),
+            "icon" => $icon,
         ];
     }
 }

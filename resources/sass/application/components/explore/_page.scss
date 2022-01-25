@@ -1,0 +1,22 @@
+.explore-page {
+    margin-top: 64px !important;
+
+    .explore-page-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 52px;
+
+        i {
+            font-size: 52px;
+            color: $dark;
+        }
+    }
+
+    .explore-page-content {
+        justify-content: center;
+        margin-bottom: 52px;
+    }
+
+}

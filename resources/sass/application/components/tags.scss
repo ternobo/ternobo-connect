@@ -47,7 +47,7 @@
     }
 
     .hashtag-name {
-        background: linear-gradient(135deg, #0094FF 22.26%, #C852FF 68.57%);
+        background:  $commuity-tag-gradient;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         -webkit-user-select: none;
@@ -91,7 +91,7 @@
     align-items: center;
 
     .tag-name {
-        background: linear-gradient(135deg, #0094FF 22.26%, #C852FF 68.57%);
+        background:  $commuity-tag-gradient;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         -webkit-user-select: none;

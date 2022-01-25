@@ -10,7 +10,9 @@ module.exports = {
         chunkFilename: 'js/[name].js?id=[chunkhash]',
     },
     watchOptions: {
-        ignored: ["/node_modules/", "/public"]
+        ignored: ["/node_modules/", "/public"],
+        aggregateTimeout: 300,
+        poll: 1000
     },
     devServer: {
         port: 8080,
