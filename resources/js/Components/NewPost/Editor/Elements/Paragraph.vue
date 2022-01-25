@@ -1,6 +1,6 @@
 <template>
 	<mentionable :max-tags="3" class="textarea-content w-100" v-bind="$attrs" @click="focus">
-		<div ref="editable" dir="auto" :placeholder="__.get('content/posts.enter-your-text')" class="editor--text-input" contenteditable @blur="onBlur" @focus="onFocus" @input="input" @keydown="onKeyDown" @paste="onPaste" @keydown.enter="addParagraph"></div>
+		<div ref="editable" dir="auto" :placeholder="placeholder" class="editor--text-input" contenteditable @blur="onBlur" @focus="onFocus" @input="input" @keydown="onKeyDown" @paste="onPaste" @keydown.enter="addParagraph"></div>
 	</mentionable>
 </template>
 
@@ -32,8 +32,12 @@ export default {
 		},
 	},
 	methods: {
+		reset() {
+			this.$refs.editable.innerHTML = "";
+			this.updateContent();
+		},
 		addParagraph(e) {
-			if (!e.shiftKey) {
+			if (!e.shiftKey && this.disableEnter) {
 				e.preventDefault();
 				this.$emit("addParagraph");
 			}
@@ -170,6 +174,12 @@ export default {
 	props: {
 		content: {
 			default: "",
+		},
+		disableEnter: {
+			default: true,
+		},
+		placeholder: {
+			default: __.get("content/posts.enter-your-text"),
 		},
 		max: {
 			default: 1200,
