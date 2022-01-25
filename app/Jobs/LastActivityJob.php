@@ -35,7 +35,7 @@ class LastActivityJob implements ShouldQueue
     public function handle()
     {
         if (DB::selectOne("SELECT * FROM `last_activities` where `user_id` = ?", [$this->id])) {
-            DB::insert("UPDATE `last_activities SET `last_activity` = ? WHERE `user_id` = ?", [Carbon::now()->format("Y-m-d H:i:s"), $this->id]);
+            DB::insert("UPDATE `last_activities` SET `last_activity` = ? WHERE `user_id` = ?", [Carbon::now()->format("Y-m-d H:i:s"), $this->id]);
         } else {
             DB::insert("INSERT INTO `last_activities`(`user_id`,`last_activity`) VALUES(?,?)", [$this->id, Carbon::now()->format("Y-m-d H:i:s")]);
         }
