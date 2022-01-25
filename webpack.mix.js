@@ -12,13 +12,6 @@ const mix = require('laravel-mix');
  |
  */
 
-// mix.options({
-//     hmrOptions: {
-//         host: '10.8.0.2',
-//         port: 8080
-//     }
-// });
-
 mix.babelConfig({
     plugins: ['@babel/plugin-syntax-dynamic-import'],
 });

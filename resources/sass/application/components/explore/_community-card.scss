@@ -1,0 +1,32 @@
+.community-card {
+
+    .community-icon {
+        box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        width: 64px;
+        height: 64px;
+        background: $white;
+        padding: 10px;
+
+        img {
+            height: 44px;
+            width: 44px;
+        }
+    }
+
+    .community-info-tag {
+        background: $commuity-tag-gradient;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        line-height: 20px;
+        font-size: $text-xsm;
+    }
+}
+
+.community-category-group {
+    padding-bottom: 64px;
+}

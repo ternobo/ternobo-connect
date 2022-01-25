@@ -2,14 +2,13 @@
 
 namespace Database\Factories;
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-
-use App\Models\Page;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class SuggestionFactory extends Factory
+class TagFactory extends Factory
 {
-    protected $model = Post::class;
+
+    protected $model = Tag::class;
 
     /**
      * Define the model's default state.
@@ -18,9 +17,8 @@ class SuggestionFactory extends Factory
      */
     public function definition()
     {
-        $page_id = Page::all()->random()->id;
         return [
-            "page_id" => $page_id,
+            "name" => $this->faker->unique()->word()
         ];
     }
 }

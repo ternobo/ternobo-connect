@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Content\CommunityExploreController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Content\CommunityTagController;
 
@@ -10,3 +11,6 @@ Route::get("/interests", [CommunityTagController::class, "interestsPages"]);
 Route::post("/interests/set", [CommunityTagController::class, "setInterests"]);
 
 Route::post("/interests/skip", [CommunityTagController::class, "skipInterestPage"]);
+
+Route::get("/explore", [CommunityExploreController::class, "index"]);
+Route::get("/communities/{CommunityCategory:id}", [CommunityExploreController::class, "get"]);
