@@ -15,6 +15,9 @@ const NotificationMixin = {
             return this.notificationGroup.notifications;
         },
         createdAt() {
+            if (moment().isSame(this.notificationGroup.updated_at, "day")) {
+                return this.formatTime(this.notificationGroup.updated_at, "H:mm:ss")
+            }
             return this.formatTime(this.notificationGroup.updated_at, "YYYY MMMM DD")
         }
     }
