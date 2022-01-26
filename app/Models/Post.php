@@ -304,12 +304,14 @@ class Post extends Model
                         break;
 
                     case "title":
+                    case "heading2":
+                    case "heading3":
                         SlideBlock::query()->create([
                             'slide_id' => $slide_id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
                             'content' => $content,
-                            'type' => 'title',
+                            'type' => $type,
                             "meta" => $meta,
                         ]);
                         break;
