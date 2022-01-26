@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\Post;
 use App\Services\Content\CommunityTagService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
