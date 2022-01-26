@@ -1,6 +1,6 @@
 <template>
 	<div class="title-input">
-		<div contenteditable @focus="onFocus" dir="auto" :placeholder="__.get('content/posts.heading')" v-max-contenteditable="112" @keypress.enter.prevent @keydown.enter.prevent @input="input" ref="input" class="w-100 heading-1 shadow-0">{{ text }}</div>
+		<div contenteditable @focus="onFocus" dir="auto" :placeholder="__.get('content/posts.heading')" v-max-contenteditable="112" @keypress.enter.prevent @keydown.enter.prevent @input="input" ref="input" class="w-100 heading-2 shadow-0">{{ text }}</div>
 	</div>
 </template>
 

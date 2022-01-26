@@ -395,10 +395,22 @@ div[placeholder]:not(:focus):empty:before {
     [contenteditable] {
         color: $text-color;
         font-weight: bold;
-        font-size: 24px;
         unicode-bidi: -moz-plaintext;
         unicode-bidi: plaintext;
         text-align: start;
+
+
+        &.heading-1 {
+            font-size: 32px;
+        }
+
+        &.heading-2 {
+            font-size: 24px;
+        }
+
+        &.heading-3 {
+            font-size: 20px;
+        }
 
         &:empty {
             text-align: $start;

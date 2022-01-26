@@ -46,6 +46,8 @@ import BulletedList from "./Elements/Lists/BulletedList.vue";
 import OrderedList from "./Elements/Lists/OrderedList.vue";
 import Quote from "./Elements/Quote.vue";
 import PollBlock from "./Elements/Poll/PollBlock.vue";
+import Heading2 from "./Elements/Heading2.vue";
+import Heading3 from "./Elements/Heading3.vue";
 
 export default {
 	watch: {
@@ -160,7 +162,7 @@ export default {
 		},
 		availableOptions() {
 			let addedOptions = this.blocks.map((item) => item.type);
-			return ["text", "title", "video", "image", "code", "bulletedList", "orderedList", "quote", "poll"].filter((item) => {
+			return ["text", "title", "heading2", "heading3", "video", "image", "code", "bulletedList", "orderedList", "quote", "poll"].filter((item) => {
 				if (item == "text" || item == "quote" || item == "bulletedList" || item == "orderedList") {
 					return this.leftCharacter > 0;
 				}
@@ -192,6 +194,8 @@ export default {
 				orderedList: OrderedList,
 				quote: Quote,
 				poll: PollBlock,
+				heading2: Heading2,
+				heading3: Heading3,
 			},
 		};
 	},

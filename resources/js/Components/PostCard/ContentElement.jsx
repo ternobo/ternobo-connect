@@ -9,7 +9,15 @@ export default {
         let content = "";
         switch (contentType) {
             case "title":
+                tag = "h1";
+                content = this.content.content;
+                break;
+            case "heading2":
                 tag = "h2";
+                content = this.content.content;
+                break;
+            case "heading3":
+                tag = "h3";
                 content = this.content.content;
                 break;
             case "quote":

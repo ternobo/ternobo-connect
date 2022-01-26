@@ -26,9 +26,11 @@ class ContentBlock implements RuleInterface
             "code" => [new CodeBlockRule()],
             "bulletedList" => [new BulletedListRule()],
             "orderedList" => [new OrderedListRule()],
-            "quote" => ["max:1200"],
-            "text" => ["max:1200"],
+            "quote" => ["max:2200"],
+            "text" => ["max:2200"],
             "title" => ["max:150"],
+            "heading2" => ["max:150"],
+            "heading3" => ["max:150"],
             "poll" => [],
         ];
         $typeValidator = validator(["blocks" => $blocks], [
