@@ -16,7 +16,7 @@ const NotificationMixin = {
         },
         createdAt() {
             if (moment().isSame(this.notificationGroup.updated_at, "day")) {
-                return this.formatTime(this.notificationGroup.updated_at, "H:mm:ss")
+                return this.this.timeAgo(this.notificationGroup.updated_at)
             }
             return this.formatTime(this.notificationGroup.updated_at, "YYYY MMMM DD")
         }
