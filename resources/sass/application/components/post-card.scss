@@ -507,11 +507,29 @@
         list-style: num;
     }
 
+    h1 {
+        unicode-bidi: -moz-plaintext;
+        unicode-bidi: plaintext;
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 28px;
+        text-align: start;
+    }
+
     h2 {
         unicode-bidi: -moz-plaintext;
         unicode-bidi: plaintext;
         font-weight: 600;
-        font-size: 1.125rem;
+        font-size: 24px;
+        line-height: 28px;
+        text-align: start;
+    }
+
+    h3 {
+        unicode-bidi: -moz-plaintext;
+        unicode-bidi: plaintext;
+        font-weight: 600;
+        font-size: 20px;
         line-height: 28px;
         text-align: start;
     }
