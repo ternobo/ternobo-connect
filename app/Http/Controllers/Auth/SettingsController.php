@@ -176,7 +176,7 @@ class SettingsController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            "value" => ["required", "numeric", "min:1", "max:12"],
+            "value" => ["required", "numeric", "min:2", "max:12"],
         ]);
         if ($validator->fails()) {
             return response()->json(array("result" => false, "errors" => $validator->errors()), 422);
