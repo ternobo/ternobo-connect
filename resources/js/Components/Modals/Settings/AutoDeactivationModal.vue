@@ -6,7 +6,7 @@
 					class="flex-column align-items-start"
 					v-model="val"
 					:values="[
-						{ value: 1, label: __.choice('settings.autodeactivate-month', 1, { month: 1 }) },
+						{ value: 2, label: __.choice('settings.autodeactivate-month', 2, { month: 2 }) },
 						{ value: 6, label: __.choice('settings.autodeactivate-month', 6, { month: 6 }) },
 						{ value: 12, label: __.choice('settings.autodeactivate-year', 1, { year: 1 }) },
 					]"
