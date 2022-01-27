@@ -37,7 +37,7 @@ export default {
 				const responseData = response.data.data;
 				this.loading = false;
 				this.communities = responseData.data;
-				this.next_page_url = responseData.next_page_url;
+				this.next_page_url = responseData.links.next;
 			})
 			.catch((err) => {
 				this.error = true;
@@ -53,7 +53,7 @@ export default {
 					const responseData = response.data.data;
 					this.loadingNextPage = false;
 					this.communities = this.communities.concat(responseData.data);
-					this.next_page_url = responseData.next_page_url;
+					this.next_page_url = responseData.links.next;
 				})
 				.catch((err) => {
 					this.error = true;
