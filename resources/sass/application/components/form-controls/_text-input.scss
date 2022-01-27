@@ -21,6 +21,10 @@
         border: 0;
     }
 
+    .editor--text-input {
+        min-height: unset !important;
+    }
+
     &:focus,
     &:focus-within {
         border-color: $dark !important;
