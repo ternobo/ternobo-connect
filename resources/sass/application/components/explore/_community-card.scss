@@ -1,4 +1,12 @@
 .community-card {
+    box-shadow: $main-card-shdow;
+    will-change: box-shadow;
+    transition: 0.3s box-shadow;
+
+    &:hover {
+        box-shadow: $bg-shadow;
+
+    }
 
     .community-icon {
         box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);

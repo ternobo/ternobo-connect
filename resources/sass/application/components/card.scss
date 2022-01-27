@@ -1,8 +1,11 @@
 .card {
+    display: flex;
+    flex-direction: column;
     background: $white;
 
     .card-body {
         padding: 1.5rem;
+        flex: 1 1 auto;
     }
 
     .card-footer {
@@ -11,7 +14,7 @@
         background-color: $white;
         border: none;
 
-        &::after {
+        &:not(.no-border):after {
             content: " ";
             position: absolute;
             top: 0;
