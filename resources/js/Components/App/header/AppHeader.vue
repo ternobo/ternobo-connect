@@ -11,7 +11,7 @@
 				</wire-link>
 
 				<form @submit="searchSubmit" method="get" action="javascript:;" ref="searchfield" class="searchfield d-flex">
-					<auto-complete class="search-field w-100" ref="searchInput" inputClass="rounded xsm-input" icon="search" v-model="searchVal" @suggestionclick="submitsearch" @search="submitsearch" required type="text" :suggestionPosition="17" name="q" :placeholder="__.get('application.searchq')" />
+					<auto-complete class="search-field w-100" endpoint="/search" ref="searchInput" inputClass="fill rounded xsm-input" icon="search" v-model="searchVal" @suggestionclick="submitsearch" @search="submitsearch" required type="text" :suggestionPosition="17" name="q" :placeholder="__.get('application.searchq')" />
 				</form>
 
 				<div v-if="!$root.isDesktop">

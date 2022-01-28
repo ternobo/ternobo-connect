@@ -93,5 +93,4 @@ class Skill extends Model
 
         return null;
     }
-
 }

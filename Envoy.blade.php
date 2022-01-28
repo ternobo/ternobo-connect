@@ -1,8 +1,9 @@
 @servers(['production' => ['ternobo@ternobo.info']])
 
 @story("deploy",['on'=>"production"])
-setup-nvm
-backup-system
+@if ($withbackup)
+    backup-system
+@endif
 update-code
 install-dependencies
 setup-database
@@ -14,15 +15,15 @@ cd /home/ternobo/public_html/
 php artisan backup:run
 @endtask
 
-@task("setup-nvm")
-export NVM_DIR="$HOME/.nvm" [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-@endtask
-
-
 @task("update-code")
 cd /home/ternobo/public_html/
 git pull
+@endtask
+
+@task("update-code-from-master")
+cd /home/ternobo/public_html/
+git pull origin master --no-edit
+git push
 @endtask
 
 @task("install-dependencies")
@@ -38,6 +39,10 @@ php artisan migrate --force
 @endtask
 
 @task('build-ui', ['on' => 'production'])
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
 cd /home/ternobo/public_html/
 git pull
 npm install
