@@ -42,7 +42,11 @@
 					<i class="material-icons hand-hover">unfold_more</i>
 					<i class="material-icons-outlined hover-danger clickable" @click="doDelete">delete</i>
 				</div>
-				<MaterialTextField v-if="skillVal.isNew" maxlength="50" v-model="skillVal.name" class="material--sm w-75" input-class="w-100"></MaterialTextField>
+				<auto-complete v-if="skillVal.isNew" v-model="skillVal.name" maxlength="50" :suggestionPosition="{ x: 0, y: 30 }" endpoint="/skills/search" inputClass="xsm-input" class="w-75">
+					<template #suggestionItem="{ suggestion }">
+						{{ suggestion }}
+					</template>
+				</auto-complete>
 				<span class="skill-name" v-else>
 					{{ skillVal.name }}
 				</span>
@@ -52,6 +56,7 @@
 </template>
 
 <script>
+import AutoComplete from "../../../inputs/AutoComplete.vue";
 import RadioButton from "../../../inputs/RadioButton";
 import SkillCreditModal from "../../../Modals/SkillCreditModal";
 import CreditsModal from "./CreditsModal.vue";
@@ -60,6 +65,7 @@ export default {
 		RadioButton,
 		SkillCreditModal,
 		CreditsModal,
+		AutoComplete,
 	},
 	watch: {
 		skillVal() {

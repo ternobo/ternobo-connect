@@ -20,6 +20,12 @@ cd /home/ternobo/public_html/
 git pull
 @endtask
 
+@task("update-code-from-master")
+cd /home/ternobo/public_html/
+git pull origin master --no-edit
+git push
+@endtask
+
 @task("install-dependencies")
 cd /home/ternobo/public_html/
 composer install --no-interaction --prefer-dist

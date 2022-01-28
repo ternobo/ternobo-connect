@@ -5,15 +5,11 @@
     padding: 0;
     margin: 0;
 
-    li {
+    >li {
         width: 100%;
         flex: 100%;
 
-        padding: 16px 0;
-
-        @media screen and (max-width: $sm-size) {
-            padding: 12px 0;
-        }
+        padding: 1rem 0;
 
         &:first-child {
             padding-top: 0;
@@ -23,6 +19,24 @@
 
         &.skill-edit {
             padding: 20px 0;
+
+            .auto-complete-container>ul {
+                position: absolute;
+                padding: 1rem;
+                padding-top: 1rem !important;
+                top: 52px !important;
+                left: unset !important;
+
+                li {
+                    font-size: $text-xsm;
+                    color: $gray-dark;
+                    padding: 0.5rem;
+
+                    &:hover {
+                        background: $gray-bg;
+                    }
+                }
+            }
 
             &:not(:last-child)::after {
                 position: absolute;

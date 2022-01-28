@@ -51,12 +51,8 @@ class SkillController extends Controller
         if ($request->has("q") && $request->q !== "") {
             $search = $request->q;
             $result = array();
-            $suggestions = Skill::query()->whereRaw("name like '%?%'", [$search])->limit(10)->get();
-            //dd($suggestions->toSql());
-            foreach ($suggestions as $value) {
-                $result[] = $value->name;
-            }
-            return response()->json(array("result" => true, "pages" => $result));
+            $suggestions = Skill::query()->whereRaw("name like ?", ["%$search%"])->limit(10)->get("name")->pluck("name");
+            return response()->json(["result" => true, "suggestions" => $suggestions]);
         }
     }
 
