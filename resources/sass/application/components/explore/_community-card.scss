@@ -3,6 +3,10 @@
     will-change: box-shadow;
     transition: 0.3s box-shadow;
 
+    .page-cover-info-card:after {
+        transition: 0.3s all;
+    }
+
     &:hover {
         box-shadow: $bg-shadow;
 
