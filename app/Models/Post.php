@@ -254,13 +254,7 @@ class Post extends Model
                         // Process
                         $text = SocialMediaTools::safeHTML($content);
                         $text_mentions = SocialMediaTools::getMentions($text);
-
                         $slideTags = array_slice(SocialMediaTools::getHashtags($text), 0, 3);
-
-                        if (count($tags) < 3) {
-                            $tags = array_merge($slideTags, $tags);
-                            $text = SocialMediaTools::replaceHashtags($text, $tags);
-                        }
                         $mentions = array_merge($text_mentions, $mentions);
 
                         SlideBlock::query()->create([
@@ -280,24 +274,14 @@ class Post extends Model
                         $content = collect($content)->map(function ($item) use ($mentions, $tags) {
                             $text = SocialMediaTools::safeHTML($item);
                             $text_mentions = SocialMediaTools::getMentions($text);
-
-                            $slideTags = array_slice(SocialMediaTools::getHashtags($text), 0, 3);
-                            $text = SocialMediaTools::replaceHashtags($text, $slideTags);
-
-                            $mentions = array_merge($text_mentions, $mentions);
-                            return ["text" => SocialMediaTools::replaceMentions($text, $text_mentions), "tags" => $slideTags];
+                            return SocialMediaTools::replaceMentions($text, $text_mentions);
                         });
-
-                        $tags_block = $content->pluck("tags")->flatten()->toArray();
-                        if (count($tags) < 3) {
-                            $tags = array_slice(array_merge($tags, $tags_block), 0, 3);
-                        }
-
+                        
                         SlideBlock::query()->create([
                             'slide_id' => $slide_id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
-                            'content' => json_encode($content->pluck("text")),
+                            'content' => json_encode($content),
                             'type' => $type,
                             "meta" => $meta,
                         ]);
@@ -378,7 +362,7 @@ class Post extends Model
                 }
             }
         }
-        return ['mentions' => $mentions, 'tags' => $tags];
+        return  $mentions;
     }
 
     public function tags()

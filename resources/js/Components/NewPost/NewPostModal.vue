@@ -25,7 +25,7 @@
 						</div>
 					</div>
 					<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
-
+					<tag-input v-model="tags" />
 					<modal-footer-buttons @ok="submitPost(shouldDraft)" @cancel="submitPost(!shouldDraft)" class="mt-8" :cancelLoading="loadingDraft" :okLoading="loading" :okText="post ? __.get('application.save') : __.get('content/posts.publish')" :cancelText="shouldDraft ? __.get('content/posts.publish') : __.get('content/posts.draft')" :cancelDisable="!checkContent" cancelClass="btn-text" :okDisabled="!checkContent" okClass="btn-primary"></modal-footer-buttons>
 				</div>
 			</div>
@@ -116,6 +116,7 @@ export default {
 			let data = {
 				slides: this.content,
 				draft: draft ? 1 : 0,
+				tags: this.tags,
 			};
 			data.slides = data.slides.map((item) => {
 				for (let sort = 0; sort < item.content.length; sort++) {
@@ -261,15 +262,6 @@ export default {
 		username() {
 			return Boolean(this.user) && Boolean(this.user.name) && this.user.name.length > 40 ? this.user.name.substr(0, 40) : this.user.name;
 		},
-		tags() {
-			return this.content
-				.flatMap((item) => {
-					return item.content.filter((item) => item.type == "text" && item.content.match(/\B#(\S+)/gu)?.length > 0);
-				})
-				.flatMap((item) => {
-					return item.content.match(/\B#(\S+)/gu);
-				});
-		},
 		checkContent() {
 			return (
 				this.content.filter((item) => {
@@ -289,6 +281,7 @@ export default {
 
 			deletedSlides: [],
 			content: [{ id: uuidv4(), content: [], icon: "more_horiz", active: true }],
+			tags: [],
 
 			canDonate: false,
 			loadingCanDonate: false,

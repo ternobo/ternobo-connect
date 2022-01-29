@@ -1,21 +1,22 @@
 <template>
-	<div class="d-flex tag-input" :class="{ focus: tags != null && tags != undefined && tags.length > 0 }">
-		<div class="tags">
-			<div class="tag-item" v-for="(tag, index) in tags" @click="removeTag(index)" :key="'newpost_tag_' + tag + '_' + index">
-				{{ tag }}
-			</div>
-		</div>
-		<input :type="type" placeholder=" " @keyup.enter="addTag()" :disabled="tags != null && tags != null && tags.length == 3" :class="[inputClass, { invalid: invalid }]" @blur="check" v-model="input" :maxlength="maxlength" class="input" />
-		<label class="d-flex align-items-center">
-			برچسب‌ها
-			<small class="max-text ms-1">حداکثر 3 برچسب</small>
-		</label>
-
-		<div class="tags-suggestion" v-if="suggestions.length > 0 && this.input != null && this.input.length > 0">
-			<div class="tags flex-wrap">
-				<div class="tag-item" v-for="(suggestion, index) in suggestions" @click="addTag(suggestion.text)" :key="'suggested_tag_' + suggestion + '_' + index">
-					{{ suggestion.text }}
+	<div class="tag-input-container">
+		<span class="font-demibold font-18"> {{ __.get("content/posts.tags") }} </span>
+		<div class="d-flex tag-input mt-3" :class="{ focus: tags != null && tags != undefined && tags.length > 0 }">
+			<div class="tags">
+				<div class="tag-item" v-for="(tag, index) in tags" :key="'newpost_tag_' + tag + '_' + index">
+					<i class="material-icons" @click="removeTag(index)">close</i>
+					<span class="separator"></span>
+					<span>{{ tag }}</span>
 				</div>
+			</div>
+			<input :type="type" @keyup.enter="addTag()" :disabled="tags != null && tags != null && tags.length == 3" :class="[inputClass, { invalid: invalid }]" @blur="check" v-model="input" :maxlength="maxlength" class="text-input text-input--md input" />
+
+			<div class="autocomplete-dropdown" v-if="suggestions.length > 0 && this.input != null && this.input.length > 0">
+				<ul style="left: 0; top: 48px">
+					<li v-for="(suggestion, index) in suggestions" @click="addTag(suggestion.value)" :key="'suggested_tag_' + suggestion + '_' + index">
+						{{ suggestion.value }}
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -66,14 +67,17 @@ export default {
 			this.tags = this.value;
 		},
 		input(newVal) {
-			if (newVal != null && newVal.length > 0) {
-				axios.get(this.$APP_URL + "/gettags?term=" + newVal + "&q=" + newVal).then((response) => {
-					let data = response.data;
-					if (data.results.length > 0) {
-						this.suggestions = data.results;
-					}
-				});
-			}
+			clearTimeout(this.timeout);
+			this.timeout = setTimeout(() => {
+				if (newVal != null && newVal.length > 0) {
+					axios.get(this.$APP_URL + "/gettags?term=" + newVal + "&q=" + newVal).then((response) => {
+						let data = response.data;
+						if (data.results.length > 0) {
+							this.suggestions = data.results;
+						}
+					});
+				}
+			}, 250);
 		},
 	},
 	data() {
@@ -82,6 +86,8 @@ export default {
 			suggestions: [],
 			input: null,
 			invalid: false,
+
+			timeout: null,
 		};
 	},
 	props: {
@@ -93,6 +99,7 @@ export default {
 		value: {
 			type: Array,
 			required: false,
+			default: [],
 		},
 		required: {
 			type: Boolean,

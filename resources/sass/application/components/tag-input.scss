@@ -4,7 +4,7 @@
     transition: 0.3s all;
 
     &:focus-within {
-        border-color: #191919;
+        border-color: $dark;
     }
 
     .tags {
@@ -14,12 +14,12 @@
         z-index: 2;
 
         .tag-item {
+            display: flex;
+            align-items: center;
             min-width: 2rem;
-            padding: 5px 12px 0 12px;
-            background: #EEE;
-            margin: 8px;
-            margin-bottom: 5px;
-            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            background: $gray-bg;
+            margin: 0.5rem;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -27,28 +27,34 @@
             vertical-align: middle;
             transition: 0.3s all;
             white-space: nowrap;
+            font-size: $text-xxsm;
+            font-weight: 600;
+
+            .separator {
+                display: block;
+                width: 2px;
+                height: 12px;
+                background-color: $gray;
+                margin: 0 0.5rem;
+            }
+
+            i {
+                color: $gray-dark;
+                font-size: 1rem;
+                cursor: pointer;
+            }
+
+            &:hover {
+                color: $dark;
+                background: $gray-light;
+
+                i {
+                    color: $dark;
+                }
+            }
+
         }
 
-        .tag-item:hover {
-            color: #FFF;
-            background-color: $danger;
-        }
-
-    }
-
-    .tags-suggestion {
-        position: absolute;
-        top: 105%;
-        z-index: 1;
-        background: #FFF;
-        width: 100%;
-        padding: 6px 0;
-        box-shadow: 0 20px 40px 5px rgba(0, 0, 0, 0.1);
-
-        .tag-item:hover {
-            background-color: #E0E0E0 !important;
-            color: #191919 !important;
-        }
     }
 
     label {
@@ -70,12 +76,9 @@
     .input {
         border: 0;
         width: 100%;
-        outline: none;
-        border-radius: 0;
         color: $text-color;
-        transition: 0.1s ease-out;
+        transition: 0.3s ease-out;
         font-size: $text-xsm;
-        padding: 0.5rem 0.35rem;
     }
 
     &:focus {
