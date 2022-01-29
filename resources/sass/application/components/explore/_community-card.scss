@@ -6,6 +6,9 @@
     &:hover {
         box-shadow: $bg-shadow;
 
+        .page-cover-info-card:after {
+            opacity: 0;
+        }
     }
 
     .community-icon {
