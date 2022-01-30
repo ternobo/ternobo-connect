@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Monetization;
 
 use App\Http\Controllers\Controller;
 use App\Models\MonetizationRequest;
-use App\Services\MonetizationManagementService;
+use App\Services\Admin\MonetizationManagementService;
 
 class MonetizationManagementController extends Controller
 {
