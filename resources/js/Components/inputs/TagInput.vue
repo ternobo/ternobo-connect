@@ -4,9 +4,9 @@
 		<div class="d-flex tag-input mt-3" :class="{ focus: tags != null && tags != undefined && tags.length > 0 }">
 			<div class="tags">
 				<div class="tag-item" v-for="(tag, index) in tags" :key="'newpost_tag_' + tag + '_' + index">
-					<i class="material-icons" @click="removeTag(index)">close</i>
-					<span class="separator"></span>
 					<span>{{ tag }}</span>
+					<span class="separator"></span>
+					<i class="material-icons" @click="removeTag(index)">close</i>
 				</div>
 			</div>
 			<input :type="type" @keyup.enter="addTag()" :disabled="tags != null && tags != null && tags.length == 3" :class="[inputClass, { invalid: invalid }]" @blur="check" v-model="input" :maxlength="maxlength" class="text-input text-input--md input" />

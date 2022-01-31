@@ -1,0 +1,57 @@
+ .media-block {
+     position: relative;
+     background: $gray-bg;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     padding: 3.25rem 1rem;
+     border: 2px dashed $gray;
+
+     .edit-image-icon {
+         position: absolute;
+         top: 2rem;
+         #{$end}: 2rem;
+         z-index: 1;
+         box-shadow: $bg-hover-shadow;
+     }
+
+     .spoiler-alert-check {
+         padding: 0.25rem 0.5rem;
+         background: $white;
+         color: $gray-medium-dark;
+         border-radius: 8px;
+         z-index: 1;
+         position: absolute;
+         #{$start}: 2rem;
+         bottom: 1.5rem;
+         display: flex;
+         align-items: center;
+         gap: 0.5rem;
+         font-size: $text-xsm;
+         height: 32px;
+         box-shadow: $bg-hover-shadow;
+     }
+
+     .action-container {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         margin: -12px 0px;
+         color: $gray-500;
+
+         >* {
+             margin: 12px 0px;
+         }
+
+         .title {
+             color: $dark;
+             font-weight: 600;
+         }
+
+         .btn {
+             padding: 12px 40px;
+         }
+
+     }
+ }

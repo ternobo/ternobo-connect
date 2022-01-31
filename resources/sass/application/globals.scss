@@ -352,51 +352,6 @@ img {
     box-shadow: 0 1rem 40px rgba(0, 0, 0, .02);
 }
 
-
-
-.new-post--placeholder {
-    font-size: 0.875rem;
-    color: $gray-500;
-}
-
-.new-post--action {
-    display: flex;
-    align-items: center;
-    line-height: 1;
-    font-size: 0.875rem;
-    color: $gray-500;
-    display: flex;
-    border-radius: 12px;
-    transition: 0.3s all;
-    font-size: $text-xsm;
-
-    @media screen and(min-width: $sm-size) {
-        padding: 4px 16px;
-
-        &:not(.disabled):hover {
-            background: #EEE;
-            color: $gray-500;
-        }
-    }
-
-    i {
-        font-size: 1.25rem;
-        margin-#{$end}: 0.25rem;
-
-        &:not(.disabled) {
-            color: $gray-500;
-        }
-
-    }
-
-    &.disabled:hover,
-    &.disabled:hover i,
-    &.disabled i {
-        color: #C8C8C8;
-    }
-
-}
-
 .verificationcheck {
     @extend .material-icons;
     color: $blue-cta;
@@ -980,29 +935,9 @@ a:focus {
     background-color: $gray-500;
 }
 
-
-.new-post-body {
-    padding: 1.5rem;
-
-    figure.profile-sm {
-        @if($direction==rtl) {
-            margin: -2px 0 -2px 1rem;
-        }
-
-        @else {
-            margin: -2px 1rem -2px 0;
-        }
-    }
-}
-
-.new-post-actions {
-    margin-top: 0.75rem;
-}
-
 .ck.ck-sticky-panel .ck-sticky-panel__content_sticky {
     top: 70px !important;
 }
-
 
 
 @media screen and (max-width: $sm-size) {

@@ -1,0 +1,45 @@
+ >.editor-block {
+     display: flex;
+     flex-direction: row;
+     padding: 0;
+     align-items: flex-start;
+
+     &:hover,
+     &:focus-within {
+         border-#{$start}-color: $gray-400;
+     }
+
+     .editor-block--container {
+         margin-#{$start}: 1rem;
+         width: 100%;
+         max-width: 100%;
+         border-#{$start}: 3px solid transparent;
+         transition: 0.3s border;
+         @import "./media";
+     }
+
+     &:not(:first-child) {
+         margin-top: 1.5rem;
+     }
+
+     &:last-child {
+         margin-bottom: 1rem;
+     }
+
+     >.delete-move-actions {
+         color: $gray-medium-dark;
+         background: $gray-light;
+         border-radius: 12px;
+         padding: 0.5rem;
+         height: auto;
+         width: auto;
+
+         >* {
+             margin: 0 1px;
+         }
+
+         i {
+             font-size: $text-lg;
+         }
+     }
+ }

@@ -1,13 +1,13 @@
 <template>
-	<div class="content-editor--container">
-		<div class="elements">
-			<draggable class="list-group" v-model="blocks" v-if="blocks.length > 0" handle=".hand-hover" tag="div" v-bind="dragOptions" @start="drag = true" @end="drag = false">
-				<div class="editor-item" :class="{ 'image-item': element.type == 'image' || element.type == 'video' }" v-for="(element, index) in blocks" :key="`item_type_${element.id}_${element.type}`">
+	<div class="block-content-editor">
+		<div class="block-content-editor--body">
+			<draggable class="block-content-editor--body__list" v-model="blocks" v-if="blocks.length > 0" handle=".hand-hover" tag="div" v-bind="dragOptions" @start="drag = true" @end="drag = false">
+				<div class="editor-block" v-for="(element, index) in blocks" :key="`item_type_${element.id}_${element.type}`">
 					<div class="delete-move-actions">
 						<i class="material-icons-outlined hand-hover">drag_indicator</i>
 						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 					</div>
-					<div class="editor-block-container">
+					<div class="editor-block--container">
 						<component :is="components[element.type]" ref="blocks" :isDefault="element.default" @delete="deleteElem(index, true)" @addParagraph="addParagraph(index + 1)" :type.sync="blocks[index].type" @focus="onFocus" :meta.sync="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" :max="leftCharacter" />
 					</div>
 				</div>
@@ -19,7 +19,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="d-flex align-items-center justify-content-between">
+		<div class="block-content-editor--footer">
 			<emoji-picker @pick="appendEmoji" />
 			<div class="my-3 character-counter">
 				<span class="counter tex-dark">{{ leftCharacter }}</span>

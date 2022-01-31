@@ -1,9 +1,11 @@
 .poll-block-container {
-    min-height: 102px;
+    min-height: 216px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    border: 2px dashed $gray;
+    background: $gray-bg;
 
     .poll-not-setuped {
         display: flex;
