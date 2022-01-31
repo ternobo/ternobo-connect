@@ -68,7 +68,7 @@ export default {
 				this.transformBy += value;
 			}
 		},
-		deleteItem(index) {
+		deleteSlide(index) {
 			if (index == this.activeIndex) {
 				if (index == 0 && this.slides.length == 1) {
 					let slide = this.slides[index];
@@ -83,11 +83,24 @@ export default {
 					this.selectSlide(index - 1);
 				}
 			}
+
 			if (this.slides.length > 1) {
 				this.$nextTick(() => {
 					let deletedItem = this.slides.splice(index, 1)[0];
 					this.$emit("delete", deletedItem.id);
 				});
+			}
+		},
+		deleteItem(index) {
+			const slide = this.slides[index];
+			if (slide.content.length > 0) {
+				this.confirmDialog(__.get("messages.delete-post-confirm"), { okTitle: __.get("application.delete") }).then((value) => {
+					if (value) {
+						this.deleteSlide(index);
+					}
+				});
+			} else {
+				this.deleteSlide(index);
 			}
 		},
 		updateIcon() {

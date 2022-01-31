@@ -40,18 +40,39 @@
     }
 }
 
-.content-editor--container {
+/*******************************************************************/
+.block-content-editor {
     display: flex;
     flex-direction: column;
     min-height: 270px;
     background-color: $white;
 
-    .elements {
+    &__blocks-list-button {
+        i {
+            transition: 0.3s all;
+        }
+
+        &:hover {
+            background: $gray-bg;
+        }
+
+        &.active {
+            background: $gray-bg;
+
+            i {
+                transform: rotate(45deg);
+            }
+        }
+    }
+
+    &--body {
         flex: 1 1 auto;
 
-        .list-group {
-            width: calc(100% + 165px);
-            margin-#{$start}: -132px;
+        &__list {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            @import "./blocks/editor-block";
         }
 
         .code-blocks {
@@ -60,13 +81,15 @@
         }
 
         .placeholder-element {
-            margin-#{$start}: 57px;
+            margin-#{$start}: 32px;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
         }
     }
+
+    @import "./block-list";
 
     .editor-actions {
         width: 100%;
@@ -82,149 +105,6 @@
         margin-bottom: 1.5rem;
 
     }
-
-    .editor-item {
-        display: flex;
-        flex-direction: row;
-        padding: 0 16px;
-        align-items: flex-start;
-
-        .editor-block-container {
-            margin-#{$start}: 12px;
-            width: 100%;
-            max-width: calc(100% - 3.25rem);
-            border-#{$start}: 3px solid transparent;
-            padding-#{$start}: 2rem;
-            transition: 0.3s border;
-
-            &:hover,
-            &:focus-within {
-                border-#{$start}-color: $gray-400;
-            }
-
-        }
-
-        &:not(:first-child) {
-            margin-top: 1.5rem;
-        }
-
-        &:last-child {
-            margin-bottom: 16px;
-        }
-
-        &.image-item {
-            position: relative;
-
-            .editor-block-container {
-                margin-#{$start}: 8px;
-                padding-#{$start}: 0;
-            }
-
-            img,
-            figure {
-                width: 100%;
-                max-height: 842.666666667px;
-                -o-object-fit: cover;
-                object-fit: cover;
-                -o-object-position: center;
-                object-position: center;
-            }
-
-            >img {
-                width: 100%;
-            }
-
-            &:not(:first-child) {
-                margin-top: 2rem;
-            }
-
-            &:last-child {
-                margin-bottom: 1.5rem;
-            }
-        }
-
-        >.delete-move-actions {
-            background: $white;
-            color: $gray-500;
-            border-radius: 12px;
-            padding: 6px;
-            height: auto;
-            width: auto;
-
-            >* {
-                margin: 0 1px;
-            }
-
-            i {
-                font-size: $text-lg;
-            }
-        }
-    }
-
-    .media-item {
-        position: relative;
-        background: $gray-50;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 3.25rem 1rem;
-
-
-        .edit-image-icon {
-            position: absolute;
-            top: 2rem;
-            #{$end}: 2rem;
-            z-index: 1;
-            box-shadow: $bg-hover-shadow;
-        }
-
-        .spoiler-alert-check {
-            padding: 0.25rem 0.5rem;
-            background: $white;
-            color: $gray-medium-dark;
-            border-radius: 8px;
-            z-index: 1;
-            position: absolute;
-            #{$start}: 2rem;
-            bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: $text-xsm;
-            height: 32px;
-            box-shadow: $bg-hover-shadow;
-        }
-
-        .action-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: -12px 0px;
-            color: $gray-500;
-
-            >* {
-                margin: 12px 0px;
-            }
-
-            .title {
-                color: $dark;
-                font-weight: 600;
-            }
-
-            .btn {
-                padding: 12px 40px;
-            }
-
-        }
-    }
-}
-
-.editors-actions-list {
-    position: absolute;
-    z-index: 999;
-    background: $gray-100;
-    padding: 0.75rem;
 }
 
 .add-action-btn {
@@ -238,75 +118,6 @@
 
     i {
         transition: 0.3s transform;
-    }
-}
-
-.add-action-btn.active {
-    background: #EEEEEE;
-
-    &:hover {
-        background: #E0E0E0;
-    }
-
-    i {
-        color: $light;
-        transform: rotate(45deg);
-    }
-}
-
-
-
-.text-type-list {
-    display: flex;
-    flex-direction: column;
-    width: 212px;
-    padding: 12px;
-
-    &:not(:first-child) {
-        margin-top: 0.5rem;
-        padding-top: 0;
-    }
-
-
-    >.list-title {
-        margin-bottom: 4px;
-        color: $gray-500;
-        font-size: $text-xxsm;
-    }
-
-
-    >.editor-list-item {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding: 8px 10px;
-
-        &:hover {
-            background: $gray-200;
-            cursor: pointer;
-        }
-
-        strong {
-            color: $gray-500;
-            margin-#{$start}: 12px;
-            font-size: $text-xxsm;
-        }
-
-        i {
-            background: $gray-300;
-            color: $gray-600;
-            height: 28px;
-            width: 28px;
-            font-size: $text-lg;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.3s all;
-
-            &.disabled {
-                opacity: 0.4;
-            }
-        }
     }
 }
 
@@ -378,9 +189,9 @@
 
 div[placeholder]:not(:focus):empty:before {
     content: attr(placeholder);
-    color: $gray-400;
+    color: $gray;
     cursor: text;
-    vertical-align: -webkit-baseline-middle;
+    vertical-align: middle;
 }
 
 /** Tag Selector **/

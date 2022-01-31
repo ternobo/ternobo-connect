@@ -1,6 +1,6 @@
 <template>
 	<div class="position-relative" v-click-outside="hideList">
-		<button class="btn rounded-circle add-action-btn btn-icon" :class="{ active: showList }" @click="toggleList"><i class="material-icons font-20">add</i></button>
+		<button class="btn btn-rounded btn-icon block-content-editor__blocks-list-button" :class="{ active: showList }" @click="toggleList"><i class="material-icons font-20">add</i></button>
 		<transition name="fade">
 			<div class="editors-actions-list" :style="editorsActionListStyle" v-if="showList">
 				<div class="text-type-list">
@@ -70,9 +70,9 @@ export default {
 				top: 0,
 			};
 			if (this.shared.direction == "rtl") {
-				style.left = "-272px";
+				style.left = "-266px";
 			} else {
-				style.right = "-272px";
+				style.right = "-266px";
 			}
 			return style;
 		},

@@ -1,5 +1,5 @@
 <template>
-	<div class="media-item" :class="{ 'p-0': content != null }">
+	<div class="media-block" :class="{ 'p-0': content != null }">
 		<edit-image-modal :show.sync="showImageEdit" :image="contentUrl" v-model="editResult"></edit-image-modal>
 
 		<!--- Show Media End !-->
