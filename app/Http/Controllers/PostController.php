@@ -87,15 +87,16 @@ class PostController extends Controller
                 'can_tip' => $request->canDonate,
             ]);
 
-            $tagsAndMentions = $post->setContent($slides, $user, false, $this->pollService, $this->dom);
-
+            $mentions = $post->setContent($slides, $user, false, $this->pollService, $this->dom);
             if (!$draft) {
-                SocialMediaTools::callMentions($tagsAndMentions['mentions'], $post->id);
+                SocialMediaTools::callMentions($mentions, $post->id);
             }
-            $post->tags()->sync(Tag::addTag($tagsAndMentions["tags"]));
+            $post->tags()->sync(Tag::addTag($request->input("tags", [])));
             $post->save();
+
             $user->personalPage->addAction("post", $post->id);
             $post->load(["page", "tags", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);;
+
             DB::commit();
             event(new PostShareEvent($post));
         } catch (\Throwable $th) {
@@ -321,14 +322,10 @@ class PostController extends Controller
                 'category_id' => $category,
                 'can_tip' => $request->canDonate,
             ]);
-
-            $mentions = [];
-            $tags = [];
-
             $post->deleteBlocks();
             $post->slides()->delete();
-            $tags = $post->setContent($slides, $user, false, $this->pollService, $this->dom)['tags'];
-            $post->tags()->sync(Tag::addTag($tags));
+            $post->setContent($slides, $user, false, $this->pollService, $this->dom);
+            $post->tags()->sync(Tag::addTag($request->input("tags", [])));
             $post->save();
             DB::commit();
             event(new PostShareEvent($post));

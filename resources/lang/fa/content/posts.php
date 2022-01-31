@@ -27,7 +27,7 @@ return [
     'spoiler-alert' => "خطر لو رفتن",
     'rotate' => "چرخاندن",
     'alt-text' => "متن جایگزین",
-
+    "tags"=>"برچسب‌ها",
     'votes' => "رای",
     "poll-loading-error" => "خطا در دریافت اطلاعات",
 ];

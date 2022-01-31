@@ -1,0 +1,44 @@
+.autocomplete-dropdown {
+    ul {
+        position: absolute;
+        width: 100%;
+        height: -webkit-max-content;
+        height: -moz-max-content;
+        height: max-content;
+        background: $white;
+        padding: 1rem;
+        box-shadow: $bg-shadow;
+        z-index: 1;
+        top: 52px;
+        left: 0;
+        border: 2px solid $gray-light-medium;
+
+        li {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            align-items: center;
+
+            font-size: $text-xsm;
+            color: $gray-dark;
+            padding: 0.5rem;
+
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+            cursor: pointer;
+
+            >i {
+                color: $light;
+                margin-#{$end}: map-get($spacings, 2);
+                font-size: $text-sm;
+            }
+
+            &:hover {
+                background: $gray-bg;
+            }
+        }
+    }
+}
