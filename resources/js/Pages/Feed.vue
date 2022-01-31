@@ -42,7 +42,7 @@ export default {
 	created() {
 		this.postsArray = this.posts.data;
 		this.page = this.posts.current_page;
-		this.next_page_url = this.posts.next_page_url;
+		this.next_page_url = this.posts.links.next;
 	},
 	data() {
 		return {
@@ -68,7 +68,7 @@ export default {
 					.then((response) => {
 						let data = response.posts;
 						this.postsArray = this.postsArray.concat(data.data);
-						this.next_page_url = data.next_page_url;
+						this.next_page_url = data.links.next;
 					})
 					.catch((error) => {
 						console.log(error);

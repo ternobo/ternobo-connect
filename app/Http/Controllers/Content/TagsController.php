@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers\Content;
 
-use App\Http\Controllers\Controller;
-use App\Models\CommunityTag;
-use App\Models\CommunityTranslation;
-use App\Models\Following;
-use App\Models\Post;
-use App\Models\Tag;
-use App\Services\Content\CommunityTagService;
-use App\Ternobo;
-use Artesaos\SEOTools\Facades\SEOMeta;
-use Artesaos\SEOTools\Facades\SEOTools;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
 use Ternobo\TernoboWire\TernoboWire;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
+use Illuminate\Http\Request;
+use Artesaos\SEOTools\Facades\SEOTools;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use App\Ternobo;
+use App\Services\Content\CommunityTagService;
+use App\Models\Tag;
+use App\Models\Post;
+use App\Models\Following;
+use App\Models\CommunityTranslation;
+use App\Models\CommunityTag;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Content\PostResource;
 
 class TagsController extends Controller
 {
@@ -37,9 +39,11 @@ class TagsController extends Controller
 
         $tag =  Tag::query()->where("name", $name)->first();
 
-        $posts = $tag->posts()
+        $posts = PostResource::collection($tag->posts()
             ->with(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"])
-            ->paginate(10);
+            ->paginate(10))
+            ->response()
+            ->getData();
 
         $followed = false;
         if ($tag instanceof Tag) {
@@ -52,6 +56,29 @@ class TagsController extends Controller
 
         return TernoboWire::render('Tags', ["posts" => $posts, 'tag' => $name, "followed" => $followed, "community" => $community]);
     }
+
+
+    public function search(Request $request)
+    {
+        $term = trim($request->q);
+        $tags = Tag::query();
+        if (empty($term)) {
+            $tags = $tags->latest()->limit(10)->get();
+        } else {
+            $tags = $tags->where("name", "like", "$term%")->latest()->limit(10)->get();
+        }
+        $tags = $tags->map(function ($tag) {
+            $community = CommunityTag::query()->where("tag_id", $tag->id)->first();
+            $icon = null;
+            if ($community instanceof CommunityTag) {
+                $icon = url($community->icon);
+            }
+
+            return ["icon" => $icon, 'value' => $tag->name, "is_community" => $community instanceof CommunityTag];
+        });
+        return $this->generateResponse(true, $tags);
+    }
+
 
     public function toggleFollowTag($tag)
     {

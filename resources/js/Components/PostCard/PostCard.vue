@@ -29,9 +29,7 @@
 				</div>
 			</div>
 		</div>
-
 		<component v-if="post_data != null && post_data != undefined" :slide.sync="slideShowing" :post="post_data" :has-comment="hasComment" v-bind:is="componentType"></component>
-
 		<div class="post-footer" v-if="!isEmbed">
 			<div class="actions">
 				<div>

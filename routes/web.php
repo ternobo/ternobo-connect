@@ -119,8 +119,7 @@ Route::middleware(["auth.web"])->group(function () {
         Route::post("/mutual-friends", "Profile\PageController@getMutualFriends")->middleware(FullAccessUserMiddleware::class);
 
         Route::post("/slugsearch", "Profile\PageController@search")->middleware(FullAccessUserMiddleware::class);
-
-        Route::get("/gettags", "PostController@getTags")->middleware(FullAccessUserMiddleware::class);
+        Route::get("/search/tags", "Content\TagsController@search")->middleware(FullAccessUserMiddleware::class);
 
         Route::post("/setcover", "Profile\ProfileController@setCover")->name("profile-cover")->middleware(FullAccessUserMiddleware::class);
 
@@ -305,7 +304,6 @@ Route::prefix('/{page:slug}')->group(function () {
 
     Route::post("/actions", "Profile\PageController@getActions");
     Route::post("/drafts", "Profile\PageController@getDrafts");
-    Route::post("/tags", "Profile\PageController@getTags");
 
     Route::post("/followings", "Profile\ConnectionsController@followings");
     Route::post("/followings/tags", "Profile\ConnectionsController@followingTags");

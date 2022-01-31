@@ -70,10 +70,10 @@ export default {
 			clearTimeout(this.timeout);
 			this.timeout = setTimeout(() => {
 				if (newVal != null && newVal.length > 0) {
-					axios.get(this.$APP_URL + "/gettags?term=" + newVal + "&q=" + newVal).then((response) => {
+					axios.get("/search/tags", { params: { q: newVal } }).then((response) => {
 						let data = response.data;
-						if (data.results.length > 0) {
-							this.suggestions = data.results;
+						if (data.data.length > 0) {
+							this.suggestions = data.data;
 						}
 					});
 				}

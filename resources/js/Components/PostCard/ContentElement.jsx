@@ -28,7 +28,7 @@ export default {
                     this.text = (TextareaParser.unescapeHtml(this.content.content));
                     content = (
                         <div>
-                            <social-content text={this.text} tags={this.tags}></social-content>
+                            <social-content text={this.text}></social-content>
                         </div>
                     );
                 }
@@ -66,7 +66,7 @@ export default {
 
                 items.forEach((item) => {
                     li_list.push(<li>
-                        <social-content text={item} tags={this.tags}></social-content>
+                        <social-content text={item}></social-content>
                     </li>)
                 });
 
@@ -101,10 +101,6 @@ export default {
         },
         content: {
             required: true
-        },
-        tags: {
-            required: false,
-            default: () => [],
         }
     }
 }

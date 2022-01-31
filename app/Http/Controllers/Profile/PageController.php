@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Content\ActionResource;
 use App\Models\Action;
 use App\Models\Category;
 use App\Models\Contact;
@@ -193,7 +194,6 @@ class PageController extends Controller
             if (Auth::check()) {
                 $actions = $actions->with("post.mutualLikes");
             }
-
             $actions = $actions->paginate(10);
         } elseif ($request->filled("action")) {
             if (Str::startsWith($request->action, "like")) {
@@ -208,7 +208,7 @@ class PageController extends Controller
         }
 
         return response()->json([
-            'actions' => $actions,
+            'actions' => ActionResource::collection($actions)->response()->getData(),
         ]);
     }
 
