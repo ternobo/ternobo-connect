@@ -1,0 +1,55 @@
+.content-creation {
+    .content-creation--header {
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding-bottom: 1.5rem;
+        border-bottom: 2px solid $gray-light-medium;
+        margin-bottom: 2rem;
+
+        &__user-profile {
+            display: flex;
+            align-items: center;
+
+            >.profile-xxsm {
+                margin-#{$end}: 0.75rem;
+            }
+        }
+
+        &__actions {
+            display: flex;
+            align-items: center;
+
+            >*:first-child {
+                margin-#{$end}: 1rem;
+            }
+        }
+    }
+
+    .user-profile-name {
+        font-size: 0.875rem;
+        word-break: break-word;
+        max-width: 126px;
+    }
+
+    .can-tip-post-check {
+        display: flex;
+        align-items: center;
+        width: 140px;
+        border: 2px solid $gray-200;
+        margin-#{$end}: 0.75rem;
+
+        >div:first-child {
+            display: flex;
+            align-items: center;
+        }
+
+        font-weight: 600;
+        font-size: 0.75rem;
+        justify-content: space-between;
+
+        padding: .75rem 1rem;
+    }
+}

@@ -69,8 +69,7 @@
     }
 
     .editor-actions {
-        width: calc(100% + 77px);
-        margin-#{$start}: -77px;
+        width: 100%;
 
         .add-action-btn {
             background: $white;

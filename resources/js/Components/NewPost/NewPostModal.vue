@@ -1,34 +1,33 @@
 <template>
-	<div>
+	<div v-if="user != null">
 		<category-select-modal :categories.sync="categories" @hide="onCategoryClose" :selectedCategory.sync="category" :show.sync="showCategoryModal"></category-select-modal>
-		<b-modal ignore-enforce-focus-selector=".ternoboeditor--link-input, .editor-block-container *" v-if="user != null" v-model="showModal" @hide="hide" @show="shown" no-close-on-esc hide-footer :hide-backdrop="showCategoryModal || !showNewPostModal" :modal-class="['new-post-modal', { 'opacity-0': showCategoryModal || !showNewPostModal }]" size="lg modal-new-post" :title="__.get('content/posts.create-new-post')" :centered="true">
-			<div action="/posts" data-ajax method="POST" data-reload="1" enctype="multipart/form-data" class="w-100">
-				<div class="new-post position-relative">
-					<div class="selections">
-						<div class="d-flex align-items-center">
-							<lazy-image :src="user.profile" class="profile-xxsm mb-0" img-class="profile-xxsm" loading="lazy" />
-							<strong class="user-profile-name">{{ username }}</strong>
+
+		<b-modal ignore-enforce-focus-selector=".ternoboeditor--link-input, .editor-block-container *" v-model="showModal" @hide="hide" @show="shown" no-close-on-esc hide-footer :hide-backdrop="hideModal" :modal-class="{ 'opacity-0': hideModal }" size="lg" :title="__.get('content/posts.create-new-post')" :centered="true">
+			<div class="content-creation">
+				<div class="content-creation--header">
+					<div class="content-creation--header__user-profile">
+						<lazy-image :src="user.profile" class="profile-xxsm mb-0" img-class="profile-xxsm" loading="lazy" />
+						<strong class="user-profile-name">{{ username }}</strong>
+					</div>
+					<div class="content-creation--header__actions">
+						<div class="can-tip-post-check clickable" @click="canDonate = !canDonate">
+							<div>
+								<i class="material-icons-outlined font-20 me-1">savings</i>
+								{{ __.choice("tips.tip", 1) }}
+							</div>
+							<loading-spinner v-if="loadingCanDonate" style="height: 12px; width: 12px; border-width: 1px"></loading-spinner>
+							<checkbox v-else v-model="canDonate" :status="canDonate" class="m-0 text-superlight light"></checkbox>
 						</div>
-						<div class="categoryandtype">
-							<div class="can-tip-post-check clickable" @click="canDonate = !canDonate">
-								<div>
-									<i class="material-icons-outlined font-20 me-1">savings</i>
-									{{ __.choice("tips.tip", 1) }}
-								</div>
-								<loading-spinner v-if="loadingCanDonate" style="height: 12px; width: 12px; border-width: 1px"></loading-spinner>
-								<checkbox v-else v-model="canDonate" :status="canDonate" class="m-0 text-superlight light"></checkbox>
-							</div>
-							<div class="category-select" @click="showCategoryModal = true">
-								<i class="material-icons-outlined">layers</i>
-								<span>{{ category == null ? __.choice("content/posts.category", 2) : category.name }}</span>
-							</div>
+						<div class="category-select" @click="showCategoryModal = true">
+							<i class="material-icons-outlined">layers</i>
+							<span>{{ category == null ? __.choice("content/posts.category", 2) : category.name }}</span>
 						</div>
 					</div>
-					<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
-					<tag-input v-model="tags" />
-					<modal-footer-buttons @ok="submitPost(shouldDraft)" @cancel="submitPost(!shouldDraft)" class="mt-8" :cancelLoading="loadingDraft" :okLoading="loading" :okText="post ? __.get('application.save') : __.get('content/posts.publish')" :cancelText="shouldDraft ? __.get('content/posts.publish') : __.get('content/posts.draft')" :cancelDisable="!checkContent" cancelClass="btn-text" :okDisabled="!checkContent" okClass="btn-primary"></modal-footer-buttons>
 				</div>
+				<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
+				<tag-input v-model="tags" />
 			</div>
+			<modal-footer-buttons @ok="submitPost(shouldDraft)" @cancel="submitPost(!shouldDraft)" class="mt-8" :cancelLoading="loadingDraft" :okLoading="loading" :okText="post ? __.get('application.save') : __.get('content/posts.publish')" :cancelText="shouldDraft ? __.get('content/posts.publish') : __.get('content/posts.draft')" :cancelDisable="!checkContent" cancelClass="btn-text" :okDisabled="!checkContent" okClass="btn-primary"></modal-footer-buttons>
 		</b-modal>
 	</div>
 </template>
@@ -256,6 +255,9 @@ export default {
 	},
 	computed: {
 		...mapState(["user", "shared", "showNewPostModal"]),
+		hideModal() {
+			return this.showCategoryModal || !this.showNewPostModal;
+		},
 		shouldDraft() {
 			return this.post?.type == "draft_post";
 		},
