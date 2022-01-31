@@ -9,6 +9,7 @@ use App\Ternobo;
 use App\HasUser;
 use App\Facade\UserBadgeService;
 use App\Facade\MonetizationService;
+use App\Http\Resources\Content\ActionResource;
 use Illuminate\Support\Facades\Request;
 
 class Page extends Model

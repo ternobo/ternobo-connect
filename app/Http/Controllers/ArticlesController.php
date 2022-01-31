@@ -170,9 +170,9 @@ class ArticlesController extends Controller
 
             $articles = Post::where("type", "article")->where("page_id", $article->user->personalPage->id)->get();
 
-            $comments = $article->getComments();
+            // $comments = $article->getComments();
 
-            return TernoboWire::render("Articles/Article", array("post" => $article, "comments" => $comments, "userposts" => count($articles)));
+            return TernoboWire::render("Articles/Article", array("post" => $article, "comments" => [], "userposts" => count($articles)));
         } else {
             return abort(404);
         }

@@ -9,6 +9,7 @@ use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\FollowMiddlware;
 use App\Http\Middleware\FullAccessUserMiddleware;
 use App\Http\Requests\PostRequest;
+use App\Http\Resources\Content\PostResource;
 use App\Jobs\PostDeleteProcess;
 use App\Models\Action;
 use App\Models\Category;
@@ -51,61 +52,6 @@ class PostController extends Controller
         $this->middleware([FullAccessUserMiddleware::class])->only(["store", "update", "destroy"]);
         $this->dom = $dom;
         $this->pollService = $pollService;
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(PostRequest $request)
-    {
-        $slides = $request->slides;
-        $user = Auth::user();
-        $user->load("personalPage");
-        $category = null;
-
-        DB::beginTransaction();
-        try {
-            if ($request->filled("category")) {
-                $category = Category::query()->where("name", $request->category)->where("page_id", $user->personalPage->id)->firstOrCreate([
-                    "name" => $request->category,
-                    "page_id" => $user->personalPage->id,
-                    "type" => "post",
-                ])->id;
-            }
-
-            $draft = $request->draft == '1';
-            $post = Post::withRelations()->create([
-                'type' => $draft ? 'draft_post' : 'post',
-                'user_id' => $user->id,
-                'page_id' => $user->personalPage->id,
-                'media' => [],
-                'show' => "public",
-                "category_id" => $category,
-                'can_tip' => $request->canDonate,
-            ]);
-
-            $mentions = $post->setContent($slides, $user, false, $this->pollService, $this->dom);
-            if (!$draft) {
-                SocialMediaTools::callMentions($mentions, $post->id);
-            }
-            $post->tags()->sync(Tag::addTag($request->input("tags", [])));
-            $post->save();
-
-            $user->personalPage->addAction("post", $post->id);
-            $post->load(["page", "tags", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);;
-
-            DB::commit();
-            event(new PostShareEvent($post));
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            throw $th;
-        }
-
-
-        return response()->json(array("result" => true, "post" => $post));
     }
 
     public function likePost($post_id)
@@ -197,28 +143,6 @@ class PostController extends Controller
         return response()->json(array("results" => $formatted_categories, "pagination" => ["more" => $more]));
     }
 
-    public function getTags(Request $request)
-    {
-        $term = trim($request->q);
-        $tags = Tag::query();
-        if (empty($term)) {
-            $tags = $tags->latest()->paginate(10);
-        } else {
-            $tags = $tags->where("name", "like", "$term%")->paginate(10);
-        }
-        $formatted_tags = [];
-        foreach ($tags as $tag) {
-            $community = CommunityTag::query()->where("tag_id", $tag->id)->first();
-            $icon = null;
-            if ($community instanceof CommunityTag) {
-                $icon = url($community->icon);
-            }
-
-            $formatted_tags[] = ['key' => "#" . $tag->name, "icon" => $icon, 'value' => $tag->name, 'name' => "#" . $tag->name];
-        }
-        return response()->json(array("results" => $formatted_tags));
-    }
-
     /**
      * Display the specified resource.
      *
@@ -249,7 +173,7 @@ class PostController extends Controller
             SEOTools::setDescription("$page->name Shared Content");
         }
         if (($post->type === "post" || $post->type === "share") && $post->user->active) {
-            return TernoboWire::render("PostPage", ["post" => $post, "comment" => $request->input("comment", 0)]);
+            return TernoboWire::render("PostPage", ["post" => PostResource::make($post), "comment" => $request->input("comment", 0)]);
         }
         return abort(404);
     }
@@ -291,6 +215,63 @@ class PostController extends Controller
         ]);
     }
 
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(PostRequest $request)
+    {
+        $slides = $request->slides;
+        $user = Auth::user();
+        $user->load("personalPage");
+        $category = null;
+
+        DB::beginTransaction();
+        $tags = collect($request->input("tags", []))->reject(fn ($item) => $item == null);
+
+        try {
+            if ($request->filled("category")) {
+                $category = Category::query()->where("name", $request->category)->where("page_id", $user->personalPage->id)->firstOrCreate([
+                    "name" => $request->category,
+                    "page_id" => $user->personalPage->id,
+                    "type" => "post",
+                ])->id;
+            }
+
+            $draft = $request->draft == '1';
+            $post = Post::withRelations()->create([
+                'type' => $draft ? 'draft_post' : 'post',
+                'user_id' => $user->id,
+                'page_id' => $user->personalPage->id,
+                'media' => [],
+                'show' => "public",
+                "category_id" => $category,
+                'can_tip' => $request->canDonate,
+            ]);
+
+            $mentions = $post->setContent($slides, $user, false, $this->pollService, $this->dom);
+            if (!$draft) {
+                SocialMediaTools::callMentions($mentions, $post->id);
+            }
+            $post->tags()->sync(Tag::addTag($tags));
+            $post->save();
+
+            $user->personalPage->addAction("post", $post->id);
+            DB::commit();
+            event(new PostShareEvent($post));
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
+
+
+        return response()->json(array("result" => true, "post" => PostResource::make($post)));
+    }
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -302,15 +283,14 @@ class PostController extends Controller
     {
         $post = Post::withDrafts()->findOrFail($post);
         $slides = $request->slides;
-
         $user = Auth::user();
         $user->load("personalPage");
-
         $draft = $request->draft == '1';
 
         $deletedSlides = [];
 
         DB::beginTransaction();
+        $tags = collect($request->input("tags", []))->reject(fn ($item) => $item == null);
         try {
             $category = $request->filled("category") ? Category::query()->firstOrCreate([
                 'page_id' => $post->page_id,
@@ -325,7 +305,8 @@ class PostController extends Controller
             $post->deleteBlocks();
             $post->slides()->delete();
             $post->setContent($slides, $user, false, $this->pollService, $this->dom);
-            $post->tags()->sync(Tag::addTag($request->input("tags", [])));
+            $post->tags()->sync(Tag::addTag($tags));
+
             $post->save();
             DB::commit();
             event(new PostShareEvent($post));
@@ -336,7 +317,7 @@ class PostController extends Controller
         $post->fresh();
         $post->load(["page", "tags", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
 
-        return response()->json(array("result" => true, "post" => $post));
+        return response()->json(array("result" => true, "post" => PostResource::make($post)));
     }
 
     public function publishPost($post)

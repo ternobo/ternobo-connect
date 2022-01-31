@@ -198,7 +198,6 @@ export default {
 			default: () => {
 				return {
 					"@": "/slugsearch",
-					"#": "gettags",
 				};
 			},
 			required: false,
@@ -210,7 +209,7 @@ export default {
 		},
 		triggers: {
 			type: Array,
-			default: () => ["@", "#"],
+			default: () => ["@"],
 			required: false,
 		},
 		element: {

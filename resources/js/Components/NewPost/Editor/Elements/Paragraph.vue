@@ -1,5 +1,5 @@
 <template>
-	<mentionable :max-tags="3" class="textarea-content w-100" v-bind="$attrs" @click="focus">
+	<mentionable class="textarea-content w-100" v-bind="$attrs" @click="focus">
 		<div ref="editable" dir="auto" :placeholder="placeholder" class="editor--text-input" contenteditable @blur="onBlur" @focus="onFocus" @input="input" @keydown="onKeyDown" @paste="onPaste" @keydown.enter="addParagraph"></div>
 	</mentionable>
 </template>

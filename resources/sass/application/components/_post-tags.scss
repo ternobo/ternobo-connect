@@ -1,0 +1,19 @@
+.post-tags {
+    display: flex;
+    align-items: center;
+
+    .tag-item {
+        margin-#{$end}: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        font-size: $text-xxsm;
+        font-weight: 600;
+        line-height: 20px;
+        background-color: $gray-bg;
+
+        .icon {
+            height: 16px;
+            width: 16px;
+            margin-#{$end}: 0.25rem;
+        }
+    }
+}

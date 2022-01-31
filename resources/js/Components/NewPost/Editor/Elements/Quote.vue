@@ -1,5 +1,5 @@
 <template>
-  <mentionable :max-tags="3" class="quote-editor textarea-content w-100" v-bind="$attrs" @click="focus">
+  <mentionable class="quote-editor textarea-content w-100" v-bind="$attrs" @click="focus">
     <i class="material-icons-outlined text-grey me-2">format_quote</i>
     <div ref="editable" :placeholder="__.get('content/posts.enter-your-text')" class="editor--text-input"
          contenteditable @blur="onBlur" @focus="onFocus" @input="input"

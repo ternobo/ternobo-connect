@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Content;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Content\SearchRequest;
 use App\Http\Resources\BaseResource;
+use App\Http\Resources\Content\PostResource;
 use App\Http\Resources\Search\TagSearchResource;
 use App\Models\Page;
 use App\Models\Post;
@@ -44,7 +45,7 @@ class SearchController extends Controller
         $searchType = $request->input("type", "user");
 
         if ($searchType == "content") {
-            $results = BaseResource::collection($this->service->searchForContent($search)->appends(["q" => $search]))->response()->getData();
+            $results = PostResource::collection($this->service->searchForContent($search)->appends(["q" => $search]))->response()->getData();
         } elseif ($searchType == "tags") {
             $results = TagSearchResource::collection($this->service->searchForTags($search)->appends(["q" => $search]))->response()->getData();
         } else {

@@ -2,9 +2,9 @@
 	<div class="post-body" tabindex="1" @mouseenter="focus" @keyup.left="goPrevSlide" @keyup.right="goNextSlide">
 		<div class="slider-content" :class="{ expanded: showFullText }">
 			<Content @loaded="updateHeight" v-for="content in post.slides[active].content" :content="content" :tags="post.tags" :key="`content_item_${content.id}`"></Content>
-
 			<div class="showmore-container" :class="{ expanded: showFullText }" @click="showFullText = !showFullText" v-if="viewShowMore">{{ showFullText ? __.get("application.show-less") : __.get("application.show-more") }}</div>
 		</div>
+		<tags-list :tags="post.tags"></tags-list>
 		<div dir="ltr" class="slider-arrows" v-if="post.slides.length > 1">
 			<i class="material-icons clickable" :class="{ disabled: active < 1 }" @click="goPrevSlide">keyboard_arrow_left</i>
 			<div class="dot" v-for="(dot, index) in post.slides" :key="'dot_' + dot.id" @click="active = index" :class="{ active: index == active, clickable: index != active }"></div>
@@ -16,6 +16,7 @@
 <script>
 import Content from "./ContentElement";
 import Slide from "./SliderCard/Slide.vue";
+import TagsList from "./TagsList.vue";
 export default {
 	methods: {
 		focus() {
@@ -110,7 +111,7 @@ export default {
 			}, 200);
 		});
 	},
-	components: { Content, Slide },
+	components: { Content, Slide, TagsList },
 	name: "SliderCard",
 	props: {
 		slide: {

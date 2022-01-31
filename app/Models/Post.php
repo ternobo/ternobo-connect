@@ -174,52 +174,19 @@ class Post extends Model
         return $this->belongsToMany('App\Models\User', 'bookmarks', 'post_id', 'user_id');
     }
 
-    public function toArray(): array
-    {
-        // get the original array to be displayed
-        $data = parent::toArray();
-        $data['is_liked'] = false;
-        $data['is_bookmarked'] = false;
-        $data['tags'] = isset($data['tags']) ? collect($data['tags'])->pluck("name") : [];
-        if (Ternobo::isUserLogedIn()) {
-            if ($this->likes != null) {
-                $current_page = json_decode(Cookie::get('ternobo_current_page')) !== null ? json_decode(Cookie::get('ternobo_current_page')) : Auth::user()->personalPage;
-                $page_ids = array_column($this->likes->toArray(), "page_id");
-                if (in_array($current_page->id, $page_ids)) {
-                    $data['is_liked'] = true;
-                }
-            }
-            $bookmark = Bookmark::where("post_id", $data['id'])->where("user_id", Auth::user()->id)->first();
-            $data['is_bookmarked'] = $bookmark instanceof Bookmark;
-        }
-        return $data;
-    }
-
-    public function getComments($limit = 10): LengthAwarePaginator
-    {
-        return Comment::query()->whereNull("reply_to")->whereHas("page", function ($query) {
-            $query->whereHas("user", function ($query) {
-                $query->where("active", true);
-            });
-        })->where("post_id", $this->id)->latest()->paginate($limit);
-    }
-
     public function mutualLikes()
     {
-        if (Auth::check()) {
-            return $this->hasMany("App\Models\Like", "post_id")
-                ->with("page")
-                ->whereHas("page", function ($query) {
-                    $query->whereRaw("id in (select following from followings where page_id = ?)", Auth::user()->id);
-                })
-                ->latest();
-        }
-        return $this->hasMany("App\Models\Like", "post_id")->where("id", "-1");
+        return $this->hasMany(Like::class, "post_id")
+            ->with("page")
+            ->whereHas("page", function ($query) {
+                $query->whereRaw("id in (select following from followings where page_id = ?)", Auth::check() ? Auth::user()->id : "-1");
+            })
+            ->latest();
     }
 
     public function likes(): HasMany
     {
-        return $this->hasMany("App\Models\Like", "post_id")
+        return $this->hasMany(Like::class, "post_id")
             ->with("page")
             ->latest();
     }
@@ -229,7 +196,8 @@ class Post extends Model
         $mentions = [];
         $tags = [];
         foreach ($slides as $slide) {
-            if (count($slide) < 0) {
+
+            if (count($slide) == 0) {
                 continue;
             }
 
@@ -276,7 +244,7 @@ class Post extends Model
                             $text_mentions = SocialMediaTools::getMentions($text);
                             return SocialMediaTools::replaceMentions($text, $text_mentions);
                         });
-                        
+
                         SlideBlock::query()->create([
                             'slide_id' => $slide_id,
                             'page_id' => $user->personalPage->id,
