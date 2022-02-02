@@ -44,6 +44,20 @@ class Action extends Model
 
     protected $dates = ['deleted_at'];
 
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        if (!(Auth::user() instanceof Admin)) {
+            static::addGlobalScope(function ($query) {
+                return $query->whereHas("post");
+            });
+        }
+    }
+
     public function post()
     {
         return $this->belongsTo(Post::class, "post_id");

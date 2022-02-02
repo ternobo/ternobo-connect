@@ -174,10 +174,6 @@ class PageController extends Controller
             $actions = Action::query()->where("page_id", $page->id)
                 ->with("post")
                 ->where("action", "post")
-                ->whereHas("post", function ($query) use ($request) {
-                    $category = $request->category;
-                    $query->where("category_id", $category);
-                })
                 ->latest();
 
             if (Auth::check()) {
