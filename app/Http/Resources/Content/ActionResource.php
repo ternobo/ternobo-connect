@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Content;
 
+use App\Models\Post;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ActionResource extends JsonResource
@@ -14,11 +15,10 @@ class ActionResource extends JsonResource
      */
     public function toArray($request)
     {
-        print_r($this->post_id);
         return [
             "id" => $this->id,
             "action" => $this->action,
-            "post" => PostResource::make($this->post)
+            "post" => PostResource::make(Post::find($this->post_id))
         ];
     }
 }
