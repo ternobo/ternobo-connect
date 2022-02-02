@@ -18,7 +18,7 @@ class ActionResource extends JsonResource
         return [
             "id" => $this->id,
             "action" => $this->action,
-            "post" => Post::find($this->post_id)
+            "post" => $this->post_id
         ];
     }
 }
