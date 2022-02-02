@@ -18,6 +18,7 @@
 <script>
 import NewPostModal from "../NewPost/NewPostModal";
 export default {
+	watch: {},
 	methods: {
 		onPosted(post) {
 			this.$emit("posted", post);

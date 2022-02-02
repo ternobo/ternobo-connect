@@ -6,15 +6,15 @@
 				<div class="text-type-list">
 					<div class="editor-list-item" @click="emitAcion('title')">
 						<i class="material-icons" :class="{ disabled: !activeOptions.includes('title') }">title</i>
-						<strong>H1</strong>
+						<strong>{{ __.get("editor.heading1") }}</strong>
 					</div>
 					<div class="editor-list-item" @click="emitAcion('heading2', { type: 2 })">
 						<i class="material-icons" :class="{ disabled: !activeOptions.includes('heading2') }">title</i>
-						<strong>H2</strong>
+						<strong>{{ __.get("editor.heading2") }}</strong>
 					</div>
 					<div class="editor-list-item" @click="emitAcion('heading3', { type: 3 })">
 						<i class="material-icons" :class="{ disabled: !activeOptions.includes('heading3') }">title</i>
-						<strong>H3</strong>
+						<strong>{{ __.get("editor.heading3") }}</strong>
 					</div>
 					<div class="editor-list-item" @click="emitAcion('text')">
 						<i class="material-icons" :class="{ disabled: !activeOptions.includes('text') }">text_fields</i>

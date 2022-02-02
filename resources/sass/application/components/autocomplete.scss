@@ -3,10 +3,6 @@
 
     input {
         z-index: 2;
-
-        @if $direction=="ltr" {
-            padding-#{$start}: 2.75rem !important;
-        }
     }
 
     >i {
