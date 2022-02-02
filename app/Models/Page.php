@@ -172,7 +172,8 @@ class Page extends Model
             ->with("post")
             ->with("post.page")
             ->with("post.category")
-            ->where("page_id", $this->id)->latest();
+            ->where("page_id", $this->id)
+            ->latest();
 
         if (Ternobo::isUserLogedIn()) {
             $actions = $actions->with("post.mutualLikes");

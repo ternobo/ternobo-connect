@@ -168,10 +168,9 @@ class PageController extends Controller
 
     public function getActions(Page $page, Request $request)
     {
-        $actions = ["data" => [], "next_page_url" => null];
-
+        $actions = Action::query()->latest();
         if ($request->filled("category")) {
-            $actions = Action::query()->where("page_id", $page->id)
+            $actions = $actions->where("page_id", $page->id)
                 ->with("post")
                 ->where("action", "post")
                 ->latest();

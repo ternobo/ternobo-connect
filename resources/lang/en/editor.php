@@ -6,6 +6,9 @@ return [
     "bulleted-list" => "Bulleted List",
     "ordered-list" => "Ordered List",
     "quote" => "Quote",
+    "heading1" => "Heading 1",
+    "heading2" => "Heading 2",
+    "heading3" => "Heading 3",
 
     'video-format' => "Authorized Format: MP4",
     'image-size' => "Suggested Size: 1700x1700",

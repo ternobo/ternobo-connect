@@ -65,15 +65,17 @@ export default {
 		},
 		onInput() {
 			this.$emit("input", this.val);
-			axios
-				.post(this.endpoint, {
-					q: this.val,
-				})
-				.then((response) => {
-					if (response.data.result) {
-						this.suggestions = response.data.suggestions;
-					}
-				});
+			if (this.val.length > 0) {
+				axios
+					.post(this.endpoint, {
+						q: this.val,
+					})
+					.then((response) => {
+						if (response.data.result) {
+							this.suggestions = response.data.suggestions;
+						}
+					});
+			}
 		},
 	},
 	props: {

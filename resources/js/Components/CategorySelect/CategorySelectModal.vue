@@ -12,7 +12,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="category-selection-list">
+		<div class="category-selection-list mt-5">
 			<span class="category-badge clickable font-16 font-demibold" v-for="category in categories" :key="`category_id_item_${category.id}`" @click="selectCategory(category)" :class="{ active: selected.id == category.id }">{{ category.name }}</span>
 		</div>
 	</b-modal>
