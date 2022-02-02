@@ -51,11 +51,9 @@ class Action extends Model
      */
     protected static function booted()
     {
-        if (!(Auth::user() instanceof Admin)) {
-            static::addGlobalScope(function ($query) {
-                return $query->whereHas("post");
-            });
-        }
+        static::addGlobalScope(function ($query) {
+            return $query->whereHas("post");
+        });
     }
 
     public function post()
