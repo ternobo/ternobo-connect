@@ -14,6 +14,7 @@ class ActionResource extends JsonResource
      */
     public function toArray($request)
     {
+        dd($this->post);
         return [
             "id" => $this->id,
             "action" => $this->action,
