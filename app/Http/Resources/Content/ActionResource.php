@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources\Content;
 
-use App\Models\Post;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ActionResource extends JsonResource
@@ -18,7 +17,7 @@ class ActionResource extends JsonResource
         return [
             "id" => $this->id,
             "action" => $this->action,
-            "post" => $this->post_id
+            "post" => PostResource::make($this->post)
         ];
     }
 }
