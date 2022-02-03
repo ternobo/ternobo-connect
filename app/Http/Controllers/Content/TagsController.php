@@ -61,7 +61,8 @@ class TagsController extends Controller
     public function getTag(Request $request)
     {
         if ($request->filled("tag")) {
-            return $this->generateResponse(true, TagResource::make(Tag::query()->where("name", $request->tag)->first()));
+            $tag = Tag::query()->where("name", $request->tag)->first();
+            return $this->generateResponse($tag instanceof Tag, $tag instanceof Tag ? TagResource::make() : null);
         }
         return abort(400);
     }
