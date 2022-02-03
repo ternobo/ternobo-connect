@@ -62,7 +62,7 @@ class TagsController extends Controller
     {
         if ($request->filled("tag")) {
             $tag = Tag::query()->where("name", $request->tag)->first();
-            return $this->generateResponse($tag instanceof Tag, $tag instanceof Tag ? TagResource::make() : null);
+            return $this->generateResponse($tag instanceof Tag, $tag instanceof Tag ? TagResource::make($tag) : null);
         }
         return abort(400);
     }
