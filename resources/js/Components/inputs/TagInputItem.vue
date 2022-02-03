@@ -1,6 +1,6 @@
 <template>
 	<div class="tag-item">
-		<img width="16" :src="assetURL(community.icon)" v-if="community != null" />
+		<img width="16" class="me-1" :src="assetURL(community.icon)" v-if="community != null" />
 		<span :class="{ communityTag: community != null }">{{ tag }}</span>
 		<span class="separator"></span>
 		<i class="material-icons" @click="$emit('delete')">close</i>
