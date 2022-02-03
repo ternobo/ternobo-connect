@@ -79,7 +79,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .ordered-list-editor {
 	list-style: number;
 	margin-bottom: 0;
