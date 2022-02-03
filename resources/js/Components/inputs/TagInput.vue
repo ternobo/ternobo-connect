@@ -3,18 +3,15 @@
 		<span class="font-demibold font-18"> {{ __.get("content/posts.tags") }} </span>
 		<div class="d-flex tag-input mt-3" :class="{ focus: tags != null && tags != undefined && tags.length > 0 }">
 			<div class="tags">
-				<div class="tag-item" v-for="(tag, index) in tags" :key="'newpost_tag_' + tag + '_' + index">
-					<span>{{ tag }}</span>
-					<span class="separator"></span>
-					<i class="material-icons" @click="removeTag(index)">close</i>
-				</div>
+				<tag-input-item v-for="(tag, index) in tags" :tag="tag" @delete="removeTag(index)" :key="'newpost_tag_' + tag + '_' + index"></tag-input-item>
 			</div>
 			<input :type="type" @keyup.enter="addTag()" :disabled="tags != null && tags != null && tags.length == 3" :class="[inputClass, { invalid: invalid }]" @blur="check" v-model="input" :maxlength="maxlength" class="text-input text-input--md input" />
 
 			<div class="autocomplete-dropdown" v-if="suggestions.length > 0 && this.input != null && this.input.length > 0">
 				<ul style="left: 0; top: 48px">
-					<li v-for="(suggestion, index) in suggestions" @click="addTag(suggestion.value)" :key="'suggested_tag_' + suggestion + '_' + index">
-						{{ suggestion.value }}
+					<li v-for="(tag, index) in suggestions" @click="addTag(tag.tag)" :key="'suggested_tag_' + tag.id + '_' + index">
+						<img width="16" :src="`${assetURL(tag.community.icon)}`" v-if="tag.is_community_tag" />
+						<span :class="{ communityTag: tag.is_community_tag }">{{ tag.tag }}</span>
 					</li>
 				</ul>
 			</div>
@@ -23,7 +20,9 @@
 </template>
 
 <script>
+import TagInputItem from "./TagInputItem.vue";
 export default {
+	components: { TagInputItem },
 	methods: {
 		removeLastTag() {
 			if (this.input == null || this.input.length < 1) {
