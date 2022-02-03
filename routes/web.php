@@ -120,6 +120,7 @@ Route::middleware(["auth.web"])->group(function () {
 
         Route::post("/slugsearch", "Profile\PageController@search")->middleware(FullAccessUserMiddleware::class);
         Route::get("/search/tags", "Content\TagsController@search")->middleware(FullAccessUserMiddleware::class);
+        Route::get("/tags/detail", "Content\TagsController@getTag")->middleware(FullAccessUserMiddleware::class);
 
         Route::post("/setcover", "Profile\ProfileController@setCover")->name("profile-cover")->middleware(FullAccessUserMiddleware::class);
 

@@ -17,6 +17,7 @@ use App\Models\CommunityTranslation;
 use App\Models\CommunityTag;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Content\PostResource;
+use App\Http\Resources\Content\TagResource;
 
 class TagsController extends Controller
 {
@@ -57,6 +58,13 @@ class TagsController extends Controller
         return TernoboWire::render('Tags', ["posts" => $posts, 'tag' => $name, "followed" => $followed, "community" => $community]);
     }
 
+    public function getTag(Request $request)
+    {
+        if ($request->filled("tag")) {
+            return $this->generateResponse(true, TagResource::make(Tag::query()->where("name", $request->tag)->first()));
+        }
+        return abort(400);
+    }
 
     public function search(Request $request)
     {
@@ -67,16 +75,7 @@ class TagsController extends Controller
         } else {
             $tags = $tags->where("name", "like", "$term%")->latest()->limit(10)->get();
         }
-        $tags = $tags->map(function ($tag) {
-            $community = CommunityTag::query()->where("tag_id", $tag->id)->first();
-            $icon = null;
-            if ($community instanceof CommunityTag) {
-                $icon = url($community->icon);
-            }
-
-            return ["icon" => $icon, 'value' => $tag->name, "is_community" => $community instanceof CommunityTag];
-        });
-        return $this->generateResponse(true, $tags);
+        return $this->generateResponse(true, TagResource::collection($tags));
     }
 
 
