@@ -84,5 +84,6 @@ export default {
 	list-style: number;
 	margin-bottom: 0;
 	padding: 0 24px;
+	margin-top: 0;
 }
 </style>
