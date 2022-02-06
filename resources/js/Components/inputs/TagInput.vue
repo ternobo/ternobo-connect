@@ -10,7 +10,7 @@
 			<div class="autocomplete-dropdown" v-if="suggestions.length > 0 && this.input != null && this.input.length > 0">
 				<ul style="left: 0; top: 48px">
 					<li v-for="(tag, index) in suggestions" @click="addTag(tag.tag)" :key="'suggested_tag_' + tag.id + '_' + index">
-						<img width="16" :src="`${assetURL(tag.community.icon)}`" v-if="tag.is_community_tag" />
+						<img width="16" class="me-1" :src="`${assetURL(tag.community.icon)}`" v-if="tag.is_community_tag" />
 						<span :class="{ communityTag: tag.is_community_tag }">{{ tag.tag }}</span>
 					</li>
 				</ul>

@@ -1053,13 +1053,12 @@ a:focus {
         right: 0;
         top: 0;
         width: 100%;
-
     }
 
     img {
         min-height: 116px;
-        -o-object-fit: fill;
-        object-fit: fill;
+        -o-object-fit: cover;
+        object-fit: cover;
         -o-object-position: center;
         object-position: center;
     }
