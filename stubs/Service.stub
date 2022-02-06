@@ -1,0 +1,10 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Service\RestfulService;
+
+class DummyClass extends RestfulService
+{
+    // Your methods for service
+}
