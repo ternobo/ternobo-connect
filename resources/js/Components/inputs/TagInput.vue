@@ -40,7 +40,7 @@ export default {
 					this.tags.push(item);
 					this.input = null;
 					this.$emit("input", this.tags);
-					this.suggestions = [];
+					this.suggestionsList = [];
 				}
 			} else if (this.input != null) {
 				if (this.tags.indexOf(this.input) == -1) {
@@ -72,17 +72,24 @@ export default {
 					axios.get("/search/tags", { params: { q: newVal } }).then((response) => {
 						let data = response.data;
 						if (data.data.length > 0) {
-							this.suggestions = data.data;
+							this.suggestionsList = data.data;
 						}
 					});
 				}
 			}, 250);
 		},
 	},
+	computed: {
+		suggestions() {
+			return this.suggestionsList.filter((tag) => {
+				return !this.tags.includes(tag.tag);
+			});
+		},
+	},
 	data() {
 		return {
 			tags: [],
-			suggestions: [],
+			suggestionsList: [],
 			input: null,
 			invalid: false,
 
