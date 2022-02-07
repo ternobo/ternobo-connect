@@ -6,6 +6,7 @@ return [
     "bulleted-list" => "Bulleted List",
     "ordered-list" => "Ordered List",
     "quote" => "Quote",
+    "gif-by-giphy" => "Gifs by Giphy",
     "heading1" => "Heading 1",
     "heading2" => "Heading 2",
     "heading3" => "Heading 3",

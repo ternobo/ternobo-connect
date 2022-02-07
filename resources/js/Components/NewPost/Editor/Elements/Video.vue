@@ -4,19 +4,20 @@
 
 		<!--- Show Media End !-->
 		<div v-if="content != null" class="w-100" style="overflow: hidden">
-			<lazy-image v-if="type == 'image'" class="mb-0" style="min-height: 150px" :style="{ transform: `rotate(${editResult.rotate}deg)` }" :src="contentUrl" />
-			<video-player v-else :src="contentUrl" class="mb-0 w-100"></video-player>
+			<video-player :src="contentUrl" class="mb-0 w-100"></video-player>
 		</div>
 		<!--- Show Media End !-->
 
 		<!--- Select Media !-->
 		<div class="action-container" v-else>
 			<span class="title text-center">
-				<i class="material-icons-outlined">{{ type == "image" ? "image" : "play_circle" }}</i>
-				{{ __.get(`editor.${type == "image" ? "image" : "video"}`) }}
+				<i class="material-icons-outlined">play_circle</i>
+				{{ __.get(`editor.video`) }}
 			</span>
-			<div v-html="type == 'image' ? __.get(`editor.image-size`) : __.get(`editor.video-format`)"></div>
-			<button class="btn btn-outlined btn-rounded w-100" @click="selectMedia"><i class="material-icons-outlined me-2">cloud_upload</i> {{ __.get("application.upload") }}</button>
+			<button class="btn btn-outlined btn-rounded w-100" @click="selectMedia">
+				<i class="material-icons-outlined me-2">cloud_upload</i>
+				{{ __.get("application.upload") }}
+			</button>
 		</div>
 		<!--- Select Media End !-->
 
@@ -37,18 +38,6 @@ import Checkbox from "../../../inputs/Checkbox.vue";
 import VideoPlayer from "../../../VideoPlayer/VideoPlayer.vue";
 import EditImageModal from "../../EditImageModal.vue";
 export default {
-	data() {
-		return {
-			showImageEdit: false,
-			isSpoiler: false,
-			editResult: {
-				height: null,
-				width: null,
-				rotate: 0,
-				alt: "",
-			},
-		};
-	},
 	components: {
 		VideoPlayer,
 		EditImageModal,
@@ -59,14 +48,6 @@ export default {
 			return typeof this.content == "object" && this.content != null ? URL.createObjectURL(this.content) : `/${this.content}`;
 		},
 	},
-	watch: {
-		isSpoiler() {
-			this.$emit("update:meta", { spoiler: this.isSpoiler, rotate: this.editResult.rotate, alt: this.editResult.alt });
-		},
-		editResult() {
-			this.$emit("update:meta", { spoiler: this.isSpoiler, rotate: this.editResult.rotate, alt: this.editResult.alt });
-		},
-	},
 	methods: {
 		checkDuration(file) {
 			let video = document.createElement("video");
@@ -75,7 +56,6 @@ export default {
 			video.onloadedmetadata = () => {
 				URL.revokeObjectURL(video.src);
 				var duration = video.duration;
-				console.log(duration);
 				if (duration <= 20 * 60) {
 					this.$emit("update:content", file);
 				} else {
@@ -86,20 +66,12 @@ export default {
 		selectMedia() {
 			let fileChooser = document.createElement("input");
 			fileChooser.type = "file";
-			if (this.type == "video") {
-				fileChooser.accept = `video/mp4, video/mkv`;
-			} else {
-				fileChooser.accept = `${this.type}/*`;
-			}
+			ileChooser.accept = `video/mp4, video/mkv`;
 
 			fileChooser.onchange = (e) => {
 				let file = e.target.files[0];
 				if (file.type.startsWith(this.type) && !file.type.includes("svg+xml")) {
-					if (this.type == "video") {
-						this.checkDuration(file);
-					} else {
-						this.$emit("update:content", file);
-					}
+					this.checkDuration(file);
 				} else {
 					this.toast(__.get("messages.invalid-mime"));
 				}
@@ -108,9 +80,6 @@ export default {
 		},
 	},
 	props: {
-		type: {
-			default: null,
-		},
 		content: {
 			default: null,
 		},

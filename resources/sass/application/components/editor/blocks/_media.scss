@@ -49,9 +49,14 @@
              font-weight: 600;
          }
 
-         .btn {
-             padding: 12px 40px;
-         }
+     }
 
+     &__actions {
+         display: flex;
+         align-items: center;
+
+         button:not(:last-child) {
+             margin-#{$end}: 0.75rem;
+         }
      }
  }

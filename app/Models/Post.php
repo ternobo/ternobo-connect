@@ -269,13 +269,13 @@ class Post extends Model
                         break;
                     case "image":
                         $media = $content instanceof UploadedFile | $fileOnly ? SocialMediaTools::uploadPostImage($content->store("media"), 90) : $content;
-
                         if (isset($meta['rotate'])) {
                             ImageTools::rotateImage(Storage::path($media), $meta['rotate']);
                         }
 
-                        $meta['info'] = SocialMediaTools::getImageInfo(Storage::path($media));
-
+                        if (Storage::exists($media)) {
+                            $meta['info'] = SocialMediaTools::getImageInfo(Storage::path($media));
+                        }
                         SlideBlock::query()->create([
                             'slide_id' => $slide_id,
                             'page_id' => $user->personalPage->id,

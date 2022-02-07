@@ -35,7 +35,8 @@
 import ActionsButton from "./ActionsButton.vue";
 import Paragraph from "./Elements/Paragraph.vue";
 import TitleInput from "./Elements/TitleInput.vue";
-import Media from "./Elements/Media";
+import Image from "./Elements/Image";
+import Video from "./Elements/Video";
 import uuidv4 from "uuid";
 import EmojiPicker from "../../EmojiPicker/EmojiPicker.vue";
 import { mapState } from "vuex";
@@ -187,8 +188,8 @@ export default {
 			components: {
 				text: Paragraph,
 				title: TitleInput,
-				video: Media,
-				image: Media,
+				video: Video,
+				image: Image,
 				code: Code,
 				bulletedList: BulletedList,
 				orderedList: OrderedList,
