@@ -2,6 +2,8 @@
 return [
     'video' => "ویدئو",
     'image' => "تصویر",
+    "video-embed" => "ویدیو امبد",
+
     "code" => "کد",
     "bulleted-list" => "لیست گلوله‌ای",
     "ordered-list" => "لیست شماره‌ای",
@@ -24,5 +26,13 @@ return [
     "poll-modal-question-ph" => "پرسش خود را وارد کنید",
     "poll-modal-options" => "گزینه‌ها",
     "poll-duration" => "تاریخ پایان نظرسنجی",
-    "poll-duration-ph" => "انتخاب تاریخ"
+    "poll-duration-ph" => "انتخاب تاریخ",
+
+    "embed" => [
+        "youtube" => "Youtube",
+        "aparat" => "آپارات",
+        "vimeo" => "Vimeo",
+        "Odysee" => "Odysee"
+    ]
+
 ];

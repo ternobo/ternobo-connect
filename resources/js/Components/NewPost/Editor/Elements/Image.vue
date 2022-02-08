@@ -14,7 +14,9 @@
 				<i class="material-icons-outlined">image</i>
 				{{ __.get(`editor.image`) }}
 			</span>
-			<div v-html="__.get(`editor.image-size`)"></div>
+
+			<span class="font-12 text-dark-gray mt-0">{{ __.get(`editor.image-size`) }}</span>
+
 			<div class="media-block__actions">
 				<button class="btn btn-outlined btn-rounded" @click="selectMedia"><i class="material-icons-outlined me-2">cloud_upload</i> {{ __.get("application.upload") }}</button>
 				<button class="btn btn-outlined btn-rounded"><img src="/images/unsplash-logo.svg" class="me-2" width="12" /> Unsplash</button>

@@ -14,10 +14,15 @@
 				<i class="material-icons-outlined">play_circle</i>
 				{{ __.get(`editor.video`) }}
 			</span>
-			<button class="btn btn-outlined btn-rounded w-100" @click="selectMedia">
-				<i class="material-icons-outlined me-2">cloud_upload</i>
-				{{ __.get("application.upload") }}
-			</button>
+			<span class="font-12 text-dark-gray mt-0">{{ __.get(`editor.video-format`) }}</span>
+
+			<div class="media-block__actions">
+				<button class="btn btn-outlined btn-rounded" @click="selectMedia"><i class="material-icons-outlined me-2">cloud_upload</i> {{ __.get("application.upload") }}</button>
+				<button class="btn btn-outlined btn-rounded"><img src="/images/embeds/youtube.svg" width="16" class="me-2" /> {{ __.get("editor.embed.youtube") }}</button>
+				<button class="btn btn-outlined btn-rounded"><img src="/images/embeds/aparat.svg" width="16" class="me-2" /> {{ __.get("editor.embed.aparat") }}</button>
+				<button class="btn btn-outlined btn-rounded"><img src="/images/embeds/vimeo.svg" width="16" class="me-2" /> {{ __.get("editor.embed.vimeo") }}</button>
+				<button class="btn btn-outlined btn-rounded"><img src="/images/embeds/odysee.svg" width="16" class="me-2" /> {{ __.get("editor.embed.odysee") }}</button>
+			</div>
 		</div>
 		<!--- Select Media End !-->
 

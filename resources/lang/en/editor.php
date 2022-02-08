@@ -2,6 +2,8 @@
 return [
     "image" => "Image",
     "video" => "Video",
+    "video-embed" => "Video Embed",
+
     "code" => "Code",
     "bulleted-list" => "Bulleted List",
     "ordered-list" => "Ordered List",
@@ -25,5 +27,12 @@ return [
     "poll-modal-question-ph" => "Enter your Question",
     "poll-modal-options" => "Options",
     "poll-duration" => "Poll End Date",
-    "poll-duration-ph" => "Select Poll End Date"
+    "poll-duration-ph" => "Select Poll End Date",
+
+    "embed" => [
+        "youtube" => "Youtube",
+        "aparat" => "Aparat",
+        "vimeo" => "Vimeo",
+        "odysee" => "Odysee"
+    ]
 ];

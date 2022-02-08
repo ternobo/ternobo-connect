@@ -1,0 +1,10 @@
+.embed-block {
+    @extend .media-block;
+
+    &_link-insert {
+        padding: 0.5rem;
+        background: $white;
+        box-shadow: $card-shadow;
+
+    }
+}
