@@ -1,23 +1,25 @@
 <template>
-	<b-modal v-model="showModal" hide-footer @show="hideNewPostModal" @hide="showNewPostModal" :title="__.choice('content/posts.image-detail', 2)" size="lg" modal-class="new-post-modal" :centered="true">
+	<b-modal v-model="showModal" hide-footer header-class="back-modal" @show="hideNewPostModal" @hide="showNewPostModal" :title="__.choice('content/posts.image-detail', 2)" size="lg" modal-class="new-post-modal" :centered="true">
 		<template #modal-header-close> arrow_back </template>
 		<div class="editimage-modal-content" ref="container">
 			<div class="image-container">
 				<img :src="image" ref="image" :style="{ transform: `rotate(${rotate}deg)` }" />
 			</div>
+
 			<div class="controls">
 				<button class="btn btn-primary btn-icon btn-white" @click="rotateAction"><i class="material-icons">loop</i></button>
 				<button class="btn btn-primary btn-icon btn-white" :class="{ 'text-action': showAlt }" @click="altTextAction"><i class="material-icons">link</i></button>
-			</div>
 
-			<!--- Alt Text Input !--->
-			<div class="ternoboeditor--link-input" v-show="showAlt">
-				<div class="controls">
-					<input placeholder="Enter Alt" v-model="altText" />
-					<button class="btn btn-text text-dark" :disabled="!Boolean(altText)" @click="showAlt = false"><i class="material-icons">subdirectory_arrow_left</i></button>
+				<!--- Alt Text Input !--->
+				<div class="ternoboeditor--link-input" v-show="showAlt">
+					<div class="controls">
+						<input placeholder="Enter Alt" v-model="altText" />
+						<button class="btn btn-text text-dark" :disabled="!Boolean(altText)" @click="showAlt = false"><i class="material-icons">subdirectory_arrow_left</i></button>
+					</div>
 				</div>
 			</div>
 		</div>
+
 		<div class="d-flex justify-content-center align-items-center mt-4 mb-2">
 			<button class="btn btn-transparent font-14" @click="cancel">{{ __.get("application.cancel") }}</button>
 			<button class="btn btn-primary font-14 w-100" @click="save">{{ __.get("application.save") }}</button>
@@ -26,14 +28,12 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import InternalModalsMixin from "./Mixins/InternalModalsMixin";
 import ModalMixin from "../../Mixins/Modal";
 export default {
-	mixins: [ModalMixin],
+	mixins: [ModalMixin, InternalModalsMixin],
 	props: ["value", "image"],
 	methods: {
-		...mapMutations(["showNewPostModal", "hideNewPostModal"]),
-
 		cancel() {
 			this.$emit("update:show", false);
 		},

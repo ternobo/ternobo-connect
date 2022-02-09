@@ -2,10 +2,13 @@
 return [
     "image" => "Image",
     "video" => "Video",
+    "video-embed" => "Video Embed",
+
     "code" => "Code",
     "bulleted-list" => "Bulleted List",
     "ordered-list" => "Ordered List",
     "quote" => "Quote",
+    "gif-by-giphy" => "Gifs by Giphy",
     "heading1" => "Heading 1",
     "heading2" => "Heading 2",
     "heading3" => "Heading 3",
@@ -24,5 +27,12 @@ return [
     "poll-modal-question-ph" => "Enter your Question",
     "poll-modal-options" => "Options",
     "poll-duration" => "Poll End Date",
-    "poll-duration-ph" => "Select Poll End Date"
+    "poll-duration-ph" => "Select Poll End Date",
+
+    "embed" => [
+        "youtube" => "Youtube",
+        "aparat" => "Aparat",
+        "vimeo" => "Vimeo",
+        "odysee" => "Odysee"
+    ]
 ];

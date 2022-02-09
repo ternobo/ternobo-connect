@@ -35,7 +35,8 @@
 import ActionsButton from "./ActionsButton.vue";
 import Paragraph from "./Elements/Paragraph.vue";
 import TitleInput from "./Elements/TitleInput.vue";
-import Media from "./Elements/Media";
+import Image from "./Elements/Image";
+import Video from "./Elements/Video";
 import uuidv4 from "uuid";
 import EmojiPicker from "../../EmojiPicker/EmojiPicker.vue";
 import { mapState } from "vuex";
@@ -48,7 +49,7 @@ import Quote from "./Elements/Quote.vue";
 import PollBlock from "./Elements/Poll/PollBlock.vue";
 import Heading2 from "./Elements/Heading2.vue";
 import Heading3 from "./Elements/Heading3.vue";
-
+import Embed from "./Elements/Embed.vue";
 export default {
 	watch: {
 		blocks: {
@@ -187,8 +188,8 @@ export default {
 			components: {
 				text: Paragraph,
 				title: TitleInput,
-				video: Media,
-				image: Media,
+				video: Video,
+				image: Image,
 				code: Code,
 				bulletedList: BulletedList,
 				orderedList: OrderedList,
@@ -196,6 +197,7 @@ export default {
 				poll: PollBlock,
 				heading2: Heading2,
 				heading3: Heading3,
+				embed: Embed,
 			},
 		};
 	},

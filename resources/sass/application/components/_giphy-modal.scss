@@ -1,0 +1,7 @@
+.giphy-modal {
+    &__list {
+        max-height: 324px;
+        overflow: auto;
+        @include nice-scroll;
+    }
+}

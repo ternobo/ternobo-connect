@@ -2,7 +2,6 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
     position: relative;
     transition: 0.3s all;
 
@@ -20,23 +19,22 @@
     }
 
     >.controls {
-        position: absolute;
-        #{$start}: -80px;
-        top: 0;
         display: flex;
         flex-direction: column;
+        position: relative;
+        padding-#{$start}: 1rem;
 
         .btn:first-child {
             margin-bottom: 1rem;
         }
+
+        >.ternoboeditor--link-input {
+            position: absolute !important;
+            box-shadow: $bg-hover-shadow;
+            top: 80px;
+            #{$end}: 32px;
+        }
     }
 
-    .ternoboeditor--link-input {
-        position: absolute;
-        #{$start}: -1.25rem;
-        top: 28px;
-        box-shadow: $bg-hover-shadow;
-
-    }
 
 }
