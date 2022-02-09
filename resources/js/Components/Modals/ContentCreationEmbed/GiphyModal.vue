@@ -19,15 +19,11 @@
 import ModalMixin from "../../../Mixins/Modal";
 import { GiphyFetch } from "@giphy/js-fetch-api";
 import InternalModalsMixin from "../../NewPost/Mixins/InternalModalsMixin";
-import Giphy from "vue-giphy";
 const giphy = new GiphyFetch(process.env.MIX_GIPHY_API_KEY);
 
 export default {
 	mixins: [ModalMixin, InternalModalsMixin],
 	name: "GiphyModal",
-	components: {
-		Giphy,
-	},
 	data() {
 		return {
 			search: "",

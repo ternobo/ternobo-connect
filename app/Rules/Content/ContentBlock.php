@@ -32,6 +32,7 @@ class ContentBlock implements RuleInterface
             "heading2" => ["max:150"],
             "heading3" => ["max:150"],
             "poll" => [],
+            "embed" => ["string", "url"]
         ];
         $typeValidator = validator(["blocks" => $blocks], [
             "blocks.*.type" => [Rule::in(array_keys($rules))]

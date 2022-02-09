@@ -308,6 +308,16 @@ class Post extends Model
                             "meta" => $meta,
                         ]);
                         break;
+                    case "embed":
+                        SlideBlock::query()->create([
+                            'slide_id' => $slide_id,
+                            'page_id' => $user->personalPage->id,
+                            'sort' => $sort,
+                            'content' => $content,
+                            'type' => 'embed',
+                            "meta" => $meta,
+                        ]);
+                        break;
                     case "poll":
                         $poll = null;
                         if (isset($meta['poll_id'])) {

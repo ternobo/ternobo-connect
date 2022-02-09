@@ -2,7 +2,7 @@
 	<div v-if="user != null">
 		<category-select-modal :categories.sync="categories" @hide="onCategoryClose" :selectedCategory.sync="category" :show.sync="showCategoryModal"></category-select-modal>
 
-		<b-modal ignore-enforce-focus-selector=".ternoboeditor--link-input, .editor-block-container *" v-model="showModal" @hide="hide" @show="shown" no-close-on-esc hide-footer :hide-backdrop="hideModal" :modal-class="{ 'opacity-0': hideModal }" size="lg" :title="__.get('content/posts.create-new-post')" :centered="true">
+		<b-modal ignore-enforce-focus-selector=".ternoboeditor--link-input, .form-control, .editor-block-container *" v-model="showModal" @hide="hide" @show="shown" no-close-on-esc hide-footer :hide-backdrop="hideModal" :modal-class="{ 'opacity-0': hideModal }" size="lg" :title="__.get('content/posts.create-new-post')" :centered="true">
 			<div class="content-creation">
 				<div class="content-creation--header">
 					<div class="content-creation--header__user-profile">

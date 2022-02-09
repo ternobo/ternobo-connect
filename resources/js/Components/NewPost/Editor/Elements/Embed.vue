@@ -1,25 +1,45 @@
 <template>
-	<div class="media-block" :class="{ 'p-0': content != null }">
+	<div class="media-block" :class="{ 'p-0': embedInfo != null }">
 		<!--- Select Media !-->
-		<div class="action-container">
+		<div class="action-container" v-if="embedInfo == null">
 			<span class="title text-center">
 				<i class="material-icons-outlined">play_circle</i>
 				{{ __.get(`editor.video-embed`) }}
 			</span>
-			<div class="media-block__actions">
+			<div class="media-block__actions bg-white">
 				<div class="input-group-icon">
-					<input class="form-control fill" />
-					<i class="material-icons">subdirectory_arrow</i>
+					<input class="form-control fill" @keypress.enter="setEmbed" v-model="url" placeholder="Insert Link" />
+					<i class="material-icons" @click="setEmbed">subdirectory_arrow_left</i>
 				</div>
 			</div>
 		</div>
 		<!--- Select Media End !-->
+
+		<iframe v-else title="embedvideo" class="embed-video" :src="embedInfo.embed" allowfullscreen width="640" height="480"></iframe>
 	</div>
 </template>
 
 <script>
-export default {};
-</script>
+import embedParser from "embed-video-parser";
 
-<style>
-</style>
+export default {
+	data() {
+		return {
+			url: "",
+			embedInfo: null,
+		};
+	},
+
+	methods: {
+		setEmbed() {
+			this.embedInfo = embedParser(this.url);
+			this.$emit("update:content", this.embedInfo?.embed);
+			this.$emit("update:meta", this.embedInfo);
+		},
+	},
+	mounted() {
+		this.embedInfo = Object.keys(this.meta) > 0 ? this.meta : null;
+	},
+	props: ["meta", "content"],
+};
+</script>

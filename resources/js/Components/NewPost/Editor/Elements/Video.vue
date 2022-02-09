@@ -1,7 +1,5 @@
 <template>
 	<div class="media-block" :class="{ 'p-0': content != null }">
-		<edit-image-modal :show.sync="showImageEdit" :image="contentUrl" v-model="editResult"></edit-image-modal>
-
 		<!--- Show Media End !-->
 		<div v-if="content != null" class="w-100" style="overflow: hidden">
 			<video-player :src="contentUrl" class="mb-0 w-100"></video-player>
@@ -18,23 +16,12 @@
 
 			<div class="media-block__actions">
 				<button class="btn btn-outlined btn-rounded" @click="selectMedia"><i class="material-icons-outlined me-2">cloud_upload</i> {{ __.get("application.upload") }}</button>
-				<button class="btn btn-outlined btn-rounded"><img src="/images/embeds/youtube.svg" width="16" class="me-2" /> {{ __.get("editor.embed.youtube") }}</button>
-				<button class="btn btn-outlined btn-rounded"><img src="/images/embeds/aparat.svg" width="16" class="me-2" /> {{ __.get("editor.embed.aparat") }}</button>
-				<button class="btn btn-outlined btn-rounded"><img src="/images/embeds/vimeo.svg" width="16" class="me-2" /> {{ __.get("editor.embed.vimeo") }}</button>
-				<button class="btn btn-outlined btn-rounded"><img src="/images/embeds/odysee.svg" width="16" class="me-2" /> {{ __.get("editor.embed.odysee") }}</button>
+				<button class="btn btn-outlined btn-rounded" @click="$emit('update:type', 'embed')"><img src="/images/embeds/youtube.svg" width="16" class="me-2" /> {{ __.get("editor.embed.youtube") }}</button>
+				<button class="btn btn-outlined btn-rounded" @click="$emit('update:type', 'embed')"><img src="/images/embeds/aparat.svg" width="16" class="me-2" /> {{ __.get("editor.embed.aparat") }}</button>
+				<button class="btn btn-outlined btn-rounded" @click="$emit('update:type', 'embed')"><img src="/images/embeds/vimeo.svg" width="16" class="me-2" /> {{ __.get("editor.embed.vimeo") }}</button>
 			</div>
 		</div>
 		<!--- Select Media End !-->
-
-		<!--- Media Settings !-->
-		<button class="btn btn-rounded btn-primary btn-white btn-icon edit-image-icon" v-if="type == 'image' && content != null" @click="showImageEdit = true">
-			<i class="material-icons-outlined">create</i>
-		</button>
-		<div class="spoiler-alert-check clickable" @click="isSpoiler = !isSpoiler" v-if="content != null">
-			<checkbox v-model="isSpoiler" />
-			<span>{{ __.get("content/posts.spoiler-alert") }}</span>
-		</div>
-		<!--- Media Settings !-->
 	</div>
 </template>
 

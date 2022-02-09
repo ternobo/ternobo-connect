@@ -12,6 +12,10 @@ export default {
                 tag = "h1";
                 content = this.content.content;
                 break;
+            case "embed":
+                tag = "div";
+                content = <iframe title="embedvideo" class="embed-video" src={this.content.content} allowfullscreen width="510" height="287"></iframe>;
+                break;
             case "heading2":
                 tag = "h2";
                 content = this.content.content;

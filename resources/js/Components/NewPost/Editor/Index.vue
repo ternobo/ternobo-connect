@@ -49,7 +49,7 @@ import Quote from "./Elements/Quote.vue";
 import PollBlock from "./Elements/Poll/PollBlock.vue";
 import Heading2 from "./Elements/Heading2.vue";
 import Heading3 from "./Elements/Heading3.vue";
-
+import Embed from "./Elements/Embed.vue";
 export default {
 	watch: {
 		blocks: {
@@ -197,6 +197,7 @@ export default {
 				poll: PollBlock,
 				heading2: Heading2,
 				heading3: Heading3,
+				embed: Embed,
 			},
 		};
 	},
