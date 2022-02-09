@@ -2,6 +2,7 @@
 	<div class="media-block" :class="{ 'p-0': content != null }">
 		<edit-image-modal :show.sync="showImageEdit" :image="contentUrl" v-model="editResult"></edit-image-modal>
 		<giphy-modal :show.sync="showGiphyModal" @select="selectGif" />
+		<unsplash-model :show.sync="showUnsplashModal" @select="selectGif"></unsplash-model>
 		<!--- Show Media End !-->
 		<div v-if="content != null" class="w-100" style="overflow: hidden">
 			<lazy-image class="mb-0" style="min-height: 150px" :style="{ transform: `rotate(${editResult.rotate}deg)` }" :src="contentUrl" />
@@ -19,7 +20,7 @@
 
 			<div class="media-block__actions">
 				<button class="btn btn-outlined btn-rounded" @click="selectMedia"><i class="material-icons-outlined me-2">cloud_upload</i> {{ __.get("application.upload") }}</button>
-				<button class="btn btn-outlined btn-rounded"><img src="/images/unsplash-logo.svg" class="me-2" width="12" /> Unsplash</button>
+				<button class="btn btn-outlined btn-rounded" @click="showUnsplashModal = true"><img src="/images/unsplash-logo.svg" class="me-2" width="12" /> Unsplash</button>
 				<button class="btn btn-outlined btn-rounded" @click="showGiphyModal = true"><img src="/images/giphy-logo.png" width="12" class="me-2" /> Giphy</button>
 			</div>
 		</div>
@@ -40,6 +41,7 @@
 <script>
 import Checkbox from "../../../inputs/Checkbox.vue";
 import GiphyModal from "../../../Modals/ContentCreationEmbed/GiphyModal.vue";
+import UnsplashModel from "../../../Modals/ContentCreationEmbed/UnsplashModel.vue";
 import VideoPlayer from "../../../VideoPlayer/VideoPlayer.vue";
 import EditImageModal from "../../EditImageModal.vue";
 export default {
@@ -48,6 +50,7 @@ export default {
 			showImageEdit: false,
 			isSpoiler: false,
 			showGiphyModal: false,
+			showUnsplashModal: false,
 			editResult: {
 				height: null,
 				width: null,
@@ -69,6 +72,7 @@ export default {
 		EditImageModal,
 		Checkbox,
 		GiphyModal,
+		UnsplashModel,
 	},
 	computed: {
 		contentUrl() {
@@ -90,6 +94,7 @@ export default {
 		selectGif(gif) {
 			this.$emit("update:content", gif);
 			this.showGiphyModal = false;
+			this.showUnsplashModal = false;
 		},
 		selectMedia() {
 			let fileChooser = document.createElement("input");
