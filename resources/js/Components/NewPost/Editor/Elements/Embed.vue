@@ -39,6 +39,7 @@ export default {
 	},
 	mounted() {
 		this.embedInfo = Object.keys(this.meta) > 0 ? this.meta : null;
+		this.url = this.content != null ? this.content : "";
 	},
 	props: ["meta", "content"],
 };
