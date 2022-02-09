@@ -3,7 +3,7 @@
 		<template #modal-header-close> arrow_back </template>
 		<template #modal-title> <img src="/images/unsplash-logo.svg" width="16" class="me-2" /> Unsplash</template>
 		<div class="input-group-icon mb-4">
-			<input v-model="search" class="form-control fill rounded" />
+			<input v-model="search" :placeholder="__.get('application.search')" class="form-control fill rounded" />
 			<i v-if="loading"><loading-spinner :width="20" :height="20"></loading-spinner></i>
 			<i class="material-icons" v-else>search</i>
 		</div>
@@ -26,6 +26,7 @@ import InternalModalsMixin from "../../NewPost/Mixins/InternalModalsMixin";
 const unsplash = createApi({
 	accessKey: process.env.MIX_UNSPLASH_ACCESS_KEY,
 });
+
 export default {
 	mixins: [ModalMixin, InternalModalsMixin],
 	name: "UnsplashModel",
@@ -44,7 +45,23 @@ export default {
 		search() {
 			clearTimeout(this.searchTimeout);
 			this.searchTimeout = setTimeout(() => {
-				infiniteHandler(null);
+				this.currentPage = 1;
+				this.loading = true;
+				unsplash.search
+					.getPhotos({
+						query: this.search,
+						page: this.currentPage,
+						perPage: 25,
+					})
+					.then((result) => {
+						if (result.errors) {
+							console.log("error occurred: ", result.errors[0]);
+							this.loading = false;
+						} else {
+							this.photos = result.response.results;
+							this.loading = false;
+						}
+					});
 			}, 400);
 		},
 	},
