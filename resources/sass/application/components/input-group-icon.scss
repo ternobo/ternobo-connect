@@ -10,7 +10,33 @@
 
     .form-control,
     .material-textfield>input {
-        padding-#{$end}: 1.75rem;
+        padding-#{$end}: 2.25rem;
+    }
+
+    &_start {
+
+        .form-control,
+        .material-textfield>input {
+            padding-#{$start}: 2.25rem;
+        }
+
+        >i,
+        .actions {
+            z-index: 1000;
+            color: $gray-500;
+            position: absolute;
+            #{$start}: 0.75rem;
+            top: 0;
+            bottom: 0;
+            vertical-align: middle;
+            display: flex;
+            align-items: center;
+            max-width: 1.5rem;
+            justify-content: center;
+            transition: 0.3s all;
+            font-size: 20px;
+        }
+
     }
 
     .input-group-icon-loading {
