@@ -9,8 +9,7 @@
 			</wire-link>
 			<div class="community-card-body text-center card-body pt-6">
 				<wire-link :href="`/tags/${community.tag}`" class="d-flex flex-column">
-					<strong class="font-20"> {{ community.name }} </strong>
-					<span class="community-info-tag mt-2"> {{ community.tag }} </span>
+					<strong class="community-info-tag font-20"> {{ community.name }} </strong>
 				</wire-link>
 			</div>
 		</div>
