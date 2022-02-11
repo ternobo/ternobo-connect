@@ -7,7 +7,7 @@
 				{{ __.get(`editor.video-embed`) }}
 			</span>
 			<div class="media-block__actions bg-white">
-				<div class="input-group-icon">
+				<div class="input-group-icon embed-block__input">
 					<input class="form-control fill" @keypress.enter="setEmbed" v-model="url" placeholder="Insert Link" />
 					<i class="material-icons" @click="setEmbed">subdirectory_arrow_left</i>
 				</div>
