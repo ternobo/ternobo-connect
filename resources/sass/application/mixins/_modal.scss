@@ -9,7 +9,8 @@
         padding-#{$start}: 3.75rem !important;
 
         .close {
-            #{$start}: 1.25rem;
+            #{$start}: 1.25rem !important;
+            #{$end}: unset !important;
             top: unset !important;
         }
     }

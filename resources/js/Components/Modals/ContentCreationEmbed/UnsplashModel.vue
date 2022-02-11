@@ -1,8 +1,8 @@
 <template>
-	<b-modal v-model="showModal" @show="onShow" @hide="showNewPostModal" header-class="back-modal" title-class="d-flex align-items-center" hide-footer size="lg" :centered="true">
+	<b-modal v-model="showModal" @show="onShow" @hide="showNewPostModal" header-class="back-modal" title-class="d-flex align-items-center w-100 justify-content-center" hide-footer size="lg" :centered="true">
 		<template #modal-header-close> arrow_back </template>
 		<template #modal-title> <img src="/images/unsplash-logo.svg" width="16" class="me-2" /> Unsplash</template>
-		<div class="input-group-icon mb-4">
+		<div class="input-group-icon input-group-icon_start mb-4">
 			<input v-model="search" :placeholder="__.get('application.search')" class="form-control fill rounded" />
 			<i v-if="loading"><loading-spinner :width="20" :height="20"></loading-spinner></i>
 			<i class="material-icons" v-else>search</i>
@@ -10,7 +10,7 @@
 		<div class="giphy-modal__list">
 			<masonry :cols="2" :gutter="12">
 				<div v-for="photo in photos" :key="`photo_id_${photo.id}`" class="w-100 mt-0 clickable mb-3" @click="$emit('select', photo.urls.regular)">
-					<lazy-image imgStyle="height: 200px" :src="photo.urls.regular" class="d-flex justify-content-center m-0" />
+					<lazy-image imgStyle="min-height: 200px" :src="photo.urls.regular" imgClass="w-100" class="w-100 d-flex justify-content-center m-0" />
 				</div>
 			</masonry>
 			<infinite-loading v-if="showInfinite" @infinite="infiniteHandler"></infinite-loading>
