@@ -12,10 +12,9 @@
 		<wire-link :href="`/tags/${page.tag}`" class="community-tag-suggestion d-flex" v-if="type == 'tag'">
 			<lazy-image :loadingColor="skeletonOptions.profileColor" class="community-icon" :src="assetURL(page.icon)" />
 			<div class="flex-column d-flex">
-				<strong class="tag-name">
+				<strong class="tag-name communityTag">
 					<span> {{ page.name }}</span>
 				</strong>
-				<small class="hashtag-name">#{{ page.tag }}</small>
 			</div>
 		</wire-link>
 		<loading-button class="btn btn-icon btn-md" v-if="shared.fullAccess && type == 'tag'" @click="follow" :class="{ 'btn-secondary': !isFollowed }" :loading="loading">

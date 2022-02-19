@@ -10,8 +10,6 @@
 					</strong>
 
 					<div>
-						<small class="tag-name" dir="auto">#{{ tag }}</small>
-						<span class="text-gray-medium-dark mx-1">.</span>
 						<small>{{ totalPosts }} {{ __.choice("application.post", totalPosts) }}</small>
 					</div>
 				</div>
@@ -24,7 +22,7 @@
 			<h2 class="mb-5 text-center">{{ __.get("application.top-active-users") }}</h2>
 			<div class="flex-container" v-if="loadingTopUsers">
 				<div v-for="i in 5" :key="`skeleton_top_user_${i}`">
-					<div class="d-flex align-items-center card p-3">
+					<div class="d-flex align-items-center flex-row card p-3">
 						<skeleton circle :loadingColor="skeletonOptions.profileColor" height="40px" width="40px" class="me-4"></skeleton>
 						<skeleton width="100px"></skeleton>
 					</div>

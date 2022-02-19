@@ -1,6 +1,6 @@
 <template>
 	<base-layout>
-		<component :is="headerComponnet" :followed="followed" :community="community" :tag="tag" :totalPosts="posts.total" />
+		<component :is="headerComponnet" :followed="followed" :community="community" :tag="tag" :totalPosts="posts.meta.total" />
 		<div class="w-100">
 			<div v-if="postsArray.length < 1">
 				<no-content class="mt-8"> {{ __.get("messages.no-content-with-tag") }} </no-content>
