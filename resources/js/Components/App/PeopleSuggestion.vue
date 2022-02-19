@@ -11,7 +11,7 @@
 		<!-- Community Tag Suggestion !-->
 		<wire-link :href="`/tags/${page.tag}`" class="community-tag-suggestion d-flex" v-if="type == 'tag'">
 			<lazy-image :loadingColor="skeletonOptions.profileColor" class="community-icon" :src="assetURL(page.icon)" />
-			<div class="flex-column d-flex">
+			<div class="flex-column d-flex justify-content-center">
 				<strong class="tag-name communityTag">
 					<span> {{ page.name }}</span>
 				</strong>
