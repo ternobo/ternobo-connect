@@ -11,7 +11,6 @@
 					<wire-link href="/" v-if="!$root.isDesktop">
 						<img :src="appDirection == 'rtl' ? '/images/farsi-logo.svg' : '/images/logo-en-dark.svg'" class="logo-sm w-auto" />
 					</wire-link>
-					<span class="beta-badge">Beta</span>
 				</div>
 				<div class="login-header-menu">
 					<slot name="header">
