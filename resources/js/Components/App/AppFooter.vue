@@ -10,7 +10,7 @@
 					<a class="text-muted hover-dark font-14" href="https://trello.com/b/Vku6XmjN/ternobo" target="_blank">{{ __.get("application.trello") }}</a>
 				</div>
 				<div class="copyright-text d-flex align-items-center justify-content-center" style="height: 16px">
-					<img :src="shared.direction == 'rtl' ? '/images/farsi-logo.svg' : '/images/logo-en-dark.svg'" class="mx-1" height="16" />
+					<img :src="shared.direction == 'rtl' ? '/images/logo-fa-footer.svg' : '/images/logo-en-footer.svg'" class="mx-1" height="16" />
 					<span class="font-14" style="height: 13px; line-height: 1">© {{ this.lang.value == "fa" ? "۱۴۰۰" : "2021" }}</span>
 				</div>
 			</div>
