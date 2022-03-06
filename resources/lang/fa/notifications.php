@@ -12,4 +12,5 @@ return [
     'mentioned-you-post' => "در یک محتوا از شما نام برده.",
     'mentioned-you-comment' => "در یک دیدگاه از شما نام برده.",
     'replied-you' => "به دیدگاه شما پاسخ داد.",
+    "no-notification" => "هیچ اعلانی وجود ندارد"
 ];

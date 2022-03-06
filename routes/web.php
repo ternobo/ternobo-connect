@@ -234,6 +234,7 @@ Route::middleware(["auth.web"])->group(function () {
 
     // Notifications
     Route::get('/notifications', 'NotificationController@index')->name('notifications')->middleware(FullAccessUserMiddleware::class);;
+    Route::get('/notifications/get', 'NotificationController@get')->name('notifications')->middleware(FullAccessUserMiddleware::class);;
 
     // Start Idea Comments
     // Route::prefix("/feedbacks")->group(function () {

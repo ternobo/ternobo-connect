@@ -12,4 +12,5 @@ return [
     'mentioned-you-post' => "Mentioned you in a post.",
     'mentioned-you-comment' => "Mentioned you in a comment.",
     'replied-you' => "Replied to your comment.",
+    "no-notification" => "You don't have any notification"
 ];

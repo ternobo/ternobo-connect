@@ -1,5 +1,9 @@
 <template>
 	<div class="toolbar">
+		<transition name="fade" duration="100">
+			<notification-peek v-if="notificationPeek" @mouseenter.native="showNotificationPeek" @mouseleave.native="hideNotificationPeek" />
+		</transition>
+
 		<div class="header-menu" v-if="$store.state.user != null">
 			<a :class="{ active: $store.state.url === '/feed' }" href="/feed" @click="onHomeClick">
 				<i class="navheader-icon">home</i>
@@ -10,7 +14,7 @@
 			<wire-link :class="{ active: $store.state.url === '/explore' }" href="/explore">
 				<i class="navheader-icon">explore</i>
 			</wire-link>
-			<wire-link :class="{ active: $store.state.url === '/notifications' }" v-if="$store.state.shared.fullAccess" href="/notifications">
+			<wire-link :class="{ active: $store.state.url === '/notifications' }" @mouseenter="showNotificationPeek" @mouseleave="hideNotificationPeek" v-if="$store.state.shared.fullAccess" href="/notifications">
 				<i class="navheader-icon" :class="{ unread: $store.state.shared.notifications_count > 0 && $store.state.url != '/notifications' }">{{ $store.state.url === "/notifications" ? "notifications" : "notifications_none" }}</i>
 			</wire-link>
 			<wire-link :class="{ active: $store.state.url === '/invite' }" v-if="$store.state.shared.fullAccess" href="/invite">
@@ -23,7 +27,6 @@
 				<button class="text-dark btn btn-transparent font-14 py-1" @click="showLogin = true">{{ __.get("application.login") }}</button>
 			</div>
 		</div>
-
 		<div ref="usermenushow" v-if="$store.state.user != null" class="usertoolbar" @mouseenter="showUserMenu" @mouseleave="menuVisible = false">
 			<div class="usertoolbar-container" :class="{ active: menuVisible }">
 				<div :class="{ active: $store.state.url === '/' + $store.state.user.username }" class="profile-image-container p-1">
@@ -40,6 +43,7 @@
 <script>
 import LoginModal from "../../Modals/LoginModal.vue";
 import SignupModal from "../../Modals/SignupModal.vue";
+import NotificationPeek from "../../Notifications/Peek/NotificationPeek.vue";
 import UserMenu from "./UserMenu";
 
 export default {
@@ -52,9 +56,24 @@ export default {
 			showLogin: false,
 			showSignup: false,
 			usermenuStyle: {},
+
+			notificationPeek: false,
+
+			peektimeout: null,
 		};
 	},
 	methods: {
+		showNotificationPeek() {
+			clearTimeout(this.peektimeout);
+			this.peektimeout = setTimeout(() => {
+				this.notificationPeek = true;
+			}, 350);
+		},
+		hideNotificationPeek() {
+			setTimeout(() => {
+				this.notificationPeek = false;
+			}, 350);
+		},
 		onHomeClick(e) {
 			e.preventDefault();
 			if (window.location.pathname === "/feed") {
@@ -83,6 +102,7 @@ export default {
 		UserMenu,
 		LoginModal,
 		SignupModal,
+		NotificationPeek,
 	},
 };
 </script>
