@@ -1,0 +1,23 @@
+.post-notification {
+    padding: 1rem 0;
+
+    &:first-child {
+        padding-top: 0;
+    }
+
+    .notification-sender {
+        font-size: $text-xxxsm;
+        color: $gray-medium-dark;
+
+        strong {
+            color: $gray-dark;
+            font-weight: 600;
+        }
+    }
+
+    .notification__created {
+        font-size: $text-xxxsm;
+        color: $gray-medium-dark;
+        font-weight: 600;
+    }
+}

@@ -10,7 +10,7 @@ use App\Models\Page;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
-use Faker\Factory;
+use Faker\Generator;
 use Illuminate\Console\Command;
 
 class FakeNotification extends Command
@@ -34,9 +34,10 @@ class FakeNotification extends Command
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Generator $generator)
     {
         parent::__construct();
+        $this->faker = $generator;
     }
 
     /**
@@ -46,22 +47,18 @@ class FakeNotification extends Command
      */
     public function handle()
     {
-
-        $faker = Factory::create();
-
         $numbers = $this->argument("nums");
         for ($i = 0; $i < $numbers; $i++) {
             $user = User::query()->find($this->argument("user"));
 
             $post = Post::withRelations()->where("page_id", $user->personalPage->id)->get()->random();
 
-            $from = User::query()->where("id", "!=", $user->id)->with("personalPage")->get()->random()->personalPage;
-            // print_r($from);
+            $from = Page::query()->where("user_id", "!=", $user->id)->get()->random();
             $notification = new Notification();
             $notification->from = $from->id;
             $notification->to = $user->id;
 
-            $action = $faker->randomElement(['like', 'comment', 'follow', 'mention']);
+            $action = $this->faker->randomElement(['like', 'comment', 'follow', 'mention']);
             // print_r($action);
             $notification->action = $action;
 
@@ -82,7 +79,7 @@ class FakeNotification extends Command
                     $comment = new Comment();
                     $comment->page_id = $from->id;
                     $comment->post_id = $post->id;
-                    $comment->text = $faker->text;
+                    $comment->text = $this->faker->text;
                     $comment->save();
                     $connected_to = $comment->id;
                     break;

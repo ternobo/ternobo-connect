@@ -79,6 +79,7 @@
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",
+        "fzaninotto/faker": "^1.5",
         "laravel/dusk": "^6.9",
         "laravel/envoy": "^2.8",
         "laravel/telescope": "^4.6",

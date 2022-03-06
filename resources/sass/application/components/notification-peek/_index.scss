@@ -1,0 +1,26 @@
+.notification-peek {
+    position: absolute;
+    top: 72px;
+    box-shadow: $tooltip-shadow;
+    width: 316px;
+    height: 204px;
+    background: $white;
+    #{$end}: 205px;
+
+    &__loading {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    &__list {
+        max-height: 100%;
+        padding: 24px;
+        overflow: auto;
+        @include nice-scroll;
+    }
+
+    @import "./notifications.scss";
+}
