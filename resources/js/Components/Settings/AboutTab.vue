@@ -20,7 +20,7 @@
 						</i>
 						<span>{{ __.get("application.discord") }}</span>
 					</div>
-					<a class="btn setting-btn btn-subtle btn-icon btn-md" href="https://discord.gg/unXsnGHsNj" target="_blank" @click="showLawsModal = true">
+					<a class="btn setting-btn btn-subtle btn-icon btn-md" href="https://discord.gg/unXsnGHsNj" target="_blank">
 						<i class="material-icons-outlined">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 					</a>
 				</div>
@@ -31,7 +31,7 @@
 						</i>
 						<span>{{ __.get("application.trello") }}</span>
 					</div>
-					<a class="btn setting-btn btn-subtle btn-icon btn-md" href="https://trello.com/b/Vku6XmjN/ternobo" target="_blank" @click="showLawsModal = true">
+					<a class="btn setting-btn btn-subtle btn-icon btn-md" href="https://trello.com/b/Vku6XmjN/ternobo" target="_blank">
 						<i class="material-icons-outlined">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 					</a>
 				</div>
