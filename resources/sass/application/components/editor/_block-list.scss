@@ -23,7 +23,11 @@
             padding: 0.5rem;
             width: 188px;
 
-            &:hover {
+            &.disabled {
+                opacity: 0.4;
+            }
+
+            &:hover:not(.disabled) {
                 background: $white;
                 cursor: pointer;
             }
@@ -44,10 +48,6 @@
                 align-items: center;
                 justify-content: center;
                 transition: 0.3s all;
-
-                &.disabled {
-                    opacity: 0.4;
-                }
             }
         }
     }
