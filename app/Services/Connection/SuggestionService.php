@@ -43,6 +43,7 @@ class SuggestionService
                 $item['type'] = $item instanceof Page ? "page" : "tag";
                 return $item;
             })
+            ->unique("id")
             ->shuffle();
     }
 
@@ -75,6 +76,7 @@ class SuggestionService
                 }
                 return $item;
             })
+            ->unique("id")
             ->shuffle();
     }
 
@@ -103,7 +105,8 @@ class SuggestionService
                 }
                 return $item;
             })
-            ->pluck("following");
+            ->pluck("following")
+            ->unique("id");
 
         if (count($suggestions) >= 3) {
             return $suggestions;
