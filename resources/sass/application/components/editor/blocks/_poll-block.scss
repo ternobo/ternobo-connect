@@ -1,17 +1,18 @@
 .poll-block-container {
-    min-height: 216px;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    border: 2px dashed $gray;
-    background: $gray-bg;
 
     .poll-not-setuped {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        background: $gray-bg;
+        border: 2px dashed $gray;
+        min-height: 216px;
     }
 
     .edit-poll {
@@ -91,204 +92,4 @@
         }
 
     }
-}
-
-
-// Time Picker
-.vpd-counter {
-    display: flex;
-}
-
-.vpd-addon-list-content {
-    padding: 0.5rem;
-}
-
-.vpd-wrapper {
-    z-index: 99999;
-}
-
-.vpd-content {
-    box-shadow: $control-shadow;
-}
-
-.vpd-month-label {
-    width: -webkit-max-content;
-    width: -moz-max-content;
-    width: max-content;
-    position: relative;
-    left: unset;
-    right: unset;
-
-    span:hover {
-        color: $dark !important;
-    }
-}
-
-.vpd-day-effect {
-    transition: none;
-    -webkit-animation: none;
-    animation: none;
-    background-color: $dark !important;
-    border-radius: 0.5rem;
-}
-
-.vpd-day:not([disabled]):not(.vpd-selected):hover {
-    color: $dark;
-
-    .vpd-day-effect {
-        background: $gray-light !important;
-    }
-}
-
-.slideY-enter-active,
-.slideY-leave-active {
-    position: relative !important;
-    opacity: 1 !important;
-    transition: none !important;
-}
-
-.slideY-enter,
-.slideY-leave-to {
-    opacity: 1 !important
-}
-
-.vpd-date span {
-    font-weight: bold;
-    text-align: center;
-}
-
-.vpd-counter-item {
-    color: $dark;
-    font-weight: 700;
-
-    input {
-        font-weight: 700;
-    }
-}
-
-.vpd-up-arrow-btn,
-.vpd-down-arrow-btn {
-    display: none !important;
-}
-
-.vpd-week {
-    padding: 0 18px;
-}
-
-.vpd-wrapper[data-type=datetime].vpd-compact-time .vpd-time .vpd-counter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.vpd-controls {
-    overflow: hidden;
-}
-
-.vpd-time-column .vpd-counter input {
-    letter-spacing: 6px;
-    font-size: 20px;
-    line-height: 24px;
-    width: 40px;
-    padding: 0;
-    text-align: center;
-    padding-left: 5px;
-    display: flex;
-    padding-top: 5px;
-    align-items: center;
-    color: $dark;
-    font-weight: bold;
-}
-
-.vpd-addon-list.vpd-month-list {
-    padding: 0 1.5rem;
-    height: 100%;
-
-    .vpd-addon-list-content {
-        padding-top: 2.5rem;
-    }
-}
-
-.vpd-addon-list-item.vpd-selected {
-    background: $dark !important;
-    color: $white !important;
-}
-
-.vpd-wrapper[data-type=datetime].vpd-compact-time .vpd-time {
-    border: none;
-    z-index: 0;
-
-    .vpd-addon-list-content {
-        padding-top: 0;
-    }
-}
-
-.vpd-weekday {
-    color: $gray-medium-dark;
-}
-
-.vpd-header {
-    color: $dark;
-    padding: 1.5rem;
-    padding-bottom: 0.75rem;
-}
-
-.vpd-year-label {
-    display: none;
-}
-
-.vpd-addon-list-content {
-    padding: 0.75rem 0;
-}
-
-.vpd-actions {
-    display: flex;
-    padding: 1.5rem;
-    padding-top: 0.75rem;
-
-    button {
-        padding: 0.625rem 1.5rem;
-        outline: none;
-        border: 2px solid transparent;
-        min-height: 2.75rem;
-        color: $text-color !important;
-        transition: 0.3s all;
-        max-height: 2.75rem;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: $text-xsm;
-        font-family: $font-family-base;
-        cursor: pointer;
-
-        &:first-child {
-            background: $primary;
-            color: $text-on-primary !important;
-            width: 100%;
-
-            &:hover:not(:disabled) {
-                background: $gray-dark;
-            }
-
-            &:disabled {
-                color: $gray !important;
-                background: $gray-light;
-                opacity: 1;
-            }
-        }
-
-    }
-}
-
-.vpd-close-addon {
-    background-color: transparent;
-    color: $gray-medium-dark;
-    padding: 0.5rem;
-    height: 40px;
-    width: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    #{$start}: 1.5rem
 }
