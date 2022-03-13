@@ -88,7 +88,10 @@ export default {
 						this.poll.options = response.data.result;
 					}
 				})
-				.catch(() => (this.error = true))
+				.catch((err) => {
+					console.log(err);
+					this.error = true;
+				})
 				.then(() => onDone());
 		},
 		submitVote() {
@@ -97,7 +100,7 @@ export default {
 				.post(`/polls/${this.pollId}/${this.selectedOption}/vote`)
 				.then((response) => {
 					if (response.data.status) {
-						this.poll.options = response.data.result.options.map((option) => {
+						this.poll.options = this.poll.options.map((option) => {
 							if (option.id == this.selectedOption) {
 								option.voted = true;
 							}
@@ -112,7 +115,8 @@ export default {
 						this.toast(__.get("messages.connection-error"));
 					}
 				})
-				.catch(() => {
+				.catch((err) => {
+					console.error(err);
 					this.toast(__.get("messages.connection-error"));
 				})
 				.then(() => (this.voteSubmitLoading = false));

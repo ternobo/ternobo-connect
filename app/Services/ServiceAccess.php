@@ -60,11 +60,11 @@ abstract class ServiceAccess
         $headers = [
             "application" => "Ternobo",
         ];
-        $userId = null;
+
+        $userId = Ternobo::isUserLogedIn() ? Auth::user()->id : 0;
 
         if ($this->isAuthrequired) {
             $headers['user'] = Base64::encode(json_encode(Auth::user()));
-            $userId = Ternobo::isUserLogedIn() ? Auth::user()->id : 0;
         }
         return Http::withHeaders(["Authorization" => "Token " . $this->applicationPassword, "userId" => $userId])
             ->retry(2)
