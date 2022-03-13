@@ -45,6 +45,7 @@ export default {
 			if (this.list[index].text.length > 0) {
 				this.list.splice(index + 1, 0, { id: uuidv4(), text: "" });
 			} else {
+				this.deleteItem(index);
 				this.$emit("addParagraph");
 			}
 		},
