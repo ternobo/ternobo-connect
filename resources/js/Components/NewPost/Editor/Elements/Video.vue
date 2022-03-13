@@ -58,11 +58,11 @@ export default {
 		selectMedia() {
 			let fileChooser = document.createElement("input");
 			fileChooser.type = "file";
-			ileChooser.accept = `video/mp4, video/mkv`;
+			fileChooser.accept = `video/mp4, video/mkv`;
 
 			fileChooser.onchange = (e) => {
 				let file = e.target.files[0];
-				if (file.type.startsWith(this.type) && !file.type.includes("svg+xml")) {
+				if (file.type.startsWith("video")) {
 					this.checkDuration(file);
 				} else {
 					this.toast(__.get("messages.invalid-mime"));
