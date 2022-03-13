@@ -213,7 +213,7 @@ export default {
 
 			phone: null,
 			email: null,
-			self_deactivation: 12,
+			self_deactivation: 0,
 		};
 	},
 	components: {
