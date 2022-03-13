@@ -173,8 +173,8 @@ class PageController extends Controller
             $actions = $actions->where("page_id", $page->id)
                 ->with("post")
                 ->where("action", "post")
+                ->whereRelation("post", "category_id", "=", $request->category)
                 ->latest();
-
             if (Auth::check()) {
                 $actions = $actions->with("post.mutualLikes");
             }
