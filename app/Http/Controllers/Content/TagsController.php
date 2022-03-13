@@ -40,11 +40,11 @@ class TagsController extends Controller
 
         $tag =  Tag::query()->where("name", $name)->first();
 
-        $posts = PostResource::collection($tag->posts()
+        $posts = $tag != null ? PostResource::collection($tag->posts()
             ->with(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"])
             ->paginate(10))
             ->response()
-            ->getData();
+            ->getData() : ["meta" => ["total" => 0], "data" => []];
 
         $followed = false;
         if ($tag instanceof Tag) {
