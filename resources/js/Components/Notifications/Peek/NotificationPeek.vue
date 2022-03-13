@@ -26,7 +26,7 @@ export default {
 	mounted() {
 		this.loading = true;
 		axios
-			.get("notifications/get")
+			.get("/notifications/get")
 			.then((response) => {
 				this.notifications = response.data.data.notifications;
 			})
