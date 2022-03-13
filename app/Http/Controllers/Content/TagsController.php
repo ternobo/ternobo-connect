@@ -32,13 +32,14 @@ class TagsController extends Controller
 
     public function index($name)
     {
+        $tag =  Tag::query()->where("name", $name)->firstOrFail();
+
         SEOTools::setTitle(__("seo.tag", ['tag' => $name]));
         SEOTools::setDescription("مطالب منتشر شده با برچسب " . $name);
         SEOTools::opengraph()->setUrl(url("/tags/" . $name));
         SEOTools::setCanonical(url("/tags/" . $name));
         SEOMeta::addKeyword([$name]);
 
-        $tag =  Tag::query()->where("name", $name)->first();
 
         $posts = $tag != null ? PostResource::collection($tag->posts()
             ->with(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"])
