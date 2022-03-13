@@ -4,7 +4,7 @@
 		<div class="mention-menu-container" v-if="searchKey != null" :style="caretPosition">
 			<ul>
 				<li v-for="item in items" :key="getKey(item.key)" :class="{ hashtag: searchKey == '#' }" @mousedown="selectItem(item)">
-					<lazy-image class="profile-xxsm ms-4" imgClass="profile-xxsm" :src="item.profile" v-if="item.profile" />
+					<lazy-image class="profile-xxsm me-4" imgClass="profile-xxsm" :src="item.profile" v-if="item.profile" />
 
 					<div class="d-flex flex-column">
 						<div class="d-flex align-items-center">
