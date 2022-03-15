@@ -26,3 +26,4 @@ package-lock.json
 socket-server.json
 .idea
 .phpdoc
+deploy-ui.sh
