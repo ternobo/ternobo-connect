@@ -82,7 +82,7 @@ export default {
 
 <style lang="scss" scoped>
 .bulleted-list-editor {
-	list-style: disc;
+	list-style: disc !important;
 	margin-bottom: 0;
 	padding: 0 24px;
 }
