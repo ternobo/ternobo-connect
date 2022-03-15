@@ -23,9 +23,9 @@ export default {
 			const element = document.createElement("span");
 			element.className = classes;
 			if (key == "#") {
-				element.innerHTML = key + value;
+				element.innerHTML = key + value + " ";
 			} else {
-				element.innerHTML = item.name;
+				element.innerHTML = item.name + " ";
 			}
 			element.contentEditable = false;
 			return element;
