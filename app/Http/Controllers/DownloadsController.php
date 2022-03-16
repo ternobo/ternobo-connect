@@ -28,9 +28,7 @@ class DownloadsController extends Controller
     public function media($image)
     {
         if (Storage::exists("media/$image")) {
-            return response()->file(Storage::path("media/$image"), [
-                "Content-Type" => Storage::mimeType("media/$image"),
-            ]);
+            return Storage::response("media/$image", null, ["Content-Type" => Storage::mimeType("media/$image")]);
         }
         return abort(404);
     }
@@ -38,22 +36,10 @@ class DownloadsController extends Controller
     public function video($video)
     {
         if (Storage::exists("videos/$video")) {
-            return response()->file(Storage::path("videos/$video"), [
-                "Content-Type" => Storage::mimeType("videos/$video"),
-            ]);
+            return Storage::response("videos/$video", null, ["Content-Type" => Storage::mimeType("videos/$video")]);
         }
         return abort(404);
     }
-
-    // public function nationalCards($image)
-    // {
-    //     if (Storage::exists("nationalcards/$image")) {
-    //         $response = (Storage::download("nationalcards/$image"));
-    //         ob_end_clean();
-    //         return $response;
-    //     }
-    //     return abort(404);
-    // }
 
     public function voices($file)
     {
