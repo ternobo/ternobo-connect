@@ -35,7 +35,7 @@ class CommunityTag extends Model
         return $data;
     }
 
-    public function category()
+    public function communityCategory()
     {
         return $this->belongsTo(CommunityCategory::class);
     }

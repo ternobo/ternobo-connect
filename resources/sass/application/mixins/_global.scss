@@ -46,3 +46,29 @@
         cursor: grabbing;
     }
 }
+
+
+@mixin hidden-scroll {
+    scrollbar-color: transparent;
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar {
+        cursor: default;
+        width: 0;
+        background: transparent;
+        max-height: 0;
+        opacity: 0;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        cursor: default;
+        width: 0;
+        background: transparent;
+        max-height: 0;
+        opacity: 0;
+    }
+
+    &::-webkit-scrollbar-thumb:active {
+        cursor: default;
+    }
+}
