@@ -13,4 +13,4 @@ Route::post("/interests/set", [CommunityTagController::class, "setInterests"]);
 Route::post("/interests/skip", [CommunityTagController::class, "skipInterestPage"]);
 
 Route::get("/explore", [CommunityExploreController::class, "index"]);
-Route::get("/communities/{CommunityCategory:id}", [CommunityExploreController::class, "get"]);
+Route::get("/communities", [CommunityExploreController::class, "get"]);

@@ -30,6 +30,7 @@ class CommunityTagResource extends BaseResource
             "name" =>  $translation instanceof CommunityTranslation ? $translation->translation : $this->name,
             "show_in_interst_page" =>  $this->show_in_interst_page,
             "tag" =>  $this->tag->name,
+            "category_name" => $this->communityCategory->name,
             "is_followed" => Ternobo::currentPage() ? Following::tags()->where("page_id", Ternobo::currentPage()->id)->where("following", $this->tag_id)->exists() : false,
         ];
     }

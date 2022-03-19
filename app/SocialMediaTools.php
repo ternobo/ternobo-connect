@@ -6,6 +6,7 @@ use App\Models\CommunityTag;
 use App\Models\Notification;
 use App\Models\Page;
 use HtmlSanitizer\Sanitizer;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image as ImageFacades;
@@ -135,22 +136,29 @@ class SocialMediaTools
      *
      * @return string new image path
      */
-    public static function uploadPostImage($media, $quality = 70)
+    public static function uploadPostImage(UploadedFile $media, $quality = 70, $meta = [])
     {
-        $path = "storage/app/$media";
+        $result = ['meta' => []];
+        $path = Storage::disk("local")->path($media->store("media", ['disk' => "local"]));
         if (!Str::endsWith(Str::lower($path), "gif")) {
-            $path .= ".webp";
-            $image = SocialMediaTools::fitPostImage(ImageFacades::make(base_path("storage/app/$media")));
-            $image->save(base_path($path), $quality, "webp");
-            Storage::delete("$media");
-            return "$media.webp";
+            $image = SocialMediaTools::fitPostImage(ImageFacades::make($path));
+            if (isset($meta['rotate'])) {
+                $image->rotate($meta['rotate']);
+            }
+            $image->save($path, $quality, "webp");
+            $result['content'] = Storage::putFile("media", $path);
+            $result['meta'] = ['info' => SocialMediaTools::getImageInfo($image)];
+            return $result;
         }
-        return "$media";
+
+        $result['content'] = Storage::putFile("media", $path);
+        $result['meta'] = ['info' => SocialMediaTools::getImageInfo($image)];
+        unlink($path);
+        return $result;
     }
 
-    public static function getImageInfo($media)
+    public static function getImageInfo(Image $image)
     {
-        $image = ImageFacades::make($media);
         return [
             'height' => $image->height(),
             'width' => $image->width()
@@ -160,7 +168,7 @@ class SocialMediaTools
     public static function fitPostImage(Image $image)
     {
 
-        $image = ImageFacades::make($image)->resize(static::$imageMaxWidth, null, function ($constraint) {
+        $image = $image->resize(static::$imageMaxWidth, null, function ($constraint) {
             $constraint->upsize();
             $constraint->aspectRatio();
         });

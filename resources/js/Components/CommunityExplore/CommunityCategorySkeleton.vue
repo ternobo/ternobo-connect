@@ -1,15 +1,6 @@
 <template>
 	<div class="explore-page-content row">
-		<div class="col-md-3">
-			<community-card-skeleteton />
-		</div>
-		<div class="col-md-3">
-			<community-card-skeleteton />
-		</div>
-		<div class="col-md-3">
-			<community-card-skeleteton />
-		</div>
-		<div class="col-md-3">
+		<div class="col-md-3 mb-4" v-for="i in 20" :key="`community_loading_item_${i}`">
 			<community-card-skeleteton />
 		</div>
 	</div>

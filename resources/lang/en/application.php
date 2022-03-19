@@ -73,8 +73,10 @@ return [
     "related-hashtags" => "Related Hashtags",
     "nickname" => "Nickname",
     "continue" => "Continue",
-    "optional"=>"Optional",
-    "bookmarks"=>"Bookmarks",
+    "optional" => "Optional",
+    "bookmarks" => "Bookmarks",
+    "sort-by" => "Sort by",
+
 
     "password-strength" => [
         "short" => "Too Short",

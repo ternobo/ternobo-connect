@@ -17,19 +17,50 @@ export default {
 			loading: false,
 		};
 	},
+	watch: {
+		config() {
+			this.next_page_url = null;
+			this.loadData();
+		},
+	},
 	methods: {
+		loadData() {
+			this.loading = true;
+			const config = {
+				url: this.endpoint,
+				method: this.method,
+				...this.config,
+			};
+			axios(config)
+				.then((response) => {
+					response = response.data;
+					if (response.status) {
+						this.items = response.data.data;
+						this.next_page_url = response.data.links.next;
+						this.$emit("initalLoad", { total: response.data.meta.total });
+					}
+					this.loading = false;
+				})
+				.catch((err) => {
+					console.error(err);
+				})
+				.then(() => {
+					this.loading = false;
+				});
+		},
 		infiniteHandler($state) {
 			if (this.next_page_url != null) {
 				const config = {
 					url: this.next_page_url,
 					method: this.method,
+					...this.config,
 				};
 				axios(config)
 					.then((response) => {
 						response = response.data;
 						if (response.status) {
-							this.items = this.items.concat(response.data);
-							this.next_page_url = response.links.next;
+							this.items = this.items.concat(response.data.data);
+							this.next_page_url = response.data.links.next;
 							$state.loaded();
 							if (this.next_page_url == null) {
 								$state.complete();
@@ -45,32 +76,18 @@ export default {
 			}
 		},
 	},
+
 	mounted() {
-		this.loading = true;
-		const config = {
-			url: this.endpoint,
-			method: this.method,
-		};
-		axios(config)
-			.then((response) => {
-				response = response.data;
-				if (response.status) {
-					this.items = response.data.data;
-					this.next_page_url = response.data.links.next;
-					this.$emit("initalLoad", { total: response.data.meta.total });
-				}
-				this.loading = false;
-			})
-			.catch((err) => {
-				console.error(err);
-			})
-			.then(() => {
-				this.loading = false;
-			});
+		this.loadData();
 	},
 	props: {
 		endpoint: {
 			required: true,
+		},
+		config: {
+			default: () => {
+				return {};
+			},
 		},
 		method: {
 			default: "post",
