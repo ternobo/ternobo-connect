@@ -5,7 +5,7 @@
 			<div @wheel="scrollHeader" ref="header" class="explore-page-header__categories">
 				<div v-for="category in categories" @click="select(category)" :class="{ active: category == activeCategory }" :key="`community_category_card_${category.id}`">
 					<span>{{ category.name }}</span>
-					<img width="32" :src="assetURL(category.icon)" />
+					<span width="32" :style="{ background: `url(${assetURL(category.icon)})`, backgroundSize: 'cover', width: '32px', height: '32px' }" />
 				</div>
 			</div>
 		</div>
