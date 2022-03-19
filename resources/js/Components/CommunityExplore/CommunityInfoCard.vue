@@ -9,7 +9,7 @@
 			</div>
 			<div class="community-card-body text-center card-body pt-6">
 				<strong class="community-info-tag font-20"> {{ community.name }} </strong>
-				<span class="text-dark font-16 font-demibold d-block mt-2">{{ community.category_name }}</span>
+				<span class="font-16 font-demibold d-block mt-2">{{ community.category_name }}</span>
 			</div>
 		</wire-link>
 		<div class="card-footer pt-4 no-border">
