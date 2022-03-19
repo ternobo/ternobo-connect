@@ -12,7 +12,7 @@
             @include hidden-scroll;
 
             >div {
-                min-width: 264px;
+                min-width: 245px;
                 height: 66px;
                 white-space: normal;
                 display: flex;
@@ -38,14 +38,14 @@
                 &.active {
                     background: $dark;
                     color: $white;
+
                 }
             }
         }
     }
 
     .explore-page-content {
-        justify-content: center;
-        margin-bottom: 52px;
+        margin-bottom: 3.25rem;
     }
 
 }

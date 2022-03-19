@@ -3,27 +3,33 @@
 namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Community\CommunityExploreRequest;
 use App\Http\Resources\CommunityTagResource;
 use App\Models\CommunityCategory;
 use App\Models\CommunityTag;
+use App\Services\Community\CommunityExploreService;
+use App\Services\Community\CommunitySortQuery;
 use Illuminate\Http\Request;
 use Ternobo\TernoboWire\TernoboWire;
 
 class CommunityExploreController extends Controller
 {
+    private CommunityExploreService $service;
+
+    public function __construct(CommunityExploreService $service)
+    {
+        $this->service = $service;
+    }
+
     public function index()
     {
         return TernoboWire::render("CommunityExplore", ['categories' => CommunityCategory::all()]);
     }
 
-    public function get(Request $request)
+    public function get(CommunityExploreRequest $request)
     {
-        $query =  CommunityTag::query();
-        if ($request->filled("category")) {
-            $query->whereRelation("communityCategory", "id", "=", $request->category);
-        }
         return $this->generateResponse(true, CommunityTagResource::collection(
-            $query->paginate(20)
+            $this->service->getCommunities(new CommunitySortQuery($request->input("sort", "activity")), $request->category, $request->search)
         )->response()->getData());
     }
 }

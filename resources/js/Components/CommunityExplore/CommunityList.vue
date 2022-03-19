@@ -1,5 +1,20 @@
 <template>
 	<div class="community-category-group">
+		<div class="community-category-group__filters" v-if="category == null">
+			<search-input v-model="search" inputClass="fill rounded" :placeholder="__.get('application.search')" />
+
+			<div class="d-flex align-items-center">
+				<strong class="me-3 text-nowrap text-dark">{{ __.get("application.sort-by") }}</strong>
+				<tselect
+					class="community-category-group__filters--sort tselect-lg tselect-filter"
+					:items="[
+						{ name: __.get('community.activity'), value: 'activity' },
+						{ name: __.get('community.post'), value: 'posts' },
+					]"
+					v-model="sort"
+				></tselect>
+			</div>
+		</div>
 		<infinite-scroll endpoint="/communities" :config="config" #default="{ items, loading }" method="GET">
 			<community-category-skeleton v-if="loading"></community-category-skeleton>
 			<div class="explore-page-content row" v-else>
@@ -14,6 +29,8 @@
 <script>
 import LoadingTextButton from "../buttons/LoadingTextButton.vue";
 import InfiniteScroll from "../InfiniteScroll.vue";
+import SearchInput from "../inputs/SearchInput.vue";
+import Tselect from "../Tselect.vue";
 import CommunityCategorySkeleton from "./CommunityCategorySkeleton.vue";
 import CommunityInfoCard from "./CommunityInfoCard.vue";
 export default {
@@ -25,19 +42,17 @@ export default {
 			communities: [],
 			next_page_url: null,
 			loadingNextPage: false,
+
+			search: "",
+			sort: { name: __.get("community.activity"), value: "activity" },
 		};
-	},
-	watch: {
-		category() {
-			this.loadData();
-		},
 	},
 	mounted() {
 		this.loadData();
 	},
 	computed: {
 		config() {
-			return { params: { category: this.category?.id } };
+			return { params: { category: this.category?.id, search: this.search, sort: this.sort?.value } };
 		},
 	},
 	methods: {
@@ -73,6 +88,13 @@ export default {
 		},
 	},
 	props: ["category"],
-	components: { CommunityCategorySkeleton, LoadingTextButton, CommunityInfoCard, InfiniteScroll },
+	components: {
+		CommunityCategorySkeleton,
+		LoadingTextButton,
+		CommunityInfoCard,
+		InfiniteScroll,
+		SearchInput,
+		Tselect,
+	},
 };
 </script>
