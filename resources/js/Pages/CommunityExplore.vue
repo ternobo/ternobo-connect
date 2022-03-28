@@ -2,7 +2,7 @@
 	<base-layout class="explore-page">
 		<div class="explore-page-header">
 			<h1 class="mb-6">{{ __.get("community.header-title") }}</h1>
-			<div @mousedown="mouseDownHandler" @mouseleave="mouseUpHandler" @wheel="scrollHeader" ref="header" class="explore-page-header__categories">
+			<div @mousedown="mouseDownHandler" @mouseleave="mouseUpHandler" @wheel="scrollHeader" :class="{moving: moving}" ref="header" class="explore-page-header__categories">
 				<div v-for="category in categories" @click="select(category)" :class="{ active: category == activeCategory }" :key="`community_category_card_${category.id}`">
 					<span>{{ category.name }}</span>
 					<span width="32" :style="{ background: `url(${assetURL(category.icon)})`, backgroundSize: 'cover', width: '32px', height: '32px' }" />
@@ -46,7 +46,6 @@ export default {
 		mouseDownHandler(e) {
 			this.$refs["header"].style.cursor = "grabbing";
 			this.$refs["header"].style.userSelect = "none";
-			this.$refs["header"].classList.add("moving");
 			this.pos = {
 				// The current scroll
 				left: this.$refs["header"].scrollLeft,
