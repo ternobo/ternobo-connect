@@ -11,6 +11,12 @@
             margin-top: -3.25rem;
             @include hidden-scroll;
 
+            &:not(.moving) {
+                >div {
+                    cursor: pointer;
+                }
+            }
+
             >div {
                 min-width: 245px;
                 height: 66px;
@@ -23,7 +29,7 @@
                 padding: 1rem 1.5rem;
                 font-weight: 700;
                 font-size: 20px;
-                cursor: pointer;
+
                 -webkit-user-select: none;
                 -moz-user-select: none;
                 -ms-user-select: none;
