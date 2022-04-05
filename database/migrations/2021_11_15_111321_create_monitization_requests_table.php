@@ -15,6 +15,7 @@ class CreateMonitizationRequestsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('monitization_requests');
         Schema::create('monitization_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class, "user_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
