@@ -14,7 +14,7 @@
 			<connections-list v-else :connections="connections" :next_page_url="next_page_url" @loadMore="loadMoreConnection">
 				<template v-slot:default="{ connection }">
 					<wire-link :href="`/tags/${connection.following.tag}`" class="d-flex align-items-center">
-						<strong class="font-16" :class="{ communityTag: connection.following.is_community }"> #{{ connection.following.tag }} </strong>
+						<strong class="font-16" :class="{ communityTag: connection.following.is_community }"> {{ connection.following.tag }} </strong>
 						<img width="24" :src="assetURL(connection.following.icon)" v-if="connection.following.is_community" class="ms-2" />
 					</wire-link>
 					<follow-tag-button v-if="user != null" :tag="connection.following.tag" :followed="connection.following.is_followed"></follow-tag-button>
