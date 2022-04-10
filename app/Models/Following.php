@@ -70,7 +70,7 @@ class Following extends Model
         if (isset($array['page']) && $array['type'] == 'user') {
             $array['following'] = $array['page'];
             unset($array['page']);
-        } elseif (isset($array['tag']) && $array['type'] == 'tag') {
+        } elseif ($array['type'] == 'tag') {
             $array['following'] = $array['tag'];
             unset($array['tag']);
         }
