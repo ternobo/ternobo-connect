@@ -10,14 +10,14 @@
 						<strong class="user-profile-name">{{ username }}</strong>
 					</div>
 					<div class="content-creation--header__actions">
-						<div class="can-tip-post-check clickable" @click="canDonate = !canDonate">
+						<!-- <div class="can-tip-post-check clickable" @click="canDonate = !canDonate">
 							<div>
 								<i class="material-icons-outlined font-20 me-1">savings</i>
 								{{ __.choice("tips.tip", 1) }}
 							</div>
 							<loading-spinner v-if="loadingCanDonate" style="height: 12px; width: 12px; border-width: 1px"></loading-spinner>
 							<checkbox v-else v-model="canDonate" :status="canDonate" class="m-0 text-superlight light"></checkbox>
-						</div>
+						</div> -->
 						<div class="category-select" @click="showCategoryModal = true">
 							<i class="material-icons-outlined">layers</i>
 							<span>{{ category == null ? __.choice("content/posts.category", 2) : category.name }}</span>

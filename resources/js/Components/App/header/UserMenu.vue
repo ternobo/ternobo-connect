@@ -17,9 +17,9 @@
 				<wire-link href="/bookmarks" as="a" class="list-group-item border-0">
 					<a class="m-0"><i class="material-icons-outlined">bookmark_border</i> {{ __.get("application.bookmarks") }} </a>
 				</wire-link>
-				<wire-link href="/monetization" v-if="shared.fullAccess" as="a" class="list-group-item border-0">
+				<!-- <wire-link href="/monetization" v-if="shared.fullAccess" as="a" class="list-group-item border-0">
 					<a class="m-0"><i class="material-icons-outlined">savings</i> {{ __.get("monitization.monitization") }}</a>
-				</wire-link>
+				</wire-link> -->
 				<wire-link href="/settings" as="a" class="list-group-item border-0">
 					<a class="m-0"><i class="material-icons-outlined">settings</i> {{ __.get("settings.settings") }} </a>
 				</wire-link>
