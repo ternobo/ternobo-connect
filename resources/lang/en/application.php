@@ -76,6 +76,7 @@ return [
     "optional" => "Optional",
     "bookmarks" => "Bookmarks",
     "sort-by" => "Sort by",
+    "trending" => "Trending",
 
 
     "password-strength" => [

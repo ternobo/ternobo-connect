@@ -75,6 +75,9 @@ return [
     "optional" => "اختیاری",
     "bookmarks" => "نشان‌ها",
     "sort-by" => "ترتیب براساس",
+    "trending" => "پرطرفدار",
+
+
     "password-strength" => [
         "short" => "کوتاه",
         'too-weak' => "بسیار ضعیف",

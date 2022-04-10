@@ -14,6 +14,7 @@ use App\Http\Controllers\AutoUpdateController;
 use App\Http\Middleware\CommunityTagSelectMiddleware;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 /*
 |--------------------------------------------------------------------------
@@ -298,6 +299,15 @@ Route::post("/contacts/{page}", "Profile\ContactsController@getContactData");
 
 //monetization
 require base_path("routes/tip_routes.php");
+
+
+
+Route::get("/test-redis", function () {
+    Redis::connection("default")->publish('ternobo_post_action', json_encode([
+        'name' => 'Adam Wathan'
+    ]));
+});
+
 
 // Pages
 Route::prefix('/{page:slug}')->group(function () {
