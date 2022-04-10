@@ -27,3 +27,5 @@ socket-server.json
 .idea
 .phpdoc
 deploy-ui.sh
+.env.production
+laravel-echo-server-production.json
