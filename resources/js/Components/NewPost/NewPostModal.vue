@@ -25,7 +25,7 @@
 					</div>
 				</div>
 				<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
-				<tag-input v-model="tags" />
+				<!-- <tag-input v-model="tags" /> -->
 			</div>
 			<modal-footer-buttons @ok="submitPost(shouldDraft)" @cancel="submitPost(!shouldDraft)" class="mt-8" :cancelLoading="loadingDraft" :okLoading="loading" :okText="post ? __.get('application.save') : __.get('content/posts.publish')" :cancelText="shouldDraft ? __.get('content/posts.publish') : __.get('content/posts.draft')" :cancelDisable="!checkContent" cancelClass="btn-text" :okDisabled="!checkContent" okClass="btn-primary"></modal-footer-buttons>
 		</b-modal>

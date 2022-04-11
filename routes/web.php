@@ -262,7 +262,9 @@ Route::middleware(["auth.web"])->group(function () {
 Route::resource("/posts", PostController::class)->only(['store', 'update', 'destroy', "show"]);
 
 // Tags
-Route::get("/tags/{name}", [TagsController::class, "index"]);
+if (config("features.tags")) {
+    Route::get("/tags/{name}", [TagsController::class, "index"]);
+}
 
 if (config("features.communities")) {
     require base_path("routes/community_tags.php");

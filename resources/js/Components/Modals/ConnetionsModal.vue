@@ -49,14 +49,14 @@
 						<span class="font-16 text-superlight">{{ __.get("messages.following-not-found") }}</span>
 					</div>
 					<div class="connections-list" v-else>
-						<div class="connection-item clickable" @click="showTags = true">
+						<!-- <div class="connection-item clickable" @click="showTags = true">
 							<div>
 								<i class="material-icons me-3">tag</i>
 								<strong class="font-16 text-dark font-demibold">{{ __.get("user-profile.tags") }}</strong>
 							</div>
 
 							<i class="material-icons text-gray hover-dark">chevron_right</i>
-						</div>
+						</div> -->
 						<div v-for="connection in connections" :key="'connections_' + connection.id" class="connection-item">
 							<wire-link :href="'/' + connection.following.slug" class="userinfo">
 								<lazy-image class="mb-0 profile-standard" imgClass="profile-standard" :src="connection.following.profile"></lazy-image>

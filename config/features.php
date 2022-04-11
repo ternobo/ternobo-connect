@@ -5,6 +5,7 @@ return [
     "monitization" => false,
     "communities" => false,
     "feedback" => false,
+    "tags" => false,
     "profile" => [
         "about" => false,
         "contact" => false
