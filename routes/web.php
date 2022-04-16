@@ -232,8 +232,8 @@ Route::middleware(["auth.web"])->group(function () {
     Route::resource("categories", CategoryController::class)->middleware(FullAccessUserMiddleware::class);
 
     // Notifications
-    Route::get('/notifications', [NotificationController::class, "inex"])->name('notifications')->middleware(FullAccessUserMiddleware::class);;
-    Route::get('/notifications/get', [NotificationController::class, "get"])->name('notifications')->middleware(FullAccessUserMiddleware::class);;
+    Route::get('/notifications', [NotificationController::class, "index"])->name('notifications')->middleware(FullAccessUserMiddleware::class);;
+    Route::get('/notifications/get', [NotificationController::class, "get"])->name('notifications.get')->middleware(FullAccessUserMiddleware::class);;
 
     // Start Idea Comments
     if (config("features.chat")) {
