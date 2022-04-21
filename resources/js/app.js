@@ -1,6 +1,5 @@
 require('./bootstrap');
 import Vue from 'vue';
-window.maxlengthContentEditableLib = require('maxlength-contenteditable').maxlengthContentEditable;
 import {
     plugin,
 } from 'ternobowire-js';
@@ -41,9 +40,6 @@ Vue.use(infiniteScroll);
 Vue.prototype.$APP_URL = window.APP_URL;
 Vue.prototype.$axios = axios;
 Vue.prototype.scrollToElement = scrollToElement;
-
-var twitter = require('twitter-text')
-window.twitter = twitter;
 
 axios.get(`/translations.js?version=${Date.now()}`).then((response) => {
     eval(response.data);

@@ -40,7 +40,6 @@ import Video from "./Elements/Video";
 import uuidv4 from "uuid";
 import EmojiPicker from "../../EmojiPicker/EmojiPicker.vue";
 import { mapState } from "vuex";
-import TwitterText from "twitter-text";
 import TextareaParser from "./TextareaParser";
 import Code from "./Elements/Code.vue";
 import BulletedList from "./Elements/Lists/BulletedList.vue";
@@ -64,7 +63,7 @@ export default {
 	},
 	methods: {
 		addParagraph(index) {
-			this.blocks.splice(index, 0, { id: uuidv4(), type: "text", content: "", meta: {} });
+			this.blocks.splice(index, 0, { id: uuidv4(), type: "text", content: { type: "doc", content: [] }, meta: {} });
 			this.$emit("itemAdd");
 		},
 		getData() {
@@ -74,14 +73,7 @@ export default {
 			this.lastFocused = node;
 		},
 		appendEmoji(emoji) {
-			if (this.lastFocused?.mounted) {
-				this.lastFocused.insertEmoji(emoji);
-			} else {
-				this.blocks.push({ id: uuidv4(), type: "text", content: "", meta: {} });
-				this.$nextTick(() => {
-					setTimeout(() => this.$refs.blocks[this.blocks.length - 1].insertEmoji(emoji), 100);
-				});
-			}
+			// TODO
 		},
 		deleteElem(index, focus = false) {
 			this.blocks.splice(index, 1);
@@ -146,12 +138,12 @@ export default {
 		charachersCount() {
 			let characterCount = 0;
 			this.textItems.forEach((item) => {
-				characterCount += TwitterText.parseTweet(TextareaParser.unescapeHtml(item.content)).weightedLength;
+				characterCount += 0;
 			});
 			this.listItems.forEach((item) => {
 				const content = typeof item.content == "string" ? JSON.parse(item.content) : item.content;
 				content?.forEach((listItem) => {
-					characterCount += TwitterText.parseTweet(TextareaParser.unescapeHtml(listItem)).weightedLength;
+					characterCount += 0;
 				});
 			});
 

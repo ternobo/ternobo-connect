@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import embedParser from "embed-video-parser";
+import embedParser from "@ternobo/embed-video-parser";
 
 export default {
 	data() {

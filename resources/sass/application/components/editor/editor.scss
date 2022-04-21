@@ -1,8 +1,5 @@
-.editorBox {
-    position: fixed !important;
-    display: none;
+.ternobo-editor-bubble {
     border-radius: 8px;
-    z-index: 9999;
     background: $white;
     box-shadow: 0 0 1rem 0px rgba(0, 0, 0, 0.1);
 
@@ -36,6 +33,16 @@
             background: $gray-100;
             color: $blue-cta;
             cursor: pointer;
+        }
+    }
+
+    .link-input {
+        display: flex;
+        align-items: center;
+
+        input {
+            @extend .form-control;
+            @extend .fill;
         }
     }
 }

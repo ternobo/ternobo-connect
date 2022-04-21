@@ -36,7 +36,6 @@ import SendIconImg from "./SendIconImg.vue";
 import TwemojiProps from "./TwemojiPicker/props";
 import TwemojiPropWatchers from "./TwemojiPicker/prop-watchers";
 import { propsForMixin } from "../mixins/propsFor";
-import TwitterText from "twitter-text";
 export default Vue.extend({
 	name: "TwemojiTextarea",
 	components: {
@@ -127,7 +126,7 @@ export default Vue.extend({
 			if (content.length !== 0 && content[content.length - 1] === "\n") {
 				content = content.slice(0, -1);
 			}
-			this.actualContentLength = TwitterText.parseTweet(content || "").weightedLength;
+			this.actualContentLength = 0;
 			if (this.twemojiPicker.$refs.popupEmoji) this.twemojiPicker.$refs.popupEmoji.popperInstance.forceUpdate();
 			this.$emit("update:content", content);
 			this.$emit("actualContentLengthChanged", this.actualContentLength);
