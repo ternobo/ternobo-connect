@@ -69,6 +69,10 @@
                 
             </li>
                     <li>
+                <a href="namespaces/app-casts.html">Casts</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/app-console.html">Console</a>
                 
             </li>
@@ -81,6 +85,10 @@
                 
             </li>
                     <li>
+                <a href="namespaces/app-facade.html">Facade</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/app-filemanager.html">FileManager</a>
                 
             </li>
@@ -90,6 +98,10 @@
             </li>
                     <li>
                 <a href="namespaces/app-jobs.html">Jobs</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/app-listeners.html">Listeners</a>
                 
             </li>
                     <li>
@@ -110,6 +122,10 @@
             </li>
                     <li>
                 <a href="namespaces/app-services.html">Services</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/app-utils.html">Utils</a>
                 
             </li>
             </ul>
@@ -164,14 +180,29 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/PostSlide.php"><a href="files/app-models-postslide.html"><abbr title="app/Models/PostSlide.php">PostSlide.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">8</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
-        
-    <section class="phpdocumentor-description"></section>
+            <p class="phpdocumentor-summary">App\Models\PostSlide</p>
 
 
+
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">mixin</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>\Eloquent</p>
+</section>
+
+                                    </dd>
+                        </dl>
 
 
 
@@ -184,7 +215,35 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+                <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/App-Models-PostSlide.html#property_content">$content</a>
+    <span>
+                &nbsp;: <abbr title="\Illuminate\Database\Eloquent\Collection">Collection</abbr>|array&lt;string|int, <a href="classes/App-Models-PostBlock.html"><abbr title="\App\Models\PostBlock">PostBlock</abbr></a>&gt;            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/App-Models-PostSlide.html#property_content_count">$content_count</a>
+    <span>
+                &nbsp;: int|null            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/App-Models-PostSlide.html#property_page">$page</a>
+    <span>
+                &nbsp;: <abbr title="\App\Models\Page">Page</abbr>            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/App-Models-PostSlide.html#property_post">$post</a>
+    <span>
+                &nbsp;: <a href="classes/App-Models-Post.html"><abbr title="\App\Models\Post">Post</abbr></a>            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/App-Models-PostSlide.html#property_fillable">$fillable</a>
     <span>
                 &nbsp;: mixed            </span>
@@ -199,6 +258,20 @@
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/App-Models-PostSlide.html#method_newModelQuery">newModelQuery()</a>
+    <span>
+                        &nbsp;: <a href=""><abbr title=""></abbr></a>    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/App-Models-PostSlide.html#method_newQuery">newQuery()</a>
+    <span>
+                        &nbsp;: <a href=""><abbr title=""></abbr></a>    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/App-Models-PostSlide.html#method_page">page()</a>
     <span>
                         &nbsp;: mixed    </span>
@@ -209,6 +282,13 @@
     <a href="classes/App-Models-PostSlide.html#method_post">post()</a>
     <span>
                         &nbsp;: mixed    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/App-Models-PostSlide.html#method_query">query()</a>
+    <span>
+                        &nbsp;: <a href=""><abbr title=""></abbr></a>    </span>
 </dt>
 <dd></dd>
 
@@ -228,6 +308,138 @@
         class="
             phpdocumentor-element
             -property
+            -public
+                                                -read-only        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_content">
+        $content
+        <a href="classes/App-Models-PostSlide.html#property_content" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="app/Models/PostSlide.php"><a href="files/app-models-postslide.html"><abbr title="app/Models/PostSlide.php">PostSlide.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Illuminate\Database\Eloquent\Collection">Collection</abbr>|array&lt;string|int, <a href="classes/App-Models-PostBlock.html"><abbr title="\App\Models\PostBlock">PostBlock</abbr></a>&gt;</span>
+    <span class="phpdocumentor-signature__name">$content</span>
+    </code>
+
+    
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                -read-only        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_content_count">
+        $content_count
+        <a href="classes/App-Models-PostSlide.html#property_content_count" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="app/Models/PostSlide.php"><a href="files/app-models-postslide.html"><abbr title="app/Models/PostSlide.php">PostSlide.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$content_count</span>
+    </code>
+
+    
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                -read-only        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_page">
+        $page
+        <a href="classes/App-Models-PostSlide.html#property_page" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="app/Models/PostSlide.php"><a href="files/app-models-postslide.html"><abbr title="app/Models/PostSlide.php">PostSlide.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\App\Models\Page">Page</abbr></span>
+    <span class="phpdocumentor-signature__name">$page</span>
+    </code>
+
+    
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                -read-only        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_post">
+        $post
+        <a href="classes/App-Models-PostSlide.html#property_post" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="app/Models/PostSlide.php"><a href="files/app-models-postslide.html"><abbr title="app/Models/PostSlide.php">PostSlide.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/App-Models-Post.html"><abbr title="\App\Models\Post">Post</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$post</span>
+    </code>
+
+    
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
             -protected
                                                         "
 >
@@ -240,7 +452,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/PostSlide.php"><a href="files/app-models-postslide.html"><abbr title="app/Models/PostSlide.php">PostSlide.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
     </aside>
 
@@ -278,7 +490,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/PostSlide.php"><a href="files/app-models-postslide.html"><abbr title="app/Models/PostSlide.php">PostSlide.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
@@ -302,6 +514,70 @@
         class="phpdocumentor-element
             -method
             -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_newModelQuery">
+        newModelQuery()
+        <a href="classes/App-Models-PostSlide.html#method_newModelQuery" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="app/Models/PostSlide.php"><a href="files/app-models-postslide.html"><abbr title="app/Models/PostSlide.php">PostSlide.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">newModelQuery</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href=""><abbr title=""></abbr></a></span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href=""><abbr title=""></abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_newQuery">
+        newQuery()
+        <a href="classes/App-Models-PostSlide.html#method_newQuery" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="app/Models/PostSlide.php"><a href="files/app-models-postslide.html"><abbr title="app/Models/PostSlide.php">PostSlide.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">newQuery</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href=""><abbr title=""></abbr></a></span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href=""><abbr title=""></abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
                                                         "
 >
     <h4 class="phpdocumentor-element__name" id="method_page">
@@ -311,7 +587,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/PostSlide.php"><a href="files/app-models-postslide.html"><abbr title="app/Models/PostSlide.php">PostSlide.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
     </aside>
 
@@ -344,7 +620,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Models/PostSlide.php"><a href="files/app-models-postslide.html"><abbr title="app/Models/PostSlide.php">PostSlide.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
@@ -360,6 +636,38 @@
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_query">
+        query()
+        <a href="classes/App-Models-PostSlide.html#method_query" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="app/Models/PostSlide.php"><a href="files/app-models-postslide.html"><abbr title="app/Models/PostSlide.php">PostSlide.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">0</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">query</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href=""><abbr title=""></abbr></a></span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href=""><abbr title=""></abbr></a></span>
             &mdash;
         
     

@@ -51,11 +51,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Broadcasting-NotificationsChannel.html"
         },                {
-            "fqsen": "\\App\\Broadcasting\\NotificationsChannel\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "Create\u0020a\u0020new\u0020channel\u0020instance.",
-            "url": "classes/App-Broadcasting-NotificationsChannel.html#method___construct"
-        },                {
             "fqsen": "\\App\\Broadcasting\\NotificationsChannel\u003A\u003Ajoin\u0028\u0029",
             "name": "join",
             "summary": "Authenticate\u0020the\u0020user\u0027s\u0020access\u0020to\u0020the\u0020channel.",
@@ -716,6 +711,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-HasUser.html#method_booted"
         },                {
+            "fqsen": "\\App\\HasUser\u003A\u003AwithoutActiveUser\u0028\u0029",
+            "name": "withoutActiveUser",
+            "summary": "",
+            "url": "classes/App-HasUser.html#method_withoutActiveUser"
+        },                {
             "fqsen": "\\is_multi_array\u0028\u0029",
             "name": "is_multi_array",
             "summary": "",
@@ -866,6 +866,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Http-Controllers-Admin-AdminController.html#method_login"
         },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\AdminController\u003A\u003Alogout\u0028\u0029",
+            "name": "logout",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-AdminController.html#method_logout"
+        },                {
             "fqsen": "\\App\\Http\\Controllers\\Admin\\AdminController\u003A\u003AgetUser\u0028\u0029",
             "name": "getUser",
             "summary": "",
@@ -891,6 +896,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Http-Controllers-Admin-NotificationsController.html"
         },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\NotificationsController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-NotificationsController.html#method___construct"
+        },                {
             "fqsen": "\\App\\Http\\Controllers\\Admin\\NotificationsController\u003A\u003Aindex\u0028\u0029",
             "name": "index",
             "summary": "",
@@ -900,6 +910,11 @@ Search.appendIndex(
             "name": "store",
             "summary": "",
             "url": "classes/App-Http-Controllers-Admin-NotificationsController.html#method_store"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\NotificationsController\u003A\u003A\u0024service",
+            "name": "service",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-NotificationsController.html#property_service"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\Admin\\PostsController",
             "name": "PostsController",
@@ -1181,25 +1196,15 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Http-Controllers-Auth-RegisterController.html"
         },                {
-            "fqsen": "\\App\\Http\\Controllers\\Auth\\RegisterController\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "Create\u0020a\u0020new\u0020controller\u0020instance.",
-            "url": "classes/App-Http-Controllers-Auth-RegisterController.html#method___construct"
-        },                {
             "fqsen": "\\App\\Http\\Controllers\\Auth\\RegisterController\u003A\u003Aindex\u0028\u0029",
             "name": "index",
-            "summary": "",
+            "summary": "Where\u0020to\u0020redirect\u0020users\u0020after\u0020registration.",
             "url": "classes/App-Http-Controllers-Auth-RegisterController.html#method_index"
         },                {
-            "fqsen": "\\App\\Http\\Controllers\\Auth\\RegisterController\u003A\u003AsignupUser\u0028\u0029",
-            "name": "signupUser",
+            "fqsen": "\\App\\Http\\Controllers\\Auth\\RegisterController\u003A\u003AcreateUser\u0028\u0029",
+            "name": "createUser",
             "summary": "",
-            "url": "classes/App-Http-Controllers-Auth-RegisterController.html#method_signupUser"
-        },                {
-            "fqsen": "\\App\\Http\\Controllers\\Auth\\RegisterController\u003A\u003AsavePassword\u0028\u0029",
-            "name": "savePassword",
-            "summary": "",
-            "url": "classes/App-Http-Controllers-Auth-RegisterController.html#method_savePassword"
+            "url": "classes/App-Http-Controllers-Auth-RegisterController.html#method_createUser"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\Auth\\SessionsController",
             "name": "SessionsController",
@@ -1260,6 +1265,11 @@ Search.appendIndex(
             "name": "deactiveAccount",
             "summary": "",
             "url": "classes/App-Http-Controllers-Auth-SettingsController.html#method_deactiveAccount"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Auth\\SettingsController\u003A\u003AsetAutodeactivationAccount\u0028\u0029",
+            "name": "setAutodeactivationAccount",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Auth-SettingsController.html#method_setAutodeactivationAccount"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\Auth\\TwoFAController",
             "name": "TwoFAController",
@@ -1341,15 +1351,25 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Http-Controllers-Auth-VerificationController.html"
         },                {
-            "fqsen": "\\App\\Http\\Controllers\\Auth\\VerificationController\u003A\u003AsendVcode\u0028\u0029",
-            "name": "sendVcode",
+            "fqsen": "\\App\\Http\\Controllers\\Auth\\VerificationController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
             "summary": "",
-            "url": "classes/App-Http-Controllers-Auth-VerificationController.html#method_sendVcode"
+            "url": "classes/App-Http-Controllers-Auth-VerificationController.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Auth\\VerificationController\u003A\u003AsendVerificationCode\u0028\u0029",
+            "name": "sendVerificationCode",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Auth-VerificationController.html#method_sendVerificationCode"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\Auth\\VerificationController\u003A\u003AverifyCode\u0028\u0029",
             "name": "verifyCode",
             "summary": "",
             "url": "classes/App-Http-Controllers-Auth-VerificationController.html#method_verifyCode"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Auth\\VerificationController\u003A\u003A\u0024service",
+            "name": "service",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Auth-VerificationController.html#property_service"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\AutoUpdateController",
             "name": "AutoUpdateController",
@@ -1486,45 +1506,90 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Http-Controllers-Content-FeedController.html"
         },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\FeedController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-FeedController.html#method___construct"
+        },                {
             "fqsen": "\\App\\Http\\Controllers\\Content\\FeedController\u003A\u003Aindex\u0028\u0029",
             "name": "index",
             "summary": "Show\u0020the\u0020application\u0020dashboard.",
             "url": "classes/App-Http-Controllers-Content-FeedController.html#method_index"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\FeedController\u003A\u003A\u0024contentService",
+            "name": "contentService",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-FeedController.html#property_contentService"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\FeedController\u003A\u003A\u0024suggestionService",
+            "name": "suggestionService",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-FeedController.html#property_suggestionService"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\Content\\SearchController",
             "name": "SearchController",
             "summary": "",
             "url": "classes/App-Http-Controllers-Content-SearchController.html"
         },                {
-            "fqsen": "\\App\\Http\\Controllers\\Content\\SearchController\u003A\u003AgenerateSearch\u0028\u0029",
-            "name": "generateSearch",
+            "fqsen": "\\App\\Http\\Controllers\\Content\\SearchController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
             "summary": "",
-            "url": "classes/App-Http-Controllers-Content-SearchController.html#method_generateSearch"
-        },                {
-            "fqsen": "\\App\\Http\\Controllers\\Content\\SearchController\u003A\u003AhandleGetSearch\u0028\u0029",
-            "name": "handleGetSearch",
-            "summary": "",
-            "url": "classes/App-Http-Controllers-Content-SearchController.html#method_handleGetSearch"
+            "url": "classes/App-Http-Controllers-Content-SearchController.html#method___construct"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\Content\\SearchController\u003A\u003Asearch\u0028\u0029",
             "name": "search",
             "summary": "",
             "url": "classes/App-Http-Controllers-Content-SearchController.html#method_search"
         },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\SearchController\u003A\u003Aindex\u0028\u0029",
+            "name": "index",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-SearchController.html#method_index"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\SearchController\u003A\u003A\u0024service",
+            "name": "service",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-SearchController.html#property_service"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\SearchController\u003A\u003A\u0024suggestionService",
+            "name": "suggestionService",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-SearchController.html#property_suggestionService"
+        },                {
             "fqsen": "\\App\\Http\\Controllers\\Content\\TagsController",
             "name": "TagsController",
             "summary": "",
             "url": "classes/App-Http-Controllers-Content-TagsController.html"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\TagsController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-TagsController.html#method___construct"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\Content\\TagsController\u003A\u003Aindex\u0028\u0029",
             "name": "index",
             "summary": "",
             "url": "classes/App-Http-Controllers-Content-TagsController.html#method_index"
         },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\TagsController\u003A\u003AgetTag\u0028\u0029",
+            "name": "getTag",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-TagsController.html#method_getTag"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\TagsController\u003A\u003Asearch\u0028\u0029",
+            "name": "search",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-TagsController.html#method_search"
+        },                {
             "fqsen": "\\App\\Http\\Controllers\\Content\\TagsController\u003A\u003AtoggleFollowTag\u0028\u0029",
             "name": "toggleFollowTag",
             "summary": "",
             "url": "classes/App-Http-Controllers-Content-TagsController.html#method_toggleFollowTag"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\TagsController\u003A\u003A\u0024service",
+            "name": "service",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-TagsController.html#property_service"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\Controller",
             "name": "Controller",
@@ -1535,6 +1600,16 @@ Search.appendIndex(
             "name": "getCsrf",
             "summary": "",
             "url": "classes/App-Http-Controllers-Controller.html#method_getCsrf"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Controller\u003A\u003AgenerateResponseErrors\u0028\u0029",
+            "name": "generateResponseErrors",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Controller.html#method_generateResponseErrors"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Controller\u003A\u003AgenerateResponse\u0028\u0029",
+            "name": "generateResponse",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Controller.html#method_generateResponse"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\Donation\\DontaionsController",
             "name": "DontaionsController",
@@ -1666,6 +1741,11 @@ Search.appendIndex(
             "summary": "Remove\u0020the\u0020specified\u0020resource\u0020from\u0020storage.",
             "url": "classes/App-Http-Controllers-Feedback-FeedbacksController.html#method_destroy"
         },                {
+            "fqsen": "\\App\\Http\\Controllers\\Feedback\\FeedbacksController\u003A\u003A\u0024suggestionService",
+            "name": "suggestionService",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Feedback-FeedbacksController.html#property_suggestionService"
+        },                {
             "fqsen": "\\App\\Http\\Controllers\\Feedback\\RepliesCotnroller",
             "name": "RepliesCotnroller",
             "summary": "",
@@ -1791,6 +1871,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Http-Controllers-NotificationController.html#method_index"
         },                {
+            "fqsen": "\\App\\Http\\Controllers\\NotificationController\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-NotificationController.html#method_get"
+        },                {
             "fqsen": "\\App\\Http\\Controllers\\Payment\\ZarinpalController",
             "name": "ZarinpalController",
             "summary": "",
@@ -1851,11 +1936,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Http-Controllers-PostController.html#method___construct"
         },                {
-            "fqsen": "\\App\\Http\\Controllers\\PostController\u003A\u003Astore\u0028\u0029",
-            "name": "store",
-            "summary": "Store\u0020a\u0020newly\u0020created\u0020resource\u0020in\u0020storage.",
-            "url": "classes/App-Http-Controllers-PostController.html#method_store"
-        },                {
             "fqsen": "\\App\\Http\\Controllers\\PostController\u003A\u003AlikePost\u0028\u0029",
             "name": "likePost",
             "summary": "",
@@ -1876,11 +1956,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Http-Controllers-PostController.html#method_getCategories"
         },                {
-            "fqsen": "\\App\\Http\\Controllers\\PostController\u003A\u003AgetTags\u0028\u0029",
-            "name": "getTags",
-            "summary": "",
-            "url": "classes/App-Http-Controllers-PostController.html#method_getTags"
-        },                {
             "fqsen": "\\App\\Http\\Controllers\\PostController\u003A\u003Ashow\u0028\u0029",
             "name": "show",
             "summary": "Display\u0020the\u0020specified\u0020resource.",
@@ -1900,6 +1975,11 @@ Search.appendIndex(
             "name": "getEmbed",
             "summary": "",
             "url": "classes/App-Http-Controllers-PostController.html#method_getEmbed"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\PostController\u003A\u003Astore\u0028\u0029",
+            "name": "store",
+            "summary": "Store\u0020a\u0020newly\u0020created\u0020resource\u0020in\u0020storage.",
+            "url": "classes/App-Http-Controllers-PostController.html#method_store"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\PostController\u003A\u003Aupdate\u0028\u0029",
             "name": "update",
@@ -1981,6 +2061,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Http-Controllers-Profile-ConnectionsController.html#method_followings"
         },                {
+            "fqsen": "\\App\\Http\\Controllers\\Profile\\ConnectionsController\u003A\u003AfollowingTags\u0028\u0029",
+            "name": "followingTags",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Profile-ConnectionsController.html#method_followingTags"
+        },                {
             "fqsen": "\\App\\Http\\Controllers\\Profile\\ConnectionsController\u003A\u003Afollowers\u0028\u0029",
             "name": "followers",
             "summary": "",
@@ -2045,6 +2130,11 @@ Search.appendIndex(
             "name": "PageController",
             "summary": "",
             "url": "classes/App-Http-Controllers-Profile-PageController.html"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Profile\\PageController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Profile-PageController.html#method___construct"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\Profile\\PageController\u003A\u003Ashow\u0028\u0029",
             "name": "show",
@@ -2130,6 +2220,16 @@ Search.appendIndex(
             "name": "getMutualFriends",
             "summary": "",
             "url": "classes/App-Http-Controllers-Profile-PageController.html#method_getMutualFriends"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Profile\\PageController\u003A\u003A\u0024service",
+            "name": "service",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Profile-PageController.html#property_service"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Profile\\PageController\u003A\u003A\u0024suggestionService",
+            "name": "suggestionService",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Profile-PageController.html#property_suggestionService"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\Profile\\ProfileController",
             "name": "ProfileController",
@@ -2516,16 +2616,6 @@ Search.appendIndex(
             "summary": "The\u0020application\u0027s\u0020route\u0020middleware.",
             "url": "classes/App-Http-Kernel.html#property_routeMiddleware"
         },                {
-            "fqsen": "\\App\\Http\\Middleware\\AdminAPIMiddleware",
-            "name": "AdminAPIMiddleware",
-            "summary": "",
-            "url": "classes/App-Http-Middleware-AdminAPIMiddleware.html"
-        },                {
-            "fqsen": "\\App\\Http\\Middleware\\AdminAPIMiddleware\u003A\u003Ahandle\u0028\u0029",
-            "name": "handle",
-            "summary": "Handle\u0020an\u0020incoming\u0020request.",
-            "url": "classes/App-Http-Middleware-AdminAPIMiddleware.html#method_handle"
-        },                {
             "fqsen": "\\App\\Http\\Middleware\\Authenticate",
             "name": "Authenticate",
             "summary": "",
@@ -2596,6 +2686,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Http-Middleware-PreventRequestsDuringMaintenance.html"
         },                {
+            "fqsen": "\\App\\Http\\Middleware\\PreventRequestsDuringMaintenance\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "",
+            "url": "classes/App-Http-Middleware-PreventRequestsDuringMaintenance.html#method_handle"
+        },                {
             "fqsen": "\\App\\Http\\Middleware\\PreventRequestsDuringMaintenance\u003A\u003A\u0024except",
             "name": "except",
             "summary": "The\u0020URIs\u0020that\u0020should\u0020be\u0020reachable\u0020while\u0020maintenance\u0020mode\u0020is\u0020enabled.",
@@ -2631,21 +2726,6 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020host\u0020patterns\u0020that\u0020should\u0020be\u0020trusted.",
             "url": "classes/App-Http-Middleware-TrustHosts.html#method_hosts"
         },                {
-            "fqsen": "\\App\\Http\\Middleware\\TrustProxies",
-            "name": "TrustProxies",
-            "summary": "",
-            "url": "classes/App-Http-Middleware-TrustProxies.html"
-        },                {
-            "fqsen": "\\App\\Http\\Middleware\\TrustProxies\u003A\u003A\u0024proxies",
-            "name": "proxies",
-            "summary": "The\u0020trusted\u0020proxies\u0020for\u0020this\u0020application.",
-            "url": "classes/App-Http-Middleware-TrustProxies.html#property_proxies"
-        },                {
-            "fqsen": "\\App\\Http\\Middleware\\TrustProxies\u003A\u003A\u0024headers",
-            "name": "headers",
-            "summary": "The\u0020headers\u0020that\u0020should\u0020be\u0020used\u0020to\u0020detect\u0020proxies.",
-            "url": "classes/App-Http-Middleware-TrustProxies.html#property_headers"
-        },                {
             "fqsen": "\\App\\Http\\Middleware\\VerifyCsrfToken",
             "name": "VerifyCsrfToken",
             "summary": "",
@@ -2655,16 +2735,6 @@ Search.appendIndex(
             "name": "except",
             "summary": "The\u0020URIs\u0020that\u0020should\u0020be\u0020excluded\u0020from\u0020CSRF\u0020verification.",
             "url": "classes/App-Http-Middleware-VerifyCsrfToken.html#property_except"
-        },                {
-            "fqsen": "\\App\\Http\\Middleware\\WebAdminMiddleware",
-            "name": "WebAdminMiddleware",
-            "summary": "",
-            "url": "classes/App-Http-Middleware-WebAdminMiddleware.html"
-        },                {
-            "fqsen": "\\App\\Http\\Middleware\\WebAdminMiddleware\u003A\u003Ahandle\u0028\u0029",
-            "name": "handle",
-            "summary": "Handle\u0020an\u0020incoming\u0020request.",
-            "url": "classes/App-Http-Middleware-WebAdminMiddleware.html#method_handle"
         },                {
             "fqsen": "\\App\\Http\\Requests\\AddTagRequest",
             "name": "AddTagRequest",
@@ -2718,7 +2788,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Http\\Requests\\BaseRequest\u003A\u003Arules\u0028\u0029",
             "name": "rules",
-            "summary": "Get\u0020the\u0020validation\u0020rules\u0020that\u0020apply\u0020to\u0020the\u0020request.",
+            "summary": "",
             "url": "classes/App-Http-Requests-BaseRequest.html#method_rules"
         },                {
             "fqsen": "\\App\\Http\\Requests\\ChangeFeedbackTypeRequest",
@@ -2791,16 +2861,6 @@ Search.appendIndex(
             "summary": "Determine\u0020if\u0020the\u0020user\u0020is\u0020authorized\u0020to\u0020make\u0020this\u0020request.",
             "url": "classes/App-Http-Requests-NotificationRequest.html#method_authorize"
         },                {
-            "fqsen": "\\App\\Http\\Requests\\NotificationRequest\u003A\u003AfailedValidation\u0028\u0029",
-            "name": "failedValidation",
-            "summary": "",
-            "url": "classes/App-Http-Requests-NotificationRequest.html#method_failedValidation"
-        },                {
-            "fqsen": "\\App\\Http\\Requests\\NotificationRequest\u003A\u003Amessages\u0028\u0029",
-            "name": "messages",
-            "summary": "Get\u0020the\u0020error\u0020messages\u0020for\u0020the\u0020defined\u0020validation\u0020rules.",
-            "url": "classes/App-Http-Requests-NotificationRequest.html#method_messages"
-        },                {
             "fqsen": "\\App\\Http\\Requests\\NotificationRequest\u003A\u003Arules\u0028\u0029",
             "name": "rules",
             "summary": "Get\u0020the\u0020validation\u0020rules\u0020that\u0020apply\u0020to\u0020the\u0020request.",
@@ -2860,21 +2920,6 @@ Search.appendIndex(
             "name": "rules",
             "summary": "Get\u0020the\u0020validation\u0020rules\u0020that\u0020apply\u0020to\u0020the\u0020request.",
             "url": "classes/App-Http-Requests-PostRequest.html#method_rules"
-        },                {
-            "fqsen": "\\App\\Http\\Resources\\BaseCollection",
-            "name": "BaseCollection",
-            "summary": "",
-            "url": "classes/App-Http-Resources-BaseCollection.html"
-        },                {
-            "fqsen": "\\App\\Http\\Resources\\BaseCollection\u003A\u003AtoArray\u0028\u0029",
-            "name": "toArray",
-            "summary": "Transform\u0020the\u0020resource\u0020collection\u0020into\u0020an\u0020array.",
-            "url": "classes/App-Http-Resources-BaseCollection.html#method_toArray"
-        },                {
-            "fqsen": "\\App\\Http\\Resources\\BaseCollection\u003A\u003AwithResponse\u0028\u0029",
-            "name": "withResponse",
-            "summary": "",
-            "url": "classes/App-Http-Resources-BaseCollection.html#method_withResponse"
         },                {
             "fqsen": "\\App\\Http\\Resources\\DonationCollection",
             "name": "DonationCollection",
@@ -3008,18 +3053,33 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\AboutData",
             "name": "AboutData",
-            "summary": "",
+            "summary": "App\\Models\\AboutData",
             "url": "classes/App-Models-AboutData.html"
+        },                {
+            "fqsen": "\\App\\Models\\AboutData\u003A\u003A\u0024fillable",
+            "name": "fillable",
+            "summary": "",
+            "url": "classes/App-Models-AboutData.html#property_fillable"
+        },                {
+            "fqsen": "\\App\\Models\\AboutData\u003A\u003A\u0024casts",
+            "name": "casts",
+            "summary": "",
+            "url": "classes/App-Models-AboutData.html#property_casts"
         },                {
             "fqsen": "\\App\\Models\\Achievement",
             "name": "Achievement",
-            "summary": "",
+            "summary": "App\\Models\\Achievement",
             "url": "classes/App-Models-Achievement.html"
         },                {
             "fqsen": "\\App\\Models\\Action",
             "name": "Action",
             "summary": "Action\u0020done\u0020by\u0020\\App\\Page",
             "url": "classes/App-Models-Action.html"
+        },                {
+            "fqsen": "\\App\\Models\\Action\u003A\u003Abooted\u0028\u0029",
+            "name": "booted",
+            "summary": "The\u0020\u0022booted\u0022\u0020method\u0020of\u0020the\u0020model.",
+            "url": "classes/App-Models-Action.html#method_booted"
         },                {
             "fqsen": "\\App\\Models\\Action\u003A\u003Apost\u0028\u0029",
             "name": "post",
@@ -3038,7 +3098,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\ActiveSession",
             "name": "ActiveSession",
-            "summary": "",
+            "summary": "App\\Models\\ActiveSession",
             "url": "classes/App-Models-ActiveSession.html"
         },                {
             "fqsen": "\\App\\Models\\ActiveSession\u003A\u003Auser\u0028\u0029",
@@ -3088,18 +3148,8 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\Admin",
             "name": "Admin",
-            "summary": "",
+            "summary": "App\\Models\\Admin",
             "url": "classes/App-Models-Admin.html"
-        },                {
-            "fqsen": "\\App\\Models\\Admin\u003A\u003AgenerateApiKey\u0028\u0029",
-            "name": "generateApiKey",
-            "summary": "",
-            "url": "classes/App-Models-Admin.html#method_generateApiKey"
-        },                {
-            "fqsen": "\\App\\Models\\Admin\u003A\u003AgetAPI_key\u0028\u0029",
-            "name": "getAPI_key",
-            "summary": "",
-            "url": "classes/App-Models-Admin.html#method_getAPI_key"
         },                {
             "fqsen": "\\App\\Models\\Admin\u003A\u003A\u0024roles",
             "name": "roles",
@@ -3121,19 +3171,14 @@ Search.appendIndex(
             "summary": "The\u0020attributes\u0020that\u0020should\u0020be\u0020hidden\u0020for\u0020arrays.",
             "url": "classes/App-Models-Admin.html#property_hidden"
         },                {
-            "fqsen": "\\App\\Models\\Admin\u003A\u003A\u0024casts",
-            "name": "casts",
-            "summary": "The\u0020attributes\u0020that\u0020should\u0020be\u0020cast\u0020to\u0020native\u0020types.",
-            "url": "classes/App-Models-Admin.html#property_casts"
-        },                {
             "fqsen": "\\App\\Models\\AdminNotifications",
             "name": "AdminNotifications",
-            "summary": "",
+            "summary": "App\\Models\\AdminNotifications",
             "url": "classes/App-Models-AdminNotifications.html"
         },                {
             "fqsen": "\\App\\Models\\BlockedPage",
             "name": "BlockedPage",
-            "summary": "",
+            "summary": "App\\Models\\BlockedPage",
             "url": "classes/App-Models-BlockedPage.html"
         },                {
             "fqsen": "\\App\\Models\\BlockedPage\u003A\u003AblockPage\u0028\u0029",
@@ -3183,7 +3228,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\Chat",
             "name": "Chat",
-            "summary": "",
+            "summary": "App\\Models\\Chat",
             "url": "classes/App-Models-Chat.html"
         },                {
             "fqsen": "\\App\\Models\\Comment",
@@ -3258,7 +3303,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\ConnectedAccount",
             "name": "ConnectedAccount",
-            "summary": "",
+            "summary": "App\\Models\\ConnectedAccount",
             "url": "classes/App-Models-ConnectedAccount.html"
         },                {
             "fqsen": "\\App\\Models\\ConnectedAccount\u003A\u003Auser\u0028\u0029",
@@ -3283,7 +3328,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\Connection",
             "name": "Connection",
-            "summary": "",
+            "summary": "App\\Models\\Connection",
             "url": "classes/App-Models-Connection.html"
         },                {
             "fqsen": "\\App\\Models\\Connection\u003A\u003Aconnection\u0028\u0029",
@@ -3303,7 +3348,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\Contact",
             "name": "Contact",
-            "summary": "",
+            "summary": "App\\Models\\Contact",
             "url": "classes/App-Models-Contact.html"
         },                {
             "fqsen": "\\App\\Models\\Contact\u003A\u003Aoption\u0028\u0029",
@@ -3318,22 +3363,32 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\ContactData",
             "name": "ContactData",
-            "summary": "",
+            "summary": "App\\Models\\ContactData",
             "url": "classes/App-Models-ContactData.html"
+        },                {
+            "fqsen": "\\App\\Models\\ContactData\u003A\u003A\u0024fillable",
+            "name": "fillable",
+            "summary": "",
+            "url": "classes/App-Models-ContactData.html#property_fillable"
+        },                {
+            "fqsen": "\\App\\Models\\ContactData\u003A\u003A\u0024casts",
+            "name": "casts",
+            "summary": "",
+            "url": "classes/App-Models-ContactData.html#property_casts"
         },                {
             "fqsen": "\\App\\Models\\ContactOption",
             "name": "ContactOption",
-            "summary": "",
+            "summary": "App\\Models\\ContactOption",
             "url": "classes/App-Models-ContactOption.html"
         },                {
             "fqsen": "\\App\\Models\\ContentSeen",
             "name": "ContentSeen",
-            "summary": "",
+            "summary": "App\\Models\\ContentSeen",
             "url": "classes/App-Models-ContentSeen.html"
         },                {
             "fqsen": "\\App\\Models\\Conversation",
             "name": "Conversation",
-            "summary": "",
+            "summary": "App\\Models\\Conversation",
             "url": "classes/App-Models-Conversation.html"
         },                {
             "fqsen": "\\App\\Models\\Conversation\u003A\u003AtoArray\u0028\u0029",
@@ -3353,12 +3408,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\Experience",
             "name": "Experience",
-            "summary": "",
+            "summary": "App\\Models\\Experience",
             "url": "classes/App-Models-Experience.html"
         },                {
             "fqsen": "\\App\\Models\\Feedback",
             "name": "Feedback",
-            "summary": "",
+            "summary": "App\\Models\\Feedback",
             "url": "classes/App-Models-Feedback.html"
         },                {
             "fqsen": "\\App\\Models\\Feedback\u003A\u003Areplies\u0028\u0029",
@@ -3413,7 +3468,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\FeedbackBookmark",
             "name": "FeedbackBookmark",
-            "summary": "",
+            "summary": "App\\Models\\FeedbackBookmark",
             "url": "classes/App-Models-FeedbackBookmark.html"
         },                {
             "fqsen": "\\App\\Models\\FeedbackBookmark\u003A\u003Afeedback\u0028\u0029",
@@ -3423,7 +3478,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\FeedbackReply",
             "name": "FeedbackReply",
-            "summary": "",
+            "summary": "App\\Models\\FeedbackReply",
             "url": "classes/App-Models-FeedbackReply.html"
         },                {
             "fqsen": "\\App\\Models\\FeedbackReply\u003A\u003Afeedback\u0028\u0029",
@@ -3478,7 +3533,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\FeedbackVote",
             "name": "FeedbackVote",
-            "summary": "",
+            "summary": "App\\Models\\FeedbackVote",
             "url": "classes/App-Models-FeedbackVote.html"
         },                {
             "fqsen": "\\App\\Models\\FeedbackVote\u003A\u003Aidea\u0028\u0029",
@@ -3488,13 +3543,18 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\Following",
             "name": "Following",
-            "summary": "",
+            "summary": "App\\Models\\Following",
             "url": "classes/App-Models-Following.html"
         },                {
             "fqsen": "\\App\\Models\\Following\u003A\u003Apage\u0028\u0029",
             "name": "page",
             "summary": "return\u0020the\u0020following\u0020user",
             "url": "classes/App-Models-Following.html#method_page"
+        },                {
+            "fqsen": "\\App\\Models\\Following\u003A\u003Atag\u0028\u0029",
+            "name": "tag",
+            "summary": "",
+            "url": "classes/App-Models-Following.html#method_tag"
         },                {
             "fqsen": "\\App\\Models\\Following\u003A\u003Afollower\u0028\u0029",
             "name": "follower",
@@ -3505,6 +3565,11 @@ Search.appendIndex(
             "name": "tags",
             "summary": "",
             "url": "classes/App-Models-Following.html#method_tags"
+        },                {
+            "fqsen": "\\App\\Models\\Following\u003A\u003AwithTags\u0028\u0029",
+            "name": "withTags",
+            "summary": "",
+            "url": "classes/App-Models-Following.html#method_withTags"
         },                {
             "fqsen": "\\App\\Models\\Following\u003A\u003Abooted\u0028\u0029",
             "name": "booted",
@@ -3526,9 +3591,14 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Models-Following.html#property_dates"
         },                {
+            "fqsen": "\\App\\Models\\Following\u003A\u003A\u0024with",
+            "name": "with",
+            "summary": "",
+            "url": "classes/App-Models-Following.html#property_with"
+        },                {
             "fqsen": "\\App\\Models\\FollowSuggestion",
             "name": "FollowSuggestion",
-            "summary": "",
+            "summary": "App\\Models\\FollowSuggestion",
             "url": "classes/App-Models-FollowSuggestion.html"
         },                {
             "fqsen": "\\App\\Models\\FollowSuggestion\u003A\u003Apage\u0028\u0029",
@@ -3553,7 +3623,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\HelpCategory",
             "name": "HelpCategory",
-            "summary": "",
+            "summary": "App\\Models\\HelpCategory",
             "url": "classes/App-Models-HelpCategory.html"
         },                {
             "fqsen": "\\App\\Models\\HelpCategory\u003A\u003Aposts\u0028\u0029",
@@ -3568,17 +3638,17 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\HelpPost",
             "name": "HelpPost",
-            "summary": "",
+            "summary": "App\\Models\\HelpPost",
             "url": "classes/App-Models-HelpPost.html"
         },                {
             "fqsen": "\\App\\Models\\Industry",
             "name": "Industry",
-            "summary": "",
+            "summary": "App\\Models\\Industry",
             "url": "classes/App-Models-Industry.html"
         },                {
             "fqsen": "\\App\\Models\\InviteLink",
             "name": "InviteLink",
-            "summary": "",
+            "summary": "App\\Models\\InviteLink",
             "url": "classes/App-Models-InviteLink.html"
         },                {
             "fqsen": "\\App\\Models\\InviteLink\u003A\u003Auser\u0028\u0029",
@@ -3608,13 +3678,18 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\Like",
             "name": "Like",
-            "summary": "",
+            "summary": "App\\Models\\Like",
             "url": "classes/App-Models-Like.html"
         },                {
             "fqsen": "\\App\\Models\\Like\u003A\u003Apage\u0028\u0029",
             "name": "page",
             "summary": "Page\u0020that\u0020like\u0020the\u0020post",
             "url": "classes/App-Models-Like.html#method_page"
+        },                {
+            "fqsen": "\\App\\Models\\Like\u003A\u003Apost\u0028\u0029",
+            "name": "post",
+            "summary": "",
+            "url": "classes/App-Models-Like.html#method_post"
         },                {
             "fqsen": "\\App\\Models\\Like\u003A\u003Anotification\u0028\u0029",
             "name": "notification",
@@ -3653,7 +3728,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\Media",
             "name": "Media",
-            "summary": "",
+            "summary": "App\\Models\\Media",
             "url": "classes/App-Models-Media.html"
         },                {
             "fqsen": "\\App\\Models\\Media\u003A\u003A\u0024casts",
@@ -3668,7 +3743,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\Message",
             "name": "Message",
-            "summary": "",
+            "summary": "App\\Models\\Message",
             "url": "classes/App-Models-Message.html"
         },                {
             "fqsen": "\\App\\Models\\Message\u003A\u003Aconversation\u0028\u0029",
@@ -3678,7 +3753,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\Notification",
             "name": "Notification",
-            "summary": "",
+            "summary": "App\\Models\\Notification",
             "url": "classes/App-Models-Notification.html"
         },                {
             "fqsen": "\\App\\Models\\Notification\u003A\u003Asender\u0028\u0029",
@@ -3736,9 +3811,14 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Models-Notification.html#property_casts"
         },                {
+            "fqsen": "\\App\\Models\\Notification\u003A\u003A\u0024fillable",
+            "name": "fillable",
+            "summary": "",
+            "url": "classes/App-Models-Notification.html#property_fillable"
+        },                {
             "fqsen": "\\App\\Models\\NotificationSeen",
             "name": "NotificationSeen",
-            "summary": "",
+            "summary": "App\\Models\\NotificationSeen",
             "url": "classes/App-Models-NotificationSeen.html"
         },                {
             "fqsen": "\\App\\Models\\NotificationSeen\u003A\u003AseenNotification\u0028\u0029",
@@ -3748,17 +3828,17 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\Option",
             "name": "Option",
-            "summary": "",
+            "summary": "App\\Models\\Option",
             "url": "classes/App-Models-Option.html"
         },                {
             "fqsen": "\\App\\Models\\PageSocial",
             "name": "PageSocial",
-            "summary": "",
+            "summary": "App\\Models\\PageSocial",
             "url": "classes/App-Models-PageSocial.html"
         },                {
             "fqsen": "\\App\\Models\\PasswordReset",
             "name": "PasswordReset",
-            "summary": "",
+            "summary": "App\\Models\\PasswordReset",
             "url": "classes/App-Models-PasswordReset.html"
         },                {
             "fqsen": "\\App\\Models\\PasswordReset\u003A\u003A\u0024table",
@@ -3768,8 +3848,18 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\Post",
             "name": "Post",
-            "summary": "",
+            "summary": "App\\Models\\Post",
             "url": "classes/App-Models-Post.html"
+        },                {
+            "fqsen": "\\App\\Models\\Post\u003A\u003AwithRelations\u0028\u0029",
+            "name": "withRelations",
+            "summary": "",
+            "url": "classes/App-Models-Post.html#method_withRelations"
+        },                {
+            "fqsen": "\\App\\Models\\Post\u003A\u003AloadRelations\u0028\u0029",
+            "name": "loadRelations",
+            "summary": "",
+            "url": "classes/App-Models-Post.html#method_loadRelations"
         },                {
             "fqsen": "\\App\\Models\\Post\u003A\u003AscriptStripper\u0028\u0029",
             "name": "scriptStripper",
@@ -3846,16 +3936,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Models-Post.html#method_bookmarks"
         },                {
-            "fqsen": "\\App\\Models\\Post\u003A\u003AtoArray\u0028\u0029",
-            "name": "toArray",
-            "summary": "",
-            "url": "classes/App-Models-Post.html#method_toArray"
-        },                {
-            "fqsen": "\\App\\Models\\Post\u003A\u003AgetComments\u0028\u0029",
-            "name": "getComments",
-            "summary": "",
-            "url": "classes/App-Models-Post.html#method_getComments"
-        },                {
             "fqsen": "\\App\\Models\\Post\u003A\u003AmutualLikes\u0028\u0029",
             "name": "mutualLikes",
             "summary": "",
@@ -3870,6 +3950,11 @@ Search.appendIndex(
             "name": "setContent",
             "summary": "",
             "url": "classes/App-Models-Post.html#method_setContent"
+        },                {
+            "fqsen": "\\App\\Models\\Post\u003A\u003Atags\u0028\u0029",
+            "name": "tags",
+            "summary": "",
+            "url": "classes/App-Models-Post.html#method_tags"
         },                {
             "fqsen": "\\App\\Models\\Post\u003A\u003Apublish\u0028\u0029",
             "name": "publish",
@@ -3903,7 +3988,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\PostSlide",
             "name": "PostSlide",
-            "summary": "",
+            "summary": "App\\Models\\PostSlide",
             "url": "classes/App-Models-PostSlide.html"
         },                {
             "fqsen": "\\App\\Models\\PostSlide\u003A\u003Apost\u0028\u0029",
@@ -3928,18 +4013,23 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\PostTags",
             "name": "PostTags",
-            "summary": "",
+            "summary": "App\\Models\\PostTags",
             "url": "classes/App-Models-PostTags.html"
         },                {
             "fqsen": "\\App\\Models\\Report",
             "name": "Report",
-            "summary": "",
+            "summary": "App\\Models\\Report",
             "url": "classes/App-Models-Report.html"
         },                {
             "fqsen": "\\App\\Models\\Report\u003A\u003AadminNotes\u0028\u0029",
             "name": "adminNotes",
             "summary": "",
             "url": "classes/App-Models-Report.html#method_adminNotes"
+        },                {
+            "fqsen": "\\App\\Models\\Report\u003A\u003Areason\u0028\u0029",
+            "name": "reason",
+            "summary": "",
+            "url": "classes/App-Models-Report.html#method_reason"
         },                {
             "fqsen": "\\App\\Models\\Report\u003A\u003AreportedBy\u0028\u0029",
             "name": "reportedBy",
@@ -3958,7 +4048,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\ReportNote",
             "name": "ReportNote",
-            "summary": "",
+            "summary": "App\\Models\\ReportNote",
             "url": "classes/App-Models-ReportNote.html"
         },                {
             "fqsen": "\\App\\Models\\ReportNote\u003A\u003Auser\u0028\u0029",
@@ -3978,7 +4068,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\ReportOption",
             "name": "ReportOption",
-            "summary": "",
+            "summary": "App\\Models\\ReportOption",
             "url": "classes/App-Models-ReportOption.html"
         },                {
             "fqsen": "\\App\\Models\\ReportOption\u003A\u003Asubreasons\u0028\u0029",
@@ -3993,7 +4083,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\SearchSuggestion",
             "name": "SearchSuggestion",
-            "summary": "",
+            "summary": "App\\Models\\SearchSuggestion",
             "url": "classes/App-Models-SearchSuggestion.html"
         },                {
             "fqsen": "\\App\\Models\\SearchSuggestion\u003A\u003A\u0024fillable",
@@ -4003,7 +4093,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\Skill",
             "name": "Skill",
-            "summary": "",
+            "summary": "App\\Models\\Skill",
             "url": "classes/App-Models-Skill.html"
         },                {
             "fqsen": "\\App\\Models\\Skill\u003A\u003Auser\u0028\u0029",
@@ -4033,7 +4123,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\SkillCredit",
             "name": "SkillCredit",
-            "summary": "",
+            "summary": "App\\Models\\SkillCredit",
             "url": "classes/App-Models-SkillCredit.html"
         },                {
             "fqsen": "\\App\\Models\\SkillCredit\u003A\u003Auser\u0028\u0029",
@@ -4056,29 +4146,14 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Models-SkillCredit.html#method_delete"
         },                {
-            "fqsen": "\\App\\Models\\SlideBlock",
-            "name": "SlideBlock",
-            "summary": "",
-            "url": "classes/App-Models-SlideBlock.html"
-        },                {
-            "fqsen": "\\App\\Models\\SlideBlock\u003A\u003A\u0024casts",
-            "name": "casts",
-            "summary": "",
-            "url": "classes/App-Models-SlideBlock.html#property_casts"
-        },                {
-            "fqsen": "\\App\\Models\\SlideBlock\u003A\u003A\u0024fillable",
-            "name": "fillable",
-            "summary": "",
-            "url": "classes/App-Models-SlideBlock.html#property_fillable"
-        },                {
             "fqsen": "\\App\\Models\\Social",
             "name": "Social",
-            "summary": "",
+            "summary": "App\\Models\\Social",
             "url": "classes/App-Models-Social.html"
         },                {
             "fqsen": "\\App\\Models\\SocialDriver",
             "name": "SocialDriver",
-            "summary": "",
+            "summary": "App\\Models\\SocialDriver",
             "url": "classes/App-Models-SocialDriver.html"
         },                {
             "fqsen": "\\App\\Models\\SocialDriver\u003A\u003Aaccount\u0028\u0029",
@@ -4098,7 +4173,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\Tag",
             "name": "Tag",
-            "summary": "",
+            "summary": "App\\Models\\Tag",
             "url": "classes/App-Models-Tag.html"
         },                {
             "fqsen": "\\App\\Models\\Tag\u003A\u003AaddTag\u0028\u0029",
@@ -4106,24 +4181,29 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Models-Tag.html#method_addTag"
         },                {
-            "fqsen": "\\App\\Models\\Tag\u003A\u003Aposts_count\u0028\u0029",
-            "name": "posts_count",
+            "fqsen": "\\App\\Models\\Tag\u003A\u003Acommunity\u0028\u0029",
+            "name": "community",
             "summary": "",
-            "url": "classes/App-Models-Tag.html#method_posts_count"
+            "url": "classes/App-Models-Tag.html#method_community"
         },                {
-            "fqsen": "\\App\\Models\\Tag\u003A\u003AtoArray\u0028\u0029",
-            "name": "toArray",
+            "fqsen": "\\App\\Models\\Tag\u003A\u003Aposts\u0028\u0029",
+            "name": "posts",
             "summary": "",
-            "url": "classes/App-Models-Tag.html#method_toArray"
+            "url": "classes/App-Models-Tag.html#method_posts"
         },                {
             "fqsen": "\\App\\Models\\Tag\u003A\u003A\u0024fillable",
             "name": "fillable",
             "summary": "",
             "url": "classes/App-Models-Tag.html#property_fillable"
         },                {
+            "fqsen": "\\App\\Models\\Tag\u003A\u003A\u0024hidden",
+            "name": "hidden",
+            "summary": "",
+            "url": "classes/App-Models-Tag.html#property_hidden"
+        },                {
             "fqsen": "\\App\\Models\\Tip",
             "name": "Tip",
-            "summary": "",
+            "summary": "App\\Models\\Tip",
             "url": "classes/App-Models-Tip.html"
         },                {
             "fqsen": "\\App\\Models\\Tip\u003A\u003Auser\u0028\u0029",
@@ -4153,7 +4233,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\Transaction",
             "name": "Transaction",
-            "summary": "",
+            "summary": "App\\Models\\Transaction",
             "url": "classes/App-Models-Transaction.html"
         },                {
             "fqsen": "\\App\\Models\\Transaction\u003A\u003Auser\u0028\u0029",
@@ -4168,7 +4248,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\User",
             "name": "User",
-            "summary": "",
+            "summary": "App\\Models\\User",
             "url": "classes/App-Models-User.html"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003Aconversations\u0028\u0029",
@@ -4180,6 +4260,11 @@ Search.appendIndex(
             "name": "invitedBy",
             "summary": "",
             "url": "classes/App-Models-User.html#method_invitedBy"
+        },                {
+            "fqsen": "\\App\\Models\\User\u003A\u003AgenerateInviteLink\u0028\u0029",
+            "name": "generateInviteLink",
+            "summary": "",
+            "url": "classes/App-Models-User.html#method_generateInviteLink"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003AgenerateToken\u0028\u0029",
             "name": "generateToken",
@@ -4195,11 +4280,6 @@ Search.appendIndex(
             "name": "getAPI_key",
             "summary": "",
             "url": "classes/App-Models-User.html#method_getAPI_key"
-        },                {
-            "fqsen": "\\App\\Models\\User\u003A\u003AgetPages\u0028\u0029",
-            "name": "getPages",
-            "summary": "",
-            "url": "classes/App-Models-User.html#method_getPages"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003AgetPosts\u0028\u0029",
             "name": "getPosts",
@@ -4246,6 +4326,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Models-User.html#method_activeSessions"
         },                {
+            "fqsen": "\\App\\Models\\User\u003A\u003Aoptions\u0028\u0029",
+            "name": "options",
+            "summary": "",
+            "url": "classes/App-Models-User.html#method_options"
+        },                {
             "fqsen": "\\App\\Models\\User\u003A\u003Atransactions\u0028\u0029",
             "name": "transactions",
             "summary": "",
@@ -4285,11 +4370,6 @@ Search.appendIndex(
             "name": "pages",
             "summary": "User\u0020pages",
             "url": "classes/App-Models-User.html#method_pages"
-        },                {
-            "fqsen": "\\App\\Models\\User\u003A\u003AgetPage\u0028\u0029",
-            "name": "getPage",
-            "summary": "Get\u0020user\u0020personal\u0020page\u0020\u0028deprecated\u0029",
-            "url": "classes/App-Models-User.html#method_getPage"
         },                {
             "fqsen": "\\App\\Models\\User\u003A\u003AisPostLiked\u0028\u0029",
             "name": "isPostLiked",
@@ -4408,7 +4488,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\UserOption",
             "name": "UserOption",
-            "summary": "",
+            "summary": "App\\Models\\UserOption",
             "url": "classes/App-Models-UserOption.html"
         },                {
             "fqsen": "\\App\\Models\\UserOption\u003A\u003AgetOption\u0028\u0029",
@@ -4438,7 +4518,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\Verification",
             "name": "Verification",
-            "summary": "",
+            "summary": "App\\Models\\Verification",
             "url": "classes/App-Models-Verification.html"
         },                {
             "fqsen": "\\App\\Models\\Verification\u003A\u003AsendVerification\u0028\u0029",
@@ -4453,17 +4533,17 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Models\\Website",
             "name": "Website",
-            "summary": "",
+            "summary": "App\\Models\\Website",
             "url": "classes/App-Models-Website.html"
         },                {
             "fqsen": "\\App\\Models\\WebsiteOption",
             "name": "WebsiteOption",
-            "summary": "",
+            "summary": "App\\Models\\WebsiteOption",
             "url": "classes/App-Models-WebsiteOption.html"
         },                {
             "fqsen": "\\App\\Models\\WelcomeBackground",
             "name": "WelcomeBackground",
-            "summary": "",
+            "summary": "App\\Models\\WelcomeBackground",
             "url": "classes/App-Models-WelcomeBackground.html"
         },                {
             "fqsen": "\\App\\Models\\WelcomeBackground\u003A\u003AsetBackground\u0028\u0029",
@@ -4605,11 +4685,6 @@ Search.appendIndex(
             "name": "HOME",
             "summary": "The\u0020path\u0020to\u0020the\u0020\u0022home\u0022\u0020route\u0020for\u0020your\u0020application.",
             "url": "classes/App-Providers-RouteServiceProvider.html#constant_HOME"
-        },                {
-            "fqsen": "\\App\\Providers\\RouteServiceProvider\u003A\u003A\u0024namespace",
-            "name": "namespace",
-            "summary": "The\u0020controller\u0020namespace\u0020for\u0020the\u0020application.",
-            "url": "classes/App-Providers-RouteServiceProvider.html#property_namespace"
         },                {
             "fqsen": "\\App\\Providers\\TelescopeServiceProvider",
             "name": "TelescopeServiceProvider",
@@ -5078,7 +5153,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Services\\ServiceAccess\u003A\u003A\u0024AccessTypes",
             "name": "AccessTypes",
-            "summary": "Access\u0020Types\u0020\u002D\u0020only\u0020rest\u0020implemented\u0020yet.",
+            "summary": "Access\u0020Types\u0020\u002D\u0020only\u0020HTTP\u002DREST\u0020implemented\u0020yet.",
             "url": "classes/App-Services-ServiceAccess.html#property_AccessTypes"
         },                {
             "fqsen": "\\App\\Services\\ServiceAccess\u003A\u003A\u0024isAuthrequired",
@@ -5206,6 +5281,11 @@ Search.appendIndex(
             "summary": "Remove\u0020script,\u0020style\u0020and\u0020whitespace\u0020text\u0020nodes\u0020from\u0020html\u0020content\u0020\u002D\u002D\u0020Prevent\u0020XSS",
             "url": "classes/App-SocialMediaTools.html#method_safeHTML"
         },                {
+            "fqsen": "\\App\\SocialMediaTools\u003A\u003AreplaceHashtags\u0028\u0029",
+            "name": "replaceHashtags",
+            "summary": "",
+            "url": "classes/App-SocialMediaTools.html#method_replaceHashtags"
+        },                {
             "fqsen": "\\App\\SocialMediaTools\u003A\u003AreplaceMentions\u0028\u0029",
             "name": "replaceMentions",
             "summary": "replace\u0020mentions\u0020with\u0020with\u0020\u003Ca\u003E\u0020tag",
@@ -5215,6 +5295,11 @@ Search.appendIndex(
             "name": "uploadPostImage",
             "summary": "Resize\u0020and\u0020optimize\u0020image\u0020for\u0020web",
             "url": "classes/App-SocialMediaTools.html#method_uploadPostImage"
+        },                {
+            "fqsen": "\\App\\SocialMediaTools\u003A\u003AgetImageInfo\u0028\u0029",
+            "name": "getImageInfo",
+            "summary": "",
+            "url": "classes/App-SocialMediaTools.html#method_getImageInfo"
         },                {
             "fqsen": "\\App\\SocialMediaTools\u003A\u003AfitPostImage\u0028\u0029",
             "name": "fitPostImage",
@@ -5236,6 +5321,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-SocialMediaTools.html#property_imageMinHeight"
         },                {
+            "fqsen": "\\App\\SocialMediaTools\u003A\u003A\u0024imageMaxHeight",
+            "name": "imageMaxHeight",
+            "summary": "",
+            "url": "classes/App-SocialMediaTools.html#property_imageMaxHeight"
+        },                {
             "fqsen": "\\App\\SocialMediaTools\u003A\u003A\u0024imageRatio",
             "name": "imageRatio",
             "summary": "",
@@ -5250,6 +5340,11 @@ Search.appendIndex(
             "name": "Ternobo",
             "summary": "",
             "url": "classes/App-Ternobo.html"
+        },                {
+            "fqsen": "\\App\\Ternobo\u003A\u003AisUserLogedIn\u0028\u0029",
+            "name": "isUserLogedIn",
+            "summary": "",
+            "url": "classes/App-Ternobo.html#method_isUserLogedIn"
         },                {
             "fqsen": "\\App\\Ternobo\u003A\u003AcurrentPage\u0028\u0029",
             "name": "currentPage",
@@ -5281,6 +5376,1696 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-URLTools.html#method_toURL"
         },                {
+            "fqsen": "\\App\\Broadcasting\\AnnouncementChannel",
+            "name": "AnnouncementChannel",
+            "summary": "",
+            "url": "classes/App-Broadcasting-AnnouncementChannel.html"
+        },                {
+            "fqsen": "\\App\\Broadcasting\\AnnouncementChannel\u003A\u003Ajoin\u0028\u0029",
+            "name": "join",
+            "summary": "Authenticate\u0020the\u0020user\u0027s\u0020access\u0020to\u0020the\u0020channel.",
+            "url": "classes/App-Broadcasting-AnnouncementChannel.html#method_join"
+        },                {
+            "fqsen": "\\App\\Casts\\PostBlockContentCast",
+            "name": "PostBlockContentCast",
+            "summary": "",
+            "url": "classes/App-Casts-PostBlockContentCast.html"
+        },                {
+            "fqsen": "\\App\\Casts\\PostBlockContentCast\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "Cast\u0020the\u0020given\u0020value.",
+            "url": "classes/App-Casts-PostBlockContentCast.html#method_get"
+        },                {
+            "fqsen": "\\App\\Casts\\PostBlockContentCast\u003A\u003Aset\u0028\u0029",
+            "name": "set",
+            "summary": "Prepare\u0020the\u0020given\u0020value\u0020for\u0020storage.",
+            "url": "classes/App-Casts-PostBlockContentCast.html#method_set"
+        },                {
+            "fqsen": "\\App\\Casts\\PostBlockContentCast\u003A\u003A\u0024jsonTypes",
+            "name": "jsonTypes",
+            "summary": "",
+            "url": "classes/App-Casts-PostBlockContentCast.html#property_jsonTypes"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\AddCommunity",
+            "name": "AddCommunity",
+            "summary": "",
+            "url": "classes/App-Console-Commands-AddCommunity.html"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\AddCommunity\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020command\u0020instance.",
+            "url": "classes/App-Console-Commands-AddCommunity.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\AddCommunity\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Execute\u0020the\u0020console\u0020command.",
+            "url": "classes/App-Console-Commands-AddCommunity.html#method_handle"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\AddCommunity\u003A\u003A\u0024signature",
+            "name": "signature",
+            "summary": "The\u0020name\u0020and\u0020signature\u0020of\u0020the\u0020console\u0020command.",
+            "url": "classes/App-Console-Commands-AddCommunity.html#property_signature"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\AddCommunity\u003A\u003A\u0024description",
+            "name": "description",
+            "summary": "The\u0020console\u0020command\u0020description.",
+            "url": "classes/App-Console-Commands-AddCommunity.html#property_description"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\AddCommunity\u003A\u003A\u0024service",
+            "name": "service",
+            "summary": "",
+            "url": "classes/App-Console-Commands-AddCommunity.html#property_service"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\ClearTags",
+            "name": "ClearTags",
+            "summary": "",
+            "url": "classes/App-Console-Commands-ClearTags.html"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\ClearTags\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020command\u0020instance.",
+            "url": "classes/App-Console-Commands-ClearTags.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\ClearTags\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Execute\u0020the\u0020console\u0020command.",
+            "url": "classes/App-Console-Commands-ClearTags.html#method_handle"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\ClearTags\u003A\u003A\u0024signature",
+            "name": "signature",
+            "summary": "The\u0020name\u0020and\u0020signature\u0020of\u0020the\u0020console\u0020command.",
+            "url": "classes/App-Console-Commands-ClearTags.html#property_signature"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\ClearTags\u003A\u003A\u0024description",
+            "name": "description",
+            "summary": "The\u0020console\u0020command\u0020description.",
+            "url": "classes/App-Console-Commands-ClearTags.html#property_description"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\CreateAdmin",
+            "name": "CreateAdmin",
+            "summary": "",
+            "url": "classes/App-Console-Commands-CreateAdmin.html"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\CreateAdmin\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020command\u0020instance.",
+            "url": "classes/App-Console-Commands-CreateAdmin.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\CreateAdmin\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Execute\u0020the\u0020console\u0020command.",
+            "url": "classes/App-Console-Commands-CreateAdmin.html#method_handle"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\CreateAdmin\u003A\u003A\u0024signature",
+            "name": "signature",
+            "summary": "The\u0020name\u0020and\u0020signature\u0020of\u0020the\u0020console\u0020command.",
+            "url": "classes/App-Console-Commands-CreateAdmin.html#property_signature"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\CreateAdmin\u003A\u003A\u0024description",
+            "name": "description",
+            "summary": "The\u0020console\u0020command\u0020description.",
+            "url": "classes/App-Console-Commands-CreateAdmin.html#property_description"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\GenerateTernoboInvite",
+            "name": "GenerateTernoboInvite",
+            "summary": "",
+            "url": "classes/App-Console-Commands-GenerateTernoboInvite.html"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\GenerateTernoboInvite\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020command\u0020instance.",
+            "url": "classes/App-Console-Commands-GenerateTernoboInvite.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\GenerateTernoboInvite\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Execute\u0020the\u0020console\u0020command.",
+            "url": "classes/App-Console-Commands-GenerateTernoboInvite.html#method_handle"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\GenerateTernoboInvite\u003A\u003A\u0024signature",
+            "name": "signature",
+            "summary": "The\u0020name\u0020and\u0020signature\u0020of\u0020the\u0020console\u0020command.",
+            "url": "classes/App-Console-Commands-GenerateTernoboInvite.html#property_signature"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\GenerateTernoboInvite\u003A\u003A\u0024description",
+            "name": "description",
+            "summary": "The\u0020console\u0020command\u0020description.",
+            "url": "classes/App-Console-Commands-GenerateTernoboInvite.html#property_description"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\MakeService",
+            "name": "MakeService",
+            "summary": "",
+            "url": "classes/App-Console-Commands-MakeService.html"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\MakeService\u003A\u003Afire\u0028\u0029",
+            "name": "fire",
+            "summary": "Execute\u0020the\u0020console\u0020command.",
+            "url": "classes/App-Console-Commands-MakeService.html#method_fire"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\MakeService\u003A\u003AsetServiceClass\u0028\u0029",
+            "name": "setServiceClass",
+            "summary": "Set\u0020service\u0020class\u0020name",
+            "url": "classes/App-Console-Commands-MakeService.html#method_setServiceClass"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\MakeService\u003A\u003AreplaceClass\u0028\u0029",
+            "name": "replaceClass",
+            "summary": "Replace\u0020the\u0020class\u0020name\u0020for\u0020the\u0020given\u0020stub.",
+            "url": "classes/App-Console-Commands-MakeService.html#method_replaceClass"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\MakeService\u003A\u003AgetStub\u0028\u0029",
+            "name": "getStub",
+            "summary": "Get\u0020the\u0020stub\u0020file\u0020for\u0020the\u0020generator.",
+            "url": "classes/App-Console-Commands-MakeService.html#method_getStub"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\MakeService\u003A\u003AgetDefaultNamespace\u0028\u0029",
+            "name": "getDefaultNamespace",
+            "summary": "Get\u0020the\u0020default\u0020namespace\u0020for\u0020the\u0020class.",
+            "url": "classes/App-Console-Commands-MakeService.html#method_getDefaultNamespace"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\MakeService\u003A\u003AgetArguments\u0028\u0029",
+            "name": "getArguments",
+            "summary": "Get\u0020the\u0020console\u0020command\u0020arguments.",
+            "url": "classes/App-Console-Commands-MakeService.html#method_getArguments"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\MakeService\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "The\u0020name\u0020and\u0020signature\u0020of\u0020the\u0020console\u0020command.",
+            "url": "classes/App-Console-Commands-MakeService.html#property_name"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\MakeService\u003A\u003A\u0024description",
+            "name": "description",
+            "summary": "The\u0020console\u0020command\u0020description.",
+            "url": "classes/App-Console-Commands-MakeService.html#property_description"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\MakeService\u003A\u003A\u0024type",
+            "name": "type",
+            "summary": "The\u0020type\u0020of\u0020class\u0020being\u0020generated.",
+            "url": "classes/App-Console-Commands-MakeService.html#property_type"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\MakeService\u003A\u003A\u0024serviceClass",
+            "name": "serviceClass",
+            "summary": "The\u0020name\u0020of\u0020class\u0020being\u0020generated.",
+            "url": "classes/App-Console-Commands-MakeService.html#property_serviceClass"
+        },                {
+            "fqsen": "\\App\\Console\\Commands\\MakeService\u003A\u003A\u0024model",
+            "name": "model",
+            "summary": "The\u0020name\u0020of\u0020class\u0020being\u0020generated.",
+            "url": "classes/App-Console-Commands-MakeService.html#property_model"
+        },                {
+            "fqsen": "\\App\\Events\\AnnouncementEvent",
+            "name": "AnnouncementEvent",
+            "summary": "",
+            "url": "classes/App-Events-AnnouncementEvent.html"
+        },                {
+            "fqsen": "\\App\\Events\\AnnouncementEvent\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020event\u0020instance.",
+            "url": "classes/App-Events-AnnouncementEvent.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Events\\AnnouncementEvent\u003A\u003AbroadcastOn\u0028\u0029",
+            "name": "broadcastOn",
+            "summary": "Get\u0020the\u0020channels\u0020the\u0020event\u0020should\u0020broadcast\u0020on.",
+            "url": "classes/App-Events-AnnouncementEvent.html#method_broadcastOn"
+        },                {
+            "fqsen": "\\App\\Events\\AnnouncementEvent\u003A\u003A\u0024announcement",
+            "name": "announcement",
+            "summary": "",
+            "url": "classes/App-Events-AnnouncementEvent.html#property_announcement"
+        },                {
+            "fqsen": "\\App\\Events\\PostShareEvent",
+            "name": "PostShareEvent",
+            "summary": "",
+            "url": "classes/App-Events-PostShareEvent.html"
+        },                {
+            "fqsen": "\\App\\Events\\PostShareEvent\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020event\u0020instance.",
+            "url": "classes/App-Events-PostShareEvent.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Events\\PostShareEvent\u003A\u003A\u0024post",
+            "name": "post",
+            "summary": "",
+            "url": "classes/App-Events-PostShareEvent.html#property_post"
+        },                {
+            "fqsen": "\\App\\Facade\\MonetizationService",
+            "name": "MonetizationService",
+            "summary": "",
+            "url": "classes/App-Facade-MonetizationService.html"
+        },                {
+            "fqsen": "\\App\\Facade\\MonetizationService\u003A\u003AgetFacadeAccessor\u0028\u0029",
+            "name": "getFacadeAccessor",
+            "summary": "",
+            "url": "classes/App-Facade-MonetizationService.html#method_getFacadeAccessor"
+        },                {
+            "fqsen": "\\App\\Facade\\NotificationService",
+            "name": "NotificationService",
+            "summary": "",
+            "url": "classes/App-Facade-NotificationService.html"
+        },                {
+            "fqsen": "\\App\\Facade\\NotificationService\u003A\u003AgetFacadeAccessor\u0028\u0029",
+            "name": "getFacadeAccessor",
+            "summary": "",
+            "url": "classes/App-Facade-NotificationService.html#method_getFacadeAccessor"
+        },                {
+            "fqsen": "\\App\\Facade\\UserBadgeService",
+            "name": "UserBadgeService",
+            "summary": "",
+            "url": "classes/App-Facade-UserBadgeService.html"
+        },                {
+            "fqsen": "\\App\\Facade\\UserBadgeService\u003A\u003AgetFacadeAccessor\u0028\u0029",
+            "name": "getFacadeAccessor",
+            "summary": "",
+            "url": "classes/App-Facade-UserBadgeService.html#method_getFacadeAccessor"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Announcement\\AnnouncementController",
+            "name": "AnnouncementController",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Announcement-AnnouncementController.html"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Announcement\\AnnouncementController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Announcement-AnnouncementController.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Announcement\\AnnouncementController\u003A\u003AsendAnnouncement\u0028\u0029",
+            "name": "sendAnnouncement",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Announcement-AnnouncementController.html#method_sendAnnouncement"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Announcement\\AnnouncementController\u003A\u003A\u0024service",
+            "name": "service",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Announcement-AnnouncementController.html#property_service"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Community\\CommunityCategoriesController",
+            "name": "CommunityCategoriesController",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Community-CommunityCategoriesController.html"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Community\\CommunityCategoriesController\u003A\u003Aindex\u0028\u0029",
+            "name": "index",
+            "summary": "Display\u0020a\u0020listing\u0020of\u0020the\u0020resource.",
+            "url": "classes/App-Http-Controllers-Admin-Community-CommunityCategoriesController.html#method_index"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Community\\CommunityCategoriesController\u003A\u003Astore\u0028\u0029",
+            "name": "store",
+            "summary": "Store\u0020a\u0020newly\u0020created\u0020resource\u0020in\u0020storage.",
+            "url": "classes/App-Http-Controllers-Admin-Community-CommunityCategoriesController.html#method_store"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Community\\CommunityCategoriesController\u003A\u003Ashow\u0028\u0029",
+            "name": "show",
+            "summary": "Display\u0020the\u0020specified\u0020resource.",
+            "url": "classes/App-Http-Controllers-Admin-Community-CommunityCategoriesController.html#method_show"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Community\\CommunityCategoriesController\u003A\u003Aupdate\u0028\u0029",
+            "name": "update",
+            "summary": "Update\u0020the\u0020specified\u0020resource\u0020in\u0020storage.",
+            "url": "classes/App-Http-Controllers-Admin-Community-CommunityCategoriesController.html#method_update"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Community\\CommunityCategoriesController\u003A\u003Adestroy\u0028\u0029",
+            "name": "destroy",
+            "summary": "Remove\u0020the\u0020specified\u0020resource\u0020from\u0020storage.",
+            "url": "classes/App-Http-Controllers-Admin-Community-CommunityCategoriesController.html#method_destroy"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Community\\CommunityController",
+            "name": "CommunityController",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Community-CommunityController.html"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Community\\CommunityController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Community-CommunityController.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Community\\CommunityController\u003A\u003Aindex\u0028\u0029",
+            "name": "index",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Community-CommunityController.html#method_index"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Community\\CommunityController\u003A\u003Ashow\u0028\u0029",
+            "name": "show",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Community-CommunityController.html#method_show"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Community\\CommunityController\u003A\u003Astore\u0028\u0029",
+            "name": "store",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Community-CommunityController.html#method_store"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Community\\CommunityController\u003A\u003AaddTranslation\u0028\u0029",
+            "name": "addTranslation",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Community-CommunityController.html#method_addTranslation"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Community\\CommunityController\u003A\u003AgetTranslations\u0028\u0029",
+            "name": "getTranslations",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Community-CommunityController.html#method_getTranslations"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Community\\CommunityController\u003A\u003AdeleteTranslation\u0028\u0029",
+            "name": "deleteTranslation",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Community-CommunityController.html#method_deleteTranslation"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Community\\CommunityController\u003A\u003Aupdate\u0028\u0029",
+            "name": "update",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Community-CommunityController.html#method_update"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Community\\CommunityController\u003A\u003Adestroy\u0028\u0029",
+            "name": "destroy",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Community-CommunityController.html#method_destroy"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Community\\CommunityController\u003A\u003A\u0024service",
+            "name": "service",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Community-CommunityController.html#property_service"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Monetization\\MonetizationManagementController",
+            "name": "MonetizationManagementController",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Monetization-MonetizationManagementController.html"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Monetization\\MonetizationManagementController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Monetization-MonetizationManagementController.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Monetization\\MonetizationManagementController\u003A\u003AacceptMonetizationRequest\u0028\u0029",
+            "name": "acceptMonetizationRequest",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Monetization-MonetizationManagementController.html#method_acceptMonetizationRequest"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Monetization\\MonetizationManagementController\u003A\u003ArejectMonetizationRequest\u0028\u0029",
+            "name": "rejectMonetizationRequest",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Monetization-MonetizationManagementController.html#method_rejectMonetizationRequest"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Monetization\\MonetizationManagementController\u003A\u003A\u0024service",
+            "name": "service",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Admin-Monetization-MonetizationManagementController.html#property_service"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\CommunityExploreController",
+            "name": "CommunityExploreController",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-CommunityExploreController.html"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\CommunityExploreController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-CommunityExploreController.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\CommunityExploreController\u003A\u003Aindex\u0028\u0029",
+            "name": "index",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-CommunityExploreController.html#method_index"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\CommunityExploreController\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-CommunityExploreController.html#method_get"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\CommunityExploreController\u003A\u003A\u0024service",
+            "name": "service",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-CommunityExploreController.html#property_service"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\CommunityTagController",
+            "name": "CommunityTagController",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-CommunityTagController.html"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\CommunityTagController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-CommunityTagController.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\CommunityTagController\u003A\u003AinterestsPages\u0028\u0029",
+            "name": "interestsPages",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-CommunityTagController.html#method_interestsPages"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\CommunityTagController\u003A\u003AsetInterests\u0028\u0029",
+            "name": "setInterests",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-CommunityTagController.html#method_setInterests"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\CommunityTagController\u003A\u003AskipInterestPage\u0028\u0029",
+            "name": "skipInterestPage",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-CommunityTagController.html#method_skipInterestPage"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\CommunityTagController\u003A\u003AgetHashtagTopUsers\u0028\u0029",
+            "name": "getHashtagTopUsers",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-CommunityTagController.html#method_getHashtagTopUsers"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\CommunityTagController\u003A\u003AgetRelatedTags\u0028\u0029",
+            "name": "getRelatedTags",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-CommunityTagController.html#method_getRelatedTags"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Content\\CommunityTagController\u003A\u003A\u0024service",
+            "name": "service",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Content-CommunityTagController.html#property_service"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\DataAccess\\DataExtractionController",
+            "name": "DataExtractionController",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-DataAccess-DataExtractionController.html"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\DataAccess\\DataExtractionController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-DataAccess-DataExtractionController.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\DataAccess\\DataExtractionController\u003A\u003AgetAllPosts\u0028\u0029",
+            "name": "getAllPosts",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-DataAccess-DataExtractionController.html#method_getAllPosts"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\DataAccess\\DataExtractionController\u003A\u003AgetTags\u0028\u0029",
+            "name": "getTags",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-DataAccess-DataExtractionController.html#method_getTags"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\DataAccess\\DataExtractionController\u003A\u003AgetPostsByTag\u0028\u0029",
+            "name": "getPostsByTag",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-DataAccess-DataExtractionController.html#method_getPostsByTag"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\DataAccess\\DataExtractionController\u003A\u003A\u0024service",
+            "name": "service",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-DataAccess-DataExtractionController.html#property_service"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Donation\\MonetizationController",
+            "name": "MonetizationController",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Donation-MonetizationController.html"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Donation\\MonetizationController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Donation-MonetizationController.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Donation\\MonetizationController\u003A\u003AgetMonetizationStatus\u0028\u0029",
+            "name": "getMonetizationStatus",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Donation-MonetizationController.html#method_getMonetizationStatus"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Donation\\MonetizationController\u003A\u003AsendMonetizationRequest\u0028\u0029",
+            "name": "sendMonetizationRequest",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Donation-MonetizationController.html#method_sendMonetizationRequest"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Donation\\MonetizationController\u003A\u003A\u0024service",
+            "name": "service",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Donation-MonetizationController.html#property_service"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Socialite\\RedditController",
+            "name": "RedditController",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Socialite-RedditController.html"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Socialite\\RedditController\u003A\u003Alogin\u0028\u0029",
+            "name": "login",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Socialite-RedditController.html#method_login"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Socialite\\RedditController\u003A\u003Acallback\u0028\u0029",
+            "name": "callback",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Socialite-RedditController.html#method_callback"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Validators\\UserRegisterValidatorController",
+            "name": "UserRegisterValidatorController",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Validators-UserRegisterValidatorController.html"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Validators\\UserRegisterValidatorController\u003A\u003AusernameValidation\u0028\u0029",
+            "name": "usernameValidation",
+            "summary": "",
+            "url": "classes/App-Http-Controllers-Validators-UserRegisterValidatorController.html#method_usernameValidation"
+        },                {
+            "fqsen": "\\App\\Http\\Middleware\\CommunityTagSelectMiddleware",
+            "name": "CommunityTagSelectMiddleware",
+            "summary": "",
+            "url": "classes/App-Http-Middleware-CommunityTagSelectMiddleware.html"
+        },                {
+            "fqsen": "\\App\\Http\\Middleware\\CommunityTagSelectMiddleware\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Handle\u0020an\u0020incoming\u0020request.",
+            "url": "classes/App-Http-Middleware-CommunityTagSelectMiddleware.html#method_handle"
+        },                {
+            "fqsen": "\\App\\Http\\Middleware\\Cors",
+            "name": "Cors",
+            "summary": "",
+            "url": "classes/App-Http-Middleware-Cors.html"
+        },                {
+            "fqsen": "\\App\\Http\\Middleware\\Cors\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Handle\u0020an\u0020incoming\u0020request.",
+            "url": "classes/App-Http-Middleware-Cors.html#method_handle"
+        },                {
+            "fqsen": "\\App\\Http\\Middleware\\DataAccessMiddleware",
+            "name": "DataAccessMiddleware",
+            "summary": "",
+            "url": "classes/App-Http-Middleware-DataAccessMiddleware.html"
+        },                {
+            "fqsen": "\\App\\Http\\Middleware\\DataAccessMiddleware\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Handle\u0020an\u0020incoming\u0020request.",
+            "url": "classes/App-Http-Middleware-DataAccessMiddleware.html#method_handle"
+        },                {
+            "fqsen": "\\App\\Http\\Middleware\\FullAccessUserMiddleware",
+            "name": "FullAccessUserMiddleware",
+            "summary": "",
+            "url": "classes/App-Http-Middleware-FullAccessUserMiddleware.html"
+        },                {
+            "fqsen": "\\App\\Http\\Middleware\\FullAccessUserMiddleware\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Handle\u0020an\u0020incoming\u0020request.",
+            "url": "classes/App-Http-Middleware-FullAccessUserMiddleware.html#method_handle"
+        },                {
+            "fqsen": "\\App\\Http\\Middleware\\RedirectIfTernoboUser",
+            "name": "RedirectIfTernoboUser",
+            "summary": "",
+            "url": "classes/App-Http-Middleware-RedirectIfTernoboUser.html"
+        },                {
+            "fqsen": "\\App\\Http\\Middleware\\RedirectIfTernoboUser\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Handle\u0020an\u0020incoming\u0020request.",
+            "url": "classes/App-Http-Middleware-RedirectIfTernoboUser.html#method_handle"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\AnnouncementRequest",
+            "name": "AnnouncementRequest",
+            "summary": "",
+            "url": "classes/App-Http-Requests-AnnouncementRequest.html"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\AnnouncementRequest\u003A\u003Aauthorize\u0028\u0029",
+            "name": "authorize",
+            "summary": "Determine\u0020if\u0020the\u0020user\u0020is\u0020authorized\u0020to\u0020make\u0020this\u0020request.",
+            "url": "classes/App-Http-Requests-AnnouncementRequest.html#method_authorize"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\AnnouncementRequest\u003A\u003Arules\u0028\u0029",
+            "name": "rules",
+            "summary": "Get\u0020the\u0020validation\u0020rules\u0020that\u0020apply\u0020to\u0020the\u0020request.",
+            "url": "classes/App-Http-Requests-AnnouncementRequest.html#method_rules"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\Community\\CommunityExploreRequest",
+            "name": "CommunityExploreRequest",
+            "summary": "",
+            "url": "classes/App-Http-Requests-Community-CommunityExploreRequest.html"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\Community\\CommunityExploreRequest\u003A\u003Aauthorize\u0028\u0029",
+            "name": "authorize",
+            "summary": "Determine\u0020if\u0020the\u0020user\u0020is\u0020authorized\u0020to\u0020make\u0020this\u0020request.",
+            "url": "classes/App-Http-Requests-Community-CommunityExploreRequest.html#method_authorize"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\Community\\CommunityExploreRequest\u003A\u003Arules\u0028\u0029",
+            "name": "rules",
+            "summary": "Get\u0020the\u0020validation\u0020rules\u0020that\u0020apply\u0020to\u0020the\u0020request.",
+            "url": "classes/App-Http-Requests-Community-CommunityExploreRequest.html#method_rules"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\CommunityManagement\\AddTranslationRequest",
+            "name": "AddTranslationRequest",
+            "summary": "",
+            "url": "classes/App-Http-Requests-CommunityManagement-AddTranslationRequest.html"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\CommunityManagement\\AddTranslationRequest\u003A\u003Aauthorize\u0028\u0029",
+            "name": "authorize",
+            "summary": "Determine\u0020if\u0020the\u0020user\u0020is\u0020authorized\u0020to\u0020make\u0020this\u0020request.",
+            "url": "classes/App-Http-Requests-CommunityManagement-AddTranslationRequest.html#method_authorize"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\CommunityManagement\\AddTranslationRequest\u003A\u003Arules\u0028\u0029",
+            "name": "rules",
+            "summary": "Get\u0020the\u0020validation\u0020rules\u0020that\u0020apply\u0020to\u0020the\u0020request.",
+            "url": "classes/App-Http-Requests-CommunityManagement-AddTranslationRequest.html#method_rules"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\CommunityManagement\\TranslationRequest",
+            "name": "TranslationRequest",
+            "summary": "",
+            "url": "classes/App-Http-Requests-CommunityManagement-TranslationRequest.html"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\CommunityManagement\\TranslationRequest\u003A\u003Aauthorize\u0028\u0029",
+            "name": "authorize",
+            "summary": "Determine\u0020if\u0020the\u0020user\u0020is\u0020authorized\u0020to\u0020make\u0020this\u0020request.",
+            "url": "classes/App-Http-Requests-CommunityManagement-TranslationRequest.html#method_authorize"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\CommunityManagement\\TranslationRequest\u003A\u003Arules\u0028\u0029",
+            "name": "rules",
+            "summary": "Get\u0020the\u0020validation\u0020rules\u0020that\u0020apply\u0020to\u0020the\u0020request.",
+            "url": "classes/App-Http-Requests-CommunityManagement-TranslationRequest.html#method_rules"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\Content\\SearchRequest",
+            "name": "SearchRequest",
+            "summary": "",
+            "url": "classes/App-Http-Requests-Content-SearchRequest.html"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\Content\\SearchRequest\u003A\u003Aauthorize\u0028\u0029",
+            "name": "authorize",
+            "summary": "Determine\u0020if\u0020the\u0020user\u0020is\u0020authorized\u0020to\u0020make\u0020this\u0020request.",
+            "url": "classes/App-Http-Requests-Content-SearchRequest.html#method_authorize"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\Content\\SearchRequest\u003A\u003Arules\u0028\u0029",
+            "name": "rules",
+            "summary": "Get\u0020the\u0020validation\u0020rules\u0020that\u0020apply\u0020to\u0020the\u0020request.",
+            "url": "classes/App-Http-Requests-Content-SearchRequest.html#method_rules"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\CreateCommunityCategoryRequest",
+            "name": "CreateCommunityCategoryRequest",
+            "summary": "",
+            "url": "classes/App-Http-Requests-CreateCommunityCategoryRequest.html"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\CreateCommunityCategoryRequest\u003A\u003Aauthorize\u0028\u0029",
+            "name": "authorize",
+            "summary": "Determine\u0020if\u0020the\u0020user\u0020is\u0020authorized\u0020to\u0020make\u0020this\u0020request.",
+            "url": "classes/App-Http-Requests-CreateCommunityCategoryRequest.html#method_authorize"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\CreateCommunityCategoryRequest\u003A\u003Arules\u0028\u0029",
+            "name": "rules",
+            "summary": "Get\u0020the\u0020validation\u0020rules\u0020that\u0020apply\u0020to\u0020the\u0020request.",
+            "url": "classes/App-Http-Requests-CreateCommunityCategoryRequest.html#method_rules"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\CreateCommunityTagRequest",
+            "name": "CreateCommunityTagRequest",
+            "summary": "",
+            "url": "classes/App-Http-Requests-CreateCommunityTagRequest.html"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\CreateCommunityTagRequest\u003A\u003Aauthorize\u0028\u0029",
+            "name": "authorize",
+            "summary": "Determine\u0020if\u0020the\u0020user\u0020is\u0020authorized\u0020to\u0020make\u0020this\u0020request.",
+            "url": "classes/App-Http-Requests-CreateCommunityTagRequest.html#method_authorize"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\CreateCommunityTagRequest\u003A\u003Arules\u0028\u0029",
+            "name": "rules",
+            "summary": "Get\u0020the\u0020validation\u0020rules\u0020that\u0020apply\u0020to\u0020the\u0020request.",
+            "url": "classes/App-Http-Requests-CreateCommunityTagRequest.html#method_rules"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\CreateUserRequest",
+            "name": "CreateUserRequest",
+            "summary": "",
+            "url": "classes/App-Http-Requests-CreateUserRequest.html"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\CreateUserRequest\u003A\u003Aauthorize\u0028\u0029",
+            "name": "authorize",
+            "summary": "Determine\u0020if\u0020the\u0020user\u0020is\u0020authorized\u0020to\u0020make\u0020this\u0020request.",
+            "url": "classes/App-Http-Requests-CreateUserRequest.html#method_authorize"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\CreateUserRequest\u003A\u003Arules\u0028\u0029",
+            "name": "rules",
+            "summary": "Get\u0020the\u0020validation\u0020rules\u0020that\u0020apply\u0020to\u0020the\u0020request.",
+            "url": "classes/App-Http-Requests-CreateUserRequest.html#method_rules"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\DataFilterRequest",
+            "name": "DataFilterRequest",
+            "summary": "",
+            "url": "classes/App-Http-Requests-DataFilterRequest.html"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\DataFilterRequest\u003A\u003Aauthorize\u0028\u0029",
+            "name": "authorize",
+            "summary": "Determine\u0020if\u0020the\u0020user\u0020is\u0020authorized\u0020to\u0020make\u0020this\u0020request.",
+            "url": "classes/App-Http-Requests-DataFilterRequest.html#method_authorize"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\DataFilterRequest\u003A\u003Arules\u0028\u0029",
+            "name": "rules",
+            "summary": "Get\u0020the\u0020validation\u0020rules\u0020that\u0020apply\u0020to\u0020the\u0020request.",
+            "url": "classes/App-Http-Requests-DataFilterRequest.html#method_rules"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\MonetizationRequest",
+            "name": "MonetizationRequest",
+            "summary": "",
+            "url": "classes/App-Http-Requests-MonetizationRequest.html"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\MonetizationRequest\u003A\u003Aauthorize\u0028\u0029",
+            "name": "authorize",
+            "summary": "Determine\u0020if\u0020the\u0020user\u0020is\u0020authorized\u0020to\u0020make\u0020this\u0020request.",
+            "url": "classes/App-Http-Requests-MonetizationRequest.html#method_authorize"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\MonetizationRequest\u003A\u003Arules\u0028\u0029",
+            "name": "rules",
+            "summary": "Get\u0020the\u0020validation\u0020rules\u0020that\u0020apply\u0020to\u0020the\u0020request.",
+            "url": "classes/App-Http-Requests-MonetizationRequest.html#method_rules"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\UpdateCommunityTagRequest",
+            "name": "UpdateCommunityTagRequest",
+            "summary": "",
+            "url": "classes/App-Http-Requests-UpdateCommunityTagRequest.html"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\UpdateCommunityTagRequest\u003A\u003Aauthorize\u0028\u0029",
+            "name": "authorize",
+            "summary": "Determine\u0020if\u0020the\u0020user\u0020is\u0020authorized\u0020to\u0020make\u0020this\u0020request.",
+            "url": "classes/App-Http-Requests-UpdateCommunityTagRequest.html#method_authorize"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\UpdateCommunityTagRequest\u003A\u003Arules\u0028\u0029",
+            "name": "rules",
+            "summary": "Get\u0020the\u0020validation\u0020rules\u0020that\u0020apply\u0020to\u0020the\u0020request.",
+            "url": "classes/App-Http-Requests-UpdateCommunityTagRequest.html#method_rules"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\VerificationRequest",
+            "name": "VerificationRequest",
+            "summary": "",
+            "url": "classes/App-Http-Requests-VerificationRequest.html"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\VerificationRequest\u003A\u003Aauthorize\u0028\u0029",
+            "name": "authorize",
+            "summary": "Determine\u0020if\u0020the\u0020user\u0020is\u0020authorized\u0020to\u0020make\u0020this\u0020request.",
+            "url": "classes/App-Http-Requests-VerificationRequest.html#method_authorize"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\VerificationRequest\u003A\u003Arules\u0028\u0029",
+            "name": "rules",
+            "summary": "Get\u0020the\u0020validation\u0020rules\u0020that\u0020apply\u0020to\u0020the\u0020request.",
+            "url": "classes/App-Http-Requests-VerificationRequest.html#method_rules"
+        },                {
+            "fqsen": "\\App\\Http\\Resources\\BaseResource",
+            "name": "BaseResource",
+            "summary": "",
+            "url": "classes/App-Http-Resources-BaseResource.html"
+        },                {
+            "fqsen": "\\App\\Http\\Resources\\BaseResource\u003A\u003AtoArray\u0028\u0029",
+            "name": "toArray",
+            "summary": "Transform\u0020the\u0020resource\u0020collection\u0020into\u0020an\u0020array.",
+            "url": "classes/App-Http-Resources-BaseResource.html#method_toArray"
+        },                {
+            "fqsen": "\\App\\Http\\Resources\\CommunityTagResource",
+            "name": "CommunityTagResource",
+            "summary": "",
+            "url": "classes/App-Http-Resources-CommunityTagResource.html"
+        },                {
+            "fqsen": "\\App\\Http\\Resources\\CommunityTagResource\u003A\u003AtoArray\u0028\u0029",
+            "name": "toArray",
+            "summary": "Transform\u0020the\u0020resource\u0020into\u0020an\u0020array.",
+            "url": "classes/App-Http-Resources-CommunityTagResource.html#method_toArray"
+        },                {
+            "fqsen": "\\App\\Http\\Resources\\Content\\ActionResource",
+            "name": "ActionResource",
+            "summary": "",
+            "url": "classes/App-Http-Resources-Content-ActionResource.html"
+        },                {
+            "fqsen": "\\App\\Http\\Resources\\Content\\ActionResource\u003A\u003AtoArray\u0028\u0029",
+            "name": "toArray",
+            "summary": "Transform\u0020the\u0020resource\u0020into\u0020an\u0020array.",
+            "url": "classes/App-Http-Resources-Content-ActionResource.html#method_toArray"
+        },                {
+            "fqsen": "\\App\\Http\\Resources\\Content\\PostResource",
+            "name": "PostResource",
+            "summary": "",
+            "url": "classes/App-Http-Resources-Content-PostResource.html"
+        },                {
+            "fqsen": "\\App\\Http\\Resources\\Content\\PostResource\u003A\u003AtoResponse\u0028\u0029",
+            "name": "toResponse",
+            "summary": "",
+            "url": "classes/App-Http-Resources-Content-PostResource.html#method_toResponse"
+        },                {
+            "fqsen": "\\App\\Http\\Resources\\Content\\PostResource\u003A\u003AtoArray\u0028\u0029",
+            "name": "toArray",
+            "summary": "Transform\u0020the\u0020resource\u0020into\u0020an\u0020array.",
+            "url": "classes/App-Http-Resources-Content-PostResource.html#method_toArray"
+        },                {
+            "fqsen": "\\App\\Http\\Resources\\Content\\TagResource",
+            "name": "TagResource",
+            "summary": "",
+            "url": "classes/App-Http-Resources-Content-TagResource.html"
+        },                {
+            "fqsen": "\\App\\Http\\Resources\\Content\\TagResource\u003A\u003AtoArray\u0028\u0029",
+            "name": "toArray",
+            "summary": "Transform\u0020the\u0020resource\u0020into\u0020an\u0020array.",
+            "url": "classes/App-Http-Resources-Content-TagResource.html#method_toArray"
+        },                {
+            "fqsen": "\\App\\Http\\Resources\\NotificationResource",
+            "name": "NotificationResource",
+            "summary": "",
+            "url": "classes/App-Http-Resources-NotificationResource.html"
+        },                {
+            "fqsen": "\\App\\Http\\Resources\\NotificationResource\u003A\u003AtoArray\u0028\u0029",
+            "name": "toArray",
+            "summary": "Transform\u0020the\u0020resource\u0020into\u0020an\u0020array.",
+            "url": "classes/App-Http-Resources-NotificationResource.html#method_toArray"
+        },                {
+            "fqsen": "\\App\\Http\\Resources\\PostDataAccess",
+            "name": "PostDataAccess",
+            "summary": "",
+            "url": "classes/App-Http-Resources-PostDataAccess.html"
+        },                {
+            "fqsen": "\\App\\Http\\Resources\\PostDataAccess\u003A\u003AtoArray\u0028\u0029",
+            "name": "toArray",
+            "summary": "Transform\u0020the\u0020resource\u0020into\u0020an\u0020array.",
+            "url": "classes/App-Http-Resources-PostDataAccess.html#method_toArray"
+        },                {
+            "fqsen": "\\App\\Http\\Resources\\Search\\TagSearchResource",
+            "name": "TagSearchResource",
+            "summary": "",
+            "url": "classes/App-Http-Resources-Search-TagSearchResource.html"
+        },                {
+            "fqsen": "\\App\\Http\\Resources\\Search\\TagSearchResource\u003A\u003AtoArray\u0028\u0029",
+            "name": "toArray",
+            "summary": "Transform\u0020the\u0020resource\u0020into\u0020an\u0020array.",
+            "url": "classes/App-Http-Resources-Search-TagSearchResource.html#method_toArray"
+        },                {
+            "fqsen": "\\App\\Jobs\\AutomaticDeactivationJob",
+            "name": "AutomaticDeactivationJob",
+            "summary": "",
+            "url": "classes/App-Jobs-AutomaticDeactivationJob.html"
+        },                {
+            "fqsen": "\\App\\Jobs\\AutomaticDeactivationJob\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020job\u0020instance.",
+            "url": "classes/App-Jobs-AutomaticDeactivationJob.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Jobs\\AutomaticDeactivationJob\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Execute\u0020the\u0020job.",
+            "url": "classes/App-Jobs-AutomaticDeactivationJob.html#method_handle"
+        },                {
+            "fqsen": "\\App\\Jobs\\ClearTagsJob",
+            "name": "ClearTagsJob",
+            "summary": "",
+            "url": "classes/App-Jobs-ClearTagsJob.html"
+        },                {
+            "fqsen": "\\App\\Jobs\\ClearTagsJob\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020job\u0020instance.",
+            "url": "classes/App-Jobs-ClearTagsJob.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Jobs\\ClearTagsJob\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Execute\u0020the\u0020job.",
+            "url": "classes/App-Jobs-ClearTagsJob.html#method_handle"
+        },                {
+            "fqsen": "\\App\\Jobs\\LastActivityJob",
+            "name": "LastActivityJob",
+            "summary": "",
+            "url": "classes/App-Jobs-LastActivityJob.html"
+        },                {
+            "fqsen": "\\App\\Jobs\\LastActivityJob\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020job\u0020instance.",
+            "url": "classes/App-Jobs-LastActivityJob.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Jobs\\LastActivityJob\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Execute\u0020the\u0020job.",
+            "url": "classes/App-Jobs-LastActivityJob.html#method_handle"
+        },                {
+            "fqsen": "\\App\\Jobs\\LastActivityJob\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "",
+            "url": "classes/App-Jobs-LastActivityJob.html#property_id"
+        },                {
+            "fqsen": "\\App\\Jobs\\PostDeleteProcess",
+            "name": "PostDeleteProcess",
+            "summary": "",
+            "url": "classes/App-Jobs-PostDeleteProcess.html"
+        },                {
+            "fqsen": "\\App\\Jobs\\PostDeleteProcess\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020job\u0020instance.",
+            "url": "classes/App-Jobs-PostDeleteProcess.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Jobs\\PostDeleteProcess\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Execute\u0020the\u0020job.",
+            "url": "classes/App-Jobs-PostDeleteProcess.html#method_handle"
+        },                {
+            "fqsen": "\\App\\Jobs\\PostDeleteProcess\u003A\u003A\u0024post",
+            "name": "post",
+            "summary": "",
+            "url": "classes/App-Jobs-PostDeleteProcess.html#property_post"
+        },                {
+            "fqsen": "\\App\\Jobs\\PostProcessJob",
+            "name": "PostProcessJob",
+            "summary": "",
+            "url": "classes/App-Jobs-PostProcessJob.html"
+        },                {
+            "fqsen": "\\App\\Jobs\\PostProcessJob\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020job\u0020instance.",
+            "url": "classes/App-Jobs-PostProcessJob.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Jobs\\PostProcessJob\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Execute\u0020the\u0020job.",
+            "url": "classes/App-Jobs-PostProcessJob.html#method_handle"
+        },                {
+            "fqsen": "\\App\\Jobs\\PostProcessJob\u003A\u003A\u0024post",
+            "name": "post",
+            "summary": "",
+            "url": "classes/App-Jobs-PostProcessJob.html#property_post"
+        },                {
+            "fqsen": "\\App\\Listeners\\PostShareListner",
+            "name": "PostShareListner",
+            "summary": "",
+            "url": "classes/App-Listeners-PostShareListner.html"
+        },                {
+            "fqsen": "\\App\\Listeners\\PostShareListner\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Handle\u0020the\u0020event.",
+            "url": "classes/App-Listeners-PostShareListner.html#method_handle"
+        },                {
+            "fqsen": "\\App\\Models\\Announcement",
+            "name": "Announcement",
+            "summary": "App\\Models\\Announcement",
+            "url": "classes/App-Models-Announcement.html"
+        },                {
+            "fqsen": "\\App\\Models\\Announcement\u003A\u003A\u0024casts",
+            "name": "casts",
+            "summary": "",
+            "url": "classes/App-Models-Announcement.html#property_casts"
+        },                {
+            "fqsen": "\\App\\Models\\Announcement\u003A\u003A\u0024fillable",
+            "name": "fillable",
+            "summary": "",
+            "url": "classes/App-Models-Announcement.html#property_fillable"
+        },                {
+            "fqsen": "\\App\\Models\\CommunityCategory",
+            "name": "CommunityCategory",
+            "summary": "App\\Models\\CommunityCategory",
+            "url": "classes/App-Models-CommunityCategory.html"
+        },                {
+            "fqsen": "\\App\\Models\\CommunityCategory\u003A\u003Atags\u0028\u0029",
+            "name": "tags",
+            "summary": "",
+            "url": "classes/App-Models-CommunityCategory.html#method_tags"
+        },                {
+            "fqsen": "\\App\\Models\\CommunityCategory\u003A\u003A\u0024fillable",
+            "name": "fillable",
+            "summary": "",
+            "url": "classes/App-Models-CommunityCategory.html#property_fillable"
+        },                {
+            "fqsen": "\\App\\Models\\CommunityTag",
+            "name": "CommunityTag",
+            "summary": "App\\Models\\CommunityTag",
+            "url": "classes/App-Models-CommunityTag.html"
+        },                {
+            "fqsen": "\\App\\Models\\CommunityTag\u003A\u003AtoArray\u0028\u0029",
+            "name": "toArray",
+            "summary": "",
+            "url": "classes/App-Models-CommunityTag.html#method_toArray"
+        },                {
+            "fqsen": "\\App\\Models\\CommunityTag\u003A\u003AcommunityCategory\u0028\u0029",
+            "name": "communityCategory",
+            "summary": "",
+            "url": "classes/App-Models-CommunityTag.html#method_communityCategory"
+        },                {
+            "fqsen": "\\App\\Models\\CommunityTag\u003A\u003Atransactions\u0028\u0029",
+            "name": "transactions",
+            "summary": "",
+            "url": "classes/App-Models-CommunityTag.html#method_transactions"
+        },                {
+            "fqsen": "\\App\\Models\\CommunityTag\u003A\u003Atag\u0028\u0029",
+            "name": "tag",
+            "summary": "",
+            "url": "classes/App-Models-CommunityTag.html#method_tag"
+        },                {
+            "fqsen": "\\App\\Models\\CommunityTag\u003A\u003A\u0024hidden",
+            "name": "hidden",
+            "summary": "",
+            "url": "classes/App-Models-CommunityTag.html#property_hidden"
+        },                {
+            "fqsen": "\\App\\Models\\CommunityTag\u003A\u003A\u0024fillable",
+            "name": "fillable",
+            "summary": "",
+            "url": "classes/App-Models-CommunityTag.html#property_fillable"
+        },                {
+            "fqsen": "\\App\\Models\\CommunityTranslation",
+            "name": "CommunityTranslation",
+            "summary": "App\\Models\\CommunityTranslation",
+            "url": "classes/App-Models-CommunityTranslation.html"
+        },                {
+            "fqsen": "\\App\\Models\\CommunityTranslation\u003A\u003A\u0024table",
+            "name": "table",
+            "summary": "",
+            "url": "classes/App-Models-CommunityTranslation.html#property_table"
+        },                {
+            "fqsen": "\\App\\Models\\CommunityTranslation\u003A\u003A\u0024fillable",
+            "name": "fillable",
+            "summary": "",
+            "url": "classes/App-Models-CommunityTranslation.html#property_fillable"
+        },                {
+            "fqsen": "\\App\\Models\\MonetizationRequest",
+            "name": "MonetizationRequest",
+            "summary": "App\\Models\\MonetizationRequest",
+            "url": "classes/App-Models-MonetizationRequest.html"
+        },                {
+            "fqsen": "\\App\\Models\\MonetizationRequest\u003A\u003A\u0024status_accepted",
+            "name": "status_accepted",
+            "summary": "",
+            "url": "classes/App-Models-MonetizationRequest.html#property_status_accepted"
+        },                {
+            "fqsen": "\\App\\Models\\MonetizationRequest\u003A\u003A\u0024status_rejected",
+            "name": "status_rejected",
+            "summary": "",
+            "url": "classes/App-Models-MonetizationRequest.html#property_status_rejected"
+        },                {
+            "fqsen": "\\App\\Models\\MonetizationRequest\u003A\u003A\u0024status_waiting",
+            "name": "status_waiting",
+            "summary": "",
+            "url": "classes/App-Models-MonetizationRequest.html#property_status_waiting"
+        },                {
+            "fqsen": "\\App\\Models\\MonetizationRequest\u003A\u003A\u0024fillable",
+            "name": "fillable",
+            "summary": "",
+            "url": "classes/App-Models-MonetizationRequest.html#property_fillable"
+        },                {
+            "fqsen": "\\App\\Models\\Otp",
+            "name": "Otp",
+            "summary": "App\\Models\\Otp",
+            "url": "classes/App-Models-Otp.html"
+        },                {
+            "fqsen": "\\App\\Models\\Otp\u003A\u003A\u0024fillable",
+            "name": "fillable",
+            "summary": "",
+            "url": "classes/App-Models-Otp.html#property_fillable"
+        },                {
+            "fqsen": "\\App\\Models\\Partner",
+            "name": "Partner",
+            "summary": "App\\Models\\Partner",
+            "url": "classes/App-Models-Partner.html"
+        },                {
+            "fqsen": "\\App\\Models\\PostBlock",
+            "name": "PostBlock",
+            "summary": "App\\Models\\PostBlock",
+            "url": "classes/App-Models-PostBlock.html"
+        },                {
+            "fqsen": "\\App\\Models\\PostBlock\u003A\u003A\u0024casts",
+            "name": "casts",
+            "summary": "",
+            "url": "classes/App-Models-PostBlock.html#property_casts"
+        },                {
+            "fqsen": "\\App\\Models\\PostBlock\u003A\u003A\u0024fillable",
+            "name": "fillable",
+            "summary": "",
+            "url": "classes/App-Models-PostBlock.html#property_fillable"
+        },                {
+            "fqsen": "\\App\\Models\\Ternobomate",
+            "name": "Ternobomate",
+            "summary": "App\\Models\\Ternobomate",
+            "url": "classes/App-Models-Ternobomate.html"
+        },                {
+            "fqsen": "\\App\\Models\\Ternobomate\u003A\u003Auser\u0028\u0029",
+            "name": "user",
+            "summary": "",
+            "url": "classes/App-Models-Ternobomate.html#method_user"
+        },                {
+            "fqsen": "\\App\\Models\\Ternobomate\u003A\u003A\u0024fillable",
+            "name": "fillable",
+            "summary": "",
+            "url": "classes/App-Models-Ternobomate.html#property_fillable"
+        },                {
+            "fqsen": "\\App\\Rules\\DataFilterRule",
+            "name": "DataFilterRule",
+            "summary": "",
+            "url": "classes/App-Rules-DataFilterRule.html"
+        },                {
+            "fqsen": "\\App\\Rules\\DataFilterRule\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020rule\u0020instance.",
+            "url": "classes/App-Rules-DataFilterRule.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Rules\\DataFilterRule\u003A\u003Apasses\u0028\u0029",
+            "name": "passes",
+            "summary": "Determine\u0020if\u0020the\u0020validation\u0020rule\u0020passes.",
+            "url": "classes/App-Rules-DataFilterRule.html#method_passes"
+        },                {
+            "fqsen": "\\App\\Rules\\DataFilterRule\u003A\u003Amessage\u0028\u0029",
+            "name": "message",
+            "summary": "Get\u0020the\u0020validation\u0020error\u0020message.",
+            "url": "classes/App-Rules-DataFilterRule.html#method_message"
+        },                {
+            "fqsen": "\\App\\Rules\\ImageCropRule",
+            "name": "ImageCropRule",
+            "summary": "",
+            "url": "classes/App-Rules-ImageCropRule.html"
+        },                {
+            "fqsen": "\\App\\Rules\\ImageCropRule\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020rule\u0020instance.",
+            "url": "classes/App-Rules-ImageCropRule.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Rules\\ImageCropRule\u003A\u003Apasses\u0028\u0029",
+            "name": "passes",
+            "summary": "Determine\u0020if\u0020the\u0020validation\u0020rule\u0020passes.",
+            "url": "classes/App-Rules-ImageCropRule.html#method_passes"
+        },                {
+            "fqsen": "\\App\\Rules\\ImageCropRule\u003A\u003Amessage\u0028\u0029",
+            "name": "message",
+            "summary": "Get\u0020the\u0020validation\u0020error\u0020message.",
+            "url": "classes/App-Rules-ImageCropRule.html#method_message"
+        },                {
+            "fqsen": "\\App\\Services\\Admin\\CommunityTagsManagementService",
+            "name": "CommunityTagsManagementService",
+            "summary": "",
+            "url": "classes/App-Services-Admin-CommunityTagsManagementService.html"
+        },                {
+            "fqsen": "\\App\\Services\\Admin\\CommunityTagsManagementService\u003A\u003AaddCommunityTag\u0028\u0029",
+            "name": "addCommunityTag",
+            "summary": "",
+            "url": "classes/App-Services-Admin-CommunityTagsManagementService.html#method_addCommunityTag"
+        },                {
+            "fqsen": "\\App\\Services\\Admin\\CommunityTagsManagementService\u003A\u003AaddCommunityTagTranslation\u0028\u0029",
+            "name": "addCommunityTagTranslation",
+            "summary": "",
+            "url": "classes/App-Services-Admin-CommunityTagsManagementService.html#method_addCommunityTagTranslation"
+        },                {
+            "fqsen": "\\App\\Services\\Admin\\CommunityTagsManagementService\u003A\u003AgetCommunityTagTranslations\u0028\u0029",
+            "name": "getCommunityTagTranslations",
+            "summary": "",
+            "url": "classes/App-Services-Admin-CommunityTagsManagementService.html#method_getCommunityTagTranslations"
+        },                {
+            "fqsen": "\\App\\Services\\Admin\\CommunityTagsManagementService\u003A\u003AdeleteCommunityTagTranslation\u0028\u0029",
+            "name": "deleteCommunityTagTranslation",
+            "summary": "",
+            "url": "classes/App-Services-Admin-CommunityTagsManagementService.html#method_deleteCommunityTagTranslation"
+        },                {
+            "fqsen": "\\App\\Services\\Admin\\CommunityTagsManagementService\u003A\u003AupdateCommunityTag\u0028\u0029",
+            "name": "updateCommunityTag",
+            "summary": "",
+            "url": "classes/App-Services-Admin-CommunityTagsManagementService.html#method_updateCommunityTag"
+        },                {
+            "fqsen": "\\App\\Services\\Admin\\CommunityTagsManagementService\u003A\u003AcreateCommunityCategory\u0028\u0029",
+            "name": "createCommunityCategory",
+            "summary": "",
+            "url": "classes/App-Services-Admin-CommunityTagsManagementService.html#method_createCommunityCategory"
+        },                {
+            "fqsen": "\\App\\Services\\Admin\\CommunityTagsManagementService\u003A\u003AgetCommunityCategories\u0028\u0029",
+            "name": "getCommunityCategories",
+            "summary": "Get\u0020All\u0020community\u0020categories",
+            "url": "classes/App-Services-Admin-CommunityTagsManagementService.html#method_getCommunityCategories"
+        },                {
+            "fqsen": "\\App\\Services\\Admin\\CommunityTagsManagementService\u003A\u003AgetCommunityTags\u0028\u0029",
+            "name": "getCommunityTags",
+            "summary": "Get\u0020All\u0020community\u0020tags",
+            "url": "classes/App-Services-Admin-CommunityTagsManagementService.html#method_getCommunityTags"
+        },                {
+            "fqsen": "\\App\\Services\\Admin\\MonetizationManagementService",
+            "name": "MonetizationManagementService",
+            "summary": "Monetization\u0020conditions",
+            "url": "classes/App-Services-Admin-MonetizationManagementService.html"
+        },                {
+            "fqsen": "\\App\\Services\\Admin\\MonetizationManagementService\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Services-Admin-MonetizationManagementService.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Services\\Admin\\MonetizationManagementService\u003A\u003AacceptMonetizationRequest\u0028\u0029",
+            "name": "acceptMonetizationRequest",
+            "summary": "",
+            "url": "classes/App-Services-Admin-MonetizationManagementService.html#method_acceptMonetizationRequest"
+        },                {
+            "fqsen": "\\App\\Services\\Admin\\MonetizationManagementService\u003A\u003ArejectMonetizationRequest\u0028\u0029",
+            "name": "rejectMonetizationRequest",
+            "summary": "",
+            "url": "classes/App-Services-Admin-MonetizationManagementService.html#method_rejectMonetizationRequest"
+        },                {
+            "fqsen": "\\App\\Services\\Admin\\MonetizationManagementService\u003A\u003AgetRequests\u0028\u0029",
+            "name": "getRequests",
+            "summary": "",
+            "url": "classes/App-Services-Admin-MonetizationManagementService.html#method_getRequests"
+        },                {
+            "fqsen": "\\App\\Services\\Admin\\MonetizationManagementService\u003A\u003AremoveRequest\u0028\u0029",
+            "name": "removeRequest",
+            "summary": "",
+            "url": "classes/App-Services-Admin-MonetizationManagementService.html#method_removeRequest"
+        },                {
+            "fqsen": "\\App\\Services\\Admin\\MonetizationManagementService\u003A\u003A\u0024notificationService",
+            "name": "notificationService",
+            "summary": "",
+            "url": "classes/App-Services-Admin-MonetizationManagementService.html#property_notificationService"
+        },                {
+            "fqsen": "\\App\\Services\\Announcement\\AnnouncementService",
+            "name": "AnnouncementService",
+            "summary": "",
+            "url": "classes/App-Services-Announcement-AnnouncementService.html"
+        },                {
+            "fqsen": "\\App\\Services\\Announcement\\AnnouncementService\u003A\u003AsendAnnouncement\u0028\u0029",
+            "name": "sendAnnouncement",
+            "summary": "",
+            "url": "classes/App-Services-Announcement-AnnouncementService.html#method_sendAnnouncement"
+        },                {
+            "fqsen": "\\App\\Services\\Community\\CommunityExploreService",
+            "name": "CommunityExploreService",
+            "summary": "",
+            "url": "classes/App-Services-Community-CommunityExploreService.html"
+        },                {
+            "fqsen": "\\App\\Services\\Community\\CommunityExploreService\u003A\u003AgetCommunities\u0028\u0029",
+            "name": "getCommunities",
+            "summary": "",
+            "url": "classes/App-Services-Community-CommunityExploreService.html#method_getCommunities"
+        },                {
+            "fqsen": "\\App\\Services\\Community\\CommunitySortQuery",
+            "name": "CommunitySortQuery",
+            "summary": "",
+            "url": "classes/App-Services-Community-CommunitySortQuery.html"
+        },                {
+            "fqsen": "\\App\\Services\\Community\\CommunitySortQuery\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Services-Community-CommunitySortQuery.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Services\\Community\\CommunitySortQuery\u003A\u003AgetSortQuery\u0028\u0029",
+            "name": "getSortQuery",
+            "summary": "",
+            "url": "classes/App-Services-Community-CommunitySortQuery.html#method_getSortQuery"
+        },                {
+            "fqsen": "\\App\\Services\\Community\\CommunitySortQuery\u003A\u003AgetSortByPostsQuery\u0028\u0029",
+            "name": "getSortByPostsQuery",
+            "summary": "",
+            "url": "classes/App-Services-Community-CommunitySortQuery.html#method_getSortByPostsQuery"
+        },                {
+            "fqsen": "\\App\\Services\\Community\\CommunitySortQuery\u003A\u003AgetSortByActivityQuery\u0028\u0029",
+            "name": "getSortByActivityQuery",
+            "summary": "",
+            "url": "classes/App-Services-Community-CommunitySortQuery.html#method_getSortByActivityQuery"
+        },                {
+            "fqsen": "\\App\\Services\\Community\\CommunitySortQuery\u003A\u003A\u0024sort",
+            "name": "sort",
+            "summary": "",
+            "url": "classes/App-Services-Community-CommunitySortQuery.html#property_sort"
+        },                {
+            "fqsen": "\\App\\Services\\Connection\\ConnectionsService",
+            "name": "ConnectionsService",
+            "summary": "",
+            "url": "classes/App-Services-Connection-ConnectionsService.html"
+        },                {
+            "fqsen": "\\App\\Services\\Connection\\ConnectionsService\u003A\u003AisFollowing\u0028\u0029",
+            "name": "isFollowing",
+            "summary": "Check\u0020if\u0020user\u0020is\u0020following\u0020a\u0020page",
+            "url": "classes/App-Services-Connection-ConnectionsService.html#method_isFollowing"
+        },                {
+            "fqsen": "\\App\\Services\\Connection\\ConnectionsService\u003A\u003AisConnected\u0028\u0029",
+            "name": "isConnected",
+            "summary": "check\u0020if\u0020user\u0020is\u0020connected\u0020to\u0020another\u0020user.",
+            "url": "classes/App-Services-Connection-ConnectionsService.html#method_isConnected"
+        },                {
+            "fqsen": "\\App\\Services\\Connection\\ConnectionsService\u003A\u003AisAcceptedConnection\u0028\u0029",
+            "name": "isAcceptedConnection",
+            "summary": "Check\u0020if\u0020a\u0020connection\u0020is\u0020accepted\u0020by\u0020user",
+            "url": "classes/App-Services-Connection-ConnectionsService.html#method_isAcceptedConnection"
+        },                {
+            "fqsen": "\\App\\Services\\Connection\\SuggestionService",
+            "name": "SuggestionService",
+            "summary": "",
+            "url": "classes/App-Services-Connection-SuggestionService.html"
+        },                {
+            "fqsen": "\\App\\Services\\Connection\\SuggestionService\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Services-Connection-SuggestionService.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Services\\Connection\\SuggestionService\u003A\u003AgetSuggestionsForVisitor\u0028\u0029",
+            "name": "getSuggestionsForVisitor",
+            "summary": "",
+            "url": "classes/App-Services-Connection-SuggestionService.html#method_getSuggestionsForVisitor"
+        },                {
+            "fqsen": "\\App\\Services\\Connection\\SuggestionService\u003A\u003AgetSuggestionsBaseOnPage\u0028\u0029",
+            "name": "getSuggestionsBaseOnPage",
+            "summary": "",
+            "url": "classes/App-Services-Connection-SuggestionService.html#method_getSuggestionsBaseOnPage"
+        },                {
+            "fqsen": "\\App\\Services\\Connection\\SuggestionService\u003A\u003AgetSuggestionsForUser\u0028\u0029",
+            "name": "getSuggestionsForUser",
+            "summary": "",
+            "url": "classes/App-Services-Connection-SuggestionService.html#method_getSuggestionsForUser"
+        },                {
+            "fqsen": "\\App\\Services\\Connection\\SuggestionService\u003A\u003AgetSuggestions\u0028\u0029",
+            "name": "getSuggestions",
+            "summary": "",
+            "url": "classes/App-Services-Connection-SuggestionService.html#method_getSuggestions"
+        },                {
+            "fqsen": "\\App\\Services\\Connection\\SuggestionService\u003A\u003A\u0024connectionsService",
+            "name": "connectionsService",
+            "summary": "",
+            "url": "classes/App-Services-Connection-SuggestionService.html#property_connectionsService"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\CommunityTagService",
+            "name": "CommunityTagService",
+            "summary": "",
+            "url": "classes/App-Services-Content-CommunityTagService.html"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\CommunityTagService\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Services-Content-CommunityTagService.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\CommunityTagService\u003A\u003AgetServiceName\u0028\u0029",
+            "name": "getServiceName",
+            "summary": "Return\u0020Service\u0020name",
+            "url": "classes/App-Services-Content-CommunityTagService.html#method_getServiceName"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\CommunityTagService\u003A\u003AgetRelatedTags\u0028\u0029",
+            "name": "getRelatedTags",
+            "summary": "",
+            "url": "classes/App-Services-Content-CommunityTagService.html#method_getRelatedTags"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\CommunityTagService\u003A\u003AprocessHashtag\u0028\u0029",
+            "name": "processHashtag",
+            "summary": "",
+            "url": "classes/App-Services-Content-CommunityTagService.html#method_processHashtag"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\CommunityTagService\u003A\u003AgetCommunityByHashtag\u0028\u0029",
+            "name": "getCommunityByHashtag",
+            "summary": "",
+            "url": "classes/App-Services-Content-CommunityTagService.html#method_getCommunityByHashtag"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\CommunityTagService\u003A\u003AaddRelatedHashtags\u0028\u0029",
+            "name": "addRelatedHashtags",
+            "summary": "",
+            "url": "classes/App-Services-Content-CommunityTagService.html#method_addRelatedHashtags"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\CommunityTagService\u003A\u003AdeleteRelatedHashtag\u0028\u0029",
+            "name": "deleteRelatedHashtag",
+            "summary": "",
+            "url": "classes/App-Services-Content-CommunityTagService.html#method_deleteRelatedHashtag"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\CommunityTagService\u003A\u003AgetHashtagTopUsers\u0028\u0029",
+            "name": "getHashtagTopUsers",
+            "summary": "",
+            "url": "classes/App-Services-Content-CommunityTagService.html#method_getHashtagTopUsers"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\ContentService",
+            "name": "ContentService",
+            "summary": "",
+            "url": "classes/App-Services-Content-ContentService.html"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\ContentService\u003A\u003AgetFeedPosts\u0028\u0029",
+            "name": "getFeedPosts",
+            "summary": "Get\u0020Feed\u0020Posts",
+            "url": "classes/App-Services-Content-ContentService.html#method_getFeedPosts"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\ContentStore\\ContentStoreService",
+            "name": "ContentStoreService",
+            "summary": "",
+            "url": "classes/App-Services-Content-ContentStore-ContentStoreService.html"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\ContentStore\\ContentStoreService\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Services-Content-ContentStore-ContentStoreService.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\ContentStore\\ContentStoreService\u003A\u003AsetContent\u0028\u0029",
+            "name": "setContent",
+            "summary": "",
+            "url": "classes/App-Services-Content-ContentStore-ContentStoreService.html#method_setContent"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\ContentStore\\ContentStoreService\u003A\u003A\u0024pollService",
+            "name": "pollService",
+            "summary": "",
+            "url": "classes/App-Services-Content-ContentStore-ContentStoreService.html#property_pollService"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\ContentStore\\Elements\\TextBlock",
+            "name": "TextBlock",
+            "summary": "",
+            "url": "classes/App-Services-Content-ContentStore-Elements-TextBlock.html"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\ContentStore\\Elements\\TextBlock\u003A\u003AgetContentMentions\u0028\u0029",
+            "name": "getContentMentions",
+            "summary": "",
+            "url": "classes/App-Services-Content-ContentStore-Elements-TextBlock.html#method_getContentMentions"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\SearchService",
+            "name": "SearchService",
+            "summary": "",
+            "url": "classes/App-Services-Content-SearchService.html"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\SearchService\u003A\u003AgenerateSearchQeury\u0028\u0029",
+            "name": "generateSearchQeury",
+            "summary": "",
+            "url": "classes/App-Services-Content-SearchService.html#method_generateSearchQeury"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\SearchService\u003A\u003AsearchForPages\u0028\u0029",
+            "name": "searchForPages",
+            "summary": "",
+            "url": "classes/App-Services-Content-SearchService.html#method_searchForPages"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\SearchService\u003A\u003AsearchForContent\u0028\u0029",
+            "name": "searchForContent",
+            "summary": "",
+            "url": "classes/App-Services-Content-SearchService.html#method_searchForContent"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\SearchService\u003A\u003AsearchForTags\u0028\u0029",
+            "name": "searchForTags",
+            "summary": "",
+            "url": "classes/App-Services-Content-SearchService.html#method_searchForTags"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\SearchService\u003A\u003AsuggestForSearchAutoComplete\u0028\u0029",
+            "name": "suggestForSearchAutoComplete",
+            "summary": "",
+            "url": "classes/App-Services-Content-SearchService.html#method_suggestForSearchAutoComplete"
+        },                {
+            "fqsen": "\\App\\Services\\DataExtraction\\DataExtractionService",
+            "name": "DataExtractionService",
+            "summary": "",
+            "url": "classes/App-Services-DataExtraction-DataExtractionService.html"
+        },                {
+            "fqsen": "\\App\\Services\\DataExtraction\\DataExtractionService\u003A\u003AgetAllPosts\u0028\u0029",
+            "name": "getAllPosts",
+            "summary": "",
+            "url": "classes/App-Services-DataExtraction-DataExtractionService.html#method_getAllPosts"
+        },                {
+            "fqsen": "\\App\\Services\\DataExtraction\\DataExtractionService\u003A\u003AgetPostsByHashtag\u0028\u0029",
+            "name": "getPostsByHashtag",
+            "summary": "",
+            "url": "classes/App-Services-DataExtraction-DataExtractionService.html#method_getPostsByHashtag"
+        },                {
+            "fqsen": "\\App\\Services\\DataExtraction\\DataExtractionService\u003A\u003AgetAllTags\u0028\u0029",
+            "name": "getAllTags",
+            "summary": "",
+            "url": "classes/App-Services-DataExtraction-DataExtractionService.html#method_getAllTags"
+        },                {
+            "fqsen": "\\App\\Services\\MonetizationService",
+            "name": "MonetizationService",
+            "summary": "Monetization\u0020conditions",
+            "url": "classes/App-Services-MonetizationService.html"
+        },                {
+            "fqsen": "\\App\\Services\\MonetizationService\u003A\u003AsendMonetizationRequest\u0028\u0029",
+            "name": "sendMonetizationRequest",
+            "summary": "",
+            "url": "classes/App-Services-MonetizationService.html#method_sendMonetizationRequest"
+        },                {
+            "fqsen": "\\App\\Services\\MonetizationService\u003A\u003AcanAccessMonetization\u0028\u0029",
+            "name": "canAccessMonetization",
+            "summary": "",
+            "url": "classes/App-Services-MonetizationService.html#method_canAccessMonetization"
+        },                {
+            "fqsen": "\\App\\Services\\MonetizationService\u003A\u003AgetMonetizationStatus\u0028\u0029",
+            "name": "getMonetizationStatus",
+            "summary": "",
+            "url": "classes/App-Services-MonetizationService.html#method_getMonetizationStatus"
+        },                {
+            "fqsen": "\\App\\Services\\MonetizationService\u003A\u003AgetLastMonetizationRequest\u0028\u0029",
+            "name": "getLastMonetizationRequest",
+            "summary": "",
+            "url": "classes/App-Services-MonetizationService.html#method_getLastMonetizationRequest"
+        },                {
+            "fqsen": "\\App\\Services\\MonetizationService\u003A\u003AcheckSharedPosts\u0028\u0029",
+            "name": "checkSharedPosts",
+            "summary": "",
+            "url": "classes/App-Services-MonetizationService.html#method_checkSharedPosts"
+        },                {
+            "fqsen": "\\App\\Services\\MonetizationService\u003A\u003AcheckSignupUsersLikes\u0028\u0029",
+            "name": "checkSignupUsersLikes",
+            "summary": "",
+            "url": "classes/App-Services-MonetizationService.html#method_checkSignupUsersLikes"
+        },                {
+            "fqsen": "\\App\\Services\\MonetizationService\u003A\u003AcheckVisitorUsersLikes\u0028\u0029",
+            "name": "checkVisitorUsersLikes",
+            "summary": "",
+            "url": "classes/App-Services-MonetizationService.html#method_checkVisitorUsersLikes"
+        },                {
+            "fqsen": "\\App\\Services\\MonetizationService\u003A\u003Acheck2FAEnabled\u0028\u0029",
+            "name": "check2FAEnabled",
+            "summary": "",
+            "url": "classes/App-Services-MonetizationService.html#method_check2FAEnabled"
+        },                {
+            "fqsen": "\\App\\Services\\Notification\\NotificationService",
+            "name": "NotificationService",
+            "summary": "",
+            "url": "classes/App-Services-Notification-NotificationService.html"
+        },                {
+            "fqsen": "\\App\\Services\\Notification\\NotificationService\u003A\u003AsendNotification\u0028\u0029",
+            "name": "sendNotification",
+            "summary": "",
+            "url": "classes/App-Services-Notification-NotificationService.html#method_sendNotification"
+        },                {
+            "fqsen": "\\App\\Services\\OtpService",
+            "name": "OtpService",
+            "summary": "",
+            "url": "classes/App-Services-OtpService.html"
+        },                {
+            "fqsen": "\\App\\Services\\OtpService\u003A\u003AresendInternationalOtp\u0028\u0029",
+            "name": "resendInternationalOtp",
+            "summary": "",
+            "url": "classes/App-Services-OtpService.html#method_resendInternationalOtp"
+        },                {
+            "fqsen": "\\App\\Services\\OtpService\u003A\u003AsendInternationalOtp\u0028\u0029",
+            "name": "sendInternationalOtp",
+            "summary": "",
+            "url": "classes/App-Services-OtpService.html#method_sendInternationalOtp"
+        },                {
+            "fqsen": "\\App\\Services\\OtpService\u003A\u003AsendGenerateAndSendOtp\u0028\u0029",
+            "name": "sendGenerateAndSendOtp",
+            "summary": "",
+            "url": "classes/App-Services-OtpService.html#method_sendGenerateAndSendOtp"
+        },                {
+            "fqsen": "\\App\\Services\\OtpService\u003A\u003AsendOtp\u0028\u0029",
+            "name": "sendOtp",
+            "summary": "",
+            "url": "classes/App-Services-OtpService.html#method_sendOtp"
+        },                {
+            "fqsen": "\\App\\Services\\OtpService\u003A\u003Agenerate\u0028\u0029",
+            "name": "generate",
+            "summary": "Generate\u0020and\u0020save\u0020OTP",
+            "url": "classes/App-Services-OtpService.html#method_generate"
+        },                {
+            "fqsen": "\\App\\Services\\OtpService\u003A\u003Avalidate\u0028\u0029",
+            "name": "validate",
+            "summary": "",
+            "url": "classes/App-Services-OtpService.html#method_validate"
+        },                {
+            "fqsen": "\\App\\Services\\OtpService\u003A\u003AverifyInternationalOtp\u0028\u0029",
+            "name": "verifyInternationalOtp",
+            "summary": "",
+            "url": "classes/App-Services-OtpService.html#method_verifyInternationalOtp"
+        },                {
+            "fqsen": "\\App\\Services\\OtpService\u003A\u003AgeneratePin\u0028\u0029",
+            "name": "generatePin",
+            "summary": "",
+            "url": "classes/App-Services-OtpService.html#method_generatePin"
+        },                {
+            "fqsen": "\\App\\Services\\OtpService\u003A\u003A\u0024GLOBALBASE",
+            "name": "GLOBALBASE",
+            "summary": "",
+            "url": "classes/App-Services-OtpService.html#property_GLOBALBASE"
+        },                {
+            "fqsen": "\\App\\Services\\ProfileService",
+            "name": "ProfileService",
+            "summary": "",
+            "url": "classes/App-Services-ProfileService.html"
+        },                {
+            "fqsen": "\\App\\Services\\ProfileService\u003A\u003AcheckAboutMeTab\u0028\u0029",
+            "name": "checkAboutMeTab",
+            "summary": "",
+            "url": "classes/App-Services-ProfileService.html#method_checkAboutMeTab"
+        },                {
+            "fqsen": "\\App\\Services\\RestfulService",
+            "name": "RestfulService",
+            "summary": "",
+            "url": "classes/App-Services-RestfulService.html"
+        },                {
+            "fqsen": "\\App\\Services\\RestfulService\u003A\u003AgenerateResponse\u0028\u0029",
+            "name": "generateResponse",
+            "summary": "",
+            "url": "classes/App-Services-RestfulService.html#method_generateResponse"
+        },                {
+            "fqsen": "\\App\\Services\\User\\UserBadgeService",
+            "name": "UserBadgeService",
+            "summary": "",
+            "url": "classes/App-Services-User-UserBadgeService.html"
+        },                {
+            "fqsen": "\\App\\Services\\User\\UserBadgeService\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Services-User-UserBadgeService.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Services\\User\\UserBadgeService\u003A\u003AgetUserBadge\u0028\u0029",
+            "name": "getUserBadge",
+            "summary": "",
+            "url": "classes/App-Services-User-UserBadgeService.html#method_getUserBadge"
+        },                {
+            "fqsen": "\\App\\Services\\User\\UserBadgeService\u003A\u003AcheckVisitor\u0028\u0029",
+            "name": "checkVisitor",
+            "summary": "",
+            "url": "classes/App-Services-User-UserBadgeService.html#method_checkVisitor"
+        },                {
+            "fqsen": "\\App\\Services\\User\\UserBadgeService\u003A\u003AmonitizationCheck\u0028\u0029",
+            "name": "monitizationCheck",
+            "summary": "",
+            "url": "classes/App-Services-User-UserBadgeService.html#method_monitizationCheck"
+        },                {
+            "fqsen": "\\App\\Services\\User\\UserBadgeService\u003A\u003AcheckNewCommer\u0028\u0029",
+            "name": "checkNewCommer",
+            "summary": "",
+            "url": "classes/App-Services-User-UserBadgeService.html#method_checkNewCommer"
+        },                {
+            "fqsen": "\\App\\Services\\User\\UserBadgeService\u003A\u003AcheckTernoboMate\u0028\u0029",
+            "name": "checkTernoboMate",
+            "summary": "",
+            "url": "classes/App-Services-User-UserBadgeService.html#method_checkTernoboMate"
+        },                {
+            "fqsen": "\\App\\Services\\User\\UserBadgeService\u003A\u003A\u0024monitizationService",
+            "name": "monitizationService",
+            "summary": "",
+            "url": "classes/App-Services-User-UserBadgeService.html#property_monitizationService"
+        },                {
+            "fqsen": "\\App\\Utils\\DataFilter",
+            "name": "DataFilter",
+            "summary": "",
+            "url": "classes/App-Utils-DataFilter.html"
+        },                {
+            "fqsen": "\\App\\Utils\\DataFilter\u003A\u003AfilterByColumnsLike\u0028\u0029",
+            "name": "filterByColumnsLike",
+            "summary": "",
+            "url": "classes/App-Utils-DataFilter.html#method_filterByColumnsLike"
+        },                {
+            "fqsen": "\\App\\Utils\\DataFilter\u003A\u003AfilterByGeoPosition\u0028\u0029",
+            "name": "filterByGeoPosition",
+            "summary": "",
+            "url": "classes/App-Utils-DataFilter.html#method_filterByGeoPosition"
+        },                {
+            "fqsen": "\\App\\Utils\\DataFilter\u003A\u003A\u0024allowedOperators",
+            "name": "allowedOperators",
+            "summary": "",
+            "url": "classes/App-Utils-DataFilter.html#property_allowedOperators"
+        },                {
+            "fqsen": "\\App\\Utils\\StringUtils",
+            "name": "StringUtils",
+            "summary": "",
+            "url": "classes/App-Utils-StringUtils.html"
+        },                {
+            "fqsen": "\\App\\Utils\\StringUtils\u003A\u003ArandomCode\u0028\u0029",
+            "name": "randomCode",
+            "summary": "",
+            "url": "classes/App-Utils-StringUtils.html#method_randomCode"
+        },                {
+            "fqsen": "\\App\\Utils\\StringUtils\u003A\u003AfixPhoneNumber\u0028\u0029",
+            "name": "fixPhoneNumber",
+            "summary": "",
+            "url": "classes/App-Utils-StringUtils.html#method_fixPhoneNumber"
+        },                {
+            "fqsen": "\\App\\Utils\\StringUtils\u003A\u003AisBase64\u0028\u0029",
+            "name": "isBase64",
+            "summary": "",
+            "url": "classes/App-Utils-StringUtils.html#method_isBase64"
+        },                {
+            "fqsen": "\\App\\Utils\\Uploader",
+            "name": "Uploader",
+            "summary": "",
+            "url": "classes/App-Utils-Uploader.html"
+        },                {
+            "fqsen": "\\App\\Utils\\Uploader\u003A\u003AuploadImage\u0028\u0029",
+            "name": "uploadImage",
+            "summary": "",
+            "url": "classes/App-Utils-Uploader.html#method_uploadImage"
+        },                {
+            "fqsen": "\\App\\Utils\\Uploader\u003A\u003AuplaodProfile\u0028\u0029",
+            "name": "uplaodProfile",
+            "summary": "",
+            "url": "classes/App-Utils-Uploader.html#method_uplaodProfile"
+        },                {
+            "fqsen": "\\App\\Utils\\Uploader\u003A\u003AresizeIcon\u0028\u0029",
+            "name": "resizeIcon",
+            "summary": "",
+            "url": "classes/App-Utils-Uploader.html#method_resizeIcon"
+        },                {
+            "fqsen": "\\App\\Utils\\Uploader\u003A\u003AresizeCover\u0028\u0029",
+            "name": "resizeCover",
+            "summary": "",
+            "url": "classes/App-Utils-Uploader.html#method_resizeCover"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
@@ -5311,6 +7096,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/app.html"
         },                {
+            "fqsen": "\\App\\Casts",
+            "name": "Casts",
+            "summary": "",
+            "url": "namespaces/app-casts.html"
+        },                {
             "fqsen": "\\App\\Console\\Commands",
             "name": "Commands",
             "summary": "",
@@ -5331,6 +7121,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/app-exceptions.html"
         },                {
+            "fqsen": "\\App\\Facade",
+            "name": "Facade",
+            "summary": "",
+            "url": "namespaces/app-facade.html"
+        },                {
             "fqsen": "\\App\\FileManager",
             "name": "FileManager",
             "summary": "",
@@ -5340,6 +7135,21 @@ Search.appendIndex(
             "name": "Admin",
             "summary": "",
             "url": "namespaces/app-http-controllers-admin.html"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Announcement",
+            "name": "Announcement",
+            "summary": "",
+            "url": "namespaces/app-http-controllers-admin-announcement.html"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Community",
+            "name": "Community",
+            "summary": "",
+            "url": "namespaces/app-http-controllers-admin-community.html"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\Admin\\Monetization",
+            "name": "Monetization",
+            "summary": "",
+            "url": "namespaces/app-http-controllers-admin-monetization.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\Admin\\Tips",
             "name": "Tips",
@@ -5365,6 +7175,11 @@ Search.appendIndex(
             "name": "Content",
             "summary": "",
             "url": "namespaces/app-http-controllers-content.html"
+        },                {
+            "fqsen": "\\App\\Http\\Controllers\\DataAccess",
+            "name": "DataAccess",
+            "summary": "",
+            "url": "namespaces/app-http-controllers-dataaccess.html"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\Donation",
             "name": "Donation",
@@ -5411,6 +7226,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/app-http-controllers-uploads.html"
         },                {
+            "fqsen": "\\App\\Http\\Controllers\\Validators",
+            "name": "Validators",
+            "summary": "",
+            "url": "namespaces/app-http-controllers-validators.html"
+        },                {
             "fqsen": "\\App\\Http",
             "name": "Http",
             "summary": "",
@@ -5426,15 +7246,45 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/app-http-requests.html"
         },                {
+            "fqsen": "\\App\\Http\\Requests\\Community",
+            "name": "Community",
+            "summary": "",
+            "url": "namespaces/app-http-requests-community.html"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\CommunityManagement",
+            "name": "CommunityManagement",
+            "summary": "",
+            "url": "namespaces/app-http-requests-communitymanagement.html"
+        },                {
+            "fqsen": "\\App\\Http\\Requests\\Content",
+            "name": "Content",
+            "summary": "",
+            "url": "namespaces/app-http-requests-content.html"
+        },                {
             "fqsen": "\\App\\Http\\Resources",
             "name": "Resources",
             "summary": "",
             "url": "namespaces/app-http-resources.html"
         },                {
+            "fqsen": "\\App\\Http\\Resources\\Content",
+            "name": "Content",
+            "summary": "",
+            "url": "namespaces/app-http-resources-content.html"
+        },                {
+            "fqsen": "\\App\\Http\\Resources\\Search",
+            "name": "Search",
+            "summary": "",
+            "url": "namespaces/app-http-resources-search.html"
+        },                {
             "fqsen": "\\App\\Jobs",
             "name": "Jobs",
             "summary": "",
             "url": "namespaces/app-jobs.html"
+        },                {
+            "fqsen": "\\App\\Listeners",
+            "name": "Listeners",
+            "summary": "",
+            "url": "namespaces/app-listeners.html"
         },                {
             "fqsen": "\\App\\Models",
             "name": "Models",
@@ -5461,14 +7311,69 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/app-scopes.html"
         },                {
+            "fqsen": "\\App\\Services\\Admin",
+            "name": "Admin",
+            "summary": "",
+            "url": "namespaces/app-services-admin.html"
+        },                {
+            "fqsen": "\\App\\Services\\Announcement",
+            "name": "Announcement",
+            "summary": "",
+            "url": "namespaces/app-services-announcement.html"
+        },                {
+            "fqsen": "\\App\\Services\\Community",
+            "name": "Community",
+            "summary": "",
+            "url": "namespaces/app-services-community.html"
+        },                {
+            "fqsen": "\\App\\Services\\Connection",
+            "name": "Connection",
+            "summary": "",
+            "url": "namespaces/app-services-connection.html"
+        },                {
+            "fqsen": "\\App\\Services\\Content",
+            "name": "Content",
+            "summary": "",
+            "url": "namespaces/app-services-content.html"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\ContentStore",
+            "name": "ContentStore",
+            "summary": "",
+            "url": "namespaces/app-services-content-contentstore.html"
+        },                {
+            "fqsen": "\\App\\Services\\Content\\ContentStore\\Elements",
+            "name": "Elements",
+            "summary": "",
+            "url": "namespaces/app-services-content-contentstore-elements.html"
+        },                {
+            "fqsen": "\\App\\Services\\DataExtraction",
+            "name": "DataExtraction",
+            "summary": "",
+            "url": "namespaces/app-services-dataextraction.html"
+        },                {
             "fqsen": "\\App\\Services",
             "name": "Services",
             "summary": "",
             "url": "namespaces/app-services.html"
         },                {
+            "fqsen": "\\App\\Services\\Notification",
+            "name": "Notification",
+            "summary": "",
+            "url": "namespaces/app-services-notification.html"
+        },                {
             "fqsen": "\\App\\Services\\Poll",
             "name": "Poll",
             "summary": "",
             "url": "namespaces/app-services-poll.html"
+        },                {
+            "fqsen": "\\App\\Services\\User",
+            "name": "User",
+            "summary": "",
+            "url": "namespaces/app-services-user.html"
+        },                {
+            "fqsen": "\\App\\Utils",
+            "name": "Utils",
+            "summary": "",
+            "url": "namespaces/app-utils.html"
         }            ]
 );
