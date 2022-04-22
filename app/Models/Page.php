@@ -12,6 +12,69 @@ use App\Facade\MonetizationService;
 use App\Http\Resources\Content\ActionResource;
 use Illuminate\Support\Facades\Request;
 
+/**
+ * App\Models\Page
+ *
+ * @property int $id
+ * @property string $name
+ * @property string|null $nickname
+ * @property int $user_id
+ * @property string $slug
+ * @property string $profile
+ * @property string $cover
+ * @property string|null $short_bio
+ * @property string|null $location
+ * @property string|null $website
+ * @property string|null $about
+ * @property int|null $industry
+ * @property string|null $company_size
+ * @property string|null $founded_at
+ * @property string $type
+ * @property bool $visible
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\AboutData $aboutData
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
+ * @property-read int|null $categories_count
+ * @property-read \App\Models\ContactData $contactData
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Following[] $followers
+ * @property-read int|null $followers_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Following[] $followings
+ * @property-read int|null $followings_count
+ * @property-read Page|null $page
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Post[] $posts
+ * @property-read int|null $posts_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Skill[] $skills
+ * @property-read int|null $skills_count
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Page newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Page newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Page onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Page query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereAbout($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereCompanySize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereCover($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereFoundedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereIndustry($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereLocation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereNickname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereProfile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereShortBio($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereVisible($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereWebsite($value)
+ * @method static \Illuminate\Database\Query\Builder|Page withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Page withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Page extends Model
 {
 

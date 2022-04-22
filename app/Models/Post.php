@@ -27,7 +27,71 @@ use Illuminate\Support\Facades\Storage;
 use PHPHtmlParser\Dom;
 
 /**
+ * App\Models\Post
+ *
  * @property mixed|string slug
+ * @property int $id
+ * @property int $user_id
+ * @property int $page_id
+ * @property string|null $title
+ * @property string|null $text
+ * @property array $media
+ * @property int|null $category_id
+ * @property string $show
+ * @property string $type
+ * @property bool $can_tip
+ * @property string|null $slug
+ * @property int|null $post_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Action[] $actions
+ * @property-read int|null $actions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PostBlock[] $blocks
+ * @property-read int|null $blocks_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $bookmarks
+ * @property-read int|null $bookmarks_count
+ * @property-read \App\Models\Category|null $category
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Comment[] $comments
+ * @property-read int|null $comments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Like[] $likes
+ * @property-read int|null $likes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Like[] $mutualLikes
+ * @property-read int|null $mutual_likes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Notification[] $notifications
+ * @property-read int|null $notifications_count
+ * @property-read \App\Models\Page $page
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Report[] $reports
+ * @property-read int|null $reports_count
+ * @property-read Post|null $share
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PostSlide[] $slides
+ * @property-read int|null $slides_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
+ * @property-read int|null $tags_count
+ * @property-read \App\Models\User $user
+ * @method static \Database\Factories\PostFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Post onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereCanTip($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereMedia($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post wherePageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post wherePostId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereShow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|Post withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Post withoutTrashed()
+ * @mixin \Eloquent
  */
 class Post extends Model
 {
@@ -140,7 +204,7 @@ class Post extends Model
 
     public function blocks(): HasManyThrough
     {
-        return $this->hasManyThrough(SlideBlock::class, PostSlide::class, "post_id", "slide_id");
+        return $this->hasManyThrough(PostBlock::class, PostSlide::class, "post_id", "slide_id");
     }
 
     public function share(): BelongsTo
@@ -225,7 +289,7 @@ class Post extends Model
                         $slideTags = array_slice(SocialMediaTools::getHashtags($text), 0, 3);
                         $mentions = array_merge($text_mentions, $mentions);
 
-                        SlideBlock::query()->create([
+                        PostBlock::query()->create([
                             'slide_id' => $slide_id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
@@ -245,7 +309,7 @@ class Post extends Model
                             return SocialMediaTools::replaceMentions($text, $text_mentions);
                         });
 
-                        SlideBlock::query()->create([
+                        PostBlock::query()->create([
                             'slide_id' => $slide_id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
@@ -258,7 +322,7 @@ class Post extends Model
                     case "title":
                     case "heading2":
                     case "heading3":
-                        SlideBlock::query()->create([
+                        PostBlock::query()->create([
                             'slide_id' => $slide_id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
@@ -269,7 +333,7 @@ class Post extends Model
                         break;
                     case "image":
                         $media = $content instanceof UploadedFile | $fileOnly ? SocialMediaTools::uploadPostImage($content, 90, $meta) : $content;
-                        SlideBlock::query()->create([
+                        PostBlock::query()->create([
                             'slide_id' => $slide_id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
@@ -281,7 +345,7 @@ class Post extends Model
                     case "video":
                         $media = $content instanceof UploadedFile | $fileOnly ? $content->store("videos") : $content;
 
-                        SlideBlock::query()->create([
+                        PostBlock::query()->create([
                             'slide_id' => $slide_id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
@@ -292,7 +356,7 @@ class Post extends Model
                         break;
 
                     case "code":
-                        SlideBlock::query()->create([
+                        PostBlock::query()->create([
                             'slide_id' => $slide_id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
@@ -302,7 +366,7 @@ class Post extends Model
                         ]);
                         break;
                     case "embed":
-                        SlideBlock::query()->create([
+                        PostBlock::query()->create([
                             'slide_id' => $slide_id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,
@@ -321,7 +385,7 @@ class Post extends Model
                             );
                         }
 
-                        SlideBlock::query()->create([
+                        PostBlock::query()->create([
                             'slide_id' => $slide_id,
                             'page_id' => $user->personalPage->id,
                             'sort' => $sort,

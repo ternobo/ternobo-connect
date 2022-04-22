@@ -6,6 +6,26 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * App\Models\UserOption
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $key
+ * @property array $value
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|UserOption newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserOption newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserOption query()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserOption whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserOption whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserOption whereKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserOption whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserOption whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserOption whereValue($value)
+ * @mixin \Eloquent
+ */
 class UserOption extends Model
 {
 

@@ -14,6 +14,36 @@ use Illuminate\Support\Str;
 use Jenssegers\Agent\Agent;
 use Stevebauman\Location\Facades\Location;
 
+/**
+ * App\Models\ActiveSession
+ *
+ * @property int $id
+ * @property int|null $user_id
+ * @property string|null $token
+ * @property string|null $ip_address
+ * @property string|null $user_agent
+ * @property string|null $location
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|ActiveSession newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ActiveSession newQuery()
+ * @method static \Illuminate\Database\Query\Builder|ActiveSession onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|ActiveSession query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ActiveSession whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActiveSession whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActiveSession whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActiveSession whereIpAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActiveSession whereLocation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActiveSession whereToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActiveSession whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActiveSession whereUserAgent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActiveSession whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|ActiveSession withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|ActiveSession withoutTrashed()
+ * @mixin \Eloquent
+ */
 class ActiveSession extends Model
 {
     use HasFactory;

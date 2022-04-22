@@ -6,6 +6,31 @@ use App\SMS;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * App\Models\Verification
+ *
+ * @property int $id
+ * @property string|null $phone
+ * @property string|null $email
+ * @property string $code
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Verification newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Verification newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Verification onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Verification query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Verification whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Verification whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Verification whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Verification whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Verification whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Verification wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Verification whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|Verification withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Verification withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Verification extends Model
 {
     use SoftDeletes;

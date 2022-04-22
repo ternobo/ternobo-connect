@@ -15,6 +15,115 @@ use Laravel\Passport\HasApiTokens;
 use Ternobo\TernoboChat\Interfaces\Messageable;
 use Ternobo\TernoboChat\Traits\CanChat;
 
+/**
+ * App\Models\User
+ *
+ * @property int $id
+ * @property string|null $name
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $gender
+ * @property string|null $short_bio
+ * @property string|null $email
+ * @property string|null $phone
+ * @property string $token
+ * @property string $username
+ * @property string $cover
+ * @property string $profile
+ * @property bool $two_factor
+ * @property int $active
+ * @property string|null $phone_verified_at
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property string|null $password
+ * @property int|null $invited_by
+ * @property string|null $two_factor_type
+ * @property string|null $two_factor_secret
+ * @property string|null $two_factor_recovery_codes
+ * @property string $api_token
+ * @property string|null $nationalcard
+ * @property string|null $nationalcode
+ * @property int $is_verified
+ * @property bool $is_admin
+ * @property string|null $pushe_id
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\AboutData|null $aboutData
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Action[] $actions
+ * @property-read int|null $actions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ActiveSession[] $activeSessions
+ * @property-read int|null $active_sessions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Bookmark[] $bookmarks
+ * @property-read int|null $bookmarks_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
+ * @property-read int|null $clients_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Comment[] $commets
+ * @property-read int|null $commets_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Following[] $followers
+ * @property-read int|null $followers_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Following[] $followings
+ * @property-read int|null $followings_count
+ * @property-read User|null $invitedBy
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Like[] $likes
+ * @property-read int|null $likes_count
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserOption[] $options
+ * @property-read int|null $options_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Page[] $pages
+ * @property-read int|null $pages_count
+ * @property-read \App\Models\Page|null $personalPage
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Post[] $posts
+ * @property-read int|null $posts_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Skill[] $skills
+ * @property-read int|null $skills_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tip[] $tips
+ * @property-read int|null $tips_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
+ * @property-read int|null $tokens_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Transaction[] $transactions
+ * @property-read int|null $transactions_count
+ * @method static \Database\Factories\UserFactory factory(...$parameters)
+ * @method static Builder|User newModelQuery()
+ * @method static Builder|User newQuery()
+ * @method static \Illuminate\Database\Query\Builder|User onlyTrashed()
+ * @method static Builder|User query()
+ * @method static Builder|User whereActive($value)
+ * @method static Builder|User whereApiToken($value)
+ * @method static Builder|User whereCover($value)
+ * @method static Builder|User whereCreatedAt($value)
+ * @method static Builder|User whereDeletedAt($value)
+ * @method static Builder|User whereEmail($value)
+ * @method static Builder|User whereEmailVerifiedAt($value)
+ * @method static Builder|User whereFirstName($value)
+ * @method static Builder|User whereGender($value)
+ * @method static Builder|User whereId($value)
+ * @method static Builder|User whereInvitedBy($value)
+ * @method static Builder|User whereIsAdmin($value)
+ * @method static Builder|User whereIsVerified($value)
+ * @method static Builder|User whereLastName($value)
+ * @method static Builder|User whereName($value)
+ * @method static Builder|User whereNationalcard($value)
+ * @method static Builder|User whereNationalcode($value)
+ * @method static Builder|User wherePassword($value)
+ * @method static Builder|User wherePhone($value)
+ * @method static Builder|User wherePhoneVerifiedAt($value)
+ * @method static Builder|User whereProfile($value)
+ * @method static Builder|User wherePusheId($value)
+ * @method static Builder|User whereRememberToken($value)
+ * @method static Builder|User whereShortBio($value)
+ * @method static Builder|User whereToken($value)
+ * @method static Builder|User whereTwoFactor($value)
+ * @method static Builder|User whereTwoFactorRecoveryCodes($value)
+ * @method static Builder|User whereTwoFactorSecret($value)
+ * @method static Builder|User whereTwoFactorType($value)
+ * @method static Builder|User whereUpdatedAt($value)
+ * @method static Builder|User whereUsername($value)
+ * @method static \Illuminate\Database\Query\Builder|User withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|User withoutTrashed()
+ * @mixin \Eloquent
+ */
 class User extends Authenticatable implements Messageable
 {
 
