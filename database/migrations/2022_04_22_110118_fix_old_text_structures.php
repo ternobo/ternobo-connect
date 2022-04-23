@@ -18,7 +18,7 @@ return new class extends Migration
     {
         Post::query()->delete();
         PostSlide::query()->delete();
-        SlideBlock::query()->delete();
+        DB::statement("TRUNCATE ` slide_blocks `");
     }
 
     /**
