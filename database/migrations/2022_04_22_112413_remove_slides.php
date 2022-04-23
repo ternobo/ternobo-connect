@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('slide_blocks', function (Blueprint $table) {
-            $table->dropForeignIdFor(PostSlide::class);
+            $table->dropForeign("slide_blocks_post_slide_id_foreign");
             $table->dropIndex("slide_blocks_slide_id_foreign");
         });
         Schema::drop("post_slides");
