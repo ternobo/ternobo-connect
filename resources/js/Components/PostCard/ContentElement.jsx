@@ -29,11 +29,8 @@ export default {
                 if (this.content.content != null) {
                     tag = contentType == "quote" ? "blockquote" : "div";
                     classes += "post-content--text";
-                    this.text = (TextareaParser.unescapeHtml(this.content.content));
                     content = (
-                        <div>
-                            <social-content text={this.text}></social-content>
-                        </div>
+                        <div domPropsInnerHTML={window.ContentRenderer.render(this.content.content)}></div>
                     );
                 }
                 break;
@@ -70,7 +67,7 @@ export default {
 
                 items.forEach((item) => {
                     li_list.push(<li>
-                        <social-content text={item}></social-content>
+                        <div domPropsInnerHTML={window.ContentRenderer.render(JSON.parse(item))}></div>
                     </li>)
                 });
 

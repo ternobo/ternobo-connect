@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\HelpCenter;
 
+use App\Http\Controllers\Controller;
 use App\Models\HelpCategory;
 use App\Models\HelpPost;
-use App\Models\Http\Controllers\Controller;
 
 class HelpCenterController extends Controller
 {

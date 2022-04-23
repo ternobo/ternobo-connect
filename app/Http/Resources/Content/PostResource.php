@@ -34,7 +34,7 @@ class PostResource extends JsonResource
             "is_liked" => Auth::check() ? Like::query()->wherePostId($this->id)->wherePageId(Ternobo::currentPage()->id)->exists() : false,
             "mutual_likes" => $this->mutualLikes,
             "page" => $this->page,
-            "slides" => $this->slides->load("content"),
+            "blocks" => $this->blocks,
             "tags" => TagResource::collection($this->tags),
             "type" => $this->type
         ];

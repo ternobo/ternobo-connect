@@ -11,7 +11,7 @@ export default {
 	props: {
 		content: {
 			default: () => {
-				return { type: "doc", content: [] };
+				return JSON.stringify({ type: "doc", content: [] });
 			},
 		},
 		disableEnter: {
@@ -40,13 +40,13 @@ export default {
 	watch: {
 		val() {
 			if (this.val != this.value) {
-				this.$emit("update:content", this.val);
+				this.$emit("update:content", JSON.stringify(this.val));
 			}
 		},
 	},
 	created() {
 		this.val = this.content
-			? this.content
+			? JSON.parse(this.content)
 			: {
 					content: [],
 					type: "doc",
@@ -66,7 +66,7 @@ export default {
 								this.$emit("addParagraph");
 								event.preventDefault();
 							} else if (event.keyCode == 8) {
-								if (this.content ? window.ContentRenderer.render(this.content).length <= "<p dir='auto'></p>".length : this.content) {
+								if (this.val ? window.ContentRenderer.render(this.val).length <= "<p dir='auto'></p>".length : this.val) {
 									this.$emit("delete");
 								}
 							}

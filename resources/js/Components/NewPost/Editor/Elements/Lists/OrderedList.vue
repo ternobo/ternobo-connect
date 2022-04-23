@@ -1,7 +1,9 @@
 <template>
-	<ul class="ordered-list-editor">
-		<paragraph v-for="(item, index) in list" :max="max" :dir="computedList[index].direction" ref="list-item" :key="`ordered_list_${item.id}`" tag="li" @delete="deleteItem(index)" @addParagraph="onEnter(index)" :content.sync="list[index].text"></paragraph>
-	</ul>
+	<ol class="ordered-list-editor">
+		<li v-for="(item, index) in list" :dir="computedList[index].direction" :key="`bulleted_list_${item.id}`">
+			<paragraph ref="list-item" @delete="deleteItem(index)" @addParagraph="onEnter(index)" :content.sync="list[index].text"></paragraph>
+		</li>
+	</ol>
 </template>
 
 <script>
@@ -42,7 +44,7 @@ export default {
 			return direction;
 		},
 		onEnter(index) {
-			if (this.list[index].text.length > 0) {
+			if (window.ContentRenderer.render(JSON.parse(this.list[index].text)).length > "<p dir='auto'></p>".length) {
 				this.list.splice(index + 1, 0, { id: uuidv4(), text: "" });
 			} else {
 				this.deleteItem(index);

@@ -24,7 +24,7 @@
 						</div>
 					</div>
 				</div>
-				<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
+				<editor :content.sync="blocks" />
 				<!-- <tag-input v-model="tags" /> -->
 			</div>
 			<modal-footer-buttons @ok="submitPost(shouldDraft)" @cancel="submitPost(!shouldDraft)" class="mt-8" :cancelLoading="loadingDraft" :okLoading="loading" :okText="post ? __.get('application.save') : __.get('content/posts.publish')" :cancelText="shouldDraft ? __.get('content/posts.publish') : __.get('content/posts.draft')" :cancelDisable="!checkContent" cancelClass="btn-text" :okDisabled="!checkContent" okClass="btn-primary"></modal-footer-buttons>
@@ -48,6 +48,8 @@ import CategorySelectModal from "../CategorySelect/CategorySelectModal.vue";
 import { serialize } from "../../Libs/ObjectToFormdata";
 import EditImageModal from "./EditImageModal.vue";
 import ModalFooterButtons from "../Modals/ModalFooterButtons.vue";
+import Editor from "./Editor/Index";
+
 export default {
 	props: {
 		post: {
@@ -62,11 +64,6 @@ export default {
 		},
 		onCategoryClose() {
 			this.$emit("update:show", true);
-		},
-		onSlideDelete(id) {
-			if (!isUUID.v4(id)) {
-				this.deletedSlides.push(id);
-			}
 		},
 		newCategory(value) {
 			if (!this.categories.filter((item) => item.name == value).length > 0) {
@@ -113,32 +110,27 @@ export default {
 				this.loading = true;
 			}
 			let data = {
-				slides: this.content,
+				blocks: this.blocks,
 				draft: draft ? 1 : 0,
 				tags: this.tags,
+				canDonate: this.canDonate,
 			};
-			data.slides = data.slides.map((item) => {
-				for (let sort = 0; sort < item.content.length; sort++) {
-					item.content[sort] = {
-						type: item.content[sort].type,
-						id: item.content[sort].id,
-						sort: sort,
-						content: item.content[sort].content,
-						meta: item.content[sort].meta,
-					};
-				}
-				return { id: item.id, blocks: item.content };
+			data.blocks = data.blocks.map((item, sort) => {
+				return {
+					type: item.type,
+					id: item.id,
+					sort: sort,
+					content: item.content,
+					meta: item.meta,
+				};
 			});
 			if (this.category) {
 				data.category = this.category.name;
 			}
 
 			if (this.post) {
-				data.deletedSlides = JSON.stringify(this.deletedSlides);
 				data._method = "PUT";
 			}
-
-			data.canDonate = this.canDonate;
 
 			let url = this.post != null ? `/posts/${this.post.id}` : "/posts";
 
@@ -157,10 +149,9 @@ export default {
 							this.deletedSlides = [];
 							this.toast(__.get("messages.save-success"), "check", "text-success");
 						} else {
-							this.content = [{ id: uuidv4(), content: [], icon: "more_horiz", active: true }];
+							this.blocks = [];
 							this.category = undefined;
 							this.canDonate = false;
-							this.deletedSlides = [];
 							if (draft) {
 								this.toast(__.get("messages.drafted-success"), "check", "text-success");
 							} else {
@@ -229,28 +220,12 @@ export default {
 				this.categories = this.$store.state.shared.currentPage.categories;
 			}
 		}
-		this.deletedSlides = [];
+
 		if (this.post) {
 			this.canDonate = this.post.can_tip;
 			this.category = this.post.category;
-			let content = _.cloneDeep(this.post.slides);
-			for (let i = 0; i < content.length; i++) {
-				let item = content[i];
-				item.icon = "more_horiz";
-				let items = item.content;
-				for (let i = 0; i < items.length; i++) {
-					let elem = items[i];
-					if (elem.type == "media") {
-						item.icon = "image";
-						break;
-					} else {
-						item.icon = "text_fields";
-					}
-				}
-				item.active = false;
-			}
-			content[0].active = true;
-			this.content = content;
+			let content = _.cloneDeep(this.post.blocks);
+			this.blocks = content;
 		}
 	},
 	computed: {
@@ -266,8 +241,8 @@ export default {
 		},
 		checkContent() {
 			return (
-				this.content.filter((item) => {
-					return item.content.length > 0 && item.content.filter((content) => Boolean(content.content)).length > 0;
+				this.blocks.filter((block) => {
+					return block.content != null;
 				}).length > 0
 			);
 		},
@@ -282,7 +257,7 @@ export default {
 			showCategoryModal: false,
 
 			deletedSlides: [],
-			content: [{ id: uuidv4(), content: [], icon: "more_horiz", active: true }],
+			blocks: [],
 			tags: [],
 
 			canDonate: false,
@@ -299,6 +274,7 @@ export default {
 		CategorySelectModal,
 		EditImageModal,
 		ModalFooterButtons,
+		Editor,
 	},
 	mixins: [ModalMixin],
 	name: "NewPostModal",

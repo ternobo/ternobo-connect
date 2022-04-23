@@ -8,7 +8,7 @@
 						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 					</div>
 					<div class="editor-block--container">
-						<component :is="components[element.type]" ref="blocks" :isDefault="element.default" @delete="deleteElem(index, true)" @addParagraph="addParagraph(index + 1)" :type.sync="blocks[index].type" @focus="onFocus" :meta.sync="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" :max="leftCharacter" />
+						<component :is="components[element.type]" ref="blocks" :isDefault="element.default" @delete="deleteElem(index, true)" @addParagraph="addParagraph(index + 1)" :type.sync="blocks[index].type" @focus="onFocus" :meta.sync="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" />
 					</div>
 				</div>
 			</draggable>
@@ -16,15 +16,6 @@
 				<actions-button @select="addElement" :active-options="availableOptions" />
 				<div class="placeholder-element clickable" v-if="blocks.length < 1" @click="addElement('text')">
 					<span class="text-superlight font-14">{{ __.get("content/posts.post-ph", { fname: user.first_name }) }}</span>
-				</div>
-			</div>
-		</div>
-		<div class="block-content-editor--footer">
-			<emoji-picker @pick="appendEmoji" />
-			<div class="my-3 character-counter">
-				<span class="counter tex-dark">{{ leftCharacter }}</span>
-				<div class="progress me-1 mb-0" style="width: 100px; height: 5px">
-					<div class="progress-bar" role="progressbar" :style="{ width: textProgress }" aria-valuemin="0" aria-valuemax="100"></div>
 				</div>
 			</div>
 		</div>
@@ -63,7 +54,7 @@ export default {
 	},
 	methods: {
 		addParagraph(index) {
-			this.blocks.splice(index, 0, { id: uuidv4(), type: "text", content: { type: "doc", content: [] }, meta: {} });
+			this.blocks.splice(index, 0, { id: uuidv4(), type: "text", content: JSON.stringify({ type: "doc", content: [] }), meta: {} });
 			this.$emit("itemAdd");
 		},
 		getData() {
@@ -135,30 +126,9 @@ export default {
 			let characterCount = this.charachersCount;
 			return (characterCount / 2200) * 100 + "%";
 		},
-		charachersCount() {
-			let characterCount = 0;
-			this.textItems.forEach((item) => {
-				characterCount += 0;
-			});
-			this.listItems.forEach((item) => {
-				const content = typeof item.content == "string" ? JSON.parse(item.content) : item.content;
-				content?.forEach((listItem) => {
-					characterCount += 0;
-				});
-			});
-
-			return characterCount;
-		},
-		leftCharacter() {
-			let characterCount = this.charachersCount;
-			return 2200 - characterCount;
-		},
 		availableOptions() {
 			let addedOptions = this.blocks.map((item) => item.type);
 			return ["text", "title", "heading2", "heading3", "video", "image", "code", "bulletedList", "orderedList", "quote", "poll"].filter((item) => {
-				if (item == "text" || item == "quote" || item == "bulletedList" || item == "orderedList" || item == "heading2" || item == "heading3") {
-					return this.leftCharacter > 0;
-				}
 				return !addedOptions.includes(item);
 			});
 		},

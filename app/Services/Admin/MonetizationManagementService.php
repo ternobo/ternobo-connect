@@ -7,6 +7,7 @@ use App\Models\MonetizationRequest;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\User;
+use App\Services\MonetizationService;
 use App\Services\Notification\NotificationService;
 
 /**

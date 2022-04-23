@@ -4,11 +4,13 @@ namespace App\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
-class SlideBlockContentCast implements CastsAttributes
+class PostBlockContentCast implements CastsAttributes
 {
     private $jsonTypes = [
         "orderedList",
-        "bulletedList"
+        "bulletedList",
+        "text",
+        "quote"
     ];
     /**
      * Cast the given value.

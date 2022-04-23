@@ -20,10 +20,11 @@ use App\Models\Like;
 use App\Models\Notification;
 use App\Models\Page;
 use App\Models\Post;
-use App\Models\SlideBlock;
+use App\Models\PostBlock;
 use App\Models\PostSlide;
 use App\Models\Report;
 use App\Models\Tag;
+use App\Services\Content\ContentStore\ContentStoreService;
 use App\Services\Poll\PollService;
 use App\SocialMediaTools;
 use Artesaos\SEOTools\Facades\SEOMeta;
@@ -41,17 +42,15 @@ use Ternobo\TernoboWire\TernoboWire;
 class PostController extends Controller
 {
 
-    private Dom $dom;
-    private PollService $pollService;
+    private ContentStoreService $service;
 
-    public function __construct(Dom $dom, PollService $pollService)
+    public function __construct(ContentStoreService $service)
     {
         $this->middleware([FollowMiddlware::class, Authenticate::class])->except([
             "show"
         ]);
         $this->middleware([FullAccessUserMiddleware::class])->only(["store", "update", "destroy"]);
-        $this->dom = $dom;
-        $this->pollService = $pollService;
+        $this->service = $service;
     }
 
     public function likePost($post_id)
@@ -224,7 +223,7 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $slides = $request->slides;
+        $blocks = $request->blocks;
         $user = Auth::user();
         $user->load("personalPage");
         $category = null;
@@ -252,11 +251,12 @@ class PostController extends Controller
                 'can_tip' => $request->canDonate,
             ]);
 
-            $mentions = $post->setContent($slides, $user, false, $this->pollService, $this->dom);
+            $mentions = $this->service->setContent($post, $blocks, true);
+
             if (!$draft) {
                 SocialMediaTools::callMentions($mentions, $post->id);
             }
-            $post->tags()->sync(Tag::addTag($tags));
+            // $post->tags()->sync(Tag::addTag($tags));
             $post->save();
 
             $user->personalPage->addAction("post", $post->id);

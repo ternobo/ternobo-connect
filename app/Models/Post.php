@@ -130,12 +130,12 @@ class Post extends Model
      */
     public static function withRelations(): \Illuminate\Database\Eloquent\Builder
     {
-        return self::with(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
+        return self::with(["page", 'likes', 'mutualLikes', 'category']);
     }
 
     public function loadRelations()
     {
-        return $this->load(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
+        return $this->load(["page", 'likes', 'mutualLikes', 'category']);
     }
 
 
@@ -178,11 +178,6 @@ class Post extends Model
         return $this->morphMany(Notification::class, "notifiable");
     }
 
-    public function slides()
-    {
-        return $this->hasMany(PostSlide::class, "post_id");
-    }
-
     public function reports()
     {
         return $this->hasMany(Report::class, "reportable_id")->where("reportable_type", Post::class);
@@ -202,9 +197,9 @@ class Post extends Model
         }
     }
 
-    public function blocks(): HasManyThrough
+    public function blocks(): HasMany
     {
-        return $this->hasManyThrough(PostBlock::class, PostSlide::class, "post_id", "slide_id");
+        return $this->hasMany(PostBlock::class);
     }
 
     public function share(): BelongsTo
@@ -253,151 +248,6 @@ class Post extends Model
         return $this->hasMany(Like::class, "post_id")
             ->with("page")
             ->latest();
-    }
-
-    public function setContent($slides, $user, $fileOnly = false, PollService $pollService, Dom $dom): array
-    {
-        $mentions = [];
-        $tags = [];
-        foreach ($slides as $slide) {
-
-            if (count($slide) == 0) {
-                continue;
-            }
-
-            $slide_id = PostSlide::query()->create([
-                'page_id' => $user->personalPage->id,
-                'post_id' => $this->id,
-            ])->id;
-            foreach ($slide['blocks'] as $rawContent) {
-                $sort = (int)$rawContent['sort'];
-                $content = $rawContent['content'];
-                $type = $rawContent['type'];
-                $meta = $rawContent['meta'] ?? [];
-
-                if (!isset($content)) {
-                    continue;
-                }
-
-
-                switch ($type) {
-                    case "quote":
-                    case "text":
-                        // Process
-                        $text = SocialMediaTools::safeHTML($content);
-                        $text_mentions = SocialMediaTools::getMentions($text);
-                        $slideTags = array_slice(SocialMediaTools::getHashtags($text), 0, 3);
-                        $mentions = array_merge($text_mentions, $mentions);
-
-                        PostBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => SocialMediaTools::replaceMentions($text, $text_mentions),
-                            'type' => $type,
-                            "meta" => $meta,
-                        ]);
-
-
-                        break;
-
-                    case "orderedList":
-                    case "bulletedList":
-                        $content = collect($content)->map(function ($item) use ($mentions, $tags) {
-                            $text = SocialMediaTools::safeHTML($item);
-                            $text_mentions = SocialMediaTools::getMentions($text);
-                            return SocialMediaTools::replaceMentions($text, $text_mentions);
-                        });
-
-                        PostBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => json_encode($content),
-                            'type' => $type,
-                            "meta" => $meta,
-                        ]);
-                        break;
-
-                    case "title":
-                    case "heading2":
-                    case "heading3":
-                        PostBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => $content,
-                            'type' => $type,
-                            "meta" => $meta,
-                        ]);
-                        break;
-                    case "image":
-                        $media = $content instanceof UploadedFile | $fileOnly ? SocialMediaTools::uploadPostImage($content, 90, $meta) : $content;
-                        PostBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => $media['content'],
-                            'type' => 'image',
-                            'meta' => $media['meta']
-                        ]);
-                        break;
-                    case "video":
-                        $media = $content instanceof UploadedFile | $fileOnly ? $content->store("videos") : $content;
-
-                        PostBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => $media,
-                            'type' => 'video',
-                            "meta" => $meta,
-                        ]);
-                        break;
-
-                    case "code":
-                        PostBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => json_encode(['language' => $content['language'], "code" => $content['code']]),
-                            'type' => 'code',
-                            "meta" => $meta,
-                        ]);
-                        break;
-                    case "embed":
-                        PostBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => $content,
-                            'type' => 'embed',
-                            "meta" => $meta,
-                        ]);
-                        break;
-                    case "poll":
-                        $poll = null;
-                        if (isset($meta['poll_id'])) {
-                            $poll = $pollService->findById($meta['poll_id']);
-                        } else {
-                            $poll = $pollService->createPoll(
-                                PollModel::fromArray($content)
-                            );
-                        }
-
-                        PostBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => json_encode($poll),
-                            'type' => 'poll',
-                            "meta" => $meta,
-                        ]);
-                        break;
-                }
-            }
-        }
-        return  $mentions;
     }
 
     public function tags()

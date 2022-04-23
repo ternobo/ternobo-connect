@@ -29,3 +29,4 @@ socket-server.json
 deploy-ui.sh
 .env.production
 laravel-echo-server-production.json
+_ide_helper.php
