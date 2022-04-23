@@ -14,14 +14,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('slide_blocks', function (Blueprint $table) {
-            try {
+        try {
+            Schema::table('slide_blocks', function (Blueprint $table) {
                 $table->dropForeign("slide_blocks_post_slide_id_foreign");
                 $table->dropIndex("slide_blocks_slide_id_foreign");
-            } catch (\Throwable $th) {
-                //throw $th;
-            }
-        });
+            });
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
         Schema::drop("post_slides");
     }
 
