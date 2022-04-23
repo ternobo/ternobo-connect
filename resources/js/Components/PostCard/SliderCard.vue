@@ -1,85 +1,14 @@
 <template>
-	<div class="post-body" tabindex="1" @mouseenter="focus" @keyup.left="goPrevSlide" @keyup.right="goNextSlide">
-		<Content @loaded="updateHeight" v-for="content in post.blocks" :content="content" :tags="post.tags" :key="`content_item_${content.id}`"></Content>
+	<div class="post-body" tabindex="1">
+		<Content v-for="content in post.blocks" :content="content" :key="`content_item_${content.id}`"></Content>
 		<!-- <tags-list :tags="post.tags"></tags-list> -->
 	</div>
 </template>
 
 <script>
 import Content from "./ContentElement";
-import Slide from "./SliderCard/Slide.vue";
 import TagsList from "./TagsList.vue";
 export default {
-	methods: {
-		focus() {
-			this.$el.focus();
-		},
-		goPrevSlide() {
-			if (this.active > 0) {
-				this.active--;
-			}
-		},
-		goNextSlide() {
-			if (this.active < this.post.slides.length - 1) {
-				this.active++;
-			}
-		},
-		updateHeight() {
-			this.$nextTick(() => {
-				if (this.$el.getBoundingClientRect().height > 930) {
-					this.viewShowMore = true;
-				} else {
-					this.viewShowMore = false;
-				}
-			});
-		},
-	},
-	data() {
-		return {
-			active: 0,
-			showFullText: false,
-
-			viewShowMore: false,
-		};
-	},
-	watch: {
-		slide() {
-			if (this.slide != null && this.slide < this.post.slides.length) {
-				this.active = this.slide;
-			}
-		},
-		active() {
-			this.$nextTick(() => {
-				const y = this.$parent.$el.getBoundingClientRect().top + window.scrollY;
-				window.scroll({
-					top: y - 92,
-					behavior: "smooth",
-				});
-
-				this.$nextTick(() => {
-					setTimeout(() => {
-						if (this.$el.getBoundingClientRect().height > 930) {
-							this.viewShowMore = true;
-						} else {
-							this.viewShowMore = false;
-						}
-					}, 200);
-				});
-			});
-			this.$emit("update:slide", this.active);
-		},
-		showFullText() {
-			if (!this.showFullText) {
-				this.$nextTick(() => {
-					const y = this.$parent.$el.getBoundingClientRect().top + window.scrollY;
-					window.scroll({
-						top: y - 92,
-						behavior: "smooth",
-					});
-				});
-			}
-		},
-	},
 	mounted() {
 		let options = {
 			root: null,
@@ -103,7 +32,7 @@ export default {
 			}, 200);
 		});
 	},
-	components: { Content, Slide, TagsList },
+	components: { Content, TagsList },
 	name: "SliderCard",
 	props: {
 		slide: {

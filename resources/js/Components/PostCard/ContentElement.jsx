@@ -1,6 +1,7 @@
-import TextareaParser from "../NewPost/Editor/TextareaParser";
 import VideoPlayer from "./SliderCard/Elements/PostVideoPlayer.vue";
 import CodeBlock from "./SliderCard/Elements/Code.vue";
+import ContentViewer from "./ContentViewer.vue";
+
 export default {
     render: function (h) {
         let contentType = this.content.type;
@@ -30,7 +31,7 @@ export default {
                     tag = contentType == "quote" ? "blockquote" : "div";
                     classes += "post-content--text";
                     content = (
-                        <div domPropsInnerHTML={window.ContentRenderer.render(this.content.content)}></div>
+                        <content-viewer content={this.content.content}></content-viewer>
                     );
                 }
                 break;
@@ -67,7 +68,7 @@ export default {
 
                 items.forEach((item) => {
                     li_list.push(<li>
-                        <div domPropsInnerHTML={window.ContentRenderer.render(JSON.parse(item))}></div>
+                        <content-viewer content={this.content.content}></content-viewer>
                     </li>)
                 });
 
@@ -86,6 +87,7 @@ export default {
     components: {
         VideoPlayer,
         CodeBlock,
+        ContentViewer,
         "image-viewer": () => import("./SliderCard/Elements/ImageViewer.vue"),
         "poll-viewer": () => import("./SliderCard/Elements/PollViewer.vue")
     },

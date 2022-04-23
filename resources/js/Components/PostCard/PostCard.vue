@@ -98,9 +98,6 @@ export default {
 		slide() {
 			this.slideShowing = this.slide;
 		},
-		slideShowing() {
-			this.$emit("update:slide", this.slideShowing);
-		},
 	},
 	methods: {
 		copySlide() {

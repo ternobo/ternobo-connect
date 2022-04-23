@@ -45,11 +45,15 @@ export default {
 		blocks: {
 			deep: true,
 			handler(newValue) {
-				this.$emit("update:content", newValue);
+				if (newValue != this.content) {
+					this.$emit("update:content", newValue);
+				}
 			},
 		},
 		content() {
-			this.blocks = this.content;
+			if (this.blocks != this.content) {
+				this.blocks = this.content;
+			}
 		},
 	},
 	methods: {

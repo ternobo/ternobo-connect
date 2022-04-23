@@ -35,18 +35,12 @@
 <script>
 import ModalMixin from "../../Mixins/Modal";
 import TagInput from "../inputs/TagInput";
-import FileInput from "../../Components/inputs/FileInput";
-import Slider from "./Slides/Slider.vue";
-
-import uuidv4 from "uuid";
-import isUUID from "is-uuid";
 import Checkbox from "../inputs/Checkbox.vue";
 import { mapState } from "vuex";
 import LoadingSpinner from "../LoadingSpinner.vue";
 import CategorySelect from "../CategorySelect/CategorySelect.vue";
 import CategorySelectModal from "../CategorySelect/CategorySelectModal.vue";
 import { serialize } from "../../Libs/ObjectToFormdata";
-import EditImageModal from "./EditImageModal.vue";
 import ModalFooterButtons from "../Modals/ModalFooterButtons.vue";
 import Editor from "./Editor/Index";
 
@@ -82,14 +76,7 @@ export default {
 				this.toast(__.get("messages.duplicated-category"));
 			}
 		},
-		toBase64(file) {
-			return new Promise((resolve, reject) => {
-				const reader = new FileReader();
-				reader.readAsDataURL(file);
-				reader.onload = () => resolve(reader.result);
-				reader.onerror = (error) => reject(error);
-			});
-		},
+		// Prevent tab close
 		shown() {
 			window.onbeforeunload = function (e) {
 				var message = "در صورت خروج اطلاعات از بین‌می‌رود!",
@@ -103,40 +90,35 @@ export default {
 				return message;
 			};
 		},
-		async submitPost(draft = false) {
+
+		submitPost(draft = false) {
+			// Check if post is draft
 			if (draft) {
 				this.loadingDraft = true;
 			} else {
 				this.loading = true;
 			}
+
 			let data = {
-				blocks: this.blocks,
+				blocks: this.blocks.map((item, sort) => {
+					return {
+						type: item.type,
+						id: item.id,
+						sort: sort,
+						content: item.content,
+						meta: item.meta,
+					};
+				}),
 				draft: draft ? 1 : 0,
 				tags: this.tags,
 				canDonate: this.canDonate,
+				category: this.category ? this.category.name : null,
+				_method: this.post ? "PUT" : "POST",
 			};
-			data.blocks = data.blocks.map((item, sort) => {
-				return {
-					type: item.type,
-					id: item.id,
-					sort: sort,
-					content: item.content,
-					meta: item.meta,
-				};
-			});
-			if (this.category) {
-				data.category = this.category.name;
-			}
-
-			if (this.post) {
-				data._method = "PUT";
-			}
-
-			let url = this.post != null ? `/posts/${this.post.id}` : "/posts";
 
 			let requestConfig = {
 				method: "post",
-				url: url,
+				url: this.post != null ? `/posts/${this.post.id}` : "/posts",
 				data: serialize(data),
 			};
 
@@ -150,7 +132,6 @@ export default {
 						} else {
 							this.blocks = [];
 							this.category = undefined;
-							this.canDonate = false;
 							if (draft) {
 								this.toast(__.get("messages.drafted-success"), "check", "text-success");
 							} else {
@@ -175,44 +156,44 @@ export default {
 			this.$emit("update:show", false);
 		},
 	},
-	watch: {
-		canDonate(newValue) {
-			if (newValue && this.show) {
-				this.loadingCanDonate = true;
-				axios
-					.post("/can-donate")
-					.then((response) => {
-						if (!response.data.result) {
-							this.canDonate = false;
-							this.$bvModal
-								.msgBoxConfirm(this.__.get("messages.active-tip-error"), {
-									title: this.__.get("tips.active-gateway"),
-									cancelVariant: "transparent text-muted",
-									cancelTitle: this.__.get("application.skip"),
-									okTitle: this.__.get("tips.activate"),
-									headerClass: "category-select-modal",
-									centered: true,
-									headerCloseContent: "arrow_back",
-									hideBackdrop: false,
-									hideHeaderClose: false,
-								})
-								.then((value) => {
-									this.$emit("update:show", true);
-									if (value) {
-										window.open("/monetization?tab=settings");
-									}
-								});
-						}
-					})
-					.catch((err) => {
-						console.log(err);
-						this.toast(__.get("messages.save-error"));
-						this.canDonate = false;
-					})
-					.then(() => (this.loadingCanDonate = false));
-			}
-		},
-	},
+	// watch: {
+	// canDonate(newValue) {
+	// 	if (newValue && this.show) {
+	// 		this.loadingCanDonate = true;
+	// 		axios
+	// 			.post("/can-donate")
+	// 			.then((response) => {
+	// 				if (!response.data.result) {
+	// 					this.canDonate = false;
+	// 					this.$bvModal
+	// 						.msgBoxConfirm(this.__.get("messages.active-tip-error"), {
+	// 							title: this.__.get("tips.active-gateway"),
+	// 							cancelVariant: "transparent text-muted",
+	// 							cancelTitle: this.__.get("application.skip"),
+	// 							okTitle: this.__.get("tips.activate"),
+	// 							headerClass: "category-select-modal",
+	// 							centered: true,
+	// 							headerCloseContent: "arrow_back",
+	// 							hideBackdrop: false,
+	// 							hideHeaderClose: false,
+	// 						})
+	// 						.then((value) => {
+	// 							this.$emit("update:show", true);
+	// 							if (value) {
+	// 								window.open("/monetization?tab=settings");
+	// 							}
+	// 						});
+	// 				}
+	// 			})
+	// 			.catch((err) => {
+	// 				console.log(err);
+	// 				this.toast(__.get("messages.save-error"));
+	// 				this.canDonate = false;
+	// 			})
+	// 			.then(() => (this.loadingCanDonate = false));
+	// 	}
+	// },
+	// },
 	mounted() {
 		if (this.$store.state.user) {
 			if (this.$store.state.shared.currentPage.categories != null) {
@@ -265,13 +246,10 @@ export default {
 	},
 	components: {
 		TagInput,
-		FileInput,
-		Slider,
 		Checkbox,
 		LoadingSpinner,
 		CategorySelect,
 		CategorySelectModal,
-		EditImageModal,
 		ModalFooterButtons,
 		Editor,
 	},
