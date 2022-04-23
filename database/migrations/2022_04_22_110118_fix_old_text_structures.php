@@ -17,7 +17,7 @@ return new class extends Migration
     public function up()
     {
         Post::query()->delete();
-        PostSlide::query()->delete();
+        DB::statement("TRUNCATE `post_slides`");
         DB::statement("TRUNCATE `slide_blocks`");
     }
 
