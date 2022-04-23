@@ -144,9 +144,8 @@ export default {
 				.backgroundUpload(requestConfig)
 				.then((response) => {
 					if (response.data.result) {
-						if (this.post) {
+						if (this.post && this.post?.blocks != response.data.post.blocks) {
 							this.$emit("update:post", response.data.post);
-							this.deletedSlides = [];
 							this.toast(__.get("messages.save-success"), "check", "text-success");
 						} else {
 							this.blocks = [];
