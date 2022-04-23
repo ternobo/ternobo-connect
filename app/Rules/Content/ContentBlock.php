@@ -28,7 +28,7 @@ class ContentBlock implements RuleInterface
             "orderedList" => [new OrderedListRule()],
             "quote" => ["max:2200"],
             "text" => ["json", new TextBlockRule()],
-            "title" => ["max:150"],
+            "heading1" => ["max:150"],
             "heading2" => ["max:150"],
             "heading3" => ["max:150"],
             "poll" => [],

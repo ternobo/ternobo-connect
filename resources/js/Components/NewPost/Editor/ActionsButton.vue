@@ -4,7 +4,7 @@
 		<transition name="fade">
 			<div class="editors-actions-list" :style="editorsActionListStyle" v-if="showList">
 				<div class="text-type-list">
-					<div class="editor-list-item" :class="{ disabled: !activeOptions.includes('title') }" @click="emitAcion('title')">
+					<div class="editor-list-item" :class="{ disabled: !activeOptions.includes('heading1') }" @click="emitAcion('heading1', { type: 1 })">
 						<i class="material-icons">title</i>
 						<strong>{{ __.get("editor.heading1") }}</strong>
 					</div>

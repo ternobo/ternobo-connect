@@ -8,7 +8,7 @@
 						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 					</div>
 					<div class="editor-block--container">
-						<component :is="components[element.type]" ref="blocks" :isDefault="element.default" @delete="deleteElem(index, true)" @addParagraph="addParagraph(index + 1)" :type.sync="blocks[index].type" @focus="onFocus" :meta.sync="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" />
+						<component :is="components[element.type]" ref="blocks" :isDefault="element.default" @delete="deleteElem(index, true)" @addParagraph="addParagraph(index + 1)" :type.sync="blocks[index].type" :meta.sync="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" />
 					</div>
 				</div>
 			</draggable>
@@ -64,12 +64,6 @@ export default {
 		getData() {
 			return this.blocks;
 		},
-		onFocus(node) {
-			this.lastFocused = node;
-		},
-		appendEmoji(emoji) {
-			// TODO
-		},
 		deleteElem(index, focus = false) {
 			this.blocks.splice(index, 1);
 			if (focus) {
@@ -90,50 +84,23 @@ export default {
 							code: "public class Main{\n \tpublic static void main(String args[]){\n\t} \n}",
 							language: "java",
 						},
-						meta: {},
+						meta: meta,
 					});
 					this.$emit("itemAdd");
 				} else {
-					this.blocks.push({ id: uuidv4(), type: type, content: null, meta: {} });
+					this.blocks.push({ id: uuidv4(), type: type, content: null, meta: meta });
 				}
 			}
 		},
 	},
 	computed: {
 		...mapState(["user"]),
-		hasTitle() {
-			return this.blocks.filter((item) => item.type == "title").length > 0;
-		},
-		hasText() {
-			return this.blocks.filter((item) => item.type == "text").length > 0;
-		},
-		hasList() {
-			return this.blocks.filter((item) => ["bulletedList", "orderedList"].includes(item.type)).length > 0;
-		},
-		// ************* //
-		textItems() {
-			if (this.hasText) {
-				return this.blocks.filter((item) => item.type == "text");
-			} else {
-				return [{ content: "" }];
-			}
-		},
-		listItems() {
-			if (this.hasList) {
-				return this.blocks.filter((item) => ["bulletedList", "orderedList"].includes(item.type));
-			} else {
-				return [];
-			}
-		},
-		// ************* //
-		textProgress() {
-			let characterCount = this.charachersCount;
-			return (characterCount / 2200) * 100 + "%";
-		},
 		availableOptions() {
-			let addedOptions = this.blocks.map((item) => item.type);
-			return ["text", "title", "heading2", "heading3", "video", "image", "code", "bulletedList", "orderedList", "quote", "poll"].filter((item) => {
-				return !addedOptions.includes(item);
+			return ["text", "heading1", "heading2", "heading3", "video", "image", "code", "bulletedList", "orderedList", "quote", "poll"].filter((option) => {
+				if (option == "heading1") {
+					return this.blocks.filter((block) => block.type == "heading1").length == 0;
+				}
+				return true;
 			});
 		},
 		dragOptions() {
@@ -153,7 +120,7 @@ export default {
 			lastFocused: null,
 			components: {
 				text: Paragraph,
-				title: TitleInput,
+				heading1: TitleInput,
 				video: Video,
 				image: Image,
 				code: Code,
