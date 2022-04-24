@@ -251,7 +251,7 @@ class PostController extends Controller
                 'can_tip' => $request->canDonate,
             ]);
 
-            $mentions = $this->service->setContent($post, $blocks, true);
+            $mentions = $this->service->setContent($post, $blocks, false);
 
             if (!$draft) {
                 SocialMediaTools::callMentions($mentions, $post->id);
@@ -282,7 +282,9 @@ class PostController extends Controller
     public function update(PostRequest $request, $post)
     {
         $post = Post::withDrafts()->findOrFail($post);
-        $slides = $request->slides;
+
+        $blocks = $request->blocks;
+
         $user = Auth::user();
         $user->load("personalPage");
         $draft = $request->draft == '1';
@@ -290,7 +292,7 @@ class PostController extends Controller
         $deletedSlides = [];
 
         DB::beginTransaction();
-        $tags = collect($request->input("tags", []))->reject(fn ($item) => $item == null);
+
         try {
             $category = $request->filled("category") ? Category::query()->firstOrCreate([
                 'page_id' => $post->page_id,
@@ -303,10 +305,7 @@ class PostController extends Controller
                 'can_tip' => $request->canDonate,
             ]);
             $post->deleteBlocks();
-            $post->slides()->delete();
-            $post->setContent($slides, $user, false, $this->pollService, $this->dom);
-            $post->tags()->sync(Tag::addTag($tags));
-
+            $this->service->setContent($post, $blocks, false);
             $post->save();
             DB::commit();
             event(new PostShareEvent($post));
