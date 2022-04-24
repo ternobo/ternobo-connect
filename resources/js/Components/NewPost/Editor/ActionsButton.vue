@@ -49,10 +49,10 @@
 						<i class="material-icons-outlined">code</i>
 						<strong>{{ __.get("editor.code") }}</strong>
 					</div>
-					<div class="editor-list-item" :class="{ disabled: !activeOptions.includes('poll') }" @click="emitAcion('poll')">
+					<!-- <div class="editor-list-item" :class="{ disabled: !activeOptions.includes('poll') }" @click="emitAcion('poll')">
 						<i class="material-icons-outlined">poll</i>
 						<strong>{{ __.get("editor.poll") }}</strong>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</transition>
