@@ -77,7 +77,7 @@ class ContentStoreService extends RestfulService
                         'sort' => $sort,
                         'content' =>  $content instanceof UploadedFile ? $media['content'] : $content,
                         'type' => 'image',
-                        'meta' => $media['meta']
+                        'meta' => $content instanceof UploadedFile ? $media['meta'] : null,
                     ]);
                     break;
                 case "video":
