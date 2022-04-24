@@ -75,7 +75,7 @@ class ContentStoreService extends RestfulService
                     $post->blocks()->create([
                         'page_id' => $post->page_id,
                         'sort' => $sort,
-                        'content' => $media['content'],
+                        'content' =>  $content instanceof UploadedFile ? $media['content'] : $content,
                         'type' => 'image',
                         'meta' => $media['meta']
                     ]);
