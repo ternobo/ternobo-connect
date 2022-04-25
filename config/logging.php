@@ -37,14 +37,8 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            // Add bugsnag to the stack:
-            'channels' => ['daily', 'bugsnag'],
+            'channels' => ['daily'],
         ],
-
-        'bugsnag' => [
-            'driver' => 'bugsnag',
-        ],
-
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
