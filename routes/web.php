@@ -284,14 +284,6 @@ if (config("features.profile.contact")) {
 if (config("features.chat")) {
     require base_path("routes/tip_routes.php");
 }
-
-Route::get('/debug-sentry', function () {
-    throw new Exception('My first Sentry error!');
-});
-
-Bugsnag::notifyException(new RuntimeException("Test error"));
-
-
 // Pages
 Route::prefix('/{page:slug}')->group(function () {
 
