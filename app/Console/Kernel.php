@@ -40,6 +40,15 @@ class Kernel extends ConsoleKernel
         $schedule->job(new AutomaticDeactivationJob())->monthly();
     }
 
+    protected function bootstrappers()
+    {
+        return array_merge(
+            [\Bugsnag\BugsnagLaravel\OomBootstrapper::class],
+            parent::bootstrappers(),
+        );
+    }
+
+
     /**
      * Register the commands for the application.
      *

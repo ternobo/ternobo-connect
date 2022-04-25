@@ -8,7 +8,7 @@
 						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 					</div>
 					<div class="editor-block--container">
-						<component :is="components[element.type]" ref="blocks" :isDefault="element.default" @delete="deleteElem(index, true)" @addParagraph="addParagraph(index + 1)" :type.sync="blocks[index].type" :meta.sync="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" />
+						<component :is="components[element.type]" ref="blocks" :isDefault="element.default" @delete="deleteElem(index, true)" @addParagraph="addParagraph(index + 1)" @convertType="convertType(index, $event)" :meta.sync="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" />
 					</div>
 				</div>
 			</draggable>
@@ -25,13 +25,12 @@
 <script>
 import ActionsButton from "./ActionsButton.vue";
 import Paragraph from "./Elements/Paragraph.vue";
-import TitleInput from "./Elements/TitleInput.vue";
+import Heading1 from "./Elements/Heading1.vue";
 import Image from "./Elements/Image";
 import Video from "./Elements/Video";
 import uuidv4 from "uuid";
 import EmojiPicker from "../../EmojiPicker/EmojiPicker.vue";
 import { mapState } from "vuex";
-import TextareaParser from "./TextareaParser";
 import Code from "./Elements/Code.vue";
 import BulletedList from "./Elements/Lists/BulletedList.vue";
 import OrderedList from "./Elements/Lists/OrderedList.vue";
@@ -40,6 +39,8 @@ import PollBlock from "./Elements/Poll/PollBlock.vue";
 import Heading2 from "./Elements/Heading2.vue";
 import Heading3 from "./Elements/Heading3.vue";
 import Embed from "./Elements/Embed.vue";
+import HorizontalRule from "./Elements/HorizontalRule.vue";
+
 export default {
 	watch: {
 		blocks: {
@@ -74,6 +75,10 @@ export default {
 			}
 			this.$emit("itemRemoved");
 		},
+		convertType(index, type) {
+			this.blocks[index].content = null;
+			this.blocks[index].type = type;
+		},
 		addElement(type, meta) {
 			if (this.availableOptions.includes(type)) {
 				if (type == "code") {
@@ -96,7 +101,7 @@ export default {
 	computed: {
 		...mapState(["user"]),
 		availableOptions() {
-			return ["text", "heading1", "heading2", "heading3", "video", "image", "code", "bulletedList", "orderedList", "quote", "poll"].filter((option) => {
+			return ["text", "heading1", "horizontalRule", "heading2", "heading3", "video", "image", "code", "bulletedList", "orderedList", "quote", "poll"].filter((option) => {
 				if (option == "heading1") {
 					return this.blocks.filter((block) => block.type == "heading1").length == 0;
 				}
@@ -120,7 +125,9 @@ export default {
 			lastFocused: null,
 			components: {
 				text: Paragraph,
-				heading1: TitleInput,
+				heading1: Heading1,
+				heading2: Heading2,
+				heading3: Heading3,
 				video: Video,
 				image: Image,
 				code: Code,
@@ -128,9 +135,8 @@ export default {
 				orderedList: OrderedList,
 				quote: Quote,
 				poll: PollBlock,
-				heading2: Heading2,
-				heading3: Heading3,
 				embed: Embed,
+				horizontalRule: HorizontalRule,
 			},
 		};
 	},

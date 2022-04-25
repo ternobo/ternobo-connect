@@ -9,21 +9,21 @@ export default {
         let classes = "";
         let content = "";
         switch (contentType) {
-            case "title":
-                tag = "h1";
-                content = this.content.content;
+            case "heading1":
+                tag = "div";
+                content = <h1 dir="auto">{this.content.content}</h1>;
+                break;
+            case "heading2":
+                tag = "div";
+                content = <h2 dir="auto">{this.content.content}</h2>;
+                break;
+            case "heading3":
+                tag = "div";
+                content = <h3 dir="auto">{this.content.content}</h3>;
                 break;
             case "embed":
                 tag = "div";
                 content = <iframe title="embedvideo" class="embed-video" src={this.content.content} allowfullscreen width="510" height="287"></iframe>;
-                break;
-            case "heading2":
-                tag = "h2";
-                content = this.content.content;
-                break;
-            case "heading3":
-                tag = "h3";
-                content = this.content.content;
                 break;
             case "quote":
             case "text":
@@ -43,6 +43,9 @@ export default {
                 let spoiler = this.content.meta?.spoiler;
                 spoiler = typeof (spoiler) == 'string' ? parseInt(spoiler) : spoiler;
                 content = (<image-viewer onLoad={this.$emit.bind(this, 'loaded')} spoiler={spoiler} info={this.content.meta?.info} src={source} />);
+                break;
+            case "horizontalRule":
+                content = <hr class="horizontal-rule" />;
                 break;
             case "video":
                 tag = "div";
@@ -81,6 +84,7 @@ export default {
         }
 
         return h(tag, {
+            dir: "auto",
             class: classes
         }, [content]);
     },

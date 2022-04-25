@@ -20,6 +20,10 @@
 						<i class="material-icons">text_fields</i>
 						<strong>{{ __.get("content/posts.text") }}</strong>
 					</div>
+					<div class="editor-list-item" :class="{ disabled: !activeOptions.includes('text') }" @click="emitAcion('horizontalRule')">
+						<i class="material-icons">remove</i>
+						<strong>{{ __.get("editor.divider") }}</strong>
+					</div>
 					<div class="editor-list-item" :class="{ disabled: !activeOptions.includes('text') }" @click="emitAcion('bulletedList')">
 						<i class="material-icons-outlined">format_list_bulleted</i>
 						<strong>{{ __.get("editor.bulleted-list") }}</strong>

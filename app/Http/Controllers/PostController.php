@@ -158,34 +158,20 @@ class PostController extends Controller
             $post = $post->with("mutualLikes");
         }
 
-
         $post = $post->findOrFail($post_id);
         SEOMeta::addMeta("robots", "noindex");
-        $page = $post->page;
-        SEOMeta::addKeyword(['محتوای ' . $page->name, $page->name, $page->user->first_name, $page->user->last_name]);
-        $textItem = collect($post->slides[0]->content)->filter(function ($item) {
-            return $item->type == "text";
+        $textItem = collect($post->blocks)->filter(function ($item) {
+            return $item->type == "heading1" || $item->type == "heading2" || $item->type == "heading3";
         })->first();
-        if ($textItem) {
-            SEOTools::setDescription($textItem->content);
+        if ($textItem != null) {
+            SEOMeta::setTitle(Str::limit($textItem->content));
         } else {
-            SEOTools::setDescription("$page->name Shared Content");
+            SEOMeta::setTitle(trans("application.post-page-title", ['user' => $post->page->name]));
         }
         if (($post->type === "post" || $post->type === "share") && $post->user->active) {
             return TernoboWire::render("PostPage", ["post" => PostResource::make($post), "comment" => $request->input("comment", 0)]);
         }
         return abort(404);
-    }
-
-    /**
-     * Render embed post
-     */
-    public function embedPost($post_id, Request $request)
-    {
-        $post = Post::with("page")
-            ->with("category")
-            ->findOrFail($post_id);
-        return TernoboWire::render("Embed/Widget", array("post" => $post));
     }
 
     public function seenPost(Request $request)
@@ -200,18 +186,6 @@ class PostController extends Controller
             }
         }
         return response()->json(array("result" => true));
-    }
-
-    public function getEmbed($post_id)
-    {
-        $post = url("/embed-posts/" . $post_id);
-        $randomhash = (Str::uuid());
-        $url = url("/posts/" . $post_id);
-        $html_code = HTMLMinifier::html(view("embedcode", array("url" => $url, "randomhash" => $randomhash, "post" => $post))->render());
-        return response()->json([
-            "result" => true,
-            "code" => $html_code,
-        ]);
     }
 
 
@@ -314,7 +288,7 @@ class PostController extends Controller
             throw $th;
         }
         $post->fresh();
-        $post->load(["page", "tags", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
+        $post->load(["page", "tags", 'likes', 'mutualLikes', 'category', "blocks"]);
 
         return response()->json(array("result" => true, "post" => PostResource::make($post)));
     }
@@ -335,9 +309,9 @@ class PostController extends Controller
         $post = Post::withDrafts()->findOrFail($post);
         if ($post->user_id === Auth::user()->id) {
             $result = $post->delete();
-            if ($result) {
-                PostDeleteProcess::dispatch($post);
-            }
+            // if ($result) {
+            // PostDeleteProcess::dispatch($post);
+            // }
             return response()->json(array("result" => $result));
         } else {
             return abort(404);

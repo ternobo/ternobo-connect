@@ -37,8 +37,12 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
-            'ignore_exceptions' => false,
+            // Add bugsnag to the stack:
+            'channels' => ['daily', 'bugsnag'],
+        ],
+
+        'bugsnag' => [
+            'driver' => 'bugsnag',
         ],
 
         'single' => [

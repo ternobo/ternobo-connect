@@ -64,8 +64,6 @@ use PHPHtmlParser\Dom;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Report[] $reports
  * @property-read int|null $reports_count
  * @property-read Post|null $share
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PostSlide[] $slides
- * @property-read int|null $slides_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
  * @property-read int|null $tags_count
  * @property-read \App\Models\User $user

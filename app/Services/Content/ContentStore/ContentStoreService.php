@@ -30,12 +30,17 @@ class ContentStoreService extends RestfulService
             $content = $block['content'];
             $type = $block['type'];
             $meta = $block['meta'] ?? [];
-            if (!isset($content)) {
-                continue;
-            }
-            // dd($block);
 
             switch ($type) {
+                case "horizontalRule":
+                    $post->blocks()->create([
+                        'page_id' => $post->page_id,
+                        'sort' => $sort,
+                        'content' => "",
+                        'type' => $type,
+                        "meta" => $meta,
+                    ]);
+                    break;
                 case "quote":
                 case "text":
                     // Process

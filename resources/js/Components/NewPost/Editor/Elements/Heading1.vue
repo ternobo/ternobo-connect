@@ -1,5 +1,5 @@
 <template>
-	<div class="heading-3">
+	<div class="heading-1">
 		<rich-input class="editor--text-input" ref="editor" :activeOptions="[]" :editorOptions="editorOptions" :extensions="extensions" v-model="val" />
 	</div>
 </template>

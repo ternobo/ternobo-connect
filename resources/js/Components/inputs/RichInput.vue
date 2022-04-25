@@ -1,6 +1,6 @@
 <template>
 	<ternobo-editor ref="ternoboEditor" :editorOptions="editorOptions" :extensions="extensions" class="ternobo-editor" v-model="val" v-slot:default="{ editor }">
-		<popup-menu :editor="editor"></popup-menu>
+		<popup-menu :activeOptions="activeOptions" :editor="editor"></popup-menu>
 	</ternobo-editor>
 </template>
 
@@ -22,6 +22,9 @@ export default {
 			default: () => {
 				return [];
 			},
+		},
+		activeOptions: {
+			default: ["bold", "italic", "underline", "strike", "code", "link", "superscript", "spoiler"],
 		},
 		editorOptions: {
 			type: Object,
@@ -47,12 +50,7 @@ export default {
 		};
 	},
 	created() {
-		this.val = this.value
-			? this.value
-			: {
-					content: [],
-					type: "doc",
-			  };
+		this.val = this.value ? this.value : "";
 	},
 	watch: {
 		val() {

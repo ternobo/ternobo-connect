@@ -669,6 +669,10 @@ blockquote {
     font-weight: 600;
     color: $black;
 
+    p {
+        margin: 0;
+    }
+
     &::after {
         content: "format_quote";
         @include material-icons-outlined;
@@ -677,4 +681,11 @@ blockquote {
         top: 0;
         color: $gray-medium-dark;
     }
+}
+
+
+
+.horizontal-rule {
+    border: 2px solid $gray-light-medium;
+    background: $gray-light-medium;
 }

@@ -179,6 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\DependencyInjectionServiceProvider::class,
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class
 
     ],
 

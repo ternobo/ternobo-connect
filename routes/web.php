@@ -5,6 +5,7 @@ use Laravel\Passport\Passport;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Broadcast;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use App\Models\User;
 use App\Models\Post;
 use App\Http\Middleware\FullAccessUserMiddleware;
@@ -283,6 +284,14 @@ if (config("features.profile.contact")) {
 if (config("features.chat")) {
     require base_path("routes/tip_routes.php");
 }
+
+Route::get('/debug-sentry', function () {
+    throw new Exception('My first Sentry error!');
+});
+
+Bugsnag::notifyException(new RuntimeException("Test error"));
+
+
 // Pages
 Route::prefix('/{page:slug}')->group(function () {
 

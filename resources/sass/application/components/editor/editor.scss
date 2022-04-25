@@ -3,6 +3,10 @@
     background: $white;
     box-shadow: 0 0 1rem 0px rgba(0, 0, 0, 0.1);
 
+    >div {
+        display: flex;
+    }
+
     button {
         background: none;
         outline: none;

@@ -12,6 +12,7 @@ return [
     "heading1" => "Heading 1",
     "heading2" => "Heading 2",
     "heading3" => "Heading 3",
+    "divider" => "Divider",
 
     'video-format' => "Authorized Format: MP4",
     'image-size' => "Suggested Size: 1700x1700",

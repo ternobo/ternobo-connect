@@ -76,7 +76,7 @@ return [
     "optional" => "Optional",
     "bookmarks" => "Bookmarks",
     "sort-by" => "Sort by",
-
+    "post-page-title" => ":user Post",
 
     "password-strength" => [
         "short" => "Too Short",

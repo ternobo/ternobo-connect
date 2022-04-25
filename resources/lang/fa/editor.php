@@ -11,6 +11,7 @@ return [
     "heading1" => "تیتر 1",
     "heading2" => "تیتر 2",
     "heading3" => "تیتر 3",
+    "divider" => "جدا کننده",
 
     'video-format' => "فرمت مجاز: MP4",
     'image-size' => "اندازه پیشنهادی: 1700x1700",

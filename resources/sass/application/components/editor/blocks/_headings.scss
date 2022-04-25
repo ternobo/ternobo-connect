@@ -1,0 +1,20 @@
+@for $i from 1 to 4 {
+    $font-size: 32px / $i;
+
+    @if($font-size <=16) {
+        $font-size: $font-size+4;
+
+        @if($font-size <=16) {
+            $font-size: $font-size+4;
+        }
+    }
+
+    .heading-#{$i}>* {
+        font-weight: 600;
+        font-size: $font-size;
+
+        [data-type=emoji]>img {
+            max-width: $font-size;
+        }
+    }
+}
