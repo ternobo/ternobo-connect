@@ -8,7 +8,8 @@ export default {
         // Lists
         bulletedList: "- ",
         orderedList: "1. ",
-        quote: "> "
+        quote: "> ",
+        horizontalRule: "—-"
     },
     parse(content) {
         const htmlContent = ContentRenderer.render(content);
