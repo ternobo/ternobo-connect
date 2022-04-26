@@ -24,7 +24,7 @@ export default {
 			},
 		},
 		activeOptions: {
-			default: ["bold", "italic", "underline", "strike", "code", "link", "superscript", "spoiler"],
+			default: () => ["bold", "italic", "underline", "strike", "code", "link", "superscript", "spoiler"],
 		},
 		editorOptions: {
 			type: Object,
