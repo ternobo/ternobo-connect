@@ -23,7 +23,7 @@ export default {
                 break;
             case "embed":
                 tag = "div";
-                content = <iframe title="embedvideo" class="embed-video" src={this.content.content} allowfullscreen width="510" height="287"></iframe>;
+                content = <iframe title="embedvideo" class="embed-video" src={this.content.content} allowfullscreen width="510" height="286"></iframe>;
                 break;
             case "quote":
             case "text":

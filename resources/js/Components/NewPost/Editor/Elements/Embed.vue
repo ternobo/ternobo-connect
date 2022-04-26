@@ -1,5 +1,5 @@
 <template>
-	<div class="media-block" :class="{ 'p-0': embedInfo != null }">
+	<div class="media-block" :class="{ 'p-0 border-0': embedInfo != null }">
 		<!--- Select Media !-->
 		<div class="action-container" v-if="embedInfo == null">
 			<span class="title text-center">
@@ -15,7 +15,7 @@
 		</div>
 		<!--- Select Media End !-->
 
-		<iframe v-else title="embedvideo" class="embed-video" :src="embedInfo.embed" allowfullscreen width="640" height="480"></iframe>
+		<iframe v-else title="embedvideo" class="embed-video" :src="embedInfo.embed" allowfullscreen width="640" height="316"></iframe>
 	</div>
 </template>
 

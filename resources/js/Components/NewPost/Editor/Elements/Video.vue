@@ -1,5 +1,5 @@
 <template>
-	<div class="media-block" :class="{ 'p-0': content != null }">
+	<div class="media-block" :class="{ 'p-0 border-0': content != null }">
 		<!--- Show Media End !-->
 		<div v-if="content != null" class="w-100" style="overflow: hidden">
 			<video-player :src="contentUrl" class="mb-0 w-100"></video-player>
