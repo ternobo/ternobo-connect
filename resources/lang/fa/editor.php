@@ -29,6 +29,11 @@ return [
     "poll-duration" => "تاریخ پایان نظرسنجی",
     "poll-duration-ph" => "انتخاب تاریخ",
 
+    "text-placeholder" => "بنویس به چه چیزی فکر می‌کنی...",
+    "title-placeholder" => "موضوع این محتوا چیست؟",
+    "heading-placeholder" => "عنوان :num",
+
+
     "embed" => [
         "youtube" => "Youtube",
         "aparat" => "آپارات",

@@ -6,9 +6,7 @@ import EditorConfig from "../../../../utils/EditorConfig";
 export default {
     props: {
         content: {
-            default: () => {
-                return JSON.stringify({ type: "doc", content: [] });
-            },
+            default: null,
         },
         disableEnter: {
             default: true,
@@ -27,10 +25,7 @@ export default {
     },
     data() {
         return {
-            val: {
-                content: [],
-                type: "doc",
-            },
+            val: null,
         };
     },
     watch: {
@@ -48,10 +43,7 @@ export default {
 
         this.val = this.content
             ? content
-            : {
-                content: [],
-                type: "doc",
-            };
+            : null;
     },
     computed: {
         ...mapState(["shared"]),

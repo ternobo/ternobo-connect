@@ -5,6 +5,9 @@
 
 .code-block {
     position: relative;
+    background: #1e1e1e;
+    padding: 0.75rem;
+    max-width: 567px;
 
     .fullscreen-icon {
         color: #FFF;
@@ -18,6 +21,67 @@
 
         &:hover {
             cursor: pointer;
+        }
+    }
+
+
+    .language-select {
+        max-width: 140px;
+        font-size: $text-xxxsm;
+
+        .tselect_title,
+        .tselect-items {
+            color: $body-bg !important;
+            background: $gray-dark;
+
+
+            .items {
+                @include nice-scroll-dark;
+            }
+
+            input {
+                color: #FFF;
+                font-weight: 600;
+                font-size: $text-xxxsm;
+
+                &::-webkit-input-placeholder {
+                    color: #FFF;
+                    font-size: $text-xxxsm;
+                }
+
+                &::-moz-placeholder {
+                    color: #FFF;
+                    font-size: $text-xxxsm;
+                }
+
+                &:-ms-input-placeholder {
+                    color: #FFF;
+                    font-size: $text-xxxsm;
+                }
+
+                &::-ms-input-placeholder {
+                    color: #FFF;
+                    font-size: $text-xxxsm;
+                }
+
+                &::placeholder {
+                    color: #FFF;
+                    font-size: $text-xxxsm;
+                }
+            }
+
+            .tselect_item {
+
+                &:hover,
+                &.active {
+                    background: $gray-medium-dark;
+                }
+
+                &--text {
+                    font-size: $text-xxxsm;
+                    color: #FFF !important;
+                }
+            }
         }
     }
 

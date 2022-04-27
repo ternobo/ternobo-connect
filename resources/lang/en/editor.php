@@ -30,6 +30,10 @@ return [
     "poll-duration" => "Poll End Date",
     "poll-duration-ph" => "Select Poll End Date",
 
+    "text-placeholder" => "Write what you're thinking about...",
+    "heading-placeholder" => "Heading :num",
+    "title-placeholder" => "What’s the title?",
+
     "embed" => [
         "youtube" => "Youtube",
         "aparat" => "Aparat",

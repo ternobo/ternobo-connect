@@ -1,11 +1,13 @@
 <template>
-	<ternobo-editor ref="ternoboEditor" :editorOptions="editorOptions" :extensions="extensions" class="ternobo-editor" v-model="val" v-slot:default="{ editor }">
+	<ternobo-editor ref="ternoboEditor" :editorOptions="editorOptions" :extensions="[...extensions, ...richEditorExtentions]" class="ternobo-editor" v-model="val" v-slot:default="{ editor }">
 		<popup-menu :activeOptions="activeOptions" :editor="editor"></popup-menu>
 	</ternobo-editor>
 </template>
 
 <script>
 import { TernoboEditor, PopupMenu } from "@ternobo/ternobo-editor";
+import Placeholder from "@tiptap/extension-placeholder";
+
 export default {
 	components: {
 		TernoboEditor,
@@ -32,6 +34,9 @@ export default {
 				return {};
 			},
 		},
+		placeholder: {
+			default: "",
+		},
 		value: {
 			default: () => {
 				return {
@@ -47,10 +52,16 @@ export default {
 				content: [],
 				type: "doc",
 			},
+			richEditorExtentions: [],
 		};
 	},
 	created() {
 		this.val = this.value ? this.value : "";
+		this.richEditorExtentions = [
+			Placeholder.configure({
+				placeholder: this.placeholder,
+			}),
+		];
 	},
 	watch: {
 		val() {

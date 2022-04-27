@@ -107,7 +107,7 @@
             max-height: 210px;
             overflow: auto;
             padding: 0.5rem 1rem;
-            @extend .nice-scroll;
+            @include nice-scroll;
         }
     }
 
@@ -143,6 +143,29 @@
         padding: 0.5rem;
         align-items: center;
         margin-top: 10px;
+    }
+
+    &.tselect-sm {
+        height: 32px;
+
+        .tselect_item {
+            .tselect_item--text {
+                font-size: $text-xsm;
+            }
+
+            padding: 0.5rem;
+
+        }
+
+
+        .items {
+            padding: 0.25rem 0.5rem;
+        }
+
+        .tselect_title {
+            height: 32px;
+            padding: 0.5rem;
+        }
     }
 
     &.tselect-lg {

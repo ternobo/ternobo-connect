@@ -1,6 +1,9 @@
 <template>
 	<div class="post-body" tabindex="1">
-		<Content v-for="content in post.blocks" :content="content" :key="`content_item_${content.id}`"></Content>
+		<div class="post-content">
+			<Content v-for="content in post.blocks" :content="content" :key="`content_item_${content.id}`"></Content>
+		</div>
+
 		<!-- <tags-list :tags="post.tags"></tags-list> -->
 	</div>
 </template>

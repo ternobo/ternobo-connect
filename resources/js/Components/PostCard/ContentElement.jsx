@@ -1,5 +1,5 @@
-import VideoPlayer from "./SliderCard/Elements/PostVideoPlayer.vue";
-import CodeBlock from "./SliderCard/Elements/Code.vue";
+import VideoPlayer from "./Blocks/PostVideoPlayer.vue";
+import CodeBlock from "./Blocks/Code.vue";
 import ContentViewer from "./ContentViewer.vue";
 
 export default {
@@ -92,8 +92,8 @@ export default {
         VideoPlayer,
         CodeBlock,
         ContentViewer,
-        "image-viewer": () => import("./SliderCard/Elements/ImageViewer.vue"),
-        "poll-viewer": () => import("./SliderCard/Elements/PollViewer.vue")
+        "image-viewer": () => import("./Blocks/ImageViewer.vue"),
+        "poll-viewer": () => import("./Blocks/PollViewer.vue")
     },
     mounted() {
         twemoji.parse(this.$el);

@@ -12,10 +12,12 @@
 					</div>
 				</div>
 			</draggable>
-			<div class="d-flex editor-actions" v-if="availableOptions.length > 0" :class="{ 'align-items-center': blocks.length < 1 }">
+			<div class="d-flex editor-actions w-100" v-if="availableOptions.length > 0" :class="{ 'align-items-center': blocks.length < 1 }">
 				<actions-button @select="addElement" :active-options="availableOptions" />
-				<div class="placeholder-element clickable" v-if="blocks.length < 1" @click="addElement('text')">
-					<span class="text-superlight font-14">{{ __.get("content/posts.post-ph", { fname: user.first_name }) }}</span>
+				<div class="w-100 clickable" @click="addElement('text')">
+					<div class="placeholder-element clickable" v-if="blocks.length < 1">
+						<span class="text-superlight font-14">{{ __.get("content/posts.post-ph", { fname: user.first_name }) }}</span>
+					</div>
 				</div>
 			</div>
 		</div>

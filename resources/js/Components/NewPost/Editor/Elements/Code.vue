@@ -1,6 +1,11 @@
  <template>
 	<div class="code-block">
-		<tselect class="mb-4" :search="true" placeholder="Search For Language" direction="ltr" v-model="language" :items="languages"></tselect>
+		<div class="d-flex align-items-center mb-3 justify-content-between">
+			<tselect class="tselect-sm language-select" :search="true" placeholder="Search For Language" direction="ltr" v-model="language" :items="languages"></tselect>
+
+			<button class="btn close btn-text" v-if="fullscreen" @click="exitFullscreen"><i class="material-icons">close</i></button>
+			<i class="material-icons text-white" v-if="showFullscreenIcon && !fullscreen" @click="showFullscreen">fullscreen</i>
+		</div>
 		<div class="code-block--textarea" dir="ltr">
 			<div ref="textarea" :style="{ height: height, maxHeight: '450px' }"></div>
 		</div>
@@ -30,13 +35,25 @@ export default {
 		},
 	},
 	methods: {
+		exitFullscreen() {
+			document.exitFullscreen();
+			this.fullscreen = false;
+		},
+		showFullscreen() {
+			this.fullscreen = true;
+			this.$el.requestFullscreen();
+			this.$refs["code-viewer"].style.height = `calc(100vh - 100px)`;
+			this.editor.layout();
+		},
+
 		renderCodeEditor(language = "java", code = "public class Main{\n \tpublic static void main(String args[]){\n\t} \n}") {
 			setTimeout(() => {
 				this.editor = monaco.editor.create(this.$refs.textarea, {
 					value: code,
-					automaticLayout: true,
 					language: language,
 					theme: "vs-dark",
+					automaticLayout: true,
+					scrollBeyondLastLine: false,
 				});
 				this.$nextTick(() => {
 					this.editor.onDidBlurEditorText(() => {
@@ -55,7 +72,7 @@ export default {
 	data() {
 		return {
 			language: "java",
-			height: "200px",
+			height: "111px",
 			languages: [
 				"abap",
 				"apex",
@@ -132,6 +149,9 @@ export default {
 				"xml",
 				"yaml",
 			],
+
+			fullscreen: false,
+			showFullscreenIcon: true,
 		};
 	},
 	beforeDestroy() {

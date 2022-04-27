@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import PollSkeleton from "../../../Skeletons/PollSkeleton.vue";
+import PollSkeleton from "../../Skeletons/PollSkeleton.vue";
 export default {
 	components: { PollSkeleton },
 	props: {
