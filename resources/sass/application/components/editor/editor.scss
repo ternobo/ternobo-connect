@@ -254,7 +254,7 @@ div[placeholder]:not(:focus):empty:before {
 .ProseMirror p.is-editor-empty:first-child:before {
     content: attr(data-placeholder);
     float: $start;
-    color: $gray-light;
+    color: $gray;
     pointer-events: none;
     height: 0;
 }

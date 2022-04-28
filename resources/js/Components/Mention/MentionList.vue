@@ -1,8 +1,8 @@
 <template>
 	<div class="mention-menu-container">
 		<template v-if="items.length">
-			<ul>
-				<li v-for="item in items" :key="getKey(item.id)" @mousedown="selectItem(item)">
+			<ul ref="items">
+				<li v-for="(item, index) in items" ref="mentionItem" :key="getKey(item.id)" :class="{ 'is-selected': selectedIndex == index }" @keypress.enter="selectItem(item)" @mousedown.left="selectItem(item)">
 					<lazy-image class="profile-xxsm me-4" imgClass="profile-xxsm" :src="item.profile" v-if="item.profile" />
 
 					<div class="d-flex flex-column justify-content-center">
@@ -48,7 +48,9 @@ export default {
 			this.selectedIndex = 0;
 		},
 	},
-
+	mounted() {
+		this.$el.focus();
+	},
 	methods: {
 		getKey(item) {
 			return `item_${item}_${uuidv4()}`;
@@ -74,10 +76,16 @@ export default {
 
 		upHandler() {
 			this.selectedIndex = (this.selectedIndex + this.items.length - 1) % this.items.length;
+			if (this.$refs.items && this.$refs.mentionItem) {
+				this.$refs.items.scrollTop = this.$refs.mentionItem[this.selectedIndex].offsetTop;
+			}
 		},
 
 		downHandler() {
 			this.selectedIndex = (this.selectedIndex + 1) % this.items.length;
+			if (this.$refs.items && this.$refs.mentionItem) {
+				this.$refs.items.scrollTop = this.$refs.mentionItem[this.selectedIndex].offsetTop;
+			}
 		},
 
 		enterHandler() {

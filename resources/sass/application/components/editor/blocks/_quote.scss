@@ -1,0 +1,12 @@
+.quote-editor {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0 1rem;
+    border-#{$start}: 2px solid $gray-light-medium;
+
+    .editor--text-input {
+        p {
+            margin: 0;
+        }
+    }
+}

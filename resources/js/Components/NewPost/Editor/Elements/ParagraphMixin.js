@@ -56,8 +56,10 @@ export default {
                     handleDOMEvents: {
                         keydown: (view, event) => {
                             if (event.key == "Enter" && !event.shiftKey) {
-                                this.$emit("addParagraph");
-                                event.preventDefault();
+                                if (!document.querySelector("[data-tippy-root]")) {
+                                    this.$emit("addParagraph");
+                                    event.preventDefault();
+                                }
                             } else if (event.keyCode == 8) {
                                 if (this.val ? window.ContentRenderer.render(this.val).length <= "<p dir='auto'></p>".length : this.val) {
                                     this.$emit("delete");

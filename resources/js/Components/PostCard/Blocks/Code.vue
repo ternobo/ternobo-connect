@@ -67,10 +67,7 @@ export default {
 				if (height >= 320) {
 					this.showFullscreenIcon = true;
 					this.$el.addEventListener("fullscreenchange", () => {
-						if (document.fullscreenElement) {
-							console.log(`Element: ${document.fullscreenElement.id} entered fullscreen mode.`);
-						} else {
-							console.log("Leaving full-screen mode.");
+						if (!document.fullscreenElement) {
 							this.fullscreen = false;
 						}
 					});

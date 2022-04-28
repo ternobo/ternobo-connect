@@ -538,6 +538,10 @@
         text-align: start;
     }
 
+    .mention {
+        color: $blue-cta;
+    }
+
     div.post-content--text {
         margin-bottom: 1rem;
         text-align: start;
@@ -664,22 +668,11 @@ code {
 blockquote {
     margin-left: 0;
     margin-right: 0;
-    padding: 0 2rem;
-    position: relative;
-    font-weight: 600;
-    color: $black;
+    padding: 0 1rem;
+    border-#{$start}: 2px solid $gray-light-medium;
 
     p {
         margin: 0;
-    }
-
-    &::after {
-        content: "format_quote";
-        @include material-icons-outlined;
-        position: absolute;
-        left: 0;
-        top: 0;
-        color: $gray-medium-dark;
     }
 }
 

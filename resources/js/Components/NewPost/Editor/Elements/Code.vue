@@ -3,8 +3,8 @@
 		<div class="d-flex align-items-center mb-3 justify-content-between">
 			<tselect class="tselect-sm language-select" :search="true" placeholder="Search For Language" direction="ltr" v-model="language" :items="languages"></tselect>
 
-			<button class="btn close btn-text" v-if="fullscreen" @click="exitFullscreen"><i class="material-icons">close</i></button>
-			<i class="material-icons text-white" v-if="showFullscreenIcon && !fullscreen" @click="showFullscreen">fullscreen</i>
+			<button class="btn close text-white btn-text" v-if="fullscreen" @click="exitFullscreen"><i class="material-icons">close</i></button>
+			<button class="btn close text-white btn-text" v-if="showFullscreenIcon && !fullscreen" @click="showFullscreen"><i class="material-icons text-white">fullscreen</i></button>
 		</div>
 		<div class="code-block--textarea" dir="ltr">
 			<div ref="textarea" :style="{ height: height, maxHeight: '450px' }"></div>
@@ -60,6 +60,11 @@ export default {
 						this.$emit("update:content", { code: this.editor.getValue(), language: this.language });
 					});
 
+					this.$el.addEventListener("fullscreenchange", () => {
+						if (!document.fullscreenElement) {
+							this.fullscreen = false;
+						}
+					});
 					this.editor.onDidChangeModelContent(() => {
 						const height = this.editor.getModel().getLineCount() * 19 + 16;
 						this.height = `${height}px`;
