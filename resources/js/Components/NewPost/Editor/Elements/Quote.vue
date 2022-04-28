@@ -1,6 +1,6 @@
 <template>
 	<div class="quote-editor">
-		<rich-input class="editor--text-input" ref="editor" :editorOptions="editorOptions" :extensions="extensions" v-model="val" />
+		<rich-input :placeholder="__.get('editor.quote-placeholder')" class="editor--text-input" ref="editor" :editorOptions="editorOptions" :extensions="extensions" v-model="val" />
 	</div>
 </template>
 

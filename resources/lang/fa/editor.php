@@ -32,6 +32,7 @@ return [
     "text-placeholder" => "بنویس به چه چیزی فکر می‌کنی...",
     "title-placeholder" => "موضوع این محتوا چیست؟",
     "heading-placeholder" => "عنوان :num",
+    "quote-placeholder" =>  "نقل قول",
 
 
     "embed" => [

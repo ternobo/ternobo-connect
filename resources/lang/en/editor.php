@@ -33,6 +33,7 @@ return [
     "text-placeholder" => "Write what you're thinking about...",
     "heading-placeholder" => "Heading :num",
     "title-placeholder" => "What’s the title?",
+    "quote-placeholder" => "Quote",
 
     "embed" => [
         "youtube" => "Youtube",
