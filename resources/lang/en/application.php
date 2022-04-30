@@ -77,6 +77,7 @@ return [
     "bookmarks" => "Bookmarks",
     "sort-by" => "Sort by",
     "post-page-title" => ":user Post",
+    "privacy-policy" => "Privacy Policy",
 
     "password-strength" => [
         "short" => "Too Short",

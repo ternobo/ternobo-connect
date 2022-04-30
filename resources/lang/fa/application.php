@@ -76,6 +76,7 @@ return [
     "bookmarks" => "نشان‌ها",
     "sort-by" => "ترتیب براساس",
     "post-page-title" => "محتوای :user",
+    "privacy-policy" => "Privacy Policy",
 
     "password-strength" => [
         "short" => "کوتاه",
