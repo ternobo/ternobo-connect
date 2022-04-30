@@ -13,8 +13,14 @@ export default {
 				this.$emit("update:content", JSON.stringify(this.val));
 				setTimeout(() => {
 					const command = EditorCommandParser.parse(this.val);
-					if (command != "text") {
+					if (command == "action") {
+						this.$emit("showMenu");
+					} else if (command == "hideAction") {
+						this.$emit("hideMenu");
+					} else if (command != "text") {
 						this.$emit("convertType", command);
+					} else {
+						this.$emit("hideMenu");
 					}
 				}, 10);
 			}

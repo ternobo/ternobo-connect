@@ -2,14 +2,16 @@ import ContentRenderer from "./PostContentRenderer";
 
 export default {
     commands: {
-        heading1: "# ",
-        heading2: "## ",
-        heading3: "### ",
+        heading1: /^# $/g,
+        heading2: /^## $/g,
+        heading3: /^### $/g,
         // Lists
-        bulletedList: "- ",
-        orderedList: "1. ",
-        quote: "> ",
-        horizontalRule: "—-"
+        bulletedList: /^- $/g,
+        orderedList: /^1. $/g,
+        quote: /^> $/g,
+        horizontalRule: /^—-$/g,
+        action: /^\/$/g,
+        hideAction: /^$/g
     },
     parse(content) {
         const htmlContent = ContentRenderer.render(content);
@@ -17,9 +19,9 @@ export default {
         const doc = parser.parseFromString(htmlContent, "text/html");
         const textContent = doc.body.textContent;
         let command = "text";
+
         Object.keys(this.commands).forEach((item) => {
-            // console.log([textContent, this.commands[item]]);
-            if (this.commands[item] == textContent) {
+            if (this.commands[item].test(textContent)) {
                 command = item;
             }
         });

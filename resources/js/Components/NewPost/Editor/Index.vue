@@ -2,18 +2,18 @@
 	<div class="block-content-editor">
 		<div class="block-content-editor--body">
 			<draggable class="block-content-editor--body__list" v-model="blocks" v-if="blocks.length > 0" handle=".hand-hover" tag="div" v-bind="dragOptions" @start="drag = true" @end="drag = false">
-				<div class="editor-block" v-for="(element, index) in blocks" :key="`item_type_${element.id}_${element.type}`">
+				<div class="editor-block" v-for="(element, index) in blocks" ref="blockContainer" :key="`item_type_${element.id}_${element.type}`">
 					<div class="delete-move-actions">
 						<i class="material-icons-outlined hand-hover">drag_indicator</i>
 						<i class="material-icons-outlined hover-danger" @click="deleteElem(index)">delete_outline</i>
 					</div>
 					<div class="editor-block--container">
-						<component :is="components[element.type]" ref="blocks" :isDefault="element.default" @delete="deleteElem(index, true)" @addParagraph="addParagraph(index + 1)" @convertType="convertType(index, $event)" :meta.sync="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" />
+						<component :is="components[element.type]" ref="blocks" @showMenu="showMenu(index)" @hideMenu="hideMenu" :isDefault="element.default" @delete="deleteElem(index, true)" @addParagraph="addParagraph(index + 1)" @convertType="convertType(index, $event)" :meta.sync="blocks[index].meta" :content.sync="blocks[index].content" :key="'item_type_' + element.id" />
 					</div>
 				</div>
 			</draggable>
 			<div class="d-flex editor-actions w-100" v-if="availableOptions.length > 0" :class="{ 'align-items-center': blocks.length < 1 }">
-				<actions-button @select="addElement" :active-options="availableOptions" />
+				<actions-button ref="actionMenu" @select="addElement" :active-options="availableOptions" />
 				<div class="w-100 clickable" @click="addElement('text')">
 					<div class="placeholder-element clickable" v-if="blocks.length < 1">
 						<span class="text-superlight font-14">{{ __.get("content/posts.post-ph", { fname: user.first_name }) }}</span>
@@ -60,8 +60,14 @@ export default {
 		},
 	},
 	methods: {
+		hideMenu() {
+			this.$refs.actionMenu.hideList();
+		},
+		showMenu(index) {
+			this.$refs.actionMenu.toggleList(`${this.$refs.blockContainer[index].getBoundingClientRect().height * index}px`);
+		},
 		addParagraph(index) {
-			this.blocks.splice(index, 0, { id: uuidv4(), type: "text", content: JSON.stringify({ type: "doc", content: [] }), meta: {} });
+			this.blocks.splice(index, 0, { id: uuidv4(), type: "text", content: null, meta: {} });
 			this.$emit("itemAdd");
 		},
 		getData() {

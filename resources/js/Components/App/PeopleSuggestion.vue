@@ -1,5 +1,5 @@
 <template>
-	<div class="people-sugestion" :class="{ nofollow: !$store.state.shared.fullAccess }">
+	<div class="people-sugestion">
 		<profile-peeking :page="page" v-if="type == 'page'" />
 		<FollowButton class="btn-icon btn-md" :page="page" v-if="type == 'page'">
 			<template v-slot:default="{ followed }">

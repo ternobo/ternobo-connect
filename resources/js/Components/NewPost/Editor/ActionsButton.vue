@@ -71,7 +71,7 @@ export default {
 		...mapState(["shared"]),
 		editorsActionListStyle() {
 			let style = {
-				top: 0,
+				top: this.top,
 			};
 			if (this.shared.direction == "rtl") {
 				style.left = "-266px";
@@ -97,15 +97,24 @@ export default {
 				this.$emit("select", type, meta);
 			}
 		},
-		toggleList(e) {
+		toggleList(top = 0) {
 			this.showList = !this.showList;
+			if (this.showList) {
+				this.top = top;
+			} else {
+				this.top = 0;
+			}
 		},
 		hideList() {
+			if (this.showList) {
+				this.top = 0;
+			}
 			this.showList = false;
 		},
 	},
 	data() {
 		return {
+			top: 0,
 			showList: false,
 			xPosition: 0,
 			yPosition: 0,
