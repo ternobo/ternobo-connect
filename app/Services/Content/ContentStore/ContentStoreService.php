@@ -9,7 +9,9 @@ use App\Services\Poll\PollModel;
 use App\Services\RestfulService;
 use App\Services\Poll\PollService;
 use App\SocialMediaTools;
+use App\Utils\StringUtils;
 use Illuminate\Http\UploadedFile;
+use SebastianBergmann\CodeUnit\FunctionUnit;
 
 class ContentStoreService extends RestfulService
 {
@@ -22,8 +24,17 @@ class ContentStoreService extends RestfulService
         $this->pollService = $pollService;
     }
 
+    public function generateSlug()
+    {
+        return StringUtils::randomCode(8, fn ($code) => !Post::query()->where("slug", $code)->exists());
+    }
+
     public function setContent(Post $post, $blocks, $fileOnly = false)
     {
+        $slug = $this->generateSlug();
+        $post->slug = $slug;
+
+        $post->save();
         $mentions = [];
         foreach ($blocks as $block) {
             $sort = (int)$block['sort'];

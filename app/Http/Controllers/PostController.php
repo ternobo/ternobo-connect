@@ -158,17 +158,21 @@ class PostController extends Controller
             $post = $post->with("mutualLikes");
         }
 
-        $post = $post->findOrFail($post_id);
+        $post = $post->where("slug", $post_id)->firstOrFail();
+
         SEOMeta::addMeta("robots", "noindex");
+
         $textItem = collect($post->blocks)->filter(function ($item) {
             return $item->type == "heading1" || $item->type == "heading2" || $item->type == "heading3";
         })->first();
+
         if ($textItem != null) {
             SEOMeta::setTitle(Str::limit($textItem->content));
         } else {
             SEOMeta::setTitle(trans("application.post-page-title", ['user' => $post->page->name]));
         }
-        if (($post->type === "post" || $post->type === "share") && $post->user->active) {
+
+        if (($post->type === "post") && $post->user->active) {
             return TernoboWire::render("PostPage", ["post" => PostResource::make($post), "comment" => $request->input("comment", 0)]);
         }
         return abort(404);
