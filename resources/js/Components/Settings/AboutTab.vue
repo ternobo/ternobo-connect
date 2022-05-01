@@ -20,7 +20,7 @@
 						</i>
 						<span>{{ __.get("application.discord") }}</span>
 					</div>
-					<a class="btn setting-btn btn-subtle btn-icon btn-md" href="https://discord.gg/unXsnGHsNj" target="_blank">
+					<a class="btn setting-btn btn-subtle btn-icon btn-md" href="https://discord.com/invite/ApQzyxsKQG" target="_blank">
 						<i class="material-icons-outlined">{{ appDirection == "rtl" ? "keyboard_arrow_left" : "keyboard_arrow_right" }}</i>
 					</a>
 				</div>

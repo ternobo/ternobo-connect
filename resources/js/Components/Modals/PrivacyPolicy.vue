@@ -97,8 +97,8 @@
 			<p>We’ll notify you before we make changes to this policy and give you the opportunity to review and comment on the revised policy before continuing to use our Services.</p>
 			<p><strong>How to contact Ternobo with questions</strong></p>
 			<p>If there are any questions regarding this privacy policy, you may contact us using the information below.</p>
-			<p>Discord Server: <a href="htts://discord.gg/ApQzyxsKQG">Discord.gg/ApQzyxsKQG</a></p>
-			<p>Email: help@ternobo.com</p>
+			<p>Discord Server: <a class="text-action" href="https://discord.com/invite/ApQzyxsKQG">Discord.gg/ApQzyxsKQG</a></p>
+			<p>Email: <a class="text-action" href="mailto:help@ternobo.com">help@ternobo.com</a></p>
 		</div>
 	</b-modal>
 </template>
