@@ -10,7 +10,7 @@ export default {
         orderedList: /^1. $/g,
         quote: /^> $/g,
         horizontalRule: /^—-$/g,
-        action: /^\/$/g,
+        // action: /^\/$/g,
         // hideAction: /^$/g
     },
     parse(content) {
