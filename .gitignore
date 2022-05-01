@@ -28,9 +28,5 @@ socket-server.json
 .phpdoc
 deploy-ui.sh
 .env.production
-<<<<<<< HEAD
-laravel-echo-server-production.json
-=======
 laravel-echo-server-production.json
 _ide_helper.php
->>>>>>> 660e61971e471c31859fc3a6c12a65ee7233cb03

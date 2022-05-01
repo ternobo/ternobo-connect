@@ -35,17 +35,10 @@ use App\Http\Controllers\Content\BookmarksController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Chats\ChatController;
 use App\Http\Controllers\AutoUpdateController;
-<<<<<<< HEAD
-use App\Http\Middleware\CommunityTagSelectMiddleware;
-use App\Models\User;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redis;
-=======
 use App\Http\Controllers\Auth\UsersController;
 use App\Http\Controllers\Auth\TwoFAController;
 use App\Http\Controllers\Auth\SessionsController;
 use App\Http\Controllers\Auth\FollowSuggestionController;
->>>>>>> 660e61971e471c31859fc3a6c12a65ee7233cb03
 
 /*
 |--------------------------------------------------------------------------
@@ -288,23 +281,9 @@ if (config("features.profile.contact")) {
 }
 
 //monetization
-<<<<<<< HEAD
-require base_path("routes/tip_routes.php");
-
-
-
-Route::get("/test-redis", function () {
-    Redis::connection("default")->publish('ternobo_post_action', json_encode([
-        'name' => 'Adam Wathan'
-    ]));
-});
-
-
-=======
 if (config("features.chat")) {
     require base_path("routes/tip_routes.php");
 }
->>>>>>> 660e61971e471c31859fc3a6c12a65ee7233cb03
 // Pages
 Route::prefix('/{page:slug}')->group(function () {
 

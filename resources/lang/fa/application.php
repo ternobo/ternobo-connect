@@ -75,13 +75,8 @@ return [
     "optional" => "اختیاری",
     "bookmarks" => "نشان‌ها",
     "sort-by" => "ترتیب براساس",
-<<<<<<< HEAD
-    "trending" => "پرطرفدار",
-
-=======
     "post-page-title" => "محتوای :user",
     "privacy-policy" => "Privacy Policy",
->>>>>>> 660e61971e471c31859fc3a6c12a65ee7233cb03
 
     "password-strength" => [
         "short" => "کوتاه",
