@@ -1,0 +1,27 @@
+.ternobo-editor {
+    font-size: 1rem;
+
+    p {
+        margin: 0;
+    }
+
+    a {
+        color: $blue-cta;
+
+        &:hover {
+            color: $blue-hover;
+        }
+    }
+
+    .spoiler {
+        background: $blue-light;
+
+        &::after {
+            display: none;
+        }
+    }
+
+    span.mention {
+        color: $blue-cta;
+    }
+}

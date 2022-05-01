@@ -1,10 +1,11 @@
-.editorBox {
-    position: fixed !important;
-    display: none;
+.ternobo-editor-bubble {
     border-radius: 8px;
-    z-index: 9999;
     background: $white;
     box-shadow: 0 0 1rem 0px rgba(0, 0, 0, 0.1);
+
+    >div {
+        display: flex;
+    }
 
     button {
         background: none;
@@ -38,13 +39,23 @@
             cursor: pointer;
         }
     }
+
+    .link-input {
+        display: flex;
+        align-items: center;
+
+        input {
+            @extend .form-control;
+            @extend .fill;
+        }
+    }
 }
 
 /*******************************************************************/
 .block-content-editor {
     display: flex;
     flex-direction: column;
-    min-height: 270px;
+    min-height: 340px;
     background-color: $white;
 
     &__blocks-list-button {
@@ -238,3 +249,12 @@ div[placeholder]:not(:focus):empty:before {
 
 @import "./blocks/datepicekr.scss";
 @import "./poll-modal";
+
+/*****************************/
+.ProseMirror p.is-editor-empty:first-child:before {
+    content: attr(data-placeholder);
+    float: $start;
+    color: $gray;
+    pointer-events: none;
+    height: 0;
+}

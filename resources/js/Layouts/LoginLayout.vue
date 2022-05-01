@@ -15,7 +15,7 @@
 				<div class="login-header-menu">
 					<slot name="header">
 						<a href="https://trello.com/b/Vku6XmjN/ternobo" target="trello">{{ __.get("application.trello") }}</a>
-						<a href="https://discord.gg/unXsnGHsNj" target="discord">{{ __.get("application.discord") }}</a>
+						<a href="https://discord.com/invite/ApQzyxsKQG" target="discord">{{ __.get("application.discord") }}</a>
 						<a href="#" @click="showlaws = !showlaws">{{ __.get("application.comuunity-guidelines") }}</a>
 						<dropdown-menu class="me-4 pe-0" variant="white">
 							<template #button="{ active }">

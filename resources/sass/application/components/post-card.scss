@@ -164,6 +164,10 @@
 
         }
 
+        ul {
+            list-style: disc;
+        }
+
         &:last-child {
             padding-bottom: 0.75rem;
         }
@@ -498,7 +502,7 @@
 }
 
 
-.slider-content {
+.post-content {
     ul {
         list-style: disc;
     }
@@ -511,8 +515,8 @@
         unicode-bidi: -moz-plaintext;
         unicode-bidi: plaintext;
         font-weight: 600;
-        font-size: 32px;
-        line-height: 28px;
+        font-size: 1.875rem;
+        line-height: 56px;
         text-align: start;
     }
 
@@ -520,8 +524,8 @@
         unicode-bidi: -moz-plaintext;
         unicode-bidi: plaintext;
         font-weight: 600;
-        font-size: 24px;
-        line-height: 28px;
+        font-size: 1.5rem;
+        line-height: 50px;
         text-align: start;
     }
 
@@ -529,9 +533,13 @@
         unicode-bidi: -moz-plaintext;
         unicode-bidi: plaintext;
         font-weight: 600;
-        font-size: 20px;
-        line-height: 28px;
+        font-size: 1.125rem;
+        line-height: 34px;
         text-align: start;
+    }
+
+    .mention {
+        color: $blue-cta;
     }
 
     div.post-content--text {
@@ -660,17 +668,17 @@ code {
 blockquote {
     margin-left: 0;
     margin-right: 0;
-    padding: 0 2rem;
-    position: relative;
-    font-weight: 600;
-    color: $black;
+    padding: 0 1rem;
+    border-#{$start}: 2px solid $gray-light-medium;
 
-    &::after {
-        content: "format_quote";
-        @include material-icons-outlined;
-        position: absolute;
-        left: 0;
-        top: 0;
-        color: $gray-medium-dark;
+    p {
+        margin: 0;
     }
+}
+
+
+
+.horizontal-rule {
+    border: 1px solid $gray-light-medium;
+    background: $gray-light-medium;
 }

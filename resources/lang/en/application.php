@@ -76,8 +76,8 @@ return [
     "optional" => "Optional",
     "bookmarks" => "Bookmarks",
     "sort-by" => "Sort by",
-    "trending" => "Trending",
-
+    "post-page-title" => ":user Post",
+    "privacy-policy" => "Privacy Policy",
 
     "password-strength" => [
         "short" => "Too Short",

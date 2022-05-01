@@ -27,7 +27,69 @@ use Illuminate\Support\Facades\Storage;
 use PHPHtmlParser\Dom;
 
 /**
+ * App\Models\Post
+ *
  * @property mixed|string slug
+ * @property int $id
+ * @property int $user_id
+ * @property int $page_id
+ * @property string|null $title
+ * @property string|null $text
+ * @property array $media
+ * @property int|null $category_id
+ * @property string $show
+ * @property string $type
+ * @property bool $can_tip
+ * @property string|null $slug
+ * @property int|null $post_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Action[] $actions
+ * @property-read int|null $actions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PostBlock[] $blocks
+ * @property-read int|null $blocks_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $bookmarks
+ * @property-read int|null $bookmarks_count
+ * @property-read \App\Models\Category|null $category
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Comment[] $comments
+ * @property-read int|null $comments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Like[] $likes
+ * @property-read int|null $likes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Like[] $mutualLikes
+ * @property-read int|null $mutual_likes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Notification[] $notifications
+ * @property-read int|null $notifications_count
+ * @property-read \App\Models\Page $page
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Report[] $reports
+ * @property-read int|null $reports_count
+ * @property-read Post|null $share
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
+ * @property-read int|null $tags_count
+ * @property-read \App\Models\User $user
+ * @method static \Database\Factories\PostFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Post onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereCanTip($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereMedia($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post wherePageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post wherePostId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereShow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|Post withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Post withoutTrashed()
+ * @mixin \Eloquent
  */
 class Post extends Model
 {
@@ -66,12 +128,12 @@ class Post extends Model
      */
     public static function withRelations(): \Illuminate\Database\Eloquent\Builder
     {
-        return self::with(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
+        return self::with(["page", 'likes', 'mutualLikes', 'category']);
     }
 
     public function loadRelations()
     {
-        return $this->load(["page", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
+        return $this->load(["page", 'likes', 'mutualLikes', 'category']);
     }
 
 
@@ -114,11 +176,6 @@ class Post extends Model
         return $this->morphMany(Notification::class, "notifiable");
     }
 
-    public function slides()
-    {
-        return $this->hasMany(PostSlide::class, "post_id");
-    }
-
     public function reports()
     {
         return $this->hasMany(Report::class, "reportable_id")->where("reportable_type", Post::class);
@@ -138,9 +195,9 @@ class Post extends Model
         }
     }
 
-    public function blocks(): HasManyThrough
+    public function blocks(): HasMany
     {
-        return $this->hasManyThrough(SlideBlock::class, PostSlide::class, "post_id", "slide_id");
+        return $this->hasMany(PostBlock::class);
     }
 
     public function share(): BelongsTo
@@ -189,151 +246,6 @@ class Post extends Model
         return $this->hasMany(Like::class, "post_id")
             ->with("page")
             ->latest();
-    }
-
-    public function setContent($slides, $user, $fileOnly = false, PollService $pollService, Dom $dom): array
-    {
-        $mentions = [];
-        $tags = [];
-        foreach ($slides as $slide) {
-
-            if (count($slide) == 0) {
-                continue;
-            }
-
-            $slide_id = PostSlide::query()->create([
-                'page_id' => $user->personalPage->id,
-                'post_id' => $this->id,
-            ])->id;
-            foreach ($slide['blocks'] as $rawContent) {
-                $sort = (int)$rawContent['sort'];
-                $content = $rawContent['content'];
-                $type = $rawContent['type'];
-                $meta = $rawContent['meta'] ?? [];
-
-                if (!isset($content)) {
-                    continue;
-                }
-
-
-                switch ($type) {
-                    case "quote":
-                    case "text":
-                        // Process
-                        $text = SocialMediaTools::safeHTML($content);
-                        $text_mentions = SocialMediaTools::getMentions($text);
-                        $slideTags = array_slice(SocialMediaTools::getHashtags($text), 0, 3);
-                        $mentions = array_merge($text_mentions, $mentions);
-
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => SocialMediaTools::replaceMentions($text, $text_mentions),
-                            'type' => $type,
-                            "meta" => $meta,
-                        ]);
-
-
-                        break;
-
-                    case "orderedList":
-                    case "bulletedList":
-                        $content = collect($content)->map(function ($item) use ($mentions, $tags) {
-                            $text = SocialMediaTools::safeHTML($item);
-                            $text_mentions = SocialMediaTools::getMentions($text);
-                            return SocialMediaTools::replaceMentions($text, $text_mentions);
-                        });
-
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => json_encode($content),
-                            'type' => $type,
-                            "meta" => $meta,
-                        ]);
-                        break;
-
-                    case "title":
-                    case "heading2":
-                    case "heading3":
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => $content,
-                            'type' => $type,
-                            "meta" => $meta,
-                        ]);
-                        break;
-                    case "image":
-                        $media = $content instanceof UploadedFile | $fileOnly ? SocialMediaTools::uploadPostImage($content, 90, $meta) : $content;
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => $media['content'],
-                            'type' => 'image',
-                            'meta' => $media['meta']
-                        ]);
-                        break;
-                    case "video":
-                        $media = $content instanceof UploadedFile | $fileOnly ? $content->store("videos") : $content;
-
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => $media,
-                            'type' => 'video',
-                            "meta" => $meta,
-                        ]);
-                        break;
-
-                    case "code":
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => json_encode(['language' => $content['language'], "code" => $content['code']]),
-                            'type' => 'code',
-                            "meta" => $meta,
-                        ]);
-                        break;
-                    case "embed":
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => $content,
-                            'type' => 'embed',
-                            "meta" => $meta,
-                        ]);
-                        break;
-                    case "poll":
-                        $poll = null;
-                        if (isset($meta['poll_id'])) {
-                            $poll = $pollService->findById($meta['poll_id']);
-                        } else {
-                            $poll = $pollService->createPoll(
-                                PollModel::fromArray($content)
-                            );
-                        }
-
-                        SlideBlock::query()->create([
-                            'slide_id' => $slide_id,
-                            'page_id' => $user->personalPage->id,
-                            'sort' => $sort,
-                            'content' => json_encode($poll),
-                            'type' => 'poll',
-                            "meta" => $meta,
-                        ]);
-                        break;
-                }
-            }
-        }
-        return  $mentions;
     }
 
     public function tags()

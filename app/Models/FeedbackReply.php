@@ -8,6 +8,44 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 
+/**
+ * App\Models\FeedbackReply
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $feedback_id
+ * @property string $text
+ * @property int|null $parent_id
+ * @property int|null $reply_to
+ * @property int $pinned
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Feedback $feedback
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Like[] $likes
+ * @property-read int|null $likes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|FeedbackReply[] $replies
+ * @property-read int|null $replies_count
+ * @property-read FeedbackReply|null $replyto
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|FeedbackReply newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|FeedbackReply newQuery()
+ * @method static \Illuminate\Database\Query\Builder|FeedbackReply onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|FeedbackReply query()
+ * @method static \Illuminate\Database\Eloquent\Builder|FeedbackReply whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FeedbackReply whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FeedbackReply whereFeedbackId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FeedbackReply whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FeedbackReply whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FeedbackReply wherePinned($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FeedbackReply whereReplyTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FeedbackReply whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FeedbackReply whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FeedbackReply whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|FeedbackReply withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|FeedbackReply withoutTrashed()
+ * @mixin \Eloquent
+ */
 class FeedbackReply extends Model
 {
     use SoftDeletes;

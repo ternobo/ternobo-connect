@@ -1,5 +1,5 @@
 <template>
-	<div class="media-block" :class="{ 'p-0': content != null }">
+	<div class="media-block" :class="{ 'p-0 border-0': content != null }">
 		<!--- Show Media End !-->
 		<div v-if="content != null" class="w-100" style="overflow: hidden">
 			<video-player :src="contentUrl" class="mb-0 w-100"></video-player>
@@ -16,9 +16,9 @@
 
 			<div class="media-block__actions">
 				<button class="btn btn-outlined btn-rounded" @click="selectMedia"><i class="material-icons-outlined me-2">cloud_upload</i> {{ __.get("application.upload") }}</button>
-				<button class="btn btn-outlined btn-rounded" @click="$emit('update:type', 'embed')"><img src="/images/embeds/youtube.svg" width="16" class="me-2" /> {{ __.get("editor.embed.youtube") }}</button>
-				<button class="btn btn-outlined btn-rounded" @click="$emit('update:type', 'embed')"><img src="/images/embeds/aparat.svg" width="16" class="me-2" /> {{ __.get("editor.embed.aparat") }}</button>
-				<button class="btn btn-outlined btn-rounded" @click="$emit('update:type', 'embed')"><img src="/images/embeds/vimeo.svg" width="16" class="me-2" /> {{ __.get("editor.embed.vimeo") }}</button>
+				<button class="btn btn-outlined btn-rounded" @click="$emit('convertType', 'embed')"><img src="/images/embeds/youtube.svg" width="16" class="me-2" /> {{ __.get("editor.embed.youtube") }}</button>
+				<button class="btn btn-outlined btn-rounded" @click="$emit('convertType', 'embed')"><img src="/images/embeds/aparat.svg" width="16" class="me-2" /> {{ __.get("editor.embed.aparat") }}</button>
+				<button class="btn btn-outlined btn-rounded" @click="$emit('convertType', 'embed')"><img src="/images/embeds/vimeo.svg" width="16" class="me-2" /> {{ __.get("editor.embed.vimeo") }}</button>
 			</div>
 		</div>
 		<!--- Select Media End !-->

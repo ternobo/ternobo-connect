@@ -10,18 +10,22 @@ class StringUtils
 {
     public static function randomCode($length = 32, Closure $checkFunction)
     {
-        $result = "";
-        $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $result = collect([]);
+        $codeAlphabet = "abcdefghijklmnopqrstuvwxyz";
         $codeAlphabet .= "0123456789";
 
         for ($i = 0; $i < $length; $i++) {
-            $result .= $codeAlphabet[mt_rand(0, strlen($codeAlphabet) - 1)];
+            $result->add($codeAlphabet[mt_rand(0, strlen($codeAlphabet) - 1)]);
         }
 
-        if ($checkFunction($result)) {
-            return $result;
+        if ($result->diff($result->unique())->count() >= $length / 2) {
+            return StringUtils::randomCode($length, $checkFunction);
+        }
+
+        if ($checkFunction($result->join(""))) {
+            return $result->join("");
         } else {
-            return Tools::randomCode($length, $checkFunction);
+            return StringUtils::randomCode($length, $checkFunction);
         }
     }
 

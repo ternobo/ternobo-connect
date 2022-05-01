@@ -12,6 +12,7 @@ return [
     "heading1" => "Heading 1",
     "heading2" => "Heading 2",
     "heading3" => "Heading 3",
+    "divider" => "Divider",
 
     'video-format' => "Authorized Format: MP4",
     'image-size' => "Suggested Size: 1700x1700",
@@ -28,6 +29,11 @@ return [
     "poll-modal-options" => "Options",
     "poll-duration" => "Poll End Date",
     "poll-duration-ph" => "Select Poll End Date",
+
+    "text-placeholder" => "Write what you're thinking about...",
+    "heading-placeholder" => "Heading :num",
+    "title-placeholder" => "What’s the title?",
+    "quote-placeholder" => "Quote",
 
     "embed" => [
         "youtube" => "Youtube",

@@ -3,7 +3,7 @@
     flex: 28.9%;
 
     .sticky-aside {
-        top: 160px;
+        top: calc(1.25rem + 72px);
     }
 
     @media screen and (max-width: $sm-size) {

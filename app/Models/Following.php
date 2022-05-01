@@ -7,6 +7,34 @@ use App\Scopes\FollowingUsersScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * App\Models\Following
+ *
+ * @property int $id
+ * @property int $page_id
+ * @property int $following
+ * @property string $type
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Page $follower
+ * @property-read \App\Models\Page|null $page
+ * @property-read \App\Models\Tag|null $tag
+ * @method static \Illuminate\Database\Eloquent\Builder|Following newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Following newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Following onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Following query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Following whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Following whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Following whereFollowing($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Following whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Following wherePageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Following whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Following whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|Following withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Following withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Following extends Model
 {
 
@@ -70,7 +98,7 @@ class Following extends Model
         if (isset($array['page']) && $array['type'] == 'user') {
             $array['following'] = $array['page'];
             unset($array['page']);
-        } elseif (isset($array['tag']) && $array['type'] == 'tag') {
+        } elseif ($array['type'] == 'tag') {
             $array['following'] = $array['tag'];
             unset($array['tag']);
         }

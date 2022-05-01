@@ -27,11 +27,12 @@ class ContentBlock implements RuleInterface
             "bulletedList" => [new BulletedListRule()],
             "orderedList" => [new OrderedListRule()],
             "quote" => ["max:2200"],
-            "text" => ["max:2200"],
-            "title" => ["max:150"],
-            "heading2" => ["max:150"],
-            "heading3" => ["max:150"],
+            "text" => ["json", new TextBlockRule()],
+            "heading1" => ["string"],
+            "heading2" => ["string"],
+            "heading3" => ["string"],
             "poll" => [],
+            "horizontalRule" => ["nullable"],
             "embed" => ["string", "url"]
         ];
         $typeValidator = validator(["blocks" => $blocks], [

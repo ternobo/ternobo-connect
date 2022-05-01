@@ -11,6 +11,7 @@ return [
     "heading1" => "تیتر 1",
     "heading2" => "تیتر 2",
     "heading3" => "تیتر 3",
+    "divider" => "جدا کننده",
 
     'video-format' => "فرمت مجاز: MP4",
     'image-size' => "اندازه پیشنهادی: 1700x1700",
@@ -27,6 +28,12 @@ return [
     "poll-modal-options" => "گزینه‌ها",
     "poll-duration" => "تاریخ پایان نظرسنجی",
     "poll-duration-ph" => "انتخاب تاریخ",
+
+    "text-placeholder" => "بنویس به چه چیزی فکر می‌کنی...",
+    "title-placeholder" => "موضوع این محتوا چیست؟",
+    "heading-placeholder" => "عنوان :num",
+    "quote-placeholder" =>  "نقل قول",
+
 
     "embed" => [
         "youtube" => "Youtube",

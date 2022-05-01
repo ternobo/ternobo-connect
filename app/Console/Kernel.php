@@ -40,6 +40,7 @@ class Kernel extends ConsoleKernel
         $schedule->job(new AutomaticDeactivationJob())->monthly();
     }
 
+
     /**
      * Register the commands for the application.
      *

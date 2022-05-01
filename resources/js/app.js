@@ -1,6 +1,5 @@
 require('./bootstrap');
 import Vue from 'vue';
-window.maxlengthContentEditableLib = require('maxlength-contenteditable').maxlengthContentEditable;
 import {
     plugin,
 } from 'ternobowire-js';
@@ -42,9 +41,6 @@ Vue.prototype.$APP_URL = window.APP_URL;
 Vue.prototype.$axios = axios;
 Vue.prototype.scrollToElement = scrollToElement;
 
-var twitter = require('twitter-text')
-window.twitter = twitter;
-
 axios.get(`/translations.js?version=${Date.now()}`).then((response) => {
     eval(response.data);
 
@@ -71,7 +67,7 @@ axios.get(`/translations.js?version=${Date.now()}`).then((response) => {
     let dataToken = (document.body.dataset.wire);
     document.body.dataset.wire = "";
     const vue_app = new Vue({
-        store: require("./store").default,
+        store: require("./store/store").default,
         render: (h) =>
             h(Application, {
                 props: {

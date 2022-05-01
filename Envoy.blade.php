@@ -28,8 +28,8 @@ git push
 
 @task("install-dependencies")
 cd /home/ternobo/public_html/
-composer install --no-interaction --prefer-dist
 composer update --no-interaction
+composer install --no-interaction --prefer-dist
 composer dump-autoload
 @endtask
 

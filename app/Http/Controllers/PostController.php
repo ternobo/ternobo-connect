@@ -20,10 +20,11 @@ use App\Models\Like;
 use App\Models\Notification;
 use App\Models\Page;
 use App\Models\Post;
-use App\Models\SlideBlock;
+use App\Models\PostBlock;
 use App\Models\PostSlide;
 use App\Models\Report;
 use App\Models\Tag;
+use App\Services\Content\ContentStore\ContentStoreService;
 use App\Services\Poll\PollService;
 use App\SocialMediaTools;
 use Artesaos\SEOTools\Facades\SEOMeta;
@@ -41,17 +42,15 @@ use Ternobo\TernoboWire\TernoboWire;
 class PostController extends Controller
 {
 
-    private Dom $dom;
-    private PollService $pollService;
+    private ContentStoreService $service;
 
-    public function __construct(Dom $dom, PollService $pollService)
+    public function __construct(ContentStoreService $service)
     {
         $this->middleware([FollowMiddlware::class, Authenticate::class])->except([
             "show"
         ]);
         $this->middleware([FullAccessUserMiddleware::class])->only(["store", "update", "destroy"]);
-        $this->dom = $dom;
-        $this->pollService = $pollService;
+        $this->service = $service;
     }
 
     public function likePost($post_id)
@@ -159,34 +158,24 @@ class PostController extends Controller
             $post = $post->with("mutualLikes");
         }
 
+        $post = $post->where("slug", $post_id)->firstOrFail();
 
-        $post = $post->findOrFail($post_id);
         SEOMeta::addMeta("robots", "noindex");
-        $page = $post->page;
-        SEOMeta::addKeyword(['محتوای ' . $page->name, $page->name, $page->user->first_name, $page->user->last_name]);
-        $textItem = collect($post->slides[0]->content)->filter(function ($item) {
-            return $item->type == "text";
+
+        $textItem = collect($post->blocks)->filter(function ($item) {
+            return $item->type == "heading1" || $item->type == "heading2" || $item->type == "heading3";
         })->first();
-        if ($textItem) {
-            SEOTools::setDescription($textItem->content);
+
+        if ($textItem != null) {
+            SEOMeta::setTitle(Str::limit($textItem->content));
         } else {
-            SEOTools::setDescription("$page->name Shared Content");
+            SEOMeta::setTitle(trans("application.post-page-title", ['user' => $post->page->name]));
         }
-        if (($post->type === "post" || $post->type === "share") && $post->user->active) {
+
+        if (($post->type === "post") && $post->user->active) {
             return TernoboWire::render("PostPage", ["post" => PostResource::make($post), "comment" => $request->input("comment", 0)]);
         }
         return abort(404);
-    }
-
-    /**
-     * Render embed post
-     */
-    public function embedPost($post_id, Request $request)
-    {
-        $post = Post::with("page")
-            ->with("category")
-            ->findOrFail($post_id);
-        return TernoboWire::render("Embed/Widget", array("post" => $post));
     }
 
     public function seenPost(Request $request)
@@ -203,18 +192,6 @@ class PostController extends Controller
         return response()->json(array("result" => true));
     }
 
-    public function getEmbed($post_id)
-    {
-        $post = url("/embed-posts/" . $post_id);
-        $randomhash = (Str::uuid());
-        $url = url("/posts/" . $post_id);
-        $html_code = HTMLMinifier::html(view("embedcode", array("url" => $url, "randomhash" => $randomhash, "post" => $post))->render());
-        return response()->json([
-            "result" => true,
-            "code" => $html_code,
-        ]);
-    }
-
 
     /**
      * Store a newly created resource in storage.
@@ -224,7 +201,7 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $slides = $request->slides;
+        $blocks = $request->blocks;
         $user = Auth::user();
         $user->load("personalPage");
         $category = null;
@@ -252,11 +229,12 @@ class PostController extends Controller
                 'can_tip' => $request->canDonate,
             ]);
 
-            $mentions = $post->setContent($slides, $user, false, $this->pollService, $this->dom);
+            $mentions = $this->service->setContent($post, $blocks, false);
+
             if (!$draft) {
                 SocialMediaTools::callMentions($mentions, $post->id);
             }
-            $post->tags()->sync(Tag::addTag($tags));
+            // $post->tags()->sync(Tag::addTag($tags));
             $post->save();
 
             $user->personalPage->addAction("post", $post->id);
@@ -282,7 +260,9 @@ class PostController extends Controller
     public function update(PostRequest $request, $post)
     {
         $post = Post::withDrafts()->findOrFail($post);
-        $slides = $request->slides;
+
+        $blocks = $request->blocks;
+
         $user = Auth::user();
         $user->load("personalPage");
         $draft = $request->draft == '1';
@@ -290,7 +270,7 @@ class PostController extends Controller
         $deletedSlides = [];
 
         DB::beginTransaction();
-        $tags = collect($request->input("tags", []))->reject(fn ($item) => $item == null);
+
         try {
             $category = $request->filled("category") ? Category::query()->firstOrCreate([
                 'page_id' => $post->page_id,
@@ -303,10 +283,7 @@ class PostController extends Controller
                 'can_tip' => $request->canDonate,
             ]);
             $post->deleteBlocks();
-            $post->slides()->delete();
-            $post->setContent($slides, $user, false, $this->pollService, $this->dom);
-            $post->tags()->sync(Tag::addTag($tags));
-
+            $this->service->setContent($post, $blocks, false);
             $post->save();
             DB::commit();
             event(new PostShareEvent($post));
@@ -315,7 +292,7 @@ class PostController extends Controller
             throw $th;
         }
         $post->fresh();
-        $post->load(["page", "tags", 'likes', 'mutualLikes', 'category', 'slides', "slides.content"]);
+        $post->load(["page", "tags", 'likes', 'mutualLikes', 'category', "blocks"]);
 
         return response()->json(array("result" => true, "post" => PostResource::make($post)));
     }
@@ -336,9 +313,9 @@ class PostController extends Controller
         $post = Post::withDrafts()->findOrFail($post);
         if ($post->user_id === Auth::user()->id) {
             $result = $post->delete();
-            if ($result) {
-                PostDeleteProcess::dispatch($post);
-            }
+            // if ($result) {
+            // PostDeleteProcess::dispatch($post);
+            // }
             return response()->json(array("result" => $result));
         } else {
             return abort(404);

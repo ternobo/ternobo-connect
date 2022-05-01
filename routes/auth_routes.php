@@ -1,30 +1,35 @@
 <?php
 
-use App\Http\Middleware\InviteLinkMiddleware;
-use App\Http\Middleware\RedirectIfTernoboUser;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\RedirectIfTernoboUser;
+use App\Http\Middleware\InviteLinkMiddleware;
+use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\Auth\SettingsController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
-Route::get("/register", "Auth\RegisterController@index")->middleware(RedirectIfTernoboUser::class);
-Route::post("/rest-password", "Auth\ForgotPasswordController@resetPassword");
-Route::post("/updatepassword", "Auth\ForgotPasswordController@updatePassword");
-Route::post("/passowrd-reset-verification", "Auth\ForgotPasswordController@checkCode");
+Route::get("/register", [RegisterController::class, "index"])->middleware(RedirectIfTernoboUser::class);
+Route::post("/rest-password", [ForgotPasswordController::class, "resetPassword"]);
+Route::post("/updatepassword", [ForgotPasswordController::class, "updatePassword"]);
+Route::post("/passowrd-reset-verification", [ForgotPasswordController::class, "checkCode"]);
 
 Route::prefix("/auth")->group(function () {
-    Route::post('login', 'Auth\LoginController@login');
-    Route::post('verify-tfa', 'Auth\LoginController@twoFactorVerify');
+    Route::post("login", [LoginController::class, "login"]);
+    Route::post("verify-tfa", [LoginController::class, "twoFactorVerify"]);
 
 
-    Route::post('verification', 'Auth\VerificationController@sendVerificationCode');
-    Route::post('verifycode', 'Auth\VerificationController@verifyCode');
-    Route::post("signup", "Auth\RegisterController@createUser");
+    Route::post("verification", [VerificationController::class, "sendVerificationCode"]);
+    Route::post("verifycode", [VerificationController::class, "verifyCode"]);
+    Route::post("signup", [RegisterController::class, "createUser"]);
 
-    Route::post('logout', 'Auth\LoginController@logout');
+    Route::post("logout", [LoginController::class, "logout"]);
 
     /**
      * Password
      */
-    Route::post("/change-password", "Auth\SettingsController@changePassword");
+    Route::post("/change-password", [SettingsController::class, "changePassword"]);
 
     // Deactive
-    Route::post("/deactive", "Auth\SettingsController@deactiveAccount");
+    Route::post("/deactive", [SettingsController::class, "deactiveAccount"]);
 });

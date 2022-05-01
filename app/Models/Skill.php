@@ -6,6 +6,31 @@ use App\HasUser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * App\Models\Skill
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $name
+ * @property int|null $sort_place
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\SkillCredit[] $credits
+ * @property-read int|null $credits_count
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill whereSortPlace($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill whereUserId($value)
+ * @mixin \Eloquent
+ */
 class Skill extends Model
 {
     use HasUser;

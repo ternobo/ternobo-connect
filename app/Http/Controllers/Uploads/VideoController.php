@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Uploads;
 
-use App\Models\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Raju\Streamer\Helpers\VideoStream;
 use Illuminate\Support\Facades\Auth;
 
-class VideoController extends Controller {
+class VideoController extends Controller
+{
 
     /**
      * Store a newly created resource in storage.
@@ -17,14 +18,15 @@ class VideoController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         if (Auth::check()) {
             $validator = Validator::make($request->all(), [
-                        "video" => "required|mimes:mp4|max:30000"
-                            ], [
-                        "video.required" => "ویدیو احباری است",
-                        "video.mimes" => "فقط امکان آپلود فایل mp4 وجود دارد",
-                        "video.max" => "حداکثر حجم برای آپلود 30 مگابایت است"
+                "video" => "required|mimes:mp4|max:30000"
+            ], [
+                "video.required" => "ویدیو احباری است",
+                "video.mimes" => "فقط امکان آپلود فایل mp4 وجود دارد",
+                "video.max" => "حداکثر حجم برای آپلود 30 مگابایت است"
             ]);
             if ($validator->fails()) {
                 return response()->json(array("result" => false, "errors" => $validator->errors()));
@@ -42,13 +44,14 @@ class VideoController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
+    public function show($id)
+    {
         $file = Storage::disk('local')->getAdapter()->getPathPrefix() . "videos/$id";
         if (file_exists($file)) {
             $stream = new VideoStream($file);
-            return response()->stream(function() use ($stream) {
-                        $stream->start();
-                    });
+            return response()->stream(function () use ($stream) {
+                $stream->start();
+            });
         }
         return abort(404);
     }
@@ -59,8 +62,8 @@ class VideoController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         //
     }
-
 }

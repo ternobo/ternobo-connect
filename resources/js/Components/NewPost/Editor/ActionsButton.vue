@@ -4,7 +4,7 @@
 		<transition name="fade">
 			<div class="editors-actions-list" :style="editorsActionListStyle" v-if="showList">
 				<div class="text-type-list">
-					<div class="editor-list-item" :class="{ disabled: !activeOptions.includes('title') }" @click="emitAcion('title')">
+					<div class="editor-list-item" :class="{ disabled: !activeOptions.includes('heading1') }" @click="emitAcion('heading1', { type: 1 })">
 						<i class="material-icons">title</i>
 						<strong>{{ __.get("editor.heading1") }}</strong>
 					</div>
@@ -19,6 +19,10 @@
 					<div class="editor-list-item" :class="{ disabled: !activeOptions.includes('text') }" @click="emitAcion('text')">
 						<i class="material-icons">text_fields</i>
 						<strong>{{ __.get("content/posts.text") }}</strong>
+					</div>
+					<div class="editor-list-item" :class="{ disabled: !activeOptions.includes('text') }" @click="emitAcion('horizontalRule')">
+						<i class="material-icons">remove</i>
+						<strong>{{ __.get("editor.divider") }}</strong>
 					</div>
 					<div class="editor-list-item" :class="{ disabled: !activeOptions.includes('text') }" @click="emitAcion('bulletedList')">
 						<i class="material-icons-outlined">format_list_bulleted</i>
@@ -49,10 +53,10 @@
 						<i class="material-icons-outlined">code</i>
 						<strong>{{ __.get("editor.code") }}</strong>
 					</div>
-					<div class="editor-list-item" :class="{ disabled: !activeOptions.includes('poll') }" @click="emitAcion('poll')">
+					<!-- <div class="editor-list-item" :class="{ disabled: !activeOptions.includes('poll') }" @click="emitAcion('poll')">
 						<i class="material-icons-outlined">poll</i>
 						<strong>{{ __.get("editor.poll") }}</strong>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</transition>
@@ -67,7 +71,7 @@ export default {
 		...mapState(["shared"]),
 		editorsActionListStyle() {
 			let style = {
-				top: 0,
+				top: this.top,
 			};
 			if (this.shared.direction == "rtl") {
 				style.left = "-266px";
@@ -93,15 +97,24 @@ export default {
 				this.$emit("select", type, meta);
 			}
 		},
-		toggleList(e) {
+		toggleList(top = 0) {
 			this.showList = !this.showList;
+			if (this.showList) {
+				this.top = top;
+			} else {
+				this.top = 0;
+			}
 		},
 		hideList() {
+			if (this.showList) {
+				this.top = 0;
+			}
 			this.showList = false;
 		},
 	},
 	data() {
 		return {
+			top: 0,
 			showList: false,
 			xPosition: 0,
 			yPosition: 0,

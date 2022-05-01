@@ -33,10 +33,10 @@
 		<div class="post-footer" v-if="!isEmbed">
 			<div class="actions">
 				<div>
-					<div class="clickale text-muted clickable hover-dark" v-if="post_data.page.has_donate && post_data.can_tip" @click="showTips = true">
+					<!-- <div class="clickale text-muted clickable hover-dark" v-if="post_data.page.has_donate && post_data.can_tip" @click="showTips = true">
 						<i class="material-icons-outlined">savings</i>
 						{{ __.choice("tips.tip", 1) }}
-					</div>
+					</div> -->
 				</div>
 				<div>
 					<div class="buttons" v-if="$store.state.user">
@@ -97,9 +97,6 @@ export default {
 	watch: {
 		slide() {
 			this.slideShowing = this.slide;
-		},
-		slideShowing() {
-			this.$emit("update:slide", this.slideShowing);
 		},
 	},
 	methods: {

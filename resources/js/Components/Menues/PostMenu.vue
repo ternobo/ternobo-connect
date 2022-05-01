@@ -7,13 +7,9 @@
 				<template v-slot:button>
 					<i class="material-icons openmenu clickale text-muted hover-dark">more_vert</i>
 				</template>
-				<dropdown-item v-clipboard="$APP_URL + '/posts/' + post.id">
+				<dropdown-item v-clipboard="$APP_URL + '/p/' + post.slug">
 					<i class="material-icons text-dark">link</i>
 					<strong>{{ __.get("content/posts.copy-post-link") }}</strong>
-				</dropdown-item>
-				<dropdown-item v-if="post.slides.length > 1" @click="$emit('copySlide')">
-					<i class="material-icons text-dark">link</i>
-					<strong>{{ __.get("content/posts.copy-post-link-slide") }}</strong>
 				</dropdown-item>
 				<dropdown-item @click="$emit('edit')" v-if="checkUser(post.page.user_id) && post.type != 'article'">
 					<div class="d-flex align-items-center">

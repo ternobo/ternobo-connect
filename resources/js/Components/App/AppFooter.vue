@@ -1,12 +1,14 @@
 <template>
 	<div>
 		<LawsModal :show.sync="showLaws"></LawsModal>
+		<privacy-policy :show.sync="showPrivacyPolicy"></privacy-policy>
 		<div class="sticky-aside d-flex align-items-center flex-column">
 			<langdropdown class="mb-4" :value="lang"></langdropdown>
 			<div class="app-footer">
 				<div class="sidemenu-links d-flex flex-wrap justify-content-center align-items-center mb-2">
 					<a class="text-muted hover-dark font-14 me-4" @click="showLaws = true">{{ __.get("application.comuunity-guidelines") }}</a>
-					<a class="text-muted hover-dark font-14 me-4" href="https://discord.gg/unXsnGHsNj" target="_blank">{{ __.get("application.discord") }}</a>
+					<a class="text-muted hover-dark font-14 me-4" @click="showPrivacyPolicy = true">{{ __.get("application.privacy-policy") }}</a>
+					<a class="text-muted hover-dark font-14 me-4" href="https://discord.com/invite/ApQzyxsKQG" target="_blank">{{ __.get("application.discord") }}</a>
 					<a class="text-muted hover-dark font-14" href="https://trello.com/b/Vku6XmjN/ternobo" target="_blank">{{ __.get("application.trello") }}</a>
 				</div>
 				<div class="copyright-text d-flex align-items-center justify-content-center" style="height: 16px">
@@ -21,10 +23,12 @@
 <script>
 import { mapState } from "vuex";
 import Langdropdown from "../Langdropdown";
+import PrivacyPolicy from "../Modals/PrivacyPolicy.vue";
 export default {
 	data() {
 		return {
 			showLaws: false,
+			showPrivacyPolicy: false,
 			lang: { label: "فارسی", subtext: "", icon: "/images/iran-flag.png" },
 		};
 	},
@@ -43,6 +47,7 @@ export default {
 				"../Modals/LawsModal"
 			),
 		Langdropdown,
+		PrivacyPolicy,
 	},
 };
 </script>

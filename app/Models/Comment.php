@@ -10,12 +10,45 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 
 /**
- *
  * All models are connected to database so just functions are defined and variables variables are dynamic.
+ * 
  * Variables :
  *      post_id - bookmarked post id
  *      action - \App\Post bookmarked post
  *      created_at - bookmark date
+ *
+ * @property int $id
+ * @property int $page_id
+ * @property int $post_id
+ * @property int|null $reply_to
+ * @property int|null $parent_id
+ * @property string $text
+ * @property array|null $tags
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Like[] $likes
+ * @property-read int|null $likes_count
+ * @property-read \App\Models\Notification|null $notification
+ * @property-read \App\Models\Page $page
+ * @property-read \Illuminate\Database\Eloquent\Collection|Comment[] $replies
+ * @property-read int|null $replies_count
+ * @property-read Comment|null $replyto
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment wherePageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment wherePostId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereReplyTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereTags($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Comment extends Model
 {

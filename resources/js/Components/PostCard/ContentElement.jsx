@@ -1,6 +1,7 @@
-import TextareaParser from "../NewPost/Editor/TextareaParser";
-import VideoPlayer from "./SliderCard/Elements/PostVideoPlayer.vue";
-import CodeBlock from "./SliderCard/Elements/Code.vue";
+import VideoPlayer from "./Blocks/PostVideoPlayer.vue";
+import CodeBlock from "./Blocks/Code.vue";
+import ContentViewer from "./ContentViewer.vue";
+
 export default {
     render: function (h) {
         let contentType = this.content.type;
@@ -8,32 +9,29 @@ export default {
         let classes = "";
         let content = "";
         switch (contentType) {
-            case "title":
-                tag = "h1";
-                content = this.content.content;
+            case "heading1":
+                tag = "div";
+                content = <h1 dir="auto">{this.content.content}</h1>;
+                break;
+            case "heading2":
+                tag = "div";
+                content = <h2 dir="auto">{this.content.content}</h2>;
+                break;
+            case "heading3":
+                tag = "div";
+                content = <h3 dir="auto">{this.content.content}</h3>;
                 break;
             case "embed":
                 tag = "div";
-                content = <iframe title="embedvideo" class="embed-video" src={this.content.content} allowfullscreen width="510" height="287"></iframe>;
-                break;
-            case "heading2":
-                tag = "h2";
-                content = this.content.content;
-                break;
-            case "heading3":
-                tag = "h3";
-                content = this.content.content;
+                content = <iframe title="embedvideo" class="embed-video" src={this.content.content} allowfullscreen width="510" height="286"></iframe>;
                 break;
             case "quote":
             case "text":
                 if (this.content.content != null) {
                     tag = contentType == "quote" ? "blockquote" : "div";
                     classes += "post-content--text";
-                    this.text = (TextareaParser.unescapeHtml(this.content.content));
                     content = (
-                        <div>
-                            <social-content text={this.text}></social-content>
-                        </div>
+                        <content-viewer content={this.content.content}></content-viewer>
                     );
                 }
                 break;
@@ -45,6 +43,9 @@ export default {
                 let spoiler = this.content.meta?.spoiler;
                 spoiler = typeof (spoiler) == 'string' ? parseInt(spoiler) : spoiler;
                 content = (<image-viewer onLoad={this.$emit.bind(this, 'loaded')} spoiler={spoiler} info={this.content.meta?.info} src={source} />);
+                break;
+            case "horizontalRule":
+                content = <hr class="horizontal-rule" />;
                 break;
             case "video":
                 tag = "div";
@@ -70,7 +71,7 @@ export default {
 
                 items.forEach((item) => {
                     li_list.push(<li>
-                        <social-content text={item}></social-content>
+                        <content-viewer content={this.content.content}></content-viewer>
                     </li>)
                 });
 
@@ -83,14 +84,16 @@ export default {
         }
 
         return h(tag, {
+            dir: "auto",
             class: classes
         }, [content]);
     },
     components: {
         VideoPlayer,
         CodeBlock,
-        "image-viewer": () => import("./SliderCard/Elements/ImageViewer.vue"),
-        "poll-viewer": () => import("./SliderCard/Elements/PollViewer.vue")
+        ContentViewer,
+        "image-viewer": () => import("./Blocks/ImageViewer.vue"),
+        "poll-viewer": () => import("./Blocks/PollViewer.vue")
     },
     mounted() {
         twemoji.parse(this.$el);

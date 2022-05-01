@@ -42,7 +42,7 @@ export default {
 	computed: {
 		...mapState(["user", "shared"]),
 		canShowFollow() {
-			return this.user !== null && this.user.personal_page_id != this.page_id && this.shared.fullAccess;
+			return this.user !== null && this.user.personal_page_id != this.page_id;
 		},
 	},
 	methods: {

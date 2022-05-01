@@ -6,6 +6,50 @@ use App\Events\NotificationEvent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * App\Models\Notification
+ *
+ * @property int $id
+ * @property string $action
+ * @property int|null $from
+ * @property int $guest
+ * @property int $to
+ * @property string $notifiable_type
+ * @property int $notifiable_id
+ * @property int|null $connected_to
+ * @property string|null $text
+ * @property int $pin
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property mixed|null $meta
+ * @property string|null $title
+ * @property string|null $icon
+ * @property-read \App\Models\Comment|null $comment
+ * @property-read Model|\Eloquent $notifiable
+ * @property-read \App\Models\Page|null $receiver
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\NotificationSeen[] $seenNotification
+ * @property-read int|null $seen_notification_count
+ * @property-read \App\Models\Page|null $sender
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereAction($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereConnectedTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereGuest($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereIcon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereMeta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereNotifiableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereNotifiableType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification wherePin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Notification extends Model
 {
 

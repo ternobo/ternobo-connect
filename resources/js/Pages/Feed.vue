@@ -6,7 +6,7 @@
 		<div class="content-container">
 			<new-post-card @posted="postAdded" class="mb-4"></new-post-card>
 			<transition-group name="flip-list" tag="div" class="posts" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="5">
-				<PostCard v-for="post in postsArray" :key="'post_item_' + uuidV4(post)" :post="post"></PostCard>
+				<post-card v-for="post in postsArray" :key="'post_item_' + post.id" :post="post"></post-card>
 			</transition-group>
 			<div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
 				<loading-spinner class="image__spinner" />
@@ -28,14 +28,14 @@
 
 <script>
 import AppLayout from "../Layouts/AppLayout";
-import PostCard from "../Components/PostCard/PostCard";
 import NoContent from "../Components/NoContent";
 import AppFooter from "../Components/App/AppFooter";
 import { TernoboWire } from "ternobowire-js";
+import PostCard from "../Components/PostCard/PostCard.vue";
 
 export default {
 	watch: {
-		posts(newValue) {
+		posts() {
 			this.postsArray = this.posts.data;
 		},
 	},

@@ -2,7 +2,7 @@
 	<div v-if="user != null">
 		<category-select-modal :categories.sync="categories" @hide="onCategoryClose" :selectedCategory.sync="category" :show.sync="showCategoryModal"></category-select-modal>
 
-		<b-modal ignore-enforce-focus-selector=".ternoboeditor--link-input, .form-control, .editor-block-container *" v-model="showModal" @hide="hide" @show="shown" no-close-on-esc hide-footer :hide-backdrop="hideModal" :modal-class="{ 'opacity-0': hideModal }" size="lg" :title="__.get('content/posts.create-new-post')" :centered="true">
+		<b-modal ignore-enforce-focus-selector=".ternoboeditor--link-input, .editor-list-item, .form-control, .editor-block-container *" v-model="showModal" @hide="hide" @show="shown" no-close-on-esc hide-footer :hide-backdrop="hideModal" :modal-class="{ 'opacity-0': hideModal }" size="lg" :title="__.get('content/posts.create-new-post')" :centered="true">
 			<div class="content-creation">
 				<div class="content-creation--header">
 					<div class="content-creation--header__user-profile">
@@ -10,22 +10,22 @@
 						<strong class="user-profile-name">{{ username }}</strong>
 					</div>
 					<div class="content-creation--header__actions">
-						<div class="can-tip-post-check clickable" @click="canDonate = !canDonate">
+						<!-- <div class="can-tip-post-check clickable" @click="canDonate = !canDonate">
 							<div>
 								<i class="material-icons-outlined font-20 me-1">savings</i>
 								{{ __.choice("tips.tip", 1) }}
 							</div>
 							<loading-spinner v-if="loadingCanDonate" style="height: 12px; width: 12px; border-width: 1px"></loading-spinner>
 							<checkbox v-else v-model="canDonate" :status="canDonate" class="m-0 text-superlight light"></checkbox>
-						</div>
+						</div> -->
 						<div class="category-select" @click="showCategoryModal = true">
 							<i class="material-icons-outlined">layers</i>
 							<span>{{ category == null ? __.choice("content/posts.category", 2) : category.name }}</span>
 						</div>
 					</div>
 				</div>
-				<slider v-model="content" @delete="onSlideDelete" ref="sliderEditor" />
-				<tag-input v-model="tags" />
+				<editor :content.sync="blocks" />
+				<!-- <tag-input v-model="tags" /> -->
 			</div>
 			<modal-footer-buttons @ok="submitPost(shouldDraft)" @cancel="submitPost(!shouldDraft)" class="mt-8" :cancelLoading="loadingDraft" :okLoading="loading" :okText="post ? __.get('application.save') : __.get('content/posts.publish')" :cancelText="shouldDraft ? __.get('content/posts.publish') : __.get('content/posts.draft')" :cancelDisable="!checkContent" cancelClass="btn-text" :okDisabled="!checkContent" okClass="btn-primary"></modal-footer-buttons>
 		</b-modal>
@@ -35,19 +35,15 @@
 <script>
 import ModalMixin from "../../Mixins/Modal";
 import TagInput from "../inputs/TagInput";
-import FileInput from "../../Components/inputs/FileInput";
-import Slider from "./Slides/Slider.vue";
-
-import uuidv4 from "uuid";
-import isUUID from "is-uuid";
 import Checkbox from "../inputs/Checkbox.vue";
 import { mapState } from "vuex";
 import LoadingSpinner from "../LoadingSpinner.vue";
 import CategorySelect from "../CategorySelect/CategorySelect.vue";
 import CategorySelectModal from "../CategorySelect/CategorySelectModal.vue";
 import { serialize } from "../../Libs/ObjectToFormdata";
-import EditImageModal from "./EditImageModal.vue";
 import ModalFooterButtons from "../Modals/ModalFooterButtons.vue";
+import Editor from "./Editor/Index";
+
 export default {
 	props: {
 		post: {
@@ -62,11 +58,6 @@ export default {
 		},
 		onCategoryClose() {
 			this.$emit("update:show", true);
-		},
-		onSlideDelete(id) {
-			if (!isUUID.v4(id)) {
-				this.deletedSlides.push(id);
-			}
 		},
 		newCategory(value) {
 			if (!this.categories.filter((item) => item.name == value).length > 0) {
@@ -85,14 +76,7 @@ export default {
 				this.toast(__.get("messages.duplicated-category"));
 			}
 		},
-		toBase64(file) {
-			return new Promise((resolve, reject) => {
-				const reader = new FileReader();
-				reader.readAsDataURL(file);
-				reader.onload = () => resolve(reader.result);
-				reader.onerror = (error) => reject(error);
-			});
-		},
+		// Prevent tab close
 		shown() {
 			window.onbeforeunload = function (e) {
 				var message = "در صورت خروج اطلاعات از بین‌می‌رود!",
@@ -106,45 +90,35 @@ export default {
 				return message;
 			};
 		},
-		async submitPost(draft = false) {
+
+		submitPost(draft = false) {
+			// Check if post is draft
 			if (draft) {
 				this.loadingDraft = true;
 			} else {
 				this.loading = true;
 			}
+
 			let data = {
-				slides: this.content,
+				blocks: this.blocks.map((item, sort) => {
+					return {
+						type: item.type,
+						id: item.id,
+						sort: sort,
+						content: item.content,
+						meta: item.meta,
+					};
+				}),
 				draft: draft ? 1 : 0,
 				tags: this.tags,
+				canDonate: this.canDonate,
+				category: this.category ? this.category.name : null,
+				_method: this.post ? "PUT" : "POST",
 			};
-			data.slides = data.slides.map((item) => {
-				for (let sort = 0; sort < item.content.length; sort++) {
-					item.content[sort] = {
-						type: item.content[sort].type,
-						id: item.content[sort].id,
-						sort: sort,
-						content: item.content[sort].content,
-						meta: item.content[sort].meta,
-					};
-				}
-				return { id: item.id, blocks: item.content };
-			});
-			if (this.category) {
-				data.category = this.category.name;
-			}
-
-			if (this.post) {
-				data.deletedSlides = JSON.stringify(this.deletedSlides);
-				data._method = "PUT";
-			}
-
-			data.canDonate = this.canDonate;
-
-			let url = this.post != null ? `/posts/${this.post.id}` : "/posts";
 
 			let requestConfig = {
 				method: "post",
-				url: url,
+				url: this.post != null ? `/posts/${this.post.id}` : "/posts",
 				data: serialize(data),
 			};
 
@@ -152,15 +126,12 @@ export default {
 				.backgroundUpload(requestConfig)
 				.then((response) => {
 					if (response.data.result) {
-						if (this.post) {
+						if (this.post && this.post?.blocks != response.data.post.blocks) {
 							this.$emit("update:post", response.data.post);
-							this.deletedSlides = [];
 							this.toast(__.get("messages.save-success"), "check", "text-success");
 						} else {
-							this.content = [{ id: uuidv4(), content: [], icon: "more_horiz", active: true }];
+							this.blocks = [];
 							this.category = undefined;
-							this.canDonate = false;
-							this.deletedSlides = [];
 							if (draft) {
 								this.toast(__.get("messages.drafted-success"), "check", "text-success");
 							} else {
@@ -185,72 +156,56 @@ export default {
 			this.$emit("update:show", false);
 		},
 	},
-	watch: {
-		canDonate(newValue) {
-			if (newValue && this.show) {
-				this.loadingCanDonate = true;
-				axios
-					.post("/can-donate")
-					.then((response) => {
-						if (!response.data.result) {
-							this.canDonate = false;
-							this.$bvModal
-								.msgBoxConfirm(this.__.get("messages.active-tip-error"), {
-									title: this.__.get("tips.active-gateway"),
-									cancelVariant: "transparent text-muted",
-									cancelTitle: this.__.get("application.skip"),
-									okTitle: this.__.get("tips.activate"),
-									headerClass: "category-select-modal",
-									centered: true,
-									headerCloseContent: "arrow_back",
-									hideBackdrop: false,
-									hideHeaderClose: false,
-								})
-								.then((value) => {
-									this.$emit("update:show", true);
-									if (value) {
-										window.open("/monetization?tab=settings");
-									}
-								});
-						}
-					})
-					.catch((err) => {
-						console.log(err);
-						this.toast(__.get("messages.save-error"));
-						this.canDonate = false;
-					})
-					.then(() => (this.loadingCanDonate = false));
-			}
-		},
-	},
+	// watch: {
+	// canDonate(newValue) {
+	// 	if (newValue && this.show) {
+	// 		this.loadingCanDonate = true;
+	// 		axios
+	// 			.post("/can-donate")
+	// 			.then((response) => {
+	// 				if (!response.data.result) {
+	// 					this.canDonate = false;
+	// 					this.$bvModal
+	// 						.msgBoxConfirm(this.__.get("messages.active-tip-error"), {
+	// 							title: this.__.get("tips.active-gateway"),
+	// 							cancelVariant: "transparent text-muted",
+	// 							cancelTitle: this.__.get("application.skip"),
+	// 							okTitle: this.__.get("tips.activate"),
+	// 							headerClass: "category-select-modal",
+	// 							centered: true,
+	// 							headerCloseContent: "arrow_back",
+	// 							hideBackdrop: false,
+	// 							hideHeaderClose: false,
+	// 						})
+	// 						.then((value) => {
+	// 							this.$emit("update:show", true);
+	// 							if (value) {
+	// 								window.open("/monetization?tab=settings");
+	// 							}
+	// 						});
+	// 				}
+	// 			})
+	// 			.catch((err) => {
+	// 				console.log(err);
+	// 				this.toast(__.get("messages.save-error"));
+	// 				this.canDonate = false;
+	// 			})
+	// 			.then(() => (this.loadingCanDonate = false));
+	// 	}
+	// },
+	// },
 	mounted() {
 		if (this.$store.state.user) {
 			if (this.$store.state.shared.currentPage.categories != null) {
 				this.categories = this.$store.state.shared.currentPage.categories;
 			}
 		}
-		this.deletedSlides = [];
+
 		if (this.post) {
 			this.canDonate = this.post.can_tip;
 			this.category = this.post.category;
-			let content = _.cloneDeep(this.post.slides);
-			for (let i = 0; i < content.length; i++) {
-				let item = content[i];
-				item.icon = "more_horiz";
-				let items = item.content;
-				for (let i = 0; i < items.length; i++) {
-					let elem = items[i];
-					if (elem.type == "media") {
-						item.icon = "image";
-						break;
-					} else {
-						item.icon = "text_fields";
-					}
-				}
-				item.active = false;
-			}
-			content[0].active = true;
-			this.content = content;
+			let content = _.cloneDeep(this.post.blocks);
+			this.blocks = content;
 		}
 	},
 	computed: {
@@ -266,8 +221,8 @@ export default {
 		},
 		checkContent() {
 			return (
-				this.content.filter((item) => {
-					return item.content.length > 0 && item.content.filter((content) => Boolean(content.content)).length > 0;
+				this.blocks.filter((block) => {
+					return block.content != null;
 				}).length > 0
 			);
 		},
@@ -282,7 +237,7 @@ export default {
 			showCategoryModal: false,
 
 			deletedSlides: [],
-			content: [{ id: uuidv4(), content: [], icon: "more_horiz", active: true }],
+			blocks: [],
 			tags: [],
 
 			canDonate: false,
@@ -291,14 +246,12 @@ export default {
 	},
 	components: {
 		TagInput,
-		FileInput,
-		Slider,
 		Checkbox,
 		LoadingSpinner,
 		CategorySelect,
 		CategorySelectModal,
-		EditImageModal,
 		ModalFooterButtons,
+		Editor,
 	},
 	mixins: [ModalMixin],
 	name: "NewPostModal",

@@ -4,7 +4,42 @@
 		<div class="content-container-profile" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
 			<ProfileHeader ref="ProfileHeader" :page="page" :can-edit="canEdit"></ProfileHeader>
 			<page-blocked v-if="page.blocked" :fname="page.user.first_name" />
-			<tabs :compact="true" :disabled="edit" class="profile-tabs" @selected="tabChange" :state-tab="true" v-else>
+			<div class="profile-tabs mt-6">
+				<div class="row">
+					<div class="categories-sidebar" v-if="$root.isDesktop">
+						<Categories v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug"></Categories>
+					</div>
+					<div class="posts-container-profile">
+						<div v-if="draft">
+							<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
+								<draft-card class="mb-4" v-for="action in actionsList" :post="action" :key="action.id"></draft-card>
+							</div>
+							<posts-loading v-if="loadingActions" :count="3" />
+							<div class="w-100 d-flex justify-content-center py-3" v-else-if="loadingMore">
+								<loading-spinner class="image__spinner" />
+							</div>
+							<div v-if="next_page_url === null && !loadingActions">
+								<no-content></no-content>
+							</div>
+						</div>
+						<div v-else>
+							<NewPostCard :showDraft="false" @posted="onPostAdded" ref="newPostCard" v-if="canEdit"></NewPostCard>
+							<categories-mobile v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug" v-if="!$root.isDesktop"></categories-mobile>
+							<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
+								<ActionCard v-for="action in actionsList" :page="page" :action="action" :key="action.id"></ActionCard>
+							</div>
+							<posts-loading v-if="loadingActions" :count="3" />
+							<div class="w-100 d-flex justify-content-center py-3" v-else-if="loadingMore">
+								<loading-spinner class="image__spinner" />
+							</div>
+							<div v-if="next_page_url === null && !loadingActions">
+								<no-content></no-content>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <tabs :compact="true" :disabled="edit" class="profile-tabs" @selected="tabChange" :state-tab="true" v-else>
 				<template slot="custom-item">
 					<div class="d-flex align-items-center mt-4" v-if="canEdit && showEdit">
 						<div class="me-3" v-if="edit">
@@ -36,45 +71,11 @@
 					</div>
 					<AboutTab v-else ref="about" :edit="edit" :page="page"></AboutTab>
 				</tab>
-				<tab v-if="hasActivity || canEdit" :name="__.get('user-profile.tabs.activities')" id="activities" :href="'/' + page.slug + '/activities'" :selected="current_tab === 'activities'">
-					<div class="row">
-						<div class="categories-sidebar" v-if="$root.isDesktop">
-							<Categories v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug"></Categories>
-						</div>
-						<div class="posts-container-profile">
-							<div v-if="draft">
-								<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
-									<draft-card class="mb-4" v-for="action in actionsList" :post="action" :key="action.id"></draft-card>
-								</div>
-								<posts-loading v-if="loadingActions" :count="3" />
-								<div class="w-100 d-flex justify-content-center py-3" v-else-if="loadingMore">
-									<loading-spinner class="image__spinner" />
-								</div>
-								<div v-if="next_page_url === null && !loadingActions">
-									<no-content></no-content>
-								</div>
-							</div>
-							<div v-else>
-								<NewPostCard :showDraft="false" @posted="onPostAdded" ref="newPostCard" v-if="canEdit"></NewPostCard>
-								<categories-mobile v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug" v-if="!$root.isDesktop"></categories-mobile>
-								<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
-									<ActionCard v-for="action in actionsList" :page="page" :action="action" :key="action.id"></ActionCard>
-								</div>
-								<posts-loading v-if="loadingActions" :count="3" />
-								<div class="w-100 d-flex justify-content-center py-3" v-else-if="loadingMore">
-									<loading-spinner class="image__spinner" />
-								</div>
-								<div v-if="next_page_url === null && !loadingActions">
-									<no-content></no-content>
-								</div>
-							</div>
-						</div>
-					</div>
-				</tab>
+				<tab v-if="hasActivity || canEdit" :name="__.get('user-profile.tabs.activities')" id="activities" :href="'/' + page.slug + '/activities'" :selected="current_tab === 'activities'"> </tab>
 				<tab :name="__.get('user-profile.tabs.contact')" id="contact" :href="'/' + page.slug + '/contact'" :selected="current_tab === 'contact'">
 					<ContactTab ref="contacts" :edit="edit" :page="page"></ContactTab>
 				</tab>
-			</tabs>
+			</tabs> -->
 		</div>
 		<sidebar-left v-if="$root.isDesktop">
 			<div class="card" style="margin-bottom: 16px" v-if="pages.length > 0">
@@ -145,9 +146,10 @@ export default {
 			this.current_tab = "activities";
 			this.draft = true;
 			this.showEdit = false;
-		} else {
-			this.current_tab = this.location;
 		}
+		// else {
+		// 	this.current_tab = this.location;
+		// }
 
 		if (this.current_tab == "activities") {
 			this.showEdit = false;
@@ -254,123 +256,123 @@ export default {
 			}
 		},
 
-		loadTab(link, pushState = true) {
-			if (link.endsWith("articles") || link.endsWith("activities")) {
-				this.showEdit = false;
-				this.loadingTab = true;
-				this.loadingActions = true;
-				axios
-					.post("/" + this.page.slug + "/actions", this.filters)
-					.then((response) => {
-						this.actionsList = response.data.actions.data;
-						this.next_page_url = response.data.actions.next_page_url;
-					})
-					.catch((err) => {
-						console.log(err);
-						this.toast(__.get("messages.error-in-get-data"));
-					})
-					.then(() => {
-						this.loadingTab = false;
-						this.loadingActions = false;
-					});
-			} else {
-				this.showEdit = true;
-			}
+		// loadTab(link, pushState = true) {
+		// 	if (link.endsWith("articles") || link.endsWith("activities")) {
+		// 		this.showEdit = false;
+		// 		this.loadingTab = true;
+		// 		this.loadingActions = true;
+		// 		axios
+		// 			.post("/" + this.page.slug + "/actions", this.filters)
+		// 			.then((response) => {
+		// 				this.actionsList = response.data.actions.data;
+		// 				this.next_page_url = response.data.actions.next_page_url;
+		// 			})
+		// 			.catch((err) => {
+		// 				console.log(err);
+		// 				this.toast(__.get("messages.error-in-get-data"));
+		// 			})
+		// 			.then(() => {
+		// 				this.loadingTab = false;
+		// 				this.loadingActions = false;
+		// 			});
+		// 	} else {
+		// 		this.showEdit = true;
+		// 	}
 
-			if (pushState) {
-				window.history.replaceState({}, false, link);
-			}
-		},
+		// 	if (pushState) {
+		// 		window.history.replaceState({}, false, link);
+		// 	}
+		// },
 
-		tabChange(link, id) {
-			this.current_tab = id;
-			this.loadTab(link);
-		},
-		doEdit() {
-			if (this.edit) {
-				this.loadingSave = true;
-				if (this.current_tab === "contact") {
-					let data = this.$refs.contacts.getData();
-					if (data) {
-						axios
-							.post("/contacts", {
-								contacts: data,
-							})
-							.then((response) => {
-								if (response.data.result) {
-									this.$store.commit("setProfileEdit", false);
-									window.onbeforeunload = null;
-									if (response.data.redirectTo != null) {
-										window.location = response.data.redirectTo;
-									}
-								} else {
-									this.handleError(response.data.errors);
-								}
-								this.loadingSave = false;
-							})
-							.catch((err) => {
-								console.log(err);
-								this.toast(__.get("messages.save-error"));
-							})
-							.then(() => {
-								this.loadingSave = false;
-							});
-					} else {
-						this.loadingSave = false;
-						this.toast(__.get("messages.invalid-inputs"));
-					}
-				} else if (this.current_tab === "home") {
-					axios
-						.post("/save/resume", this.$refs.about.getData())
-						.then((response) => {
-							if (response.data.result) {
-								this.$store.commit("setProfileEdit", false);
-								window.onbeforeunload = null;
-								this.reloadUser();
-							} else {
-								this.handleError(response.data.errors, response.data.type);
-							}
-							this.loadingSave = false;
-						})
-						.catch((err) => {
-							console.log(err);
-							this.toast(__.get("messages.save-error"));
-						})
-						.then(() => {
-							this.loadingSave = false;
-						});
-				}
-			} else {
-				this.$store.commit("setProfileEdit", true);
-				window.onbeforeunload = function (e) {
-					var message = "در صورت خروج تغییرات پروفایل از بین‌می‌رود!",
-						e = e || window.event;
-					// For IE and Firefox
-					if (e) {
-						e.returnValue = message;
-					}
+		// tabChange(link, id) {
+		// 	this.current_tab = id;
+		// 	this.loadTab(link);
+		// },
+		// doEdit() {
+		// 	if (this.edit) {
+		// 		this.loadingSave = true;
+		// 		if (this.current_tab === "contact") {
+		// 			let data = this.$refs.contacts.getData();
+		// 			if (data) {
+		// 				axios
+		// 					.post("/contacts", {
+		// 						contacts: data,
+		// 					})
+		// 					.then((response) => {
+		// 						if (response.data.result) {
+		// 							this.$store.commit("setProfileEdit", false);
+		// 							window.onbeforeunload = null;
+		// 							if (response.data.redirectTo != null) {
+		// 								window.location = response.data.redirectTo;
+		// 							}
+		// 						} else {
+		// 							this.handleError(response.data.errors);
+		// 						}
+		// 						this.loadingSave = false;
+		// 					})
+		// 					.catch((err) => {
+		// 						console.log(err);
+		// 						this.toast(__.get("messages.save-error"));
+		// 					})
+		// 					.then(() => {
+		// 						this.loadingSave = false;
+		// 					});
+		// 			} else {
+		// 				this.loadingSave = false;
+		// 				this.toast(__.get("messages.invalid-inputs"));
+		// 			}
+		// 		} else if (this.current_tab === "home") {
+		// 			axios
+		// 				.post("/save/resume", this.$refs.about.getData())
+		// 				.then((response) => {
+		// 					if (response.data.result) {
+		// 						this.$store.commit("setProfileEdit", false);
+		// 						window.onbeforeunload = null;
+		// 						this.reloadUser();
+		// 					} else {
+		// 						this.handleError(response.data.errors, response.data.type);
+		// 					}
+		// 					this.loadingSave = false;
+		// 				})
+		// 				.catch((err) => {
+		// 					console.log(err);
+		// 					this.toast(__.get("messages.save-error"));
+		// 				})
+		// 				.then(() => {
+		// 					this.loadingSave = false;
+		// 				});
+		// 		}
+		// 	} else {
+		// 		this.$store.commit("setProfileEdit", true);
+		// 		window.onbeforeunload = function (e) {
+		// 			var message = "در صورت خروج تغییرات پروفایل از بین‌می‌رود!",
+		// 				e = e || window.event;
+		// 			// For IE and Firefox
+		// 			if (e) {
+		// 				e.returnValue = message;
+		// 			}
 
-					// For Safari
-					return message;
-				};
-			}
-		},
-		cancelEdit() {
-			this.loadingTab = true;
-			this.$store.state.ternoboWireApp.reload({
-				only: ["page"],
-			});
-			setTimeout(() => {
-				this.loadingTab = false;
-			}, 300);
-			this.$store.commit("setProfileEdit", false);
-		},
+		// 			// For Safari
+		// 			return message;
+		// 		};
+		// 	}
+		// },
+		// cancelEdit() {
+		// 	this.loadingTab = true;
+		// 	this.$store.state.ternoboWireApp.reload({
+		// 		only: ["page"],
+		// 	});
+		// 	setTimeout(() => {
+		// 		this.loadingTab = false;
+		// 	}, 300);
+		// 	this.$store.commit("setProfileEdit", false);
+		// },
 	},
 	data() {
 		return {
 			about: null,
 			loadingSave: false,
-			current_tab: "",
+			current_tab: "activities",
 			experiences: [],
 			skills: [],
 			categories: [],
