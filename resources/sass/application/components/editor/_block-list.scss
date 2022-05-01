@@ -27,7 +27,8 @@
                 opacity: 0.4;
             }
 
-            &:hover:not(.disabled) {
+            &:hover:not(.disabled),
+            &:focus {
                 background: $white;
                 cursor: pointer;
             }

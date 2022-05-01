@@ -1,6 +1,26 @@
 <template>
 	<b-modal v-model="showModal" hide-footer title="Privacy Policy" size="lg" :centered="true">
 		<div dir="ltr">
+			<p>
+				<span>
+					<span>
+						<b>Last Updated: May 1</b>
+					</span>
+				</span>
+				<span>
+					<sup>
+						<span>
+							<b>th</b>
+						</span>
+					</sup>
+				</span>
+				<span>
+					<span>
+						<b> ,2022</b>
+					</span>
+				</span>
+			</p>
+
 			<p>This privacy policy has been compiled to better serve those who are concerned with how their 'Personally Identifiable Information' (PII) is being used online. PII, as described in US privacy law and information security, is information that can be used on its own or with other information to identify, contact, or locate a single person, or to identify an individual in context.</p>
 			<p><strong>Data Policy</strong></p>
 			<p>This policy describes the information we process to support Ternobo. You can find additional tools and information in the Settings.Please read our privacy policy carefully to get a clear understanding of how we collect, use, protect or otherwise handle your Personally Identifiable Information in accordance with our website.</p>

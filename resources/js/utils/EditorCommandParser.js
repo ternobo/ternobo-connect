@@ -11,7 +11,7 @@ export default {
         quote: /^> $/g,
         horizontalRule: /^—-$/g,
         action: /^\/$/g,
-        hideAction: /^$/g
+        // hideAction: /^$/g
     },
     parse(content) {
         const htmlContent = ContentRenderer.render(content);
