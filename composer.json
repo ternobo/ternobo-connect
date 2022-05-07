@@ -76,7 +76,7 @@
         "ternobo/ffmpeg-php": "@dev",
         "tgalopin/html-sanitizer": "^1.4",
         "ueberdosis/tiptap-php": "^1.1",
-        "vonage/client": "^2.4"
+        "vonage/client": "3.0.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
