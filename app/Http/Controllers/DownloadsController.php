@@ -19,7 +19,6 @@ class DownloadsController extends Controller
     {
         if (Storage::exists("profiles/$image")) {
             $response = (Storage::download("profiles/$image"));
-            ob_end_clean();
             return $response;
         }
         return abort(404);

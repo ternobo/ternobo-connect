@@ -20,6 +20,7 @@ use App\Models\Comment;
 use App\Models\Announcement;
 use App\Ternobo;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -43,6 +44,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (env('APP_ENV') !== 'local') {
+            URL::forceScheme('https');
+        }
+
         TernoboWire::share(
             function () {
                 return [

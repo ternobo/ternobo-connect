@@ -1,0 +1,16 @@
+.tag-filter__item {
+    background: $white;
+    box-shadow: $bg-shadow;
+    color: $dark;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+
+    &.acitve {
+        color: $white;
+        background: $dark;
+    }
+}

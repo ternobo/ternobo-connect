@@ -2,19 +2,13 @@
 	<base-layout>
 		<component :is="headerComponnet" :followed="followed" :community="community" :tag="tag" :totalPosts="posts.meta.total" />
 		<div class="w-100">
-			<div v-if="postsArray.length < 1">
-				<no-content class="mt-8"> {{ __.get("messages.no-content-with-tag") }} </no-content>
-			</div>
-			<div v-if="postsArray.length > 0" class="posts" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loadingPage" infinite-scroll-distance="5">
-				<masonry v-if="!loadingPage" :cols="2" :gutter="32">
-					<div v-for="(post, index) in postsArray" class="py-3" :key="post.id + '_index_' + index">
-						<PostCard class="h-100 m-0" :post="post"></PostCard>
-					</div>
-				</masonry>
-				<div class="w-100 d-flex justify-content-center py-3" v-if="loadingPage">
-					<loading-spinner class="image__spinner" />
-				</div>
-			</div>
+			<tabs compact>
+				<tab name="Posts" :selected="true">
+					<content-tab :tag="tag" />
+				</tab>
+				<tab name="Tags"></tab>
+				<tab name="Users"></tab>
+			</tabs>
 		</div>
 	</base-layout>
 </template>
@@ -24,7 +18,7 @@ import AppLayout from "../Layouts/AppLayout";
 import AppFooter from "../Components/App/AppFooter";
 import NoContent from "../Components/NoContent";
 import PostCard from "../Components/PostCard/PostCard";
-import LoadingButton from "../Components/buttons/LoadingButton.vue";
+import ContentTab from "../Components/Tag/Tabs/ContentTab.vue";
 
 export default {
 	methods: {
@@ -87,8 +81,8 @@ export default {
 		AppFooter,
 		NoContent,
 		PostCard,
+		ContentTab,
 	},
 	layout: AppLayout,
-	LoadingButton,
 };
 </script>
