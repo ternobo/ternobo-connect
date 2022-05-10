@@ -47,10 +47,7 @@ COPY --chown=www:www ./ /app
 
 USER www
 
-RUN mv /app/.env.production .env
-
 USER root
-
 
 EXPOSE 9000
 CMD ["php-fpm"]
