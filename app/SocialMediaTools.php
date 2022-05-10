@@ -14,6 +14,7 @@ use Intervention\Image\Image;
 use League\HTMLToMarkdown\HtmlConverter;
 use PHPHtmlParser\Dom;
 use PHPHtmlParser\Options;
+use Str as GlobalStr;
 use Twitter\Text\Parser;
 
 class SocialMediaTools
@@ -140,7 +141,7 @@ class SocialMediaTools
     {
         $result = ['meta' => []];
         $path = Storage::disk("local")->path($media->store("media", ['disk' => "local"]));
-        if (!Str::endsWith(Str::lower($path), "gif")) {
+        if (!GlobalStr::endsWith(Str::lower($path), "gif")) {
             $image = SocialMediaTools::fitPostImage(ImageFacades::make($path));
             if (isset($meta['rotate'])) {
                 $image->rotate($meta['rotate']);
@@ -148,7 +149,6 @@ class SocialMediaTools
             $image->save($path, $quality, "webp");
             $result['content'] = Storage::putFile("media", $path);
             $result['meta'] = ['info' => SocialMediaTools::getImageInfo($image)];
-            return $result;
         }
 
         $result['content'] = Storage::putFile("media", $path);

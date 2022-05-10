@@ -88,6 +88,7 @@ class ContentStoreService extends RestfulService
                     break;
                 case "image":
                     $media = $content instanceof UploadedFile | $fileOnly ? SocialMediaTools::uploadPostImage($content, 90, $meta) : $content;
+                    dd($media);
                     $post->blocks()->create([
                         'page_id' => $post->page_id,
                         'sort' => $sort,
