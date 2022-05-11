@@ -65,7 +65,7 @@
         "uuid": "^3.4.0",
         "v-tooltip": "^2.1.3",
         "vue": "^2.6.14",
-        "vue-advanced-cropper": "^0.17.9",
+        "vue-advanced-cropper": "0.20.1",
         "vue-infinite-loading": "^2.4.5",
         "vue-infinite-scroll": "^2.0.2",
         "vue-loading-skeleton": "^1.1.9",
