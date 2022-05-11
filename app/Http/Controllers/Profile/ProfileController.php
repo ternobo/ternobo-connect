@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Profile;
 
+use App\Facade\UploaderService;
 use App\Http\Controllers\Controller;
 use App\Models\AboutData;
 use App\Models\Skill;
@@ -32,25 +33,19 @@ class ProfileController extends Controller
             if ($sizesValidator->passes()) {
                 $current_profile = substr(str_replace(url('/'), "", Auth::user()->profile), 1);
                 Storage::delete($current_profile);
-                $file = ($request->file("profile")->store("profiles"));
-                $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
-                $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->left), intval($sizes->top));
-                $image->resize(200, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-                $image->save();
+                $file = $request->file("profile");
+                $profile = UploaderService::uploadImageWithCrop($file, $sizes, 200, "profiles");
                 $user = $request->user();
                 $page = $user->personalPage;
-                $user->profile = url($file);
-                $page->profile = url($file);
+                $user->profile = $profile;
+                $page->profile = $profile;
                 $user->save();
                 $page->save();
-                return response()->json(array("result" => true, "url" => url($file)));
+                return response()->json(["result" => true, "url" => $profile]);
             }
-            return response()->json(array("result" => true, "errors" => $sizesValidator->errors()));
+            return response()->json(["result" => true, "errors" => $sizesValidator->errors()]);
         }
-        return response()->json(array("result" => true, "errors" => $requestValidator->errors()));
+        return response()->json(["result" => true, "errors" => $requestValidator->errors()]);
     }
 
     public function setCover(Request $request)
@@ -67,19 +62,12 @@ class ProfileController extends Controller
                 'height' => ["required", "integer", "min:30"],
             ]);
             if ($sizesValidator->passes()) {
-                $file = $request->file("cover")->store("profiles");
-                $image = Image::make(Storage::disk('local')->getAdapter()->getPathPrefix() . $file);
-                $sizes = (json_decode($request->sizes));
-                $image = $image->crop(intval($sizes->width), intval($sizes->height), intval($sizes->left), intval($sizes->top));
-                $image->resize(794, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-                $image->save(null, 90, "jpg");
+                $file = $request->file("cover");
+                $cover = UploaderService::uploadImageWithCrop($file, $sizes, 794, "media");
                 $user = Auth::user();
-                $user->cover = url($file);
+                $user->cover = $cover;
                 $user->save();
-                return response()->json(array("result" => true, "url" => url($file)));
+                return response()->json(["result" => true, "url" => $cover]);
             }
             return response()->json(array("result" => true, "errors" => $sizesValidator->errors()));
         }

@@ -102,7 +102,7 @@ export default {
 			fileChooser.accept = `image/*`;
 			fileChooser.onchange = (e) => {
 				let file = e.target.files[0];
-				if (file.type.startsWith(this.type) && !file.type.includes("svg+xml")) {
+				if (file.type.startsWith("image") && !file.type.includes("svg+xml")) {
 					this.$emit("update:content", file);
 				} else {
 					this.toast(__.get("messages.invalid-mime"));
@@ -116,9 +116,6 @@ export default {
 			default: () => {
 				return { spoiler: false, rotate: 0, alt: "" };
 			},
-		},
-		type: {
-			default: null,
 		},
 		content: {
 			default: null,
