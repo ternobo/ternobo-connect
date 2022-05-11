@@ -1,4 +1,4 @@
-<p align="center"><a href="https://Ternobo.com/" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center"><a href="https://Ternobo.com/" target="_blank"><img src="https://raw.githubusercontent.com/ternobo/ternobo-connect/master/public/android-chrome-512x512.png?token=GHSAT0AAAAAABUEKDG6XPDZEDROYKES2EASYT35NKQ" width="400"></a></p>
 
 <p align="center">
 <a href="https://github.com/ternobo/ternobo-connect"><img src="https://img.shields.io/github/v/release/ternobo/ternobo-connect" alt="Latest Version"></a>
@@ -6,7 +6,5 @@
 </p>
 
 ## About Ternobo
-
-![logo](https://raw.githubusercontent.com/ternobo/ternobo-connect/master/public/android-chrome-512x512.png?token=GHSAT0AAAAAABUEKDG6XPDZEDROYKES2EASYT35NKQ)
 
 Welcome to the Ternobo development repository! Ternobo is a social media based on public communities, Where you can share your experiences, information, and interests freely. We believe  
