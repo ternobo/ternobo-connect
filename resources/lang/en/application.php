@@ -76,7 +76,7 @@ return [
     "optional" => "Optional",
     "bookmarks" => "Bookmarks",
     "sort-by" => "Sort by",
-    "post-page-title" => ":user Post",
+    "post-page-title" => ":user On Ternobo",
     "privacy-policy" => "Privacy Policy",
 
     "password-strength" => [

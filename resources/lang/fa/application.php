@@ -75,7 +75,7 @@ return [
     "optional" => "اختیاری",
     "bookmarks" => "نشان‌ها",
     "sort-by" => "ترتیب براساس",
-    "post-page-title" => "محتوای :user",
+    "post-page-title" => "در ترنوبو :user",
     "privacy-policy" => "Privacy Policy",
 
     "password-strength" => [

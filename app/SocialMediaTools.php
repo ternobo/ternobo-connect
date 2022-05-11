@@ -151,7 +151,7 @@ class SocialMediaTools
             $result['meta'] = ['info' => SocialMediaTools::getImageInfo($image)];
         }
 
-        $result['content'] = Storage::putFile("media", $path);
+        $result['content'] = config("s3.cdn_endpoint") . "/" . config("s3.bucket") . "/" . Storage::putFile("media", $path);
         $result['meta'] = ['info' => SocialMediaTools::getImageInfo($image)];
         unlink($path);
         return $result;

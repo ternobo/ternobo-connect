@@ -13,6 +13,7 @@ use App\Models\Post;
 use App\Models\Page;
 use App\Models\Following;
 use App\Http\Controllers\Controller;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class FeedController extends Controller
 {
@@ -33,7 +34,7 @@ class FeedController extends Controller
      */
     public function index(Request $request)
     {
-
+        SEOTools::setTitle("Feed");
         $user = Auth::user();
         $pages = $this->suggestionService->getSuggestions($user);
         $posts = $this->contentService->getFeedPosts(Ternobo::currentPage(), $user);

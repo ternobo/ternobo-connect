@@ -4,42 +4,7 @@
 		<div class="content-container-profile" v-infinite-scroll="loadMore" infinite-scroll-distance="5">
 			<ProfileHeader ref="ProfileHeader" :page="page" :can-edit="canEdit"></ProfileHeader>
 			<page-blocked v-if="page.blocked" :fname="page.user.first_name" />
-			<div class="profile-tabs mt-6">
-				<div class="row">
-					<div class="categories-sidebar" v-if="$root.isDesktop">
-						<Categories v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug"></Categories>
-					</div>
-					<div class="posts-container-profile">
-						<div v-if="draft">
-							<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
-								<draft-card class="mb-4" v-for="action in actionsList" :post="action" :key="action.id"></draft-card>
-							</div>
-							<posts-loading v-if="loadingActions" :count="3" />
-							<div class="w-100 d-flex justify-content-center py-3" v-else-if="loadingMore">
-								<loading-spinner class="image__spinner" />
-							</div>
-							<div v-if="next_page_url === null && !loadingActions">
-								<no-content></no-content>
-							</div>
-						</div>
-						<div v-else>
-							<NewPostCard :showDraft="false" @posted="onPostAdded" ref="newPostCard" v-if="canEdit"></NewPostCard>
-							<categories-mobile v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug" v-if="!$root.isDesktop"></categories-mobile>
-							<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
-								<ActionCard v-for="action in actionsList" :page="page" :action="action" :key="action.id"></ActionCard>
-							</div>
-							<posts-loading v-if="loadingActions" :count="3" />
-							<div class="w-100 d-flex justify-content-center py-3" v-else-if="loadingMore">
-								<loading-spinner class="image__spinner" />
-							</div>
-							<div v-if="next_page_url === null && !loadingActions">
-								<no-content></no-content>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- <tabs :compact="true" :disabled="edit" class="profile-tabs" @selected="tabChange" :state-tab="true" v-else>
+			<tabs :compact="true" :disabled="edit" class="profile-tabs" :state-tab="true" v-else>
 				<template slot="custom-item">
 					<div class="d-flex align-items-center mt-4" v-if="canEdit && showEdit">
 						<div class="me-3" v-if="edit">
@@ -65,17 +30,51 @@
 						</button>
 					</div>
 				</template>
-				<tab v-if="hasAbout || canEdit" :name="__.get('user-profile.tabs.about')" id="home" :href="'/' + page.slug" :selected="current_tab === 'home'">
+				<!-- <tab v-if="hasAbout || canEdit" :name="__.get('user-profile.tabs.about')" id="home" :href="'/' + page.slug" :selected="current_tab === 'home'">
 					<div class="w-100 d-flex justify-content-center py-3" v-if="loadingTab">
 						<loading-spinner class="image__spinner" />
 					</div>
 					<AboutTab v-else ref="about" :edit="edit" :page="page"></AboutTab>
+				</tab> -->
+				<tab :name="__.get('user-profile.tabs.activities')" id="activities" :href="'/' + page.slug + '/activities'" :selected="true">
+					<div class="row">
+						<div class="categories-sidebar" v-if="$root.isDesktop">
+							<Categories v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug"></Categories>
+						</div>
+						<div class="posts-container-profile">
+							<div v-if="draft">
+								<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
+									<draft-card class="mb-4" v-for="action in actionsList" :post="action" :key="action.id"></draft-card>
+								</div>
+								<posts-loading v-if="loadingActions" :count="3" />
+								<div class="w-100 d-flex justify-content-center py-3" v-else-if="loadingMore">
+									<loading-spinner class="image__spinner" />
+								</div>
+								<div v-if="next_page_url == null && !loadingActions">
+									<no-content></no-content>
+								</div>
+							</div>
+							<div v-else>
+								<NewPostCard :showDraft="false" @posted="onPostAdded" ref="newPostCard" v-if="canEdit"></NewPostCard>
+								<categories-mobile v-model="filters" :page-id="page.id" :categories="page.categories" :slug="page.slug" v-if="!$root.isDesktop"></categories-mobile>
+								<div class="profile-posts posts" :class="{ 'mt-0': !canEdit }" v-if="!loadingActions">
+									<ActionCard v-for="action in actionsList" :page="page" :action="action" :key="action.id"></ActionCard>
+								</div>
+								<posts-loading v-if="loadingActions" :count="3" />
+								<div class="w-100 d-flex justify-content-center py-3" v-else-if="loadingMore">
+									<loading-spinner class="image__spinner" />
+								</div>
+								<div v-if="next_page_url == null && !loadingActions">
+									<no-content>{{ __.get("messages.no-posts") }}</no-content>
+								</div>
+							</div>
+						</div>
+					</div>
 				</tab>
-				<tab v-if="hasActivity || canEdit" :name="__.get('user-profile.tabs.activities')" id="activities" :href="'/' + page.slug + '/activities'" :selected="current_tab === 'activities'"> </tab>
-				<tab :name="__.get('user-profile.tabs.contact')" id="contact" :href="'/' + page.slug + '/contact'" :selected="current_tab === 'contact'">
+				<!-- <tab :name="__.get('user-profile.tabs.contact')" id="contact" :href="'/' + page.slug + '/contact'" :selected="current_tab === 'contact'">
 					<ContactTab ref="contacts" :edit="edit" :page="page"></ContactTab>
-				</tab>
-			</tabs> -->
+				</tab> -->
+			</tabs>
 		</div>
 		<sidebar-left v-if="$root.isDesktop">
 			<div class="card" style="margin-bottom: 16px" v-if="pages.length > 0">

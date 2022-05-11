@@ -58,10 +58,8 @@ export default {
 		suggestionClick(suggestion) {
 			this.val = suggestion;
 			this.suggestions = [];
+			this.$emit("suggestionclick", suggestion);
 			this.$emit("input", this.val);
-			setTimeout(() => {
-				this.$emit("suggestionclick", suggestion);
-			}, 500);
 		},
 		onInput() {
 			this.$emit("input", this.val);

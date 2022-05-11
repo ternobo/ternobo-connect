@@ -13,7 +13,7 @@
 				</div>
 				<div class="copyright-text d-flex align-items-center justify-content-center" style="height: 16px">
 					<img :src="shared.direction == 'rtl' ? '/images/logo-fa-footer.svg' : '/images/logo-en-footer.svg'" class="mx-1" height="16" />
-					<span class="font-14" style="height: 13px; line-height: 1">© {{ this.lang.value == "fa" ? "۱۴۰۰" : "2021" }}</span>
+					<span class="font-14" style="height: 13px; line-height: 1">© {{ new Date().getFullYear() }}</span>
 				</div>
 			</div>
 		</div>

@@ -53,7 +53,7 @@
 			</div>
 			<div class="comment-body" dir="auto">
 				<span dir="auto">
-					<social-content :text="comment.text" :tags="comment.tags" />
+					<content-viewer :content="JSON.parse(comment.text)"></content-viewer>
 				</span>
 			</div>
 			<div class="comment-footer">
@@ -103,6 +103,7 @@ import LikesModal from "../Modals/LikesModal.vue";
 import CommentSkeleton from "../Skeletons/CommentSkeleton.vue";
 import CommentsLoading from "../Skeletons/CommentsLoading.vue";
 import ProfilePeeking from "../App/ProfilePeeking/ProfilePeeking.vue";
+import ContentViewer from "../PostCard/ContentViewer.vue";
 
 export default {
 	mounted() {
@@ -224,6 +225,7 @@ export default {
 		CommentSkeleton,
 		CommentsLoading,
 		ProfilePeeking,
+		ContentViewer,
 	},
 	props: {
 		replyTo: {

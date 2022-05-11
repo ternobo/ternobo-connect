@@ -13,11 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: "shivammathur/setup-php@v2"
-      with:
-        php-version: "latest"
-    - uses: "ramsey/composer-install@v2"
-      run: "composer install"
     - uses: docker/build-push-action@v3.0.0
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ghcr.io/ternobo/ternobo-connect:$(date +%s)
+      run: docker build . --file Dockerfile --tag ghcr.io/ternobo/ternobo-connect:0.1-$(date +%s)

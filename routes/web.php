@@ -259,8 +259,8 @@ Route::middleware(["auth.web"])->group(function () {
 });
 //End Auth
 
-Route::redirect("/p/{id}", "/posts/{id}");
-Route::resource("/posts", PostController::class)->only(['store', 'update', 'destroy', "show"]);
+Route::get("/p/{id}", [PostController::class,"show"]);
+Route::resource("/posts", PostController::class)->only(['store', 'update', 'destroy']);
 
 // Tags
 if (config("features.tags")) {

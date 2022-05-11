@@ -13,7 +13,7 @@ return [
             'title' => "Ternobo", // set false to total remove
             'titleBefore' => false, // Put defaults.title before page title, like 'It's Over 9000! - Dashboard'
             'description' => 'Ternobo is a social network for sharing your experiences, information, and interests freely. A place to learn, be aware, and build a better world.            ', // set false to total remove
-            'separator' => ' | ',
+            'separator' => ' / ',
             'keywords' => ["ternobo", 'social media'],
             'canonical' => null, // Set null for using Url::current(), set false to total remove
             'robots' => 'all', // Set to 'all', 'none' or any combination of index/noindex and follow/nofollow

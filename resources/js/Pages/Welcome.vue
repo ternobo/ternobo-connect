@@ -87,6 +87,13 @@ export default {
 		};
 	},
 	layout: App,
+	watch: {
+		username() {
+			if (this.username == "00") {
+				this.username = "+";
+			}
+		},
+	},
 	methods: {
 		verifyCode() {
 			if (this.code != null) {

@@ -7,6 +7,7 @@ use App\Models\Notification;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\Skill;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Ternobo\TernoboWire\TernoboWire;
@@ -16,6 +17,7 @@ class NotificationController extends Controller
 
     public function index()
     {
+        SEOTools::setTitle("Notifications");
         $notifications = Auth::user()->getNotifications();
         return TernoboWire::render("Notifications", array("notifications" => $notifications));
     }
