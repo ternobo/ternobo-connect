@@ -11,7 +11,7 @@
 				</wire-link>
 
 				<form @submit="searchSubmit" method="get" action="javascript:;" ref="searchfield" class="searchfield d-flex">
-					<auto-complete class="search-field w-100" endpoint="/search" ref="searchInput" inputClass="fill rounded xsm-input" icon="search" v-model="searchVal" @suggestionclick="submitsearch" @search="submitsearch" required type="text" :suggestionPosition="17" name="q" :placeholder="__.get('application.searchq')" />
+					<auto-complete class="search-field w-100" endpoint="/search" ref="searchInput" inputClass="fill rounded xsm-input" icon="search" v-model="searchVal" @suggestionclick="searchSubmit" @search="searchSubmit" required type="text" :suggestionPosition="17" name="q" :placeholder="__.get('application.searchq')" />
 				</form>
 
 				<div v-if="!$root.isDesktop">
@@ -47,9 +47,6 @@ export default {
 		searchSubmit() {
 			this.$store.state.ternoboWireApp.visit("/search?q=" + this.searchVal);
 			this.$refs.searchInput.focus = false;
-		},
-		submitsearch() {
-			if (this.searchVal.length > 0) this.$refs.searchfield.submit();
 		},
 		search(input) {
 			const element = document.getElementById("searchforminput").parentElement;

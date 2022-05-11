@@ -14,6 +14,9 @@ export default {
 		PopupMenu,
 	},
 	methods: {
+		reset() {
+			this.$refs.ternoboEditor.editor.commands.clearContent();
+		},
 		focus() {
 			this.$refs.ternoboEditor.editor.chain().focus();
 		},
@@ -38,25 +41,17 @@ export default {
 			default: "",
 		},
 		value: {
-			default: () => {
-				return {
-					content: [],
-					type: "doc",
-				};
-			},
+			default: null,
 		},
 	},
 	data() {
 		return {
-			val: {
-				content: [],
-				type: "doc",
-			},
+			val: null,
 			richEditorExtentions: [],
 		};
 	},
 	created() {
-		this.val = this.value ? this.value : "";
+		this.val = this.value ? this.value : null;
 		this.richEditorExtentions = [
 			Placeholder.configure({
 				placeholder: this.placeholder,

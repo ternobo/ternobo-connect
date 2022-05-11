@@ -1,0 +1,8 @@
+*.map
+.vscode
+.idea
+.phpdoc
+docs
+storage/app
+node_modules
+.env

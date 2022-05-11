@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\ActiveSession;
 use App\Models\User;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
@@ -56,6 +57,7 @@ class UsersController extends Controller
 
     public function settingsPage(Request $request)
     {
+        SEOTools::setTitle("Settings");
         return TernoboWire::render("Settings");
     }
 
@@ -68,5 +70,4 @@ class UsersController extends Controller
         $request->session()->invalidate();
         return redirect("/");
     }
-
 }

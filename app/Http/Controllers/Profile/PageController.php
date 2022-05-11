@@ -80,7 +80,7 @@ class PageController extends Controller
         }
 
         $page->load("user.invitedBy");
-        SEOTools::setTitle($page->name);
+        SEOTools::setTitle($page->toArray()['name'] . " (@$page->slug)");
         if ($page->about !== null && $page->about !== "") {
             SEOTools::setDescription($page->about);
         } else {

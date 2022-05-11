@@ -1,10 +1,9 @@
 <template>
 	<div class="sendcomment clearfix" v-if="$store.state.user != null">
-		<paragraph class="form-control" ref="input" :placeholder="__.get('content/comments.comment-ph')" :content.sync="text"></paragraph>
+		<paragraph class="form-control py-0" ref="input" :placeholder="__.get('content/comments.comment-ph')" :content.sync="text"></paragraph>
 		<div class="d-flex w-100 mt-4 align-items-center justify-content-between">
 			<div class="d-flex align-items-center">
 				<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xxxsm me-4 mb-0" imgClass="profile-xxxsm" :src="$store.state.user.profile" />
-				<emoji-picker iconSize="20" @pick="$refs.input.insertEmoji($event)" :portal="true" />
 			</div>
 			<loading-button @click.native="submit" :disabled="!showSubmit" :loading="loading" class="btn btn-transparent cta-text font-14">{{ __.get("content/comments.post") }}</loading-button>
 		</div>
@@ -41,17 +40,17 @@ export default {
 	data() {
 		return {
 			loading: false,
-			text: "",
+			text: null,
 		};
 	},
 	computed: {
 		showSubmit() {
-			return this.text.length > 0;
+			return this.text?.length > 0;
 		},
 	},
 	methods: {
 		submit() {
-			if (this.text.length > 0) {
+			if (this.text?.length > 0) {
 				this.loading = true;
 				const data = {
 					text: this.text,
@@ -63,7 +62,7 @@ export default {
 					.post(this.$APP_URL + "/posts/" + this.post + "/comments", data)
 					.then((response) => {
 						if (response.data.result) {
-							this.text = "";
+							this.text = null;
 							this.$refs.input.reset();
 							this.$emit("submit", response.data.comment);
 						} else {

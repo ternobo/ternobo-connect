@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Content;
 use App\Http\Controllers\Controller;
 use App\Models\Bookmark;
 use App\Models\Post;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Auth;
 use Ternobo\TernoboWire\TernoboWire;
 
@@ -13,6 +14,7 @@ class BookmarksController extends Controller
 
     public function bookmarks()
     {
+        SEOTools::setTitle("Bookmarks");
         $bookmarks = Bookmark::query()
             ->with("post")
             ->where("user_id", Auth::user()->id)->latest()->paginate(10);

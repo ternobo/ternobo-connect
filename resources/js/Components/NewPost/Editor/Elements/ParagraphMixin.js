@@ -19,6 +19,9 @@ export default {
         },
     },
     methods: {
+        reset() {
+            this.$refs.editor.reset();
+        },
         focus() {
             this.$refs.editor.focus();
         },

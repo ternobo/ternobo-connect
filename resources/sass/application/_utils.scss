@@ -21,23 +21,23 @@ $space in $spacings {
     }
 
     .mx-#{$name} {
-        margin-left: $space;
-        margin-right: $space;
+        margin-left: $space !important;
+        margin-right: $space !important;
     }
 
     .px-#{$name} {
-        padding-left: $space;
-        padding-right: $space;
+        padding-left: $space !important;
+        padding-right: $space !important;
     }
 
     .my-#{$name} {
-        margin-top: $space;
-        margin-bottom: $space;
+        margin-top: $space !important;
+        margin-bottom: $space !important;
     }
 
     .py-#{$name} {
-        padding-top: $space;
-        padding-bottom: $space;
+        padding-top: $space !important;
+        padding-bottom: $space !important;
     }
 
 }

@@ -8,6 +8,7 @@ use App\Services\Content\ContentStore\Elements\TextBlock;
 use App\Services\Poll\PollModel;
 use App\Services\RestfulService;
 use App\Services\Poll\PollService;
+use App\Services\UploaderService;
 use App\SocialMediaTools;
 use App\Utils\StringUtils;
 use Illuminate\Http\UploadedFile;
@@ -18,10 +19,11 @@ class ContentStoreService extends RestfulService
     use TextBlock;
 
     private PollService $pollService;
-
-    public function __construct(PollService $pollService)
+    private UploaderService $uploaderService;
+    public function __construct(PollService $pollService, UploaderService $uploaderService)
     {
         $this->pollService = $pollService;
+        $this->uploaderService = $uploaderService;
     }
 
     public function generateSlug()
@@ -97,7 +99,7 @@ class ContentStoreService extends RestfulService
                     ]);
                     break;
                 case "video":
-                    $media = $content instanceof UploadedFile | $fileOnly ? $content->store("videos") : $content;
+                    $media = $content instanceof UploadedFile | $fileOnly ? $this->uploaderService->uploadVideo($content) : $content;
                     $post->blocks()->create([
                         'page_id' => $post->page_id,
                         'sort' => $sort,
