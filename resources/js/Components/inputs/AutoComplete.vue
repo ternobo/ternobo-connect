@@ -58,8 +58,8 @@ export default {
 		suggestionClick(suggestion) {
 			this.val = suggestion;
 			this.suggestions = [];
-			this.$emit("suggestionclick", suggestion);
 			this.$emit("input", this.val);
+			this.$emit("suggestionclick", suggestion);
 		},
 		onInput() {
 			this.$emit("input", this.val);

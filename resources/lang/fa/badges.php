@@ -1,6 +1,6 @@
 <?php
 return [
-    "ternobomate" => "هم‌ترنوبویی",
+    "ternobomate" => "Ternobomate",
     "supporter" => "حمایت‌کننده",
     "newcommer" => "تازه‌وارد",
     'visitor' => "بازدیدکننده"

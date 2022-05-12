@@ -44,8 +44,8 @@ export default {
 		...mapState(["shared"]),
 	},
 	methods: {
-		searchSubmit() {
-			this.$store.state.ternoboWireApp.visit("/search?q=" + this.searchVal);
+		searchSubmit(searchFor = null) {
+			this.$store.state.ternoboWireApp.visit("/search?q=" + searchFor ? searchFor : this.searchVal);
 			this.$refs.searchInput.focus = false;
 		},
 		search(input) {

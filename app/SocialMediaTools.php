@@ -15,7 +15,6 @@ use League\HTMLToMarkdown\HtmlConverter;
 use PHPHtmlParser\Dom;
 use PHPHtmlParser\Options;
 use Str as GlobalStr;
-use Twitter\Text\Parser;
 
 class SocialMediaTools
 {

@@ -1,3 +1,17 @@
+FROM node:17-alpine
+COPY ./ /app
+
+RUN mv /app/.env.production .env
+
+WORKDIR /app
+
+RUN npm install
+
+RUN npm run production
+
+RUN rm -rf node_modules
+
+#########################################################
 FROM php:8.1-fpm
 
 RUN apt-get update && apt-get install -y \
@@ -41,13 +55,12 @@ COPY ./composer.json /app
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 
+COPY --chown=www-data:www-data --from=0 /app/ /app
+
 RUN chown -R www /app
-
-COPY --chown=www:www ./ /app
-
-USER www
 
 USER root
 
 EXPOSE 9000
+
 CMD ["php-fpm"]
