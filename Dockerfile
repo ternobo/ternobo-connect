@@ -1,7 +1,7 @@
 FROM node:17-alpine
 COPY ./ /app
 
-RUN mv /app/.env.production .env
+RUN mv /app/.env-build .env
 
 WORKDIR /app
 
