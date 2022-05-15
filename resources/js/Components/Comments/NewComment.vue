@@ -1,6 +1,6 @@
 <template>
 	<div class="sendcomment clearfix" v-if="$store.state.user != null">
-		<paragraph class="form-control py-0" ref="input" :placeholder="__.get('content/comments.comment-ph')" :content.sync="text"></paragraph>
+		<rich-input :maxCharacter="2200" class="form-control py-0" ref="input" :placeholder="__.get('content/comments.comment-ph')" v-model="text"></rich-input>
 		<div class="d-flex w-100 mt-4 align-items-center justify-content-between">
 			<div class="d-flex align-items-center">
 				<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xxxsm me-4 mb-0" imgClass="profile-xxxsm" :src="$store.state.user.profile" />
@@ -14,7 +14,7 @@
 import EmojiPicker from "../EmojiPicker/EmojiPicker.vue";
 import MaterialTextAreaEmoji from "../inputs/MaterialTextAreaEmoji.vue";
 import Mentionable from "../Mentionable.vue";
-import Paragraph from "../NewPost/Editor/Elements/Paragraph.vue";
+import RichInput from "../inputs/RichInput.vue";
 export default {
 	props: {
 		post: {
@@ -79,7 +79,7 @@ export default {
 		MaterialTextAreaEmoji,
 		EmojiPicker,
 		Mentionable,
-		Paragraph,
+		RichInput,
 	},
 };
 </script>

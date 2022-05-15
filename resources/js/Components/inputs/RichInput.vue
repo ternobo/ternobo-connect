@@ -1,5 +1,5 @@
 <template>
-	<ternobo-editor ref="ternoboEditor" :editorOptions="editorOptions" :extensions="[...extensions, ...richEditorExtentions]" class="ternobo-editor" v-model="val" v-slot:default="{ editor }">
+	<ternobo-editor :maxCharacter="maxCharacter" ref="ternoboEditor" :editorOptions="editorOptions" :extensions="[...extensions, ...richEditorExtentions]" class="ternobo-editor" v-model="val" v-slot:default="{ editor }">
 		<popup-menu :activeOptions="activeOptions" :editor="editor"></popup-menu>
 	</ternobo-editor>
 </template>
@@ -41,6 +41,9 @@ export default {
 			default: "",
 		},
 		value: {
+			default: null,
+		},
+		maxCharacter: {
 			default: null,
 		},
 	},

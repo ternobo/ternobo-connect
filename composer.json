@@ -10,11 +10,11 @@
     "repositories": {
         "ternobo-chat": {
             "type": "git",
-            "url": "https://git.ternobo.info/Ternobo/ternobo-chat.git"
+            "url": "https://github.com/ternobo/ternobo-chat.git"
         },
         "ffmpeg-vidoe": {
             "type": "git",
-            "url": "https://git.ternobo.info/soroosh_tanzadeh/ffmpeg-video.git"
+            "url": "https://github.com/ternobo/ffmpeg-php.git"
         },
         "sms": {
             "type": "git",
@@ -27,6 +27,7 @@
         "artesaos/seotools": "0.22.0",
         "bacon/bacon-qr-code": "2.0.7",
         "doctrine/dbal": "3.3.6",
+        "fakerphp/faker": "^1.19",
         "guzzlehttp/guzzle": "7.4.2",
         "intervention/image": "2.7.1",
         "ipecompany/smsirlaravel": "@dev",
@@ -79,7 +80,6 @@
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "2.12.3",
-        "fzaninotto/faker": "1.9.2",
         "laravel/dusk": "6.24.0",
         "laravel/envoy": "2.8.2",
         "laravel/telescope": "4.9.0",

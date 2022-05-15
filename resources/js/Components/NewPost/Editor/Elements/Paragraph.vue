@@ -1,5 +1,5 @@
 <template>
-	<rich-input ref="editor" :placeholder="__.get('editor.text-placeholder')" :editorOptions="editorOptions" :extensions="extensions" v-model="val" />
+	<rich-input ref="editor" :maxCharacter="maxCharacter" :placeholder="__.get('editor.text-placeholder')" :editorOptions="editorOptions" :extensions="extensions" v-model="val" />
 </template>
 
 <script>

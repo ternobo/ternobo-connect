@@ -169,7 +169,7 @@ class PostController extends Controller
         if ($textItem != null) {
             SEOMeta::setTitle(Str::limit($textItem->content));
         } else {
-            SEOMeta::setTitle(trans("application.post-page-title", ['user' => $post->page->name]));
+            SEOMeta::setTitle(trans("application.post-page-title", ['user' => $post->page->name]), false);
         }
 
         if (($post->type === "post") && $post->user->active) {

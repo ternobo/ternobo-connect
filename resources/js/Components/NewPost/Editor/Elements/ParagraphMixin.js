@@ -14,8 +14,8 @@ export default {
         placeholder: {
             default: __.get("content/posts.enter-your-text"),
         },
-        max: {
-            default: 1200,
+        maxCharacter: {
+            default: null,
         },
     },
     methods: {
