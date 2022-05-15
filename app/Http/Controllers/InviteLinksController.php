@@ -12,7 +12,7 @@ class InviteLinksController extends Controller
     public function index()
     {
         SEOTools::setTitle("Invitation Links");
-        $invite_links = InviteLink::query()->with(["used_by"])->where("user_id", Auth::user()->id)->get();
+        $invite_links = InviteLink::query()->with(["used_by"])->where("user_id", Auth::user()->id)->orderBy("used_by", "DESC")->get();
         return TernoboWire::render("Invite", ['inviteLinks' => $invite_links]);
     }
 }

@@ -30,7 +30,7 @@ import Paragraph from "./Elements/Paragraph.vue";
 import Heading1 from "./Elements/Heading1.vue";
 import Image from "./Elements/Image";
 import Video from "./Elements/Video";
-import uuidv4 from "uuid";
+import { v4 as uuidv4 } from "uuid";
 import EmojiPicker from "../../EmojiPicker/EmojiPicker.vue";
 import { mapState } from "vuex";
 import Code from "./Elements/Code.vue";
@@ -112,6 +112,8 @@ export default {
 			return ["text", "heading1", "horizontalRule", "heading2", "heading3", "video", "image", "code", "bulletedList", "orderedList", "quote", "poll"].filter((option) => {
 				if (option == "heading1") {
 					return this.blocks.filter((block) => block.type == "heading1").length == 0;
+				} else if (option == "video" || option == "image") {
+					return this.blocks.filter((block) => block.type == "video" || block.type == "image").length < 25;
 				}
 				return true;
 			});

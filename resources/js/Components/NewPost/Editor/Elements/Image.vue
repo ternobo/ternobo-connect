@@ -27,7 +27,7 @@
 		<!--- Select Media End !-->
 
 		<!--- Media Settings !-->
-		<button class="btn btn-rounded btn-primary btn-white btn-icon edit-image-icon" v-if="type == 'image' && content != null" @click="showImageEdit = true">
+		<button class="btn btn-rounded btn-primary btn-white btn-icon edit-image-icon" v-if="content != null" @click="showImageEdit = true">
 			<i class="material-icons-outlined">create</i>
 		</button>
 		<div class="spoiler-alert-check clickable" @click="isSpoiler = !isSpoiler" v-if="content != null">

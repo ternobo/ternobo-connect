@@ -1,8 +1,9 @@
-require('./bootstrap');
 import Vue from 'vue';
+require('./bootstrap');
 import {
     plugin,
 } from 'ternobowire-js';
+require("./utils/PostContentRenderer");
 import PortalVue from 'portal-vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import TProgress from "./Libs/TProgress";
@@ -17,7 +18,6 @@ import Lang from 'lang.js';
 import InfiniteError from "./Components/InfiniteError";
 import { scrollToElement } from "./Libs/WindowUtils";
 import setupNotifications from "./NotifcationsHandler";
-
 Vue.use(VueMasonry);
 
 Vue.prototype.window = window;
