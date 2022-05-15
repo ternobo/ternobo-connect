@@ -45,7 +45,7 @@ export default {
 	},
 	methods: {
 		searchSubmit(searchFor = null) {
-			this.$store.state.ternoboWireApp.visit("/search?q=" + searchFor ? searchFor : this.searchVal);
+			this.$store.state.ternoboWireApp.visit("/search?q=" + (searchFor ? searchFor : this.searchVal));
 			this.$refs.searchInput.focus = false;
 		},
 		search(input) {
