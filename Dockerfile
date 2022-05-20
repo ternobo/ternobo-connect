@@ -1,5 +1,5 @@
 FROM node:17-alpine
-COPY ./src /app
+COPY ../ /app
 
 RUN mv /app/.env-build .env
 
@@ -53,7 +53,7 @@ RUN chown -R www-data:www-data /app
 
 USER www-data
 
-COPY ./src/composer.json /app
+COPY ./composer.json /app
 
 COPY --chown=www-data:www-data --from=0 /app/ /app
 
