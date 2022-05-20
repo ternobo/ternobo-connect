@@ -121,7 +121,7 @@ class Post extends Model
         "can_tip",
     ];
 
-    protected $with = ['tags'];
+    protected $with = ['tags', "blocks"];
 
     /**
      * @return \Illuminate\Database\Eloquent\Builder
