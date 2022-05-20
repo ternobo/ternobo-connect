@@ -80,7 +80,7 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          build-args: COMPOSER_AUTH={"github-oauth":{"github.com":"${{ secrets.GITHUB_TOKEN }}"}}
+          build-args: COMPOSER_AUTH=${{ secrets.GITHUB }}
             
 
       # Sign the resulting Docker image digest except on PRs.
