@@ -1,5 +1,5 @@
 FROM node:17-alpine
-COPY ./ /app
+COPY ./src /app
 
 RUN mv /app/.env-build .env
 
@@ -11,8 +11,13 @@ RUN npm run production
 
 RUN rm -rf node_modules
 
-#########################################################
+# #########################################################
+
 FROM php:8.1-fpm
+
+ARG COMPOSER_AUTH
+
+ENV COMPOSER_AUTH ${COMPOSER_AUTH}
 
 RUN apt-get update && apt-get install -y \
     build-essential \
@@ -27,15 +32,9 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     libonig-dev \
-    libzip-dev 
-
-
-RUN apt-get update && apt-get install -y libpng-dev 
-RUN apt-get install -y \
+    libzip-dev \
     libwebp-dev \
-    libjpeg62-turbo-dev \
-    libpng-dev libxpm-dev \
-    libfreetype6-dev
+    libxpm-dev 
 
 RUN docker-php-ext-configure gd \
     --enable-gd \
@@ -50,16 +49,25 @@ RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl gd
 
 WORKDIR /app
 
-COPY ./composer.json /app
+RUN chown -R www-data:www-data /app
 
-RUN groupadd -g 1000 www
-RUN useradd -u 1000 -ms /bin/bash -g www www
+USER www-data
+
+COPY ./src/composer.json /app
 
 COPY --chown=www-data:www-data --from=0 /app/ /app
 
-RUN chown -R www /app
-
 USER root
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+ENV COMPOSER_AUTH ${COMPOSER_AUTH}
+
+RUN chown -R www-data:www-data /var/www 
+
+USER www-data
+
+RUN composer install
 
 EXPOSE 9000
 
