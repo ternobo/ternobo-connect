@@ -95,10 +95,11 @@ jobs:
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
         run: cosign sign ${{ steps.meta.outputs.tags }}@${{ steps.build-and-push.outputs.digest }}
-      - name: Deploy Kubernetes
+
+      - name: Deploy to Kubernetes
         uses: tale/kubectl-action@v1.0.2
         with:
           base64-kube-config: ${{ secrets.KUBE_CONFIG }}
           kubectl-version: v1.22.0
-        run: kubectl set image deployment/app -n ternobo-connect app=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.tags }}
+      - run: kubectl set image deployment/app -n ternobo-connect app=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.tags }}
         
