@@ -18,7 +18,7 @@
 			<i class="material-icons-outlined notif-icon">comment</i>
 		</div>
 		<div class="notification-content">
-			<div class="comment-text">{{ notifications[0].comment.text }}</div>
+			<content-viewer :content="JSON.parse(notifications[0].comment.text)"></content-viewer>
 			<post-viewer class="post-viewer" :href="`/posts/${notificationGroup.notifiable.id}?comment=${notifications[0].comment.id}`" :post="notificationGroup.notifiable"></post-viewer>
 		</div>
 	</div>
@@ -27,10 +27,13 @@
 <script>
 import NotificationMixin from "../../Mixins/NotificationMixin";
 import PostViewer from "./PostViewer.vue";
+import ContentViewer from "../PostCard/ContentViewer.vue";
+
 export default {
 	mixins: [NotificationMixin],
 	components: {
 		PostViewer,
+		ContentViewer
 	},
 };
 </script>

@@ -99,7 +99,7 @@ class ContentStoreService extends RestfulService
                     ]);
                     break;
                 case "video":
-                    $media = $content instanceof UploadedFile | $fileOnly ? $this->uploaderService->uploadVideo($content) : $content;
+                    $media = $content instanceof UploadedFile | $fileOnly ? $this->uploaderService->uploadFile($content) : $content;
                     $post->blocks()->create([
                         'page_id' => $post->page_id,
                         'sort' => $sort,

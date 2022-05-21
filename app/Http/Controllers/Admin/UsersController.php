@@ -25,7 +25,9 @@ class UsersController extends Controller
 
         if ($request->filled("q")) {
             $query = $request->q;
-            $users = $users->whereRaw("name like ?", ["%$query%"])->orWhereRaw("username like ?", ["%$query"]);
+            $users = $users->whereRaw("name like ?", ["%$query%"])
+                ->orWhereRaw("username like ?", ["$query%"])
+                ->orWhereRaw("phone like ?", ["%$query%"]);
         }
 
         $data = $users->paginate();
@@ -60,7 +62,7 @@ class UsersController extends Controller
      */
     public function show($user)
     {
-        $user = User::withTrashed()->where("id", $user)->firstOrFail();
+        $user = User::withTrashed()->where("id", $user)->with(['personalPage'])->firstOrFail();
         $user->makeVisible([
             "deleted_at",
             "two_factor_type",
@@ -76,7 +78,7 @@ class UsersController extends Controller
             "updated_at",
         ]);
         $user->loadCount(["followings", 'followers']);
-        $user->load(["personalPage.aboutData", "personalPage.contactData"]);
+        $user->load(["personalPage.aboutData", "personalPage.contactData", "invitedBy"]);
         return response()->json(['result' => true, 'data' => $user]);
     }
 
