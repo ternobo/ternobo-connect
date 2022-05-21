@@ -6,6 +6,12 @@ name: Docker
 # documentation.
 
 on:
+  workflow_dispatch:
+    environment:
+      description: 'Environment to run tests against'
+      type: environment
+      required: true 
+      
   schedule:
     - cron: '20 21 * * *'
   push:
