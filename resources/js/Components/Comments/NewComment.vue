@@ -1,6 +1,6 @@
 <template>
 	<div class="sendcomment clearfix" v-if="$store.state.user != null">
-		<rich-input :maxCharacter="2200" class="form-control py-0" ref="input" :placeholder="__.get('content/comments.comment-ph')" v-model="text"></rich-input>
+		<rich-input :maxCharacter="2200" class="form-control" ref="input" :placeholder="__.get('content/comments.comment-ph')" v-model="text"></rich-input>
 		<div class="d-flex w-100 mt-4 align-items-center justify-content-between">
 			<div class="d-flex align-items-center">
 				<lazy-image :loadingColor="skeletonOptions.profileColor" class="profile-xxxsm me-4 mb-0" imgClass="profile-xxxsm" :src="$store.state.user.profile" />
@@ -45,7 +45,7 @@ export default {
 	},
 	computed: {
 		showSubmit() {
-			return this.text?.length > 0;
+			return this.text?.content?.filter((item) => item.content?.length > 0).length > 0;
 		},
 	},
 	methods: {
