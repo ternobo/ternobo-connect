@@ -50,7 +50,7 @@ export default {
 	},
 	methods: {
 		submit() {
-			if (this.text?.length > 0) {
+			if (this.showSubmit) {
 				this.loading = true;
 				const data = {
 					text: this.text,
