@@ -1,6 +1,10 @@
 FROM node:17-alpine
 COPY ../ /app
 
+ARG COMPOSER_AUTH
+
+ENV COMPOSER_AUTH ${COMPOSER_AUTH}
+
 RUN mv /app/.env-build .env
 
 WORKDIR /app
