@@ -131,6 +131,10 @@ class User extends Authenticatable implements Messageable
 
     protected $dates = ['deleted_at', 'created_at', 'updated_at', "last_activity"];
 
+    protected $appends = [
+        "self_deactivation"
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -212,6 +216,12 @@ class User extends Authenticatable implements Messageable
     {
         InviteLink::createLink($this->id);
         InviteLink::createLink($this->id);
+    }
+
+
+    public function getSelfDeactivationAttribute()
+    {
+        return intval(UserOption::getOption("autodeactivation", 12));
     }
 
     public function generateToken()

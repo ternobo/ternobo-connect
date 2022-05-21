@@ -14,7 +14,7 @@
 			<!-- <wire-link :class="{ active: $store.state.url === '/explore' }" href="/explore">
 				<i class="navheader-icon">explore</i>
 			</wire-link> -->
-			<wire-link :class="{ active: $store.state.url === '/notifications' }" @mouseenter="showNotificationPeek" @mouseleave="hideNotificationPeek" v-if="$store.state.shared.fullAccess" href="/notifications">
+			<wire-link :class="{ active: $store.state.url === '/notifications' }" v-if="$store.state.shared.fullAccess" href="/notifications">
 				<i class="navheader-icon" :class="{ unread: $store.state.shared.notifications_count > 0 && $store.state.url != '/notifications' }">{{ $store.state.url === "/notifications" ? "notifications" : "notifications_none" }}</i>
 			</wire-link>
 			<wire-link :class="{ active: $store.state.url === '/invite' }" v-if="$store.state.shared.fullAccess" href="/invite">

@@ -78,7 +78,7 @@ class UsersController extends Controller
             "updated_at",
         ]);
         $user->loadCount(["followings", 'followers']);
-        $user->load(["personalPage.aboutData", "personalPage.contactData"]);
+        $user->load(["personalPage.aboutData", "personalPage.contactData", "invitedBy"]);
         return response()->json(['result' => true, 'data' => $user]);
     }
 
