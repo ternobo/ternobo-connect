@@ -17,6 +17,8 @@ FROM php:8.1-fpm
 
 ARG COMPOSER_AUTH
 
+RUN echo COMPOSER_AUTH
+
 ENV COMPOSER_AUTH ${COMPOSER_AUTH}
 
 RUN apt-get update && apt-get install -y \
