@@ -83,7 +83,7 @@ class SearchService extends RestfulService
     public function suggestForSearchAutoComplete($search)
     {
         $result = array();
-        $suggestions = SearchSuggestion::query()->whereRaw("name like ?", ['%' . $search . '%'])->limit(10)->get();
+        $suggestions = SearchSuggestion::query()->whereRaw("name like ?", ['%' . $search . '%'])->limit(5)->get();
         foreach ($suggestions as $value) {
             $result[] = $value->name;
         }
