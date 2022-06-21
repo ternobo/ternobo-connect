@@ -28,7 +28,7 @@
         "bacon/bacon-qr-code": "2.0.7",
         "doctrine/dbal": "3.3.6",
         "fakerphp/faker": "^1.19",
-        "guzzlehttp/guzzle": "7.4.2",
+        "guzzlehttp/guzzle": "7.4.5",
         "intervention/image": "2.7.1",
         "ipecompany/smsirlaravel": "@dev",
         "ixudra/curl": "6.22.0",
