@@ -22,7 +22,7 @@
         "postcss": "8.4.13",
         "resolve-url-loader": "5.0.0",
         "sass": "1.51.0",
-        "sass-loader": "12.6.0",
+        "sass-loader": "13.3.3",
         "vue-loader": "15.9.8",
         "vue-masonry-css": "1.0.3",
         "vue-template-compiler": "2.6.14",
